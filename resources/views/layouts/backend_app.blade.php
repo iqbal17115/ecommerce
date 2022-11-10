@@ -8,14 +8,15 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico') }}">
 
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    
     @yield('css')
 
     @include('layouts.head-scripts')
@@ -67,7 +68,7 @@
     <script src="assets/js/app.js"></script>
 
     <!-- App js -->
-    <script src="{{ URL::asset('assets/js/app.min.js')}}"></script>
+    <script src="{{ URL::asset('assets/js/app.min.js') }}"></script>
     @yield('script')
     @stack('script')
 </body>

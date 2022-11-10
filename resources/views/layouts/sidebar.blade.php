@@ -53,7 +53,7 @@
                            <li><a href="javascript:void(0);">Category</a></li>
                            <li><a href="javascript:void(0);">Brand</a></li>
                            <li><a href="javascript:void(0);">Variant</a></li>
-                           <li><a href="javascript:void(0);">Unit</a></li>
+                           <li><a href="{{ route('product-unit') }}">Unit</a></li>
                        </ul>
                    </li>
 

@@ -7,9 +7,8 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FrontEnt\LoginController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Backend\Product\UnitController;
 
-use App\Http\Livewire\Backend\Offer\Offer;
-use App\Http\Livewire\Backend\Order\OrderEdit;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,12 +68,15 @@ Route::get('contact', [HomeController::class, 'Contact'])->name('contact');
 Route::get('about', [HomeController::class, 'About'])->name('about');
 Route::get('privacy-policy', [HomeController::class, 'PrivacyPolicy'])->name('privacy-policy');
 Route::get('terms-condition', [HomeController::class, 'TermsAndCondition'])->name('terms-condition');
-
-
 Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');
+
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('/admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
+        // Unit Route Start
+        Route::get('product-unit', [UnitController::class, 'index'])->name('product-unit');
+        // Unit Route Start
+    
     Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
 
         // Start Report
