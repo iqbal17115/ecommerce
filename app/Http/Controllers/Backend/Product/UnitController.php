@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
+    public function deleteUnit(request $request) {
+        $unit = Unit::find($request->id)->delete();
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
     public function addUnit(request $request) {
         $request->validate(
             [

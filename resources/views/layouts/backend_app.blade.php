@@ -18,6 +18,7 @@
     <link href="{{ URL::asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ URL::asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     @yield('css')
 
@@ -71,6 +72,8 @@
 
     <!-- App js -->
     <script src="{{ URL::asset('assets/js/app.min.js') }}"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
     <script>
     $(document).ready(function() {
         $.ajaxSetup({
