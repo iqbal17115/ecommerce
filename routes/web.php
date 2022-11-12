@@ -73,9 +73,10 @@ Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name(
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('/admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
-        // Unit Route Start
+        // Unit Start
         Route::get('product-unit', [UnitController::class, 'index'])->name('product-unit');
-        // Unit Route Start
+        Route::post('add-unit', [UnitController::class, 'addUnit'])->name('add.unit');
+        // Unit Start
     
     Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
 

@@ -17,6 +17,7 @@ use App\Models\Inventory\Currency;
 use App\Models\Notification;
 use App\Models\Backend\Offer\Offer;
 use App\Services\AddToCardService;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
         //Categories
         View::composer('*', function ($view) {
 

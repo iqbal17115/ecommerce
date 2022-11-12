@@ -19,7 +19,7 @@ class CreateUnitsTable extends Migration
             $table->string('short_name', 10);
             $table->foreignId('branch_id');
             $table->foreignId('user_id');
-            $table->boolean('status')->nullable()->default(1);
+            $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();
             $table->timestamps();
         });
