@@ -12,7 +12,7 @@
                           </button>
                       </div>
                       <div class="modal-body">
-                        <!-- <input type="hidden" name="cu_id" id="cu_id" value="-1"> -->
+                        <input type="hidden" name="cu_id" id="cu_id" value="-1">
                           <div class="row">
                               <div class="col-md-12">
                                   <div class="form-group">

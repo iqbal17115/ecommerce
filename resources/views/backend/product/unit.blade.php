@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12 p-2 rounded" style="background-color: #e4ebea;">
                 <span class="h4">Unit List</span>
-                <a class="btn btn-success text-light btn-sm py-1 float-right" data-toggle="modal"
+                <a class="btn btn-success text-light btn-sm py-1 float-right clean_form" data-toggle="modal"
                     data-target="#unitModal"><i class="fas fa-plus-circle"></i> New</a>
                 <input class="float-right mr-2" />
             </div>

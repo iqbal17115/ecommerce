@@ -22,12 +22,17 @@ class UnitController extends Controller
                 'is_active' => 'required',
             ]
         );
-
-        $unit = new Unit();
+        if($request->cu_id > 0) {
+            $unit = Unit::find($request->cu_id);
+        }else {
+            $unit = new Unit();
+            $unit->user_id = Auth::user()->id;
+        }
+        
         $unit->name = $request->name;
         $unit->short_name = $request->short_name;
         $unit->branch_id = 1;
-        $unit->user_id = Auth::user()->id;
+       
         $unit->is_active = $request->is_active;
         $unit->save();
 
