@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col-md-12 p-2 rounded" style="background-color: #e4ebea;">
                 <span class="h4">Unit List</span>
-                <a class="btn btn-success text-light btn-sm py-1 float-right clean_form" data-toggle="modal"
-                    data-target="#unitModal"><i class="fas fa-plus-circle"></i> New</a>
-                <input class="float-right mr-2" name="search_string" id="search_string" placeholder="Search..."/>
+                <a class="btn btn-success text-light btn-sm py-2 float-right clean_form" data-toggle="modal"
+                    data-target="#unitModal" style="width: 100px;"><i class="fas fa-plus-circle"></i> New</a>
+                <input class="float-right mr-2 py-1" name="search_string" id="search_string" placeholder="Search..."/>
             </div>
             <div class="col-md-12 unit_content">
                 <table class="table table-striped">
