@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
+    public function searchUnit(Request $request) {
+        $units = Unit::where('name', 'like', '%'.$request->search_string.'%')->orWhere('short_name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(5);
+        if($units->count() >= 1) {
+        return view('backend.product.pagination-unit', compact('units'))->render();
+        }else {
+            return response()->json([
+                'status' => 'nothing_found'
+            ]);
+        }
+    }
     public function pagination(Request $request) {
         $units = Unit::latest()->paginate(5);
         return view('backend.product.pagination-unit', compact('units'))->render();

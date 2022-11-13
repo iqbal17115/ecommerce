@@ -1,5 +1,24 @@
 <script>
 $(document).ready(function() {
+    $(document).on('keyup', function(e) {
+        e.preventDefault();
+        let search_string = $("#search_string").val();
+        $.ajax({
+            url: "{{route('search.unit')}}",
+            method: 'get',
+            data: {search_string: search_string},
+            success: function(data) {
+                    $('.unit_content').html(data);
+                    if(data.status=='nothing_found') {
+                        $('.unit_content').html('<div class="text-danger text-center h3 mt-3">Nothing Found!!</div>');
+                    }
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+
     function pagination(page) {
         $.ajax({
             url: '/pagination/unit-pagination-data?page=' + page,

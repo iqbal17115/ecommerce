@@ -8,7 +8,7 @@
                 <span class="h4">Unit List</span>
                 <a class="btn btn-success text-light btn-sm py-1 float-right clean_form" data-toggle="modal"
                     data-target="#unitModal"><i class="fas fa-plus-circle"></i> New</a>
-                <input class="float-right mr-2" />
+                <input class="float-right mr-2" name="search_string" id="search_string" placeholder="Search..."/>
             </div>
             <div class="col-md-12 unit_content">
                 <table class="table table-striped">
