@@ -10,7 +10,7 @@
                     data-target="#unitModal"><i class="fas fa-plus-circle"></i> New</a>
                 <input class="float-right mr-2" />
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 unit_content">
                 <table class="table table-striped">
 
                     <thead>
@@ -49,9 +49,7 @@
                     </tbody>
 
                 </table>
-                <div class="paginate">
-                    <span class="float-right">{!! $units->links() !!}<span>
-                </div>
+               {!! $units->links() !!}
             </div>
         </div>
     </div>

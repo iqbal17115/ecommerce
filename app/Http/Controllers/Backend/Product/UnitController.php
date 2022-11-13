@@ -9,13 +9,17 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
-    public function deleteUnit(request $request) {
+    public function pagination(Request $request) {
+        $units = Unit::latest()->paginate(5);
+        return view('backend.product.pagination-unit', compact('units'))->render();
+    }
+    public function deleteUnit(Request $request) {
         $unit = Unit::find($request->id)->delete();
         return response()->json([
             'status' => 'success'
         ]);
     }
-    public function addUnit(request $request) {
+    public function addUnit(Request $request) {
         $request->validate(
             [
                 'name' => 'required|max:20',

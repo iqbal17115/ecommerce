@@ -77,6 +77,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('product-unit', [UnitController::class, 'index'])->name('product-unit');
         Route::post('add-unit', [UnitController::class, 'addUnit'])->name('add.unit');
         Route::post('delete-unit', [UnitController::class, 'deleteUnit'])->name('delete.unit');
+        Route::get('pagination/unit-pagination-data', [UnitController::class, 'pagination']);
         // Unit Start
     
     Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {

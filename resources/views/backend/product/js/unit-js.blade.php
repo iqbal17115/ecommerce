@@ -1,6 +1,18 @@
 <script>
 $(document).ready(function() {
-
+    function pagination(page) {
+        $.ajax({
+            url: '/pagination/unit-pagination-data?page=' + page,
+            success: function(data) {
+                $('.unit_content').html(data);
+            }
+        })
+    }
+    $(document).on('click', '.pagination a', function(e) {
+        e.preventDefault();
+        let page = $(this).attr('href').split('page=')[1]
+        pagination(page);
+    });
     $(document).on('click', '.delete_unit', function(e) {
         e.preventDefault();
         let id = $(this).data('id');
@@ -14,7 +26,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(data) {
                     if (data.status == 'success') {
-                        $('.table').load(location.href + ' .table');
+                        $('.unit_content').load(location.href + ' .unit_content');
                         $('.paginate').load(location.href + ' .paginate');
                         Command: toastr["success"]("Unit Deleted",
                             "success")
@@ -86,32 +98,32 @@ $(document).ready(function() {
             success: function(data) {
                 if (data.status == 'success') {
                     Command: toastr["success"]("Unit Added",
-                            "Success")
+                        "Success")
 
-                        toastr.options = {
-                            "closeButton": true,
-                            "debug": false,
-                            "newestOnTop": false,
-                            "progressBar": true,
-                            "positionClass": "toast-top-right",
-                            "preventDuplicates": false,
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "timeOut": "5000",
-                            "extendedTimeOut": "1000",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        }
-                        
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+
                     $('#unitModal').modal('hide');
                     $('#addUnit')[0].reset();
-                    $('.table').load(location.href + ' .table');
+                    $('.unit_content').load(location.href + ' .unit_content');
                     $('.paginate').load(location.href + ' .paginate');
                     $('#cu_id').val(-1);
-                    
+
                 }
             },
             error: function(err) {
