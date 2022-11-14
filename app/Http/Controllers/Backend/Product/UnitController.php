@@ -37,9 +37,9 @@ class UnitController extends Controller
                 'is_active' => 'required',
             ],
             [
-                'name' => 'unit name required',
-                'short_name' => 'required|max:10',
-                'is_active' => 'required',
+                'name' => 'Name is required',
+                'short_name' => 'Short name is required',
+                'is_active' => 'Status is required',
             ]
         );
         if($request->cu_id > 0) {

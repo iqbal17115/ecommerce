@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FrontEnt\LoginController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Backend\Product\UnitController;
+use App\Http\Controllers\Backend\Product\VariantController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -79,6 +80,14 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('delete-unit', [UnitController::class, 'deleteUnit'])->name('delete.unit');
         Route::get('pagination/unit-pagination-data', [UnitController::class, 'pagination']);
         Route::get('search-unit', [UnitController::class, 'searchUnit'])->name('search.unit');
+        // Unit Start
+
+        // Unit Start
+        Route::get('product-variant', [VariantController::class, 'index'])->name('product-variant');
+        Route::post('add-variant', [VariantController::class, 'addVariant'])->name('add.variant');
+        Route::post('delete-variant', [VariantController::class, 'deleteVariant'])->name('delete.variant');
+        Route::get('pagination/variant-pagination-data', [VariantController::class, 'pagination']);
+        Route::get('search-variant', [VariantController::class, 'searchVariant'])->name('search.variant');
         // Unit Start
     
     Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
