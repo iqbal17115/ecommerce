@@ -45,7 +45,6 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('language', Language::whereIsDefault(1)->first());
             $view->with('Districts', District::orderBy('name', 'asc')->get());
-            $view->with('categories', Category::orderBy('id', 'desc')->get());
             // $view->with('categoryImageLast', Category::whereTopShow(1)->orderBy('id', 'desc')->first());
             // $view->with('subCategories', SubCategory::orderBy('id', 'desc')->get());
             // $view->with('subSubCategories', SubSubCategory::orderBy('id', 'desc')->get());

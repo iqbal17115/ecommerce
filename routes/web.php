@@ -8,8 +8,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FrontEnt\LoginController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Backend\Product\UnitController;
-use App\Http\Controllers\Backend\Product\BrandController;
 use App\Http\Controllers\Backend\Product\VariantController;
+use App\Http\Controllers\Backend\Product\BrandController;
+use App\Http\Controllers\Backend\Product\CategoryController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -99,6 +100,13 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('search-brand', [BrandController::class, 'searchBrand'])->name('search.brand');
         // Unit Brand
 
+        // Unit Category
+        Route::get('product-category', [CategoryController::class, 'index'])->name('product-category');
+        Route::post('add-category', [CategoryController::class, 'addCategory'])->name('add.category');
+        Route::post('delete-category', [CategoryController::class, 'deleteCategory'])->name('delete.category');
+        Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
+        Route::get('search-category', [CategoryController::class, 'searchCategory'])->name('search.category');
+        // Unit Category
     
     Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
 

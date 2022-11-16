@@ -15,17 +15,18 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 191);
-            $table->string('name', 191);
-            $table->text('image1')->nullable();
-            $table->text('image2')->nullable();
-            $table->text('description')->nullable();
-            $table->tinyInteger('top_show');
+            $table->string('name', 50);
+            $table->foreignId('parent_category_id');
+            $table->boolean('top_menu')->nullable()->default(0);
+            $table->tinyInteger('position')->nullable();
+            $table->text('icon')->nullable();
+            $table->text('image')->nullable();
+            $table->double('vendor_commission_percentage')->nullable();
             $table->foreignId('branch_id');
-            $table->foreignId('created_by');
+            $table->foreignId('user_id');
             $table->boolean('is_active')->nullable()->default(1);
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
