@@ -19,7 +19,11 @@
             <th scope="row">{{ ++$i }}</th>
             <td>{{$variant->type}}</td>
             <td>{{$variant->name}}</td>
-            <td>{{$variant->color_code}}</td>
+            <td>
+                @if($variant->color_code)
+                <input type="color" value="{{$variant->color_code}}" disabled/>
+                @endif
+            </td>
             <td>{{$variant->is_active == 1? 'Active' : 'Inactive'}}</td>
             <td>
                 <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal"

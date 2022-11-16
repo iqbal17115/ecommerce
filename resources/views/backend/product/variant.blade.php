@@ -8,7 +8,7 @@
                 <span class="h4">Variant List</span>
                 <a class="btn btn-success text-light btn-sm py-2 float-right clean_form" data-toggle="modal"
                     data-target="#variantModal" style="width: 100px;"><i class="fas fa-plus-circle"></i> New</a>
-                <input class="float-right mr-2 py-1" name="search_string" id="search_string" placeholder="Search..."/>
+                <input class="float-right mr-2 py-1" name="search_string" id="search_string" placeholder="Search..." />
             </div>
             <div class="col-md-12 variant_content">
                 <table class="table table-striped">
@@ -32,14 +32,17 @@
                             <th scope="row">{{ ++$i }}</th>
                             <td>{{$variant->type}}</td>
                             <td>{{$variant->name}}</td>
-                            <td>{{$variant->color_code}}</td>
+                            <td>
+                                @if($variant->color_code)
+                                <input type="color" value="{{$variant->color_code}}" disabled />
+                                @endif
+                            </td>
                             <td>{{$variant->is_active == 1? 'Active' : 'Inactive'}}</td>
                             <td>
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#variantModal" data-id="{{$variant->id}}"
-                                    data-type="{{$variant->type}}"
-                                    data-name="{{$variant->name}}" data-color_code="{{$variant->color_code}}"
-                                    data-is_active="{{$variant->is_active}}">
+                                    data-type="{{$variant->type}}" data-name="{{$variant->name}}"
+                                    data-color_code="{{$variant->color_code}}" data-is_active="{{$variant->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger text-light btn-sm delete_variant"
@@ -52,7 +55,7 @@
                     </tbody>
 
                 </table>
-               {!! $variants->links() !!}
+                {!! $variants->links() !!}
             </div>
         </div>
     </div>

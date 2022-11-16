@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class VariantController extends Controller
 {
     public function searchVariant(Request $request) {
-        $variants = Variant::where('name', 'like', '%'.$request->search_string.'%')->orWhere('short_name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(5);
+        $variants = Variant::where('name', 'like', '%'.$request->search_string.'%')->orWhere('short_name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(10);
         if($variants->count() >= 1) {
         return view('backend.product.pagination-variant', compact('variants'))->render();
         }else {
@@ -20,7 +20,7 @@ class VariantController extends Controller
         }
     }
     public function pagination(Request $request) {
-        $variants = Variant::latest()->paginate(5);
+        $variants = Variant::latest()->paginate(10);
         return view('backend.product.pagination-variant', compact('variants'))->render();
     }
     public function deleteVariant(Request $request) {
@@ -66,7 +66,7 @@ class VariantController extends Controller
         ]);
     }
     public function index() {
-        $variants = Variant::latest()->paginate(5);
+        $variants = Variant::latest()->paginate(10);
         return view('backend.product.variant', compact('variants'));
     }
 }

@@ -18,6 +18,7 @@ class CreateBrandsTable extends Migration
             $table->string('name', 50);
             $table->text('image')->nullable();
             $table->text('website')->nullable();
+            $table->foreignId('branch_id');
             $table->foreignId('user_id');
             $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();

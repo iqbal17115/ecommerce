@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FrontEnt\LoginController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Backend\Product\UnitController;
+use App\Http\Controllers\Backend\Product\BrandController;
 use App\Http\Controllers\Backend\Product\VariantController;
 
 use Illuminate\Support\Facades\Route;
@@ -89,6 +90,15 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('pagination/variant-pagination-data', [VariantController::class, 'pagination']);
         Route::get('search-variant', [VariantController::class, 'searchVariant'])->name('search.variant');
         // Unit Start
+
+        // Unit Brand
+        Route::get('product-brand', [BrandController::class, 'index'])->name('product-brand');
+        Route::post('add-brand', [BrandController::class, 'addBrand'])->name('add.brand');
+        Route::post('delete-brand', [BrandController::class, 'deleteBrand'])->name('delete.brand');
+        Route::get('pagination/brand-pagination-data', [BrandController::class, 'pagination']);
+        Route::get('search-brand', [BrandController::class, 'searchBrand'])->name('search.brand');
+        // Unit Brand
+
     
     Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
 

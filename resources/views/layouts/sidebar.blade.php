@@ -51,7 +51,7 @@
                            <li><a href="javascript:void(0);">Manage Product</a></li>
                            <li><a href="javascript:void(0);">Product Ledger</a></li>
                            <li><a href="javascript:void(0);">Category</a></li>
-                           <li><a href="javascript:void(0);">Brand</a></li>
+                           <li><a href="{{ route('product-brand') }}">Brand</a></li>
                            <li><a href="{{ route('product-variant') }}">Variant</a></li>
                            <li><a href="{{ route('product-unit') }}">Unit</a></li>
                        </ul>
