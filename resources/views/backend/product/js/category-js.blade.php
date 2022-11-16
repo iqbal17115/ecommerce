@@ -91,21 +91,25 @@ $(document).ready(function() {
     $(document).on('click', '.update_form', function(e) {
         let id = $(this).data('id');
         let name = $(this).data('name');
-        let image = $(this).data('image');
-        let website = $(this).data('website');
+        let parent_category_id = $(this).data('parent_category_id');
+        let top_menu = $(this).data('top_menu');
+        let position = $(this).data('position');
+        let vendor_commission_percentage = $(this).data('vendor_commission_percentage');
         let is_active = $(this).data('is_active');
 
         $('#cu_id').val(id);
+        $('#id').val(id);
         $('#name').val(name);
-        $('#image').val(image);
-        $('#website').val(website);
+        $('#parent_category_id').val(parent_category_id);
+        $('#top_menu').val(top_menu);
+        $('#position').val(position);
+        $('#vendor_commission_percentage').val(vendor_commission_percentage);
         $('#is_active').val(is_active);
     });
 
     $(document).on('submit', '#addCategory', function(e) {
         e.preventDefault();
         var form = this;
-        alert("OK");
         $.ajax({
             url: "{{route('add.category')}}",
             method: 'post',

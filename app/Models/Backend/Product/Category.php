@@ -11,4 +11,7 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+    public function Parent() {
+       return $this->belongsTo(self::class, 'parent_category_id');
+    }
 }

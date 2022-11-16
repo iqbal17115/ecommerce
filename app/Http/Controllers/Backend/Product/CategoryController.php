@@ -33,7 +33,7 @@ class CategoryController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:20',
-                // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'is_active' => 'required',
             ],
             [
@@ -50,14 +50,27 @@ class CategoryController extends Controller
         }
         
         $category->name = $request->name;
+        $category->parent_category_id = $request->id;
+        $category->top_menu = $request->top_menu;
+        $category->position = $request->position;
         if ($request->file('image')) {
             $imagePath = $request->file('image');
             $imageName = $imagePath->getClientOriginalName();
             $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
         }
-        $image = $request->file('image')->store('images/blog_posts', 'public');
+        $image = $request->file('image')->store('category/images', 'public');
+
+        $icon = '';
+        if ($request->file('icon')) {
+            $iconPath = $request->file('icon');
+            $iconName = $iconPath->getClientOriginalName();
+            $path = $request->file('icon')->storeAs('uploads', $iconName, 'public');
+        }
+        $icon = $request->file('icon')->store('category/icons', 'public');
+
         $category->image = $image;
-        $category->website = $request->website;
+        $category->icon = $icon;
+        $category->vendor_commission_percentage = $request->vendor_commission_percentage;
         $category->branch_id = 1;
         $category->is_active = $request->is_active;
         $category->save();
