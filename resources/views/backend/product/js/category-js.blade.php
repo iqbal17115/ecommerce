@@ -1,5 +1,31 @@
 <script>
 $(document).ready(function() {
+    $('#imgPreviewIcon').hide();
+    $('#imgPreview').hide();
+    $(document).on('change', '#image', function(e) {
+        $('#imgPreview').show();
+        const file = this.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                console.log(event.target.result);
+                $('#imgPreview').attr('src', event.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    $(document).on('change', '#icon', function(e) {
+        $('#imgPreviewIcon').show();
+        const file = this.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                console.log(event.target.result);
+                $('#imgPreviewIcon').attr('src', event.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
     $(document).on('keyup', function(e) {
         e.preventDefault();
         let search_string = $("#search_string").val();
@@ -14,7 +40,7 @@ $(document).ready(function() {
                 if (data.status == 'nothing_found') {
                     $('.category_content').html(
                         '<div class="text-danger text-center h3 mt-3">Nothing Found!!</div>'
-                        );
+                    );
                 }
             },
             error: function(err) {
@@ -86,6 +112,8 @@ $(document).ready(function() {
     $(document).on('click', '.clean_form', function(e) {
         $('#addCategory')[0].reset();
         $('#cu_id').val(-1);
+        $('#imgPreviewIcon').hide();
+        $('#imgPreview').hide();
     });
 
     $(document).on('click', '.update_form', function(e) {
@@ -94,6 +122,8 @@ $(document).ready(function() {
         let parent_category_id = $(this).data('parent_category_id');
         let top_menu = $(this).data('top_menu');
         let position = $(this).data('position');
+        let icon = $(this).data('icon1');
+        let image = $(this).data('image');
         let vendor_commission_percentage = $(this).data('vendor_commission_percentage');
         let is_active = $(this).data('is_active');
 
@@ -103,6 +133,14 @@ $(document).ready(function() {
         $('#parent_category_id').val(parent_category_id);
         $('#top_menu').val(top_menu);
         $('#position').val(position);
+        if (image) {
+            $('#imgPreview').show();
+            $('#imgPreview').attr("src", 'storage/' + image);
+        }
+        if (icon) {
+            $('#imgPreviewIcon').show();
+            $('#imgPreviewIcon').attr("src", 'storage/' + icon);
+        }
         $('#vendor_commission_percentage').val(vendor_commission_percentage);
         $('#is_active').val(is_active);
     });

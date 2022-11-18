@@ -37,7 +37,9 @@
                             <td>
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#brandModal" data-id="{{$brand->id}}"
-                                    data-name="{{$brand->name}}" data-short_name="{{$brand->short_name}}"
+                                    data-name="{{$brand->name}}" 
+                                    data-image="{{$brand->image}}"
+                                    data-short_name="{{$brand->short_name}}"
                                     data-is_active="{{$brand->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>

@@ -1,5 +1,18 @@
 <script>
 $(document).ready(function() {
+    $('#imgPreview').hide();
+    $(document).on('change', '#image', function(e) {
+        $('#imgPreview').show();
+        const file = this.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                console.log(event.target.result);
+                $('#imgPreview').attr('src', event.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
     $(document).on('keyup', function(e) {
         e.preventDefault();
         let search_string = $("#search_string").val();
@@ -86,6 +99,7 @@ $(document).ready(function() {
     $(document).on('click', '.clean_form', function(e) {
         $('#addBrand')[0].reset();
         $('#cu_id').val(-1);
+        $('#imgPreview').hide();
     });
 
     $(document).on('click', '.update_form', function(e) {
@@ -97,7 +111,10 @@ $(document).ready(function() {
 
         $('#cu_id').val(id);
         $('#name').val(name);
-        $('#image').val(image);
+        if(image) {
+        $('#imgPreview').show();
+        $('#imgPreview').attr("src", 'storage/'+image);
+        }
         $('#website').val(website);
         $('#is_active').val(is_active);
     });

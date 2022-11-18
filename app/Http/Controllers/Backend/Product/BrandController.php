@@ -33,18 +33,24 @@ class BrandController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:20',
-                // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'is_active' => 'required',
             ],
             [
                 'name' => 'Name is required',
-                'image' => 'Image is required',
                 'is_active' => 'Status is required',
             ]
         );
         if($request->cu_id > 0) {
             $brand = Brand::find($request->cu_id);
         }else {
+            $request->validate(
+                [
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                ],
+                [
+                    'image' => 'Image is required',
+                ]
+            );
             $brand = new Brand();
             $brand->user_id = Auth::user()->id;
         }
@@ -54,9 +60,10 @@ class BrandController extends Controller
             $imagePath = $request->file('image');
             $imageName = $imagePath->getClientOriginalName();
             $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
+            $image = $request->file('image')->store('images/blog_posts', 'public');
+            $brand->image = $image;
         }
-        $image = $request->file('image')->store('images/blog_posts', 'public');
-        $brand->image = $image;
+        
         $brand->website = $request->website;
         $brand->branch_id = 1;
         $brand->is_active = $request->is_active;

@@ -37,20 +37,26 @@
                                 {{$category->Parent->name}}
                                 @endif
                             </td>
-                            <td><img src="{{ asset('storage/'.$category->image) }}" class="rounded"
-                                    style="width: 55px; height: 40px;" /></td>
-                            <td><img src="{{ asset('storage/'.$category->icon) }}" class="rounded"
-                                    style="width: 55px; height: 40px;" /></td>
+                            <td>
+                                @if($category->icon)
+                                <img src="{{ asset('storage/'.$category->icon) }}" class="rounded"
+                                    style="width: 55px; height: 40px;" />
+                                @endif
+                            </td>
+                            <td>
+                                @if($category->image)
+                                <img src="{{ asset('storage/'.$category->image) }}" class="rounded"
+                                    style="width: 55px; height: 40px;" />
+                                @endif
+                            </td>
                             <td>{{$category->is_active == 1? 'Active' : 'Inactive'}}</td>
                             <td>
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#categoryModal" data-id="{{$category->id}}"
                                     data-name="{{$category->name}}"
                                     data-parent_category_id="{{$category->parent_category_id}}"
-                                    data-top_menu="{{$category->top_menu}}" 
-                                    data-position="{{$category->position}}"
-                                    data-icon1="{{$category->icon}}"
-                                    data-image="{{$category->image}}"
+                                    data-top_menu="{{$category->top_menu}}" data-position="{{$category->position}}"
+                                    data-icon1="{{$category->icon}}" data-image="{{$category->image}}"
                                     data-vendor_commission_percentage="{{$category->vendor_commission_percentage}}"
                                     data-is_active="{{$category->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>

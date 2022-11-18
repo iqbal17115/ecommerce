@@ -12,14 +12,14 @@
                           </button>
                       </div>
                       <div class="modal-body">
-                        <input type="hidden" name="cu_id" id="cu_id" value="-1">
+                          <input type="hidden" name="cu_id" id="cu_id" value="-1">
                           <div class="row">
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="name">Brand Name</label>
                                       <input type="text" name="name" id="name" class="form-control"
                                           placeholder="Enter Brand Name">
-                                          <span class="text-danger err_name"></span>
+                                      <span class="text-danger err_name"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
@@ -27,7 +27,7 @@
                                       <label for="image">Image</label>
                                       <input type="file" name="image" id="image" class="form-control"
                                           placeholder="Enter Short Name">
-                                          <span class="text-danger err_image"></span>
+                                      <span class="text-danger err_image"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
@@ -35,7 +35,7 @@
                                       <label for="website">Website</label>
                                       <input type="text" name="website" id="website" class="form-control"
                                           placeholder="Enter Website">
-                                          <span class="text-danger err_website"></span>
+                                      <span class="text-danger err_website"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
@@ -53,6 +53,10 @@
                           </div>
                       </div>
                       <div class="modal-footer">
+                          <center>
+                              <img id="imgPreview" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
+                          </center>
+                          <span style="width: 200px;"></span>
                           <button type="button" class="btn btn-secondary waves-effect"
                               data-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
