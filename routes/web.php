@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\Product\UnitController;
 use App\Http\Controllers\Backend\Product\VariantController;
 use App\Http\Controllers\Backend\Product\BrandController;
 use App\Http\Controllers\Backend\Product\CategoryController;
+use App\Http\Controllers\Backend\Product\ProductController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -107,6 +108,10 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
         Route::get('search-category', [CategoryController::class, 'searchCategory'])->name('search.category');
         // Unit Category
+
+        // Unit Product
+        Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
+        // Unit Product
     
     Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
 
