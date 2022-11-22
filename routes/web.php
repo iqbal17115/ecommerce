@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\Product\UnitController;
 use App\Http\Controllers\Backend\Product\VariantController;
 use App\Http\Controllers\Backend\Product\BrandController;
 use App\Http\Controllers\Backend\Product\CategoryController;
+use App\Http\Controllers\Backend\Product\MaterialController;
 use App\Http\Controllers\Backend\Product\ProductController;
 
 use Illuminate\Support\Facades\Route;
@@ -91,7 +92,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('delete-variant', [VariantController::class, 'deleteVariant'])->name('delete.variant');
         Route::get('pagination/variant-pagination-data', [VariantController::class, 'pagination']);
         Route::get('search-variant', [VariantController::class, 'searchVariant'])->name('search.variant');
-        // Unit Start
+        // End Start
 
         // Unit Brand
         Route::get('product-brand', [BrandController::class, 'index'])->name('product-brand');
@@ -108,6 +109,14 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
         Route::get('search-category', [CategoryController::class, 'searchCategory'])->name('search.category');
         // Unit Category
+
+        // Material Start
+        Route::get('product-material', [MaterialController::class, 'index'])->name('product-material');
+        Route::post('add-material', [MaterialController::class, 'addMaterial'])->name('add.material');
+        Route::post('delete-material', [MaterialController::class, 'deleteMaterial'])->name('delete.material');
+        Route::get('pagination/material-pagination-data', [MaterialController::class, 'pagination']);
+        Route::get('search-material', [MaterialController::class, 'searchMaterial'])->name('search.material');
+        // Material End
 
         // Unit Product
         Route::get('product-product', [ProductController::class, 'index'])->name('product-product');

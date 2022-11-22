@@ -54,6 +54,7 @@
                            <li><a href="{{ route('product-brand') }}">Brand</a></li>
                            <li><a href="{{ route('product-variant') }}">Variant</a></li>
                            <li><a href="{{ route('product-unit') }}">Unit</a></li>
+                           <li><a href="{{ route('product-material') }}">Material</a></li>
                        </ul>
                    </li>
 
