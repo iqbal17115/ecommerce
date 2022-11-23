@@ -95,25 +95,17 @@ $(document).ready(function() {
         $('#is_active').val(is_active);
     });
 
-    $(document).on('click', '.add_material', function(e) {
+    $(document).on('submit', '#addMaterial', function(e) {
         e.preventDefault();
-        let cu_id = $('#cu_id').val();
-        let name = $('#name').val();
-        let short_name = $('#short_name').val();
-        let is_active = $('#is_active').val();
 
-        let formData = {
-            cu_id: cu_id,
-            name: name,
-            short_name: short_name,
-            is_active: is_active
-        };
-
+        let formData = this;
         $.ajax({
             url: "{{route('add.material')}}",
             method: 'post',
-            data: formData,
+            data: new FormData(formData),
+            processData: false,
             dataType: 'json',
+            contentType: false,
             success: function(data) {
                 if (data.status == 'success') {
                     Command: toastr["success"]("Material Added",
