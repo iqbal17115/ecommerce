@@ -81,6 +81,22 @@
 #rowAdder {
     margin-left: 17px;
 }
+
+#box-one,
+#box-two {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
+
+#box-two {
+    transition: transform 0.6s ease;
+}
+
+#button-three {
+    position: relative;
+    left: 200px;
+}
 </style>
 @endsection
 @section('content')
@@ -127,7 +143,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#settings" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#keywords" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Keywords
                                 </a>
                             </li>
@@ -281,12 +297,86 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="variations" role="tabpanel">
-                                <p>I think that’s a responsibility that I have, to push possibilities, to show
-                                    people, this is the level that things could be at. So when you get something
-                                    that has the name Kanye West on it, it’s supposed to be pushing the furthest
-                                    possibilities. I will be the leader of a company that ends up being worth
-                                    billions of dollars, because I got the answers. I understand culture. I am the
-                                    nucleus.</p>
+                                <div class="row">
+                                    <!-- Start -->
+                                    <div class="col-md-10">
+                                        <!-- Start Content -->
+                                        <div class="row">
+                                            <div class="col-md-4 mt-md-3">
+                                                <label class="col-form-label float-md-right"
+                                                    style="font-size: 14px;">Select Variation </label>
+                                                <span class="text-danger float-md-right">*</span>
+                                            </div>
+                                            <div class="col-md-8 mt-md-3">
+                                                <select class="form-select">
+                                                    <option value="">Select Option</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <!-- End -->
+                                            <div class="col-md-4 mt-md-3"></div>
+                                            <div class="col-md-2 mt-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckChecked">
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Set Variant wise Price
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-md-3"></div>
+                                            <!-- End -->
+                                            <div class="col-md-4 mt-md-3"></div>
+                                            <div class="col-md-8 mt-md-3">
+                                                
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Size<span class="color-red">*</span></th>
+                                                            <th>Color</th>
+                                                            <th>Price<span class="color-red">*</span></th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="variant_area">
+                                                        <tr>
+                                                            <td>
+                                                                <select name="variant_1" id="size_var"
+                                                                    class="form-control select2 custom_select">
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <select name="variant_2" id="color_var"
+                                                                    class="form-control select2 custom_select">
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" name="var_price_1" id="var_price"
+                                                                    class="form-control" placeholder="0.00" value="">
+                                                            </td>
+                                                            <td>
+                                                                <input type="button" value="Add" class="btn btn-info"
+                                                                    id="variant-row-add" data-key="0">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- End -->
+                                        </div>
+                                        <!-- End Content -->
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <!-- End -->
+                                </div>
                             </div>
                             <div class="tab-pane" id="offer" role="tabpanel">
                                 <div class="row">
@@ -665,6 +755,20 @@
                                                     id="product_description"></textarea>
                                             </div>
                                             <!-- End -->
+                                        </div>
+                                        <!-- End Content -->
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <!-- End -->
+                                </div>
+                            </div>
+                            <!-- End -->
+                            <div class="tab-pane" id="keywords" role="tabpanel">
+                                <div class="row">
+                                    <!-- Start -->
+                                    <div class="col-md-10">
+                                        <!-- Start Content -->
+                                        <div class="row">
                                             <div class="col-md-4 mt-md-3">
                                                 <label class="col-form-label float-md-right"
                                                     style="font-size: 14px;">Key Product Features</label>
@@ -828,8 +932,8 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-12" style="text-align: left;">
-                                                        <label class="col-form-label"
-                                                            style="font-size: 14px;">Package Height</label>
+                                                        <label class="col-form-label" style="font-size: 14px;">Package
+                                                            Height</label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <input type="text" class="form-control m-input"
@@ -843,8 +947,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12" style="text-align: left;">
-                                                        <label class="col-form-label"
-                                                            style="font-size: 14px;">Package Length</label>
+                                                        <label class="col-form-label" style="font-size: 14px;">Package
+                                                            Length</label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <input type="text" class="form-control m-input"
@@ -858,8 +962,8 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12" style="text-align: left;">
-                                                        <label class="col-form-label"
-                                                            style="font-size: 14px;">Package Width</label>
+                                                        <label class="col-form-label" style="font-size: 14px;">Package
+                                                            Width</label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <input type="text" class="form-control m-input"
@@ -881,8 +985,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-4 mt-md-3">
-                                                <input class="form-control" placeholder="45" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="45" name="" id="" />
                                             </div>
                                             <div class="col-md-4 mt-md-3">
                                                 <select class="form-select">
@@ -898,8 +1001,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input type="text" class="form-control m-input"
-                                                    placeholder="MLB">
+                                                <input type="text" class="form-control m-input" placeholder="MLB">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -909,7 +1011,8 @@
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <textarea class="form-control" name="warranty_description"
-                                                    id="warranty_description" placeholder="Manufacturer warranty for 90 days from date of purchase"></textarea>
+                                                    id="warranty_description"
+                                                    placeholder="Manufacturer warranty for 90 days from date of purchase"></textarea>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -931,8 +1034,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
-                                                    placeholder="Arsenal">
+                                                <input type="text" class="form-control m-input" placeholder="Arsenal">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -941,8 +1043,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
-                                                    placeholder="3 months">
+                                                <input type="text" class="form-control m-input" placeholder="3 months">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -951,7 +1052,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
+                                                <input type="text" class="form-control m-input"
                                                     placeholder="with warm lining">
                                             </div>
                                             <!-- End -->
@@ -961,7 +1062,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
+                                                <input type="text" class="form-control m-input"
                                                     placeholder="ankle-wrap">
                                             </div>
                                             <!-- End -->
@@ -971,8 +1072,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
-                                                    placeholder="">
+                                                <input type="text" class="form-control m-input" placeholder="">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -981,8 +1081,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
-                                                    placeholder="">
+                                                <input type="text" class="form-control m-input" placeholder="">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -991,8 +1090,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
-                                                    placeholder="4">
+                                                <input type="text" class="form-control m-input" placeholder="4">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -1001,8 +1099,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
-                                                    placeholder="">
+                                                <input type="text" class="form-control m-input" placeholder="">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -1011,8 +1108,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
-                                                    placeholder="">
+                                                <input type="text" class="form-control m-input" placeholder="">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -1021,8 +1117,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                            <input type="text" class="form-control m-input"
-                                                    placeholder="">
+                                                <input type="text" class="form-control m-input" placeholder="">
                                             </div>
                                             <!-- End -->
                                         </div>

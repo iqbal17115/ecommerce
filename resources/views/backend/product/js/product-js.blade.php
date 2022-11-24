@@ -1,4 +1,15 @@
 <script type="text/javascript">
+    
+$("body").on("click", "#DeleteRow", function() {
+    $(this).parents("#DeleteVariantRow").remove();
+});
+$("#variant-row-add").click(function() {
+    newRowAdd =
+        '<tr id="DeleteVariantRow"><td>Large</td><td>Green</td><td>1150Tk</td><td><button class="btn btn-danger" id="DeleteRow" type="button"><i class="mdi mdi-delete"></i></td></tr>';
+
+    $('#variant_area').append(newRowAdd);
+});
+
 $('#condition_note').summernote({
     height: 120
 });
