@@ -182,6 +182,7 @@ $(document).ready(function() {
                     $('#categoryModal').modal('hide');
                     $('#addCategory')[0].reset();
                     $('.category_content').load(location.href + ' .category_content');
+                    $('.category_load').load(location.href + ' .category_load');
                     $('.paginate').load(location.href + ' .paginate');
                     $('#cu_id').val(-1);
 

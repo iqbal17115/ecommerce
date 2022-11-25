@@ -3,7 +3,9 @@
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+    integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 .container {
     padding: 50px 10%;
@@ -156,7 +158,7 @@
                     </div>
                     <div class="card-body">
                         <!-- Tab panes -->
-                        <div class="tab-content text-center">
+                        <div class="tab-content">
                             <div class="tab-pane active" id="vital_info" role="tabpanel">
                                 <div class="row">
                                     <!-- Start -->
@@ -196,15 +198,67 @@
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
                                                 <label class="col-form-label float-md-right"
+                                                    style="font-size: 14px;">Category Name</label>
+                                                <span class="text-danger float-md-right">*</span>
+                                            </div>
+                                            <div class="col-md-8 mt-md-3">
+                                                <select class="form-select" id="category_id">
+                                                    <option value=""></option>
+                                                    @foreach($categories as $category)
+                                                    <option value="{{$category->id}}">
+                                                        {{$category->name}}
+                                                    </option>
+                                                    <!-- Start Sub-Category -->
+                                                    @if($category->SubCategory)
+                                                    @foreach($category->SubCategory as $subCategory)
+                                                    <option value="{{$subCategory->id}}">
+                                                        -{{$subCategory->name}}
+                                                    </option>
+                                                    <!-- Start sub-Sub-Category -->
+                                                    @if($subCategory->SubCategory)
+                                                    @foreach($subCategory->SubCategory as $subSubCategory)
+                                                    <option value="{{$subCategory->id}}">
+                                                        --{{$subSubCategory->name}}
+                                                    </option>
+                                                    <!-- Start sub-Sub-Sub-Category -->
+                                                    @if($subSubCategory->SubCategory)
+                                                    @foreach($subSubCategory->SubCategory as $subSubSubCategory)
+                                                    <option value="{{$subCategory->id}}">
+                                                        ---{{$subSubSubCategory->name}}
+                                                    </option>
+                                                    <!-- Start sub-Sub-Sub-Sub-Category -->
+                                                    @if($subSubSubCategory->SubCategory)
+                                                    @foreach($subSubSubCategory->SubCategory as $subSubSubSubCategory)
+                                                    <option value="{{$subCategory->id}}">
+                                                        ----{{$subSubSubSubCategory->name}}
+                                                    </option>
+                                                    @endforeach
+                                                    @endif
+                                                    <!-- End sub-Sub-Sub-Sub-Category -->
+                                                    @endforeach
+                                                    @endif
+                                                    <!-- End sub-Sub-Sub-Category -->
+                                                    @endforeach
+                                                    @endif
+                                                    <!-- End sub-Sub-Category -->
+                                                    @endforeach
+                                                    @endif
+                                                    <!-- End Sub Category -->
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <!-- End -->
+                                            <div class="col-md-4 mt-md-3">
+                                                <label class="col-form-label float-md-right"
                                                     style="font-size: 14px;">Brand Name</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select">
-                                                    <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" id="brand_id">
+                                                    <option value=""></option>
+                                                    @foreach($brands as $brand)
+                                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -242,10 +296,9 @@
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <select class="form-select">
-                                                    <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    @foreach($brands as $brand)
+                                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -265,11 +318,11 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select">
-                                                    <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" id="material_id">
+                                                    <option value=""></option>
+                                                    @foreach($materials as $material)
+                                                    <option value="{{$material->id}}">{{$material->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -308,11 +361,11 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select">
-                                                    <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" id="variant_id" multiple="multiple"
+                                                    style="width: 100%;">
+                                                    @foreach($variants as $variant)
+                                                    <option value="{{$variant->id}}">{{$variant->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -330,7 +383,7 @@
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3"></div>
                                             <div class="col-md-8 mt-md-3">
-                                                
+
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
@@ -1144,5 +1197,22 @@
 </script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+$('#category_id').select2({
+    placeholder: 'Select An Option'
+});
+$('#brand_id').select2({
+    placeholder: 'Select An Option'
+});
+$('#material_id').select2({
+    placeholder: 'Select An Option'
+});
+$('#variant_id').select2({
+    placeholder: 'Select An Option'
+});
+</script>
 @include('backend.product.js.product-js')
 @endsection
