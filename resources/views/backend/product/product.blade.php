@@ -939,8 +939,22 @@
                                                     <div class="col-md-6">
                                                         <select class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
+                                                            <option value="dm">Decimeter</option>
+                                                            <option value="mm">Milimeter</option>
+                                                            <option value="cm">Centimeter</option>
+                                                            <option value="m">Meter</option>
+                                                            <option value="Å">Angstrom</option>
+                                                            <option value="mil">Mil</option>
+                                                            <option value="yd">Yards</option>
+                                                            <option value="pm">Picometer</option>
+                                                            <option value="mi">Mile</option>
+                                                            <option value="in">Inch</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="hin">Hundredths Inch</option>
+                                                            <option value="nm">Nanometer</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="μm">Micrometre</option>
+                                                            <option value="km">Kilometers</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12" style="text-align: left;">
@@ -954,8 +968,22 @@
                                                     <div class="col-md-6">
                                                         <select class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
+                                                            <option value="dm">Decimeter</option>
+                                                            <option value="mm">Milimeter</option>
+                                                            <option value="cm">Centimeter</option>
+                                                            <option value="m">Meter</option>
+                                                            <option value="Å">Angstrom</option>
+                                                            <option value="mil">Mil</option>
+                                                            <option value="yd">Yards</option>
+                                                            <option value="pm">Picometer</option>
+                                                            <option value="mi">Mile</option>
+                                                            <option value="in">Inch</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="hin">Hundredths Inch</option>
+                                                            <option value="nm">Nanometer</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="μm">Micrometre</option>
+                                                            <option value="km">Kilometers</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12" style="text-align: left;">
@@ -969,8 +997,22 @@
                                                     <div class="col-md-6">
                                                         <select class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
+                                                            <option value="dm">Decimeter</option>
+                                                            <option value="mm">Milimeter</option>
+                                                            <option value="cm">Centimeter</option>
+                                                            <option value="m">Meter</option>
+                                                            <option value="Å">Angstrom</option>
+                                                            <option value="mil">Mil</option>
+                                                            <option value="yd">Yards</option>
+                                                            <option value="pm">Picometer</option>
+                                                            <option value="mi">Mile</option>
+                                                            <option value="in">Inch</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="hin">Hundredths Inch</option>
+                                                            <option value="nm">Nanometer</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="μm">Micrometre</option>
+                                                            <option value="km">Kilometers</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -995,8 +1037,22 @@
                                                     <div class="col-md-6">
                                                         <select class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
+                                                            <option value="dm">Decimeter</option>
+                                                            <option value="mm">Milimeter</option>
+                                                            <option value="cm">Centimeter</option>
+                                                            <option value="m">Meter</option>
+                                                            <option value="Å">Angstrom</option>
+                                                            <option value="mil">Mil</option>
+                                                            <option value="yd">Yards</option>
+                                                            <option value="pm">Picometer</option>
+                                                            <option value="mi">Mile</option>
+                                                            <option value="in">Inch</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="hin">Hundredths Inch</option>
+                                                            <option value="nm">Nanometer</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="μm">Micrometre</option>
+                                                            <option value="km">Kilometers</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12" style="text-align: left;">
@@ -1010,8 +1066,22 @@
                                                     <div class="col-md-6">
                                                         <select class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
+                                                            <option value="dm">Decimeter</option>
+                                                            <option value="mm">Milimeter</option>
+                                                            <option value="cm">Centimeter</option>
+                                                            <option value="m">Meter</option>
+                                                            <option value="Å">Angstrom</option>
+                                                            <option value="mil">Mil</option>
+                                                            <option value="yd">Yards</option>
+                                                            <option value="pm">Picometer</option>
+                                                            <option value="mi">Mile</option>
+                                                            <option value="in">Inch</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="hin">Hundredths Inch</option>
+                                                            <option value="nm">Nanometer</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="μm">Micrometre</option>
+                                                            <option value="km">Kilometers</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12" style="text-align: left;">
@@ -1025,8 +1095,22 @@
                                                     <div class="col-md-6">
                                                         <select class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
+                                                            <option value="dm">Decimeter</option>
+                                                            <option value="mm">Milimeter</option>
+                                                            <option value="cm">Centimeter</option>
+                                                            <option value="m">Meter</option>
+                                                            <option value="Å">Angstrom</option>
+                                                            <option value="mil">Mil</option>
+                                                            <option value="yd">Yards</option>
+                                                            <option value="pm">Picometer</option>
+                                                            <option value="mi">Mile</option>
+                                                            <option value="in">Inch</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="hin">Hundredths Inch</option>
+                                                            <option value="nm">Nanometer</option>
+                                                            <option value="ft">Feet</option>
+                                                            <option value="μm">Micrometre</option>
+                                                            <option value="km">Kilometers</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -1043,8 +1127,13 @@
                                             <div class="col-md-4 mt-md-3">
                                                 <select class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
+                                                    <option value="lb">Pound</option>
+                                                    <option value="kg">Kilogram</option>
+                                                    <option value="gm">Gram</option>
+                                                    <option value="hlb">Hundredths Pounds</option>
+                                                    <option value="mg">Milligram</option>
+                                                    <option value="tn">Ton</option>
+                                                    <option value="oz">Ounce</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
