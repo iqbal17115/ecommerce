@@ -651,9 +651,9 @@
                             </div>
                             <div class="tab-pane" id="images" role="tabpanel">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <div class="dropzone-wrapper">
+                                    <div class="col-md-2 preview-zone">
+                                        <div class="form-group box">
+                                            <div class="dropzone-wrapper box-body">
                                                 <div class="dropzone-desc">
                                                     <i class="fas fa-camera-retro text-dark"
                                                         style="font-size: 20px;"></i>
@@ -661,135 +661,10 @@
                                                 </div>
                                                 <input type="file" name="img_logo" class="dropzone">
                                             </div>
-                                            <div class="preview-zone hidden">
-                                                <div class="box box-solid">
-                                                    <div class="box-header with-border">
-                                                        <div><b>Preview</b></div>
-                                                        <div class="box-tools pull-right">
-                                                        </div>
-                                                    </div>
-                                                    <div class="box-body"></div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <!-- End -->
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <div class="dropzone-wrapper">
-                                                <div class="dropzone-desc">
-                                                    <i class="fas fa-camera-retro text-dark"
-                                                        style="font-size: 20px;"></i>
-                                                    <p>Upload</p>
-                                                </div>
-                                                <input type="file" name="img_logo" class="dropzone">
-                                            </div>
-                                            <div class="preview-zone hidden">
-                                                <div class="box box-solid">
-                                                    <div class="box-header with-border">
-                                                        <div><b>Preview</b></div>
-                                                        <div class="box-tools pull-right">
-                                                        </div>
-                                                    </div>
-                                                    <div class="box-body"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End -->
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <div class="dropzone-wrapper">
-                                                <div class="dropzone-desc">
-                                                    <i class="fas fa-camera-retro text-dark"
-                                                        style="font-size: 20px;"></i>
-                                                    <p>Upload</p>
-                                                </div>
-                                                <input type="file" name="img_logo" class="dropzone">
-                                            </div>
-                                            <div class="preview-zone hidden">
-                                                <div class="box box-solid">
-                                                    <div class="box-header with-border">
-                                                        <div><b>Preview</b></div>
-                                                        <div class="box-tools pull-right">
-                                                        </div>
-                                                    </div>
-                                                    <div class="box-body"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End -->
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <div class="dropzone-wrapper">
-                                                <div class="dropzone-desc">
-                                                    <i class="fas fa-camera-retro text-dark"
-                                                        style="font-size: 20px;"></i>
-                                                    <p>Upload</p>
-                                                </div>
-                                                <input type="file" name="img_logo" class="dropzone">
-                                            </div>
-                                            <div class="preview-zone hidden">
-                                                <div class="box box-solid">
-                                                    <div class="box-header with-border">
-                                                        <div><b>Preview</b></div>
-                                                        <div class="box-tools pull-right">
-                                                        </div>
-                                                    </div>
-                                                    <div class="box-body"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End -->
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <div class="dropzone-wrapper">
-                                                <div class="dropzone-desc">
-                                                    <i class="fas fa-camera-retro text-dark"
-                                                        style="font-size: 20px;"></i>
-                                                    <p>Upload</p>
-                                                </div>
-                                                <input type="file" name="img_logo" class="dropzone">
-                                            </div>
-                                            <div class="preview-zone hidden">
-                                                <div class="box box-solid">
-                                                    <div class="box-header with-border">
-                                                        <div><b>Preview</b></div>
-                                                        <div class="box-tools pull-right">
-                                                        </div>
-                                                    </div>
-                                                    <div class="box-body"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End -->
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <div class="dropzone-wrapper">
-                                                <div class="dropzone-desc">
-
-                                                    <i class="fas fa-camera-retro text-dark"
-                                                        style="font-size: 20px;"></i>
-                                                    <p>Upload</p>
-                                                </div>
-                                                <input type="file" name="img_logo" class="dropzone">
-                                            </div>
-                                            <div class="preview-zone hidden">
-                                                <div class="box box-solid">
-                                                    <div class="box-header with-border">
-                                                        <div><b>Preview</b></div>
-                                                        <div class="box-tools pull-right">
-                                                        </div>
-                                                    </div>
-                                                    <div class="box-body"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End -->
+                                   
                                 </div>
                             </div>
                             <div class="tab-pane" id="description" role="tabpanel">
