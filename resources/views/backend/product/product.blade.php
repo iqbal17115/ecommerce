@@ -212,25 +212,25 @@
                                                     @if($category->SubCategory)
                                                     @foreach($category->SubCategory as $subCategory)
                                                     <option value="{{$subCategory->id}}">
-                                                        -{{$subCategory->name}}
+                                                        --{{$subCategory->name}}
                                                     </option>
                                                     <!-- Start sub-Sub-Category -->
                                                     @if($subCategory->SubCategory)
                                                     @foreach($subCategory->SubCategory as $subSubCategory)
                                                     <option value="{{$subCategory->id}}">
-                                                        --{{$subSubCategory->name}}
+                                                        ----{{$subSubCategory->name}}
                                                     </option>
                                                     <!-- Start sub-Sub-Sub-Category -->
                                                     @if($subSubCategory->SubCategory)
                                                     @foreach($subSubCategory->SubCategory as $subSubSubCategory)
                                                     <option value="{{$subCategory->id}}">
-                                                        ---{{$subSubSubCategory->name}}
+                                                        ------{{$subSubSubCategory->name}}
                                                     </option>
                                                     <!-- Start sub-Sub-Sub-Sub-Category -->
                                                     @if($subSubSubCategory->SubCategory)
                                                     @foreach($subSubSubCategory->SubCategory as $subSubSubSubCategory)
                                                     <option value="{{$subCategory->id}}">
-                                                        ----{{$subSubSubSubCategory->name}}
+                                                        --------{{$subSubSubSubCategory->name}}
                                                     </option>
                                                     @endforeach
                                                     @endif
@@ -1165,8 +1165,9 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <select class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Unisex">Unisex</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
