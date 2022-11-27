@@ -1,5 +1,7 @@
 <script type="text/javascript">
-    
+function pro1(val) {
+    document.getElementById(val).click();
+}
 $("body").on("click", "#DeleteRow", function() {
     $(this).parents("#DeleteVariantRow").remove();
 });
@@ -26,11 +28,13 @@ function readFile(input) {
 
         reader.onload = function(e) {
             var htmlPreview =
-                '<img width="200" style="width: 220px; height: 150px;" src="' + e.target.result + '" />' +
+                '<img width="200" style="width: 232px; height: 150px;" src="' + e.target.result +
+                '"/>' +
                 '<p>' + input.files[0].name + '</p>';
             var wrapperZone = $(input).parent();
             var previewZone = $(input).parent().parent().find('.preview-zone');
-            var boxZone = $(input).parent().parent().parent().parent().find('.preview-zone').find('.box').find('.box-body');
+            var boxZone = $(input).parent().parent().parent().parent().find('.preview-zone').find('.box'+input.id).find(
+                '.box-body');
 
             wrapperZone.removeClass('dragover');
             previewZone.removeClass('hidden');
@@ -49,6 +53,7 @@ function reset(e) {
 
 $(".dropzone").change(function() {
     readFile(this);
+    console.log(this);
 });
 
 $('.dropzone-wrapper').on('dragover', function(e) {

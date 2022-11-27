@@ -652,19 +652,32 @@
                             <div class="tab-pane" id="images" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-2 preview-zone">
-                                        <div class="form-group box">
-                                            <div class="dropzone-wrapper box-body">
+                                        <div class="form-group box box1">
+                                            <div class="dropzone-wrapper box-body" onclick="pro1(1)">
                                                 <div class="dropzone-desc">
                                                     <i class="fas fa-camera-retro text-dark"
                                                         style="font-size: 20px;"></i>
-                                                    <p>Upload</p>
+                                                    <p for="">Upload</p>
                                                 </div>
-                                                <input type="file" name="img_logo" class="dropzone">
+
                                             </div>
                                         </div>
+                                        <input type="file" name="img_logo" id="1" class="dropzone">
                                     </div>
                                     <!-- End -->
-                                   
+                                    <div class="col-md-2 preview-zone">
+                                        <div class="form-group box box2">
+                                            <div class="dropzone-wrapper box-body" onclick="pro1(2)">
+                                                <div class="dropzone-desc">
+                                                    <i class="fas fa-camera-retro text-dark"
+                                                        style="font-size: 20px;"></i>
+                                                    <p for="">Upload</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="file" name="img_logo" id="2" class="dropzone">
+                                    </div>
+                                    <!-- End -->
                                 </div>
                             </div>
                             <div class="tab-pane" id="description" role="tabpanel">
