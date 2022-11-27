@@ -3,7 +3,7 @@
         <x-slot name="logo">
             {{-- <x-jet-authentication-card-logo /> --}}
             {{-- <img class="img-fluid border shadow-xl rounded-full" src="./icon.png" alt="" style="width:100px;height:100px;"> --}}
-            <img class="img-fluid border shadow-xl rounded-full" src="{{ asset('icon1.png') }}" alt="" style="width:100px;height:100px;">
+            <!-- <img class="img-fluid border shadow-xl rounded-full" src="{{ asset('icon1.png') }}" alt="" style="width:100px;height:100px;"> -->
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
