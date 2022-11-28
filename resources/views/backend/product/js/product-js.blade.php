@@ -1,4 +1,76 @@
 <script type="text/javascript">
+document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+    const dropZoneElement = inputElement.closest(".drop-zone");
+
+    dropZoneElement.addEventListener("click", (e) => {
+        inputElement.click();
+    });
+
+    inputElement.addEventListener("change", (e) => {
+        if (inputElement.files.length) {
+            updateThumbnail(dropZoneElement, inputElement.files[0]);
+        }
+    });
+
+    dropZoneElement.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZoneElement.classList.add("drop-zone--over");
+    });
+
+    ["dragleave", "dragend"].forEach((type) => {
+        dropZoneElement.addEventListener(type, (e) => {
+            dropZoneElement.classList.remove("drop-zone--over");
+        });
+    });
+
+    dropZoneElement.addEventListener("drop", (e) => {
+        e.preventDefault();
+
+        if (e.dataTransfer.files.length) {
+            inputElement.files = e.dataTransfer.files;
+            updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+        }
+
+        dropZoneElement.classList.remove("drop-zone--over");
+    });
+});
+
+/**
+ * Updates the thumbnail on a drop zone element.
+ *
+ * @param {HTMLElement} dropZoneElement
+ * @param {File} file
+ */
+function updateThumbnail(dropZoneElement, file) {
+    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+    // First time - remove the prompt
+    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+        dropZoneElement.querySelector(".drop-zone__prompt").remove();
+    }
+
+    // First time - there is no thumbnail element, so lets create it
+    if (!thumbnailElement) {
+        thumbnailElement = document.createElement("div");
+        thumbnailElement.classList.add("drop-zone__thumb");
+        dropZoneElement.appendChild(thumbnailElement);
+    }
+
+    thumbnailElement.dataset.label = file.name;
+
+    // Show thumbnail for image files
+    if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+        };
+    } else {
+        thumbnailElement.style.backgroundImage = null;
+    }
+}
+
 function pro1(val) {
     document.getElementById(val).click();
 }
@@ -21,61 +93,7 @@ $('#product_description').summernote({
 $('#warranty_description').summernote({
     height: 120
 });
-// Code By Webdevtrick ( https://webdevtrick.com )
-function readFile(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function(e) {
-            var htmlPreview =
-                '<img width="200" style="width: 232px; height: 150px;" src="' + e.target.result +
-                '"/>' +
-                '<p>' + input.files[0].name + '</p>';
-            var wrapperZone = $(input).parent();
-            var previewZone = $(input).parent().parent().find('.preview-zone');
-            var boxZone = $(input).parent().parent().parent().parent().find('.preview-zone').find('.box'+input.id).find(
-                '.box-body');
-
-            wrapperZone.removeClass('dragover');
-            previewZone.removeClass('hidden');
-            boxZone.empty();
-            boxZone.append(htmlPreview);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function reset(e) {
-    e.wrap('<form>').closest('form').get(0).reset();
-    e.unwrap();
-}
-
-$(".dropzone").change(function() {
-    readFile(this);
-    console.log(this);
-});
-
-$('.dropzone-wrapper').on('dragover', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $(this).addClass('dragover');
-});
-
-$('.dropzone-wrapper').on('dragleave', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $(this).removeClass('dragover');
-});
-
-$('.remove-preview').on('click', function() {
-    var boxZone = $(this).parents('.preview-zone').find('.box-body');
-    var previewZone = $(this).parents('.preview-zone');
-    var dropzone = $(this).parents('.form-group').find('.dropzone');
-    boxZone.empty();
-    previewZone.addClass('hidden');
-    reset(dropzone);
-});
 $("#rowAdder").click(function() {
     newRowAdd =
         '<div id="row"> <div class="input-group m-3">' +

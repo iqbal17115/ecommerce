@@ -7,77 +7,52 @@
     integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
-.container {
-    padding: 50px 10%;
-}
-
-.box {
-    position: relative;
-    background: #ffffff;
-    width: 100%;
-}
-
-.box-header {
-    color: #444;
-    display: block;
-    padding: 10px;
-    position: relative;
-    border-bottom: 1px solid #f4f4f4;
-    margin-bottom: 10px;
-}
-
-.box-tools {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-}
-
-.dropzone-wrapper {
-    border: 2px dashed #91b0b3;
-    color: #92b0b3;
-    position: relative;
-    height: 150px;
-}
-
-.dropzone-desc {
-    position: absolute;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
+.drop-zone {
+    max-width: 200px;
+    height: 200px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    width: 40%;
-    top: 50px;
-    font-size: 16px;
-}
-
-.dropzone,
-.dropzone:focus {
-    position: absolute;
-    outline: none !important;
-    width: 100%;
-    height: 150px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
     cursor: pointer;
-    opacity: 0;
+    color: #cccccc;
+    border: 4px dashed #009578;
+    border-radius: 10px;
 }
 
-.dropzone-wrapper:hover,
-.dropzone-wrapper.dragover {
-    background: #ecf0f5;
+.drop-zone--over {
+    border-style: solid;
 }
 
-.preview-zone {
+.drop-zone__input {
+    display: none;
+}
+
+.drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #cccccc;
+    background-size: cover;
+    position: relative;
+}
+
+.drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
     text-align: center;
-}
-
-.preview-zone .box {
-    box-shadow: none;
-    border-radius: 0;
-    margin-bottom: 0;
-}
-
-.btn-primary {
-    background-color: crimson;
-    border: 1px solid #212121;
 }
 
 #rowAdder {
@@ -651,31 +626,46 @@
                             </div>
                             <div class="tab-pane" id="images" role="tabpanel">
                                 <div class="row">
-                                    <div class="col-md-2 preview-zone">
-                                        <div class="form-group box box1">
-                                            <div class="dropzone-wrapper box-body" onclick="pro1(1)">
-                                                <div class="dropzone-desc">
-                                                    <i class="fas fa-camera-retro text-dark"
-                                                        style="font-size: 20px;"></i>
-                                                    <p for="">Upload</p>
-                                                </div>
-
-                                            </div>
+                                    <div class="col-md-2">
+                                        <div class="drop-zone">
+                                            <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                            <input type="file" name="myFile" class="drop-zone__input">
                                         </div>
-                                        <input type="file" name="img_logo" id="1" class="dropzone">
                                     </div>
                                     <!-- End -->
-                                    <div class="col-md-2 preview-zone">
-                                        <div class="form-group box box2">
-                                            <div class="dropzone-wrapper box-body" onclick="pro1(2)">
-                                                <div class="dropzone-desc">
-                                                    <i class="fas fa-camera-retro text-dark"
-                                                        style="font-size: 20px;"></i>
-                                                    <p for="">Upload</p>
-                                                </div>
-                                            </div>
+                                    <div class="col-md-2">
+                                        <div class="drop-zone">
+                                            <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                            <input type="file" name="myFile" class="drop-zone__input">
                                         </div>
-                                        <input type="file" name="img_logo" id="2" class="dropzone">
+                                    </div>
+                                    <!-- End -->
+                                    <div class="col-md-2">
+                                        <div class="drop-zone">
+                                            <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                            <input type="file" name="myFile" class="drop-zone__input">
+                                        </div>
+                                    </div>
+                                    <!-- End -->
+                                    <div class="col-md-2">
+                                        <div class="drop-zone">
+                                            <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                            <input type="file" name="myFile" class="drop-zone__input">
+                                        </div>
+                                    </div>
+                                    <!-- End -->
+                                    <div class="col-md-2">
+                                        <div class="drop-zone">
+                                            <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                            <input type="file" name="myFile" class="drop-zone__input">
+                                        </div>
+                                    </div>
+                                    <!-- End -->
+                                    <div class="col-md-2">
+                                        <div class="drop-zone">
+                                            <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                            <input type="file" name="myFile" class="drop-zone__input">
+                                        </div>
                                     </div>
                                     <!-- End -->
                                 </div>
@@ -1191,6 +1181,7 @@ $('#material_id').select2({
 $('#variant_id').select2({
     placeholder: 'Select An Option'
 });
+$('.file-upload').file_upload();
 </script>
 @include('backend.product.js.product-js')
 @endsection
