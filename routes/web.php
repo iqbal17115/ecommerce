@@ -8,6 +8,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FrontEnt\LoginController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Backend\Product\UnitController;
+use App\Http\Controllers\Backend\Product\VariantController;
+use App\Http\Controllers\Backend\Product\BrandController;
+use App\Http\Controllers\Backend\Product\CategoryController;
+use App\Http\Controllers\Backend\Product\MaterialController;
+use App\Http\Controllers\Backend\Product\ProductController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +85,42 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('pagination/unit-pagination-data', [UnitController::class, 'pagination']);
         Route::get('search-unit', [UnitController::class, 'searchUnit'])->name('search.unit');
         // Unit Start
+
+        // Unit Start
+        Route::get('product-variant', [VariantController::class, 'index'])->name('product-variant');
+        Route::post('add-variant', [VariantController::class, 'addVariant'])->name('add.variant');
+        Route::post('delete-variant', [VariantController::class, 'deleteVariant'])->name('delete.variant');
+        Route::get('pagination/variant-pagination-data', [VariantController::class, 'pagination']);
+        Route::get('search-variant', [VariantController::class, 'searchVariant'])->name('search.variant');
+        // End Start
+
+        // Unit Brand
+        Route::get('product-brand', [BrandController::class, 'index'])->name('product-brand');
+        Route::post('add-brand', [BrandController::class, 'addBrand'])->name('add.brand');
+        Route::post('delete-brand', [BrandController::class, 'deleteBrand'])->name('delete.brand');
+        Route::get('pagination/brand-pagination-data', [BrandController::class, 'pagination']);
+        Route::get('search-brand', [BrandController::class, 'searchBrand'])->name('search.brand');
+        // Unit Brand
+
+        // Unit Category
+        Route::get('product-category', [CategoryController::class, 'index'])->name('product-category');
+        Route::post('add-category', [CategoryController::class, 'addCategory'])->name('add.category');
+        Route::post('delete-category', [CategoryController::class, 'deleteCategory'])->name('delete.category');
+        Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
+        Route::get('search-category', [CategoryController::class, 'searchCategory'])->name('search.category');
+        // Unit Category
+
+        // Material Start
+        Route::get('product-material', [MaterialController::class, 'index'])->name('product-material');
+        Route::post('add-material', [MaterialController::class, 'addMaterial'])->name('add.material');
+        Route::post('delete-material', [MaterialController::class, 'deleteMaterial'])->name('delete.material');
+        Route::get('pagination/material-pagination-data', [MaterialController::class, 'pagination']);
+        Route::get('search-material', [MaterialController::class, 'searchMaterial'])->name('search.material');
+        // Material End
+
+        // Unit Product
+        Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
+        // Unit Product
     
     Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
 

@@ -26,18 +26,15 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'business_name' => ['required', 'string', 'max:255'],
-            // 'district_id' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'mobile' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
-            // 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
 
         return DB::transaction(function () use ($input) {
             return tap(User::create([
                 'name' => $input['name'],
-                // 'email' => $input['email'],
                 'address' => $input['address'],
                 'mobile' => $input['mobile'],
                 'type' => 'Customer',
@@ -53,7 +50,6 @@ class CreateNewUser implements CreatesNewUsers
                 $contact->user_id = $user->id;
                 $contact->type = 'Customer';
                 $contact->mobile = $user->mobile;
-                // $contact->district_id = $input['district_id'];
                 $contact->created_by = $user->id;
                 $contact->save();
             });

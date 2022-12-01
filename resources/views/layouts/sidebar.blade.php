@@ -1,5 +1,5 @@
    <!-- ========== Left Sidebar Start ========== -->
-   <div class="vertical-menu">
+   <div class="vertical-menu" style="background: #000000 !important;">
 
        <div data-simplebar class="h-100">
 
@@ -45,15 +45,16 @@
                            <span>Product</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Add Product</a></li>
+                           <li><a href="{{ route('product-product') }}">Add Product</a></li>
                            <li><a href="javascript:void(0);">Import Product(CSV)</a></li>
                            <li><a href="javascript:void(0);">Import Product(EXCEL)</a></li>
                            <li><a href="javascript:void(0);">Manage Product</a></li>
                            <li><a href="javascript:void(0);">Product Ledger</a></li>
-                           <li><a href="javascript:void(0);">Category</a></li>
-                           <li><a href="javascript:void(0);">Brand</a></li>
-                           <li><a href="javascript:void(0);">Variant</a></li>
+                           <li><a href="{{ route('product-category') }}">Category</a></li>
+                           <li><a href="{{ route('product-brand') }}">Brand</a></li>
+                           <li><a href="{{ route('product-variant') }}">Variant</a></li>
                            <li><a href="{{ route('product-unit') }}">Unit</a></li>
+                           <li><a href="{{ route('product-material') }}">Material</a></li>
                        </ul>
                    </li>
 

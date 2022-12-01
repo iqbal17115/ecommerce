@@ -17,6 +17,7 @@ class CreateVariantsTable extends Migration
             $table->id();
             $table->enum('type', ['Size', 'Color']);
             $table->string('name', 30);
+            $table->string('color_code', 20)->nullable();
             $table->foreignId('branch_id');
             $table->foreignId('user_id');
             $table->boolean('is_active')->nullable()->default(1);
