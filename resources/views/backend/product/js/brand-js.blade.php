@@ -13,7 +13,7 @@ $(document).ready(function() {
             reader.readAsDataURL(file);
         }
     });
-    $(document).on('keyup', function(e) {
+    $("#search_string").on('keyup', function(e) {
         e.preventDefault();
         let search_string = $("#search_string").val();
         $.ajax({

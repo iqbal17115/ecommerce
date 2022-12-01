@@ -15,15 +15,15 @@ class CreateSlidersTable extends Migration
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100)->nullable();
-            $table->text('image')->nullable();
-            $table->string('description', 250)->nullable();
-            $table->string('position', 50)->nullable();
+            $table->text('link')->nullable();
+            $table->text('image');
+            $table->tinyInteger('position')->nullable();
+            $table->foreignId('category_id')->nullable();
             $table->foreignId('branch_id');
-            $table->foreignId('created_by');
+            $table->foreignId('user_id');
             $table->boolean('is_active')->nullable()->default(1);
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

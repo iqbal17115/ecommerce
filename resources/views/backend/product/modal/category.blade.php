@@ -16,7 +16,7 @@
                           <input type="hidden" name="cu_id" id="cu_id" value="-1">
                           <div class="row">
 
-                              <div class="col-md-6">
+                              <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="name">Category Name</label>
                                       <input type="text" name="name" id="name" class="form-control"
@@ -24,14 +24,52 @@
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
-                              <div class="col-md-6">
+                              <div class="col-md-12">
                                   <div class="form-group category_load">
                                       <label for="id">Select Category</label>
-                                      <select name="id" id="id" class="form-control category_id">
+                                      <select name="id" id="id" class="form-control category_id" style="width: 100%;">
                                           <option value="">Select Option</option>
-                                          @foreach($categories as $category)
-                                          <option value="{{$category->id}}">{{$category->name}}</option>
-                                          @endforeach
+                                          @foreach($parent_categories as $category)
+                                                    <option value="{{$category->id}}">
+                                                        {{$category->name}}
+                                                    </option>
+                                                    <!-- Start Sub-Category -->
+                                                    @if($category->SubCategory)
+                                                    @foreach($category->SubCategory as $subCategory)
+                                                    <option value="{{$subCategory->id}}">
+                                                        --{{$subCategory->name}}
+                                                    </option>
+                                                    <!-- Start sub-Sub-Category -->
+                                                    @if($subCategory->SubCategory)
+                                                    @foreach($subCategory->SubCategory as $subSubCategory)
+                                                    <option value="{{$subCategory->id}}">
+                                                        ----{{$subSubCategory->name}}
+                                                    </option>
+                                                    <!-- Start sub-Sub-Sub-Category -->
+                                                    @if($subSubCategory->SubCategory)
+                                                    @foreach($subSubCategory->SubCategory as $subSubSubCategory)
+                                                    <option value="{{$subCategory->id}}">
+                                                        ------{{$subSubSubCategory->name}}
+                                                    </option>
+                                                    <!-- Start sub-Sub-Sub-Sub-Category -->
+                                                    @if($subSubSubCategory->SubCategory)
+                                                    @foreach($subSubSubCategory->SubCategory as $subSubSubSubCategory)
+                                                    <option value="{{$subCategory->id}}">
+                                                        --------{{$subSubSubSubCategory->name}}
+                                                    </option>
+                                                    @endforeach
+                                                    @endif
+                                                    <!-- End sub-Sub-Sub-Sub-Category -->
+                                                    @endforeach
+                                                    @endif
+                                                    <!-- End sub-Sub-Sub-Category -->
+                                                    @endforeach
+                                                    @endif
+                                                    <!-- End sub-Sub-Category -->
+                                                    @endforeach
+                                                    @endif
+                                                    <!-- End Sub Category -->
+                                                    @endforeach
                                       </select>
                                   </div>
                               </div>

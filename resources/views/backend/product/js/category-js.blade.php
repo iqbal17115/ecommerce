@@ -26,7 +26,7 @@ $(document).ready(function() {
             reader.readAsDataURL(file);
         }
     });
-    $(document).on('keyup', function(e) {
+    $("#search_string").on('keyup', function(e) {
         e.preventDefault();
         let search_string = $("#search_string").val();
         $.ajax({
@@ -130,7 +130,8 @@ $(document).ready(function() {
         $('#cu_id').val(id);
         $('#id').val(id);
         $('#name').val(name);
-        $('#parent_category_id').val(parent_category_id);
+        // $('#parent_category_id').val(parent_category_id);
+        $('.category_id').val(parent_category_id).trigger("change");
         $('#top_menu').val(top_menu);
         $('#position').val(position);
         if (image) {

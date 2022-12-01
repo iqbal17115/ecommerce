@@ -1,9 +1,9 @@
 <script>
 $(document).ready(function() {
     function colorContent(type) {
-        if(type=="Color") {
+        if (type == "Color") {
             $('.color_code_content').show();
-        }else if(type == "" || type=="Size") {
+        } else if (type == "" || type == "Size") {
             $('.color_code_content').hide();
         }
     }
@@ -11,18 +11,22 @@ $(document).ready(function() {
         let type = $("#type").val();
         colorContent(type);
     });
-    $(document).on('keyup', function(e) {
+    $("#search_string").on('keyup', function(e) {
         e.preventDefault();
         let search_string = $("#search_string").val();
         $.ajax({
             url: "{{route('search.variant')}}",
             method: 'get',
-            data: {search_string: search_string},
+            data: {
+                search_string: search_string
+            },
             success: function(data) {
-                    $('.variant_content').html(data);
-                    if(data.status=='nothing_found') {
-                        $('.variant_content').html('<div class="text-danger text-center h3 mt-3">Nothing Found!!</div>');
-                    }
+                $('.variant_content').html(data);
+                if (data.status == 'nothing_found') {
+                    $('.variant_content').html(
+                        '<div class="text-danger text-center h3 mt-3">Nothing Found!!</div>'
+                        );
+                }
             },
             error: function(err) {
                 console.log(err);

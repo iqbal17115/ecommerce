@@ -223,7 +223,7 @@
                            <span>Web Settings</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Slider</a></li>
+                           <li><a href="{{ route('slider') }}">Slider</a></li>
                            <li><a href="javascript:void(0);">Advertisement</a></li>
                            <li><a href="javascript:void(0);">Product Review</a></li>
                            <li><a href="javascript:void(0);">Web Footer</a></li>

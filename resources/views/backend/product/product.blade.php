@@ -519,9 +519,9 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <select class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="New">New</option>
+                                                    <option value="Used">Used</option>
+                                                    <option value="Refurbished">Refurbished</option>
                                                 </select>
                                             </div>
                                             <!-- End -->

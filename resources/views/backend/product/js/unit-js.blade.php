@@ -1,6 +1,6 @@
 <script>
 $(document).ready(function() {
-    $(document).on('keyup', function(e) {
+    $("#search_string").on('keyup', function(e) {
         e.preventDefault();
         let search_string = $("#search_string").val();
         $.ajax({
