@@ -48,14 +48,12 @@ class UnitController extends Controller
             $unit = new Unit();
             $unit->user_id = Auth::user()->id;
         }
-        
+
         $unit->name = $request->name;
         $unit->short_name = $request->short_name;
         $unit->branch_id = 1;
-       
         $unit->is_active = $request->is_active;
         $unit->save();
-
         return response()->json([
             'status' => 'success'
         ]);
