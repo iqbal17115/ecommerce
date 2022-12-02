@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\Product\BrandController;
 use App\Http\Controllers\Backend\Product\CategoryController;
 use App\Http\Controllers\Backend\Product\MaterialController;
 use App\Http\Controllers\Backend\Product\ProductController;
+use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
 
 use Illuminate\Support\Facades\Route;
@@ -140,5 +141,15 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('pagination/slider-pagination-data', [SliderController::class, 'pagination']);
     });
     // End Slider
+
+    // Start Advertisement
+    Route::group([], function () {
+        Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement');
+        Route::post('add-advertisement', [AdvertisementController::class, 'addAdvertisement'])->name('add.advertisement');
+        Route::post('delete-advertisement', [AdvertisementController::class, 'deleteAdvertisement'])->name('delete.advertisement');
+        Route::get('pagination/advertisement-pagination-data', [AdvertisementController::class, 'pagination']);
+        Route::get('search-advertisement', [AdvertisementController::class, 'searchAdvertisement'])->name('search.advertisement');
+    });
+    // End Advertisement
 
 });
