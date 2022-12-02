@@ -21,7 +21,7 @@
                             <th scope="col">Slider Link</th>
                             <th scope="col">Slider Image</th>
                             <th scope="col">Slider Position</th>
-                            <th scope="col">Slider Category</th>
+                            <th scope="col">Category</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
