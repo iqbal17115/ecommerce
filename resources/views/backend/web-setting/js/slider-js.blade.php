@@ -86,6 +86,7 @@
             let image = $(this).data('image');
             let position = $(this).data('position');
             let category_id = $(this).data('category_id');
+            $('.category_id').val(category_id).trigger("change");
             let is_active = $(this).data('is_active');
             $('#cu_id').val(id);
             $('#link').val(link);

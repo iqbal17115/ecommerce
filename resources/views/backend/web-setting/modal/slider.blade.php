@@ -1,6 +1,5 @@
       <!-- sample modal content -->
-      <div id="sliderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySliderLabel"
-          aria-hidden="true">
+      <div id="sliderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySliderLabel" aria-hidden="true">
           <form action="" method="post" id="addSlider" enctype="multipart/form-data">
               @csrf
               <div class="modal-dialog">
@@ -17,8 +16,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="link">Slider Link</label>
-                                      <input type="text" name="link" id="link" class="form-control"
-                                          placeholder="Enter Slider Link">
+                                      <input type="text" name="link" id="link" class="form-control" placeholder="Enter Slider Link">
                                       <span class="text-danger err_link"></span>
                                   </div>
                               </div>
@@ -32,15 +30,14 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="position">Slider Position</label>
-                                      <input type="text" name="position" id="position" class="form-control"
-                                          placeholder="Enter Slider Position">
+                                      <input type="text" name="position" id="position" class="form-control" placeholder="Enter Slider Position">
                                       <span class="text-danger err_position"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
-                                  <label for="id">Select Category</label>
+                                  <label for="category_id">Select Category</label>
                                   <select class="form-select category_id" name="category_id" id="category_id" style="width: 100%;">
-                                      <option value=""></option>
+                                      <option value="">Select Option</option>
                                       @foreach($categories as $category)
                                       <option value="{{$category->id}}">
                                           {{$category->name}}
@@ -103,8 +100,7 @@
                               <img id="imgPreview" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
                           </center>
                           <span style="width: 200px;"></span>
-                          <button type="button" class="btn btn-secondary waves-effect"
-                              data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
                       </div>
                   </div><!-- /.modal-content -->
