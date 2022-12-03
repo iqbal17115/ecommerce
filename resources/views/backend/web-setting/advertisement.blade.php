@@ -10,9 +10,9 @@
         <div class="row">
             <div class="col-md-12 p-2 rounded" style="background-color: #e4ebea;">
                 <span class="h4">Advertisement List</span>
-                <a class="btn btn-success text-light btn-sm py-2 float-right clean_form" data-toggle="modal" data-target="#sliderModal" style="width: 100px;"><i class="fas fa-plus-circle"></i> New</a>
+                <a class="btn btn-success text-light btn-sm py-2 float-right clean_form" data-toggle="modal" data-target="#advertisementModal" style="width: 100px;"><i class="fas fa-plus-circle"></i> New</a>
             </div>
-            <div class="col-md-12 slider_content">
+            <div class="col-md-12 advertisement_content">
                
             </div>
         </div>
@@ -31,7 +31,7 @@
 <script>
     $(document).ready(function() {
         $(".category_id").select2({
-            dropdownParent: $("#sliderModal"),
+            dropdownParent: $("#advertisementModal"),
             placeholder: 'Select An Option'
         });
     });
