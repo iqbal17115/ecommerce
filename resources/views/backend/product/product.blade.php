@@ -105,7 +105,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#settings" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#compliance" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Compliance
                                 </a>
                             </li>
@@ -622,7 +622,254 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="compliance" role="tabpanel">
-
+                                <!-- Start -->
+                                <div class="col-md-10">
+                                    <!-- Start Content -->
+                                    <div class="row">
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right"
+                                                style="font-size: 14px;">Battery Cell Type</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <select class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right"
+                                                style="font-size: 14px;">Battery Type</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <select class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Number
+                                                of Batteries Required</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <input class="form-control" placeholder="Number of Batteries Required"
+                                                name="" id="" />
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right"
+                                                style="font-size: 14px;">Lithium Battery Energy Content</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input class="form-control" placeholder="1, 2, 3" name="" id="" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right"
+                                                style="font-size: 14px;">Lithium Battery Packaging</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <select class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right"
+                                                style="font-size: 14px;">Batteries are Included</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <select class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Are
+                                                Batteries Required</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <select class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right"
+                                                style="font-size: 14px;">Battery Weight</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input class="form-control" placeholder="150" name="" id="" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Number
+                                                of Lithium Metal Cells</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <input class="form-control" placeholder="1, 2, 3" name="" id="" />
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Number
+                                                of Lithium-ion Cells</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <input class="form-control" placeholder="1, 2, 3" name="" id="" />
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right"
+                                                style="font-size: 14px;">Lithium Battery Weight</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input class="form-control" placeholder="0.9" name="" id="" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Hazmat
+                                                United Nations Regulatory Id</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <input class="form-control" placeholder="UN1950" name="" id="" />
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Safety
+                                                Data Sheet URL</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <input class="form-control" placeholder="https://www.facebook.com/" name=""
+                                                id="" />
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right"
+                                                style="font-size: 14px;">Volume</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input class="form-control" placeholder="34.78" name="" id="" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Flash
+                                                Point</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <input class="form-control" placeholder="180" name="" id="" />
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Item
+                                                Weight</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input class="form-control" placeholder="2.33, 20.75, 10000.00"
+                                                        name="" id="" />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <select class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">GHS
+                                                Classification</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <select class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-4 mt-md-3">
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Applicable Dangerous Goods Regulations</label>
+                                        </div>
+                                        <div class="col-md-8 mt-md-3">
+                                            <select class="form-select">
+                                                <option value="">Select Option</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <!-- End -->
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <!-- End -->
                             </div>
                             <div class="tab-pane" id="images" role="tabpanel">
                                 <div class="row">
