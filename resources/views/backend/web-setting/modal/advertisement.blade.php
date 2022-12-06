@@ -15,14 +15,14 @@
                           <div class="row">
                               <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="add_page">Add Page</label>
-                                      <select name="add_page" id="add_page" class="form-control">
+                                      <label for="page">Add Page</label>
+                                      <select name="page" id="page" class="form-control">
                                           <option value="">Select Option</option>
                                           <option value="Home">Home</option>
                                           <option value="Category">Category</option>
                                           <option value="Details">Details</option>
                                       </select>
-                                      <span class="text-danger err_add_page"></span>
+                                      <span class="text-danger err_page"></span>
                                   </div>
                               </div>
                               <div class="col-md-6">
@@ -34,24 +34,24 @@
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
-                                      <label for="ads_style">Ads Style</label>
-                                      <select name="ads_style" id="ads_style" class="form-control">
-                                          <option value="1">Style One</option>
-                                          <option value="2">Style Two</option>
-                                          <option value="3">Style Three</option>
+                                      <label for="style">Ads Style</label>
+                                      <select name="style" id="style" class="form-control ads_content">
+                                          <option value="Style One">Style One</option>
+                                          <option value="Style Two">Style Two</option>
+                                          <option value="Style Three">Style Three</option>
                                       </select>
-                                      <span class="text-danger err_ads_style"></span>
+                                      <span class="text-danger err_style"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
-                                      <label for="ads_type">Ads Type</label>
-                                      <select name="ads_type" id="ads_type" class="form-control">
+                                      <label for="type">Ads Type</label>
+                                      <select name="type" id="type" class="form-control ads_content">
                                           <option value="">Select Option</option>
-                                          <option value="1">Embed Code</option>
-                                          <option value="2">Image Ads</option>
+                                          <option value="Embed Code">Embed Code</option>
+                                          <option value="Image Ads">Image Ads</option>
                                       </select>
-                                      <span class="text-danger err_ads_type"></span>
+                                      <span class="text-danger err_type"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
@@ -75,7 +75,9 @@
                       </div>
                       <div class="modal-footer">
                           <center>
-                              <img id="imgPreview" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
+                              <img id="imgPreview1" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
+                              <img id="imgPreview2" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
+                              <img id="imgPreview3" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
                           </center>
                           <span style="width: 200px;"></span>
                           <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
