@@ -106,21 +106,30 @@
 
         $(document).on('click', '.update_form', function(e) {
             let id = $(this).data('id');
-            let link = $(this).data('link');
-            let image = $(this).data('image');
+            let page = $(this).data('page');
             let position = $(this).data('position');
-            let category_id = $(this).data('category_id');
-            $('.category_id').val(category_id).trigger("change");
+            let style = $(this).data('style');
+            let type = $(this).data('type');
+            let embed_code_or_image1 = $(this).data('embed_code_or_image1');
+            let embed_code_or_image2 = $(this).data('embed_code_or_image2');
+            let embed_code_or_image3 = $(this).data('embed_code_or_image3');
+            let url1 = $(this).data('url1');
+            let url2 = $(this).data('url2');
+            let url3 = $(this).data('url3');
+            // $('.category_id').val(category_id).trigger("change");
             let is_active = $(this).data('is_active');
             $('#cu_id').val(id);
-            $('#link').val(link);
-            if (image) {
-                $('#imgPreview').show();
-                $('#imgPreview').attr("src", 'storage/' + image);
-            }
+            $('#page').val(page);
             $('#position').val(position);
-            $('#category_id').val(category_id);
+            $('#style').val(style);
+            $('#type').val(type);
             $('#is_active').val(is_active);
+            // if (image) {
+            //     $('#imgPreview').show();
+            //     $('#imgPreview').attr("src", 'storage/' + image);
+            // }
+            // $('#position').val(position);
+            // $('#category_id').val(category_id);
         });
 
         $(document).on('submit', '#addAdvertisement', function(e) {

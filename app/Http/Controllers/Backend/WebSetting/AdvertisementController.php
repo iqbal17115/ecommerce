@@ -52,7 +52,7 @@ class AdvertisementController extends Controller
             if ($request->type == "Image Ads") {
                 $request->validate(
                     [
-                        'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
+                        'embed_code_or_image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
                     ],
                     [
                         'embed_code_or_image1' => 'Image1 is required'
@@ -78,8 +78,8 @@ class AdvertisementController extends Controller
             if ($request->type == "Image Ads") {
                 $request->validate(
                     [
-                        'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
-                        'embed_code_or_image2' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
+                        'embed_code_or_image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                        'embed_code_or_image2' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
                     ],
                     [
                         'embed_code_or_image1' => 'Image1 is required',
@@ -118,9 +118,9 @@ class AdvertisementController extends Controller
             if ($request->type == "Image Ads") {
                 $request->validate(
                     [
-                        'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
-                        'embed_code_or_image2' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
-                        'embed_code_or_image3' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
+                        'embed_code_or_image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                        'embed_code_or_image2' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                        'embed_code_or_image3' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
                     ],
                     [
                         'embed_code_or_image1' => 'Image1 is required',
@@ -177,6 +177,7 @@ class AdvertisementController extends Controller
     }
     public function index()
     {
-        return view('backend.web-setting.advertisement');
+        $advertisements = Advertisement::latest()->paginate(10);
+        return view('backend.web-setting.advertisement', compact('advertisements'));
     }
 }
