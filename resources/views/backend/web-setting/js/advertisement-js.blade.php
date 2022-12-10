@@ -1,9 +1,6 @@
 <script>
     $(document).ready(function() {
 
-        $('#imgPreview1').hide();
-        $('#imgPreview2').hide();
-        $('#imgPreview3').hide();
         $(document).on('change', '#embed_code_or_image1', function(e) {
             $('#imgPreview1').show();
             const file = this.files[0];
@@ -101,35 +98,9 @@
         $(document).on('click', '.clean_form', function(e) {
             $('#addAdvertisement')[0].reset();
             $('#cu_id').val(-1);
-            $('#imgPreview').hide();
-        });
-
-        $(document).on('click', '.update_form', function(e) {
-            let id = $(this).data('id');
-            let page = $(this).data('page');
-            let position = $(this).data('position');
-            let style = $(this).data('style');
-            let type = $(this).data('type');
-            let embed_code_or_image1 = $(this).data('embed_code_or_image1');
-            let embed_code_or_image2 = $(this).data('embed_code_or_image2');
-            let embed_code_or_image3 = $(this).data('embed_code_or_image3');
-            let url1 = $(this).data('url1');
-            let url2 = $(this).data('url2');
-            let url3 = $(this).data('url3');
-            // $('.category_id').val(category_id).trigger("change");
-            let is_active = $(this).data('is_active');
-            $('#cu_id').val(id);
-            $('#page').val(page);
-            $('#position').val(position);
-            $('#style').val(style);
-            $('#type').val(type);
-            $('#is_active').val(is_active);
-            // if (image) {
-            //     $('#imgPreview').show();
-            //     $('#imgPreview').attr("src", 'storage/' + image);
-            // }
-            // $('#position').val(position);
-            // $('#category_id').val(category_id);
+            $('#imgPreview1').hide();
+            $('#imgPreview2').hide();
+            $('#imgPreview3').hide();
         });
 
         $(document).on('submit', '#addAdvertisement', function(e) {
@@ -184,27 +155,81 @@
             });
         });
 
-        $('.ads_content').on('change', function() {
-            var ads_style = $('#style').val();
-            var ads_type = $('#type').val();
-            $('#ads_content').empty();
-            var ads_content = "";
-            if (ads_style == "Style One" && ads_type == "Image Ads") {
-                ads_content += "<div class='col-md-6'><div class='form-group'><label for='embed_code_or_image1'>Image1</label><input type='file' name='embed_code_or_image1' id='embed_code_or_image1' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url1'>URL1</label><input type='text' name='url1' id='url1' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div>";
-            } else if (ads_style == "Style Two" && ads_type == "Image Ads") {
-                ads_content += "<div class='col-md-6'><div class='form-group'><label for='embed_code_or_image1'>Image1</label><input type='file' name='embed_code_or_image1' id='embed_code_or_image1' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url1'>URL1</label><input type='text' name='url1' id='url1' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div><div class='col-md-6'><div class='form-group'><label for='embed_code_or_image2'>Image2</label><input type='file' name='embed_code_or_image2' id='embed_code_or_image2' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url2'>URL2</label><input type='text' name='url2' id='url2' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div>";
-            } else if (ads_style == "Style Three" && ads_type == "Image Ads") {
-                ads_content += "<div class='col-md-6'><div class='form-group'><label for='embed_code_or_image1'>Image1</label><input type='file' name='embed_code_or_image1' id='embed_code_or_image1' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url1'>URL1</label><input type='text' name='url1' id='url1' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div><div class='col-md-6'><div class='form-group'><label for='embed_code_or_image2'>Image2</label><input type='file' name='embed_code_or_image2' id='embed_code_or_image2' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url2'>URL2</label><input type='text' name='url2' id='url2' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div><div class='col-md-6'><div class='form-group'><label for='embed_code_or_image3'>Image3</label><input type='file' name='embed_code_or_image3' id='embed_code_or_image3' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url3'>URL3</label><input type='text' name='url3' id='url3' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div>";
-            } else if (ads_style == "Style One" && ads_type == "Embed Code") {
-                ads_content += "<div class='col-md-12'><div class='form-group'><label for='ads_type'>Embed Code1</label><textarea name='embed_code_or_image1' id='embed_code_or_image1' class='form-control' placeholder='Embed Code'></textarea></div></div>";
-            } else if (ads_style == "Style Two" && ads_type == "Embed Code") {
-                ads_content += "<div class='col-md-12'><div class='form-group'><label for='ads_type'>Embed Code1</label><textarea name='embed_code_or_image1' id='embed_code_or_image1' class='form-control' placeholder='Embed Code'></textarea></div></div><div class='col-md-12'><div class='form-group'><label for='embed_code_or_image2'>Embed Code2</label><textarea name='embed_code_or_image2' id='embed_code_or_image2' class='form-control' placeholder='Embed Code'></textarea></div></div>";
-            } else if (ads_style == "Style Three" && ads_type == "Embed Code") {
-                ads_content += "<div class='col-md-12'><div class='form-group'><label for='ads_type'>Embed Code1</label><textarea name='embed_code_or_image1' id='embed_code_or_image1' class='form-control' placeholder='Embed Code'></textarea></div></div><div class='col-md-12'><div class='form-group'><label for='embed_code_or_image2'>Embed Code2</label><textarea name='embed_code_or_image2' id='embed_code_or_image2' class='form-control' placeholder='Embed Code'></textarea></div></div><div class='col-md-12'><div class='form-group'><label for='embed_code_or_image3'>Embed Code3</label><textarea name='embed_code_or_image3' id='embed_code_or_image3' class='form-control' placeholder='Embed Code'></textarea></div></div>";
+    });
+
+    $(document).on('click', '.update_form', function(e) {
+        $('#imgPreview1').hide();
+        $('#imgPreview2').hide();
+        $('#imgPreview3').hide();
+
+        let id = $(this).data('id');
+        let page = $(this).data('page');
+        let position = $(this).data('position');
+        let style = $(this).data('style');
+        let type = $(this).data('type');
+        let is_active = $(this).data('is_active');
+        $('#style').val(style);
+        $('#type').val(type);
+        $('#cu_id').val(id);
+        $('#page').val(page);
+        $('#position').val(position);
+        $('#is_active').val(is_active);
+        styleType();
+        if ($('#embed_code_or_image1').length) {
+            let embed_code_or_image1 = $(this).data('embed_code_or_image1');
+            if (type == "Embed Code") {
+                $('#embed_code_or_image1').val(embed_code_or_image1);
+            } else {
+                $('#imgPreview1').show();
+                $('#imgPreview1').attr("src", 'storage/' + embed_code_or_image1);
+                let url1 = $(this).data('url1');
+                $('#url1').val(url1);
             }
-            ads_content += "</div>";
-            $("#ads_content").append(ads_content);
-        });
+        }
+        if ($('#embed_code_or_image2').length) {
+            let embed_code_or_image2 = $(this).data('embed_code_or_image2');
+            if (type == "Embed Code") {
+                $('#embed_code_or_image2').val(embed_code_or_image2);
+            } else {
+                $('#imgPreview2').show();
+                $('#imgPreview2').attr("src", 'storage/' + embed_code_or_image2);
+                let url2 = $(this).data('url2');
+                $('#url2').val(url2);
+            }
+        }
+        if ($('#embed_code_or_image3').length) {
+            let embed_code_or_image3 = $(this).data('embed_code_or_image3');
+            if (type == "Embed Code") {
+                $('#embed_code_or_image3').val(embed_code_or_image3);
+            } else {
+                $('#imgPreview3').show();
+                $('#imgPreview3').attr("src", 'storage/' + embed_code_or_image3);
+                let url3 = $(this).data('url3');
+                $('#url3').val(url3);
+            }
+        }
 
     });
+
+    function styleType() {
+        var ads_style = $('#style').val();
+        var ads_type = $('#type').val();
+        $('#ads_content').empty();
+        var ads_content = "";
+        if (ads_style == "Style One" && ads_type == "Image Ads") {
+            ads_content += "<div class='col-md-6'><div class='form-group'><label for='embed_code_or_image1'>Image1</label><input type='file' name='embed_code_or_image1' id='embed_code_or_image1' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url1'>URL1</label><input type='text' name='url1' id='url1' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div>";
+        } else if (ads_style == "Style Two" && ads_type == "Image Ads") {
+            ads_content += "<div class='col-md-6'><div class='form-group'><label for='embed_code_or_image1'>Image1</label><input type='file' name='embed_code_or_image1' id='embed_code_or_image1' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url1'>URL1</label><input type='text' name='url1' id='url1' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div><div class='col-md-6'><div class='form-group'><label for='embed_code_or_image2'>Image2</label><input type='file' name='embed_code_or_image2' id='embed_code_or_image2' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url2'>URL2</label><input type='text' name='url2' id='url2' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div>";
+        } else if (ads_style == "Style Three" && ads_type == "Image Ads") {
+            ads_content += "<div class='col-md-6'><div class='form-group'><label for='embed_code_or_image1'>Image1</label><input type='file' name='embed_code_or_image1' id='embed_code_or_image1' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url1'>URL1</label><input type='text' name='url1' id='url1' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div><div class='col-md-6'><div class='form-group'><label for='embed_code_or_image2'>Image2</label><input type='file' name='embed_code_or_image2' id='embed_code_or_image2' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url2'>URL2</label><input type='text' name='url2' id='url2' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div><div class='col-md-6'><div class='form-group'><label for='embed_code_or_image3'>Image3</label><input type='file' name='embed_code_or_image3' id='embed_code_or_image3' class='form-control'></div></div><div class='col-md-6'><div class='form-group'><label for='url3'>URL3</label><input type='text' name='url3' id='url3' class='form-control' placeholder='e.g. http://zainsoft.com'></div></div>";
+        } else if (ads_style == "Style One" && ads_type == "Embed Code") {
+            ads_content += "<div class='col-md-12'><div class='form-group'><label for='ads_type'>Embed Code1</label><textarea name='embed_code_or_image1' id='embed_code_or_image1' class='form-control' placeholder='Embed Code'></textarea></div></div>";
+        } else if (ads_style == "Style Two" && ads_type == "Embed Code") {
+            ads_content += "<div class='col-md-12'><div class='form-group'><label for='ads_type'>Embed Code1</label><textarea name='embed_code_or_image1' id='embed_code_or_image1' class='form-control' placeholder='Embed Code'></textarea></div></div><div class='col-md-12'><div class='form-group'><label for='embed_code_or_image2'>Embed Code2</label><textarea name='embed_code_or_image2' id='embed_code_or_image2' class='form-control' placeholder='Embed Code'></textarea></div></div>";
+        } else if (ads_style == "Style Three" && ads_type == "Embed Code") {
+            ads_content += "<div class='col-md-12'><div class='form-group'><label for='ads_type'>Embed Code1</label><textarea name='embed_code_or_image1' id='embed_code_or_image1' class='form-control' placeholder='Embed Code'></textarea></div></div><div class='col-md-12'><div class='form-group'><label for='embed_code_or_image2'>Embed Code2</label><textarea name='embed_code_or_image2' id='embed_code_or_image2' class='form-control' placeholder='Embed Code'></textarea></div></div><div class='col-md-12'><div class='form-group'><label for='embed_code_or_image3'>Embed Code3</label><textarea name='embed_code_or_image3' id='embed_code_or_image3' class='form-control' placeholder='Embed Code'></textarea></div></div>";
+        }
+        ads_content += "</div>";
+        $("#ads_content").append(ads_content);
+    }
 </script>

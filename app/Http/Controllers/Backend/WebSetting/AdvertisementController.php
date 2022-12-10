@@ -50,19 +50,23 @@ class AdvertisementController extends Controller
         if ($request->style == "Style One") {
             // 1st Image Or URL
             if ($request->type == "Image Ads") {
-                $request->validate(
-                    [
-                        'embed_code_or_image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-                    ],
-                    [
-                        'embed_code_or_image1' => 'Image1 is required'
-                    ]
-                );
-                $imagePath = $request->file('embed_code_or_image1');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
-                $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
-                $advertisement->embed_code_or_image1 = $embed_code_or_image1;
+                if ($request->cu_id < 0) {
+                    $request->validate(
+                        [
+                            'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
+                        ],
+                        [
+                            'embed_code_or_image1' => 'Image1 is required'
+                        ]
+                    );
+                }
+                if ($request->file('embed_code_or_image1')) {
+                    $imagePath = $request->file('embed_code_or_image1');
+                    $imageName = $imagePath->getClientOriginalName();
+                    $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
+                    $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
+                    $advertisement->embed_code_or_image1 = $embed_code_or_image1;
+                }
             } else {
                 $request->validate(
                     [
@@ -76,29 +80,34 @@ class AdvertisementController extends Controller
             }
         } else if ($request->style == "Style Two") {
             if ($request->type == "Image Ads") {
-                $request->validate(
-                    [
-                        'embed_code_or_image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                        'embed_code_or_image2' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-                    ],
-                    [
-                        'embed_code_or_image1' => 'Image1 is required',
-                        'embed_code_or_image2' => 'Image2 is required',
-                    ]
-                );
+                if ($request->cu_id < 0) {
+                    $request->validate(
+                        [
+                            'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+                            'embed_code_or_image2' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
+                        ],
+                        [
+                            'embed_code_or_image1' => 'Image1 is required',
+                            'embed_code_or_image2' => 'Image2 is required',
+                        ]
+                    );
+                }
                 // 1st Image
-                $imagePath = $request->file('embed_code_or_image1');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
-                $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
-                $advertisement->embed_code_or_image1 = $embed_code_or_image1;
-
+                if ($request->file('embed_code_or_image1')) {
+                    $imagePath = $request->file('embed_code_or_image1');
+                    $imageName = $imagePath->getClientOriginalName();
+                    $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
+                    $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
+                    $advertisement->embed_code_or_image1 = $embed_code_or_image1;
+                }
                 // 2nd Image
-                $imagePath = $request->file('embed_code_or_image2');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('embed_code_or_image2')->storeAs('uploads', $imageName, 'public');
-                $embed_code_or_image2 = $request->file('embed_code_or_image2')->store('images/advertisement', 'public');
-                $advertisement->embed_code_or_image2 = $embed_code_or_image2;
+                if ($request->file('embed_code_or_image2')) {
+                    $imagePath = $request->file('embed_code_or_image2');
+                    $imageName = $imagePath->getClientOriginalName();
+                    $path = $request->file('embed_code_or_image2')->storeAs('uploads', $imageName, 'public');
+                    $embed_code_or_image2 = $request->file('embed_code_or_image2')->store('images/advertisement', 'public');
+                    $advertisement->embed_code_or_image2 = $embed_code_or_image2;
+                }
             } else {
                 $request->validate(
                     [
@@ -116,38 +125,44 @@ class AdvertisementController extends Controller
             }
         } else {
             if ($request->type == "Image Ads") {
-                $request->validate(
-                    [
-                        'embed_code_or_image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                        'embed_code_or_image2' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                        'embed_code_or_image3' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-                    ],
-                    [
-                        'embed_code_or_image1' => 'Image1 is required',
-                        'embed_code_or_image2' => 'Image2 is required',
-                        'embed_code_or_image3' => 'Image3 is required'
-                    ]
-                );
+                if ($request->cu_id < 0) {
+                    $request->validate(
+                        [
+                            'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+                            'embed_code_or_image2' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+                            'embed_code_or_image3' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
+                        ],
+                        [
+                            'embed_code_or_image1' => 'Image1 is required',
+                            'embed_code_or_image2' => 'Image2 is required',
+                            'embed_code_or_image3' => 'Image3 is required'
+                        ]
+                    );
+                }
                 // 1st Image
-                $imagePath = $request->file('embed_code_or_image1');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
-                $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
-                $advertisement->embed_code_or_image1 = $embed_code_or_image1;
-
+                if ($request->file('embed_code_or_image1')) {
+                    $imagePath = $request->file('embed_code_or_image1');
+                    $imageName = $imagePath->getClientOriginalName();
+                    $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
+                    $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
+                    $advertisement->embed_code_or_image1 = $embed_code_or_image1;
+                }
                 // 2nd Image
-                $imagePath = $request->file('embed_code_or_image2');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('embed_code_or_image2')->storeAs('uploads', $imageName, 'public');
-                $embed_code_or_image2 = $request->file('embed_code_or_image2')->store('images/advertisement', 'public');
-                $advertisement->embed_code_or_image2 = $embed_code_or_image2;
-
+                if ($request->file('embed_code_or_image2')) {
+                    $imagePath = $request->file('embed_code_or_image2');
+                    $imageName = $imagePath->getClientOriginalName();
+                    $path = $request->file('embed_code_or_image2')->storeAs('uploads', $imageName, 'public');
+                    $embed_code_or_image2 = $request->file('embed_code_or_image2')->store('images/advertisement', 'public');
+                    $advertisement->embed_code_or_image2 = $embed_code_or_image2;
+                }
                 // 3rd Image
-                $imagePath = $request->file('embed_code_or_image3');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('embed_code_or_image3')->storeAs('uploads', $imageName, 'public');
-                $embed_code_or_image3 = $request->file('embed_code_or_image3')->store('images/advertisement', 'public');
-                $advertisement->embed_code_or_image3 = $embed_code_or_image3;
+                if ($request->file('embed_code_or_image3')) {
+                    $imagePath = $request->file('embed_code_or_image3');
+                    $imageName = $imagePath->getClientOriginalName();
+                    $path = $request->file('embed_code_or_image3')->storeAs('uploads', $imageName, 'public');
+                    $embed_code_or_image3 = $request->file('embed_code_or_image3')->store('images/advertisement', 'public');
+                    $advertisement->embed_code_or_image3 = $embed_code_or_image3;
+                }
             } else {
                 $request->validate(
                     [

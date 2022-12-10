@@ -35,7 +35,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="style">Ads Style</label>
-                                      <select name="style" id="style" class="form-control ads_content">
+                                      <select name="style" id="style" class="form-control ads_content" onchange="styleType()">
                                           <option value="Style One">Style One</option>
                                           <option value="Style Two">Style Two</option>
                                           <option value="Style Three">Style Three</option>
@@ -46,7 +46,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="type">Ads Type</label>
-                                      <select name="type" id="type" class="form-control ads_content">
+                                      <select name="type" id="type" class="form-control ads_content" onchange="styleType()">
                                           <option value="">Select Option</option>
                                           <option value="Embed Code">Embed Code</option>
                                           <option value="Image Ads">Image Ads</option>
