@@ -3,77 +3,75 @@
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
-    integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
-.drop-zone {
-    max-width: 200px;
-    height: 200px;
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    cursor: pointer;
-    color: #cccccc;
-    border: 4px dashed #009578;
-    border-radius: 10px;
-}
+    .drop-zone {
+        max-width: 200px;
+        height: 200px;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        cursor: pointer;
+        color: #cccccc;
+        border: 4px dashed #009578;
+        border-radius: 10px;
+    }
 
-.drop-zone--over {
-    border-style: solid;
-}
+    .drop-zone--over {
+        border-style: solid;
+    }
 
-.drop-zone__input {
-    display: none;
-}
+    .drop-zone__input {
+        display: none;
+    }
 
-.drop-zone__thumb {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #cccccc;
-    background-size: cover;
-    position: relative;
-}
+    .drop-zone__thumb {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #cccccc;
+        background-size: cover;
+        position: relative;
+    }
 
-.drop-zone__thumb::after {
-    content: attr(data-label);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 5px 0;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.75);
-    font-size: 14px;
-    text-align: center;
-}
+    .drop-zone__thumb::after {
+        content: attr(data-label);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 5px 0;
+        color: #ffffff;
+        background: rgba(0, 0, 0, 0.75);
+        font-size: 14px;
+        text-align: center;
+    }
 
-#rowAdder {
-    margin-left: 17px;
-}
+    #rowAdder {
+        margin-left: 17px;
+    }
 
-#box-one,
-#box-two {
-    width: 100px;
-    height: 100px;
-    background-color: blue;
-}
+    #box-one,
+    #box-two {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
 
-#box-two {
-    transition: transform 0.6s ease;
-}
+    #box-two {
+        transition: transform 0.6s ease;
+    }
 
-#button-three {
-    position: relative;
-    left: 200px;
-}
+    #button-three {
+        position: relative;
+        left: 200px;
+    }
 </style>
 @endsection
 @section('content')
@@ -141,13 +139,11 @@
                                         <!-- Start Content -->
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Product Id</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Product Id</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-4">
-                                                <input class="form-control" placeholder="Enter product Id" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="Enter product Id" name="" id="" />
                                             </div>
                                             <div class="col-md-4">
                                                 <select class="form-select">
@@ -162,18 +158,15 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Product Name</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Product Name</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="Enter product Name" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="Enter product Name" name="" id="" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Category Name</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Category Name</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -224,8 +217,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Brand Name</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Brand Name</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -238,35 +230,28 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Mobile Number</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Mobile Number</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="mobile_number"><i
-                                                                class="fas fa-phone"></i></span>
+                                                        <span class="input-group-text" id="mobile_number"><i class="fas fa-phone"></i></span>
                                                     </div>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Enter Mobile Number" aria-label="Username"
-                                                        aria-describedby="mobile_number">
+                                                    <input type="text" class="form-control" placeholder="Enter Mobile Number" aria-label="Username" aria-describedby="mobile_number">
                                                 </div>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Outer Material</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Outer Material</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="Enter Outer Material" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="Enter Outer Material" name="" id="" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Country/Region of Publication</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Country/Region of Publication</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -278,18 +263,15 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Model Name</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Model Name</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="Enter Model Name" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="Enter Model Name" name="" id="" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Material Type</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Material Type</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -302,18 +284,15 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Item Booking Date</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Item Booking Date</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="product_booking_date"><i
-                                                                class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                        <span class="input-group-text" id="product_booking_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                     </div>
-                                                    <input type="date" class="form-control" placeholder="Ex: 50.00"
-                                                        aria-label="Username" aria-describedby="product_booking_date">
+                                                    <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="product_booking_date">
                                                 </div>
                                             </div>
                                             <!-- End -->
@@ -326,84 +305,48 @@
                             </div>
                             <div class="tab-pane" id="variations" role="tabpanel">
                                 <div class="row">
-                                    <!-- Start -->
-                                    <div class="col-md-10">
-                                        <!-- Start Content -->
-                                        <div class="row">
-                                            <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Select Variation </label>
-                                                <span class="text-danger float-md-right">*</span>
-                                            </div>
-                                            <div class="col-md-8 mt-md-3">
-                                                <select class="form-select" id="variant_id" multiple="multiple"
-                                                    style="width: 100%;">
-                                                    @foreach($variants as $variant)
-                                                    <option value="{{$variant->id}}">{{$variant->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <!-- End -->
-                                            <div class="col-md-4 mt-md-3"></div>
-                                            <div class="col-md-2 mt-md-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckChecked">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Set Variant wise Price
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mt-md-3"></div>
-                                            <!-- End -->
-                                            <div class="col-md-4 mt-md-3"></div>
-                                            <div class="col-md-8 mt-md-3">
 
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Size<span class="color-red">*</span></th>
-                                                            <th>Color</th>
-                                                            <th>Price<span class="color-red">*</span></th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="variant_area">
-                                                        <tr>
-                                                            <td>
-                                                                <select name="variant_1" id="size_var"
-                                                                    class="form-control select2 custom_select">
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <select name="variant_2" id="color_var"
-                                                                    class="form-control select2 custom_select">
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" name="var_price_1" id="var_price"
-                                                                    class="form-control" placeholder="0.00" value="">
-                                                            </td>
-                                                            <td>
-                                                                <input type="button" value="Add" class="btn btn-info"
-                                                                    id="variant-row-add" data-key="0">
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- End -->
+                                    <div class="col-md-4"><label class="float-md-right">Choose variation type</label></div>
+                                    <div class="col-md-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input mt-1" type="checkbox" id="size" value="1" />
+                                            <label class="form-check-label" for="size">Size</label>
                                         </div>
-                                        <!-- End Content -->
                                     </div>
-                                    <div class="col-md-2"></div>
-                                    <!-- End -->
+                                    <div class="col-md-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input mt-1" type="checkbox" id="color" value="2" />
+                                            <label class="form-check-label" for="color">Color</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input mt-1" type="checkbox" id="material_type" value="3" />
+                                            <label class="form-check-label" for="material_type">Material Type</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input mt-1" type="checkbox" id="package_quantity" value="4" />
+                                            <label class="form-check-label" for="package_quantity">Package Quantity</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- End Content -->
+                                    <div class="col-md-12">
+                                        <hr class="m-0">
+                                    </div>
+                                    <!-- End Content -->
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4" id="add_size">
+                                                
+                                            </div>
+                                            <div class="col-md-4" id="all_size"></div>
+                                        </div>
+                                    </div>
+                                    <!-- End Content -->
                                 </div>
                             </div>
                             <div class="tab-pane" id="offer" role="tabpanel">
@@ -413,28 +356,23 @@
                                         <!-- Start Content -->
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Seller SKU</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Seller SKU</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8">
-                                                <input class="form-control" placeholder="Enter Seller SKU" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="Enter Seller SKU" name="" id="" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Product Tax Code</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Product Tax Code</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="Enter Product Tax Code" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="Enter Product Tax Code" name="" id="" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Your Price</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Your Price</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -442,14 +380,12 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="your_price">AED</span>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Ex: 50.00"
-                                                        aria-label="Username" aria-describedby="your_price">
+                                                    <input type="text" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="your_price">
                                                 </div>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Sale Price</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Sale Price</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -457,63 +393,51 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="sale_price">AED</span>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Ex: 50.00"
-                                                        aria-label="Username" aria-describedby="sale_price">
+                                                    <input type="text" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="sale_price">
                                                 </div>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Sale Start Date</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Sale Start Date</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="sale_start_date"><i
-                                                                class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                        <span class="input-group-text" id="sale_start_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                     </div>
-                                                    <input type="date" class="form-control" placeholder="Ex: 50.00"
-                                                        aria-label="Username" aria-describedby="sale_start_date">
+                                                    <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="sale_start_date">
                                                 </div>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Sale End Date</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Sale End Date</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="sale_end_date"><i
-                                                                class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                        <span class="input-group-text" id="sale_end_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                     </div>
-                                                    <input type="date" class="form-control" placeholder="Ex: 50.00"
-                                                        aria-label="Username" aria-describedby="sale_end_date">
+                                                    <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="sale_end_date">
                                                 </div>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Retail Price (Inclusive VAT)</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Retail Price (Inclusive VAT)</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"
-                                                            id="retail_price_inclusive_vat">AED</span>
+                                                        <span class="input-group-text" id="retail_price_inclusive_vat">AED</span>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="Ex: 50.00"
-                                                        aria-label="Username"
-                                                        aria-describedby="retail_price_inclusive_vat">
+                                                    <input type="text" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="retail_price_inclusive_vat">
                                                 </div>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Condition</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Condition</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -526,38 +450,31 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Condition Note</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Condition Note</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <textarea class="form-control" name="condition_note"
-                                                    id="condition_note"></textarea>
+                                                <textarea class="form-control" name="condition_note" id="condition_note"></textarea>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Max Order Qty</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Max Order Qty</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="Enter Max Order Qty" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="Enter Max Order Qty" name="" id="" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Handling Time</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Handling Time</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="Enter Handling Time" name=""
-                                                    id="" />
+                                                <input class="form-control" placeholder="Enter Handling Time" name="" id="" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Offering Can Be Gift Messaged</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Offering Can Be Gift Messaged</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -583,34 +500,28 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Start Selling Date</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Start Selling Date</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="start_selling_date"><i
-                                                                class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                        <span class="input-group-text" id="start_selling_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                     </div>
-                                                    <input type="date" class="form-control" placeholder="Ex: 50.00"
-                                                        aria-label="Username" aria-describedby="start_selling_date">
+                                                    <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="start_selling_date">
                                                 </div>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Restock Date</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Restock Date</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="restock_date"><i
-                                                                class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                        <span class="input-group-text" id="restock_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                     </div>
-                                                    <input type="date" class="form-control" placeholder="Ex: 50.00"
-                                                        aria-label="Username" aria-describedby="restock_date">
+                                                    <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="restock_date">
                                                 </div>
                                             </div>
                                             <!-- End -->
@@ -627,8 +538,7 @@
                                     <!-- Start Content -->
                                     <div class="row">
                                         <div class="col-md-4 mt-md-3">
-                                            <label class="col-form-label float-md-right"
-                                                style="font-size: 14px;">Battery Cell Type</label>
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Battery Cell Type</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
                                             <select class="form-select">
@@ -640,8 +550,7 @@
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-4 mt-md-3">
-                                            <label class="col-form-label float-md-right"
-                                                style="font-size: 14px;">Battery Type</label>
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Battery Type</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
                                             <select class="form-select">
@@ -657,13 +566,11 @@
                                                 of Batteries Required</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
-                                            <input class="form-control" placeholder="Number of Batteries Required"
-                                                name="" id="" />
+                                            <input class="form-control" placeholder="Number of Batteries Required" name="" id="" />
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-4 mt-md-3">
-                                            <label class="col-form-label float-md-right"
-                                                style="font-size: 14px;">Lithium Battery Energy Content</label>
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Lithium Battery Energy Content</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
                                             <div class="row">
@@ -682,8 +589,7 @@
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-4 mt-md-3">
-                                            <label class="col-form-label float-md-right"
-                                                style="font-size: 14px;">Lithium Battery Packaging</label>
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Lithium Battery Packaging</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
                                             <select class="form-select">
@@ -695,8 +601,7 @@
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-4 mt-md-3">
-                                            <label class="col-form-label float-md-right"
-                                                style="font-size: 14px;">Batteries are Included</label>
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Batteries are Included</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
                                             <select class="form-select">
@@ -720,8 +625,7 @@
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-4 mt-md-3">
-                                            <label class="col-form-label float-md-right"
-                                                style="font-size: 14px;">Battery Weight</label>
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Battery Weight</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
                                             <div class="row">
@@ -756,8 +660,7 @@
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-4 mt-md-3">
-                                            <label class="col-form-label float-md-right"
-                                                style="font-size: 14px;">Lithium Battery Weight</label>
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Lithium Battery Weight</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
                                             <div class="row">
@@ -788,13 +691,11 @@
                                                 Data Sheet URL</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
-                                            <input class="form-control" placeholder="https://www.facebook.com/" name=""
-                                                id="" />
+                                            <input class="form-control" placeholder="https://www.facebook.com/" name="" id="" />
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-4 mt-md-3">
-                                            <label class="col-form-label float-md-right"
-                                                style="font-size: 14px;">Volume</label>
+                                            <label class="col-form-label float-md-right" style="font-size: 14px;">Volume</label>
                                         </div>
                                         <div class="col-md-8 mt-md-3">
                                             <div class="row">
@@ -827,8 +728,7 @@
                                         <div class="col-md-8 mt-md-3">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input class="form-control" placeholder="2.33, 20.75, 10000.00"
-                                                        name="" id="" />
+                                                    <input class="form-control" placeholder="2.33, 20.75, 10000.00" name="" id="" />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <select class="form-select">
@@ -924,13 +824,11 @@
                                         <!-- Start Content -->
                                         <div class="row">
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Product Description</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Product Description</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <textarea class="form-control" name="product_description"
-                                                    id="product_description"></textarea>
+                                                <textarea class="form-control" name="product_description" id="product_description"></textarea>
                                             </div>
                                             <!-- End -->
                                         </div>
@@ -948,8 +846,7 @@
                                         <!-- Start Content -->
                                         <div class="row">
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Key Product Features</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Key Product Features</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -985,8 +882,7 @@
                                         <!-- Start Content -->
                                         <div class="row">
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Closure Type</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Closure Type</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -994,8 +890,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Manufacturer</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Manufacturer</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1003,8 +898,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Manufacturer Part Number</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Manufacturer Part Number</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1012,8 +906,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Number of Items</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Number of Items</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1021,45 +914,37 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Release Date</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Release Date</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="release_date"><i
-                                                                class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                        <span class="input-group-text" id="release_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                     </div>
-                                                    <input type="date" class="form-control" aria-label="Username"
-                                                        aria-describedby="release_date">
+                                                    <input type="date" class="form-control" aria-label="Username" aria-describedby="release_date">
                                                 </div>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Fabric Type</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Fabric Type</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input type="text" class="form-control m-input"
-                                                    placeholder="cotton, plastic">
+                                                <input type="text" class="form-control m-input" placeholder="cotton, plastic">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Item Dimensions</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Item Dimensions</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-12" style="text-align: left;">
-                                                        <label class="col-form-label"
-                                                            style="font-size: 14px;">Length</label>
+                                                        <label class="col-form-label" style="font-size: 14px;">Length</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control m-input"
-                                                            placeholder="10.33, 5.50, 15000.0">
+                                                        <input type="text" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select class="form-select">
@@ -1083,12 +968,10 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12" style="text-align: left;">
-                                                        <label class="col-form-label"
-                                                            style="font-size: 14px;">Width</label>
+                                                        <label class="col-form-label" style="font-size: 14px;">Width</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control m-input"
-                                                            placeholder="10.33, 5.50, 15000.0">
+                                                        <input type="text" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select class="form-select">
@@ -1112,12 +995,10 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-12" style="text-align: left;">
-                                                        <label class="col-form-label"
-                                                            style="font-size: 14px;">Height</label>
+                                                        <label class="col-form-label" style="font-size: 14px;">Height</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control m-input"
-                                                            placeholder="10.33, 5.50, 15000.0">
+                                                        <input type="text" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select class="form-select">
@@ -1145,8 +1026,7 @@
                                             <!-- End -->
 
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Package Dimensions</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Package Dimensions</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1156,8 +1036,7 @@
                                                             Height</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control m-input"
-                                                            placeholder="3.45">
+                                                        <input type="text" class="form-control m-input" placeholder="3.45">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select class="form-select">
@@ -1185,8 +1064,7 @@
                                                             Length</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control m-input"
-                                                            placeholder="400, 2, 3, 3.54">
+                                                        <input type="text" class="form-control m-input" placeholder="400, 2, 3, 3.54">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select class="form-select">
@@ -1214,8 +1092,7 @@
                                                             Width</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control m-input"
-                                                            placeholder="400, 2, 3, 3.54">
+                                                        <input type="text" class="form-control m-input" placeholder="400, 2, 3, 3.54">
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select class="form-select">
@@ -1242,8 +1119,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Package Weight</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Package Weight</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-4 mt-md-3">
@@ -1263,8 +1139,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">League Name</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">League Name</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1272,19 +1147,15 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Warranty Description</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Warranty Description</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <textarea class="form-control" name="warranty_description"
-                                                    id="warranty_description"
-                                                    placeholder="Manufacturer warranty for 90 days from date of purchase"></textarea>
+                                                <textarea class="form-control" name="warranty_description" id="warranty_description" placeholder="Manufacturer warranty for 90 days from date of purchase"></textarea>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Target Gender</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Target Gender</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1297,8 +1168,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Team Name</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Team Name</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1306,8 +1176,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Age Range Description</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Age Range Description</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1315,28 +1184,23 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Lining Description</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Lining Description</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input type="text" class="form-control m-input"
-                                                    placeholder="with warm lining">
+                                                <input type="text" class="form-control m-input" placeholder="with warm lining">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Strap Type</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Strap Type</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input type="text" class="form-control m-input"
-                                                    placeholder="ankle-wrap">
+                                                <input type="text" class="form-control m-input" placeholder="ankle-wrap">
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Handle Type</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Handle Type</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1344,8 +1208,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Number Of Compartments</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Number Of Compartments</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1353,8 +1216,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Number Of Wheels</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Number Of Wheels</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1362,8 +1224,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Pocket Description</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Pocket Description</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1371,8 +1232,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Sheel Type</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Sheel Type</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1380,8 +1240,7 @@
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
-                                                <label class="col-form-label float-md-right"
-                                                    style="font-size: 14px;">Wheel Type</label>
+                                                <label class="col-form-label float-md-right" style="font-size: 14px;">Wheel Type</label>
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
@@ -1407,28 +1266,22 @@
 @endsection
 @section('script')
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 </script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
-    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-$('#category_id').select2({
-    placeholder: 'Select An Option'
-});
-$('#brand_id').select2({
-    placeholder: 'Select An Option'
-});
-$('#material_id').select2({
-    placeholder: 'Select An Option'
-});
-$('#variant_id').select2({
-    placeholder: 'Select An Option'
-});
-$('.file-upload').file_upload();
+    $('#category_id').select2({
+        placeholder: 'Select An Option'
+    });
+    $('#brand_id').select2({
+        placeholder: 'Select An Option'
+    });
+    $('#material_id').select2({
+        placeholder: 'Select An Option'
+    });
+    $('.file-upload').file_upload();
 </script>
 @include('backend.product.js.product-js')
 @endsection
