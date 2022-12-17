@@ -72,6 +72,27 @@
         position: relative;
         left: 200px;
     }
+
+    div#variation_content {
+        margin: 4px, 4px;
+        padding: 4px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+    .select-form {
+        /* margin: 4px, 4px; */
+        /* padding: 4px; */
+        width: 100%;
+    }
+
+    .input-form {
+        /* margin-top: 8px; */
+        /* padding: 3px; */
+        width: 100%;
+        height: 25px;
+    }
 </style>
 @endsection
 @section('content')
@@ -341,12 +362,38 @@
                                         <div class="row">
                                             <div class="col-md-4"></div>
                                             <div class="col-md-4" id="add_size">
-                                                
+
                                             </div>
                                             <div class="col-md-4" id="all_size"></div>
+
                                         </div>
                                     </div>
                                     <!-- End Content -->
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-11" id="variation_content">
+                                                <!-- Start -->
+                                                <div class="row" id="variation_row">
+                                                    <div class="col-md-12" style="display: flex;">
+                                                        <div class="text-center" style="width: 80px; font-weight: bold;"><span style="width: 100%;">Size</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Target Gender</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Description</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Bottom Size</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Bottom Size Map</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Seller SKU</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Product Id</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Type</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Price</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Quantity</span></div>
+                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Condition</span></div>
+                                                    </div>
+                                                </div>
+                                                <!-- End -->
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="offer" role="tabpanel">

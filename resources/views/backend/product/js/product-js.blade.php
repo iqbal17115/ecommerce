@@ -1,14 +1,41 @@
 <script type="text/javascript">
+    function variationManage(variation_type, val) {
+        if (variation_type == 1) {
+            variation_content = '<div class="col-md-12" style="display: flex;">';
+            variation_content += '<div style="width: 80px; font-weight: bold;">' + val + '</div>';
+            variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+            variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+            variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+            variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+            variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+            variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+            variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+            variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+            variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+            variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+            variation_content += '</div>';
+            $("#variation_row").append(variation_content);
+        }
+    }
     $("body").on("click", "#add_individual_size", function() {
-        alert(true);
+        let individual_size = $("#individual_size").val();
+
+        if (individual_size != "") {
+            let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_size + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
+            $("#all_size").append(badge);
+            $("#individual_size").val(null)
+            variationManage(1, individual_size);
+        }
     });
 
     $('#size').on('click', function(e) {
         if ($(this).prop("checked") == true) {
             add_size = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Size</label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_size" placeholder="Size" aria-label="Size" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_size" id="add_individual_size">Add</button></div></div></div></div>';
             $("#add_size").append(add_size);
+            $("#all_size").after('<div class="col-md-12 remove_size_hr"><hr></div>');
         } else if ($(this).prop("checked") == false) {
             $("#add_size").empty();
+            $(".remove_size_hr").remove();
         }
     });
 
