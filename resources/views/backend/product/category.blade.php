@@ -93,6 +93,11 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 $(document).ready(function() {
+    $(".variation_type").select2({
+        dropdownParent: $("#categoryModal"),
+        placeholder: 'Select An Option'
+    });
+
     $(".category_id").select2({
         dropdownParent: $("#categoryModal"),
         placeholder: 'Select An Option'

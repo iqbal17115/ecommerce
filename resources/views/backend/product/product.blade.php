@@ -360,12 +360,20 @@
                                     <!-- End Content -->
                                     <div class="col-md-12">
                                         <div class="row">
+                                            <!-- Start Size -->
                                             <div class="col-md-4"></div>
                                             <div class="col-md-4" id="add_size">
 
                                             </div>
                                             <div class="col-md-4" id="all_size"></div>
+                                            <!-- End Size -->
+                                             <!-- Start Color -->
+                                             <div class="col-md-4"></div>
+                                            <div class="col-md-4" id="add_color">
 
+                                            </div>
+                                            <div class="col-md-4" id="all_color"></div>
+                                            <!-- End Color -->
                                         </div>
                                     </div>
                                     <!-- End Content -->
@@ -375,18 +383,7 @@
                                             <div class="col-md-11" id="variation_content">
                                                 <!-- Start -->
                                                 <div class="row" id="variation_row">
-                                                    <div class="col-md-12" style="display: flex;">
-                                                        <div class="text-center" style="width: 80px; font-weight: bold;"><span style="width: 100%;">Size</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Target Gender</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Description</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Bottom Size</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Bottom Size Map</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Seller SKU</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Product Id</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Type</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Price</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Quantity</span></div>
-                                                        <div class="text-center" style="width: 150px;"><span style="width: 100%;">Condition</span></div>
+                                                    <div class="col-md-12" id="variation_head" style="display: flex;">
                                                     </div>
                                                 </div>
                                                 <!-- End -->

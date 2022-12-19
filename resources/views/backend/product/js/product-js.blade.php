@@ -17,6 +17,35 @@
             $("#variation_row").append(variation_content);
         }
     }
+
+    $("body").on("click", "#add_individual_color", function() {
+        let individual_color = $("#individual_color").val();
+
+        if (individual_color != "") {
+            let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_color + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
+            $("#all_color").append(badge);
+            $("#individual_color").val(null);
+            // variationManage(1, individual_color);
+        }
+
+        // Start Variation Head
+        variation_head = '';
+        variation_head += '<div style="width: 80px; font-size: 14px; font-weight: bold;">Size</div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Target Gender</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Description</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Bottom Size</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Bottom Size Map</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Seller SKU</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Product Id</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Type</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Price</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Quantity</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Condition</span></div>';
+        $("#variation_head").empty();
+        $("#variation_head").append(variation_head);
+        // End Variation Head
+    });
+
     $("body").on("click", "#add_individual_size", function() {
         let individual_size = $("#individual_size").val();
 
@@ -25,6 +54,34 @@
             $("#all_size").append(badge);
             $("#individual_size").val(null)
             variationManage(1, individual_size);
+        }
+
+        // Start Variation Head
+        variation_head = '';
+        variation_head += '<div style="width: 80px; font-size: 14px; font-weight: bold;">Size</div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Target Gender</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Description</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Bottom Size</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Bottom Size Map</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Seller SKU</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Product Id</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Type</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Price</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Quantity</span></div>';
+        variation_head += '<div style="width: 150px; font-size: 14px; font-weight: bold;"><span style="width: 100%;">Condition</span></div>';
+        $("#variation_head").empty();
+        $("#variation_head").append(variation_head);
+        // End Variation Head
+    });
+
+    $('#color').on('click', function(e) {
+        if ($(this).prop("checked") == true) {
+            add_color = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Color </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_color" placeholder="Color" aria-label="Size" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_color" id="add_individual_color">Add</button></div></div></div></div>';
+            $("#add_color").append(add_color);
+            $("#all_color").after('<div class="col-md-12 remove_color_hr"><hr></div>');
+        } else if ($(this).prop("checked") == false) {
+            $("#add_color").empty();
+            $(".remove_color_hr").remove();
         }
     });
 

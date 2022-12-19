@@ -1,6 +1,5 @@
       <!-- sample modal content -->
-      <div id="categoryModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myCategoryLabel"
-          aria-hidden="true">
+      <div id="categoryModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myCategoryLabel" aria-hidden="true">
           <form action="" method="post" id="addCategory" enctype="multipart/form-data">
               @csrf
               <div class="modal-dialog modal-lg">
@@ -19,8 +18,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="name">Category Name</label>
-                                      <input type="text" name="name" id="name" class="form-control"
-                                          placeholder="Enter Category Name">
+                                      <input type="text" name="name" id="name" class="form-control" placeholder="Enter Category Name">
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
@@ -86,8 +84,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="position">Menu Position</label>
-                                      <input type="number" name="position" id="position" class="form-control"
-                                          placeholder="Menu Position">
+                                      <input type="number" name="position" id="position" class="form-control" placeholder="Menu Position">
                                       <span class="text-danger err_position"></span>
                                   </div>
                               </div>
@@ -105,12 +102,22 @@
                                       <span class="text-danger err_image"></span>
                                   </div>
                               </div>
+                              <div class="form-group category_load">
+                                  <label for="variation_type">Variation Type</label>
+                                  <select name="variation_type" id="variation_type" class="form-control variation_type" multiple="multiple" style="width: 100%;">
+                                      <option value="1">Size</option>
+                                      <option value="2">Color</option>
+                                      <option value="3">Package Qty</option>
+                                      <option value="4">Material Type</option>
+                                      <option value="5">Wattage</option>
+                                      <option value="6">Number Of Items</option>
+                                      <option value="7">Style Name</option>
+                                  </select>
+                              </div>
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="vendor_commission_percentage">Vendor Commission(%)</label>
-                                      <input type="number" name="vendor_commission_percentage"
-                                          id="vendor_commission_percentage" class="form-control"
-                                          placeholder="Vendor Commission">
+                                      <input type="number" name="vendor_commission_percentage" id="vendor_commission_percentage" class="form-control" placeholder="Vendor Commission">
                                       <span class="text-danger err_vendor_commission_percentage"></span>
                                   </div>
                               </div>
@@ -129,15 +136,13 @@
                       </div>
                       <div class="modal-footer">
                           <center>
-                              <img id="imgPreviewIcon" class="rounded" src="#" alt=""
-                                  style="width: 30px; height: 30px;" />
+                              <img id="imgPreviewIcon" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
                           </center>
                           <center>
                               <img id="imgPreview" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
                           </center>
                           <span style="width: 200px;"></span>
-                          <button type="button" class="btn btn-secondary waves-effect"
-                              data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
                       </div>
                   </div><!-- /.modal-content -->
