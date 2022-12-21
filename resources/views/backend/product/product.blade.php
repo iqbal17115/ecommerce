@@ -191,7 +191,7 @@
                                                 <span class="text-danger float-md-right">*</span>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select" id="category_id">
+                                                <select class="form-select" id="category_id" onchange="variantByCategory(this)">
                                                     <option value=""></option>
                                                     @foreach($categories as $category)
                                                     <option value="{{$category->id}}">
@@ -206,19 +206,19 @@
                                                     <!-- Start sub-Sub-Category -->
                                                     @if($subCategory->SubCategory)
                                                     @foreach($subCategory->SubCategory as $subSubCategory)
-                                                    <option value="{{$subCategory->id}}">
+                                                    <option value="{{$subSubCategory->id}}">
                                                         ----{{$subSubCategory->name}}
                                                     </option>
                                                     <!-- Start sub-Sub-Sub-Category -->
                                                     @if($subSubCategory->SubCategory)
                                                     @foreach($subSubCategory->SubCategory as $subSubSubCategory)
-                                                    <option value="{{$subCategory->id}}">
+                                                    <option value="{{$subSubSubCategory->id}}">
                                                         ------{{$subSubSubCategory->name}}
                                                     </option>
                                                     <!-- Start sub-Sub-Sub-Sub-Category -->
                                                     @if($subSubSubCategory->SubCategory)
                                                     @foreach($subSubSubCategory->SubCategory as $subSubSubSubCategory)
-                                                    <option value="{{$subCategory->id}}">
+                                                    <option value="{{$subSubSubSubCategory->id}}">
                                                         --------{{$subSubSubSubCategory->name}}
                                                     </option>
                                                     @endforeach
@@ -367,8 +367,8 @@
                                             </div>
                                             <div class="col-md-4" id="all_size"></div>
                                             <!-- End Size -->
-                                             <!-- Start Color -->
-                                             <div class="col-md-4"></div>
+                                            <!-- Start Color -->
+                                            <div class="col-md-4"></div>
                                             <div class="col-md-4" id="add_color">
 
                                             </div>

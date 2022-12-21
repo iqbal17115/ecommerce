@@ -104,7 +104,7 @@
                               </div>
                               <div class="form-group category_load">
                                   <label for="variation_type">Variation Type</label>
-                                  <select name="variation_type" id="variation_type" class="form-control variation_type" multiple="multiple" style="width: 100%;">
+                                  <select name="variation_type[]" id="variation_type" class="form-control variation_type" multiple="multiple" style="width: 100%;">
                                       <option value="1">Size</option>
                                       <option value="2">Color</option>
                                       <option value="3">Package Qty</option>

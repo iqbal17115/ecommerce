@@ -40,6 +40,7 @@ class CategoryController extends Controller
                 'is_active' => 'Status is required',
             ]
         );
+        // dd($request->variation_type);
         if($request->cu_id > 0) {
             $category = Category::find($request->cu_id);
         }else {
@@ -76,6 +77,7 @@ class CategoryController extends Controller
         }
 
         $category->vendor_commission_percentage = $request->vendor_commission_percentage;
+        $category->variation_type = json_encode($request->variation_type);
         $category->branch_id = 1;
         $category->is_active = $request->is_active;
         $category->save();

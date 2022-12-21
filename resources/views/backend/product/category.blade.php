@@ -60,7 +60,9 @@
                                     data-name="{{$category->name}}"
                                     data-parent_category_id="{{$category->parent_category_id}}"
                                     data-top_menu="{{$category->top_menu}}" data-position="{{$category->position}}"
-                                    data-icon1="{{$category->icon}}" data-image="{{$category->image}}"
+                                    data-icon1="{{$category->icon}}" data-image="{{$category->icon}}"
+                                    data-icon1="{{$category->image}}" data-image="{{$category->image}}"
+                                    data-icon1="{{$category->variation_type}}" data-variation_type="{{$category->variation_type}}"
                                     data-vendor_commission_percentage="{{$category->vendor_commission_percentage}}"
                                     data-is_active="{{$category->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>

@@ -22,6 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->text('icon')->nullable();
             $table->text('image')->nullable();
             $table->double('vendor_commission_percentage')->nullable();
+            $table->string('variation_type')->nullable();
             $table->foreignId('branch_id');
             $table->foreignId('user_id');
             $table->boolean('is_active')->nullable()->default(1);

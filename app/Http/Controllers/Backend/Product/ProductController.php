@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function getCategory($id) {
+        $category = Category::find($id);
+        return response()->json($category);
+    }
     public function index() {
         $categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
         $brands = Brand::orderBy('id', 'DESC')->get();

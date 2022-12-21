@@ -130,6 +130,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     // Start Product
     Route::group([], function () {
         Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
+        Route::get('get-category/{id}', [ProductController::class, 'getCategory'])->name('get-category');
     });
     // End Product
 

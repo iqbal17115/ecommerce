@@ -97,6 +97,21 @@
     });
 
 
+    function variantByCategory(category) {
+        let category_id = $("#" + category.id).val();
+        $.ajax({
+            type: 'GET', //THIS NEEDS TO BE GET
+            url: 'get-category/'+category_id,
+            success: function(data) {
+                const obj = JSON.parse(data['variation_type']);
+
+                console.log(obj);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    }
 
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
         const dropZoneElement = inputElement.closest(".drop-zone");
