@@ -333,6 +333,7 @@
                                     <input type="hidden" value="0" name="hidden_value_5" id="hidden_value_5" />
                                     <input type="hidden" value="0" name="hidden_value_6" id="hidden_value_6" />
                                     <input type="hidden" value="0" name="hidden_value_7" id="hidden_value_7" />
+
                                     <div class="col-md-12">
                                         <div class="row" id="variation_type_content"></div>
                                     </div>
@@ -408,8 +409,19 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-11" id="variation_content">
                                                 <!-- Start -->
-                                                <!-- <div class="col-md-12" id="variation_head" style="display: flex;">
-                                                    </div> -->
+                                                <div class="col-md-12" id="variation_head" style="display: flex;">
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;" id="gender_header"><span style="width: 100%;">Target Gender</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Description</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Bottom Size</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Bottom Size Map</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Seller SKU</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Product Id</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Type</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Price</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Quantity</span></div>
+                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Condition</span></div>
+                                                </div>
+
                                                 <div class="row" id="variation_row"></div>
                                                 <!-- End -->
                                             </div>

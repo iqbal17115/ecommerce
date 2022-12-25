@@ -4,8 +4,8 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="master_prev_1 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="master_prev_1 master_prev text-center" style="width: 150px;">' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -17,12 +17,13 @@
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
+                $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Size</span></div>');
             } else {
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="master_prev_1 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="master_prev_1 master_prev text-center" style="width: 150px;">' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -37,8 +38,9 @@
                 } else {
                     var already_1 = $(".already_1").length;
                     if (already_1 == 0) {
-                        $('<div class="already_1 available_class" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $('<div class="text-center already_1 available_class" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_1").removeClass("master_prev");
+                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Size</span></div>').insertBefore("#gender_header");
                     } else {
 
                         var variation_element = document.querySelectorAll(".per-row");
@@ -64,8 +66,8 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="master_prev_2 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;">' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -77,12 +79,13 @@
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
+                $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Color</span></div>');
             } else {
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="master_prev_2 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;">' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -97,8 +100,9 @@
                 } else {
                     var already_2 = $(".already_2").length;
                     if (already_2 == 0) {
-                        $('<div class="already_2 available_class" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $('<div class="text-center already_2 available_class" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_2").removeClass("master_prev");
+                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Color</span></div>').insertBefore("#gender_header");
                     } else {
 
                         var variation_element = document.querySelectorAll(".per-row");
@@ -124,8 +128,8 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="master_prev_3 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="text-center master_prev_3 master_prev" style="width: 150px;">' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -137,12 +141,13 @@
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
+                $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">P. Qty</span></div>');
             } else {
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="master_prev_3 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="text-center master_prev_3 master_prev" style="width: 150px;">' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -157,8 +162,9 @@
                 } else {
                     var already_3 = $(".already_3").length;
                     if (already_3 == 0) {
-                        $('<div class="already_3 available_class_3" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $('<div class="text-center already_3 available_class_3" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_3").removeClass("master_prev");
+                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">P. Qty</span></div>').insertBefore("#gender_header");
                     } else {
 
                         var variation_element = document.querySelectorAll(".per-row");
@@ -184,8 +190,8 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="master_prev_4 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="text-center master_prev_4 master_prev" style="width: 150px;">' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -197,12 +203,13 @@
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
+                $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">M. Type</span></div>');
             } else {
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="master_prev_4 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="text-center master_prev_4 master_prev" style="width: 150px;">' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -217,8 +224,9 @@
                 } else {
                     var already_4 = $(".already_4").length;
                     if (already_4 == 0) {
-                        $('<div class="already_4 available_class_4" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $('<div class="text-center already_4 available_class_4" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_4").removeClass("master_prev");
+                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">M. Type</span></div>').insertBefore("#gender_header");
                     } else {
 
                         var variation_element = document.querySelectorAll(".per-row");
@@ -244,8 +252,8 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="master_prev_5 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="text-center master_prev_5 master_prev" style="width: 150px;">' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -257,12 +265,13 @@
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
+                $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Wattage</span></div>');
             } else {
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="master_prev_5 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="text-center master_prev_5 master_prev" style="width: 150px;">' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -277,8 +286,9 @@
                 } else {
                     var already_5 = $(".already_5").length;
                     if (already_5 == 0) {
-                        $('<div class="already_5 available_class_5" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $('<div class="text-center already_5 available_class_5" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_4").removeClass("master_prev");
+                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Wattage</span></div>').insertBefore("#gender_header");
                     } else {
 
                         var variation_element = document.querySelectorAll(".per-row");
@@ -304,8 +314,8 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="master_prev_6 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="text-center master_prev_6 master_prev" style="width: 150px;">' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -317,12 +327,13 @@
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
+                $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Items</span></div>');
             } else {
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="master_prev_6 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="text-center master_prev_6 master_prev" style="width: 150px;">' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -337,8 +348,9 @@
                 } else {
                     var already_6 = $(".already_6").length;
                     if (already_6 == 0) {
-                        $('<div class="already_6 available_class_6" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $('<div class="text-center already_6 available_class_6" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_4").removeClass("master_prev");
+                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Items</span></div>').insertBefore("#gender_header");
                     } else {
 
                         var variation_element = document.querySelectorAll(".per-row");
@@ -364,8 +376,8 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="master_prev_7 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="text-center master_prev_7 master_prev" style="width: 150px;">' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -377,12 +389,13 @@
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
+                $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Style</span></div>');
             } else {
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="master_prev_7 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="text-center master_prev_7 master_prev" style="width: 150px;">' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -397,8 +410,9 @@
                 } else {
                     var already_7 = $(".already_7").length;
                     if (already_7 == 0) {
-                        $('<div class="already_7 available_class_7" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $('<div class="text-center already_7 available_class_7" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_4").removeClass("master_prev");
+                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Style</span></div>').insertBefore("#gender_header");
                     } else {
 
                         var variation_element = document.querySelectorAll(".per-row");
