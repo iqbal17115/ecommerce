@@ -329,10 +329,12 @@
                                     <input type="hidden" value="0" name="hidden_value_1" id="hidden_value_1" />
                                     <input type="hidden" value="0" name="hidden_value_2" id="hidden_value_2" />
                                     <input type="hidden" value="0" name="hidden_value_3" id="hidden_value_3" />
+                                    <input type="hidden" value="0" name="hidden_value_4" id="hidden_value_4" />
+                                    <input type="hidden" value="0" name="hidden_value_5" id="hidden_value_5" />
+                                    <input type="hidden" value="0" name="hidden_value_6" id="hidden_value_6" />
+                                    <input type="hidden" value="0" name="hidden_value_7" id="hidden_value_7" />
                                     <div class="col-md-12">
-                                        <div class="row" id="variation_type_content">
-
-                                        </div>
+                                        <div class="row" id="variation_type_content"></div>
                                     </div>
 
                                     <!-- End Content -->

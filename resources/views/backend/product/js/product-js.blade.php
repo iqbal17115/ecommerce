@@ -180,8 +180,291 @@
                     }
                 }
             }
+        } else if (variation_type == 4) {
+            var len = $("#variation_row").children().length;
+            if (len == 0) {
+                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
+                variation_content += '<div class="master_prev_4 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '</div>';
+                $("#variation_row").append(variation_content);
+            } else {
+                var variation_type_len = $(".master_type_" + variation_type).length;
+                if (variation_type_len != 0) {
+                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
+                    variation_content += '<div class="master_prev_4 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '</div>';
+                    $("#variation_row").append(variation_content);
+                } else {
+                    var already_4 = $(".already_4").length;
+                    if (already_4 == 0) {
+                        $('<div class="already_4 available_class_4" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $(".master_prev_4").removeClass("master_prev");
+                    } else {
+
+                        var variation_element = document.querySelectorAll(".per-row");
+                        var variation_tags = '';
+                        var cart_div = document.getElementById("variation_row");
+                        var hidden_value_4 = $('#hidden_value_4').val();
+                        if (hidden_value_4 == 0) {
+                            var length = variation_element.length;
+                            $('#hidden_value_4').val(length);
+                        } else {
+                            var length = hidden_value_4;
+                        }
+                        for (var i = 0; i < length; i++) {
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            $('.current_val .available_class_4').text(val);
+                        }
+                        $(".per-row").removeClass("current_val");
+                        console.log(variation_tags);
+                    }
+                }
+            }
+        } else if (variation_type == 5) {
+            var len = $("#variation_row").children().length;
+            if (len == 0) {
+                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
+                variation_content += '<div class="master_prev_5 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '</div>';
+                $("#variation_row").append(variation_content);
+            } else {
+                var variation_type_len = $(".master_type_" + variation_type).length;
+                if (variation_type_len != 0) {
+                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
+                    variation_content += '<div class="master_prev_5 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '</div>';
+                    $("#variation_row").append(variation_content);
+                } else {
+                    var already_5 = $(".already_5").length;
+                    if (already_5 == 0) {
+                        $('<div class="already_5 available_class_5" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $(".master_prev_4").removeClass("master_prev");
+                    } else {
+
+                        var variation_element = document.querySelectorAll(".per-row");
+                        var variation_tags = '';
+                        var cart_div = document.getElementById("variation_row");
+                        var hidden_value_5 = $('#hidden_value_5').val();
+                        if (hidden_value_5 == 0) {
+                            var length = variation_element.length;
+                            $('#hidden_value_5').val(length);
+                        } else {
+                            var length = hidden_value_5;
+                        }
+                        for (var i = 0; i < length; i++) {
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            $('.current_val .available_class_5').text(val);
+                        }
+                        $(".per-row").removeClass("current_val");
+                        console.log(variation_tags);
+                    }
+                }
+            }
+        } else if (variation_type == 6) {
+            var len = $("#variation_row").children().length;
+            if (len == 0) {
+                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
+                variation_content += '<div class="master_prev_6 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '</div>';
+                $("#variation_row").append(variation_content);
+            } else {
+                var variation_type_len = $(".master_type_" + variation_type).length;
+                if (variation_type_len != 0) {
+                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
+                    variation_content += '<div class="master_prev_6 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '</div>';
+                    $("#variation_row").append(variation_content);
+                } else {
+                    var already_6 = $(".already_6").length;
+                    if (already_6 == 0) {
+                        $('<div class="already_6 available_class_6" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $(".master_prev_4").removeClass("master_prev");
+                    } else {
+
+                        var variation_element = document.querySelectorAll(".per-row");
+                        var variation_tags = '';
+                        var cart_div = document.getElementById("variation_row");
+                        var hidden_value_6 = $('#hidden_value_6').val();
+                        if (hidden_value_6 == 0) {
+                            var length = variation_element.length;
+                            $('#hidden_value_6').val(length);
+                        } else {
+                            var length = hidden_value_6;
+                        }
+                        for (var i = 0; i < length; i++) {
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            $('.current_val .available_class_6').text(val);
+                        }
+                        $(".per-row").removeClass("current_val");
+                        console.log(variation_tags);
+                    }
+                }
+            }
+        } else if (variation_type == 7) {
+            var len = $("#variation_row").children().length;
+            if (len == 0) {
+                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
+                variation_content += '<div class="master_prev_7 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '</div>';
+                $("#variation_row").append(variation_content);
+            } else {
+                var variation_type_len = $(".master_type_" + variation_type).length;
+                if (variation_type_len != 0) {
+                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
+                    variation_content += '<div class="master_prev_7 master_prev" style="width: 80px; font-weight: bold;">' + val + '</div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '</div>';
+                    $("#variation_row").append(variation_content);
+                } else {
+                    var already_7 = $(".already_7").length;
+                    if (already_7 == 0) {
+                        $('<div class="already_7 available_class_7" style="width: 80px; font-weight: bold;">' + val + '</div>').insertBefore(".master_prev");
+                        $(".master_prev_4").removeClass("master_prev");
+                    } else {
+
+                        var variation_element = document.querySelectorAll(".per-row");
+                        var variation_tags = '';
+                        var cart_div = document.getElementById("variation_row");
+                        var hidden_value_7 = $('#hidden_value_7').val();
+                        if (hidden_value_7 == 0) {
+                            var length = variation_element.length;
+                            $('#hidden_value_7').val(length);
+                        } else {
+                            var length = hidden_value_7;
+                        }
+                        for (var i = 0; i < length; i++) {
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            $('.current_val .available_class_7').text(val);
+                        }
+                        $(".per-row").removeClass("current_val");
+                    }
+                }
+            }
         }
     }
+
+    $("body").on("click", "#add_style_name", function() {
+        let individual_style_name = $("#individual_style_name").val();
+
+        if (individual_style_name != "") {
+            let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_style_name + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
+            $("#all_color").append(badge);
+            $("#individual_style_name").val(null);
+            variationManage(6, individual_style_name);
+        }
+    });
+
+    $("body").on("click", "#add_number_of_items", function() {
+        let individual_number_of_items = $("#individual_number_of_items").val();
+
+        if (individual_number_of_items != "") {
+            let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_number_of_items + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
+            $("#all_color").append(badge);
+            $("#individual_number_of_items").val(null);
+            variationManage(6, individual_number_of_items);
+        }
+    });
+
+    $("body").on("click", "#add_wattage", function() {
+        let individual_wattage = $("#individual_wattage").val();
+
+        if (individual_wattage != "") {
+            let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_wattage + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
+            $("#all_color").append(badge);
+            $("#individual_wattage").val(null);
+            variationManage(5, individual_wattage);
+        }
+    });
+
+    $("body").on("click", "#add_material_type", function() {
+        let individual_material_type = $("#individual_material_type").val();
+
+        if (individual_material_type != "") {
+            let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_material_type + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
+            $("#all_color").append(badge);
+            $("#individual_material_type").val(null);
+            variationManage(4, individual_material_type);
+        }
+    });
 
     $("body").on("click", "#add_package_qty", function() {
         let individual_package_qty = $("#individual_package_qty").val();
@@ -317,7 +600,7 @@
                     } else if (obj[prop] == 5) {
                         variation_option += '<div class="col-md-1"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="wattage" value="5" /><label class="form-check-label" for="wattage">Wattage</label></div></div>';
                     } else if (obj[prop] == 6) {
-                        variation_option += '<div class="col-md-2"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="number_of_item" value="6" /><label class="form-check-label" for="number_of_item">Number Of Items</label></div></div>';
+                        variation_option += '<div class="col-md-2"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="number_of_items" value="6" /><label class="form-check-label" for="number_of_items">Number Of Items</label></div></div>';
                     } else if (obj[prop] == 7) {
                         variation_option += '<div class="col-md-2"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="style_name" value="7" /><label class="form-check-label" for="style_name">Style Name</label></div></div>';
                     }
