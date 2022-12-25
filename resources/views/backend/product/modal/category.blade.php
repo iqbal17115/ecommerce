@@ -102,7 +102,7 @@
                                       <span class="text-danger err_image"></span>
                                   </div>
                               </div>
-                              <div class="form-group category_load">
+                              <div class="form-group variation_load">
                                   <label for="variation_type">Variation Type</label>
                                   <select name="variation_type[]" id="variation_type" class="form-control variation_type" multiple="multiple" style="width: 100%;">
                                       <option value="1">Size</option>

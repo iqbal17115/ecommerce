@@ -127,11 +127,9 @@
             let variation_type = $(this).data('variation_type');
             let vendor_commission_percentage = $(this).data('vendor_commission_percentage');
             let is_active = $(this).data('is_active');
-            // alert(typeof variation_type);
             $('#cu_id').val(id);
             $('#id').val(id);
             $('#name').val(name);
-            // $('#parent_category_id').val(parent_category_id);
             $('.category_id').val(parent_category_id).trigger("change");
             $('#top_menu').val(top_menu);
             $('#position').val(position);
@@ -147,6 +145,14 @@
             $('.variation_type').val(variation_type).trigger("change");
             $('#vendor_commission_percentage').val(vendor_commission_percentage);
             $('#is_active').val(is_active);
+            $(".variation_type").select2({
+                dropdownParent: $("#categoryModal"),
+                placeholder: 'Select An Option'
+            });
+            $(".category_id").select2({
+                dropdownParent: $("#categoryModal"),
+                placeholder: 'Select An Option'
+            });
         });
 
         $(document).on('submit', '#addCategory', function(e) {
@@ -187,9 +193,9 @@
                         $('#addCategory')[0].reset();
                         $('.category_content').load(location.href + ' .category_content');
                         $('.category_load').load(location.href + ' .category_load');
+                        $('.variation_load').load(location.href + ' .variation_load');
                         $('.paginate').load(location.href + ' .paginate');
                         $('#cu_id').val(-1);
-
                     }
                 },
                 error: function(err) {

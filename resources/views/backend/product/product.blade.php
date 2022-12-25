@@ -326,30 +326,12 @@
                             </div>
                             <div class="tab-pane" id="variations" role="tabpanel">
                                 <div class="row">
+                                    <input type="hidden" value="0" name="hidden_value_1" id="hidden_value_1" />
+                                    <input type="hidden" value="0" name="hidden_value_2" id="hidden_value_2" />
+                                    <input type="hidden" value="0" name="hidden_value_3" id="hidden_value_3" />
+                                    <div class="col-md-12">
+                                        <div class="row" id="variation_type_content">
 
-                                    <div class="col-md-4"><label class="float-md-right">Choose variation type</label></div>
-                                    <div class="col-md-2">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input mt-1" type="checkbox" id="size" value="1" />
-                                            <label class="form-check-label" for="size">Size</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input mt-1" type="checkbox" id="color" value="2" />
-                                            <label class="form-check-label" for="color">Color</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input mt-1" type="checkbox" id="material_type" value="3" />
-                                            <label class="form-check-label" for="material_type">Material Type</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input mt-1" type="checkbox" id="package_quantity" value="4" />
-                                            <label class="form-check-label" for="package_quantity">Package Quantity</label>
                                         </div>
                                     </div>
 
@@ -374,6 +356,48 @@
                                             </div>
                                             <div class="col-md-4" id="all_color"></div>
                                             <!-- End Color -->
+                                            <!-- Start Color -->
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4" id="add_package_qty">
+
+                                            </div>
+                                            <div class="col-md-4" id="all_package_qty"></div>
+                                            <!-- End Color -->
+                                            <!-- Start Color -->
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4" id="add_package_qty">
+
+                                            </div>
+                                            <div class="col-md-4" id="all_package_qty"></div>
+                                            <!-- End Color -->
+                                            <!-- Start Color -->
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4" id="add_material_type">
+
+                                            </div>
+                                            <div class="col-md-4" id="all_material_type"></div>
+                                            <!-- End Color -->
+                                            <!-- Start Color -->
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4" id="add_wattage">
+
+                                            </div>
+                                            <div class="col-md-4" id="all_wattage"></div>
+                                            <!-- End Color -->
+                                            <!-- Start Color -->
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4" id="add_number_of_items">
+
+                                            </div>
+                                            <div class="col-md-4" id="all_number_of_items"></div>
+                                            <!-- End Color -->
+                                            <!-- Start Color -->
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4" id="add_style_name">
+
+                                            </div>
+                                            <div class="col-md-4" id="all_style_name"></div>
+                                            <!-- End Color -->
                                         </div>
                                     </div>
                                     <!-- End Content -->
@@ -382,10 +406,9 @@
                                             <div class="col-md-1"></div>
                                             <div class="col-md-11" id="variation_content">
                                                 <!-- Start -->
-                                                <div class="row" id="variation_row">
-                                                    <div class="col-md-12" id="variation_head" style="display: flex;">
-                                                    </div>
-                                                </div>
+                                                <!-- <div class="col-md-12" id="variation_head" style="display: flex;">
+                                                    </div> -->
+                                                <div class="row" id="variation_row"></div>
                                                 <!-- End -->
                                             </div>
                                         </div>
