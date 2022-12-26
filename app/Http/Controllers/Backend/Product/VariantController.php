@@ -32,8 +32,8 @@ class VariantController extends Controller
     public function addVariant(Request $request) {
         $request->validate(
             [
-                'name' => 'required|max:20',
-                'type' => 'required|max:10',
+                'name' => 'required|max:30',
+                'type' => 'required|max:20',
                 'is_active' => 'required',
             ],
             [

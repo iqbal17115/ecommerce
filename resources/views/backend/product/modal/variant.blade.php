@@ -21,6 +21,7 @@
                                           <option value="">Select Option</option>
                                           <option value="Size">Size</option>
                                           <option value="Color">Color</option>
+                                          <option value="Material_Type">Material Type</option>
                                       </select>
                                       <span class="text-danger err_type"></span>
                                   </div>
