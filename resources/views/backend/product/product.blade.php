@@ -411,9 +411,9 @@
                                                 <!-- Start -->
                                                 <div class="col-md-12" id="variation_head" style="display: flex;">
                                                     <div class="text-center" style="width: 150px; font-size: 12px;" id="gender_header"><span style="width: 100%;">Target Gender</span></div>
+                                                    <div class="text-center div_size" style="display: none; width: 150px; font-size: 12px;"><span style="width: 100%;">Bottom Size</span></div>
+                                                    <div class="text-center div_size" style="display: none; width: 150px; font-size: 12px;"><span style="width: 100%;">Bottom Size Map</span></div>
                                                     <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Description</span></div>
-                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Bottom Size</span></div>
-                                                    <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Bottom Size Map</span></div>
                                                     <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Seller SKU</span></div>
                                                     <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Product Id</span></div>
                                                     <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Type</span></div>

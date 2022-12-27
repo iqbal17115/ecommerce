@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class VariantController extends Controller
 {
+    public function getVariant($type) {
+        if($type == 1) {
+            $variants = Variant::whereType('Size')->orderBy('id', 'desc')->get();
+        }
+
+        return response()->json($variants);
+    }
     public function searchVariant(Request $request) {
         $variants = Variant::where('name', 'like', '%'.$request->search_string.'%')->orWhere('short_name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(10);
         if($variants->count() >= 1) {

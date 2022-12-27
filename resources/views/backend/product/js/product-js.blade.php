@@ -1,13 +1,35 @@
 <script type="text/javascript">
+    function getAllVariant(type) {
+        $.ajax({
+            method: "GET",
+            url: "{{ url('/get-variant/1') }}",
+            success: (result) => {
+                variant = '';
+                Object.entries(result).forEach(([key, value]) => {
+                    console.log(value['branch_id']);
+                    variant += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
+                });
+                $('.bottom_size_map').append(variant)
+            },
+            error: (error) => {
+                alert('Something went wrong to fetch datas...');
+            }
+        });
+    }
+
     function variationManage(variation_type, val) {
+        var variation_menu = [];
         if (variation_type == 1) {
             var len = $("#variation_row").children().length;
+            if (!variation_menu.includes(1)) {
+                variation_menu.push(1);
+            }
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                 variation_content += '<div class="master_prev_1 master_prev text-center" style="width: 150px;">' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -25,7 +47,7 @@
                     variation_content += '<div class="master_prev_1 master_prev text-center" style="width: 150px;">' + val + '</div>';
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -68,8 +90,8 @@
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                 variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;">' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none; width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="div_size" style="display: none; width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -86,8 +108,8 @@
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                     variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;">' + val + '</div>';
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -130,8 +152,8 @@
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                 variation_content += '<div class="text-center master_prev_3 master_prev" style="width: 150px;">' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -148,8 +170,8 @@
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                     variation_content += '<div class="text-center master_prev_3 master_prev" style="width: 150px;">' + val + '</div>';
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -192,8 +214,8 @@
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                 variation_content += '<div class="text-center master_prev_4 master_prev" style="width: 150px;">' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -210,8 +232,8 @@
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                     variation_content += '<div class="text-center master_prev_4 master_prev" style="width: 150px;">' + val + '</div>';
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -254,8 +276,8 @@
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                 variation_content += '<div class="text-center master_prev_5 master_prev" style="width: 150px;">' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -272,8 +294,8 @@
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                     variation_content += '<div class="text-center master_prev_5 master_prev" style="width: 150px;">' + val + '</div>';
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -316,8 +338,8 @@
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                 variation_content += '<div class="text-center master_prev_6 master_prev" style="width: 150px;">' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -334,8 +356,8 @@
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                     variation_content += '<div class="text-center master_prev_6 master_prev" style="width: 150px;">' + val + '</div>';
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -378,8 +400,8 @@
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                 variation_content += '<div class="text-center master_prev_7 master_prev" style="width: 150px;">' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -396,8 +418,8 @@
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                     variation_content += '<div class="text-center master_prev_7 master_prev" style="width: 150px;">' + val + '</div>';
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
@@ -433,6 +455,10 @@
                     }
                 }
             }
+        }
+        if (variation_menu.includes(1)) {
+            $(".div_size").css("display", "inline");
+            getAllVariant(1);
         }
     }
 
