@@ -10,7 +10,9 @@ use App\Http\Controllers\Backend\Product\BrandController;
 use App\Http\Controllers\Backend\Product\CategoryController;
 use App\Http\Controllers\Backend\Product\MaterialController;
 use App\Http\Controllers\Backend\Product\ProductController;
+use App\Http\Controllers\Backend\Product\ConditionController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
+use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
 
 use Illuminate\Support\Facades\Route;
@@ -128,6 +130,17 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     });
     // Material End
 
+    // Start Condition
+    Route::group([], function () {
+        Route::get('condition', [ConditionController::class, 'index'])->name('condition');
+        Route::post('add-condition', [ConditionController::class, 'addCondition'])->name('add.condition');
+        Route::post('delete-condition', [ConditionController::class, 'deleteCondition'])->name('delete.condition');
+        Route::get('pagination/condition-pagination-data', [ConditionController::class, 'pagination']);
+        Route::get('search-condition', [ConditionController::class, 'searchCondition'])->name('search.condition');
+        Route::get('get-condition', [ConditionController::class, 'getCondition'])->name('get-condition');
+    });
+    // End Condition
+
     // Start Product
     Route::group([], function () {
         Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
@@ -153,5 +166,15 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('search-advertisement', [AdvertisementController::class, 'searchAdvertisement'])->name('search.advertisement');
     });
     // End Advertisement
+
+    // Start Block
+    Route::group([], function () {
+        Route::get('block', [BlockController::class, 'index'])->name('block');
+        Route::post('add-block', [BlockController::class, 'addBlock'])->name('add.block');
+        Route::post('delete-block', [BlockController::class, 'deleteBlock'])->name('delete.block');
+        Route::get('pagination/block-pagination-data', [BlockController::class, 'pagination']);
+        Route::get('search-block', [BlockController::class, 'searchBlock'])->name('search.block');
+    });
+    // End Block
 
 });

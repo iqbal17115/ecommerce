@@ -9,34 +9,41 @@ use Illuminate\Http\Request;
 
 class VariantController extends Controller
 {
-    public function getVariant($type) {
-        if($type == 1) {
+    public function getVariant($type)
+    {
+        if ($type == 1) {
             $variants = Variant::whereType('Size')->orderBy('id', 'desc')->get();
+        } else {
+            $variants = Variant::whereType('Color')->orderBy('id', 'desc')->get();
         }
 
         return response()->json($variants);
     }
-    public function searchVariant(Request $request) {
-        $variants = Variant::where('name', 'like', '%'.$request->search_string.'%')->orWhere('short_name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(10);
-        if($variants->count() >= 1) {
-        return view('backend.product.pagination-variant', compact('variants'))->render();
-        }else {
+    public function searchVariant(Request $request)
+    {
+        $variants = Variant::where('name', 'like', '%' . $request->search_string . '%')->orWhere('short_name', 'like', '%' . $request->search_string . '%')->orderBy('id', 'desc')->paginate(10);
+        if ($variants->count() >= 1) {
+            return view('backend.product.pagination-variant', compact('variants'))->render();
+        } else {
             return response()->json([
                 'status' => 'nothing_found'
             ]);
         }
     }
-    public function pagination(Request $request) {
+    public function pagination(Request $request)
+    {
         $variants = Variant::latest()->paginate(10);
         return view('backend.product.pagination-variant', compact('variants'))->render();
     }
-    public function deleteVariant(Request $request) {
+    public function deleteVariant(Request $request)
+    {
         $variant = Variant::find($request->id)->delete();
         return response()->json([
             'status' => 'success'
         ]);
     }
-    public function addVariant(Request $request) {
+    public function addVariant(Request $request)
+    {
         $request->validate(
             [
                 'name' => 'required|max:30',
@@ -49,22 +56,22 @@ class VariantController extends Controller
                 'is_active' => 'required',
             ]
         );
-        if($request->cu_id > 0) {
+        if ($request->cu_id > 0) {
             $variant = Variant::find($request->cu_id);
-        }else {
+        } else {
             $variant = new Variant();
             $variant->user_id = Auth::user()->id;
         }
-        
+
         $variant->name = $request->name;
         $variant->type = $request->type;
-        if($request->type == "Color") {
+        if ($request->type == "Color") {
             $variant->color_code = $request->color_code;
-        }else {
+        } else {
             $variant->color_code = "";
         }
         $variant->branch_id = 1;
-       
+
         $variant->is_active = $request->is_active;
         $variant->save();
 
@@ -72,7 +79,8 @@ class VariantController extends Controller
             'status' => 'success'
         ]);
     }
-    public function index() {
+    public function index()
+    {
         $variants = Variant::latest()->paginate(10);
         return view('backend.product.variant', compact('variants'));
     }

@@ -1,15 +1,39 @@
 <script type="text/javascript">
+    function getAllCondition() {
+        $.ajax({
+            method: "GET",
+            url: "{{ url('/get-condition') }}",
+            success: (result) => {
+                condition = '';
+                Object.entries(result).forEach(([key, value]) => {
+                    condition += '<option value="' + value['id'] + '">' + value['title'] + '</option>';
+                });
+                console.log(condition);
+                $('.product_condition').empty();
+                $('.product_condition').append(condition);
+            },
+            error: (error) => {
+                alert('Something went wrong to fetch datas...');
+            }
+        });
+    }
+
     function getAllVariant(type) {
         $.ajax({
             method: "GET",
-            url: "{{ url('/get-variant/1') }}",
+            url: "{{ url('/get-variant') }}" + '/' + type,
             success: (result) => {
                 variant = '';
                 Object.entries(result).forEach(([key, value]) => {
-                    console.log(value['branch_id']);
                     variant += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
                 });
-                $('.bottom_size_map').append(variant)
+                if (type == 1) {
+                    $('.bottom_size_map').empty();
+                    $('.bottom_size_map').append(variant);
+                } else if (type == 2) {
+                    $('.color_map').empty();
+                    $('.color_map').append(variant);
+                }
             },
             error: (error) => {
                 alert('Something went wrong to fetch datas...');
@@ -30,13 +54,14 @@
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
                 $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Size</span></div>');
@@ -48,13 +73,14 @@
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                     variation_content += '</div>';
                     $("#variation_row").append(variation_content);
                 } else {
@@ -86,19 +112,23 @@
             }
         } else if (variation_type == 2) {
             var len = $("#variation_row").children().length;
+            if (!variation_menu.includes(2)) {
+                variation_menu.push(2);
+            }
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
                 variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;">' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div class="div_size" style="display: none; width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none; width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form color_map"></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
                 $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Color</span></div>');
@@ -110,13 +140,14 @@
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form color_map"></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                     variation_content += '</div>';
                     $("#variation_row").append(variation_content);
                 } else {
@@ -154,13 +185,14 @@
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
                 $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">P. Qty</span></div>');
@@ -172,13 +204,14 @@
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                     variation_content += '</div>';
                     $("#variation_row").append(variation_content);
                 } else {
@@ -216,13 +249,14 @@
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
                 $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">M. Type</span></div>');
@@ -234,13 +268,14 @@
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                     variation_content += '</div>';
                     $("#variation_row").append(variation_content);
                 } else {
@@ -278,13 +313,14 @@
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
                 $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Wattage</span></div>');
@@ -296,13 +332,14 @@
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                     variation_content += '</div>';
                     $("#variation_row").append(variation_content);
                 } else {
@@ -340,13 +377,14 @@
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
                 $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Items</span></div>');
@@ -358,13 +396,14 @@
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                     variation_content += '</div>';
                     $("#variation_row").append(variation_content);
                 } else {
@@ -402,13 +441,14 @@
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                 variation_content += '</div>';
                 $("#variation_row").append(variation_content);
                 $("#variation_head").prepend('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Style</span></div>');
@@ -420,13 +460,14 @@
                     variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><input name="color_map" class="input-form" /></div>';
+                    variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
+                    variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
                     variation_content += '</div>';
                     $("#variation_row").append(variation_content);
                 } else {
@@ -456,10 +497,28 @@
                 }
             }
         }
+
         if (variation_menu.includes(1)) {
             $(".div_size").css("display", "inline");
             getAllVariant(1);
+            // $('.bottom_size_map').select2({
+            //     placeholder: 'Select An Option'
+            // });
         }
+        if (variation_menu.includes(2)) {
+            $(".div_color").css("display", "inline");
+            getAllVariant(2);
+            // $('.color_map').select2({
+            //     placeholder: 'Select An Option'
+            // });
+        }
+
+        getAllCondition();
+        // $('.product_condition').select2({
+        //     placeholder: 'Select An Option'
+        // });
+        $('select').children('option:enabled').eq(0).prop('selected',true);
+
     }
 
     $("body").on("click", "#add_style_name", function() {

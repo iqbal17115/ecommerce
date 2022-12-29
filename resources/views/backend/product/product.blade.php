@@ -413,6 +413,7 @@
                                                     <div class="text-center" style="width: 150px; font-size: 12px;" id="gender_header"><span style="width: 100%;">Target Gender</span></div>
                                                     <div class="text-center div_size" style="display: none; width: 150px; font-size: 12px;"><span style="width: 100%;">Bottom Size</span></div>
                                                     <div class="text-center div_size" style="display: none; width: 150px; font-size: 12px;"><span style="width: 100%;">Bottom Size Map</span></div>
+                                                    <div class="text-center div_color" style="display: none; width: 150px; font-size: 12px;"><span style="width: 100%;">Color Map</span></div>
                                                     <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Description</span></div>
                                                     <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Seller SKU</span></div>
                                                     <div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Product Id</span></div>
@@ -524,9 +525,9 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <select class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="New">New</option>
-                                                    <option value="Used">Used</option>
-                                                    <option value="Refurbished">Refurbished</option>
+                                                    @foreach($conditions AS $condition)
+                                                    <option value="{{ $condition->id }}">{{ $condition->title }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -1360,6 +1361,9 @@
         placeholder: 'Select An Option'
     });
     $('#material_id').select2({
+        placeholder: 'Select An Option'
+    });
+    $('.bottom_size_map').select2({
         placeholder: 'Select An Option'
     });
     $('.file-upload').file_upload();

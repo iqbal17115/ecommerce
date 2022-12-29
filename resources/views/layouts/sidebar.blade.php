@@ -55,6 +55,7 @@
                            <li><a href="{{ route('product-variant') }}">Variant</a></li>
                            <li><a href="{{ route('product-unit') }}">Unit</a></li>
                            <li><a href="{{ route('product-material') }}">Material</a></li>
+                           <li><a href="{{ route('condition') }}">Condition</a></li>
                        </ul>
                    </li>
 
@@ -225,6 +226,7 @@
                        <ul class="sub-menu" aria-expanded="false">
                            <li><a href="{{ route('slider') }}">Slider</a></li>
                            <li><a href="{{ route('advertisement') }}">Advertisement</a></li>
+                           <li><a href="{{ route('block') }}">Block</a></li>
                            <li><a href="javascript:void(0);">Product Review</a></li>
                            <li><a href="javascript:void(0);">Web Footer</a></li>
                            <li><a href="javascript:void(0);">Link Page</a></li>
