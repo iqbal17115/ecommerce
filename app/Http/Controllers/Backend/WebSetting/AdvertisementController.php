@@ -11,7 +11,7 @@ class AdvertisementController extends Controller
     public function pagination(Request $request)
     {
         $advertisements = Advertisement::latest()->paginate(10);
-        return view('backend.product.pagination-advertisement', compact('advertisements'))->render();
+        return view('backend.product.pagination.advertisement', compact('advertisements'))->render();
     }
     public function deleteAdvertisement(Request $request)
     {

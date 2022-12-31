@@ -12,7 +12,7 @@ class BlockController extends Controller
     public function pagination(Request $request)
     {
         $blocks = Block::latest()->paginate(10);
-        return view('backend.web-setting.pagination-block', compact('blocks'))->render();
+        return view('backend.web-setting.pagination.block', compact('blocks'))->render();
     }
     public function deleteBlock(Request $request)
     {

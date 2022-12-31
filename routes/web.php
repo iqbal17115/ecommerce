@@ -97,6 +97,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('pagination/variant-pagination-data', [VariantController::class, 'pagination']);
         Route::get('search-variant', [VariantController::class, 'searchVariant'])->name('search.variant');
         Route::get('get-variant/{type}', [VariantController::class, 'getVariant'])->name('get-variant');
+        Route::get('variant/{id}', [VariantController::class, 'getVariantById'])->name('variant');
     });
     // End Start
 

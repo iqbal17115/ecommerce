@@ -34,7 +34,7 @@
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
                             <td>
-                            @if($block->Category)
+                                @if($block->Category)
                                 {{$block->Category->name}}
                                 @endif
                             </td>
@@ -45,7 +45,7 @@
                             </td>
                             <td>{{$block->is_active == 1? 'Active' : 'Inactive'}}</td>
                             <td>
-                                <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal" data-target="#blockModal" data-id="{{$block->id}}" data-category_id="{{$block->category_id}}" data-position="{{$block->position}}" data-style="{{$block->style}}" data-type="{{$block->type}}" data-image="{{$block->image}}" data-is_active="{{$block->is_active}}">
+                                <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal" data-target="#blockModal" data-id="{{$block->id}}" data-category_id="{{$block->category_id}}" data-position="{{$block->position}}" data-style="{{$block->style}}" data-image="{{$block->image}}" data-is_active="{{$block->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger text-light btn-sm delete_block" data-id="{{$block->id}}">

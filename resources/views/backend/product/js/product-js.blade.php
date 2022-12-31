@@ -18,6 +18,23 @@
         });
     }
 
+    function getMaterialTypeVariant() {
+        $.ajax({
+            method: "GET",
+            url: "{{ url('/get-variant/4') }}",
+            success: (result) => {
+                variant = '';
+                Object.entries(result).forEach(([key, value]) => {
+                    variant += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
+                });
+                $('#individual_material_type').append(variant);
+            },
+            error: (error) => {
+                alert('Something went wrong to fetch datas...');
+            }
+        });
+    }
+
     function getAllVariant(type) {
         $.ajax({
             method: "GET",
@@ -58,7 +75,7 @@
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -77,7 +94,7 @@
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -125,7 +142,7 @@
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -144,7 +161,7 @@
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -189,7 +206,7 @@
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -208,7 +225,7 @@
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -253,7 +270,7 @@
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -272,7 +289,7 @@
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -317,7 +334,7 @@
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -336,7 +353,7 @@
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -381,7 +398,7 @@
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -400,7 +417,7 @@
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -445,7 +462,7 @@
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -464,7 +481,7 @@
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">-Select-</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="your_price" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="quantity" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form product_condition"></select></div>';
@@ -517,7 +534,7 @@
         // $('.product_condition').select2({
         //     placeholder: 'Select An Option'
         // });
-        $('select').children('option:enabled').eq(0).prop('selected',true);
+        $('select').children('option:enabled').eq(0).prop('selected', true);
 
     }
 
@@ -526,7 +543,7 @@
 
         if (individual_style_name != "") {
             let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_style_name + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
-            $("#all_color").append(badge);
+            $("#all_style_name").append(badge);
             $("#individual_style_name").val(null);
             variationManage(6, individual_style_name);
         }
@@ -537,40 +554,53 @@
 
         if (individual_number_of_items != "") {
             let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_number_of_items + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
-            $("#all_color").append(badge);
+            $("#all_number_of_items").append(badge);
             $("#individual_number_of_items").val(null);
             variationManage(6, individual_number_of_items);
         }
     });
 
-    $("body").on("click", "#add_wattage", function() {
+    $("body").on("click", "#add_individual_wattage", function() {
         let individual_wattage = $("#individual_wattage").val();
 
         if (individual_wattage != "") {
             let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_wattage + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
-            $("#all_color").append(badge);
+            $("#all_wattage").append(badge);
             $("#individual_wattage").val(null);
             variationManage(5, individual_wattage);
         }
     });
 
-    $("body").on("click", "#add_material_type", function() {
+    $("body").on("click", "#add_individual_material_type", function() {
         let individual_material_type = $("#individual_material_type").val();
+        let individual_material_type_val = '';
+        if (individual_material_type != null) {
+            // Ajax Start
+            $.ajax({
+                method: "GET",
+                url: "{{ url('/variant') }}" + '/' + individual_material_type,
+                success: (result) => {
+                    individual_material_type_val = result['name'];
+                    let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_material_type_val + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
+                    $("#all_material_type").append(badge);
+                    $("#individual_material_type").val(null);
+                    variationManage(4, individual_material_type_val);
+                },
+                error: (error) => {
+                    alert('Something went wrong to fetch datas...');
+                }
+            });
+            // Ajax End
 
-        if (individual_material_type != "") {
-            let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_material_type + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
-            $("#all_color").append(badge);
-            $("#individual_material_type").val(null);
-            variationManage(4, individual_material_type);
         }
     });
 
-    $("body").on("click", "#add_package_qty", function() {
+    $("body").on("click", "#add_individual_package_qty", function() {
         let individual_package_qty = $("#individual_package_qty").val();
 
         if (individual_package_qty != "") {
             let badge = '<button type="button" class="btn btn-secondary position-relative m-2">' + individual_package_qty + '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">X</span></span></button>';
-            $("#all_color").append(badge);
+            $("#all_package_qty").append(badge);
             $("#individual_package_qty").val(null);
             variationManage(3, individual_package_qty);
         }
@@ -628,9 +658,10 @@
             }
         } else if (this.value == 4) {
             if ($(this).prop("checked") == true) {
-                add_material_type = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 14px;">M. Type </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_material_type" placeholder="Material Type" aria-label="Material Type" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_material_type" id="add_individual_material_type">Add</button></div></div></div></div>';
+                add_material_type = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 14px;">M. Type </label></div><div class="col-md-6"><div class="input-group mb-3"><select class="form-control" id="individual_material_type" aria-label="Material Type" aria-describedby="basic-addon2"></select><div class="input-group-append"><button class="btn btn-success add_individual_material_type" id="add_individual_material_type">Add</button></div></div></div></div>';
                 $("#add_material_type").append(add_material_type);
                 $("#all_material_type").after('<div class="col-md-12 remove_material_type_hr"><hr></div>');
+                getMaterialTypeVariant();
             } else if ($(this).prop("checked") == false) {
                 $("#add_material_type").empty();
                 $(".remove_material_type_hr").remove();

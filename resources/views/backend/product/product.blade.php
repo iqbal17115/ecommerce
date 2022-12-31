@@ -169,12 +169,12 @@
                                             <div class="col-md-4">
                                                 <select class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">Gtin</option>
-                                                    <option value="2">Ean</option>
-                                                    <option value="3">Gcid</option>
-                                                    <option value="4">Upc</option>
-                                                    <option value="5">asin</option>
-                                                    <option value="6">ISBN</option>
+                                                    <option value="GTIN">GTIN</option>
+                                                    <option value="EAN">EAN</option>
+                                                    <option value="GCID">GCID</option>
+                                                    <option value="UPC">UPC</option>
+                                                    <option value="ASIN">ASIN</option>
+                                                    <option value="ISBN">ISBN</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -366,41 +366,34 @@
                                             </div>
                                             <div class="col-md-4" id="all_package_qty"></div>
                                             <!-- End Color -->
-                                            <!-- Start Color -->
-                                            <div class="col-md-4"></div>
-                                            <div class="col-md-4" id="add_package_qty">
-
-                                            </div>
-                                            <div class="col-md-4" id="all_package_qty"></div>
-                                            <!-- End Color -->
-                                            <!-- Start Color -->
+                                            <!-- Start Material -->
                                             <div class="col-md-4"></div>
                                             <div class="col-md-4" id="add_material_type">
 
                                             </div>
                                             <div class="col-md-4" id="all_material_type"></div>
-                                            <!-- End Color -->
-                                            <!-- Start Color -->
+                                            <!-- End Material -->
+                                            <!-- Start Wattage -->
                                             <div class="col-md-4"></div>
                                             <div class="col-md-4" id="add_wattage">
 
                                             </div>
                                             <div class="col-md-4" id="all_wattage"></div>
-                                            <!-- End Color -->
-                                            <!-- Start Color -->
+                                            <!-- End Wattage -->
+                                            <!-- Start Number Of Item -->
                                             <div class="col-md-4"></div>
                                             <div class="col-md-4" id="add_number_of_items">
 
                                             </div>
                                             <div class="col-md-4" id="all_number_of_items"></div>
-                                            <!-- End Color -->
-                                            <!-- Start Color -->
+                                            <!-- End Number Of Item -->
+                                            <!-- Start Style Name -->
                                             <div class="col-md-4"></div>
                                             <div class="col-md-4" id="add_style_name">
 
                                             </div>
                                             <div class="col-md-4" id="all_style_name"></div>
-                                            <!-- End Color -->
+                                            <!-- End Style Name -->
                                         </div>
                                     </div>
                                     <!-- End Content -->
@@ -561,10 +554,9 @@
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <select class="form-select">
-                                                    <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <option value="">Select Option</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
                                                 </select>
                                             </div>
                                             <!-- End -->

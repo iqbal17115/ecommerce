@@ -139,22 +139,20 @@
 
         let id = $(this).data('id');
         let category_id = $(this).data('category_id');
-        alert(category_id);
         let position = $(this).data('position');
         let style = $(this).data('style');
         let is_active = $(this).data('is_active');
-        $('#category_id').val(category_id);
         $('.category_id').val(category_id).trigger("change");
+        $('#category_id').val(category_id);
         $('#style').val(style);
-        $('#position').val(position);
-        $('#is_active').val(is_active);
-        $('#cu_id').val(id);
-
         if ($('#image').length) {
             let image = $(this).data('image');
             $('#imgPreview').show();
             $('#imgPreview').attr("src", 'storage/' + image);
         }
+        $('#position').val(position);
+        $('#is_active').val(is_active);
+        $('#cu_id').val(id);
 
     });
 </script>

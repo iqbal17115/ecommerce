@@ -12,7 +12,7 @@ class SliderController extends Controller
 {
     public function pagination(Request $request) {
         $sliders = Slider::latest()->paginate(10);
-        return view('backend.product.pagination-slider', compact('sliders'))->render();
+        return view('backend.product.pagination.slider', compact('sliders'))->render();
     }
     public function deleteSlider(Request $request) {
         $slider = Slider::find($request->id)->delete();

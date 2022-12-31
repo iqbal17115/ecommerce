@@ -9,12 +9,19 @@ use Illuminate\Http\Request;
 
 class VariantController extends Controller
 {
+    public function getVariantById($id) {
+        $variant = Variant::find($id);
+
+        return response()->json($variant);
+    }
     public function getVariant($type)
     {
         if ($type == 1) {
             $variants = Variant::whereType('Size')->orderBy('id', 'desc')->get();
-        } else {
+        } else if($type == 2) {
             $variants = Variant::whereType('Color')->orderBy('id', 'desc')->get();
+        } else if ($type == 4) {
+            $variants = Variant::whereType('Material_Type')->orderBy('id', 'desc')->get();
         }
 
         return response()->json($variants);
