@@ -1,4 +1,50 @@
 <script type="text/javascript">
+     // Start Product Add
+     $(document).on('submit', '#addVitalInfo', function(e) {
+            e.preventDefault();
+            var form = this;
+            console.log(form);
+            // $.ajax({
+            //     url: "{{route('add.category')}}",
+            //     method: 'post',
+            //     data: new FormData(form),
+            //     enctype: 'multipart/form-data',
+            //     processData: false,
+            //     dataType: 'json',
+            //     contentType: false,
+            //     success: function(data) {
+            //         if (data.status == 'success') {
+            //             Command: toastr["success"]("Category Added",
+            //                 "Success")
+
+            //             toastr.options = {
+            //                 "closeButton": true,
+            //                 "debug": false,
+            //                 "newestOnTop": false,
+            //                 "progressBar": true,
+            //                 "positionClass": "toast-top-right",
+            //                 "preventDuplicates": false,
+            //                 "onclick": null,
+            //                 "showDuration": "300",
+            //                 "hideDuration": "1000",
+            //                 "timeOut": "5000",
+            //                 "extendedTimeOut": "1000",
+            //                 "showEasing": "swing",
+            //                 "hideEasing": "linear",
+            //                 "showMethod": "fadeIn",
+            //                 "hideMethod": "fadeOut"
+            //             }
+            //         }
+            //     },
+            //     error: function(err) {
+            //         let error = err.responseJSON;
+            //         $.each(error.errors, function(key, value) {
+            //             $('.err_' + key).html(value);
+            //         });
+            //     }
+            // });
+        });
+        // End Product Add
     function getAllCondition() {
         $.ajax({
             method: "GET",
