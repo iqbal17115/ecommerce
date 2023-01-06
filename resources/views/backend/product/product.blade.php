@@ -109,7 +109,7 @@
                         <!-- justify-content-center -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#vital_info" role="tab">
+                                <a class="nav-link active" data-toggle="tab" href="#addVitalInfo" role="tab">
                                     <i class="now-ui-icons objects_umbrella-13"></i> Vital Info
                                 </a>
                             </li>
@@ -153,10 +153,11 @@
                     <div class="card-body">
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane active" id="vital_info" role="tabpanel">
-                                <form action="" method="post" id="addVitalInfo" enctype="multipart/form-data">
+                            <div class="tab-pane active" id="addVitalInfo" role="tabpanel">
+                                <form method="post" id="add_vital_info">
                                     @csrf
                                     <div class="row">
+                                        <input type="hidden" name="vital_info_id" id="vital_info_id" value="-1" />
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -166,10 +167,10 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input class="form-control" placeholder="Enter product Id" name="" id="" />
+                                                    <input name="code" id="code" class="form-control" placeholder="Enter product Id" />
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-select">
+                                                    <select name="type" id="type" class="form-select">
                                                         <option value="">Select Option</option>
                                                         <option value="GTIN">GTIN</option>
                                                         <option value="EAN">EAN</option>
@@ -185,7 +186,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input class="form-control" placeholder="Enter product Name" name="" id="" />
+                                                    <input name="name" id="name" class="form-control" placeholder="Enter product Name" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -193,7 +194,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" id="category_id" onchange="variantByCategory(this)">
+                                                    <select class="form-select" id="category_id" name="category_id" onchange="variantByCategory(this)">
                                                         <option value=""></option>
                                                         @foreach($categories as $category)
                                                         <option value="{{$category->id}}">
@@ -245,7 +246,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" id="brand_id">
+                                                    <select name="brand_id" id="brand_id" class="form-select">
                                                         <option value=""></option>
                                                         @foreach($brands as $brand)
                                                         <option value="{{$brand->id}}">{{$brand->name}}</option>
@@ -258,7 +259,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control" placeholder="Enter Model Number" aria-label="Username" aria-describedby="model_number">
+                                                    <input name="model_number" id="model_number" type="text" class="form-control" placeholder="Enter Model Number" aria-label="Username" aria-describedby="model_number">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -266,7 +267,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input class="form-control" placeholder="Enter Outer Material" name="" id="" />
+                                                    <input name="outer_material" id="outer_material" class="form-control" placeholder="Enter Outer Material" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -274,10 +275,8 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select">
-                                                        @foreach($brands as $brand)
-                                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                                        @endforeach
+                                                    <select name="region_publication_id" id="region_publication_id" class="form-select">
+                                                        <option value="1">Bangladesh</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
@@ -286,7 +285,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input class="form-control" placeholder="Enter Model Name" name="" id="" />
+                                                    <input name="model_name" id="model_name" class="form-control" placeholder="Enter Model Name" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -294,7 +293,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" id="material_id">
+                                                    <select name="material_type_id" id="material_type_id" class="form-select">
                                                         <option value=""></option>
                                                         @foreach($materials as $material)
                                                         <option value="{{$material->id}}">{{$material->name}}</option>
@@ -311,14 +310,14 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="product_booking_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="product_booking_date">
+                                                        <input name="booking_date" id="booking_date" type="date" class="form-control" aria-label="Username" aria-describedby="product_booking_date">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-12 mt-md-3">
                                                     <button class="float-right btn btn-success btn-sm ml-2">Save and
                                                         finish</button>
-                                                    <button class="float-right btn btn-warning btn-sm">Save as
+                                                    <button type="submit" class="float-right btn btn-warning btn-sm">Save as
                                                         draft</button>
                                                 </div>
                                                 <!-- End -->
@@ -456,9 +455,10 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="offer" role="tabpanel">
-                                <form action="" method="post" id="addVitalInfo" enctype="multipart/form-data">
+                                <form method="post" id="add_product_detail_info">
                                     @csrf
                                     <div class="row">
+                                        <input type="hidden" name="product_offer_id" id="product_offer_id"/>
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -468,7 +468,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input class="form-control" placeholder="Enter Seller SKU" name="" id="" />
+                                                    <input name="seller_sku" id="seller_sku" class="form-control" placeholder="Enter Seller SKU" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -476,7 +476,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input class="form-control" placeholder="Enter Product Tax Code" name="" id="" />
+                                                    <input name="tax_code" id="tax_code" class="form-control" placeholder="Enter Product Tax Code" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -488,7 +488,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="your_price">AED</span>
                                                         </div>
-                                                        <input type="text" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="your_price">
+                                                        <input type="text" name="your_price" id="your_price" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="your_price">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -501,7 +501,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="sale_price">AED</span>
                                                         </div>
-                                                        <input type="text" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="sale_price">
+                                                        <input type="text" name="sale_price" id="sale_price" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="sale_price">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -512,9 +512,9 @@
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="sale_start_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                            <span class="input-group-text" id="sale_start_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="sale_start_date">
+                                                        <input type="date" name="sale_start_date" id="sale_start_date" class="form-control" aria-describedby="sale_start_date1">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -525,9 +525,9 @@
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="sale_end_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                            <span class="input-group-text" id="sale_end_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="sale_end_date">
+                                                        <input type="date" name="sale_end_date" id="sale_end_date" class="form-control" aria-describedby="sale_end_date1">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -540,7 +540,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="retail_price_inclusive_vat">AED</span>
                                                         </div>
-                                                        <input type="text" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="retail_price_inclusive_vat">
+                                                        <input type="text" name="retail_price" id="retail_price" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="retail_price_inclusive_vat">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -549,7 +549,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" id="product_condition_id" style="width: 100%;">
+                                                    <select class="form-select" name="condition_id" id="condition_id" style="width: 100%;">
                                                         <option value="">Select Option</option>
                                                         @foreach($conditions AS $condition)
                                                         <option value="{{ $condition->id }}">{{ $condition->title }}
@@ -571,7 +571,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input class="form-control" placeholder="Enter Max Order Qty" name="" id="" />
+                                                    <input name="max_order_qty" id="max_order_qty" class="form-control" placeholder="Enter Max Order Qty" name="" id="" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -587,7 +587,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select">
+                                                    <select name="offering_gift_message" id="offering_gift_message" class="form-select">
                                                         <option value="">Select Option</option>
                                                         <option value="1">Yes</option>
                                                         <option value="0">No</option>
@@ -600,7 +600,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select">
+                                                    <select name="gift_wrap_available" id="gift_wrap_available" class="form-select">
                                                         <option value="">Select Option</option>
                                                         <option value="1">Yes</option>
                                                         <option value="0">No</option>
@@ -614,9 +614,9 @@
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="start_selling_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                            <span class="input-group-text" id="start_selling_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="start_selling_date">
+                                                        <input type="date" name="start_selling_date" id="start_selling_date" class="form-control" aria-describedby="start_selling_date1">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -627,9 +627,9 @@
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="restock_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                            <span class="input-group-text" id="restock_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="restock_date">
+                                                        <input type="date" name="restock_date" id="restock_date" class="form-control" aria-describedby="restock_date1">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -652,7 +652,7 @@
                                 <!-- Start -->
                                 <div class="col-md-10">
                                     <!-- Start Content -->
-                                    <form action="" method="post" id="addVitalInfo" enctype="multipart/form-data">
+                                    <form action="" method="post" id="addCompliance" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-4 mt-md-3">
@@ -897,48 +897,49 @@
                                 <!-- End -->
                             </div>
                             <div class="tab-pane" id="images" role="tabpanel">
-                                <form action="" method="post" id="addVitalInfo" enctype="multipart/form-data">
+                                <form action="" method="post" id="add_product_image_info" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
+                                    <input type="hidden" name="product_image_id" id="product_image_id"/>
                                         <div class="col-md-2">
                                             <div class="drop-zone">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="myFile" class="drop-zone__input">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
                                             <div class="drop-zone">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="myFile" class="drop-zone__input">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
                                             <div class="drop-zone">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="myFile" class="drop-zone__input">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
                                             <div class="drop-zone">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="myFile" class="drop-zone__input">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
                                             <div class="drop-zone">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="myFile" class="drop-zone__input">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
                                             <div class="drop-zone">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="myFile" class="drop-zone__input">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
@@ -953,7 +954,7 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="description" role="tabpanel">
-                                <form action="" method="post" id="addVitalInfo" enctype="multipart/form-data">
+                                <form action="" method="post" id="addDescription" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <!-- Start -->
@@ -989,7 +990,7 @@
                                     <!-- Start -->
                                     <div class="col-md-10">
                                         <!-- Start Content -->
-                                        <form action="" method="post" id="addVitalInfo" enctype="multipart/form-data">
+                                        <form action="" method="post" id="addKeyfeature" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-4 mt-md-3">
@@ -1031,7 +1032,7 @@
                             </div>
                             <!-- End -->
                             <div class="tab-pane" id="more_details" role="tabpanel">
-                                <form action="" method="post" id="addVitalInfo" enctype="multipart/form-data">
+                                <form action="" method="post" id="addMoreDetail" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <!-- Start -->
@@ -1455,4 +1456,5 @@
     $('.file-upload').file_upload();
 </script>
 @include('backend.product.js.product-js')
+{!! Toastr::message() !!}
 @endsection

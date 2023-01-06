@@ -146,6 +146,9 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::group([], function () {
         Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
         Route::get('get-category/{id}', [ProductController::class, 'getCategory'])->name('get-category');
+        Route::post('add-vital_info', [ProductController::class, 'addVitalInfo'])->name('add.vital_info');
+        Route::post('add-add_product_detail_info', [ProductController::class, 'addProductDetailInfo'])->name('add.add_product_detail_info');
+        Route::post('add-add_product_image_info', [ProductController::class, 'addProductImageInfo'])->name('add.add_product_image_info');
     });
     // End Product
 

@@ -1,50 +1,128 @@
 <script type="text/javascript">
-     // Start Product Add
-     $(document).on('submit', '#addVitalInfo', function(e) {
-            e.preventDefault();
-            var form = this;
-            console.log(form);
-            // $.ajax({
-            //     url: "{{route('add.category')}}",
-            //     method: 'post',
-            //     data: new FormData(form),
-            //     enctype: 'multipart/form-data',
-            //     processData: false,
-            //     dataType: 'json',
-            //     contentType: false,
-            //     success: function(data) {
-            //         if (data.status == 'success') {
-            //             Command: toastr["success"]("Category Added",
-            //                 "Success")
-
-            //             toastr.options = {
-            //                 "closeButton": true,
-            //                 "debug": false,
-            //                 "newestOnTop": false,
-            //                 "progressBar": true,
-            //                 "positionClass": "toast-top-right",
-            //                 "preventDuplicates": false,
-            //                 "onclick": null,
-            //                 "showDuration": "300",
-            //                 "hideDuration": "1000",
-            //                 "timeOut": "5000",
-            //                 "extendedTimeOut": "1000",
-            //                 "showEasing": "swing",
-            //                 "hideEasing": "linear",
-            //                 "showMethod": "fadeIn",
-            //                 "hideMethod": "fadeOut"
-            //             }
-            //         }
-            //     },
-            //     error: function(err) {
-            //         let error = err.responseJSON;
-            //         $.each(error.errors, function(key, value) {
-            //             $('.err_' + key).html(value);
-            //         });
-            //     }
-            // });
+    // Start Product Image Add
+    $(document).on('submit', '#add_product_image_info', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{route('add.add_product_image_info')}}",
+            method: 'post',
+            data: new FormData(form),
+            enctype: 'multipart/form-data',
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 201) {
+                    Command: toastr["success"]("Product Image Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    // $("#product_id").val(data.product_id);
+                    // $("#product_offer_id").val(data.product_id);
+                }
+            },
         });
-        // End Product Add
+    });
+    // End Product Image Add
+    // Start Product Details Add
+    $(document).on('submit', '#add_product_detail_info', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{route('add.add_product_detail_info')}}",
+            method: 'post',
+            data: new FormData(form),
+            enctype: 'multipart/form-data',
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 201) {
+                    Command: toastr["success"]("Product Detail Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    // $("#product_id").val(data.product_id);
+                    // $("#product_offer_id").val(data.product_id);
+                }
+            },
+        });
+    });
+    // End Product Details Add
+    // Start Product Vital Info Add
+    $(document).on('submit', '#add_vital_info', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{route('add.vital_info')}}",
+            method: 'post',
+            data: new FormData(form),
+            enctype: 'multipart/form-data',
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 201) {
+                    Command: toastr["success"]("Vital Info Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                    $("#vital_info_id").val(data.product_id);
+                    $("#product_offer_id").val(data.product_id);
+                    $("#product_image_id").val(data.product_id);
+                }
+            },
+            error: (error) => {
+                alert('Something went wrong to fetch datas...');
+            }
+        });
+    });
+    // End Product Vital Info Add
     function getAllCondition() {
         $.ajax({
             method: "GET",
@@ -677,7 +755,7 @@
     $("body").on("click", ".variation_specify", function() {
         if (this.value == 1) {
             if ($(this).prop("checked") == true) {
-                add_size = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Size </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_size" placeholder="Size" aria-label="Size" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_size" id="add_individual_size">Add</button></div></div></div></div>';
+                add_size = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Size </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_size" placeholder="Size" aria-label="Size" aria-describedby="basic-addon2"><div class="input-group-append"><button type="button" class="btn btn-success add_individual_size" id="add_individual_size">Add</button></div></div></div></div>';
                 $("#add_size").append(add_size);
                 $("#all_size").after('<div class="col-md-12 remove_sizer_hr"><hr></div>');
             } else if ($(this).prop("checked") == false) {
@@ -686,7 +764,7 @@
             }
         } else if (this.value == 2) {
             if ($(this).prop("checked") == true) {
-                add_color = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Color </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_color" placeholder="Color" aria-label="Size" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_color" id="add_individual_color">Add</button></div></div></div></div>';
+                add_color = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Color </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_color" placeholder="Color" aria-label="Size" aria-describedby="basic-addon2"><div class="input-group-append"><button type="button" class="btn btn-success add_individual_color" id="add_individual_color">Add</button></div></div></div></div>';
                 $("#add_color").append(add_color);
                 $("#all_color").after('<div class="col-md-12 remove_color_hr"><hr></div>');
             } else if ($(this).prop("checked") == false) {
@@ -695,7 +773,7 @@
             }
         } else if (this.value == 3) {
             if ($(this).prop("checked") == true) {
-                add_package_qty = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 14px;">P. Qty </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_package_qty" placeholder="Package Qty" aria-label="Package Qty" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_package_qty" id="add_individual_package_qty">Add</button></div></div></div></div>';
+                add_package_qty = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 14px;">P. Qty </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_package_qty" placeholder="Package Qty" aria-label="Package Qty" aria-describedby="basic-addon2"><div class="input-group-append"><button type="button" class="btn btn-success add_individual_package_qty" id="add_individual_package_qty">Add</button></div></div></div></div>';
                 $("#add_package_qty").append(add_package_qty);
                 $("#all_package_qty").after('<div class="col-md-12 remove_package_qty_hr"><hr></div>');
             } else if ($(this).prop("checked") == false) {
@@ -704,7 +782,7 @@
             }
         } else if (this.value == 4) {
             if ($(this).prop("checked") == true) {
-                add_material_type = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 14px;">M. Type </label></div><div class="col-md-6"><div class="input-group mb-3"><select class="form-control" id="individual_material_type" aria-label="Material Type" aria-describedby="basic-addon2"></select><div class="input-group-append"><button class="btn btn-success add_individual_material_type" id="add_individual_material_type">Add</button></div></div></div></div>';
+                add_material_type = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 14px;">M. Type </label></div><div class="col-md-6"><div class="input-group mb-3"><select class="form-control" id="individual_material_type" aria-label="Material Type" aria-describedby="basic-addon2"></select><div class="input-group-append"><button type="button" class="btn btn-success add_individual_material_type" id="add_individual_material_type">Add</button></div></div></div></div>';
                 $("#add_material_type").append(add_material_type);
                 $("#all_material_type").after('<div class="col-md-12 remove_material_type_hr"><hr></div>');
                 getMaterialTypeVariant();
@@ -714,7 +792,7 @@
             }
         } else if (this.value == 5) {
             if ($(this).prop("checked") == true) {
-                add_wattage = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Wattage </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_wattage" placeholder="Wattage" aria-label="Wattage" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_wattage" id="add_individual_wattage">Add</button></div></div></div></div>';
+                add_wattage = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Wattage </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_wattage" placeholder="Wattage" aria-label="Wattage" aria-describedby="basic-addon2"><div class="input-group-append"><button type="button" class="btn btn-success add_individual_wattage" id="add_individual_wattage">Add</button></div></div></div></div>';
                 $("#add_wattage").append(add_wattage);
                 $("#all_wattage").after('<div class="col-md-12 remove_wattage_hr"><hr></div>');
             } else if ($(this).prop("checked") == false) {
@@ -723,7 +801,7 @@
             }
         } else if (this.value == 6) {
             if ($(this).prop("checked") == true) {
-                add_number_of_items = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Number Of Items </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_number_of_items" placeholder="Number Of Items" aria-label="Number Of Items" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_number_of_items" id="add_individual_number_of_items">Add</button></div></div></div></div>';
+                add_number_of_items = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Number Of Items </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_number_of_items" placeholder="Number Of Items" aria-label="Number Of Items" aria-describedby="basic-addon2"><div class="input-group-append"><button type="button" class="btn btn-success add_individual_number_of_items" id="add_individual_number_of_items">Add</button></div></div></div></div>';
                 $("#add_number_of_items").append(add_number_of_items);
                 $("#all_number_of_items").after('<div class="col-md-12 remove_number_of_items_hr"><hr></div>');
             } else if ($(this).prop("checked") == false) {
@@ -732,7 +810,7 @@
             }
         } else if (this.value == 7) {
             if ($(this).prop("checked") == true) {
-                add_style_name = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Style Name </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_style_name" placeholder="Style Name" aria-label="Style Name" aria-describedby="basic-addon2"><div class="input-group-append"><button class="btn btn-success add_individual_style_name" id="add_individual_style_name">Add</button></div></div></div></div>';
+                add_style_name = '<div class="row mt-2"><div class="col-md-1"><label class="col-form-label" style="font-size: 18px;">Style Name </label></div><div class="col-md-6"><div class="input-group mb-3"><input type="text" class="form-control" id="individual_style_name" placeholder="Style Name" aria-label="Style Name" aria-describedby="basic-addon2"><div class="input-group-append"><button  class="btn btn-success add_individual_style_name" id="add_individual_style_name">Add</button></div></div></div></div>';
                 $("#add_style_name").append(add_style_name);
                 $("#all_style_name").after('<div class="col-md-12 remove_style_name_hr"><hr></div>');
             } else if ($(this).prop("checked") == false) {

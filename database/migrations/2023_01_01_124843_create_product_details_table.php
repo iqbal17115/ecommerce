@@ -15,6 +15,18 @@ class CreateProductDetailsTable extends Migration
     {
         Schema::create('product_details', function (Blueprint $table) {
             $table->id();
+            $table->string('outer_material', 100)->nullable();
+            $table->string('seller_sku', 100)->nullable();
+            $table->string('tax_code', 40)->nullable();
+            $table->date('restock_date')->nullable();
+            $table->text('description')->nullable();
+            $table->text('condition_note')->nullable();
+            $table->enum('target_gender', ['Male', 'Female', 'Unisex'])->nullable();
+            $table->tinyInteger('age_range')->nullable();
+            $table->foreignId('product_id')->nullable();
+            $table->foreignId('material_type_id')->nullable();
+            $table->foreignId('condition_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
