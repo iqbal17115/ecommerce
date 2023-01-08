@@ -458,7 +458,7 @@
                                 <form method="post" id="add_product_detail_info">
                                     @csrf
                                     <div class="row">
-                                        <input type="hidden" name="product_offer_id" id="product_offer_id"/>
+                                        <input type="hidden" name="product_offer_id" id="product_offer_id" />
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -652,18 +652,48 @@
                                 <!-- Start -->
                                 <div class="col-md-10">
                                     <!-- Start Content -->
-                                    <form action="" method="post" id="addCompliance" enctype="multipart/form-data">
+                                    <form method="post" id="add_product_compliance">
                                         @csrf
                                         <div class="row">
+                                        <input type="hidden" name="product_compliance_id" id="product_compliance_id"/>
                                             <div class="col-md-4 mt-md-3">
                                                 <label class="col-form-label float-md-right" style="font-size: 14px;">Battery Cell Type</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select">
+                                                <select name="battery_cell_type" id="battery_cell_type" class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="Polymer Lithium Ion">Polymer Lithium Ion</option>
+                                                    <option value="Lithium Ion">Lithium Ion</option>
+                                                    <option value="Alkaline">Alkaline</option>
+                                                    <option value="Lithium Manganese Dioxide">Lithium Manganese Dioxide</option>
+                                                    <option value="Manganese">Manganese</option>
+                                                    <option value="Sealed Lead Acid">Sealed Lead Acid</option>
+                                                    <option value="Lithium Polymer">Lithium Polymer</option>
+                                                    <option value="Nicad">Nicad</option>
+                                                    <option value="Lithium Metal">Lithium Metal</option>
+                                                    <option value="Nimh">Nimh</option>
+                                                    <option value="Lead Calcium">Lead Calcium</option>
+                                                    <option value="Aluminium Oxygen">Aluminium Oxygen</option>
+                                                    <option value="Zinc">Zinc</option>
+                                                    <option value="Lead Acid">Lead Acid</option>
+                                                    <option value="Silver Zinc">Silver Zinc</option>
+                                                    <option value="Zinc Chloride">Zinc Chloride</option>
+                                                    <option value="Lithium Cobalt">Lithium Cobalt</option>
+                                                    <option value="Lithium Phosphate">Lithium Phosphate</option>
+                                                    <option value="Lead Acid Agm">Lead Acid Agm</option>
+                                                    <option value="Lithium Thionyl Chloride">Lithium Thionyl Chloride</option>
+                                                    <option value="Lithium">Lithium</option>
+                                                    <option value="Lithium Nickel Cobalt Aluminum">Lithium Nickel Cobalt Aluminum</option>
+                                                    <option value="Lithium Nickel Manganese Cobalt">Lithium Nickel Manganese Cobalt</option>
+                                                    <option value="Mercury Oxide">Mercury Oxide</option>
+                                                    <option value="Nickel Iron">Nickel Iron</option>
+                                                    <option value="Lithium Air">Lithium Air</option>
+                                                    <option value="Nickel Oxyhydroxide">Nickel Oxyhydroxide</option>
+                                                    <option value="Zinc Carbon">Zinc Carbon</option>
+                                                    <option value="Nickel Zinc">Nickel Zinc</option>
+                                                    <option value="Lithium Titanate">Lithium Titanate</option>
+                                                    <option value="Silver Calcium">Silver Calcium</option>
+                                                    <option value="Zinc Air">Zinc Air</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -671,11 +701,25 @@
                                                 <label class="col-form-label float-md-right" style="font-size: 14px;">Battery Type</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select">
+                                                <select name="battery_type" id="battery_type" class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="Aa">Aa</option>
+                                                    <option value="Aaa">Aaa</option>
+                                                    <option value="Lithium Ion">Lithium Ion</option>
+                                                    <option value="A">A</option>
+                                                    <option value="Cr2">Cr2</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                    <option value="Cr5">Cr5</option>
+                                                    <option value="Aaaa">Aaaa</option>
+                                                    <option value="P76">P76</option>
+                                                    <option value="Product Specific">Product Specific</option>
+                                                    <option value="Lithium Metal">Lithium Metal</option>
+                                                    <option value="Cr123A">Cr123A</option>
+                                                    <option value="12V">12V</option>
+                                                    <option value="9V">9V</option>
+                                                    <option value="CR2032">CR2032</option>
+                                                    <option value="CR2430">CR2430</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -684,7 +728,7 @@
                                                     of Batteries Required</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="Number of Batteries Required" name="" id="" />
+                                                <input name="number_of_battery_require" id="number_of_battery_require" class="form-control" placeholder="Number of Batteries Required"/>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -693,14 +737,20 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input class="form-control" placeholder="1, 2, 3" name="" id="" />
+                                                        <input name="lithium_battery_energy_content" id="lithium_battery_energy_content" class="form-control" placeholder="1, 2, 3"/>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <select class="form-select">
+                                                        <select name="lithium_battery_energy_content_unit" id="lithium_battery_energy_content_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option value="Kilowatt Hours">Kilowatt Hours</option>
+                                                            <option value="Joules">Joules</option>
+                                                            <option value="Cubic Feet">Cubic Feet</option>
+                                                            <option value="Watt Hours">Watt Hours</option>
+                                                            <option value="Milliampere Hour (mAh)">Milliampere Hour (mAh)</option>
+                                                            <option value="Cubic Meters">Cubic Meters</option>
+                                                            <option value="Milliamp Hours (mAh)">Milliamp Hours (mAh)</option>
+                                                            <option value="Milliampere Second (mAs)">Milliampere Second (mAs)</option>
+                                                            <option value="British Thermal Units (BTUs)">British Thermal Units (BTUs)</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -710,11 +760,11 @@
                                                 <label class="col-form-label float-md-right" style="font-size: 14px;">Lithium Battery Packaging</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select">
+                                                <select name="lithium_battery_packaging" id="lithium_battery_packaging" class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="1">Batteries Packed With Equipment</option>
+                                                    <option value="2">Batteries Contained In Equipment</option>
+                                                    <option value="3">Batteries Only</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -722,7 +772,7 @@
                                                 <label class="col-form-label float-md-right" style="font-size: 14px;">Batteries are Included</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select">
+                                                <select name="battery_include" id="battery_include" class="form-select">
                                                     <option value="">Select Option</option>
                                                     <option value="1">Yes</option>
                                                     <option value="0">No</option>
@@ -734,7 +784,7 @@
                                                     Batteries Required</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <select class="form-select">
+                                                <select name="battery_require" id="battery_require" class="form-select">
                                                     <option value="">Select Option</option>
                                                     <option value="1">Yes</option>
                                                     <option value="0">No</option>
@@ -747,14 +797,18 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input class="form-control" placeholder="150" name="" id="" />
+                                                        <input name="battery_weight" id="battery_weight" class="form-control" placeholder="150"/>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <select class="form-select">
+                                                        <select name="battery_weight_unit" id="battery_weight_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option value="Pounds">Pounds</option>
+                                                            <option value="Kilograms">Kilograms</option>
+                                                            <option value="Grams">Grams</option>
+                                                            <option value="Hundredths Pounds">Hundredths Pounds</option>
+                                                            <option value="Milligrams">Milligrams</option>
+                                                            <option value="Tons">Tons</option>
+                                                            <option value="Ounces">Ounces</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -765,7 +819,7 @@
                                                     of Lithium Metal Cells</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="1, 2, 3" name="" id="" />
+                                                <input name="number_of_lithium_metal_cell" id="number_of_lithium_metal_cell" class="form-control" placeholder="1, 2, 3"/>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -773,7 +827,7 @@
                                                     of Lithium-ion Cells</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="1, 2, 3" name="" id="" />
+                                                <input name="number_of_lithium_ion_cell" id="number_of_lithium_ion_cell" class="form-control" placeholder="1, 2, 3"/>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -782,14 +836,18 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input class="form-control" placeholder="0.9" name="" id="" />
+                                                        <input name="lithium_battery_weight" id="lithium_battery_weight" class="form-control" placeholder="0.9"/>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <select class="form-select">
+                                                        <select name="lithium_battery_weight_unit" id="lithium_battery_weight_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option value="Pounds">Pounds</option>
+                                                            <option value="Kilograms">Kilograms</option>
+                                                            <option value="Grams">Grams</option>
+                                                            <option value="Hundredths Pounds">Hundredths Pounds</option>
+                                                            <option value="Milligrams">Milligrams</option>
+                                                            <option value="Tons">Tons</option>
+                                                            <option value="Ounces">Ounces</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -800,7 +858,7 @@
                                                     United Nations Regulatory Id</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="UN1950" name="" id="" />
+                                                <input name="regulatory_id" id="regulatory_id" class="form-control" placeholder="UN1950"/>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -808,7 +866,7 @@
                                                     Data Sheet URL</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="https://www.facebook.com/" name="" id="" />
+                                                <input name="safety_data_sheet_url" id="safety_data_sheet_url" class="form-control" placeholder="https://www.facebook.com/"/>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -817,14 +875,29 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input class="form-control" placeholder="34.78" name="" id="" />
+                                                        <input name="volume" id="volume" class="form-control" placeholder="34.78"/>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <select class="form-select">
+                                                        <select name="volume_unit" id="volume_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option value="Cups">Cups</option>
+                                                            <option value="Microliters">Microliters</option>
+                                                            <option value="Cubic Feet">Cubic Feet</option>
+                                                            <option value="Centiliters">Centiliters</option>
+                                                            <option value="Gallons">Gallons</option>
+                                                            <option value="Quarts">Quarts</option>
+                                                            <option value="Nanoliters">Nanoliters</option>
+                                                            <option value="Liters">Liters</option>
+                                                            <option value="Picoliters">Picoliters</option>
+                                                            <option value="Fluid Ounces">Fluid Ounces</option>
+                                                            <option value="Cubic Meters">Cubic Meters</option>
+                                                            <option value="Pints">Pints</option>
+                                                            <option value="Cubic Yards">Cubic Yards</option>
+                                                            <option value="Cubic Inches">Cubic Inches</option>
+                                                            <option value="Imperial Gallons">Imperial Gallons</option>
+                                                            <option value="Milliliters">Milliliters</option>
+                                                            <option value="Cubic Centimeters">Cubic Centimeters</option>
+                                                            <option value="Deciliters">Deciliters</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -835,7 +908,7 @@
                                                     Point</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input class="form-control" placeholder="180" name="" id="" />
+                                                <input name="flash_point" id="flash_point" class="form-control" placeholder="180"/>
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -845,14 +918,18 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input class="form-control" placeholder="2.33, 20.75, 10000.00" name="" id="" />
+                                                        <input name="item_weight" id="item_weight" class="form-control" placeholder="2.33, 20.75, 10000.00"/>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <select class="form-select">
+                                                        <select name="item_weight_unit" id="item_weight_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option value="Pounds">Pounds</option>
+                                                            <option value="Kilograms">Kilograms</option>
+                                                            <option value="Grams">Grams</option>
+                                                            <option value="Hundredths Pounds">Hundredths Pounds</option>
+                                                            <option value="Milligrams">Milligrams</option>
+                                                            <option value="Tons">Tons</option>
+                                                            <option value="Ounces">Ounces</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -900,7 +977,7 @@
                                 <form action="" method="post" id="add_product_image_info" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
-                                    <input type="hidden" name="product_image_id" id="product_image_id"/>
+                                        <input type="hidden" name="product_image_id" id="product_image_id" />
                                         <div class="col-md-2">
                                             <div class="drop-zone">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
@@ -954,9 +1031,10 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="description" role="tabpanel">
-                                <form action="" method="post" id="addDescription" enctype="multipart/form-data">
+                                <form method="post" id="add_product_description_info">
                                     @csrf
                                     <div class="row">
+                                        <input type="hidden" name="product_description_id" id="product_description_id" />
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -990,9 +1068,10 @@
                                     <!-- Start -->
                                     <div class="col-md-10">
                                         <!-- Start Content -->
-                                        <form action="" method="post" id="addKeyfeature" enctype="multipart/form-data">
+                                        <form method="post" id="add_product_keyword">
                                             @csrf
                                             <div class="row">
+                                                <input type="hidden" name="product_keyword_id" id="product_keyword_id" />
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right" style="font-size: 14px;">Key Product Features</label>
                                                     <span class="text-danger float-md-right">*</span>
@@ -1005,7 +1084,7 @@
                                                                     <i class="mdi mdi-delete"></i>
                                                                 </button>
                                                             </div>
-                                                            <input type="text" class="form-control m-input">
+                                                            <input type="text" name="keyword[]" id="keyword" class="form-control m-input">
                                                         </div>
                                                     </div>
 
@@ -1032,9 +1111,10 @@
                             </div>
                             <!-- End -->
                             <div class="tab-pane" id="more_details" role="tabpanel">
-                                <form action="" method="post" id="addMoreDetail" enctype="multipart/form-data">
+                                <form method="post" id="add_product_more_detail">
                                     @csrf
                                     <div class="row">
+                                    <input type="hidden" name="product_more_detail_id" id="product_more_detail_id"/>
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -1044,7 +1124,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="zipper">
+                                                    <input type="text" name="closure_type" id="closure_type" class="form-control m-input" placeholder="zipper">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1052,7 +1132,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="Philips">
+                                                    <input type="text" name="manufacturer" id="manufacturer" class="form-control m-input" placeholder="Philips">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1060,7 +1140,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="SB-122">
+                                                    <input type="text" name="manufacturer_part_number" id="manufacturer_part_number" class="form-control m-input" placeholder="SB-122">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1068,7 +1148,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="1">
+                                                    <input type="text" name="number_of_item" id="number_of_item" class="form-control m-input" placeholder="1">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1080,7 +1160,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="release_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" class="form-control" aria-label="Username" aria-describedby="release_date">
+                                                        <input type="date" name="release_date" id="release_date" class="form-control" aria-describedby="release_date">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -1089,7 +1169,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="cotton, plastic">
+                                                    <input type="text" name="fabric_type" id="fabric_type" class="form-control m-input" placeholder="cotton, plastic">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1102,10 +1182,10 @@
                                                             <label class="col-form-label" style="font-size: 14px;">Length</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
+                                                            <input type="text" name="item_length" id="item_length" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select class="form-select">
+                                                            <select name="item_length_unit" id="item_length_unit" class="form-select">
                                                                 <option value="">Select Option</option>
                                                                 <option value="dm">Decimeter</option>
                                                                 <option value="mm">Milimeter</option>
@@ -1129,10 +1209,10 @@
                                                             <label class="col-form-label" style="font-size: 14px;">Width</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
+                                                            <input type="text" name="item_width" id="item_width" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select class="form-select">
+                                                            <select name="item_width_unit" id="item_width_unit" class="form-select">
                                                                 <option value="">Select Option</option>
                                                                 <option value="dm">Decimeter</option>
                                                                 <option value="mm">Milimeter</option>
@@ -1156,10 +1236,10 @@
                                                             <label class="col-form-label" style="font-size: 14px;">Height</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
+                                                            <input type="text" name="item_height" id="item_height" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select class="form-select">
+                                                            <select name="item_height_unit" id="item_height_unit" class="form-select">
                                                                 <option value="">Select Option</option>
                                                                 <option value="dm">Decimeter</option>
                                                                 <option value="mm">Milimeter</option>
@@ -1194,10 +1274,10 @@
                                                                 Height</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control m-input" placeholder="3.45">
+                                                            <input type="text" name="package_height" id="package_height" class="form-control m-input" placeholder="3.45">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select class="form-select">
+                                                            <select name="package_height_unit" id="package_height_unit" class="form-select">
                                                                 <option value="">Select Option</option>
                                                                 <option value="dm">Decimeter</option>
                                                                 <option value="mm">Milimeter</option>
@@ -1222,10 +1302,10 @@
                                                                 Length</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control m-input" placeholder="400, 2, 3, 3.54">
+                                                            <input type="text" name="package_length" id="package_length" class="form-control m-input" placeholder="400, 2, 3, 3.54">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select class="form-select">
+                                                            <select name="package_length_unit" id="package_length_unit" class="form-select">
                                                                 <option value="">Select Option</option>
                                                                 <option value="dm">Decimeter</option>
                                                                 <option value="mm">Milimeter</option>
@@ -1250,10 +1330,10 @@
                                                                 Width</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control m-input" placeholder="400, 2, 3, 3.54">
+                                                            <input type="text" name="package_width" id="package_width" class="form-control m-input" placeholder="400, 2, 3, 3.54">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select class="form-select">
+                                                            <select name="package_width_unit" id="package_width_unit" class="form-select">
                                                                 <option value="">Select Option</option>
                                                                 <option value="dm">Decimeter</option>
                                                                 <option value="mm">Milimeter</option>
@@ -1281,10 +1361,10 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-4 mt-md-3">
-                                                    <input class="form-control" placeholder="45" name="" id="" />
+                                                    <input name="package_weight" id="package_weight" class="form-control" placeholder="45"/>
                                                 </div>
                                                 <div class="col-md-4 mt-md-3">
-                                                    <select class="form-select">
+                                                    <select name="package_weight_unit" id="package_weight_unit" class="form-select">
                                                         <option value="">Select Option</option>
                                                         <option value="lb">Pound</option>
                                                         <option value="kg">Kilogram</option>
@@ -1301,7 +1381,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="MLB">
+                                                    <input type="text" name="league_name" id="league_name" class="form-control m-input" placeholder="MLB">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1317,7 +1397,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select">
+                                                    <select name="target_gender" id="target_gender" class="form-select">
                                                         <option value="">Select Option</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Female">Female</option>
@@ -1330,7 +1410,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="Arsenal">
+                                                    <input type="text" name="team_name" id="team_name" class="form-control m-input" placeholder="Arsenal">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1338,7 +1418,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="3 months">
+                                                    <input type="text" name="age_range_description" id="age_range_description" class="form-control m-input" placeholder="3 months">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1346,7 +1426,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="with warm lining">
+                                                    <input type="text" name="lining_description" id="lining_description" class="form-control m-input" placeholder="with warm lining">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1354,7 +1434,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="ankle-wrap">
+                                                    <input type="text" name="strap_type" id="strap_type" class="form-control m-input" placeholder="ankle-wrap">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1362,7 +1442,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="handle_type" id="handle_type" class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1370,7 +1450,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="number_of_compartment" id="number_of_compartment" class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1378,7 +1458,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="4">
+                                                    <input type="text" name="number_of_wheel" id="number_of_wheel" class="form-control m-input" placeholder="4">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1386,7 +1466,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="pocket_description" id="pocket_description" class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1394,7 +1474,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="sheel_type" id="sheel_type" class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1402,7 +1482,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="wheel_type" id="wheel_type" class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-12 mt-md-3">

@@ -1,4 +1,152 @@
 <script type="text/javascript">
+      // Start More Product Detail Add
+      $(document).on('submit', '#add_product_more_detail', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{route('add.add_product_more_detail')}}",
+            method: 'post',
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 201) {
+                    Command: toastr["success"]("Product More Detail Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            },
+        });
+    });
+    // End More Product Detail Add
+    // Start Product Compliance Add
+    $(document).on('submit', '#add_product_compliance', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{route('add.add_product_compliance')}}",
+            method: 'post',
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 201) {
+                    Command: toastr["success"]("Product Compliance Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            },
+        });
+    });
+    // End Product Compliance Add
+    // Start Product Keyword Add
+    $(document).on('submit', '#add_product_keyword', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{route('add.add_product_keyword')}}",
+            method: 'post',
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 201) {
+                    Command: toastr["success"]("Product Keyword Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            },
+        });
+    });
+    // End Product Keyword Add
+    // Start Product Description Add
+    $(document).on('submit', '#add_product_description_info', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{route('add.add_product_description_info')}}",
+            method: 'post',
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 201) {
+                    Command: toastr["success"]("Product Description Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            },
+        });
+    });
+    // End Product Description Add
     // Start Product Image Add
     $(document).on('submit', '#add_product_image_info', function(e) {
         e.preventDefault();
@@ -32,8 +180,6 @@
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut"
                     }
-                    // $("#product_id").val(data.product_id);
-                    // $("#product_offer_id").val(data.product_id);
                 }
             },
         });
@@ -72,8 +218,6 @@
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut"
                     }
-                    // $("#product_id").val(data.product_id);
-                    // $("#product_offer_id").val(data.product_id);
                 }
             },
         });
@@ -115,6 +259,10 @@
                     $("#vital_info_id").val(data.product_id);
                     $("#product_offer_id").val(data.product_id);
                     $("#product_image_id").val(data.product_id);
+                    $("#product_description_id").val(data.product_id);
+                    $("#product_keyword_id").val(data.product_id);
+                    $("#product_compliance_id").val(data.product_id);
+                    $("#product_more_detail_id").val(data.product_id);
                 }
             },
             error: (error) => {
@@ -960,7 +1108,7 @@
             '<div class="input-group-prepend">' +
             '<button class="btn btn-danger" id="DeleteRow" type="button">' +
             '<i class="mdi mdi-delete"></i></button> </div>' +
-            '<input type="text" class="form-control m-input"> </div> </div>';
+            '<input name="keyword[]" id="keyword" type="text" class="form-control m-input"> </div> </div>';
 
         $('#newinput').append(newRowAdd);
     });

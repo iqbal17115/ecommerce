@@ -15,6 +15,10 @@ class CreateProductKeywordsTable extends Migration
     {
         Schema::create('product_keywords', function (Blueprint $table) {
             $table->id();
+            $table->string('keyword');
+            $table->tinyInteger('serial')->nullable();
+            $table->foreignId('product_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

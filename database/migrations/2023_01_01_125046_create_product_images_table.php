@@ -16,6 +16,7 @@ class CreateProductImagesTable extends Migration
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
             $table->text('image');
+            $table->tinyInteger('serial')->nullable();
             $table->foreignId('product_id')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();

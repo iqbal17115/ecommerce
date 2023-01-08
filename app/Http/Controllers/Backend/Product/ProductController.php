@@ -9,6 +9,9 @@ use App\Models\Backend\Product\Condition;
 use App\Models\Backend\Product\Product;
 use App\Models\Backend\Product\ProductDetail;
 use App\Models\Backend\Product\ProductImage;
+use App\Models\Backend\Product\ProductKeyword;
+use App\Models\Backend\Product\ProductCompliance;
+use App\Models\Backend\Product\ProductMoreDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -16,13 +19,112 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function addProductMoreDetailInfo(Request $request)
+    {
+        $Query = ProductMoreDetail::whereProductId($request->product_more_detail_id)->first();
+        if (!$Query) {
+            $Query = new ProductMoreDetail();
+        }
+        $Query->closure_type = $request->closure_type;
+        $Query->manufacturer = $request->manufacturer;
+        $Query->manufacturer_part_number = $request->manufacturer_part_number;
+        $Query->number_of_item = $request->number_of_item;
+        $Query->release_date = $request->release_date;
+        $Query->fabric_type = $request->fabric_type;
+        $Query->item_length = $request->item_length;
+        $Query->item_length_unit = $request->item_length_unit;
+        $Query->item_width = $request->item_width;
+        $Query->item_width_unit = $request->item_width_unit;
+        $Query->item_height = $request->item_height;
+        $Query->item_height_unit = $request->item_height_unit;
+        $Query->package_height = $request->package_height;
+        $Query->package_height_unit = $request->package_height_unit;
+        $Query->package_length = $request->package_length;
+        $Query->package_length_unit = $request->package_length_unit;
+        $Query->package_width = $request->package_width;
+        $Query->package_width_unit = $request->package_width_unit;
+        $Query->package_weight = $request->package_weight;
+        $Query->package_weight_unit = $request->package_weight_unit;
+        $Query->league_name = $request->league_name;
+        $Query->warranty_description = $request->warranty_description;
+        $Query->team_name = $request->team_name;
+        $Query->age_range_description = $request->age_range_description;
+        $Query->lining_description = $request->lining_description;
+        $Query->strap_type = $request->strap_type;
+        $Query->handle_type = $request->handle_type;
+        $Query->number_of_compartment = $request->number_of_compartment;
+        $Query->number_of_wheel = $request->number_of_wheel;
+        $Query->pocket_description = $request->pocket_description;
+        $Query->sheel_type = $request->sheel_type;
+        $Query->wheel_type = $request->wheel_type;
+        $Query->product_id = $request->product_more_detail_id;
+        $Query->save();
+        return response()->json(['status' => 201]);
+    }
+    public function addProductComplianceInfo(Request $request)
+    {
+        $Query = ProductCompliance::whereProductId($request->product_compliance_id)->first();
+        if (!$Query) {
+            $Query = new ProductCompliance();
+        }
+        $Query->battery_cell_type = $request->battery_cell_type;
+        $Query->battery_type = $request->battery_type;
+        $Query->number_of_battery_require = $request->number_of_battery_require;
+        $Query->lithium_battery_energy_content = $request->lithium_battery_energy_content;
+        $Query->lithium_battery_energy_content_unit = $request->lithium_battery_energy_content_unit;
+        $Query->lithium_battery_packaging = $request->lithium_battery_packaging;
+        $Query->battery_include = $request->battery_include;
+        $Query->battery_require = $request->battery_require;
+        $Query->battery_weight = $request->battery_weight;
+        $Query->battery_weight_unit = $request->battery_weight_unit;
+        $Query->number_of_lithium_metal_cell = $request->number_of_lithium_metal_cell;
+        $Query->number_of_lithium_ion_cell = $request->number_of_lithium_ion_cell;
+        $Query->lithium_battery_weight = $request->lithium_battery_weight;
+        $Query->lithium_battery_weight_unit = $request->lithium_battery_weight_unit;
+        $Query->regulatory_id = $request->regulatory_id;
+        $Query->safety_data_sheet_url = $request->safety_data_sheet_url;
+        $Query->volume = $request->volume;
+        $Query->volume_unit = $request->volume_unit;
+        $Query->flash_point = $request->flash_point;
+        $Query->item_weight = $request->item_weight;
+        $Query->item_weight_unit = $request->item_weight_unit;
+        $Query->product_id = $request->product_compliance_id;
+        $Query->save();
+        return response()->json(['status' => 201]);
+    }
+    public function addProductKeywordInfo(Request $request)
+    {
+        foreach ($request->keyword as $key => $keyword) {
+            $Query = ProductKeyword::whereSerial($key)->whereProductId($request->product_keyword_id)->first();
+            if (!$Query) {
+                $Query = new ProductKeyword();
+            }
+            $Query->keyword = $keyword;
+            $Query->serial = $key;
+            $Query->product_id = $request->product_keyword_id;
+            $Query->save();
+        }
+        // $request->product_image
+        return response()->json(['status' => 201]);
+    }
+    public function addProductDescriptionInfo(Request $request)
+    {
+        $Query = ProductDetail::whereProductId($request->product_description_id)->first();
+        $Query->description = $request->product_description;
+        $Query->save();
+        return response()->json(['status' => 201]);
+    }
     public function addProductImageInfo(Request $request)
     {
 
-        foreach ($request->product_image as $product_image) {
-            $Query = new ProductImage();
+        foreach ($request->product_image as $key => $product_image) {
+            $Query = ProductImage::whereSerial($key)->whereProductId($request->product_image_id)->first();
+            if (!$Query) {
+                $Query = new ProductImage();
+            }
             $path = $product_image->store('/public/product_photo');
             $Query->image = basename($path);
+            $Query->serial = $key;
             $Query->product_id = $request->product_image_id;
             $Query->save();
         }
