@@ -153,9 +153,12 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('add-add_product_keyword', [ProductController::class, 'addProductKeywordInfo'])->name('add.add_product_keyword');
         Route::post('add-add_product_compliance', [ProductController::class, 'addProductComplianceInfo'])->name('add.add_product_compliance');
         Route::post('add-add_product_more_detail', [ProductController::class, 'addProductMoreDetailInfo'])->name('add.add_product_more_detail');
+        Route::get('product_list', [ProductController::class, 'productList'])->name('product_list');
+        Route::get('pagination/product-pagination-data', [ProductController::class, 'pagination']);
+        Route::get('search-product', [ProductController::class, 'searchProduct'])->name('search.product');
     });
     // End Product
-    
+
     // Start Slider
     Route::group([], function () {
         Route::get('slider', [SliderController::class, 'index'])->name('slider');

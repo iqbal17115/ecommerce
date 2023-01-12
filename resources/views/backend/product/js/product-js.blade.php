@@ -1,6 +1,29 @@
 <script type="text/javascript">
-      // Start More Product Detail Add
-      $(document).on('submit', '#add_product_more_detail', function(e) {
+    var tab_menu = [];
+
+    function pagination(page) {
+        $.ajax({
+            url: '/pagination/product-pagination-data?page=' + page,
+            success: function(data) {
+                $('.product_content').html(data);
+            }
+        })
+    }
+    $(document).on('click', '.pagination a', function(e) {
+        e.preventDefault();
+        let page = $(this).attr('href').split('page=')[1]
+        pagination(page);
+    });
+
+
+    function tabIndexPerform() {
+        for (let i = 0; i < tab_menu.length; i++) {
+            $(".p_" + tab_menu[i]).even().removeClass("disabled");
+            // $( "p" ).even().removeClass( "blue" );
+        }
+    }
+    // Start More Product Detail Add
+    $(document).on('submit', '#add_product_more_detail', function(e) {
         e.preventDefault();
         var form = this;
         $.ajax({
@@ -12,6 +35,10 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
+                    // if (!tab_menu.includes(8)) {
+                    //     tab_menu.push(8);
+                    // }
+                    // tabIndexPerform();
                     Command: toastr["success"]("Product More Detail Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -49,6 +76,10 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
+                    // if (!tab_menu.includes(4)) {
+                    //     tab_menu.push(4);
+                    // }
+                    tabIndexPerform();
                     Command: toastr["success"]("Product Compliance Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -86,6 +117,10 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
+                    // if (!tab_menu.includes(7)) {
+                    //     tab_menu.push(7);
+                    // }
+                    // tabIndexPerform();
                     Command: toastr["success"]("Product Keyword Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -123,6 +158,10 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
+                    if (!tab_menu.includes(6)) {
+                        tab_menu.push(6);
+                    }
+                    tabIndexPerform();
                     Command: toastr["success"]("Product Description Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -161,6 +200,19 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
+                    if (!tab_menu.includes(5)) {
+                        tab_menu.push(5);
+                    }
+                    if (!tab_menu.includes(6)) {
+                        tab_menu.push(6);
+                    }
+                    if (!tab_menu.includes(7)) {
+                        tab_menu.push(7);
+                    }
+                    if (!tab_menu.includes(8)) {
+                        tab_menu.push(8);
+                    }
+                    tabIndexPerform();
                     Command: toastr["success"]("Product Image Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -199,6 +251,10 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
+                    if (!tab_menu.includes(4)) {
+                        tab_menu.push(4);
+                    }
+                    tabIndexPerform();
                     Command: toastr["success"]("Product Detail Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -237,6 +293,13 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
+                    if (!tab_menu.includes(2)) {
+                        tab_menu.push(2);
+                    }
+                    if (!tab_menu.includes(3)) {
+                        tab_menu.push(3);
+                    }
+                    tabIndexPerform();
                     Command: toastr["success"]("Vital Info Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -339,9 +402,9 @@
             }
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="master_prev_1 master_prev text-center" style="width: 150px;">' + val + '</div>';
-                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="master_prev_1 master_prev text-center" style="width: 150px;"><input type="hidden" name="input_size[]" value="' + val + '"/>' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div style="width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -358,9 +421,9 @@
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="master_prev_1 master_prev text-center" style="width: 150px;">' + val + '</div>';
-                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div style="width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="master_prev_1 master_prev text-center" style="width: 150px;"><input type="hidden" name="input_size[]" value="' + val + '"/>' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -375,7 +438,7 @@
                 } else {
                     var already_1 = $(".already_1").length;
                     if (already_1 == 0) {
-                        $('<div class="text-center already_1 available_class" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
+                        $('<div class="text-center already_1 available_class" style="width: 150px;"><input type="hidden" name="input_size[]" value="' + val + '"/>' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_1").removeClass("master_prev");
                         $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Size</span></div>').insertBefore("#gender_header");
                     } else {
@@ -406,9 +469,9 @@
             }
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;">' + val + '</div>';
-                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div class="div_size" style="display: none; width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;"><input type="hidden" name="input_color[]" value="' + val + '"/>' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none; width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none; width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><select class="select-form color_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -425,9 +488,9 @@
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;">' + val + '</div>';
-                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="text-center master_prev_2 master_prev" style="width: 150px;"><input type="hidden" name="input_color[]" value="' + val + '"/>' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><select class="select-form color_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -442,7 +505,7 @@
                 } else {
                     var already_2 = $(".already_2").length;
                     if (already_2 == 0) {
-                        $('<div class="text-center already_2 available_class" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
+                        $('<div class="text-center already_2 available_class" style="width: 150px;"><input type="hidden" name="input_color[]" value="' + val + '"/>' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_2").removeClass("master_prev");
                         $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Color</span></div>').insertBefore("#gender_header");
                     } else {
@@ -470,9 +533,9 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="text-center master_prev_3 master_prev" style="width: 150px;">' + val + '</div>';
-                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="text-center master_prev_3 master_prev" style="width: 150px;"><input type="hidden" name="input_package_qty[]" value="' + val + '"/>' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -489,9 +552,9 @@
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="text-center master_prev_3 master_prev" style="width: 150px;">' + val + '</div>';
-                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="text-center master_prev_3 master_prev" style="width: 150px;"><input type="hidden" name="input_package_qty[]" value="' + val + '"/>' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -506,7 +569,7 @@
                 } else {
                     var already_3 = $(".already_3").length;
                     if (already_3 == 0) {
-                        $('<div class="text-center already_3 available_class_3" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
+                        $('<div class="text-center already_3 available_class_3" style="width: 150px;"><input type="hidden" name="input_package_qty[]" value="' + val + '"/>' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_3").removeClass("master_prev");
                         $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">P. Qty</span></div>').insertBefore("#gender_header");
                     } else {
@@ -534,9 +597,9 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="text-center master_prev_4 master_prev" style="width: 150px;">' + val + '</div>';
+                variation_content += '<div class="text-center master_prev_4 master_prev" style="width: 150px;"><input type="hidden" name="input_material_type[]" value="' + val + '"/>' + val + '</div>';
                 variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -553,9 +616,9 @@
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="text-center master_prev_4 master_prev" style="width: 150px;">' + val + '</div>';
-                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="text-center master_prev_4 master_prev" style="width: 150px;"><input type="hidden" name="input_material_type[]" value="' + val + '"/>' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -570,7 +633,7 @@
                 } else {
                     var already_4 = $(".already_4").length;
                     if (already_4 == 0) {
-                        $('<div class="text-center already_4 available_class_4" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
+                        $('<div class="text-center already_4 available_class_4" style="width: 150px;"><input type="hidden" name="input_material_type[]" value="' + val + '"/>' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_4").removeClass("master_prev");
                         $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">M. Type</span></div>').insertBefore("#gender_header");
                     } else {
@@ -598,9 +661,9 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="text-center master_prev_5 master_prev" style="width: 150px;">' + val + '</div>';
-                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="text-center master_prev_5 master_prev" style="width: 150px;"><input type="hidden" name="input_wattage[]" value="' + val + '"/>' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -617,9 +680,9 @@
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="text-center master_prev_5 master_prev" style="width: 150px;">' + val + '</div>';
-                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="text-center master_prev_5 master_prev" style="width: 150px;"><input type="hidden" name="input_wattage[]" value="' + val + '"/>' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -634,7 +697,7 @@
                 } else {
                     var already_5 = $(".already_5").length;
                     if (already_5 == 0) {
-                        $('<div class="text-center already_5 available_class_5" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
+                        $('<div class="text-center already_5 available_class_5" style="width: 150px;"><input type="hidden" name="input_wattage[]" value="' + val + '"/>' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_4").removeClass("master_prev");
                         $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Wattage</span></div>').insertBefore("#gender_header");
                     } else {
@@ -662,9 +725,9 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="text-center master_prev_6 master_prev" style="width: 150px;">' + val + '</div>';
-                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="text-center master_prev_6 master_prev" style="width: 150px;"><input type="hidden" name="input_number_of_item[]" value="' + val + '"/>' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -681,9 +744,9 @@
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="text-center master_prev_6 master_prev" style="width: 150px;">' + val + '</div>';
-                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="text-center master_prev_6 master_prev" style="width: 150px;"><input type="hidden" name="input_number_of_item[]" value="' + val + '"/>' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -698,7 +761,7 @@
                 } else {
                     var already_6 = $(".already_6").length;
                     if (already_6 == 0) {
-                        $('<div class="text-center already_6 available_class_6" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
+                        $('<div class="text-center already_6 available_class_6" style="width: 150px;"><input type="hidden" name="input_number_of_item[]" value="' + val + '"/>' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_4").removeClass("master_prev");
                         $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Items</span></div>').insertBefore("#gender_header");
                     } else {
@@ -726,9 +789,9 @@
             var len = $("#variation_row").children().length;
             if (len == 0) {
                 variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                variation_content += '<div class="text-center master_prev_7 master_prev" style="width: 150px;">' + val + '</div>';
-                variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                variation_content += '<div class="text-center master_prev_7 master_prev" style="width: 150px;"><input type="hidden" name="input_style_name[]" value="' + val + '"/>' + val + '</div>';
+                variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                 variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                 variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -745,9 +808,9 @@
                 var variation_type_len = $(".master_type_" + variation_type).length;
                 if (variation_type_len != 0) {
                     variation_content = '<div class="col-md-12 per-row master_type_' + variation_type + '" style="display: flex;">';
-                    variation_content += '<div class="text-center master_prev_7 master_prev" style="width: 150px;">' + val + '</div>';
-                    variation_content += '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="age_range" class="input-form" /></div>';
+                    variation_content += '<div class="text-center master_prev_7 master_prev" style="width: 150px;"><input type="hidden" name="input_style_name[]" value="' + val + '"/>' + val + '</div>';
+                    variation_content += '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
+                    variation_content += '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
                     variation_content += '<div class="div_size" style="display: none;width: 150px;"><select class="select-form bottom_size_map"></select></div>';
                     variation_content += '<div class="div_color" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="name" class="input-form" /></div>';
@@ -762,7 +825,7 @@
                 } else {
                     var already_7 = $(".already_7").length;
                     if (already_7 == 0) {
-                        $('<div class="text-center already_7 available_class_7" style="width: 150px;">' + val + '</div>').insertBefore(".gender_id");
+                        $('<div class="text-center already_7 available_class_7" style="width: 150px;"><input type="hidden" name="input_style_name[]" value="' + val + '"/>' + val + '</div>').insertBefore(".gender_id");
                         $(".master_prev_4").removeClass("master_prev");
                         $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Style</span></div>').insertBefore("#gender_header");
                     } else {

@@ -48,7 +48,7 @@
                            <li><a href="{{ route('product-product') }}">Add Product</a></li>
                            <li><a href="javascript:void(0);">Import Product(CSV)</a></li>
                            <li><a href="javascript:void(0);">Import Product(EXCEL)</a></li>
-                           <li><a href="javascript:void(0);">Manage Product</a></li>
+                           <li><a href="{{ route('product_list') }}">Manage Product</a></li>
                            <li><a href="javascript:void(0);">Product Ledger</a></li>
                            <li><a href="{{ route('product-category') }}">Category</a></li>
                            <li><a href="{{ route('product-brand') }}">Brand</a></li>
