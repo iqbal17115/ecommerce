@@ -74,7 +74,7 @@
     <script src="assets/js/app.js"></script>
 
     <!-- App js -->
-    <script src="{{ URL::asset('assets/js/app.min.js') }}"></script>
+    <!-- <script src="{{ URL::asset('assets/js/app.min.js') }}"></script> -->
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
     <script>

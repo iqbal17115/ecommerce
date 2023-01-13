@@ -1,5 +1,6 @@
 @extends('layouts.backend_app')
 @section('individual__link')
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
@@ -114,37 +115,37 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p_1" data-toggle="tab" href="#variations" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#variations" role="tab">
                                     <i class="now-ui-icons shopping_cart-simple"></i> Variation
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p_2 disabled" data-toggle="tab" href="#offer" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#offer" role="tab">
                                     <i class="now-ui-icons shopping_shop"></i> Offer
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p_3 disabled" data-toggle="tab" href="#compliance" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#compliance" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Compliance
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p_4 disabled" data-toggle="tab" href="#images" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#images" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Images
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p_5 disabled" data-toggle="tab" href="#description" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#description" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Description
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p_6 disabled" data-toggle="tab" href="#keywords" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#keywords" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Keywords
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link p_7 disabled" data-toggle="tab" href="#more_details" role="tab">
+                                <a class="nav-link" data-toggle="tab" href="#more_details" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> More Details
                                 </a>
                             </li>
@@ -330,7 +331,7 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="variations" role="tabpanel">
-                                <form action="" method="post" id="addVariant" enctype="multipart/form-data">
+                                <form method="post" id="add_variant_variant">
                                     @csrf
                                     <div class="row">
                                         <input type="hidden" value="0" name="hidden_value_1" id="hidden_value_1" />
@@ -340,6 +341,7 @@
                                         <input type="hidden" value="0" name="hidden_value_5" id="hidden_value_5" />
                                         <input type="hidden" value="0" name="hidden_value_6" id="hidden_value_6" />
                                         <input type="hidden" value="0" name="hidden_value_7" id="hidden_value_7" />
+                                        <input class="selected_variation" type="" name="selected_variation[]" id="selected_variation[]" />
 
                                         <div class="col-md-12">
                                             <div class="row" id="variation_type_content"></div>
@@ -1533,7 +1535,7 @@
     $('.bottom_size_map').select2({
         placeholder: 'Select An Option'
     });
-    $('.file-upload').file_upload();
+    // $('.file-upload').file_upload();
 </script>
 @include('backend.product.js.product-js')
 {!! Toastr::message() !!}

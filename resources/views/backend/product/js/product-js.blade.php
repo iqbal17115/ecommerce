@@ -1,5 +1,6 @@
 <script type="text/javascript">
     var tab_menu = [];
+    var selected_variation = [];
 
     function pagination(page) {
         $.ajax({
@@ -22,6 +23,44 @@
             // $( "p" ).even().removeClass( "blue" );
         }
     }
+    // Start Product Variant Add
+    $(document).on('submit', '#add_variant_variant', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{route('add.add_variant_variant')}}",
+            method: 'post',
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                console.log(data);
+                if (data.status == 201) {
+                    Command: toastr["success"]("Product Variation Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            },
+        });
+    });
+    // End Product Variant Add
     // Start More Product Detail Add
     $(document).on('submit', '#add_product_more_detail', function(e) {
         e.preventDefault();
@@ -395,6 +434,10 @@
 
     function variationManage(variation_type, val) {
         var variation_menu = [];
+        if (!selected_variation.includes(variation_type)) {
+            selected_variation.push(variation_type);
+        }
+        $(".selected_variation").val(selected_variation);
         if (variation_type == 1) {
             var len = $("#variation_row").children().length;
             if (!variation_menu.includes(1)) {

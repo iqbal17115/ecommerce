@@ -19,23 +19,54 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function searchProduct(Request $request) {
-        $products = Product::where('name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(20);
-        if($products->count() >= 1) {
-        return view('backend.product.pagination-product', compact('products'))->render();
-        }else {
+    public function searchProduct(Request $request)
+    {
+        $products = Product::where('name', 'like', '%' . $request->search_string . '%')->orderBy('id', 'desc')->paginate(20);
+        if ($products->count() >= 1) {
+            return view('backend.product.pagination-product', compact('products'))->render();
+        } else {
             return response()->json([
                 'status' => 'nothing_found'
             ]);
         }
     }
-    public function pagination(Request $request) {
+    public function pagination(Request $request)
+    {
         $products = Product::latest()->paginate(20);
         return view('backend.product.pagination-product', compact('products'))->render();
     }
-    public function productList() {
+    public function productList()
+    {
         $products = Product::latest()->paginate(20);
         return view('backend.product.product_list', compact('products'));
+    }
+    public function addProductVariantInfo(Request $request)
+    {
+        $variation = array();
+        $selected_variations = explode(',', $request->selected_variation[0]);
+        foreach ($selected_variations as $selected_variation) {
+            if ($selected_variation == 1) {
+                array_push($variation, $request->input_size);
+                array_push($variation, $request->input_bottom_size);
+                array_push($variation, $request->input_bottom_size_map);
+            } else if ($selected_variation == 2) {
+                array_push($variation, $request->input_color);
+                array_push($variation, $request->input_color_map);
+            } else if ($selected_variation == 3) {
+                array_push($variation, $request->input_package_qty);
+            } else if ($selected_variation == 4) {
+                array_push($variation, $request->input_material_type);
+            } else if ($selected_variation == 5) {
+                array_push($variation, $request->input_wattage);
+            } else if ($selected_variation == 6) {
+                array_push($variation, $request->input_number_of_item);
+            } else if ($selected_variation == 7) {
+                array_push($variation, $request->input_style_name);
+            }
+        }
+
+
+        return response()->json(['product_id' => $variation]);
     }
     public function addProductMoreDetailInfo(Request $request)
     {
