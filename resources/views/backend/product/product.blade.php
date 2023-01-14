@@ -168,17 +168,17 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input name="code" id="code" class="form-control" placeholder="Enter product Id" />
+                                                    <input name="code" id="code" @if($productInfo) value="{{$productInfo->code}}" @endif class="form-control" placeholder="Enter product Id" />
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select name="type" id="type" class="form-select">
                                                         <option value="">Select Option</option>
-                                                        <option value="GTIN">GTIN</option>
-                                                        <option value="EAN">EAN</option>
-                                                        <option value="GCID">GCID</option>
-                                                        <option value="UPC">UPC</option>
-                                                        <option value="ASIN">ASIN</option>
-                                                        <option value="ISBN">ISBN</option>
+                                                        <option @if($productInfo && $productInfo->type=='GTIN') selected @endif value="GTIN">GTIN</option>
+                                                        <option @if($productInfo && $productInfo->type=='EAN') selected @endif value="EAN">EAN</option>
+                                                        <option @if($productInfo && $productInfo->type=='GCID') selected @endif value="GCID">GCID</option>
+                                                        <option @if($productInfo && $productInfo->type=='UPC') selected @endif value="UPC">UPC</option>
+                                                        <option @if($productInfo && $productInfo->type=='ASIN') selected @endif value="ASIN">ASIN</option>
+                                                        <option @if($productInfo && $productInfo->type=='ISBN') selected @endif value="ISBN">ISBN</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
@@ -187,7 +187,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="name" id="name" class="form-control" placeholder="Enter product Name" required />
+                                                    <input name="name" id="name" @if($productInfo) value="{{$productInfo->name}}" @endif class="form-control" placeholder="Enter product Name" required />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -198,32 +198,32 @@
                                                     <select class="form-select" id="category_id" name="category_id" onchange="variantByCategory(this)" required>
                                                         <option value=""></option>
                                                         @foreach($categories as $category)
-                                                        <option value="{{$category->id}}">
+                                                        <option @if($productInfo && $productInfo->category_id==$category->id) selected @endif value="{{$category->id}}">
                                                             {{$category->name}}
                                                         </option>
                                                         <!-- Start Sub-Category -->
                                                         @if($category->SubCategory)
                                                         @foreach($category->SubCategory as $subCategory)
-                                                        <option value="{{$subCategory->id}}">
+                                                        <option @if($productInfo && $productInfo->category_id==$subCategory->id) selected @endif value="{{$subCategory->id}}">
                                                             --{{$subCategory->name}}
                                                         </option>
                                                         <!-- Start sub-Sub-Category -->
                                                         @if($subCategory->SubCategory)
                                                         @foreach($subCategory->SubCategory as $subSubCategory)
-                                                        <option value="{{$subSubCategory->id}}">
+                                                        <option @if($productInfo && $productInfo->category_id==$subSubCategory->id) selected @endif value="{{$subSubCategory->id}}">
                                                             ----{{$subSubCategory->name}}
                                                         </option>
                                                         <!-- Start sub-Sub-Sub-Category -->
                                                         @if($subSubCategory->SubCategory)
                                                         @foreach($subSubCategory->SubCategory as $subSubSubCategory)
-                                                        <option value="{{$subSubSubCategory->id}}">
+                                                        <option @if($productInfo && $productInfo->category_id==$subSubSubCategory->id) selected @endif value="{{$subSubSubCategory->id}}">
                                                             ------{{$subSubSubCategory->name}}
                                                         </option>
                                                         <!-- Start sub-Sub-Sub-Sub-Category -->
                                                         @if($subSubSubCategory->SubCategory)
                                                         @foreach($subSubSubCategory->SubCategory as
                                                         $subSubSubSubCategory)
-                                                        <option value="{{$subSubSubSubCategory->id}}">
+                                                        <option @if($productInfo && $productInfo->category_id==$subSubSubSubCategory->id) selected @endif value="{{$subSubSubSubCategory->id}}">
                                                             --------{{$subSubSubSubCategory->name}}
                                                         </option>
                                                         @endforeach
@@ -250,7 +250,7 @@
                                                     <select name="brand_id" id="brand_id" class="form-select">
                                                         <option value=""></option>
                                                         @foreach($brands as $brand)
-                                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                        <option @if($productInfo && $productInfo->brand_id==$brand->id) selected @endif value="{{$brand->id}}">{{$brand->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -260,7 +260,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="model_number" id="model_number" type="text" class="form-control" placeholder="Enter Model Number" aria-label="Username" aria-describedby="model_number">
+                                                    <input name="model_number" id="model_number" type="text" @if($productInfo) value="{{$productInfo->model_number}}" @endif class="form-control" placeholder="Enter Model Number" aria-label="Username" aria-describedby="model_number">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -277,7 +277,7 @@
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="region_publication_id" id="region_publication_id" class="form-select">
-                                                        <option value="1">Bangladesh</option>
+                                                        <option @if($productInfo && $productInfo->region_publication_id==1) selected @endif value="1">Bangladesh</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
@@ -286,7 +286,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="model_name" id="model_name" class="form-control" placeholder="Enter Model Name" />
+                                                    <input name="model_name" id="model_name" @if($productInfo) value="{{$productInfo->model_name}}" @endif class="form-control" placeholder="Enter Model Name" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -311,7 +311,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="product_booking_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input name="booking_date" id="booking_date" type="date" class="form-control" aria-label="Username" aria-describedby="product_booking_date">
+                                                        <input type="date" name="booking_date" id="booking_date" @if($productInfo) value="{{$productInfo->booking_date}}" @endif class="form-control" aria-label="Username" aria-describedby="product_booking_date">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -342,6 +342,7 @@
                                         <input type="hidden" value="0" name="hidden_value_6" id="hidden_value_6" />
                                         <input type="hidden" value="0" name="hidden_value_7" id="hidden_value_7" />
                                         <input class="selected_variation" type="" name="selected_variation[]" id="selected_variation[]" />
+                                        <input type="hidden" name="product_variant_info_id" id="product_variant_info_id" />
 
                                         <div class="col-md-12">
                                             <div class="row" id="variation_type_content"></div>
@@ -490,7 +491,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="your_price">AED</span>
                                                         </div>
-                                                        <input type="text" name="your_price" id="your_price" class="form-control" placeholder="Ex: 50.00" aria-describedby="your_price" required>
+                                                        <input type="text" name="your_price" id="your_price" @if($productInfo) value="{{$productInfo->your_price}}" @endif  class="form-control" placeholder="Ex: 50.00" aria-describedby="your_price" required>
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -503,7 +504,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="sale_price">AED</span>
                                                         </div>
-                                                        <input type="text" name="sale_price" id="sale_price" class="form-control" placeholder="Ex: 50.00" aria-describedby="sale_price" required>
+                                                        <input type="text" name="sale_price" id="sale_price" @if($productInfo) value="{{$productInfo->sale_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-describedby="sale_price" required>
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -516,7 +517,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="sale_start_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" name="sale_start_date" id="sale_start_date" class="form-control" aria-describedby="sale_start_date1">
+                                                        <input type="date" name="sale_start_date" id="sale_start_date" @if($productInfo) value="{{$productInfo->sale_start_date}}" @endif class="form-control" aria-describedby="sale_start_date1">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -529,7 +530,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="sale_end_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" name="sale_end_date" id="sale_end_date" class="form-control" aria-describedby="sale_end_date1">
+                                                        <input type="date" name="sale_end_date" id="sale_end_date" @if($productInfo) value="{{$productInfo->sale_end_date}}" @endif class="form-control" aria-describedby="sale_end_date1">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -542,7 +543,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="retail_price_inclusive_vat">AED</span>
                                                         </div>
-                                                        <input type="text" name="retail_price" id="retail_price" class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="retail_price_inclusive_vat">
+                                                        <input type="text" name="retail_price" id="retail_price" @if($productInfo) value="{{$productInfo->retail_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="retail_price_inclusive_vat">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -573,7 +574,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="max_order_qty" id="max_order_qty" class="form-control" placeholder="Enter Max Order Qty" name="" id="" />
+                                                    <input name="max_order_qty" id="max_order_qty" @if($productInfo) value="{{$productInfo->max_order_qty}}" @endif class="form-control" placeholder="Enter Max Order Qty" name="" id="" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -591,8 +592,8 @@
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="offering_gift_message" id="offering_gift_message" class="form-select">
                                                         <option value="">Select Option</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="0">No</option>
+                                                        <option @if($productInfo && $productInfo->offering_gift_message==1) selected @endif value="1">Yes</option>
+                                                        <option @if($productInfo && $productInfo->offering_gift_message==0) selected @endif value="0">No</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
@@ -604,8 +605,8 @@
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="gift_wrap_available" id="gift_wrap_available" class="form-select">
                                                         <option value="">Select Option</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="0">No</option>
+                                                        <option  @if($productInfo && $productInfo->gift_wrap_available==1) selected @endif value="1">Yes</option>
+                                                        <option @if($productInfo && $productInfo->gift_wrap_available==0) selected @endif value="0">No</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
@@ -618,7 +619,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="start_selling_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" name="start_selling_date" id="start_selling_date" class="form-control" aria-describedby="start_selling_date1">
+                                                        <input type="date" name="start_selling_date" id="start_selling_date" @if($productInfo) value="{{$productInfo->start_selling_date}}" @endif class="form-control" aria-describedby="start_selling_date1">
                                                     </div>
                                                 </div>
                                                 <!-- End -->

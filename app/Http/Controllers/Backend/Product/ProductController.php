@@ -14,6 +14,7 @@ use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductMoreDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,7 @@ class ProductController extends Controller
     public function addProductVariantInfo(Request $request)
     {
         $variation = array();
+        array_push($variation, explode(',', $request->selected_variation[0]));
         $selected_variations = explode(',', $request->selected_variation[0]);
         foreach ($selected_variations as $selected_variation) {
             if ($selected_variation == 1) {
@@ -64,9 +66,20 @@ class ProductController extends Controller
                 array_push($variation, $request->input_style_name);
             }
         }
+        array_push($variation, $request->input_target_gender);
+        array_push($variation, $request->input_description);
+        array_push($variation, $request->input_seller_sku);
+        array_push($variation, $request->input_product_code);
+        array_push($variation, $request->input_type);
+        array_push($variation, $request->input_your_price);
+        array_push($variation, $request->input_quantity);
 
+        $variation = json_encode($variation, JSON_FORCE_OBJECT);
+        $Query = Product::find($request->product_variant_info_id);
+        $Query->variation = $variation;
+        $Query->save();
 
-        return response()->json(['product_id' => $variation]);
+        return response()->json(['status' => 201, 'product_id' => $variation]);
     }
     public function addProductMoreDetailInfo(Request $request)
     {
@@ -250,12 +263,18 @@ class ProductController extends Controller
         $category = Category::find($id);
         return response()->json($category);
     }
-    public function index()
+    public function index($id = null)
     {
+        
         $categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
         $brands = Brand::orderBy('id', 'DESC')->get();
         $materials = Material::orderBy('id', 'DESC')->get();
         $conditions = Condition::orderBy('id', 'DESC')->get();
-        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions'));
+        $productInfo = null;
+        if($id) {
+           $id = Crypt::decrypt($id);
+           $productInfo = Product::whereId($id)->first();
+        }
+        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo'));
     }
 }

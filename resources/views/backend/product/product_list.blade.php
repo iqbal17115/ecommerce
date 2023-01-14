@@ -44,9 +44,9 @@
                                 @endif
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger text-light btn-sm delete_product" data-id="{{$product->id}}">
-                                    <i class="mdi mdi-trash-can font-size-16"></i>
-                                </button>
+                                <a href="{{ route('product-product', Crypt::encrypt(['id'=>$product->id])) }}" class="btn btn-info text-light">
+                                    <i class="mdi mdi-pencil font-size-16"></i>
+</a>
                             </td>
                         </tr>
                         @endforeach

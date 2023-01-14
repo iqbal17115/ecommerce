@@ -365,6 +365,7 @@
                     $("#product_keyword_id").val(data.product_id);
                     $("#product_compliance_id").val(data.product_id);
                     $("#product_more_detail_id").val(data.product_id);
+                    $("#product_variant_info_id").val(data.product_id);
                 }
             },
             error: (error) => {
@@ -453,7 +454,7 @@
                 variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -472,7 +473,7 @@
                     variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -497,7 +498,7 @@
                             var length = hidden_value_1;
                         }
                         for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_size[]" value="' + val + '"/>' + variation_element[i].innerHTML + '</div>';
                             $('.current_val .available_class').text(val);
                         }
                         $(".per-row").removeClass("current_val");
@@ -520,7 +521,7 @@
                 variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -539,7 +540,7 @@
                     variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -564,7 +565,7 @@
                             var length = hidden_value_2;
                         }
                         for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_color[]" value="' + val + '"/>' + variation_element[i].innerHTML + '</div>';
                             $('.current_val .available_class').text(val);
                         }
                         $(".per-row").removeClass("current_val");
@@ -584,7 +585,7 @@
                 variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -603,7 +604,7 @@
                     variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -628,7 +629,7 @@
                             var length = hidden_value_3;
                         }
                         for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_package_qty[]" value="' + val + '"/>' + variation_element[i].innerHTML + '</div>';
                             $('.current_val .available_class_3').text(val);
                         }
                         $(".per-row").removeClass("current_val");
@@ -648,7 +649,7 @@
                 variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -667,7 +668,7 @@
                     variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -692,7 +693,7 @@
                             var length = hidden_value_4;
                         }
                         for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_material_type[]" value="' + val + '"/>' + variation_element[i].innerHTML + '</div>';
                             $('.current_val .available_class_4').text(val);
                         }
                         $(".per-row").removeClass("current_val");
@@ -712,7 +713,7 @@
                 variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -731,7 +732,7 @@
                     variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -756,7 +757,7 @@
                             var length = hidden_value_5;
                         }
                         for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_wattage[]" value="' + val + '"/>' + variation_element[i].innerHTML + '</div>';
                             $('.current_val .available_class_5').text(val);
                         }
                         $(".per-row").removeClass("current_val");
@@ -776,7 +777,7 @@
                 variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -795,7 +796,7 @@
                     variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -820,7 +821,7 @@
                             var length = hidden_value_6;
                         }
                         for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_number_of_item[]" value="' + val + '"/>' + variation_element[i].innerHTML + '</div>';
                             $('.current_val .available_class_6').text(val);
                         }
                         $(".per-row").removeClass("current_val");
@@ -840,7 +841,7 @@
                 variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                 variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -859,7 +860,7 @@
                     variation_content += '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content += '<div style="width: 150px;"><select name="input_type" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
+                    variation_content += '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
                     variation_content += '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
@@ -884,7 +885,7 @@
                             var length = hidden_value_7;
                         }
                         for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;">' + variation_element[i].innerHTML + '</div>';
+                            cart_div.innerHTML += '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_style_name[]" value="' + val + '"/>' + variation_element[i].innerHTML + '</div>';
                             $('.current_val .available_class_7').text(val);
                         }
                         $(".per-row").removeClass("current_val");

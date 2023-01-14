@@ -32,6 +32,7 @@ class CreateProductsTable extends Migration
             $table->boolean('offering_gift_message')->nullable();
             $table->boolean('gift_wrap_available')->nullable();
             $table->string('varition_type_data', 191)->nullable();
+            $table->text('variation')->nullable();
             $table->foreignId('region_publication_id')->nullable();
             $table->foreignId('category_id');
             $table->foreignId('brand_id')->nullable();
