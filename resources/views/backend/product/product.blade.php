@@ -158,7 +158,7 @@
                                 <form method="post" id="add_vital_info">
                                     @csrf
                                     <div class="row">
-                                        <input type="hidden" name="vital_info_id" id="vital_info_id" value="-1" />
+                                        <input type="hidden" name="vital_info_id" id="vital_info_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -268,7 +268,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="outer_material" id="outer_material" class="form-control" placeholder="Enter Outer Material" />
+                                                    <input name="outer_material" id="outer_material" @if($productInfo && $productInfo->ProductDetail) value="{{$productInfo->outer_material}}" @endif class="form-control" placeholder="Enter Outer Material" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -341,8 +341,8 @@
                                         <input type="hidden" value="0" name="hidden_value_5" id="hidden_value_5" />
                                         <input type="hidden" value="0" name="hidden_value_6" id="hidden_value_6" />
                                         <input type="hidden" value="0" name="hidden_value_7" id="hidden_value_7" />
-                                        <input class="selected_variation" type="" name="selected_variation[]" id="selected_variation[]" />
-                                        <input type="hidden" name="product_variant_info_id" id="product_variant_info_id" />
+                                        <input class="selected_variation" type="hidden" name="selected_variation[]" id="selected_variation[]" />
+                                        <input type="hidden" name="product_variant_info_id" id="product_variant_info_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif />
 
                                         <div class="col-md-12">
                                             <div class="row" id="variation_type_content"></div>
@@ -461,7 +461,7 @@
                                 <form method="post" id="add_product_detail_info">
                                     @csrf
                                     <div class="row">
-                                        <input type="hidden" name="product_offer_id" id="product_offer_id" />
+                                        <input type="hidden" name="product_offer_id" id="product_offer_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -471,7 +471,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input name="seller_sku" id="seller_sku" class="form-control" placeholder="Enter Seller SKU" />
+                                                    <input name="seller_sku" id="seller_sku" @if($productInfo && $productInfo->ProductDetail) value="{{$productInfo->seller_sku}}" @endif class="form-control" placeholder="Enter Seller SKU" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -479,7 +479,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="tax_code" id="tax_code" class="form-control" placeholder="Enter Product Tax Code" />
+                                                    <input name="tax_code" id="tax_code" @if($productInfo && $productInfo->ProductDetail) value="{{$productInfo->tax_code}}" @endif class="form-control" placeholder="Enter Product Tax Code" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -491,7 +491,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="your_price">AED</span>
                                                         </div>
-                                                        <input type="text" name="your_price" id="your_price" @if($productInfo) value="{{$productInfo->your_price}}" @endif  class="form-control" placeholder="Ex: 50.00" aria-describedby="your_price" required>
+                                                        <input type="text" name="your_price" id="your_price" @if($productInfo) value="{{$productInfo->your_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-describedby="your_price" required>
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -555,7 +555,7 @@
                                                     <select class="form-select" name="condition_id" id="condition_id" style="width: 100%;">
                                                         <option value="">Select Option</option>
                                                         @foreach($conditions AS $condition)
-                                                        <option value="{{ $condition->id }}">{{ $condition->title }}
+                                                        <option value="{{ $condition->id }}" @if($productInfo && $productInfo->ProductDetail && $productInfo->ProductDetail->condition_id==$condition->id) selected @endif>{{ $condition->title }}
                                                         </option>
                                                         @endforeach
                                                     </select>
@@ -566,7 +566,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <textarea class="form-control" name="condition_note" id="condition_note"></textarea>
+                                                    <textarea class="form-control" name="condition_note" id="condition_note" @if($productInfo && $productInfo->ProductDetail) value="{{$productInfo->condition_note}}"  @endif></textarea>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -605,7 +605,7 @@
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="gift_wrap_available" id="gift_wrap_available" class="form-select">
                                                         <option value="">Select Option</option>
-                                                        <option  @if($productInfo && $productInfo->gift_wrap_available==1) selected @endif value="1">Yes</option>
+                                                        <option @if($productInfo && $productInfo->gift_wrap_available==1) selected @endif value="1">Yes</option>
                                                         <option @if($productInfo && $productInfo->gift_wrap_available==0) selected @endif value="0">No</option>
                                                     </select>
                                                 </div>
@@ -632,7 +632,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="restock_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" name="restock_date" id="restock_date" class="form-control" aria-describedby="restock_date1">
+                                                        <input type="date" name="restock_date" id="restock_date" @if($productInfo && $productInfo->ProductDetail) value="{{$productInfo->restock_date}}" @endif class="form-control" aria-describedby="restock_date1">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -658,45 +658,45 @@
                                     <form method="post" id="add_product_compliance">
                                         @csrf
                                         <div class="row">
-                                            <input type="hidden" name="product_compliance_id" id="product_compliance_id" />
+                                            <input type="hidden" name="product_compliance_id" id="product_compliance_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                             <div class="col-md-4 mt-md-3">
                                                 <label class="col-form-label float-md-right" style="font-size: 14px;">Battery Cell Type</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
                                                 <select name="battery_cell_type" id="battery_cell_type" class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="Polymer Lithium Ion">Polymer Lithium Ion</option>
-                                                    <option value="Lithium Ion">Lithium Ion</option>
-                                                    <option value="Alkaline">Alkaline</option>
-                                                    <option value="Lithium Manganese Dioxide">Lithium Manganese Dioxide</option>
-                                                    <option value="Manganese">Manganese</option>
-                                                    <option value="Sealed Lead Acid">Sealed Lead Acid</option>
-                                                    <option value="Lithium Polymer">Lithium Polymer</option>
-                                                    <option value="Nicad">Nicad</option>
-                                                    <option value="Lithium Metal">Lithium Metal</option>
-                                                    <option value="Nimh">Nimh</option>
-                                                    <option value="Lead Calcium">Lead Calcium</option>
-                                                    <option value="Aluminium Oxygen">Aluminium Oxygen</option>
-                                                    <option value="Zinc">Zinc</option>
-                                                    <option value="Lead Acid">Lead Acid</option>
-                                                    <option value="Silver Zinc">Silver Zinc</option>
-                                                    <option value="Zinc Chloride">Zinc Chloride</option>
-                                                    <option value="Lithium Cobalt">Lithium Cobalt</option>
-                                                    <option value="Lithium Phosphate">Lithium Phosphate</option>
-                                                    <option value="Lead Acid Agm">Lead Acid Agm</option>
-                                                    <option value="Lithium Thionyl Chloride">Lithium Thionyl Chloride</option>
-                                                    <option value="Lithium">Lithium</option>
-                                                    <option value="Lithium Nickel Cobalt Aluminum">Lithium Nickel Cobalt Aluminum</option>
-                                                    <option value="Lithium Nickel Manganese Cobalt">Lithium Nickel Manganese Cobalt</option>
-                                                    <option value="Mercury Oxide">Mercury Oxide</option>
-                                                    <option value="Nickel Iron">Nickel Iron</option>
-                                                    <option value="Lithium Air">Lithium Air</option>
-                                                    <option value="Nickel Oxyhydroxide">Nickel Oxyhydroxide</option>
-                                                    <option value="Zinc Carbon">Zinc Carbon</option>
-                                                    <option value="Nickel Zinc">Nickel Zinc</option>
-                                                    <option value="Lithium Titanate">Lithium Titanate</option>
-                                                    <option value="Silver Calcium">Silver Calcium</option>
-                                                    <option value="Zinc Air">Zinc Air</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Polymer Lithium Ion') selected @endif value="Polymer Lithium Ion">Polymer Lithium Ion</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Ion') selected @endif value="Lithium Ion">Lithium Ion</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Alkaline') selected @endif value="Alkaline">Alkaline</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Manganese Dioxide') selected @endif value="Lithium Manganese Dioxide">Lithium Manganese Dioxide</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Manganese') selected @endif value="Manganese">Manganese</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Sealed Lead Acid') selected @endif value="Sealed Lead Acid">Sealed Lead Acid</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Polymer') selected @endif value="Lithium Polymer">Lithium Polymer</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Nicad') selected @endif value="Nicad">Nicad</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Metal') selected @endif value="Lithium Metal">Lithium Metal</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Nimh') selected @endif value="Nimh">Nimh</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lead Calcium') selected @endif value="Lead Calcium">Lead Calcium</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Aluminium Oxygen') selected @endif value="Aluminium Oxygen">Aluminium Oxygen</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Zinc') selected @endif value="Zinc">Zinc</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lead Acid') selected @endif value="Lead Acid">Lead Acid</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Silver Zinc') selected @endif value="Silver Zinc">Silver Zinc</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Zinc Chloride') selected @endif value="Zinc Chloride">Zinc Chloride</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Cobalt') selected @endif value="Lithium Cobalt">Lithium Cobalt</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Phosphate') selected @endif value="Lithium Phosphate">Lithium Phosphate</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lead Acid Agm') selected @endif value="Lead Acid Agm">Lead Acid Agm</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Thionyl Chloride') selected @endif value="Lithium Thionyl Chloride">Lithium Thionyl Chloride</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium') selected @endif value="Lithium">Lithium</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Nickel Cobalt Aluminum') selected @endif value="Lithium Nickel Cobalt Aluminum">Lithium Nickel Cobalt Aluminum</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Nickel Manganese Cobalt') selected @endif value="Lithium Nickel Manganese Cobalt">Lithium Nickel Manganese Cobalt</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Mercury Oxide') selected @endif value="Mercury Oxide">Mercury Oxide</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Nickel Iron') selected @endif value="Nickel Iron">Nickel Iron</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Air') selected @endif value="Lithium Air">Lithium Air</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Nickel Oxyhydroxide') selected @endif value="Nickel Oxyhydroxide">Nickel Oxyhydroxide</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Zinc Carbon') selected @endif value="Zinc Carbon">Zinc Carbon</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Nickel Zinc') selected @endif value="Nickel Zinc">Nickel Zinc</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Lithium Titanate') selected @endif value="Lithium Titanate">Lithium Titanate</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Silver Calcium') selected @endif value="Silver Calcium">Silver Calcium</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_cell_type=='Zinc Air') selected @endif value="Zinc Air">Zinc Air</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -706,23 +706,23 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <select name="battery_type" id="battery_type" class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="Aa">Aa</option>
-                                                    <option value="Aaa">Aaa</option>
-                                                    <option value="Lithium Ion">Lithium Ion</option>
-                                                    <option value="A">A</option>
-                                                    <option value="Cr2">Cr2</option>
-                                                    <option value="C">C</option>
-                                                    <option value="D">D</option>
-                                                    <option value="Cr5">Cr5</option>
-                                                    <option value="Aaaa">Aaaa</option>
-                                                    <option value="P76">P76</option>
-                                                    <option value="Product Specific">Product Specific</option>
-                                                    <option value="Lithium Metal">Lithium Metal</option>
-                                                    <option value="Cr123A">Cr123A</option>
-                                                    <option value="12V">12V</option>
-                                                    <option value="9V">9V</option>
-                                                    <option value="CR2032">CR2032</option>
-                                                    <option value="CR2430">CR2430</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Aa') selected @endif value="Aa">Aa</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Aaa') selected @endif value="Aaa">Aaa</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Lithium Ion') selected @endif value="Lithium Ion">Lithium Ion</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='A') selected @endif value="A">A</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Cr2') selected @endif value="Cr2">Cr2</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='C') selected @endif value="C">C</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='D') selected @endif value="D">D</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Cr5') selected @endif value="Cr5">Cr5</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Aaaa') selected @endif value="Aaaa">Aaaa</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='P76') selected @endif value="P76">P76</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Product Specific') selected @endif value="Product Specific">Product Specific</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Lithium Metal') selected @endif value="Lithium Metal">Lithium Metal</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='Cr123A') selected @endif value="Cr123A">Cr123A</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='12V') selected @endif value="12V">12V</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='9V') selected @endif value="9V">9V</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='CR2032') selected @endif value="CR2032">CR2032</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_type=='CR2430') selected @endif value="CR2430">CR2430</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -731,7 +731,7 @@
                                                     of Batteries Required</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input name="number_of_battery_require" id="number_of_battery_require" class="form-control" placeholder="Number of Batteries Required" />
+                                                <input name="number_of_battery_require" id="number_of_battery_require" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->number_of_battery_require}}" @endif class="form-control" placeholder="Number of Batteries Required" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -740,20 +740,20 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input name="lithium_battery_energy_content" id="lithium_battery_energy_content" class="form-control" placeholder="1, 2, 3" />
+                                                        <input name="lithium_battery_energy_content" id="lithium_battery_energy_content" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->lithium_battery_energy_content}}" @endif class="form-control" placeholder="1, 2, 3" />
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select name="lithium_battery_energy_content_unit" id="lithium_battery_energy_content_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="Kilowatt Hours">Kilowatt Hours</option>
-                                                            <option value="Joules">Joules</option>
-                                                            <option value="Cubic Feet">Cubic Feet</option>
-                                                            <option value="Watt Hours">Watt Hours</option>
-                                                            <option value="Milliampere Hour (mAh)">Milliampere Hour (mAh)</option>
-                                                            <option value="Cubic Meters">Cubic Meters</option>
-                                                            <option value="Milliamp Hours (mAh)">Milliamp Hours (mAh)</option>
-                                                            <option value="Milliampere Second (mAs)">Milliampere Second (mAs)</option>
-                                                            <option value="British Thermal Units (BTUs)">British Thermal Units (BTUs)</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='Kilowatt Hours') selected @endif value="Kilowatt Hours">Kilowatt Hours</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='Joules') selected @endif value="Joules">Joules</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='Cubic Feet') selected @endif value="Cubic Feet">Cubic Feet</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='Watt Hours') selected @endif value="Watt Hours">Watt Hours</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='Milliampere Hour (mAh)') selected @endif value="Milliampere Hour (mAh)">Milliampere Hour (mAh)</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='Cubic Meters') selected @endif value="Cubic Meters">Cubic Meters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='Milliamp Hours (mAh)') selected @endif value="Milliamp Hours (mAh)">Milliamp Hours (mAh)</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='Milliampere Second (mAs)') selected @endif value="Milliampere Second (mAs)">Milliampere Second (mAs)</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_energy_content_unit=='British Thermal Units (BTUs)') selected @endif value="British Thermal Units (BTUs)">British Thermal Units (BTUs)</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -765,9 +765,9 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <select name="lithium_battery_packaging" id="lithium_battery_packaging" class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">Batteries Packed With Equipment</option>
-                                                    <option value="2">Batteries Contained In Equipment</option>
-                                                    <option value="3">Batteries Only</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_packaging==1) selected @endif value="1">Batteries Packed With Equipment</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_packaging==2) selected @endif value="2">Batteries Contained In Equipment</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_packaging==3) selected @endif value="3">Batteries Only</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -777,8 +777,8 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <select name="battery_include" id="battery_include" class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">Yes</option>
-                                                    <option value="0">No</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_include==1) selected @endif value="1">Yes</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_include==0) selected @endif value="0">No</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -789,8 +789,8 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <select name="battery_require" id="battery_require" class="form-select">
                                                     <option value="">Select Option</option>
-                                                    <option value="1">Yes</option>
-                                                    <option value="0">No</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_include==1) selected @endif value="1">Yes</option>
+                                                    <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_include==0) selected @endif value="0">No</option>
                                                 </select>
                                             </div>
                                             <!-- End -->
@@ -800,18 +800,18 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input name="battery_weight" id="battery_weight" class="form-control" placeholder="150" />
+                                                        <input name="battery_weight" id="battery_weight" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->battery_weight}}" @endif class="form-control" placeholder="150" />
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select name="battery_weight_unit" id="battery_weight_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="Pounds">Pounds</option>
-                                                            <option value="Kilograms">Kilograms</option>
-                                                            <option value="Grams">Grams</option>
-                                                            <option value="Hundredths Pounds">Hundredths Pounds</option>
-                                                            <option value="Milligrams">Milligrams</option>
-                                                            <option value="Tons">Tons</option>
-                                                            <option value="Ounces">Ounces</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_weight_unit=="Pounds") selected @endif value="Pounds">Pounds</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_weight_unit=="Kilograms") selected @endif value="Kilograms">Kilograms</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_weight_unit=="Grams") selected @endif value="Grams">Grams</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_weight_unit=="Hundredths") selected @endif value="Hundredths Pounds">Hundredths Pounds</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_weight_unit=="Milligrams") selected @endif value="Milligrams">Milligrams</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_weight_unit=="Tons") selected @endif value="Tons">Tons</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->battery_weight_unit=="Ounces") selected @endif value="Ounces">Ounces</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -822,7 +822,7 @@
                                                     of Lithium Metal Cells</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input name="number_of_lithium_metal_cell" id="number_of_lithium_metal_cell" class="form-control" placeholder="1, 2, 3" />
+                                                <input name="number_of_lithium_metal_cell" id="number_of_lithium_metal_cell" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->number_of_lithium_metal_cell}}" @endif class="form-control" placeholder="1, 2, 3" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -830,7 +830,7 @@
                                                     of Lithium-ion Cells</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input name="number_of_lithium_ion_cell" id="number_of_lithium_ion_cell" class="form-control" placeholder="1, 2, 3" />
+                                                <input name="number_of_lithium_ion_cell" id="number_of_lithium_ion_cell" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->number_of_lithium_ion_cell}}" @endif class="form-control" placeholder="1, 2, 3" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -839,18 +839,18 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input name="lithium_battery_weight" id="lithium_battery_weight" class="form-control" placeholder="0.9" />
+                                                        <input name="lithium_battery_weight" id="lithium_battery_weight" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->lithium_battery_weight}}" @endif class="form-control" placeholder="0.9" />
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select name="lithium_battery_weight_unit" id="lithium_battery_weight_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="Pounds">Pounds</option>
-                                                            <option value="Kilograms">Kilograms</option>
-                                                            <option value="Grams">Grams</option>
-                                                            <option value="Hundredths Pounds">Hundredths Pounds</option>
-                                                            <option value="Milligrams">Milligrams</option>
-                                                            <option value="Tons">Tons</option>
-                                                            <option value="Ounces">Ounces</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_weight_unit=="Pounds") selected @endif value="Pounds">Pounds</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_weight_unit=="Kilograms") selected @endif value="Kilograms">Kilograms</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_weight_unit=="Grams") selected @endif value="Grams">Grams</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_weight_unit=="Hundredths") selected @endif value="Hundredths Pounds">Hundredths Pounds</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_weight_unit=="Milligrams") selected @endif value="Milligrams">Milligrams</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_weight_unit=="Tons") selected @endif value="Tons">Tons</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->lithium_battery_weight_unit=="Ounces") selected @endif value="Ounces">Ounces</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -861,7 +861,7 @@
                                                     United Nations Regulatory Id</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input name="regulatory_id" id="regulatory_id" class="form-control" placeholder="UN1950" />
+                                                <input name="regulatory_id" id="regulatory_id" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->regulatory_id}}" @endif class="form-control" placeholder="UN1950" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -869,7 +869,7 @@
                                                     Data Sheet URL</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input name="safety_data_sheet_url" id="safety_data_sheet_url" class="form-control" placeholder="https://www.facebook.com/" />
+                                                <input name="safety_data_sheet_url" id="safety_data_sheet_url" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->safety_data_sheet_url}}" @endif class="form-control" placeholder="https://www.facebook.com/" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -878,29 +878,29 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input name="volume" id="volume" class="form-control" placeholder="34.78" />
+                                                        <input name="volume" id="volume" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->volume}}" @endif class="form-control" placeholder="34.78" />
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select name="volume_unit" id="volume_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="Cups">Cups</option>
-                                                            <option value="Microliters">Microliters</option>
-                                                            <option value="Cubic Feet">Cubic Feet</option>
-                                                            <option value="Centiliters">Centiliters</option>
-                                                            <option value="Gallons">Gallons</option>
-                                                            <option value="Quarts">Quarts</option>
-                                                            <option value="Nanoliters">Nanoliters</option>
-                                                            <option value="Liters">Liters</option>
-                                                            <option value="Picoliters">Picoliters</option>
-                                                            <option value="Fluid Ounces">Fluid Ounces</option>
-                                                            <option value="Cubic Meters">Cubic Meters</option>
-                                                            <option value="Pints">Pints</option>
-                                                            <option value="Cubic Yards">Cubic Yards</option>
-                                                            <option value="Cubic Inches">Cubic Inches</option>
-                                                            <option value="Imperial Gallons">Imperial Gallons</option>
-                                                            <option value="Milliliters">Milliliters</option>
-                                                            <option value="Cubic Centimeters">Cubic Centimeters</option>
-                                                            <option value="Deciliters">Deciliters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Cups") selected @endif value="Cups">Cups</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Microliters") selected @endif value="Microliters">Microliters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Cubic Feet") selected @endif value="Cubic Feet">Cubic Feet</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Centiliters") selected @endif value="Centiliters">Centiliters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Gallons") selected @endif value="Gallons">Gallons</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Quarts") selected @endif value="Quarts">Quarts</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Nanoliters") selected @endif value="Nanoliters">Nanoliters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Liters") selected @endif value="Liters">Liters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Picoliters") selected @endif value="Picoliters">Picoliters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Fluid Ounces") selected @endif value="Fluid Ounces">Fluid Ounces</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Cubic Meters") selected @endif value="Cubic Meters">Cubic Meters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Pints") selected @endif value="Pints">Pints</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Cubic Yards") selected @endif value="Cubic Yards">Cubic Yards</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Cubic Inches") selected @endif value="Cubic Inches">Cubic Inches</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Imperial Gallons") selected @endif value="Imperial Gallons">Imperial Gallons</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Milliliters") selected @endif value="Milliliters">Milliliters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Cubic Centimeters") selected @endif value="Cubic Centimeters">Cubic Centimeters</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->volume_unit=="Deciliters") selected @endif value="Deciliters">Deciliters</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -911,7 +911,7 @@
                                                     Point</label>
                                             </div>
                                             <div class="col-md-8 mt-md-3">
-                                                <input name="flash_point" id="flash_point" class="form-control" placeholder="180" />
+                                                <input name="flash_point" id="flash_point" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->flash_point}}" @endif class="form-control" placeholder="180" />
                                             </div>
                                             <!-- End -->
                                             <div class="col-md-4 mt-md-3">
@@ -921,18 +921,18 @@
                                             <div class="col-md-8 mt-md-3">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input name="item_weight" id="item_weight" class="form-control" placeholder="2.33, 20.75, 10000.00" />
+                                                        <input name="item_weight" id="item_weight" @if($productInfo && $productInfo->ProductCompliance) value="{{$productInfo->ProductCompliance->item_weight}}" @endif class="form-control" placeholder="2.33, 20.75, 10000.00" />
                                                     </div>
                                                     <div class="col-md-6">
                                                         <select name="item_weight_unit" id="item_weight_unit" class="form-select">
                                                             <option value="">Select Option</option>
-                                                            <option value="Pounds">Pounds</option>
-                                                            <option value="Kilograms">Kilograms</option>
-                                                            <option value="Grams">Grams</option>
-                                                            <option value="Hundredths Pounds">Hundredths Pounds</option>
-                                                            <option value="Milligrams">Milligrams</option>
-                                                            <option value="Tons">Tons</option>
-                                                            <option value="Ounces">Ounces</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->item_weight_unit=="Pounds") selected @endif value="Pounds">Pounds</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->item_weight_unit=="Kilograms") selected @endif value="Kilograms">Kilograms</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->item_weight_unit=="Grams") selected @endif value="Grams">Grams</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->item_weight_unit=="Hundredths") selected @endif value="Hundredths Pounds">Hundredths Pounds</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->item_weight_unit=="Milligrams") selected @endif value="Milligrams">Milligrams</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->item_weight_unit=="Tons") selected @endif value="Tons">Tons</option>
+                                                            <option @if($productInfo && $productInfo->ProductCompliance && $productInfo->ProductCompliance->item_weight_unit=="Ounces") selected @endif value="Ounces">Ounces</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -980,7 +980,7 @@
                                 <form action="" method="post" id="add_product_image_info" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
-                                        <input type="hidden" name="product_image_id" id="product_image_id" />
+                                        <input type="hidden" name="product_image_id" id="product_image_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                         <div class="col-md-2">
                                             <div class="drop-zone">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
@@ -1037,7 +1037,7 @@
                                 <form method="post" id="add_product_description_info">
                                     @csrf
                                     <div class="row">
-                                        <input type="hidden" name="product_description_id" id="product_description_id" />
+                                        <input type="hidden" name="product_description_id" id="product_description_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -1047,7 +1047,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <textarea class="form-control" name="product_description" id="product_description"></textarea>
+                                                    <textarea class="form-control" name="product_description" id="product_description" @if($productInfo && $productInfo->ProductDetail) value="{{$productInfo->description}}"  @endif></textarea>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-12 mt-md-3">
@@ -1074,11 +1074,34 @@
                                         <form method="post" id="add_product_keyword">
                                             @csrf
                                             <div class="row">
-                                                <input type="hidden" name="product_keyword_id" id="product_keyword_id" />
+                                                <input type="hidden" name="product_keyword_id" id="product_keyword_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right" style="font-size: 14px;">Key Product Features</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
+                                                @if($productInfo && count($productInfo->ProductKeyword) > 0)
+                                                <div class="col-md-8 mt-md-3">
+                                                    @foreach($productInfo->ProductKeyword as $ProductKeyword)
+
+                                                    <div id="row">
+                                                        <div class="input-group m-3">
+                                                            <div class="input-group-prepend">
+                                                                <button class="btn btn-danger" id="DeleteRow" type="button">
+                                                                    <i class="mdi mdi-delete"></i>
+                                                                </button>
+                                                            </div>
+                                                            <input type="text" name="keyword[]" id="keyword" value="{{$ProductKeyword->keyword}}" class="form-control m-input">
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+
+                                                    <div id="newinput"></div>
+                                                    <button id="rowAdder" type="button" class="btn btn-dark">
+                                                        <i class="fas fa-plus-square"></i> ADD
+                                                    </button>
+                                                </div>
+                                                <!-- End -->
+                                                @else
                                                 <div class="col-md-8 mt-md-3">
                                                     <div id="row">
                                                         <div class="input-group m-3">
@@ -1097,6 +1120,7 @@
                                                     </button>
                                                 </div>
                                                 <!-- End -->
+                                                @endif
                                                 <div class="col-md-12 mt-md-3">
                                                     <button class="float-right btn btn-success btn-sm ml-2">Save and
                                                         finish</button>
@@ -1117,7 +1141,7 @@
                                 <form method="post" id="add_product_more_detail">
                                     @csrf
                                     <div class="row">
-                                        <input type="hidden" name="product_more_detail_id" id="product_more_detail_id" />
+                                        <input type="hidden" name="product_more_detail_id" id="product_more_detail_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                         <!-- Start -->
                                         <div class="col-md-10">
                                             <!-- Start Content -->
@@ -1127,7 +1151,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="closure_type" id="closure_type" class="form-control m-input" placeholder="zipper">
+                                                    <input type="text" name="closure_type" id="closure_type" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->closure_type}}" @endif class="form-control m-input" placeholder="zipper">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1135,7 +1159,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="manufacturer" id="manufacturer" class="form-control m-input" placeholder="Philips">
+                                                    <input type="text" name="manufacturer" id="manufacturer" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->manufacturer}}" @endif class="form-control m-input" placeholder="Philips">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1143,7 +1167,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="manufacturer_part_number" id="manufacturer_part_number" class="form-control m-input" placeholder="SB-122">
+                                                    <input type="text" name="manufacturer_part_number" id="manufacturer_part_number" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->manufacturer_part_number}}" @endif class="form-control m-input" placeholder="SB-122">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1151,7 +1175,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="number_of_item" id="number_of_item" class="form-control m-input" placeholder="1">
+                                                    <input type="text" name="number_of_item" id="number_of_item" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->number_of_item}}" @endif class="form-control m-input" placeholder="1">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1163,7 +1187,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="release_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" name="release_date" id="release_date" class="form-control" aria-describedby="release_date">
+                                                        <input type="date" name="release_date" id="release_date" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->release_date}}" @endif class="form-control" aria-describedby="release_date">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -1172,7 +1196,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="fabric_type" id="fabric_type" class="form-control m-input" placeholder="cotton, plastic">
+                                                    <input type="text" name="fabric_type" id="fabric_type" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->fabric_type}}" @endif class="form-control m-input" placeholder="cotton, plastic">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1185,81 +1209,81 @@
                                                             <label class="col-form-label" style="font-size: 14px;">Length</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" name="item_length" id="item_length" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
+                                                            <input type="text" name="item_length" id="item_length" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->item_length}}" @endif class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select name="item_length_unit" id="item_length_unit" class="form-select">
                                                                 <option value="">Select Option</option>
-                                                                <option value="dm">Decimeter</option>
-                                                                <option value="mm">Milimeter</option>
-                                                                <option value="cm">Centimeter</option>
-                                                                <option value="m">Meter</option>
-                                                                <option value="Å">Angstrom</option>
-                                                                <option value="mil">Mil</option>
-                                                                <option value="yd">Yards</option>
-                                                                <option value="pm">Picometer</option>
-                                                                <option value="mi">Mile</option>
-                                                                <option value="in">Inch</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="hin">Hundredths Inch</option>
-                                                                <option value="nm">Nanometer</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="μm">Micrometre</option>
-                                                                <option value="km">Kilometers</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="dm") selected @endif value="dm">Decimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="mm") selected @endif value="mm">Milimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="cm") selected @endif value="cm">Centimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="m") selected @endif value="m">Meter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="Å") selected @endif value="Å">Angstrom</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="mil") selected @endif value="mil">Mil</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="yd") selected @endif value="yd">Yards</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="pm") selected @endif value="pm">Picometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="mi") selected @endif value="mi">Mile</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="in") selected @endif value="in">Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="hin") selected @endif value="hin">Hundredths Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="nm") selected @endif value="nm">Nanometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="μm") selected @endif value="μm">Micrometre</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_length_unit=="km") selected @endif value="km">Kilometers</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-12" style="text-align: left;">
                                                             <label class="col-form-label" style="font-size: 14px;">Width</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" name="item_width" id="item_width" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
+                                                            <input type="text" name="item_width" id="item_width" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->item_width}}" @endif class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select name="item_width_unit" id="item_width_unit" class="form-select">
                                                                 <option value="">Select Option</option>
-                                                                <option value="dm">Decimeter</option>
-                                                                <option value="mm">Milimeter</option>
-                                                                <option value="cm">Centimeter</option>
-                                                                <option value="m">Meter</option>
-                                                                <option value="Å">Angstrom</option>
-                                                                <option value="mil">Mil</option>
-                                                                <option value="yd">Yards</option>
-                                                                <option value="pm">Picometer</option>
-                                                                <option value="mi">Mile</option>
-                                                                <option value="in">Inch</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="hin">Hundredths Inch</option>
-                                                                <option value="nm">Nanometer</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="μm">Micrometre</option>
-                                                                <option value="km">Kilometers</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="dm") selected @endif value="dm">Decimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="mm") selected @endif value="mm">Milimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="cm") selected @endif value="cm">Centimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="m") selected @endif value="m">Meter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="Å") selected @endif value="Å">Angstrom</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="mil") selected @endif value="mil">Mil</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="yd") selected @endif value="yd">Yards</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="pm") selected @endif value="pm">Picometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="mi") selected @endif value="mi">Mile</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="in") selected @endif value="in">Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="hin") selected @endif value="hin">Hundredths Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="nm") selected @endif value="nm">Nanometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="μm") selected @endif value="μm">Micrometre</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_width_unit=="km") selected @endif value="km">Kilometers</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-12" style="text-align: left;">
                                                             <label class="col-form-label" style="font-size: 14px;">Height</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" name="item_height" id="item_height" class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
+                                                            <input type="text" name="item_height" id="item_height" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->item_height}}" @endif class="form-control m-input" placeholder="10.33, 5.50, 15000.0">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select name="item_height_unit" id="item_height_unit" class="form-select">
                                                                 <option value="">Select Option</option>
-                                                                <option value="dm">Decimeter</option>
-                                                                <option value="mm">Milimeter</option>
-                                                                <option value="cm">Centimeter</option>
-                                                                <option value="m">Meter</option>
-                                                                <option value="Å">Angstrom</option>
-                                                                <option value="mil">Mil</option>
-                                                                <option value="yd">Yards</option>
-                                                                <option value="pm">Picometer</option>
-                                                                <option value="mi">Mile</option>
-                                                                <option value="in">Inch</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="hin">Hundredths Inch</option>
-                                                                <option value="nm">Nanometer</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="μm">Micrometre</option>
-                                                                <option value="km">Kilometers</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="dm") selected @endif value="dm">Decimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="mm") selected @endif value="mm">Milimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="cm") selected @endif value="cm">Centimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="m") selected @endif value="m">Meter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="Å") selected @endif value="Å">Angstrom</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="mil") selected @endif value="mil">Mil</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="yd") selected @endif value="yd">Yards</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="pm") selected @endif value="pm">Picometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="mi") selected @endif value="mi">Mile</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="in") selected @endif value="in">Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="hin") selected @endif value="hin">Hundredths Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="nm") selected @endif value="nm">Nanometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="μm") selected @endif value="μm">Micrometre</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->item_height_unit=="km") selected @endif value="km">Kilometers</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1277,27 +1301,27 @@
                                                                 Height</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" name="package_height" id="package_height" class="form-control m-input" placeholder="3.45">
+                                                            <input type="text" name="package_height" id="package_height" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->package_height}}" @endif class="form-control m-input" placeholder="3.45">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select name="package_height_unit" id="package_height_unit" class="form-select">
                                                                 <option value="">Select Option</option>
-                                                                <option value="dm">Decimeter</option>
-                                                                <option value="mm">Milimeter</option>
-                                                                <option value="cm">Centimeter</option>
-                                                                <option value="m">Meter</option>
-                                                                <option value="Å">Angstrom</option>
-                                                                <option value="mil">Mil</option>
-                                                                <option value="yd">Yards</option>
-                                                                <option value="pm">Picometer</option>
-                                                                <option value="mi">Mile</option>
-                                                                <option value="in">Inch</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="hin">Hundredths Inch</option>
-                                                                <option value="nm">Nanometer</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="μm">Micrometre</option>
-                                                                <option value="km">Kilometers</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="dm") selected @endif value="dm">Decimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="mm") selected @endif value="mm">Milimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="cm") selected @endif value="cm">Centimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="m") selected @endif value="m">Meter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="Å") selected @endif value="Å">Angstrom</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="mil") selected @endif value="mil">Mil</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="yd") selected @endif value="yd">Yards</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="pm") selected @endif value="pm">Picometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="mi") selected @endif value="mi">Mile</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="in") selected @endif value="in">Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="hin") selected @endif value="hin">Hundredths Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="nm") selected @endif value="nm">Nanometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="μm") selected @endif value="μm">Micrometre</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_height_unit=="km") selected @endif value="km">Kilometers</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-12" style="text-align: left;">
@@ -1305,27 +1329,27 @@
                                                                 Length</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" name="package_length" id="package_length" class="form-control m-input" placeholder="400, 2, 3, 3.54">
+                                                            <input type="text" name="package_length" id="package_length" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->package_length}}" @endif class="form-control m-input" placeholder="400, 2, 3, 3.54">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select name="package_length_unit" id="package_length_unit" class="form-select">
                                                                 <option value="">Select Option</option>
-                                                                <option value="dm">Decimeter</option>
-                                                                <option value="mm">Milimeter</option>
-                                                                <option value="cm">Centimeter</option>
-                                                                <option value="m">Meter</option>
-                                                                <option value="Å">Angstrom</option>
-                                                                <option value="mil">Mil</option>
-                                                                <option value="yd">Yards</option>
-                                                                <option value="pm">Picometer</option>
-                                                                <option value="mi">Mile</option>
-                                                                <option value="in">Inch</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="hin">Hundredths Inch</option>
-                                                                <option value="nm">Nanometer</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="μm">Micrometre</option>
-                                                                <option value="km">Kilometers</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="dm") selected @endif value="dm">Decimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="mm") selected @endif value="mm">Milimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="cm") selected @endif value="cm">Centimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="m") selected @endif value="m">Meter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="Å") selected @endif value="Å">Angstrom</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="mil") selected @endif value="mil">Mil</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="yd") selected @endif value="yd">Yards</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="pm") selected @endif value="pm">Picometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="mi") selected @endif value="mi">Mile</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="in") selected @endif value="in">Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="hin") selected @endif value="hin">Hundredths Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="nm") selected @endif value="nm">Nanometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="μm") selected @endif value="μm">Micrometre</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_length_unit=="km") selected @endif value="km">Kilometers</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-12" style="text-align: left;">
@@ -1333,27 +1357,26 @@
                                                                 Width</label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="text" name="package_width" id="package_width" class="form-control m-input" placeholder="400, 2, 3, 3.54">
+                                                            <input type="text" name="package_width" id="package_width" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->package_width}}" @endif class="form-control m-input" placeholder="400, 2, 3, 3.54">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <select name="package_width_unit" id="package_width_unit" class="form-select">
-                                                                <option value="">Select Option</option>
-                                                                <option value="dm">Decimeter</option>
-                                                                <option value="mm">Milimeter</option>
-                                                                <option value="cm">Centimeter</option>
-                                                                <option value="m">Meter</option>
-                                                                <option value="Å">Angstrom</option>
-                                                                <option value="mil">Mil</option>
-                                                                <option value="yd">Yards</option>
-                                                                <option value="pm">Picometer</option>
-                                                                <option value="mi">Mile</option>
-                                                                <option value="in">Inch</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="hin">Hundredths Inch</option>
-                                                                <option value="nm">Nanometer</option>
-                                                                <option value="ft">Feet</option>
-                                                                <option value="μm">Micrometre</option>
-                                                                <option value="km">Kilometers</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="dm") selected @endif value="dm">Decimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="mm") selected @endif value="mm">Milimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="cm") selected @endif value="cm">Centimeter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="m") selected @endif value="m">Meter</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="Å") selected @endif value="Å">Angstrom</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="mil") selected @endif value="mil">Mil</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="yd") selected @endif value="yd">Yards</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="pm") selected @endif value="pm">Picometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="mi") selected @endif value="mi">Mile</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="in") selected @endif value="in">Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="hin") selected @endif value="hin">Hundredths Inch</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="nm") selected @endif value="nm">Nanometer</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="ft") selected @endif value="ft">Feet</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="μm") selected @endif value="μm">Micrometre</option>
+                                                                <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_width_unit=="km") selected @endif value="km">Kilometers</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1364,18 +1387,18 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-4 mt-md-3">
-                                                    <input name="package_weight" id="package_weight" class="form-control" placeholder="45" />
+                                                    <input name="package_weight" id="package_weight" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->package_weight}}" @endif class="form-control" placeholder="45" />
                                                 </div>
                                                 <div class="col-md-4 mt-md-3">
                                                     <select name="package_weight_unit" id="package_weight_unit" class="form-select">
                                                         <option value="">Select Option</option>
-                                                        <option value="lb">Pound</option>
-                                                        <option value="kg">Kilogram</option>
-                                                        <option value="gm">Gram</option>
-                                                        <option value="hlb">Hundredths Pounds</option>
-                                                        <option value="mg">Milligram</option>
-                                                        <option value="tn">Ton</option>
-                                                        <option value="oz">Ounce</option>
+                                                        <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_weight_unit=="lb") selected @endif value="lb">Pound</option>
+                                                        <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_weight_unit=="kg") selected @endif value="kg">Kilogram</option>
+                                                        <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_weight_unit=="gm") selected @endif value="gm">Gram</option>
+                                                        <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_weight_unit=="hlb") selected @endif value="hlb">Hundredths Pounds</option>
+                                                        <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_weight_unit=="mg") selected @endif value="mg">Milligram</option>
+                                                        <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_weight_unit=="tn") selected @endif value="tn">Ton</option>
+                                                        <option @if($productInfo && $productInfo->ProductMoreDetail && $productInfo->ProductMoreDetail->package_weight_unit=="oz") selected @endif value="oz">Ounce</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
@@ -1384,7 +1407,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="league_name" id="league_name" class="form-control m-input" placeholder="MLB">
+                                                    <input type="text" name="league_name" id="league_name" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->league_name}}" @endif class="form-control m-input" placeholder="MLB">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1392,7 +1415,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <textarea class="form-control" name="warranty_description" id="warranty_description" placeholder="Manufacturer warranty for 90 days from date of purchase"></textarea>
+                                                    <textarea class="form-control" name="warranty_description" id="warranty_description" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->warranty_description}}" @endif placeholder="Manufacturer warranty for 90 days from date of purchase"></textarea>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1402,9 +1425,9 @@
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="target_gender" id="target_gender" class="form-select">
                                                         <option value="">Select Option</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Unisex">Unisex</option>
+                                                        <option @if($productInfo && $productInfo->ProductDetail && $productInfo->ProductDetail->target_gender=="Male") selected @endif value="Male">Male</option>
+                                                        <option @if($productInfo && $productInfo->ProductDetail && $productInfo->ProductDetail->target_gender=="Female") selected @endif value="Female">Female</option>
+                                                        <option @if($productInfo && $productInfo->ProductDetail && $productInfo->ProductDetail->target_gender=="Unisex") selected @endif value="Unisex">Unisex</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
@@ -1413,7 +1436,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="team_name" id="team_name" class="form-control m-input" placeholder="Arsenal">
+                                                    <input type="text" name="team_name" id="team_name" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->team_name}}" @endif class="form-control m-input" placeholder="Arsenal">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1421,7 +1444,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="age_range_description" id="age_range_description" class="form-control m-input" placeholder="3 months">
+                                                    <input type="text" name="age_range_description" id="age_range_description" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->age_range_description}}" @endif class="form-control m-input" placeholder="3 months">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1429,7 +1452,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="lining_description" id="lining_description" class="form-control m-input" placeholder="with warm lining">
+                                                    <input type="text" name="lining_description" id="lining_description" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->lining_description}}" @endif class="form-control m-input" placeholder="with warm lining">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1437,7 +1460,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="strap_type" id="strap_type" class="form-control m-input" placeholder="ankle-wrap">
+                                                    <input type="text" name="strap_type" id="strap_type" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->strap_type}}" @endif class="form-control m-input" placeholder="ankle-wrap">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1445,7 +1468,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="handle_type" id="handle_type" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="handle_type" id="handle_type" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->handle_type}}" @endif class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1453,7 +1476,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="number_of_compartment" id="number_of_compartment" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="number_of_compartment" id="number_of_compartment" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->number_of_compartment}}" @endif class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1461,7 +1484,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="number_of_wheel" id="number_of_wheel" class="form-control m-input" placeholder="4">
+                                                    <input type="text" name="number_of_wheel" id="number_of_wheel" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->number_of_wheel}}" @endif class="form-control m-input" placeholder="4">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1469,7 +1492,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="pocket_description" id="pocket_description" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="pocket_description" id="pocket_description" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->pocket_description}}" @endif class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1477,7 +1500,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="sheel_type" id="sheel_type" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="sheel_type" id="sheel_type" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->sheel_type}}" @endif class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1485,7 +1508,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="wheel_type" id="wheel_type" class="form-control m-input" placeholder="">
+                                                    <input type="text" name="wheel_type" id="wheel_type" @if($productInfo && $productInfo->ProductMoreDetail) value="{{$productInfo->ProductMoreDetail->wheel_type}}" @endif class="form-control m-input" placeholder="">
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-12 mt-md-3">
