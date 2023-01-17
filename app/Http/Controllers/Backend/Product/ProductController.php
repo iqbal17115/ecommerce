@@ -49,11 +49,11 @@ class ProductController extends Controller
         foreach ($selected_variations as $selected_variation) {
             if ($selected_variation == 1) {
                 array_push($variation, $request->input_size);
-                array_push($variation, $request->input_bottom_size);
-                array_push($variation, $request->input_bottom_size_map);
+                // array_push($variation, $request->input_bottom_size);
+                // array_push($variation, $request->input_bottom_size_map);
             } else if ($selected_variation == 2) {
                 array_push($variation, $request->input_color);
-                array_push($variation, $request->input_color_map);
+                // array_push($variation, $request->input_color_map);
             } else if ($selected_variation == 3) {
                 array_push($variation, $request->input_package_qty);
             } else if ($selected_variation == 4) {

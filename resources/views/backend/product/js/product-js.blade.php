@@ -1,7 +1,24 @@
 <script type="text/javascript">
     var tab_menu = [];
     var selected_variation = [];
+    function updateVariationType(variation) {
+        const manage_variation = JSON.parse(variation);
+        let pp = 1;
+            for (let property in manage_variation[0]) {
+                var b = parseInt(property);
+                var temp_variation = '';
+                // console.log(manage_variation[b+1]);
+                let myArr = Object.values(manage_variation[b+1]);
+                arr = myArr.filter((item,
+            index) => myArr.indexOf(item) === index);
+console.log(arr);
+for (let i = 0; i < arr.length; i++) {
 
+                    variationManage(manage_variation[0][property], arr[i]);
+             
+                }
+            }
+    }
     function pagination(page) {
         $.ajax({
             url: '/pagination/product-pagination-data?page=' + page,
