@@ -1527,14 +1527,14 @@
                                 </form>
                                 @if($productInfo)
                                 <!-- variantByCategory -->
-                                   <input type="text" name="category" id="{{$productInfo->category_id}}" value="">
+                                   <input type="text" name="category" id="get_category_id" value="{{$productInfo->category_id}}">
                                    <input type="text" name="variation" id="variation" value="{{$productInfo->variation}}">
                                 <script>
                                     $( document ).ready(function() {
                                         var variation = $( "#variation" ).val();
-                                        // var category = $( "#category" ).val();
-                                        // alert(category);
-                                        // variantByCategory(category);
+                                        var get_category_id = $( "#get_category_id" ).val();
+                                        // alert(get_category_id);
+                                        updateVariantByCategory(get_category_id);
                                         updateVariationType(variation);
                                     });
                                 </script>

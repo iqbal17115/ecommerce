@@ -44,7 +44,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('product-product', Crypt::encrypt(['id'=>$product->id])) }}" class="btn btn-info text-light">
+                                <a href="{{ route('product-product', ['id'=>$product->id]) }}" class="btn btn-info text-light">
                                     <i class="mdi mdi-pencil font-size-16"></i>
 </a>
                             </td>

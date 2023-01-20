@@ -1366,6 +1366,48 @@ $('#size').on('click', function(e) {
 });
 
 
+function updateVariantByCategory(category_id) {
+    $.ajax({
+        type: 'GET', //THIS NEEDS TO BE GET
+        url: 'get-category/' + category_id,
+        success: function(data) {
+            const obj = JSON.parse(data['variation_type']);
+            variation_option = '';
+
+            variation_option +=
+                '<div class="col-md-4"><label class="float-md-right">Choose variation type</label></div>';
+            for (const prop in obj) {
+                if (obj[prop] == 1) {
+                    variation_option +=
+                        '<div class="col-md-1"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="size" value="1" /><label class="form-check-label" for="size">Size</label></div></div>';
+                } else if (obj[prop] == 2) {
+                    variation_option +=
+                        '<div class="col-md-1"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="color" value="2" /><label class="form-check-label" for="color">Color</label></div></div>';
+                } else if (obj[prop] == 3) {
+                    variation_option +=
+                        '<div class="col-md-2"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="package_quantity" value="3" /><label class="form-check-label" for="package_quantity">Package Quantity</label></div></div>';
+                } else if (obj[prop] == 4) {
+                    variation_option +=
+                        '<div class="col-md-2"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="material_type" value="4" /><label class="form-check-label" for="material_type">Material Type</label></div></div>';
+                } else if (obj[prop] == 5) {
+                    variation_option +=
+                        '<div class="col-md-1"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="wattage" value="5" /><label class="form-check-label" for="wattage">Wattage</label></div></div>';
+                } else if (obj[prop] == 6) {
+                    variation_option +=
+                        '<div class="col-md-2"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="number_of_items" value="6" /><label class="form-check-label" for="number_of_items">Number Of Items</label></div></div>';
+                } else if (obj[prop] == 7) {
+                    variation_option +=
+                        '<div class="col-md-2"><div class="form-check form-check-inline"><input class="form-check-input mt-1 variation_specify" type="checkbox" id="style_name" value="7" /><label class="form-check-label" for="style_name">Style Name</label></div></div>';
+                }
+            }
+            $("#variation_type_content").empty();
+            $("#variation_type_content").append(variation_option);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+};
 function variantByCategory(category) {
     let category_id = $("#" + category.id).val();
     $.ajax({

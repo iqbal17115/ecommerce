@@ -263,16 +263,16 @@ class ProductController extends Controller
         $category = Category::find($id);
         return response()->json($category);
     }
-    public function index($id = null)
+    public function index(Request $request)
     {
-        
         $categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
         $brands = Brand::orderBy('id', 'DESC')->get();
         $materials = Material::orderBy('id', 'DESC')->get();
         $conditions = Condition::orderBy('id', 'DESC')->get();
         $productInfo = null;
+        $id = $request->id;
         if($id) {
-           $id = Crypt::decrypt($id);
+           $id = $id;
            $productInfo = Product::whereId($id)->first();
         }
         return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo'));
