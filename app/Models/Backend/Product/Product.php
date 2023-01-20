@@ -8,6 +8,7 @@ use App\Models\Backend\Product\ProductDetail;
 use App\Models\Backend\Product\ProductMoreDetail;
 use App\Models\Backend\Product\ProductKeyword;
 use App\Models\Backend\Product\ProductCompliance;
+use App\Models\Backend\Product\ProductImage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,10 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+    public function ProductImage()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
     public function ProductCompliance()
     {
         return $this->hasOne(ProductCompliance::class);
