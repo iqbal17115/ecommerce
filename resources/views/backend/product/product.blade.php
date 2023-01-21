@@ -983,8 +983,9 @@
                                         <input type="hidden" name="product_image_id" id="product_image_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                         <div class="col-md-2">
                                             <div class="drop-zone">
+                                                <!-- <img src="" class="" style="width: 150px;height: 150px;"/> -->
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input product_info_image_preview_0">
                                             </div>
                                         </div>
                                         <!-- End -->
@@ -1527,13 +1528,19 @@
                                 </form>
                                 @if($productInfo)
                                 <!-- variantByCategory -->
-                                   <input type="text" name="category" id="get_category_id" value="{{$productInfo->category_id}}">
-                                   <input type="text" name="variation" id="variation" value="{{$productInfo->variation}}">
+                                   <input type="hidden" name="category" id="get_category_id" value="{{$productInfo->category_id}}">
+                                   <input type="hidden" name="variation" id="variation" value="{{$productInfo->variation}}">
+                                   @foreach($productInfo->ProductImage as $product_info_image)
+                                   <input type="text" name="product_info_image[]" id="product_info_image_{{$product_info_image->serial}}" value="{{$product_info_image->image}}">
+                                   @endforeach
                                 <script>
                                     $( document ).ready(function() {
                                         var variation = $( "#variation" ).val();
                                         var get_category_id = $( "#get_category_id" ).val();
-                                        // alert(get_category_id);
+                                        var product_info_image_0 = $( "#product_info_image_0" ).val();
+                                        alert(product_info_image_0);
+                                        $('.product_info_image_preview_0').attr("src", 'storage/product_photo/' + product_info_image_0);
+                                        // product_info_image_preview_0
                                         updateVariantByCategory(get_category_id);
                                         updateVariationType(variation);
                                     });

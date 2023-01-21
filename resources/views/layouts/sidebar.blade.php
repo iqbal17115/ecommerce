@@ -19,18 +19,6 @@
                    <li>
                        <a href="javascript: void(0);" class="has-arrow waves-effect">
                            <i class="bx bx-layout"></i>
-                           <span>Sales</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">New Sale</a></li>
-                           <li><a href="javascript:void(0);">Manage Sale</a></li>
-                           <li><a href="javascript:void(0);">POS Sale</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
                            <span>Order</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
@@ -62,51 +50,6 @@
                    <li>
                        <a href="javascript: void(0);" class="has-arrow waves-effect">
                            <i class="bx bx-layout"></i>
-                           <span>Customer</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Customer</a></li>
-                           <li><a href="javascript:void(0);">Customer Ledger</a></li>
-                           <li><a href="javascript:void(0);">Customer Balance Report</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Supplier</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Supplier</a></li>
-                           <li><a href="javascript:void(0);">Supplier Ledger</a></li>
-                           <li><a href="javascript:void(0);">Supplier Balance Report</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Purchase</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Purchase</a></li>
-                           <li><a href="javascript:void(0);">Manage Purchase Return</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Product Image Gallery</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Add Product Image</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
                            <span>Tax</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
@@ -122,79 +65,6 @@
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
                            <li><a href="javascript:void(0);">Currency</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Accounting</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Fiscal Year</a></li>
-                           <li><a href="javascript:void(0);">Fiscal Year Ending</a></li>
-                           <li><a href="javascript:void(0);">Chart of Accounting</a></li>
-                           <li><a href="javascript:void(0);">Opening Balance</a></li>
-                           <li><a href="javascript:void(0);">Supplier Payment</a></li>
-                           <li><a href="javascript:void(0);">Cash Adjustment</a></li>
-                           <li><a href="javascript:void(0);">Debit Voucher</a></li>
-                           <li><a href="javascript:void(0);">Credit Voucher</a></li>
-                           <li><a href="javascript:void(0);">Contra Voucher</a></li>
-                           <li><a href="javascript:void(0);">Journal Voucher</a></li>
-                           <li><a href="javascript:void(0);">Voucher Approval</a></li>
-                           <li><a href="javascript:void(0);">Receipt Voucher</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Account Report</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Reports By Voucher</a></li>
-                           <li><a href="javascript:void(0);">General ledger</a></li>
-                           <li><a href="javascript:void(0);">Profit Loss</a></li>
-                           <li><a href="javascript:void(0);">Balance Sheet</a></li>
-                           <li><a href="javascript:void(0);">Trial Balance</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Stock</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Stock Report</a></li>
-                           <li><a href="javascript:void(0);">Stock Report(Supplier Wise)</a></li>
-                           <li><a href="javascript:void(0);">Stock Report(Product Wise)</a></li>
-                           <li><a href="javascript:void(0);">Stock Report(Store Wise)</a></li>
-                           <li><a href="javascript:void(0);">Stock Adjustment</a></li>
-                           <li><a href="javascript:void(0);">Batch Wise Stock</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Bank</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Bank</a></li>
-                       </ul>
-                   </li>
-
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Report</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="javascript:void(0);">Sales Report</a></li>
-                           <li><a href="javascript:void(0);">Sales Report(Store Wise)</a></li>
-                           <li><a href="javascript:void(0);">Purchase Report</a></li>
-                           <li><a href="javascript:void(0);">Tax Report(Store Wise)</a></li>
                        </ul>
                    </li>
 
@@ -230,8 +100,7 @@
                            <li><a href="javascript:void(0);">Product Review</a></li>
                            <li><a href="javascript:void(0);">Web Footer</a></li>
                            <li><a href="javascript:void(0);">Link Page</a></li>
-                           <li><a href="javascript:void(0);">Coupon</a></li>
-                           <li><a href="javascript:void(0);">Contact Form</a></li>
+                           <li><a href="{{ route('coupon') }}">Coupon</a></li>
                            <li><a href="javascript:void(0);">Why Choose Us</a></li>
                            <li><a href="javascript:void(0);">Our Location</a></li>
                            <li><a href="javascript:void(0);">Shipping Method</a></li>

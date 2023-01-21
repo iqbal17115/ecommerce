@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\Product\ConditionController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
+use App\Http\Controllers\Backend\WebSetting\CouponController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
 
 use Illuminate\Support\Facades\Route;
@@ -178,6 +179,16 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('search-advertisement', [AdvertisementController::class, 'searchAdvertisement'])->name('search.advertisement');
     });
     // End Advertisement
+
+        // Start Coupon
+        Route::group([], function () {
+            Route::get('coupon', [CouponController::class, 'index'])->name('coupon');
+            Route::post('add-coupon', [CouponController::class, 'addCoupon'])->name('add.coupon');
+            Route::post('delete-coupon', [CouponController::class, 'deleteCoupon'])->name('delete.coupon');
+            Route::get('pagination/coupon-pagination-data', [CouponController::class, 'pagination']);
+            Route::get('search-coupon', [CouponController::class, 'searchCoupon'])->name('search.coupon');
+        });
+        // End Coupon
 
     // Start Block
     Route::group([], function () {
