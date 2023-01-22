@@ -26,8 +26,8 @@
                             <td>{{$currency->is_default==1 ? 'Yes' : 'No'}}</td>
                             <td>{{$currency->is_active == 1? 'Active' : 'Inactive'}}</td>
                             <td>
-                            <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal" data-target="#currencyModal" data-id="{{$currency->id}}" data-name="{{$currency->name}}" data-icon1="{{$currency->icon}}" data-position="{{$currency->position}}" data-is_active="{{$currency->is_active}}">
-                                    <i class="mdi mdi-pencil font-size-16"></i>
+                            <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal" data-target="#currencyModal" data-id="{{$currency->id}}" data-name="{{$currency->name}}" data-icon1="{{$currency->icon}}" data-position="{{$currency->position}}" data-conversion_rate="{{$currency->conversion_rate}}" data-is_default="{{$currency->is_default}}" data-is_active="{{$currency->is_active}}">
+                                <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger text-light btn-sm delete_currency" data-id="{{$currency->id}}">
                                     <i class="mdi mdi-trash-can font-size-16"></i>
