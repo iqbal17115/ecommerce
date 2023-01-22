@@ -126,24 +126,29 @@
         let name = $(this).data('name');
         let type = $(this).data('type');
         let amount = $(this).data('amount');
+        let start_date = $(this).data('start_date');
+        let end_date = $(this).data('end_date');
         let is_active = $(this).data('is_active');
         $('#cu_id').val(id);
         $('#name').val(name);
         $('#type').val(type);
-        $('#amount').val(amount);
+        $('#discount_amount').val(amount);
+        $('#start_date').val(start_date);
+        $('#end_date').val(end_date);
         $('#is_active').val(is_active);
-        discountType();
+        discountType(amount);
 
     });
 
-    function discountType() {
+    function discountType(amount = null) {
+        alert(val);
         var discount_type = $('#type').val();
         $('#discount_content').empty();
         var discount_content = "";
         if (discount_type == 1) {
-            discount_content += "<div class='col-md-12'><div class='form-group'><label for='discount_amount'>Discount Amount</label><input type='number' name='discount_amount' id='discount_amount' class='form-control' placeholder='Discount Amount'></div></div>";
+            discount_content += "<div class='col-md-12'><div class='form-group'><label for='discount_amount'>Discount Amount</label><input type='number' name='discount_amount' id='discount_amount' value='"+amount+"' class='form-control' placeholder='Discount Amount'></div></div>";
         } else if (discount_type == 0) {
-            discount_content += "<div class='col-md-12'><div class='form-group'><label for='discount_percentage'>Discount Percentage</label><input type='number' name='discount_percentage' id='discount_percentage' class='form-control' placeholder='Discount Percentage'></div></div>";
+            discount_content += "<div class='col-md-12'><div class='form-group'><label for='discount_percentage'>Discount Percentage</label><input type='number' name='discount_percentage' id='discount_percentage' value='"+amount+"' class='form-control' placeholder='Discount Percentage'></div></div>";
         }
         discount_content += "</div>";
         $("#discount_content").append(discount_content);

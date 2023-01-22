@@ -31,12 +31,13 @@
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
                             <td>{{$coupon->name}}</td>
-                            <td>{{$coupon->type}}</td>
-                            <td>{{$coupon->amount}}</td>
-                            <td>{{$coupon->amount}}</td>
+                            <td>{{$coupon->type==0 ? $coupon->amount:''}}</td>
+                            <td>{{$coupon->type==1 ? $coupon->amount:''}}</td>
+                            <td>{{$coupon->start_date}}</td>
+                            <td>{{$coupon->end_date}}</td>
                             <td>{{$coupon->is_active == 1? 'Active' : 'Inactive'}}</td>
                             <td>
-                                <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal" data-target="#couponModal" data-id="{{$coupon->id}}" data-type="{{$coupon->type}}" data-amount="{{$coupon->amount}}" data-start_date="{{$coupon->start_date}}" data-end_date="{{$coupon->end_date}}" data-is_active="{{$coupon->is_active}}">
+                                <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal" data-target="#couponModal" data-id="{{$coupon->id}}" data-name="{{$coupon->name}}" data-type="{{$coupon->type}}" data-amount="{{$coupon->amount}}" data-start_date="{{$coupon->start_date}}" data-end_date="{{$coupon->end_date}}" data-is_active="{{$coupon->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger text-light btn-sm delete_coupon" data-id="{{$coupon->id}}">

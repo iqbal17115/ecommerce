@@ -40,6 +40,20 @@
                                 </div>
                                 </div>
                               </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="start_date">Start Date</label>
+                                      <input type="date" name="start_date" id="start_date" class="form-control">
+                                      <span class="text-danger err_start_date"></span>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="end_date">End Date</label>
+                                      <input type="date" name="end_date" id="end_date" class="form-control">
+                                      <span class="text-danger err_end_date"></span>
+                                  </div>
+                              </div>
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
