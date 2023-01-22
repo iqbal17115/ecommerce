@@ -14,6 +14,7 @@ class CreateCouponsTable extends Migration
     public function up()
     {
         Schema::create('coupons', function (Blueprint $table) {
+            $table->id();
             $table->string('name', 100);
             $table->boolean('type')->nullable();
             $table->double('amount', 20, 4)->nullable();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\FrontEnt\HomeController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -87,7 +88,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('delete-unit', [UnitController::class, 'deleteUnit'])->name('delete.unit');
         Route::get('pagination/unit-pagination-data', [UnitController::class, 'pagination']);
         Route::get('search-unit', [UnitController::class, 'searchUnit'])->name('search.unit');
-    });
+    }
+    );
     // Unit Start
 
     // Unit Start
@@ -99,7 +101,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('search-variant', [VariantController::class, 'searchVariant'])->name('search.variant');
         Route::get('get-variant/{type}', [VariantController::class, 'getVariant'])->name('get-variant');
         Route::get('variant/{id}', [VariantController::class, 'getVariantById'])->name('variant');
-    });
+    }
+    );
     // End Start
 
     // Unit Brand
@@ -109,7 +112,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('delete-brand', [BrandController::class, 'deleteBrand'])->name('delete.brand');
         Route::get('pagination/brand-pagination-data', [BrandController::class, 'pagination']);
         Route::get('search-brand', [BrandController::class, 'searchBrand'])->name('search.brand');
-    });
+    }
+    );
     // Unit Brand
 
     // Unit Category
@@ -119,7 +123,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('delete-category', [CategoryController::class, 'deleteCategory'])->name('delete.category');
         Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
         Route::get('search-category', [CategoryController::class, 'searchCategory'])->name('search.category');
-    });
+    }
+    );
     // Unit Category
 
     // Material Start
@@ -129,7 +134,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('delete-material', [MaterialController::class, 'deleteMaterial'])->name('delete.material');
         Route::get('pagination/material-pagination-data', [MaterialController::class, 'pagination']);
         Route::get('search-material', [MaterialController::class, 'searchMaterial'])->name('search.material');
-    });
+    }
+    );
     // Material End
 
     // Start Condition
@@ -140,7 +146,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('pagination/condition-pagination-data', [ConditionController::class, 'pagination']);
         Route::get('search-condition', [ConditionController::class, 'searchCondition'])->name('search.condition');
         Route::get('get-condition', [ConditionController::class, 'getCondition'])->name('get-condition');
-    });
+    }
+    );
     // End Condition
 
     // Start Product
@@ -158,7 +165,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('product_list', [ProductController::class, 'productList'])->name('product_list');
         Route::get('pagination/product-pagination-data', [ProductController::class, 'pagination']);
         Route::get('search-product', [ProductController::class, 'searchProduct'])->name('search.product');
-    });
+    }
+    );
     // End Product
 
     // Start Slider
@@ -167,7 +175,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('add-slider', [SliderController::class, 'addSlider'])->name('add.slider');
         Route::post('delete-slider', [SliderController::class, 'deleteSlider'])->name('delete.slider');
         Route::get('pagination/slider-pagination-data', [SliderController::class, 'pagination']);
-    });
+    }
+    );
     // End Slider
 
     // Start Advertisement
@@ -177,18 +186,20 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('delete-advertisement', [AdvertisementController::class, 'deleteAdvertisement'])->name('delete.advertisement');
         Route::get('pagination/advertisement-pagination-data', [AdvertisementController::class, 'pagination']);
         Route::get('search-advertisement', [AdvertisementController::class, 'searchAdvertisement'])->name('search.advertisement');
-    });
+    }
+    );
     // End Advertisement
 
-        // Start Coupon
-        Route::group([], function () {
-            Route::get('coupon', [CouponController::class, 'index'])->name('coupon');
-            Route::post('add-coupon', [CouponController::class, 'addCoupon'])->name('add.coupon');
-            Route::post('delete-coupon', [CouponController::class, 'deleteCoupon'])->name('delete.coupon');
-            Route::get('pagination/coupon-pagination-data', [CouponController::class, 'pagination']);
-            Route::get('search-coupon', [CouponController::class, 'searchCoupon'])->name('search.coupon');
-        });
-        // End Coupon
+    // Start Coupon
+    Route::group([], function () {
+        Route::get('coupon', [CouponController::class, 'index'])->name('coupon');
+        Route::post('add-coupon', [CouponController::class, 'addCoupon'])->name('add.coupon');
+        Route::post('delete-coupon', [CouponController::class, 'deleteCoupon'])->name('delete.coupon');
+        Route::get('pagination/coupon-pagination-data', [CouponController::class, 'pagination']);
+        Route::get('search-coupon', [CouponController::class, 'searchCoupon'])->name('search.coupon');
+    }
+    );
+    // End Coupon
 
     // Start Block
     Route::group([], function () {
@@ -197,7 +208,19 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('delete-block', [BlockController::class, 'deleteBlock'])->name('delete.block');
         Route::get('pagination/block-pagination-data', [BlockController::class, 'pagination']);
         Route::get('search-block', [BlockController::class, 'searchBlock'])->name('search.block');
-    });
+    }
+    );
     // End Block
+
+    // Start Currency
+    Route::group([], function () {
+        Route::get('currency', [CurrencyController::class, 'index'])->name('currency');
+        Route::post('add-currency', [CurrencyController::class, 'addCurrency'])->name('add.currency');
+        Route::post('delete-currency', [CurrencyController::class, 'deleteCurrency'])->name('delete.currency');
+        Route::get('pagination/currency-pagination-data', [CurrencyController::class, 'pagination']);
+        Route::get('search-currency', [CurrencyController::class, 'searchCurrency'])->name('search.currency');
+    }
+    );
+    // End Currency
 
 });
