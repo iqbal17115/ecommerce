@@ -106,23 +106,7 @@
                 <div
                     class="p-0 m-0 header-icon header-search header-search-inline header-search-category d-sm-block d-none w-lg-max text-right mt-0">
                     <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
-                    <form action="{{ route('product-search') }}" method="GET">
-                        <div class="header-search-wrapper mr-1">
-                            <input type="search" class="form-control" name="search_product_name"
-                                id="search_product_name" placeholder="Search..." required>
-                            <div class="select-custom">
-                                <select id="cat" name="cat">
-                                    <option value="">All Categories</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <!-- End .select-custom -->
-                            <button class="btn icon-magnifier p-0" title="search" type="submit"></button>
-                        </div>
-                        <!-- End .header-search-wrapper -->
-                    </form>
+                   
                 </div>
                 <!-- End .header-search -->
 

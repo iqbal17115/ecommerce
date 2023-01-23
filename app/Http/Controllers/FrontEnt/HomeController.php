@@ -260,32 +260,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $data['html'] = view('frontend.header-card-popup')->render();
-        $data['products'] = $this->product->with(['ProductImageFirst', 'ProductImageLast'])->whereIsActive(1)->limit(10)->get()->toArray();
-
-        $featues = ProductFeature::orderBy('position', 'ASC')->get();
-        foreach($featues as $feature){
-            $featured = str_replace(' ', '_', $feature->name);
-            $data[$featured] = $this->product->with(['ProductImageFirst', 'ProductImageLast'])->whereProductFeatureId($feature->id)->whereIsActive(1)->limit(24)->orderBy('id', 'desc')->get()->toArray();
-        }
-        // $data['products_desc'] = $this->product->with(['ProductImageFirst', 'ProductImageLast'])->whereFeatured('New Product')->whereIsActive(1)->limit(24)->orderBy('id', 'desc')->get()->toArray();
-        // $data['best_sellings'] = $this->product->with(['ProductImageFirst', 'ProductImageLast'])->whereFeatured('Best Selling Product')->whereIsActive(1)->limit(24)->orderBy('id', 'desc')->get()->toArray();
-        // $data['fresh_vegetables'] = $this->product->with(['ProductImageFirst', 'ProductImageLast'])->whereFeatured('Fresh Vegetables')->whereIsActive(1)->limit(24)->orderBy('id', 'desc')->get()->toArray();
-        // $data['fresh_fruits'] = $this->product->with(['ProductImageFirst', 'ProductImageLast'])->whereFeatured('Fresh Fruits')->whereIsActive(1)->limit(24)->orderBy('id', 'desc')->get()->toArray();
-        // $data['meat_and_sea_food'] = $this->product->with(['ProductImageFirst', 'ProductImageLast'])->whereFeatured('Meat & Seafood')->whereIsActive(1)->limit(24)->orderBy('id', 'desc')->get()->toArray();
-        $topFourCategories = Category::take(4)->get();
-        $topCategories = Category::skip(4)->take(200)->get();
-        $sliderImages = Slider::orderBy('position')->whereIsActive(1)->get();
-        $sliderImageDesc = Slider::orderBy('id', 'desc')->whereIsActive(1)->limit(2)->get();
-        return view('ecommerce.home', [
-            'data' => $data,
-            'topFourCategories' => $topFourCategories,
-            'topCategories' => $topCategories,
-            'sliderImages' => $sliderImages,
-            'sliderImageDesc' => $sliderImageDesc,
-            'features' => ProductFeature::orderBy('position', 'ASC')->get(),
-            'offers' => Offer::whereIsActive(1)->orderBy('id', 'DESC')->get()
-        ]);
+        return view('ecommerce.home');
     }
 
     public function orderComplete($id = null)

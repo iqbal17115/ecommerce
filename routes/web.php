@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Currency\CurrencyController;
-use App\Http\Controllers\FrontEnt\HomeController;
+use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\FrontEnt\LoginController;
@@ -31,14 +31,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('change-password-customer', [HomeController::class, 'ChangePassword'])->name('change-password-customer');
-Route::post('change-profile-photo', [HomeController::class, 'ChangeProfilePhoto'])->name('change-profile-photo');
-Route::post('upazila-search', [HomeController::class, 'SearchUpazila'])->name('upazila-search');
-Route::get('edit/{id?}', [HomeController::class, 'EditContact'])->name('edit');
-Route::post('edit', [HomeController::class, 'EditContactById']);
-Route::post('edit-shipping-address', [HomeController::class, 'EditShippingAddress'])->name('edit-shipping-address');
-Route::get('seller-create', [HomeController::class, 'SellerCreateForm'])->name('seller-create');
-Route::post('seller-create', [HomeController::class, 'CreateSeller']);
+// Route::post('change-password-customer', [HomeController::class, 'ChangePassword'])->name('change-password-customer');
+// Route::post('change-profile-photo', [HomeController::class, 'ChangeProfilePhoto'])->name('change-profile-photo');
+// Route::post('upazila-search', [HomeController::class, 'SearchUpazila'])->name('upazila-search');
+// Route::get('edit/{id?}', [HomeController::class, 'EditContact'])->name('edit');
+// Route::post('edit', [HomeController::class, 'EditContactById']);
+// Route::post('edit-shipping-address', [HomeController::class, 'EditShippingAddress'])->name('edit-shipping-address');
+// Route::get('seller-create', [HomeController::class, 'SellerCreateForm'])->name('seller-create');
+// Route::post('seller-create', [HomeController::class, 'CreateSeller']);
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
@@ -49,33 +49,33 @@ Route::get('/', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/customer_login', [HomeController::class, 'CustomerLogin'])->name('customer_login');
-Route::get('/check-out', [HomeController::class, 'checkOut'])->name('check-out');
-Route::get('/offer', [HomeController::class, 'Offer'])->name('offer');
-Route::get('/product-search/', [HomeController::class, 'productSearch'])->name('product-search');
-Route::get('/feature-wise/{feature}', [HomeController::class, 'FeatureWise'])->name('feature-wise');
-Route::get('/all-category-wise/{id?}', [HomeController::class, 'allCategoryWise'])->name('all-category-wise');
-Route::get('/category/{id?}', [HomeController::class, 'Category'])->name('category');
-Route::get('/sub-category/{id?}', [HomeController::class, 'SubCategory'])->name('sub-category');
-Route::get('/sub-sub-category/{id?}', [HomeController::class, 'SubSubCategory'])->name('sub-sub-category');
-Route::get('/search-category-wise/{id?}', [HomeController::class, 'searchByCategory'])->name('search-category-wise');
-Route::get('/search-subCategory-wise/{id?}', [HomeController::class, 'searchBySubCategory'])->name('search-subCategory-wise');
-Route::get('/search-subSubCategory-wise/{id?}', [HomeController::class, 'searchBySubSubCategory'])->name('search-subSubCategory-wise');
-Route::get('/search-brand-wise/{id?}', [HomeController::class, 'searchByBrand'])->name('search-brand-wise');
-Route::post('/ajax/add-to-card-store', [HomeController::class, 'addToCardStore'])->name('ajax-add-to-card-store');
-Route::post('/ajax/add-to-card-quantity-update', [HomeController::class, 'cartProductQuantityUpdate'])->name('ajax-add-to-card-quantity-update');
-Route::post('/ajax/add-to-card-product-delete', [HomeController::class, 'cartProductDelete'])->name('ajax-add-to-card-product-delete');
-Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
-Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
-Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');
-Route::get('/order-completed/{id?}', [HomeController::class, 'orderComplete'])->name('order-completed');
-Route::get('product-details/{id?}', [HomeController::class, 'productDetails'])->name('product-details');
-Route::get('my-account', [HomeController::class, 'MyAccount'])->name('my-account');
-Route::get('order-details/{id?}', [HomeController::class, 'OrderDetail'])->name('order-details');
-Route::get('contact', [HomeController::class, 'Contact'])->name('contact');
-Route::get('about', [HomeController::class, 'About'])->name('about');
-Route::get('privacy-policy', [HomeController::class, 'PrivacyPolicy'])->name('privacy-policy');
-Route::get('terms-condition', [HomeController::class, 'TermsAndCondition'])->name('terms-condition');
+// Route::get('/customer_login', [HomeController::class, 'CustomerLogin'])->name('customer_login');
+// Route::get('/check-out', [HomeController::class, 'checkOut'])->name('check-out');
+// Route::get('/offer', [HomeController::class, 'Offer'])->name('offer');
+// Route::get('/product-search/', [HomeController::class, 'productSearch'])->name('product-search');
+// Route::get('/feature-wise/{feature}', [HomeController::class, 'FeatureWise'])->name('feature-wise');
+// Route::get('/all-category-wise/{id?}', [HomeController::class, 'allCategoryWise'])->name('all-category-wise');
+// Route::get('/category/{id?}', [HomeController::class, 'Category'])->name('category');
+// Route::get('/sub-category/{id?}', [HomeController::class, 'SubCategory'])->name('sub-category');
+// Route::get('/sub-sub-category/{id?}', [HomeController::class, 'SubSubCategory'])->name('sub-sub-category');
+// Route::get('/search-category-wise/{id?}', [HomeController::class, 'searchByCategory'])->name('search-category-wise');
+// Route::get('/search-subCategory-wise/{id?}', [HomeController::class, 'searchBySubCategory'])->name('search-subCategory-wise');
+// Route::get('/search-subSubCategory-wise/{id?}', [HomeController::class, 'searchBySubSubCategory'])->name('search-subSubCategory-wise');
+// Route::get('/search-brand-wise/{id?}', [HomeController::class, 'searchByBrand'])->name('search-brand-wise');
+// Route::post('/ajax/add-to-card-store', [HomeController::class, 'addToCardStore'])->name('ajax-add-to-card-store');
+// Route::post('/ajax/add-to-card-quantity-update', [HomeController::class, 'cartProductQuantityUpdate'])->name('ajax-add-to-card-quantity-update');
+// Route::post('/ajax/add-to-card-product-delete', [HomeController::class, 'cartProductDelete'])->name('ajax-add-to-card-product-delete');
+// Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
+// Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
+// Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');
+// Route::get('/order-completed/{id?}', [HomeController::class, 'orderComplete'])->name('order-completed');
+// Route::get('product-details/{id?}', [HomeController::class, 'productDetails'])->name('product-details');
+// Route::get('my-account', [HomeController::class, 'MyAccount'])->name('my-account');
+// Route::get('order-details/{id?}', [HomeController::class, 'OrderDetail'])->name('order-details');
+// Route::get('contact', [HomeController::class, 'Contact'])->name('contact');
+// Route::get('about', [HomeController::class, 'About'])->name('about');
+// Route::get('privacy-policy', [HomeController::class, 'PrivacyPolicy'])->name('privacy-policy');
+// Route::get('terms-condition', [HomeController::class, 'TermsAndCondition'])->name('terms-condition');
 Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');
 
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
