@@ -261,7 +261,6 @@
                 <div class="banner-section appear-animate" data-animation-name="fadeInUpShorter" data-animation-delay="200">
                     <div class="row">
                         <div class="col-md-4 mb-2 mb-md-0">
-                            <div class="banner banner1 d-flex align-items-center justify-content-end" style="background-image: url(assets/images/demoes/demo36/banners/banner1.jpg);">
                                 <div class="container d-flex align-items-center justify-content-end">
                                     <div class="banner-layer text-right">
                                         <h5 class="coupon-sale-text text-white font1">
@@ -275,7 +274,7 @@
                         </div>
 
                         <div class="col-md-8">
-                            <div class="banner banner2 d-flex align-items-center justify-content-end" style="background-image: url(assets/images/demoes/demo36/banners/banner2.jpg);">
+                            <div class="banner banner2 d-flex align-items-center justify-content-end" style="background-image: url(aladdinne/assets/images/demoes/demo36/banners/banner2.jpg);">
                                 <div class="container d-flex align-items-center justify-content-end">
                                     <div class="banner-layer text-right pt-0">
                                         <h4 class="text-dark mb-0 pl-3 pr-3 pt-1 pb-1">TOP ELECTRONIC<br />FOR GIFTS
@@ -295,7 +294,7 @@
                             <div class="product-default deal-product">
                                 <figure>
                                     <a href="demo36-product.html">
-                                        <img src="assets/images/demoes/demo36/products/product-1.jpg" width="450" height="450" alt="product">
+                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-1.jpg') }}" width="450" height="450" alt="product">
                                     </a>
                                     <div class="product-countdown-container custom-product-countdown">
                                         <span class="product-countdown-title">offer ends in:</span>
@@ -344,7 +343,7 @@
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
                                                 <a href="demo36-product.html">
-                                                    <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                 </a>
                                                 <div class="label-group">
                                                     <div class="product-label label-hot">HOT</div>
@@ -390,7 +389,7 @@
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
                                                 <a href="demo36-product.html">
-                                                    <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                 </a>
                                                 <div class="btn-icon-group">
                                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -432,7 +431,7 @@
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
                                                 <a href="demo36-product.html">
-                                                    <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                 </a>
                                                 <div class="btn-icon-group">
                                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -474,7 +473,7 @@
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
                                                 <a href="demo36-product.html">
-                                                    <img src="assets/images/demoes/demo36/products/product-5.jpg" width="239" height="239" alt="product">
+                                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-5.jpg') }}" width="239" height="239" alt="product">
                                                 </a>
                                                 <div class="btn-icon-group">
                                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -516,7 +515,7 @@
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
                                                 <a href="demo36-product.html">
-                                                    <img src="assets/images/demoes/demo36/products/product-6.jpg" width="239" height="239" alt="product">
+                                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-6.jpg') }}" width="239" height="239" alt="product">
                                                 </a>
                                                 <div class="btn-icon-group">
                                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -558,7 +557,7 @@
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
                                                 <a href="demo36-product.html">
-                                                    <img src="assets/images/demoes/demo36/products/product-7.jpg" width="239" height="239" alt="product">
+                                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-7.jpg') }}" width="239" height="239" alt="product">
                                                 </a>
                                                 <div class="btn-icon-group">
                                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -600,7 +599,7 @@
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
                                                 <a href="demo36-product.html">
-                                                    <img src="assets/images/demoes/demo36/products/product-8.jpg" width="239" height="239" alt="product">
+                                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-8.jpg') }}" width="239" height="239" alt="product">
                                                 </a>
                                                 <div class="btn-icon-group">
                                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -642,7 +641,7 @@
                                         <div class="product-default inner-quickview inner-icon">
                                             <figure>
                                                 <a href="demo36-product.html">
-                                                    <img src="assets/images/demoes/demo36/products/product-9.jpg" width="239" height="239" alt="product">
+                                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-9.jpg') }}" width="239" height="239" alt="product">
                                                 </a>
                                                 <div class="btn-icon-group">
                                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -761,7 +760,7 @@
                         </div>
 
                         <div class="col-lg-3 col-sm-6 pl-lg-3 pl-sm-0 order-0">
-                            <div class="banner banner3" style="background-image: url(assets/images/demoes/demo36/banners/banner3.jpg);">
+                            <div class="banner banner3" style="background-image: url(aladdinne/assets/images/demoes/demo36/banners/banner3.jpg);">
                                 <div class="container d-flex justify-content-center">
                                     <div class="banner-layer text-center">
                                         <h4 class="font1"><i class="font2">Find the Boundaries. Push Through!</i>
@@ -787,7 +786,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-10.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-10.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -830,7 +829,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-11.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-11.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -873,7 +872,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -916,7 +915,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-8.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-8.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -959,7 +958,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-6.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-6.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1002,7 +1001,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-7.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-7.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1051,7 +1050,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -1097,7 +1096,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1139,7 +1138,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1188,7 +1187,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -1234,7 +1233,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1276,7 +1275,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1325,7 +1324,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -1371,7 +1370,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1413,7 +1412,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1462,7 +1461,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -1508,7 +1507,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1550,7 +1549,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1599,7 +1598,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -1645,7 +1644,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1687,7 +1686,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1736,7 +1735,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -1782,7 +1781,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1824,7 +1823,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1873,7 +1872,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -1919,7 +1918,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -1961,7 +1960,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2010,7 +2009,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -2056,7 +2055,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2098,7 +2097,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2147,7 +2146,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -2193,7 +2192,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2235,7 +2234,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2284,7 +2283,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -2330,7 +2329,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2372,7 +2371,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2421,7 +2420,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -2467,7 +2466,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2509,7 +2508,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2558,7 +2557,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="label-group">
                                                         <div class="product-label label-hot">HOT</div>
@@ -2604,7 +2603,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2646,7 +2645,7 @@
                                             <div class="product-default inner-quickview inner-icon">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/product-4.jpg" width="239" height="239" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}" width="239" height="239" alt="product">
                                                     </a>
                                                     <div class="btn-icon-group">
                                                         <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2698,7 +2697,7 @@
                         <h4 class="section-title text-transform-none">Electronics</h4>
                         <div class="row">
                             <div class="col-md-6 mb-2 mb-md-0">
-                                <div class="banner banner4 bg-image" style="background-image: url(assets/images/demoes/demo36/banners/banner4.jpg);">
+                                <div class="banner banner4 bg-image" style="background-image: url(aladdinne/assets/images/demoes/demo36/banners/banner4.jpg);">
                                     <div class="banner-layer d-flex align-items-center flex-column flex-sm-row justify-content-end">
                                         <div class="content-left">
                                             <div class="coupon-sale-content">
@@ -2717,7 +2716,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="banner banner5 bg-image" style="background-image: url(assets/images/demoes/demo36/banners/banner5.jpg);">
+                                <div class="banner banner5 bg-image" style="background-image: url(aladdinne/assets/images/demoes/demo36/banners/banner5.jpg);">
                                     <div class="banner-layer d-flex align-items-center flex-column flex-sm-row justify-content-end">
                                         <div class="content-left">
                                             <h3 class="text-white text-center mb-0">ELECTRONIC DEALS
@@ -2817,7 +2816,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2857,7 +2856,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-5.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-5.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2897,7 +2896,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-1.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-1.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2944,7 +2943,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-9.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-9.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -2984,7 +2983,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3024,7 +3023,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-12.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne//demo36/products/product-12.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3147,7 +3146,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-13.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-13.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3187,7 +3186,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-9.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne//demo36/products/product-9.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3227,7 +3226,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-14.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-14.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3267,7 +3266,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-15.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-15.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3307,7 +3306,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-16.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-16.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3347,7 +3346,7 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
-                                    <img src="assets/images/demoes/demo36/products/product-17.jpg" width="239" height="239" alt="product">
+                                    <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-17.jpg') }}" width="239" height="239" alt="product">
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3386,7 +3385,7 @@
                         </div>
                     </div>
 
-                    <div class="sale-banner banner bg-image mb-4 appear-animate" data-animation-name="fadeIn" data-animation-delay="100" style="background-image: url(assets/images/demoes/demo36/banners/banner6.jpg);">
+                    <div class="sale-banner banner bg-image mb-4 appear-animate" data-animation-name="fadeIn" data-animation-delay="100" style="background-image: url(aladdinne/assets/images/demoes/demo36/banners/banner6.jpg);">
                         <div class="container banner-content">
                             <div class="row no-gutter justify-content-start">
                                 <div class="col-auto col-lg-5 col-md-6 col-12 d-flex flex-column justify-content-center content-left text-center text-md-right">
@@ -3423,7 +3422,7 @@
                                     </div>
                                     <div class="banner banner6" data-md-order="8">
                                         <figure>
-                                            <img src="assets/images/demoes/demo36/banners/banner7.jpg" alt="banner">
+                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/banners/banner7.jpg') }}" alt="banner">
                                         </figure>
                                         <div class="banner-layer text-center content-left">
                                             <h4 class="heading-border">Amazing</h4>
@@ -3488,7 +3487,7 @@
                                                 <div class="product-default inner-quickview inner-icon">
                                                     <figure>
                                                         <a href="demo36-product.html">
-                                                            <img src="assets/images/demoes/demo36/products/product-18.jpg" width="239" height="239" alt="product">
+                                                            <img src="{{ asset('aladdinne/demoes/demo36/products/product-18.jpg') }}" width="239" height="239" alt="product">
                                                         </a>
                                                         <div class="btn-icon-group">
                                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3529,7 +3528,7 @@
                                                 <div class="product-default inner-quickview inner-icon">
                                                     <figure>
                                                         <a href="demo36-product.html">
-                                                            <img src="assets/images/demoes/demo36/products/product-19.jpg" width="239" height="239" alt="product">
+                                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-19.jpg') }}" width="239" height="239" alt="product">
                                                         </a>
                                                         <div class="btn-icon-group">
                                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3570,7 +3569,7 @@
                                                 <div class="product-default inner-quickview inner-icon">
                                                     <figure>
                                                         <a href="demo36-product.html">
-                                                            <img src="assets/images/demoes/demo36/products/product-20.jpg" width="239" height="239" alt="product">
+                                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-20.jpg') }}" width="239" height="239" alt="product">
                                                         </a>
                                                         <div class="btn-icon-group">
                                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3611,7 +3610,7 @@
                                                 <div class="product-default inner-quickview inner-icon">
                                                     <figure>
                                                         <a href="demo36-product.html">
-                                                            <img src="assets/images/demoes/demo36/products/product-21.jpg" width="239" height="239" alt="product">
+                                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-21.jpg') }}" width="239" height="239" alt="product">
                                                         </a>
                                                         <div class="btn-icon-group">
                                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3676,7 +3675,7 @@
                                                 <div class="product-default inner-quickview inner-icon">
                                                     <figure>
                                                         <a href="demo36-product.html">
-                                                            <img src="assets/images/demoes/demo36/products/product-19.jpg" width="239" height="239" alt="product">
+                                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-19.jpg') }}" width="239" height="239" alt="product">
                                                         </a>
                                                         <div class="btn-icon-group">
                                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3717,7 +3716,7 @@
                                                 <div class="product-default inner-quickview inner-icon">
                                                     <figure>
                                                         <a href="demo36-product.html">
-                                                            <img src="assets/images/demoes/demo36/products/product-20.jpg" width="239" height="239" alt="product">
+                                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-20.jpg') }}" width="239" height="239" alt="product">
                                                         </a>
                                                         <div class="btn-icon-group">
                                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3758,7 +3757,7 @@
                                                 <div class="product-default inner-quickview inner-icon">
                                                     <figure>
                                                         <a href="demo36-product.html">
-                                                            <img src="assets/images/demoes/demo36/products/product-21.jpg" width="239" height="239" alt="product">
+                                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-21.jpg') }}" width="239" height="239" alt="product">
                                                         </a>
                                                         <div class="btn-icon-group">
                                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3823,7 +3822,7 @@
                                                 <div class="product-default inner-quickview inner-icon">
                                                     <figure>
                                                         <a href="demo36-product.html">
-                                                            <img src="assets/images/demoes/demo36/products/product-20.jpg" width="239" height="239" alt="product">
+                                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-20.jpg') }}" width="239" height="239" alt="product">
                                                         </a>
                                                         <div class="btn-icon-group">
                                                             <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -3885,7 +3884,7 @@
                                             <div class="product-default left-details product-widget">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/small/product-1.jpg" width="84" height="84" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/small/product-1.jpg') }}" width="84" height="84" alt="product">
                                                     </a>
                                                 </figure>
 
@@ -3915,7 +3914,7 @@
                                             <div class="product-default left-details product-widget">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/small/product-2.jpg" width="84" height="84" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/small/product-2.jpg') }}" width="84" height="84" alt="product">
                                                     </a>
                                                 </figure>
 
@@ -3945,7 +3944,7 @@
                                             <div class="product-default left-details product-widget">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/small/product-3.jpg" width="84" height="84" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/small/product-3.jpg') }}" width="84" height="84" alt="product">
                                                     </a>
                                                 </figure>
 
@@ -3975,7 +3974,7 @@
                                             <div class="product-default left-details product-widget">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/small/product-4.jpg" width="84" height="84" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/small/product-4.jpg') }}" width="84" height="84" alt="product">
                                                     </a>
                                                 </figure>
 
@@ -4005,7 +4004,7 @@
                                             <div class="product-default left-details product-widget">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/small/product-5.jpg" width="84" height="84" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/small/product-5.jpg') }}" width="84" height="84" alt="product">
                                                     </a>
                                                 </figure>
 
@@ -4035,7 +4034,7 @@
                                             <div class=" product-default left-details product-widget">
                                                 <figure>
                                                     <a href="demo36-product.html">
-                                                        <img src="assets/images/demoes/demo36/products/small/product-6.jpg" width="84" height="84" alt="product">
+                                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/small/product-6.jpg') }}" width="84" height="84" alt="product">
                                                     </a>
                                                 </figure>
 
@@ -4079,19 +4078,19 @@
                                 'navText': [ '<i class=icon-left-open-big>', '<i class=icon-right-open-big>' ],
                                 'nav': true
                             }">
-                            <figure><img src="assets/images/brands/small/brand1.png" width="140" height="60" alt="brand">
+                            <figure><img src="{{ asset('aladdinne/assets/images/brands/small/brand1.png') }}" width="140" height="60" alt="brand">
                             </figure>
-                            <figure><img src="assets/images/brands/small/brand2.png" width="140" height="60" alt="brand">
+                            <figure><img src="{{ asset('aladdinne/assets/images/brands/small/brand2.png') }}" width="140" height="60" alt="brand">
                             </figure>
-                            <figure><img src="assets/images/brands/small/brand3.png" width="140" height="60" alt="brand">
+                            <figure><img src="{{ asset('aladdinne/assets/images/brands/small/brand3.png') }}" width="140" height="60" alt="brand">
                             </figure>
-                            <figure><img src="assets/images/brands/small/brand4.png" width="140" height="60" alt="brand">
+                            <figure><img src="{{ asset('aladdinne/assets/images/brands/small/brand4.png') }}" width="140" height="60" alt="brand">
                             </figure>
-                            <figure><img src="assets/images/brands/small/brand5.png" width="140" height="60" alt="brand">
+                            <figure><img src="{{ asset('aladdinne/assets/images/brands/small/brand5.png') }}" width="140" height="60" alt="brand">
                             </figure>
-                            <figure><img src="assets/images/brands/small/brand6.png" width="140" height="60" alt="brand">
+                            <figure><img src="{{ asset('aladdinne/assets/images/brands/small/brand6.png') }}" width="140" height="60" alt="brand">
                             </figure>
-                            <figure><img src="assets/images/brands/small/brand4.png" width="140" height="60" alt="brand">
+                            <figure><img src="{{ asset('aladdinne/assets/images/brands/small/brand4.png') }}" width="140" height="60" alt="brand">
                             </figure>
                         </div>
                         <!-- End .brands-slider -->
@@ -4146,7 +4145,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-16.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-16.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4187,7 +4186,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-15.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-15.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4228,7 +4227,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-17.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-17.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4269,7 +4268,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-14.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-14.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4310,7 +4309,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-13.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-13.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4351,7 +4350,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4392,7 +4391,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-21.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/demoes/demo36/products/product-21.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4461,7 +4460,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-14.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-14.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4502,7 +4501,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-13.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-13.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4543,7 +4542,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-2.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4584,7 +4583,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-21.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-21.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4652,7 +4651,7 @@
                                     <div class="product-default inner-quickview inner-icon">
                                         <figure>
                                             <a href="demo36-product.html">
-                                                <img src="assets/images/demoes/demo36/products/product-20.jpg" width="239" height="239" alt="product">
+                                                <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-20.jpg') }}" width="239" height="239" alt="product">
                                             </a>
                                             <div class="btn-icon-group">
                                                 <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4697,7 +4696,7 @@
 
                     <div class="top-notice bg-dark text-white  top-notice-bg appear-animate" data-animation-name="fadeIn" data-animation-delay="100">
                         <div class="container text-center d-flex align-items-center justify-content-center flex-column flex-xl-row ">
-                            <img src="assets/images/demoes/demo36/shop-logo.png" width="116" height="23" alt="logo" />
+                            <img src="{{ asset('aladdinne/demoes/demo36/shop-logo.png') }}" width="116" height="23" alt="logo" />
                             <h5 class="d-inline-block mb-0 pl-3 pr-3 pt-1 pb-1">The Lowest Prices Once A Month! Hurry To Snap Up
                             </h5>
                             <a href="demo36-shop.html" class="btn btn-darkcategory ls-n-0 mt-xl-0 mt-1">SHOP NOW!</a>
@@ -4740,7 +4739,7 @@
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
                                     <a href="demo36-product.html">
-                                        <img src="assets/images/demoes/demo36/products/product-1.jpg" width="239" height="239" alt="product">
+                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-1.jpg') }}" width="239" height="239" alt="product">
                                     </a>
                                     <div class="btn-icon-group">
                                         <a href="#" title="Add To Cart" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4781,7 +4780,7 @@
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
                                     <a href="demo36-product.html">
-                                        <img src="assets/images/demoes/demo36/products/product-8.jpg" width="239" height="239" alt="product">
+                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-8.jpg') }}" width="239" height="239" alt="product">
                                     </a>
                                     <div class="btn-icon-group">
                                         <a href="#" title="Add To Cart" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4822,7 +4821,7 @@
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
                                     <a href="demo36-product.html">
-                                        <img src="assets/images/demoes/demo36/products/product-7.jpg" width="239" height="239" alt="product">
+                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-7.jpg') }}" width="239" height="239" alt="product">
                                     </a>
                                     <div class="btn-icon-group">
                                         <a href="#" title="Add To Cart" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4863,7 +4862,7 @@
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
                                     <a href="demo36-product.html">
-                                        <img src="assets/images/demoes/demo36/products/product-17.jpg" width="239" height="239" alt="product">
+                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-17.jpg') }}" width="239" height="239" alt="product">
                                     </a>
                                     <div class="btn-icon-group">
                                         <a href="#" title="Add To Cart" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4904,7 +4903,7 @@
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
                                     <a href="demo36-product.html">
-                                        <img src="assets/images/demoes/demo36/products/product-10.jpg" width="239" height="239" alt="product">
+                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-10.jpg') }}" width="239" height="239" alt="product">
                                     </a>
                                     <div class="btn-icon-group">
                                         <a href="#" title="Add To Cart" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4945,7 +4944,7 @@
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
                                     <a href="demo36-product.html">
-                                        <img src="assets/images/demoes/demo36/products/product-15.jpg" width="239" height="239" alt="product">
+                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-15.jpg') }}" width="239" height="239" alt="product">
                                     </a>
                                     <div class="btn-icon-group">
                                         <a href="#" title="Add To Cart" class="btn-icon btn-add-cart product-type-simple"><i
@@ -4986,7 +4985,7 @@
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
                                     <a href="demo36-product.html">
-                                        <img src="assets/images/demoes/demo36/products/product-3.jpg" width="239" height="239" alt="product">
+                                        <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}" width="239" height="239" alt="product">
                                     </a>
                                     <div class="btn-icon-group">
                                         <a href="#" title="Add To Cart" class="btn-icon btn-add-cart product-type-simple"><i

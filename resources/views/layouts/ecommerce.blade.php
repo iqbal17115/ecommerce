@@ -13,7 +13,7 @@
     <meta name="author" content="SW-THEMES">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('aladdinne/assets/images/icons/favicon.png') }}"">
+    <link rel="icon" type="image/x-icon" href="{{ asset('aladdinne/assets/images/icons/favicon.png') }}">
 
 
     <script>
