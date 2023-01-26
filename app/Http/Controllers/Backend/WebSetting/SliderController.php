@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class SliderController extends Controller
 {
     public function pagination(Request $request) {
-        $sliders = Slider::latest()->paginate(10);
+        $sliders = Slider::orderBy('position', 'ASC')->paginate(10);
         return view('backend.product.pagination.slider', compact('sliders'))->render();
     }
     public function deleteSlider(Request $request) {
@@ -49,7 +49,7 @@ class SliderController extends Controller
             $imagePath = $request->file('image');
             $imageName = $imagePath->getClientOriginalName();
             $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
-            $image = $request->file('image')->store('images/blog_posts', 'public');
+            $image = $request->file('image')->store('images/slides', 'public');
             $slider->image = $image;
         }
         
@@ -64,7 +64,7 @@ class SliderController extends Controller
         ]);
     }
     public function index() {
-        $sliders = Slider::latest()->paginate(10);
+        $sliders = Slider::orderBy('position', 'ASC')->paginate(10);
         $categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
         return view('backend.web-setting.slider', compact('sliders', 'categories'));
     }

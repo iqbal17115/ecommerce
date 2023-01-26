@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\Backend\Inventory\SaleInvoice;
 use App\Models\Backend\Inventory\SaleInvoiceDetail;
-use App\Models\Backend\ProductInfo\Category;
 use App\Models\Backend\Setting\BreakingNews;
 use App\Models\Backend\Setting\CompanyInfo;
 use App\Models\UserProfile\ProfileSetting;
@@ -16,6 +15,7 @@ use App\Models\FrontEnd\Order;
 use App\Models\Inventory\Currency;
 use App\Models\Notification;
 use App\Models\Backend\Offer\Offer;
+use App\Models\Backend\Product\Category;
 use App\Services\AddToCardService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('language', Language::whereIsDefault(1)->first());
             $view->with('Districts', District::orderBy('name', 'asc')->get());
-            // $view->with('categoryImageLast', Category::whereTopShow(1)->orderBy('id', 'desc')->first());
+            $view->with('parentCategories', Category::whereParentCategoryId(null)->orderBy('id', 'desc')->get());
             // $view->with('subCategories', SubCategory::orderBy('id', 'desc')->get());
             // $view->with('subSubCategories', SubSubCategory::orderBy('id', 'desc')->get());
             $view->with('companyInfo', CompanyInfo::first());
