@@ -1,4 +1,22 @@
 <header class="header">
+         <!-- Start Sidebar -->
+         <div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      
+      <ul class="sidebar-nav">
+        <li class="text-center h4" style="background-color: brown;">Aladdinne</li>
+        @foreach($parentCategories as $parentCategory)
+        <li><a href="#">{{$parentCategory->name}}</a></li>
+        @foreach($parentCategory->SubCategory as $subCategory)
+        <li><a href="#">{{$subCategory->name}}</a></li>
+        @endforeach
+        <hr style="border-top: 1px solid red; margin: 0px;">
+        @endforeach
+      </ul>
+    </div>
+    </div>
+                <!-- End Sidebar -->
             <div class="header-top">
                 <div class="container">
                     <div class="header-left d-none d-sm-block">
@@ -66,6 +84,7 @@
             <!-- End .header-top -->
 
             <div class="header-middle sticky-header" data-sticky-options="{'mobile': true}">
+           
                 <div class="container">
                     <div class="header-left col-lg-2 w-auto pl-0">
                         <button class="mobile-menu-toggler text-dark mr-2" type="button">
@@ -74,6 +93,7 @@
                         <a href="demo36.html" class="logo">
                             <img src="{{ asset('aladdinne/assets/images/logo-black.png') }}" class="w-100" width="111" height="44" alt="Porto Logo">
                         </a>
+                        
                     </div>
                     <!-- End .header-left -->
 
@@ -240,38 +260,8 @@
                 <div class="container">
                     <nav class="main-nav w-100">
                         <ul class="menu w-100">
-                            <li class="menu-item">
-                                <a class="d-inline-flex align-items-center sf-with-ul text-white">
-                                    <i class="custom-icon-toggle-menu d-inline-table"></i><span>ALL
-                                        DEPARTMENTS</span></a>
-                                <div class="menu-depart-overlay"></div>
-                                <!-- End .mobil-menu-overlay -->
-                                <div class="menu-depart">
-                                    <ul class="menu menu-vertical sf-arrows d-block no-superfish">
-                                        @foreach($parentCategories as $parentCategory)
-                                        <li>
-                                            <a href="#"><i class="icon-category-garden"></i>{{$parentCategory->name}}</a>
-                                            <div class="megamenu megamenu-fixed-width megamenu-four">
-                                                <div class="row">
-                                            @foreach($parentCategory->SubCategory as $subCategory)
-                                                    <div class="col-lg-4 mb-1 pb-2">
-                                                        <a href="#" class="nolink pl-0 d-lg-none d-block">{{$subCategory->name}}</a>
-                                                        <a href="#" class="nolink pl-0">{{$subCategory->name}}</a>
-                                                        <ul class="submenu">
-                                                        @foreach($subCategory->SubCategory as $subSubCategory)
-                                                            <li><a href="demo36-shop.html">{{$subSubCategory->name}}</a></li>
-                                                        @endforeach
-                                                        </ul>
-                                                    </div>
-                                                    @endforeach
-                                                </div>
-                                                <!-- End .row -->
-                                            </div>
-                                            <!-- End .megamenu -->
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                            <li>
+                            <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
                             </li>
                             <li class="active">
                                 <a href="demo36.html">Home</a>

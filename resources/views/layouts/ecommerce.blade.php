@@ -80,6 +80,69 @@
         }
     }
 
+    /* Sidebar */
+    #sidebar-wrapper {
+        z-index: 1;
+        position: absolute;
+        width: 0;
+        min-height: 100% !important;
+        height: 100vh;
+
+        overflow-y: hidden;
+        background: #e2ebeb;
+        opacity: 0.9;
+        transition: all .5s;
+        display: flex;
+        /* align-items:center; */
+    }
+
+    /* Main Content */
+    #page-content-wrapper {
+        width: 100%;
+        position: absolute;
+        padding: 15px;
+        transition: all .5s;
+    }
+
+    #menu-toggle {
+        transition: all .3s;
+        /* font-size:2em; */
+    }
+
+    /* Change the width of the sidebar to display it*/
+    #wrapper.menuDisplayed #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.menuDisplayed #page-content-wrapper {
+        padding-left: 250px;
+    }
+
+    /* Sidebar styling */
+    .sidebar-nav {
+        padding: 0;
+        list-style: none;
+        transition: all .5s;
+        width: 100%;
+        /* text-align: center; */
+    }
+
+    .sidebar-nav li {
+        line-height: 20px;
+        width: 100%;
+        transition: all .3s;
+        padding: 10px;
+    }
+
+    .sidebar-nav li a {
+        display: block;
+        text-decoration: none;
+        color: #000;
+    }
+
+    .sidebar-nav li:hover {
+        background: #846bab;
+    }
     </style>
 </head>
 
@@ -116,7 +179,14 @@
 
     <!-- Main JS File -->
     <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
-
+    <script>
+    $(document).ready(function() {
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("menuDisplayed");
+        });
+    });
+    </script>
     <script>
     $.ajaxSetup({
         crossDomain: true,
