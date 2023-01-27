@@ -256,6 +256,19 @@
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right" style="font-size: 14px;">Feature</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select name="product_feature_id" id="product_feature_id" class="form-select">
+                                                        <option value=""></option>
+                                                        @foreach($product_features as $product_feature)
+                                                        <option @if($productInfo && $productInfo->product_feature_id==$product_feature->id) selected @endif value="{{$product_feature->id}}">{{$product_feature->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right" style="font-size: 14px;">Model Number</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
@@ -1538,7 +1551,7 @@
                                         var variation = $( "#variation" ).val();
                                         var get_category_id = $( "#get_category_id" ).val();
                                         var product_info_image_0 = $( "#product_info_image_0" ).val();
-                                        alert(product_info_image_0);
+                                        // alert(product_info_image_0);
                                         $('.product_info_image_preview_0').attr("src", 'storage/product_photo/' + product_info_image_0);
                                         // product_info_image_preview_0
                                         updateVariantByCategory(get_category_id);
@@ -1570,6 +1583,9 @@
         placeholder: 'Select An Option'
     });
     $('#brand_id').select2({
+        placeholder: 'Select An Option'
+    });
+    $('#product_feature_id').select2({
         placeholder: 'Select An Option'
     });
     $('#material_id').select2({

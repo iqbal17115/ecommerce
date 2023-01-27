@@ -36,6 +36,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('region_publication_id')->nullable();
             $table->foreignId('category_id');
             $table->foreignId('brand_id')->nullable();
+            $table->foreignId('product_feature_id')->nullable();
             $table->foreignId('branch_id')->nullable();
             $table->foreignId('created_by');
             $table->foreignId('vendor_id')->nullable();

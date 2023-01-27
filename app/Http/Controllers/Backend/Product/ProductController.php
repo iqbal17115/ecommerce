@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Product\ProductFeature;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -238,6 +239,7 @@ class ProductController extends Controller
             $Query->type = $request->type;
             $Query->category_id = $request->category_id;
             $Query->brand_id = $request->brand_id;
+            $Query->product_feature_id = $request->product_feature_id;
             $Query->model_number = $request->model_number;
             $Query->model_name = $request->model_name;
             $Query->booking_date = $request->booking_date;
@@ -269,12 +271,13 @@ class ProductController extends Controller
         $brands = Brand::orderBy('id', 'DESC')->get();
         $materials = Material::orderBy('id', 'DESC')->get();
         $conditions = Condition::orderBy('id', 'DESC')->get();
+        $product_features = ProductFeature::orderBy('id', 'DESC')->whereIsActive(1)->get();
         $productInfo = null;
         $id = $request->id;
         if($id) {
            $id = $id;
            $productInfo = Product::whereId($id)->first();
         }
-        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo'));
+        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features'));
     }
 }
