@@ -22,7 +22,6 @@ class CreateSlidersTable extends Migration
             $table->foreignId('branch_id');
             $table->foreignId('user_id');
             $table->boolean('is_active')->nullable()->default(1);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

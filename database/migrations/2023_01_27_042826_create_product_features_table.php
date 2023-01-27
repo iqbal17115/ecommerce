@@ -15,11 +15,9 @@ class CreateProductFeaturesTable extends Migration
     {
         Schema::create('product_features', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 191);
-            $table->string('name', 191);
-            $table->tinyInteger('position');
+            $table->string('name', 100);
+            $table->tinyInteger('position')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
-            $table->foreignId('branch_id');
             $table->timestamps();
         });
     }
