@@ -2519,4 +2519,5 @@
     </div>
 </main>
 <!-- End .main -->
+    @include('ecommerce.sidebar-js')
 @endsection

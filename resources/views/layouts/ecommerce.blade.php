@@ -143,7 +143,24 @@
     .sidebar-nav li:hover {
         background: #846bab;
     }
+
+    .arrow {
+        border: solid #707070;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 4px;
+        margin-top: 3px;
+        align-items: flex-end;
+    }
+
+    .right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+    }
     </style>
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -179,6 +196,8 @@
 
     <!-- Main JS File -->
     <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <script>
     $(document).ready(function() {
         $("#menu-toggle").click(function(e) {

@@ -32,7 +32,7 @@ class CategoryController extends Controller
     public function addCategory(Request $request) {
         $request->validate(
             [
-                'name' => 'required|max:20',
+                'name' => 'required|max:50',
                 'is_active' => 'required',
             ],
             [

@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function getSubCategory(Request $request) {
+        $sub_categories = Category::whereParentCategoryId($request->id)->get(['id', 'name']);
+        return response()->json(['sub_categories' => $sub_categories]);
+    }
     public function adminDashboard() {
         return view('backend.dashboard');
     }
