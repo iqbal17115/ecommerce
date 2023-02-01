@@ -82,15 +82,15 @@
 
     /* Sidebar */
     #sidebar-wrapper {
-        z-index: 1;
+        z-index: 10;
         position: absolute;
         width: 0;
         min-height: 100% !important;
         height: 100vh;
 
         overflow-y: hidden;
-        background: #e2ebeb;
-        opacity: 0.9;
+        background: #222529;
+        /* opacity: 0.9; */
         transition: all .5s;
         display: flex;
         /* align-items:center; */
@@ -137,7 +137,7 @@
     .sidebar-nav li a {
         display: block;
         text-decoration: none;
-        color: #000;
+        color: #f1f1f1;
     }
 
     .sidebar-nav li:hover {
