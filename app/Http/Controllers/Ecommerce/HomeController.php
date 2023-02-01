@@ -10,16 +10,16 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function checkSubCategory(Request $request) {
-        $category = Category::whereId($request->id)->first();
-        if($category->SubCategory) {
+        $category = Category::find($request->id);
+        if(count($category->SubCategory) > 0) {
             return 1;
         } else {
-            return 2;
+            return 0;
         }
         
     }
     public function getSubCategory(Request $request) {
-        $sub_categories = Category::whereParentCategoryId($request->id)->get(['id', 'name']);
+        $sub_categories = Category::whereParentCategoryId($request->id)->get();
         return response()->json(['sub_categories' => $sub_categories]);
     }
     public function adminDashboard() {

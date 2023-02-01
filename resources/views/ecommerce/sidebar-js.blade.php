@@ -1,25 +1,30 @@
 <script>
 $(document).ready(function() {
-    $('body').on('click','.parent_category',function(){
-    // $('.parent_category').on('click', function() {
-        var id = $(this).data('id');
-        var check_sub_category=false;
-        // Check SubCategory
-        $.ajax({
+    check_sub_category = '';
+    
+    function checkParentCategory(parent_cat_id) {
+         // Check SubCategory
+         $.ajax({
             url: "{{route('check_sub_category')}}",
             method: 'get',
             data: {
-                id: id
+                id: parent_cat_id
             },
             dataType: 'json',
+            async : false,
             success: function(data) {
-                // check_sub_category=data;
+                check_sub_category=data;
             },
             error: function(err) {
                 var error = err.responseJSON;
                 console.log(error);
             }
         });
+        return check_sub_category;
+    }
+    $('body').on('click','.parent_category',function(){
+    // $('.parent_category').on('click', function() {
+        var id = $(this).data('id');
 
         // Get SubCategory
         $.ajax({
@@ -30,10 +35,14 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(data) {
-              console.log(data['sub_categories']);
+            //   console.log(data);
+            // alert(data['sub_categories'].length);
               sub_category_list = '';
               for (var i = 0; i < data['sub_categories'].length; i++) {
-                  sub_category_list += "<li style='color: white;'><a href='javascript:void(0);' class='parent_category' data-id='"+data['sub_categories'][i]['id']+"'>"+ data['sub_categories'][i]['name'] + "<i class='arrow right float-right'></i></a></li>";
+                check_sub_category = checkParentCategory(data['sub_categories'][i]['id']);
+                parent_category = check_sub_category==1 ? 'parent_category' : '';
+                arrow_signal = check_sub_category==1 ? '<i class="arrow right float-right"></i>' : '';
+                  sub_category_list += "<li style='list-style: none;padding-bottom: 2px;'><a style='font-family: inherit;' href='javascript:void(0);' class='" + parent_category + "' data-id='"+data['sub_categories'][i]['id']+"'>"+ data['sub_categories'][i]['name'] + arrow_signal+"</a></li>";
               }
               $('#category_content').nextAll('li').remove();
               $("#category_show").append(sub_category_list);

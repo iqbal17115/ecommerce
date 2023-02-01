@@ -89,7 +89,7 @@
         height: 100vh;
 
         overflow-y: hidden;
-        background: #222529;
+        background: #fff;
         /* opacity: 0.9; */
         transition: all .5s;
         display: flex;
@@ -112,7 +112,7 @@
 
     /* Change the width of the sidebar to display it*/
     #wrapper.menuDisplayed #sidebar-wrapper {
-        width: 250px;
+        width: 310px;
     }
 
     #wrapper.menuDisplayed #page-content-wrapper {
@@ -138,7 +138,7 @@
     .sidebar-nav li a {
         display: block;
         text-decoration: none;
-        color: #f1f1f1;
+        color: #000000;
     }
 
     .sidebar-nav li:hover {

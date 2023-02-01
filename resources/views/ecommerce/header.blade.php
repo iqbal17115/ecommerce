@@ -6,9 +6,9 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav" id="category_show">
                 <li class="text-center h4" style="background-color: brown;">Aladdinne</li>
-                <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: white;">Shop By Department</a></li>
+                <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: black;"><i class="fa fa-arrow-left"></i> Shop By Department</a></li>
                 @foreach($parentCategories as $parentCategory)
-                <li><a href="javascript:void(0);" @if($parentCategory->SubCategory) class="parent_category" data-id="{{$parentCategory->id}}" @endif>{{$parentCategory->name}} @if($parentCategory->SubCategory) <i class="arrow right float-right"></i> @endif</a></li>
+                <li style="list-style: none;padding-bottom: 2px;"><a style="font-family: inherit;" href="javascript:void(0);" @if($parentCategory->SubCategory) class="parent_category" data-id="{{$parentCategory->id}}" @endif>{{$parentCategory->name}} @if($parentCategory->SubCategory) <i class="arrow right float-right"></i> @endif</a></li>
                 @endforeach
             </ul>
         </div>
