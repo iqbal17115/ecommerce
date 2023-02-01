@@ -12,9 +12,9 @@ class HomeController extends Controller
     public function checkSubCategory(Request $request) {
         $category = Category::whereId($request->id)->first();
         if($category->SubCategory) {
-            return response()->json(['sub_category' => True]);
+            return 1;
         } else {
-            return response()->json(['sub_category' => False]);
+            return 2;
         }
         
     }

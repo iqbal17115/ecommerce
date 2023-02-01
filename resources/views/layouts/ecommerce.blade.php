@@ -93,6 +93,7 @@
         /* opacity: 0.9; */
         transition: all .5s;
         display: flex;
+        overflow-y: scroll;
         /* align-items:center; */
     }
 
@@ -141,7 +142,7 @@
     }
 
     .sidebar-nav li:hover {
-        background: #846bab;
+        /* background: #846bab; */
     }
 
     .arrow {
