@@ -18,6 +18,10 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+    public function ProductMainImage()
+    {
+        return $this->hasOne(ProductImage::class);
+    }
     public function ProductImage()
     {
         return $this->hasMany(ProductImage::class);
