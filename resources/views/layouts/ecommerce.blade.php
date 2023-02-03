@@ -93,7 +93,7 @@
         /* opacity: 0.9; */
         transition: all .5s;
         display: flex;
-        overflow-y: scroll;
+        overflow: scroll;
         /* align-items:center; */
     }
 
