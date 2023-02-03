@@ -58,6 +58,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/all-category-wise/{id?}', [HomeController::class, 'allCategoryWise'])->name('all-category-wise');
 Route::get('/check_sub_category', [HomeController::class, 'checkSubCategory'])->name('check_sub_category');
 Route::get('/get_sub_category', [HomeController::class, 'getSubCategory'])->name('get_sub_category');
+Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])->name('get_parent_category');
 // Route::get('/sub-category/{id?}', [HomeController::class, 'SubCategory'])->name('sub-category');
 // Route::get('/sub-sub-category/{id?}', [HomeController::class, 'SubSubCategory'])->name('sub-sub-category');
 // Route::get('/search-category-wise/{id?}', [HomeController::class, 'searchByCategory'])->name('search-category-wise');
