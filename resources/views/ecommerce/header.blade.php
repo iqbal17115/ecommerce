@@ -28,7 +28,10 @@
 
         <div class="container">
             <div class="header-left col-lg-2 w-auto pl-0">
-                <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
+            <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
+            <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
+                </button> -->
+                
                 <a href="demo36.html" class="logo">
                     <img src="{{ asset('aladdinne/assets/images/logo-black.png') }}" class="w-100" width="111"
                         height="44" alt="Porto Logo">
