@@ -17,7 +17,7 @@ use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CouponController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
-
+use App\Http\Controllers\Ecommerce\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,14 +51,13 @@ Route::get('/', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/customer_login', [HomeController::class, 'CustomerLogin'])->name('customer_login');
-// Route::get('/check-out', [HomeController::class, 'checkOut'])->name('check-out');
-// Route::get('/offer', [HomeController::class, 'Offer'])->name('offer');
-// Route::get('/product-search/', [HomeController::class, 'productSearch'])->name('product-search');
-// Route::get('/feature-wise/{feature}', [HomeController::class, 'FeatureWise'])->name('feature-wise');
 // Route::get('/all-category-wise/{id?}', [HomeController::class, 'allCategoryWise'])->name('all-category-wise');
 Route::get('/check_sub_category', [HomeController::class, 'checkSubCategory'])->name('check_sub_category');
 Route::get('/get_sub_category', [HomeController::class, 'getSubCategory'])->name('get_sub_category');
 Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])->name('get_parent_category');
+Route::get('/shop/{id}', [ShopController::class, 'shop'])->name('shop');
+Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagination']);
+Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
 // Route::get('/sub-category/{id?}', [HomeController::class, 'SubCategory'])->name('sub-category');
 // Route::get('/sub-sub-category/{id?}', [HomeController::class, 'SubSubCategory'])->name('sub-sub-category');
 // Route::get('/search-category-wise/{id?}', [HomeController::class, 'searchByCategory'])->name('search-category-wise');
