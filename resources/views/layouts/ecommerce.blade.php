@@ -87,7 +87,6 @@
         width: 0;
         min-height: 100% !important;
         height: 100vh;
-
         overflow-y: hidden;
         background: #fff;
         /* opacity: 0.9; */
@@ -203,6 +202,7 @@
     $(document).ready(function() {
         $("#menu-toggle").click(function(e) {
             e.preventDefault();
+            $("#sidebar-wrapper").css("width", "320px");
             $("#wrapper").toggleClass("menuDisplayed");
         });
     });

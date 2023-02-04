@@ -1,15 +1,23 @@
 <header class="header">
-    
+
     <!-- Start Sidebar -->
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <input type="hidden" name="category_data[]" id="category_data" value=""/>
+            <input type="hidden" name="category_data[]" id="category_data" value="" />
             <ul class="sidebar-nav" id="category_show">
                 <li class="text-center h4" style="background-color: brown;">Aladdinne</li>
-                <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: black;"><i id="category_back" class="fa fa-arrow-left"></i> Shop By Department</a></li>
+                <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: black;"><i
+                            id="category_back" class="fa fa-arrow-left"></i> Shop By Department <button
+                            id="minimizeSidebar" type="button" style="font-weight: bold; font-size: 28px; color: red;"
+                            class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button></a></li>
                 @foreach($parentCategories as $parentCategory)
-                <li style="list-style: none;padding-bottom: 2px;"><a style="font-family: inherit;" href="javascript:void(0);" @if($parentCategory->SubCategory) class="parent_category" data-id="{{$parentCategory->id}}" @endif>{{$parentCategory->name}} @if($parentCategory->SubCategory) <i class="arrow right float-right"></i> @endif</a></li>
+                <li style="list-style: none;padding-bottom: 2px;"><a style="font-family: inherit;"
+                        href="javascript:void(0);" @if($parentCategory->SubCategory) class="parent_category"
+                        data-id="{{$parentCategory->id}}" @endif>{{$parentCategory->name}}
+                        @if($parentCategory->SubCategory) <i class="arrow right float-right"></i> @endif</a></li>
                 @endforeach
             </ul>
         </div>
@@ -20,9 +28,7 @@
 
         <div class="container">
             <div class="header-left col-lg-2 w-auto pl-0">
-                <button class="mobile-menu-toggler text-dark mr-2" type="button">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
                 <a href="demo36.html" class="logo">
                     <img src="{{ asset('aladdinne/assets/images/logo-black.png') }}" class="w-100" width="111"
                         height="44" alt="Porto Logo">

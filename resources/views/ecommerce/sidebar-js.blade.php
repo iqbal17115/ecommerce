@@ -2,7 +2,14 @@
 $(document).ready(function() {
     check_sub_category = '';
     categoryData = [];
-
+    $('body').on('click', '#minimizeSidebar', function() {
+        // sidebar-wrapper
+        $("#sidebar-wrapper").css("width", "0px");
+    });
+    $('body').on('click', '#minimizeSidebar', function() {
+        // sidebar-wrapper
+        $("#sidebar-wrapper").css("width", "0px");
+    });
     function checkParentCategory(parent_cat_id) {
         // Check SubCategory
         $.ajax({
