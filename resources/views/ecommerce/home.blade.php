@@ -106,7 +106,7 @@
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
                             <a href="demo36-product.html">
-                                <img src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
+                                <img @if($product->ProductMainImage) src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif
                                     width="239" height="239" style="width: 239px; height: 239px;" alt="product">
                             </a>
                             <div class="btn-icon-group">

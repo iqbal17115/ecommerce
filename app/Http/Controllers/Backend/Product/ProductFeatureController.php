@@ -31,7 +31,7 @@ class ProductFeatureController extends Controller
     public function addProductFeature(Request $request) {
         $request->validate(
             [
-                'name' => 'required|max:20',
+                'name' => 'required|max:100',
                 'position' => 'required',
                 'is_active' => 'required',
             ],
