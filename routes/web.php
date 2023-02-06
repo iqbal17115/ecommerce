@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Ecommerce\HomeController;
+use App\Http\Controllers\Ecommerce\ProductDetailController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\FrontEnt\LoginController;
@@ -58,13 +59,8 @@ Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])
 Route::get('/shop/{id}', [ShopController::class, 'shop'])->name('shop');
 Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagination']);
 Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
-Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
-// Route::get('/sub-category/{id?}', [HomeController::class, 'SubCategory'])->name('sub-category');
-// Route::get('/sub-sub-category/{id?}', [HomeController::class, 'SubSubCategory'])->name('sub-sub-category');
-// Route::get('/search-category-wise/{id?}', [HomeController::class, 'searchByCategory'])->name('search-category-wise');
-// Route::get('/search-subCategory-wise/{id?}', [HomeController::class, 'searchBySubCategory'])->name('search-subCategory-wise');
-// Route::get('/search-subSubCategory-wise/{id?}', [HomeController::class, 'searchBySubSubCategory'])->name('search-subSubCategory-wise');
-// Route::get('/search-brand-wise/{id?}', [HomeController::class, 'searchByBrand'])->name('search-brand-wise');
+Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
+// Route::get('product-details/{id?}', [HomeController::class, 'productDetails'])->name('product-details');
 // Route::post('/ajax/add-to-card-store', [HomeController::class, 'addToCardStore'])->name('ajax-add-to-card-store');
 // Route::post('/ajax/add-to-card-quantity-update', [HomeController::class, 'cartProductQuantityUpdate'])->name('ajax-add-to-card-quantity-update');
 // Route::post('/ajax/add-to-card-product-delete', [HomeController::class, 'cartProductDelete'])->name('ajax-add-to-card-product-delete');
@@ -72,7 +68,6 @@ Route::get('pagination/shop-order-total-data', [ShopController::class, 'productO
 // Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
 // Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');
 // Route::get('/order-completed/{id?}', [HomeController::class, 'orderComplete'])->name('order-completed');
-// Route::get('product-details/{id?}', [HomeController::class, 'productDetails'])->name('product-details');
 // Route::get('my-account', [HomeController::class, 'MyAccount'])->name('my-account');
 // Route::get('order-details/{id?}', [HomeController::class, 'OrderDetail'])->name('order-details');
 // Route::get('contact', [HomeController::class, 'Contact'])->name('contact');

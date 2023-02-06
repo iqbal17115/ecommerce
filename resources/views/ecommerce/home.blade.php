@@ -105,7 +105,7 @@
                     @foreach($product_feature->Product as $product)
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
-                            <a href="demo36-product.html">
+                            <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
                                 <img @if($product->ProductMainImage) src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif
                                     width="239" height="239" style="width: 239px; height: 239px;" alt="product">
                             </a>
@@ -113,32 +113,17 @@
                                 <a href="#" title="Add To Cart" class="btn-icon btn-add-cart product-type-simple"><i
                                         class="icon-shopping-cart"></i></a>
                             </div>
-                            <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                                View</a>
                         </figure>
                         <div class="product-details">
-                            <div class="category-wrap">
-                                <div class="category-list">
-                                    <a href="demo36-shop.html" class="product-category">category</a>
-                                </div>
-                                <a href="wishlist.html" title="Add to Wishlist" class="btn-icon-wish"><i
-                                        class="icon-heart"></i></a>
-                            </div>
                             <h3 class="product-title">
-                                <a href="demo36-product.html">{{$product->name}}</a>
+                                <a href="{{ route('product-detail', ['id'=>$product->id]) }}">{{$product->name}}</a>
                             </h3>
-                            <div class="ratings-container">
-                                <div class="product-ratings">
-                                    <span class="ratings" style="width:100%"></span>
-                                    <!-- End .ratings -->
-                                    <span class="tooltiptext tooltip-top"></span>
-                                </div>
-                                <!-- End .product-ratings -->
-                            </div>
                             <!-- End .product-container -->
                             <div class="price-box">
-                                <span class="old-price">$29.00</span>
-                                <span class="product-price">$19.00</span>
+                                @php
+                                echo $product->your_price? '<span class="old-price">$'.number_format((float)$product->your_price, 2).'</span>' : '';
+                                echo $product->sale_price? '<span class="product-price">$'.number_format((float)$product->sale_price, 2).'</span>' : '';
+                                @endphp
                             </div>
                             <!-- End .price-box -->
                         </div>
