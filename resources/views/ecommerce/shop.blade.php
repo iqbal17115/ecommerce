@@ -37,13 +37,10 @@
                             <label>Sort By:</label>
 
                             <div class="select-custom">
-                                <select name="orderby" class="form-control">
-                                    <option value="menu_order" selected="selected">Default sorting</option>
-                                    <option value="popularity">Sort by popularity</option>
-                                    <option value="rating">Sort by average rating</option>
-                                    <option value="date">Sort by newness</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to low</option>
+                                <select name="orderby" class="form-control order_of_product">
+                                    <option value="1" selected="selected">Default sorting</option>
+                                    <option value="2">Sort by price: low to high</option>
+                                    <option value="3">Sort by price: high to low</option>
                                 </select>
                             </div>
                             <!-- End .select-custom -->
@@ -350,7 +347,15 @@
 <script>
 count = 12;
 $(document).ready(function() {
-
+    $("select.order_of_product").change(function() {
+        order = $(this).children("option:selected").val();
+        $.ajax({
+            url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order,
+            success: function(data) {
+                $('#main-content').html(data);
+            }
+        })
+    });
     $("select.count_paginate").change(function() {
         count = $(this).children("option:selected").val();
         $.ajax({
