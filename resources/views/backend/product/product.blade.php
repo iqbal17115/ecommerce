@@ -183,6 +183,14 @@
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right" style="font-size: 14px;">Seller SKU</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input name="seller_sku" id="seller_sku" @if($productInfo) value="{{$productInfo->seller_sku}}" @endif class="form-control" placeholder="Enter Seller SKU"/>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right" style="font-size: 14px;">Product Name</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>

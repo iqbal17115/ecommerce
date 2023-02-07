@@ -40,6 +40,10 @@
     <link rel="stylesheet" href="{{ URL::asset('aladdinne/') }}/assets/css/demo36.min.css">
     <link rel="stylesheet" type="text/css"
         href="{{ URL::asset('aladdinne/') }}/assets/vendor/fontawesome-free/css/all.min.css">
+
+<!-- Main CSS File -->
+<link rel="stylesheet" href="{{ URL::asset('aladdinne/') }}/assets/css/style.min.css">
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('aladdinne/') }}/assets/vendor/fontawesome-free/css/all.min.css">
     <style>
     .owl-dots {
         display: none;
@@ -196,6 +200,7 @@
 
     <!-- Main JS File -->
     <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>

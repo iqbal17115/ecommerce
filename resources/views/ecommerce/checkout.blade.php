@@ -1,34 +1,30 @@
 @extends('layouts.ecommerce')
 @section('content')
-    <main class="main main-test">
-        <div class="container checkout-container">
-            <ul class="checkout-progress-bar d-flex justify-content-center flex-wrap">
-                <li>
-                    <a href="{{ route('cart') }}">Shopping Cart</a>
-                </li>
-                <li class="active">
-                    <a href="{{ route('checkout') }}">Checkout</a>
-                </li>
-                <li class="disabled">
-                    <a href="#">Order Complete</a>
-                </li>
-            </ul>
-            @if (!Auth::user())
+<main class="main main-test">
+            <div class="container checkout-container">
+                <ul class="checkout-progress-bar d-flex justify-content-center flex-wrap">
+                    <li>
+                        <a href="cart.html">Shopping Cart</a>
+                    </li>
+                    <li class="active">
+                        <a href="checkout.html">Checkout</a>
+                    </li>
+                    <li class="disabled">
+                        <a href="#">Order Complete</a>
+                    </li>
+                </ul>
+
                 <div class="login-form-container">
-                    <h4>Do You Have Account?
-                        <button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                            aria-controls="collapseOne" class="btn btn-link btn-toggle">Login</button>
+                    <h4>Returning customer?
+                        <button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link btn-toggle">Login</button>
                     </h4>
 
                     <div id="collapseOne" class="collapse">
                         <div class="login-section feature-box">
                             <div class="feature-box-content">
-                                <form method="POST" action="{{ route('customer_sign_in') }}" id="login-form">
-                                    @csrf
+                                <form action="#" id="login-form">
                                     <p>
-                                        If you have shopped with us before, please enter your details below. If you are a
-                                        new
-                                        customer, please proceed to the Billing & Shipping section.
+                                        If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing & Shipping section.
                                     </p>
 
                                     <div class="row">
@@ -36,8 +32,7 @@
                                             <div class="form-group">
                                                 <label class="mb-0 pb-1">Username or email <span
                                                         class="required">*</span></label>
-                                                <input type="tel" name="mobile" id="mobile" class="form-control"
-                                                    required />
+                                                <input type="email" class="form-control" required />
                                             </div>
                                         </div>
 
@@ -45,8 +40,7 @@
                                             <div class="form-group">
                                                 <label class="mb-0 pb-1">Password <span
                                                         class="required">*</span></label>
-                                                <input type="password" id="password" name="password" class="form-control"
-                                                    required />
+                                                <input type="password" class="form-control" required />
                                             </div>
                                         </div>
                                     </div>
@@ -67,215 +61,336 @@
                         </div>
                     </div>
                 </div>
-            @endif
-            <div class="checkout-discount">
-                <h4>Have a coupon?
-                    <button data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-                        aria-controls="collapseOne" class="btn btn-link btn-toggle">ENTER YOUR CODE</button>
-                </h4>
 
-                <div id="collapseTwo" class="collapse">
-                    <div class="feature-box">
-                        <div class="feature-box-content">
-                            <p>If you have a coupon code, please apply it below.</p>
+                <div class="checkout-discount">
+                    <h4>Have a coupon?
+                        <button data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne" class="btn btn-link btn-toggle">ENTER YOUR CODE</button>
+                    </h4>
 
-                            <form action="#">
-                                <div class="input-group">
-                                    <input type="text" class="form-control form-control-sm w-auto" placeholder="Coupon code"
-                                        required="" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sm mt-0" type="submit">
-                                            Apply Coupon
-                                        </button>
+                    <div id="collapseTwo" class="collapse">
+                        <div class="feature-box">
+                            <div class="feature-box-content">
+                                <p>If you have a coupon code, please apply it below.</p>
+
+                                <form action="#">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-control-sm w-auto" placeholder="Coupon code" required="" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sm mt-0" type="submit">
+                                                Apply Coupon
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-lg-7">
-                    <ul class="checkout-steps">
-                        <li>
-                            <h2 class="step-title">Billing details</h2>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <ul class="checkout-steps">
+                            <li>
+                                <h2 class="step-title">Billing details</h2>
 
-                            <form method="POST" action="{{ route('confirm-order') }}" id="checkout-form">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Name
-                                                <abbr class="required" title="required">*</abbr>
-                                            </label>
-                                            <input type="text"
-                                                @if (Auth::user()) value="{{ Auth::user()->name }}" @endif
-                                                name="fName" class="form-control" required />
+                                <form action="#" id="checkout-form">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>First name
+                                                    <abbr class="required" title="required">*</abbr>
+                                                </label>
+                                                <input type="text" class="form-control" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Last name
+                                                    <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="form-control" required />
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Mobile
-                                                <abbr class="required" title="required">*</abbr>
-                                            </label>
-                                            <input type="text" name="mobile"
-                                                value="@if (Auth::user()) {{ Auth::user()->mobile }} @endif"
-                                                class="form-control" required />
+                                    <div class="form-group">
+                                        <label>Company name (optional)</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+
+                                    <div class="select-custom">
+                                        <label>Country / Region
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <select name="orderby" class="form-control">
+                                            <option value="" selected="selected">Vanuatu
+                                            </option>
+                                            <option value="1">Brunei</option>
+                                            <option value="2">Bulgaria</option>
+                                            <option value="3">Burkina Faso</option>
+                                            <option value="4">Burundi</option>
+                                            <option value="5">Cameroon</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mb-1 pb-2">
+                                        <label>Street address
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" class="form-control" placeholder="House number and street name" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Apartment, suite, unite, etc. (optional)" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Town / City
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" class="form-control" required />
+                                    </div>
+
+                                    <div class="select-custom">
+                                        <label>State / County <abbr class="required" title="required">*</abbr></label>
+                                        <select name="orderby" class="form-control">
+                                            <option value="" selected="selected">NY</option>
+                                            <option value="1">Brunei</option>
+                                            <option value="2">Bulgaria</option>
+                                            <option value="3">Burkina Faso</option>
+                                            <option value="4">Burundi</option>
+                                            <option value="5">Cameroon</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Postcode / Zip
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Phone <abbr class="required" title="required">*</abbr></label>
+                                        <input type="tel" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Email address
+                                            <abbr class="required" title="required">*</abbr></label>
+                                        <input type="email" class="form-control" required />
+                                    </div>
+
+                                    <div class="form-group mb-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="create-account" />
+                                            <label class="custom-control-label" data-toggle="collapse" data-target="#collapseThree" aria-controls="collapseThree" for="create-account">Create an
+                                                account?</label>
                                         </div>
                                     </div>
 
-                                </div>
+                                    <div id="collapseThree" class="collapse">
+                                        <div class="form-group">
+                                            <label>Create account password
+                                                <abbr class="required" title="required">*</abbr></label>
+                                            <input type="password" placeholder="Password" class="form-control" required />
+                                        </div>
+                                    </div>
 
-                                <div class="select-custom">
-                                    <label>Region
-                                        <abbr class="required" title="required">*</abbr></label>
-                                    <select name="division_id" class="form-control" required>
-                                        <option value="">-- Select --</option>
-                                        @foreach ($divisions as $division)
-                                          <option @if(isset(Auth::user()->Contact)) @if (Auth::user()->Contact->division_id==$division->id) selected @endif  @endif value="{{ $division->id }}">{{$division->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox mt-0">
+                                            <input type="checkbox" class="custom-control-input" id="different-shipping" />
+                                            <label class="custom-control-label" data-toggle="collapse" data-target="#collapseFour" aria-controls="collapseFour" for="different-shipping">Ship to a
+                                                different
+                                                address?</label>
 
-                                <div class="form-group mb-1 pb-2">
-                                    <label>Shipping address
-                                        <abbr class="required" title="required">*</abbr></label>
-                                    <input type="text" class="form-control" name="shipping_address"
-                                        value="@if (Auth::user()) {{ Auth::user()->address }} @endif"
-                                        name=placeholder="House number and street name" required />
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="order-comments">Order notes (optional)</label>
-                                    <textarea class="form-control"
-                                        placeholder="Notes about your order, e.g. special notes for delivery."
-                                        ></textarea>
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <!-- End .col-lg-8 -->
+                                        </div>
+                                    </div>
 
-                <div class="col-lg-5">
-                    <div class="order-summary">
-                        <h3>YOUR ORDER</h3>
+                                    <div id="collapseFour" class="collapse">
+                                        <div class="shipping-info">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>First name <abbr class="required"
+                                                                title="required">*</abbr></label>
+                                                        <input type="text" class="form-control" required />
+                                                    </div>
+                                                </div>
 
-                        <table class="table table-mini-cart">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Product</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php $totalPrice = 0; @endphp
-                                @if ($cardBadge['data']['products'])
-                                    @php $totalPrice = $cardBadge['data']['total_price'] @endphp
-                                @endif
-                                @foreach ($cardBadge['data']['products'] as $productId => $product)
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Last name <abbr class="required"
+                                                                title="required">*</abbr></label>
+                                                        <input type="text" class="form-control" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Company name (optional)</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+
+                                            <div class="select-custom">
+                                                <label>Country / Region <span class="required">*</span></label>
+                                                <select name="orderby" class="form-control">
+                                                    <option value="" selected="selected">Vanuatu</option>
+                                                    <option value="1">Brunei</option>
+                                                    <option value="2">Bulgaria</option>
+                                                    <option value="3">Burkina Faso</option>
+                                                    <option value="4">Burundi</option>
+                                                    <option value="5">Cameroon</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group mb-1 pb-2">
+                                                <label>Street address <abbr class="required"
+                                                        title="required">*</abbr></label>
+                                                <input type="text" class="form-control" placeholder="House number and street name" required />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Apartment, suite, unit, etc. (optional)" required />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Town / City <abbr class="required"
+                                                        title="required">*</abbr></label>
+                                                <input type="text" class="form-control" required />
+                                            </div>
+
+                                            <div class="select-custom">
+                                                <label>State / County <abbr class="required"
+                                                        title="required">*</abbr></label>
+                                                <select name="orderby" class="form-control">
+                                                    <option value="" selected="selected">NY</option>
+                                                    <option value="1">Brunei</option>
+                                                    <option value="2">Bulgaria</option>
+                                                    <option value="3">Burkina Faso</option>
+                                                    <option value="4">Burundi</option>
+                                                    <option value="5">Cameroon</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Postcode / ZIP <abbr class="required"
+                                                        title="required">*</abbr></label>
+                                                <input type="text" class="form-control" required />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="order-comments">Order notes (optional)</label>
+                                        <textarea class="form-control" placeholder="Notes about your order, e.g. special notes for delivery." required></textarea>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End .col-lg-8 -->
+
+                    <div class="col-lg-5">
+                        <div class="order-summary">
+                            <h3>YOUR ORDER</h3>
+
+                            <table class="table table-mini-cart">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Product</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
                                         <td class="product-col">
                                             <h3 class="product-title">
-                                                @if (strlen($product['Info']['product_name']) > 50)
-                                                    {{ \Illuminate\Support\Str::limit($product['Info']['product_name'], 50) . '...' }}
-                                                @else
-                                                    {{ $product['Info']['product_name'] }}
-                                                @endif
-                                                ×
-                                                <span class="product-qty">
-                                                    {{ $product['quantity'] }}
-                                                </span>
+                                                Circled Ultimate 3D Speaker ×
+                                                <span class="product-qty">4</span>
                                             </h3>
                                         </td>
 
                                         <td class="price-col">
-                                            <span>
-                                                @if ($currencySymbol)
-                                                    {{ $currencySymbol->symbol }}
-                                                @endif
-                                                {{ $product['total_price'] }}
-                                            </span>
+                                            <span>$1,040.00</span>
                                         </td>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr class="cart-subtotal">
-                                    <td>
-                                        <h4>Subtotal</h4>
-                                    </td>
 
-                                    <td class="price-col">
-                                        <span>
-                                            @if ($currencySymbol)
-                                                {{ $currencySymbol->symbol }}
-                                            @endif
-                                            {{ $totalPrice }}
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="order-shipping">
-                                    <td class="text-left" colspan="2">
-                                        <h4 class="m-b-sm">Discount</h4>
+                                    <tr>
+                                        <td class="product-col">
+                                            <h3 class="product-title">
+                                                Fashion Computer Bag ×
+                                                <span class="product-qty">2</span>
+                                            </h3>
+                                        </td>
 
-                                        <div class="form-group form-group-custom-control">
-                                            <div class="custom-control custom-radio d-flex">
-                                                @if ($currencySymbol)
-                                                    {{ $currencySymbol->symbol }}
-                                                @endif
-                                                0
+                                        <td class="price-col">
+                                            <span>$418.00</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="cart-subtotal">
+                                        <td>
+                                            <h4>Subtotal</h4>
+                                        </td>
+
+                                        <td class="price-col">
+                                            <span>$1,458.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-shipping">
+                                        <td class="text-left" colspan="2">
+                                            <h4 class="m-b-sm">Shipping</h4>
+
+                                            <div class="form-group form-group-custom-control">
+                                                <div class="custom-control custom-radio d-flex">
+                                                    <input type="radio" class="custom-control-input" name="radio" checked />
+                                                    <label class="custom-control-label">Local Pickup</label>
+                                                </div>
+                                                <!-- End .custom-checkbox -->
                                             </div>
-                                            <!-- End .custom-checkbox -->
-                                        </div>
-                                        <!-- End .form-group -->
+                                            <!-- End .form-group -->
 
-                                    </td>
+                                            <div class="form-group form-group-custom-control mb-0">
+                                                <div class="custom-control custom-radio d-flex mb-0">
+                                                    <input type="radio" name="radio" class="custom-control-input">
+                                                    <label class="custom-control-label">Flat Rate</label>
+                                                </div>
+                                                <!-- End .custom-checkbox -->
+                                            </div>
+                                            <!-- End .form-group -->
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                                <tr class="order-total">
-                                    <td>
-                                        <h4>Total</h4>
-                                    </td>
-                                    <td>
-                                        <b class="total-price">
-                                            <span>
-                                                <span>
-                                                    @if ($currencySymbol)
-                                                        {{ $currencySymbol->symbol }}
-                                                    @endif
-                                                    {{ $totalPrice }}
-                                                </span>
-                                            </span>
-                                        </b>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                    <tr class="order-total">
+                                        <td>
+                                            <h4>Total</h4>
+                                        </td>
+                                        <td>
+                                            <b class="total-price"><span>$1,603.80</span></b>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
 
-                        {{-- <div class="payment-methods">
-                            <h4 class="">Payment methods</h4>
-                            <div class="info-box with-icon p-0">
-                                <p>
-                                    Sorry, it seems that there are no available payment methods for your state. Please
-                                    contact us if you require assistance or wish to make alternate arrangements.
-                                </p>
+                            <div class="payment-methods">
+                                <h4 class="">Payment methods</h4>
+                                <div class="info-box with-icon p-0">
+                                    <p>
+                                        Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.
+                                    </p>
+                                </div>
                             </div>
-                        </div> --}}
 
-                        <button type="submit" class="btn btn-dark btn-place-order" form="checkout-form">
-                            Place order
-                        </button>
+                            <button type="submit" class="btn btn-dark btn-place-order" form="checkout-form">
+                                Place order
+                            </button>
+                        </div>
+                        <!-- End .cart-summary -->
                     </div>
-                    <!-- End .cart-summary -->
+                    <!-- End .col-lg-4 -->
                 </div>
-                <!-- End .col-lg-4 -->
+                <!-- End .row -->
             </div>
-            <!-- End .row -->
-        </div>
-        <!-- End .container -->
-    </main>
-    <!-- End .main -->
+            <!-- End .container -->
+        </main>
+        <!-- End .main -->
 @endsection

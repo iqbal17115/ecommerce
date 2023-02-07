@@ -233,10 +233,11 @@ class ProductController extends Controller
             } else {
                 $Query = Product::find($request->vital_info_id);
             }
-
+            
             $Query->code = $request->code;
             $Query->name = $request->name;
             $Query->type = $request->type;
+            $Query->seller_sku = $request->seller_sku;
             $Query->category_id = $request->category_id;
             $Query->brand_id = $request->brand_id;
             $Query->product_feature_id = $request->product_feature_id;
