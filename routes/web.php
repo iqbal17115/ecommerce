@@ -59,6 +59,7 @@ Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])
 Route::get('/shop/{id}', [ShopController::class, 'shop'])->name('shop');
 Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagination']);
 Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
+Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
 Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
 // Route::get('product-details/{id?}', [HomeController::class, 'productDetails'])->name('product-details');
 // Route::post('/ajax/add-to-card-store', [HomeController::class, 'addToCardStore'])->name('ajax-add-to-card-store');

@@ -19,8 +19,6 @@ class CreateSlidersTable extends Migration
             $table->text('image');
             $table->tinyInteger('position')->nullable();
             $table->foreignId('category_id')->nullable();
-            $table->foreignId('branch_id');
-            $table->foreignId('user_id');
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
         });

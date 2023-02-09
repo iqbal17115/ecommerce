@@ -39,25 +39,27 @@
                                           <option value="Style One">Style One</option>
                                           <option value="Style Two">Style Two</option>
                                           <option value="Style Three">Style Three</option>
+                                          <option value="Style Four">Style Four</option>
+                                          <option value="Style Five">Style Five</option>
                                       </select>
                                       <span class="text-danger err_style"></span>
-                                  </div>
-                              </div>
-                              <div class="col-md-12">
-                                  <div class="form-group">
-                                      <label for="type">Ads Type</label>
-                                      <select name="type" id="type" class="form-control ads_content" onchange="styleType()">
-                                          <option value="">Select Option</option>
-                                          <option value="Embed Code">Embed Code</option>
-                                          <option value="Image Ads">Image Ads</option>
-                                      </select>
-                                      <span class="text-danger err_type"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
                                 <div class="row" id="ads_content">
                                     
                                 </div>
+                              </div>
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="width">Width</label>
+                                      <select name="width" id="width" class="form-control ads_content">
+                                          <option value="Full">Full</option>
+                                          <option value="Half">Half</option>
+                                          <option value="One Third">One Third</option>
+                                      </select>
+                                      <span class="text-danger err_width"></span>
+                                  </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">

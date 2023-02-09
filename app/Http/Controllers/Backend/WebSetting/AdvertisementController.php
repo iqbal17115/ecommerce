@@ -26,13 +26,11 @@ class AdvertisementController extends Controller
             [
                 'page' => 'required',
                 'style' => 'required',
-                'type' => 'required',
                 'is_active' => 'required'
             ],
             [
                 'page' => 'Page is required',
                 'style' => 'Style is required',
-                'type' => 'Type is required',
                 'is_active' => 'Status is required'
             ]
         );
@@ -45,139 +43,41 @@ class AdvertisementController extends Controller
         $advertisement->page = $request->page;
         $advertisement->position = $request->position;
         $advertisement->style = $request->style;
-        $advertisement->type = $request->type;
+        $advertisement->width = $request->width;
         if ($request->style == "Style One") {
-            // 1st Image Or URL
-            if ($request->type == "Image Ads") {
-                if ($request->cu_id < 0) {
-                    $request->validate(
-                        [
-                            'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
-                        ],
-                        [
-                            'embed_code_or_image1' => 'Image1 is required'
-                        ]
-                    );
-                }
-                if ($request->file('embed_code_or_image1')) {
-                    $imagePath = $request->file('embed_code_or_image1');
-                    $imageName = $imagePath->getClientOriginalName();
-                    $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
-                    $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
-                    $advertisement->embed_code_or_image1 = $embed_code_or_image1;
-                }
-            } else {
-                $request->validate(
-                    [
-                        'embed_code_or_image1' => 'required'
-                    ],
-                    [
-                        'embed_code_or_image1' => 'Embed Code1 is required'
-                    ]
-                );
-                $advertisement->embed_code_or_image1 = $request->embed_code_or_image1;
-            }
+            $advertisement->title = $request->title;
+            $advertisement->sub_title = $request->sub_title;
         } else if ($request->style == "Style Two") {
-            if ($request->type == "Image Ads") {
-                if ($request->cu_id < 0) {
-                    $request->validate(
-                        [
-                            'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
-                            'embed_code_or_image2' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
-                        ],
-                        [
-                            'embed_code_or_image1' => 'Image1 is required',
-                            'embed_code_or_image2' => 'Image2 is required',
-                        ]
-                    );
-                }
-                // 1st Image
-                if ($request->file('embed_code_or_image1')) {
-                    $imagePath = $request->file('embed_code_or_image1');
-                    $imageName = $imagePath->getClientOriginalName();
-                    $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
-                    $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
-                    $advertisement->embed_code_or_image1 = $embed_code_or_image1;
-                }
-                // 2nd Image
-                if ($request->file('embed_code_or_image2')) {
-                    $imagePath = $request->file('embed_code_or_image2');
-                    $imageName = $imagePath->getClientOriginalName();
-                    $path = $request->file('embed_code_or_image2')->storeAs('uploads', $imageName, 'public');
-                    $embed_code_or_image2 = $request->file('embed_code_or_image2')->store('images/advertisement', 'public');
-                    $advertisement->embed_code_or_image2 = $embed_code_or_image2;
-                }
-            } else {
-                $request->validate(
-                    [
-                        'embed_code_or_image1' => 'required',
-                        'embed_code_or_image2' => 'required'
-                    ],
-                    [
-                        'embed_code_or_image1' => 'Embed Code1 is required',
-                        'embed_code_or_image2' => 'Embed Code2 is required'
-                    ]
-                );
-
-                $advertisement->embed_code_or_image1 = $request->embed_code_or_image1;
-                $advertisement->embed_code_or_image2 = $request->embed_code_or_image2;
+            $advertisement->title = $request->title;
+            $advertisement->sub_title = $request->sub_title;
+            $advertisement->offer = $request->offer;
+            if ($request->file('embed_code_or_image1')) {
+                $imagePath = $request->file('embed_code_or_image1');
+                $imageName = $imagePath->getClientOriginalName();
+                $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
+                $image = $request->file('image')->store('images/advertisement', 'public');
+                $advertisement->image = $image;
             }
-        } else {
-            if ($request->type == "Image Ads") {
-                if ($request->cu_id < 0) {
-                    $request->validate(
-                        [
-                            'embed_code_or_image1' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
-                            'embed_code_or_image2' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
-                            'embed_code_or_image3' => 'required|mimes:jpeg,png,jpg,gif|max:2048'
-                        ],
-                        [
-                            'embed_code_or_image1' => 'Image1 is required',
-                            'embed_code_or_image2' => 'Image2 is required',
-                            'embed_code_or_image3' => 'Image3 is required'
-                        ]
-                    );
-                }
-                // 1st Image
-                if ($request->file('embed_code_or_image1')) {
-                    $imagePath = $request->file('embed_code_or_image1');
-                    $imageName = $imagePath->getClientOriginalName();
-                    $path = $request->file('embed_code_or_image1')->storeAs('uploads', $imageName, 'public');
-                    $embed_code_or_image1 = $request->file('embed_code_or_image1')->store('images/advertisement', 'public');
-                    $advertisement->embed_code_or_image1 = $embed_code_or_image1;
-                }
-                // 2nd Image
-                if ($request->file('embed_code_or_image2')) {
-                    $imagePath = $request->file('embed_code_or_image2');
-                    $imageName = $imagePath->getClientOriginalName();
-                    $path = $request->file('embed_code_or_image2')->storeAs('uploads', $imageName, 'public');
-                    $embed_code_or_image2 = $request->file('embed_code_or_image2')->store('images/advertisement', 'public');
-                    $advertisement->embed_code_or_image2 = $embed_code_or_image2;
-                }
-                // 3rd Image
-                if ($request->file('embed_code_or_image3')) {
-                    $imagePath = $request->file('embed_code_or_image3');
-                    $imageName = $imagePath->getClientOriginalName();
-                    $path = $request->file('embed_code_or_image3')->storeAs('uploads', $imageName, 'public');
-                    $embed_code_or_image3 = $request->file('embed_code_or_image3')->store('images/advertisement', 'public');
-                    $advertisement->embed_code_or_image3 = $embed_code_or_image3;
-                }
-            } else {
-                $request->validate(
-                    [
-                        'embed_code_or_image1' => 'required',
-                        'embed_code_or_image2' => 'required',
-                        'embed_code_or_image3' => 'required'
-                    ],
-                    [
-                        'embed_code_or_image1' => 'Embed Code1 is required',
-                        'embed_code_or_image2' => 'Embed Code2 is required',
-                        'embed_code_or_image3' => 'Embed Code3 is required'
-                    ]
-                );
-                $advertisement->embed_code_or_image1 = $request->embed_code_or_image1;
-                $advertisement->embed_code_or_image2 = $request->embed_code_or_image2;
-                $advertisement->embed_code_or_image3 = $request->embed_code_or_image3;
+        } else if ($request->style == "Style Three") {
+            $advertisement->title = $request->title;
+            $advertisement->sub_title = $request->sub_title;
+            $advertisement->offer = $request->offer;
+            if ($request->file('embed_code_or_image1')) {
+                $imagePath = $request->file('embed_code_or_image1');
+                $imageName = $imagePath->getClientOriginalName();
+                $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
+                $image = $request->file('image')->store('images/advertisement', 'public');
+                $advertisement->image = $image;
+            }
+        } else if ($request->style == "Style Four") {
+            $advertisement->title = $request->title;
+            $advertisement->sub_title = $request->sub_title;
+            if ($request->file('embed_code_or_image1')) {
+                $imagePath = $request->file('embed_code_or_image1');
+                $imageName = $imagePath->getClientOriginalName();
+                $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
+                $image = $request->file('image')->store('images/advertisement', 'public');
+                $advertisement->image = $image;
             }
         }
 
