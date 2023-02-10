@@ -23,6 +23,7 @@ class CreateAdvertisementsTable extends Migration
             $table->string('sub_title')->nullable();
             $table->tinyInteger('offer')->nullable();
             $table->text('image')->nullable();
+            $table->foreignId('product_feature_id')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
         });

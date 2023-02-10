@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class ProductFeatureController extends Controller
 {
+    public function getFeature() {
+        $product_features = ProductFeature::whereIsActive(1)->orderBy('position', 'DESC')->select('id', 'name')->get();
+        return response()->json(['product_features' => $product_features]);
+    }
     public function searchProductFeature(Request $request) {
         $product_features = ProductFeature::where('name', 'like', '%'.$request->search_string.'%')->orWhere('short_name', 'like', '%'.$request->search_string.'%')->orderBy('position', 'asc')->paginate(5);
         if($product_features->count() >= 1) {

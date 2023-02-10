@@ -215,6 +215,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::post('delete-advertisement', [AdvertisementController::class, 'deleteAdvertisement'])->name('delete.advertisement');
             Route::get('pagination/advertisement-pagination-data', [AdvertisementController::class, 'pagination']);
             Route::get('search-advertisement', [AdvertisementController::class, 'searchAdvertisement'])->name('search.advertisement');
+            Route::get('get-product-feature', [ProductFeatureController::class, 'getFeature'])->name('get-product-feature');
         }
     );
     // End Advertisement

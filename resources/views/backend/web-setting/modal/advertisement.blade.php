@@ -78,8 +78,6 @@
                       <div class="modal-footer">
                           <center>
                               <img id="imgPreview1" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
-                              <img id="imgPreview2" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
-                              <img id="imgPreview3" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
                           </center>
                           <span style="width: 200px;"></span>
                           <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>

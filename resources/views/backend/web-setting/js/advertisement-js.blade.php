@@ -99,8 +99,23 @@
             $('#addAdvertisement')[0].reset();
             $('#cu_id').val(-1);
             $('#imgPreview1').hide();
-            $('#imgPreview2').hide();
-            $('#imgPreview3').hide();
+            // Get Product Feature
+            $.ajax({
+                url: "{{route('get-product-feature')}}",
+                method: 'get',
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function(data) {
+console.log(data);
+                        // $('#advertisementModal').modal('hide');
+                        // $('#addAdvertisement')[0].reset();
+                },
+                error: function(err) {
+                    let error = err.responseJSON;
+                   
+                }
+            });
         });
 
         $(document).on('submit', '#addAdvertisement', function(e) {
@@ -186,28 +201,6 @@
                 $('#url1').val(url1);
             }
         }
-        if ($('#embed_code_or_image2').length) {
-            let embed_code_or_image2 = $(this).data('embed_code_or_image2');
-            if (type == "Embed Code") {
-                $('#embed_code_or_image2').val(embed_code_or_image2);
-            } else {
-                $('#imgPreview2').show();
-                $('#imgPreview2').attr("src", 'storage/' + embed_code_or_image2);
-                let url2 = $(this).data('url2');
-                $('#url2').val(url2);
-            }
-        }
-        if ($('#embed_code_or_image3').length) {
-            let embed_code_or_image3 = $(this).data('embed_code_or_image3');
-            if (type == "Embed Code") {
-                $('#embed_code_or_image3').val(embed_code_or_image3);
-            } else {
-                $('#imgPreview3').show();
-                $('#imgPreview3').attr("src", 'storage/' + embed_code_or_image3);
-                let url3 = $(this).data('url3');
-                $('#url3').val(url3);
-            }
-        }
 
     });
 
@@ -216,13 +209,13 @@
         $('#ads_content').empty();
         var ads_content = "";
         if (ads_style == "Style One") {
-            ads_content += "<div class='col-md-6'><div class='form-group'><label for='title'>Title</label><input type='text' name='title' id='title' class='form-control'  placeholder='Title'></div></div><div class='col-md-6'><div class='form-group'><label for='title'>Sub-title</label><input type='text' name='title' id='title' class='form-control' placeholder='Sub-title'></div></div>";
+            ads_content += "<div class='col-md-6'><div class='form-group'><label for='title'>Title</label><input type='text' name='title' id='title' class='form-control'  placeholder='Title'></div></div><div class='col-md-6'><div class='form-group'><label for='sub_title'>Sub-title</label><input type='text' name='sub_title' id='sub_title' class='form-control' placeholder='Sub-title'></div></div>";
         } else if (ads_style == "Style Two") {
-            ads_content += "<div class='col-md-6'><div class='form-group'><label for='title'>Title</label><input type='text' name='title' id='title' class='form-control'  placeholder='Title'></div></div><div class='col-md-6'><div class='form-group'><label for='title'>Sub-title</label><input type='text' name='title' id='title' class='form-control' placeholder='Sub-title'></div></div><div class='col-md-6'><div class='form-group'><label for='offer'>Offer In Amount</label><input type='number' name='offer' id='offer' class='form-control' placeholder='Offer'></div></div><div class='col-md-6'><div class='form-group'><label for='image'>Image</label><input type='file' name='image' id='image' class='form-control'></div></div>";
+            ads_content += "<div class='col-md-6'><div class='form-group'><label for='title'>Title</label><input type='text' name='title' id='title' class='form-control'  placeholder='Title'></div></div><div class='col-md-6'><div class='form-group'><label for='sub_title'>Sub-title</label><input type='text' name='sub_title' id='sub_title' class='form-control' placeholder='Sub-title'></div></div><div class='col-md-6'><div class='form-group'><label for='offer'>Offer In Amount</label><input type='number' name='offer' id='offer' class='form-control' placeholder='Offer'></div></div><div class='col-md-6'><div class='form-group'><label for='image'>Image</label><input type='file' name='image' id='image' class='form-control'></div></div>";
         } else if (ads_style == "Style Three") {
-            ads_content += "<div class='col-md-6'><div class='form-group'><label for='title'>Title</label><input type='text' name='title' id='title' class='form-control'  placeholder='Title'></div></div><div class='col-md-6'><div class='form-group'><label for='title'>Sub-title</label><input type='text' name='title' id='title' class='form-control' placeholder='Sub-title'></div></div><div class='col-md-6'><div class='form-group'><label for='offer'>Offer In Percentage</label><input type='number' name='offer' id='offer' class='form-control' placeholder='Offer'></div></div><div class='col-md-6'><div class='form-group'><label for='image'>Image</label><input type='file' name='image' id='image' class='form-control'></div></div>";
+            ads_content += "<div class='col-md-6'><div class='form-group'><label for='title'>Title</label><input type='text' name='title' id='title' class='form-control'  placeholder='Title'></div></div><div class='col-md-6'><div class='form-group'><label for='sub_title'>Sub-title</label><input type='text' name='sub_title' id='sub_title' class='form-control' placeholder='Sub-title'></div></div><div class='col-md-6'><div class='form-group'><label for='offer'>Offer In Percentage</label><input type='number' name='offer' id='offer' class='form-control' placeholder='Offer'></div></div><div class='col-md-6'><div class='form-group'><label for='image'>Image</label><input type='file' name='image' id='image' class='form-control'></div></div>";
         } else if (ads_style == "Style Four") {
-            ads_content += "<div class='col-md-6'><div class='form-group'><label for='title'>Title</label><input type='text' name='title' id='title' class='form-control'  placeholder='Title'></div></div><div class='col-md-6'><div class='form-group'><label for='title'>Sub-title</label><input type='text' name='title' id='title' class='form-control' placeholder='Sub-title'></div></div><div class='col-md-12'><div class='form-group'><label for='image'>Image</label><input type='file' name='image' id='image' class='form-control'></div></div>";
+            ads_content += "<div class='col-md-6'><div class='form-group'><label for='title'>Title</label><input type='text' name='title' id='title' class='form-control'  placeholder='Title'></div></div><div class='col-md-6'><div class='form-group'><label for='sub_title'>Sub-title</label><input type='text' name='sub_title' id='sub_title' class='form-control' placeholder='Sub-title'></div></div><div class='col-md-12'><div class='form-group'><label for='image'>Image</label><input type='file' name='image' id='image' class='form-control'></div></div>";
         }
         ads_content += "</div>";
         $("#ads_content").append(ads_content);
