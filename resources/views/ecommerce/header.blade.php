@@ -28,10 +28,10 @@
 
         <div class="container">
             <div class="header-left col-lg-2 w-auto pl-0">
-            <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
+                <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
             <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
                 </button> -->
-                
+
                 <a href="demo36.html" class="logo">
                     <img src="{{ asset('aladdinne/assets/images/logo-black.png') }}" class="w-100" width="111"
                         height="44" alt="Porto Logo">
@@ -74,7 +74,7 @@
                     <a href="#" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-cart-thick"></i>
-                        <span class="cart-count badge-circle">3</span>
+                        <span class="cart-count badge-circle">{{ count((array) session('cart')) }}</span>
                     </a>
 
                     <div class="cart-overlay"></div>
@@ -87,80 +87,42 @@
                             <!-- End .dropdown-cart-header -->
 
                             <div class="dropdown-cart-products">
-                                <div class="product">
+                                @php $total = 0 @endphp
+                                @if(session('cart'))
+                                @foreach(session('cart') as $id => $details)
+                                @php $total += $details['sale_price'] * $details['quantity'] @endphp
+                                <div class="product cart-{{ $id }}" data-id="{{ $id }}">
                                     <div class="product-details">
                                         <h4 class="product-title">
-                                            <a href="demo36-product.html">Ultimate 3D Bluetooth Speaker</a>
+                                            <a href="demo36-product.html">{{ $details['name'] }}</a>
                                         </h4>
 
                                         <span class="cart-product-info">
-                                            <span class="cart-product-qty">1</span> × $99.00
+                                            <span class="cart-product-qty">{{ $details['quantity'] }}</span> ×
+                                            ${{ $details['sale_price'] }}
                                         </span>
                                     </div>
                                     <!-- End .product-details -->
 
                                     <figure class="product-image-container">
                                         <a href="demo36-product.html" class="product-image">
-                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-1.jpg') }}"
+                                            <img src="{{ asset('storage/product_photo/'.$details['image']) }}"
                                                 alt="product" width="80" height="80">
                                         </a>
 
-                                        <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
+                                        <a href="javascript:void(0);" class="btn-remove" title="Remove Product"><span>×</span></a>
                                     </figure>
                                 </div>
                                 <!-- End .product -->
-
-                                <div class="product">
-                                    <div class="product-details">
-                                        <h4 class="product-title">
-                                            <a href="demo36-product.html">Brown Women Casual HandBag</a>
-                                        </h4>
-
-                                        <span class="cart-product-info">
-                                            <span class="cart-product-qty">1</span> × $35.00
-                                        </span>
-                                    </div>
-                                    <!-- End .product-details -->
-
-                                    <figure class="product-image-container">
-                                        <a href="demo36-product.html" class="product-image">
-                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}"
-                                                alt="product" width="80" height="80">
-                                        </a>
-
-                                        <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                                    </figure>
-                                </div>
-                                <!-- End .product -->
-
-                                <div class="product">
-                                    <div class="product-details">
-                                        <h4 class="product-title">
-                                            <a href="demo36-product.html">Circled Ultimate 3D Speaker</a>
-                                        </h4>
-
-                                        <span class="cart-product-info">
-                                            <span class="cart-product-qty">1</span> × $35.00
-                                        </span>
-                                    </div>
-                                    <!-- End .product-details -->
-
-                                    <figure class="product-image-container">
-                                        <a href="demo36-product.html" class="product-image">
-                                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}"
-                                                alt="product" width="80" height="80">
-                                        </a>
-                                        <a href="#" class="btn-remove" title="Remove Product"><span>×</span></a>
-                                    </figure>
-                                </div>
-                                <!-- End .product -->
+                                @endforeach
+                                @endif
                             </div>
                             <!-- End .cart-product -->
 
                             <div class="dropdown-cart-total">
                                 <span>SUBTOTAL:</span>
 
-                                <span class="cart-total-price float-right">$134.00</span>
+                                <span class="cart-total-price float-right">${{$total}}</span>
                             </div>
                             <!-- End .dropdown-cart-total -->
 

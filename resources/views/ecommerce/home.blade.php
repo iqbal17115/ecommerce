@@ -110,7 +110,7 @@
                                     width="239" height="239" style="width: 239px; height: 239px;" alt="product">
                             </a>
                             <div class="btn-icon-group">
-                                <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}" data-your_price="{{$product->your_price}}" data-sale_price="{{$product->sale_price}}" class="btn-icon btn-add-cart product-type-simple"><i
+                                <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}" data-name="{{$product->name}}" data-your_price="{{$product->your_price}}" data-sale_price="{{$product->sale_price}}" @if($product->ProductMainImage) data-image="{{$product->ProductMainImage->image }}" @endif class="btn-icon btn-add-cart product-type-simple"><i
                                         class="icon-shopping-cart"></i></a>
                             </div>
                         </figure>
