@@ -7,7 +7,7 @@
             let sale_price = $(this).data("sale_price");
             // ajax
             $.ajax({
-                    url: "{{route('add.to.cart')}}",
+                    url: "{{route('add-to-cart')}}",
                     method: 'get',
                     data: {
                         id: id,
