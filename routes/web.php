@@ -52,7 +52,6 @@ Route::get('/', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/customer_login', [HomeController::class, 'CustomerLogin'])->name('customer_login');
-// Route::get('/all-category-wise/{id?}', [HomeController::class, 'allCategoryWise'])->name('all-category-wise');
 Route::get('/check_sub_category', [HomeController::class, 'checkSubCategory'])->name('check_sub_category');
 Route::get('/get_sub_category', [HomeController::class, 'getSubCategory'])->name('get_sub_category');
 Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])->name('get_parent_category');
@@ -61,10 +60,10 @@ Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagin
 Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
 Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
 Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
-// Route::get('product-details/{id?}', [HomeController::class, 'productDetails'])->name('product-details');
-// Route::post('/ajax/add-to-card-store', [HomeController::class, 'addToCardStore'])->name('ajax-add-to-card-store');
-// Route::post('/ajax/add-to-card-quantity-update', [HomeController::class, 'cartProductQuantityUpdate'])->name('ajax-add-to-card-quantity-update');
-// Route::post('/ajax/add-to-card-product-delete', [HomeController::class, 'cartProductDelete'])->name('ajax-add-to-card-product-delete');
+Route::get('cart', [CartController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 // Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
 // Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
 // Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');

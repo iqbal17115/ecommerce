@@ -50,7 +50,7 @@
                         <!-- End .toolbox-item -->
                     </div>
                     <!-- End .toolbox-left -->
-                   
+
                     <div class="toolbox-right">
                         <div class="toolbox-item toolbox-show">
                             <label>Show:</label>
@@ -99,10 +99,14 @@
                                 </h3>
                                 <!-- End .product-container -->
                                 <div class="price-box">
-                                @php
-                                echo $product->your_price? '<span class="old-price">$'.number_format((float)$product->your_price, 2).'</span>' : '';
-                                echo $product->sale_price? '<span class="product-price">$'.number_format((float)$product->sale_price, 2).'</span>' : '';
-                                @endphp
+                                    @php
+                                    echo $product->your_price? '<span
+                                        class="old-price">$'.number_format((float)$product->your_price, 2).'</span>' :
+                                    '';
+                                    echo $product->sale_price? '<span
+                                        class="product-price">$'.number_format((float)$product->sale_price, 2).'</span>'
+                                    : '';
+                                    @endphp
                                 </div>
                                 <!-- End .price-box -->
                             </div>
@@ -157,70 +161,30 @@
                                             Cameras
                                         </a>
                                     </li>
+                                    @foreach($parentCategories as $parentCategory)
                                     <li>
-                                        <a href="#widget-category-2" class="collapsed" data-toggle="collapse"
-                                            role="button" aria-expanded="false" aria-controls="widget-category-2">
-                                            Electronics<span class="toggle"></span>
+                                        <a href="#widget-category-{{$parentCategory->id}}" class="collapsed"
+                                            data-toggle="collapse" role="button" aria-expanded="false"
+                                            aria-controls="widget-category-2">
+                                            {{$parentCategory->name}} @if($parentCategory->SubCategory)<span class="toggle"></span>@endif
                                         </a>
-                                        <div class="collapse" id="widget-category-2">
+                                        @if($parentCategory->SubCategory)
+                                        <div class="collapse" id="widget-category-{{$parentCategory->id}}">
                                             <ul class="cat-sublist">
-                                                <li>Accessories</li>
-                                                <li>Audio & Video</li>
-                                                <li>Camera & Photo</li>
-                                                <li>Laptops</li>
+                                                @foreach($parentCategory->SubCategory as $subCategory)
+                                                <li>
+                                                    <a href="#widget-category-{{$subCategory->id}}" class="collapsed"
+                                                        data-toggle="collapse" role="button" aria-expanded="false"
+                                                        aria-controls="widget-category-2">
+                                                        {{$subCategory->name}}@if($subCategory->SubCategory)<span class="toggle"></span>@endif
+                                                    </a>
+                                                </li>
+                                                @endforeach
                                             </ul>
                                         </div>
+                                        @endif
                                     </li>
-                                    <li>
-                                        <a href="#widget-category-3" class="collapsed" data-toggle="collapse"
-                                            role="button" aria-expanded="false" aria-controls="widget-category-3">
-                                            Fashion<span class="toggle"></span>
-                                        </a>
-                                        <div class="collapse" id="widget-category-3">
-                                            <ul class="cat-sublist">
-                                                <li>Kids Fashion</li>
-                                                <li>Man</li>
-                                                <li>Woman</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="#widget-category-4">
-                                            Furniture
-                                        </a>
-                                    </li>
-                                    <li><a href="#">Gaming</a></li>
-                                    <li>
-                                        <a href="#widget-category-4" class="collapsed" data-toggle="collapse"
-                                            role="button" aria-expanded="false" aria-controls="widget-category-4">
-                                            Gifts & Gadgets<span class="toggle"></span>
-                                        </a>
-                                        <div class="collapse" id="widget-category-4">
-                                            <ul class="cat-sublist">
-                                                <li>Birthday</li>
-                                                <li>For Her</li>
-                                                <li>For Him</li>
-                                                <li>For Kids</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Headphones</a></li>
-                                    <li>
-                                        <a href="#widget-category-5" class="collapsed" data-toggle="collapse"
-                                            role="button" aria-expanded="false" aria-controls="widget-category-5">
-                                            Home & Garden<span class="toggle"></span>
-                                        </a>
-                                        <div class="collapse" id="widget-category-5">
-                                            <ul class="cat-sublist">
-                                                <li>Furniture</li>
-                                                <li>Home Accessories</li>
-                                                <li>Lighting</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Smartphones</a></li>
-                                    <li><a href="#">Sports</a></li>
-                                    <li><a href="#">Toys</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <!-- End .widget-body -->
