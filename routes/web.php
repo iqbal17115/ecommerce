@@ -61,7 +61,7 @@ Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'sho
 Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
 Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
-Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::get('add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 // Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
