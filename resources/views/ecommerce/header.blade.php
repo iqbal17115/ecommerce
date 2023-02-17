@@ -32,7 +32,7 @@
             <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
                 </button> -->
 
-                <a href="demo36.html" class="logo">
+                <a href="{{ route('home') }}" class="logo">
                     <img src="{{ asset('aladdinne/assets/images/logo-black.png') }}" class="w-100" width="111"
                         height="44" alt="Porto Logo">
                 </a>
@@ -71,7 +71,7 @@
                 </a>
 
                 <div class="dropdown cart-dropdown">
-                    <a href="#" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle" role="button"
+                    <a href="javascript:void(0);" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-cart-thick"></i>
                         <span class="cart-count badge-circle">{{ count((array) session('cart')) }}</span>
@@ -80,7 +80,7 @@
                     <div class="cart-overlay"></div>
 
                     <div class="dropdown-menu mobile-cart">
-                        <a href="#" title="Close (Esc)" class="btn-close">×</a>
+                        <a href="javascript:void(0);" title="Close (Esc)" class="btn-close">×</a>
 
                         <div class="dropdownmenu-wrapper custom-scrollbar">
                             <div class="dropdown-cart-header">Shopping Cart</div>

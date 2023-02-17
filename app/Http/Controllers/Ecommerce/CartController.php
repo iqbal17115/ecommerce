@@ -8,6 +8,22 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function decreaseQty(Request $request) {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$request->id]) && $cart[$request->id]['quantity'] > 1) {
+            $cart[$request->id]['quantity']--;
+        }
+        session()->put('cart', $cart);
+        return response()->json(['cart' => $cart]);
+    }
+    public function increaseQty(Request $request) {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$request->id])) {
+            $cart[$request->id]['quantity']++;
+        }
+        session()->put('cart', $cart);
+        return response()->json(['cart' => $cart]);
+    }
     public function remove(Request $request)
     {
         if ($request->id) {
@@ -17,6 +33,7 @@ class CartController extends Controller
                 session()->put('cart', $cart);
             }
         }
+        return response()->json(['cart' => $cart]);
     }
     public function addToCart(Request $request)
     {

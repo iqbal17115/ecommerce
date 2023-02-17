@@ -60,10 +60,12 @@ Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagin
 Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
 Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
 Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
-Route::get('cart', [CartController::class, 'cart'])->name('cart');
+Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::post('add-to-cart', [CartController::class, 'addToCart']);
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [CartController::class, 'remove']);
+Route::post('increase-product-qty', [CartController::class, 'increaseQty']);
+Route::post('decrease-product-qty', [CartController::class, 'decreaseQty']);
 // Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
 // Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
 // Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');

@@ -28,77 +28,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="product-row">
+                            @php $total = 0 @endphp
+                            @if(session('cart'))
+                            @foreach(session('cart') as $id => $details)
+                            @php $total += $details['sale_price'] * $details['quantity'] @endphp
+                            <tr class="product-row cart-{{ $id }}" data-id="{{ $id }}">
                                 <td>
                                     <figure class="product-image-container">
-                                        <a href="product.html" class="product-image">
-                                            <img src="{{ asset('aladdinne/assets/images/products/product-4.jpg') }}" alt="product">
+                                        <a href="javascript:void(0);" class="product-image">
+                                            <img src="{{ asset('storage/product_photo/'.$details['image']) }}"
+                                                alt="product">
                                         </a>
 
-                                        <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
+                                        <a href="javascript:void(0);" class="btn-remove remove-from-cart icon-cancel" title="Remove Product"></a>
                                     </figure>
                                 </td>
                                 <td class="product-col">
                                     <h5 class="product-title">
-                                        <a href="product.html">Men Watch</a>
+                                        <a href="javascript:void(0);">{{ $details['name'] }}</a>
                                     </h5>
                                 </td>
-                                <td>$17.90</td>
+                                <td>${{ $details['sale_price'] }}</td>
                                 <td>
                                     <div class="product-single-qty">
-                                        <input class="horizontal-quantity form-control" type="text">
+                                        <input value="{{ $details['quantity'] }}" class="horizontal-quantity form-control product-quantity-{{ $id }}" type="text">
                                     </div><!-- End .product-single-qty -->
                                 </td>
-                                <td class="text-right"><span class="subtotal-price">$17.90</span></td>
+                                <td class="text-right"><span class="subtotal-price subtotal-price-{{ $id }}">${{ $details['quantity'] * $details['sale_price'] }}</span></td>
                             </tr>
+                            @endforeach
+                            @endif
 
-                            <tr class="product-row">
-                                <td>
-                                    <figure class="product-image-container">
-                                        <a href="product.html" class="product-image">
-                                            <img src="{{ asset('aladdinne/assets/images/products/product-3.jpg') }}" alt="product">
-                                        </a>
-
-                                        <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
-                                    </figure>
-                                </td>
-                                <td class="product-col">
-                                    <h5 class="product-title">
-                                        <a href="product.html">Men Watch</a>
-                                    </h5>
-                                </td>
-                                <td>$17.90</td>
-                                <td>
-                                    <div class="product-single-qty">
-                                        <input class="horizontal-quantity form-control" type="text">
-                                    </div><!-- End .product-single-qty -->
-                                </td>
-                                <td class="text-right"><span class="subtotal-price">$17.90</span></td>
-                            </tr>
-
-                            <tr class="product-row">
-                                <td>
-                                    <figure class="product-image-container">
-                                        <a href="product.html" class="product-image">
-                                            <img src="{{ asset('aladdinne/assets/images/products/product-6.jpg') }}" alt="product">
-                                        </a>
-
-                                        <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
-                                    </figure>
-                                </td>
-                                <td class="product-col">
-                                    <h5 class="product-title">
-                                        <a href="product.html">Men Black Gentle Belt</a>
-                                    </h5>
-                                </td>
-                                <td>$17.90</td>
-                                <td>
-                                    <div class="product-single-qty">
-                                        <input class="horizontal-quantity form-control" type="text">
-                                    </div><!-- End .product-single-qty -->
-                                </td>
-                                <td class="text-right"><span class="subtotal-price">$17.90</span></td>
-                            </tr>
                         </tbody>
 
 
@@ -140,7 +100,7 @@
                         <tbody>
                             <tr>
                                 <td>Subtotal</td>
-                                <td>$17.90</td>
+                                <td>${{$total}}</td>
                             </tr>
 
                             <tr>
@@ -220,5 +180,5 @@
 
     <div class="mb-6"></div><!-- margin -->
 </main><!-- End .main -->
-
+@include('ecommerce.cart-js')
 @endsection
