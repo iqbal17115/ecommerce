@@ -70,6 +70,10 @@
                 success: function (data) {
                     $('.cart-count').text(Object.keys(data['cart']).length);
                     $(".cart-" + ele.parents("tr").attr("data-id")).remove();
+                    propertyNames = Object.values(data['cart']);
+                    price_qty = propertyNames.map(x => x['quantity'] * x['sale_price']);
+                    total = price_qty.reduce(function (curr, prev) { return curr + prev; });
+                    $('.cart-total-price').text(total);
                 }
             });
 
@@ -87,6 +91,13 @@
                 success: function (data) {
                     $('.cart-count').text(Object.keys(data['cart']).length);
                     $(".cart-" + ele.parents("div").attr("data-id")).remove();
+                    propertyNames = Object.values(data['cart']);
+                    price_qty = propertyNames.map(x => x['quantity'] * x['sale_price']);
+                    total = 0;
+                    if (price_qty.length != 0) {
+                        total = price_qty.reduce(function (curr, prev) { return curr + prev; });
+                    }
+                    $('.cart-total-price').text(total);
                 }
             });
         });
