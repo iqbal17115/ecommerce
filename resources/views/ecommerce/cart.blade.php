@@ -4,13 +4,13 @@
     <div class="container">
         <ul class="checkout-progress-bar d-flex justify-content-center flex-wrap">
             <li class="active">
-                <a href="cart.html">Shopping Cart</a>
+                <a href="{{ route('cart') }}">Shopping Cart</a>
             </li>
             <li>
-                <a href="checkout.html">Checkout</a>
+                <a href="{{ route('checkout') }}">Checkout</a>
             </li>
             <li class="disabled">
-                <a href="cart.html">Order Complete</a>
+                <a href="{{ route('cart') }}">Order Complete</a>
             </li>
         </ul>
 

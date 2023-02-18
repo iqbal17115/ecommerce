@@ -4,7 +4,7 @@
             <div class="container checkout-container">
                 <ul class="checkout-progress-bar d-flex justify-content-center flex-wrap">
                     <li>
-                        <a href="cart.html">Shopping Cart</a>
+                        <a href="{{ route('cart') }}">Shopping Cart</a>
                     </li>
                     <li class="active">
                         <a href="checkout.html">Checkout</a>
