@@ -6,23 +6,28 @@
             var ele = $(this);
             id = ele.parents("tr").attr("data-id");
             quantity = $(".product-quantity-" + id).val();
-                // ajax
-                $.ajax({
-                    url: "decrease-product-qty",
-                    method: 'post',
-                    data: {
-                        id: id,
-                        quantity: quantity
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        $('.subtotal-price-' + id).text(data['cart'][id]['quantity'] * data['cart'][id]['sale_price']);
-                    },
-                    error: function (err) {
-                        var error = err.responseJSON;
-                        console.log(error);
-                    }
-                });
+            // ajax
+            $.ajax({
+                url: "decrease-product-qty",
+                method: 'post',
+                data: {
+                    id: id,
+                    quantity: quantity
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('.subtotal-price-' + id).text(data['cart'][id]['quantity'] * data['cart'][id]['sale_price']);
+                    $('.card-product-qty-' + id).text(data['cart'][id]['quantity']);
+                    propertyNames = Object.values(data['cart']);
+                    price_qty = propertyNames.map(x => x['quantity'] * x['sale_price']);
+                    total = price_qty.reduce(function (curr, prev) { return curr + prev; });
+                    $('.cart-total-price').text(total);
+                },
+                error: function (err) {
+                    var error = err.responseJSON;
+                    console.log(error);
+                }
+            });
         });
         // Increase Product Qty
         $("body").on("click", ".bootstrap-touchspin-up", function (e) {
@@ -40,6 +45,11 @@
                 dataType: 'json',
                 success: function (data) {
                     $('.subtotal-price-' + id).text(data['cart'][id]['quantity'] * data['cart'][id]['sale_price']);
+                    $('.card-product-qty-' + id).text(data['cart'][id]['quantity']);
+                    propertyNames = Object.values(data['cart']);
+                    price_qty = propertyNames.map(x => x['quantity'] * x['sale_price']);
+                    total = price_qty.reduce(function (curr, prev) { return curr + prev; });
+                    $('.cart-total-price').text(total);
                 },
                 error: function (err) {
                     var error = err.responseJSON;
@@ -100,8 +110,11 @@
                 },
                 dataType: 'json',
                 success: function (data) {
+                    propertyNames = Object.values(data['cart']);
+                    price_qty = propertyNames.map(x => x['quantity'] * x['sale_price']);
+                    total = price_qty.reduce(function (curr, prev) { return curr + prev; });
+                    $('.cart-total-price').text(total);
                     if (data['new_product'].length != 0) {
-                        console.log(Object.keys(data['cart']).length);
                         var imageSrc = "{{ asset('storage/images/my-image.png') }}";
                         $('.cart-count').text(Object.keys(data['cart']).length);
                         $(".dropdown-cart-products").append('<div class="product cart-' + data[
@@ -113,7 +126,7 @@
                             '</a></h4><span class="cart-product-info"><span class="cart-product-qty">' +
                             data['new_product']['quantity'] +
                             '</span>' + ' x ' + data['new_product']['sale_price'] +
-                            '</span></div><figure class="product-image-container"><a href="javascript:void(0);" class="product-image"><img src="' + imageSrc + '" alt=""></a><a href="javascript:void(0);" class="btn-remove" title="Remove Product"><span>×</span></a></figure></div>'
+                            '</span></div><figure class="product-image-container"><a href="javascript:void(0);" class="product-image"><img alt=""></a><a href="javascript:void(0);" class="btn-remove" title="Remove Product"><span>×</span></a></figure></div>'
                         );
                     }
                 },

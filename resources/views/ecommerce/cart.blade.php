@@ -100,7 +100,7 @@
                         <tbody>
                             <tr>
                                 <td>Subtotal</td>
-                                <td>${{$total}}</td>
+                                <td class="cart-total-price">${{$total}}</td>
                             </tr>
 
                             <tr>

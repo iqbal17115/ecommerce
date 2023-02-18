@@ -98,7 +98,7 @@
                                         </h4>
 
                                         <span class="cart-product-info">
-                                            <span class="cart-product-qty">{{ $details['quantity'] }}</span> ×
+                                            <span class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span> ×
                                             ${{ $details['sale_price'] }}
                                         </span>
                                     </div>
