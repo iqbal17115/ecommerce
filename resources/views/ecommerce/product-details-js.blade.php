@@ -32,8 +32,8 @@
         // Increase Product Qty
         $("body").on("click", ".bootstrap-touchspin-up", function (e) {
             var ele = $(this);
-            id = ele.parents("div").attr("data-id");
-            console.log(ele.parents("tr").attr("data-id"));
+            id = ele.parents("tr").attr("data-id");
+            alert(id);
             var quantity = $(".product-quantity-" + id).val();
             // ajax
             $.ajax({
