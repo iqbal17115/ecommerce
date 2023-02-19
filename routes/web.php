@@ -3,7 +3,6 @@
 use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\ProductDetailController;
-use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\FrontEnt\LoginController;
 use App\Http\Controllers\Backend\Product\UnitController;
 use App\Http\Controllers\Backend\Product\VariantController;
@@ -19,6 +18,7 @@ use App\Http\Controllers\Backend\WebSetting\CouponController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
 use App\Http\Controllers\Ecommerce\ShopController;
 use App\Http\Controllers\Ecommerce\CartController;
+use App\Http\Controllers\Ecommerce\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +43,6 @@ use Illuminate\Support\Facades\Route;
 // Route::post('seller-create', [HomeController::class, 'CreateSeller']);
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
-Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 Route::get('/', function () {
     return view('auth.login');
@@ -66,6 +65,10 @@ Route::patch('update-cart', [CartController::class, 'update'])->name('update.car
 Route::delete('remove-from-cart', [CartController::class, 'remove']);
 Route::post('increase-product-qty', [CartController::class, 'increaseQty']);
 Route::post('decrease-product-qty', [CartController::class, 'decreaseQty']);
+Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('get-district', [CheckoutController::class, 'getDistrict'])->name('get-district');
+Route::get('get-upazila', [CheckoutController::class, 'getUpazila'])->name('get-upazila');
+Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-union');
 // Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
 // Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
 // Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');

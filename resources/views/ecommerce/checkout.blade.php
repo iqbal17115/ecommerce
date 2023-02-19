@@ -63,30 +63,65 @@
             </div>
         </div>
 
-        <div class="checkout-discount">
-            <h4>Have a coupon?
-                <button data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-                    aria-controls="collapseOne" class="btn btn-link btn-toggle">ENTER YOUR CODE</button>
-            </h4>
+        <!-- Shipping Address -->
+        <div class="form-group">
+            <div class="custom-control custom-checkbox mt-0">
+                <input type="checkbox" class="custom-control-input" id="different-shipping" />
+                <label class="custom-control-label" data-toggle="collapse" data-target="#collapseFour"
+                    aria-controls="collapseFour" for="different-shipping">Ship to a
+                    different
+                    address?</label>
 
-            <div id="collapseTwo" class="collapse">
-                <div class="feature-box">
-                    <div class="feature-box-content">
-                        <p>If you have a coupon code, please apply it below.</p>
 
-                        <form action="#">
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-sm w-auto" placeholder="Coupon code"
-                                    required="" />
-                                <div class="input-group-append">
-                                    <button class="btn btn-sm mt-0" type="submit">
-                                        Apply Coupon
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+            </div>
+        </div>
+
+        <div id="collapseFour" class="collapse">
+            <div class="shipping-info">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="division">Province</label>
+                            <select class="form-control" id="division">
+                                <option value="" selected="selected"></option>
+                                @foreach($divisions as $division)
+                                <option value="{{$division->id}}">{{$division->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="district">District</label>
+                            <select class="form-control" id="district">
+                               
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="upazila">Upazila</label>
+                            <select class="form-control" id="upazila">
+                               
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="union">Union</label>
+                            <select class="form-control" id="union">
+                               
+                            </select>
+                        </div>
                     </div>
                 </div>
+
+                <div class="form-group mb-1 pb-2">
+                    <label>Street address <abbr class="required" title="required">*</abbr></label>
+                    <input type="text" class="form-control" placeholder="House number and street name" required />
+                </div>
+
             </div>
         </div>
 
@@ -117,69 +152,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Company name (optional)</label>
-                                <input type="text" class="form-control" />
-                            </div>
-
-                            <div class="select-custom">
-                                <label>Country / Region
-                                    <abbr class="required" title="required">*</abbr></label>
-                                <select name="orderby" class="form-control">
-                                    <option value="" selected="selected">Vanuatu
-                                    </option>
-                                    <option value="1">Brunei</option>
-                                    <option value="2">Bulgaria</option>
-                                    <option value="3">Burkina Faso</option>
-                                    <option value="4">Burundi</option>
-                                    <option value="5">Cameroon</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group mb-1 pb-2">
-                                <label>Street address
-                                    <abbr class="required" title="required">*</abbr></label>
-                                <input type="text" class="form-control" placeholder="House number and street name"
-                                    required />
-                            </div>
-
-                            <div class="form-group">
-                                <input type="text" class="form-control"
-                                    placeholder="Apartment, suite, unite, etc. (optional)" required />
-                            </div>
-
-                            <div class="form-group">
-                                <label>Town / City
-                                    <abbr class="required" title="required">*</abbr></label>
-                                <input type="text" class="form-control" required />
-                            </div>
-
-                            <div class="select-custom">
-                                <label>State / County <abbr class="required" title="required">*</abbr></label>
-                                <select name="orderby" class="form-control">
-                                    <option value="" selected="selected">NY</option>
-                                    <option value="1">Brunei</option>
-                                    <option value="2">Bulgaria</option>
-                                    <option value="3">Burkina Faso</option>
-                                    <option value="4">Burundi</option>
-                                    <option value="5">Cameroon</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Postcode / Zip
-                                    <abbr class="required" title="required">*</abbr></label>
-                                <input type="text" class="form-control" required />
-                            </div>
-
-                            <div class="form-group">
                                 <label>Phone <abbr class="required" title="required">*</abbr></label>
                                 <input type="tel" class="form-control" required />
-                            </div>
-
-                            <div class="form-group">
-                                <label>Email address
-                                    <abbr class="required" title="required">*</abbr></label>
-                                <input type="email" class="form-control" required />
                             </div>
 
                             <div class="form-group mb-1">
@@ -198,98 +172,6 @@
                                         <abbr class="required" title="required">*</abbr></label>
                                     <input type="password" placeholder="Password" class="form-control" required />
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox mt-0">
-                                    <input type="checkbox" class="custom-control-input" id="different-shipping" />
-                                    <label class="custom-control-label" data-toggle="collapse"
-                                        data-target="#collapseFour" aria-controls="collapseFour"
-                                        for="different-shipping">Ship to a
-                                        different
-                                        address?</label>
-
-
-                                </div>
-                            </div>
-
-                            <div id="collapseFour" class="collapse">
-                                <div class="shipping-info">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>First name <abbr class="required"
-                                                        title="required">*</abbr></label>
-                                                <input type="text" class="form-control" required />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Last name <abbr class="required"
-                                                        title="required">*</abbr></label>
-                                                <input type="text" class="form-control" required />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Company name (optional)</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-
-                                    <div class="select-custom">
-                                        <label>Country / Region <span class="required">*</span></label>
-                                        <select name="orderby" class="form-control">
-                                            <option value="" selected="selected">Vanuatu</option>
-                                            <option value="1">Brunei</option>
-                                            <option value="2">Bulgaria</option>
-                                            <option value="3">Burkina Faso</option>
-                                            <option value="4">Burundi</option>
-                                            <option value="5">Cameroon</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group mb-1 pb-2">
-                                        <label>Street address <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="form-control"
-                                            placeholder="House number and street name" required />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control"
-                                            placeholder="Apartment, suite, unit, etc. (optional)" required />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Town / City <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="form-control" required />
-                                    </div>
-
-                                    <div class="select-custom">
-                                        <label>State / County <abbr class="required" title="required">*</abbr></label>
-                                        <select name="orderby" class="form-control">
-                                            <option value="" selected="selected">NY</option>
-                                            <option value="1">Brunei</option>
-                                            <option value="2">Bulgaria</option>
-                                            <option value="3">Burkina Faso</option>
-                                            <option value="4">Burundi</option>
-                                            <option value="5">Cameroon</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Postcode / ZIP <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="form-control" required />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="order-comments">Order notes (optional)</label>
-                                <textarea class="form-control"
-                                    placeholder="Notes about your order, e.g. special notes for delivery."
-                                    required></textarea>
                             </div>
                         </form>
                     </li>
@@ -315,7 +197,7 @@
                             <tr>
                                 <td class="product-col">
                                     <h3 class="product-title">
-                                    {{ $details['name'] }} ×
+                                        {{ $details['name'] }} ×
                                         <span class="product-qty">{{ $details['quantity'] }}</span>
                                     </h3>
                                 </td>
@@ -396,4 +278,5 @@
     <!-- End .container -->
 </main>
 <!-- End .main -->
+@include('ecommerce.checkout-js')
 @endsection

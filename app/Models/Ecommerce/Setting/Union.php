@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Ecommerce\Setting;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Upazilla extends Model
+class Union extends Model
 {
     use HasFactory;
 }
