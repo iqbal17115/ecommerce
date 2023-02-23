@@ -63,75 +63,76 @@
             </div>
         </div>
 
-        <!-- Shipping Address -->
-        <div class="form-group">
-            <div class="custom-control custom-checkbox mt-0">
-                <input type="checkbox" class="custom-control-input" id="different-shipping" />
-                <label class="custom-control-label" data-toggle="collapse" data-target="#collapseFour"
-                    aria-controls="collapseFour" for="different-shipping">Ship to a
-                    different
-                    address?</label>
-
-
-            </div>
-        </div>
-
-        <div id="collapseFour" class="collapse">
-            <div class="shipping-info">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="division">Province</label>
-                            <select class="form-control" id="division">
-                                <option value="" selected="selected"></option>
-                                @foreach($divisions as $division)
-                                <option value="{{$division->id}}">{{$division->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="district">District</label>
-                            <select class="form-control" id="district">
-                               
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="upazila">Upazila</label>
-                            <select class="form-control" id="upazila">
-                               
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="union">Union</label>
-                            <select class="form-control" id="union">
-                               
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group mb-1 pb-2">
-                    <label>Street address <abbr class="required" title="required">*</abbr></label>
-                    <input type="text" class="form-control" placeholder="House number and street name" required />
-                </div>
-
-            </div>
-        </div>
-
         <div class="row">
+
             <div class="col-lg-7">
+                <!-- Shipping Address -->
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox mt-0">
+                        <input type="checkbox" class="custom-control-input" id="different-shipping" />
+                        <label class="custom-control-label" data-toggle="collapse" data-target="#collapseFour"
+                            aria-controls="collapseFour" for="different-shipping">Shipping address</label>
+
+
+                    </div>
+                </div>
+
+                <div id="collapseFour" class="collapse">
+                    <div class="shipping-info">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="division">Province</label>
+                                    <select class="form-control" id="division">
+                                        <option value="" selected="selected"></option>
+                                        @foreach($divisions as $division)
+                                        <option value="{{$division->id}}">{{$division->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="district">District</label>
+                                    <select class="form-control" id="district">
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="upazila">Upazila</label>
+                                    <select class="form-control" id="upazila">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="union">Union</label>
+                                    <select class="form-control" id="union">
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-1 pb-2">
+                            <label>Street address <abbr class="required" title="required">*</abbr></label>
+                            <input type="text" class="form-control" placeholder="House number and street name"
+                                required />
+                        </div>
+
+                    </div>
+                </div>
+
                 <ul class="checkout-steps">
                     <li>
                         <h2 class="step-title">Billing details</h2>
 
-                        <form action="#" id="checkout-form">
+                        <form action="{{ route('customer-register') }}" id="checkout-form">
+                        @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -155,23 +156,13 @@
                                 <label>Phone <abbr class="required" title="required">*</abbr></label>
                                 <input type="tel" class="form-control" required />
                             </div>
-
-                            <div class="form-group mb-1">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="create-account" />
-                                    <label class="custom-control-label" data-toggle="collapse"
-                                        data-target="#collapseThree" aria-controls="collapseThree"
-                                        for="create-account">Create an
-                                        account?</label>
-                                </div>
+                            <div class="form-group">
+                                <label> Password
+                                    <abbr class="required" title="required">*</abbr></label>
+                                <input type="password" placeholder="Password" class="form-control" required />
                             </div>
-
-                            <div id="collapseThree" class="collapse">
-                                <div class="form-group">
-                                    <label>Create account password
-                                        <abbr class="required" title="required">*</abbr></label>
-                                    <input type="password" placeholder="Password" class="form-control" required />
-                                </div>
+                            <div class="form-group">
+                                <button class="btn btn-danger btn-sm btn-block">Submit</button>
                             </div>
                         </form>
                     </li>

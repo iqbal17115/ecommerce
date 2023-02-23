@@ -241,14 +241,7 @@
                                                     <label style="color: black;">জেলা *</label>
                                                     <select class="custom-select district" name="district_id" required>
                                                         <option value="">সিলেক্ট করুন</option>
-                                                        @foreach ($Districts as $zilla)
-                                                            <option value="{{ $zilla->id }}"
-                                                                class="district-items division_id_{{ $zilla->division_id }} "
-                                                                @if (Auth::user()->Contact && !Auth::user()->Contact->District) @if ($zilla->name == 'Dhaka') selected @endif
-                                                            @elseif(Auth::user()->Contact && $zilla->name == Auth::user()->Contact->District->name) selected @endif
-                                                                style="color:black;">{{ $zilla->name }}
-                                                            </option>
-                                                        @endforeach
+                                              
                                                     </select>
                                                 </div>
                                             </div>

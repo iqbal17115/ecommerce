@@ -1,27 +1,19 @@
 <?php
 
-namespace App\Actions\Fortify;
+namespace App\Http\Controllers\Ecommerce;
 
-use App\Models\Backend\ContactInfo\Contact;
-use App\Models\Team;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Jetstream\Jetstream;
 
-class CreateNewUser implements CreatesNewUsers
+class AuthController extends Controller
 {
-    use PasswordValidationRules;
-
-    /**
-     * Create a newly registered user.
-     *
-     * @return \App\Models\User
-     */
     public function create(array $input)
     {
+        dd("OK");
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'business_name' => ['required', 'string', 'max:255'],
@@ -53,19 +45,6 @@ class CreateNewUser implements CreatesNewUsers
                 $contact->save();
             });
         });
-    }
-
-    /**
-     * Create a personal team for the user.
-     *
-     * @return void
-     */
-    protected function createTeam(User $user)
-    {
-        $user->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $user->id,
-            'name' => explode(' ', $user->name, 2)[0]."'s Team",
-            'personal_team' => true,
-        ]));
-    }
+    
+    }   
 }

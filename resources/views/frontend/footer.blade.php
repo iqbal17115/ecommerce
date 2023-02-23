@@ -48,9 +48,7 @@
                     <div class="widget-content">
                         <ul>
                             <li>
-                                <a href="{{route('privacy-policy')}}">
-                                    Privacy Policy
-                                </a>
+                           
                             </li>
                             <li>
                                 <a href="{{route('terms-condition')}}">
