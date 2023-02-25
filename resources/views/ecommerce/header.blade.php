@@ -60,7 +60,7 @@
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
                             <span>Welcome</span>
-                            <h4 class="mb-0">My Account</h4>
+                            <h4 class="mb-0">{{Auth::user()->name}}</h4>
                         </div>
                     </div>
                 </a>

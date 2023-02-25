@@ -37,7 +37,7 @@ class HomeController extends Controller
         return view('backend.dashboard');
     }
     public function index() {
-        dd(Auth::user());
+        // dd(Auth::user());
         $sliders = Slider::whereIsActive(1)->get();
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderBy('id', 'desc')->get();
         $product_features = ProductFeature::whereIsActive(1)->orderBy('position', 'ASC')->get();
