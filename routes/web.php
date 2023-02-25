@@ -81,7 +81,7 @@ Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-unio
 // Route::get('privacy-policy', [HomeController::class, 'PrivacyPolicy'])->name('privacy-policy');
 // Route::get('terms-condition', [HomeController::class, 'TermsAndCondition'])->name('terms-condition');
 Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');
-Route::get('customer-register', [AuthController::class, 'create'])->name('customer-register');
+Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
 // 
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('/admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);

@@ -131,35 +131,27 @@
                     <li>
                         <h2 class="step-title">Billing details</h2>
 
-                        <form action="{{ route('customer-register') }}" id="checkout-form">
+                        <form method="POST" action="{{ route('customer-register') }}" id="checkout-form">
                         @csrf
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>First name
+                                        <label> Name
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
-                                        <input type="text" class="form-control" required />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Last name
-                                            <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="form-control" required />
+                                        <input type="text" name="name" class="form-control" required />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                <input type="tel" class="form-control" required />
+                                <input type="tel" name="mobile" class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <label> Password
                                     <abbr class="required" title="required">*</abbr></label>
-                                <input type="password" placeholder="Password" class="form-control" required />
+                                <input type="password" name="password" placeholder="Password" class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-danger btn-sm btn-block">Submit</button>

@@ -7,6 +7,7 @@ use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\ProductFeature;
 use App\Models\Backend\WebSetting\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -36,6 +37,7 @@ class HomeController extends Controller
         return view('backend.dashboard');
     }
     public function index() {
+        dd(Auth::user());
         $sliders = Slider::whereIsActive(1)->get();
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderBy('id', 'desc')->get();
         $product_features = ProductFeature::whereIsActive(1)->orderBy('position', 'ASC')->get();
