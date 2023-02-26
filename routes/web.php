@@ -70,6 +70,7 @@ Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('get-district', [CheckoutController::class, 'getDistrict'])->name('get-district');
 Route::get('get-upazila', [CheckoutController::class, 'getUpazila'])->name('get-upazila');
 Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-union');
+Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
 // Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
 // Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
 // Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');
@@ -82,6 +83,8 @@ Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-unio
 // Route::get('terms-condition', [HomeController::class, 'TermsAndCondition'])->name('terms-condition');
 Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');
 Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
+Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
+Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
 // 
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('/admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);

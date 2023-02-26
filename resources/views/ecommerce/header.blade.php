@@ -60,7 +60,7 @@
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
                             <span>Welcome</span>
-                            <h4 class="mb-0">{{Auth::user()->name}}</h4>
+                            <h4 class="mb-0">@if(Auth::user()) {{Auth::user()->name}} @else My Account @endif</h4>
                         </div>
                     </div>
                 </a>
@@ -153,8 +153,9 @@
                     <li class="float-right phone"><a href="#" class="d-flex align-items-center pt-0 pb-0"><i
                                 class="icon-phone-1" style="font-size: 1.5rem;"></i>1-800-234-5678</a>
                     </li>
-                    <li class="float-right"><a class="pt-0 pb-0" href="https://1.envato.market/DdLk5" target="_blank">NEW
-                            ARRIVALS</a></li>
+                    @if(Auth::user())
+                    <li class="float-right"><a class="pt-0 pb-0" href="{{ route('customer-logout') }}">Logout</a></li>
+                    @endif
                     <li class="float-right"><a class="pt-0 pb-0" href="#">FLASH DEALS</a></li>
                 </ul>
             </nav>

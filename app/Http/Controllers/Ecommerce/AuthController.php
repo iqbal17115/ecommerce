@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\ContactInfo\Contact;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -10,13 +11,43 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'mobile' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+                return redirect(route('checkout'));
+        }
+
+        return back()->withErrors([
+            'mobile' => 'The provided credentials do not match our records.',
+        ]);
+    }
+    public function logout(Request $request) {
+        Auth::logout();
+    }
     public function create(array $data)
     {
-        return User::create([
+        return tap(User::create([
             'name' => $data['name'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password'])
-        ]);
+        ]), function (User $user) use ($data) {
+            $user->assignRole('customer');
+            $contact = Contact::whereMobile($user->mobile)->firstOrNew();
+            $contact->first_name = $user->name;
+            $contact->address = $user->address;
+            $contact->shipping_address = $user->address;
+            $contact->user_id = $user->id;
+            $contact->type = 'Customer';
+            $contact->mobile = $user->mobile;
+            $contact->created_by = $user->id;
+            $contact->save();
+        });
     }
     public function customRegistration(Request $request)
     {

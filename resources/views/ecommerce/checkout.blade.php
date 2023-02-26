@@ -15,15 +15,17 @@
         </ul>
 
         <div class="login-form-container">
+            @if(!Auth::user())
             <h4>Returning customer?
                 <button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
                     aria-controls="collapseOne" class="btn btn-link btn-toggle">Login</button>
             </h4>
-
+            @endif
             <div id="collapseOne" class="collapse">
                 <div class="login-section feature-box">
                     <div class="feature-box-content">
-                        <form action="#" id="login-form">
+                        <form method="POST" action="{{ route('customer-login') }}" id="login-form">
+                            @csrf
                             <p>
                                 If you have shopped with us before, please enter your details below. If you are a new
                                 customer, please proceed to the Billing & Shipping section.
@@ -34,14 +36,14 @@
                                     <div class="form-group">
                                         <label class="mb-0 pb-1">Username or email <span
                                                 class="required">*</span></label>
-                                        <input type="email" class="form-control" required />
+                                        <input type="text" name="mobile" class="form-control" required />
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="mb-0 pb-1">Password <span class="required">*</span></label>
-                                        <input type="password" class="form-control" required />
+                                        <input type="password" name="password" class="form-control" required />
                                     </div>
                                 </div>
                             </div>
@@ -79,50 +81,75 @@
 
                 <div id="collapseFour" class="collapse">
                     <div class="shipping-info">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="division">Province</label>
-                                    <select class="form-control" id="division">
-                                        <option value="" selected="selected"></option>
-                                        @foreach($divisions as $division)
-                                        <option value="{{$division->id}}">{{$division->name}}</option>
-                                        @endforeach
-                                    </select>
+                    @if(Auth::user() && Auth::user()->Contact->division_id)
+                          <input type="hidden" name="shipping_division_id" id="shipping_division_id" value="{{ Auth::user()->Contact->division_id }}"/>
+                    @endif
+                    @if(Auth::user() && Auth::user()->Contact->district_id)
+                          <input type="hidden" name="shipping_district_id" id="shipping_district_id" value="{{ Auth::user()->Contact->district_id }}"/>
+                    @endif
+                    @if(Auth::user() && Auth::user()->Contact->upazilla_id)
+                          <input type="hidden" name="shipping_upazilla_id" id="shipping_upazilla_id" value="{{ Auth::user()->Contact->upazilla_id }}"/>
+                    @endif
+                    @if(Auth::user() && Auth::user()->Contact->union_id)
+                          <input type="hidden" name="shipping_union_id" id="shipping_union_id" value="{{ Auth::user()->Contact->union_id }}"/>
+                    @endif
+                        <form action="{{ route('confirm-order') }}" method="POST" id="shipping-address-form">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="division">Province</label>
+                                        <select name="division_id" id="division" class="form-control" required>
+                                            <option value="" selected="selected"></option>
+                                            @foreach($divisions as $division)
+                                            <option @if(Auth::user() && Auth::user()->Contact->division_id == $division->id ) selected @endif value="{{$division->id}}">{{$division->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="district">District</label>
+                                        <select name="district_id" id="district" class="form-control" required>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="upazila">Upazila</label>
+                                        <select name="upazilla_id" id="upazila" class="form-control" required>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="union">Union</label>
+                                        <select name="union_id" id="union" class="form-control" required>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group mb-1 pb-2">
+                                        <label>Contact No. <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" name="shipping_contact_no" @if(Auth::user()) value="{{Auth::user()->Contact->mobile}}" @endif class="form-control"
+                                            placeholder="Contact No." required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-1 pb-2">
+                                        <label>Street address <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" name="shipping_address" @if(Auth::user()) value="{{Auth::user()->Contact->shipping_address}}" @endif class="form-control"
+                                            placeholder="House number and street name" required />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="district">District</label>
-                                    <select class="form-control" id="district">
+                        </form>
 
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="upazila">Upazila</label>
-                                    <select class="form-control" id="upazila">
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="union">Union</label>
-                                    <select class="form-control" id="union">
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-1 pb-2">
-                            <label>Street address <abbr class="required" title="required">*</abbr></label>
-                            <input type="text" class="form-control" placeholder="House number and street name"
-                                required />
-                        </div>
 
                     </div>
                 </div>
@@ -132,26 +159,29 @@
                         <h2 class="step-title">Billing details</h2>
 
                         <form method="POST" action="{{ route('customer-register') }}" id="checkout-form">
-                        @csrf
+                            @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label> Name
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
-                                        <input type="text" name="name" class="form-control" required />
+                                        <input type="text" name="name" @if(Auth::user())
+                                            value="{{ Auth::user()->name }}" @endif class="form-control" required />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                <input type="tel" name="mobile" class="form-control" required />
+                                <input type="tel" name="mobile" @if(Auth::user()) value="{{ Auth::user()->mobile }}"
+                                    @endif class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <label> Password
                                     <abbr class="required" title="required">*</abbr></label>
-                                <input type="password" name="password" placeholder="Password" class="form-control" required />
+                                <input type="password" name="password" placeholder="Password" class="form-control"
+                                    required />
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-danger btn-sm btn-block">Submit</button>
@@ -248,7 +278,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-dark btn-place-order" form="checkout-form">
+                    <button type="submit" class="btn btn-dark btn-place-order" form="shipping-address-form">
                         Place order
                     </button>
                 </div>

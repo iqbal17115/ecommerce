@@ -12,10 +12,15 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(data) {
+                var union_value = $("[name='shipping_union_id']").val();
                 union = '';
                 union += '<option value="" selected="selected"></option>';
                 Object.entries(data['union']).forEach(([key, value]) => {
-                    union += '<option value='+value['id']+'>'+value['name']+'</option>';
+                    union_selected = '';
+                    if(union_value == value['id']) {
+                        union_selected = 'selected';
+                    }
+                    union += '<option '+union_selected+' value='+value['id']+'>'+value['name']+'</option>';
                 });
                 $("#union").html(union);
             },
@@ -37,12 +42,18 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(data) {
+                var upazila_value = $("[name='shipping_upazilla_id']").val();
                 upazila = '';
                 upazila += '<option value="" selected="selected"></option>';
                 Object.entries(data['upazila']).forEach(([key, value]) => {
-                    upazila += '<option value='+value['id']+'>'+value['name']+'</option>';
+                    upazila_selected = '';
+                    if(upazila_value == value['id']) {
+                        upazila_selected = 'selected';
+                    }
+                    upazila += '<option '+upazila_selected+' value='+value['id']+'>'+value['name']+'</option>';
                 });
                 $("#upazila").html(upazila);
+                $('#upazila').trigger('change');
             },
             error: function(err) {
                 var error = err.responseJSON;
@@ -64,12 +75,18 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(data) {
+                var dis_value = $("[name='shipping_district_id']").val();
                 district = '';
                 district += '<option value="" selected="selected"></option>';
                 Object.entries(data['district']).forEach(([key, value]) => {
-                    district += '<option value='+value['id']+'>'+value['name']+'</option>';
+                    dis_selected = '';
+                    if(dis_value == value['id']) {
+                        dis_selected = 'selected';
+                    }
+                    district += '<option '+dis_selected+' value='+value['id']+'>'+value['name']+'</option>';
                 });
                 $("#district").html(district);
+                $('#district').trigger('change');
             },
             error: function(err) {
                 var error = err.responseJSON;
@@ -77,5 +94,8 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#division').trigger('change');
+
 });
 </script>
