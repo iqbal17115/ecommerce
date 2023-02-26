@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Currency\CurrencyController;
+use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\ProductDetailController;
 use App\Http\Controllers\FrontEnt\LoginController;
@@ -88,6 +89,15 @@ Route::post('customer-login', [AuthController::class, 'authenticate'])->name('cu
 // 
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('/admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+
+    // Order Start
+    Route::group(
+        [],
+        function () {
+            Route::get('new-order', [OrderController::class, 'index'])->name('new-order');
+            Route::get('order-detail', [OrderController::class, 'orderDetail'])->name('order-detail');
+        }
+    );
 
     // Unit Start
     Route::group(
