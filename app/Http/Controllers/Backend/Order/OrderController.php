@@ -11,7 +11,7 @@ class OrderController extends Controller
 {
     public function orderDetail(Request $request) {
         $order = Order::with('Contact')->find($request->order_id);
-        $order_detail = OrderDetail::with('Product')->whereOrderId($request->order_id)->get();
+        $order_detail = OrderDetail::with('ProductMainImage')->with('Product')->whereOrderId($request->order_id)->get();
         return response()->json(['order'=>$order, 'order_detail'=>$order_detail]);
     }
     public function index() {

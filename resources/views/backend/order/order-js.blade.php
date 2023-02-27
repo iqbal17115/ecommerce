@@ -22,11 +22,13 @@ $(document).ready(function() {
                 for (var i = 0; i < data['order_detail'].length; i++) {
                 modal_content += '<tr>';
                 modal_content +=
-                    '<th scope="row"><div><img src="assets/images/product/img-7.png" alt="" class="avatar-sm"></div></th>';
+                    '<th scope="row"><div><img id="order-product-id-'+data['order_detail'][i]['id']+'" src="assets/images/product/img-7.png" alt="" class="avatar-sm"></div></th>';
                 modal_content +=
                     '<td><div><h5 class="text-truncate font-size-14">'+data['order_detail'][i]['product']['name']+'</h5><p class="text-muted mb-0">$ '+data['order_detail'][i]['unit_price']+' x '+data['order_detail'][i]['quantity']+'</p></div></td>';
                 modal_content += '<td>$ '+ (data['order_detail'][i]['unit_price'] * data['order_detail'][i]['quantity'])+'</td>';
                 modal_content += '</tr>';
+                $('#order-product-id-' + data['order_detail'][i]['id']).attr("src",
+                        'storage/product_photo/' + data['order_detail'][i]['product_main_image']['image']);
                 }
                 modal_content += '<tr>';
                 modal_content +=
@@ -46,6 +48,10 @@ $(document).ready(function() {
                 modal_content += '</tbody>';
                 modal_content += '</table></div>';
                 $('.order-modal-body').html(modal_content);
+                for (var i = 0; i < data['order_detail'].length; i++) {
+                $('#order-product-id-' + data['order_detail'][i]['id']).attr("src",
+                        'storage/product_photo/' + data['order_detail'][i]['product_main_image']['image']);
+                }
             },
             error: function(err) {
                 console.log(err);
