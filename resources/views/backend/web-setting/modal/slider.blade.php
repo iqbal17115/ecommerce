@@ -23,14 +23,14 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="image">Slider Image</label>
-                                      <input type="file" name="image" id="image" class="form-control">
+                                      <input type="file" name="image" id="image" class="form-control" required>
                                       <span class="text-danger err_image"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="position">Slider Position</label>
-                                      <input type="text" name="position" id="position" class="form-control" placeholder="Enter Slider Position">
+                                      <input type="text" name="position" id="position" class="form-control" placeholder="Enter Slider Position" required>
                                       <span class="text-danger err_position"></span>
                                   </div>
                               </div>
@@ -84,7 +84,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
-                                      <select name="is_active" id="is_active" class="form-control">
+                                      <select name="is_active" id="is_active" class="form-control" required>
                                           <option value="">Select Status</option>
                                           <option value="1">Active</option>
                                           <option value="0">Inactive</option>

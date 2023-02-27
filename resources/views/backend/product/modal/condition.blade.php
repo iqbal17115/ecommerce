@@ -17,7 +17,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="title">Title</label>
-                                      <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title">
+                                      <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" required>
                                       <span class="text-danger err_condition"></span>
                                   </div>
                               </div>
@@ -30,7 +30,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
-                                      <select name="is_active" id="is_active" class="form-control">
+                                      <select name="is_active" id="is_active" class="form-control" required>
                                           <option value="">Select Status</option>
                                           <option value="1">Active</option>
                                           <option value="0">Inactive</option>

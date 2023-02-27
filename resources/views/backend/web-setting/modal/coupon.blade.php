@@ -16,14 +16,14 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="name">Name</label>
-                                      <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name">
+                                      <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" required>
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="type">Discount Type</label>
-                                      <select name="type" id="type" class="form-control discount_content" onchange="discountType()">
+                                      <select name="type" id="type" class="form-control discount_content" onchange="discountType()" required>
                                           <option value="1">Discount Amount</option>
                                           <option value="0">Discount Percentage</option>
                                       </select>
@@ -35,7 +35,7 @@
                                 <div class='col-md-12'>
                                     <div class='form-group'>
                                         <label for='discount_amount'>Discount Amount</label>
-                                        <input type='number' name='discount_amount' id='discount_amount' class='form-control' placeholder="Discount Amount">
+                                        <input type='number' name='discount_amount' id='discount_amount' class='form-control' placeholder="Discount Amount" required>
                                     </div>
                                 </div>
                                 </div>
@@ -43,21 +43,21 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="start_date">Start Date</label>
-                                      <input type="date" name="start_date" id="start_date" class="form-control">
+                                      <input type="date" name="start_date" id="start_date" class="form-control" required>
                                       <span class="text-danger err_start_date"></span>
                                   </div>
                               </div>
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="end_date">End Date</label>
-                                      <input type="date" name="end_date" id="end_date" class="form-control">
+                                      <input type="date" name="end_date" id="end_date" class="form-control" required>
                                       <span class="text-danger err_end_date"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
-                                      <select name="is_active" id="is_active" class="form-control">
+                                      <select name="is_active" id="is_active" class="form-control" required>
                                           <option value="">Select Status</option>
                                           <option value="1">Active</option>
                                           <option value="0">Inactive</option>

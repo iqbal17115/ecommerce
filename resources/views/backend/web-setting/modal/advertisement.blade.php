@@ -16,7 +16,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="page">Add Page</label>
-                                      <select name="page" id="page" class="form-control">
+                                      <select name="page" id="page" class="form-control" required>
                                           <option value="">Select Option</option>
                                           <option value="Home">Home</option>
                                           <option value="Category">Category</option>
@@ -28,14 +28,14 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="position">Ads Position</label>
-                                      <input type="text" name="position" id="position" class="form-control" placeholder="Enter Ads Position">
+                                      <input type="text" name="position" id="position" class="form-control" placeholder="Enter Ads Position" required>
                                       <span class="text-danger err_position"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="style">Ads Style</label>
-                                      <select name="style" id="style" class="form-control ads_content" onchange="styleType()">
+                                      <select name="style" id="style" class="form-control ads_content" onchange="styleType()" required>
                                           <option value="Style One">Style One</option>
                                           <option value="Style Two">Style Two</option>
                                           <option value="Style Three">Style Three</option>
@@ -53,7 +53,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="width">Width</label>
-                                      <select name="width" id="width" class="form-control ads_content">
+                                      <select name="width" id="width" class="form-control ads_content" required>
                                           <option value="Full">Full</option>
                                           <option value="Half">Half</option>
                                           <option value="One Third">One Third</option>
@@ -64,7 +64,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
-                                      <select name="is_active" id="is_active" class="form-control">
+                                      <select name="is_active" id="is_active" class="form-control" required>
                                           <option value="">Select Status</option>
                                           <option value="1">Active</option>
                                           <option value="0">Inactive</option>

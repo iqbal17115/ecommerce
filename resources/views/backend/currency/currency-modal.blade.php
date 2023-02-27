@@ -16,21 +16,21 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="name">Name</label>
-                                      <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name">
+                                      <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" required>
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="icon">Icon</label>
-                                      <input type="text" name="icon" id="icon" class="form-control" placeholder="Enter Icon">
+                                      <input type="text" name="icon" id="icon" class="form-control" placeholder="Enter Icon" required>
                                       <span class="text-danger err_icon"></span>
                                   </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="position">Position</label>
-                                      <select name="position" id="position" class="form-control">
+                                      <select name="position" id="position" class="form-control" required>
                                           <option value="1">Left</option>
                                           <option value="0">Right</option>
                                       </select>
@@ -46,7 +46,7 @@
                               </div>
                               <div class="col-md-12">
                               <label for="conversion_rate">Default Status</label>
-                                   <select name="is_default" id="is_default" class="form-select">
+                                   <select name="is_default" id="is_default" class="form-select" required>
                                         <option value="">Select Option</option>
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
@@ -55,7 +55,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
-                                      <select name="is_active" id="is_active" class="form-control">
+                                      <select name="is_active" id="is_active" class="form-control" required>
                                           <option value="">Select Status</option>
                                           <option value="1">Active</option>
                                           <option value="0">Inactive</option>

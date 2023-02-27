@@ -17,7 +17,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="type">Variant Type</label>
-                                      <select class="form-control type" name="type" id="type">
+                                      <select class="form-control type" name="type" id="type" required>
                                           <option value="">Select Option</option>
                                           <option value="Size">Size</option>
                                           <option value="Color">Color</option>
@@ -30,7 +30,7 @@
                                   <div class="form-group">
                                       <label for="name">Variant Name</label>
                                       <input type="text" name="name" id="name" class="form-control"
-                                          placeholder="Enter Variant Name">
+                                          placeholder="Enter Variant Name" required>
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
@@ -44,7 +44,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
-                                      <select name="is_active" id="is_active" class="form-control">
+                                      <select name="is_active" id="is_active" class="form-control" required>
                                           <option value="">Select Status</option>
                                           <option value="1">Active</option>
                                           <option value="0">Inactive</option>

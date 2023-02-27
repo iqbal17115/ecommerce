@@ -18,7 +18,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="name">Category Name</label>
-                                      <input type="text" name="name" id="name" class="form-control" placeholder="Enter Category Name">
+                                      <input type="text" name="name" id="name" class="form-control" placeholder="Enter Category Name" required>
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
@@ -74,7 +74,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="top_menu">Top Menu</label>
-                                      <select name="top_menu" id="top_menu" class="form-control">
+                                      <select name="top_menu" id="top_menu" class="form-control" required>
                                           <option value="">Select Option</option>
                                           <option value="1">Yes</option>
                                           <option value="0">No</option>
@@ -124,7 +124,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
-                                      <select name="is_active" id="is_active" class="form-control">
+                                      <select name="is_active" id="is_active" class="form-control" required>
                                           <option value="">Select Option</option>
                                           <option value="1">Active</option>
                                           <option value="0">Inactive</option>
