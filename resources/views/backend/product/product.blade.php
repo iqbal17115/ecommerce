@@ -168,10 +168,10 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input name="code" id="code" @if($productInfo) value="{{$productInfo->code}}" @endif class="form-control" placeholder="Enter product Id" />
+                                                    <input name="code" id="code" @if($productInfo) value="{{$productInfo->code}}" @endif class="form-control" placeholder="Enter product Id" required/>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select name="type" id="type" class="form-select">
+                                                    <select name="type" id="type" class="form-select" required>
                                                         <option value="">Select Option</option>
                                                         <option @if($productInfo && $productInfo->type=='GTIN') selected @endif value="GTIN">GTIN</option>
                                                         <option @if($productInfo && $productInfo->type=='EAN') selected @endif value="EAN">EAN</option>
@@ -187,7 +187,7 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="seller_sku" id="seller_sku" @if($productInfo) value="{{$productInfo->seller_sku}}" @endif class="form-control" placeholder="Enter Seller SKU"/>
+                                                    <input name="seller_sku" id="seller_sku" @if($productInfo) value="{{$productInfo->seller_sku}}" @endif class="form-control" placeholder="Enter Seller SKU" required/>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -332,7 +332,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="product_booking_date"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" name="booking_date" id="booking_date" @if($productInfo) value="{{$productInfo->booking_date}}" @endif class="form-control" aria-label="Username" aria-describedby="product_booking_date">
+                                                        <input type="date" name="booking_date" id="booking_date" @if($productInfo) value="{{$productInfo->booking_date}}" @endif class="form-control" aria-label="Username" aria-describedby="product_booking_date" required>
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -512,7 +512,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="your_price">AED</span>
                                                         </div>
-                                                        <input type="text" name="your_price" id="your_price" @if($productInfo) value="{{$productInfo->your_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-describedby="your_price" required>
+                                                        <input type="text" name="your_price" id="your_price" @if($productInfo) value="{{$productInfo->your_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-describedby="your_price">
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -538,7 +538,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="sale_start_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" name="sale_start_date" id="sale_start_date" @if($productInfo) value="{{$productInfo->sale_start_date}}" @endif class="form-control" aria-describedby="sale_start_date1">
+                                                        <input type="date" name="sale_start_date" id="sale_start_date" @if($productInfo) value="{{$productInfo->sale_start_date}}" @endif class="form-control" aria-describedby="sale_start_date1" required>
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -551,7 +551,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="sale_end_date1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                         </div>
-                                                        <input type="date" name="sale_end_date" id="sale_end_date" @if($productInfo) value="{{$productInfo->sale_end_date}}" @endif class="form-control" aria-describedby="sale_end_date1">
+                                                        <input type="date" name="sale_end_date" id="sale_end_date" @if($productInfo) value="{{$productInfo->sale_end_date}}" @endif class="form-control" aria-describedby="sale_end_date1" required>
                                                     </div>
                                                 </div>
                                                 <!-- End -->
