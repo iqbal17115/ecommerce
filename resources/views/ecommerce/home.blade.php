@@ -54,8 +54,7 @@
                                     height="240" style="height: 128px; height: 116px;" />
                             </figure>
                             <div class="category-content">
-                                <h3>Fashion</h3>
-                                <span><mark class="count">7</mark> products</span>
+                                <h3>{{$top_show_category->name}}</h3>
                             </div>
                         </a>
                     </div>
