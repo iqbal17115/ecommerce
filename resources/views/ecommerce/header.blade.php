@@ -33,8 +33,8 @@
                 </button> -->
 
                 <a href="{{ route('home') }}" class="logo">
-                    <img src="{{ asset('aladdinne/assets/images/logo-black.png') }}" class="w-100" width="111"
-                        height="44" alt="Porto Logo">
+                    <img src="{{ asset('logo.jpg') }}" class="w-100" width="111"
+                        height="44" style="height: 44px;" alt="Porto Logo">
                 </a>
 
             </div>
