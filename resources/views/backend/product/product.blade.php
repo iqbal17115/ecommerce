@@ -1003,10 +1003,10 @@
                                     <div class="row">
                                         <input type="hidden" name="product_image_id" id="product_image_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                         <div class="col-md-2">
-                                            <div class="drop-zone">
+                                            <div class="drop-zone" style="z-index: -1;">
                                                 <!-- <img src="" class="" style="width: 150px;height: 150px;"/> -->
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input product_info_image_preview_0">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
@@ -1559,10 +1559,13 @@
                                         var variation = $( "#variation" ).val();
                                         var get_category_id = $( "#get_category_id" ).val();
                                         var product_info_image_0 = $( "#product_info_image_0" ).val();
+                                        alert(product_info_image_0);
                                         $('.product_info_image_preview_0').attr("src", 'storage/product_photo/' + product_info_image_0);
+                                        var imageUrl = 'storage/product_photo/' + product_info_image_0;
+                                        $(".drop-zone").css("background-image", "url(" + imageUrl + ")");
                                         updateVariantByCategory(get_category_id);
                                         updateVariationType(variation);
-                                        $('#upazila').trigger('change');
+                                        $('.drop-zone__input').trigger('click');
                                     });
                                 </script>
                                 @endif
