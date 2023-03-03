@@ -13,9 +13,9 @@ class HomeController extends Controller
 {
     public function getParentCategory(Request $request) {
         if(isset($request->id[0]) && count($request->id[0]) > 0) {
-            $categories = Category::whereIN('id', $request->id[0])->orderBy('id', 'desc')->get();
+            $categories = Category::with('Parent')->whereIN('id', $request->id[0])->orderBy('id', 'desc')->get();
         } else {
-            $categories = Category::whereParentCategoryId(null)->orderBy('id', 'desc')->get();
+            $categories = Category::with('Parent')->whereParentCategoryId(null)->orderBy('id', 'desc')->get();
         }
         
         return response()->json(['categories' => $categories]);
@@ -30,7 +30,7 @@ class HomeController extends Controller
         
     }
     public function getSubCategory(Request $request) {
-        $sub_categories = Category::whereParentCategoryId($request->id)->orderBy('id', 'desc')->get();
+        $sub_categories = Category::with('SubCategory')->whereParentCategoryId($request->id)->orderBy('id', 'desc')->get();
         return response()->json(['sub_categories' => $sub_categories]);
     }
     public function adminDashboard() {

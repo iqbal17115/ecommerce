@@ -43,9 +43,14 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
                 sub_category_list = '';
+
                 for (var i = 0; i < data['categories'].length; i++) {
-                    check_sub_category = checkParentCategory(data['categories'][i][
-                        'id']);
+                      
+                    check_sub_category = 0;
+
+                    // if(data['categories'][i]['parent'] !== 'undefined' && data['categories'][i]['parent'].length  > 0) {
+                    //     check_sub_category = 1;
+                    // }
                     parent_category = check_sub_category == 1 ? 'parent_category' : '';
                     arrow_signal = check_sub_category == 1 ?
                         '<i class="arrow right float-right"></i>' : '';
@@ -80,8 +85,10 @@ $(document).ready(function() {
                 sub_category_list = '';
                 var parent_category_id = [];
                 for (var i = 0; i < data['sub_categories'].length; i++) {
-                    check_sub_category = checkParentCategory(data['sub_categories'][i][
-                        'id']);
+                        check_sub_category = 0;
+                    if (data['sub_categories'][i]['sub_category'].length > 0) {
+                        check_sub_category = 1;
+                    }
                     parent_category = check_sub_category == 1 ? 'parent_category' : '';
                     arrow_signal = check_sub_category == 1 ?
                         '<i class="arrow right float-right"></i>' : '';

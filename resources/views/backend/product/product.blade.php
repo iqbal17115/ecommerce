@@ -1006,7 +1006,7 @@
                                             <div class="drop-zone" style="z-index: -1;">
                                                 <!-- <img src="" class="" style="width: 150px;height: 150px;"/> -->
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input drop-zone__input1">
                                             </div>
                                         </div>
                                         <!-- End -->
@@ -1556,16 +1556,19 @@
                                    @endforeach
                                 <script>
                                     $( document ).ready(function() {
+                                        
                                         var variation = $( "#variation" ).val();
                                         var get_category_id = $( "#get_category_id" ).val();
                                         var product_info_image_0 = $( "#product_info_image_0" ).val();
-                                        alert(product_info_image_0);
                                         $('.product_info_image_preview_0').attr("src", 'storage/product_photo/' + product_info_image_0);
                                         var imageUrl = 'storage/product_photo/' + product_info_image_0;
-                                        $(".drop-zone").css("background-image", "url(" + imageUrl + ")");
+                                        // drop-zone__input
+                                        // $('.drop-zone__input1').val(imageUrl);
+                                        $('.drop-zone__input1').val(imageUrl).trigger("input");
+                                        // $(".drop-zone").css("background-image", "url(" + imageUrl + ")");
+                                        // $('.drop-zone__input').trigger('click');
                                         updateVariantByCategory(get_category_id);
                                         updateVariationType(variation);
-                                        $('.drop-zone__input').trigger('click');
                                     });
                                 </script>
                                 @endif
