@@ -60,7 +60,7 @@
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
                             <span>Welcome</span>
-                            <h4 class="mb-0">@if(Auth::user()) {{Auth::user()->name}} @else My Account @endif</h4>
+                            <h4 class="mb-0">@if(Auth::user()) {{Auth::user()->name}} @else My Account1 @endif</h4>
                         </div>
                     </div>
                 </a>
