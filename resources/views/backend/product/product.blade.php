@@ -1559,11 +1559,10 @@
                                         var variation = $( "#variation" ).val();
                                         var get_category_id = $( "#get_category_id" ).val();
                                         var product_info_image_0 = $( "#product_info_image_0" ).val();
-                                        // alert(product_info_image_0);
                                         $('.product_info_image_preview_0').attr("src", 'storage/product_photo/' + product_info_image_0);
-                                        // product_info_image_preview_0
                                         updateVariantByCategory(get_category_id);
                                         updateVariationType(variation);
+                                        $('#upazila').trigger('change');
                                     });
                                 </script>
                                 @endif

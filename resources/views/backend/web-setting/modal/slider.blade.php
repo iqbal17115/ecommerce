@@ -23,7 +23,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="image">Slider Image</label>
-                                      <input type="file" name="image" id="image" class="form-control" required>
+                                      <input type="file" name="image" id="image" class="form-control">
                                       <span class="text-danger err_image"></span>
                                   </div>
                               </div>
