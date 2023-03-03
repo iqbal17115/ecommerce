@@ -25,7 +25,7 @@
 
             <div class="categories-section appear-animate" data-animation-name="fadeIn" data-owl-options="{
 				'loop': true,
-                'autoplay':true,
+                'autoplay':false,
                 'autoplayTimeout':100
 			}">
                 <div class="categories-slider owl-carousel owl-theme show-nav-hover nav-outer" data-owl-options="{
