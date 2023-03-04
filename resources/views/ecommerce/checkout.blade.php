@@ -69,40 +69,60 @@
 
             <div class="col-lg-7">
                 <!-- Shipping Address -->
+                @if(Auth::user())
                 <div class="form-group">
                     <div class="custom-control custom-checkbox mt-0">
-                        <input type="checkbox" class="custom-control-input" id="different-shipping" />
+                        <input type="checkbox" checked class="custom-control-input" id="different-shipping" />
                         <label class="custom-control-label" data-toggle="collapse" data-target="#collapseFour"
                             aria-controls="collapseFour" for="different-shipping">Shipping address</label>
-
-
                     </div>
                 </div>
-
-                <div id="collapseFour" class="collapse">
+                @endif
+                <div id="collapseFour" class="collapse @if(Auth::user()) show @endif">
                     <div class="shipping-info">
-                    @if(Auth::user() && Auth::user()->Contact->division_id)
-                          <input type="hidden" name="shipping_division_id" id="shipping_division_id" value="{{ Auth::user()->Contact->division_id }}"/>
-                    @endif
-                    @if(Auth::user() && Auth::user()->Contact->district_id)
-                          <input type="hidden" name="shipping_district_id" id="shipping_district_id" value="{{ Auth::user()->Contact->district_id }}"/>
-                    @endif
-                    @if(Auth::user() && Auth::user()->Contact->upazilla_id)
-                          <input type="hidden" name="shipping_upazilla_id" id="shipping_upazilla_id" value="{{ Auth::user()->Contact->upazilla_id }}"/>
-                    @endif
-                    @if(Auth::user() && Auth::user()->Contact->union_id)
-                          <input type="hidden" name="shipping_union_id" id="shipping_union_id" value="{{ Auth::user()->Contact->union_id }}"/>
-                    @endif
+                        @if(Auth::user() && Auth::user()->Contact->division_id)
+                        <input type="hidden" name="shipping_division_id" id="shipping_division_id"
+                            value="{{ Auth::user()->Contact->division_id }}" />
+                        @endif
+                        @if(Auth::user() && Auth::user()->Contact->district_id)
+                        <input type="hidden" name="shipping_district_id" id="shipping_district_id"
+                            value="{{ Auth::user()->Contact->district_id }}" />
+                        @endif
+                        @if(Auth::user() && Auth::user()->Contact->upazilla_id)
+                        <input type="hidden" name="shipping_upazilla_id" id="shipping_upazilla_id"
+                            value="{{ Auth::user()->Contact->upazilla_id }}" />
+                        @endif
+                        @if(Auth::user() && Auth::user()->Contact->union_id)
+                        <input type="hidden" name="shipping_union_id" id="shipping_union_id"
+                            value="{{ Auth::user()->Contact->union_id }}" />
+                        @endif
                         <form action="{{ route('confirm-order') }}" method="POST" id="shipping-address-form">
                             @csrf
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-1 pb-2">
+                                        <label>Name <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" name="shipping_contact_no" @if(Auth::user())
+                                            value="{{Auth::user()->name}}" @endif class="form-control"
+                                            placeholder="Name" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-1 pb-2">
+                                        <label>Contact No. <abbr class="required" title="required">*</abbr></label>
+                                        <input type="text" name="shipping_contact_no" @if(Auth::user()) value="{{Auth::user()->Contact->mobile}}" @endif class="form-control"
+                                            placeholder="Contact No." required />
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="division">Province</label>
                                         <select name="division_id" id="division" class="form-control" required>
                                             <option value="" selected="selected"></option>
                                             @foreach($divisions as $division)
-                                            <option @if(Auth::user() && Auth::user()->Contact->division_id == $division->id ) selected @endif value="{{$division->id}}">{{$division->name}}</option>
+                                            <option @if(Auth::user() && Auth::user()->Contact->division_id ==
+                                                $division->id ) selected @endif
+                                                value="{{$division->id}}">{{$division->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -133,18 +153,13 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group mb-1 pb-2">
-                                        <label>Contact No. <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" name="shipping_contact_no" @if(Auth::user()) value="{{Auth::user()->Contact->mobile}}" @endif class="form-control"
-                                            placeholder="Contact No." required />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+
+                                <div class="col-md-12">
                                     <div class="form-group mb-1 pb-2">
                                         <label>Street address <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" name="shipping_address" @if(Auth::user()) value="{{Auth::user()->Contact->shipping_address}}" @endif class="form-control"
-                                            placeholder="House number and street name" required />
+                                        <input type="text" name="shipping_address" @if(Auth::user())
+                                            value="{{Auth::user()->Contact->shipping_address}}" @endif
+                                            class="form-control" placeholder="House number and street name" required />
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +168,7 @@
 
                     </div>
                 </div>
-
+                @if(!Auth::user())
                 <ul class="checkout-steps">
                     <li>
                         <h2 class="step-title">Billing details</h2>
@@ -166,16 +181,14 @@
                                         <label> Name
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
-                                        <input type="text" name="name" @if(Auth::user())
-                                            value="{{ Auth::user()->name }}" @endif class="form-control" required />
+                                        <input type="text" name="name"  class="form-control" required />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                <input type="tel" name="mobile" @if(Auth::user()) value="{{ Auth::user()->mobile }}"
-                                    @endif class="form-control" required />
+                                <input type="tel" name="mobile" class="form-control" required />
                             </div>
                             <div class="form-group">
                                 <label> Password
@@ -189,6 +202,7 @@
                         </form>
                     </li>
                 </ul>
+                @endif
             </div>
             <!-- End .col-lg-8 -->
 
