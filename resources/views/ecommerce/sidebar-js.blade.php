@@ -47,10 +47,9 @@ $(document).ready(function() {
                 for (var i = 0; i < data['categories'].length; i++) {
                       
                     check_sub_category = 0;
-
-                    // if(data['categories'][i]['parent'] !== 'undefined' && data['categories'][i]['parent'].length  > 0) {
-                    //     check_sub_category = 1;
-                    // }
+                    if (data['categories'][i]['sub_category'].length > 0) {
+                        check_sub_category = 1;
+                    }
                     parent_category = check_sub_category == 1 ? 'parent_category' : '';
                     arrow_signal = check_sub_category == 1 ?
                         '<i class="arrow right float-right"></i>' : '';
