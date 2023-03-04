@@ -276,7 +276,7 @@
                                     <h4>Total</h4>
                                 </td>
                                 <td>
-                                    <b class="total-price"><span>$1,603.80</span></b>
+                                    <b class="total-price"><span>$0.00</span></b>
                                 </td>
                             </tr>
                         </tfoot>
