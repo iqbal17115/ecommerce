@@ -10,10 +10,19 @@
                               <span aria-hidden="true">&times;</span>
                           </button>
                       </div>
+                      <input type="hidden" value="{{$dimension_type}}" name="dimension_type" id="dimension_type"/>
                       <div class="modal-body">
                           <input type="hidden" name="cu_id" id="cu_id" value="-1">
                           <div class="row">
-                          <div class="col-md-12">
+                          <div class="col-md-6">
+                                  <label for="type">Shipping Type</label>
+                                  <select class="form-select" name="dimension_type" id="dimension_type" style="width: 100%;">
+                                      <option value="">Select Option</option>
+                                      <option value="PerUnit">PerUnit</option>
+                                      <option value="Range">Range</option>
+                                  </select>
+                            </div>
+                          <div class="col-md-6">
                                   <label for="type">Type</label>
                                   <select class="form-select" name="type" id="type" style="width: 100%;" onchange="changeType(this)" required>
                                       <option value="">Select Option</option>
@@ -21,7 +30,7 @@
                                       <option value="Area">Area</option>
                                       <option value="Default">Default</option>
                                   </select>
-                              </div>
+                            </div>
                               <div class="col-md-6 shipping-charge-style">
                                   <div class="form-group">
                                       <label id="from_range" for="start">Start</label>

@@ -228,7 +228,6 @@
                                         <span class="product-qty">{{ $details['quantity'] }}</span>
                                     </h3>
                                 </td>
-
                                 <td class="price-col">
                                     <span>${{ $details['quantity'] * $details['sale_price'] }}</span>
                                 </td>

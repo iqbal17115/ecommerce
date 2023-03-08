@@ -1,13 +1,14 @@
 <script>
-    function changeType($this) {
-        if($this.value == "Default") {
-            $(".shipping-charge-style").css("display", "none");
-        } else {
-            $(".shipping-charge-style").css("display", "block");
-           $('#from_range').html($this.value+' From');
-           $('#to_range').html($this.value+' To');
-        }
+
+function changeType($this) {
+    if ($this.value == "Default") {
+        $(".shipping-charge-style").css("display", "none");
+    } else {
+        $(".shipping-charge-style").css("display", "block");
+        $('#from_range').html($this.value + ' From');
+        $('#to_range').html($this.value + ' To');
     }
+}
 $(document).ready(function() {
 
     function pagination(page) {
@@ -39,7 +40,7 @@ $(document).ready(function() {
                     if (data.status == 'success') {
                         $('.block_content').load(location.href + ' .block_content');
                         $('.paginate').load(location.href + ' .paginate');
-                        Command: toastr["success"]("Block Deleted",
+                        Command: toastr["success"]("Shipping Charge Deleted",
                             "success")
 
                         toastr.options = {
@@ -138,7 +139,7 @@ $(document).on('click', '.update_form', function(e) {
     let inside_amount = $(this).data('inside_amount');
     let outside_amount = $(this).data('outside_amount');
     let is_active = $(this).data('is_active');
-   
+
     $('#type').val(type);
     $('#start').val(start);
     $('#end').val(end);

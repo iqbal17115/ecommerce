@@ -10,8 +10,8 @@ class ShippingChargeController extends Controller
 {
     public function pagination(Request $request)
     {
-        $blocks = ShippingCharge::latest()->paginate(10);
-        return view('backend.web-setting.pagination.shipping-charge', compact('blocks'))->render();
+        $shipping_charges = ShippingCharge::latest()->paginate(10);
+        return view('backend.web-setting.pagination.shipping-charge', compact('shipping_charges'))->render();
     }
     public function deleteShippingCharge(Request $request)
     {
@@ -22,40 +22,22 @@ class ShippingChargeController extends Controller
     }
     public function addShippingCharge(Request $request)
     {
-        $request->validate(
-            [
-                'type' => 'required',
-                'inside_amount' => 'required',
-                'outside_amount' => 'required',
-                'is_active' => 'required'
-            ]
-        );
+
         if ($request->cu_id > 0) {
-            $request->validate(
-                [
-                    'start' => 'required',
-                    'end' => 'required'
-                ]
-            );
             $shipping_charge = ShippingCharge::find($request->cu_id);
         } else {
             if ($request->type == "Default") {
                 $shipping_charge = ShippingCharge::whereType('Default')->firstOrNew();
             } else {
-                $request->validate(
-                    [
-                        'start' => 'required',
-                        'end' => 'required'
-                    ]
-                );
                 $shipping_charge = new ShippingCharge();
             }
         }
 
+        $shipping_charge->dimension_type = $request->dimension_type;
         $shipping_charge->type = $request->type;
         if ($request->type == "Default") {
-            $shipping_charge->start = 0;
-            $shipping_charge->end = 1;
+            $shipping_charge->start = null;
+            $shipping_charge->end = null;
         } else {
             $shipping_charge->start = $request->start;
             $shipping_charge->end = $request->end;
@@ -71,7 +53,8 @@ class ShippingChargeController extends Controller
     }
     public function index()
     {
-        $shipping_charges = ShippingCharge::latest()->paginate(10);
-        return view('backend.web-setting.shipping-charge', compact('shipping_charges'));
+        $shipping_charges = ShippingCharge::paginate(10);
+        $dimension_type = "PerUnit";
+        return view('backend.web-setting.shipping-charge', compact('shipping_charges', 'dimension_type'));
     }
 }
