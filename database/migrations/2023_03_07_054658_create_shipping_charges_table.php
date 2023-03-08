@@ -15,18 +15,14 @@ class CreateShippingChargesTable extends Migration
     {
         Schema::create('shipping_charges', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 20)->nullable();
-            $table->string('title', 200)->nullable();
-            $table->enum('type', ['price', 'weight'])->nullable();
-            $table->double('from', 20, 4)->nullable();
-            $table->double('to', 20, 4)->nullable();
-            $table->double('shipping_fee', 20, 4)->default(0);
-            $table->foreignId('country_id');
-            $table->foreignId('branch_id');
-            $table->foreignId('created_by');
+            $table->enum('type', ['Weight', 'Area', 'Default'])->nullable();
+            $table->double('fixed', 10, 2)->nullable();
+            $table->double('start', 10, 2)->nullable();
+            $table->double('end', 10, 2)->nullable();
+            $table->double('inside_amount', 10, 2)->nullable();
+            $table->double('outside_amount', 10, 2)->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

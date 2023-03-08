@@ -104,7 +104,8 @@
                            <li><a href="{{ route('coupon') }}">Coupon</a></li>
                            <li><a href="javascript:void(0);">Why Choose Us</a></li>
                            <li><a href="javascript:void(0);">Our Location</a></li>
-                           <li><a href="javascript:void(0);">Shipping Method</a></li>
+                           <li><a href="{{ route('shipping-charge') }}">Shipping Charge</a></li>
+                           <!-- <li><a href="javascript:void(0);">Shipping Method</a></li> -->
                            <li><a href="javascript:void(0);">Setting</a></li>
                        </ul>
                    </li>
