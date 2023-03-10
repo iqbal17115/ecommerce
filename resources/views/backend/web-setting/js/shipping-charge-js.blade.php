@@ -1,21 +1,12 @@
 <script>
 
-function changeType($this) {
-    if ($this.value == "Default") {
-        $(".shipping-charge-style").css("display", "none");
-    } else {
-        $(".shipping-charge-style").css("display", "block");
-        $('#from_range').html($this.value + ' From');
-        $('#to_range').html($this.value + ' To');
-    }
-}
 $(document).ready(function() {
 
     function pagination(page) {
         $.ajax({
             url: '/pagination/shipping-charge-pagination-data?page=' + page,
             success: function(data) {
-                $('.block_content').html(data);
+                $('.shipping_charge_content').html(data);
             }
         })
     }
@@ -38,7 +29,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(data) {
                     if (data.status == 'success') {
-                        $('.block_content').load(location.href + ' .block_content');
+                        $('.shipping_charge_content').load(location.href + ' .shipping_charge_content');
                         $('.paginate').load(location.href + ' .paginate');
                         Command: toastr["success"]("Shipping Charge Deleted",
                             "success")
@@ -113,7 +104,7 @@ $(document).ready(function() {
 
                     $('#blockModal').modal('hide');
                     $('#addShippingCharge')[0].reset();
-                    $('.block_content').load(location.href + ' .block_content');
+                    $('.shipping_charge_content').load(location.href + ' .shipping_charge_content');
                     $('.paginate').load(location.href + ' .paginate');
                     $('#cu_id').val(-1);
 
@@ -134,15 +125,11 @@ $(document).on('click', '.update_form', function(e) {
 
     let id = $(this).data('id');
     let type = $(this).data('type');
-    let start = $(this).data('start');
-    let end = $(this).data('end');
     let inside_amount = $(this).data('inside_amount');
     let outside_amount = $(this).data('outside_amount');
     let is_active = $(this).data('is_active');
 
     $('#type').val(type);
-    $('#start').val(start);
-    $('#end').val(end);
     $('#inside_amount').val(inside_amount);
     $('#outside_amount').val(outside_amount);
     $('#is_active').val(is_active);

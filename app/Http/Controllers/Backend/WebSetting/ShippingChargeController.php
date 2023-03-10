@@ -25,23 +25,17 @@ class ShippingChargeController extends Controller
 
         if ($request->cu_id > 0) {
             $shipping_charge = ShippingCharge::find($request->cu_id);
+            $shipping_charge->type = $request->type;
         } else {
-            if ($request->type == "Default") {
+            if ($request->type == "Weight") {
+                $shipping_charge = ShippingCharge::whereType('Weight')->firstOrNew();
+            } else if ($request->type == "Area") {
+                $shipping_charge = ShippingCharge::whereType('Area')->firstOrNew();
+            } else if ($request->type == "Default") {
                 $shipping_charge = ShippingCharge::whereType('Default')->firstOrNew();
-            } else {
-                $shipping_charge = new ShippingCharge();
             }
         }
 
-        $shipping_charge->dimension_type = $request->dimension_type;
-        $shipping_charge->type = $request->type;
-        if ($request->type == "Default") {
-            $shipping_charge->start = null;
-            $shipping_charge->end = null;
-        } else {
-            $shipping_charge->start = $request->start;
-            $shipping_charge->end = $request->end;
-        }
         $shipping_charge->inside_amount = $request->inside_amount;
         $shipping_charge->outside_amount = $request->outside_amount;
         $shipping_charge->is_active = $request->is_active;

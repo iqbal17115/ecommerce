@@ -15,10 +15,7 @@ class CreateShippingChargesTable extends Migration
     {
         Schema::create('shipping_charges', function (Blueprint $table) {
             $table->id();
-            $table->enum('dimension_type', ['PerUnit', 'Range'])->nullable();
             $table->enum('type', ['Weight', 'Area', 'Default'])->nullable();
-            $table->double('start', 10, 2)->nullable();
-            $table->double('end', 10, 2)->nullable();
             $table->double('inside_amount', 10, 2)->nullable();
             $table->double('outside_amount', 10, 2)->nullable();
             $table->boolean('is_active')->nullable()->default(1);
