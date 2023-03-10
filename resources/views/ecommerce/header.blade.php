@@ -24,7 +24,7 @@
     </div>
     <!-- End Sidebar -->
 
-    <div class="pt-1 pb-0 header-middle sticky-header" data-sticky-options="{'mobile': true}">
+    <div class="pt-1 pb-0 header-middle sticky-header" style="background-color: #00C5D1;" data-sticky-options="{'mobile': true}">
 
         <div class="container">
             <div class="header-left col-lg-2 w-auto pl-0">
@@ -140,23 +140,23 @@
     </div>
     <!-- End .header-middle -->
 
-    <div class="header-bottom sticky-header d-none d-lg-flex pb-0 pt-0" data-sticky-options="{'mobile': false}">
+    <div class="header-bottom sticky-header d-none d-lg-flex pb-0 pt-0" style="background-color: #192D2E;" data-sticky-options="{'mobile': false}">
         <div class="container">
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li>
-                        <a class="btn pt-0 pb-0" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
+                        <a class="btn pt-0 pb-0" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table" style="color: white;"></i></a>
                     </li>
                     <li class="active">
-                        <a class="pt-0 pb-0" href="{{ route('home') }}">Home</a>
+                        <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Home</a>
                     </li>
-                    <li class="float-right phone"><a href="#" class="d-flex align-items-center pt-0 pb-0"><i
+                    <li class="float-right phone"><a href="#" class="d-flex align-items-center pt-0 pb-0" style="color: white;"><i
                                 class="icon-phone-1" style="font-size: 1.5rem;"></i>1-800-234-5678</a>
                     </li>
                     @if(Auth::user())
-                    <li class="float-right"><a class="pt-0 pb-0" href="{{ route('customer-logout') }}">Logout</a></li>
+                    <li class="float-right" ><a class="pt-0 pb-0" href="{{ route('customer-logout') }}" style="color: white;">Logout</a></li>
                     @endif
-                    <li class="float-right"><a class="pt-0 pb-0" href="#">FLASH DEALS</a></li>
+                    <li class="float-right"><a class="pt-0 pb-0" href="#" style="color: white;">FLASH DEALS</a></li>
                 </ul>
             </nav>
         </div>
