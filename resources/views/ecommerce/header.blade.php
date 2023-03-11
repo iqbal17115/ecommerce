@@ -24,21 +24,22 @@
     </div>
     <!-- End Sidebar -->
 
-    <div class="pt-1 pb-0 header-middle sticky-header" style="background-color: #00C5D1;" data-sticky-options="{'mobile': true}">
-
-        <div class="container">
-            <div class="header-left col-lg-2 w-auto pl-0">
-                <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
+    <div class="pt-1 pb-0 header-middle sticky-header" style="background-color: #00C5D1;"
+        data-sticky-options="{'mobile': true}">
+        <div class="header-left col-lg-2 w-auto pl-0 pl-1 pl-md-5">
+            <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
             <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
                 </button> -->
 
-                <a href="{{ route('home') }}" class="logo">
-                    <img src="{{ asset('logo.jpg') }}" class="w-100" width="111"
-                        height="44" style="height: 44px;" alt="Porto Logo">
-                </a>
+            <a href="{{ route('home') }}" class="logo">
+                <img src="{{ asset('logo.png') }}" class="w-100" width="111" height="44" style="height: 44px;"
+                    alt="Porto Logo">
+            </a>
 
-            </div>
-            <!-- End .header-left -->
+        </div>
+        <!-- End .header-left -->
+        <div class="container">
+
 
             <div class="header-right w-lg-max">
                 <div
@@ -66,8 +67,9 @@
                 </a>
 
                 <div class="dropdown cart-dropdown">
-                    <a href="javascript:void(0);" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                    <a href="javascript:void(0);" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        data-display="static">
                         <i class="icon-cart-thick"></i>
                         <span class="cart-count badge-circle">{{ count((array) session('cart')) }}</span>
                     </a>
@@ -93,7 +95,9 @@
                                         </h4>
 
                                         <span class="cart-product-info">
-                                            <span class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span> ×
+                                            <span
+                                                class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
+                                            ×
                                             ${{ $details['sale_price'] }}
                                         </span>
                                     </div>
@@ -105,7 +109,8 @@
                                                 alt="product" width="80" height="80">
                                         </a>
 
-                                        <a href="javascript:void(0);" class="btn-remove" title="Remove Product"><span>×</span></a>
+                                        <a href="javascript:void(0);" class="btn-remove"
+                                            title="Remove Product"><span>×</span></a>
                                     </figure>
                                 </div>
                                 <!-- End .product -->
@@ -140,21 +145,25 @@
     </div>
     <!-- End .header-middle -->
 
-    <div class="header-bottom sticky-header d-none d-lg-flex pb-0 pt-0" style="background-color: #192D2E;" data-sticky-options="{'mobile': false}">
+    <div class="header-bottom sticky-header d-none d-lg-flex pb-0 pt-0" style="background-color: #192D2E;"
+        data-sticky-options="{'mobile': false}">
         <div class="container">
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li>
-                        <a class="btn pt-0 pb-0" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table" style="color: white;"></i></a>
+                        <a class="btn pt-0 pb-0" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"
+                                style="color: white;"></i></a>
                     </li>
                     <li class="active">
                         <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Home</a>
                     </li>
-                    <li class="float-right phone"><a href="#" class="d-flex align-items-center pt-0 pb-0" style="color: white;"><i
-                                class="icon-phone-1" style="font-size: 1.5rem;"></i>1-800-234-5678</a>
+                    <li class="float-right phone"><a href="#" class="d-flex align-items-center pt-0 pb-0"
+                            style="color: white;"><i class="icon-phone-1"
+                                style="font-size: 1.5rem;"></i>1-800-234-5678</a>
                     </li>
                     @if(Auth::user())
-                    <li class="float-right" ><a class="pt-0 pb-0" href="{{ route('customer-logout') }}" style="color: white;">Logout</a></li>
+                    <li class="float-right"><a class="pt-0 pb-0" href="{{ route('customer-logout') }}"
+                            style="color: white;">Logout</a></li>
                     @endif
                     <li class="float-right"><a class="pt-0 pb-0" href="#" style="color: white;">FLASH DEALS</a></li>
                 </ul>
