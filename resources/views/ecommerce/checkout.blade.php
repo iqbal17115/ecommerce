@@ -220,7 +220,10 @@
                             @php $total = 0 @endphp
                             @if(session('cart'))
                             @foreach(session('cart') as $id => $details)
-                            @php $total += $details['sale_price'] * $details['quantity'] @endphp
+                            @php
+                             $total += $details['sale_price'] * $details['quantity'];
+                            $tmp = \App\Models\Backend\Product\Product::find($id);
+                             @endphp
                             <tr>
                                 <td class="product-col">
                                     <h3 class="product-title">
