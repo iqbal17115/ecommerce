@@ -144,4 +144,5 @@
     <div class="mb-6"></div><!-- margin -->
 </main><!-- End .main -->
 @include('ecommerce.cart-js')
+@include('ecommerce.sidebar-js')
 @endsection

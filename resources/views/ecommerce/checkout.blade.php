@@ -326,4 +326,5 @@
 </main>
 <!-- End .main -->
 @include('ecommerce.checkout-js')
+@include('ecommerce.sidebar-js')
 @endsection
