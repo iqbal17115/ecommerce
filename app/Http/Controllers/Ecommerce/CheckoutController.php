@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\ContactInfo\Contact;
 use App\Models\Backend\Product\Product;
+use App\Models\Backend\WebSetting\ShippingCharge;
 use App\Models\Ecommerce\Setting\District;
 use Illuminate\Http\Request;
 use App\Models\Ecommerce\Setting\Division;
@@ -96,6 +97,9 @@ class CheckoutController extends Controller
     public function index()
     {
         $divisions = Division::get();
-        return view('ecommerce.checkout', compact('divisions'));
+        $charge = ShippingCharge::whereType('Default')->first();
+        $weight = ShippingCharge::whereType('Weight')->first();
+        $area = ShippingCharge::whereType('Area')->first();
+        return view('ecommerce.checkout', compact('divisions', 'charge', 'weight', 'area'));
     }
 }

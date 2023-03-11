@@ -110,7 +110,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-1 pb-2">
                                         <label>Contact No. <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" name="shipping_contact_no" @if(Auth::user()) value="{{Auth::user()->Contact->mobile}}" @endif class="form-control"
+                                        <input type="text" name="shipping_contact_no" @if(Auth::user())
+                                            value="{{Auth::user()->Contact->mobile}}" @endif class="form-control"
                                             placeholder="Contact No." required />
                                     </div>
                                 </div>
@@ -181,7 +182,7 @@
                                         <label> Name
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
-                                        <input type="text" name="name"  class="form-control" required />
+                                        <input type="text" name="name" class="form-control" required />
                                     </div>
                                 </div>
                             </div>
@@ -217,13 +218,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $total = 0 @endphp
+                            @php
+                            $total = 0;
+                            $default_charge = 0;
+                            $total_weight = 0;
+                            $total_size = 0;
+                            @endphp
                             @if(session('cart'))
                             @foreach(session('cart') as $id => $details)
+                            @if($charge)
                             @php
-                             $total += $details['sale_price'] * $details['quantity'];
-                            $tmp = \App\Models\Backend\Product\Product::find($id);
-                             @endphp
+                            $default_charge += $charge->inside_amount;
+                            @endphp
+                            @endif
+                            @php
+                            $total += $details['sale_price'] * $details['quantity'];
+                            $product = \App\Models\Backend\Product\Product::find($id);
+                            $total_weight += $product->ProductMoreDetail->package_weight;
+                            $total_size += ($product->ProductMoreDetail->item_length * $product->ProductMoreDetail->item_width * $product->ProductMoreDetail->item_height);
+                            @endphp
+                            {{$product->ProductMoreDetail->package_weight}}
+
                             <tr>
                                 <td class="product-col">
                                     <h3 class="product-title">
@@ -237,6 +252,9 @@
                             </tr>
                             @endforeach
                             @endif
+                            @php 
+                              $charge_for_weight = ($total_weight * $weight->inside_amount);
+                            @endphp
                         </tbody>
                         <tfoot>
                             <tr class="cart-subtotal">
@@ -278,7 +296,7 @@
                                     <h4>Total</h4>
                                 </td>
                                 <td>
-                                    <b class="total-price"><span>$0.00</span></b>
+                                    <b class="total-price"><span>${{$total + $charge_for_weight + $default_charge}}</span></b>
                                 </td>
                             </tr>
                         </tfoot>
