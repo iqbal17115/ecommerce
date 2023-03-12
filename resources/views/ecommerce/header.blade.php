@@ -60,8 +60,8 @@
                     <div class="header-user">
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
-                            <span>Welcome</span>
-                            <h4 class="mb-0">@if(Auth::user()) {{Auth::user()->name}} @else My Account @endif</h4>
+                            <span style="color: #020100d1;">Welcome</span>
+                            <h4 class="mb-0" style="color: #ffffff;">@if(Auth::user()) {{Auth::user()->name}} @else My Account @endif</h4>
                         </div>
                     </div>
                 </a>
