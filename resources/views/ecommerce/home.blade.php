@@ -2,7 +2,7 @@
 @section('content')
 <main class="main">
     <div class="bg-gray pb-5">
-        <div class="container pb-3">
+        <div class="container pb-2">
             <div class="slide-animate owl-carousel owl-theme nav-circle mb-2" data-owl-options="{
 				'loop': true,
                 'autoplay':true,
@@ -19,7 +19,6 @@
                 </div>
                 <!-- End .home-slide -->
                 @endforeach
-
             </div>
             <!-- End .home-slider -->
 
@@ -53,7 +52,7 @@
                                 <img src="{{ asset('storage/'.$top_show_category->image) }}" alt="category" width="280"
                                     height="240" style="height: 128px; height: 116px;" />
                             </figure>
-                            <div class="category-content">
+                            <div class="category-content p-0">
                                 <h3>{{$top_show_category->name}}</h3>
                             </div>
                         </a>
@@ -72,7 +71,7 @@
             @foreach($product_features as $product_feature)
             @if(count($product_feature->Product) > 0)
             <div class="recent-products-section appear-animate" data-animation-name="fadeIn" data-animation-delay="100">
-                <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0">
+                <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
                     <h4 class="section-title text-transform-none mb-0 mr-0">{{$product_feature->name}}</h4>
                     <a class="view-all ml-auto" href="demo36-shop.html">View
                         All<i class="fas fa-long-arrow-alt-right"></i></a>
@@ -105,12 +104,16 @@
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
                             <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
-                                <img @if($product->ProductMainImage) src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif
-                                    width="239" height="239" style="width: 239px; height: 239px;" alt="product">
+                                <img @if($product->ProductMainImage)
+                                src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif
+                                width="239" height="239" style="width: 239px; height: 239px;" alt="product">
                             </a>
                             <div class="btn-icon-group">
-                                <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}" data-name="{{$product->name}}" data-your_price="{{$product->your_price}}" data-sale_price="{{$product->sale_price}}" @if($product->ProductMainImage) data-image="{{$product->ProductMainImage->image }}" @endif class="btn-icon btn-add-cart product-type-simple"><i
-                                        class="icon-shopping-cart"></i></a>
+                                <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
+                                    data-name="{{$product->name}}" data-your_price="{{$product->your_price}}"
+                                    data-sale_price="{{$product->sale_price}}" @if($product->ProductMainImage)
+                                    data-image="{{$product->ProductMainImage->image }}" @endif class="btn-icon
+                                    btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
                             </div>
                         </figure>
                         <div class="product-details">
@@ -120,8 +123,11 @@
                             <!-- End .product-container -->
                             <div class="price-box">
                                 @php
-                                echo $product->your_price? '<span class="old-price">$'.number_format((float)$product->your_price, 2).'</span>' : '';
-                                echo $product->sale_price? '<span class="product-price">$'.number_format((float)$product->sale_price, 2).'</span>' : '';
+                                echo $product->your_price? '<span
+                                    class="old-price">$'.number_format((float)$product->your_price, 2).'</span>' : '';
+                                echo $product->sale_price? '<span
+                                    class="product-price">$'.number_format((float)$product->sale_price, 2).'</span>' :
+                                '';
                                 @endphp
                             </div>
                             <!-- End .price-box -->
