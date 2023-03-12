@@ -91,8 +91,13 @@ $(document).ready(function() {
                     parent_category = check_sub_category == 1 ? 'parent_category' : '';
                     arrow_signal = check_sub_category == 1 ?
                         '<i class="arrow right float-right"></i>' : '';
+                        
+                        var url = '{{ route("shop", ":id") }}';
+                        url = check_sub_category == 0 ?
+                        url.replace(':id', data['sub_categories'][i]['id']) : 'javascript:void(0)';
+                        //  url = url.replace(':id', data['sub_categories'][i]['id']);
                     sub_category_list +=
-                        "<li style='list-style: none;padding-bottom: 2px;'><a style='font-family: inherit;' href='javascript:void(0);' class='" +
+                        "<li style='list-style: none;padding-bottom: 2px;'><a style='font-family: inherit;' href='"+url+"' class='" +
                         parent_category + "' data-id='" + data['sub_categories'][i]['id'] +
                         "'>" + data['sub_categories'][i]['name'] + arrow_signal +
                         "</a></li>";
