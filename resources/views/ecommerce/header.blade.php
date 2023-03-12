@@ -91,7 +91,7 @@
                                 <div class="product cart-{{ $id }}" data-id="{{ $id }}">
                                     <div class="product-details">
                                         <h4 class="product-title">
-                                            <a href="demo36-product.html">{{ $details['name'] }}</a>
+                                            <a href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name'] }}</a>
                                         </h4>
 
                                         <span class="cart-product-info">
@@ -104,7 +104,7 @@
                                     <!-- End .product-details -->
 
                                     <figure class="product-image-container">
-                                        <a href="demo36-product.html" class="product-image">
+                                        <a href="{{ route('product-detail', ['id'=>$id]) }}" class="product-image">
                                             <img src="{{ asset('storage/product_photo/'.$details['image']) }}"
                                                 alt="product" width="80" height="80">
                                         </a>
