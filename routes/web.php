@@ -105,7 +105,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::group(
         [],
         function () {
-            Route::get('manage-company', [CompanyInfoController::class, 'index'])->name('manage-company');
+            Route::get('company-info', [CompanyInfoController::class, 'index'])->name('company-info');
         }
     );
     // End Manage Company

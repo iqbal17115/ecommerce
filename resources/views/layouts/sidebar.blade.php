@@ -115,7 +115,7 @@
                            <span>Software Settings</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="{{ route('manage-company') }}">Manage Company</a></li>
+                           <li><a href="{{ route('company-info') }}"> Company Info</a></li>
                            <li><a href="javascript:void(0);">User</a></li>
                            <li><a href="javascript:void(0);">Language</a></li>
                            <li><a href="javascript:void(0);">Setting</a></li>

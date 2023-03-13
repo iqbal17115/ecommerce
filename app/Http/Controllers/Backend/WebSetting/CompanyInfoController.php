@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class CompanyInfoController extends Controller
 {
     public function index() {
-        return view('backend.setting.manage-company');
+        return view('backend.setting.company-info');
     }
 }

@@ -103,7 +103,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12 ml-auto">
-                <p class="category h4">Manage Company</p>
+                <p class="category h4"> Company Info</p>
                 <!-- Nav tabs -->
                 <div class="card">
                     <div class="card-header">
@@ -111,42 +111,37 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#addVitalInfo" role="tab">
-                                    <i class="now-ui-icons objects_umbrella-13"></i> 1
+                                    <i class="now-ui-icons objects_umbrella-13"></i> Info
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#variations" role="tab">
-                                    <i class="now-ui-icons shopping_cart-simple"></i> 1
+                                <a class="nav-link" data-toggle="tab" href="#links" role="tab">
+                                    <i class="now-ui-icons shopping_cart-simple"></i> Link
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#offer" role="tab">
-                                    <i class="now-ui-icons shopping_shop"></i> 3
+                                <a class="nav-link" data-toggle="tab" href="#aboutUs" role="tab">
+                                    <i class="now-ui-icons shopping_shop"></i> About Us
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#compliance" role="tab">
-                                    <i class="now-ui-icons ui-2_settings-90"></i> 4
+                                <a class="nav-link" data-toggle="tab" href="#termsCondition" role="tab">
+                                    <i class="now-ui-icons ui-2_settings-90"></i> Terms & Condition
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#images" role="tab">
-                                    <i class="now-ui-icons ui-2_settings-90"></i> 5
+                                <a class="nav-link" data-toggle="tab" href="#privacyPolicy" role="tab">
+                                    <i class="now-ui-icons ui-2_settings-90"></i> Privacy Policy
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#description" role="tab">
-                                    <i class="now-ui-icons ui-2_settings-90"></i> 6
+                                <a class="nav-link" data-toggle="tab" href="#returnPolicy" role="tab">
+                                    <i class="now-ui-icons ui-2_settings-90"></i> Return Policy
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#keywords" role="tab">
-                                    <i class="now-ui-icons ui-2_settings-90"></i> 7
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#more_details" role="tab">
-                                    <i class="now-ui-icons ui-2_settings-90"></i> 8
+                                <a class="nav-link" data-toggle="tab" href="#activeInactiveStatus" role="tab">
+                                    <i class="now-ui-icons ui-2_settings-90"></i> Status
                                 </a>
                             </li>
                         </ul>
@@ -155,15 +150,21 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="addVitalInfo" role="tabpanel">
+                                <!-- Start Info -->
+                                <form method="post" id="add_info">
+                                    @csrf
+                                    <div class="row">
+                                    </div>
+                                </form>
+                                <!-- End Info -->
+                            </div>
+                            <div class="tab-pane" id="links" role="tabpanel">
                                 
                             </div>
-                            <div class="tab-pane" id="variations" role="tabpanel">
+                            <div class="tab-pane" id="aboutUs" role="tabpanel">
                                 
                             </div>
-                            <div class="tab-pane" id="offer" role="tabpanel">
-                                
-                            </div>
-                            <div class="tab-pane" id="compliance" role="tabpanel">
+                            <div class="tab-pane" id="termsCondition" role="tabpanel">
                                 <!-- Start -->
                                 <div class="col-md-10">
                                     <!-- Start Content -->
@@ -172,14 +173,14 @@
                                 <div class="col-md-2"></div>
                                 <!-- End -->
                             </div>
-                            <div class="tab-pane" id="images" role="tabpanel">
+                            <div class="tab-pane" id="privacyPolicy" role="tabpanel">
                                 
                             </div>
-                            <div class="tab-pane" id="description" role="tabpanel">
+                            <div class="tab-pane" id="returnPolicy" role="tabpanel">
                                 
                             </div>
                             <!-- End -->
-                            <div class="tab-pane" id="keywords" role="tabpanel">
+                            <div class="tab-pane" id="activeInactiveStatus" role="tabpanel">
                                 <div class="row">
                                     <!-- Start -->
                                     <div class="col-md-10">
@@ -189,10 +190,6 @@
                                     <div class="col-md-2"></div>
                                     <!-- End -->
                                 </div>
-                            </div>
-                            <!-- End -->
-                            <div class="tab-pane" id="more_details" role="tabpanel">
-                                
                             </div>
                             <!-- End -->
                         </div>
