@@ -32,7 +32,7 @@
                 </button> -->
 
             <a href="{{ route('home') }}" class="logo">
-                <img src="{{ asset('logo.png') }}" class="w-100" width="111" height="44" style="height: 44px;"
+                <img src="{{ asset('logo1.png') }}" class="w-100" width="111" height="44" style="height: 44px;"
                     alt="Porto Logo">
             </a>
 
