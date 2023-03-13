@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\Product\ConditionController;
 use App\Http\Controllers\Backend\Product\ProductFeatureController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
+use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
 use App\Http\Controllers\Backend\WebSetting\CouponController;
 use App\Http\Controllers\Backend\WebSetting\ShippingChargeController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
@@ -99,6 +100,15 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::get('order-detail', [OrderController::class, 'orderDetail'])->name('order-detail');
         }
     );
+
+    // Start Manage Company
+    Route::group(
+        [],
+        function () {
+            Route::get('manage-company', [CompanyInfoController::class, 'index'])->name('manage-company');
+        }
+    );
+    // End Manage Company
 
     // Unit Start
     Route::group(

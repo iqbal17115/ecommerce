@@ -24,7 +24,7 @@
     </div>
     <!-- End Sidebar -->
 
-    <div class="pt-1 pb-0 header-middle sticky-header" style="background-color: #00C5D1;"
+    <div class="pt-1 pb-0 header-middle sticky-header" style="background-color: #d14c28;"
         data-sticky-options="{'mobile': true}">
         <div class="header-left col-lg-2 w-auto pl-0 pl-1 pl-md-5">
             <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
@@ -145,7 +145,7 @@
     </div>
     <!-- End .header-middle -->
 
-    <div class="header-bottom sticky-header d-none d-lg-flex pb-0 pt-0" style="background-color: #192D2E;"
+    <div class="header-bottom sticky-header d-none d-lg-flex pb-0 pt-0" style="background-color: #df4a22;"
         data-sticky-options="{'mobile': false}">
         <div class="container">
             <nav class="main-nav w-100">
