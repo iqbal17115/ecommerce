@@ -30,11 +30,12 @@
             <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
             <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
                 </button> -->
-
+            @if($company_info && $company_info->logo)
             <a href="{{ route('home') }}" class="logo">
-                <img src="{{ asset('logo1.png') }}" class="w-100" width="111" height="44" style="height: 44px;"
-                    alt="Porto Logo">
+                <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100" width="111" height="44"
+                    style="height: 44px;" alt="Porto Logo">
             </a>
+            @endif
 
         </div>
         <!-- End .header-left -->
@@ -61,7 +62,8 @@
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
                             <span style="color: #020100d1;">Welcome</span>
-                            <h4 class="mb-0" style="color: #ffffff;">@if(Auth::user()) {{Auth::user()->name}} @else My Account @endif</h4>
+                            <h4 class="mb-0" style="color: #ffffff;">@if(Auth::user()) {{Auth::user()->name}} @else My
+                                Account @endif</h4>
                         </div>
                     </div>
                 </a>
@@ -91,7 +93,8 @@
                                 <div class="product cart-{{ $id }}" data-id="{{ $id }}">
                                     <div class="product-details">
                                         <h4 class="product-title">
-                                            <a href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name'] }}</a>
+                                            <a
+                                                href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name'] }}</a>
                                         </h4>
 
                                         <span class="cart-product-info">

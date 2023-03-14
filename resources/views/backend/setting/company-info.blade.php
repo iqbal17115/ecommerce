@@ -154,7 +154,7 @@ div#variation_content {
                         <div class="tab-content">
                             <div class="tab-pane active" id="addVitalInfo" role="tabpanel">
                                 <!-- Start Info -->
-                                <form method="post" id="add_info">
+                                <form method="post" id="company_vital_info">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-10">
@@ -165,14 +165,22 @@ div#variation_content {
                                                         style="font-size: 14px;">Company Name</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="name" id="name" class="form-control"
+                                                    <input type="text" name="name" id="name" @if($company_info)
+                                                        value="{{$company_info->name}}" @endif class="form-control"
                                                         placeholder="Company Name">
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-4 mt-md-3">
+
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Logo</label>
+                                                    @if($company_info && $company_info->logo)
+                                                    <img src="{{ asset('storage/'.$company_info->logo) }}"
+                                                        class="rounded float-md-right"
+                                                        style="width: 55px; height: 30px; background: black;"
+                                                        alt="ff" />
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input type="file" name="logo" id="logo" class="form-control">
@@ -181,10 +189,26 @@ div#variation_content {
 
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Icon</label>
+                                                        @if($company_info && $company_info->icon)
+                                                    <img src="{{ asset('storage/'.$company_info->icon) }}"
+                                                        class="rounded float-md-right"
+                                                        style="width: 55px; height: 30px; background: black;"
+                                                        alt="ff" />
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="file" name="icon" id="icon" class="form-control">
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Phone</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="phone" id="phone" class="form-control"
+                                                    <input type="text" name="phone" id="phone" @if($company_info)
+                                                        value="{{$company_info->phone}}" @endif class="form-control"
                                                         placeholder="Phone">
                                                 </div>
                                                 <!-- End -->
@@ -194,7 +218,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Mobile</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="mobile" id="mobile" class="form-control"
+                                                    <input type="text" name="mobile" id="mobile" @if($company_info)
+                                                        value="{{$company_info->mobile}}" @endif class="form-control"
                                                         placeholder="Mobile">
                                                 </div>
                                                 <!-- End -->
@@ -204,7 +229,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Email</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="email" name="email" id="email" class="form-control"
+                                                    <input type="email" name="email" id="email" @if($company_info)
+                                                        value="{{$company_info->email}}" @endif class="form-control"
                                                         placeholder="Email">
                                                 </div>
                                                 <!-- End -->
@@ -214,7 +240,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Hotline</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="hotline" id="hotline" class="form-control"
+                                                    <input type="text" name="hotline" id="hotline" @if($company_info)
+                                                        value="{{$company_info->hotline}}" @endif class="form-control"
                                                         placeholder="Hotline">
                                                 </div>
                                                 <!-- End -->
@@ -224,7 +251,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Address</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="address" id="address" class="form-control"
+                                                    <input type="text" name="address" id="address" @if($company_info)
+                                                        value="{{$company_info->address}}" @endif class="form-control"
                                                         placeholder="Address">
                                                 </div>
                                                 <!-- End -->
@@ -234,7 +262,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Google map</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="google_map_location"
+                                                    <input type="text" name="google_map_location" @if($company_info)
+                                                        value="{{$company_info->google_map_location}}" @endif
                                                         id="google_map_location" class="form-control"
                                                         placeholder="Google map">
                                                 </div>
@@ -245,13 +274,22 @@ div#variation_content {
                                                         style="font-size: 14px;">Website</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="web" id="web" class="form-control"
+                                                    <input type="text" name="web" id="web" @if($company_info)
+                                                        value="{{$company_info->web}}" @endif class="form-control"
                                                         placeholder="Website">
+                                                </div>
+                                                <!-- End -->
+
+
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
                                                 </div>
                                                 <!-- End -->
                                             </div>
                                         </div>
-                                        <div class="col-md-2"></div>
+                                        <div class="col-md-2">
+
+                                        </div>
                                         <!-- End -->
                                     </div>
                                 </form>
@@ -259,7 +297,7 @@ div#variation_content {
                             </div>
                             <div class="tab-pane" id="links" role="tabpanel">
                                 <!-- Start Link -->
-                                <form method="post" id="add_info">
+                                <form method="post" id="add_link">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-10">
@@ -270,7 +308,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Video Link</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="video_link" id="video_link"
+                                                    <input type="text" name="video_link" @if($company_info)
+                                                        value="{{$company_info->video_link}}" @endif id="video_link"
                                                         class="form-control" placeholder="Video Link">
                                                 </div>
                                                 <!-- End -->
@@ -280,7 +319,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Video Title</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="video_title" id="video_title"
+                                                    <input type="text" name="video_title" @if($company_info)
+                                                        value="{{$company_info->video_title}}" @endif id="video_title"
                                                         class="form-control" placeholder="Video Title">
                                                 </div>
                                                 <!-- End -->
@@ -290,7 +330,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Facebook Link</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="facebook_link" id="facebook_link"
+                                                    <input type="text" name="facebook_link" @if($company_info)
+                                                        value="{{$company_info->facebook_link}}" @endif id="facebook_link"
                                                         class="form-control" placeholder="Facebook Link">
                                                 </div>
                                                 <!-- End -->
@@ -300,8 +341,14 @@ div#variation_content {
                                                         style="font-size: 14px;">Youtube Link</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="text" name="youtube_link" id="youtube_link"
+                                                    <input type="text" name="youtube_link" @if($company_info)
+                                                        value="{{$company_info->youtube_link}}" @endif id="youtube_link"
                                                         class="form-control" placeholder="Youtube Link">
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
                                                 </div>
                                                 <!-- End -->
                                             </div>
@@ -314,7 +361,7 @@ div#variation_content {
                             </div>
                             <div class="tab-pane" id="aboutUs" role="tabpanel">
                                 <!-- Start About Us -->
-                                <form method="post" id="add_info">
+                                <form method="post" id="add_about_us">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-10">
@@ -325,7 +372,16 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="about_us" id="about_us"
-                                                        placeholder="About Us"></textarea>
+                                                        placeholder="About Us">
+                                                        @if($company_info && $company_info->about_us)
+                                                        {!! $company_info->about_us !!}
+                                                        @endif 
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
                                                 </div>
                                                 <!-- End -->
                                             </div>
@@ -338,7 +394,7 @@ div#variation_content {
                             </div>
                             <div class="tab-pane" id="termsCondition" role="tabpanel">
                                 <!-- Start Terms & Condition -->
-                                <form method="post" id="add_info">
+                                <form method="post" id="add_term_condition">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-10">
@@ -349,7 +405,15 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="terms_condition"
-                                                        id="terms_condition" placeholder="Terms & Condition"></textarea>
+                                                        id="terms_condition" placeholder="Terms & Condition">
+                                                        @if($company_info && $company_info->terms_condition)
+                                                        {!! $company_info->terms_condition !!}
+                                                        @endif 
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
                                                 </div>
                                                 <!-- End -->
                                             </div>
@@ -362,7 +426,7 @@ div#variation_content {
                             </div>
                             <div class="tab-pane" id="privacyPolicy" role="tabpanel">
                                 <!-- Start Privacy Policy -->
-                                <form method="post" id="add_info">
+                                <form method="post" id="add_privacy_policy">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-10">
@@ -373,7 +437,15 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="privacy_policy"
-                                                        id="privacy_policy" placeholder="Privacy Policy"></textarea>
+                                                        id="privacy_policy" placeholder="Privacy Policy">
+                                                        @if($company_info && $company_info->privacy_policy)
+                                                        {!! $company_info->privacy_policy !!}
+                                                        @endif 
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
                                                 </div>
                                                 <!-- End -->
                                             </div>
@@ -386,7 +458,7 @@ div#variation_content {
                             </div>
                             <div class="tab-pane" id="returnPolicy" role="tabpanel">
                                 <!-- Start Return Policy -->
-                                <form method="post" id="add_info">
+                                <form method="post" id="add_return_policy">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-10">
@@ -397,7 +469,15 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="return_policy"
-                                                        id="return_policy" placeholder="Return Policy"></textarea>
+                                                        id="return_policy" placeholder="Return Policy">
+                                                        @if($company_info && $company_info->return_policy)
+                                                        {!! $company_info->return_policy !!}
+                                                        @endif 
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
                                                 </div>
                                                 <!-- End -->
                                             </div>
@@ -419,48 +499,48 @@ div#variation_content {
                                             <div class="row">
                                                 <div class="col-md-12 mt-md-3">
                                                     <center>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="is_phone_active">
-                                                        <label class="form-check-label"
-                                                            for="is_phone_active">Is Phone Active</label>
-                                                    </div>
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="is_phone_active">
+                                                            <label class="form-check-label" for="is_phone_active">Is
+                                                                Phone Active</label>
+                                                        </div>
                                                     </center>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
                                                     <center>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="is_mobile_active">
-                                                        <label class="form-check-label"
-                                                            for="is_mobile_active">Is Mobile Active</label>
-                                                    </div>
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="is_mobile_active">
+                                                            <label class="form-check-label" for="is_mobile_active">Is
+                                                                Mobile Active</label>
+                                                        </div>
                                                     </center>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
                                                     <center>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="is_email_active">
-                                                        <label class="form-check-label"
-                                                            for="is_email_active">Is Email Active</label>
-                                                    </div>
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="is_email_active">
+                                                            <label class="form-check-label" for="is_email_active">Is
+                                                                Email Active</label>
+                                                        </div>
                                                     </center>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
                                                     <center>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="is_hotline_active">
-                                                        <label class="form-check-label"
-                                                            for="is_hotline_active">Is Hotline Active</label>
-                                                    </div>
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="is_hotline_active">
+                                                            <label class="form-check-label" for="is_hotline_active">Is
+                                                                Hotline Active</label>
+                                                        </div>
                                                     </center>
                                                 </div>
                                                 <!-- End -->
@@ -490,9 +570,6 @@ div#variation_content {
 </script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
-    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 $('#about_us').summernote({
     height: 120
@@ -511,6 +588,6 @@ $('#return_policy').summernote({
 });
 // $('.file-upload').file_upload();
 </script>
-@include('backend.product.js.product-js')
+@include('backend.setting.setting-js')
 {!! Toastr::message() !!}
 @endsection

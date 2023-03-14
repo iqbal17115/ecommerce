@@ -106,6 +106,12 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         [],
         function () {
             Route::get('company-info', [CompanyInfoController::class, 'index'])->name('company-info');
+            Route::post('add-company_vital_info', [CompanyInfoController::class, 'addVitalInfo'])->name('add.company_vital_info');
+            Route::post('add-add_link', [CompanyInfoController::class, 'addLink'])->name('add.add_link');
+            Route::post('add-about_us', [CompanyInfoController::class, 'addAboutUs'])->name('add.about_us');
+            Route::post('add-terms_condition', [CompanyInfoController::class, 'addTermsCondition'])->name('add.terms_condition');
+            Route::post('add-privacy_policy', [CompanyInfoController::class, 'addPrivacyPolicy'])->name('add.privacy_policy');
+            Route::post('add-return_policy', [CompanyInfoController::class, 'addReturnPolicy'])->name('add.return_policy');
         }
     );
     // End Manage Company

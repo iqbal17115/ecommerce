@@ -14,8 +14,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('aladdinne/assets/images/icons/favicon.png') }}">
-
+    @if($company_info && $company_info->icon)
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/'.$company_info->icon) }}">
+@endif
 
     <script>
     WebFontConfig = {

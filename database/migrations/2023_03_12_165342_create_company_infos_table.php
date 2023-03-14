@@ -17,6 +17,7 @@ class CreateCompanyInfosTable extends Migration
             $table->id();
             $table->string('name', 100)->nullable();
             $table->text('logo')->nullable();
+            $table->text('icon')->nullable();
             $table->string('phone', 100)->nullable();
             $table->string('mobile', 100)->nullable();
             $table->string('email', 191)->nullable();
