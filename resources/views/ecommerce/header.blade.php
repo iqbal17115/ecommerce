@@ -148,7 +148,7 @@
     </div>
     <!-- End .header-middle -->
 
-    <div class="header-bottom sticky-header d-none d-lg-flex pb-0 pt-0" style="background-color: #df4a22;"
+    <div class="header-bottom sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #df4a22;"
         data-sticky-options="{'mobile': false}">
         <div class="container">
             <nav class="main-nav w-100">
