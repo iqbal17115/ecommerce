@@ -211,12 +211,11 @@ class ProductController extends Controller
             $Query->gift_wrap_available = $request->gift_wrap_available;
             $Query->save();
 
-            $ProductDetailQuery = ProductDetail::whereProductId($Query->product_offer_id)->first();
+            $ProductDetailQuery = ProductDetail::whereProductId($Query->product_offer_id)->firstOrNew();
             if ($ProductDetailQuery) {
                 $ProductDetailQuery->seller_sku = $request->seller_sku;
                 $ProductDetailQuery->tax_code = $request->tax_code;
-                $ProductDetailQuery->condition_id = $request->condition_id;
-                $ProductDetailQuery->condition_note = $request->condition_note;
+                $ProductDetailQuery->material_type_id = $request->material_type_id;
                 $ProductDetailQuery->save();
             }
 
@@ -233,7 +232,7 @@ class ProductController extends Controller
             } else {
                 $Query = Product::find($request->vital_info_id);
             }
-            
+
             $Query->code = $request->code;
             $Query->name = $request->name;
             $Query->type = $request->type;
@@ -246,16 +245,13 @@ class ProductController extends Controller
             $Query->booking_date = $request->booking_date;
             $Query->save();
 
-            $ProductDetailQuery = ProductDetail::whereProductId($Query->id)->first();
-            if (!$ProductDetailQuery) {
-                $ProductDetailQuery = new ProductDetail();
-                $ProductDetailQuery->product_id = $Query->id;
-                $ProductDetailQuery->outer_material = $request->outer_material;
-                $ProductDetailQuery->material_type_id = $request->material_type_id;
-            } else {
-                $ProductDetailQuery->outer_material = $request->outer_material;
-                $ProductDetailQuery->material_type_id = $request->material_type_id;
-            }
+            $ProductDetailQuery = ProductDetail::whereProductId($Query->id)->firstOrNew();
+            $ProductDetailQuery->product_id = $Query->id;
+            $ProductDetailQuery->outer_material = $request->outer_material;
+            $ProductDetailQuery->material_type_id = $request->material_type_id;
+            $ProductDetailQuery->condition_id = $request->condition_id;
+            $ProductDetailQuery->condition_note = $request->condition_note;
+            $ProductDetailQuery->outer_material = $request->outer_material;
             $ProductDetailQuery->save();
 
             return response()->json(['product_id' => $Query->id, 'status' => 201]);
@@ -275,9 +271,9 @@ class ProductController extends Controller
         $product_features = ProductFeature::orderBy('id', 'DESC')->whereIsActive(1)->get();
         $productInfo = null;
         $id = $request->id;
-        if($id) {
-           $id = $id;
-           $productInfo = Product::whereId($id)->first();
+        if ($id) {
+            $id = $id;
+            $productInfo = Product::whereId($id)->first();
         }
         return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features'));
     }

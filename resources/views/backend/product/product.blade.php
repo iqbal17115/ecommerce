@@ -293,6 +293,30 @@
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right" style="font-size: 14px;">Condition</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select class="form-select" name="condition_id" id="condition_id" style="width: 100%;">
+                                                        <option value="">Select Option</option>
+                                                        @foreach($conditions AS $condition)
+                                                        <option value="{{ $condition->id }}" @if($productInfo && $productInfo->ProductDetail && $productInfo->ProductDetail->condition_id==$condition->id) selected @endif>{{ $condition->title }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right" style="font-size: 14px;">Condition Note</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <textarea class="form-control" name="condition_note" id="condition_note">
+                                                    @if($productInfo && $productInfo->ProductDetail) {!!$productInfo->ProductDetail->condition_note!!}  @endif
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right" style="font-size: 14px;">Country/Region of Publication</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
@@ -318,7 +342,7 @@
                                                     <select name="material_type_id" id="material_type_id" class="form-select">
                                                         <option value=""></option>
                                                         @foreach($materials as $material)
-                                                        <option value="{{$material->id}}">{{$material->name}}</option>
+                                                        <option @if($productInfo && $productInfo->ProductDetail && $productInfo->ProductDetail->material_type_id==$material->id) selected @endif value="{{$material->id}}">{{$material->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -566,28 +590,6 @@
                                                         </div>
                                                         <input type="text" name="retail_price" id="retail_price" @if($productInfo) value="{{$productInfo->retail_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-label="Username" aria-describedby="retail_price_inclusive_vat">
                                                     </div>
-                                                </div>
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right" style="font-size: 14px;">Condition</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" name="condition_id" id="condition_id" style="width: 100%;">
-                                                        <option value="">Select Option</option>
-                                                        @foreach($conditions AS $condition)
-                                                        <option value="{{ $condition->id }}" @if($productInfo && $productInfo->ProductDetail && $productInfo->ProductDetail->condition_id==$condition->id) selected @endif>{{ $condition->title }}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right" style="font-size: 14px;">Condition Note</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <textarea class="form-control" name="condition_note" id="condition_note" @if($productInfo && $productInfo->ProductDetail) value="{{$productInfo->condition_note}}"  @endif></textarea>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1604,7 +1606,13 @@
     $('#material_id').select2({
         placeholder: 'Select An Option'
     });
+    $('#material_type_id').select2({
+        placeholder: 'Select An Option'
+    });
     $('#product_condition_id').select2({
+        placeholder: 'Select An Option'
+    });
+    $('#condition_id').select2({
         placeholder: 'Select An Option'
     });
     $('.bottom_size_map').select2({
