@@ -1560,19 +1560,13 @@
                                         
                                         var variation = $( "#variation" ).val();
                                         var get_category_id = $( "#get_category_id" ).val();
-                                        var product_info_image_0 = $( "#product_info_image_0" ).val();
-                                        var product_info_image_1 = $( "#product_info_image_1" ).val();
-                                        var product_info_image_2 = $( "#product_info_image_2" ).val();
-                                        var product_info_image_3 = $( "#product_info_image_3" ).val();
-                                        var product_info_image_4 = $( "#product_info_image_4" ).val();
-                                        var product_info_image_5 = $( "#product_info_image_5" ).val();
-                                        var imageUrl0 = 'storage/product_photo/' + product_info_image_0;
-                                        var imageUrl1 = 'storage/product_photo/' + product_info_image_1;
-                                        var imageUrl2 = 'storage/product_photo/' + product_info_image_2;
-                                        var imageUrl3 = 'storage/product_photo/' + product_info_image_3;
-                                        var imageUrl4 = 'storage/product_photo/' + product_info_image_4;
-                                        var imageUrl5 = 'storage/product_photo/' + product_info_image_5;
-                                        alert(imageUrl0);
+                                        var imageUrl0 = 'storage/product_photo/' + $( "#product_info_image_0" ).val();
+                                        var imageUrl1 = 'storage/product_photo/' + $( "#product_info_image_1" ).val();
+                                        var imageUrl2 = 'storage/product_photo/' + $( "#product_info_image_2" ).val();
+                                        var imageUrl3 = 'storage/product_photo/' + $( "#product_info_image_3" ).val();
+                                        var imageUrl4 = 'storage/product_photo/' + $( "#product_info_image_4" ).val();
+                                        var imageUrl5 = 'storage/product_photo/' + $( "#product_info_image_5" ).val();
+                                        
                                         $(".drop-zone_0").css("background-image", "url(" + imageUrl0 + ")");
                                         $(".drop-zone_1").css("background-image", "url(" + imageUrl1 + ")");
                                         $(".drop-zone_2").css("background-image", "url(" + imageUrl2 + ")");
