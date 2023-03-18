@@ -90,7 +90,7 @@ Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer
 Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
 // 
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
-    Route::get('/admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+    Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
     // Order Start
     Route::group(
