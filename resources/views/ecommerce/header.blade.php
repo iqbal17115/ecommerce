@@ -147,8 +147,8 @@
         <!-- End .container -->
     </div>
     <!-- End .header-middle -->
-
-    <div class="header-bottom sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #df4a22;"
+    <!--Class Of bottom line header-bottom  -->
+    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #df4a22; height: 40px;"
         data-sticky-options="{'mobile': false}">
         <div class="container">
             <nav class="main-nav w-100">
@@ -157,7 +157,7 @@
                         <a class="btn pt-0 pb-0" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"
                                 style="color: white;"></i></a>
                     </li>
-                    <li class="active">
+                    <li class="#">
                         <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Home</a>
                     </li>
                     <li class="float-right phone"><a href="#" class="d-flex align-items-center pt-0 pb-0"
