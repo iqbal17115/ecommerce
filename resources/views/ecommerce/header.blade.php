@@ -7,8 +7,8 @@
             <input type="hidden" name="category_data[]" id="category_data" value="" />
             <ul class="sidebar-nav" id="category_show">
                 <li class="text-center h4" style="background-color: brown;">Aladdinne</li>
-                <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: black;"><i
-                            id="category_back" class="fa fa-arrow-left"></i> Shop By Department <button
+                <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: black; "><i
+                            id="category_back" class="fa fa-arrow-left" style="display: none;"></i> Shop By Department <button
                             id="minimizeSidebar" type="button" style="font-weight: bold; font-size: 28px; color: red;"
                             class="close" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

@@ -10,6 +10,7 @@ $(document).ready(function() {
         // sidebar-wrapper
         $("#sidebar-wrapper").css("width", "0px");
     });
+
     function checkParentCategory(parent_cat_id) {
         // Check SubCategory
         $.ajax({
@@ -43,9 +44,11 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
                 sub_category_list = '';
-
+                if (data['categories'][0]['parent_category_id'] == null) {
+                    $("#category_back").hide();
+                }
                 for (var i = 0; i < data['categories'].length; i++) {
-                      
+
                     check_sub_category = 0;
                     if (data['categories'][i]['sub_category'].length > 0) {
                         check_sub_category = 1;
@@ -83,25 +86,29 @@ $(document).ready(function() {
             success: function(data) {
                 sub_category_list = '';
                 var parent_category_id = [];
+                // $("#category_back").css("visibility: hidden;");
+                $("#category_back").show();
                 for (var i = 0; i < data['sub_categories'].length; i++) {
-                        check_sub_category = 0;
+                    check_sub_category = 0;
                     if (data['sub_categories'][i]['sub_category'].length > 0) {
                         check_sub_category = 1;
                     }
                     parent_category = check_sub_category == 1 ? 'parent_category' : '';
                     arrow_signal = check_sub_category == 1 ?
                         '<i class="arrow right float-right"></i>' : '';
-                        
-                        var url = '{{ route("shop", ":id") }}';
-                        url = check_sub_category == 0 ?
-                        url.replace(':id', data['sub_categories'][i]['id']) : 'javascript:void(0)';
-                        //  url = url.replace(':id', data['sub_categories'][i]['id']);
+
+                    var url = '{{ route("shop", ":id") }}';
+                    url = check_sub_category == 0 ?
+                        url.replace(':id', data['sub_categories'][i]['id']) :
+                        'javascript:void(0)';
+                    //  url = url.replace(':id', data['sub_categories'][i]['id']);
                     sub_category_list +=
-                        "<li style='list-style: none;padding-bottom: 2px;'><a style='font-family: inherit;' href='"+url+"' class='" +
+                        "<li style='list-style: none;padding-bottom: 2px;'><a style='font-family: inherit;' href='" +
+                        url + "' class='" +
                         parent_category + "' data-id='" + data['sub_categories'][i]['id'] +
                         "'>" + data['sub_categories'][i]['name'] + arrow_signal +
                         "</a></li>";
-                        parent_category_id.push(data['sub_categories'][i]['id']);
+                    parent_category_id.push(data['sub_categories'][i]['id']);
                 }
                 $('#category_content').nextAll('li').remove();
                 $("#category_show").append(sub_category_list);
