@@ -1005,43 +1005,42 @@
                                     <div class="row">
                                         <input type="hidden" name="product_image_id" id="product_image_id" @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif/>
                                         <div class="col-md-2">
-                                            <div class="drop-zone" style="z-index: -1;">
-                                                <!-- <img src="" class="" style="width: 150px;height: 150px;"/> -->
-                                                <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input drop-zone__input1">
-                                            </div>
-                                        </div>
-                                        <!-- End -->
-                                        <div class="col-md-2">
-                                            <div class="drop-zone">
+                                            <div class="drop-zone drop-zone_0">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
                                                 <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
-                                            <div class="drop-zone">
+                                            <div class="drop-zone drop-zone_1">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
                                                 <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
-                                            <div class="drop-zone">
+                                            <div class="drop-zone drop-zone_2">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
                                                 <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
-                                            <div class="drop-zone">
+                                            <div class="drop-zone drop-zone_3">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
                                                 <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
                                         </div>
                                         <!-- End -->
                                         <div class="col-md-2">
-                                            <div class="drop-zone">
+                                            <div class="drop-zone drop-zone_4">
+                                                <span class="drop-zone__prompt">Drop file here or click to upload</span>
+                                                <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
+                                            </div>
+                                        </div>
+                                        <!-- End -->
+                                        <div class="col-md-2">
+                                            <div class="drop-zone drop-zone_5">
                                                 <span class="drop-zone__prompt">Drop file here or click to upload</span>
                                                 <input type="file" name="product_image[]" id="product_image" class="drop-zone__input">
                                             </div>
@@ -1562,13 +1561,24 @@
                                         var variation = $( "#variation" ).val();
                                         var get_category_id = $( "#get_category_id" ).val();
                                         var product_info_image_0 = $( "#product_info_image_0" ).val();
-                                        $('.product_info_image_preview_0').attr("src", 'storage/product_photo/' + product_info_image_0);
-                                        var imageUrl = 'storage/product_photo/' + product_info_image_0;
-                                        // drop-zone__input
-                                        // $('.drop-zone__input1').val(imageUrl);
-                                        $('.drop-zone__input1').val(imageUrl).trigger("input");
-                                        // $(".drop-zone").css("background-image", "url(" + imageUrl + ")");
-                                        // $('.drop-zone__input').trigger('click');
+                                        var product_info_image_1 = $( "#product_info_image_1" ).val();
+                                        var product_info_image_2 = $( "#product_info_image_2" ).val();
+                                        var product_info_image_3 = $( "#product_info_image_3" ).val();
+                                        var product_info_image_4 = $( "#product_info_image_4" ).val();
+                                        var product_info_image_5 = $( "#product_info_image_5" ).val();
+                                        var imageUrl0 = 'storage/product_photo/' + product_info_image_0;
+                                        var imageUrl1 = 'storage/product_photo/' + product_info_image_1;
+                                        var imageUrl2 = 'storage/product_photo/' + product_info_image_2;
+                                        var imageUrl3 = 'storage/product_photo/' + product_info_image_3;
+                                        var imageUrl4 = 'storage/product_photo/' + product_info_image_4;
+                                        var imageUrl5 = 'storage/product_photo/' + product_info_image_5;
+                                        alert(imageUrl0);
+                                        $(".drop-zone_0").css("background-image", "url(" + imageUrl0 + ")");
+                                        $(".drop-zone_1").css("background-image", "url(" + imageUrl1 + ")");
+                                        $(".drop-zone_2").css("background-image", "url(" + imageUrl2 + ")");
+                                        $(".drop-zone_3").css("background-image", "url(" + imageUrl3 + ")");
+                                        $(".drop-zone_4").css("background-image", "url(" + imageUrl4 + ")");
+                                        $(".drop-zone_5").css("background-image", "url(" + imageUrl5 + ")");
                                         updateVariantByCategory(get_category_id);
                                         updateVariationType(variation);
                                     });
