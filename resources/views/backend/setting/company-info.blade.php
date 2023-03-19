@@ -491,7 +491,7 @@ div#variation_content {
                             <!-- End -->
                             <div class="tab-pane" id="activeInactiveStatus" role="tabpanel">
                                 <!-- Start Return Policy -->
-                                <form method="post" id="add_info">
+                                <form method="post" id="add_status">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-4"></div>
@@ -500,7 +500,7 @@ div#variation_content {
                                                 <div class="col-md-12 mt-md-3">
                                                     <center>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
+                                                            <input @if($company_info && $company_info->is_phone_active) checked @endif class="form-check-input" type="checkbox" name="is_phone_active"
                                                                 id="is_phone_active">
                                                             <label class="form-check-label" for="is_phone_active">Is
                                                                 Phone Active</label>
@@ -512,7 +512,7 @@ div#variation_content {
                                                 <div class="col-md-12 mt-md-3">
                                                     <center>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
+                                                            <input @if($company_info && $company_info->is_mobile_active) checked @endif class="form-check-input" type="checkbox" name="is_mobile_active"
                                                                 id="is_mobile_active">
                                                             <label class="form-check-label" for="is_mobile_active">Is
                                                                 Mobile Active</label>
@@ -524,7 +524,7 @@ div#variation_content {
                                                 <div class="col-md-12 mt-md-3">
                                                     <center>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
+                                                            <input @if($company_info && $company_info->is_email_active) checked @endif class="form-check-input" type="checkbox" name="is_email_active"
                                                                 id="is_email_active">
                                                             <label class="form-check-label" for="is_email_active">Is
                                                                 Email Active</label>
@@ -536,7 +536,7 @@ div#variation_content {
                                                 <div class="col-md-12 mt-md-3">
                                                     <center>
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
+                                                            <input @if($company_info && $company_info->is_hotline_active) checked @endif class="form-check-input" type="checkbox" name="is_hotline_active"
                                                                 id="is_hotline_active">
                                                             <label class="form-check-label" for="is_hotline_active">Is
                                                                 Hotline Active</label>
@@ -545,6 +545,10 @@ div#variation_content {
                                                 </div>
                                                 <!-- End -->
 
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="btn btn-success btn-sm btn-block">Save</button>
+                                                </div>
+                                                <!-- End -->
                                             </div>
                                         </div>
                                         <div class="col-md-6"></div>

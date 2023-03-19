@@ -8,7 +8,21 @@ use Illuminate\Http\Request;
 
 class CompanyInfoController extends Controller
 {
-    public function addReturnPolicy(Request $request) {
+    public function addStatus(Request $request)
+    {
+        $company_info = CompanyInfo::firstOrNew();
+        $company_info->is_phone_active = $request->is_phone_active == null ? 0 : 1;
+        $company_info->is_mobile_active = $request->is_mobile_active == null ? 0 : 1;
+        $company_info->is_email_active = $request->is_email_active == null ? 0 : 1;
+        $company_info->is_hotline_active = $request->is_hotline_active == null ? 0 : 1;
+        $company_info->save();
+
+        return response()->json([
+            'status' => 201
+        ]);
+    }
+    public function addReturnPolicy(Request $request)
+    {
         $company_info = CompanyInfo::firstOrNew();
         $company_info->return_policy = $request->return_policy;
         $company_info->save();
@@ -17,7 +31,8 @@ class CompanyInfoController extends Controller
             'status' => 201
         ]);
     }
-    public function addPrivacyPolicy(Request $request) {
+    public function addPrivacyPolicy(Request $request)
+    {
         $company_info = CompanyInfo::firstOrNew();
         $company_info->privacy_policy = $request->privacy_policy;
         $company_info->save();
@@ -26,7 +41,8 @@ class CompanyInfoController extends Controller
             'status' => 201
         ]);
     }
-    public function addTermsCondition(Request $request) {
+    public function addTermsCondition(Request $request)
+    {
         $company_info = CompanyInfo::firstOrNew();
         $company_info->terms_condition = $request->terms_condition;
         $company_info->save();
@@ -35,7 +51,8 @@ class CompanyInfoController extends Controller
             'status' => 201
         ]);
     }
-    public function addAboutUs(Request $request) {
+    public function addAboutUs(Request $request)
+    {
         $company_info = CompanyInfo::firstOrNew();
         $company_info->about_us = $request->about_us;
         $company_info->save();
@@ -44,7 +61,8 @@ class CompanyInfoController extends Controller
             'status' => 201
         ]);
     }
-    public function addLink(Request $request) {
+    public function addLink(Request $request)
+    {
         $company_info = CompanyInfo::firstOrNew();
         $company_info->video_link = $request->video_link;
         $company_info->video_title = $request->video_title;
@@ -56,7 +74,8 @@ class CompanyInfoController extends Controller
             'status' => 201
         ]);
     }
-    public function addVitalInfo(Request $request) {
+    public function addVitalInfo(Request $request)
+    {
         $company_info = CompanyInfo::firstOrNew();
         $company_info->name = $request->name;
 
@@ -89,7 +108,8 @@ class CompanyInfoController extends Controller
             'status' => 201
         ]);
     }
-    public function index() {
+    public function index()
+    {
         $company_info = CompanyInfo::first();
         return view('backend.setting.company-info', compact('company_info'));
     }

@@ -1,10 +1,10 @@
 <script type="text/javascript">
-              // Start Privacy policy
-$(document).on('submit', '#add_return_policy', function(e) {
+                  // Start Status
+$(document).on('submit', '#add_status', function(e) {
     e.preventDefault();
     var form = this;
     $.ajax({
-        url: "{{route('add.return_policy')}}",
+        url: "{{route('add.status')}}",
         method: 'post',
         data: new FormData(form),
         processData: false,
@@ -13,7 +13,7 @@ $(document).on('submit', '#add_return_policy', function(e) {
         success: function(data) {
             console.log(data);
             if (data.status == 201) {
-                Command: toastr["success"]("Privacy Policy Saved Successfully",
+                Command: toastr["success"]("Status Saved Successfully",
                     "Success")
                 toastr.options = {
                     "closeButton": true,
@@ -36,7 +36,45 @@ $(document).on('submit', '#add_return_policy', function(e) {
         },
     });
 });
-// End Privacy policy
+// End Status
+              // Start Return policy
+$(document).on('submit', '#add_return_policy', function(e) {
+    e.preventDefault();
+    var form = this;
+    $.ajax({
+        url: "{{route('add.return_policy')}}",
+        method: 'post',
+        data: new FormData(form),
+        processData: false,
+        dataType: 'json',
+        contentType: false,
+        success: function(data) {
+            console.log(data);
+            if (data.status == 201) {
+                Command: toastr["success"]("Return Policy Saved Successfully",
+                    "Success")
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            }
+        },
+    });
+});
+// End Return policy
           // Start Privacy policy
 $(document).on('submit', '#add_privacy_policy', function(e) {
     e.preventDefault();
