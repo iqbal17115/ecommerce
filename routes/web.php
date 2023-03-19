@@ -112,6 +112,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::post('add-terms_condition', [CompanyInfoController::class, 'addTermsCondition'])->name('add.terms_condition');
             Route::post('add-privacy_policy', [CompanyInfoController::class, 'addPrivacyPolicy'])->name('add.privacy_policy');
             Route::post('add-return_policy', [CompanyInfoController::class, 'addReturnPolicy'])->name('add.return_policy');
+            Route::post('add-status', [CompanyInfoController::class, 'addStatus'])->name('add.status');
         }
     );
     // End Manage Company
