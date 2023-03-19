@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->enum('type', ['GTIN', 'EAN', 'GCID', 'UPC', 'ASIN', 'ISBN'])->nullable();
             $table->string('seller_sku', 100)->nullable();
             $table->double('purchase_price', 10, 2)->nullable();
+            $table->double('regular_price', 10, 2)->nullable();
             $table->double('your_price', 10, 2)->nullable();
             $table->double('sale_price', 10, 2)->nullable();
             $table->double('retail_price', 10, 2)->nullable();
@@ -41,6 +42,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('branch_id')->nullable();
             $table->foreignId('created_by');
             $table->foreignId('vendor_id')->nullable();
+            $table->boolean('is_offfer_on_going')->nullable()->default(0);
             $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();
             $table->timestamps();

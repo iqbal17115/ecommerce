@@ -209,6 +209,7 @@ class ProductController extends Controller
             $Query->start_selling_date = $request->start_selling_date;
             $Query->offering_gift_message = $request->offering_gift_message;
             $Query->gift_wrap_available = $request->gift_wrap_available;
+            $Query->is_offfer_on_going = $request->is_offfer_on_going==null ? 0 : 1;
             $Query->save();
 
             $ProductDetailQuery = ProductDetail::whereProductId($Query->product_offer_id)->firstOrNew();
@@ -235,6 +236,7 @@ class ProductController extends Controller
 
             $Query->code = $request->code;
             $Query->name = $request->name;
+            $Query->regular_price = $request->regular_price;
             $Query->type = $request->type;
             $Query->seller_sku = $request->seller_sku;
             $Query->category_id = $request->category_id;

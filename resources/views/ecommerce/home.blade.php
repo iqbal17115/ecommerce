@@ -122,6 +122,7 @@
                             </h3>
                             <!-- End .product-container -->
                             <div class="price-box">
+                                @if($product->is_offfer_on_going)
                                 @php
                                 echo $product->your_price? '<span
                                     class="old-price">$'.number_format((float)$product->your_price, 2).'</span>' : '';
@@ -129,6 +130,13 @@
                                     class="product-price">$'.number_format((float)$product->sale_price, 2).'</span>' :
                                 '';
                                 @endphp
+                                @else
+                                @php
+                                echo $product->regular_price? '<span
+                                    class="product-price">$'.number_format((float)$product->regular_price, 2).'</span>' :
+                                '';
+                                @endphp
+                                @endif
                             </div>
                             <!-- End .price-box -->
                         </div>
