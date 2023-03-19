@@ -117,7 +117,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="vendor_commission_percentage">Vendor Commission(%)</label>
-                                      <input type="number" name="vendor_commission_percentage" id="vendor_commission_percentage" class="form-control" placeholder="Vendor Commission">
+                                      <input type="number" step="any" name="vendor_commission_percentage" id="vendor_commission_percentage" class="form-control" placeholder="Vendor Commission">
                                       <span class="text-danger err_vendor_commission_percentage"></span>
                                   </div>
                               </div>
