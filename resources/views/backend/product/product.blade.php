@@ -645,13 +645,12 @@ div#variation_content {
                                                     <input name="opening_qty" id="opening_qty" @if($productInfo)
                                                         value="{{$productInfo->opening_qty}}" @endif
                                                         class="form-control" placeholder="Opening Qty" name=""
-                                                        id="" />
+                                                        id="" required/>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Your Price</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
@@ -723,7 +722,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Retail Price (Inclusive VAT)</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
@@ -742,7 +740,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Max Order Qty</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input name="max_order_qty" id="max_order_qty" @if($productInfo)
@@ -754,7 +751,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Product Tax Code</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input name="tax_code" id="tax_code" @if($productInfo &&
@@ -765,7 +761,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Handling Time</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input class="form-control" placeholder="Enter Handling Time"
@@ -775,7 +770,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Offering Can Be Gift Messaged</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="offering_gift_message" id="offering_gift_message"
@@ -794,7 +788,6 @@ div#variation_content {
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Is
                                                         Gift Wrap Available?</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="gift_wrap_available" id="gift_wrap_available"
@@ -812,7 +805,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Start Selling Date</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
@@ -831,7 +823,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Restock Date</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
