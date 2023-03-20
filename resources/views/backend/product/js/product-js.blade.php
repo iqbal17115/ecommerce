@@ -1,4 +1,13 @@
 <script type="text/javascript">
+function brandAvailableCheck(brand_available) {
+    brand_available = $("#" + brand_available.id).val();
+    if(brand_available==1){
+    $(".brand_available_contant").show();
+    } else {
+    $(".brand_available_contant").hide();
+
+    }
+}
 var tab_menu = [];
 var selected_variation = [];
 
@@ -337,6 +346,63 @@ $(document).on('submit', '#add_product_detail_info', function(e) {
     });
 });
 // End Product Details Add
+// Start Product Identity
+$(document).on('submit', '#add_product_identity', function(e) {
+    e.preventDefault();
+    var form = this;
+    $.ajax({
+        url: "{{route('add.product_identity')}}",
+        method: 'post',
+        data: new FormData(form),
+        enctype: 'multipart/form-data',
+        processData: false,
+        dataType: 'json',
+        contentType: false,
+        success: function(data) {
+            if (data.status == 201) {
+                if (!tab_menu.includes(2)) {
+                    tab_menu.push(2);
+                }
+                if (!tab_menu.includes(3)) {
+                    tab_menu.push(3);
+                }
+                tabIndexPerform();
+                Command: toastr["success"]("Product Identity Saved Successfully",
+                    "Success")
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                $("#product_identity_id").val(data.product_id);
+                $("#vital_info_id").val(data.product_id);
+                $("#product_offer_id").val(data.product_id);
+                $("#product_image_id").val(data.product_id);
+                $("#product_description_id").val(data.product_id);
+                $("#product_keyword_id").val(data.product_id);
+                $("#product_compliance_id").val(data.product_id);
+                $("#product_more_detail_id").val(data.product_id);
+                $("#product_variant_info_id").val(data.product_id);
+            }
+        },
+        error: (error) => {
+            alert('Something went wrong to fetch datas...');
+        }
+    });
+});
+// End Product Identity
 // Start Product Vital Info Add
 $(document).on('submit', '#add_vital_info', function(e) {
     e.preventDefault();
@@ -377,6 +443,7 @@ $(document).on('submit', '#add_vital_info', function(e) {
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
+                $("#product_identity_id").val(data.product_id);
                 $("#vital_info_id").val(data.product_id);
                 $("#product_offer_id").val(data.product_id);
                 $("#product_image_id").val(data.product_id);
@@ -488,14 +555,14 @@ function variationManage(variation_type, val) {
             variation_content +=
                 '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
             variation_content +=
-            '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
+                '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
             variation_content +=
                 '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
             variation_content += '</div>';
             $("#variation_row").append(variation_content);
             $("#variation_head").prepend(
                 '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Size</span></div>'
-                );
+            );
         } else {
             var variation_type_len = $(".master_type_" + variation_type).length;
             if (variation_type_len != 0) {
@@ -589,14 +656,14 @@ function variationManage(variation_type, val) {
             variation_content +=
                 '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
             variation_content +=
-            '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
+                '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
             variation_content +=
                 '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
             variation_content += '</div>';
             $("#variation_row").append(variation_content);
             $("#variation_head").prepend(
                 '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Color</span></div>'
-                );
+            );
         } else {
             var variation_type_len = $(".master_type_" + variation_type).length;
             if (variation_type_len != 0) {
@@ -687,14 +754,14 @@ function variationManage(variation_type, val) {
             variation_content +=
                 '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
             variation_content +=
-            '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
+                '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
             variation_content +=
                 '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
             variation_content += '</div>';
             $("#variation_row").append(variation_content);
             $("#variation_head").prepend(
                 '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">P. Qty</span></div>'
-                );
+            );
         } else {
             var variation_type_len = $(".master_type_" + variation_type).length;
             if (variation_type_len != 0) {
@@ -785,14 +852,14 @@ function variationManage(variation_type, val) {
             variation_content +=
                 '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
             variation_content +=
-            '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
+                '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
             variation_content +=
                 '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
             variation_content += '</div>';
             $("#variation_row").append(variation_content);
             $("#variation_head").prepend(
                 '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">M. Type</span></div>'
-                );
+            );
         } else {
             var variation_type_len = $(".master_type_" + variation_type).length;
             if (variation_type_len != 0) {
@@ -883,14 +950,14 @@ function variationManage(variation_type, val) {
             variation_content +=
                 '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
             variation_content +=
-            '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
+                '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
             variation_content +=
                 '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
             variation_content += '</div>';
             $("#variation_row").append(variation_content);
             $("#variation_head").prepend(
                 '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Wattage</span></div>'
-                );
+            );
         } else {
             var variation_type_len = $(".master_type_" + variation_type).length;
             if (variation_type_len != 0) {
@@ -981,14 +1048,14 @@ function variationManage(variation_type, val) {
             variation_content +=
                 '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
             variation_content +=
-            '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
+                '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
             variation_content +=
                 '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
             variation_content += '</div>';
             $("#variation_row").append(variation_content);
             $("#variation_head").prepend(
                 '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Items</span></div>'
-                );
+            );
         } else {
             var variation_type_len = $(".master_type_" + variation_type).length;
             if (variation_type_len != 0) {
@@ -1079,14 +1146,14 @@ function variationManage(variation_type, val) {
             variation_content +=
                 '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
             variation_content +=
-            '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
+                '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
             variation_content +=
                 '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
             variation_content += '</div>';
             $("#variation_row").append(variation_content);
             $("#variation_head").prepend(
                 '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Style</span></div>'
-                );
+            );
         } else {
             var variation_type_len = $(".master_type_" + variation_type).length;
             if (variation_type_len != 0) {
@@ -1408,6 +1475,7 @@ function updateVariantByCategory(category_id) {
         }
     });
 };
+
 function variantByCategory(category) {
     let category_id = $("#" + category.id).val();
     $.ajax({

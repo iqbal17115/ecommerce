@@ -257,6 +257,26 @@ class ProductController extends Controller
             return response()->json(['product_id' => $Query->id, 'status' => 201]);
         });
     }
+    public function addProductIdentity(Request $request)
+    {
+        if ($request->product_identity_id == -1) {
+            $Query = new Product();
+            $Query->branch_id = 1;
+            $Query->created_by = Auth::user()->id;
+        } else {
+            $Query = Product::find($request->product_identity_id);
+        }
+
+        $Query->code = $request->code;
+        $Query->name = $request->name;
+        $Query->category_id = $request->category_id;
+        $Query->type = $request->type;
+        $Query->brand_available = $request->brand_available;
+        $Query->brand_id = $request->brand_available == 1 ? $request->brand_id : null;
+        $Query->save();
+
+        return response()->json(['product_id' => $Query->id, 'status' => 201]);
+    }
     public function getCategory($id)
     {
         $category = Category::find($id);
