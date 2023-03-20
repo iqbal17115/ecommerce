@@ -199,7 +199,8 @@ class ProductController extends Controller
         return DB::transaction(function () use ($request) {
 
             $Query = Product::find($request->product_offer_id);
-
+            
+            $Query->opening_qty = $request->opening_qty;
             $Query->your_price = $request->your_price;
             $Query->sale_price = $request->sale_price;
             $Query->retail_price = $request->retail_price;
@@ -213,7 +214,6 @@ class ProductController extends Controller
 
             $ProductDetailQuery = ProductDetail::whereProductId($Query->product_offer_id)->firstOrNew();
             if ($ProductDetailQuery) {
-                $ProductDetailQuery->seller_sku = $request->seller_sku;
                 $ProductDetailQuery->tax_code = $request->tax_code;
                 $ProductDetailQuery->material_type_id = $request->material_type_id;
                 $ProductDetailQuery->save();
@@ -233,12 +233,6 @@ class ProductController extends Controller
                 $Query = Product::find($request->vital_info_id);
             }
 
-            $Query->code = $request->code;
-            $Query->name = $request->name;
-            $Query->type = $request->type;
-            $Query->seller_sku = $request->seller_sku;
-            $Query->category_id = $request->category_id;
-            $Query->brand_id = $request->brand_id;
             $Query->product_feature_id = $request->product_feature_id;
             $Query->model_number = $request->model_number;
             $Query->model_name = $request->model_name;

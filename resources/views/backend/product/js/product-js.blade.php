@@ -3,8 +3,10 @@ function brandAvailableCheck(brand_available) {
     brand_available = $("#" + brand_available.id).val();
     if(brand_available==1){
     $(".brand_available_contant").show();
+    $("#brand_id").attr("required", "true");
     } else {
     $(".brand_available_contant").hide();
+    $("#brand_id").removeAttr("required");
 
     }
 }

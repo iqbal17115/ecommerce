@@ -331,120 +331,7 @@ div#variation_content {
                                         <div class="col-md-10">
                                             <!-- Start Content -->
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Product Id</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input name="code" id="code" @if($productInfo)
-                                                        value="{{$productInfo->code}}" @endif class="form-control"
-                                                        placeholder="Enter product Id" required />
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <select name="type" id="type" class="form-select" required>
-                                                        <option value="">Select Option</option>
-                                                        <option @if($productInfo && $productInfo->type=='GTIN') selected
-                                                            @endif value="GTIN">GTIN</option>
-                                                        <option @if($productInfo && $productInfo->type=='EAN') selected
-                                                            @endif value="EAN">EAN</option>
-                                                        <option @if($productInfo && $productInfo->type=='GCID') selected
-                                                            @endif value="GCID">GCID</option>
-                                                        <option @if($productInfo && $productInfo->type=='UPC') selected
-                                                            @endif value="UPC">UPC</option>
-                                                        <option @if($productInfo && $productInfo->type=='ASIN') selected
-                                                            @endif value="ASIN">ASIN</option>
-                                                        <option @if($productInfo && $productInfo->type=='ISBN') selected
-                                                            @endif value="ISBN">ISBN</option>
-                                                    </select>
-                                                </div>
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Seller SKU</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <input name="seller_sku" id="seller_sku" @if($productInfo)
-                                                        value="{{$productInfo->seller_sku}}" @endif class="form-control"
-                                                        placeholder="Enter Seller SKU" required />
-                                                </div>
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Product Name</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <input name="name" id="name" @if($productInfo)
-                                                        value="{{$productInfo->name}}" @endif class="form-control"
-                                                        placeholder="Enter product Name" required />
-                                                </div>
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Category Name</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" id="category_id" name="category_id"
-                                                        onchange="variantByCategory(this)" required>
-                                                        <option value=""></option>
-                                                        @foreach($categories as $category)
-                                                        <option @if($productInfo && $productInfo->
-                                                            category_id==$category->id) selected @endif
-                                                            value="{{$category->id}}">
-                                                            {{$category->name}}
-                                                        </option>
-                                                        <!-- Start Sub-Category -->
-                                                        @if($category->SubCategory)
-                                                        @foreach($category->SubCategory as $subCategory)
-                                                        <option @if($productInfo && $productInfo->
-                                                            category_id==$subCategory->id) selected @endif
-                                                            value="{{$subCategory->id}}">
-                                                            --{{$subCategory->name}}
-                                                        </option>
-                                                        <!-- Start sub-Sub-Category -->
-                                                        @if($subCategory->SubCategory)
-                                                        @foreach($subCategory->SubCategory as $subSubCategory)
-                                                        <option @if($productInfo && $productInfo->
-                                                            category_id==$subSubCategory->id) selected @endif
-                                                            value="{{$subSubCategory->id}}">
-                                                            ----{{$subSubCategory->name}}
-                                                        </option>
-                                                        <!-- Start sub-Sub-Sub-Category -->
-                                                        @if($subSubCategory->SubCategory)
-                                                        @foreach($subSubCategory->SubCategory as $subSubSubCategory)
-                                                        <option @if($productInfo && $productInfo->
-                                                            category_id==$subSubSubCategory->id) selected @endif
-                                                            value="{{$subSubSubCategory->id}}">
-                                                            ------{{$subSubSubCategory->name}}
-                                                        </option>
-                                                        <!-- Start sub-Sub-Sub-Sub-Category -->
-                                                        @if($subSubSubCategory->SubCategory)
-                                                        @foreach($subSubSubCategory->SubCategory as
-                                                        $subSubSubSubCategory)
-                                                        <option @if($productInfo && $productInfo->
-                                                            category_id==$subSubSubSubCategory->id) selected @endif
-                                                            value="{{$subSubSubSubCategory->id}}">
-                                                            --------{{$subSubSubSubCategory->name}}
-                                                        </option>
-                                                        @endforeach
-                                                        @endif
-                                                        <!-- End sub-Sub-Sub-Sub-Category -->
-                                                        @endforeach
-                                                        @endif
-                                                        <!-- End sub-Sub-Sub-Category -->
-                                                        @endforeach
-                                                        @endif
-                                                        <!-- End sub-Sub-Category -->
-                                                        @endforeach
-                                                        @endif
-                                                        <!-- End Sub Category -->
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <!-- End -->
+                                                
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Feature</label>
@@ -452,7 +339,7 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="product_feature_id" id="product_feature_id"
-                                                        class="form-select">
+                                                        class="form-select" style="width: 100%;">
                                                         <option value=""></option>
                                                         @foreach($product_features as $product_feature)
                                                         <option @if($productInfo && $productInfo->
@@ -466,7 +353,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Model Number</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input name="model_number" id="model_number" type="text"
@@ -478,7 +364,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Outer Material</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input name="outer_material" id="outer_material" @if($productInfo &&
@@ -494,7 +379,7 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <select class="form-select" name="condition_id" id="condition_id"
-                                                        style="width: 100%;">
+                                                        style="width: 100%;" required>
                                                         <option value="">Select Option</option>
                                                         @foreach($conditions AS $condition)
                                                         <option value="{{ $condition->id }}" @if($productInfo &&
@@ -509,7 +394,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Condition Note</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="condition_note"
@@ -525,7 +409,7 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="region_publication_id" id="region_publication_id"
-                                                        class="form-select">
+                                                        class="form-select" required>
                                                         <option @if($productInfo && $productInfo->
                                                             region_publication_id==1) selected @endif
                                                             value="1">Bangladesh</option>
@@ -535,7 +419,6 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Model Name</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input name="model_name" id="model_name" @if($productInfo)
@@ -546,11 +429,10 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Material Type</label>
-                                                    <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <select name="material_type_id" id="material_type_id"
-                                                        class="form-select">
+                                                        class="form-select" style="width: 100%;">
                                                         <option value=""></option>
                                                         @foreach($materials as $material)
                                                         <option @if($productInfo && $productInfo->ProductDetail &&
@@ -743,27 +625,27 @@ div#variation_content {
                                         <div class="col-md-10">
                                             <!-- Start Content -->
                                             <div class="row">
-                                                <div class="col-md-4">
+                                               <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Seller SKU</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
-                                                <div class="col-md-8">
-                                                    <input name="seller_sku" id="seller_sku" @if($productInfo &&
-                                                        $productInfo->ProductDetail)
-                                                    value="{{$productInfo->seller_sku}}" @endif class="form-control"
-                                                    placeholder="Enter Seller SKU" />
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input name="seller_sku" id="seller_sku" @if($productInfo)
+                                                        value="{{$productInfo->seller_sku}}" @endif class="form-control"
+                                                        placeholder="Enter Seller SKU" required />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Product Tax Code</label>
+                                                        style="font-size: 14px;">Quantity</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="tax_code" id="tax_code" @if($productInfo &&
-                                                        $productInfo->ProductDetail) value="{{$productInfo->tax_code}}"
-                                                    @endif class="form-control" placeholder="Enter Product Tax Code" />
+                                                    <input name="opening_qty" id="opening_qty" @if($productInfo)
+                                                        value="{{$productInfo->opening_qty}}" @endif
+                                                        class="form-control" placeholder="Opening Qty" name=""
+                                                        id="" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -867,6 +749,17 @@ div#variation_content {
                                                         value="{{$productInfo->max_order_qty}}" @endif
                                                         class="form-control" placeholder="Enter Max Order Qty" name=""
                                                         id="" />
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Product Tax Code</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input name="tax_code" id="tax_code" @if($productInfo &&
+                                                        $productInfo->ProductDetail) value="{{$productInfo->tax_code}}"
+                                                    @endif class="form-control" placeholder="Enter Product Tax Code" />
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
