@@ -234,15 +234,10 @@
                             @php
                             $total += $details['sale_price'] * $details['quantity'];
                             $product = \App\Models\Backend\Product\Product::find($id);
-                            @endphp
-                            @if($product->ProductMoreDetail)
-                            @php
                             $total_weight += $product->ProductMoreDetail->package_weight;
-                            $total_size += ($product->ProductMoreDetail->item_length *
-                            $product->ProductMoreDetail->item_width * $product->ProductMoreDetail->item_height);
+                            $total_size += ($product->ProductMoreDetail->item_length * $product->ProductMoreDetail->item_width * $product->ProductMoreDetail->item_height);
                             @endphp
                             {{$product->ProductMoreDetail->package_weight}}
-                            @endif
 
                             <tr>
                                 <td class="product-col">
@@ -257,8 +252,8 @@
                             </tr>
                             @endforeach
                             @endif
-                            @php
-                            $charge_for_weight = ($total_weight * $weight->inside_amount);
+                            @php 
+                              $charge_for_weight = ($total_weight * $weight->inside_amount);
                             @endphp
                         </tbody>
                         <tfoot>
@@ -301,8 +296,7 @@
                                     <h4>Total</h4>
                                 </td>
                                 <td>
-                                    <b
-                                        class="total-price"><span>${{$total + $charge_for_weight + $default_charge}}</span></b>
+                                    <b class="total-price"><span>${{$total + $charge_for_weight + $default_charge}}</span></b>
                                 </td>
                             </tr>
                         </tfoot>

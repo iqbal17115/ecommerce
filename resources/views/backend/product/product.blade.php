@@ -198,20 +198,6 @@
                                                     <input name="name" id="name" @if($productInfo) value="{{$productInfo->name}}" @endif class="form-control" placeholder="Enter product Name" required />
                                                 </div>
                                                 <!-- End -->
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right" style="font-size: 14px;">Regular Price</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="your_price">AED</span>
-                                                        </div>
-                                                        <input type="text" name="regular_price" id="regular_price" @if($productInfo) value="{{$productInfo->regular_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-describedby="regular_price" required>
-                                                    </div>
-                                                </div>
-                                                <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right" style="font-size: 14px;">Category Name</label>
                                                     <span class="text-danger float-md-right">*</span>
@@ -563,7 +549,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="sale_price">AED</span>
                                                         </div>
-                                                        <input type="text" name="sale_price" id="sale_price" @if($productInfo) value="{{$productInfo->sale_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-describedby="sale_price">
+                                                        <input type="text" name="sale_price" id="sale_price" @if($productInfo) value="{{$productInfo->sale_price}}" @endif class="form-control" placeholder="Ex: 50.00" aria-describedby="sale_price" required>
                                                     </div>
                                                 </div>
                                                 <!-- End -->
@@ -673,17 +659,6 @@
                                                     </div>
                                                 </div>
                                                 <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right" style="font-size: 14px;">Is Offer On Going</label>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                        <div class="form-check form-switch mt-2">
-                                                        <input @if($productInfo && $productInfo->is_offfer_on_going) checked @endif class="form-check-input" type="checkbox" name="is_offfer_on_going"
-                                                                id="is_offfer_on_going">
-                                                        </div>
-                                                </div>
-                                                <!-- End -->
-
                                                 <div class="col-md-12 mt-md-3">
                                                     <button class="float-right btn btn-success btn-sm ml-2">Save and
                                                         finish</button>
