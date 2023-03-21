@@ -352,6 +352,16 @@ div#variation_content {
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Model Name</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input name="model_name" id="model_name" @if($productInfo)
+                                                        value="{{$productInfo->model_name}}" @endif class="form-control"
+                                                        placeholder="Enter Model Name" />
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Model Number</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
@@ -359,6 +369,23 @@ div#variation_content {
                                                         @if($productInfo) value="{{$productInfo->model_number}}" @endif
                                                         class="form-control" placeholder="Enter Model Number"
                                                         aria-label="Username" aria-describedby="model_number">
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Material Type</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select name="material_type_id" id="material_type_id"
+                                                        class="form-select" style="width: 100%;">
+                                                        <option value=""></option>
+                                                        @foreach($materials as $material)
+                                                        <option @if($productInfo && $productInfo->ProductDetail &&
+                                                            $productInfo->ProductDetail->material_type_id==$material->id)
+                                                            selected @endif
+                                                            value="{{$material->id}}">{{$material->name}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -402,47 +429,7 @@ div#variation_content {
                                                     </textarea>
                                                 </div>
                                                 <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Country/Region of Publication</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select name="region_publication_id" id="region_publication_id"
-                                                        class="form-select" required>
-                                                        <option @if($productInfo && $productInfo->
-                                                            region_publication_id==1) selected @endif
-                                                            value="1">Bangladesh</option>
-                                                    </select>
-                                                </div>
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Model Name</label>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <input name="model_name" id="model_name" @if($productInfo)
-                                                        value="{{$productInfo->model_name}}" @endif class="form-control"
-                                                        placeholder="Enter Model Name" />
-                                                </div>
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Material Type</label>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select name="material_type_id" id="material_type_id"
-                                                        class="form-select" style="width: 100%;">
-                                                        <option value=""></option>
-                                                        @foreach($materials as $material)
-                                                        <option @if($productInfo && $productInfo->ProductDetail &&
-                                                            $productInfo->ProductDetail->material_type_id==$material->id)
-                                                            selected @endif
-                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <!-- End -->
+                                               
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Item Booking Date</label>
@@ -460,6 +447,20 @@ div#variation_content {
                                                             @endif class="form-control" aria-label="Username"
                                                             aria-describedby="product_booking_date" required>
                                                     </div>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Country/Region of Publication</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select name="region_publication_id" id="region_publication_id"
+                                                        class="form-select" required>
+                                                        <option @if($productInfo && $productInfo->
+                                                            region_publication_id==1) selected @endif
+                                                            value="1">Bangladesh</option>
+                                                    </select>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-12 mt-md-3">
