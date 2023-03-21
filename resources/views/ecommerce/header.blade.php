@@ -33,7 +33,7 @@
             @if($company_info && $company_info->logo)
             <a href="{{ route('home') }}" class="logo">
                 <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100" width="111" height="44"
-                    style="height: 151px;" alt="Porto Logo">
+                    style="height: 44px;width: 151px;" alt="Porto Logo">
             </a>
             @endif
 
