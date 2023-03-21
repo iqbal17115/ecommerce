@@ -67,25 +67,8 @@ $(document).on('submit', '#add_variant_variant', function(e) {
         success: function(data) {
             console.log(data);
             if (data.status == 201) {
-                Command: toastr["success"]("Product Variation Saved Successfully",
-                    "Success")
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
+                $(".add_variant").removeClass("active");
+                $(".add_product_offer").addClass("active");
             }
         },
     });
@@ -108,7 +91,7 @@ $(document).on('submit', '#add_product_more_detail', function(e) {
                 //     tab_menu.push(8);
                 // }
                 // tabIndexPerform();
-                Command: toastr["success"]("Product More Detail Saved Successfully",
+                Command: toastr["success"]("Product Saved Successfully",
                     "Success")
                 toastr.options = {
                     "closeButton": true,
@@ -186,29 +169,8 @@ $(document).on('submit', '#add_product_keyword', function(e) {
         contentType: false,
         success: function(data) {
             if (data.status == 201) {
-                // if (!tab_menu.includes(7)) {
-                //     tab_menu.push(7);
-                // }
-                // tabIndexPerform();
-                Command: toastr["success"]("Product Keyword Saved Successfully",
-                    "Success")
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
+                $(".add_keywords").removeClass("active");
+                $(".add_more_details").addClass("active");
             }
         },
     });
@@ -231,25 +193,8 @@ $(document).on('submit', '#add_product_description_info', function(e) {
                     tab_menu.push(6);
                 }
                 tabIndexPerform();
-                Command: toastr["success"]("Product Description Saved Successfully",
-                    "Success")
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
+                $(".add_description").removeClass("active");
+                $(".add_keywords").addClass("active");
             }
         },
     });
@@ -282,25 +227,8 @@ $(document).on('submit', '#add_product_image_info', function(e) {
                     tab_menu.push(8);
                 }
                 tabIndexPerform();
-                Command: toastr["success"]("Product Image Saved Successfully",
-                    "Success")
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
+                $(".add_product_image").removeClass("active");
+                $(".add_description").addClass("active");
             }
         },
     });
@@ -324,25 +252,8 @@ $(document).on('submit', '#add_product_detail_info', function(e) {
                     tab_menu.push(4);
                 }
                 tabIndexPerform();
-                Command: toastr["success"]("Product Detail Saved Successfully",
-                    "Success")
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
+                $(".add_product_offer").removeClass("active");
+                $(".add_product_image").addClass("active");
             }
         },
     });
@@ -369,25 +280,6 @@ $(document).on('submit', '#add_product_identity', function(e) {
                     tab_menu.push(3);
                 }
                 tabIndexPerform();
-                Command: toastr["success"]("Product Identity Saved Successfully",
-                    "Success")
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
                 $("#product_identity_id").val(data.product_id);
                 $("#vital_info_id").val(data.product_id);
                 $("#product_offer_id").val(data.product_id);
@@ -397,6 +289,8 @@ $(document).on('submit', '#add_product_identity', function(e) {
                 $("#product_compliance_id").val(data.product_id);
                 $("#product_more_detail_id").val(data.product_id);
                 $("#product_variant_info_id").val(data.product_id);
+                $(".add_product_identity").removeClass("active");
+                $(".add_vital_info").addClass("active");
             }
         },
         error: (error) => {
@@ -426,25 +320,6 @@ $(document).on('submit', '#add_vital_info', function(e) {
                     tab_menu.push(3);
                 }
                 tabIndexPerform();
-                Command: toastr["success"]("Vital Info Saved Successfully",
-                    "Success")
-                toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
                 $("#product_identity_id").val(data.product_id);
                 $("#vital_info_id").val(data.product_id);
                 $("#product_offer_id").val(data.product_id);
@@ -454,6 +329,8 @@ $(document).on('submit', '#add_vital_info', function(e) {
                 $("#product_compliance_id").val(data.product_id);
                 $("#product_more_detail_id").val(data.product_id);
                 $("#product_variant_info_id").val(data.product_id);
+                $(".add_vital_info").removeClass("active");
+                $(".add_variant").addClass("active");
             }
         },
         error: (error) => {

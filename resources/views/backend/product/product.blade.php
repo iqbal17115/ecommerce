@@ -113,22 +113,22 @@ div#variation_content {
                         <!-- justify-content-center -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#addProductIdentity" role="tab">
+                                <a class="nav-link add_product_identity active" data-toggle="tab" href="#addProductIdentity" role="tab">
                                     <i class="now-ui-icons objects_umbrella-13"></i> Product Identity
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#addVitalInfo" role="tab">
+                                <a class="nav-link add_vital_info" data-toggle="tab" href="#addVitalInfo" role="tab">
                                     <i class="now-ui-icons objects_umbrella-13"></i> Vital Info
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#variations" role="tab">
+                                <a class="nav-link add_variant" data-toggle="tab" href="#variations" role="tab">
                                     <i class="now-ui-icons shopping_cart-simple"></i> Variation
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#offer" role="tab">
+                                <a class="nav-link add_product_offer" data-toggle="tab" href="#offer" role="tab">
                                     <i class="now-ui-icons shopping_shop"></i> Offer
                                 </a>
                             </li>
@@ -138,22 +138,22 @@ div#variation_content {
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#images" role="tab">
+                                <a class="nav-link add_product_image" data-toggle="tab" href="#images" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Images
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#description" role="tab">
+                                <a class="nav-link add_description" data-toggle="tab" href="#description" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Description
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#keywords" role="tab">
+                                <a class="nav-link add_keywords" data-toggle="tab" href="#keywords" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Keywords
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#more_details" role="tab">
+                                <a class="nav-link add_more_details" data-toggle="tab" href="#more_details" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> More Details
                                 </a>
                             </li>
@@ -162,7 +162,7 @@ div#variation_content {
                     <div class="card-body">
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane active" id="addProductIdentity" role="tabpanel">
+                            <div class="tab-pane add_product_identity active" id="addProductIdentity" role="tabpanel">
                                 <form method="post" id="add_product_identity">
                                     @csrf
                                     <div class="row">
@@ -321,7 +321,7 @@ div#variation_content {
                                 </form>
                             </div>
                             <!-- End Product Identity -->
-                            <div class="tab-pane" id="addVitalInfo" role="tabpanel">
+                            <div class="tab-pane add_vital_info" id="addVitalInfo" role="tabpanel">
                                 <form method="post" id="add_vital_info">
                                     @csrf
                                     <div class="row">
@@ -480,7 +480,7 @@ div#variation_content {
                                 </form>
                             </div>
                             <!-- End Vital Info -->
-                            <div class="tab-pane" id="variations" role="tabpanel">
+                            <div class="tab-pane add_variant" id="variations" role="tabpanel">
                                 <form method="post" id="add_variant_variant">
                                     @csrf
                                     <div class="row">
@@ -616,7 +616,7 @@ div#variation_content {
                                     </div>
                                 </form>
                             </div>
-                            <div class="tab-pane" id="offer" role="tabpanel">
+                            <div class="tab-pane add_product_offer" id="offer" role="tabpanel">
                                 <form method="post" id="add_product_detail_info">
                                     @csrf
                                     <div class="row">
@@ -1565,7 +1565,7 @@ div#variation_content {
                                 <div class="col-md-2"></div>
                                 <!-- End -->
                             </div>
-                            <div class="tab-pane" id="images" role="tabpanel">
+                            <div class="tab-pane add_product_image" id="images" role="tabpanel">
                                 <form action="" method="post" id="add_product_image_info" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
@@ -1629,7 +1629,7 @@ div#variation_content {
                                     </div>
                                 </form>
                             </div>
-                            <div class="tab-pane" id="description" role="tabpanel">
+                            <div class="tab-pane add_description" id="description" role="tabpanel">
                                 <form method="post" id="add_product_description_info">
                                     @csrf
                                     <div class="row">
@@ -1666,7 +1666,7 @@ div#variation_content {
                                 </form>
                             </div>
                             <!-- End -->
-                            <div class="tab-pane" id="keywords" role="tabpanel">
+                            <div class="tab-pane add_keywords" id="keywords" role="tabpanel">
                                 <div class="row">
                                     <!-- Start -->
                                     <div class="col-md-10">
@@ -1745,7 +1745,7 @@ div#variation_content {
                                 </div>
                             </div>
                             <!-- End -->
-                            <div class="tab-pane" id="more_details" role="tabpanel">
+                            <div class="tab-pane add_more_details" id="more_details" role="tabpanel">
                                 <form method="post" id="add_product_more_detail">
                                     @csrf
                                     <div class="row">
