@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         //Categories
         View::composer('*', function ($view) {
-            $view->with('parentCategories', Category::whereParentCategoryId(null)->orderBy('position', 'asc')->get());
+            $view->with('parentCategories', Category::whereParentCategoryId(null)->whereTopMenu(1)->orderBy('position', 'asc')->get());
             $view->with('company_info', CompanyInfo::first());
         });
 
