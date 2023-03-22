@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function getSidebarContent() {
+        return view('ecommerce.sidebar-content')->render();
+    }
     public function getParentCategory(Request $request) {
         if(isset($request->id[0]) && count($request->id[0]) > 0) {
             $categories = Category::with('SubCategory')->whereIN('id', $request->id[0])->orderBy('position', 'asc')->get();

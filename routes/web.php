@@ -54,7 +54,7 @@ Route::get('/', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::get('/customer_login', [HomeController::class, 'CustomerLogin'])->name('customer_login');
+Route::get('/get_sidebar_content', [HomeController::class, 'getSidebarContent'])->name('get_sidebar_content');
 Route::get('/check_sub_category', [HomeController::class, 'checkSubCategory'])->name('check_sub_category');
 Route::get('/get_sub_category', [HomeController::class, 'getSubCategory'])->name('get_sub_category');
 Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])->name('get_parent_category');
