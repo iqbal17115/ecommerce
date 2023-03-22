@@ -24,7 +24,7 @@
     </div>
     <!-- End Sidebar -->
 
-    <div class="pt-1 pb-0 header-middle sticky-header" style="background-color: #d14c28;"
+    <div class="pt-2 pb-2 header-middle sticky-header" style="background-color: #d14c28;"
         data-sticky-options="{'mobile': true}">
         <div class="header-left col-lg-2 w-auto pl-0 pl-1 pl-md-5">
             <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
@@ -33,7 +33,7 @@
             @if($company_info && $company_info->logo)
             <a href="{{ route('home') }}" class="logo">
                 <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100" width="111" height="44"
-                    style="height: 44px;width: 151px;" alt="Porto Logo">
+                    style="height: 54px;width: 151px;" alt="Porto Logo">
             </a>
             @endif
 
@@ -148,7 +148,7 @@
     </div>
     <!-- End .header-middle -->
     <!--Class Of bottom line header-bottom  -->
-    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #df4a22; height: 40px;"
+    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #df4a22; height: 25px;"
         data-sticky-options="{'mobile': false}">
         <div class="container">
             <nav class="main-nav w-100">
