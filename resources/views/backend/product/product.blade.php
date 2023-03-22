@@ -2395,6 +2395,39 @@ div#variation_content {
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
+                                                <label class="col-form-label float-md-right"
+                                                    style="font-size: 14px;">Warranty</label>
+                                            </div>
+                                            <div class="col-md-8 mt-md-3">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input name="warranty"
+                                                            id="warranty" @if($productInfo &&
+                                                            $productInfo->ProductMoreDetail)
+                                                        value="{{$productInfo->ProductMoreDetail->warranty}}"
+                                                        @endif class="form-control" placeholder="1, 2, 3, 4, 5" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <select name="warranty_unit"
+                                                            id="warranty_unit"
+                                                            class="form-select">
+                                                            <option value="">Select Option</option>
+                                                            <option @if($productInfo && $productInfo->ProductMoreDetail
+                                                                &&
+                                                                $productInfo->ProductMoreDetail->warranty_unit=='day') selected @endif value="day">Day</option>
+                                                            <option @if($productInfo && $productInfo->ProductMoreDetail
+                                                                &&
+                                                                $productInfo->ProductMoreDetail->warranty_unit=='month')
+                                                                selected @endif value="month">Month</option>
+                                                            <option @if($productInfo && $productInfo->ProductMoreDetail
+                                                                &&
+                                                                $productInfo->ProductMoreDetail->warranty_unit=='year') selected @endif value="year">Year</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Warranty Description</label>
                                                     <span class="text-danger float-md-right">*</span>

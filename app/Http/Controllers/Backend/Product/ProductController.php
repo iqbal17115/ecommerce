@@ -109,6 +109,8 @@ class ProductController extends Controller
         $Query->package_weight = $request->package_weight;
         $Query->package_weight_unit = $request->package_weight_unit;
         $Query->league_name = $request->league_name;
+        $Query->warranty = $request->warranty;
+        $Query->warranty_unit = $request->warranty_unit;
         $Query->warranty_description = $request->warranty_description;
         $Query->team_name = $request->team_name;
         $Query->age_range_description = $request->age_range_description;

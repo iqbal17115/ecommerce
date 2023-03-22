@@ -36,6 +36,8 @@ class CreateProductMoreDetailsTable extends Migration
             $table->double('package_weight', 10, 2)->nullable();
             $table->string('package_weight_unit', 30)->nullable();
             $table->string('league_name', 80)->nullable();
+            $table->float('warranty')->nullable();
+            $table->enum('warranty_unit', ['day', 'month', 'year'])->nullable();
             $table->text('warranty_description')->nullable();
             $table->string('team_name', 80)->nullable();
             $table->string('age_range_description', 100)->nullable();
