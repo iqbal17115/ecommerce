@@ -6,22 +6,6 @@ $(document).ready(function() {
     $('body').on('click', '#minimizeSidebar', function() {
         // sidebar-wrapper
         $("#sidebar-wrapper").css("width", "0px");
-
-           // Call Sidebar Content
-           $.ajax({
-            url: "{{route('get_sidebar_content')}}",
-            method: 'get',
-            async: false,
-            success: function(data) {
-                console.log(data);
-                $('#category_show').html(data);
-            },
-            error: function(err) {
-                var error = err.responseJSON;
-                console.log(error);
-
-            }
-        });
     });
 
     function checkParentCategory(parent_cat_id) {
