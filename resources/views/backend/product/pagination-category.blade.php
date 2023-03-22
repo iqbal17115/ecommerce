@@ -38,7 +38,7 @@
             <td>{{$category->is_active == 1? 'Active' : 'Inactive'}}</td>
             <td>
                 <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal"
-                    data-target="#categoryModal" data-id="{{$category->id}}" data-name="{{$category->name}}"
+                    data-target="#categoryModal" data-id="{{$category->id}}" data-name="{{$category->name}}"  data-sidebar_menu="{{$category->sidebar_menu}}"
                     data-parent_category_id="{{$category->parent_category_id}}" data-top_menu="{{$category->top_menu}}"
                     data-position="{{$category->position}}" data-icon1="{{$category->icon}}"
                     data-image="{{$category->image}}"

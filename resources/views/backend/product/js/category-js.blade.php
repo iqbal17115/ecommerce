@@ -121,6 +121,7 @@
             let name = $(this).data('name');
             let parent_category_id = $(this).data('parent_category_id');
             let top_menu = $(this).data('top_menu');
+            let sidebar_menu = $(this).data('sidebar_menu');
             let position = $(this).data('position');
             let icon = $(this).data('icon1');
             let image = $(this).data('image');
@@ -132,6 +133,7 @@
             $('#name').val(name);
             $('.category_id').val(parent_category_id).trigger("change");
             $('#top_menu').val(top_menu);
+            $('#sidebar_menu').val(sidebar_menu);
             $('#position').val(position);
             if (image) {
                 $('#imgPreview').show();

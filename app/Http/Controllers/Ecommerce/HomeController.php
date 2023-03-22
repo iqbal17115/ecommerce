@@ -15,7 +15,7 @@ class HomeController extends Controller
         if(isset($request->id[0]) && count($request->id[0]) > 0) {
             $categories = Category::with('SubCategory')->whereIN('id', $request->id[0])->orderBy('position', 'asc')->get();
         } else {
-            $categories = Category::with('SubCategory')->whereTopMenu(1)->orderBy('position', 'asc')->get();
+            $categories = Category::with('SubCategory')->whereSidebarMenu(1)->orderBy('position', 'asc')->get();
         }
         
         return response()->json(['categories' => $categories]);

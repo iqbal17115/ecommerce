@@ -13,11 +13,11 @@
                             style="font-weight: bold; font-size: 28px; color: red;" class="close" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button></a></li>
-                @foreach($topMenuCategories as $topMenuCategory)
+                @foreach($sidebarMenuCategories as $sidebarMenuCategory)
                 <li style="list-style: none;padding-bottom: 0px;" class="list-group-item"><a style="font-family: inherit;"
-                        href="javascript:void(0);" @if($topMenuCategory->SubCategory) class="parent_category"
-                        data-id="{{$topMenuCategory->id}}" @endif>{{$topMenuCategory->name}}
-                        @if(count($topMenuCategory->SubCategory) > 0)<i class="arrow right float-right"></i> @endif</a></li>
+                        href="javascript:void(0);" @if($sidebarMenuCategory->SubCategory) class="parent_category"
+                        data-id="{{$sidebarMenuCategory->id}}" @endif>{{$sidebarMenuCategory->name}}
+                        @if(count($sidebarMenuCategory->SubCategory) > 0)<i class="arrow right float-right"></i> @endif</a></li>
                 @endforeach
             </ul>
         </div>

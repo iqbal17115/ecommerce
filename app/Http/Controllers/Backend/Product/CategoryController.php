@@ -59,6 +59,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->parent_category_id = $request->id;
         $category->top_menu = $request->top_menu;
+        $category->sidebar_menu = $request->sidebar_menu;
         $category->position = $request->position;
         if ($request->file('image')) {
             $imagePath = $request->file('image');

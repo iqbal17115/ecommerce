@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name', 50);
             $table->foreignId('parent_category_id')->nullable();
             $table->boolean('top_menu')->nullable()->default(0);
+            $table->boolean('sidebar_menu')->nullable()->default(0);
             $table->tinyInteger('position')->nullable();
             $table->text('icon')->nullable();
             $table->text('image')->nullable();
