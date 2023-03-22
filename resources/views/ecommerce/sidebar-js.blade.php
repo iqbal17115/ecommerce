@@ -44,7 +44,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
                 sub_category_list = '';
-                if (data['categories'][0]['parent_category_id'] == null) {
+                if (data['categories'][0]['top_menu'] == 1) {
                     $("#category_back").hide();
                 }
                 for (var i = 0; i < data['categories'].length; i++) {
@@ -57,7 +57,7 @@ $(document).ready(function() {
                     arrow_signal = check_sub_category == 1 ?
                         '<i class="arrow right float-right"></i>' : '';
                     sub_category_list +=
-                        "<li style='list-style: none;padding-bottom: 2px;'><a style='font-family: inherit;' href='javascript:void(0);' class='" +
+                        "<li style='list-style: none;padding-bottom: 2px;' class='list-group-item'><a style='font-family: inherit;' href='javascript:void(0);' class='" +
                         parent_category + "' data-id='" + data['categories'][i]['id'] +
                         "'>" + data['categories'][i]['name'] + arrow_signal +
                         "</a></li>";
@@ -103,7 +103,7 @@ $(document).ready(function() {
                         'javascript:void(0)';
                     //  url = url.replace(':id', data['sub_categories'][i]['id']);
                     sub_category_list +=
-                        "<li style='list-style: none;padding-bottom: 2px;'><a style='font-family: inherit;' href='" +
+                        "<li style='list-style: none;padding-bottom: 2px;' class='list-group-item'><a style='font-family: inherit;' href='" +
                         url + "' class='" +
                         parent_category + "' data-id='" + data['sub_categories'][i]['id'] +
                         "'>" + data['sub_categories'][i]['name'] + arrow_signal +

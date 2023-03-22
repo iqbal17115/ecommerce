@@ -13,9 +13,9 @@ class HomeController extends Controller
 {
     public function getParentCategory(Request $request) {
         if(isset($request->id[0]) && count($request->id[0]) > 0) {
-            $categories = Category::with('SubCategory')->whereIN('id', $request->id[0])->orderBy('id', 'desc')->get();
+            $categories = Category::with('SubCategory')->whereIN('id', $request->id[0])->orderBy('position', 'asc')->get();
         } else {
-            $categories = Category::with('SubCategory')->whereParentCategoryId(null)->orderBy('id', 'desc')->get();
+            $categories = Category::with('SubCategory')->whereTopMenu(1)->orderBy('position', 'asc')->get();
         }
         
         return response()->json(['categories' => $categories]);
@@ -30,7 +30,7 @@ class HomeController extends Controller
         
     }
     public function getSubCategory(Request $request) {
-        $sub_categories = Category::with('SubCategory')->whereParentCategoryId($request->id)->orderBy('id', 'desc')->get();
+        $sub_categories = Category::with('SubCategory')->whereParentCategoryId($request->id)->orderBy('position', 'asc')->get();
         return response()->json(['sub_categories' => $sub_categories]);
     }
     public function adminDashboard() {
@@ -39,7 +39,7 @@ class HomeController extends Controller
     public function index() {
         // dd(Auth::user());
         $sliders = Slider::whereIsActive(1)->get();
-        $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderBy('id', 'desc')->get();
+        $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderBy('position', 'asc')->get();
         $product_features = ProductFeature::whereIsActive(1)->orderBy('position', 'ASC')->get();
         return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features']));
     }
