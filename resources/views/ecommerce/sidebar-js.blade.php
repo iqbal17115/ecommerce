@@ -2,12 +2,13 @@
 $(document).ready(function() {
     check_sub_category = '';
     categoryData = [];
+   
     $('body').on('click', '#minimizeSidebar', function() {
         // sidebar-wrapper
         $("#sidebar-wrapper").css("width", "0px");
 
-        // Call Sidebar Content
-        $.ajax({
+           // Call Sidebar Content
+           $.ajax({
             url: "{{route('get_sidebar_content')}}",
             method: 'get',
             async: false,
