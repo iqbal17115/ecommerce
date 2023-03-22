@@ -44,7 +44,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
                 sub_category_list = '';
-                if (data['categories'][0]['top_menu'] == 1) {
+                if (data['categories'][0]['parent_category_id'] == null) {
                     $("#category_back").hide();
                 }
                 for (var i = 0; i < data['categories'].length; i++) {
