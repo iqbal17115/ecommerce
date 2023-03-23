@@ -95,6 +95,22 @@ class CompanyInfoController extends Controller
             $company_info->icon = $icon;
         }
 
+        if ($request->file('footer_image')) {
+            $footer_imagePath = $request->file('footer_image');
+            $footer_imageName = $footer_imagePath->getClientOriginalName();
+            $path = $request->file('footer_image')->storeAs('uploads', $footer_imageName, 'public');
+            $footer_image = $request->file('footer_image')->store('company_info/footer_images', 'public');
+            $company_info->footer_image = $footer_image;
+        }
+
+        if ($request->file('footer_payment_image')) {
+            $footer_payment_imagePath = $request->file('footer_payment_image');
+            $footer_payment_imageName = $footer_payment_imagePath->getClientOriginalName();
+            $path = $request->file('footer_payment_image')->storeAs('uploads', $footer_payment_imageName, 'public');
+            $footer_payment_image = $request->file('footer_payment_image')->store('company_info/footer_payment_images', 'public');
+            $company_info->footer_payment_image = $footer_payment_image;
+        }
+
         $company_info->phone = $request->phone;
         $company_info->mobile = $request->mobile;
         $company_info->email = $request->email;

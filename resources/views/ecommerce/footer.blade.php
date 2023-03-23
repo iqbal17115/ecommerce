@@ -1,4 +1,5 @@
-<footer class="footer font2" style="background-image: url(footer_image.png);">
+<footer class="footer font2" @if($company_info && $company_info->footer_image) style="background-image: url({{asset('storage/'.$company_info->footer_image)}});background-repeat: no-repeat;
+  background-size: cover;" @endif>
     <div class="container">
         <div
             class="widget-newsletter d-flex align-items-center align-items-sm-start flex-column flex-lg-row  justify-content-lg-between">
@@ -82,14 +83,14 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom d-sm-flex align-items-center justify-content-center" style="height: 20px;">
-                <img src="{{ asset('payment.png') }}" />
-            </div>
+            <center>
+                <img @if($company_info && $company_info->footer_payment_image) src="{{asset('storage/'.$company_info->footer_payment_image)}}"  @endif style="height: 70px;" />
+            </center>
         </div>
         <!-- End .footer-bottom -->
     </div>
     <div class="footer-bottom d-sm-flex align-items-center justify-content-center p-0" style="background-color: rgba(255,255,255,0.15);">
-        <span class="footer-copyright" style="color: #fff;">@if($company_info && $company_info->name) {{$company_info->name}} @endif eCommerce. © {{date("Y")}}. All Rights
+        <span class="footer-copyright" style="color: #fff;">@if($company_info && $company_info->name) {{$company_info->name}} @endif. © {{date("Y")}}. All Rights
             Reserved</span>
     </div>
 </footer>

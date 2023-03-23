@@ -204,6 +204,36 @@ div#variation_content {
 
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Footer Image</label>
+                                                        @if($company_info && $company_info->footer_image)
+                                                    <img src="{{ asset('storage/'.$company_info->footer_image) }}"
+                                                        class="rounded float-md-right"
+                                                        style="width: 55px; height: 30px; background: black;"
+                                                        alt="ff" />
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="file" name="footer_image" id="icon" class="form-control">
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Footer Payment Image</label>
+                                                        @if($company_info && $company_info->footer_payment_image)
+                                                    <img src="{{ asset('storage/'.$company_info->footer_payment_image) }}"
+                                                        class="rounded float-md-right"
+                                                        style="width: 55px; height: 30px; background: black;"
+                                                        alt="ff" />
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="file" name="footer_payment_image" id="icon" class="form-control">
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Phone</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
