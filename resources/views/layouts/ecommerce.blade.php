@@ -16,7 +16,7 @@
     <!-- Favicon -->
     @if($company_info && $company_info->icon)
     <link rel="icon" type="image/x-icon" href="{{ asset('storage/'.$company_info->icon) }}">
-@endif
+    @endif
 
     <script>
     WebFontConfig = {
@@ -43,9 +43,10 @@
     <link rel="stylesheet" type="text/css"
         href="{{ URL::asset('aladdinne/') }}/assets/vendor/fontawesome-free/css/all.min.css">
 
-<!-- Main CSS File -->
-<link rel="stylesheet" href="{{ URL::asset('aladdinne/') }}/assets/css/style.min.css">
-<link rel="stylesheet" type="text/css" href="{{ URL::asset('aladdinne/') }}/assets/vendor/fontawesome-free/css/all.min.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{{ URL::asset('aladdinne/') }}/assets/css/style.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ URL::asset('aladdinne/') }}/assets/vendor/fontawesome-free/css/all.min.css">
     <style>
     .owl-dots {
         display: none;
@@ -211,21 +212,21 @@
             e.preventDefault();
             $("#sidebar-wrapper").css("width", "320px");
             $("#wrapper").toggleClass("menuDisplayed");
-             // Call Sidebar Content
-           $.ajax({
-            url: "{{route('get_sidebar_content')}}",
-            method: 'get',
-            async: false,
-            success: function(data) {
-                console.log(data);
-                $('#category_show').html(data);
-            },
-            error: function(err) {
-                var error = err.responseJSON;
-                console.log(error);
+            // Call Sidebar Content
+            //    $.ajax({
+            //     url: "{{route('get_sidebar_content')}}",
+            //     method: 'get',
+            //     async: false,
+            //     success: function(data) {
+            //         console.log(data);
+            //         $('#category_show').html(data);
+            //     },
+            //     error: function(err) {
+            //         var error = err.responseJSON;
+            //         console.log(error);
 
-            }
-        });
+            //     }
+            // });
         });
     });
     </script>

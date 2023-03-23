@@ -1,4 +1,4 @@
-<footer class="footer font2">
+<footer class="footer font2" style="background-image: url(footer_image.png);">
             <div class="container">
                 <div class="widget-newsletter d-flex align-items-center align-items-sm-start flex-column flex-lg-row  justify-content-lg-between">
                     <div class="widget-newsletter-info text-center text-sm-left d-flex flex-column flex-sm-row align-items-center mb-1 mb-xl-0">
@@ -76,11 +76,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="footer-bottom d-sm-flex align-items-center justify-content-center" style="height: 20px;">
+                       <img src="{{ asset('payment.png') }}"/>
+                    </div>
                 </div>
-                <div class="footer-bottom d-sm-flex align-items-center justify-content-center">
-                    <span class="footer-copyright">Porto eCommerce. © 2021. All Rights
-                        Reserved</span>
-                </div>
+                
                 <!-- End .footer-bottom -->
             </div>
         </footer>
