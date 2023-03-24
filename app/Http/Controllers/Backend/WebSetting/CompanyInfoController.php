@@ -15,6 +15,9 @@ class CompanyInfoController extends Controller
         $company_info->is_mobile_active = $request->is_mobile_active == null ? 0 : 1;
         $company_info->is_email_active = $request->is_email_active == null ? 0 : 1;
         $company_info->is_hotline_active = $request->is_hotline_active == null ? 0 : 1;
+        $company_info->is_footer_block1_active = $request->is_footer_block1_active == null ? 0 : 1;
+        $company_info->is_footer_block2_active = $request->is_footer_block2_active == null ? 0 : 1;
+        $company_info->is_footer_block3_active = $request->is_footer_block3_active == null ? 0 : 1;
         $company_info->save();
 
         return response()->json([

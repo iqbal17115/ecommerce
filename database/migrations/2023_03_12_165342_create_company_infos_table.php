@@ -38,6 +38,9 @@ class CreateCompanyInfosTable extends Migration
             $table->boolean('is_phone_active')->nullable()->default(1);
             $table->boolean('is_mobile_active')->nullable()->default(1);
             $table->boolean('is_email_active')->nullable()->default(1);
+            $table->boolean('is_footer_block1_active')->nullable()->default(1);
+            $table->boolean('is_footer_block2_active')->nullable()->default(1);
+            $table->boolean('is_footer_block3_active')->nullable()->default(1);
             $table->boolean('is_hotline_active')->nullable()->default(1);
             $table->timestamps();
         });
