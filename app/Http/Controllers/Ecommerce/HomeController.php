@@ -16,9 +16,9 @@ class HomeController extends Controller
     }
     public function getParentCategory(Request $request) {
         if(isset($request->id[0]) && count($request->id[0]) > 0) {
-            $categories = Category::with('SubCategory')->whereIN('id', $request->id[0])->orderBy('position', 'asc')->get();
+            $categories = Category::with('SubCategory')->whereIN('id', $request->id[0])->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get();
         } else {
-            $categories = Category::with('SubCategory')->whereSidebarMenu(1)->orderBy('position', 'asc')->get();
+            $categories = Category::with('SubCategory')->whereSidebarMenu(1)->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get();
         }
         
         return response()->json(['categories' => $categories]);
