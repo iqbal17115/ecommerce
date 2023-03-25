@@ -1,5 +1,16 @@
 @extends('layouts.ecommerce')
 @section('content')
+
+<style>
+    @media only screen and (min-width: 992px) {
+        .container {
+        padding-left: 130px;
+        padding-right: 130px;
+        max-width: max-content;
+}
+    } 
+ 
+</style>
 <main class="main">
     <div class="bg-gray pb-5">
         <div class="container pb-2">
@@ -9,7 +20,7 @@
                 'autoplayTimeout':5000
 			}">
                 @foreach($sliders as $slider)
-                <div class="home-slide home-slide1 banner" >
+                <div class="home-slide home-slide1 banner">
                     <img class="slider_image slide-bg" src="{{ asset('storage/'.$slider->image) }}" alt="slider image">
                     <div
                         class="container d-flex align-items-sm-center justify-content-sm-between justify-content-center flex-column flex-sm-row">
