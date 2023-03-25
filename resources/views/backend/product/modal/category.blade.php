@@ -71,11 +71,22 @@
                                       </select>
                                   </div>
                               </div>
-                              <div class="col-md-12">
+                              
+                              <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="position">Menu Position</label>
-                                      <input type="number" name="position" id="position" class="form-control" placeholder="Menu Position">
-                                      <span class="text-danger err_position"></span>
+                                      <label for="sidebar_menu">Sidebar Menu</label>
+                                      <select name="sidebar_menu" id="sidebar_menu" class="form-control" required>
+                                          <option value="">Select Option</option>
+                                          <option value="1">Yes</option>
+                                          <option value="0">No</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="sidebar_menu_position">Sidebar Menu Position</label>
+                                      <input type="number" name="sidebar_menu_position" id="sidebar_menu_position" class="form-control" placeholder="Menu Position">
+                                      <span class="text-danger err_sidebar_menu_position"></span>
                                   </div>
                               </div>
                               <div class="col-md-6">
@@ -90,12 +101,9 @@
                               </div>
                               <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="sidebar_menu">Sidebar Menu</label>
-                                      <select name="sidebar_menu" id="sidebar_menu" class="form-control" required>
-                                          <option value="">Select Option</option>
-                                          <option value="1">Yes</option>
-                                          <option value="0">No</option>
-                                      </select>
+                                      <label for="position">Top Menu Position</label>
+                                      <input type="number" name="position" id="position" class="form-control" placeholder="Menu Position">
+                                      <span class="text-danger err_position"></span>
                                   </div>
                               </div>
                               <div class="col-md-6">

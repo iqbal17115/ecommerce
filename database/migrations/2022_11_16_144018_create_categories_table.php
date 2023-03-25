@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->boolean('top_menu')->nullable()->default(0);
             $table->boolean('sidebar_menu')->nullable()->default(0);
             $table->tinyInteger('position')->nullable();
+            $table->tinyInteger('sidebar_menu_position')->nullable();
             $table->text('icon')->nullable();
             $table->text('image')->nullable();
             $table->double('vendor_commission_percentage')->nullable();

@@ -62,6 +62,7 @@
                                     data-top_menu="{{$category->top_menu}}" 
                                     data-sidebar_menu="{{$category->sidebar_menu}}"
                                     data-position="{{$category->position}}"
+                                    data-sidebar_menu_position="{{$category->sidebar_menu_position}}"
                                     data-icon1="{{$category->icon}}" data-image="{{$category->icon}}"
                                     data-icon1="{{$category->image}}" data-image="{{$category->image}}"
                                     data-icon1="{{$category->variation_type}}" data-variation_type="{{$category->variation_type}}"

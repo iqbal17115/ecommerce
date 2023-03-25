@@ -123,6 +123,7 @@
             let top_menu = $(this).data('top_menu');
             let sidebar_menu = $(this).data('sidebar_menu');
             let position = $(this).data('position');
+            let sidebar_menu_position = $(this).data('sidebar_menu_position');
             let icon = $(this).data('icon1');
             let image = $(this).data('image');
             let variation_type = $(this).data('variation_type');
@@ -135,6 +136,7 @@
             $('#top_menu').val(top_menu);
             $('#sidebar_menu').val(sidebar_menu);
             $('#position').val(position);
+            $('#sidebar_menu_position').val(sidebar_menu_position);
             if (image) {
                 $('#imgPreview').show();
                 $('#imgPreview').attr("src", 'storage/' + image);
