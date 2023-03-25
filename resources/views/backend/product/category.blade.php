@@ -97,6 +97,7 @@
     integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    
 $(document).ready(function() {
     $(".variation_type").select2({
         dropdownParent: $("#categoryModal"),
