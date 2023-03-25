@@ -1,12 +1,11 @@
 @extends('layouts.ecommerce')
 @section('content')
 <style>
-/* @media (min-width: 992px) {
-    .container {
-        padding-left: 10px;
-        padding-right: 10px;
+@media (min-width:1220px){
+    .container{
+        max-width: 1500px;;
     }
-} */
+    }
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
