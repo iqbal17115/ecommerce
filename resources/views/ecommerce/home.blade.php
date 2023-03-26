@@ -60,7 +60,7 @@
                                     height="240" style="height: 128px; height: 116px;" />
                             </figure>
                             <div class="category-content p-0">
-                                <h3>{{$top_show_category->name}}</h3>
+                                <span style="font-size: 12px;line-height: 16px;display: block;margin-top: 15px;font-weight: 700; color: black;">{{$top_show_category->name}}</span>
                             </div>
                         </a>
                     </div>
