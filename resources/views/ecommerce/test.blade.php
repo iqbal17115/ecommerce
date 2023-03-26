@@ -26,20 +26,23 @@
     </div>
     <!-- End Sidebar -->
 
-    <div class="pt-2 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}" style="background-color: #f4631b;">
+    <div class="pt-2 pb-2 header-middle sticky-header" style="background-color: #d14c28;"
+        data-sticky-options="{'mobile': true}">
+        <div class="header-left col-lg-2 w-auto pl-0 pl-1 pl-md-5">
+            <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
+            <a class="btn" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"></i></a>
+                </button> -->
+            @if($company_info && $company_info->logo)
+            <a href="{{ route('home') }}" class="logo">
+                <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100" width="111" height="44"
+                    style="height: 54px;width: 151px;" alt="Porto Logo">
+            </a>
+            @endif
+
+        </div>
+        <!-- End .header-left -->
         <div class="container">
-            <div class="header-left col-lg-2 w-auto pl-0">
-                <button class="mobile-menu-toggler text-dark mr-2" type="button">
-                    <i class="fas fa-bars"></i>
-                </button>
-                @if($company_info && $company_info->logo)
-                <a href="{{ route('home') }}" class="logo">
-                    <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100" width="111" height="44"
-                        style="height: 54px;width: 151px;" alt="Porto Logo">
-                </a>
-                @endif
-            </div>
-            <!-- End .header-left -->
+
 
             <div class="header-right w-lg-max">
                 <div
@@ -48,6 +51,7 @@
                     <form action="#" method="get">
                         <div class="header-search-wrapper">
                             <input type="search" class="form-control" name="q" id="q" placeholder="Search..." required>
+                            <!-- End .select-custom -->
                             <button class="btn icon-magnifier p-0" title="search" type="submit"></button>
                         </div>
                         <!-- End .header-search-wrapper -->
@@ -145,9 +149,8 @@
         <!-- End .container -->
     </div>
     <!-- End .header-middle -->
-
     <!--Class Of bottom line header-bottom  -->
-    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4631b; height: 25px;"
+    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #df4a22; height: 25px;"
         data-sticky-options="{'mobile': false}">
         <div class="container">
             <nav class="main-nav w-100">
