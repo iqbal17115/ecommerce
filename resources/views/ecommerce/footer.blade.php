@@ -94,7 +94,7 @@
     </div>
     @if($company_info && $company_info->is_footer_block3_active)
     <div class="footer-bottom d-sm-flex align-items-center justify-content-center p-0" style="background-color: rgba(255,255,255,0.15);">
-        <span class="footer-copyright" style="color: #fff;"> © @if($company_info && $company_info->name) {{$company_info->name}} @endif {{date("Y")}} | All Rights
+        <span class="footer-copyright" style="color: #fff;"> © {{date("Y")}} @if($company_info && $company_info->name) {{$company_info->name}} @endif | All Rights
             Reserved.</span>
     </div>
     @endif
