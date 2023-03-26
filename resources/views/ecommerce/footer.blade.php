@@ -1,101 +1,130 @@
-<footer class="footer font2" @if($company_info && $company_info->footer_image) style="background-image: url({{asset('storage/'.$company_info->footer_image)}});background-repeat: no-repeat;
-  background-size: cover;" @endif>
-    <div class="container">
-    @if($company_info && $company_info->is_footer_block1_active)
-        <div
-            class="widget-newsletter d-flex align-items-center align-items-sm-start flex-column flex-lg-row  justify-content-lg-between">
-            <div
-                class="widget-newsletter-info text-center text-sm-left d-flex flex-column flex-sm-row align-items-center mb-1 mb-xl-0">
-                <i class="icon-envolope"></i>
-                <div class="widget-info-content">
-                    <h5 class="widget-newsletter-title mb-0">
-                        Subscribe To Our Newsletter</h5>
-                    <p class="widget-newsletter-content mb-0">Get all the latest information on Events, Sales and
-                        Offers.
-                    </p>
-                </div>
-            </div>
-            <form action="#" class="mb-0 w-lg-max mt-2 mt-md-0">
-                <div class="footer-submit-wrapper d-flex align-items-center">
-                    <input type="email" class="form-control mb-0" placeholder="Your E-mail Address" size="40" required>
-                    <button type="submit" class="btn btn-primary btn-sm">Subscribe
-                        Now!</button>
-                </div>
-            </form>
-        </div>
-@endif
-@if($company_info && $company_info->is_footer_block2_active)
-        <div class="footer-top">
-            <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="widget">
-                        <h3 class="widget-title">Customer Service</h3>
-                        <div class="widget-content">
-                            <ul>
-                                <li><a href="#">Help & FAQs</a></li>
-                                <li><a href="#">Order Tracking</a></li>
-                                <li><a href="#">Shipping & Delivery</a></li>
-                                <li><a href="#">Orders History</a></li>
-                                <li><a href="#">Advanced Search</a></li>
-                                <li><a href="login.html">Login</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="widget">
-                        <h3 class="widget-title">About Us</h3>
-                        <div class="widget-content">
-                            <ul>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Our Stores</a></li>
-                                <li><a href="#">Corporate Sales</a></li>
-                                <li><a href="#">Careers</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="widget">
-                        <h3 class="widget-title">More Information</h3>
-                        <div class="widget-content">
-                            <ul>
-                                <li><a href="#">Affiliates</a></li>
-                                <li><a href="#">Refer a Friend</a></li>
-                                <li><a href="#">Student Beans Offers</a></li>
-                                <li><a href="#">Gift Vouchers</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="widget">
-                        <h3 class="widget-title">Social Media</h3>
-                        <div class="widget-content">
-                            <div class="social-icons">
-                                <a href="#" class="social-icon social-facebook icon-facebook" target="_blank"
-                                    title="Facebook"></a>
-                                <a href="#" class="social-icon social-twitter icon-twitter" target="_blank"
-                                    title="Twitter"></a>
-                                <a href="#" class="social-icon social-instagram icon-instagram" target="_blank"
-                                    title="Instagram"></a>
+<footer>
+            <div class="footer">
+            @if($company_info && $company_info->is_footer_block1_active)
+                <div class="footer-top" style="background: #f4631b;padding-top: 2rem;padding-bottom: 2rem;">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 col-lg-3">
+                                <h4 class="widget-newsletter-title font1 font-weight-bold text-white ls-n-10">Sign Up to
+                                    Newsletter</h4>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <p class="widget-newsletter-content ls-n-10 text-white mb-0">Get all the latest
+                                    information on Events, Sales and Offers.</p>
+                                <span
+                                    class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">Receive
+                                    $10 coupon for first shopping.</span>
+                            </div>
+                            <div class="col-md-10 col-lg-5">
+                                <form action="#" class="mb-0">
+                                    <div class="footer-submit-wrapper d-flex">
+                                        <input type="email" class="form-control mb-0"
+                                            placeholder="Enter your Email address..." required>
+                                        <button type="submit" class="btn btn-md btn-dark">Subscribe</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <center>
-                <img @if($company_info && $company_info->footer_payment_image) src="{{asset('storage/'.$company_info->footer_payment_image)}}"  @endif style="background: white;height: 70px;" />
-            </center>
-        </div>
-        <!-- End .footer-bottom -->
-        @endif
-    </div>
-    @if($company_info && $company_info->is_footer_block3_active)
-    <div class="footer-bottom d-sm-flex align-items-center justify-content-center p-0" style="background-color: rgba(255,255,255,0.15);">
-        <span class="footer-copyright" style="color: #fff;"> © {{date("Y")}} @if($company_info && $company_info->name) {{$company_info->name}} @endif | All Rights
+@endif
+                <div class="container">
+                @if($company_info && $company_info->is_footer_block2_active)
+                    <div class="footer-middle">
+                        <div class="row">
+                            <div class="col-lg-6 mb-1">
+                            @if($company_info && $company_info->logo)
+                                <a href="{{ route('home') }}">
+                                    <img src="{{ asset('storage/'.$company_info->logo) }}" alt="Logo" class="logo mb-3 mb-lg-6">
+                                </a>
+                            @endif
+                                <div class="row no-gutters m-0">
+                                    <div class="col-md-4 mb-2">
+                                    @if($company_info && $company_info->hotline)  
+                                        <div class="contact-widget phone">
+                                            <h4 class="widget-title">call us now:</h4>
+                                            <a href="javascript:void(0);">{{$company_info->hotline}}</a>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4 mb-2">
+                                    @if($company_info && $company_info->email)  
+                                        <div class="contact-widget email">
+                                            <h4 class="widget-title">e-mail address:</h4>
+                                            <a href="mailto:{{$company_info->email}}">{{$company_info->email}}</a>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4 mb-2">
+                                        <div class="contact-widget follow">
+                                            <h4 class="widget-title ls-n-10">follow us</h4>
+                                            <div class="social-icons">
+                                                <a href="#" class="social-icon social-facebook icon-facebook"
+                                                    target="_blank"></a>
+                                                <a href="#" class="social-icon social-twitter icon-twitter"
+                                                    target="_blank"></a>
+                                                <a href="#" class="social-icon social-linkedin fab fa-linkedin-in"
+                                                    target="_blank"></a>
+                                            </div><!-- End .social-icons -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="widget">
+                                    <h4 class="widget-title">Categories</h4>
+
+                                    <ul class="links">
+                                        <li><a href="demo21-shop.html">Electronics</a></li>
+                                        <li><a href="demo21-shop.html">Fashion</a></li>
+                                        <li><a href="demo21-shop.html">Gifts</a></li>
+                                        <li><a href="demo21-shop.html">Music</a></li>
+                                        <li><a href="demo21-shop.html">Trousers</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="widget">
+                                    <h4 class="widget-title">About</h4>
+
+                                    <ul class="links">
+                                        <li><a href="demo21-about.html">About us</a></li>
+                                        <li><a href="demo21-contact.html">Contact us</a></li>
+                                        <li><a href="#">All Collections</a></li>
+                                        <li><a href="#">Privacy policy</a></li>
+                                        <li><a href="#">Terms &amp; Conditions</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="widget">
+                                    <h4 class="widget-title">Customer Care</h4>
+
+                                    <ul class="links">
+                                        <li><a href="dashboard.html">My Account</a></li>
+                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="cart.html">Shopping Cart</a></li>
+                                        <li><a href="#">Terms &amp; Conditions</a></li>
+                                        <li><a href="#">FAQs</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+@endif
+@if($company_info && $company_info->is_footer_block3_active)
+                    <div class="footer-bottom d-sm-flex align-items-center">
+                        <div class="footer-left">
+                            <span class="footer-copyright">© {{date("Y")}} @if($company_info && $company_info->name) {{$company_info->name}} @endif | All Rights
             Reserved.</span>
-    </div>
-    @endif
-</footer>
+                        </div>
+
+                        <div class="footer-right ml-auto mt-1 mt-sm-0">
+                            <img @if($company_info && $company_info->footer_payment_image) src="{{asset('storage/'.$company_info->footer_payment_image)}}"  @endif alt="payment">
+                        </div>
+                    </div>
+                    @endif
+                </div><!-- End .footer-bottom -->
+            </div>
+        </footer>
+         <!-- End .footer -->
