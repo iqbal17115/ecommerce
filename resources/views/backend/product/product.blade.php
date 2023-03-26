@@ -1639,10 +1639,19 @@ div#variation_content {
                                         <div class="col-md-10">
                                             <!-- Start Content -->
                                             <div class="row">
+                                            <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Short Description</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <textarea class="form-control" name="short_deacription"
+                                                        id="short_deacription" @if($productInfo &&
+                                                        $productInfo->ProductDetail) value="{{$productInfo->short_deacription}}"  @endif></textarea>
+                                                </div>
+                                                <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Product Description</label>
-                                                    <span class="text-danger float-md-right">*</span>
+                                                        style="font-size: 14px;">Long Description</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="product_description"

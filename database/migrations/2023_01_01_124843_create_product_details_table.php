@@ -19,6 +19,7 @@ class CreateProductDetailsTable extends Migration
             $table->string('seller_sku', 100)->nullable();
             $table->string('tax_code', 40)->nullable();
             $table->date('restock_date')->nullable();
+            $table->text('short_deacription')->nullable();
             $table->text('description')->nullable();
             $table->text('condition_note')->nullable();
             $table->enum('target_gender', ['Male', 'Female', 'Unisex'])->nullable();

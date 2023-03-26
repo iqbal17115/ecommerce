@@ -12,10 +12,6 @@
 
     <div class="container pt-2">
         <div class="product-single-container product-single-default">
-            <div class="cart-message d-none">
-                <strong class="single-cart-notice">“Men Black Sports Shoes”</strong>
-                <span>has been added to your cart.</span>
-            </div>
 
             <div class="row">
                 <div class="col-lg-5 col-md-6 product-single-gallery">
@@ -50,41 +46,6 @@
 
                 <div class="col-lg-7 col-md-6 product-single-details">
                     <h1 class="product-title">{{$product_detail->name}}</h1>
-
-                    <div class="product-nav">
-                        <div class="product-prev">
-                            <a href="#">
-                                <span class="product-link"></span>
-
-                                <span class="product-popup">
-                                    <span class="box-content">
-                                        <img alt="product" width="150" height="150"
-                                            src="{{ asset('aladdinne/assets/images/products/product-3.jpg') }}"
-                                            style="padding-top: 0px;">
-
-                                        <span>Circled Ultimate 3D Speaker</span>
-                                    </span>
-                                </span>
-                            </a>
-                        </div>
-
-                        <div class="product-next">
-                            <a href="#">
-                                <span class="product-link"></span>
-
-                                <span class="product-popup">
-                                    <span class="box-content">
-                                        <img alt="product" width="150" height="150"
-                                            src="{{ asset('aladdinne/assets/images/products/product-4.jpg') }}"
-                                            style="padding-top: 0px;">
-
-                                        <span>Beats Solo HD Drenched</span>
-                                    </span>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-
                     <hr class="short-divider">
 
                     <div class="price-box">
@@ -99,37 +60,35 @@
 
                     <div class="product-desc">
                         <p>
-                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                            egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec
-                            eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris
-                            placerat eleifend leo.
+                            @if($product_detail && $product_detail->ProductDetail)
+                            {!!$product_detail->ProductDetail->short_deacription!!}
+                            @endif
                         </p>
                     </div>
                     <!-- End .product-desc -->
-                        <div class="product-action">
-                            
-                            <div class="product-single-qty">
-                                @php
-                                $cart_qty = 1;
-                                $cart = session()->get('cart', []);
-                                @endphp
-                                @if (isset($cart[$product_detail->id]))
-                                @php
-                                $cart_qty = $cart[$product_detail->id]['quantity'];
-                                @endphp
-                                @endif
-                                <input
-                                    class="horizontal-quantity form-control product-quantity-{{ $product_detail->id }}"
-                                    value="{{ $cart_qty }}" type="text">
-                            </div>
-                            <!-- End .product-single-qty -->
+                    <div class="product-action">
 
-                            <a href="javascript:;" class="btn btn-dark add-cart mr-2" title="Add to Cart">Add to
-                                Cart</a>
-
-                            <a href="cart.html" class="btn btn-gray view-cart d-none">View cart</a>
+                        <div class="product-single-qty">
+                            @php
+                            $cart_qty = 1;
+                            $cart = session()->get('cart', []);
+                            @endphp
+                            @if (isset($cart[$product_detail->id]))
+                            @php
+                            $cart_qty = $cart[$product_detail->id]['quantity'];
+                            @endphp
+                            @endif
+                            <input class="horizontal-quantity form-control product-quantity-{{ $product_detail->id }}"
+                                value="{{ $cart_qty }}" type="text">
                         </div>
-                        <!-- End .product-action -->
+                        <!-- End .product-single-qty -->
+
+                        <a href="javascript:;" class="btn btn-dark add-cart mr-2" title="Add to Cart">Add to
+                            Cart</a>
+
+                        <a href="cart.html" class="btn btn-gray view-cart d-none">View cart</a>
+                    </div>
+                    <!-- End .product-action -->
                     </tr>
                     <hr class="divider mb-0 mt-0">
 
@@ -175,22 +134,9 @@
                 <div class="tab-pane fade show active" id="product-desc-content" role="tabpanel"
                     aria-labelledby="product-tab-desc">
                     <div class="product-desc-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, nostrud ipsum consectetur sed do,
-                            quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.
-                        </p>
-                        <ul>
-                            <li>Any Product types that You want - Simple, Configurable
-                            </li>
-                            <li>Downloadable/Digital Products, Virtual Products
-                            </li>
-                            <li>Inventory Management with Backordered items
-                            </li>
-                        </ul>
-                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                        @if($product_detail && $product_detail->ProductDetail)
+                        {!!$product_detail->ProductDetail->description!!}
+                        @endif
                     </div>
                     <!-- End .product-desc-content -->
                 </div>
@@ -322,257 +268,53 @@
                             }
                         }
                     }">
+                @if($product_detail && $product_detail->Category && $product_detail->Category->Product)
+                @foreach($product_detail->Category->Product as $product_category_product)
+                @if($product_category_product->id != $product_detail->id)
                 <div class="product-default inner-quickview inner-icon">
                     <figure>
-                        <a href="demo36-product.html">
-                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-1.jpg') }}"
-                                width="265" height="265" alt="product" />
+                        <a href="{{ route('product-detail', ['id'=>$product_category_product->id]) }}">
+                            <img @if($product_category_product->ProductMainImage)
+                            src="{{ asset('storage/product_photo/'.$product_category_product->ProductMainImage->image) }}"
+                            @endif
+                            width="239" height="239" style="width: 239px; height: 239px;" alt="product">
                         </a>
-                        <div class="label-group">
-                            <div class="product-label label-hot">HOT</div>
-                            <div class="product-label label-sale">27%</div>
-                        </div>
                         <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
+                            <a href="javascript:void(0);" title="Add To Cart"
+                                data-id="{{$product_category_product->id}}"
+                                data-name="{{$product_category_product->name}}"
+                                data-your_price="{{$product_category_product->your_price}}"
+                                data-sale_price="{{$product_category_product->sale_price}}"
+                                @if($product_category_product->ProductMainImage)
+                                data-image="{{$product_category_product->ProductMainImage->image }}" @endif
+                                class="btn-icon
+                                btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
                         </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
                     </figure>
                     <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo36-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
                         <h3 class="product-title">
-                            <a href="demo36-product.html">Blue High Hill</a>
+                            <a
+                                href="{{ route('product-detail', ['id'=>$product_category_product->id]) }}">{{$product_category_product->name}}</a>
                         </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
                         <!-- End .product-container -->
                         <div class="price-box">
-                            <span class="old-price">$59.00</span>
-                            <span class="product-price">$49.00</span>
+                            @php
+                            echo $product_category_product->your_price? '<span
+                                class="old-price">$'.number_format((float)$product_category_product->your_price,
+                                2).'</span>' : '';
+                            echo $product_category_product->sale_price? '<span
+                                class="product-price">$'.number_format((float)$product_category_product->sale_price,
+                                2).'</span>' :
+                            '';
+                            @endphp
                         </div>
                         <!-- End .price-box -->
                     </div>
                     <!-- End .product-details -->
                 </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo36-product.html">
-                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-2.jpg') }}"
-                                width="265" height="265" alt="product" />
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="demo36-product.html" class="btn-icon btn-add-cart"><i
-                                    class="fa fa-arrow-right"></i>
-                            </a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo36-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo36-product.html">Brown Backpack</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="old-price">$59.00</span>
-                            <span class="product-price">$49.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo36-product.html">
-                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-3.jpg') }}"
-                                width="265" height="265" alt="product" />
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo36-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo36-product.html">Black Belt</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="old-price">$59.00</span>
-                            <span class="product-price">$49.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo36-product.html">
-                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-4.jpg') }}"
-                                width="265" height="265" alt="product">
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo36-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo36-product.html">High Hill Casual</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="old-price">$59.00</span>
-                            <span class="product-price">$49.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo36-product.html">
-                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-5.jpg') }}"
-                                width="265" height="265" alt="product" />
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo36-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo36-product.html">Travel Bag</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="old-price">$59.00</span>
-                            <span class="product-price">$49.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
-                <div class="product-default inner-quickview inner-icon">
-                    <figure>
-                        <a href="demo36-product.html">
-                            <img src="{{ asset('aladdinne/assets/images/demoes/demo36/products/product-5.jpg') }}"
-                                width="265" height="265" alt="product" />
-                        </a>
-                        <div class="btn-icon-group">
-                            <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                    class="icon-shopping-cart"></i></a>
-                        </div>
-                        <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick
-                            View</a>
-                    </figure>
-                    <div class="product-details">
-                        <div class="category-wrap">
-                            <div class="category-list">
-                                <a href="demo36-shop.html" class="product-category">category</a>
-                            </div>
-                            <a href="wishlist.html" title="Wishlist" class="btn-icon-wish"><i
-                                    class="icon-heart"></i></a>
-                        </div>
-                        <h3 class="product-title">
-                            <a href="demo36-product.html">Travel Bag</a>
-                        </h3>
-                        <div class="ratings-container">
-                            <div class="product-ratings">
-                                <span class="ratings" style="width:100%"></span>
-                                <!-- End .ratings -->
-                                <span class="tooltiptext tooltip-top"></span>
-                            </div>
-                            <!-- End .product-ratings -->
-                        </div>
-                        <!-- End .product-container -->
-                        <div class="price-box">
-                            <span class="old-price">$59.00</span>
-                            <span class="product-price">$49.00</span>
-                        </div>
-                        <!-- End .price-box -->
-                    </div>
-                    <!-- End .product-details -->
-                </div>
+                @endif
+                @endforeach
+                @endif
             </div>
             <!-- End .products-slider -->
         </div>
@@ -582,4 +324,5 @@
 </main>
 <!-- End .main -->
 @include('ecommerce.cart-js')
+
 @endsection

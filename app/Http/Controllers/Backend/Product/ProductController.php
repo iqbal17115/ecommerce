@@ -175,6 +175,7 @@ class ProductController extends Controller
     public function addProductDescriptionInfo(Request $request)
     {
         $Query = ProductDetail::whereProductId($request->product_description_id)->first();
+        $Query->short_deacription = $request->short_deacription;
         $Query->description = $request->product_description;
         $Query->save();
         return response()->json(['status' => 201]);

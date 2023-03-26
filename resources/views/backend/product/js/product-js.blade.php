@@ -1477,6 +1477,9 @@ function pro1(val) {
 $('#condition_note').summernote({
     height: 120
 });
+$('#short_deacription').summernote({
+    height: 120
+});
 $('#product_description').summernote({
     height: 120
 });
