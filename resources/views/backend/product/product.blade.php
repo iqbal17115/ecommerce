@@ -1645,8 +1645,12 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="short_deacription"
-                                                        id="short_deacription" @if($productInfo &&
-                                                        $productInfo->ProductDetail) value="{{$productInfo->short_deacription}}"  @endif></textarea>
+                                                        id="short_deacription">
+                                                        @if($productInfo &&
+                                                        $productInfo->ProductDetail) 
+                                                          {{$productInfo->ProductDetail->short_deacription}} 
+                                                        @endif
+                                                    </textarea>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
@@ -1655,8 +1659,11 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="product_description"
-                                                        id="product_description" @if($productInfo &&
-                                                        $productInfo->ProductDetail) value="{{$productInfo->description}}"  @endif></textarea>
+                                                        id="product_description">
+                                                        @if($productInfo && $productInfo->ProductDetail) 
+                                                           {{$productInfo->ProductDetail->description}} 
+                                                        @endif
+                                                    </textarea>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-12 mt-md-3">
