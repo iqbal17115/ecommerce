@@ -42,7 +42,7 @@
                                     <div class="col-md-4 mb-2">
                                     @if($company_info && $company_info->hotline)  
                                         <div class="contact-widget phone">
-                                            <h4 class="widget-title">call us now:</h4>
+                                            <h4 class="widget-title text-dark">call us now:</h4>
                                             <a href="javascript:void(0);">{{$company_info->hotline}}</a>
                                         </div>
                                         @endif
@@ -50,14 +50,14 @@
                                     <div class="col-md-4 mb-2">
                                     @if($company_info && $company_info->email)  
                                         <div class="contact-widget email">
-                                            <h4 class="widget-title">e-mail address:</h4>
+                                            <h4 class="widget-title text-dark">e-mail address:</h4>
                                             <a href="mailto:{{$company_info->email}}">{{$company_info->email}}</a>
                                         </div>
                                         @endif
                                     </div>
                                     <div class="col-md-4 mb-2">
                                         <div class="contact-widget follow">
-                                            <h4 class="widget-title ls-n-10">follow us</h4>
+                                            <h4 class="widget-title ls-n-10 text-dark">follow us</h4>
                                             <div class="social-icons">
                                                 <a href="#" class="social-icon social-facebook icon-facebook"
                                                     target="_blank"></a>
