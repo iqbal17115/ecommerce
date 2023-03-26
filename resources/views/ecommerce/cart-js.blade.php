@@ -145,18 +145,19 @@ $(document).ready(function() {
                             'new_product']['id'] + '" data-id="' + data['new_product'][
                             'id'
                         ] + '">' +
-                        ' <div class="product-details"><h4 class="product-title"><a href="#">' +
+                        ' <div class="product-details"><h4 class="product-title"><a class="product-unique-' +data['new_product']['id'] +'">' +
                         data['new_product']['name'] +
                         '</a></h4><span class="cart-product-info"><span class="cart-product-qty">' +
                         data['new_product']['quantity'] +
                         '</span>' + ' x ' + data['new_product']['sale_price'] +
-                        '</span></div><figure class="product-image-container"><a href="javascript:void(0);" class="product-image"><img class="img-preview-' +
+                        '</span></div><figure class="product-image-container"><a class="product-image product-unique-' +data['new_product']['id'] +'"><img class="img-preview-' +
                         data[
                             'new_product']['id'] +
-                        '" alt=""></a><a href="javascript:void(0);" class="btn-remove" title="Remove Product"><span>×</span></a></figure></div>'
+                        '" alt=""></a><a class="btn-remove" title="Remove Product"><span>×</span></a></figure></div>'
                     );
                     $('.img-preview-' + data['new_product']['id']).attr("src",
                         'storage/product_photo/' + data['new_product']['image']);
+                        $('.product-unique-' + data['new_product']['id']).attr('href', "{{ route('product-detail', ['id' => ' ']) }}" + data['new_product']['id']);
                 }
             },
             error: function(err) {
