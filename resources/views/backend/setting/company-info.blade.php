@@ -186,14 +186,28 @@ div#variation_content {
                                                     <input type="file" name="logo" id="logo" class="form-control">
                                                 </div>
                                                 <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
 
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Footer Logo</label>
+                                                    @if($company_info && $company_info->logo)
+                                                    <img src="{{ asset('storage/'.$company_info->footer_logo) }}"
+                                                        class="rounded float-md-right"
+                                                        style="width: 55px; height: 30px;"
+                                                        alt="ff" />
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="file" name="footer_logo" id="footer_logo" class="form-control">
+                                                </div>
+                                                <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Icon</label>
-                                                        @if($company_info && $company_info->icon)
+                                                    @if($company_info && $company_info->icon)
                                                     <img src="{{ asset('storage/'.$company_info->icon) }}"
                                                         class="rounded float-md-right"
-                                                        style="width: 55px; height: 30px; background: black;"
+                                                        style="width: 55px; height: 30px;"
                                                         alt="ff" />
                                                     @endif
                                                 </div>
@@ -205,22 +219,23 @@ div#variation_content {
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Footer Image</label>
-                                                        @if($company_info && $company_info->footer_image)
+                                                    @if($company_info && $company_info->footer_image)
                                                     <img src="{{ asset('storage/'.$company_info->footer_image) }}"
                                                         class="rounded float-md-right"
-                                                        style="width: 55px; height: 30px; background: black;"
+                                                        style="width: 55px; height: 30px;"
                                                         alt="ff" />
                                                     @endif
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="file" name="footer_image" id="icon" class="form-control">
+                                                    <input type="file" name="footer_image" id="icon"
+                                                        class="form-control">
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Footer Payment Image</label>
-                                                        @if($company_info && $company_info->footer_payment_image)
+                                                    @if($company_info && $company_info->footer_payment_image)
                                                     <img src="{{ asset('storage/'.$company_info->footer_payment_image) }}"
                                                         class="rounded float-md-right"
                                                         style="width: 55px; height: 30px; background: black;"
@@ -228,7 +243,8 @@ div#variation_content {
                                                     @endif
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input type="file" name="footer_payment_image" id="icon" class="form-control">
+                                                    <input type="file" name="footer_payment_image" id="icon"
+                                                        class="form-control">
                                                 </div>
                                                 <!-- End -->
 
@@ -361,8 +377,9 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input type="text" name="facebook_link" @if($company_info)
-                                                        value="{{$company_info->facebook_link}}" @endif id="facebook_link"
-                                                        class="form-control" placeholder="Facebook Link">
+                                                        value="{{$company_info->facebook_link}}" @endif
+                                                        id="facebook_link" class="form-control"
+                                                        placeholder="Facebook Link">
                                                 </div>
                                                 <!-- End -->
 
@@ -528,66 +545,90 @@ div#variation_content {
                                         <div class="col-md-4">
                                             <div class="row">
                                                 <div class="col-md-12 mt-md-3">
-                                                        <div class="form-check form-switch">
-                                                            <input @if($company_info && $company_info->is_phone_active) checked @endif class="form-check-input" type="checkbox" name="is_phone_active"
-                                                                id="is_phone_active">
-                                                            <label class="form-check-label" for="is_phone_active">Phone Active</label>
-                                                        </div>
+                                                    <div class="form-check form-switch">
+                                                        <input @if($company_info && $company_info->is_phone_active)
+                                                        checked @endif class="form-check-input" type="checkbox"
+                                                        name="is_phone_active"
+                                                        id="is_phone_active">
+                                                        <label class="form-check-label" for="is_phone_active">Phone
+                                                            Active</label>
+                                                    </div>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
-                                                        <div class="form-check form-switch">
-                                                            <input @if($company_info && $company_info->is_mobile_active) checked @endif class="form-check-input" type="checkbox" name="is_mobile_active"
-                                                                id="is_mobile_active">
-                                                            <label class="form-check-label" for="is_mobile_active">Mobile Active</label>
-                                                        </div>
+                                                    <div class="form-check form-switch">
+                                                        <input @if($company_info && $company_info->is_mobile_active)
+                                                        checked @endif class="form-check-input" type="checkbox"
+                                                        name="is_mobile_active"
+                                                        id="is_mobile_active">
+                                                        <label class="form-check-label" for="is_mobile_active">Mobile
+                                                            Active</label>
+                                                    </div>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
-                                                        <div class="form-check form-switch">
-                                                            <input @if($company_info && $company_info->is_email_active) checked @endif class="form-check-input" type="checkbox" name="is_email_active"
-                                                                id="is_email_active">
-                                                            <label class="form-check-label" for="is_email_active">Email Active</label>
-                                                        </div>
+                                                    <div class="form-check form-switch">
+                                                        <input @if($company_info && $company_info->is_email_active)
+                                                        checked @endif class="form-check-input" type="checkbox"
+                                                        name="is_email_active"
+                                                        id="is_email_active">
+                                                        <label class="form-check-label" for="is_email_active">Email
+                                                            Active</label>
+                                                    </div>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
-                                                    
-                                                        <div class="form-check form-switch">
-                                                            <input @if($company_info && $company_info->is_hotline_active) checked @endif class="form-check-input" type="checkbox" name="is_hotline_active"
-                                                                id="is_hotline_active">
-                                                            <label class="form-check-label" for="is_hotline_active">Hotline Active</label>
-                                                        </div>
+
+                                                    <div class="form-check form-switch">
+                                                        <input @if($company_info && $company_info->is_hotline_active)
+                                                        checked @endif class="form-check-input" type="checkbox"
+                                                        name="is_hotline_active"
+                                                        id="is_hotline_active">
+                                                        <label class="form-check-label" for="is_hotline_active">Hotline
+                                                            Active</label>
+                                                    </div>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
-                                                        <div class="form-check form-switch">
-                                                            <input @if($company_info && $company_info->is_footer_block1_active) checked @endif class="form-check-input" type="checkbox" name="is_footer_block1_active"
-                                                                id="is_footer_block1_active">
-                                                            <label class="form-check-label" for="is_footer_block1_active">Footer Block 1</label>
-                                                        </div>
+                                                    <div class="form-check form-switch">
+                                                        <input @if($company_info &&
+                                                            $company_info->is_footer_block1_active) checked @endif
+                                                        class="form-check-input" type="checkbox"
+                                                        name="is_footer_block1_active"
+                                                        id="is_footer_block1_active">
+                                                        <label class="form-check-label"
+                                                            for="is_footer_block1_active">Footer Block 1</label>
+                                                    </div>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
-                                                        <div class="form-check form-switch">
-                                                            <input @if($company_info && $company_info->is_footer_block2_active) checked @endif class="form-check-input" type="checkbox" name="is_footer_block2_active"
-                                                                id="is_footer_block2_active">
-                                                            <label class="form-check-label" for="is_footer_block2_active">Footer Block 2</label>
-                                                        </div>
+                                                    <div class="form-check form-switch">
+                                                        <input @if($company_info &&
+                                                            $company_info->is_footer_block2_active) checked @endif
+                                                        class="form-check-input" type="checkbox"
+                                                        name="is_footer_block2_active"
+                                                        id="is_footer_block2_active">
+                                                        <label class="form-check-label"
+                                                            for="is_footer_block2_active">Footer Block 2</label>
+                                                    </div>
                                                 </div>
                                                 <!-- End -->
 
                                                 <div class="col-md-12 mt-md-3">
-                                                        <div class="form-check form-switch">
-                                                            <input @if($company_info && $company_info->is_footer_block3_active) checked @endif class="form-check-input" type="checkbox" name="is_footer_block3_active"
-                                                                id="is_footer_block3_active">
-                                                            <label class="form-check-label" for="is_footer_block3_active">Footer Block 3</label>
-                                                        </div>
+                                                    <div class="form-check form-switch">
+                                                        <input @if($company_info &&
+                                                            $company_info->is_footer_block3_active) checked @endif
+                                                        class="form-check-input" type="checkbox"
+                                                        name="is_footer_block3_active"
+                                                        id="is_footer_block3_active">
+                                                        <label class="form-check-label"
+                                                            for="is_footer_block3_active">Footer Block 3</label>
+                                                    </div>
                                                 </div>
                                                 <!-- End -->
 

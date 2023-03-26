@@ -90,6 +90,14 @@ class CompanyInfoController extends Controller
             $company_info->logo = $logo;
         }
 
+        if ($request->file('footer_logo')) {
+            $footer_logoPath = $request->file('footer_logo');
+            $footer_logoName = $footer_logoPath->getClientOriginalName();
+            $path = $request->file('footer_logo')->storeAs('uploads', $footer_logoName, 'public');
+            $footer_logo = $request->file('footer_logo')->store('company_info/footer_logos', 'public');
+            $company_info->footer_logo = $footer_logo;
+        }
+
         if ($request->file('icon')) {
             $iconPath = $request->file('icon');
             $iconName = $iconPath->getClientOriginalName();

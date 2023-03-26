@@ -17,6 +17,7 @@ class CreateCompanyInfosTable extends Migration
             $table->id();
             $table->string('name', 100)->nullable();
             $table->text('logo')->nullable();
+            $table->text('footer_logo')->nullable();
             $table->text('icon')->nullable();
             $table->text('footer_image')->nullable();
             $table->text('footer_payment_image')->nullable();

@@ -33,9 +33,9 @@
                     <div class="footer-middle">
                         <div class="row">
                             <div class="col-lg-6 mb-1">
-                            @if($company_info && $company_info->logo)
+                            @if($company_info && $company_info->footer_logo)
                                 <a href="{{ route('home') }}">
-                                    <img src="{{ asset('storage/'.$company_info->logo) }}" alt="Logo" class="logo mb-3 mb-lg-6">
+                                    <img src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo" class="logo mb-3 mb-lg-6">
                                 </a>
                             @endif
                                 <div class="row no-gutters m-0">
