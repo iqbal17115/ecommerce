@@ -33,6 +33,7 @@
                 <div class="categories-slider owl-carousel owl-theme show-nav-hover nav-outer" data-owl-options="{
                             'autoplay': true, 
                             'autoplayTimeout': 3000,
+                            'autoPlay': true,
                             'responsive': {
                                 '0': {
                                     'items': 2
