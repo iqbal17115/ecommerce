@@ -59,9 +59,9 @@
                                 <img src="{{ asset('storage/'.$top_show_category->image) }}" alt="category" width="280"
                                     height="240" style="height: 128px; height: 116px;" />
                             </figure>
-                            <!-- <div class="category-content p-0">
+                            <div class="category-content p-0">
                                 <h3>{{$top_show_category->name}}</h3>
-                            </div> -->
+                            </div>
                         </a>
                     </div>
                     @endforeach
