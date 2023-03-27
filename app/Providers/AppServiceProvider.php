@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Backend\Currency\Currency;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\WebSetting\CompanyInfo;
 use Illuminate\Pagination\Paginator;
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('parentCategories', Category::whereParentCategoryId(null)->whereTopMenu(1)->orderBy('position', 'asc')->get());
             $view->with('sidebarMenuCategories', Category::whereSidebarMenu(1)->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get());
             $view->with('company_info', CompanyInfo::first());
+            $view->with('currency', Currency::whereIsDefault(1)->first());
         });
 
         

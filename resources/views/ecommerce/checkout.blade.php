@@ -247,7 +247,7 @@
                                     </h3>
                                 </td>
                                 <td class="price-col">
-                                    <span>${{ $details['quantity'] * $details['sale_price'] }}</span>
+                                    <span>{{$currency->icon}}{{ $details['quantity'] * $details['sale_price'] }}</span>
                                 </td>
                             </tr>
                             @endforeach
@@ -263,7 +263,7 @@
                                 </td>
 
                                 <td class="price-col">
-                                    <span>${{$total}}</span>
+                                    <span>{{$currency->icon}}{{$total}}</span>
                                 </td>
                             </tr>
                             <tr class="order-shipping">
@@ -296,7 +296,7 @@
                                     <h4>Total</h4>
                                 </td>
                                 <td>
-                                    <b class="total-price"><span>${{$total + $charge_for_weight + $default_charge}}</span></b>
+                                    <b class="total-price"><span>{{$currency->icon}}{{$total + $charge_for_weight + $default_charge}}</span></b>
                                 </td>
                             </tr>
                         </tfoot>

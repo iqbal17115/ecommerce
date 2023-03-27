@@ -48,7 +48,7 @@
                                         <a href="javascript:void(0);">{{ $details['name'] }}</a>
                                     </h5>
                                 </td>
-                                <td>${{ $details['sale_price'] }}</td>
+                                <td>{{$currency->icon}}{{ $details['sale_price'] }}</td>
                                 <td>
                                     <div class="product-single-qty">
                                         <input value="{{ $details['quantity'] }}" class="horizontal-quantity form-control product-quantity-{{ $id }}" type="text">
@@ -100,7 +100,7 @@
                         <tbody>
                             <tr>
                                 <td>Subtotal</td>
-                                <td class="cart-total-price">${{$total}}</td>
+                                <td class="cart-total-price">{{$currency->icon}}{{$total}}</td>
                             </tr>
 
                             <tr>
@@ -127,7 +127,7 @@
                         <tfoot>
                             <tr>
                                 <td>Total</td>
-                                <td>$0.00</td>
+                                <td>{{$currency->icon}}0.00</td>
                             </tr>
                         </tfoot>
                     </table>

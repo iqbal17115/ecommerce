@@ -99,7 +99,7 @@
                                             <span
                                                 class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
                                             ×
-                                            ${{ $details['sale_price'] }}
+                                            {{$currency->icon}}{{ $details['sale_price'] }}
                                         </span>
                                     </div>
                                     <!-- End .product-details -->
@@ -123,7 +123,7 @@
                             <div class="dropdown-cart-total">
                                 <span>SUBTOTAL:</span>
 
-                                <span class="cart-total-price float-right">${{$total}}</span>
+                                <span class="cart-total-price float-right">{{$currency->icon}}{{$total}}</span>
                             </div>
                             <!-- End .dropdown-cart-total -->
 
