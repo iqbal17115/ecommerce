@@ -33,7 +33,7 @@ class HomeController extends Controller
         
     }
     public function getSubCategory(Request $request) {
-        $sub_categories = Category::with('SubCategory')->whereParentCategoryId($request->id)->orderBy('position', 'asc')->get();
+        $sub_categories = Category::with('SubCategory')->whereParentCategoryId($request->id)->orderBy('position', 'ASC')->get();
         return response()->json(['sub_categories' => $sub_categories]);
     }
     public function adminDashboard() {
@@ -42,8 +42,8 @@ class HomeController extends Controller
     public function index() {
         // dd(Auth::user());
         $sliders = Slider::whereIsActive(1)->get();
-        $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderBy('position', 'asc')->get();
-        $product_features = ProductFeature::whereIsActive(1)->orderBy('position', 'ASC')->get();
+        $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        $product_features = ProductFeature::whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features']));
     }
 }
