@@ -26,18 +26,20 @@
     </div>
     <!-- End Sidebar -->
 
-    <div class="pt-2 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}" style="background-color: #f4631b;">
+    <div class="pt-2 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}"
+        style="background-color: #f4631b;">
+        <button class="mobile-menu-toggler text-dark mr-2" type="button">
+            <i class="fas fa-bars"></i>
+        </button>
+        @if($company_info && $company_info->logo)
+        <a href="{{ route('home') }}" class="logo">
+            <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100  ml-md-5" width="111" height="44"
+                style="height: 54px;width: 151px;" alt="Porto Logo">
+        </a>
+        @endif
         <div class="container">
             <div class="header-left col-lg-2 w-auto pl-0">
-                <button class="mobile-menu-toggler text-dark mr-2" type="button">
-                    <i class="fas fa-bars"></i>
-                </button>
-                @if($company_info && $company_info->logo)
-                <a href="{{ route('home') }}" class="logo">
-                    <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100" width="111" height="44"
-                        style="height: 54px;width: 151px;" alt="Porto Logo">
-                </a>
-                @endif
+                <!-- Here Was Logo Before -->
             </div>
             <!-- End .header-left -->
 
