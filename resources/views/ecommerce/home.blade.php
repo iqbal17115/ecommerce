@@ -35,7 +35,7 @@
                             'autoplayTimeout': 3000,
                             'responsive': {
                                 '0': {
-                                    'items': 4
+                                    'items': 3
                                 },
                                 '480': {
                                     'items': 5
@@ -47,7 +47,7 @@
                                     'items': 7
                                 },
                                 '992': {
-                                    'items': 9
+                                    'items': 8
                                 },
                                 '1200': {
                                     'items': 10
