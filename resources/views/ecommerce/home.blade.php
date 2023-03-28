@@ -33,6 +33,7 @@
                 <div class="categories-slider owl-carousel owl-theme show-nav-hover nav-outer" data-owl-options="{
                             'autoplay': true, 
                             'autoplayTimeout': 3000,
+                            'margin': 1,
                             'responsive': {
                                 '0': {
                                     'items': 2
@@ -50,7 +51,7 @@
                                     'items': 7
                                 },
                                 '1200': {
-                                    'items': 8
+                                    'items': 10
                                 }
                             }
                         }">
