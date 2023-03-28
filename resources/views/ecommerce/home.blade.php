@@ -34,6 +34,7 @@
                             'autoplay': true, 
                             'autoplayTimeout': 3000,
                             'margin': 1,
+                            'padding': 1,
                             'responsive': {
                                 '0': {
                                     'items': 2
