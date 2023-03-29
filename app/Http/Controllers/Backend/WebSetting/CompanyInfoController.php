@@ -122,6 +122,14 @@ class CompanyInfoController extends Controller
             $company_info->footer_payment_image = $footer_payment_image;
         }
 
+        if ($request->file('country_flag')) {
+            $country_flagPath = $request->file('country_flag');
+            $country_flagName = $country_flagPath->getClientOriginalName();
+            $path = $request->file('country_flag')->storeAs('uploads', $country_flagName, 'public');
+            $country_flag = $request->file('country_flag')->store('company_info/country_flags', 'public');
+            $company_info->country_flag = $country_flag;
+        }
+
         $company_info->phone = $request->phone;
         $company_info->mobile = $request->mobile;
         $company_info->email = $request->email;

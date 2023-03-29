@@ -247,7 +247,21 @@ div#variation_content {
                                                         class="form-control">
                                                 </div>
                                                 <!-- End -->
-
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Flag</label>
+                                                    @if($company_info && $company_info->country_flag)
+                                                    <img src="{{ asset('storage/'.$company_info->country_flag) }}"
+                                                        class="rounded float-md-right"
+                                                        style="width: 55px; height: 30px; background: black;"
+                                                        alt="ff" />
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="file" name="country_flag" id="icon"
+                                                        class="form-control">
+                                                </div>
+                                                <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Phone</label>

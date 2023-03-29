@@ -1,130 +1,163 @@
 <footer>
-            <div class="footer">
-            @if($company_info && $company_info->is_footer_block1_active)
-                <div class="footer-top" style="background: #f4631b;padding-top: 2rem;padding-bottom: 2rem;">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-md-6 col-lg-3">
-                                <h4 class="widget-newsletter-title font1 font-weight-bold text-white ls-n-10">Sign Up to
-                                    Newsletter</h4>
+    <div class="footer">
+        @if($company_info && $company_info->is_footer_block1_active)
+        <div class="footer-top" style="background: #f4631b;padding-top: 2rem;padding-bottom: 2rem;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-1">
+                    @if($company_info && $company_info->footer_logo)
+                        <a href="{{ route('home') }}">
+                            <img src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo"
+                                class="logo" style="height: 50px;">
+                        </a>
+                    @endif
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">Receive
+                            $10 coupon for first shopping.</span>
+                    </div>
+                    
+                    <div class="col-md-1">
+                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white" style="font-size: 18px;">বাংলা</span>
+                    </div>
+                    <div class="col-md-1">
+                    @if($company_info && $company_info->country_flag)
+                        <a href="{{ route('home') }}">
+                            <img src="{{ asset('storage/'.$company_info->country_flag) }}" alt="Logo"
+                                class="logo" style="height: 50px;">
+                        </a>
+                    @endif
+                    </div>
+                    <div class="col-md-2">
+                    <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white" style="font-size: 18px;">Subscribe to Newsletter</span>
+                    </div>
+                    <div class="col-md-4">
+                        <form action="#" class="mb-0">
+                            <div class="footer-submit-wrapper d-flex">
+                                <input type="email" class="form-control mb-0" placeholder="Enter your Email address..."
+                                    required>
+                                <button type="submit" class="btn btn-md btn-dark">Subscribe</button>
                             </div>
-                            <div class="col-md-6 col-lg-4">
-                                <p class="widget-newsletter-content ls-n-10 text-white mb-0">Get all the latest
-                                    information on Events, Sales and Offers.</p>
-                                <span
-                                    class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">Receive
-                                    $10 coupon for first shopping.</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        <div class="container">
+            @if($company_info && $company_info->is_footer_block2_active)
+            <div class="footer-middle">
+                <div class="row">
+                    <div class="col-lg-4 mb-1">
+                        @if($company_info && $company_info->footer_logo)
+                        <a href="{{ route('home') }}">
+                            <img src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo"
+                                class="logo mb-3 mb-lg-6">
+                        </a>
+                        @endif
+                        <div class="row no-gutters m-0">
+                            <div class="col-md-6 mb-2">
+                                @if($company_info && $company_info->hotline)
+                                <div class="contact-widget phone">
+                                    <h4 class="widget-title text-dark">call us now:</h4>
+                                    <a href="javascript:void(0);">{{$company_info->hotline}}</a>
+                                </div>
+                                @endif
                             </div>
-                            <div class="col-md-10 col-lg-5">
-                                <form action="#" class="mb-0">
-                                    <div class="footer-submit-wrapper d-flex">
-                                        <input type="email" class="form-control mb-0"
-                                            placeholder="Enter your Email address..." required>
-                                        <button type="submit" class="btn btn-md btn-dark">Subscribe</button>
-                                    </div>
-                                </form>
+                            <div class="col-md-6 mb-2">
+                                @if($company_info && $company_info->email)
+                                <div class="contact-widget email">
+                                    <h4 class="widget-title text-dark">e-mail address:</h4>
+                                    <a href="mailto:{{$company_info->email}}">{{$company_info->email}}</a>
+                                </div>
+                                @endif
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="widget">
+                            <h4 class="widget-title text-dark">Get to Know Us</h4>
+
+                            <ul class="links">
+                                <li><a href="Javascript:void(0);" style="color: #777;">About @if($company_info &&
+                                        $company_info->name) {{$company_info->name}} @endif</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Careers</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Privacy Policies</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Terms & Condition</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Shipping & Delivery</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="widget">
+                            <h4 class="widget-title text-dark">Customer Service</h4>
+
+                            <ul class="links">
+                                <li><a href="Javascript:void(0);" style="color: #777;">Your Account</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Your Order</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Track Shipment</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="widget">
+                            <h4 class="widget-title text-dark">Make Money With Us</h4>
+
+                            <ul class="links">
+                                <li><a href="Javascript:void(0);" style="color: #777;">Sell On @if($company_info &&
+                                        $company_info->name) {{$company_info->name}} @endif</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Blog</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Advertise Your Product</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Protect & Build Your Brand</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="contact-widget follow">
+                            <h4 class="widget-title ls-n-10 text-dark">Connect With Us</h4>
+                            <div class="social-icons" style="margin-bottom: 5px;">
+                                <a href="Javascript:void(0);"
+                                    class="social-icon social-facebook icon-facebook text-dark" target="_blank"></a>
+                                <a href="Javascript:void(0);" class="social-icon social-twitter icon-twitter text-dark"
+                                    target="_blank"></a>
+                                <a href="Javascript:void(0);" class="social-icon social-twitter icon-twitter text-dark"
+                                    target="_blank"></a>
+                                <a href="Javascript:void(0);"
+                                    class="social-icon social-linkedin fab fa-linkedin-in text-dark"
+                                    target="_blank"></a>
+                            </div><!-- End .social-icons -->
+                            <ul class="links">
+                                <li><a href="Javascript:void(0);" style="color: #777;">Email: @if($company_info &&
+                                        $company_info->email) {{$company_info->email}} @endif</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Whatsapp: @if($company_info &&
+                                        $company_info->phone) {{$company_info->phone}} @endif</a></li>
+                                <li><h5>Download Our App </h5></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-@endif
-                <div class="container">
-                @if($company_info && $company_info->is_footer_block2_active)
-                    <div class="footer-middle">
-                        <div class="row">
-                            <div class="col-lg-6 mb-1">
-                            @if($company_info && $company_info->footer_logo)
-                                <a href="{{ route('home') }}">
-                                    <img src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo" class="logo mb-3 mb-lg-6">
-                                </a>
-                            @endif
-                                <div class="row no-gutters m-0">
-                                    <div class="col-md-4 mb-2">
-                                    @if($company_info && $company_info->hotline)  
-                                        <div class="contact-widget phone">
-                                            <h4 class="widget-title text-dark">call us now:</h4>
-                                            <a href="javascript:void(0);">{{$company_info->hotline}}</a>
-                                        </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4 mb-2">
-                                    @if($company_info && $company_info->email)  
-                                        <div class="contact-widget email">
-                                            <h4 class="widget-title text-dark">e-mail address:</h4>
-                                            <a href="mailto:{{$company_info->email}}">{{$company_info->email}}</a>
-                                        </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4 mb-2">
-                                        <div class="contact-widget follow">
-                                            <h4 class="widget-title ls-n-10 text-dark">follow us</h4>
-                                            <div class="social-icons">
-                                                <a href="#" class="social-icon social-facebook icon-facebook"
-                                                    target="_blank"></a>
-                                                <a href="#" class="social-icon social-twitter icon-twitter"
-                                                    target="_blank"></a>
-                                                <a href="#" class="social-icon social-linkedin fab fa-linkedin-in"
-                                                    target="_blank"></a>
-                                            </div><!-- End .social-icons -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="widget">
-                                    <h4 class="widget-title">Categories</h4>
-
-                                    <ul class="links">
-                                        <li><a href="demo21-shop.html">Electronics</a></li>
-                                        <li><a href="demo21-shop.html">Fashion</a></li>
-                                        <li><a href="demo21-shop.html">Gifts</a></li>
-                                        <li><a href="demo21-shop.html">Music</a></li>
-                                        <li><a href="demo21-shop.html">Trousers</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="widget">
-                                    <h4 class="widget-title">About</h4>
-
-                                    <ul class="links">
-                                        <li><a href="demo21-about.html">About us</a></li>
-                                        <li><a href="demo21-contact.html">Contact us</a></li>
-                                        <li><a href="#">All Collections</a></li>
-                                        <li><a href="#">Privacy policy</a></li>
-                                        <li><a href="#">Terms &amp; Conditions</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="widget">
-                                    <h4 class="widget-title">Customer Care</h4>
-
-                                    <ul class="links">
-                                        <li><a href="dashboard.html">My Account</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="#">Terms &amp; Conditions</a></li>
-                                        <li><a href="#">FAQs</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-@endif
-@if($company_info && $company_info->is_footer_block3_active)
-                    <div class="footer-bottom d-sm-flex align-items-center">
-                        <div class="footer-left">
-                            <span class="footer-copyright">© {{date("Y")}} @if($company_info && $company_info->name) {{$company_info->name}} @endif | All Rights
-            Reserved.</span>
-                        </div>
-
-                        <div class="footer-right ml-auto mt-1 mt-sm-0">
-                            <img @if($company_info && $company_info->footer_payment_image) src="{{asset('storage/'.$company_info->footer_payment_image)}}"  @endif alt="payment">
-                        </div>
-                    </div>
-                    @endif
-                </div><!-- End .footer-bottom -->
             </div>
-        </footer>
-         <!-- End .footer -->
+            @endif
+            @if($company_info && $company_info->is_footer_block3_active)
+            <div class="footer-bottom d-sm-flex align-items-center">
+                <div class="footer-left">
+                    <span class="footer-copyright">© {{date("Y")}} @if($company_info && $company_info->name)
+                        {{$company_info->name}} @endif | All Rights
+                        Reserved.</span>
+                </div>
+
+                <div class="footer-right ml-auto mt-1 mt-sm-0">
+                    <img @if($company_info && $company_info->footer_payment_image)
+                    src="{{asset('storage/'.$company_info->footer_payment_image)}}" @endif alt="payment">
+                </div>
+            </div>
+            @endif
+        </div><!-- End .footer-bottom -->
+    </div>
+</footer>
+<!-- End .footer -->

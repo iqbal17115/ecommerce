@@ -21,6 +21,7 @@ class CreateCompanyInfosTable extends Migration
             $table->text('icon')->nullable();
             $table->text('footer_image')->nullable();
             $table->text('footer_payment_image')->nullable();
+            $table->text('country_flag')->nullable();
             $table->string('phone', 100)->nullable();
             $table->string('mobile', 100)->nullable();
             $table->string('email', 191)->nullable();
