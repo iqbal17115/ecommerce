@@ -253,7 +253,7 @@ div#variation_content {
                                                     @if($company_info && $company_info->country_flag)
                                                     <img src="{{ asset('storage/'.$company_info->country_flag) }}"
                                                         class="rounded float-md-right"
-                                                        style="width: 55px; height: 30px; background: black;"
+                                                        style="width: 55px; height: 30px;"
                                                         alt="ff" />
                                                     @endif
                                                 </div>
