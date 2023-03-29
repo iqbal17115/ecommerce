@@ -48,33 +48,8 @@
             @if($company_info && $company_info->is_footer_block2_active)
             <div class="footer-middle">
                 <div class="row">
-                    <div class="col-lg-4 mb-1">
-                        @if($company_info && $company_info->footer_logo)
-                        <a href="{{ route('home') }}">
-                            <img src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo"
-                                class="logo mb-3 mb-lg-6">
-                        </a>
-                        @endif
-                        <div class="row no-gutters m-0">
-                            <div class="col-md-6 mb-2">
-                                @if($company_info && $company_info->hotline)
-                                <div class="contact-widget phone">
-                                    <h4 class="widget-title text-dark">call us now:</h4>
-                                    <a href="javascript:void(0);">{{$company_info->hotline}}</a>
-                                </div>
-                                @endif
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                @if($company_info && $company_info->email)
-                                <div class="contact-widget email">
-                                    <h4 class="widget-title text-dark">e-mail address:</h4>
-                                    <a href="mailto:{{$company_info->email}}">{{$company_info->email}}</a>
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
+                    
+                    <div class="col-md-2">
                         <div class="widget">
                             <h4 class="widget-title text-dark">Get to Know Us</h4>
 
@@ -89,7 +64,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-md-2">
                         <div class="widget">
                             <h4 class="widget-title text-dark">Customer Service</h4>
 
@@ -101,7 +76,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-md-2">
                         <div class="widget">
                             <h4 class="widget-title text-dark">Make Money With Us</h4>
 
@@ -116,7 +91,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-md-2">
                         <div class="contact-widget follow">
                             <h4 class="widget-title ls-n-10 text-dark">Connect With Us</h4>
                             <div class="social-icons" style="margin-bottom: 5px;">
