@@ -129,7 +129,8 @@ class CompanyInfoController extends Controller
             $country_flag = $request->file('country_flag')->store('company_info/country_flags', 'public');
             $company_info->country_flag = $country_flag;
         }
-
+        
+        $company_info->footer_ads = $request->footer_ads;
         $company_info->phone = $request->phone;
         $company_info->mobile = $request->mobile;
         $company_info->email = $request->email;

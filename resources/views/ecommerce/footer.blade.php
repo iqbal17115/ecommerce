@@ -14,8 +14,7 @@
                     </div>
                     
                     <div class="col-md-3">
-                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">Receive
-                            $10 coupon for first shopping.</span>
+                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">@if($company_info && $company_info->footer_ads) {{$company_info->footer_ads}} @endif</span>
                     </div>
                     
                     <div class="col-md-1">

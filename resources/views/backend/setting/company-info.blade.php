@@ -264,6 +264,16 @@ div#variation_content {
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Footer Ads</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="text" name="footer_ads" id="footer_ads" @if($company_info)
+                                                        value="{{$company_info->footer_ads}}" @endif class="form-control"
+                                                        placeholder="Footer Ads">
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Phone</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
