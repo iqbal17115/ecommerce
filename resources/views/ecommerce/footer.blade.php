@@ -5,31 +5,35 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-1">
-                    @if($company_info && $company_info->footer_logo)
+                        @if($company_info && $company_info->footer_logo)
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo"
-                                class="logo" style="height: 50px;">
+                            <img src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo" class="logo"
+                                style="height: 50px;">
                         </a>
-                    @endif
+                        @endif
                     </div>
-                    
+
                     <div class="col-md-3">
-                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">@if($company_info && $company_info->footer_ads) {{$company_info->footer_ads}} @endif</span>
+                        <span
+                            class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">@if($company_info
+                            && $company_info->footer_ads) {{$company_info->footer_ads}} @endif</span>
                     </div>
-                    
+
                     <div class="col-md-1">
-                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white" style="font-size: 18px;">বাংলা</span>
+                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
+                            style="font-size: 18px;">বাংলা</span>
                     </div>
                     <div class="col-md-1">
-                    @if($company_info && $company_info->country_flag)
+                        @if($company_info && $company_info->country_flag)
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('storage/'.$company_info->country_flag) }}" alt="Logo"
-                                class="logo" style="height: 50px;">
+                            <img src="{{ asset('storage/'.$company_info->country_flag) }}" alt="Logo" class="logo"
+                                style="height: 50px;">
                         </a>
-                    @endif
+                        @endif
                     </div>
                     <div class="col-md-2">
-                    <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white" style="font-size: 18px;">Subscribe to Newsletter</span>
+                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
+                            style="font-size: 18px;">Subscribe to Newsletter</span>
                     </div>
                     <div class="col-md-4">
                         <form action="#" class="mb-0">
@@ -48,7 +52,7 @@
             @if($company_info && $company_info->is_footer_block2_active)
             <div class="footer-middle">
                 <div class="row">
-                    
+                    <div class="col-md-2"></div>
                     <div class="col-md-2">
                         <div class="widget">
                             <h4 class="widget-title text-dark">Get to Know Us</h4>
@@ -110,10 +114,15 @@
                                         $company_info->email) {{$company_info->email}} @endif</a></li>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Whatsapp: @if($company_info &&
                                         $company_info->phone) {{$company_info->phone}} @endif</a></li>
-                                <li><h5>Download Our App </h5></li>
+                                <li>
+                                    <h5>Download Our App </h5>
+                                </li>
                             </ul>
                         </div>
                     </div>
+
+                    <div class="col-md-2"></div>
+                    
                 </div>
             </div>
             @endif
