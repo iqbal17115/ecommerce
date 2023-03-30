@@ -18,7 +18,7 @@
                         @foreach($categories as $category)
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
-                            <td>{{$category->name}}</td>
+                            <td class="category-hierarchy" data-toggle="modal" data-target="#exampleModal" data-id="{{$category->id}}">{{$category->name}}</td>
                             <td>
                                 @if($category->Parent)
                                 {{$category->Parent->name}}

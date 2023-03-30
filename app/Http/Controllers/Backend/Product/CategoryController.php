@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function categoryHierarchy(Request $request) {
+        $category = Category::with('Parent')->find($request->id);
+        $child_categories = Category::whereParentCategoryId($request->id)->select('name')->get();
+        return response()->json([
+            'category' => $category,
+            'child_categories' => $child_categories
+        ]);
+    }
     public function searchCategory(Request $request) {
         $categories = Category::where('name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(10);
         if($categories->count() >= 1) {

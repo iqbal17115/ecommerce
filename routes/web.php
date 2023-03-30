@@ -166,7 +166,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::post('add-category', [CategoryController::class, 'addCategory'])->name('add.category');
             Route::post('delete-category', [CategoryController::class, 'deleteCategory'])->name('delete.category');
             Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
-            Route::get('search-category', [CategoryController::class, 'searchCategory'])->name('search.category');
+            Route::get('category.hierarchy', [CategoryController::class, 'categoryHierarchy'])->name('category.hierarchy');
+            Route::get('category', [CategoryController::class, 'searchCategory'])->name('search.category');
         }
     );
     // Unit Category

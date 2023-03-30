@@ -1,5 +1,38 @@
 <script>
 $(document).ready(function() {
+    $(document).on('click', '.category-hierarchy', function(e) {
+        let id = $(this).data('id');
+        $.ajax({
+            url: "{{route('category.hierarchy')}}",
+            method: 'get',
+            data: {
+                id: id
+            },
+            success: function(data) {
+                console.log(data['category']);
+                category_hierarchy = '';
+                if(data['category']['parent']['name'] != null) {
+                category_hierarchy +=
+                    '<div class="card-header bg-primary text-white">'+ data['category']['parent']['name'] +'</div>';
+                }
+                category_hierarchy +=
+                    '<div class="card-body"><ul class="list-group list-group-flush">';
+                category_hierarchy +=
+                    '<li class="list-group-item active">'+data['category']['name']+'</li>';
+                category_hierarchy += '<ul class="list-group">';
+                for (var i = 0; i < data['child_categories'].length; i++) {
+                    category_hierarchy +=
+                        '<li class="list-group-item">'+data['child_categories'][i]['name']+'</li>';
+                }
+                category_hierarchy += '</ul></ul></div>';
+
+                $('.category-hierarchy-data').html(category_hierarchy);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
     $('#imgPreviewIcon').hide();
     $('#imgPreview').hide();
     $(document).on('change', '#image', function(e) {
