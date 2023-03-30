@@ -10,7 +10,7 @@
                     data-target="#productFeatureModal" style="width: 100px;"><i class="fas fa-plus-circle"></i> New</a>
                 <input class="float-right mr-2 py-1" name="search_string" id="search_string" placeholder="Search..."/>
             </div>
-            <div class="col-md-12 product_feature_content">
+            <div class="col-md-12 feature_content">
                 <table class="table table-striped">
 
                     <thead>

@@ -1,5 +1,4 @@
 <table class="table table-striped">
-
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -22,7 +21,7 @@
                             <td>
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#productFeatureModal" data-id="{{$product_feature->id}}"
-                                    data-name="{{$product_feature->name}}" data-short_name="{{$product_feature->position}}"
+                                    data-name="{{$product_feature->name}}" data-position="{{$product_feature->position}}"
                                     data-is_active="{{$product_feature->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>
