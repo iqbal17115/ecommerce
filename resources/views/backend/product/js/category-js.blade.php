@@ -1,6 +1,7 @@
 <script>
 $(document).ready(function() {
     $(document).on('click', '.category-hierarchy', function(e) {
+        $('.category-hierarchy-data').html();
         let id = $(this).data('id');
         $.ajax({
             url: "{{route('category.hierarchy')}}",
