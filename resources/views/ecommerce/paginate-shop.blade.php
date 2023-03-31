@@ -17,13 +17,8 @@
                 </h3>
                 <!-- End .product-container -->
                 <div class="price-box">
-                @php
-                                echo $product->your_price? '<span
-                                    class="old-price">'.$currency->icon.''.number_format((float)$product->your_price, 2).'</span>' : '';
-                                echo $product->sale_price? '<span
-                                    class="product-price">'.$currency->icon.''.number_format((float)$product->sale_price, 2).'</span>' :
-                                '';
-                                @endphp
+                    <span class="old-price">$29.00</span>
+                    <span class="product-price">$19.00</span>
                 </div>
                 <!-- End .price-box -->
             </div>
