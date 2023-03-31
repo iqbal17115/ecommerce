@@ -21,6 +21,18 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function deleteProduct(Request $request) {
+        return DB::transaction(function () use ($request) {
+            Product::find($request->id)->delete();
+            ProductImage::whereProductId($request->id)->delete();
+            ProductDetail::whereProductId($request->id)->delete();
+            ProductKeyword::whereProductId($request->id)->delete();
+            ProductCompliance::whereProductId($request->id)->delete();
+            ProductMoreDetail::whereProductId($request->id)->delete();
+            
+            return response()->json(['status' => 201]);
+        });
+    }
     public function searchProduct(Request $request)
     {
         $products = Product::where('name', 'like', '%' . $request->search_string . '%')->orderBy('id', 'desc')->paginate(20);
