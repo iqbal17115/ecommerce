@@ -28,14 +28,12 @@
 
     <div class="pt-2 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}"
         style="background-color: #f4631b;">
-        <a class="btn mobile-sidebar-menu pb-0 pr-0" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"
-                                style="color: white;"></i></a>
-        <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
+        <button class="mobile-menu-toggler text-dark mr-2" type="button">
             <i class="fas fa-bars"></i>
-        </button> -->
+        </button>
         @if($company_info && $company_info->logo)
         <a href="{{ route('home') }}" class="logo">
-            <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5" width="111" height="44"
+            <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100  ml-md-5" width="111" height="44"
                 style="height: 54px;width: 151px;" alt="Porto Logo">
         </a>
         @endif

@@ -164,12 +164,6 @@
         transform: rotate(-45deg);
         -webkit-transform: rotate(-45deg);
     }
-
-    @media (min-width: 992px) {
-        .mobile-sidebar-menu {
-            display: none;
-        }
-    }
     </style>
     <script src="jquery-3.6.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
