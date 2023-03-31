@@ -642,13 +642,23 @@ div#variation_content {
                                                         style="font-size: 14px;">Quantity</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
-                                                <div class="col-md-8 mt-md-3">
+                                                <div class="col-md-4 mt-md-3">
                                                     <input name="opening_qty" id="opening_qty" @if($productInfo)
                                                         value="{{$productInfo->opening_qty}}" @endif
                                                         class="form-control" placeholder="Opening Qty" name=""
                                                         id="" required/>
                                                 </div>
                                                 <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                        <select name="quantity_unit" id="quantity_unit"
+                                            class="form-select">
+                                            <option value="">Select Option</option>
+                                            <option @if($productInfo && $productInfo->quantity_unit=='pcs') selected @endif value="pcs">PCS</option>
+                                            <option @if($productInfo && $productInfo->quantity_unit=='kg') selected @endif value="kg">Kg</option>
+                                            <option @if($productInfo && $productInfo->quantity_unit=='gram') selected @endif value="gram">Gram</option>
+                                        </select>
+                                    </div>
+                                    <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Your Price</label>
