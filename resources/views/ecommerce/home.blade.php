@@ -10,7 +10,7 @@
 <main class="main">
     <div class="bg-gray pb-5">
         <div class="container pb-2">
-            <div class="slide-animate owl-carousel owl-theme nav-circle mb-2" data-owl-options="{
+            <div class="slide-animate slider-image-header owl-carousel owl-theme nav-circle mb-2" data-owl-options="{
 				'loop': true,
                 'autoplay':true,
                 'autoplayTimeout':5000

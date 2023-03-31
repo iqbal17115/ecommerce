@@ -10,6 +10,6 @@ class ProductFeature extends Model
     use HasFactory;
     public function Product()
     {
-        return $this->hasMany(Product::class)->take(10);
+        return $this->hasMany(Product::class)->take(20);
     }
 }
