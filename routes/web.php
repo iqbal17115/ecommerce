@@ -74,14 +74,8 @@ Route::get('get-district', [CheckoutController::class, 'getDistrict'])->name('ge
 Route::get('get-upazila', [CheckoutController::class, 'getUpazila'])->name('get-upazila');
 Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-union');
 Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
-// Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
-// Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
-// Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');
-// Route::get('/order-completed/{id?}', [HomeController::class, 'orderComplete'])->name('order-completed');
-// Route::get('my-account', [HomeController::class, 'MyAccount'])->name('my-account');
-// Route::get('order-details/{id?}', [HomeController::class, 'OrderDetail'])->name('order-details');
 // Route::get('contact', [HomeController::class, 'Contact'])->name('contact');
-// Route::get('about', [HomeController::class, 'About'])->name('about');
+Route::get('about', [HomeController::class, 'aboutUs'])->name('about');
 // Route::get('privacy-policy', [HomeController::class, 'PrivacyPolicy'])->name('privacy-policy');
 // Route::get('terms-condition', [HomeController::class, 'TermsAndCondition'])->name('terms-condition');
 Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');

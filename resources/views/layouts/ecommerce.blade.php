@@ -214,7 +214,7 @@
 
     <script>
     $(document).ready(function() {
-        $("#menu-toggle").click(function(e) {
+        $(".menu-toggle").click(function(e) {
             e.preventDefault();
             $("#sidebar-wrapper").css("width", "320px");
             $("#wrapper").toggleClass("menuDisplayed");

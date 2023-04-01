@@ -238,7 +238,7 @@ div#variation_content {
                                                     @if($company_info && $company_info->footer_payment_image)
                                                     <img src="{{ asset('storage/'.$company_info->footer_payment_image) }}"
                                                         class="rounded float-md-right"
-                                                        style="width: 55px; height: 30px; background: black;"
+                                                        style="width: 55px; height: 30px;"
                                                         alt="ff" />
                                                     @endif
                                                 </div>
@@ -259,6 +259,22 @@ div#variation_content {
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <input type="file" name="country_flag" id="icon"
+                                                        class="form-control">
+                                                </div>
+                                                <!-- End -->
+                                                
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">About Us Image</label>
+                                                    @if($company_info && $company_info->about_us_image)
+                                                    <img src="{{ asset('storage/'.$company_info->about_us_image) }}"
+                                                        class="rounded float-md-right"
+                                                        style="width: 55px; height: 30px"
+                                                        alt="ff" />
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="file" name="about_us_image" id="icon"
                                                         class="form-control">
                                                 </div>
                                                 <!-- End -->

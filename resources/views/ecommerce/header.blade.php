@@ -28,7 +28,7 @@
 
     <div class="pt-2 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}"
         style="background-color: #f4631b;">
-        <a class="btn mobile-sidebar-menu pb-0 pr-0" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"
+        <a class="btn mobile-sidebar-menu pb-0 pr-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
                                 style="color: white;"></i></a>
         <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
             <i class="fas fa-bars"></i>
@@ -157,7 +157,7 @@
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li>
-                        <a class="btn pt-0 pb-0" id="menu-toggle"><i class="custom-icon-toggle-menu d-inline-table"
+                        <a class="btn pt-0 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
                                 style="color: white;"></i></a>
                     </li>
                     <li class="#">

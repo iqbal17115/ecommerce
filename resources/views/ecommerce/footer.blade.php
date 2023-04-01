@@ -58,7 +58,7 @@
                             <h4 class="widget-title text-dark">Get to Know Us</h4>
 
                             <ul class="links">
-                                <li><a href="Javascript:void(0);" style="color: #777;">About @if($company_info &&
+                                <li><a href="{{ route('about') }}" style="color: #777;">About @if($company_info &&
                                         $company_info->name) {{$company_info->name}} @endif</a></li>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Careers</a></li>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Privacy Policies</a></li>

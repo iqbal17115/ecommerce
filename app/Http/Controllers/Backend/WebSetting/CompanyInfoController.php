@@ -129,6 +129,15 @@ class CompanyInfoController extends Controller
             $country_flag = $request->file('country_flag')->store('company_info/country_flags', 'public');
             $company_info->country_flag = $country_flag;
         }
+
+        if ($request->file('about_us_image')) {
+            $about_us_imagePath = $request->file('about_us_image');
+            $about_us_imageName = $about_us_imagePath->getClientOriginalName();
+            $path = $request->file('about_us_image')->storeAs('uploads', $about_us_imageName, 'public');
+            $about_us_image = $request->file('about_us_image')->store('company_info/about_us_images', 'public');
+            $company_info->about_us_image = $about_us_image;
+        }
+
         
         $company_info->footer_ads = $request->footer_ads;
         $company_info->phone = $request->phone;

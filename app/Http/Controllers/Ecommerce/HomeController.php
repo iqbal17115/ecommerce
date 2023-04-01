@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function aboutUs() {
+        return view('ecommerce.about');
+    }
     public function getSidebarContent() {
         return view('ecommerce.sidebar-content')->render();
     }
