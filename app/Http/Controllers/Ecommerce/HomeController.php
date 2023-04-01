@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function privacyPolicy() {
+        return view('ecommerce.privacy-policy');
+    }
     public function termsAndCondition() {
         return view('ecommerce.terms-and-condition');
     }
