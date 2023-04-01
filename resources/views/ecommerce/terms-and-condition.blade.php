@@ -1,7 +1,6 @@
 @extends('layouts.ecommerce')
 @section('content')
 <main class="main about">
-
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
             <ol class="breadcrumb">
@@ -13,12 +12,10 @@
 
     <div class="about-section">
         <div class="container">
-            <h2 class="subtitle">Terms & Condition</h2>
-            @if ($companyInfo)
-                {!! $companyInfo->terms_condition !!}
+            @if($company_info && $company_info->terms_condition)
+            {!! $company_info->terms_condition !!}
             @endif
         </div><!-- End .container -->
     </div><!-- End .about-section -->
-
 </main><!-- End .main -->
 @endsection

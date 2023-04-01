@@ -77,7 +77,7 @@ Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name(
 // Route::get('contact', [HomeController::class, 'Contact'])->name('contact');
 Route::get('about', [HomeController::class, 'aboutUs'])->name('about');
 // Route::get('privacy-policy', [HomeController::class, 'PrivacyPolicy'])->name('privacy-policy');
-// Route::get('terms-condition', [HomeController::class, 'TermsAndCondition'])->name('terms-condition');
+Route::get('terms-condition', [HomeController::class, 'termsAndCondition'])->name('terms-condition');
 Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');
 Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
 Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
