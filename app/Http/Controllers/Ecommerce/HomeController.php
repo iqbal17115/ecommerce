@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function addShippingAndDelivery() {
+        return view('ecommerce.shipping-and-delivery');
+    }
     public function privacyPolicy() {
         return view('ecommerce.privacy-policy');
     }

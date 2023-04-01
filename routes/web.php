@@ -78,6 +78,7 @@ Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name(
 Route::get('about', [HomeController::class, 'aboutUs'])->name('about');
 Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('terms-condition', [HomeController::class, 'termsAndCondition'])->name('terms-condition');
+Route::get('shipping-and-delivery', [HomeController::class, 'addShippingAndDelivery'])->name('shipping-and-delivery');
 Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');
 Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
 Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
@@ -106,6 +107,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::post('add-terms_condition', [CompanyInfoController::class, 'addTermsCondition'])->name('add.terms_condition');
             Route::post('add-privacy_policy', [CompanyInfoController::class, 'addPrivacyPolicy'])->name('add.privacy_policy');
             Route::post('add-return_policy', [CompanyInfoController::class, 'addReturnPolicy'])->name('add.return_policy');
+            Route::post('add-shipping_and_delivery', [CompanyInfoController::class, 'addShippingAndDelivery'])->name('add.shipping_and_delivery');
             Route::post('add-status', [CompanyInfoController::class, 'addStatus'])->name('add.status');
         }
     );

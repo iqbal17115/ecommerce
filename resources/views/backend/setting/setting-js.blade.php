@@ -1,5 +1,44 @@
 <script type="text/javascript">
-                  // Start Status
+// Start Shipping & Delivery
+$(document).on('submit', '#add_shipping_delivery', function(e) {
+    e.preventDefault();
+    var form = this;
+    $.ajax({
+        url: "{{route('add.shipping_and_delivery')}}",
+        method: 'post',
+        data: new FormData(form),
+        processData: false,
+        dataType: 'json',
+        contentType: false,
+        success: function(data) {
+            console.log(data);
+            if (data.status == 201) {
+                Command: toastr["success"]("Shipping & Delivery Saved Successfully",
+                    "Success")
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            }
+        },
+    });
+});
+// End Shipping & Delivery
+
+// Start Status
 $(document).on('submit', '#add_status', function(e) {
     e.preventDefault();
     var form = this;
@@ -37,7 +76,7 @@ $(document).on('submit', '#add_status', function(e) {
     });
 });
 // End Status
-              // Start Return policy
+// Start Return policy
 $(document).on('submit', '#add_return_policy', function(e) {
     e.preventDefault();
     var form = this;
@@ -75,7 +114,7 @@ $(document).on('submit', '#add_return_policy', function(e) {
     });
 });
 // End Return policy
-          // Start Privacy policy
+// Start Privacy policy
 $(document).on('submit', '#add_privacy_policy', function(e) {
     e.preventDefault();
     var form = this;
@@ -113,7 +152,7 @@ $(document).on('submit', '#add_privacy_policy', function(e) {
     });
 });
 // End Privacy policy
-        // Start Terms & Condition
+// Start Terms & Condition
 $(document).on('submit', '#add_term_condition', function(e) {
     e.preventDefault();
     var form = this;
@@ -151,7 +190,7 @@ $(document).on('submit', '#add_term_condition', function(e) {
     });
 });
 // End Terms & Condition
-    // Start About us
+// Start About us
 $(document).on('submit', '#add_about_us', function(e) {
     e.preventDefault();
     var form = this;
@@ -266,5 +305,4 @@ $(document).on('submit', '#company_vital_info', function(e) {
     });
 });
 // End Company Vital Info
-
 </script>

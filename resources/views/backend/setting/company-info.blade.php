@@ -143,6 +143,11 @@ div#variation_content {
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#shipping-delivery" role="tab">
+                                    <i class="now-ui-icons ui-2_settings-90"></i> Shipping & Delivery
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#activeInactiveStatus" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Status
                                 </a>
@@ -576,6 +581,39 @@ div#variation_content {
                                 <!-- End Return Policy -->
                             </div>
                             <!-- End -->
+                            <div class="tab-pane" id="shipping-delivery" role="tabpanel">
+                                <!-- Start Return Policy -->
+                                <form method="post" id="add_shipping_delivery">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Shipping & Delivery</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <textarea class="form-control" name="shipping_and_delivery"
+                                                        id="shipping_and_delivery" placeholder="Shipping & Delivery">
+                                                        @if($company_info && $company_info->shipping_and_delivery)
+                                                        {!! $company_info->shipping_and_delivery !!}
+                                                        @endif 
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
+                                                </div>
+                                                <!-- End -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                        <!-- End -->
+                                    </div>
+                                </form>
+                                <!-- End Shipping & Delivery -->
+                            </div>
+                            <!-- End -->
                             <div class="tab-pane" id="activeInactiveStatus" role="tabpanel">
                                 <!-- Start Return Policy -->
                                 <form method="post" id="add_status">
@@ -715,6 +753,10 @@ $('#privacy_policy').summernote({
 });
 
 $('#return_policy').summernote({
+    height: 120
+});
+
+$('#shipping_and_delivery').summernote({
     height: 120
 });
 // $('.file-upload').file_upload();

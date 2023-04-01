@@ -24,6 +24,16 @@ class CompanyInfoController extends Controller
             'status' => 201
         ]);
     }
+    public function addShippingAndDelivery(Request $request)
+    {
+        $company_info = CompanyInfo::firstOrNew();
+        $company_info->shipping_and_delivery = $request->shipping_and_delivery;
+        $company_info->save();
+
+        return response()->json([
+            'status' => 201
+        ]);
+    }
     public function addReturnPolicy(Request $request)
     {
         $company_info = CompanyInfo::firstOrNew();
