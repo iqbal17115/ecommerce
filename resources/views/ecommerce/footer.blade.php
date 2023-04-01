@@ -64,7 +64,7 @@
                                 <li><a href="{{ route('privacy-policy') }}" style="color: #777;">Privacy Policies</a></li>
                                 <li><a href="{{ route('terms-condition') }}" style="color: #777;">Terms & Condition</a></li>
                                 <li><a href="{{ route('shipping-and-delivery') }}" style="color: #777;">Shipping & Delivery</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Contact Us</a></li>
+                                <li><a href="{{ route('contact-us') }}" style="color: #777;">Contact Us</a></li>
                             </ul>
                         </div>
                     </div>

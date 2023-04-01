@@ -74,7 +74,7 @@ Route::get('get-district', [CheckoutController::class, 'getDistrict'])->name('ge
 Route::get('get-upazila', [CheckoutController::class, 'getUpazila'])->name('get-upazila');
 Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-union');
 Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
-// Route::get('contact', [HomeController::class, 'Contact'])->name('contact');
+Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('about', [HomeController::class, 'aboutUs'])->name('about');
 Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('terms-condition', [HomeController::class, 'termsAndCondition'])->name('terms-condition');
