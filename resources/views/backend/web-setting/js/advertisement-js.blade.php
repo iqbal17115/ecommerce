@@ -1,40 +1,6 @@
 <script>
     $(document).ready(function() {
 
-        $(document).on('change', '#embed_code_or_image1', function(e) {
-            $('#imgPreview1').show();
-            const file = this.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function(event) {
-                    $('#imgPreview1').attr('src', event.target.result);
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-        $(document).on('change', '#embed_code_or_image2', function(e) {
-            $('#imgPreview2').show();
-            const file = this.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function(event) {
-                    $('#imgPreview2').attr('src', event.target.result);
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-        $(document).on('change', '#embed_code_or_image3', function(e) {
-            $('#imgPreview3').show();
-            const file = this.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function(event) {
-                    $('#imgPreview3').attr('src', event.target.result);
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
         function pagination(page) {
             $.ajax({
                 url: '/pagination/advertisement-pagination-data?page=' + page,
@@ -107,7 +73,6 @@
                 dataType: 'json',
                 contentType: false,
                 success: function(data) {
-console.log(data);
                         // $('#advertisementModal').modal('hide');
                         // $('#addAdvertisement')[0].reset();
                 },
@@ -180,14 +145,13 @@ console.log(data);
         let id = $(this).data('id');
         let page = $(this).data('page');
         let position = $(this).data('position');
-        let style = $(this).data('style');
-        let type = $(this).data('type');
+        let product_feature_id = $(this).data('product_feature_id');
         let is_active = $(this).data('is_active');
-        $('#style').val(style);
-        $('#type').val(type);
+     
         $('#cu_id').val(id);
         $('#page').val(page);
         $('#position').val(position);
+        $('.product_feature_id').val(product_feature_id).trigger("change");
         $('#is_active').val(is_active);
         styleType();
         if ($('#embed_code_or_image1').length) {

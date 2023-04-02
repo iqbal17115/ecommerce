@@ -32,23 +32,24 @@
                                       <span class="text-danger err_position"></span>
                                   </div>
                               </div>
-                              <div class="col-md-12">
+                              <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="style">Ads Style</label>
-                                      <select name="style" id="style" class="form-control ads_content" onchange="styleType()" required>
-                                          <option value="Style One">Style One</option>
-                                          <option value="Style Two">Style Two</option>
-                                          <option value="Style Three">Style Three</option>
-                                          <option value="Style Four">Style Four</option>
-                                          <option value="Style Five">Style Five</option>
-                                      </select>
-                                      <span class="text-danger err_style"></span>
+                                      <label for="ads">Ads</label>
+                                      <input type="file" name="ads" id="ads" class="form-control">
+                                      <span class="text-danger err_ads"></span>
                                   </div>
                               </div>
-                              <div class="col-md-12">
-                                <div class="row" id="ads_content">
-                                    
-                                </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="style">After</label>
+                                      <select name="product_feature_id" id="product_feature_id" class="form-select product_feature_id" required>
+                                                        <option value=""></option>
+                                                        @foreach($product_features as $product_feature)
+                                                        <option value="{{$product_feature->id}}">{{$product_feature->name}}
+                                                        </option>
+                                                        @endforeach
+                                      </select>
+                                  </div>
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">

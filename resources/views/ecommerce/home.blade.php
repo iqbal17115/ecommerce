@@ -1,11 +1,15 @@
 @extends('layouts.ecommerce')
 @section('content')
 <style>
-@media (min-width:1220px){
-    .container{
-        max-width: 1500px;;
+@media (min-width:1220px) {
+    .container {
+        max-width: 1500px;
+        ;
     }
-    }
+}
+.post-slider > .owl-stage-outer, .products-slider > .owl-stage-outer {
+  padding: 0px 0px;
+}
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
@@ -63,7 +67,8 @@
                                     height="240" style="height: 128px; height: 116px; border-radius: 50%;" />
                             </figure>
                             <div class="category-content p-0">
-                                <span style="margin: 8px 12px 0;font-size: 12px;color: #212121;line-height: 18px;height: 36px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">{{$top_show_category->name}}</span>
+                                <span
+                                    style="margin: 8px 12px 0;font-size: 12px;color: #212121;line-height: 18px;height: 36px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">{{$top_show_category->name}}</span>
                             </div>
                         </a>
                     </div>
@@ -80,7 +85,7 @@
         <div class="container">
             @foreach($product_features as $product_feature)
             @if(count($product_feature->Product) > 0)
-            <div class="recent-products-section appear-animate" data-animation-name="fadeIn" data-animation-delay="100">
+            <div class="recent-products-section appear-animate" data-animation-name="fadeIn" data-animation-delay="100" >
                 <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
                     <h4 class="section-title text-transform-none mb-0 mr-0">{{$product_feature->name}}</h4>
                     <a class="view-all ml-auto" href="demo36-shop.html">View
@@ -121,7 +126,8 @@
                             <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
                                 <img @if($product->ProductMainImage)
                                 src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif
-                                width="239" height="239" style="width: 239px; height: 239px; filter: brightness(0.9) contrast(1.2) saturate(1.1);" alt="product">
+                                width="239" height="239" style="width: 239px; height: 239px; filter: brightness(0.9)
+                                contrast(1.2) saturate(1.1);" alt="product">
                             </a>
                             <div class="btn-icon-group">
                                 <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
@@ -139,9 +145,11 @@
                             <div class="price-box">
                                 @php
                                 echo $product->your_price? '<span
-                                    class="old-price">'.$currency->icon.''.number_format((float)$product->your_price, 2).'</span>' : '';
+                                    class="old-price">'.$currency->icon.''.number_format((float)$product->your_price,
+                                    2).'</span>' : '';
                                 echo $product->sale_price? '<span
-                                    class="product-price">'.$currency->icon.''.number_format((float)$product->sale_price, 2).'</span>' :
+                                    class="product-price">'.$currency->icon.''.number_format((float)$product->sale_price,
+                                    2).'</span>' :
                                 '';
                                 @endphp
                             </div>
@@ -152,6 +160,10 @@
                     @endforeach
                 </div>
                 <!-- End .products-slider -->
+
+                <!-- Start Ads -->
+                
+                <!-- End Ads -->
             </div>
             @endif
             @endforeach

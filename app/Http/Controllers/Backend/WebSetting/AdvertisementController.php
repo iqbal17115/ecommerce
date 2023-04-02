@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\WebSetting;
 
 use App\Models\Backend\WebSetting\Advertisement;
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Product\ProductFeature;
 use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
@@ -25,60 +26,41 @@ class AdvertisementController extends Controller
         $request->validate(
             [
                 'page' => 'required',
-                'style' => 'required',
+                'position' => 'required',
+                'product_feature_id' => 'required',
+                'width' => 'required',
                 'is_active' => 'required'
             ],
             [
                 'page' => 'Page is required',
-                'style' => 'Style is required',
+                'position' => 'Position is required',
+                'product_feature_id' => 'Product Feature is required',
+                'width' => 'Width is required',
                 'is_active' => 'Status is required'
             ]
         );
         if ($request->cu_id > 0) {
             $advertisement = Advertisement::find($request->cu_id);
         } else {
+            $request->validate(
+                [
+                    'ads' => 'required'
+                ]
+            );
             $advertisement = new Advertisement();
         }
 
         $advertisement->page = $request->page;
         $advertisement->position = $request->position;
-        $advertisement->style = $request->style;
         $advertisement->width = $request->width;
-        if ($request->style == "Style One") {
-            $advertisement->title = $request->title;
-            $advertisement->sub_title = $request->sub_title;
-        } else if ($request->style == "Style Two") {
-            $advertisement->title = $request->title;
-            $advertisement->sub_title = $request->sub_title;
-            $advertisement->offer = $request->offer;
-            if ($request->file('embed_code_or_image1')) {
-                $imagePath = $request->file('embed_code_or_image1');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
-                $image = $request->file('image')->store('images/advertisement', 'public');
-                $advertisement->image = $image;
-            }
-        } else if ($request->style == "Style Three") {
-            $advertisement->title = $request->title;
-            $advertisement->sub_title = $request->sub_title;
-            $advertisement->offer = $request->offer;
-            if ($request->file('embed_code_or_image1')) {
-                $imagePath = $request->file('embed_code_or_image1');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
-                $image = $request->file('image')->store('images/advertisement', 'public');
-                $advertisement->image = $image;
-            }
-        } else if ($request->style == "Style Four") {
-            $advertisement->title = $request->title;
-            $advertisement->sub_title = $request->sub_title;
-            if ($request->file('embed_code_or_image1')) {
-                $imagePath = $request->file('embed_code_or_image1');
-                $imageName = $imagePath->getClientOriginalName();
-                $path = $request->file('image')->storeAs('uploads', $imageName, 'public');
-                $image = $request->file('image')->store('images/advertisement', 'public');
-                $advertisement->image = $image;
-            }
+        $advertisement->product_feature_id = $request->product_feature_id;
+
+        if ($request->file('ads')) {
+            $imagePath = $request->file('ads');
+            $imageName = $imagePath->getClientOriginalName();
+            $path = $request->file('ads')->storeAs('uploads', $imageName, 'public');
+            $image = $request->file('ads')->store('images/advertisement', 'public');
+            $advertisement->ads = $image;
         }
 
 
@@ -92,6 +74,7 @@ class AdvertisementController extends Controller
     public function index()
     {
         $advertisements = Advertisement::latest()->paginate(10);
-        return view('backend.web-setting.advertisement', compact('advertisements'));
+        $product_features = ProductFeature::whereIsActive(1)->orderBy('id', 'DESC')->get();
+        return view('backend.web-setting.advertisement', compact('advertisements', 'product_features'));
     }
 }

@@ -16,13 +16,9 @@ class CreateAdvertisementsTable extends Migration
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
             $table->enum('page', ['Home', 'Category', 'Details']);
-            $table->enum('style', ['Style One', 'Style Two', 'Style Three', 'Style Four', 'Style Five']);
             $table->enum('width', ['Full', 'Half', 'One Third']);
             $table->tinyInteger('position')->nullable();
-            $table->string('title')->nullable();
-            $table->string('sub_title')->nullable();
-            $table->tinyInteger('offer')->nullable();
-            $table->text('image')->nullable();
+            $table->text('ads')->nullable();
             $table->foreignId('product_feature_id')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
