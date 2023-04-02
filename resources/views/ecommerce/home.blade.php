@@ -168,7 +168,7 @@
             <div class="row">
                 @foreach($product_feature->Advertisement as $feature_ads)
                 <div class="@if($feature_ads->width=='Full') col-md-12 @elseif($feature_ads->width=='Half') col-md-6 @else col-md-4 @endif">
-                    <div class="sale-banner banner bg-image mb-4 appear-animate" data-animation-name="fadeIn"
+                    <div class="sale-banner banner bg-image appear-animate" data-animation-name="fadeIn"
                         data-animation-delay="100"
                         style="background-image: url({{asset('storage/'.$feature_ads->ads)}});">
                         <div class="container banner-content">
