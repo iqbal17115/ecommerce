@@ -234,11 +234,14 @@
                             @php
                             $total += $details['sale_price'] * $details['quantity'];
                             $product = \App\Models\Backend\Product\Product::find($id);
+                            if($product->ProductMoreDetail) {
                             $total_weight += $product->ProductMoreDetail->package_weight;
                             $total_size += ($product->ProductMoreDetail->item_length * $product->ProductMoreDetail->item_width * $product->ProductMoreDetail->item_height);
+                            }
                             @endphp
-                            {{$product->ProductMoreDetail->package_weight}}
-
+                            @if($product->ProductMoreDetail) 
+                               {{$product->ProductMoreDetail->package_weight}}
+                            @endif
                             <tr>
                                 <td class="product-col">
                                     <h3 class="product-title">
