@@ -86,7 +86,7 @@
                         <a href="javascript:;" class="btn btn-dark add-cart mr-2" title="Add to Cart">Add to
                             Cart</a>
 
-                        <a href="cart.html" class="btn btn-gray view-cart d-none">View cart</a>
+                        <a href="{{ route('cart') }}" class="btn btn-gray view-cart d-none">View cart</a>
                     </div>
                     <!-- End .product-action -->
                     </tr>
