@@ -439,6 +439,39 @@ div#variation_content {
                                                 </div>
                                                 <!-- End -->
 
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Twitter</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="text" name="twitter_link" @if($company_info)
+                                                        value="{{$company_info->twitter_link}}" @endif id="twitter_link"
+                                                        class="form-control" placeholder="Twitter Link">
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Instagram</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="text" name="instagram_link" @if($company_info)
+                                                        value="{{$company_info->instagram_link}}" @endif id="instagram_link"
+                                                        class="form-control" placeholder="Instagram Link">
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">LinkedIn</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <input type="text" name="linkedin_link" @if($company_info)
+                                                        value="{{$company_info->linkedin_link}}" @endif id="linkedin_link"
+                                                        class="form-control" placeholder="Instagram Link">
+                                                </div>
+                                                <!-- End -->
+
                                                 <div class="col-md-12 mt-md-3">
                                                     <button class="float-right btn btn-success btn-sm">Save</button>
                                                 </div>

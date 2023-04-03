@@ -101,11 +101,21 @@
                             <div class="social-icons" style="margin-bottom: 5px;">
                                 <a href="Javascript:void(0);"
                                     class="social-icon social-facebook icon-facebook text-dark" target="_blank"></a>
-                                <a href="Javascript:void(0);" class="social-icon social-twitter icon-twitter text-dark"
+                                <a 
+                                @if($company_info && $company_info->twitter_link) 
+                                    href="{{$company_info->twitter_link}}" 
+                                @endif 
+                                class="social-icon social-twitter icon-twitter text-dark"  target="_blank"></a>
+                                <a 
+                                @if($company_info && $company_info->instagram_link) 
+                                    href="{{$company_info->instagram_link}}" 
+                                @endif 
+                                class="social-icon social-instagram icon-instagram text-dark"
                                     target="_blank"></a>
-                                <a href="Javascript:void(0);" class="social-icon social-twitter icon-twitter text-dark"
-                                    target="_blank"></a>
-                                <a href="Javascript:void(0);"
+                                <a 
+                                @if($company_info && $company_info->linkedin_link) 
+                                    href="{{$company_info->linkedin_link}}" 
+                                @endif 
                                     class="social-icon social-linkedin fab fa-linkedin-in text-dark"
                                     target="_blank"></a>
                             </div><!-- End .social-icons -->

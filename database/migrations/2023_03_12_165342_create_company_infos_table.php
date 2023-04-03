@@ -34,6 +34,9 @@ class CreateCompanyInfosTable extends Migration
             $table->text('video_title')->nullable();
             $table->text('facebook_link')->nullable();
             $table->text('youtube_link')->nullable();
+            $table->text('twitter_link')->nullable();
+            $table->text('instagram_link')->nullable();
+            $table->text('linkedin_link')->nullable();
             $table->text('about_us')->nullable();
             $table->text('terms_condition')->nullable();
             $table->text('privacy_policy')->nullable();

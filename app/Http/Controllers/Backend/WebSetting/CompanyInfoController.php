@@ -81,6 +81,9 @@ class CompanyInfoController extends Controller
         $company_info->video_title = $request->video_title;
         $company_info->facebook_link = $request->facebook_link;
         $company_info->youtube_link = $request->youtube_link;
+        $company_info->twitter_link = $request->twitter_link;
+        $company_info->instagram_link = $request->instagram_link;
+        $company_info->linkedin_link = $request->linkedin_link;
         $company_info->save();
 
         return response()->json([
