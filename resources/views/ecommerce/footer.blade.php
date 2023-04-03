@@ -99,7 +99,10 @@
                         <div class="contact-widget follow">
                             <h4 class="widget-title ls-n-10 text-dark">Connect With Us</h4>
                             <div class="social-icons" style="margin-bottom: 5px;">
-                                <a href="Javascript:void(0);"
+                                <a 
+                                @if($company_info && $company_info->facebook_link) 
+                                    href="{{$company_info->facebook_link}}" 
+                                @endif 
                                     class="social-icon social-facebook icon-facebook text-dark" target="_blank"></a>
                                 <a 
                                 @if($company_info && $company_info->twitter_link) 
