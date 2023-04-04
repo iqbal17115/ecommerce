@@ -164,8 +164,10 @@ $(document).ready(function() {
         let parent_category_id = $(this).data('parent_category_id');
         let top_menu = $(this).data('top_menu');
         let sidebar_menu = $(this).data('sidebar_menu');
+        let header_menu = $(this).data('header_menu');
         let position = $(this).data('position');
         let sidebar_menu_position = $(this).data('sidebar_menu_position');
+        let header_menu_position = $(this).data('header_menu_position');
         let icon = $(this).data('icon1');
         let image = $(this).data('image');
         let variation_type = $(this).data('variation_type');
@@ -177,8 +179,10 @@ $(document).ready(function() {
         $('.category_id').val(parent_category_id).trigger("change");
         $('#top_menu').val(top_menu);
         $('#sidebar_menu').val(sidebar_menu);
+        $('#header_menu').val(header_menu);
         $('#position').val(position);
         $('#sidebar_menu_position').val(sidebar_menu_position);
+        $('#header_menu_position').val(header_menu_position);
         if (image) {
             $('#imgPreview').show();
             $('#imgPreview').attr("src", 'storage/' + image);

@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $view->with('parentCategories', Category::whereParentCategoryId(null)->whereTopMenu(1)->orderBy('position', 'asc')->get());
             $view->with('sidebarMenuCategories', Category::whereSidebarMenu(1)->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get());
+            $view->with('headerMenuCategories', Category::whereHeaderMenu(1)->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')->get());
             $view->with('company_info', CompanyInfo::first());
             $view->with('currency', Currency::whereIsDefault(1)->first());
         });

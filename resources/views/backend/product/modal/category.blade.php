@@ -103,7 +103,22 @@
                                   <div class="form-group">
                                       <label for="position">Top Menu Position</label>
                                       <input type="number" name="position" id="position" class="form-control" placeholder="Menu Position">
-                                      <span class="text-danger err_position"></span>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="header_menu">Header Menu</label>
+                                      <select name="header_menu" id="header_menu" class="form-control" required>
+                                          <option value="">Select Option</option>
+                                          <option value="1">Yes</option>
+                                          <option value="0">No</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="header_menu_position">Header Menu Position</label>
+                                      <input type="number" name="header_menu_position" id="header_menu_position" class="form-control" placeholder="Menu Position">
                                   </div>
                               </div>
                               <div class="col-md-6">
