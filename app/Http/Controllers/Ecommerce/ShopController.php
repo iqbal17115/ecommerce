@@ -10,7 +10,9 @@ class ShopController extends Controller
 {
     public function productOrderBy(Request $request) {
         if($request->order==1) {
-        $products = Product::latest()->paginate($request->count);
+            if($request->filter_type == 1) {
+               $products = Product::whereCategoryId($request->filter_for)->latest()->paginate($request->count);
+            }
         } else if($request->order==2) {
             if($request->filter_type == 1) {
                $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'ASC')->paginate($request->count);
