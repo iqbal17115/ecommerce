@@ -315,7 +315,7 @@ $(document).ready(function() {
     $("select.count_paginate").change(function() {
         count = $(this).children("option:selected").val();
         $.ajax({
-            url: '/pagination/shop-pagination-total-data?count=' + count,
+            url: '/pagination/shop-pagination-total-data?count=' + count + '&filter_type=' + filter_type + '&filter_for=' + filter_for,
             success: function(data) {
                 $('#main-content').html(data);
             }

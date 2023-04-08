@@ -25,7 +25,9 @@ class ShopController extends Controller
         return view('ecommerce.paginate-shop', compact('products'))->render();
     }
     public function shopPaginationTotal(Request $request) {
-        $products = Product::latest()->paginate($request->count);
+        if($request->filter_type == 1) {
+            $products = Product::whereCategoryId($request->filter_for)->latest()->paginate($request->count);
+        }
         return view('ecommerce.paginate-shop', compact('products'))->render();
     }
     public function shopPagination(Request $request) {
