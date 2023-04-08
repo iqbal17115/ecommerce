@@ -8,18 +8,31 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    public function shopSearch(Request $request) {
+        $products = Product::where('name', 'like', '%'.$request->q.'%')->orderBy('id', 'desc')->paginate(12);
+        $filter_type = 2;
+        $filter_for = $request->q;
+        return view('ecommerce.shop', compact(['products', 'filter_type', 'filter_for']));
+    }
     public function productOrderBy(Request $request) {
         if($request->order==1) {
             if($request->filter_type == 1) {
                $products = Product::whereCategoryId($request->filter_for)->latest()->paginate($request->count);
+            } else if($request->filter_type == 2) {
+                $products = Product::where('name', 'like', '%'.$request->filter_for.'%')->latest()->paginate($request->count);
             }
         } else if($request->order==2) {
             if($request->filter_type == 1) {
                $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'ASC')->paginate($request->count);
+            } else if($request->filter_type == 2) {
+                $products = Product::where('name', 'like', '%'.$request->filter_for.'%')->latest()->paginate($request->count);
             }
         } else if($request->order==3) {
+
             if($request->filter_type == 1) {
                $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'DESC')->paginate($request->count);
+            } else if($request->filter_type == 2) {
+                $products = Product::where('name', 'like', '%'.$request->filter_for.'%')->latest()->paginate($request->count);
             }
         }
         return view('ecommerce.paginate-shop', compact('products'))->render();

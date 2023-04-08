@@ -303,6 +303,7 @@ filter_for = '';
 $(document).ready(function() {
     filter_type = $( "#filter_type" ).val();
     filter_for = $( "#filter_for" ).val();
+
     $("select.order_of_product").change(function() {
         order = $(this).children("option:selected").val();
         $.ajax({
