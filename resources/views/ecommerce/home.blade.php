@@ -63,7 +63,7 @@
                         }">
                     @foreach($top_show_categories as $top_show_category)
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
-                        <a href="{{ route('shop', ['id'=>$top_show_category->id]) }}">
+                        <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
                             <figure>
                                 <img src="{{ asset('storage/'.$top_show_category->image) }}" alt="category" width="280"
                                     height="240" style="height: 128px; height: 116px; border-radius: 50%;" />

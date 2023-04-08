@@ -32,7 +32,8 @@
                             </svg>
                             <span>Filter</span>
                         </a>
-
+                        <input value="{{$filter_type}}" name="filter_type" id="filter_type" type="hidden"/>
+                        <input value="{{$filter_for}}" name="filter_for" id="filter_for" type="hidden"/>
                         <div class="toolbox-item toolbox-sort">
                             <label>Sort By:</label>
 
@@ -85,8 +86,10 @@
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
                                 <a href="demo36-product.html">
+                                    @if($product->ProductMainImage)
                                     <img src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
                                         width="239" height="239" style="width: 239px; height: 239px;" alt="product">
+                                    @endif
                                 </a>
                                 <div class="btn-icon-group">
                                     <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
@@ -294,11 +297,16 @@
 <!-- End .main -->
 <script>
 count = 12;
+filter_type = '';
+filter_for = '';
+
 $(document).ready(function() {
+    filter_type = $( "#filter_type" ).val();
+    filter_for = $( "#filter_for" ).val();
     $("select.order_of_product").change(function() {
         order = $(this).children("option:selected").val();
         $.ajax({
-            url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order,
+            url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order + '&filter_type=' + filter_type + '&filter_for=' + filter_for,
             success: function(data) {
                 $('#main-content').html(data);
             }
