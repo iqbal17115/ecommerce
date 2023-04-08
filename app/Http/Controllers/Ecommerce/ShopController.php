@@ -12,9 +12,13 @@ class ShopController extends Controller
         if($request->order==1) {
         $products = Product::latest()->paginate($request->count);
         } else if($request->order==2) {
-            $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'ASC')->paginate($request->count);
+            if($request->filter_type == 1) {
+               $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'ASC')->paginate($request->count);
+            }
         } else if($request->order==3) {
-            $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'DESC')->paginate($request->count);
+            if($request->filter_type == 1) {
+               $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'DESC')->paginate($request->count);
+            }
         }
         return view('ecommerce.paginate-shop', compact('products'))->render();
     }
