@@ -25,14 +25,14 @@ class ShopController extends Controller
             if($request->filter_type == 1) {
                $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'ASC')->paginate($request->count);
             } else if($request->filter_type == 2) {
-                $products = Product::where('name', 'like', '%'.$request->filter_for.'%')->latest()->paginate($request->count);
+                $products = Product::where('name', 'like', '%'.$request->filter_for.'%')->orderBy('sale_price', 'ASC')->paginate($request->count);
             }
         } else if($request->order==3) {
 
             if($request->filter_type == 1) {
                $products = Product::whereCategoryId($request->filter_for)->orderBy('sale_price', 'DESC')->paginate($request->count);
             } else if($request->filter_type == 2) {
-                $products = Product::where('name', 'like', '%'.$request->filter_for.'%')->latest()->paginate($request->count);
+                $products = Product::where('name', 'like', '%'.$request->filter_for.'%')->orderBy('sale_price', 'DESC')->paginate($request->count);
             }
         }
         return view('ecommerce.paginate-shop', compact('products'))->render();
