@@ -83,7 +83,10 @@
                         </div>
                         <!-- End .product-single-qty -->
 
-                        <a href="javascript:;" class="btn btn-dark add-cart mr-2" title="Add to Cart">Add to
+                        <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product_detail->id}}"
+                                    data-name="{{$product_detail->name}}" data-your_price="{{$product_detail->your_price}}"
+                                    data-sale_price="{{$product_detail->sale_price}}" @if($product_detail->ProductMainImage)
+                                    data-image="{{$product_detail->ProductMainImage->image }}" @endif class="btn btn-dark btn-add-cart add-cart mr-2" title="Add to Cart">Add to
                             Cart</a>
 
                         <a href="{{ route('cart') }}" class="btn btn-gray view-cart d-none">View cart</a>
@@ -324,5 +327,7 @@
 </main>
 <!-- End .main -->
 @include('ecommerce.cart-js')
-
+<!-- Start Sidebar -->
+@include('ecommerce.sidebar-js')
+<!-- End Sidebar -->
 @endsection

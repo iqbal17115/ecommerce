@@ -91,7 +91,6 @@ $(document).ready(function() {
     $("body").on("click", ".btn-remove", function(e) {
 
         var ele = $(this);
-        alert(ele.parents("div").attr("data-id"));
         $.ajax({
             url: "{{route('remove-from-cart')}}",
             method: "DELETE",
