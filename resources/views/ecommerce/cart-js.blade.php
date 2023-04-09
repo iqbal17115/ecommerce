@@ -152,12 +152,10 @@ $(document).ready(function() {
                         data['new_product']['quantity'] +
                         '</span>' + ' x ' + data['new_product']['sale_price'] +
                         '</span></div><figure class="product-image-container"><a class="product-image product-unique-' +data['new_product']['id'] +'"><img class="img-preview-' +
-                        data[
-                            'new_product']['id'] +
+                        data['new_product']['id'] +
                         '" alt=""></a><a class="btn-remove" title="Remove Product"><span>×</span></a></figure></div>'
                     );
-                    $('.img-preview-' + data['new_product']['id']).attr("src",
-                        'storage/product_photo/' + data['new_product']['image']);
+                    $('.img-preview-' + data['new_product']['id']).attr("src", '/storage/product_photo/' + data['new_product']['image']);
                         $('.product-unique-' + data['new_product']['id']).attr('href', "{{ route('product-detail', ['id' => ' ']) }}" + data['new_product']['id']);
                 }
             },
