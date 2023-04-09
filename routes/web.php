@@ -67,7 +67,7 @@ Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetai
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::get('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
-Route::delete('remove-from-cart', [CartController::class, 'remove']);
+Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove-from-cart');
 Route::post('increase-product-qty', [CartController::class, 'increaseQty']);
 Route::post('decrease-product-qty', [CartController::class, 'decreaseQty']);
 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
