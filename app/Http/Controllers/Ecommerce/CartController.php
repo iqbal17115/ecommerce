@@ -38,7 +38,6 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $cart = session()->get('cart', []);
-        // dd($request->all());
         $new_product = [];
         if (isset($cart[$request->id])) {
             $cart[$request->id]['quantity']++;

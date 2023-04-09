@@ -119,10 +119,11 @@ $(document).ready(function() {
         let your_price = $(this).data("your_price");
         let sale_price = $(this).data("sale_price");
         let image = $(this).data("image");
+
         // ajax
         $.ajax({
-            url: "add-to-cart",
-            method: 'post',
+            url: "{{route('add-to-cart')}}",
+            method: 'get',
             data: {
                 id: id,
                 name: name,
@@ -141,7 +142,7 @@ $(document).ready(function() {
                 if (data['new_product'].length != 0) {
                     var imageSrc = "{{ asset('storage/images/my-image.png') }}";
                     $('.cart-count').text(Object.keys(data['cart']).length);
-                    $(".dropdown-cart-products").append('<div class="product cart-' + data[
+                    $(".dropdown-cart-products").prepend('<div class="product cart-' + data[
                             'new_product']['id'] + '" data-id="' + data['new_product'][
                             'id'
                         ] + '">' +
@@ -161,6 +162,8 @@ $(document).ready(function() {
                 }
             },
             error: function(err) {
+        alert(id);
+
                 var error = err.responseJSON;
                 console.log(error);
             }

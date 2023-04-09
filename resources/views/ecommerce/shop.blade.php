@@ -93,20 +93,23 @@
                     <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
-                                <a href="demo36-product.html">
+                                <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
                                     @if($product->ProductMainImage)
                                     <img src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
                                         width="239" height="239" style="width: 239px; height: 239px;" alt="product">
                                     @endif
                                 </a>
                                 <div class="btn-icon-group">
-                                    <a href="#" class="btn-icon btn-add-cart product-type-simple"><i
-                                            class="icon-shopping-cart"></i></a>
+                                <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
+                                    data-name="{{$product->name}}" data-your_price="{{$product->your_price}}"
+                                    data-sale_price="{{$product->sale_price}}" @if($product->ProductMainImage)
+                                    data-image="{{$product->ProductMainImage->image }}" @endif class="btn-icon
+                                    btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
                                 </div>
                             </figure>
                             <div class="product-details">
                                 <h3 class="product-title">
-                                    <a href="demo36-product.html">{{$product->name}}</a>
+                                    <a href="{{ route('product-detail', ['id'=>$product->id]) }}">{{$product->name}}</a>
                                 </h3>
                                 <!-- End .product-container -->
                                 <div class="price-box">
@@ -303,6 +306,13 @@
     <!-- margin -->
 </main>
 <!-- End .main -->
+<!-- Start Cart -->
+@include('ecommerce.cart-js')
+<!-- End Cart -->
+
+<!-- Start Sidebar -->
+@include('ecommerce.sidebar-js')
+<!-- End Sidebar -->
 <script>
 count = 12;
 filter_type = '';
@@ -345,5 +355,6 @@ $(document).on('click', '.pagination a', function(e) {
     let page = $(this).attr('href').split('page=')[1]
     pagination(page, count);
 });
+
 </script>
 @endsection
