@@ -1,5 +1,13 @@
 @extends('layouts.ecommerce')
 @section('content')
+<style>
+    @media (min-width:1220px) {
+    .container {
+        max-width: 1500px;
+        ;
+    }
+}
+</style>
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
         <div class="container">
