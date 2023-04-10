@@ -1,19 +1,28 @@
 <?php
 
-use App\Http\Controllers\DatatableController;
-use App\Http\Controllers\FrontEnt\HomeController;
-use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\CheckoutController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Backend\Currency\CurrencyController;
+use App\Http\Controllers\Backend\Order\OrderController;
+use App\Http\Controllers\Ecommerce\HomeController;
+use App\Http\Controllers\Ecommerce\ProductDetailController;
 use App\Http\Controllers\FrontEnt\LoginController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Backend\Product\UnitController;
 use App\Http\Controllers\Backend\Product\VariantController;
 use App\Http\Controllers\Backend\Product\BrandController;
 use App\Http\Controllers\Backend\Product\CategoryController;
 use App\Http\Controllers\Backend\Product\MaterialController;
 use App\Http\Controllers\Backend\Product\ProductController;
-
+use App\Http\Controllers\Backend\Product\ConditionController;
+use App\Http\Controllers\Backend\Product\ProductFeatureController;
+use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
+use App\Http\Controllers\Backend\WebSetting\BlockController;
+use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
+use App\Http\Controllers\Backend\WebSetting\CouponController;
+use App\Http\Controllers\Backend\WebSetting\ShippingChargeController;
+use App\Http\Controllers\Backend\WebSetting\SliderController;
+use App\Http\Controllers\Ecommerce\AuthController;
+use App\Http\Controllers\Ecommerce\ShopController;
+use App\Http\Controllers\Ecommerce\CartController;
+use App\Http\Controllers\Ecommerce\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,17 +37,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('change-password-customer', [HomeController::class, 'ChangePassword'])->name('change-password-customer');
-Route::post('change-profile-photo', [HomeController::class, 'ChangeProfilePhoto'])->name('change-profile-photo');
-Route::post('upazila-search', [HomeController::class, 'SearchUpazila'])->name('upazila-search');
-Route::get('edit/{id?}', [HomeController::class, 'EditContact'])->name('edit');
-Route::post('edit', [HomeController::class, 'EditContactById']);
-Route::post('edit-shipping-address', [HomeController::class, 'EditShippingAddress'])->name('edit-shipping-address');
-Route::get('seller-create', [HomeController::class, 'SellerCreateForm'])->name('seller-create');
-Route::post('seller-create', [HomeController::class, 'CreateSeller']);
+// Route::post('change-password-customer', [HomeController::class, 'ChangePassword'])->name('change-password-customer');
+// Route::post('change-profile-photo', [HomeController::class, 'ChangeProfilePhoto'])->name('change-profile-photo');
+// Route::post('upazila-search', [HomeController::class, 'SearchUpazila'])->name('upazila-search');
+// Route::get('edit/{id?}', [HomeController::class, 'EditContact'])->name('edit');
+// Route::post('edit', [HomeController::class, 'EditContactById']);
+// Route::post('edit-shipping-address', [HomeController::class, 'EditShippingAddress'])->name('edit-shipping-address');
+// Route::get('seller-create', [HomeController::class, 'SellerCreateForm'])->name('seller-create');
+// Route::post('seller-create', [HomeController::class, 'CreateSeller']);
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
-Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 Route::get('/', function () {
     return view('auth.login');
@@ -46,160 +54,258 @@ Route::get('/', function () {
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/customer_login', [HomeController::class, 'CustomerLogin'])->name('customer_login');
-Route::get('/check-out', [HomeController::class, 'checkOut'])->name('check-out');
-Route::get('/offer', [HomeController::class, 'Offer'])->name('offer');
-Route::get('/product-search/', [HomeController::class, 'productSearch'])->name('product-search');
-Route::get('/feature-wise/{feature}', [HomeController::class, 'FeatureWise'])->name('feature-wise');
-Route::get('/all-category-wise/{id?}', [HomeController::class, 'allCategoryWise'])->name('all-category-wise');
-Route::get('/category/{id?}', [HomeController::class, 'Category'])->name('category');
-Route::get('/sub-category/{id?}', [HomeController::class, 'SubCategory'])->name('sub-category');
-Route::get('/sub-sub-category/{id?}', [HomeController::class, 'SubSubCategory'])->name('sub-sub-category');
-Route::get('/search-category-wise/{id?}', [HomeController::class, 'searchByCategory'])->name('search-category-wise');
-Route::get('/search-subCategory-wise/{id?}', [HomeController::class, 'searchBySubCategory'])->name('search-subCategory-wise');
-Route::get('/search-subSubCategory-wise/{id?}', [HomeController::class, 'searchBySubSubCategory'])->name('search-subSubCategory-wise');
-Route::get('/search-brand-wise/{id?}', [HomeController::class, 'searchByBrand'])->name('search-brand-wise');
-Route::post('/ajax/add-to-card-store', [HomeController::class, 'addToCardStore'])->name('ajax-add-to-card-store');
-Route::post('/ajax/add-to-card-quantity-update', [HomeController::class, 'cartProductQuantityUpdate'])->name('ajax-add-to-card-quantity-update');
-Route::post('/ajax/add-to-card-product-delete', [HomeController::class, 'cartProductDelete'])->name('ajax-add-to-card-product-delete');
-Route::get('/confirm-order', [HomeController::class, 'HomePage'])->name('confirm-order');
-Route::post('/confirm-order', [HomeController::class, 'confirmOrder'])->name('confirm-order');
-Route::post('/ajax/send-message', [HomeController::class, 'messages'])->name('send-message');
-Route::get('/order-completed/{id?}', [HomeController::class, 'orderComplete'])->name('order-completed');
-Route::get('product-details/{id?}', [HomeController::class, 'productDetails'])->name('product-details');
-Route::get('my-account', [HomeController::class, 'MyAccount'])->name('my-account');
-Route::get('order-details/{id?}', [HomeController::class, 'OrderDetail'])->name('order-details');
-Route::get('contact', [HomeController::class, 'Contact'])->name('contact');
-Route::get('about', [HomeController::class, 'About'])->name('about');
-Route::get('privacy-policy', [HomeController::class, 'PrivacyPolicy'])->name('privacy-policy');
-Route::get('terms-condition', [HomeController::class, 'TermsAndCondition'])->name('terms-condition');
+Route::get('/get_sidebar_content', [HomeController::class, 'getSidebarContent'])->name('get_sidebar_content');
+Route::get('/check_sub_category', [HomeController::class, 'checkSubCategory'])->name('check_sub_category');
+Route::get('/get_sub_category', [HomeController::class, 'getSubCategory'])->name('get_sub_category');
+Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])->name('get_parent_category');
+Route::get('/catalog/{id}', [ShopController::class, 'shop'])->name('catalog');
+Route::get('/search/{q?}', [ShopController::class, 'shopSearch'])->name('search');
+Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagination']);
+Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
+Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
+Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
+Route::get('cart', [CartController::class, 'index'])->name('cart');
+Route::get('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove-from-cart');
+Route::post('increase-product-qty', [CartController::class, 'increaseQty']);
+Route::post('decrease-product-qty', [CartController::class, 'decreaseQty']);
+Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('get-district', [CheckoutController::class, 'getDistrict'])->name('get-district');
+Route::get('get-upazila', [CheckoutController::class, 'getUpazila'])->name('get-upazila');
+Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-union');
+Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
+Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
+Route::get('about', [HomeController::class, 'aboutUs'])->name('about');
+Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('terms-condition', [HomeController::class, 'termsAndCondition'])->name('terms-condition');
+Route::get('shipping-and-delivery', [HomeController::class, 'addShippingAndDelivery'])->name('shipping-and-delivery');
 Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');
-
+Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
+Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
+Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
+// 
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
-    Route::get('/admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+    Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
-        // Unit Start
-        Route::get('product-unit', [UnitController::class, 'index'])->name('product-unit');
-        Route::post('add-unit', [UnitController::class, 'addUnit'])->name('add.unit');
-        Route::post('delete-unit', [UnitController::class, 'deleteUnit'])->name('delete.unit');
-        Route::get('pagination/unit-pagination-data', [UnitController::class, 'pagination']);
-        Route::get('search-unit', [UnitController::class, 'searchUnit'])->name('search.unit');
-        // Unit Start
+    // Order Start
+    Route::group(
+        [],
+        function () {
+            Route::get('new-order', [OrderController::class, 'index'])->name('new-order');
+            Route::get('order-detail', [OrderController::class, 'orderDetail'])->name('order-detail');
+        }
+    );
 
-        // Unit Start
-        Route::get('product-variant', [VariantController::class, 'index'])->name('product-variant');
-        Route::post('add-variant', [VariantController::class, 'addVariant'])->name('add.variant');
-        Route::post('delete-variant', [VariantController::class, 'deleteVariant'])->name('delete.variant');
-        Route::get('pagination/variant-pagination-data', [VariantController::class, 'pagination']);
-        Route::get('search-variant', [VariantController::class, 'searchVariant'])->name('search.variant');
-        // End Start
+    // Start Manage Company
+    Route::group(
+        [],
+        function () {
+            Route::get('company-info', [CompanyInfoController::class, 'index'])->name('company-info');
+            Route::post('add-company_vital_info', [CompanyInfoController::class, 'addVitalInfo'])->name('add.company_vital_info');
+            Route::post('add-add_link', [CompanyInfoController::class, 'addLink'])->name('add.add_link');
+            Route::post('add-about_us', [CompanyInfoController::class, 'addAboutUs'])->name('add.about_us');
+            Route::post('add-terms_condition', [CompanyInfoController::class, 'addTermsCondition'])->name('add.terms_condition');
+            Route::post('add-privacy_policy', [CompanyInfoController::class, 'addPrivacyPolicy'])->name('add.privacy_policy');
+            Route::post('add-return_policy', [CompanyInfoController::class, 'addReturnPolicy'])->name('add.return_policy');
+            Route::post('add-shipping_and_delivery', [CompanyInfoController::class, 'addShippingAndDelivery'])->name('add.shipping_and_delivery');
+            Route::post('add-status', [CompanyInfoController::class, 'addStatus'])->name('add.status');
+        }
+    );
+    // End Manage Company
 
-        // Unit Brand
-        Route::get('product-brand', [BrandController::class, 'index'])->name('product-brand');
-        Route::post('add-brand', [BrandController::class, 'addBrand'])->name('add.brand');
-        Route::post('delete-brand', [BrandController::class, 'deleteBrand'])->name('delete.brand');
-        Route::get('pagination/brand-pagination-data', [BrandController::class, 'pagination']);
-        Route::get('search-brand', [BrandController::class, 'searchBrand'])->name('search.brand');
-        // Unit Brand
+    // Unit Start
+    Route::group(
+        [],
+        function () {
+            Route::get('product-unit', [UnitController::class, 'index'])->name('product-unit');
+            Route::post('add-unit', [UnitController::class, 'addUnit'])->name('add.unit');
+            Route::post('delete-unit', [UnitController::class, 'deleteUnit'])->name('delete.unit');
+            Route::get('pagination/unit-pagination-data', [UnitController::class, 'pagination']);
+            Route::get('search-unit', [UnitController::class, 'searchUnit'])->name('search.unit');
+        }
+    );
+    // Unit Start
 
-        // Unit Category
-        Route::get('product-category', [CategoryController::class, 'index'])->name('product-category');
-        Route::post('add-category', [CategoryController::class, 'addCategory'])->name('add.category');
-        Route::post('delete-category', [CategoryController::class, 'deleteCategory'])->name('delete.category');
-        Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
-        Route::get('search-category', [CategoryController::class, 'searchCategory'])->name('search.category');
-        // Unit Category
+    // Unit Start
+    Route::group(
+        [],
+        function () {
+            Route::get('product-variant', [VariantController::class, 'index'])->name('product-variant');
+            Route::post('add-variant', [VariantController::class, 'addVariant'])->name('add.variant');
+            Route::post('delete-variant', [VariantController::class, 'deleteVariant'])->name('delete.variant');
+            Route::get('pagination/variant-pagination-data', [VariantController::class, 'pagination']);
+            Route::get('search-variant', [VariantController::class, 'searchVariant'])->name('search.variant');
+            Route::get('get-variant/{type}', [VariantController::class, 'getVariant'])->name('get-variant');
+            Route::get('variant/{id}', [VariantController::class, 'getVariantById'])->name('variant');
+        }
+    );
+    // End Start
 
-        // Material Start
-        Route::get('product-material', [MaterialController::class, 'index'])->name('product-material');
-        Route::post('add-material', [MaterialController::class, 'addMaterial'])->name('add.material');
-        Route::post('delete-material', [MaterialController::class, 'deleteMaterial'])->name('delete.material');
-        Route::get('pagination/material-pagination-data', [MaterialController::class, 'pagination']);
-        Route::get('search-material', [MaterialController::class, 'searchMaterial'])->name('search.material');
-        // Material End
+    // Unit Brand
+    Route::group(
+        [],
+        function () {
+            Route::get('product-brand', [BrandController::class, 'index'])->name('product-brand');
+            Route::post('add-brand', [BrandController::class, 'addBrand'])->name('add.brand');
+            Route::post('delete-brand', [BrandController::class, 'deleteBrand'])->name('delete.brand');
+            Route::get('pagination/brand-pagination-data', [BrandController::class, 'pagination']);
+            Route::get('search-brand', [BrandController::class, 'searchBrand'])->name('search.brand');
+        }
+    );
+    // Unit Brand
 
-        // Unit Product
-        Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
-        // Unit Product
-    
-    Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
+    // Unit Category
+    Route::group(
+        [],
+        function () {
+            Route::get('product-category', [CategoryController::class, 'index'])->name('product-category');
+            Route::post('add-category', [CategoryController::class, 'addCategory'])->name('add.category');
+            Route::post('delete-category', [CategoryController::class, 'deleteCategory'])->name('delete.category');
+            Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
+            Route::get('category.hierarchy', [CategoryController::class, 'categoryHierarchy'])->name('category.hierarchy');
+            Route::get('category', [CategoryController::class, 'searchCategory'])->name('search.category');
+        }
+    );
+    // Unit Category
 
-        // Start Report
-        Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
+    // Material Start
+    Route::group(
+        [],
+        function () {
+            Route::get('product-material', [MaterialController::class, 'index'])->name('product-material');
+            Route::post('add-material', [MaterialController::class, 'addMaterial'])->name('add.material');
+            Route::post('delete-material', [MaterialController::class, 'deleteMaterial'])->name('delete.material');
+            Route::get('pagination/material-pagination-data', [MaterialController::class, 'pagination']);
+            Route::get('search-material', [MaterialController::class, 'searchMaterial'])->name('search.material');
+        }
+    );
+    // Material End
 
-            Route::get('purchase-report-new', [ReportController::class, 'PurchaseReport'])->name('purchase-report-new');
-            Route::get('purchase-report-data', [ReportController::class, 'PurchaseReportDate'])->name('purchase-report-data');
+    // Start Condition
+    Route::group(
+        [],
+        function () {
+            Route::get('condition', [ConditionController::class, 'index'])->name('condition');
+            Route::post('add-condition', [ConditionController::class, 'addCondition'])->name('add.condition');
+            Route::post('delete-condition', [ConditionController::class, 'deleteCondition'])->name('delete.condition');
+            Route::get('pagination/condition-pagination-data', [ConditionController::class, 'pagination']);
+            Route::get('search-condition', [ConditionController::class, 'searchCondition'])->name('search.condition');
+            Route::get('get-condition', [ConditionController::class, 'getCondition'])->name('get-condition');
+        }
+    );
+    // End Condition
+    // Start Product Feature
+    Route::group(
+        [],
+        function () {
+            Route::get('feature', [ProductFeatureController::class, 'index'])->name('feature');
+            Route::post('add-feature', [ProductFeatureController::class, 'addProductFeature'])->name('add.feature');
+            Route::post('delete-feature', [ProductFeatureController::class, 'deleteProductFeature'])->name('delete.feature');
+            Route::get('pagination/feature-pagination-data', [ProductFeatureController::class, 'pagination']);
+            Route::get('search-feature', [ProductFeatureController::class, 'searchProductFeature'])->name('search.feature');
+            Route::get('get-feature', [ProductFeatureController::class, 'getProductFeature'])->name('get-feature');
+        }
+    );
+    // End Product Feature
+    // Start Product
+    Route::group(
+        [],
+        function () {
+            Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
+            Route::get('get-category/{id}', [ProductController::class, 'getCategory'])->name('get-category');
+            Route::post('add-product_identity', [ProductController::class, 'addProductIdentity'])->name('add.product_identity');
+            Route::post('add-vital_info', [ProductController::class, 'addVitalInfo'])->name('add.vital_info');
+            Route::post('add-add_product_detail_info', [ProductController::class, 'addProductDetailInfo'])->name('add.add_product_detail_info');
+            Route::post('add-add_product_image_info', [ProductController::class, 'addProductImageInfo'])->name('add.add_product_image_info');
+            Route::post('add-add_product_description_info', [ProductController::class, 'addProductDescriptionInfo'])->name('add.add_product_description_info');
+            Route::post('add-add_product_keyword', [ProductController::class, 'addProductKeywordInfo'])->name('add.add_product_keyword');
+            Route::post('add-add_product_compliance', [ProductController::class, 'addProductComplianceInfo'])->name('add.add_product_compliance');
+            Route::post('add-add_product_more_detail', [ProductController::class, 'addProductMoreDetailInfo'])->name('add.add_product_more_detail');
+            Route::post('add-add_variant_variant', [ProductController::class, 'addProductVariantInfo'])->name('add.add_variant_variant');
+            Route::post('delete-product', [ProductController::class, 'deleteProduct'])->name('delete.product');
+            Route::get('product_list', [ProductController::class, 'productList'])->name('product_list');
+            Route::get('pagination/product-pagination-data', [ProductController::class, 'pagination']);
+            Route::get('search-product', [ProductController::class, 'searchProduct'])->name('search.product');
+        }
+    );
+    // End Product
 
-            Route::get('sale-report-new', [ReportController::class, 'SaleReport'])->name('sale-report-new');
-            Route::get('sale-report-data', [ReportController::class, 'SaleReportData'])->name('sale-report-data');
+        // Start Slider
+        Route::group(
+            [],
+            function () {
+                Route::get('shipping-charge', [ShippingChargeController::class, 'index'])->name('shipping-charge');
+                Route::post('add-shipping-charge', [ShippingChargeController::class, 'addShippingCharge'])->name('add.shipping-charge');
+                Route::post('delete-shipping-charge', [ShippingChargeController::class, 'deleteShippingCharge'])->name('delete.shipping-charge');
+                Route::get('pagination/shipping-charge-pagination-data', [ShippingChargeController::class, 'pagination']);
+            }
+        );
+        // End Slider
 
-            Route::get('purchase-details-report-new', [ReportController::class, 'PurchaseDetailReport'])->name('purchase-details-report-new');
-            Route::get('purchase-details-report-data', [ReportController::class, 'PurchaseDetailReportData'])->name('purchase-details-report-data');
+    // Start Slider
+    Route::group(
+        [],
+        function () {
+            Route::get('slider', [SliderController::class, 'index'])->name('slider');
+            Route::post('add-slider', [SliderController::class, 'addSlider'])->name('add.slider');
+            Route::post('delete-slider', [SliderController::class, 'deleteSlider'])->name('delete.slider');
+            Route::get('pagination/slider-pagination-data', [SliderController::class, 'pagination']);
+        }
+    );
+    // End Slider
 
-            Route::get('cash-bank-book-report-new', [ReportController::class, 'CashBankBookReport'])->name('cash-bank-book-report-new');
-            Route::get('cash-bank-book-report-data', [ReportController::class, 'CashBankBookReportData'])->name('cash-bank-book-report-data');
+    // Start Advertisement
+    Route::group(
+        [],
+        function () {
+            Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement');
+            Route::post('add-advertisement', [AdvertisementController::class, 'addAdvertisement'])->name('add.advertisement');
+            Route::post('delete-advertisement', [AdvertisementController::class, 'deleteAdvertisement'])->name('delete.advertisement');
+            Route::get('pagination/advertisement-pagination-data', [AdvertisementController::class, 'pagination']);
+            Route::get('search-advertisement', [AdvertisementController::class, 'searchAdvertisement'])->name('search.advertisement');
+            Route::get('get-product-feature', [ProductFeatureController::class, 'getFeature'])->name('get-product-feature');
+        }
+    );
+    // End Advertisement
 
-            Route::get('sale-details-report-new', [ReportController::class, 'SaleDetailReport'])->name('sale-details-report-new');
-            Route::get('sale-details-report-data', [ReportController::class, 'SaleDetailReportData'])->name('sale-details-report-data');
+    // Start Coupon
+    Route::group(
+        [],
+        function () {
+            Route::get('coupon', [CouponController::class, 'index'])->name('coupon');
+            Route::post('add-coupon', [CouponController::class, 'addCoupon'])->name('add.coupon');
+            Route::post('delete-coupon', [CouponController::class, 'deleteCoupon'])->name('delete.coupon');
+            Route::get('pagination/coupon-pagination-data', [CouponController::class, 'pagination']);
+            Route::get('search-coupon', [CouponController::class, 'searchCoupon'])->name('search.coupon');
+        }
+    );
+    // End Coupon
 
-            Route::get('stock-report-new', [ReportController::class, 'StockReport'])->name('stock-report-new');
-            Route::get('stock-report-data', [ReportController::class, 'StockReportData'])->name('stock-report-data');
+    // Start Block
+    Route::group(
+        [],
+        function () {
+            Route::get('block', [BlockController::class, 'index'])->name('block');
+            Route::post('add-block', [BlockController::class, 'addBlock'])->name('add.block');
+            Route::post('delete-block', [BlockController::class, 'deleteBlock'])->name('delete.block');
+            Route::get('pagination/block-pagination-data', [BlockController::class, 'pagination']);
+            Route::get('search-block', [BlockController::class, 'searchBlock'])->name('search.block');
+        }
+    );
+    // End Block
 
-            Route::get('customer-ledger-report-new', [ReportController::class, 'CustomerLedgerReport'])->name('customer-ledger-report-new');
-            Route::get('customer-ledger-report-data', [ReportController::class, 'CustomerLedgerReportData'])->name('customer-ledger-report-data');
+    // Start Currency
+    Route::group(
+        [],
+        function () {
+            Route::get('currency', [CurrencyController::class, 'index'])->name('currency');
+            Route::post('add-currency', [CurrencyController::class, 'addCurrency'])->name('add.currency');
+            Route::post('delete-currency', [CurrencyController::class, 'deleteCurrency'])->name('delete.currency');
+            Route::get('pagination/currency-pagination-data', [CurrencyController::class, 'pagination']);
+            Route::get('search-currency', [CurrencyController::class, 'searchCurrency'])->name('search.currency');
+        }
+    );
+    // End Currency
 
-            Route::get('supplier-ledger-report-new', [ReportController::class, 'SupplierLedgerReport'])->name('supplier-ledger-report-new');
-            Route::get('supplier-ledger-report-data', [ReportController::class, 'SupplierLedgerReportData'])->name('supplier-ledger-report-data');
-
-            Route::get('customer-due-report-new', [ReportController::class, 'CustomerDueReport'])->name('customer-due-report-new');
-            Route::get('customer-due-report-data', [ReportController::class, 'CustomerDueReportData'])->name('customer-due-report-data');
-
-            Route::get('supplier-due-report-new', [ReportController::class, 'SupplierDueReport'])->name('supplier-due-report-new');
-            Route::get('supplier-due-report-data', [ReportController::class, 'SupplierDueReportData'])->name('supplier-due-report-data');
-
-            Route::get('profit-loss-report-new', [ReportController::class, 'ProfitLossReport'])->name('profit-loss-report-new');
-            Route::get('profit-loss-report-data', [ReportController::class, 'ProfitLossReportData'])->name('profit-loss-report-data');
-
-            Route::get('receivable-report-new', [ReportController::class, 'ReceivableReport'])->name('receivable-report-new');
-            Route::get('receivable-report-data', [ReportController::class, 'ReceivableReportData'])->name('receivable-report-data');
-
-            Route::get('payable-report-new', [ReportController::class, 'PayableReport'])->name('payable-report-new');
-            Route::get('payable-report-data', [ReportController::class, 'PayableReportData'])->name('payable-report-data');
-        });
-        // End Report
-        Route::group(['prefix' => 'data', 'as' => 'data.'], function () {
-            Route::get('category_table', [DatatableController::class, 'CategoryTable'])->name('category_table');
-            Route::get('sub_category_table', [DatatableController::class, 'SubCategoryTable'])->name('sub_category_table');
-            Route::get('sub_sub_category_table', [DatatableController::class, 'SubSubCategoryTable'])->name('sub_sub_category_table');
-            Route::get('product_table', [DatatableController::class, 'ProductTable'])->name('product_table');
-            Route::get('branch_table', [DatatableController::class, 'BranchTable'])->name('branch_table');
-            Route::get('currency_table', [DatatableController::class, 'CurrencyTable'])->name('currency_table');
-            Route::get('delivery_method_table', [DatatableController::class, 'DeliveryMethodTable'])->name('delivery_method_table');
-            Route::get('warehouse_table', [DatatableController::class, 'WarehouseTable'])->name('warehouse_table');
-            Route::get('unit_table', [DatatableController::class, 'UnitTable'])->name('unit_table');
-            Route::get('feature_product_table', [DatatableController::class, 'FeatureProductTable'])->name('feature_product_table');
-            Route::get('slider_table', [DatatableController::class, 'SliderTable'])->name('slider_table');
-            Route::get('brand_table', [DatatableController::class, 'BrandTable'])->name('brand_table');
-            Route::get('invoiceSetting_table', [DatatableController::class, 'InvoiceSettingTable'])->name('invoiceSetting_table');
-            Route::get('vat_table', [DatatableController::class, 'VatTable'])->name('vat_table');
-            Route::get('shipping_charge', [DatatableController::class, 'ShippingChargeTable'])->name('shipping_charge');
-            Route::get('coupon_table', [DatatableController::class, 'CouponTable'])->name('coupon_table');
-            Route::get('paymentMethod_table', [DatatableController::class, 'paymentMethodTable'])->name('paymentMethod_table');
-            Route::get('invoiceSave', [DatatableController::class, 'InvoiceTable'])->name('invoiceSave');
-            Route::get('customer_table', [DatatableController::class, 'CustomerTable'])->name('customer_table');
-            Route::get('supplier_table', [DatatableController::class, 'SupplierTable'])->name('supplier_table');
-            Route::get('staff_table', [DatatableController::class, 'StaffTable'])->name('staff_table');
-            Route::get('contact_category_table', [DatatableController::class, 'ContactCategoryTable'])->name('contact_category_table');
-            Route::get('purchase_list', [DatatableController::class, 'PurchaseListTable'])->name('purchase_list');
-            Route::get('sale_list', [DatatableController::class, 'SaleListTable'])->name('sale_list');
-            Route::get('news_list', [DatatableController::class, 'NewsListTable'])->name('news_list');
-            Route::get('language_list', [DatatableController::class, 'LanguageListTable'])->name('language_list');
-            Route::get('manage_language_list', [DatatableController::class, 'LanguageListTable'])->name('manage_language_list');
-            Route::get('vendor_table', [DatatableController::class, 'VendorListTable'])->name('vendor_table');
-            Route::get('vendor_approved_table', [DatatableController::class, 'VendorApprovedListTable'])->name('vendor_approved_table');
-            Route::get('vendor_cancel_table', [DatatableController::class, 'VendorCancelListTable'])->name('vendor_cancel_table');
-            Route::get('all_user_table', [DatatableController::class, 'AllUserList'])->name('all_user_table');
-            Route::get('offer_table', [DatatableController::class, 'OfferList'])->name('offer_table');
-        });
-    });
 });

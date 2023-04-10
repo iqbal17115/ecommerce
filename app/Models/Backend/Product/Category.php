@@ -11,10 +11,14 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+    public function Product()
+    {
+        return $this->hasMany(Product::class);
+    }
     public function SubCategory() {
-        return $this->hasMany(self::class, 'parent_category_id');
-     }
+        return $this->hasMany(self::class, 'parent_category_id')->orderBy('position', 'ASC');
+    }
     public function Parent() {
-       return $this->belongsTo(self::class, 'parent_category_id');
+       return $this->belongsTo(self::class, 'parent_category_id')->orderBy('position', 'ASC');
     }
 }

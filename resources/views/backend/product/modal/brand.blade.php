@@ -18,7 +18,7 @@
                                   <div class="form-group">
                                       <label for="name">Brand Name</label>
                                       <input type="text" name="name" id="name" class="form-control"
-                                          placeholder="Enter Brand Name">
+                                          placeholder="Enter Brand Name" required>
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
@@ -41,7 +41,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>
-                                      <select name="is_active" id="is_active" class="form-control">
+                                      <select name="is_active" id="is_active" class="form-control" required>
                                           <option value="">Select Status</option>
                                           <option value="1">Active</option>
                                           <option value="0">Inactive</option>

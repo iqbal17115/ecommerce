@@ -45,10 +45,6 @@ class Product extends Model
         return $this->hasOne(ProductImage::class)->orderBy('id', 'desc');
     }
 
-    public function ProductImageTop4()
-    {
-        return $this->hasMany(ProductImage::class)->where('is_default','!=', 1);
-    }
 
     public function Category()
     {

@@ -138,13 +138,7 @@
                                         <x-jet-label for="address" value="{{ __('Zila') }}" />
                                         <select class="custom-select district" name="district_id" required>
                                             <option value="">--Select--</option>
-                                            @foreach ($Districts as $zilla)
-                                            <option value="{{$zilla->id}}"
-                                                class="district-items division_id_{{$zilla->division_id}} "
-                                                 style="color:black;" @if($zilla->
-                                                 name=='Dhaka') selected @endif>{{$zilla->name}}
-                                            </option>
-                                            @endforeach
+                                      
                                         </select>
                                     </div>
                                     <div class="form-grp">
@@ -180,9 +174,7 @@
                             <div class="form-grp-bottom">
                                 {{-- <div class="remember">
                                     <input type="checkbox" id="check" checked>
-                                    <label for="check">I agree to the <a href="{{route('privacy-policy')}}">Privacy
-                                Policy</a> and <a href="{{route('terms-conditios')}}"> Terms & Conditions
-                                </a> of Paikari Electronics.</label>
+                               
                             </div> --}}
                             {{-- <div class="forget-pass">
                                         <a href="#">forgot password</a>

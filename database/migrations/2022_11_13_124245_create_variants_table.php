@@ -15,7 +15,7 @@ class CreateVariantsTable extends Migration
     {
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['Size', 'Color']);
+            $table->enum('type', ['Size', 'Color', 'Material_Type']);
             $table->string('name', 30);
             $table->string('color_code', 20)->nullable();
             $table->foreignId('branch_id');

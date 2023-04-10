@@ -16,7 +16,6 @@ class Order extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-
     public function SaleInvoice(){
         return $this->hasOne(SaleInvoice::class);
     }

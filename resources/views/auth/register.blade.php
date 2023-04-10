@@ -36,10 +36,7 @@
                             <div class="my-account-content">
                                 <p style="color: #ff5c00;">আপনাকে স্বাগতম পাইকারী ইলেকট্রনিক্স অ্যাপে</p>
                                 <div class="direct-login">
-                                    <a class="btn-hover" href="{{route('sign-in')}}"
-                                        style="background-color: red;font-weight: bold;"><i
-                                            class="form-grp-btn"></i>লগইন</a>
-                                    {{-- <a href="#" class="xing"><i class="fab fa-xing"></i>Login with xing</a> --}}
+                           
                                 </div>
                                 {{-- <x-jet-authentication-card> --}}
                                 <x-slot name="logo">
@@ -69,13 +66,7 @@
                                 <x-jet-label for="address" value="{{ __('জেলা') }}" />
                                 <select class="custom-select district" name="district_id" required>
                                     <option value="">সিলেক্ট করুন</option>
-                                    @foreach ($Districts as $zilla)
-                                    <option value="{{$zilla->id}}"
-                                        class="district-items division_id_{{$zilla->division_id}} " style="color:black;"
-                                        @if($zilla->
-                                        name=='Dhaka') selected @endif>{{$zilla->name}}
-                                    </option>
-                                    @endforeach
+                                
                                 </select>
                             </div>
                             <div class="form-grp">
@@ -117,14 +108,7 @@
                             </div>
                             @endif
 
-                            <div class="form-grp-bottom">
-                                <div class="remember">
-                                    <input type="checkbox" id="check" checked>
-                                    <label for="check">I agree to the <a href="{{route('privacy-policy')}}">Privacy
-                                            Policy</a> and <a href="{{route('terms-conditios')}}"> Terms & Conditions
-                                        </a> of Paikari Electronics.</label>
-                                </div>
-                            </div>
+                       
                             <div class="form-grp-btn">
                                 <center>
                                     <button type="submit" class="btn"

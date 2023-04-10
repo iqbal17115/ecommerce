@@ -1,5 +1,39 @@
 <script>
 $(document).ready(function() {
+    $(document).on('click', '.category-hierarchy', function(e) {
+        $('.category-hierarchy-data').html();
+        let id = $(this).data('id');
+        $.ajax({
+            url: "{{route('category.hierarchy')}}",
+            method: 'get',
+            data: {
+                id: id
+            },
+            success: function(data) {
+                console.log(data['category']);
+                category_hierarchy = '';
+                if(data['category']['parent']['name'] != null) {
+                category_hierarchy +=
+                    '<div class="card-header bg-primary text-white">'+ data['category']['parent']['name'] +'</div>';
+                }
+                category_hierarchy +=
+                    '<div class="card-body"><ul class="list-group list-group-flush">';
+                category_hierarchy +=
+                    '<li class="list-group-item active">'+data['category']['name']+'</li>';
+                category_hierarchy += '<ul class="list-group">';
+                for (var i = 0; i < data['child_categories'].length; i++) {
+                    category_hierarchy +=
+                        '<li class="list-group-item">'+data['child_categories'][i]['name']+'</li>';
+                }
+                category_hierarchy += '</ul></ul></div>';
+
+                $('.category-hierarchy-data').html(category_hierarchy);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
     $('#imgPreviewIcon').hide();
     $('#imgPreview').hide();
     $(document).on('change', '#image', function(e) {
@@ -26,7 +60,7 @@ $(document).ready(function() {
             reader.readAsDataURL(file);
         }
     });
-    $(document).on('keyup', function(e) {
+    $("#search_string").on('keyup', function(e) {
         e.preventDefault();
         let search_string = $("#search_string").val();
         $.ajax({
@@ -114,6 +148,14 @@ $(document).ready(function() {
         $('#cu_id').val(-1);
         $('#imgPreviewIcon').hide();
         $('#imgPreview').hide();
+        $(".category_id").select2({
+            dropdownParent: $("#categoryModal"),
+            placeholder: 'Select An Option'
+        });
+        $(".variation_type").select2({
+            dropdownParent: $("#categoryModal"),
+            placeholder: 'Select An Option'
+        });
     });
 
     $(document).on('click', '.update_form', function(e) {
@@ -121,18 +163,26 @@ $(document).ready(function() {
         let name = $(this).data('name');
         let parent_category_id = $(this).data('parent_category_id');
         let top_menu = $(this).data('top_menu');
+        let sidebar_menu = $(this).data('sidebar_menu');
+        let header_menu = $(this).data('header_menu');
         let position = $(this).data('position');
+        let sidebar_menu_position = $(this).data('sidebar_menu_position');
+        let header_menu_position = $(this).data('header_menu_position');
         let icon = $(this).data('icon1');
         let image = $(this).data('image');
+        let variation_type = $(this).data('variation_type');
         let vendor_commission_percentage = $(this).data('vendor_commission_percentage');
         let is_active = $(this).data('is_active');
-
         $('#cu_id').val(id);
         $('#id').val(id);
         $('#name').val(name);
-        $('#parent_category_id').val(parent_category_id);
+        $('.category_id').val(parent_category_id).trigger("change");
         $('#top_menu').val(top_menu);
+        $('#sidebar_menu').val(sidebar_menu);
+        $('#header_menu').val(header_menu);
         $('#position').val(position);
+        $('#sidebar_menu_position').val(sidebar_menu_position);
+        $('#header_menu_position').val(header_menu_position);
         if (image) {
             $('#imgPreview').show();
             $('#imgPreview').attr("src", 'storage/' + image);
@@ -141,8 +191,18 @@ $(document).ready(function() {
             $('#imgPreviewIcon').show();
             $('#imgPreviewIcon').attr("src", 'storage/' + icon);
         }
+        $('#variation_type').val(variation_type);
+        $('.variation_type').val(variation_type).trigger("change");
         $('#vendor_commission_percentage').val(vendor_commission_percentage);
         $('#is_active').val(is_active);
+        $(".variation_type").select2({
+            dropdownParent: $("#categoryModal"),
+            placeholder: 'Select An Option'
+        });
+        $(".category_id").select2({
+            dropdownParent: $("#categoryModal"),
+            placeholder: 'Select An Option'
+        });
     });
 
     $(document).on('submit', '#addCategory', function(e) {
@@ -183,10 +243,11 @@ $(document).ready(function() {
                     $('#addCategory')[0].reset();
                     $('.category_content').load(location.href + ' .category_content');
                     $('.category_load').load(location.href + ' .category_load');
+                    $('.variation_load').load(location.href + ' .variation_load');
                     $('.paginate').load(location.href + ' .paginate');
                     $('#cu_id').val(-1);
-
                 }
+
             },
             error: function(err) {
                 let error = err.responseJSON;

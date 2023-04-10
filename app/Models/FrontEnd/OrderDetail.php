@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models\FrontEnd;
+
+use App\Models\Backend\Product\ProductImage;
 use App\Models\Backend\ProductInfo\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +14,10 @@ class OrderDetail extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-     
+    public function ProductMainImage()
+    {
+        return $this->hasOne(ProductImage::class, 'product_id', 'product_id');
+    }
     public function Product(){
         return $this->belongsTo(Product::class);
     }

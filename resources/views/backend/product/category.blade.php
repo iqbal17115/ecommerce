@@ -1,5 +1,9 @@
 @extends('layouts.backend_app')
-
+@section('individual__link')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+    integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+@endsection
 @section('content')
 <div class="card">
     <div class="card-body">
@@ -31,7 +35,7 @@
                         @foreach($categories as $category)
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
-                            <td>{{$category->name}}</td>
+                            <td class="category-hierarchy" data-toggle="modal" data-target="#exampleModal" data-id="{{$category->id}}">{{$category->name}}</td>
                             <td>
                                 @if($category->Parent)
                                 {{$category->Parent->name}}
@@ -55,8 +59,15 @@
                                     data-toggle="modal" data-target="#categoryModal" data-id="{{$category->id}}"
                                     data-name="{{$category->name}}"
                                     data-parent_category_id="{{$category->parent_category_id}}"
-                                    data-top_menu="{{$category->top_menu}}" data-position="{{$category->position}}"
-                                    data-icon1="{{$category->icon}}" data-image="{{$category->image}}"
+                                    data-top_menu="{{$category->top_menu}}" 
+                                    data-sidebar_menu="{{$category->sidebar_menu}}"
+                                    data-header_menu="{{$category->header_menu}}"
+                                    data-position="{{$category->position}}"
+                                    data-sidebar_menu_position="{{$category->sidebar_menu_position}}"
+                                    data-header_menu_position="{{$category->header_menu_position}}"
+                                    data-icon1="{{$category->icon}}" data-image="{{$category->icon}}"
+                                    data-icon1="{{$category->image}}" data-image="{{$category->image}}"
+                                    data-icon1="{{$category->variation_type}}" data-variation_type="{{$category->variation_type}}"
                                     data-vendor_commission_percentage="{{$category->vendor_commission_percentage}}"
                                     data-is_active="{{$category->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
@@ -79,11 +90,29 @@
 </div>
 
 @include('backend.product.modal.category')
+@include('backend.product.modal.category-hierarchy')
 
 @endsection
 @section('script')
 
 @include('backend.product.js.category-js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
+    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    
+$(document).ready(function() {
+    $(".variation_type").select2({
+        dropdownParent: $("#categoryModal"),
+        placeholder: 'Select An Option'
+    });
+
+    $(".category_id").select2({
+        dropdownParent: $("#categoryModal"),
+        placeholder: 'Select An Option'
+    });
+});
+</script>
 {!! Toastr::message() !!}
 
 @endsection

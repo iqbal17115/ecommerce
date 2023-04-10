@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function categoryHierarchy(Request $request) {
+        $category = Category::with('Parent')->find($request->id);
+        $child_categories = Category::whereParentCategoryId($request->id)->select('name')->get();
+        return response()->json([
+            'category' => $category,
+            'child_categories' => $child_categories
+        ]);
+    }
     public function searchCategory(Request $request) {
         $categories = Category::where('name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(10);
         if($categories->count() >= 1) {
@@ -32,7 +40,7 @@ class CategoryController extends Controller
     public function addCategory(Request $request) {
         $request->validate(
             [
-                'name' => 'required|max:20',
+                'name' => 'required|max:50',
                 'is_active' => 'required',
             ],
             [
@@ -40,6 +48,7 @@ class CategoryController extends Controller
                 'is_active' => 'Status is required',
             ]
         );
+        // dd($request->variation_type);
         if($request->cu_id > 0) {
             $category = Category::find($request->cu_id);
         }else {
@@ -58,7 +67,11 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->parent_category_id = $request->id;
         $category->top_menu = $request->top_menu;
+        $category->sidebar_menu = $request->sidebar_menu;
+        $category->header_menu = $request->header_menu;
         $category->position = $request->position;
+        $category->sidebar_menu_position = $request->sidebar_menu_position;
+        $category->header_menu_position = $request->header_menu_position;
         if ($request->file('image')) {
             $imagePath = $request->file('image');
             $imageName = $imagePath->getClientOriginalName();
@@ -76,6 +89,7 @@ class CategoryController extends Controller
         }
 
         $category->vendor_commission_percentage = $request->vendor_commission_percentage;
+        $category->variation_type = json_encode($request->variation_type);
         $category->branch_id = 1;
         $category->is_active = $request->is_active;
         $category->save();
@@ -86,6 +100,7 @@ class CategoryController extends Controller
     }
     public function index() {
         $categories = Category::latest()->paginate(10);
-        return view('backend.product.category', compact('categories'));
+        $parent_categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
+        return view('backend.product.category', compact('categories', 'parent_categories'));
     }
 }

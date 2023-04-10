@@ -3,21 +3,21 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box" style="background-color: #1c1c1c;">
-                <a href="index.html" class="logo logo-dark">
+                <a href="/admin" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('assets/images/logo.svg') }}" alt="" height="22">
+                        <img @if($company_info && $company_info->logo) src="{{ asset('storage/'.$company_info->logo) }}" @endif alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('assets/images/logo-dark.png') }}" alt="" height="17">
+                        <img @if($company_info && $company_info->logo) src="{{ asset('storage/'.$company_info->logo) }}" @endif alt="" height="17">
                     </span>
                 </a>
 
-                <a href="index.html" class="logo logo-light">
+                <a href="/admin" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('assets/images/logo-light.svg') }}" alt="" height="22">
+                        <img @if($company_info && $company_info->logo) src="{{ asset('storage/'.$company_info->logo) }}" @endif alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="19">
+                        <img @if($company_info && $company_info->logo) src="{{ asset('storage/'.$company_info->logo) }}" @endif alt="" height="19">
                     </span>
                 </a>
             </div>
