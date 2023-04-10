@@ -29,7 +29,7 @@
     <div class="pt-2 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}"
         style="background-color: #f4631b;">
         <a class="btn mobile-sidebar-menu pb-0 pr-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
-                                style="color: white;"></i></a>
+                style="color: white;"></i></a>
         <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
             <i class="fas fa-bars"></i>
         </button> -->
@@ -48,13 +48,27 @@
             <div class="header-right w-lg-max">
                 <div
                     class="header-icon header-search header-search-inline header-search-category w-lg-max text-right mb-0">
-                    <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
-                    <form action="{{ route('search') }}" method="get">
-                        <div class="header-search-wrapper">
-                            <input type="search" class="form-control" name="q" id="q" placeholder="Search..." style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;" required>
-                            <button class="btn icon-magnifier p-0" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;" title="search" type="submit"></button>
+                    <!-- <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a> -->
+                    <!-- form-inline class -->
+                    <form class="my-2 my-lg-0">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text text-light font-weight-bold" id="basic-addon2"
+                                    style="background: #262424; font-size: 10px;">
+                                    <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px; color:white"></i></div>
+                                   <div> 
+                                      Deliver to Awlad
+                                      <br>
+                                      Dubai, Bur Dubai
+                                    </div>
+                                </span>
+                            </div>
+                            <input class="form-control mr-0" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append" style="background: yellow;">
+                                <span class="input-group-text" id="basic-addon1" style="background: #cecc1d;"><i
+                                        class="fa fa-search"></i></span>
+                            </div>
                         </div>
-                        <!-- End .header-search-wrapper -->
                     </form>
                 </div>
                 <!-- End .header-search -->
@@ -163,12 +177,13 @@
                     <li>
                         <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Home</a>
                     </li>
-                     <!-- Start Category -->
-                     @foreach($headerMenuCategories as $headerMenuCategory)
-                        <li>
-                                <a class="pt-0 pb-0" href="{{ route('catalog', ['id'=>$headerMenuCategory->id]) }}" style="color: white;">{{$headerMenuCategory->name}}</a>
-                        </li>
-                        @endforeach
+                    <!-- Start Category -->
+                    @foreach($headerMenuCategories as $headerMenuCategory)
+                    <li>
+                        <a class="pt-0 pb-0" href="{{ route('catalog', ['id'=>$headerMenuCategory->id]) }}"
+                            style="color: white;">{{$headerMenuCategory->name}}</a>
+                    </li>
+                    @endforeach
                     <!-- End Category -->
                     <li class="float-right phone">
                         @if($company_info && $company_info->is_mobile_active)
