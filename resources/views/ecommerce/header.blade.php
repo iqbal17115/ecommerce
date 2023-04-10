@@ -63,16 +63,22 @@
                                     </div>
                                 </span>
                             </div>
-                            <input name="q" id="q" class="form-control mr-0" type="search" placeholder="Search" aria-label="Search">
+                            <input name="q" id="q" class="form-control mr-0" type="search" placeholder="What are you looking for?" aria-label="Search">
                             <div class="input-group-append" style="background: yellow;">
                                 <span class="input-group-text" id="basic-addon1" style="background: #cecc1d;"><i
                                         class="fa fa-search"></i></span>
                             </div>
                         </div>
                     </form>
+                    
                 </div>
                 <!-- End .header-search -->
-
+                <div class="text-light font-weight-bold mr-2" style="font-size:large;">
+                    বাংলা 
+                </div>
+                <div class="text-light font-weight-bold mr-2" style="font-size:large;">
+                    Bangladesh
+                </div>
                 <a href="login.html" class="d-lg-block d-none">
                     <div class="header-user">
                         <i class="icon-user-2"></i>
