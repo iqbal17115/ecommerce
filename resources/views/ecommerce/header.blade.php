@@ -73,10 +73,10 @@
                     
                 </div>
                 <!-- End .header-search -->
-                <div class="text-light font-weight-bold mr-2" style="font-size:large;">
+                <div class="text-light font-weight-bold mr-2" style="font-size:medium;">
                     বাংলা 
                 </div>
-                <div class="text-light font-weight-bold mr-2" style="font-size:large;">
+                <div class="text-light font-weight-bold mr-2" style="font-size:medium;">
                     Bangladesh
                 </div>
                 <a href="login.html" class="d-lg-block d-none">
