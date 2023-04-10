@@ -53,9 +53,9 @@
                     <form action="{{ route('search') }}" class="my-2 my-lg-0">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text text-light font-weight-bold" id="basic-addon2"
-                                    style="background: #262424; font-size: 10px;">
-                                    <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px; color:white"></i></div>
+                                <span class="input-group-text font-weight-bold" id="basic-addon2"
+                                    style="font-size: 10px;">
+                                    <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px;"></i></div>
                                    <div> 
                                       Deliver to Awlad
                                       <br>
@@ -64,8 +64,8 @@
                                 </span>
                             </div>
                             <input name="q" id="q" class="form-control mr-0" type="search" placeholder="What are you looking for?" aria-label="Search">
-                            <div class="input-group-append" style="background: yellow;">
-                                <span class="input-group-text" id="basic-addon1" style="background: #cecc1d;"><i
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1"><i
                                         class="fa fa-search"></i></span>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li>
-                        <a class="btn pt-0 pb-0 menu-toggle" id="" style="background-color: black;"><i class="custom-icon-toggle-menu d-inline-table"
+                        <a class="btn pt-0 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
                                 style="color: white;"></i><span class="pb-0 mb-0" style="color: white;">All</span></a>
                     </li>
                     <li>
