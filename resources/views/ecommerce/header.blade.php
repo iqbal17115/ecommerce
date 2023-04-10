@@ -173,15 +173,17 @@
     <!--Class Of bottom line header-bottom  -->
     <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4631b; height: 25px;"
         data-sticky-options="{'mobile': false}">
-        <div class="container">
+        <!-- container class -->
+        <div class="">
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li>
-                        <a class="btn pt-0 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
-                                style="color: white;"></i></a>
+                        <a class="btn pt-0 pb-0 menu-toggle" id="" style="background-color: black;"><i class="custom-icon-toggle-menu d-inline-table"
+                                style="color: white;"></i><span class="pb-0 mb-0" style="color: white;">All</span></a>
                     </li>
                     <li>
-                        <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Home</a>
+                        <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Sell On @if($company_info &&
+                                        $company_info->name) {{$company_info->name}} @endif</a>
                     </li>
                     <!-- Start Category -->
                     @foreach($headerMenuCategories as $headerMenuCategory)
