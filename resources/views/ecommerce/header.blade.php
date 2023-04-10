@@ -50,7 +50,7 @@
                     class="header-icon header-search header-search-inline header-search-category w-lg-max text-right mb-0">
                     <!-- <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a> -->
                     <!-- form-inline class -->
-                    <form class="my-2 my-lg-0">
+                    <form action="{{ route('search') }}" class="my-2 my-lg-0">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text text-light font-weight-bold" id="basic-addon2"
@@ -63,7 +63,7 @@
                                     </div>
                                 </span>
                             </div>
-                            <input class="form-control mr-0" type="search" placeholder="Search" aria-label="Search">
+                            <input name="q" id="q" class="form-control mr-0" type="search" placeholder="Search" aria-label="Search">
                             <div class="input-group-append" style="background: yellow;">
                                 <span class="input-group-text" id="basic-addon1" style="background: #cecc1d;"><i
                                         class="fa fa-search"></i></span>
