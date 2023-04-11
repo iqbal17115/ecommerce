@@ -90,11 +90,11 @@
                         </div>
                     </div>
                 </a> -->
-                <div style="background-color: yellow;" class="rounded">
+                <div style="" class="rounded">
                     <!-- Start Sign -->
-                    <div class="font-weight-bold mr-2"
+                    <div class="font-weight-bold mr-2 text-light"
                         style="display: inline-block; border-right: 1px solid black; padding-right: 10px;">
-                        Sign In <i class="fas fa-user"></i>
+                        Sign In <i class="fas fa-user text-light"></i>
                     </div>
                     <!-- End Sign -->
                     <!-- Start Cart -->
@@ -113,13 +113,21 @@
                                     </span>
                                 </span>
                             </span> -->
-                            <span class="badge badge-pill badge-danger" style="font-size: 0.8rem;">
-                                <i class="fas fa-shopping-cart" style="font-size: 20px;"></i>
-                                <span class="badge badge-light cart-count"
-                                    style="font-size: 1rem; position: absolute; top: -8px; right: -8px;">{{ count((array) session('cart')) }}</span>
-                                <span class="visually-hidden">items in cart</span>
-                            </span>
 
+                            <!-- <div class="position-relative">
+                                @if($company_info && $company_info->icon)
+                                   <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image" class="img-fluid" style="height: 20px;">
+                                @endif
+                                <a href="#" class="position-absolute top-0 end-0 mt-3 me-3">
+                                    <i class="bi bi-cart"></i>
+                                    <span class="badge rounded-pill bg-danger">3</span>
+                                </a>
+                            </div> -->
+                            <!-- <span class=""></span> -->
+                            @if($company_info && $company_info->icon)
+                                   <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image" class="img-fluid icon-cart-thick" style="height: 12px;">
+                                @endif
+                            <span class="cart-count badge-circle" style="top: 5px; left: 16px; background: darkblue;">3</span>
                         </a>
 
                         <div class="cart-overlay"></div>
