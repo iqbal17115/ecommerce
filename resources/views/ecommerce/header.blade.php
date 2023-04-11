@@ -105,7 +105,7 @@
                                 class="img-fluid icon-cart-thick" style="height: 20px;">
                             @endif
                             <span class="cart-count badge-circle"
-                                style="top: 5px; left: 27px; background: darkblue;">3</span>
+                                style="top: 5px; left: 27px; background: darkblue;">{{ count((array) session('cart')) }}</span>
                         </a>
 
                         <div class="cart-overlay"></div>
