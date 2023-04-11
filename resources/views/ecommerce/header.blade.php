@@ -212,11 +212,10 @@
                                 class="icon-phone-1" style="font-size: 1.5rem;"></i>{{$company_info->mobile}}</a>
                         @endif
                     </li>
-                    @if(Auth::user())
+                    <!-- @if(Auth::user())
                     <li class="float-right"><a class="pt-0 pb-0" href="{{ route('customer-logout') }}"
                             style="color: white;">Logout</a></li>
-                    @endif
-                    <li class="float-right"><a class="pt-0 pb-0" href="#" style="color: white;">FLASH DEALS</a></li>
+                    @endif -->
                 </ul>
             </nav>
         </div>
