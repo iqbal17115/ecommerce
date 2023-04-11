@@ -54,32 +54,33 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text font-weight-bold" id="basic-addon2"
-                                    style="font-size: 10px;">
-                                    <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px;"></i></div>
-                                   <div> 
-                                      Deliver to Awlad
-                                      <br>
-                                      Dubai, Bur Dubai
+                                    style="font-size: 10px; background: white;">
+                                    <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px;"></i>
+                                    </div>
+                                    <div>
+                                        Deliver to Awlad
+                                        <br>
+                                        Dubai, Bur Dubai
                                     </div>
                                 </span>
                             </div>
-                            <input name="q" id="q" class="form-control mr-0" type="search" placeholder="What are you looking for?" aria-label="Search">
+                            <input name="q" id="q" class="form-control mr-0" type="search"
+                                placeholder="What are you looking for?" aria-label="Search" style="background: white;">
                             <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1"><i
-                                        class="fa fa-search"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
                 <!-- End .header-search -->
                 <div class="text-light font-weight-bold mr-2" style="font-size: 14px;;">
-                    বাংলা 
+                    বাংলা
                 </div>
                 <div class="text-light font-weight-bold mr-2" style="font-size: 14px;">
                     Bangladesh
                 </div>
-                <a href="login.html" class="d-lg-block d-none">
+                <!-- <a href="login.html" class="d-lg-block d-none">
                     <div class="header-user">
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
@@ -88,81 +89,106 @@
                                 Account @endif</h4>
                         </div>
                     </div>
-                </a>
-
-                <div class="dropdown cart-dropdown">
-                    <a href="javascript:void(0);" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle"
-                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        data-display="static">
-                        <i class="icon-cart-thick"></i>
-                        <span class="cart-count badge-circle">{{ count((array) session('cart')) }}</span>
-                    </a>
-
-                    <div class="cart-overlay"></div>
-
-                    <div class="dropdown-menu mobile-cart">
-                        <a href="javascript:void(0);" title="Close (Esc)" class="btn-close">×</a>
-
-                        <div class="dropdownmenu-wrapper custom-scrollbar">
-                            <div class="dropdown-cart-header">Shopping Cart</div>
-                            <!-- End .dropdown-cart-header -->
-
-                            <div class="dropdown-cart-products">
-                                @php $total = 0 @endphp
-                                @if(session('cart'))
-                                @foreach(session('cart') as $id => $details)
-                                @php $total += $details['sale_price'] * $details['quantity'] @endphp
-                                <div class="product cart-{{ $id }}" data-id="{{ $id }}">
-                                    <div class="product-details">
-                                        <h4 class="product-title">
-                                            <a
-                                                href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name'] }}</a>
-                                        </h4>
-
-                                        <span class="cart-product-info">
-                                            <span
-                                                class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
-                                            ×
-                                            {{$currency->icon}}{{ $details['sale_price'] }}
-                                        </span>
-                                    </div>
-                                    <!-- End .product-details -->
-
-                                    <figure class="product-image-container">
-                                        <a href="{{ route('product-detail', ['id'=>$id]) }}" class="product-image">
-                                            <img src="{{ asset('storage/product_photo/'.$details['image']) }}"
-                                                alt="product" width="80" height="80">
-                                        </a>
-
-                                        <a href="javascript:void(0);" class="btn-remove"
-                                            title="Remove Product"><span>×</span></a>
-                                    </figure>
-                                </div>
-                                <!-- End .product -->
-                                @endforeach
-                                @endif
-                            </div>
-                            <!-- End .cart-product -->
-
-                            <div class="dropdown-cart-total">
-                                <span>SUBTOTAL:</span>
-
-                                <span class="cart-total-price float-right">{{$currency->icon}}{{$total}}</span>
-                            </div>
-                            <!-- End .dropdown-cart-total -->
-
-                            <div class="dropdown-cart-action">
-                                <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">View
-                                    Cart</a>
-                                <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">Checkout</a>
-                            </div>
-                            <!-- End .dropdown-cart-total -->
-                        </div>
-                        <!-- End .dropdownmenu-wrapper -->
+                </a> -->
+                <div style="background-color: yellow;" class="rounded">
+                    <!-- Start Sign -->
+                    <div class="font-weight-bold mr-2"
+                        style="display: inline-block; border-right: 1px solid black; padding-right: 10px;">
+                        Sign In <i class="fas fa-user"></i>
                     </div>
-                    <!-- End .dropdown-menu -->
+                    <!-- End Sign -->
+                    <!-- Start Cart -->
+                    <div class="dropdown cart-dropdown" style="display: inline-block;">
+                        <a href="javascript:void(0);" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            data-display="static">
+                            <!-- <i class="fa fa-shopping-cart"></i>
+                            <span class="cart-count badge-circle">{{ count((array) session('cart')) }}</span> -->
+                            <!-- <span class="font-weight-bold">Cart</span> <span class="position-relative">
+                                <span class="fa-layers fa-fw">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ count((array) session('cart')) }}
+                                    </span>
+                                </span>
+                            </span> -->
+                            <span class="badge badge-pill badge-danger" style="font-size: 0.8rem;">
+                                <i class="fas fa-shopping-cart" style="font-size: 20px;"></i>
+                                <span class="badge badge-light cart-count"
+                                    style="font-size: 1rem; position: absolute; top: -8px; right: -8px;">{{ count((array) session('cart')) }}</span>
+                                <span class="visually-hidden">items in cart</span>
+                            </span>
+
+                        </a>
+
+                        <div class="cart-overlay"></div>
+
+                        <div class="dropdown-menu mobile-cart">
+                            <a href="javascript:void(0);" title="Close (Esc)" class="btn-close">×</a>
+
+                            <div class="dropdownmenu-wrapper custom-scrollbar">
+                                <div class="dropdown-cart-header">Shopping Cart</div>
+                                <!-- End .dropdown-cart-header -->
+
+                                <div class="dropdown-cart-products">
+                                    @php $total = 0 @endphp
+                                    @if(session('cart'))
+                                    @foreach(session('cart') as $id => $details)
+                                    @php $total += $details['sale_price'] * $details['quantity'] @endphp
+                                    <div class="product cart-{{ $id }}" data-id="{{ $id }}">
+                                        <div class="product-details">
+                                            <h4 class="product-title">
+                                                <a
+                                                    href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name'] }}</a>
+                                            </h4>
+
+                                            <span class="cart-product-info">
+                                                <span
+                                                    class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
+                                                ×
+                                                {{$currency->icon}}{{ $details['sale_price'] }}
+                                            </span>
+                                        </div>
+                                        <!-- End .product-details -->
+
+                                        <figure class="product-image-container">
+                                            <a href="{{ route('product-detail', ['id'=>$id]) }}" class="product-image">
+                                                <img src="{{ asset('storage/product_photo/'.$details['image']) }}"
+                                                    alt="product" width="80" height="80">
+                                            </a>
+
+                                            <a href="javascript:void(0);" class="btn-remove"
+                                                title="Remove Product"><span>×</span></a>
+                                        </figure>
+                                    </div>
+                                    <!-- End .product -->
+                                    @endforeach
+                                    @endif
+                                </div>
+                                <!-- End .cart-product -->
+
+                                <div class="dropdown-cart-total">
+                                    <span>SUBTOTAL:</span>
+
+                                    <span class="cart-total-price float-right">{{$currency->icon}}{{$total}}</span>
+                                </div>
+                                <!-- End .dropdown-cart-total -->
+
+                                <div class="dropdown-cart-action">
+                                    <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">View
+                                        Cart</a>
+                                    <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">Checkout</a>
+                                </div>
+                                <!-- End .dropdown-cart-total -->
+                            </div>
+                            <!-- End .dropdownmenu-wrapper -->
+                        </div>
+                        <!-- End .dropdown-menu -->
+                    </div>
+                    <!-- End .dropdown -->
+                    <!-- End Cart -->
                 </div>
-                <!-- End .dropdown -->
             </div>
             <!-- End .header-right -->
         </div>
@@ -179,11 +205,12 @@
                 <ul class="menu w-100">
                     <li>
                         <a class="btn pt-0 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
-                                style="color: white;"></i><span class="pb-0 mb-0" style="color: white;">All</span></a>
+                                style="color: white;"></i><span style="color: white;">All</span></a>
                     </li>
                     <li>
-                        <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Sell On @if($company_info &&
-                                        $company_info->name) {{$company_info->name}} @endif</a>
+                        <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Sell On @if($company_info
+                            &&
+                            $company_info->name) {{$company_info->name}} @endif</a>
                     </li>
                     <!-- Start Category -->
                     @foreach($headerMenuCategories as $headerMenuCategory)
