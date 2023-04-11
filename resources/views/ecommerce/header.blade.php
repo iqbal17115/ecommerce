@@ -74,11 +74,14 @@
 
                 </div>
                 <!-- End .header-search -->
-                <div class="text-light font-weight-bold mr-2" style="font-size: 14px;;">
+                <div class="text-light font-weight-bold mr-2" style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
                     বাংলা
                 </div>
-                <div class="text-light font-weight-bold mr-2" style="font-size: 14px;">
+                <div class="text-light font-weight-bold mr-2" style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
                     Bangladesh
+                </div>
+                <div class="text-light font-weight-bold mr-2" style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
+                Sign In <i class="fas fa-user text-light"></i>
                 </div>
                 <!-- <a href="login.html" class="d-lg-block d-none">
                     <div class="header-user">
@@ -91,43 +94,18 @@
                     </div>
                 </a> -->
                 <div style="" class="rounded">
-                    <!-- Start Sign -->
-                    <div class="font-weight-bold mr-2 text-light"
-                        style="display: inline-block; border-right: 1px solid black; padding-right: 10px;">
-                        Sign In <i class="fas fa-user text-light"></i>
-                    </div>
-                    <!-- End Sign -->
                     <!-- Start Cart -->
                     <div class="dropdown cart-dropdown" style="display: inline-block;">
-                        <a href="javascript:void(0);" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle"
+                        <a href="javascript:void(0);" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle ml-2"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             data-display="static">
-                            <!-- <i class="fa fa-shopping-cart"></i>
-                            <span class="cart-count badge-circle">{{ count((array) session('cart')) }}</span> -->
-                            <!-- <span class="font-weight-bold">Cart</span> <span class="position-relative">
-                                <span class="fa-layers fa-fw">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        {{ count((array) session('cart')) }}
-                                    </span>
-                                </span>
-                            </span> -->
 
-                            <!-- <div class="position-relative">
-                                @if($company_info && $company_info->icon)
-                                   <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image" class="img-fluid" style="height: 20px;">
-                                @endif
-                                <a href="#" class="position-absolute top-0 end-0 mt-3 me-3">
-                                    <i class="bi bi-cart"></i>
-                                    <span class="badge rounded-pill bg-danger">3</span>
-                                </a>
-                            </div> -->
-                            <!-- <span class=""></span> -->
                             @if($company_info && $company_info->icon)
-                                   <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image" class="img-fluid icon-cart-thick" style="height: 12px;">
-                                @endif
-                            <span class="cart-count badge-circle" style="top: 5px; left: 16px; background: darkblue;">3</span>
+                            <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image"
+                                class="img-fluid icon-cart-thick" style="height: 20px;">
+                            @endif
+                            <span class="cart-count badge-circle"
+                                style="top: 5px; left: 27px; background: darkblue;">3</span>
                         </a>
 
                         <div class="cart-overlay"></div>
