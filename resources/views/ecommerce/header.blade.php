@@ -35,7 +35,7 @@
         @if($company_info && $company_info->logo)
         <a href="{{ route('home') }}" class="logo">
             <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5" width="111" height="44"
-                style="height: 54px;width: 151px;filter: brightness(2) contrast(1.5) saturate(1.5);" alt="Porto Logo">
+                style="height: 54px;width: 151px;filter: brightness(4) contrast(1.5) saturate(1.5);" alt="Porto Logo">
         </a>
         @endif
         <div class="container">
