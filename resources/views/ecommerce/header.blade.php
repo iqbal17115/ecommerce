@@ -186,7 +186,8 @@
     <!-- End .header-middle -->
 
     <!--Class Of bottom line header-bottom  -->
-    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4631b; height: 35px; border-top: 1px solid #acacac;"
+    <!-- border-top: 1px solid #acacac; -->
+    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4631b; height: 35px;"
         data-sticky-options="{'mobile': false}">
         <!-- container class -->
         <div class="">
