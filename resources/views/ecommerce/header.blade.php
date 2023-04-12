@@ -75,15 +75,15 @@
                 </div>
                 <!-- End .header-search -->
                 <div class="text-light font-weight-bold mr-2"
-                    style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
+                    style="font-size: 14px; border-right: 1px solid white; padding-right: 14px;">
                     বাংলা
                 </div>
                 <div class="text-light font-weight-bold mr-2"
-                    style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
+                    style="font-size: 14px; border-right: 1px solid white; padding-right: 14px; padding-left: 14px;">
                     Bangladesh
                 </div>
                 <div class="text-light font-weight-bold mr-2"
-                    style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
+                    style="font-size: 14px; border-right: 1px solid white; padding-right: 14px; padding-left: 14px;">
                     Sign In <i class="fas fa-user text-light"></i>
                 </div>
                 <!-- <a href="login.html" class="d-lg-block d-none">
