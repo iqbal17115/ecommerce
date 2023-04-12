@@ -63,7 +63,7 @@
                     <form action="{{ route('search') }}" class="my-2 my-lg-0" style="min-width: 40px;">
                         <div class="input-group">
                             <input name="q" id="q" class="form-control mr-0" type="search"
-                                placeholder="What are you looking for?" aria-label="Search" style="background: white;">
+                                placeholder="What are you looking for?" aria-label="Search" style="background: white; border-radius: 5px 5px;">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon1" style="background: black;"><i
                                         class="fa fa-search" style="color: white;"></i></span>
