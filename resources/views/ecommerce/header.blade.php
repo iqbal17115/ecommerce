@@ -35,10 +35,25 @@
         @if($company_info && $company_info->logo)
         <a href="{{ route('home') }}" class="logo">
             <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5" width="111" height="44"
-                style="height: 54px;width: 151px;filter: brightness(2) contrast(1.5) saturate(1.5);" alt="Porto Logo">
+                style="height: 54px;width: 151px;" alt="Porto Logo">
         </a>
         @endif
         <div class="container">
+            
+            <!-- location start -->
+            <!-- <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold" id="basic-addon2"
+                    style="font-size: 10px; background: white;">
+                    <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px;"></i>
+                    </div>
+                    <div>
+                        Deliver to Awlad
+                        <br>
+                        Dubai, Bur Dubai
+                    </div>
+                </span>
+            </div> -->
+            <!-- location end -->
             <div class="header-right w-lg-max">
                 <div
                     class="header-icon header-search header-search-inline header-search-category w-lg-max text-right mb-0">
