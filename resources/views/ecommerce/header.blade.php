@@ -41,7 +41,7 @@
         <div class="container">
             
             <!-- location start -->
-            <div class="input-group-prepend">
+            <!-- <div class="input-group-prepend">
                 <span class="input-group-text font-weight-bold" id="basic-addon2"
                     style="font-size: 10px; background: white;">
                     <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px;"></i>
@@ -52,7 +52,7 @@
                         Dubai, Bur Dubai
                     </div>
                 </span>
-            </div>
+            </div> -->
             <!-- location end -->
             <div class="header-right w-lg-max">
                 <div
@@ -61,9 +61,10 @@
 
                     <!-- form-inline class -->
                     <form action="{{ route('search') }}" class="my-2 my-lg-0" style="min-width: 40px;">
-                        <div class="input-group">
+                        <div class="input-group" style="display: flex;
+  justify-content: center;">
                             <input name="q" id="q" class="form-control mr-0" type="search"
-                                placeholder="What are you looking for?" aria-label="Search" style="background: white; border-radius: 5px 5px;">
+                                placeholder="What are you looking for?" aria-label="Search" style="background: white; border-radius: 5px 5px; max-width: 500px;">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon1" style="background: black;"><i
                                         class="fa fa-search" style="color: white;"></i></span>
