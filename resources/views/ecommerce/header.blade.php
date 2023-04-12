@@ -2,7 +2,6 @@
 
     <!-- Start Sidebar -->
     <div id="wrapper">
-        <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <input type="hidden" name="category_data[]" id="category_data" value="" />
             <ul class="sidebar-nav list-group" id="category_show">
@@ -26,7 +25,7 @@
     </div>
     <!-- End Sidebar -->
 
-    <div class="pt-2 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}"
+    <div class="pt-0 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}"
         style="background-color: #f4631b;">
         <a class="btn mobile-sidebar-menu pb-0 pr-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
                 style="color: white;"></i></a>
@@ -40,48 +39,51 @@
         </a>
         @endif
         <div class="container">
-            <div class="header-left col-lg-2 w-auto pl-0">
-                <!-- Here Was Logo Before -->
+            
+            <!-- location start -->
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold" id="basic-addon2"
+                    style="font-size: 10px; background: white;">
+                    <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px;"></i>
+                    </div>
+                    <div>
+                        Deliver to Awlad
+                        <br>
+                        Dubai, Bur Dubai
+                    </div>
+                </span>
             </div>
-            <!-- End .header-left -->
-
+            <!-- location end -->
             <div class="header-right w-lg-max">
                 <div
                     class="header-icon header-search header-search-inline header-search-category w-lg-max text-right mb-0">
                     <!-- <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a> -->
+
                     <!-- form-inline class -->
-                    <form action="{{ route('search') }}" class="my-2 my-lg-0">
+                    <form action="{{ route('search') }}" class="my-2 my-lg-0" style="min-width: 40px;">
                         <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text font-weight-bold" id="basic-addon2"
-                                    style="font-size: 10px; background: white;">
-                                    <div class="mr-2"><i class="fas fa-map-marker-alt" style="font-size:18px;"></i>
-                                    </div>
-                                    <div>
-                                        Deliver to Awlad
-                                        <br>
-                                        Dubai, Bur Dubai
-                                    </div>
-                                </span>
-                            </div>
                             <input name="q" id="q" class="form-control mr-0" type="search"
                                 placeholder="What are you looking for?" aria-label="Search" style="background: white;">
                             <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                                <span class="input-group-text" id="basic-addon1" style="background: black;"><i
+                                        class="fa fa-search" style="color: white;"></i></span>
                             </div>
                         </div>
                     </form>
 
                 </div>
                 <!-- End .header-search -->
-                <div class="text-light font-weight-bold mr-2" style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
+                <div class="text-light font-weight-bold mr-2"
+                    style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
                     বাংলা
                 </div>
-                <div class="text-light font-weight-bold mr-2" style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
+                <div class="text-light font-weight-bold mr-2"
+                    style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
                     Bangladesh
                 </div>
-                <div class="text-light font-weight-bold mr-2" style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
-                Sign In <i class="fas fa-user text-light"></i>
+                <div class="text-light font-weight-bold mr-2"
+                    style="font-size: 14px; border-right: 1px solid white; padding-right: 7px;">
+                    Sign In <i class="fas fa-user text-light"></i>
                 </div>
                 <!-- <a href="login.html" class="d-lg-block d-none">
                     <div class="header-user">
@@ -96,9 +98,9 @@
                 <div style="" class="rounded">
                     <!-- Start Cart -->
                     <div class="dropdown cart-dropdown" style="display: inline-block;">
-                        <a href="javascript:void(0);" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle ml-2"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                            data-display="static">
+                        <a href="javascript:void(0);" title="Cart"
+                            class="dropdown-toggle dropdown-arrow cart-toggle ml-2" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" data-display="static">
 
                             @if($company_info && $company_info->icon)
                             <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image"
@@ -216,6 +218,7 @@
                     <li class="float-right"><a class="pt-0 pb-0" href="{{ route('customer-logout') }}"
                             style="color: white;">Logout</a></li>
                     @endif -->
+                    <li class="float-right"><a class="pt-0 pb-0" href="#" style="color: white;">FLASH DEALS</a></li>
                 </ul>
             </nav>
         </div>
