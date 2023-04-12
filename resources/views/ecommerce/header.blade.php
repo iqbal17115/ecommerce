@@ -186,40 +186,40 @@
     <!-- End .header-middle -->
 
     <!--Class Of bottom line header-bottom  -->
-    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4631b; height: 25px;"
+    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4631b; height: 35px; border-top: 1px solid #acacac;"
         data-sticky-options="{'mobile': false}">
         <!-- container class -->
         <div class="">
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li>
-                        <a class="btn pt-0 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
+                        <a class="btn pt-1 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
                                 style="color: white;"></i><span style="color: white;">All</span></a>
                     </li>
                     <li>
-                        <a class="pt-0 pb-0" href="{{ route('home') }}" style="color: white;">Sell On @if($company_info
+                        <a class="pt-1 pb-0" href="{{ route('home') }}" style="color: white;">Sell On @if($company_info
                             &&
                             $company_info->name) {{$company_info->name}} @endif</a>
                     </li>
                     <!-- Start Category -->
                     @foreach($headerMenuCategories as $headerMenuCategory)
                     <li>
-                        <a class="pt-0 pb-0" href="{{ route('catalog', ['id'=>$headerMenuCategory->id]) }}"
+                        <a class="pt-1 pb-0" href="{{ route('catalog', ['id'=>$headerMenuCategory->id]) }}"
                             style="color: white;">{{$headerMenuCategory->name}}</a>
                     </li>
                     @endforeach
                     <!-- End Category -->
                     <li class="float-right phone">
                         @if($company_info && $company_info->is_mobile_active)
-                        <a href="#" class="d-flex align-items-center pt-0 pb-0" style="color: white;"><i
-                                class="icon-phone-1" style="font-size: 1.5rem;"></i>{{$company_info->mobile}}</a>
+                        <a href="#" class="d-flex align-items-center pt-1 pb-0" style="color: white;"><i
+                                class="icon-phone-1" style="font-size: 1rem;"></i>{{$company_info->mobile}}</a>
                         @endif
                     </li>
                     <!-- @if(Auth::user())
-                    <li class="float-right"><a class="pt-0 pb-0" href="{{ route('customer-logout') }}"
+                    <li class="float-right"><a class="pt-1 pb-0" href="{{ route('customer-logout') }}"
                             style="color: white;">Logout</a></li>
                     @endif -->
-                    <li class="float-right"><a class="pt-0 pb-0" href="#" style="color: white;">FLASH DEALS</a></li>
+                    <li class="float-right"><a class="pt-1 pb-0" href="#" style="color: white;">Flash Deals</a></li>
                 </ul>
             </nav>
         </div>
