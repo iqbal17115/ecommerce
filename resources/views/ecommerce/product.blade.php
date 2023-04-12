@@ -51,9 +51,9 @@
                     <div class="price-box">
                         @php
                         echo $product_detail->your_price? '<span
-                            class="old-price">$'.number_format((float)$product_detail->your_price, 2).'</span>' : '';
+                            class="old-price">'.$currency->icon.''.number_format((float)$product_detail->your_price, 2).'</span>' : '';
                         echo $product_detail->sale_price? '<span
-                            class="new-price">$'.number_format((float)$product_detail->sale_price, 2).'</span>' : '';
+                            class="new-price">'.$currency->icon.''.number_format((float)$product_detail->sale_price, 2).'</span>' : '';
                         @endphp
                     </div>
                     <!-- End .price-box -->
@@ -303,10 +303,10 @@
                         <div class="price-box">
                             @php
                             echo $product_category_product->your_price? '<span
-                                class="old-price">$'.number_format((float)$product_category_product->your_price,
+                                class="old-price">'.$currency->icon.''.number_format((float)$product_category_product->your_price,
                                 2).'</span>' : '';
                             echo $product_category_product->sale_price? '<span
-                                class="product-price">$'.number_format((float)$product_category_product->sale_price,
+                                class="product-price">'.$currency->icon.''.number_format((float)$product_category_product->sale_price,
                                 2).'</span>' :
                             '';
                             @endphp
