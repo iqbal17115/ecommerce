@@ -54,7 +54,7 @@
                                         <input value="{{ $details['quantity'] }}" class="horizontal-quantity form-control product-quantity-{{ $id }}" type="text">
                                     </div><!-- End .product-single-qty -->
                                 </td>
-                                <td class="text-right"><span class="subtotal-price subtotal-price-{{ $id }}">${{ $details['quantity'] * $details['sale_price'] }}</span></td>
+                                <td class="text-right"><span class="subtotal-price subtotal-price-{{ $id }}">{{$currency->icon}}{{ $details['quantity'] * $details['sale_price'] }}</span></td>
                             </tr>
                             @endforeach
                             @endif
