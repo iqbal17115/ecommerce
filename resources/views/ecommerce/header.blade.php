@@ -54,6 +54,16 @@
                                 <span class="input-group-text" id="basic-addon1" style="background: black;"><i
                                         class="fa fa-search" style="color: white;"></i></span>
                             </div>
+                            <!-- Start Header Ads -->
+                            @if($header_advertisement) 
+                            <div class="">
+                                <center>
+                            <img src="{{ asset('storage/'.$header_advertisement->ads) }}" class="w-100 ml-sm-0 ml-md-5" width="111" height="44"
+                                 style="height: 40px;;" alt="Porto Logo">
+                                 <center>
+                            </div>
+                            @endif
+                            <!-- End Header Ads -->
                         </div>
                     </form>
 
