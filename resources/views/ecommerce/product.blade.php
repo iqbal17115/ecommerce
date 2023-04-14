@@ -1,6 +1,13 @@
 @extends('layouts.ecommerce')
 @section('content')
 <main class="main">
+@if(isset($all_active_advertisements['Details']['1']['ads']))
+    <div>
+        <center>
+        <img src="{{ asset('storage/'.$all_active_advertisements['Details']['1']['ads']) }}" class="ml-md-5">
+        </center>
+    </div>
+    @endif
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
         <div class="container">
             <ol class="breadcrumb">
@@ -9,14 +16,7 @@
             </ol>
         </div>
     </nav>
-    @if(isset($all_active_advertisements['Details']['1']['ads']))
-    <div>
-        <center>
-        <img src="{{ asset('storage/'.$all_active_advertisements['Details']['1']['ads']) }}" class="ml-md-5">
-        </center>
-    </div>
-
-        @endif
+ 
     <div class="container pt-2">
         
         <div class="product-single-container product-single-default">
