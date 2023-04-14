@@ -1,10 +1,10 @@
 @extends('layouts.ecommerce')
 @section('content')
 <main class="main">
-@if(isset($all_active_advertisements['Details']['1']['ads']))
+    @if(isset($all_active_advertisements['Details']['1']['ads']))
     <div>
         <center>
-        <img src="{{ asset('storage/'.$all_active_advertisements['Details']['1']['ads']) }}" class="ml-md-5">
+            <img src="{{ asset('storage/'.$all_active_advertisements['Details']['1']['ads']) }}">
         </center>
     </div>
     @endif
@@ -16,9 +16,9 @@
             </ol>
         </div>
     </nav>
- 
+
     <div class="container pt-2">
-        
+
         <div class="product-single-container product-single-default">
 
             <div class="row">
@@ -343,10 +343,21 @@
                 @endif
             </div>
             <!-- End .products-slider -->
+          
         </div>
         <!-- End .products-section -->
     </div>
     <!-- End .container -->
+       <!-- Start Ads -->
+       @if(isset($all_active_advertisements['Details']['4']['ads']))
+        <div>
+            <center>
+                <img src="{{ asset('storage/'.$all_active_advertisements['Details']['4']['ads']) }}" class="">
+            </center>
+        </div>
+        @endif
+        <!-- End Ads -->
+        <br>
 </main>
 <!-- End .main -->
 @include('ecommerce.cart-js')
