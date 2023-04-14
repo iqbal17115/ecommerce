@@ -49,21 +49,13 @@
                         <div class="input-group" style="display: flex;
   justify-content: center;">
                             <input name="q" id="q" class="form-control mr-0" type="search"
-                                placeholder="What are you looking for?" aria-label="Search" style="background: white; border-radius: 5px 0px 0px 5px; max-width: 500px;">
+                                placeholder="What are you looking for?" aria-label="Search"
+                                style="background: white; border-radius: 5px 0px 0px 5px; max-width: 500px;">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon1" style="background: black;"><i
                                         class="fa fa-search" style="color: white;"></i></span>
                             </div>
-                            <!-- Start Header Ads -->
-                            @if(isset($all_active_advertisements['Header']['ads'])) 
-                            <div class="">
-                                <center>
-                            <img src="{{ asset('storage/'.$all_active_advertisements['Header']['ads']) }}" class="w-100 ml-sm-0 ml-md-5" width="111" height="44"
-                                 style="height: 40px;;" alt="Porto Logo">
-                                 <center>
-                            </div>
-                            @endif
-                            <!-- End Header Ads -->
+
                         </div>
                     </form>
 
@@ -205,7 +197,7 @@
                     </li>
                     @endforeach
                     <!-- End Category -->
-                    <li class="float-right phone">
+                    <li class="phone">
                         @if($company_info && $company_info->is_mobile_active)
                         <a href="#" class="d-flex align-items-center pt-1 pb-0" style="color: white;"><i
                                 class="icon-phone-1" style="font-size: 1rem;"></i>{{$company_info->mobile}}</a>
@@ -215,7 +207,21 @@
                     <li class="float-right"><a class="pt-1 pb-0" href="{{ route('customer-logout') }}"
                             style="color: white;">Logout</a></li>
                     @endif -->
-                    <li class="float-right"><a class="pt-1 pb-0" href="#" style="color: white;">Flash Deals</a></li>
+                    <!-- <li class="float-right"><a class="pt-1 pb-0" href="#" style="color: white;">Flash Deals</a></li> -->
+                    @if(isset($all_active_advertisements['Header']['ads']))
+                    <!-- Start Header Ads -->
+                    <li class="">
+                        <div class="float-right">
+                            <center>
+                                <img src="{{ asset('storage/'.$all_active_advertisements['Header']['ads']) }}"
+                                    class="w-100 ml-sm-0 ml-md-5" width="111" height="44" style="height: 30px;;"
+                                    alt="Porto Logo">
+                                <center>
+                        </div>
+                    </li>
+                    <!-- End Header Ads -->
+                    @endif
+
                 </ul>
             </nav>
         </div>
