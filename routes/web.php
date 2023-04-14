@@ -47,7 +47,6 @@ use Illuminate\Support\Facades\Route;
 // Route::post('seller-create', [HomeController::class, 'CreateSeller']);
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
-
 Route::get('/', function () {
     return view('auth.login');
 });

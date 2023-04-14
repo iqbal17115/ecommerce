@@ -9,6 +9,7 @@ use App\Models\Backend\WebSetting\CompanyInfo;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('headerMenuCategories', Category::whereHeaderMenu(1)->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')->get());
             $view->with('company_info', CompanyInfo::first());
             $view->with('currency', Currency::whereIsDefault(1)->first());
-            $view->with('header_advertisement', Advertisement::wherePage('Header')->whereIsActive(1)->first());
+            $view->with('advertisements', Advertisement::whereIn('page', ['Home', 'Category', 'Detail', 'Header'])->orderBy('page')->get()->pluck(null, 'page')->toArray());
+
         });
 
         
