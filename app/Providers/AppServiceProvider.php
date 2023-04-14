@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('headerMenuCategories', Category::whereHeaderMenu(1)->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')->get());
             $view->with('company_info', CompanyInfo::first());
             $view->with('currency', Currency::whereIsDefault(1)->first());
-            $view->with('all_active_advertisements', Advertisement::orderBy('position')
+            $view->with('all_active_advertisements', Advertisement::orderBy('position')->whereIsActive(1)
             ->get()
             ->groupBy('page')
             ->map(function ($ads, $page) {
