@@ -19,7 +19,7 @@
                                       <select name="page" id="page" class="form-control" required>
                                           <option value="">Select Option</option>
                                           <option value="Home">Home</option>
-                                          <option value="Category">Category</option>
+                                          <option value="Category">Shop</option>
                                           <option value="Details">Details</option>
                                           <option value="Header">Header</option>
                                       </select>
