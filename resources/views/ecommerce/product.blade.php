@@ -46,9 +46,9 @@
 
                 <div class="col-lg-7 col-md-6 product-single-details">
                     <h1 class="product-title">{{$product_detail->name}}</h1>
-                    @if($all_active_advertisements['Details']['ads']) 
+                    @if(isset($all_active_advertisements['Details']['1']['ads'])) 
                             <div class="">
-                            <img src="{{ asset('storage/'.$all_active_advertisements['Details']['ads']) }}" class="w-100 ml-sm-0 mb-2" width="111" height="44"
+                            <img src="{{ asset('storage/'.$all_active_advertisements['Details']['1']['ads']) }}" class="w-100 ml-sm-0 mb-2" width="111" height="44"
                                  style="height: 72px; width: 100%;" alt="Porto Logo">
                             </div>
                     @else
@@ -118,7 +118,9 @@
                             <a href="#" class="social-icon social-mail icon-mail-alt" target="_blank" title="Mail"></a>
                         </div>
                         <!-- End .social-icons -->
-
+                        @if(isset($all_active_advertisements['Details']['2']['ads'])) 
+                            <img src="{{ asset('storage/'.$all_active_advertisements['Details']['2']['ads']) }}" class="ml-md-5" style="height: 52px;">
+                        @endif
                     </div>
                     <!-- End .product single-share -->
                 </div>

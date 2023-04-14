@@ -208,12 +208,12 @@
                             style="color: white;">Logout</a></li>
                     @endif -->
                     <!-- <li class="float-right"><a class="pt-1 pb-0" href="#" style="color: white;">Flash Deals</a></li> -->
-                    @if(isset($all_active_advertisements['Header']['ads']))
+                    @if(isset($all_active_advertisements['Header']['1']['ads']))
                     <!-- Start Header Ads -->
                     <li class="">
                         <div class="float-right">
                             <center>
-                                <img src="{{ asset('storage/'.$all_active_advertisements['Header']['ads']) }}"
+                                <img src="{{ asset('storage/'.$all_active_advertisements['Header']['1']['ads']) }}"
                                     class="w-100 ml-sm-0 ml-md-5" width="111" height="44" style="height: 30px;;"
                                     alt="Porto Logo">
                                 <center>
