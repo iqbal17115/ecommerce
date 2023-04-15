@@ -40,7 +40,8 @@
             <td>
                 <button type="button" class="btn btn-info text-light btn-sm update_form" data-toggle="modal"
                     data-target="#categoryModal" data-id="{{$category->id}}" data-name="{{$category->name}}"
-                    data-parent_category_id="{{$category->parent_category_id}}" data-top_menu="{{$category->top_menu}}"
+                    data-parent_category_id="{{$category->parent_category_id}}"
+                    data-product_feature_id="{{$category->product_feature_id}}" data-top_menu="{{$category->top_menu}}"
                     data-sidebar_menu="{{$category->sidebar_menu}}" data-header_menu="{{$category->header_menu}}"
                     data-position="{{$category->position}}"
                     data-sidebar_menu_position="{{$category->sidebar_menu_position}}"

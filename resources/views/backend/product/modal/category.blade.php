@@ -22,7 +22,7 @@
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
-                              <div class="col-md-12">
+                              <div class="col-md-6">
                                   <div class="form-group category_load">
                                       <label for="id">Select Category</label>
                                       <select name="id" id="id" class="form-control category_id" style="width: 100%;">
@@ -66,6 +66,21 @@
                                           <!-- End sub-Sub-Category -->
                                           @endforeach
                                           @endif
+                                          <!-- End Sub Category -->
+                                          @endforeach
+                                      </select>
+                                  </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                  <div class="form-group category_load">
+                                      <label for="product_feature_id">Select Feature</label>
+                                      <select name="product_feature_id" id="product_feature_id" class="form-control product_feature_id" style="width: 100%;">
+                                          <option value="">Select Option</option>
+                                          @foreach($product_features as $product_feature)
+                                          <option value="{{$product_feature->id}}">
+                                              {{$product_feature->name}}
+                                          </option>
                                           <!-- End Sub Category -->
                                           @endforeach
                                       </select>

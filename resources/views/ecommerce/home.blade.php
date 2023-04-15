@@ -23,7 +23,8 @@
 			}">
                 @foreach($sliders as $slider)
                 <div class="home-slide home-slide1 banner">
-                    <img class="slider_image slide-bg" src="{{ asset('storage/'.$slider->image) }}" alt="slider image" style="min-height: 208px;">
+                    <img class="slider_image slide-bg" src="{{ asset('storage/'.$slider->image) }}" alt="slider image"
+                        style="min-height: 208px;">
                     <div
                         class="container d-flex align-items-sm-center justify-content-sm-between justify-content-center flex-column flex-sm-row">
                         <div class="banner-content content-left text-sm-right mb-sm-0 mb-2"></div>
@@ -77,9 +78,46 @@
                     @endforeach
                 </div>
             </div>
+            <!-- Start Top Product -->
+            <div class="row">
+                <!-- Start Product Part -->
+                <div class="col-md-9">
+                    <div class="row">
+                        @foreach($top_features as $top_feature)
+                        @if(count($top_feature->Category) > 2)
+                        <div class="col-md-4 card">
+                            <div class="card-body">
+                                <div class="a-cardui-header"><h2 class="a-color-base headline truncate-2line">{{$top_feature->name}}</h2></div>
+                                <div class="row">
+                                    @foreach($top_feature->Category as $top_feature_category)
+                                    <div class="col-6 p-0">
+                                        <div class="card mb-0">
+                                            <img class="card-img-top"
+                                                src="{{ asset('storage/'.$top_feature_category->image) }}">
+                                                <div class="text-center text-dark">
+                                                    <span>{{$top_feature_category->name}}</span>
+                                                </div>
+                                        </div>
+                                        <!-- End Product -->
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <!-- End Feature -->
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                    </div>
+                    <!-- End Product Part -->
+                    <!-- Start Ads Part -->
+                    <div class="col-md-3">
 
+                    </div>
+                    <!-- End Ads Part -->
+                </div>
+                <!-- End Top Product -->
+            </div>
         </div>
-    </div>
 
     </div>
 
@@ -167,7 +205,8 @@
             <!-- Start Ads -->
             <div class="row">
                 @foreach($product_feature->Advertisement as $feature_ads)
-                <div class="@if($feature_ads->width=='Full') col-md-12 @elseif($feature_ads->width=='Half') col-md-6 @else col-md-4 @endif">
+                <div
+                    class="@if($feature_ads->width=='Full') col-md-12 @elseif($feature_ads->width=='Half') col-md-6 @else col-md-4 @endif">
                     <div class="sale-banner banner bg-image mb-1 appear-animate" data-animation-name="fadeIn"
                         data-animation-delay="100"
                         style="background-image: url({{asset('storage/'.$feature_ads->ads)}}); height: 200px;width: auto;object-fit: contain;">

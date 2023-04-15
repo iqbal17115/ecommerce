@@ -59,6 +59,7 @@
                                     data-toggle="modal" data-target="#categoryModal" data-id="{{$category->id}}"
                                     data-name="{{$category->name}}"
                                     data-parent_category_id="{{$category->parent_category_id}}"
+                                    data-product_feature_id="{{$category->product_feature_id}}"
                                     data-top_menu="{{$category->top_menu}}" 
                                     data-sidebar_menu="{{$category->sidebar_menu}}"
                                     data-header_menu="{{$category->header_menu}}"
@@ -106,8 +107,11 @@ $(document).ready(function() {
         dropdownParent: $("#categoryModal"),
         placeholder: 'Select An Option'
     });
-
     $(".category_id").select2({
+        dropdownParent: $("#categoryModal"),
+        placeholder: 'Select An Option'
+    });
+    $(".product_feature_id").select2({
         dropdownParent: $("#categoryModal"),
         placeholder: 'Select An Option'
     });

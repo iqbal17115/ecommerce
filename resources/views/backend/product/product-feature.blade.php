@@ -10,13 +10,14 @@
                     data-target="#productFeatureModal" style="width: 100px;"><i class="fas fa-plus-circle"></i> New</a>
                 <input class="float-right mr-2 py-1" name="search_string" id="search_string" placeholder="Search..."/>
             </div>
-            <div class="col-md-12 feature_content">
+            <div class="col-md-12 product_feature_content">
                 <table class="table table-striped">
 
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Top Menu</th>
                             <th scope="col">Position</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
@@ -30,12 +31,14 @@
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
                             <td>{{$product_feature->name}}</td>
+                            <td>{{$product_feature->top_menu == 1? 'Yes' : 'No'}}</td>
                             <td>{{$product_feature->position}}</td>
                             <td>{{$product_feature->is_active == 1? 'Active' : 'Inactive'}}</td>
                             <td>
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#productFeatureModal" data-id="{{$product_feature->id}}"
-                                    data-name="{{$product_feature->name}}" data-position="{{$product_feature->position}}"
+                                    data-name="{{$product_feature->name}}" 
+                                    data-top_menu="{{$product_feature->top_menu}}" data-position="{{$product_feature->position}}"
                                     data-is_active="{{$product_feature->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>

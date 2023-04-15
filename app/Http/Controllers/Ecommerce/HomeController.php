@@ -57,7 +57,8 @@ class HomeController extends Controller
     public function index() {
         $sliders = Slider::whereIsActive(1)->get();
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
-        $product_features = ProductFeature::whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
-        return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features']));
+        $product_features = ProductFeature::whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        $top_features = ProductFeature::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features', 'top_features']));
     }
 }
