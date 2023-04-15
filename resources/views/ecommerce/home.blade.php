@@ -67,7 +67,7 @@
                         <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
                             <figure>
                                 <img src="{{ asset('storage/'.$top_show_category->image) }}" alt="category" width="280"
-                                    height="240" style="height: 100px; border-radius: 50%;" />
+                                    height="240" style="width: 100px; height: 100px; border-radius: 50%;" />
                             </figure>
                             <div class="category-content p-0">
                                 <span
