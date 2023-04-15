@@ -71,7 +71,7 @@
                             </figure>
                             <div class="category-content p-0">
                                 <span
-                                    style="margin: 8px 12px 0;font-size: 12px;color: #212121;line-height: 18px;height: 36px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">{{$top_show_category->name}}</span>
+                                    style="margin: 8px 12px 0;font-size: 8px;color: #212121;line-height: 18px;height: 36px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;">{{$top_show_category->name}}</span>
                             </div>
                         </a>
                     </div>
