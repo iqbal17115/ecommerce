@@ -12,7 +12,7 @@ class ProductFeature extends Model
     use HasFactory;
     public function Category()
     {
-        return $this->hasMany(Category::class)->where('is_active', '1');
+        return $this->hasMany(Category::class);
     }
     public function Advertisement()
     {
@@ -20,7 +20,7 @@ class ProductFeature extends Model
     }
     public function Product()
     {
-        return $this->hasMany(Product::class)->where('is_active', '1')->take(20);
+        return $this->hasMany(Product::class)->take(20);
     }
 
 }
