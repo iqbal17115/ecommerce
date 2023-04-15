@@ -93,7 +93,7 @@
                                     <div class="col-6 p-0">
                                         <div class="card mb-0">
                                             <img class="card-img-top"
-                                                src="{{ asset('storage/'.$top_feature_category->image) }}" style="height: 165px;">
+                                                src="{{ asset('storage/'.$top_feature_category->image) }}" style="height: 160px;">
                                                 <div class="text-center text-dark">
                                                     <span>{{$top_feature_category->name}}</span>
                                                 </div>
