@@ -16,8 +16,8 @@ class CreateProductFeaturesTable extends Migration
         Schema::create('product_features', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->boolean('card_feature')->nullable()->default(0);
             $table->boolean('top_menu')->nullable()->default(0);
+            $table->foreignId('product_feature_id')->nullable();
             $table->tinyInteger('position')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();

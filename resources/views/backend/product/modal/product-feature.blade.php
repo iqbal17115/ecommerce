@@ -24,8 +24,8 @@
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
-                                      <label for="card_feature">Card Feature</label>
-                                      <select name="card_feature" id="card_feature" class="form-control" required>
+                                      <label for="top_menu">Top Feature</label>
+                                      <select name="top_menu" id="top_menu" class="form-control" required>
                                           <option value="">Select Option</option>
                                           <option value="1">Yes</option>
                                           <option value="0">No</option>
@@ -33,12 +33,16 @@
                                   </div>
                               </div>
                               <div class="col-md-12">
-                                  <div class="form-group">
-                                      <label for="top_menu">Top Feature</label>
-                                      <select name="top_menu" id="top_menu" class="form-control" required>
+                                  <div class="form-group category_load">
+                                      <label for="id">Select Category</label>
+                                      <select name="id" id="id" class="form-control category_id" style="width: 100%;">
                                           <option value="">Select Option</option>
-                                          <option value="1">Yes</option>
-                                          <option value="0">No</option>
+                                          @foreach($parent_categories as $category)
+                                          <option value="{{$category->id}}">
+                                              {{$category->name}}
+                                          </option>
+                                          <!-- Start Product Feature -->
+                                          @endforeach
                                       </select>
                                   </div>
                               </div>

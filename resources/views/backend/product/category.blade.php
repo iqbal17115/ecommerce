@@ -91,7 +91,7 @@
 </div>
 
 @include('backend.product.modal.category')
-<!-- @include('backend.product.modal.category-hierarchy') -->
+@include('backend.product.modal.category-hierarchy')
 
 @endsection
 @section('script')

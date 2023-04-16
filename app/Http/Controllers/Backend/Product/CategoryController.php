@@ -103,7 +103,7 @@ class CategoryController extends Controller
     public function index() {
         $categories = Category::latest()->paginate(10);
         $parent_categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
-        $product_features = ProductFeature::orderBy('id', 'DESC')->whereTopMenu(1)->orWhere('card_feature', 1)->whereIsActive(1)->get();
+        $product_features = ProductFeature::orderBy('id', 'DESC')->whereTopMenu(1)->whereIsActive(1)->get();
         return view('backend.product.category', compact('categories', 'parent_categories', 'product_features'));
     }
 }
