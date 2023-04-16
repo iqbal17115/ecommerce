@@ -13,7 +13,7 @@ class ProductFeatureController extends Controller
         return response()->json(['product_features' => $product_features]);
     }
     public function searchProductFeature(Request $request) {
-        $product_features = ProductFeature::where('name', 'like', '%'.$request->search_string.'%')->orderBy('position', 'asc')->paginate(5);
+        $product_features = ProductFeature::where('name', 'like', '%'.$request->search_string.'%')->orderBy('position', 'asc')->paginate(10);
         if($product_features->count() >= 1) {
         return view('backend.product.pagination-product-feature', compact('product_features'))->render();
         }else {
@@ -23,7 +23,7 @@ class ProductFeatureController extends Controller
         }
     }
     public function pagination(Request $request) {
-        $product_features = ProductFeature::latest()->paginate(5);
+        $product_features = ProductFeature::latest()->paginate(10);
         return view('backend.product.pagination-product-feature', compact('product_features'))->render();
     }
     public function deleteProductFeature(Request $request) {
@@ -67,7 +67,7 @@ class ProductFeatureController extends Controller
         ]);
     }
     public function index() {
-        $product_features = ProductFeature::orderBy('id', 'desc')->paginate(5);
+        $product_features = ProductFeature::orderBy('id', 'desc')->paginate(10);
         return view('backend.product.product-feature', compact('product_features'));
     }
 }
