@@ -85,7 +85,7 @@
                     <div class="row">
                         @foreach($top_features as $top_feature)
                         @if(count($top_feature->Category) >= 2)
-                        <div class="col-md-4 card" style="background: #DBC5EA;">
+                        <div class="col-md-4 card">
                             <div class="card-body">
                                 <div class="a-cardui-header"><h2 class="a-color-base headline truncate-2line">{{$top_feature->name}}</h2></div>
                                 <div class="row">
