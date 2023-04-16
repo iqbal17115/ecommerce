@@ -34,12 +34,12 @@
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group category_load">
-                                      <label for="id">Select Category</label>
+                                      <label for="id">Select Feature</label>
                                       <select name="id" id="id" class="form-control category_id" style="width: 100%;">
                                           <option value="">Select Option</option>
-                                          @foreach($product_features as $category)
+                                          @foreach($all_product_feature as $product_feature)
                                           <option value="{{$category->id}}">
-                                              {{$category->name}}
+                                              {{$product_feature->name}}
                                           </option>
                                           <!-- Start Product Feature -->
                                           @endforeach
