@@ -4,7 +4,6 @@
 @media (min-width:1220px) {
     .container {
         max-width: 1500px;
-        ;
     }
 }
 
@@ -12,6 +11,30 @@
 .products-slider>.owl-stage-outer {
     padding: 0px 0px;
 }
+
+.feature-card {
+    width: 100%;
+    background-color: #ccc;
+}
+
+@media screen and (min-width: 480px) {
+    .feature-card {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .feature-card {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .feature-card {
+        width: 25%;
+    }
+}
+
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
@@ -78,7 +101,7 @@
                     @endforeach
                 </div>
             </div>
-            <!-- Start Top Product -->
+            <!-- Start Top Feature -->
             <div class="row" style="margin-top: 18px;">
                 <!-- Start Product Part -->
                 <div class="col-md-9">
@@ -87,16 +110,19 @@
                         @if(count($top_feature->Category) >= 2)
                         <div class="col-md-4 card">
                             <div class="card-body">
-                                <div class="a-cardui-header"><h2 class="a-color-base headline truncate-2line">{{$top_feature->name}}</h2></div>
+                                <div class="a-cardui-header">
+                                    <h2 class="a-color-base headline truncate-2line">{{$top_feature->name}}</h2>
+                                </div>
                                 <div class="row">
                                     @foreach($top_feature->Category as $top_feature_category)
                                     <div class="col-6 p-0">
                                         <div class="card mb-0">
                                             <img class="card-img-top"
-                                                src="{{ asset('storage/'.$top_feature_category->image) }}" style="height: 150px;">
-                                                <div class="text-center text-dark">
-                                                    <span>{{$top_feature_category->name}}</span>
-                                                </div>
+                                                src="{{ asset('storage/'.$top_feature_category->image) }}"
+                                                style="height: 150px;">
+                                            <div class="text-center text-dark">
+                                                <span>{{$top_feature_category->name}}</span>
+                                            </div>
                                         </div>
                                         <!-- End Product -->
                                     </div>
@@ -115,7 +141,7 @@
                     </div>
                     <!-- End Ads Part -->
                 </div>
-                <!-- End Top Product -->
+                <!-- End Top Feature -->
             </div>
         </div>
 
@@ -124,7 +150,7 @@
     <div class="bg-gray">
         <div class="container">
             @foreach($product_features as $product_feature)
-            @if(count($product_feature->Product) > 0)
+            @if($product_feature->card_feature != 1 && count($product_feature->Product) > 0)
             <div class="recent-products-section appear-animate" data-animation-name="fadeIn" data-animation-delay="100">
                 <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
                     <h4 class="section-title text-transform-none mb-0 mr-0">{{$product_feature->name}}</h4>
@@ -197,12 +223,13 @@
                         </div>
                         <!-- End .product-details -->
                     </div>
+
                     @endforeach
                 </div>
                 <!-- End .products-slider -->
             </div>
-            @if($product_feature->Advertisement)
-            <!-- Start Ads -->
+            <!-- @if($product_feature->Advertisement)
+          Start Ads 
             <div class="row">
                 @foreach($product_feature->Advertisement as $feature_ads)
                 <div
@@ -212,7 +239,7 @@
                         style="background-image: url({{asset('storage/'.$feature_ads->ads)}}); height: 200px;width: auto;object-fit: contain;">
                         <div class="container banner-content">
                             <div class="row no-gutter justify-content-start">
-                                <!-- <div
+                                <div
                                     class="col-auto col-lg-5 col-md-6 col-12 d-flex flex-column justify-content-center content-left text-center text-md-right">
                                     <h4 class="align-left text-white text-uppercase">THE PERFECT GIFT FOR YOUR
                                         GIRLFRIEND
@@ -228,15 +255,38 @@
                                 <div
                                     class="mb-0 col-md-4 col-12 col-3 col-auto justify-content-center justify-content-md-start content-right">
                                     <a href="demo8-shop.html" class="btn btn-lg bg-white text-dark font2">Shop Now!</a>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
             </div>
-            <!-- End Ads -->
-            @endif
+            End Ads
+            @endif -->
+            @elseif($product_feature->card_feature == 1)
+            <!-- Start Card Feature -->
+            <div class="card-body feature-card" style=" display: inline-block;">
+                <div class="a-cardui-header">
+                    <h2 class="a-color-base headline truncate-2line">{{$product_feature->name}}</h2>
+                </div>
+                <div class="row">
+                    @foreach($product_feature->Category as $card_feature_category)
+                    <div class="col-6 p-0">
+                        <div class="card mb-0">
+                            <img class="card-img-top" src="{{ asset('storage/'.$card_feature_category->image) }}"
+                                style="height: 150px;">
+                            <div class="text-center text-dark">
+                                <span>{{$card_feature_category->name}}</span>
+                            </div>
+                        </div>
+                        <!-- End Product -->
+                    </div>
+                    @endforeach
+                </div>
+                <!-- End Feature -->
+            </div>
+            <!-- End Card Feature -->
             @endif
             @endforeach
         </div>
