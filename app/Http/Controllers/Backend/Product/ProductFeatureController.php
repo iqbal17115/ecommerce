@@ -68,6 +68,7 @@ class ProductFeatureController extends Controller
     }
     public function index() {
         $product_features = ProductFeature::orderBy('id', 'desc')->paginate(10);
+        $all_product_feature = ProductFeature::orderBy('id', 'desc')->get();
         return view('backend.product.product-feature', compact('product_features'));
     }
 }

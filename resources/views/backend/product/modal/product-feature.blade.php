@@ -37,7 +37,7 @@
                                       <label for="id">Select Category</label>
                                       <select name="id" id="id" class="form-control category_id" style="width: 100%;">
                                           <option value="">Select Option</option>
-                                          @foreach($parent_categories as $category)
+                                          @foreach($product_features as $category)
                                           <option value="{{$category->id}}">
                                               {{$category->name}}
                                           </option>
