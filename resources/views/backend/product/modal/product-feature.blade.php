@@ -33,20 +33,6 @@
                                   </div>
                               </div>
                               <div class="col-md-12">
-                                  <div class="form-group category_load">
-                                      <label for="id">Select Feature</label>
-                                      <select name="id" id="id" class="form-control category_id" style="width: 100%;">
-                                          <option value="">Select Option</option>
-                                          @foreach($all_product_feature as $product_feature)
-                                          <option value="{{$category->id}}">
-                                              {{$product_feature->name}}
-                                          </option>
-                                          <!-- Start Product Feature -->
-                                          @endforeach
-                                      </select>
-                                  </div>
-                              </div>
-                              <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="position">Position</label>
                                       <input type="number" name="position" id="position" class="form-control"
