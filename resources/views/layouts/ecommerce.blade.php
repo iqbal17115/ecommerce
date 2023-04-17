@@ -26,13 +26,13 @@
             ]
         }
     };
-    // (function(d) {
-    //     var wf = d.createElement('script'),
-    //         s = d.scripts[0];
-    //     wf.src = 'assets/js/webfont.js';
-    //     wf.async = true;
-    //     s.parentNode.insertBefore(wf, s);
-    // })(document);
+    (function(d) {
+        var wf = d.createElement('script'),
+            s = d.scripts[0];
+        wf.src = 'assets/js/webfont.js';
+        wf.async = true;
+        s.parentNode.insertBefore(wf, s);
+    })(document);
     </script>
 
     <!-- Plugins CSS File -->
@@ -176,8 +176,8 @@
     }
   
     </style>
-    <!-- <script src="jquery-3.6.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 </head>
 
@@ -215,7 +215,7 @@
     <!-- Main JS File -->
     <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
 
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
     $(document).ready(function() {
