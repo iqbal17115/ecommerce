@@ -223,21 +223,6 @@
             e.preventDefault();
             $("#sidebar-wrapper").css("width", "320px");
             $("#wrapper").toggleClass("menuDisplayed");
-            // Call Sidebar Content
-            //    $.ajax({
-            //     url: "{{route('get_sidebar_content')}}",
-            //     method: 'get',
-            //     async: false,
-            //     success: function(data) {
-            //         console.log(data);
-            //         $('#category_show').html(data);
-            //     },
-            //     error: function(err) {
-            //         var error = err.responseJSON;
-            //         console.log(error);
-
-            //     }
-            // });
         });
     });
     </script>
