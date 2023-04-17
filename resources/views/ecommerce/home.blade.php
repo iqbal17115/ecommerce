@@ -177,10 +177,6 @@
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
                             <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
-                                <img @if($product->ProductMainImage)
-                                src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif
-                                width="239" height="239" style="width: 239px; height: 239px; filter: brightness(0.9)
-                                contrast(1.2) saturate(1.1);" alt="product">
                             </a>
                             <div class="btn-icon-group">
                                 <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
@@ -261,8 +257,8 @@
                     @foreach($product_feature->Category as $card_feature_category)
                     <div class="col-6 p-0">
                         <div class="card mb-0">
-                            <img class="card-img-top" src="{{ asset('storage/'.$card_feature_category->image) }}"
-                                style="height: 150px;">
+                            <!-- <img class="card-img-top" src="{{ asset('storage/'.$card_feature_category->image) }}"
+                                style="height: 150px;"> -->
                             <div class="text-center text-dark">
                                 <span>{{$card_feature_category->name}}</span>
                             </div>
