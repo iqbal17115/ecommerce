@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
 use App\Http\Controllers\Backend\WebSetting\CouponController;
+use App\Http\Controllers\Backend\WebSetting\FeatureSettingController;
 use App\Http\Controllers\Backend\WebSetting\ShippingChargeController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
 use App\Http\Controllers\Ecommerce\AuthController;
@@ -230,17 +231,17 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     );
     // End Product
 
-        // Start Slider
-        Route::group(
-            [],
-            function () {
-                Route::get('shipping-charge', [ShippingChargeController::class, 'index'])->name('shipping-charge');
-                Route::post('add-shipping-charge', [ShippingChargeController::class, 'addShippingCharge'])->name('add.shipping-charge');
-                Route::post('delete-shipping-charge', [ShippingChargeController::class, 'deleteShippingCharge'])->name('delete.shipping-charge');
-                Route::get('pagination/shipping-charge-pagination-data', [ShippingChargeController::class, 'pagination']);
-            }
-        );
-        // End Slider
+    // Start Slider
+    Route::group(
+        [],
+        function () {
+            Route::get('shipping-charge', [ShippingChargeController::class, 'index'])->name('shipping-charge');
+            Route::post('add-shipping-charge', [ShippingChargeController::class, 'addShippingCharge'])->name('add.shipping-charge');
+            Route::post('delete-shipping-charge', [ShippingChargeController::class, 'deleteShippingCharge'])->name('delete.shipping-charge');
+            Route::get('pagination/shipping-charge-pagination-data', [ShippingChargeController::class, 'pagination']);
+        }
+    );
+    // End Slider
 
     // Start Slider
     Route::group(
@@ -253,6 +254,15 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         }
     );
     // End Slider
+
+    // Start Feature Setting
+    Route::group(
+        [],
+        function () {
+            Route::get('feature-setting', [FeatureSettingController::class, 'index'])->name('feature-setting');
+        }
+    );
+    // End Feature Setting
 
     // Start Advertisement
     Route::group(
