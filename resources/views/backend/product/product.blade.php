@@ -259,6 +259,18 @@ div#variation_content {
                                                             value="{{$subSubSubSubCategory->id}}">
                                                             --------{{$subSubSubSubCategory->name}}
                                                         </option>
+                                                        <!-- Start sub-Sub-Sub-Sub-Sub-Category -->
+                                                        @if($subSubSubSubCategory->SubCategory)
+                                                        @foreach($subSubSubSubCategory->SubCategory as
+                                                        $subSubSubSubSubCategory)
+                                                        <option @if($productInfo && $productInfo->
+                                                            category_id==$subSubSubSubSubCategory->id) selected @endif
+                                                            value="{{$subSubSubSubSubCategory->id}}">
+                                                            ----------{{$subSubSubSubSubCategory->name}}
+                                                        </option>
+                                                        @endforeach
+                                                        @endif
+                                                        <!-- End sub-Sub-Sub-Sub-Sub-Category -->
                                                         @endforeach
                                                         @endif
                                                         <!-- End sub-Sub-Sub-Sub-Category -->
