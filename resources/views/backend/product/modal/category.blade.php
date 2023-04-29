@@ -61,18 +61,14 @@
                                           @if($subSubSubSubCategory->SubCategory)
                                           @foreach($subSubSubSubCategory->SubCategory as
                                           $subSubSubSubSubCategory)
-                                          <option @if($productInfo && $productInfo->
-                                              category_id==$subSubSubSubSubCategory->id) selected @endif
-                                              value="{{$subSubSubSubSubCategory->id}}">
+                                          <option value="{{$subSubSubSubSubCategory->id}}">
                                               ----------{{$subSubSubSubSubCategory->name}}
                                           </option>
                                           <!-- Start sub-Sub-Sub-Sub-Sub-Sub-Category -->
                                           @if($subSubSubSubSubCategory->SubCategory)
                                           @foreach($subSubSubSubSubCategory->SubCategory as
                                           $subSubSubSubSubSubCategory)
-                                          <option @if($productInfo && $productInfo->
-                                              category_id==$subSubSubSubSubSubCategory->id) selected @endif
-                                              value="{{$subSubSubSubSubSubCategory->id}}">
+                                          <option value="{{$subSubSubSubSubSubCategory->id}}">
                                               ----------{{$subSubSubSubSubSubCategory->name}}
                                           </option>
                                           @endforeach
