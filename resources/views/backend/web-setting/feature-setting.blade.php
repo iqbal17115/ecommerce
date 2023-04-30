@@ -43,8 +43,14 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <input name="name" id="name" class="form-control"
-                                                        placeholder="Search By Feature Name" required />
+                                                    <select class="form-select" name="condition_id" id="condition_id"
+                                                        style="width: 100%;" required>
+                                                        <option value="">Select Option</option>
+                                                        @foreach($all_features AS $feature)
+                                                        <option value="{{ $feature->id }}">{{ $feature->name }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <!-- End -->
 
@@ -63,9 +69,129 @@
                                                     </select>
                                                 </div>
                                                 <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Category</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select class="form-select" id="select-options">
+                                                        <option value="">Select An Option</option>
+                                                        @foreach($categories as $category)
+                                                        <option value="{{$category->id}}">
+                                                            {{$category->name}}
+                                                        </option>
+                                                        <!-- Start Sub-Category -->
+                                                        @if($category->SubCategory)
+                                                        @foreach($category->SubCategory as $subCategory)
+                                                        <option value="{{$subCategory->id}}">
+                                                            --{{$subCategory->name}}
+                                                        </option>
+                                                        <!-- Start sub-Sub-Category -->
+                                                        @if($subCategory->SubCategory)
+                                                        @foreach($subCategory->SubCategory as $subSubCategory)
+                                                        <option value="{{$subSubCategory->id}}">
+                                                            ----{{$subSubCategory->name}}
+                                                        </option>
+                                                        <!-- Start sub-Sub-Sub-Category -->
+                                                        @if($subSubCategory->SubCategory)
+                                                        @foreach($subSubCategory->SubCategory as $subSubSubCategory)
+                                                        <option value="{{$subSubSubCategory->id}}">
+                                                            ------{{$subSubSubCategory->name}}
+                                                        </option>
+                                                        <!-- Start sub-Sub-Sub-Sub-Category -->
+                                                        @if($subSubSubCategory->SubCategory)
+                                                        @foreach($subSubSubCategory->SubCategory as
+                                                        $subSubSubSubCategory)
+                                                        <option value="{{$subSubSubSubCategory->id}}">
+                                                            --------{{$subSubSubSubCategory->name}}
+                                                        </option>
+                                                        <!-- Start sub-Sub-Sub-Sub-Sub-Category -->
+                                                        @if($subSubSubSubCategory->SubCategory)
+                                                        @foreach($subSubSubSubCategory->SubCategory as
+                                                        $subSubSubSubSubCategory)
+                                                        <option value="{{$subSubSubSubSubCategory->id}}">
+                                                            ----------{{$subSubSubSubSubCategory->name}}
+                                                        </option>
+                                                        <!-- Start sub-Sub-Sub-Sub-Sub-Sub-Category -->
+                                                        @if($subSubSubSubSubCategory->SubCategory)
+                                                        @foreach($subSubSubSubSubCategory->SubCategory as
+                                                        $subSubSubSubSubSubCategory)
+                                                        <option value="{{$subSubSubSubSubSubCategory->id}}">
+                                                            ----------{{$subSubSubSubSubSubCategory->name}}
+                                                        </option>
+                                                        @endforeach
+                                                        @endif
+                                                        <!-- End sub-Sub-Sub-Sub-Sub-Sub-Category -->
+                                                        @endforeach
+                                                        @endif
+                                                        <!-- End sub-Sub-Sub-Sub-Sub-Category -->
+                                                        @endforeach
+                                                        @endif
+                                                        <!-- End sub-Sub-Sub-Sub-Category -->
+                                                        @endforeach
+                                                        @endif
+                                                        <!-- End sub-Sub-Sub-Category -->
+                                                        @endforeach
+                                                        @endif
+                                                        <!-- End sub-Sub-Category -->
+                                                        @endforeach
+                                                        @endif
+                                                        <!-- End Sub Category -->
+                                                        @endforeach
+                                                    </select>
 
+                                                    <div>
+                                                        <table class="table">
+                                                            <tbody id="selected-options">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Apply For Offer</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-1">
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="is_phone_active" id="is_phone_active"
+                                                            style="width: 50px; height: 20px;">
+                                                    </div>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Apply For Coupon</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-1">
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="is_phone_active" id="is_phone_active"
+                                                            style="width: 50px; height: 20px;">
+                                                    </div>
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Status</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select name="quantity_unit" id="quantity_unit" class="form-select">
+                                                        <option value="">Select An Option</option>
+                                                        <option value="1">Active</option>
+                                                        <option value="0">Inactive</option>
+                                                    </select>
+                                                </div>
+                                                <!-- End -->
                                                 <div class="col-md-12 mt-md-3">
-                                                    <button class="float-right btn btn-success btn-sm ml-2">Submit</button>
+                                                    <button
+                                                        class="float-right btn btn-success btn-sm ml-2">Submit</button>
                                                 </div>
                                                 <!-- End -->
                                             </div>
@@ -118,11 +244,14 @@ $('#product_condition_id').select2({
 $('#condition_id').select2({
     placeholder: 'Select An Option'
 });
+$('#select-options').select2({
+    placeholder: 'Select An Option'
+});
 $('.bottom_size_map').select2({
     placeholder: 'Select An Option'
 });
 // $('.file-upload').file_upload();
 </script>
-@include('backend.product.js.product-js')
+@include('backend.web-setting.js.feature-setting-js')
 {!! Toastr::message() !!}
 @endsection
