@@ -210,7 +210,7 @@
                     <!-- <li class="float-right"><a class="pt-1 pb-0" href="#" style="color: white;">Flash Deals</a></li> -->
                     @if(isset($all_active_advertisements['Header']['1']['ads']))
                     <!-- Start Header Ads -->
-                    <li class="">
+                    <li class="" style="width: 360px;">
                         <div class="float-right">
                             <center>
                                 <img src="{{ asset('storage/'.$all_active_advertisements['Header']['1']['ads']) }}"
