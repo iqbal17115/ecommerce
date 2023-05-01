@@ -17,8 +17,8 @@ class CreateProductFeaturesTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->boolean('top_menu')->nullable()->default(0);
-            $table->foreignId('product_feature_id')->nullable();
             $table->tinyInteger('position')->nullable();
+            $table->foreignId('product_feature_id')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
         });

@@ -1,9 +1,15 @@
 <script>
-    // Start Feature Setting
+// Start Remove Feature Category
+$(document).ready(function() {
+    $("body").on("click", ".remove-btn", function() {
+        $(this).closest('tr').remove();
+    });
+});
+// End Remove Feature Category
+// Start Feature Setting
 $(document).on('submit', '#add_feature_setting', function(e) {
     e.preventDefault();
     var form = this;
-    alert('Work Ongoing');
     $.ajax({
         url: "{{route('add.feature_setting')}}",
         method: 'post',
@@ -14,9 +20,9 @@ $(document).on('submit', '#add_feature_setting', function(e) {
         contentType: false,
         success: function(data) {
             if (data.status == 201) {
-            
+                window.location.href = "feature-setting-list";
             }
-            console.log("OK");
+            
         },
         error: (error) => {
             alert('Something went wrong to fetch datas...');
@@ -26,7 +32,7 @@ $(document).on('submit', '#add_feature_setting', function(e) {
 // End Feature Setting
 $(document).ready(function() {
     // Hide the selected options div
-    $('#selected-options').hide();
+    // $('#selected-options').hide();
 
     // Listen for changes in the select box
     $('#select-options').change(function() {
@@ -36,7 +42,11 @@ $(document).ready(function() {
         // If an option is selected, add it to the selected options div
         if (selectedOption) {
             var newStr = selectedOptionText.split('-').join('');
-            $('#selected-options').append('<tr><td class="text-danger"><input class="form-control" name="category_id" id="category_id" value="' + selectedOption + '" hidden/>' + newStr + '</td><td><input class="form-control form-control-sm" placeholder="Position"/></td><td><button type="button" class="btn btn-info text-light btn-sm"><i class="mdi mdi-pencil font-size-16"></i></button><button type="button" class="btn btn-danger text-light btn-sm ml-1"><i class="mdi mdi-trash-can font-size-16"></i></button></td></tr>');
+            $('#selected-options').append(
+                '<tr><td class="text-danger"><input name="category_id[]" id="category_id"  class="form-control" value="' +
+                selectedOption + '" hidden/>' + newStr +
+                '</td><td><input name="position[]" id="position" class="form-control form-control-sm" placeholder="Position" required/></td><td><button type="button" class="btn btn-danger text-light btn-sm ml-1 p-1 remove-btn"><i class="mdi mdi-trash-can font-size-16"></i></button></td></tr>'
+            );
             $('#selected-options').show();
         }
     });

@@ -11,7 +11,9 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12 ml-auto">
-                <p class="category h4">Add Feature Setting</p>
+                <p class="category h4">Add Feature Setting <a class="btn btn-info btn-sm float-right"
+                        href="{{ route('feature-setting-list') }}">List</a></p>
+
                 <!-- Nav tabs -->
                 <div class="card">
                     <div class="card-header">
@@ -43,11 +45,13 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" name="condition_id" id="condition_id"
+                                                    <select class="form-select" name="feature_id" id="feature_id"
                                                         style="width: 100%;" required>
                                                         <option value="">Select Option</option>
                                                         @foreach($all_features AS $feature)
-                                                        <option value="{{ $feature->id }}">{{ $feature->name }}
+                                                        <option value="{{ $feature->id }}" @if($featureSettingInfo &&
+                                                            $featureSettingInfo->product_feature_id == $feature->id)
+                                                            selected @endif>{{ $feature->name }}
                                                         </option>
                                                         @endforeach
                                                     </select>
@@ -144,7 +148,26 @@
                                                     <div>
                                                         <table class="table table-bordered">
                                                             <tbody id="selected-options">
-
+                                                                @if($featureSettingInfo)
+                                                                @foreach($featureSettingInfo->FeatureSettingDetail as
+                                                                $feature_setting_detail)
+                                                                <tr>
+                                                                    <td class="text-danger">
+                                                                        <input name="category_id[]" id="category_id"
+                                                                            class="form-control" value="{{$feature_setting_detail->category_id}}" hidden /> @if($feature_setting_detail->Category) {{$feature_setting_detail->Category->name}} @endif
+                                                                    </td>
+                                                                    <td><input name="position[]" id="position"
+                                                                            class="form-control form-control-sm" value="{{$feature_setting_detail->position}}"
+                                                                            placeholder="Position" required />
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button"
+                                                                            class="btn btn-danger text-light btn-sm ml-1 p-1 remove-btn"><i
+                                                                                class="mdi mdi-trash-can font-size-16"></i></button>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                                @endif
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -156,13 +179,15 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-1">
-                                                    <select name="offering_gift_message" id="offering_gift_message"
-                                                        class="form-select">
+                                                    <select name="apply_for_offer" id="apply_for_offer"
+                                                        class="form-select" required>
                                                         <option value="">Select Option</option>
-                                                        <option value="1">Yes
-                                                        </option>
-                                                        <option value="0">No
-                                                        </option>
+                                                        <option value="1" @if($featureSettingInfo &&
+                                                            $featureSettingInfo->apply_for_offer == 1) selected
+                                                            @endif>Yes</option>
+                                                        <option value="0" @if($featureSettingInfo &&
+                                                            $featureSettingInfo->apply_for_offer == 0) selected
+                                                            @endif>No</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
@@ -172,26 +197,15 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-1">
-                                                    <select name="offering_gift_message" id="offering_gift_message"
-                                                        class="form-select">
+                                                    <select name="apply_for_coupon" id="apply_for_coupon"
+                                                        class="form-select" required>
                                                         <option value="">Select Option</option>
-                                                        <option value="1">Yes
-                                                        </option>
-                                                        <option value="0">No
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Status</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select name="quantity_unit" id="quantity_unit" class="form-select">
-                                                        <option value="">Select An Option</option>
-                                                        <option value="1">Active</option>
-                                                        <option value="0">Inactive</option>
+                                                        <option value="1" @if($featureSettingInfo &&
+                                                            $featureSettingInfo->apply_for_coupon == 1) selected
+                                                            @endif>Yes</option>
+                                                        <option value="0" @if($featureSettingInfo &&
+                                                            $featureSettingInfo->apply_for_coupon == 0) selected
+                                                            @endif>No</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->

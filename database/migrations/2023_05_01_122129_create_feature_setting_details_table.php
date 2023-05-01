@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeatureSettingsTable extends Migration
+class CreateFeatureSettingDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateFeatureSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('feature_settings', function (Blueprint $table) {
+        Schema::create('feature_setting_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_feature_id')->nullable();
-            $table->boolean('apply_for_offer')->nullable()->default(0);
-            $table->boolean('apply_for_coupon')->nullable()->default(0);
+            $table->foreignId('feature_setting_id')->nullable();
+            $table->foreignId('category_id')->nullable();
+            $table->foreignId('position')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateFeatureSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feature_settings');
+        Schema::dropIfExists('feature_setting_details');
     }
 }
