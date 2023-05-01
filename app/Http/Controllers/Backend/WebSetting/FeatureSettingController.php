@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class FeatureSettingController extends Controller
 {
+    public function addFeatureSetting(Request $request) {
+        return 1;
+    }
     public function index() {
         $all_features = ProductFeature::orderBy('id', 'DESC')->get();
         $categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();

@@ -260,6 +260,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         [],
         function () {
             Route::get('feature-setting', [FeatureSettingController::class, 'index'])->name('feature-setting');
+            Route::post('add-feature_setting', [FeatureSettingController::class, 'addFeatureSetting'])->name('add.feature_setting');
         }
     );
     // End Feature Setting

@@ -29,7 +29,7 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane add_product_identity active" id="addProductIdentity" role="tabpanel">
-                                <form method="post" id="add_product_identity">
+                                <form method="post" id="add_feature_setting">
                                     @csrf
                                     <div class="row">
                                         <!-- Start -->
@@ -142,7 +142,7 @@
                                                     </select>
 
                                                     <div>
-                                                        <table class="table">
+                                                        <table class="table table-bordered">
                                                             <tbody id="selected-options">
 
                                                             </tbody>
@@ -156,11 +156,14 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-1">
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="is_phone_active" id="is_phone_active"
-                                                            style="width: 50px; height: 20px;">
-                                                    </div>
+                                                    <select name="offering_gift_message" id="offering_gift_message"
+                                                        class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="1">Yes
+                                                        </option>
+                                                        <option value="0">No
+                                                        </option>
+                                                    </select>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4">
@@ -169,11 +172,14 @@
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-1">
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="is_phone_active" id="is_phone_active"
-                                                            style="width: 50px; height: 20px;">
-                                                    </div>
+                                                    <select name="offering_gift_message" id="offering_gift_message"
+                                                        class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="1">Yes
+                                                        </option>
+                                                        <option value="0">No
+                                                        </option>
+                                                    </select>
                                                 </div>
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
