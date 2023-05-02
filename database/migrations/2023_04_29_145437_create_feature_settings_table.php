@@ -15,6 +15,7 @@ class CreateFeatureSettingsTable extends Migration
     {
         Schema::create('feature_settings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('parent_product_feature_id')->nullable();
             $table->foreignId('product_feature_id')->nullable();
             $table->boolean('apply_for_offer')->nullable()->default(0);
             $table->boolean('apply_for_coupon')->nullable()->default(0);

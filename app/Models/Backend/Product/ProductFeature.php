@@ -13,7 +13,7 @@ class ProductFeature extends Model
     use HasFactory;
     public function FeatureSetting()
     {
-        return $this->hasOne(FeatureSetting::class);
+        return $this->hasMany(FeatureSetting::class, 'parent_product_feature_id');
     }
     public function Category()
     {

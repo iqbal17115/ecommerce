@@ -39,6 +39,25 @@
                                             <!-- Start Content -->
                                             <div class="row">
 
+                                            <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;"> Feature Area (After)</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select class="form-select" name="parent_product_feature_id" id="parent_product_feature_id"
+                                                        style="width: 100%;" required>
+                                                        <option value="">Select Option</option>
+                                                        @foreach($all_card_features AS $card_feature)
+                                                        <option value="{{ $card_feature->id }}" @if($featureSettingInfo &&
+                                                            $featureSettingInfo->parent_product_feature_id == $card_feature->id)
+                                                            selected @endif>{{ $card_feature->name }} ({{$card_feature->card_feature == 1? 'Box Feature' : 'Cart Feature'}})
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <!-- End -->
+
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Feature Name</label>
@@ -250,6 +269,9 @@ $('#brand_id').select2({
     placeholder: 'Select An Option'
 });
 $('#feature_id').select2({
+    placeholder: 'Select An Option'
+});
+$('#parent_product_feature_id').select2({
     placeholder: 'Select An Option'
 });
 $('#material_id').select2({

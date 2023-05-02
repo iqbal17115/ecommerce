@@ -24,7 +24,8 @@ class FeatureSettingController extends Controller
             if (!$Query) {
                 $Query = new FeatureSetting();
             }
-
+            
+            $Query->parent_product_feature_id = $request->parent_product_feature_id;
             $Query->product_feature_id = $request->feature_id;
             $Query->apply_for_offer = $request->apply_for_offer;
             $Query->apply_for_coupon = $request->apply_for_coupon;
@@ -45,13 +46,14 @@ class FeatureSettingController extends Controller
     }
     public function index(Request $request)
     {
-        $all_features = ProductFeature::orderBy('id', 'DESC')->get();
+        $all_features = ProductFeature::whereCardFeature(1)->orderBy('id', 'DESC')->get();
+        $all_card_features = ProductFeature::whereCardFeature(0)->orderBy('id', 'DESC')->get();
         $categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
         $featureSettingInfo = null;
         $id = $request->id;
         if ($id) {
             $featureSettingInfo = FeatureSetting::whereId($id)->first();
         }
-        return view('backend.web-setting.feature-setting', compact('all_features', 'categories', 'featureSettingInfo'));
+        return view('backend.web-setting.feature-setting', compact('all_features', 'all_card_features', 'categories', 'featureSettingInfo'));
     }
 }

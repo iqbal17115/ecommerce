@@ -216,30 +216,38 @@
                 <!-- End .products-slider -->
             </div>
             
-            @elseif($product_feature->card_feature == 1)
             <!-- Start Card Feature -->
-            <div class="card-body feature-card" style=" display: inline-block;">
-                <div class="a-cardui-header">
-                    <h2 class="a-color-base headline truncate-2line">{{$product_feature->name}}</h2>
-                </div>
-                <div class="row">
-                    @if(isset($product_feature->FeatureSetting->FeatureSettingDetail) && count($product_feature->FeatureSetting->FeatureSettingDetail) > 0)
-                    @foreach($product_feature->FeatureSetting->FeatureSettingDetail as $card_feature_category)
-                    <div class="col-6 p-0">
-                        <div class="card mb-0">
-                            <img class="card-img-top" src="{{ asset('storage/'.$card_feature_category->image) }}"
-                                style="height: 150px;">
-                            <div class="text-center text-dark">
-                                <span>{{$card_feature_category->Category->name}}</span>
-                            </div>
+             @if($product_feature->FeatureSetting)
+             <div class="row" style="margin-top: 18px;">
+                <!-- Start Product Part -->
+                @foreach($product_feature->FeatureSetting as $feature_setting)
+                @if(count($top_feature->Category) >= 2)
+                <div class="col-md-3 card">
+                    <div class="card-body">
+                        <div class="a-cardui-header">
+                            <h2 class="a-color-base headline truncate-2line">{{$feature_setting->ProductFeature->name}}</h2>
                         </div>
-                        <!-- End Product -->
+                        <div class="row">
+                            @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
+                            <div class="col-6 p-0">
+                                <div class="card mb-0">
+                                    <img class="card-img-top" src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
+                                        style="height: 150px;">
+                                    <div class="text-center text-dark">
+                                        <span>{{$feature_setting_detail->Category->name}}</span>
+                                    </div>
+                                </div>
+                                <!-- End Product -->
+                            </div>
+                            @endforeach
+                        </div>
+                        <!-- End Feature -->
                     </div>
-                    @endforeach
-                    @endif
                 </div>
-                <!-- End Feature -->
+                @endif
+                @endforeach
             </div>
+             @endif
             <!-- End Card Feature -->
             @endif
             @endforeach
