@@ -51,7 +51,7 @@
                                                         @foreach($all_features AS $feature)
                                                         <option value="{{ $feature->id }}" @if($featureSettingInfo &&
                                                             $featureSettingInfo->product_feature_id == $feature->id)
-                                                            selected @endif>{{ $feature->name }}
+                                                            selected @endif>{{ $feature->name }} ({{$feature->card_feature == 1? 'Box Feature' : 'Cart Feature'}})
                                                         </option>
                                                         @endforeach
                                                     </select>
@@ -249,7 +249,7 @@ $('#category_id').select2({
 $('#brand_id').select2({
     placeholder: 'Select An Option'
 });
-$('#product_feature_id').select2({
+$('#feature_id').select2({
     placeholder: 'Select An Option'
 });
 $('#material_id').select2({

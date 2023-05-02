@@ -215,42 +215,7 @@
                 </div>
                 <!-- End .products-slider -->
             </div>
-            <!-- @if($product_feature->Advertisement)
-          Start Ads 
-            <div class="row">
-                @foreach($product_feature->Advertisement as $feature_ads)
-                <div
-                    class="@if($feature_ads->width=='Full') col-md-12 @elseif($feature_ads->width=='Half') col-md-6 @else col-md-4 @endif">
-                    <div class="sale-banner banner bg-image mb-1 appear-animate" data-animation-name="fadeIn"
-                        data-animation-delay="100"
-                        style="background-image: url({{asset('storage/'.$feature_ads->ads)}}); height: 200px;width: auto;object-fit: contain;">
-                        <div class="container banner-content">
-                            <div class="row no-gutter justify-content-start">
-                                <div
-                                    class="col-auto col-lg-5 col-md-6 col-12 d-flex flex-column justify-content-center content-left text-center text-md-right">
-                                    <h4 class="align-left text-white text-uppercase">THE PERFECT GIFT FOR YOUR
-                                        GIRLFRIEND
-                                    </h4>
-                                    <h3 class="text-white mb-0 align-left text-uppercase">GIFT SELECTION ON SALE</h3>
-                                </div>
-                                <div
-                                    class="col-auto col-md-2 col-12 col-2 justify-content-center content-center mr-md-3 mr-lg-0  ml-md-4 ml-lg-0">
-                                    <h2 class="text-white mb-0 position-relative align-left">
-                                        50<small>%<ins>OFF</ins></small>
-                                    </h2>
-                                </div>
-                                <div
-                                    class="mb-0 col-md-4 col-12 col-3 col-auto justify-content-center justify-content-md-start content-right">
-                                    <a href="demo8-shop.html" class="btn btn-lg bg-white text-dark font2">Shop Now!</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            End Ads
-            @endif -->
+            
             @elseif($product_feature->card_feature == 1)
             <!-- Start Card Feature -->
             <div class="card-body feature-card" style=" display: inline-block;">
@@ -258,18 +223,20 @@
                     <h2 class="a-color-base headline truncate-2line">{{$product_feature->name}}</h2>
                 </div>
                 <div class="row">
-                    @foreach($product_feature->Category as $card_feature_category)
+                    @if(isset($product_feature->FeatureSetting->FeatureSettingDetail) && count($product_feature->FeatureSetting->FeatureSettingDetail) > 0)
+                    @foreach($product_feature->FeatureSetting->FeatureSettingDetail as $card_feature_category)
                     <div class="col-6 p-0">
                         <div class="card mb-0">
                             <img class="card-img-top" src="{{ asset('storage/'.$card_feature_category->image) }}"
                                 style="height: 150px;">
                             <div class="text-center text-dark">
-                                <span>{{$card_feature_category->name}}</span>
+                                <span>{{$card_feature_category->Category->name}}</span>
                             </div>
                         </div>
                         <!-- End Product -->
                     </div>
                     @endforeach
+                    @endif
                 </div>
                 <!-- End Feature -->
             </div>

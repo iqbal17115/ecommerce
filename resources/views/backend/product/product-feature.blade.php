@@ -38,6 +38,7 @@
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#productFeatureModal" data-id="{{$product_feature->id}}"
                                     data-name="{{$product_feature->name}}" 
+                                    data-card_feature="{{$product_feature->card_feature}}" 
                                     data-top_menu="{{$product_feature->top_menu}}" data-position="{{$product_feature->position}}"
                                     data-is_active="{{$product_feature->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>

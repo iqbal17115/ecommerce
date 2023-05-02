@@ -90,12 +90,14 @@ $(document).ready(function() {
     $(document).on('click', '.update_form', function(e) {
         let id = $(this).data('id');
         let name = $(this).data('name');
+        let card_feature = $(this).data('card_feature');
         let top_menu = $(this).data('top_menu');
         let position = $(this).data('position');
         let is_active = $(this).data('is_active');
 
         $('#cu_id').val(id);
         $('#name').val(name);
+        $('#card_feature').val(card_feature);
         $('#top_menu').val(top_menu);
         $('#position').val(position);
         $('#is_active').val(is_active);

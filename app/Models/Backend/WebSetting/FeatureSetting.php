@@ -4,6 +4,7 @@ namespace App\Models\Backend\WebSetting;
 
 use App\Models\Backend\Product\ProductFeature;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Backend\WebSetting\FeatureSettingDetail;
 use Illuminate\Database\Eloquent\Model;
 
 class FeatureSetting extends Model
