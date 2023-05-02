@@ -1,8 +1,14 @@
 @extends('layouts.backend_app')
 @section('individual__link')
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
     integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 @endsection
 @section('content')
 <!-- include summernote css/js-->
@@ -262,38 +268,18 @@
     integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-$('#category_id').select2({
-    placeholder: 'Select An Option'
-});
-$('#brand_id').select2({
-    placeholder: 'Select An Option'
-});
+
 $('#feature_id').select2({
     placeholder: 'Select An Option'
 });
 $('#parent_product_feature_id').select2({
     placeholder: 'Select An Option'
 });
-$('#material_id').select2({
-    placeholder: 'Select An Option'
-});
-$('#material_type_id').select2({
-    placeholder: 'Select An Option'
-});
-$('#product_condition_id').select2({
-    placeholder: 'Select An Option'
-});
-$('#condition_id').select2({
-    placeholder: 'Select An Option'
-});
 $('#select-options').select2({
-    placeholder: 'Select An Option'
-});
-$('.bottom_size_map').select2({
     placeholder: 'Select An Option'
 });
 // $('.file-upload').file_upload();
 </script>
 @include('backend.web-setting.js.feature-setting-js')
-{!! Toastr::message() !!}
+
 @endsection
