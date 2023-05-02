@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Product;
 use App\Models\Backend\Product\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Product\ProductFeature;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -66,6 +67,7 @@ class CategoryController extends Controller
         
         $category->name = $request->name;
         $category->parent_category_id = $request->id;
+        $category->product_feature_id = $request->product_feature_id;
         $category->top_menu = $request->top_menu;
         $category->sidebar_menu = $request->sidebar_menu;
         $category->header_menu = $request->header_menu;
@@ -101,6 +103,7 @@ class CategoryController extends Controller
     public function index() {
         $categories = Category::latest()->paginate(10);
         $parent_categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
-        return view('backend.product.category', compact('categories', 'parent_categories'));
+        $product_features = ProductFeature::orderBy('id', 'DESC')->whereTopMenu(1)->whereIsActive(1)->get();
+        return view('backend.product.category', compact('categories', 'parent_categories', 'product_features'));
     }
 }

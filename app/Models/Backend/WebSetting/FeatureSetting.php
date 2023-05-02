@@ -4,15 +4,16 @@ namespace App\Models\Backend\WebSetting;
 
 use App\Models\Backend\Product\ProductFeature;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Backend\WebSetting\FeatureSettingDetail;
 use Illuminate\Database\Eloquent\Model;
 
-class Advertisement extends Model
+class FeatureSetting extends Model
 {
     use HasFactory;
-    public function Parent() {
-        return $this->hasMany(self::class, 'page')->orderBy('position', 'ASC')->pluck('id', 'position');
-     }
+    public function FeatureSettingDetail() {
+        return $this->hasMany(FeatureSettingDetail::class);
+    }
     public function ProductFeature() {
         return $this->belongsTo(ProductFeature::class);
-    }
+     }
 }

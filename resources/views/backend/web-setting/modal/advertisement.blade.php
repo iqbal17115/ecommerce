@@ -19,8 +19,9 @@
                                       <select name="page" id="page" class="form-control" required>
                                           <option value="">Select Option</option>
                                           <option value="Home">Home</option>
-                                          <option value="Category">Category</option>
+                                          <option value="Category">Shop</option>
                                           <option value="Details">Details</option>
+                                          <option value="Header">Header</option>
                                       </select>
                                       <span class="text-danger err_page"></span>
                                   </div>
@@ -28,7 +29,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="position">Ads Position</label>
-                                      <input type="text" name="position" id="position" class="form-control" placeholder="Enter Ads Position" required>
+                                      <input type="text" name="position" id="position" class="form-control" placeholder="Enter Ads Position">
                                       <span class="text-danger err_position"></span>
                                   </div>
                               </div>
@@ -42,7 +43,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="style">After</label>
-                                      <select name="product_feature_id" id="product_feature_id" class="form-select product_feature_id" required>
+                                      <select name="product_feature_id" id="product_feature_id" class="form-select product_feature_id">
                                                         <option value=""></option>
                                                         @foreach($product_features as $product_feature)
                                                         <option value="{{$product_feature->id}}">{{$product_feature->name}}
@@ -54,7 +55,7 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="width">Width</label>
-                                      <select name="width" id="width" class="form-control ads_content" required>
+                                      <select name="width" id="width" class="form-control ads_content">
                                           <option value="Full">Full</option>
                                           <option value="Half">Half</option>
                                           <option value="One Third">One Third</option>

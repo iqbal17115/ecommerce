@@ -24,6 +24,26 @@
                               </div>
                               <div class="col-md-12">
                                   <div class="form-group">
+                                      <label for="top_menu">Top Feature</label>
+                                      <select name="top_menu" id="top_menu" class="form-control" required>
+                                          <option value="">Select Option</option>
+                                          <option value="1">Yes</option>
+                                          <option value="0">No</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label for="card_feature">Feature Type</label>
+                                      <select name="card_feature" id="card_feature" class="form-control" required>
+                                          <option value="">Select Option</option>
+                                          <option value="1">Box Feature</option>
+                                          <option value="0">Cart Feature</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-md-12">
+                                  <div class="form-group">
                                       <label for="position">Position</label>
                                       <input type="number" name="position" id="position" class="form-control"
                                           placeholder="Enter Short Name" required>

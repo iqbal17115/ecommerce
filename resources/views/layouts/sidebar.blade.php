@@ -96,6 +96,7 @@
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
                            <li><a href="{{ route('slider') }}">Slider</a></li>
+                           <li><a href="{{ route('feature-setting') }}">Feature Setting</a></li>
                            <li><a href="{{ route('advertisement') }}">Advertisement</a></li>
                            <li><a href="{{ route('block') }}">Block</a></li>
                            <li><a href="javascript:void(0);">Product Review</a></li>

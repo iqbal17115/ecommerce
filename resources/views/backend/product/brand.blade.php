@@ -8,7 +8,7 @@
                 <span class="h4">Brand List</span>
                 <a class="btn btn-success text-light btn-sm py-2 float-right clean_form" data-toggle="modal"
                     data-target="#brandModal" style="width: 100px;"><i class="fas fa-plus-circle"></i> New</a>
-                <input class="float-right mr-2 py-1" name="search_string" id="search_string" placeholder="Search..."/>
+                <input class="float-right mr-2 py-1" name="search_string" id="search_string" placeholder="Search..." />
             </div>
             <div class="col-md-12 brand_content">
                 <table class="table table-striped">
@@ -31,16 +31,15 @@
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
                             <td>{{$brand->name}}</td>
-                            <td><img src="{{ asset('storage/'.$brand->image) }}" class="rounded" style="width: 55px; height: 40px;"/></td>
+                            <td><img src="{{ asset('storage/'.$brand->image) }}" class="rounded"
+                                    style="width: 55px; height: 40px;" /></td>
                             <td>{{$brand->website}}</td>
                             <td>{{$brand->is_active == 1? 'Active' : 'Inactive'}}</td>
                             <td>
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#brandModal" data-id="{{$brand->id}}"
-                                    data-name="{{$brand->name}}" 
-                                    data-image="{{$brand->image}}"
-                                    data-short_name="{{$brand->short_name}}"
-                                    data-is_active="{{$brand->is_active}}">
+                                    data-name="{{$brand->name}}" data-image="{{$brand->image}}"
+                                    data-short_name="{{$brand->short_name}}" data-is_active="{{$brand->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger text-light btn-sm delete_brand"
@@ -53,11 +52,20 @@
                     </tbody>
 
                 </table>
-               {!! $brands->links() !!}
+                {!! $brands->links() !!}
             </div>
         </div>
     </div>
-
+<form method="POST" action="javascript:test('brand_form')" id="brand_form">
+    @csrf
+    <input type="" name="" value="" required>
+    <button type="">Save</button>
+</form>
+<script>
+    function test(brand_form) {
+        alert(brand_form);
+    }
+</script>
 </div>
 
 @include('backend.product.modal.brand')

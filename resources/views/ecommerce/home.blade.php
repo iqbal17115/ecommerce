@@ -4,13 +4,35 @@
 @media (min-width:1220px) {
     .container {
         max-width: 1500px;
-        ;
     }
 }
 
 .post-slider>.owl-stage-outer,
 .products-slider>.owl-stage-outer {
     padding: 0px 0px;
+}
+
+.feature-card {
+    width: 100%;
+    background-color: #ccc;
+}
+
+@media screen and (min-width: 480px) {
+    .feature-card {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .feature-card {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .feature-card {
+        width: 25%;
+    }
 }
 </style>
 <main class="main">
@@ -23,7 +45,8 @@
 			}">
                 @foreach($sliders as $slider)
                 <div class="home-slide home-slide1 banner">
-                    <img class="slider_image slide-bg" src="{{ asset('storage/'.$slider->image) }}" alt="slider image">
+                    <img class="slider_image slide-bg" src="{{ asset('storage/'.$slider->image) }}" alt="slider image"
+                        style="min-height: 208px;">
                     <div
                         class="container d-flex align-items-sm-center justify-content-sm-between justify-content-center flex-column flex-sm-row">
                         <div class="banner-content content-left text-sm-right mb-sm-0 mb-2"></div>
@@ -57,7 +80,7 @@
                                     'items': 8
                                 },
                                 '1200': {
-                                    'items': 10
+                                    'items': 12
                                 }
                             }
                         }">
@@ -66,7 +89,7 @@
                         <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
                             <figure>
                                 <img src="{{ asset('storage/'.$top_show_category->image) }}" alt="category" width="280"
-                                    height="240" style="height: 128px; height: 116px; border-radius: 50%;" />
+                                    height="240" style="width: 100px; height: 100px; border-radius: 50%;" />
                             </figure>
                             <div class="category-content p-0">
                                 <span
@@ -77,16 +100,44 @@
                     @endforeach
                 </div>
             </div>
-
+            <!-- Start Top Feature -->
+            <div class="row" style="margin-top: 18px;">
+                <!-- Start Product Part -->
+                @foreach($top_features as $top_feature)
+                @if(count($top_feature->Category) >= 2)
+                <div class="col-md-3 card">
+                    <div class="card-body">
+                        <div class="a-cardui-header">
+                            <h2 class="a-color-base headline truncate-2line">{{$top_feature->name}}</h2>
+                        </div>
+                        <div class="row">
+                            @foreach($top_feature->Category as $top_feature_category)
+                            <div class="col-6 p-0">
+                                <div class="card mb-0">
+                                    <img class="card-img-top" src="{{ asset('storage/'.$top_feature_category->image) }}"
+                                        style="height: 150px;">
+                                    <div class="text-center text-dark">
+                                        <span>{{$top_feature_category->name}}</span>
+                                    </div>
+                                </div>
+                                <!-- End Product -->
+                            </div>
+                            @endforeach
+                        </div>
+                        <!-- End Feature -->
+                    </div>
+                </div>
+                @endif
+                @endforeach
+            </div>
         </div>
-    </div>
 
     </div>
 
     <div class="bg-gray">
         <div class="container">
             @foreach($product_features as $product_feature)
-            @if(count($product_feature->Product) > 0)
+            @if($product_feature->card_feature != 1 && count($product_feature->Product) > 0)
             <div class="recent-products-section appear-animate" data-animation-name="fadeIn" data-animation-delay="100">
                 <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
                     <h4 class="section-title text-transform-none mb-0 mr-0">{{$product_feature->name}}</h4>
@@ -159,45 +210,45 @@
                         </div>
                         <!-- End .product-details -->
                     </div>
+
                     @endforeach
                 </div>
                 <!-- End .products-slider -->
             </div>
-            @if($product_feature->Advertisement)
-            <!-- Start Ads -->
-            <div class="row">
-                @foreach($product_feature->Advertisement as $feature_ads)
-                <div class="@if($feature_ads->width=='Full') col-md-12 @elseif($feature_ads->width=='Half') col-md-6 @else col-md-4 @endif">
-                    <div class="sale-banner banner bg-image mb-1 appear-animate" data-animation-name="fadeIn"
-                        data-animation-delay="100"
-                        style="background-image: url({{asset('storage/'.$feature_ads->ads)}}); height: 200px;width: auto;object-fit: contain;">
-                        <div class="container banner-content">
-                            <div class="row no-gutter justify-content-start">
-                                <!-- <div
-                                    class="col-auto col-lg-5 col-md-6 col-12 d-flex flex-column justify-content-center content-left text-center text-md-right">
-                                    <h4 class="align-left text-white text-uppercase">THE PERFECT GIFT FOR YOUR
-                                        GIRLFRIEND
-                                    </h4>
-                                    <h3 class="text-white mb-0 align-left text-uppercase">GIFT SELECTION ON SALE</h3>
-                                </div>
-                                <div
-                                    class="col-auto col-md-2 col-12 col-2 justify-content-center content-center mr-md-3 mr-lg-0  ml-md-4 ml-lg-0">
-                                    <h2 class="text-white mb-0 position-relative align-left">
-                                        50<small>%<ins>OFF</ins></small>
-                                    </h2>
-                                </div>
-                                <div
-                                    class="mb-0 col-md-4 col-12 col-3 col-auto justify-content-center justify-content-md-start content-right">
-                                    <a href="demo8-shop.html" class="btn btn-lg bg-white text-dark font2">Shop Now!</a>
-                                </div> -->
-                            </div>
+            
+            <!-- Start Card Feature -->
+             @if($product_feature->FeatureSetting)
+             <div class="row" style="margin-top: 18px;">
+                <!-- Start Product Part -->
+                @foreach($product_feature->FeatureSetting as $feature_setting)
+                @if(count($top_feature->Category) >= 2)
+                <div class="col-md-3 card">
+                    <div class="card-body">
+                        <div class="a-cardui-header">
+                            <h2 class="a-color-base headline truncate-2line">{{$feature_setting->ProductFeature->name}}</h2>
                         </div>
+                        <div class="row">
+                            @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
+                            <div class="col-6 p-0">
+                                <div class="card mb-0">
+                                    <img class="card-img-top" src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
+                                        style="height: 150px;">
+                                    <div class="text-center text-dark">
+                                        <span>{{$feature_setting_detail->Category->name}}</span>
+                                    </div>
+                                </div>
+                                <!-- End Product -->
+                            </div>
+                            @endforeach
+                        </div>
+                        <!-- End Feature -->
                     </div>
                 </div>
+                @endif
                 @endforeach
             </div>
-            <!-- End Ads -->
-            @endif
+             @endif
+            <!-- End Card Feature -->
             @endif
             @endforeach
         </div>

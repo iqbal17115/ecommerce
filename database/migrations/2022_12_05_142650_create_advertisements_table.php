@@ -15,7 +15,7 @@ class CreateAdvertisementsTable extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
-            $table->enum('page', ['Home', 'Category', 'Details']);
+            $table->enum('page', ['Home', 'Category', 'Details', 'Header']);
             $table->enum('width', ['Full', 'Half', 'One Third']);
             $table->tinyInteger('position')->nullable();
             $table->text('ads')->nullable();

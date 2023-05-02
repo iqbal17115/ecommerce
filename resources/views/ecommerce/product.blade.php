@@ -1,7 +1,14 @@
 @extends('layouts.ecommerce')
 @section('content')
 <main class="main">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+    @if(isset($all_active_advertisements['Details']['1']['ads']))
+    <div>
+        <center>
+            <img src="{{ asset('storage/'.$all_active_advertisements['Details']['1']['ads']) }}">
+        </center>
+    </div>
+    @endif
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
         <div class="container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
@@ -11,6 +18,7 @@
     </nav>
 
     <div class="container pt-2">
+
         <div class="product-single-container product-single-default">
 
             <div class="row">
@@ -46,14 +54,25 @@
 
                 <div class="col-lg-7 col-md-6 product-single-details">
                     <h1 class="product-title">{{$product_detail->name}}</h1>
+                    @if(isset($all_active_advertisements['Details']['2']['ads']))
+                    <div class="">
+                        <img src="{{ asset('storage/'.$all_active_advertisements['Details']['2']['ads']) }}"
+                            class="w-100 ml-sm-0 mb-2" width="111" height="44" style="height: 72px; width: 100%;"
+                            alt="Porto Logo">
+                    </div>
+                    @else
                     <hr class="short-divider">
+                    @endif
+
 
                     <div class="price-box">
                         @php
                         echo $product_detail->your_price? '<span
-                            class="old-price">$'.number_format((float)$product_detail->your_price, 2).'</span>' : '';
+                            class="old-price">'.$currency->icon.''.number_format((float)$product_detail->your_price,
+                            2).'</span>' : '';
                         echo $product_detail->sale_price? '<span
-                            class="new-price">$'.number_format((float)$product_detail->sale_price, 2).'</span>' : '';
+                            class="new-price">'.$currency->icon.''.number_format((float)$product_detail->sale_price,
+                            2).'</span>' : '';
                         @endphp
                     </div>
                     <!-- End .price-box -->
@@ -84,9 +103,10 @@
                         <!-- End .product-single-qty -->
 
                         <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product_detail->id}}"
-                                    data-name="{{$product_detail->name}}" data-your_price="{{$product_detail->your_price}}"
-                                    data-sale_price="{{$product_detail->sale_price}}" @if($product_detail->ProductMainImage)
-                                    data-image="{{$product_detail->ProductMainImage->image }}" @endif class="btn btn-dark btn-add-cart add-cart mr-2" title="Add to Cart">Add to
+                            data-name="{{$product_detail->name}}" data-your_price="{{$product_detail->your_price}}"
+                            data-sale_price="{{$product_detail->sale_price}}" @if($product_detail->ProductMainImage)
+                            data-image="{{$product_detail->ProductMainImage->image }}" @endif class="btn btn-dark
+                            btn-add-cart add-cart mr-2" title="Add to Cart">Add to
                             Cart</a>
 
                         <a href="{{ route('cart') }}" class="btn btn-gray view-cart d-none">View cart</a>
@@ -110,7 +130,10 @@
                             <a href="#" class="social-icon social-mail icon-mail-alt" target="_blank" title="Mail"></a>
                         </div>
                         <!-- End .social-icons -->
-
+                        @if(isset($all_active_advertisements['Details']['3']['ads']))
+                        <img src="{{ asset('storage/'.$all_active_advertisements['Details']['3']['ads']) }}"
+                            class="ml-md-5" style="height: 52px;">
+                        @endif
                     </div>
                     <!-- End .product single-share -->
                 </div>
@@ -303,10 +326,10 @@
                         <div class="price-box">
                             @php
                             echo $product_category_product->your_price? '<span
-                                class="old-price">$'.number_format((float)$product_category_product->your_price,
+                                class="old-price">'.$currency->icon.''.number_format((float)$product_category_product->your_price,
                                 2).'</span>' : '';
                             echo $product_category_product->sale_price? '<span
-                                class="product-price">$'.number_format((float)$product_category_product->sale_price,
+                                class="product-price">'.$currency->icon.''.number_format((float)$product_category_product->sale_price,
                                 2).'</span>' :
                             '';
                             @endphp
@@ -320,10 +343,21 @@
                 @endif
             </div>
             <!-- End .products-slider -->
+          
         </div>
         <!-- End .products-section -->
     </div>
     <!-- End .container -->
+       <!-- Start Ads -->
+       @if(isset($all_active_advertisements['Details']['4']['ads']))
+        <div>
+            <center>
+                <img src="{{ asset('storage/'.$all_active_advertisements['Details']['4']['ads']) }}" class="">
+            </center>
+        </div>
+        @endif
+        <!-- End Ads -->
+        <br>
 </main>
 <!-- End .main -->
 @include('ecommerce.cart-js')

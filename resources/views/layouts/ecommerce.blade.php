@@ -26,13 +26,13 @@
             ]
         }
     };
-    (function(d) {
-        var wf = d.createElement('script'),
-            s = d.scripts[0];
-        wf.src = 'assets/js/webfont.js';
-        wf.async = true;
-        s.parentNode.insertBefore(wf, s);
-    })(document);
+    // (function(d) {
+    //     var wf = d.createElement('script'),
+    //         s = d.scripts[0];
+    //     wf.src = 'assets/js/webfont.js';
+    //     wf.async = true;
+    //     s.parentNode.insertBefore(wf, s);
+    // })(document);
     </script>
 
     <!-- Plugins CSS File -->
@@ -176,7 +176,7 @@
     }
   
     </style>
-    <script src="jquery-3.6.1.min.js"></script>
+    <!-- <script src="jquery-3.6.1.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 </head>
@@ -223,21 +223,6 @@
             e.preventDefault();
             $("#sidebar-wrapper").css("width", "320px");
             $("#wrapper").toggleClass("menuDisplayed");
-            // Call Sidebar Content
-            //    $.ajax({
-            //     url: "{{route('get_sidebar_content')}}",
-            //     method: 'get',
-            //     async: false,
-            //     success: function(data) {
-            //         console.log(data);
-            //         $('#category_show').html(data);
-            //     },
-            //     error: function(err) {
-            //         var error = err.responseJSON;
-            //         console.log(error);
-
-            //     }
-            // });
         });
     });
     </script>

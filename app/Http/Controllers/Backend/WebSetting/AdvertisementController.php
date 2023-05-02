@@ -23,22 +23,22 @@ class AdvertisementController extends Controller
     }
     public function addAdvertisement(Request $request)
     {
-        $request->validate(
-            [
-                'page' => 'required',
-                'position' => 'required',
-                'product_feature_id' => 'required',
-                'width' => 'required',
-                'is_active' => 'required'
-            ],
-            [
-                'page' => 'Page is required',
-                'position' => 'Position is required',
-                'product_feature_id' => 'Product Feature is required',
-                'width' => 'Width is required',
-                'is_active' => 'Status is required'
-            ]
-        );
+        // $request->validate(
+        //     [
+        //         'page' => 'required',
+        //         'position' => 'required',
+        //         'product_feature_id' => 'required',
+        //         'width' => 'required',
+        //         'is_active' => 'required'
+        //     ],
+        //     [
+        //         'page' => 'Page is required',
+        //         'position' => 'Position is required',
+        //         'product_feature_id' => 'Product Feature is required',
+        //         'width' => 'Width is required',
+        //         'is_active' => 'Status is required'
+        //     ]
+        // );
         if ($request->cu_id > 0) {
             $advertisement = Advertisement::find($request->cu_id);
         } else {

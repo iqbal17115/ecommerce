@@ -152,6 +152,10 @@ $(document).ready(function() {
             dropdownParent: $("#categoryModal"),
             placeholder: 'Select An Option'
         });
+        $(".product_feature_id").select2({
+            dropdownParent: $("#categoryModal"),
+            placeholder: 'Select An Option'
+        });
         $(".variation_type").select2({
             dropdownParent: $("#categoryModal"),
             placeholder: 'Select An Option'
@@ -162,6 +166,7 @@ $(document).ready(function() {
         let id = $(this).data('id');
         let name = $(this).data('name');
         let parent_category_id = $(this).data('parent_category_id');
+        let product_feature_id = $(this).data('product_feature_id');
         let top_menu = $(this).data('top_menu');
         let sidebar_menu = $(this).data('sidebar_menu');
         let header_menu = $(this).data('header_menu');
@@ -177,6 +182,7 @@ $(document).ready(function() {
         $('#id').val(id);
         $('#name').val(name);
         $('.category_id').val(parent_category_id).trigger("change");
+        $('.product_feature_id').val(product_feature_id).trigger("change");
         $('#top_menu').val(top_menu);
         $('#sidebar_menu').val(sidebar_menu);
         $('#header_menu').val(header_menu);
@@ -242,7 +248,6 @@ $(document).ready(function() {
                     $('#categoryModal').modal('hide');
                     $('#addCategory')[0].reset();
                     $('.category_content').load(location.href + ' .category_content');
-                    $('.category_load').load(location.href + ' .category_load');
                     $('.variation_load').load(location.href + ' .variation_load');
                     $('.paginate').load(location.href + ' .paginate');
                     $('#cu_id').val(-1);

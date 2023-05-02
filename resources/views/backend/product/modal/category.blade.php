@@ -1,5 +1,6 @@
       <!-- sample modal content -->
-      <div id="categoryModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myCategoryLabel" aria-hidden="true">
+      <div id="categoryModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myCategoryLabel"
+          aria-hidden="true">
           <form action="" method="post" id="addCategory" enctype="multipart/form-data">
               @csrf
               <div class="modal-dialog modal-lg">
@@ -18,11 +19,12 @@
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="name">Category Name</label>
-                                      <input type="text" name="name" id="name" class="form-control" placeholder="Enter Category Name" required>
+                                      <input type="text" name="name" id="name" class="form-control"
+                                          placeholder="Enter Category Name" required>
                                       <span class="text-danger err_name"></span>
                                   </div>
                               </div>
-                              <div class="col-md-12">
+                              <div class="col-md-6">
                                   <div class="form-group category_load">
                                       <label for="id">Select Category</label>
                                       <select name="id" id="id" class="form-control category_id" style="width: 100%;">
@@ -55,6 +57,26 @@
                                           <option value="{{$subSubSubSubCategory->id}}">
                                               --------{{$subSubSubSubCategory->name}}
                                           </option>
+                                          <!-- Start sub-Sub-Sub-Sub-Sub-Category -->
+                                          @if($subSubSubSubCategory->SubCategory)
+                                          @foreach($subSubSubSubCategory->SubCategory as
+                                          $subSubSubSubSubCategory)
+                                          <option value="{{$subSubSubSubSubCategory->id}}">
+                                              ----------{{$subSubSubSubSubCategory->name}}
+                                          </option>
+                                          <!-- Start sub-Sub-Sub-Sub-Sub-Sub-Category -->
+                                          @if($subSubSubSubSubCategory->SubCategory)
+                                          @foreach($subSubSubSubSubCategory->SubCategory as
+                                          $subSubSubSubSubSubCategory)
+                                          <option value="{{$subSubSubSubSubSubCategory->id}}">
+                                              ----------{{$subSubSubSubSubSubCategory->name}}
+                                          </option>
+                                          @endforeach
+                                          @endif
+                                          <!-- End sub-Sub-Sub-Sub-Sub-Sub-Category -->
+                                          @endforeach
+                                          @endif
+                                          <!-- End sub-Sub-Sub-Sub-Sub-Category -->
                                           @endforeach
                                           @endif
                                           <!-- End sub-Sub-Sub-Sub-Category -->
@@ -71,7 +93,23 @@
                                       </select>
                                   </div>
                               </div>
-                              
+
+                              <div class="col-md-6">
+                                  <div class="form-group category_load">
+                                      <label for="product_feature_id">Select Feature</label>
+                                      <select name="product_feature_id" id="product_feature_id"
+                                          class="form-control product_feature_id" style="width: 100%;">
+                                          <option value="">Select Option</option>
+                                          @foreach($product_features as $product_feature)
+                                          <option value="{{$product_feature->id}}">
+                                              {{$product_feature->name}}
+                                          </option>
+                                          <!-- End Sub Category -->
+                                          @endforeach
+                                      </select>
+                                  </div>
+                              </div>
+
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="sidebar_menu">Sidebar Menu</label>
@@ -85,7 +123,8 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="sidebar_menu_position">Sidebar Menu Position</label>
-                                      <input type="number" name="sidebar_menu_position" id="sidebar_menu_position" class="form-control" placeholder="Menu Position">
+                                      <input type="number" name="sidebar_menu_position" id="sidebar_menu_position"
+                                          class="form-control" placeholder="Menu Position">
                                       <span class="text-danger err_sidebar_menu_position"></span>
                                   </div>
                               </div>
@@ -102,7 +141,8 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="position">Top Menu Position</label>
-                                      <input type="number" name="position" id="position" class="form-control" placeholder="Menu Position">
+                                      <input type="number" name="position" id="position" class="form-control"
+                                          placeholder="Menu Position">
                                   </div>
                               </div>
                               <div class="col-md-6">
@@ -118,7 +158,8 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="header_menu_position">Header Menu Position</label>
-                                      <input type="number" name="header_menu_position" id="header_menu_position" class="form-control" placeholder="Menu Position">
+                                      <input type="number" name="header_menu_position" id="header_menu_position"
+                                          class="form-control" placeholder="Menu Position">
                                   </div>
                               </div>
                               <div class="col-md-6">
@@ -137,7 +178,8 @@
                               </div>
                               <div class="form-group variation_load">
                                   <label for="variation_type">Variation Type</label>
-                                  <select name="variation_type[]" id="variation_type" class="form-control variation_type" multiple="multiple" style="width: 100%;">
+                                  <select name="variation_type[]" id="variation_type"
+                                      class="form-control variation_type" multiple="multiple" style="width: 100%;">
                                       <option value="1">Size</option>
                                       <option value="2">Color</option>
                                       <option value="3">Package Qty</option>
@@ -150,7 +192,9 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="vendor_commission_percentage">Vendor Commission(%)</label>
-                                      <input type="number" step="any" name="vendor_commission_percentage" id="vendor_commission_percentage" class="form-control" placeholder="Vendor Commission">
+                                      <input type="number" step="any" name="vendor_commission_percentage"
+                                          id="vendor_commission_percentage" class="form-control"
+                                          placeholder="Vendor Commission">
                                       <span class="text-danger err_vendor_commission_percentage"></span>
                                   </div>
                               </div>
@@ -169,13 +213,15 @@
                       </div>
                       <div class="modal-footer">
                           <center>
-                              <img id="imgPreviewIcon" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
+                              <img id="imgPreviewIcon" class="rounded" src="#" alt=""
+                                  style="width: 30px; height: 30px;" />
                           </center>
                           <center>
                               <img id="imgPreview" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
                           </center>
                           <span style="width: 200px;"></span>
-                          <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-secondary waves-effect"
+                              data-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
                       </div>
                   </div><!-- /.modal-content -->

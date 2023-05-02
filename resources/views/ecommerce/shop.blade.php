@@ -1,7 +1,7 @@
 @extends('layouts.ecommerce')
 @section('content')
 <style>
-    @media (min-width:1220px) {
+@media (min-width:1220px) {
     .container {
         max-width: 1500px;
         ;
@@ -9,7 +9,14 @@
 }
 </style>
 <main class="main">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+    @if(isset($all_active_advertisements['Category']['1']['ads']))
+    <div>
+        <center>
+            <img src="{{ asset('storage/'.$all_active_advertisements['Category']['1']['ads']) }}">
+        </center>
+    </div>
+    @endif
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
         <div class="container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
@@ -40,8 +47,8 @@
                             </svg>
                             <span>Filter</span>
                         </a>
-                        <input value="{{$filter_type}}" name="filter_type" id="filter_type" type="hidden"/>
-                        <input value="{{$filter_for}}" name="filter_for" id="filter_for" type="hidden"/>
+                        <input value="{{$filter_type}}" name="filter_type" id="filter_type" type="hidden" />
+                        <input value="{{$filter_for}}" name="filter_for" id="filter_for" type="hidden" />
                         <div class="toolbox-item toolbox-sort">
                             <label>Sort By:</label>
 
@@ -100,11 +107,11 @@
                                     @endif
                                 </a>
                                 <div class="btn-icon-group">
-                                <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
-                                    data-name="{{$product->name}}" data-your_price="{{$product->your_price}}"
-                                    data-sale_price="{{$product->sale_price}}" @if($product->ProductMainImage)
-                                    data-image="{{$product->ProductMainImage->image }}" @endif class="btn-icon
-                                    btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
+                                    <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
+                                        data-name="{{$product->name}}" data-your_price="{{$product->your_price}}"
+                                        data-sale_price="{{$product->sale_price}}" @if($product->ProductMainImage)
+                                        data-image="{{$product->ProductMainImage->image }}" @endif class="btn-icon
+                                        btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
                                 </div>
                             </figure>
                             <div class="product-details">
@@ -113,13 +120,15 @@
                                 </h3>
                                 <!-- End .product-container -->
                                 <div class="price-box">
-                                @php
-                                echo $product->your_price? '<span
-                                    class="old-price">'.$currency->icon.''.number_format((float)$product->your_price, 2).'</span>' : '';
-                                echo $product->sale_price? '<span
-                                    class="product-price">'.$currency->icon.''.number_format((float)$product->sale_price, 2).'</span>' :
-                                '';
-                                @endphp
+                                    @php
+                                    echo $product->your_price? '<span
+                                        class="old-price">'.$currency->icon.''.number_format((float)$product->your_price,
+                                        2).'</span>' : '';
+                                    echo $product->sale_price? '<span
+                                        class="product-price">'.$currency->icon.''.number_format((float)$product->sale_price,
+                                        2).'</span>' :
+                                    '';
+                                    @endphp
                                 </div>
                                 <!-- End .price-box -->
                             </div>
@@ -137,6 +146,7 @@
                             </ul>
                         </nav>
                     </div>
+
                 </div>
                 <!-- End .row -->
                 <div class="col-md-12">
@@ -154,6 +164,19 @@
                     </div>
                     <!-- End .toolbox-item -->
                 </div>
+
+                <!-- Start Ads -->
+                <div class="col-12">
+                    @if(isset($all_active_advertisements['Category']['3']['ads']))
+                    <div class="mt-1">
+                        <center>
+                            <img src="{{ asset('storage/'.$all_active_advertisements['Category']['3']['ads']) }}">
+                        </center>
+                    </div>
+                    @endif
+                </div>
+                <!-- End Ads -->
+
             </div>
             <!-- End .col-lg-9 -->
 
@@ -179,7 +202,8 @@
                                         <a href="#widget-category-{{$parentCategory->id}}" class="collapsed"
                                             data-toggle="collapse" role="button" aria-expanded="false"
                                             aria-controls="widget-category-2">
-                                            {{$parentCategory->name}} @if($parentCategory->SubCategory)<span class="toggle"></span>@endif
+                                            {{$parentCategory->name}} @if($parentCategory->SubCategory)<span
+                                                class="toggle"></span>@endif
                                         </a>
                                         @if($parentCategory->SubCategory)
                                         <div class="collapse" id="widget-category-{{$parentCategory->id}}">
@@ -189,7 +213,8 @@
                                                     <a href="#widget-category-{{$subCategory->id}}" class="collapsed"
                                                         data-toggle="collapse" role="button" aria-expanded="false"
                                                         aria-controls="widget-category-2">
-                                                        {{$subCategory->name}}@if($subCategory->SubCategory)<span class="toggle"></span>@endif
+                                                        {{$subCategory->name}}@if($subCategory->SubCategory)<span
+                                                            class="toggle"></span>@endif
                                                     </a>
                                                 </li>
                                                 @endforeach
@@ -293,6 +318,16 @@
                         <!-- End .collapse -->
                     </div>
                     <!-- End .widget -->
+
+                    <!-- Start Ads -->
+                    @if(isset($all_active_advertisements['Category']['2']['ads']))
+                    <div class="mt-1">
+                        <center>
+                            <img src="{{ asset('storage/'.$all_active_advertisements['Category']['2']['ads']) }}">
+                        </center>
+                    </div>
+                    @endif
+                    <!-- End Ads -->
                 </div>
                 <!-- End .sidebar-wrapper -->
             </aside>
@@ -319,13 +354,14 @@ filter_type = '';
 filter_for = '';
 
 $(document).ready(function() {
-    filter_type = $( "#filter_type" ).val();
-    filter_for = $( "#filter_for" ).val();
+    filter_type = $("#filter_type").val();
+    filter_for = $("#filter_for").val();
 
     $("select.order_of_product").change(function() {
         order = $(this).children("option:selected").val();
         $.ajax({
-            url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order + '&filter_type=' + filter_type + '&filter_for=' + filter_for,
+            url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
+                '&filter_type=' + filter_type + '&filter_for=' + filter_for,
             success: function(data) {
                 $('#main-content').html(data);
             }
@@ -334,7 +370,8 @@ $(document).ready(function() {
     $("select.count_paginate").change(function() {
         count = $(this).children("option:selected").val();
         $.ajax({
-            url: '/pagination/shop-pagination-total-data?count=' + count + '&filter_type=' + filter_type + '&filter_for=' + filter_for,
+            url: '/pagination/shop-pagination-total-data?count=' + count + '&filter_type=' +
+                filter_type + '&filter_for=' + filter_for,
             success: function(data) {
                 $('#main-content').html(data);
             }
@@ -355,6 +392,5 @@ $(document).on('click', '.pagination a', function(e) {
     let page = $(this).attr('href').split('page=')[1]
     pagination(page, count);
 });
-
 </script>
 @endsection
