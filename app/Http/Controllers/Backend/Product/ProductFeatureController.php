@@ -36,14 +36,10 @@ class ProductFeatureController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:100',
-                'top_menu' => 'required',
-                'position' => 'required',
                 'is_active' => 'required',
             ],
             [
                 'name' => 'Name is required',
-                'top_menu' => 'Top Menu is required',
-                'position' => 'Position is required',
                 'is_active' => 'Status is required',
             ]
         );
@@ -54,9 +50,6 @@ class ProductFeatureController extends Controller
         }
         
         $product_feature->name = $request->name;
-        $product_feature->card_feature = $request->card_feature;
-        $product_feature->top_menu = $request->top_menu;
-        $product_feature->position = $request->position;
         $product_feature->is_active = $request->is_active;
         $product_feature->save();
 

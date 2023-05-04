@@ -44,20 +44,59 @@
                                         <div class="col-md-10">
                                             <!-- Start Content -->
                                             <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Feature Type</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-1">
+                                                    <select name="card_feature" id="card_feature"
+                                                        class="form-select" onchange="featureTypeCheck(this)" required>
+                                                        <option value="">Select Option</option>
+                                                        <option value="1" @if($featureInfo &&
+                                                            $featureInfo->card_feature == 1)
+                                                            selected @endif>Box Feature</option>
+                                                        <option value="0" @if($featureInfo &&
+                                                            $featureInfo->card_feature == 0)
+                                                            selected @endif>Card Feature</option>
+                                                    </select>
+                                                </div>
+                                                <!-- End -->
 
-                                            <div class="col-md-4 mt-md-3">
+                                                <div class="col-md-4 feature-menu">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Top Menu</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-1 feature-menu">
+                                                    <select name="top_menu" id="top_menu"
+                                                        class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="1" @if($featureInfo &&
+                                                            $featureInfo->top_menu == 1)
+                                                            selected @endif>Yes</option>
+                                                        <option value="0" @if($featureInfo &&
+                                                            $featureInfo->top_menu == 0)
+                                                            selected @endif>No</option>
+                                                    </select>
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-4 mt-md-3 feature-menu">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;"> Feature Area (After)</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" name="parent_product_feature_id" id="parent_product_feature_id"
-                                                        style="width: 100%;" required>
+                                                <div class="col-md-8 mt-md-3 feature-menu">
+                                                    <select class="form-select" name="parent_product_feature_id"
+                                                        id="parent_product_feature_id" style="width: 100%;">
                                                         <option value="">Select Option</option>
                                                         @foreach($all_card_features AS $card_feature)
-                                                        <option value="{{ $card_feature->id }}" @if($featureSettingInfo &&
-                                                            $featureSettingInfo->parent_product_feature_id == $card_feature->id)
-                                                            selected @endif>{{ $card_feature->name }} ({{$card_feature->card_feature == 1? 'Box Feature' : 'Cart Feature'}})
+                                                        <option value="{{ $card_feature->id }}" @if($featureSettingInfo
+                                                            && $featureSettingInfo->parent_product_feature_id ==
+                                                            $card_feature->id)
+                                                            selected @endif>{{ $card_feature->name }}
+                                                            ({{$card_feature->card_feature == 1? 'Box Feature' : 'Cart Feature'}})
                                                         </option>
                                                         @endforeach
                                                     </select>
@@ -71,12 +110,13 @@
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <select class="form-select" name="feature_id" id="feature_id"
-                                                        style="width: 100%;" required>
+                                                        style="width: 100%;">
                                                         <option value="">Select Option</option>
                                                         @foreach($all_features AS $feature)
                                                         <option value="{{ $feature->id }}" @if($featureSettingInfo &&
                                                             $featureSettingInfo->product_feature_id == $feature->id)
-                                                            selected @endif>{{ $feature->name }} ({{$feature->card_feature == 1? 'Box Feature' : 'Cart Feature'}})
+                                                            selected @endif>{{ $feature->name }}
+                                                            ({{$feature->card_feature == 1? 'Box Feature' : 'Cart Feature'}})
                                                         </option>
                                                         @endforeach
                                                     </select>
@@ -98,13 +138,13 @@
                                                     </select>
                                                 </div>
                                                 <!-- End -->
-                                                <div class="col-md-4 mt-md-3">
+                                                <div class="col-md-4 mt-md-3 feature-menu">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Category</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" id="select-options">
+                                                <div class="col-md-8 mt-md-3 feature-menu">
+                                                    <select class="form-select" id="select-options" name="select-options">
                                                         <option value="">Select An Option</option>
                                                         @foreach($categories as $category)
                                                         <option value="{{$category->id}}">
@@ -170,7 +210,7 @@
                                                         @endforeach
                                                     </select>
 
-                                                    <div>
+                                                    <div class="feature-menu">
                                                         <table class="table table-bordered">
                                                             <tbody id="selected-options">
                                                                 @if($featureSettingInfo)
@@ -179,10 +219,16 @@
                                                                 <tr>
                                                                     <td class="text-danger">
                                                                         <input name="category_id[]" id="category_id"
-                                                                            class="form-control" value="{{$feature_setting_detail->category_id}}" hidden /> @if($feature_setting_detail->Category) {{$feature_setting_detail->Category->name}} @endif
+                                                                            class="form-control"
+                                                                            value="{{$feature_setting_detail->category_id}}"
+                                                                            hidden />
+                                                                        @if($feature_setting_detail->Category)
+                                                                        {{$feature_setting_detail->Category->name}}
+                                                                        @endif
                                                                     </td>
                                                                     <td><input name="position[]" id="position"
-                                                                            class="form-control form-control-sm" value="{{$feature_setting_detail->position}}"
+                                                                            class="form-control form-control-sm"
+                                                                            value="{{$feature_setting_detail->position}}"
                                                                             placeholder="Position" required />
                                                                     </td>
                                                                     <td>
@@ -200,12 +246,24 @@
                                                 <!-- End -->
                                                 <div class="col-md-4">
                                                     <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Apply For Offer</label>
+                                                        style="font-size: 14px;">Feature Position</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-1">
+                                                    <input name="feature_position"
+                                                        id="feature_position" @if($featureInfo &&
+                                                            $featureInfo->position)
+                                                            value="{{$featureInfo->position}}" @endif class="form-control"  placeholder="Position" />
+                                                </div>
+                                                <!-- End -->
+                                                <div class="col-md-4 feature-menu">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Apply For Offer</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-1 feature-menu">
                                                     <select name="apply_for_offer" id="apply_for_offer"
-                                                        class="form-select" required>
+                                                        class="form-select">
                                                         <option value="">Select Option</option>
                                                         <option value="1" @if($featureSettingInfo &&
                                                             $featureSettingInfo->apply_for_offer == 1) selected
@@ -216,14 +274,14 @@
                                                     </select>
                                                 </div>
                                                 <!-- End -->
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 feature-menu">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Apply For Coupon</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
-                                                <div class="col-md-8 mt-md-1">
+                                                <div class="col-md-8 mt-md-1 feature-menu">
                                                     <select name="apply_for_coupon" id="apply_for_coupon"
-                                                        class="form-select" required>
+                                                        class="form-select">
                                                         <option value="">Select Option</option>
                                                         <option value="1" @if($featureSettingInfo &&
                                                             $featureSettingInfo->apply_for_coupon == 1) selected
@@ -275,9 +333,11 @@ $('#feature_id').select2({
 $('#parent_product_feature_id').select2({
     placeholder: 'Select An Option'
 });
+
 $('#select-options').select2({
     placeholder: 'Select An Option'
 });
+
 // $('.file-upload').file_upload();
 </script>
 @include('backend.web-setting.js.feature-setting-js')

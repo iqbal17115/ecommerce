@@ -1,4 +1,16 @@
 <script>
+        $(document).ready(function() {
+  // Forcefully trigger the change event
+  $('#card_feature').trigger('change');
+});
+function featureTypeCheck(feature_type) {
+    feature_type_val = $("#" + feature_type.id).val();
+    if(feature_type_val==1){
+      $(".feature-menu").show();
+    } else {
+      $(".feature-menu").hide();
+    }
+}
 // Start Remove Feature Category
 $(document).ready(function() {
     $("body").on("click", ".remove-btn", function() {
@@ -22,7 +34,7 @@ $(document).on('submit', '#add_feature_setting', function(e) {
             if (data.status == 201) {
                 window.location.href = "feature-setting-list";
             }
-            
+
         },
         error: (error) => {
             alert('Something went wrong to fetch datas...');

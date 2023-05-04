@@ -225,7 +225,7 @@
                 <div class="col-md-3 card">
                     <div class="card-body">
                         <div class="a-cardui-header">
-                            <h2 class="a-color-base headline truncate-2line">{{$feature_setting->ProductFeature->name}}</h2>
+                            <h2 class="a-color-base headline truncate-2line">@if($feature_setting->ProductFeature) {{$feature_setting->ProductFeature->name}} @endif</h2>
                         </div>
                         <div class="row">
                             @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
