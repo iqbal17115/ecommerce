@@ -22,7 +22,7 @@
                                           <span class="text-danger err_name"></span>
                                   </div>
                               </div>
-                              <div class="col-md-12">
+                              <!-- <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="top_menu">Top Feature</label>
                                       <select name="top_menu" id="top_menu" class="form-control" required>
@@ -41,15 +41,15 @@
                                           <option value="0">Cart Feature</option>
                                       </select>
                                   </div>
-                              </div>
-                              <div class="col-md-12">
+                              </div> -->
+                              <!-- <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="position">Position</label>
                                       <input type="number" name="position" id="position" class="form-control"
                                           placeholder="Enter Short Name" required>
                                           <span class="text-danger err_position"></span>
                                   </div>
-                              </div>
+                              </div> -->
                               <div class="col-md-12">
                                   <div class="form-group">
                                       <label for="is_active">Status</label>

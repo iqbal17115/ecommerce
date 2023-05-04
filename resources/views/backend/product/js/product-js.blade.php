@@ -1,4 +1,5 @@
 <script type="text/javascript">
+
 function brandAvailableCheck(brand_available) {
     brand_available = $("#" + brand_available.id).val();
     if(brand_available==1){

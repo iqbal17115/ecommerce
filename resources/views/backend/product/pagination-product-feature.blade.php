@@ -4,8 +4,6 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Top Menu</th>
-                            <th scope="col">Position</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -17,14 +15,13 @@
                         @foreach($product_features as $product_feature)
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
-                            <td>{{$product_feature->name}}</td>
-                            <td>{{$product_feature->top_menu == 1? 'Yes' : 'No'}}</td>
-                            <td>{{$product_feature->position}}</td>
+                            <td><a href="{{ route('feature-setting', ['id'=>$product_feature->id]) }}">{{$product_feature->name}}</a></td>
                             <td>{{$product_feature->is_active == 1? 'Active' : 'Inactive'}}</td>
                             <td>
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#productFeatureModal" data-id="{{$product_feature->id}}"
                                     data-name="{{$product_feature->name}}" 
+                                    data-card_feature="{{$product_feature->card_feature}}" 
                                     data-top_menu="{{$product_feature->top_menu}}" data-position="{{$product_feature->position}}"
                                     data-is_active="{{$product_feature->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
