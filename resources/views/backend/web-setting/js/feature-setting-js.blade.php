@@ -32,7 +32,7 @@ $(document).on('submit', '#add_feature_setting', function(e) {
         contentType: false,
         success: function(data) {
             if (data.status == 201) {
-                window.location.href = "feature-setting-list";
+                window.location.href = "feature";
             }
 
         },

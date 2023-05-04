@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12 ml-auto">
                 <p class="category h4">Add Feature Setting <a class="btn btn-info btn-sm float-right"
-                        href="{{ route('feature-setting-list') }}">List</a></p>
+                        href="{{ route('feature') }}">List</a></p>
 
                 <!-- Nav tabs -->
                 <div class="card">
