@@ -63,12 +63,12 @@
                                                 </div>
                                                 <!-- End -->
 
-                                                <div class="col-md-4 feature-menu">
+                                                <div class="col-md-4">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Top Menu</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
-                                                <div class="col-md-8 mt-md-1 feature-menu">
+                                                <div class="col-md-8 mt-md-1">
                                                     <select name="top_menu" id="top_menu"
                                                         class="form-select">
                                                         <option value="">Select Option</option>

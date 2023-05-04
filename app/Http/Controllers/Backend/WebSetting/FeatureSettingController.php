@@ -36,7 +36,9 @@ class FeatureSettingController extends Controller
             $Query->apply_for_offer = $request->apply_for_offer;
             $Query->apply_for_coupon = $request->apply_for_coupon;
             $Query->save();
-            FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereNotIn('category_id', $request->category_id)->delete();
+            if($request->category_id){
+               FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereNotIn('category_id', $request->category_id)->delete();
+            
             foreach($request->category_id as $key => $category_id) {
                 $FeatureSettingQuery = FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereCategoryId($category_id)->first();
                 if (!$FeatureSettingQuery) {
@@ -47,6 +49,7 @@ class FeatureSettingController extends Controller
                 $FeatureSettingQuery->position = $request->position[$key];
                 $FeatureSettingQuery->save();
             }
+        }
             return response()->json(['product_id' => $Query->id, 'status' => 201]);
         });
     }
@@ -58,10 +61,12 @@ class FeatureSettingController extends Controller
        $featureSettingInfo = null;
         $featureInfo = null;
         $id = $request->id;
+        // dd($id);
         if ($id) {
-            $featureSettingInfo = FeatureSetting::whereId($id)->first();
             $featureInfo = ProductFeature::whereId($id)->first();
+            $featureSettingInfo = FeatureSetting::whereProductFeatureId($id)->first();
         }
+        // dd($featureSettingInfo);
         return view('backend.web-setting.feature-setting', compact('all_features', 'all_card_features', 'categories', 'featureSettingInfo', 'featureInfo'));
     }
 }
