@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\ProductFeature;
+use App\Models\Backend\WebSetting\FeatureSetting;
 use Illuminate\Http\Request;
 
 class ProductFeatureController extends Controller
@@ -28,6 +29,7 @@ class ProductFeatureController extends Controller
     }
     public function deleteProductFeature(Request $request) {
         $product_feature = ProductFeature::find($request->id)->delete();
+        FeatureSetting::whereProductFeatureId($request->id)->delete();
         return response()->json([
             'status' => 'success'
         ]);
