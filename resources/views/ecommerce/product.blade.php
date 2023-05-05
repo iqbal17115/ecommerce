@@ -55,9 +55,9 @@
                 <div class="col-lg-7 col-md-6 product-single-details">
                     <h1 class="product-title">{{$product_detail->name}}</h1>
                     @if(isset($all_active_advertisements['Details']['2']['ads']))
-                    <div class="">
+                    <div class="" style="width: 600px;">
                         <img src="{{ asset('storage/'.$all_active_advertisements['Details']['2']['ads']) }}"
-                            class="w-100 ml-sm-0 mb-2" width="111" height="44" style="height: 72px; width: 100%;"
+                            class="w-100 ml-sm-0 mb-2" style="height: 72px; width: 80%;"
                             alt="Porto Logo">
                     </div>
                     @else
@@ -109,6 +109,12 @@
                             btn-add-cart add-cart mr-2" title="Add to Cart">Add to
                             Cart</a>
 
+                            <a href="javascript:void(0);" title="Buy Now" data-id="{{$product_detail->id}}"
+                                data-name="{{$product_detail->name}}" data-your_price="{{$product_detail->your_price}}"
+                                data-sale_price="{{$product_detail->sale_price}}" @if($product_detail->ProductMainImage)
+                                data-image="{{$product_detail->ProductMainImage->image }}" @endif class="btn
+                                btn-add-cart add-cart mr-2" style="background-color: #F4631B; color: white;" title="Buy Now">Buy Now</a>
+
                         <a href="{{ route('cart') }}" class="btn btn-gray view-cart d-none">View cart</a>
                     </div>
                     <!-- End .product-action -->
@@ -132,7 +138,7 @@
                         <!-- End .social-icons -->
                         @if(isset($all_active_advertisements['Details']['3']['ads']))
                         <img src="{{ asset('storage/'.$all_active_advertisements['Details']['3']['ads']) }}"
-                            class="ml-md-5" style="height: 52px;">
+                            class="ml-md-5" style="height: 52px; width: 390px;">
                         @endif
                     </div>
                     <!-- End .product single-share -->
@@ -343,7 +349,7 @@
                 @endif
             </div>
             <!-- End .products-slider -->
-          
+
         </div>
         <!-- End .products-section -->
     </div>
