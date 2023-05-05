@@ -103,35 +103,6 @@
             <!-- Start Top Feature -->
             <div class="row" style="margin-top: 18px;">
                 <!-- Start Product Part -->
-                @foreach($top_features as $top_feature)
-                @if(count($top_feature->Category) >= 2)
-                <div class="col-md-3 card">
-                    <div class="card-body">
-                        <div class="a-cardui-header">
-                            <h2 class="a-color-base headline truncate-2line">{{$top_feature->name}}</h2>
-                        </div>
-                        <div class="row">
-                            @foreach($top_feature->Category as $top_feature_category)
-                            <div class="col-6 p-0">
-                                <div class="card mb-0">
-                                    <img class="card-img-top" src="{{ asset('storage/'.$top_feature_category->image) }}"
-                                        style="height: 150px;">
-                                    <div class="text-center text-dark">
-                                        <span>{{$top_feature_category->name}}</span>
-                                    </div>
-                                </div>
-                                <!-- End Product -->
-                            </div>
-                            @endforeach
-                        </div>
-                        <!-- End Feature -->
-                    </div>
-                </div>
-                @endif
-                @endforeach
-
-                <!-- ee -->
-                <div class="row" style="margin-top: 18px;">
                     <!-- Start Product Part -->
                     @foreach($top_features as $top_feature)
                     @if($top_feature->TopFeatureSetting)
@@ -139,12 +110,14 @@
                     <div class="col-md-3 card">
                         <div class="card-body">
                             <div class="a-cardui-header">
-                                <h2 class="a-color-base headline truncate-2line">@if($feature_setting->ProductFeature)
-                                    {{$top_feature->TopFeatureSetting->ProductFeature->name}} @endif</h2>
+                                <h2 class="a-color-base headline truncate-2line">
+                                    {{$top_feature->name}}
+                                </h2>
                             </div>
                             <div class="row">
                                 @foreach($top_feature->TopFeatureSetting->FeatureSettingDetail as $feature_setting_detail)
                                 <div class="col-6 p-0">
+                                <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                     <div class="card mb-0">
                                         <img class="card-img-top"
                                             src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
@@ -153,6 +126,7 @@
                                             <span>{{$feature_setting_detail->Category->name}}</span>
                                         </div>
                                     </div>
+                                </a>
                                     <!-- End Product -->
                                 </div>
                                 @endforeach
@@ -163,7 +137,6 @@
                     @endif
                     @endif
                     @endforeach
-                </div>
             </div>
         </div>
 
@@ -266,6 +239,7 @@
                         <div class="row">
                             @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
                             <div class="col-6 p-0">
+                            <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                 <div class="card mb-0">
                                     <img class="card-img-top"
                                         src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
@@ -274,6 +248,7 @@
                                         <span>{{$feature_setting_detail->Category->name}}</span>
                                     </div>
                                 </div>
+                            </a>
                                 <!-- End Product -->
                             </div>
                             @endforeach
