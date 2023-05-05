@@ -36,7 +36,6 @@
 }
 .truncate {
   display: -webkit-box; /* use old flexbox syntax for compatibility */
-  width: 10ch; /* set width to 10 characters */
   white-space: nowrap; /* prevent line breaks */
   overflow: hidden; /* hide overflow */
   text-overflow: ellipsis; /* add ellipsis */
