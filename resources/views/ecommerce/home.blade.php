@@ -117,6 +117,7 @@
                             <div class="row">
                                 @foreach($top_feature->TopFeatureSetting->FeatureSettingDetail as $feature_setting_detail)
                                 <div class="col-6 p-0">
+                                <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                     <div class="card mb-0">
                                         <img class="card-img-top"
                                             src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
@@ -125,6 +126,7 @@
                                             <span>{{$feature_setting_detail->Category->name}}</span>
                                         </div>
                                     </div>
+                                </a>
                                     <!-- End Product -->
                                 </div>
                                 @endforeach
@@ -237,6 +239,7 @@
                         <div class="row">
                             @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
                             <div class="col-6 p-0">
+                            <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                 <div class="card mb-0">
                                     <img class="card-img-top"
                                         src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
@@ -245,6 +248,7 @@
                                         <span>{{$feature_setting_detail->Category->name}}</span>
                                     </div>
                                 </div>
+                            </a>
                                 <!-- End Product -->
                             </div>
                             @endforeach
