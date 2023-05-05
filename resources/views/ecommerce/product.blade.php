@@ -55,9 +55,9 @@
                 <div class="col-lg-7 col-md-6 product-single-details">
                     <h1 class="product-title">{{$product_detail->name}}</h1>
                     @if(isset($all_active_advertisements['Details']['2']['ads']))
-                    <div class="">
+                    <div class="" style="width: 600px;">
                         <img src="{{ asset('storage/'.$all_active_advertisements['Details']['2']['ads']) }}"
-                            class="w-100 ml-sm-0 mb-2" width="111" height="44" style="height: 72px; width: 100%;"
+                            class="w-100 ml-sm-0 mb-2" style="height: 72px; width: 80%;"
                             alt="Porto Logo">
                     </div>
                     @else
@@ -132,7 +132,7 @@
                         <!-- End .social-icons -->
                         @if(isset($all_active_advertisements['Details']['3']['ads']))
                         <img src="{{ asset('storage/'.$all_active_advertisements['Details']['3']['ads']) }}"
-                            class="ml-md-5" style="height: 52px;">
+                            class="ml-md-5" style="height: 52px; width: 390px;">
                         @endif
                     </div>
                     <!-- End .product single-share -->
@@ -343,7 +343,7 @@
                 @endif
             </div>
             <!-- End .products-slider -->
-          
+
         </div>
         <!-- End .products-section -->
     </div>
