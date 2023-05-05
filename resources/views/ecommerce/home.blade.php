@@ -36,6 +36,7 @@
 }
 .truncate {
   display: -webkit-box; /* use old flexbox syntax for compatibility */
+  width: 10ch; /* set width to 10 characters */
   white-space: nowrap; /* prevent line breaks */
   overflow: hidden; /* hide overflow */
   text-overflow: ellipsis; /* add ellipsis */
@@ -117,7 +118,7 @@
                     <div class="col-md-3 card">
                         <div class="card-body">
                             <div class="a-cardui-header">
-                                <h2 class="a-color-base headline truncate-2line truncate">
+                                <h2 class="a-color-base headline truncate-2line ">
                                     {{$top_feature->name}}
                                 </h2>
                             </div>
@@ -240,7 +241,7 @@
                 <div class="col-md-3 card">
                     <div class="card-body">
                         <div class="a-cardui-header">
-                            <h2 class="a-color-base headline truncate-2line truncate">@if($feature_setting->ProductFeature)
+                            <h2 class="a-color-base headline truncate-2line">@if($feature_setting->ProductFeature)
                                 {{$feature_setting->ProductFeature->name}} @endif</h2>
                         </div>
                         <div class="row">
