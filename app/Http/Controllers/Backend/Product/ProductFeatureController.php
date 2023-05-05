@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\ProductFeature;
+use App\Models\Backend\WebSetting\FeatureSetting;
 use Illuminate\Http\Request;
 
 class ProductFeatureController extends Controller
@@ -28,6 +29,7 @@ class ProductFeatureController extends Controller
     }
     public function deleteProductFeature(Request $request) {
         $product_feature = ProductFeature::find($request->id)->delete();
+        FeatureSetting::whereProductFeatureId($request->id)->delete();
         return response()->json([
             'status' => 'success'
         ]);
@@ -36,14 +38,10 @@ class ProductFeatureController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:100',
-                'top_menu' => 'required',
-                'position' => 'required',
                 'is_active' => 'required',
             ],
             [
                 'name' => 'Name is required',
-                'top_menu' => 'Top Menu is required',
-                'position' => 'Position is required',
                 'is_active' => 'Status is required',
             ]
         );
@@ -54,9 +52,6 @@ class ProductFeatureController extends Controller
         }
         
         $product_feature->name = $request->name;
-        $product_feature->card_feature = $request->card_feature;
-        $product_feature->top_menu = $request->top_menu;
-        $product_feature->position = $request->position;
         $product_feature->is_active = $request->is_active;
         $product_feature->save();
 

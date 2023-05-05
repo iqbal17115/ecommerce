@@ -129,6 +129,41 @@
                 </div>
                 @endif
                 @endforeach
+
+                <!-- ee -->
+                <div class="row" style="margin-top: 18px;">
+                    <!-- Start Product Part -->
+                    @foreach($top_features as $top_feature)
+                    @foreach($top_feature->FeatureSetting as $feature_setting)
+                    @if(count($top_feature->Category) >= 2)
+                    <div class="col-md-3 card">
+                        <div class="card-body">
+                            <div class="a-cardui-header">
+                                <h2 class="a-color-base headline truncate-2line">@if($feature_setting->ProductFeature)
+                                    {{$feature_setting->ProductFeature->name}} @endif</h2>
+                            </div>
+                            <div class="row">
+                                @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
+                                <div class="col-6 p-0">
+                                    <div class="card mb-0">
+                                        <img class="card-img-top"
+                                            src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
+                                            style="height: 150px;">
+                                        <div class="text-center text-dark">
+                                            <span>{{$feature_setting_detail->Category->name}}</span>
+                                        </div>
+                                    </div>
+                                    <!-- End Product -->
+                                </div>
+                                @endforeach
+                            </div>
+                            <!-- End Feature -->
+                        </div>
+                    </div>
+                    @endif
+                    @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
 
@@ -215,23 +250,25 @@
                 </div>
                 <!-- End .products-slider -->
             </div>
-            
+
             <!-- Start Card Feature -->
-             @if($product_feature->FeatureSetting)
-             <div class="row" style="margin-top: 18px;">
+            @if($product_feature->FeatureSetting)
+            <div class="row" style="margin-top: 18px;">
                 <!-- Start Product Part -->
                 @foreach($product_feature->FeatureSetting as $feature_setting)
-                @if(count($top_feature->Category) >= 2)
+                @if($feature_setting->ProductFeature->card_feature == 1 && count($feature_setting->FeatureSettingDetail) >= 2)
                 <div class="col-md-3 card">
                     <div class="card-body">
                         <div class="a-cardui-header">
-                            <h2 class="a-color-base headline truncate-2line">{{$feature_setting->ProductFeature->name}}</h2>
+                            <h2 class="a-color-base headline truncate-2line">@if($feature_setting->ProductFeature)
+                                {{$feature_setting->ProductFeature->name}} @endif</h2>
                         </div>
                         <div class="row">
                             @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
                             <div class="col-6 p-0">
                                 <div class="card mb-0">
-                                    <img class="card-img-top" src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
+                                    <img class="card-img-top"
+                                        src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
                                         style="height: 150px;">
                                     <div class="text-center text-dark">
                                         <span>{{$feature_setting_detail->Category->name}}</span>
@@ -247,7 +284,7 @@
                 @endif
                 @endforeach
             </div>
-             @endif
+            @endif
             <!-- End Card Feature -->
             @endif
             @endforeach

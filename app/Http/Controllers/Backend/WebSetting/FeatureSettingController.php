@@ -20,6 +20,12 @@ class FeatureSettingController extends Controller
     public function addFeatureSetting(Request $request)
     {
         return DB::transaction(function () use ($request) {
+            $ProductFeatureQuery = ProductFeature::whereId($request->feature_id)->first();
+            $ProductFeatureQuery->position = $request->feature_position;
+            $ProductFeatureQuery->card_feature = $request->card_feature;
+            $ProductFeatureQuery->top_menu = $request->top_menu;
+            $ProductFeatureQuery->save();
+
             $Query = FeatureSetting::whereProductFeatureId($request->feature_id)->first();
             if (!$Query) {
                 $Query = new FeatureSetting();
@@ -30,7 +36,9 @@ class FeatureSettingController extends Controller
             $Query->apply_for_offer = $request->apply_for_offer;
             $Query->apply_for_coupon = $request->apply_for_coupon;
             $Query->save();
-            FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereNotIn('category_id', $request->category_id)->delete();
+            if($request->category_id){
+               FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereNotIn('category_id', $request->category_id)->delete();
+            
             foreach($request->category_id as $key => $category_id) {
                 $FeatureSettingQuery = FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereCategoryId($category_id)->first();
                 if (!$FeatureSettingQuery) {
@@ -41,19 +49,24 @@ class FeatureSettingController extends Controller
                 $FeatureSettingQuery->position = $request->position[$key];
                 $FeatureSettingQuery->save();
             }
+        }
             return response()->json(['product_id' => $Query->id, 'status' => 201]);
         });
     }
     public function index(Request $request)
     {
-        $all_features = ProductFeature::whereCardFeature(1)->orderBy('id', 'DESC')->get();
-        $all_card_features = ProductFeature::whereCardFeature(0)->orderBy('id', 'DESC')->get();
+        $all_features = ProductFeature::orderBy('id', 'DESC')->get();
+        $all_card_features = ProductFeature::orderBy('id', 'DESC')->get();
         $categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
-        $featureSettingInfo = null;
+       $featureSettingInfo = null;
+        $featureInfo = null;
         $id = $request->id;
+        // dd($id);
         if ($id) {
-            $featureSettingInfo = FeatureSetting::whereId($id)->first();
+            $featureInfo = ProductFeature::whereId($id)->first();
+            $featureSettingInfo = FeatureSetting::whereProductFeatureId($id)->first();
         }
-        return view('backend.web-setting.feature-setting', compact('all_features', 'all_card_features', 'categories', 'featureSettingInfo'));
+        // dd($featureSettingInfo);
+        return view('backend.web-setting.feature-setting', compact('all_features', 'all_card_features', 'categories', 'featureSettingInfo', 'featureInfo'));
     }
 }
