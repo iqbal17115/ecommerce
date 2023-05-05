@@ -109,6 +109,12 @@
                             btn-add-cart add-cart mr-2" title="Add to Cart">Add to
                             Cart</a>
 
+                            <a href="javascript:void(0);" title="Buy Now" data-id="{{$product_detail->id}}"
+                                data-name="{{$product_detail->name}}" data-your_price="{{$product_detail->your_price}}"
+                                data-sale_price="{{$product_detail->sale_price}}" @if($product_detail->ProductMainImage)
+                                data-image="{{$product_detail->ProductMainImage->image }}" @endif class="btn
+                                btn-add-cart add-cart mr-2" style="background-color: #F4631B; color: white;" title="Buy Now">Buy Now</a>
+
                         <a href="{{ route('cart') }}" class="btn btn-gray view-cart d-none">View cart</a>
                     </div>
                     <!-- End .product-action -->
