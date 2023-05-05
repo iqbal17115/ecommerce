@@ -11,6 +11,6 @@ class FeatureSettingDetail extends Model
     use HasFactory;
     public function Category()
     {
-        return $this->belongsTo(Category::class)->orderBy('position', 'ASC');;
+        return $this->belongsTo(Category::class);
     }
 }
