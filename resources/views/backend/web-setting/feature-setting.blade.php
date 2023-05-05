@@ -44,6 +44,26 @@
                                         <div class="col-md-10">
                                             <!-- Start Content -->
                                             <div class="row">
+                                            <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Feature Name</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select class="form-select" name="feature_id" id="feature_id"
+                                                        style="width: 100%;">
+                                                        <option value="">Select Option</option>
+                                                        @foreach($all_features AS $feature)
+                                                        <option value="{{ $feature->id }}" @if($featureSettingInfo &&
+                                                            $featureSettingInfo->product_feature_id == $feature->id)
+                                                            selected @endif>{{ $feature->name }}
+                                                            ({{$feature->card_feature == 1? 'Box Feature' : 'Cart Feature'}})
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <!-- End -->
+
                                                 <div class="col-md-4">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Feature Type</label>
@@ -63,9 +83,25 @@
                                                 </div>
                                                 <!-- End -->
 
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Feature Location</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <select name="quantity_unit" id="quantity_unit" class="form-select">
+                                                        <option value="">Select Option</option>
+                                                        <option value="home_page">Home Page</option>
+                                                        <option value="product_details_page">Product Details Page
+                                                        </option>
+                                                        <option value="cart_page">Cart Page</option>
+                                                    </select>
+                                                </div>
+                                                <!-- End -->
+
                                                 <div class="col-md-4">
                                                     <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Top Menu</label>
+                                                        style="font-size: 14px;">Feature Area</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-1">
@@ -74,14 +110,26 @@
                                                         <option value="">Select Option</option>
                                                         <option value="1" @if($featureInfo &&
                                                             $featureInfo->top_menu == 1)
-                                                            selected @endif>Yes</option>
+                                                            selected @endif>Down Of Category</option>
                                                         <option value="0" @if($featureInfo &&
                                                             $featureInfo->top_menu == 0)
-                                                            selected @endif>No</option>
+                                                            selected @endif>Down Of Feature</option>
                                                     </select>
                                                 </div>
                                                 <!-- End -->
-
+                                                
+                                                <div class="col-md-4">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Feature Position</label>
+                                                    <span class="text-danger float-md-right">*</span>
+                                                </div>
+                                                <div class="col-md-8 mt-md-1">
+                                                    <input name="feature_position"
+                                                        id="feature_position" @if($featureInfo &&
+                                                            $featureInfo->position)
+                                                            value="{{$featureInfo->position}}" @endif class="form-control"  placeholder="Position" />
+                                                </div>
+                                                <!-- End -->
                                                 <div class="col-md-4 mt-md-3 feature-menu">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;"> Feature Area (After)</label>
@@ -103,41 +151,6 @@
                                                 </div>
                                                 <!-- End -->
 
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Feature Name</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select class="form-select" name="feature_id" id="feature_id"
-                                                        style="width: 100%;">
-                                                        <option value="">Select Option</option>
-                                                        @foreach($all_features AS $feature)
-                                                        <option value="{{ $feature->id }}" @if($featureSettingInfo &&
-                                                            $featureSettingInfo->product_feature_id == $feature->id)
-                                                            selected @endif>{{ $feature->name }}
-                                                            ({{$feature->card_feature == 1? 'Box Feature' : 'Cart Feature'}})
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <!-- End -->
-
-                                                <div class="col-md-4 mt-md-3">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Feature Location</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-3">
-                                                    <select name="quantity_unit" id="quantity_unit" class="form-select">
-                                                        <option value="">Select Option</option>
-                                                        <option value="home_page">Home Page</option>
-                                                        <option value="product_details_page">Product Details Page
-                                                        </option>
-                                                        <option value="cart_page">Cart Page</option>
-                                                    </select>
-                                                </div>
-                                                <!-- End -->
                                                 <div class="col-md-4 mt-md-3 feature-menu">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Category</label>
@@ -244,18 +257,7 @@
                                                     </div>
                                                 </div>
                                                 <!-- End -->
-                                                <div class="col-md-4">
-                                                    <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Feature Position</label>
-                                                    <span class="text-danger float-md-right">*</span>
-                                                </div>
-                                                <div class="col-md-8 mt-md-1">
-                                                    <input name="feature_position"
-                                                        id="feature_position" @if($featureInfo &&
-                                                            $featureInfo->position)
-                                                            value="{{$featureInfo->position}}" @endif class="form-control"  placeholder="Position" />
-                                                </div>
-                                                <!-- End -->
+                                                
                                                 <div class="col-md-4 feature-menu">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Apply For Offer</label>
