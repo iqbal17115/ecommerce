@@ -36,6 +36,7 @@ class FeatureSettingController extends Controller
             $Query->apply_for_offer = $request->apply_for_offer;
             $Query->apply_for_coupon = $request->apply_for_coupon;
             $Query->save();
+            
             if($request->category_id){
                FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereNotIn('category_id', $request->category_id)->delete();
             

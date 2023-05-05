@@ -134,16 +134,16 @@
                 <div class="row" style="margin-top: 18px;">
                     <!-- Start Product Part -->
                     @foreach($top_features as $top_feature)
-                    @foreach($top_feature->FeatureSetting as $feature_setting)
-                    @if(count($top_feature->Category) >= 2)
+                    @if($top_feature->TopFeatureSetting)
+                    @if($top_feature->TopFeatureSetting && count($top_feature->TopFeatureSetting->FeatureSettingDetail) >= 2)
                     <div class="col-md-3 card">
                         <div class="card-body">
                             <div class="a-cardui-header">
                                 <h2 class="a-color-base headline truncate-2line">@if($feature_setting->ProductFeature)
-                                    {{$feature_setting->ProductFeature->name}} @endif</h2>
+                                    {{$top_feature->TopFeatureSetting->ProductFeature->name}} @endif</h2>
                             </div>
                             <div class="row">
-                                @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
+                                @foreach($top_feature->TopFeatureSetting->FeatureSettingDetail as $feature_setting_detail)
                                 <div class="col-6 p-0">
                                     <div class="card mb-0">
                                         <img class="card-img-top"
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     @endif
-                    @endforeach
+                    @endif
                     @endforeach
                 </div>
             </div>
