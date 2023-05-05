@@ -256,7 +256,7 @@
             <div class="row" style="margin-top: 18px;">
                 <!-- Start Product Part -->
                 @foreach($product_feature->FeatureSetting as $feature_setting)
-                @if(count($top_feature->Category) >= 2)
+                @if($feature_setting->ProductFeature->card_feature == 1 && count($feature_setting->FeatureSettingDetail) >= 2)
                 <div class="col-md-3 card">
                     <div class="card-body">
                         <div class="a-cardui-header">
