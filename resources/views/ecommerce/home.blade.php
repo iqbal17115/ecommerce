@@ -35,20 +35,6 @@
     }
 }
 
-.truncate {
-    display: -webkit-box;
-    /* use old flexbox syntax for compatibility */
-    width: 10ch;
-    /* set width to 10 characters */
-    white-space: nowrap;
-    /* prevent line breaks */
-    overflow: hidden;
-    /* hide overflow */
-    text-overflow: ellipsis;
-    /* add ellipsis */
-    -webkit-line-clamp: 2;
-    /* limit to 2 lines */
-}
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
@@ -60,7 +46,7 @@
 			}">
                 @foreach($sliders as $slider)
                 <div class="home-slide home-slide1 banner">
-                    <img class="slider_image slide-bg" src="{{ asset('storage/'.$slider->image) }}" alt="slider image"
+                    <img class="slider_image slide-bg lazy-load" data-src="{{ asset('storage/'.$slider->image) }}" alt="slider image"
                         style="min-height: 208px;">
                     <div
                         class="container d-flex align-items-sm-center justify-content-sm-between justify-content-center flex-column flex-sm-row">
