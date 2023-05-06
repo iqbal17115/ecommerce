@@ -292,29 +292,39 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
+// Get an array of all the image elements you want to lazy load
 var images = document.getElementsByClassName('lazy-load');
 
-// Create a new IntersectionObserver object
-var observer = new IntersectionObserver(function(entries) {
-    // Loop through all the entries (elements in the viewport)
-    entries.forEach(function(entry) {
-        // If the entry is intersecting (in the viewport), load the image by setting its `src` attribute to the appropriate URL
-        if (entry.isIntersecting) {
-            var image = entry.target;
-            var imageUrl = image.getAttribute('data-src');
-            image.src = imageUrl;
-            image.classList.remove(
-            'lazy-load'); // Remove the class to prevent the image from being loaded again
-        }
-    });
-});
-
-// Loop through all the image elements and add them to the observer
-for (var i = 0; i < images.length; i++) {
-    observer.observe(images[i]);
+// Define a function to check if an element is in the viewport
+function isInViewport(element) {
+  var rect = element.getBoundingClientRect();
+  return (
+    rect.bottom >= 0 &&
+    rect.right >= 0 &&
+    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.left <= (window.innerWidth || document.documentElement.clientWidth)
+  );
 }
 
-// Get an array of all the image elements you want to load
+// Define a function to lazy load the images
+function lazyLoad() {
+  // Loop through all the image elements
+  for (var i = 0; i < images.length; i++) {
+    var image = images[i];
+    // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
+    if (isInViewport(image) && image.getAttribute('data-src')) {
+      image.src = image.getAttribute('data-src');
+      image.removeAttribute('data-src');
+      image.classList.remove('lazy-load'); // Remove the class to prevent the image from being loaded again
+    }
+  }
+}
+
+// Add an event listener to the window object to detect when the user scrolls
+window.addEventListener('scroll', lazyLoad);
+
+// Call the `lazyLoad` function once when the page loads to load images that are already in the viewport
+lazyLoad();
 
 </script>
 @endsection
