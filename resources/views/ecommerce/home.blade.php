@@ -193,10 +193,9 @@
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
                             <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
-                                <img @if($product->ProductMainImage)
-                                src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif
-                                width="239" height="239" style="width: 239px; height: 239px; filter: brightness(0.9)
-                                contrast(1.2) saturate(1.1);" alt="product">
+                                <img class="lazy-load" @if($product->ProductMainImage) data-src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif style="width: 239px; height: 239px; filter: brightness(0.9)
+                                contrast(1.2) saturate(1.1);" 
+                                width="239" height="239" alt="product">
                             </a>
                             <div class="btn-icon-group">
                                 <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
@@ -280,4 +279,24 @@
 @include('ecommerce.footer')
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
+<script>
+    // Get an array of all the image elements you want to load
+var images = document.getElementsByClassName('lazy-load');
+
+// Add an event listener to the window object to detect when the user scrolls
+window.addEventListener('scroll', function() {
+  // Loop through all the image elements
+  for (var i = 0; i < images.length; i++) {
+    var image = images[i];
+    var imagePosition = image.getBoundingClientRect().top;
+    var scrollPosition = window.innerHeight + window.pageYOffset;
+
+    // If the image is within the viewport, load the image by setting its `src` attribute to the appropriate URL
+    if (imagePosition < scrollPosition) {
+      image.src = image.getAttribute('data-src');
+      image.classList.remove('lazy-load'); // Remove the class to prevent the image from being loaded again
+    }
+  }
+});
+</script>
 @endsection
