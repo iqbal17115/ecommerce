@@ -295,29 +295,32 @@
 // Get an array of all the image elements you want to load
 var images = document.getElementsByClassName('lazy-load');
 
-// Add an event listener to the window object to detect when the user scrolls
-window.addEventListener('scroll', function() {
+// Add an event listener to the window object to detect when the user scrolls or resizes the window
+window.addEventListener('scroll', checkImagesInView);
+window.addEventListener('resize', checkImagesInView);
+
+function checkImagesInView() {
   // Loop through all the image elements
   for (var i = 0; i < images.length; i++) {
     var image = images[i];
     var imageUrl = image.getAttribute('data-src');
 
-    // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
-    if (isElementInViewport(image) && image.getAttribute('src') !== imageUrl) {
+    // If the image is within 200 pixels of the visible area of the screen, load it by setting its `src` attribute to the appropriate URL
+    if (isElementNearViewport(image, 200) && image.getAttribute('src') !== imageUrl) {
       image.src = imageUrl;
       image.classList.remove('lazy-load'); // Remove the class to prevent the image from being loaded again
     }
   }
-});
+}
 
-// Helper function to check if an element is in the viewport
-function isElementInViewport(element) {
+// Helper function to check if an element is within a certain distance from the visible area of the screen
+function isElementNearViewport(element, distance) {
   var rect = element.getBoundingClientRect();
   return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    rect.top <= window.innerHeight + distance &&
+    rect.bottom >= -distance &&
+    rect.left <= window.innerWidth + distance &&
+    rect.right >= -distance
   );
 }
 </script>
