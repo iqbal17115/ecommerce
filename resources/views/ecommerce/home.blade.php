@@ -292,39 +292,33 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
-// Get an array of all the image elements you want to lazy load
+// Get an array of all the image elements you want to load
 var images = document.getElementsByClassName('lazy-load');
 
-// Define a function to check if an element is in the viewport
-function isInViewport(element) {
-  var rect = element.getBoundingClientRect();
-  return (
-    rect.bottom >= 0 &&
-    rect.right >= 0 &&
-    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.left <= (window.innerWidth || document.documentElement.clientWidth)
-  );
-}
-
-// Define a function to lazy load the images
-function lazyLoad() {
+// Add an event listener to the window object to detect when the user scrolls
+window.addEventListener('scroll', function() {
   // Loop through all the image elements
   for (var i = 0; i < images.length; i++) {
     var image = images[i];
+    var imageUrl = image.getAttribute('data-src');
+
     // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
-    if (isInViewport(image) && image.getAttribute('data-src')) {
-      image.src = image.getAttribute('data-src');
-      image.removeAttribute('data-src');
+    if (isElementInViewport(image) && image.getAttribute('src') !== imageUrl) {
+      image.src = imageUrl;
       image.classList.remove('lazy-load'); // Remove the class to prevent the image from being loaded again
     }
   }
+});
+
+// Helper function to check if an element is in the viewport
+function isElementInViewport(element) {
+  var rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
 }
-
-// Add an event listener to the window object to detect when the user scrolls
-window.addEventListener('scroll', lazyLoad);
-
-// Call the `lazyLoad` function once when the page loads to load images that are already in the viewport
-lazyLoad();
-
 </script>
 @endsection
