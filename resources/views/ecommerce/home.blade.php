@@ -273,12 +273,6 @@
         </div>
     </div>
 </main>
-<!-- End .main -->
-@include('ecommerce.cart-js')
-<!-- footer-area -->
-@include('ecommerce.footer')
-<!-- footer-area-end -->
-@include('ecommerce.sidebar-js')
 <script>
     function lazyLoad() {
     const lazyImages = document.querySelectorAll('.lazyload');
@@ -320,4 +314,11 @@ for (var i = 0; i < images.length; i++) {
     observer.observe(image);
 }
 </script>
+<!-- End .main -->
+@include('ecommerce.cart-js')
+<!-- footer-area -->
+@include('ecommerce.footer')
+<!-- footer-area-end -->
+@include('ecommerce.sidebar-js')
+
 @endsection
