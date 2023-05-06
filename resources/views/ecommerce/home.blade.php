@@ -315,23 +315,6 @@ for (var i = 0; i < images.length; i++) {
 }
 
 // Get an array of all the image elements you want to load
-var images = document.getElementsByClassName('lazy-load');
 
-// Add an event listener to the window object to detect when the user scrolls
-window.addEventListener('scroll', function() {
-    // Loop through all the image elements
-    for (var i = 0; i < images.length; i++) {
-        var image = images[i];
-        var imagePosition = image.getBoundingClientRect().top;
-        var scrollPosition = window.innerHeight + window.pageYOffset;
-
-        // If the image is within the viewport, load the image by setting its `src` attribute to the appropriate URL
-        if (imagePosition < scrollPosition) {
-            image.src = image.getAttribute('data-src');
-            image.classList.remove(
-            'lazy-load'); // Remove the class to prevent the image from being loaded again
-        }
-    }
-});
 </script>
 @endsection
