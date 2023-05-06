@@ -188,12 +188,7 @@
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
                             <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
-                                <img srcset="image-400.jpg 400w,
-             image-800.jpg 800w,
-             image-1200.jpg 1200w"
-     sizes="(max-width: 600px) 400px,
-            (max-width: 1024px) 800px,
-            1200px" class="lazy-load" @if($product->ProductMainImage)
+                                <img class="lazy-load" @if($product->ProductMainImage)
                                 data-src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
                                 @endif style="width: 239px; height: 239px; filter: brightness(0.9)
                                 contrast(1.2) saturate(1.1);"
