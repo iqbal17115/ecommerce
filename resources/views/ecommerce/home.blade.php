@@ -89,7 +89,7 @@
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
                         <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
                             <figure>
-                                <img class="lazy-load" data-src="{{ asset('storage/'.$top_show_category->image) }}"
+                                <img src="{{ asset('storage/'.$top_show_category->image) }}"
                                     alt="category" width="280" height="240"
                                     style="width: 100px; height: 100px; border-radius: 50%;" />
                             </figure>
