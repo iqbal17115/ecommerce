@@ -280,7 +280,7 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
-    function lazyLoad() {
+function lazyLoad() {
     const lazyImages = document.querySelectorAll('.lazyload');
     lazyImages.forEach(img => {
         if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect().bottom >= 0 && getComputedStyle(img).display !== 'none') {
@@ -290,7 +290,8 @@
     });
 }
 
-window.addEventListener('scroll', lazyLoad);
+// Check for visible images on page load
+document.addEventListener("DOMContentLoaded", lazyLoad);
 // Get an array of all the image elements you want to load
 var images = document.getElementsByClassName('lazy-load');
 
