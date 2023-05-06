@@ -96,7 +96,7 @@
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
                         <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
                             <figure>
-                                <img src="{{ asset('storage/'.$top_show_category->image) }}" alt="category" width="280"
+                                <img class="lazy-load" data-src="{{ asset('storage/'.$top_show_category->image) }}" alt="category" width="280"
                                     height="240" style="width: 100px; height: 100px; border-radius: 50%;" />
                             </figure>
                             <div class="category-content p-0">
@@ -128,7 +128,7 @@
                                 <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                     <div class="card mb-0">
                                         <img class="card-img-top"
-                                            src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
+                                            data-src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
                                             style="height: 150px;">
                                         <div class="text-center text-dark">
                                             <span>{{$feature_setting_detail->Category->name}}</span>
@@ -248,8 +248,8 @@
                             <div class="col-6 p-0">
                             <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                 <div class="card mb-0">
-                                    <img class="card-img-top"
-                                        src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
+                                    <img class="card-img-top lazy-load"
+                                        data-src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
                                         style="height: 150px;">
                                     <div class="text-center text-dark">
                                         <span>{{$feature_setting_detail->Category->name}}</span>
