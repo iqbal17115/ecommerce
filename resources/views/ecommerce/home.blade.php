@@ -295,33 +295,29 @@
 // Get an array of all the image elements you want to load
 var images = document.getElementsByClassName('lazy-load');
 
-// Add an event listener to the window object to detect when the user scrolls or resizes the window
-window.addEventListener('scroll', checkImagesInView);
-window.addEventListener('resize', checkImagesInView);
+// Set up an IntersectionObserver to detect when the images are in view
+var options = {
+  rootMargin: '0px',
+  threshold: 0.1
+};
 
-function checkImagesInView() {
-  // Loop through all the image elements
-  for (var i = 0; i < images.length; i++) {
-    var image = images[i];
-    var imageUrl = image.getAttribute('data-src');
-
-    // If the image is within 200 pixels of the visible area of the screen, load it by setting its `src` attribute to the appropriate URL
-    if (isElementNearViewport(image, 200) && image.getAttribute('src') !== imageUrl) {
+var observer = new IntersectionObserver(function(entries, observer) {
+  entries.forEach(function(entry) {
+    // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
+    if (entry.isIntersecting) {
+      var image = entry.target;
+      var imageUrl = image.getAttribute('data-src');
       image.src = imageUrl;
       image.classList.remove('lazy-load'); // Remove the class to prevent the image from being loaded again
+      observer.unobserve(image); // Stop observing the image once it has been loaded
     }
-  }
-}
+  });
+}, options);
 
-// Helper function to check if an element is within a certain distance from the visible area of the screen
-function isElementNearViewport(element, distance) {
-  var rect = element.getBoundingClientRect();
-  return (
-    rect.top <= window.innerHeight + distance &&
-    rect.bottom >= -distance &&
-    rect.left <= window.innerWidth + distance &&
-    rect.right >= -distance
-  );
+// Loop through all the image elements and observe them with the IntersectionObserver
+for (var i = 0; i < images.length; i++) {
+  var image = images[i];
+  observer.observe(image);
 }
 </script>
 @endsection
