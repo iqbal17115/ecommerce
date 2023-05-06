@@ -45,8 +45,8 @@
                 'autoplayTimeout':5000
 			}">
                 @foreach($sliders as $slider)
-                <div class="slider home-slide home-slide1 banner">
-                    <img class="slider_image slide-bg" data-src="{{ asset('storage/'.$slider->image) }}" alt="slider image"
+                <div class="home-slide home-slide1 banner">
+                    <img class="slider_image slide-bg lazy-load" data-src="{{ asset('storage/'.$slider->image) }}" alt="slider image"
                         style="min-height: 208px;">
                     <div
                         class="container d-flex align-items-sm-center justify-content-sm-between justify-content-center flex-column flex-sm-row">
@@ -88,8 +88,8 @@
                     @foreach($top_show_categories as $top_show_category)
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
                         <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
-                            <figure class="slider">
-                                <img data-src="{{ asset('storage/'.$top_show_category->image) }}"
+                            <figure>
+                                <img class="lazy-load" data-src="{{ asset('storage/'.$top_show_category->image) }}"
                                     alt="category" width="280" height="240"
                                     style="width: 100px; height: 100px; border-radius: 50%;" />
                             </figure>
@@ -278,35 +278,6 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
-    // Get an array of all the image elements in the slider
-var images = document.querySelectorAll('.slider img');
-
-// Set up an IntersectionObserver to detect when the images are in view
-var options = {
-  rootMargin: '0px',
-  threshold: 0.1
-};
-
-var observer = new IntersectionObserver(function(entries, observer) {
-  entries.forEach(function(entry) {
-    // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
-    if (entry.isIntersecting) {
-      var image = entry.target;
-      var imageUrl = image.getAttribute('data-src');
-      image.src = imageUrl;
-      image.classList.remove('lazy-load'); // Remove the class to prevent the image from being loaded again
-      observer.unobserve(image); // Stop observing the image once it has been loaded
-    }
-  });
-}, options);
-
-// Loop through all the image elements in the slider and observe them with the IntersectionObserver
-for (var i = 0; i < images.length; i++) {
-  var image = images[i];
-  image.classList.add('lazy-load'); // Add the lazy-load class to the image
-  observer.observe(image);
-}
-
 // Get an array of all the image elements you want to load
 var images = document.getElementsByClassName('lazy-load');
 
