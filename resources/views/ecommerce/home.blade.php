@@ -34,13 +34,20 @@
         width: 25%;
     }
 }
+
 .truncate {
-  display: -webkit-box; /* use old flexbox syntax for compatibility */
-  width: 10ch; /* set width to 10 characters */
-  white-space: nowrap; /* prevent line breaks */
-  overflow: hidden; /* hide overflow */
-  text-overflow: ellipsis; /* add ellipsis */
-  -webkit-line-clamp: 2; /* limit to 2 lines */
+    display: -webkit-box;
+    /* use old flexbox syntax for compatibility */
+    width: 10ch;
+    /* set width to 10 characters */
+    white-space: nowrap;
+    /* prevent line breaks */
+    overflow: hidden;
+    /* hide overflow */
+    text-overflow: ellipsis;
+    /* add ellipsis */
+    -webkit-line-clamp: 2;
+    /* limit to 2 lines */
 }
 </style>
 <main class="main">
@@ -96,8 +103,9 @@
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
                         <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
                             <figure>
-                                <img class="lazy-load" data-src="{{ asset('storage/'.$top_show_category->image) }}" alt="category" width="280"
-                                    height="240" style="width: 100px; height: 100px; border-radius: 50%;" />
+                                <img class="lazy-load" data-src="{{ asset('storage/'.$top_show_category->image) }}"
+                                    alt="category" width="280" height="240"
+                                    style="width: 100px; height: 100px; border-radius: 50%;" />
                             </figure>
                             <div class="category-content p-0">
                                 <span
@@ -111,20 +119,21 @@
             <!-- Start Top Feature -->
             <div class="row" style="margin-top: 18px;">
                 <!-- Start Product Part -->
-                    <!-- Start Product Part -->
-                    @foreach($top_features as $top_feature)
-                    @if($top_feature->TopFeatureSetting)
-                    @if($top_feature->TopFeatureSetting && count($top_feature->TopFeatureSetting->FeatureSettingDetail) >= 2)
-                    <div class="col-md-3 card">
-                        <div class="card-body">
-                            <div class="a-cardui-header">
-                                <h2 class="a-color-base headline truncate-2line ">
-                                    {{$top_feature->name}}
-                                </h2>
-                            </div>
-                            <div class="row">
-                                @foreach($top_feature->TopFeatureSetting->FeatureSettingDetail as $feature_setting_detail)
-                                <div class="col-6 p-0">
+                <!-- Start Product Part -->
+                @foreach($top_features as $top_feature)
+                @if($top_feature->TopFeatureSetting)
+                @if($top_feature->TopFeatureSetting && count($top_feature->TopFeatureSetting->FeatureSettingDetail) >=
+                2)
+                <div class="col-md-3 card">
+                    <div class="card-body">
+                        <div class="a-cardui-header">
+                            <h2 class="a-color-base headline truncate-2line ">
+                                {{$top_feature->name}}
+                            </h2>
+                        </div>
+                        <div class="row">
+                            @foreach($top_feature->TopFeatureSetting->FeatureSettingDetail as $feature_setting_detail)
+                            <div class="col-6 p-0">
                                 <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                     <div class="card mb-0">
                                         <img class="card-img-top lazy-load"
@@ -135,16 +144,16 @@
                                         </div>
                                     </div>
                                 </a>
-                                    <!-- End Product -->
-                                </div>
-                                @endforeach
+                                <!-- End Product -->
                             </div>
-                            <!-- End Feature -->
+                            @endforeach
                         </div>
+                        <!-- End Feature -->
                     </div>
-                    @endif
-                    @endif
-                    @endforeach
+                </div>
+                @endif
+                @endif
+                @endforeach
             </div>
         </div>
 
@@ -193,8 +202,10 @@
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
                             <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
-                                <img class="lazy-load" @if($product->ProductMainImage) data-src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif style="width: 239px; height: 239px; filter: brightness(0.9)
-                                contrast(1.2) saturate(1.1);" 
+                                <img class="lazy-load" @if($product->ProductMainImage)
+                                data-src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
+                                @endif style="width: 239px; height: 239px; filter: brightness(0.9)
+                                contrast(1.2) saturate(1.1);"
                                 width="239" height="239" alt="product">
                             </a>
                             <div class="btn-icon-group">
@@ -236,7 +247,8 @@
             <div class="row" style="margin-top: 18px;">
                 <!-- Start Product Part -->
                 @foreach($product_feature->FeatureSetting as $feature_setting)
-                @if($feature_setting->ProductFeature->card_feature == 1 && count($feature_setting->FeatureSettingDetail) >= 2)
+                @if($feature_setting->ProductFeature->card_feature == 1 && count($feature_setting->FeatureSettingDetail)
+                >= 2)
                 <div class="col-md-3 card">
                     <div class="card-body">
                         <div class="a-cardui-header">
@@ -246,16 +258,16 @@
                         <div class="row">
                             @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
                             <div class="col-6 p-0">
-                            <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
-                                <div class="card mb-0">
-                                    <img class="card-img-top lazy-load"
-                                        data-src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
-                                        style="height: 150px;">
-                                    <div class="text-center text-dark">
-                                        <span>{{$feature_setting_detail->Category->name}}</span>
+                                <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
+                                    <div class="card mb-0">
+                                        <img class="card-img-top lazy-load"
+                                            data-src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
+                                            style="height: 150px;">
+                                        <div class="text-center text-dark">
+                                            <span>{{$feature_setting_detail->Category->name}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
                                 <!-- End Product -->
                             </div>
                             @endforeach
@@ -280,23 +292,46 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
-    // Get an array of all the image elements you want to load
+var images = document.getElementsByClassName('lazy-load');
+
+// Create a new IntersectionObserver object
+var observer = new IntersectionObserver(function(entries) {
+    // Loop through all the entries (elements in the viewport)
+    entries.forEach(function(entry) {
+        // If the entry is intersecting (in the viewport), load the image by setting its `src` attribute to the appropriate URL
+        if (entry.isIntersecting) {
+            var image = entry.target;
+            var imageUrl = image.getAttribute('data-src');
+            image.src = imageUrl;
+            image.classList.remove(
+            'lazy-load'); // Remove the class to prevent the image from being loaded again
+        }
+    });
+});
+
+// Loop through all the image elements and add them to the observer
+for (var i = 0; i < images.length; i++) {
+    observer.observe(images[i]);
+}
+
+// Get an array of all the image elements you want to load
 var images = document.getElementsByClassName('lazy-load');
 
 // Add an event listener to the window object to detect when the user scrolls
 window.addEventListener('scroll', function() {
-  // Loop through all the image elements
-  for (var i = 0; i < images.length; i++) {
-    var image = images[i];
-    var imagePosition = image.getBoundingClientRect().top;
-    var scrollPosition = window.innerHeight + window.pageYOffset;
+    // Loop through all the image elements
+    for (var i = 0; i < images.length; i++) {
+        var image = images[i];
+        var imagePosition = image.getBoundingClientRect().top;
+        var scrollPosition = window.innerHeight + window.pageYOffset;
 
-    // If the image is within the viewport, load the image by setting its `src` attribute to the appropriate URL
-    if (imagePosition < scrollPosition) {
-      image.src = image.getAttribute('data-src');
-      image.classList.remove('lazy-load'); // Remove the class to prevent the image from being loaded again
+        // If the image is within the viewport, load the image by setting its `src` attribute to the appropriate URL
+        if (imagePosition < scrollPosition) {
+            image.src = image.getAttribute('data-src');
+            image.classList.remove(
+            'lazy-load'); // Remove the class to prevent the image from being loaded again
+        }
     }
-  }
 });
 </script>
 @endsection
