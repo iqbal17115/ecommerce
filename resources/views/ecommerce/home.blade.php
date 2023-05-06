@@ -127,7 +127,7 @@
                                 <div class="col-6 p-0">
                                 <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                     <div class="card mb-0">
-                                        <img class="card-img-top"
+                                        <img class="card-img-top lazy-load"
                                             data-src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
                                             style="height: 150px;">
                                         <div class="text-center text-dark">
