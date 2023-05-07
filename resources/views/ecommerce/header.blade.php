@@ -34,7 +34,7 @@
         </button> -->
         @if($company_info && $company_info->logo)
         <a href="{{ route('home') }}" class="logo">
-            <img src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5" width="111" height="44"
+            <img data-src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5 lazyload" width="111" height="44"
                 style="height: 54px;width: 151px;filter: brightness(4) contrast(1.5) saturate(1.5);" alt="Porto Logo">
         </a>
         @endif
@@ -129,8 +129,8 @@
                                         <!-- End .product-details -->
 
                                         <figure class="product-image-container">
-                                            <a href="{{ route('product-detail', ['id'=>$id]) }}" class="product-image">
-                                                <img src="{{ asset('storage/product_photo/'.$details['image']) }}"
+                                            <a href="{{ route('product-detail', ['id'=>$id]) }}" class="product-image lazyload">
+                                                <img data-src="{{ asset('storage/product_photo/'.$details['image']) }}"
                                                     alt="product" width="80" height="80">
                                             </a>
 
@@ -213,10 +213,10 @@
                     <li class="" style="width: 360px;">
                         <div class="float-right">
                             <center>
-                                <img src="{{ asset('storage/'.$all_active_advertisements['Header']['1']['ads']) }}"
-                                    class="w-100 ml-sm-0 ml-md-5" width="111" height="44" style="height: 30px;;"
+                                <img data-src="{{ asset('storage/'.$all_active_advertisements['Header']['1']['ads']) }}"
+                                    class="w-100 ml-sm-0 ml-md-5 lazyload" width="111" height="44" style="height: 30px;;"
                                     alt="Porto Logo">
-                                <center>
+                            <center>
                         </div>
                     </li>
                     <!-- End Header Ads -->
