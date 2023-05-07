@@ -88,9 +88,9 @@
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
                         <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
                             <figure>
-                                <img class="lazy-load"
-                                    data-src="{{ asset('storage/'.$top_show_category->image) }}" alt="category"
-                                    width="280" height="240" style="width: 100px; height: 100px; border-radius: 50%;" />
+                                <img class="lazy-load" data-src="{{ asset('storage/'.$top_show_category->image) }}"
+                                    alt="category" width="280" height="240"
+                                    style="width: 100px; height: 100px; border-radius: 50%;" />
                             </figure>
                             <div class="category-content p-0">
                                 <span
@@ -280,47 +280,49 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
-    $(document).ready(function() { 
-function lazyLoad() {
-    const lazyImages = document.querySelectorAll('.lazy-load');
-    lazyImages.forEach(img => {
-        if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect().bottom >= 0 && getComputedStyle(img).display !== 'none') {
-            img.src = img.dataset.src;
-            img.classList.remove('lazyload');
-        }
-    });
-}
+$(document).ready(function() {
+    function lazyLoad() {
+        const lazyImages = document.querySelectorAll('.lazy-load');
+        lazyImages.forEach(img => {
+            if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
+                .bottom >= 0 && getComputedStyle(img).display !== 'none') {
+                img.src = img.dataset.src;
+                img.classList.remove('lazyload');
+            }
+        });
+    }
 
-// Check for visible images on page load
-document.addEventListener("DOMContentLoaded", lazyLoad);
-// Get an array of all the image elements you want to load
-var images = document.getElementsByClassName('lazy-load');
+    // Check for visible images on page load
+    document.addEventListener("DOMContentLoaded", lazyLoad);
+    // Get an array of all the image elements you want to load
+    var images = document.getElementsByClassName('lazy-load');
 
-// Set up an IntersectionObserver to detect when the images are in view
-var options = {
-    rootMargin: '0px',
-    threshold: 0.1
-};
+    // Set up an IntersectionObserver to detect when the images are in view
+    var options = {
+        rootMargin: '0px',
+        threshold: 0.1
+    };
 
-var observer = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(function(entry) {
-        // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
-        if (entry.isIntersecting) {
-            var image = entry.target;
-            var imageUrl = image.getAttribute('data-src');
-            image.src = imageUrl;
-            image.classList.remove(
-            'lazy-load'); // Remove the class to prevent the image from being loaded again
-            observer.unobserve(image); // Stop observing the image once it has been loaded
-        }
-    });
-}, options);
+    var observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+            // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
+            if (entry.isIntersecting) {
+                var image = entry.target;
+                var imageUrl = image.getAttribute('data-src');
+                image.src = imageUrl;
+                image.classList.remove(
+                    'lazy-load'
+                    ); // Remove the class to prevent the image from being loaded again
+                observer.unobserve(image); // Stop observing the image once it has been loaded
+            }
+        });
+    }, options);
 
-// Loop through all the image elements and observe them with the IntersectionObserver
-for (var i = 0; i < images.length; i++) {
-    var image = images[i];
-    observer.observe(image);
-}
+    // Loop through all the image elements and observe them with the IntersectionObserver
+    for (var i = 0; i < images.length; i++) {
+        var image = images[i];
+        observer.observe(image);
+    }
 });
 </script>
 @endsection
