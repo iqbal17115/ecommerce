@@ -280,19 +280,19 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
-    function lazyLoad() {
-        const lazyImages = document.querySelectorAll('.lazy-load');
-        lazyImages.forEach(img => {
-            if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
-                .bottom >= 0 && getComputedStyle(img).display !== 'none') {
-                img.src = img.dataset.src;
-                img.classList.remove('lazyload');
-            }
-        });
-    }
+function lazyLoad() {
+    const lazyImages = document.querySelectorAll('.lazy-load');
+    lazyImages.forEach(img => {
+        if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
+            .bottom >= 0 && getComputedStyle(img).display !== 'none') {
+            img.src = img.dataset.src;
+            img.classList.remove('lazyload');
+        }
+    });
+}
 
-    // Check for visible images on page load
-    document.addEventListener("DOMContentLoaded", lazyLoad);
+// Check for visible images on page load
+document.addEventListener("DOMContentLoaded", lazyLoad);
 $(document).ready(function() {
     // Get an array of all the image elements you want to load
     var images = document.getElementsByClassName('lazy-load');
@@ -312,7 +312,7 @@ $(document).ready(function() {
                 image.src = imageUrl;
                 image.classList.remove(
                     'lazy-load'
-                    ); // Remove the class to prevent the image from being loaded again
+                ); // Remove the class to prevent the image from being loaded again
                 observer.unobserve(image); // Stop observing the image once it has been loaded
             }
         });
