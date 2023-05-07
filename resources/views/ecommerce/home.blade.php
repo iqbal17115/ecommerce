@@ -34,6 +34,13 @@
         width: 25%;
     }
 }
+img {
+  transform: scale(1.2);
+  transform-origin: 0 0;
+}
+p {
+  font-size: calc(100% + 20%);
+}
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
