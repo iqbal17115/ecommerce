@@ -280,7 +280,6 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
-$(document).ready(function() {
     function lazyLoad() {
         const lazyImages = document.querySelectorAll('.lazy-load');
         lazyImages.forEach(img => {
@@ -294,6 +293,7 @@ $(document).ready(function() {
 
     // Check for visible images on page load
     document.addEventListener("DOMContentLoaded", lazyLoad);
+$(document).ready(function() {
     // Get an array of all the image elements you want to load
     var images = document.getElementsByClassName('lazy-load');
 
