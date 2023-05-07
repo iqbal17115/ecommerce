@@ -280,6 +280,7 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
+    $(document).ready(function() { 
 function lazyLoad() {
     const lazyImages = document.querySelectorAll('.lazy-load');
     lazyImages.forEach(img => {
@@ -320,5 +321,6 @@ for (var i = 0; i < images.length; i++) {
     var image = images[i];
     observer.observe(image);
 }
+});
 </script>
 @endsection
