@@ -1,5 +1,35 @@
 @extends('layouts.ecommerce')
 @section('content')
+<style>
+    .rating-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .star-rating {
+        display: inline-block;
+        font-size: 0;
+    }
+
+    .star-rating input[type="radio"] {
+        display: none;
+    }
+
+    .star-rating label.star {
+        font-size: 24px;
+        color: #F85506;
+        cursor: pointer;
+    }
+
+    .star-rating input[type="radio"]:checked~label.star {
+        color: #ffcc00;
+    }
+
+    .rating-text {
+        margin-left: 10px;
+        font-size: 16px;
+    }
+</style>
 <main class="main">
     @if(isset($all_active_advertisements['Details']['1']['ads']))
     <div>
@@ -12,7 +42,8 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
-                <li class="breadcrumb-item"><a href="#">Products</a></li>
+                <li class="breadcrumb-item"><a href="#">Products : <span style="color: black;">{{$product_detail->Category->name}}</span></a>
+                </li>
             </ol>
         </div>
     </nav>
@@ -54,11 +85,28 @@
 
                 <div class="col-lg-7 col-md-6 product-single-details">
                     <h1 class="product-title">{{$product_detail->name}}</h1>
+                    <h3 class=""> Brand: {{$product_detail->Brand->name}}</h3>
+                    {{-- star Rating --}}
+                    <div class="rating-container">
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label for="star5" class="star">&#9733;</label>
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label for="star4" class="star">&#9733;</label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3" class="star">&#9733;</label>
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2" class="star">&#9733;</label>
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1" class="star">&#9733;</label>
+                        </div>
+                        <span class="rating-text">598 ratings |</span>
+                    </div>
+                    {{-- end star Rating --}}
                     @if(isset($all_active_advertisements['Details']['2']['ads']))
                     <div class="" style="width: 600px;">
                         <img src="{{ asset('storage/'.$all_active_advertisements['Details']['2']['ads']) }}"
-                            class="w-100 ml-sm-0 mb-2" style="height: 72px; width: 80%;"
-                            alt="Porto Logo">
+                            class="w-100 ml-sm-0 mb-2" style="height: 72px; width: 80%;" alt="Porto Logo">
                     </div>
                     @else
                     <hr class="short-divider">
@@ -109,11 +157,12 @@
                             btn-add-cart add-cart mr-2" title="Add to Cart">Add to
                             Cart</a>
 
-                            <a href="javascript:void(0);" title="Buy Now" data-id="{{$product_detail->id}}"
-                                data-name="{{$product_detail->name}}" data-your_price="{{$product_detail->your_price}}"
-                                data-sale_price="{{$product_detail->sale_price}}" @if($product_detail->ProductMainImage)
-                                data-image="{{$product_detail->ProductMainImage->image }}" @endif class="btn
-                                btn-add-cart add-cart mr-2" style="background-color: #F4631B; color: white;" title="Buy Now">Buy Now</a>
+                        <a href="javascript:void(0);" title="Buy Now" data-id="{{$product_detail->id}}"
+                            data-name="{{$product_detail->name}}" data-your_price="{{$product_detail->your_price}}"
+                            data-sale_price="{{$product_detail->sale_price}}" @if($product_detail->ProductMainImage)
+                            data-image="{{$product_detail->ProductMainImage->image }}" @endif class="btn
+                            btn-add-cart add-cart mr-2" style="background-color: #F4631B; color: white;" title="Buy
+                            Now">Buy Now</a>
 
                         <a href="{{ route('cart') }}" class="btn btn-gray view-cart d-none">View cart</a>
                     </div>
@@ -307,7 +356,8 @@
                     <figure>
                         <a href="{{ route('product-detail', ['id'=>$product_category_product->id]) }}">
                             <img @if($product_category_product->ProductMainImage)
-                            src="{{ asset('storage/product_photo/'.$product_category_product->ProductMainImage->image) }}"
+                            src="{{ asset('storage/product_photo/'.$product_category_product->ProductMainImage->image)
+                            }}"
                             @endif
                             width="239" height="239" style="width: 239px; height: 239px;" alt="product">
                         </a>
@@ -354,16 +404,16 @@
         <!-- End .products-section -->
     </div>
     <!-- End .container -->
-       <!-- Start Ads -->
-       @if(isset($all_active_advertisements['Details']['4']['ads']))
-        <div>
-            <center>
-                <img src="{{ asset('storage/'.$all_active_advertisements['Details']['4']['ads']) }}" class="">
-            </center>
-        </div>
-        @endif
-        <!-- End Ads -->
-        <br>
+    <!-- Start Ads -->
+    @if(isset($all_active_advertisements['Details']['4']['ads']))
+    <div>
+        <center>
+            <img src="{{ asset('storage/'.$all_active_advertisements['Details']['4']['ads']) }}" class="">
+        </center>
+    </div>
+    @endif
+    <!-- End Ads -->
+    <br>
 </main>
 <!-- End .main -->
 @include('ecommerce.cart-js')
