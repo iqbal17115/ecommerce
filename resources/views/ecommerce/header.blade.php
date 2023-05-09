@@ -34,7 +34,8 @@
         </button> -->
         @if($company_info && $company_info->logo)
         <a href="{{ route('home') }}" class="logo">
-            <img data-src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5 lazy-load" width="111" height="44"
+            <img data-src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5 lazy-load"
+                width="111" height="44"
                 style="height: 54px;width: 151px;filter: brightness(4) contrast(1.5) saturate(1.5);" alt="Porto Logo">
         </a>
         @endif
@@ -61,17 +62,30 @@
 
                 </div>
                 <!-- End .header-search -->
-                <div class="text-light font-weight-bold mr-2"
-                    style="font-size: 14px; border-right: 1px solid white; padding-right: 14px;">
+                <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
+                    style="font-size: 14px; padding-right: 14px;">
                     বাংলা
                 </div>
-                <div class="text-light font-weight-bold mr-2"
-                    style="font-size: 14px; border-right: 1px solid white; padding-right: 14px; padding-left: 14px;">
+                <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
+                    style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
                     Bangladesh
                 </div>
-                <div class="text-light font-weight-bold mr-2"
-                    style="font-size: 14px; border-right: 1px solid white; padding-right: 14px; padding-left: 14px;">
+                <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
+                    style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
                     Sign In <i class="fas fa-user text-light"></i>
+                </div>
+                <div class="text-light font-weight-bold mr-2 responsive-mobile-menu" style="font-size: 16px;">
+                    <div class="d-flex flex-column align-items-center">
+                        <i class="text-dark">اللغة العربية</i>
+                        <span class="text-dark small">Language</span>
+                    </div>
+                </div>
+                <div class="text-light font-weight-bold mr-2 responsive-mobile-menu"
+                    style="font-size: 16px; padding-right: 14px; padding-left: 14px;">
+                    <div class="d-flex flex-column align-items-center">
+                        <i class="fas fa-user text-dark"></i>
+                        <span class="text-dark small mt-1">Account</span>
+                    </div>
                 </div>
                 <!-- <a href="login.html" class="d-lg-block d-none">
                     <div class="header-user">
@@ -86,18 +100,21 @@
                 <div style="" class="rounded">
                     <!-- Start Cart -->
                     <div class="dropdown cart-dropdown" style="display: inline-block;">
-                        <a href="javascript:void(0);" title="Cart"
-                            class="dropdown-toggle dropdown-arrow cart-toggle ml-2" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false" data-display="static">
+                        <div class="d-flex flex-column align-items-center">
+                            <a href="javascript:void(0);" title="Cart"
+                                class="dropdown-toggle dropdown-arrow cart-toggle ml-2" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"
+                                style="min-height: 30px;">
 
-                            @if($company_info && $company_info->icon)
-                            <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image"
-                                class="img-fluid icon-cart-thick" style="height: 20px;">
-                            @endif
-                            <span class="cart-count badge-circle"
-                                style="top: 5px; left: 27px; background: darkblue;">{{ count((array) session('cart')) }}</span>
-                        </a>
-
+                                @if($company_info && $company_info->icon)
+                                <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image"
+                                    class="img-fluid icon-cart-thick pb-0 mb-0" style="height: 20px;">
+                                @endif
+                                <span class="cart-count badge-circle"
+                                    style="top: 5px; left: 27px; background: darkblue;">{{ count((array) session('cart')) }}</span>
+                            </a>
+                            <span class="text-dark small responsive-mobile-menu">Cart</span>
+                        </div>
                         <div class="cart-overlay"></div>
 
                         <div class="dropdown-menu mobile-cart">
@@ -129,7 +146,8 @@
                                         <!-- End .product-details -->
 
                                         <figure class="product-image-container">
-                                            <a href="{{ route('product-detail', ['id'=>$id]) }}" class="product-image lazy-load">
+                                            <a href="{{ route('product-detail', ['id'=>$id]) }}"
+                                                class="product-image lazy-load">
                                                 <img data-src="{{ asset('storage/product_photo/'.$details['image']) }}"
                                                     alt="product" width="80" height="80">
                                             </a>
@@ -214,9 +232,9 @@
                         <div class="float-right">
                             <center>
                                 <img data-src="{{ asset('storage/'.$all_active_advertisements['Header']['1']['ads']) }}"
-                                    class="w-100 ml-sm-0 ml-md-5 lazy-load" width="111" height="44" style="height: 30px;;"
-                                    alt="Porto Logo">
-                            <center>
+                                    class="w-100 ml-sm-0 ml-md-5 lazy-load" width="111" height="44"
+                                    style="height: 30px;;" alt="Porto Logo">
+                                <center>
                         </div>
                     </li>
                     <!-- End Header Ads -->

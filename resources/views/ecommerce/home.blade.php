@@ -34,7 +34,6 @@
         width: 25%;
     }
 }
-
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
