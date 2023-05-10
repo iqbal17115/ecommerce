@@ -306,11 +306,9 @@
                         <div class="collapse show" id="widget-body-7">
                             <div class="widget-body pb-0">
                                 <ul class="cat-list">
-                                    <li><a href="#">Adidas</a></li>
-                                    <li><a href="#">Asics</a></li>
-                                    <li><a href="#">Brooks</a></li>
-                                    <li><a href="#">Nike</a></li>
-                                    <li><a href="#">Puma</a></li>
+                                    @foreach($brands as $brand)
+                                    <li><a href="#">{{$brand->name}}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <!-- End .widget-body -->
