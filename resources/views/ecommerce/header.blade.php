@@ -51,7 +51,7 @@
   justify-content: center;">
                             <input name="q" id="q" class="form-control mr-0" type="search"
                                 placeholder="What are you looking for?" aria-label="Search"
-                                style="background: white; border-radius: 5px 0px 0px 5px; max-width: 500px;">
+                                style="background: white; border-radius: 5px 0px 0px 5px; max-width: 600px;">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon1" style="background: black;"><i
                                         class="fa fa-search" style="color: white;"></i></span>
