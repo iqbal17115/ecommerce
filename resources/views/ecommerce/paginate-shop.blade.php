@@ -3,7 +3,7 @@
     <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
         <div class="product-default inner-quickview inner-icon">
             <figure>
-                <a href="demo36-product.html">
+                <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
                     <img @if($product->ProductMainImage) src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif width="239"
                         height="239" style="width: 239px; height: 239px;" alt="product">
                 </a>
@@ -13,7 +13,7 @@
             </figure>
             <div class="product-details">
                 <h3 class="product-title">
-                    <a href="demo36-product.html">{{$product->name}}</a>
+                    <a href="{{ route('product-detail', ['id'=>$product->id]) }}">{{$product->name}}</a>
                 </h3>
                 <!-- End .product-container -->
                 <div class="price-box">
