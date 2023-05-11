@@ -55,7 +55,9 @@ class ShopController extends Controller
         } else if ($request->filter_type == 2) {
             $query->where('name', 'like', '%' . $request->filter_for . '%');
         }
-
+        if ($request->brand_id) {
+            $query->whereIn('brand_id', [$request->brand_id]);
+        }
         $products = $query->paginate($request->count);
 
         return view('ecommerce.paginate-shop', compact('products'))->render();

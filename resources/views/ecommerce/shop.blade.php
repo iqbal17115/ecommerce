@@ -334,15 +334,32 @@ $(document).ready(function() {
     filter_type = $("#filter_type").val();
     filter_for = $("#filter_for").val();
 
-    $("select.order_of_product").change(function() {
+    $('input[name="brand[]"]').on('change', function() {
         order = $(this).children("option:selected").val();
-        var selectedBrands = $('input[name="brand[]"]:checked').map(function() {
+        selectedBrands = $('input[name="brand[]"]:checked').map(function() {
             return this.value;
         }).get();
         console.log(selectedBrands);
         $.ajax({
             url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
-                '&filter_type=' + filter_type + '&filter_for=' + filter_for,
+                '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
+                selectedBrands,
+            success: function(data) {
+                $('#main-content').html(data);
+            }
+        })
+    });
+
+    $("select.order_of_product").change(function() {
+        order = $(this).children("option:selected").val();
+        selectedBrands = $('input[name="brand[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+        console.log(selectedBrands);
+        $.ajax({
+            url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
+                '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
+                selectedBrands,
             success: function(data) {
                 $('#main-content').html(data);
             }
@@ -350,9 +367,12 @@ $(document).ready(function() {
     });
     $("select.count_paginate").change(function() {
         count = $(this).children("option:selected").val();
+        selectedBrands = $('input[name="brand[]"]:checked').map(function() {
+            return this.value;
+        }).get();
         $.ajax({
             url: '/pagination/shop-pagination-total-data?count=' + count + '&filter_type=' +
-                filter_type + '&filter_for=' + filter_for,
+                filter_type + '&filter_for=' + filter_for + '&brand_id=' + selectedBrands,
             success: function(data) {
                 $('#main-content').html(data);
             }
