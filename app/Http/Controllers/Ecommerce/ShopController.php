@@ -12,9 +12,16 @@ class ShopController extends Controller
     public function shopSearch(Request $request)
     {
         $products = Product::where('name', 'like', '%' . $request->q . '%')->orderBy('id', 'desc')->paginate(12);
+        $brands = Product::join('categories', 'categories.id', '=', 'products.category_id')
+        ->join('brands', 'brands.id', '=', 'products.brand_id')
+        ->where('products.name', 'like', '%' . $request->q . '%')->orderBy('id', 'desc')
+        ->orderBy('products.id', 'desc')
+        ->select('brands.id', 'brands.name')
+        ->distinct('brands.name')
+        ->get();
         $filter_type = 2;
         $filter_for = $request->q;
-        return view('ecommerce.shop', compact(['products', 'filter_type', 'filter_for']));
+        return view('ecommerce.shop', compact(['products', 'filter_type', 'filter_for', 'brands']));
     }
     public function productOrderBy(Request $request)
     {

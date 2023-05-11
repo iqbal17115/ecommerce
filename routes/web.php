@@ -37,16 +37,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-// Route::post('change-password-customer', [HomeController::class, 'ChangePassword'])->name('change-password-customer');
-// Route::post('change-profile-photo', [HomeController::class, 'ChangeProfilePhoto'])->name('change-profile-photo');
-// Route::post('upazila-search', [HomeController::class, 'SearchUpazila'])->name('upazila-search');
-// Route::get('edit/{id?}', [HomeController::class, 'EditContact'])->name('edit');
-// Route::post('edit', [HomeController::class, 'EditContactById']);
-// Route::post('edit-shipping-address', [HomeController::class, 'EditShippingAddress'])->name('edit-shipping-address');
-// Route::get('seller-create', [HomeController::class, 'SellerCreateForm'])->name('seller-create');
-// Route::post('seller-create', [HomeController::class, 'CreateSeller']);
-
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::get('/', function () {
     return view('auth.login');
