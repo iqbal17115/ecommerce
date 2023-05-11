@@ -215,24 +215,31 @@
 
                         <div class="collapse show" id="widget-body-3">
                             <div class="widget-body pb-0">
-                                <form action="#">
-                                    <div class="price-slider-wrapper">
-                                        <div id="price-slider"></div>
-                                        <!-- End #price-slider -->
-                                    </div>
-                                    <!-- End .price-slider-wrapper -->
-
-                                    <div
-                                        class="filter-price-action d-flex align-items-center justify-content-between flex-wrap">
-                                        <div class="filter-price-text">
-                                            Price:
-                                            <span id="filter-price-range"></span>
+                                <form id="productFilterByPrice">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <input type="number" class="form-control form-control-sm rounded"
+                                                    id="min-price" name="min-price" placeholder="Min" min="0"
+                                                    style="-moz-appearance: textfield; height: 30px; font-size: 14px;"
+                                                    required>
+                                            </div>
                                         </div>
-                                        <!-- End .filter-price-text -->
-
-                                        <button type="submit" class="btn btn-primary">Filter</button>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <input type="number" class="form-control form-control-sm rounded"
+                                                    id="max-price" name="max-price" placeholder="Max" min="0"
+                                                    style="-moz-appearance: textfield;height: 30px; font-size: 14px;"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 align-items-end">
+                                            <center>
+                                                <button type="submit" class="btn btn-primary btn-sm"
+                                                    style="height: 30px; border-radius: 3px; background-color: #007bff; border-color: #007bff; color: #fff; padding: 0em 0em;">Filter</button>
+                                            </center>
+                                        </div>
                                     </div>
-                                    <!-- End .filter-price-action -->
                                 </form>
                             </div>
                             <!-- End .widget-body -->
@@ -334,7 +341,13 @@ $(document).ready(function() {
     filter_type = $("#filter_type").val();
     filter_for = $("#filter_for").val();
 
-    $('input[name="brand[]"]').on('change', function() {
+    // Filter By Price
+    $('#productFilterByPrice').submit(function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        // Get the form values
+        minPrice = $('#min-price').val();
+        maxPrice = $('#max-price').val();
+        // Do something with the form values, such as sending an AJAX request to filter the product listing
         order = $(this).children("option:selected").val();
         selectedBrands = $('input[name="brand[]"]:checked').map(function() {
             return this.value;
@@ -343,7 +356,26 @@ $(document).ready(function() {
         $.ajax({
             url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
                 '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                selectedBrands,
+                selectedBrands + '&min_price=' + minPrice + '&max_price=' + maxPrice,
+            success: function(data) {
+                $('#main-content').html(data);
+            }
+        })
+    });
+
+    $('input[name="brand[]"]').on('change', function() {
+        minPrice = $('#min-price').val();
+        maxPrice = $('#max-price').val();
+
+        order = $(this).children("option:selected").val();
+        selectedBrands = $('input[name="brand[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+        console.log(selectedBrands);
+        $.ajax({
+            url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
+                '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
+                selectedBrands + '&min_price=' + minPrice + '&max_price=' + maxPrice,
             success: function(data) {
                 $('#main-content').html(data);
             }
@@ -351,6 +383,9 @@ $(document).ready(function() {
     });
 
     $("select.order_of_product").change(function() {
+        minPrice = $('#min-price').val();
+        maxPrice = $('#max-price').val();
+
         order = $(this).children("option:selected").val();
         selectedBrands = $('input[name="brand[]"]:checked').map(function() {
             return this.value;
@@ -359,20 +394,24 @@ $(document).ready(function() {
         $.ajax({
             url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
                 '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                selectedBrands,
+                selectedBrands + '&min_price=' + minPrice + '&max_price=' + maxPrice,
             success: function(data) {
                 $('#main-content').html(data);
             }
         })
     });
     $("select.count_paginate").change(function() {
+        minPrice = $('#min-price').val();
+        maxPrice = $('#max-price').val();
+
         count = $(this).children("option:selected").val();
         selectedBrands = $('input[name="brand[]"]:checked').map(function() {
             return this.value;
         }).get();
         $.ajax({
             url: '/pagination/shop-pagination-total-data?count=' + count + '&filter_type=' +
-                filter_type + '&filter_for=' + filter_for + '&brand_id=' + selectedBrands,
+                filter_type + '&filter_for=' + filter_for + '&brand_id=' + selectedBrands +
+                '&min_price=' + minPrice + '&max_price=' + maxPrice,
             success: function(data) {
                 $('#main-content').html(data);
             }

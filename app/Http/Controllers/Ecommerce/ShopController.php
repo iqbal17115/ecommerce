@@ -55,8 +55,14 @@ class ShopController extends Controller
         } else if ($request->filter_type == 2) {
             $query->where('name', 'like', '%' . $request->filter_for . '%');
         }
+
         if ($request->brand_id) {
             $query->whereIn('brand_id', [$request->brand_id]);
+        }
+
+        if($request->min_price && $request->max_price) {
+
+            $query->whereBetween('sale_price', [$request->min_price, $request->max_price]);
         }
         $products = $query->paginate($request->count);
 
