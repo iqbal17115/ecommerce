@@ -192,35 +192,11 @@
                         <div class="collapse show" id="widget-body-2">
                             <div class="widget-body">
                                 <ul class="cat-list">
+                                    @foreach($categories as $category)
                                     <li>
-                                        <a href="#widget-category-1">
-                                            Cameras
+                                        <a href="">
+                                            {{$category->name}}
                                         </a>
-                                    </li>
-                                    @foreach($parentCategories as $parentCategory)
-                                    <li>
-                                        <a href="#widget-category-{{$parentCategory->id}}" class="collapsed"
-                                            data-toggle="collapse" role="button" aria-expanded="false"
-                                            aria-controls="widget-category-2">
-                                            {{$parentCategory->name}} @if($parentCategory->SubCategory)<span
-                                                class="toggle"></span>@endif
-                                        </a>
-                                        @if($parentCategory->SubCategory)
-                                        <div class="collapse" id="widget-category-{{$parentCategory->id}}">
-                                            <ul class="cat-sublist">
-                                                @foreach($parentCategory->SubCategory as $subCategory)
-                                                <li>
-                                                    <a href="#widget-category-{{$subCategory->id}}" class="collapsed"
-                                                        data-toggle="collapse" role="button" aria-expanded="false"
-                                                        aria-controls="widget-category-2">
-                                                        {{$subCategory->name}}@if($subCategory->SubCategory)<span
-                                                            class="toggle"></span>@endif
-                                                    </a>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        @endif
                                     </li>
                                     @endforeach
                                 </ul>
@@ -307,7 +283,10 @@
                             <div class="widget-body pb-0">
                                 <ul class="cat-list">
                                     @foreach($brands as $brand)
-                                    <li><a href="#">{{$brand->name}}</a></li>
+                                    <li>
+                                        <input type="checkbox" name="brand[]" value="{{$brand->id}}">
+                                        <a>{{$brand->name}}</a>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -357,6 +336,10 @@ $(document).ready(function() {
 
     $("select.order_of_product").change(function() {
         order = $(this).children("option:selected").val();
+        var selectedBrands = $('input[name="brand[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+        console.log(selectedBrands);
         $.ajax({
             url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
                 '&filter_type=' + filter_type + '&filter_for=' + filter_for,
