@@ -34,6 +34,35 @@
         width: 25%;
     }
 }
+/* five start css code */
+.five-star-rating {
+    color: gold; /* Set the color of the stars */
+    font-size: 20px; /* Adjust the size of the stars */
+}
+
+.five-star-rating i {
+    display: inline-block;
+}
+
+/* If you are using FontAwesome for the star icons */
+.five-star-rating .fa-star:before {
+    content: "\f005"; /* Use the appropriate Unicode for the star icon */
+}
+/* end of five start css code */
+
+/* two line name show css code */
+
+
+.product-name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* two line name show css code */
+
+
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
@@ -61,7 +90,7 @@
             <div class="categories-section appear-animate" data-animation-name="fadeIn" data-animation-delay="100">
                 <div class="categories-slider owl-carousel owl-theme show-nav-hover nav-outer" data-owl-options="{
                             'loop': true,
-                            'autoplay': true, 
+                            'autoplay': true,
                             'autoplayTimeout': 3000,
                             'responsive': {
                                 '0': {
@@ -206,7 +235,20 @@
                         </figure>
                         <div class="product-details">
                             <h3 class="product-title">
-                                <a href="{{ route('product-detail', ['id'=>$product->id]) }}">{{$product->name}}</a>
+                                {{-- <a href="{{ route('product-detail', ['id'=>$product->id]) }}" class="product-name">{{$product->name}}</a> --}}
+                                <a href="{{ route('product-detail', ['id'=>$product->id]) }}" class="product-name">{{$product->name}}</a>
+
+                                {{-- rating add html code --}}
+                                <span class="five-star-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                {{-- end of rating add html code --}}
+                                </span>
+                                <span class="rating-number">-</span>
+                                <span class="rating-number">33,213</span>
                             </h3>
                             <!-- End .product-container -->
                             <div class="price-box">
