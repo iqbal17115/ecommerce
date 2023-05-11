@@ -1,8 +1,7 @@
 <header class="header">
     <head>
-        <link rel=“canonical” href=“https://www.aladdinne.com”>
+        <link rel="canonical" href="https://www.aladdinne.com">
     </head>
-
     <!-- Start Sidebar -->
     <div id="wrapper">
         <div id="sidebar-wrapper">
