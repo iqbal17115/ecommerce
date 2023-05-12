@@ -221,9 +221,7 @@
                         {!!$product_detail->ProductDetail->description!!}
                         @endif
 
-                        <div>
-                            <hr>
-                        </div>
+                        <br>
                         @if($product_detail && $product_detail->ProductDetail)
                         {!!$product_detail->ProductDetail->content!!}
                         @endif
