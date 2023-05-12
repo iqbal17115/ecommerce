@@ -37,9 +37,10 @@
 
     /* five start css code */
     .five-star-rating {
-        color: gold;
+        color: #F4631B;
         /* Set the color of the stars */
-        font-size: 20px;
+        font-size: 12px;
+        margin-left: 11px;
         /* Adjust the size of the stars */
     }
 
@@ -251,7 +252,7 @@
                                     {{-- end of rating add html code --}}
                                 </span>
                                 <span class="rating-number">-</span>
-                                <span class="rating-number">33,213</span>
+                                <span class="rating-number" style="font-size: 11px;">33,213</span>
                             </h3>
                             <!-- End .product-container -->
                             <div class="price-box">
