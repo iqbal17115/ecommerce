@@ -1462,7 +1462,7 @@ $('#short_deacription').summernote({
 $('#product_description').summernote({
     height: 120
 });
-$('#content').summernote({
+$('#product_content').summernote({
     height: 120
 });
 $('#warranty_description').summernote({
