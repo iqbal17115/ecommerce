@@ -173,6 +173,26 @@
                     </div>
                 </div>
                 @endif
+                <!-- Start Ads -->
+                @if($top_feature->TopFeatureSetting->ProductFeature->Advertisement)
+                <div class="col-md-3 card">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach($top_feature->TopFeatureSetting->ProductFeature->Advertisement as $advertisement)
+                            <div class="col-12 p-0">
+                                    <div class="card mb-0">
+                                        <img class="card-img-top lazy-load"
+                                            data-src="{{ asset('storage/'.$advertisement->ads) }}">
+                                    </div>
+                                <!-- End Product -->
+                            </div>
+                            @endforeach
+                        </div>
+                        <!-- End Feature -->
+                    </div>
+                </div>
+                @endif
+                <!-- End Ads -->
                 @endif
                 @endforeach
             </div>
