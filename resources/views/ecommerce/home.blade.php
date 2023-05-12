@@ -34,10 +34,13 @@
         width: 25%;
     }
 }
+
 /* five start css code */
 .five-star-rating {
-    color: gold; /* Set the color of the stars */
-    font-size: 20px; /* Adjust the size of the stars */
+    color: gold;
+    /* Set the color of the stars */
+    font-size: 20px;
+    /* Adjust the size of the stars */
 }
 
 .five-star-rating i {
@@ -46,8 +49,10 @@
 
 /* If you are using FontAwesome for the star icons */
 .five-star-rating .fa-star:before {
-    content: "\f005"; /* Use the appropriate Unicode for the star icon */
+    content: "\f005";
+    /* Use the appropriate Unicode for the star icon */
 }
+
 /* end of five start css code */
 
 /* two line name show css code */
@@ -60,9 +65,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 /* two line name show css code */
-
-
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
@@ -235,8 +239,10 @@
                         </figure>
                         <div class="product-details">
                             <h3 class="product-title">
-                                {{-- <a href="{{ route('product-detail', ['id'=>$product->id]) }}" class="product-name">{{$product->name}}</a> --}}
-                                <a href="{{ route('product-detail', ['id'=>$product->id]) }}" class="product-name">{{$product->name}}</a>
+                                {{-- <a href="{{ route('product-detail', ['id'=>$product->id]) }}"
+                                class="product-name">{{$product->name}}</a> --}}
+                                <a href="{{ route('product-detail', ['id'=>$product->id]) }}"
+                                    class="product-name">{{$product->name}}</a>
 
                                 {{-- rating add html code --}}
                                 <span class="five-star-rating">
@@ -245,7 +251,7 @@
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
-                                {{-- end of rating add html code --}}
+                                    {{-- end of rating add html code --}}
                                 </span>
                                 <span class="rating-number">-</span>
                                 <span class="rating-number">33,213</span>
@@ -286,6 +292,7 @@
                                 {{$feature_setting->ProductFeature->name}} @endif</h2>
                         </div>
                         <div class="row">
+                            @if($feature_setting->FeatureSettingDetail)
                             @foreach($feature_setting->FeatureSettingDetail as $feature_setting_detail)
                             <div class="col-6 p-0">
                                 <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
@@ -301,11 +308,32 @@
                                 <!-- End Product -->
                             </div>
                             @endforeach
+                            @endif
                         </div>
                         <!-- End Feature -->
                     </div>
                 </div>
                 @endif
+                <!-- Start Ads -->
+                @if($feature_setting->ProductFeature->Advertisement)
+                <div class="col-md-3 card">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach($feature_setting->ProductFeature->Advertisement as $advertisement)
+                            <div class="col-12 p-0">
+                                    <div class="card mb-0">
+                                        <img class="card-img-top lazy-load"
+                                            data-src="{{ asset('storage/'.$advertisement->ads) }}">
+                                    </div>
+                                <!-- End Product -->
+                            </div>
+                            @endforeach
+                        </div>
+                        <!-- End Feature -->
+                    </div>
+                </div>
+                @endif
+                <!-- End Ads -->
                 @endforeach
             </div>
             @endif

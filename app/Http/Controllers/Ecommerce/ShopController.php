@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\Brand;
+use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Product;
 use Illuminate\Http\Request;
 
@@ -60,7 +61,7 @@ class ShopController extends Controller
             $query->whereIn('brand_id', [$request->brand_id]);
         }
 
-        if($request->min_price && $request->max_price) {
+        if ($request->min_price && $request->max_price) {
 
             $query->whereBetween('sale_price', [$request->min_price, $request->max_price]);
         }
@@ -91,15 +92,16 @@ class ShopController extends Controller
             ->distinct('brands.name')
             ->get();
 
-        $categories = Product::join('categories', 'categories.id', '=', 'products.category_id')
+        $related_categories = Category::join('products', 'categories.id', '=', 'products.category_id')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
             ->where('products.category_id', $id)
-            ->orderBy('products.id', 'desc')
+            ->where('categories.id', '!=', $id)
+            ->orderBy('categories.id', 'desc')
             ->select('categories.id', 'categories.name')
             ->distinct('categories.name')
             ->get();
         $filter_type = 1;
         $filter_for = $id;
-        return view('ecommerce.shop', compact(['products', 'brands', 'categories', 'filter_type', 'filter_for']));
+        return view('ecommerce.shop', compact(['products', 'brands', 'related_categories', 'filter_type', 'filter_for']));
     }
 }

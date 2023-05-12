@@ -192,7 +192,7 @@
                         <div class="collapse show" id="widget-body-2">
                             <div class="widget-body">
                                 <ul class="cat-list">
-                                    @foreach($categories as $category)
+                                    @foreach($related_categories as $category)
                                     <li>
                                         <a href="">
                                             {{$category->name}}
