@@ -220,6 +220,13 @@
                         @if($product_detail && $product_detail->ProductDetail)
                         {!!$product_detail->ProductDetail->description!!}
                         @endif
+
+                        <div>
+                            <hr>
+                        </div>
+                        @if($product_detail && $product_detail->ProductDetail)
+                        {!!$product_detail->ProductDetail->content!!}
+                        @endif
                     </div>
                     <!-- End .product-desc-content -->
                 </div>
