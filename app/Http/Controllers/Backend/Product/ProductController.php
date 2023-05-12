@@ -189,6 +189,7 @@ class ProductController extends Controller
         $Query = ProductDetail::whereProductId($request->product_description_id)->first();
         $Query->short_deacription = $request->short_deacription;
         $Query->description = $request->product_description;
+        $Query->content = $request->content;
         $Query->save();
         return response()->json(['status' => 201]);
     }

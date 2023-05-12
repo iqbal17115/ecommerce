@@ -1700,6 +1700,19 @@ div#variation_content {
                                                     </textarea>
                                                 </div>
                                                 <!-- End -->
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Content</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <textarea class="form-control" name="content"
+                                                        id="content">
+                                                        @if($productInfo && $productInfo->ProductDetail) 
+                                                           {{$productInfo->ProductDetail->content}} 
+                                                        @endif
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
                                                 <div class="col-md-12 mt-md-3">
                                                     <button class="float-right btn btn-success btn-sm ml-2">Save and
                                                         finish</button>

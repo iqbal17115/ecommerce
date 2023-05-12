@@ -21,6 +21,7 @@ class CreateProductDetailsTable extends Migration
             $table->date('restock_date')->nullable();
             $table->text('short_deacription')->nullable();
             $table->text('description')->nullable();
+            $table->text('content')->nullable();
             $table->text('condition_note')->nullable();
             $table->enum('target_gender', ['Male', 'Female', 'Unisex'])->nullable();
             $table->tinyInteger('age_range')->nullable();
