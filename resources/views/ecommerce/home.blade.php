@@ -1,72 +1,70 @@
 @extends('layouts.ecommerce')
 @section('content')
 <style>
-@media (min-width:1220px) {
-    .container {
-        max-width: 1500px;
+    @media (min-width:1220px) {
+        .container {
+            max-width: 1500px;
+        }
     }
-}
 
-.post-slider>.owl-stage-outer,
-.products-slider>.owl-stage-outer {
-    padding: 0px 0px;
-}
+    .post-slider>.owl-stage-outer,
+    .products-slider>.owl-stage-outer {
+        padding: 0px 0px;
+    }
 
-.feature-card {
-    width: 100%;
-    background-color: #ccc;
-}
-
-@media screen and (min-width: 480px) {
     .feature-card {
         width: 100%;
+        background-color: #ccc;
     }
-}
 
-@media screen and (min-width: 768px) {
-    .feature-card {
-        width: 50%;
+    @media screen and (min-width: 480px) {
+        .feature-card {
+            width: 100%;
+        }
     }
-}
 
-@media screen and (min-width: 992px) {
-    .feature-card {
-        width: 25%;
+    @media screen and (min-width: 768px) {
+        .feature-card {
+            width: 50%;
+        }
     }
-}
 
-/* five start css code */
-.five-star-rating {
-    color: gold;
-    /* Set the color of the stars */
-    font-size: 20px;
-    /* Adjust the size of the stars */
-}
+    @media screen and (min-width: 992px) {
+        .feature-card {
+            width: 25%;
+        }
+    }
 
-.five-star-rating i {
-    display: inline-block;
-}
+    /* five start css code */
+    .five-star-rating {
+        color: #F4631B;
+        /* Set the color of the stars */
+        font-size: 12px;
+        margin-left: 11px;
+        /* Adjust the size of the stars */
+    }
 
-/* If you are using FontAwesome for the star icons */
-.five-star-rating .fa-star:before {
-    content: "\f005";
-    /* Use the appropriate Unicode for the star icon */
-}
+    .five-star-rating i {
+        display: inline-block;
+    }
 
-/* end of five start css code */
+    /* If you are using FontAwesome for the star icons */
+    .five-star-rating .fa-star:before {
+        content: "\f005";
+        /* Use the appropriate Unicode for the star icon */
+    }
 
-/* two line name show css code */
+    /* end of five start css code */
+
+    /* two line name show css code */
 
 
-.product-name {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    .product-name {
+        display: inline-block;
+        word-wrap: break-word;
+    }
 
-/* two line name show css code */
+    /* two line name show css code */
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
@@ -260,9 +258,9 @@
                         <div class="product-details">
                             <h3 class="product-title">
                                 {{-- <a href="{{ route('product-detail', ['id'=>$product->id]) }}"
-                                class="product-name">{{$product->name}}</a> --}}
+                                    class="product-name">{{$product->name}}</a> --}}
                                 <a href="{{ route('product-detail', ['id'=>$product->id]) }}"
-                                    class="product-name">{{$product->name}}</a>
+                                    class="product-name" id="product-name">{{$product->name}}</a>
 
                                 {{-- rating add html code --}}
                                 <span class="five-star-rating">
@@ -274,7 +272,7 @@
                                     {{-- end of rating add html code --}}
                                 </span>
                                 <span class="rating-number">-</span>
-                                <span class="rating-number">33,213</span>
+                                <span class="rating-number" style="font-size: 11px;">33,213</span>
                             </h3>
                             <!-- End .product-container -->
                             <div class="price-box">
@@ -370,7 +368,7 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
-function lazyLoad() {
+    function lazyLoad() {
     const lazyImages = document.querySelectorAll('.lazy-load');
     lazyImages.forEach(img => {
         if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
@@ -380,6 +378,18 @@ function lazyLoad() {
         }
     });
 }
+
+// using Javascript we doing split the producuct name into two lines
+// Get the product name element
+var productName = document.getElementById('product-name');
+// Split the product name into two lines
+var words = productName.textContent.split(' ');
+var halfLength = Math.ceil(words.length / 2);
+var firstLine = words.slice(0, halfLength).join(' ');
+var secondLine = words.slice(halfLength).join(' ');
+// Set the product name with two lines
+productName.innerHTML = firstLine + '<br>' + secondLine;
+// end of using Javascript we doing split the producuct name into two lines
 
 // Check for visible images on page load
 document.addEventListener("DOMContentLoaded", lazyLoad);

@@ -1,12 +1,41 @@
 @extends('layouts.ecommerce')
 @section('content')
 <style>
-@media (min-width:1220px) {
-    .container {
-        max-width: 1500px;
-        ;
+    @media (min-width:1220px) {
+        .container {
+            max-width: 1500px;
+            ;
+        }
     }
-}
+
+    /* five start css code */
+    .five-star-rating {
+        color: #F4631B;
+        /* Set the color of the stars */
+        font-size: 12px;
+        margin-left: 11px;
+        /* Adjust the size of the stars */
+    }
+
+    .five-star-rating i {
+        display: inline-block;
+    }
+
+    /* If you are using FontAwesome for the star icons */
+    .five-star-rating .fa-star:before {
+        content: "\f005";
+        /* Use the appropriate Unicode for the star icon */
+    }
+
+    .product-name {
+        display: inline-block;
+        word-wrap: break-word;
+    }
+
+
+
+    /* end of five start css code */
+    /* end Start rating review Css */
 </style>
 <main class="main">
     @if(isset($all_active_advertisements['Category']['1']['ads']))
@@ -116,8 +145,22 @@
                             </figure>
                             <div class="product-details">
                                 <h3 class="product-title">
-                                    <a href="{{ route('product-detail', ['id'=>$product->id]) }}">{{$product->name}}</a>
+                                    <a href="{{ route('product-detail', ['id'=>$product->id]) }}"
+                                        class="product-name">{{$product->name}}</a>
+                                    {{-- rating add html code --}}
+                                    <span class="five-star-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        {{-- end of rating add html code --}}
+                                    </span>
+                                    <span class="rating-number">-</span>
+                                    <span class="rating-number" style="font-size: 11px;">33,213</span>
                                 </h3>
+
+
                                 <!-- End .product-container -->
                                 <div class="price-box">
                                     @php
@@ -333,7 +376,7 @@
 @include('ecommerce.sidebar-js')
 <!-- End Sidebar -->
 <script>
-count = 12;
+    count = 12;
 filter_type = '';
 filter_for = '';
 
