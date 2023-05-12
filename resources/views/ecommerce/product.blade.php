@@ -1,34 +1,54 @@
 @extends('layouts.ecommerce')
 @section('content')
 <style>
-    .rating-container {
-        display: flex;
-        align-items: center;
-    }
+.rating-container {
+    display: flex;
+    align-items: center;
+}
 
-    .star-rating {
-        display: inline-block;
-        font-size: 0;
-    }
+.star-rating {
+    display: inline-block;
+    font-size: 0;
+}
 
-    .star-rating input[type="radio"] {
-        display: none;
-    }
+.star-rating input[type="radio"] {
+    display: none;
+}
 
-    .star-rating label.star {
-        font-size: 24px;
-        color: #F85506;
-        cursor: pointer;
-    }
+.star-rating label.star {
+    font-size: 24px;
+    color: #F85506;
+    cursor: pointer;
+}
 
-    .star-rating input[type="radio"]:checked~label.star {
-        color: #ffcc00;
-    }
+.star-rating input[type="radio"]:checked~label.star {
+    color: #ffcc00;
+}
 
-    .rating-text {
-        margin-left: 10px;
-        font-size: 16px;
-    }
+.rating-text {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.brand-container {
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.brand-label h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.brand-name h4 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #c00;
+}
 </style>
 <main class="main">
     @if(isset($all_active_advertisements['Details']['1']['ads']))
@@ -42,7 +62,8 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
-                <li class="breadcrumb-item"><a href="#">Products : <span style="color: black;">{{$product_detail->Category->name}}</span></a>
+                <li class="breadcrumb-item"><a href="#">Products : <span
+                            style="color: black;">{{$product_detail->Category->name}}</span></a>
                 </li>
             </ol>
         </div>
@@ -86,8 +107,18 @@
                 <div class="col-lg-7 col-md-6 product-single-details">
                     <h1 class="product-title">{{$product_detail->name}}</h1>
                     @if($product_detail->Brand)
-                    <h3 class=""> Brand: {{$product_detail->Brand->name}}</h3>
+                    <div class="row g-3 align-items-center brand-container">
+                        <div class="col-md-3">
+                            <h5 class="fw-bold m-0 p-0">Brand:</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 class="text-danger m-0 p-0">{{$product_detail->Brand->name}}</h4>
+                        </div>
+                    </div>
                     @endif
+
+
+
                     {{-- star Rating --}}
                     <div class="rating-container">
                         <div class="star-rating">
