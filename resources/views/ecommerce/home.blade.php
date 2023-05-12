@@ -174,7 +174,7 @@
                 </div>
                 @endif
                 <!-- Start Ads -->
-                @if($top_feature->TopFeatureSetting->ProductFeature->Advertisement)
+                @if($top_feature->TopFeatureSetting->ProductFeature->Advertisement && count($top_feature->TopFeatureSetting->ProductFeature->Advertisement) > 0)
                 <div class="col-md-3 card">
                     <div class="card-body">
                         <div class="row">
