@@ -223,7 +223,7 @@
 
                         <br>
                         @if($product_detail && $product_detail->ProductDetail)
-                        11{!!$product_detail->ProductDetail->content!!}
+                        {!!$product_detail->ProductDetail->content!!}
                         @endif
                     </div>
                     <!-- End .product-desc-content -->

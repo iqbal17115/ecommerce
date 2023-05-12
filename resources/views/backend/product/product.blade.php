@@ -1705,8 +1705,8 @@ div#variation_content {
                                                         style="font-size: 14px;">Content</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
-                                                    <textarea class="form-control" name="content"
-                                                        id="content">
+                                                    <textarea class="form-control" name="product_content"
+                                                        id="product_content">
                                                         @if($productInfo && $productInfo->ProductDetail) 
                                                            {{$productInfo->ProductDetail->content}} 
                                                         @endif
