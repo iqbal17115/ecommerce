@@ -21,4 +21,14 @@ class Category extends Model
     public function Parent() {
        return $this->belongsTo(self::class, 'parent_category_id')->orderBy('position', 'ASC');
     }
+    public function getParentsAttribute()
+    {
+        $parents = [];
+        $category = $this;
+        while ($category->Parent) {
+            $parents[] = $category->Parent;
+            $category = $category->Parent;
+        }
+        return collect(array_reverse($parents));
+    }
 }

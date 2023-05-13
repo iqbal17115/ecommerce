@@ -33,9 +33,13 @@
 .brand-container {
     background-color: #f7f7f7;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
-
+.category-container {
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-bottom: 5px;
+}
 .brand-label h5 {
     margin: 0;
     font-size: 16px;
@@ -116,7 +120,17 @@
                         </div>
                     </div>
                     @endif
-
+                    <div class="row g-3 align-items-center category-container">
+                        @foreach ($product_detail->category->getParentsAttribute() as $parentCategory)
+                        {{ $parentCategory->name }}
+                        @if (!$loop->last)
+                        &raquo;
+                        @else
+                        &raquo;
+                        {{ $product_detail->category->name }}
+                        @endif
+                        @endforeach
+                    </div>
 
 
                     {{-- star Rating --}}
