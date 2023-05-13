@@ -397,7 +397,6 @@ $(document).ready(function() {
         selectedCategories = $('input[name="category[]"]:checked').map(function() {
             return this.value;
         }).get();
-        alert(selectedCategories);
         $.ajax({
             url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
                 '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
