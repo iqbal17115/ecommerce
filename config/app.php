@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'ZainSoft E-Commerce'),
+    'env' => env('APP_ENV', 'Aladdinne'),
 
     /*
     |--------------------------------------------------------------------------

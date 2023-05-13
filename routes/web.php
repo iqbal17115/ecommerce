@@ -24,6 +24,7 @@ use App\Http\Controllers\Ecommerce\AuthController;
 use App\Http\Controllers\Ecommerce\ShopController;
 use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
+use App\Http\Controllers\Language\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,7 +42,8 @@ Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::get('/', function () {
     return view('auth.login');
 });
-
+// Language
+Route::get('lang/{lang}',[LanguageController::class, 'switchLang'])->name('lang.switch');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/get_sidebar_content', [HomeController::class, 'getSidebarContent'])->name('get_sidebar_content');
