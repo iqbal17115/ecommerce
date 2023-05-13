@@ -235,13 +235,14 @@
                         <div class="collapse show" id="widget-body-2">
                             <div class="widget-body">
                                 <ul class="cat-list">
-                                    @foreach($related_categories as $category)
+                                    @if($related_category->Parent && $related_category->Parent->SubCategory)
+                                    @foreach($related_category->Parent->SubCategory as $cat)
                                     <li>
-                                        <a href="">
-                                            {{$category->name}}
-                                        </a>
+                                    <input type="checkbox" name="category[]" value="{{ $cat->id }}">
+                                    <a>{{ $cat->name }}</a>
                                     </li>
                                     @endforeach
+                                    @endif
                                 </ul>
                             </div>
                             <!-- End .widget-body -->
@@ -384,6 +385,29 @@ $(document).ready(function() {
     filter_type = $("#filter_type").val();
     filter_for = $("#filter_for").val();
 
+    // Filter By Category
+    $('input[name="category[]"]').on('change', function() {
+        minPrice = $('#min-price').val();
+        maxPrice = $('#max-price').val();
+
+        order = $(this).children("option:selected").val();
+        selectedBrands = $('input[name="brand[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+        selectedCategories = $('input[name="category[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+        alert(selectedCategories);
+        $.ajax({
+            url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
+                '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
+                selectedBrands + '&category_id='+ selectedCategories +'&min_price=' + minPrice + '&max_price=' + maxPrice,
+            success: function(data) {
+                $('#main-content').html(data);
+            }
+        })
+    });
+
     // Filter By Price
     $('#productFilterByPrice').submit(function(e) {
         e.preventDefault(); // Prevent the default form submission
@@ -395,11 +419,14 @@ $(document).ready(function() {
         selectedBrands = $('input[name="brand[]"]:checked').map(function() {
             return this.value;
         }).get();
-        console.log(selectedBrands);
+        selectedCategories = $('input[name="category[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+
         $.ajax({
             url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
                 '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                selectedBrands + '&min_price=' + minPrice + '&max_price=' + maxPrice,
+                selectedBrands + '&category_id='+ selectedCategories + '&min_price=' + minPrice + '&max_price=' + maxPrice,
             success: function(data) {
                 $('#main-content').html(data);
             }
@@ -414,11 +441,15 @@ $(document).ready(function() {
         selectedBrands = $('input[name="brand[]"]:checked').map(function() {
             return this.value;
         }).get();
-        console.log(selectedBrands);
+
+        selectedCategories = $('input[name="category[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+
         $.ajax({
             url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
                 '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                selectedBrands + '&min_price=' + minPrice + '&max_price=' + maxPrice,
+                selectedBrands + '&category_id='+ selectedCategories + '&min_price=' + minPrice + '&max_price=' + maxPrice,
             success: function(data) {
                 $('#main-content').html(data);
             }
@@ -433,11 +464,15 @@ $(document).ready(function() {
         selectedBrands = $('input[name="brand[]"]:checked').map(function() {
             return this.value;
         }).get();
-        console.log(selectedBrands);
+
+        selectedCategories = $('input[name="category[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+        
         $.ajax({
             url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
                 '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                selectedBrands + '&min_price=' + minPrice + '&max_price=' + maxPrice,
+                selectedBrands + '&category_id='+ selectedCategories + '&min_price=' + minPrice + '&max_price=' + maxPrice,
             success: function(data) {
                 $('#main-content').html(data);
             }
@@ -451,9 +486,14 @@ $(document).ready(function() {
         selectedBrands = $('input[name="brand[]"]:checked').map(function() {
             return this.value;
         }).get();
+
+        selectedCategories = $('input[name="category[]"]:checked').map(function() {
+            return this.value;
+        }).get();
+
         $.ajax({
             url: '/pagination/shop-pagination-total-data?count=' + count + '&filter_type=' +
-                filter_type + '&filter_for=' + filter_for + '&brand_id=' + selectedBrands +
+                filter_type + '&filter_for=' + filter_for + '&brand_id=' + selectedBrands + '&category_id='+ selectedCategories +
                 '&min_price=' + minPrice + '&max_price=' + maxPrice,
             success: function(data) {
                 $('#main-content').html(data);

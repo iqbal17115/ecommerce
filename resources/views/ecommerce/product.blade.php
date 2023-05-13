@@ -132,7 +132,6 @@
                         @endforeach
                     </div>
 
-
                     {{-- star Rating --}}
                     <div class="rating-container">
                         <div class="star-rating">

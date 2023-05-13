@@ -51,7 +51,7 @@ class ShopController extends Controller
                 break;
         }
 
-        if ($request->filter_type == 1) {
+        if ($request->filter_type == 1 && !$request->category_id) {
             $query->where('category_id', $request->filter_for);
         } else if ($request->filter_type == 2) {
             $query->where('name', 'like', '%' . $request->filter_for . '%');
@@ -59,6 +59,10 @@ class ShopController extends Controller
 
         if ($request->brand_id) {
             $query->whereIn('brand_id', [$request->brand_id]);
+        }
+
+        if ($request->category_id) {
+            $query->whereIn('category_id', [$request->category_id]);
         }
 
         if ($request->min_price && $request->max_price) {
@@ -92,16 +96,9 @@ class ShopController extends Controller
             ->distinct('brands.name')
             ->get();
 
-        $related_categories = Category::join('products', 'categories.id', '=', 'products.category_id')
-            ->join('brands', 'brands.id', '=', 'products.brand_id')
-            ->where('products.category_id', $id)
-            ->where('categories.id', '!=', $id)
-            ->orderBy('categories.id', 'desc')
-            ->select('categories.id', 'categories.name')
-            ->distinct('categories.name')
-            ->get();
+        $related_category = Category::find($id);
         $filter_type = 1;
         $filter_for = $id;
-        return view('ecommerce.shop', compact(['products', 'brands', 'related_categories', 'filter_type', 'filter_for']));
+        return view('ecommerce.shop', compact(['products', 'brands', 'related_category', 'filter_type', 'filter_for']));
     }
 }
