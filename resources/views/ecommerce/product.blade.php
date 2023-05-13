@@ -121,19 +121,15 @@
                     </div>
                     @endif
                     <div class="row g-3 align-items-center category-container">
-                        @if($product_detail->category->getParentsAttribute())
                         @foreach ($product_detail->category->getParentsAttribute() as $parentCategory)
                         {{ $parentCategory->name }}
                         @if (!$loop->last)
                         &raquo;
                         @else
                         &raquo;
-                        {{ $product_detail->Category->name }}
+                        {{ $product_detail->category->name }}
                         @endif
                         @endforeach
-                        @else
-                        <!-- {{ $product_detail->Category->name }} -->
-                        @endif
                     </div>
 
 
