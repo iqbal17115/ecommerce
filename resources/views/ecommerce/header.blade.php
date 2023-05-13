@@ -66,7 +66,14 @@
                 <!-- End .header-search -->
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px;">
-                    বাংলা
+                        <select name="" class="form-control language_switcher" style="height: 25px;">
+                            <option>{{ Config::get('languages')[App::getLocale()] }}</option>
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                       <option value="{{ $lang }}"> <a class="dropdown-item" href="#"> {{$language}}</a> </option>
+                                @endif
+                            @endforeach
+                        </select>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
@@ -74,7 +81,7 @@
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
-                    Sign In <i class="fas fa-user text-light"></i>
+                    {{ __('translate.sign_in') }} <i class="fas fa-user text-light"></i>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-mobile-menu" style="font-size: 16px;">
                     <div class="d-flex flex-column align-items-center">

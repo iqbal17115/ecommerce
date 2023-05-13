@@ -1,5 +1,5 @@
 <!doctype html>
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 
     <meta charset="UTF-8">
@@ -227,6 +227,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
+        $("body").on("change", ".language_switcher", function(event) {
+    event.preventDefault();
+    var lang = $(this).val();
+    var url = "{{ route('lang.switch', ':lang') }}";
+
+    url = url.replace(':lang', lang);
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: {
+            lang: lang,
+        },
+        success: function() {
+            window.location.reload();
+        },
+        error: function() {
+            window.location.reload();
+        }
+    });
+});
     $(document).ready(function() {
         $(".menu-toggle").click(function(e) {
             e.preventDefault();

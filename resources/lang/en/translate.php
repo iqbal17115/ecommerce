@@ -1,3 +1,4 @@
+<?php
 return [
     'sign_in' => 'Sign In',
     'get_to_know_us' => 'GET TO KNOW US',

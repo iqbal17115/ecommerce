@@ -55,27 +55,26 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-2">
                         <div class="widget">
-                            <h4 class="widget-title text-dark">Get to Know Us</h4>
+                            <h4 class="widget-title text-dark">{{ __('translate.get_to_know_us') }}</h4>
 
                             <ul class="links">
-                                <li><a href="{{ route('about') }}" style="color: #777;">About @if($company_info &&
-                                        $company_info->name) {{$company_info->name}} @endif</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Careers</a></li>
-                                <li><a href="{{ route('privacy-policy') }}" style="color: #777;">Privacy Policies</a></li>
-                                <li><a href="{{ route('terms-condition') }}" style="color: #777;">Terms & Condition</a></li>
-                                <li><a href="{{ route('shipping-and-delivery') }}" style="color: #777;">Shipping & Delivery</a></li>
-                                <li><a href="{{ route('contact-us') }}" style="color: #777;">Contact Us</a></li>
+                                <li><a href="{{ route('about') }}" style="color: #777;">{{ __('translate.about') }}</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.career') }}</a></li>
+                                <li><a href="{{ route('privacy-policy') }}" style="color: #777;">{{ __('translate.privacy_policy') }}</a></li>
+                                <li><a href="{{ route('terms-condition') }}" style="color: #777;">{{ __('translate.terms_and_condition') }}</a></li>
+                                <li><a href="{{ route('shipping-and-delivery') }}" style="color: #777;">{{ __('translate.shipping_and_delivery') }}</a></li>
+                                <li><a href="{{ route('contact-us') }}" style="color: #777;">{{ __('translate.contact_us') }}</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="widget">
-                            <h4 class="widget-title text-dark">Customer Service</h4>
+                            <h4 class="widget-title text-dark">{{ __('translate.customer_service') }}</h4>
 
                             <ul class="links">
-                                <li><a href="Javascript:void(0);" style="color: #777;">Your Account</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Your Order</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Track Shipment</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.your_account') }}</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.your_order') }}</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.track_shipment') }}</a></li>
                             </ul>
                         </div>
                     </div>
