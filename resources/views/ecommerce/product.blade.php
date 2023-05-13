@@ -132,7 +132,7 @@
                         @endif
                         @endforeach
                         @else
-                        {{ $product_detail->Category->name }}
+                        <!-- {{ $product_detail->Category->name }} -->
                         @endif
                     </div>
 
