@@ -60,5 +60,8 @@ return [
     'your_email' => 'আপনার ইমেইল',
     'your_message' => 'আপনার মেসেজ',
     'send_message' => 'মেসেজ পাঠান',
-    'frequently_asked_question' => 'সচরাচর আপনাদের জিজ্ঞাসা'
+    'frequently_asked_question' => 'সচরাচর আপনাদের জিজ্ঞাসা',
+    'coupon_code' => 'কুপন কোড',
+    'apply_coupon' => 'এপ্লাই কুপন',
+    'update_cart' => 'আপডেট কার্ট'
 ];

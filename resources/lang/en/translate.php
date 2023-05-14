@@ -61,4 +61,7 @@ return [
     'your_message' => 'Your Message',
     'send_message' => 'Send Message',
     'frequently_asked_questions' => 'Frequently Asked Questions',
+    'coupon_code' => 'কুপন কোড',
+    'apply_coupon' => 'এপ্লাই কুপন',
+    'update_cart' => 'আপডেট কার্ট'
 ];
