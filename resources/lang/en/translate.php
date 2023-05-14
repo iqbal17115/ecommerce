@@ -43,5 +43,11 @@ return [
     'total' => 'Total',
     'payment_methods' => 'Payment Methods',
     'place_order' => 'Place Order',
-    'language' => 'Language'
+    'language' => 'Language',
+    'bangladesh' => 'Bangladesh',
+    'all' => 'All',
+    'subscribe_to_newsletter' => 'Subscribe to Newsletter',
+    'subscribe' => 'Subscribe',
+    'add_to_cart' => 'Add to Cart',
+    'buy_now' => 'Buy Now'
 ];

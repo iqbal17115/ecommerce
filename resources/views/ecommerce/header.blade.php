@@ -311,7 +311,7 @@
                 <ul class="menu w-100">
                     <li>
                         <a class="btn pt-1 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
-                                style="color: white;"></i><span style="color: white;">All</span></a>
+                                style="color: white;"></i><span style="color: white;">{{ __('translate.all') }}</span></a>
                     </li>
                     <li>
                         <a class="pt-1 pb-0" href="{{ route('home') }}"

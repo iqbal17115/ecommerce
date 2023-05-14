@@ -43,5 +43,11 @@ return [
     'total' => 'টোটাল',
     'payment_methods' => 'পেমেন্ট মেথড',
     'place_order' => 'প্লেস অর্ডার',
-    'language' => 'ভাষা'
+    'language' => 'ভাষা',
+    'bangladesh' => 'বাংলাদেশ',
+    'all' => 'সব',
+    'subscribe_to_newsletter' => 'সাবস্ক্রাইব টু নিউজলেটার',
+    'subscribe' => 'সাবস্ক্রাইব',
+    'add_to_cart' => 'কার্টে যোগ করুন',
+    'buy_now' => 'এখনই কিনুন',
 ];

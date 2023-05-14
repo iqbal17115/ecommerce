@@ -9,7 +9,7 @@
 							<a href="demo4.html"><i class="icon-home"></i></a>
 						</li>
 						<li class="breadcrumb-item active" aria-current="page">
-							Contact Us
+						{{ __('translate.contact_us') }}
 						</li>
 					</ol>
 				</div>

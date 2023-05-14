@@ -21,7 +21,7 @@
 
                     <div class="col-md-1">
                         <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
-                            style="font-size: 18px;">বাংলা</span>
+                            style="font-size: 18px;">{{ __('translate.language') }}</span>
                     </div>
                     <div class="col-md-1">
                         @if($company_info && $company_info->country_flag)
@@ -33,14 +33,14 @@
                     </div>
                     <div class="col-md-2">
                         <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
-                            style="font-size: 18px;">Subscribe to Newsletter</span>
+                            style="font-size: 18px;">{{ __('translate.subscribe_to_newsletter') }}</span>
                     </div>
                     <div class="col-md-4">
                         <form action="#" class="mb-0">
                             <div class="footer-submit-wrapper d-flex">
                                 <input type="email" class="form-control mb-0" placeholder="Enter your Email address..."
                                     required>
-                                <button type="submit" class="btn btn-md btn-dark">Subscribe</button>
+                                <button type="submit" class="btn btn-md btn-dark">{{ __('translate.subscribe') }}</button>
                             </div>
                         </form>
                     </div>

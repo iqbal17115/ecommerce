@@ -208,7 +208,7 @@
                             data-sale_price="{{$product_detail->sale_price}}" @if($product_detail->ProductMainImage)
                             data-image="{{$product_detail->ProductMainImage->image }}" @endif class="btn
                             btn-add-cart add-cart mr-2" style="background-color: #F4631B; color: white;" title="Buy
-                            Now">Buy Now</a>
+                            Now">{{ __('translate.buy_now') }}</a>
 
                         <a href="{{ route('cart') }}" class="btn btn-gray view-cart d-none">View cart</a>
                     </div>

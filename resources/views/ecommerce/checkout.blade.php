@@ -179,7 +179,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label> Name
+                                        <label> {{ __('translate.name') }}
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" name="name" class="form-control" required />
@@ -188,17 +188,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Phone <abbr class="required" title="required">*</abbr></label>
+                                <label>{{ __('translate.phone') }} <abbr class="required" title="required">*</abbr></label>
                                 <input type="tel" name="mobile" class="form-control" required />
                             </div>
                             <div class="form-group">
-                                <label> Password
+                                <label> {{ __('translate.password') }}
                                     <abbr class="required" title="required">*</abbr></label>
                                 <input type="password" name="password" placeholder="Password" class="form-control"
                                     required />
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-danger btn-sm btn-block">Submit</button>
+                                <button class="btn btn-danger btn-sm btn-block">{{ __('translate.submit') }}</button>
                             </div>
                         </form>
                     </li>

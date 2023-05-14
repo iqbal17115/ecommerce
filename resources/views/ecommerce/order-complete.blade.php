@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-md-3">
                         <a href="{{ route('home') }}">
-                            <div class="btn btn-light btn-lg mt-2 mt-md-0">Buy Now!</div>
+                            <div class="btn btn-light btn-lg mt-2 mt-md-0">{{ __('translate.buy_now') }}!</div>
                         </a>
                     </div>
                 </div>
