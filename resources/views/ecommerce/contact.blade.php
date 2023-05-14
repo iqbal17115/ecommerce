@@ -26,7 +26,7 @@
 					<div class="row">
 						<div class="col-12">
 							<h2 class="ls-n-25 m-b-1">
-								Contact Info
+							{{ __('translate.contact_info') }}
 							</h2>
 
 							<p>
@@ -44,7 +44,7 @@
 							<div class="feature-box text-center">
 								<i class="sicon-location-pin"></i>
 								<div class="feature-box-content">
-									<h3>Address</h3>
+									<h3>{{ __('translate.address') }}</h3>
 									<h5>
                                     @if($company_info && $company_info->address)
                                         {!! $company_info->address !!}
@@ -57,7 +57,7 @@
 							<div class="feature-box text-center">
 								<i class="fa fa-mobile-alt"></i>
 								<div class="feature-box-content">
-									<h3>Phone Number</h3>
+									<h3>{{ __('translate.phone_number') }}</h3>
 									<h5>
                                     @if($company_info && $company_info->phone)
                                         {!! $company_info->phone !!}
@@ -70,7 +70,7 @@
 							<div class="feature-box text-center">
 								<i class="far fa-envelope"></i>
 								<div class="feature-box-content">
-									<h3>E-mail Address</h3>
+									<h3>{{ __('translate.email_address') }}</h3>
 									<h5>
                                     @if($company_info && $company_info->email)
                                         {!! $company_info->email !!}
@@ -83,7 +83,7 @@
 							<div class="feature-box text-center">
 								<i class="far fa-calendar-alt"></i>
 								<div class="feature-box-content">
-									<h3>Working Days/Hours</h3>
+									<h3>{{ __('translate.working_days_hours') }}</h3>
 									<h5>Mon - Sun / 9:00AM - 8:00PM</h5>
 								</div>
 							</div>
@@ -93,25 +93,25 @@
 
 				<div class="row">
 					<div class="col-lg-6">
-						<h2 class="mt-6 mb-2">Send Us a Message</h2>
+						<h2 class="mt-6 mb-2">{{ __('translate.sending_us_message') }}</h2>
 
 						<form class="mb-0" action="#">
 							<div class="form-group">
-								<label class="mb-1" for="contact-name">Your Name
+								<label class="mb-1" for="contact-name">{{ __('translate.your_name') }}
 									<span class="required">*</span></label>
 								<input type="text" class="form-control" id="contact-name" name="contact-name"
 									required />
 							</div>
 
 							<div class="form-group">
-								<label class="mb-1" for="contact-email">Your E-mail
+								<label class="mb-1" for="contact-email">{{ __('translate.your_email') }}
 									<span class="required">*</span></label>
 								<input type="email" class="form-control" id="contact-email" name="contact-email"
 									required />
 							</div>
 
 							<div class="form-group">
-								<label class="mb-1" for="contact-message">Your Message
+								<label class="mb-1" for="contact-message">{{ __('translate.your_message') }}
 									<span class="required">*</span></label>
 								<textarea cols="30" rows="1" id="contact-message" class="form-control"
 									name="contact-message" required></textarea>
@@ -119,14 +119,14 @@
 
 							<div class="form-footer mb-0">
 								<button type="submit" class="btn btn-dark font-weight-normal">
-									Send Message
+								{{ __('translate.send_message') }}
 								</button>
 							</div>
 						</form>
 					</div>
 
 					<div class="col-lg-6">
-						<h2 class="mt-6 mb-1">Frequently Asked Questions</h2>
+						<h2 class="mt-6 mb-1">{{ __('translate.frequently_asked_questions') }}</h2>
 						<div id="accordion">
 							<div class="card card-accordion">
 								<a class="card-header" href="#" data-toggle="collapse" data-target="#collapseOne"
