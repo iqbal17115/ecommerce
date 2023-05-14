@@ -5,7 +5,7 @@ return [
     'customer_service' => 'Customer Service',
     'make_money_with_us' => 'Make Money With Us',
     'connect_with_us' => 'Connect With Us',
-    'about_aladdine' => 'About Aladdinne',
+    'about_aladdine' => 'Aladdinne',
     'careers' => 'Careers',
     'privacy_policy' => 'Privacy Policy',
     'terms_and_condition' => 'Terms And Condition',

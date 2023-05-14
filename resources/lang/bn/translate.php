@@ -5,7 +5,7 @@ return [
     'customer_service' => 'কাস্টমার সার্ভিস',
     'make_money_with_us' => 'মেইক মানি উইথ আস',
     'connect_with_us' => 'আমাদের সাথে যোগাযোগ করুন',
-    'about_aladdine' => 'এবাউট আলাদিন',
+    'about_aladdine' => 'আলাদিন',
     'careers' => 'ক্যারিয়ার',
     'privacy_policy' => 'গোপনীয়তা নীতি',
     'terms_and_condition' => 'বিধি - নিষেধ এবং শর্তাবলী',
