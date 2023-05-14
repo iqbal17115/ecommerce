@@ -81,14 +81,13 @@
 
                     <div class="col-md-2">
                         <div class="widget">
-                            <h4 class="widget-title text-dark">Make Money With Us</h4>
+                            <h4 class="widget-title text-dark">{{ __('translate.make_money_with_us') }}</h4>
 
                             <ul class="links">
-                                <li><a href="Javascript:void(0);" style="color: #777;">Sell On @if($company_info &&
-                                        $company_info->name) {{$company_info->name}} @endif</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Blog</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Advertise Your Product</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Protect & Build Your Brand</a>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.sell_on_aladdine') }}</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.blog') }}</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.advertise_your_product') }}</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.protect_and_build_your_brand') }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -96,7 +95,7 @@
 
                     <div class="col-md-2">
                         <div class="contact-widget follow">
-                            <h4 class="widget-title ls-n-10 text-dark">Connect With Us</h4>
+                            <h4 class="widget-title ls-n-10 text-dark">{{ __('translate.connect_with_us') }}</h4>
                             <div class="social-icons" style="margin-bottom: 5px;">
                                 <a 
                                 @if($company_info && $company_info->facebook_link) 
@@ -122,12 +121,12 @@
                                     target="_blank"></a>
                             </div><!-- End .social-icons -->
                             <ul class="links">
-                                <li><a href="Javascript:void(0);" style="color: #777;">Email: @if($company_info &&
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.email') }}: @if($company_info &&
                                         $company_info->email) {{$company_info->email}} @endif</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Whatsapp: @if($company_info &&
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.whatsapp') }}: @if($company_info &&
                                         $company_info->phone) {{$company_info->phone}} @endif</a></li>
                                 <li>
-                                    <h5>Download Our App </h5>
+                                    <h5>{{ __('translate.download_your_app') }} </h5>
                                 </li>
                             </ul>
                         </div>

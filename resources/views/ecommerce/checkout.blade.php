@@ -4,13 +4,13 @@
     <div class="container checkout-container">
         <ul class="checkout-progress-bar d-flex justify-content-center flex-wrap">
             <li>
-                <a href="{{ route('cart') }}">Shopping Cart</a>
+                <a href="{{ route('cart') }}">{{ __('translate.shopping_cart') }}:</a>
             </li>
             <li class="active">
-                <a href="checkout.html">Checkout</a>
+                <a href="checkout.html">{{ __('translate.check_out') }}</a>
             </li>
             <li class="disabled">
-                <a href="#">Order Complete</a>
+                <a href="#">{{ __('translate.order_complete') }}</a>
             </li>
         </ul>
 
@@ -18,7 +18,7 @@
             @if(!Auth::user())
             <h4>Returning customer?
                 <button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                    aria-controls="collapseOne" class="btn btn-link btn-toggle">Login</button>
+                    aria-controls="collapseOne" class="btn btn-link btn-toggle">{{ __('translate.login') }}</button>
             </h4>
             @endif
             <div id="collapseOne" class="collapse">
@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="mb-0 pb-1">Username or email <span
+                                        <label class="mb-0 pb-1">{{ __('translate.email') }} <span
                                                 class="required">*</span></label>
                                         <input type="text" name="mobile" class="form-control" required />
                                     </div>
@@ -42,13 +42,13 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="mb-0 pb-1">Password <span class="required">*</span></label>
+                                        <label class="mb-0 pb-1">{{ __('translate.password') }} <span class="required">*</span></label>
                                         <input type="password" name="password" class="form-control" required />
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn">LOGIN</button>
+                            <button type="submit" class="btn">{{ __('translate.login') }}</button>
 
                             <div class="form-footer mb-1">
                                 <div class="custom-control custom-checkbox mb-0 mt-0">
@@ -209,12 +209,12 @@
 
             <div class="col-lg-5">
                 <div class="order-summary">
-                    <h3>YOUR ORDER</h3>
+                    <h3>{{ __('translate.your_order') }}</h3>
 
                     <table class="table table-mini-cart">
                         <thead>
                             <tr>
-                                <th colspan="2">Product</th>
+                                <th colspan="2">{{ __('translate.product') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -262,7 +262,7 @@
                         <tfoot>
                             <tr class="cart-subtotal">
                                 <td>
-                                    <h4>Subtotal</h4>
+                                    <h4>{{ __('translate.sub_total') }}</h4>
                                 </td>
 
                                 <td class="price-col">
@@ -271,12 +271,12 @@
                             </tr>
                             <tr class="order-shipping">
                                 <td class="text-left" colspan="2">
-                                    <h4 class="m-b-sm">Shipping</h4>
+                                    <h4 class="m-b-sm">{{ __('translate.shipping') }}</h4>
 
                                     <div class="form-group form-group-custom-control">
                                         <div class="custom-control custom-radio d-flex">
                                             <input type="radio" class="custom-control-input" name="radio" checked />
-                                            <label class="custom-control-label">Local Pickup</label>
+                                            <label class="custom-control-label">{{ __('translate.local_pickup') }}</label>
                                         </div>
                                         <!-- End .custom-checkbox -->
                                     </div>
@@ -285,7 +285,7 @@
                                     <div class="form-group form-group-custom-control mb-0">
                                         <div class="custom-control custom-radio d-flex mb-0">
                                             <input type="radio" name="radio" class="custom-control-input">
-                                            <label class="custom-control-label">Flat Rate</label>
+                                            <label class="custom-control-label">{{ __('translate.flat_rate') }}</label>
                                         </div>
                                         <!-- End .custom-checkbox -->
                                     </div>
@@ -296,7 +296,7 @@
 
                             <tr class="order-total">
                                 <td>
-                                    <h4>Total</h4>
+                                    <h4>{{ __('translate.total') }}</h4>
                                 </td>
                                 <td>
                                     <b class="total-price"><span>{{$currency->icon}}{{$total + $charge_for_weight + $default_charge}}</span></b>
@@ -306,7 +306,7 @@
                     </table>
 
                     <div class="payment-methods">
-                        <h4 class="">Payment methods</h4>
+                        <h4 class="">{{ __('translate.payment_methods') }}</h4>
                         <div class="info-box with-icon p-0">
                             <p>
                                 Sorry, it seems that there are no available payment methods for your state. Please
@@ -316,7 +316,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-dark btn-place-order" form="shipping-address-form">
-                        Place order
+                    {{ __('translate.place_order') }}
                     </button>
                 </div>
                 <!-- End .cart-summary -->

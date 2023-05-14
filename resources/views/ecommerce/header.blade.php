@@ -130,7 +130,7 @@
                             <a href="javascript:void(0);" title="Close (Esc)" class="btn-close">×</a>
 
                             <div class="dropdownmenu-wrapper custom-scrollbar">
-                                <div class="dropdown-cart-header">Shopping Cart</div>
+                                <div class="dropdown-cart-header">{{ __('translate.shopping_cart') }}</div>
                                 <!-- End .dropdown-cart-header -->
 
                                 <div class="dropdown-cart-products">
@@ -172,16 +172,15 @@
                                 <!-- End .cart-product -->
 
                                 <div class="dropdown-cart-total">
-                                    <span>SUBTOTAL:</span>
+                                    <span>{{ __('translate.sub_total') }}:</span>
 
                                     <span class="cart-total-price float-right">{{$currency->icon}}{{$total}}</span>
                                 </div>
                                 <!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">
-                                    <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">View
-                                        Cart</a>
-                                    <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">Checkout</a>
+                                    <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">{{ __('translate.shopping_cart') }}</a>
+                                    <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">{{ __('translate.check_out') }}</a>
                                 </div>
                                 <!-- End .dropdown-cart-total -->
                             </div>
@@ -212,9 +211,7 @@
                                 style="color: white;"></i><span style="color: white;">All</span></a>
                     </li>
                     <li>
-                        <a class="pt-1 pb-0" href="{{ route('home') }}" style="color: white;">Sell On @if($company_info
-                            &&
-                            $company_info->name) {{$company_info->name}} @endif</a>
+                        <a class="pt-1 pb-0" href="{{ route('home') }}" style="color: white;">{{ __('translate.sell_on_aladdine') }}</a>
                     </li>
                     <!-- Start Category -->
                     @foreach($headerMenuCategories as $headerMenuCategory)
