@@ -1,7 +1,7 @@
 <?php 
 return [
     'sign_in' => 'সাইন ইন',
-    'get_to_know_us' => 'আলাদ্দিনে সম্পর্কিত তথ্য',
+    'get_to_know_us' => 'আলাদিনে সম্পর্কিত তথ্য',
     'customer_service' => 'কাস্টমার সার্ভিস',
     'make_money_with_us' => 'মেইক মানি উইথ আস',
     'connect_with_us' => 'আমাদের সাথে যোগাযোগ করুন',
