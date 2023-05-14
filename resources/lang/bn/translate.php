@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
     'sign_in' => 'সাইন ইন',
     'get_to_know_us' => 'আলাদিনে সম্পর্কিত তথ্য',
@@ -50,4 +50,15 @@ return [
     'subscribe' => 'সাবস্ক্রাইব',
     'add_to_cart' => 'কার্টে যোগ করুন',
     'buy_now' => 'এখনই কিনুন',
+    'contact_info' => 'আমাদের সাথে যোগাযোগের ঠিকানা',
+    'address' => 'ঠিকানা',
+    'phone_number' => 'ফোন নাম্বার',
+    'email_address' => 'ইমেইল এড্রেস',
+    'working_days_hours' => 'কর্মদিবস/ ঘন্টা',
+    'sending_us_message' => 'আমাদের মেসেজ করুন',
+    'your_name' => 'আপনার নাম',
+    'your_email' => 'আপনার ইমেইল',
+    'your_message' => 'আপনার মেসেজ',
+    'send_message' => 'মেসেজ পাঠান',
+    'frequently_asked_question' => 'সচরাচর আপনাদের জিজ্ঞাসা'
 ];
