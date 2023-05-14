@@ -15,15 +15,15 @@
                       <div class="modal-body">
                           <input type="hidden" name="cu_id" id="cu_id" value="-1">
                           <div class="row">
-
-                              <div class="col-md-12">
+                          @foreach (Config::get('languages') as $lang => $language)
+                              <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="name">Category Name</label>
-                                      <input type="text" name="name" id="name" class="form-control"
-                                          placeholder="Enter Category Name" required>
-                                      <span class="text-danger err_name"></span>
+                                      <label for="name_{{ $lang }}">{{ ucfirst($lang) }} Name</label>
+                                      <input type="text" class="form-control" id="name_{{ $lang }}"
+                                          name="translations[{{ $lang }}][name]" placeholder="Enter {{ $language }}">
                                   </div>
                               </div>
+                          @endforeach
                               <div class="col-md-6">
                                   <div class="form-group category_load">
                                       <label for="id">Select Category</label>

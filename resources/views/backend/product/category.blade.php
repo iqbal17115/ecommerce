@@ -57,7 +57,6 @@
                             <td>
                                 <button type="button" class="btn btn-info text-light btn-sm update_form"
                                     data-toggle="modal" data-target="#categoryModal" data-id="{{$category->id}}"
-                                    data-name="{{$category->name}}"
                                     data-parent_category_id="{{$category->parent_category_id}}"
                                     data-product_feature_id="{{$category->product_feature_id}}"
                                     data-top_menu="{{$category->top_menu}}" 
@@ -70,6 +69,9 @@
                                     data-icon1="{{$category->image}}" data-image="{{$category->image}}"
                                     data-icon1="{{$category->variation_type}}" data-variation_type="{{$category->variation_type}}"
                                     data-vendor_commission_percentage="{{$category->vendor_commission_percentage}}"
+                                    @foreach($category->translations as $translation)
+                                    data-{{$translation->locale}}="{{$translation->name}}"
+                                    @endforeach
                                     data-is_active="{{$category->is_active}}">
                                     <i class="mdi mdi-pencil font-size-16"></i>
                                 </button>
