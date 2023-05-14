@@ -42,5 +42,6 @@ return [
     'submit' => 'Submit',
     'total' => 'Total',
     'payment_methods' => 'Payment Methods',
-    'place_order' => 'Place Order'
+    'place_order' => 'Place Order',
+    'language' => 'Language'
 ];

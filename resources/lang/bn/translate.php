@@ -42,5 +42,6 @@ return [
     'submit' => 'সাবমিট',
     'total' => 'টোটাল',
     'payment_methods' => 'পেমেন্ট মেথড',
-    'place_order' => 'প্লেস অর্ডার'
+    'place_order' => 'প্লেস অর্ডার',
+    'language' => 'ভাষা'
 ];

@@ -157,7 +157,7 @@
                             @endforeach
                         </select> -->
                     <div class="top-links-item grey" id="topActionSwitchLang">
-                        <span>ভাষা</span>
+                        <span>{{ __('translate.language') }}</span>
                         <div class="lzd-switch-popup top-popup-wrap" id="lzdSwitchPop">
                             <div class="top-popup-content lzd-switch-content">
                                 @foreach (Config::get('languages') as $lang => $language)
