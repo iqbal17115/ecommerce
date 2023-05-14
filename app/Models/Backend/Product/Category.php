@@ -26,12 +26,12 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
-    public function getNameAttribute()
-    {
-        $translation = $this->translations->where('locale', app()->getLocale())->first();
+    // public function getNameAttribute()
+    // {
+    //     $translation = $this->translations->where('locale', app()->getLocale())->first();
 
-        return $translation ? $translation->name : null;
-    }
+    //     return $translation ? $translation->name : null;
+    // }
 
     public function getDescriptionAttribute()
     {
