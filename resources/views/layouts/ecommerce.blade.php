@@ -227,9 +227,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
-        $("body").on("change", ".language_switcher", function(event) {
+         $('#topActionSwitchLang').on('click', function() {
+    $('#lzdSwitchPop').toggle();
+  });
+        $("body").on("click", ".language_switcher", function(event) {
     event.preventDefault();
-    var lang = $(this).val();
+    var lang = $(this).data('lang');
     var url = "{{ route('lang.switch', ':lang') }}";
 
     url = url.replace(':lang', lang);

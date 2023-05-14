@@ -1,7 +1,89 @@
 <header class="header">
+
     <head>
         <link rel="canonical" href="https://www.aladdinne.com">
     </head>
+    <style>
+    .top-links-item {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .top-links-item span {
+        display: inline-block;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .top-links-item .lzd-switch-popup {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        min-width: 160px;
+        padding: 5px 0;
+        margin: 2px 0 0;
+        font-size: 14px;
+        text-align: left;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    }
+
+    .top-links-item .lzd-switch-popup .top-popup-content {
+        max-height: 200px;
+        overflow: auto;
+    }
+
+    .top-links-item .lzd-switch-item {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .top-links-item .lzd-switch-item:hover,
+    .top-links-item .lzd-switch-item:focus {
+        color: #262626;
+        background-color: #f5f5f5;
+    }
+
+    .top-links-item .lzd-switch-item.currentSelected .lzd-switch-checked {
+        float: right;
+        margin-top: 3px;
+        margin-right: -10px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #f0ad4e;
+    }
+
+    .top-links-item .lzd-switch-item .lzd-switch-icon {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        vertical-align: middle;
+    }
+
+    .top-links-item .lzd-switch-item .lzd-switch-icon-bn {
+        background-image: url('flag/bengali-flag-icon.png');
+    }
+
+    .top-links-item .lzd-switch-item .lzd-switch-icon-en {
+        background-image: url('flag/english-flag-icon.png');
+    }
+    </style>
     <!-- Start Sidebar -->
     <div id="wrapper">
         <div id="sidebar-wrapper">
@@ -66,14 +148,33 @@
                 <!-- End .header-search -->
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px;">
-                        <select name="" class="form-control language_switcher" style="height: 25px;">
+                    <!-- <select name="" class="form-control language_switcher" style="height: 25px;">
                             <option>{{ Config::get('languages')[App::getLocale()] }}</option>
                             @foreach (Config::get('languages') as $lang => $language)
                                 @if ($lang != App::getLocale())
                                        <option value="{{ $lang }}"> <a class="dropdown-item" href="#"> {{$language}}</a> </option>
                                 @endif
                             @endforeach
-                        </select>
+                        </select> -->
+                    <div class="top-links-item grey" id="topActionSwitchLang">
+                        <span>ভাষা</span>
+                        <div class="lzd-switch-popup top-popup-wrap" id="lzdSwitchPop">
+                            <div class="top-popup-content lzd-switch-content">
+                                @foreach (Config::get('languages') as $lang => $language)
+                                <div class="lzd-switch-item language_switcher @if(App::getLocale() == $lang) currentSelected @endif" data-lang="{{ $lang }}">
+                                    <span class="lzd-switch-icon lzd-switch-icon-{{ $lang }}"></span>
+                                    {{$language}}
+                                    <div class="lzd-switch-checked"></div>
+                                </div>
+                                @endforeach
+                                <!-- <div class="lzd-switch-item currentSelected" data-lang="en">
+                                    <span class="lzd-switch-icon lzd-switch-icon-en"></span>
+                                    EN / English
+                                    <div class="lzd-switch-checked"></div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
@@ -179,8 +280,10 @@
                                 <!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">
-                                    <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">{{ __('translate.shopping_cart') }}</a>
-                                    <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">{{ __('translate.check_out') }}</a>
+                                    <a href="{{ route('cart') }}"
+                                        class="btn btn-gray btn-block view-cart">{{ __('translate.shopping_cart') }}</a>
+                                    <a href="{{ route('checkout') }}"
+                                        class="btn btn-dark btn-block">{{ __('translate.check_out') }}</a>
                                 </div>
                                 <!-- End .dropdown-cart-total -->
                             </div>
@@ -211,7 +314,8 @@
                                 style="color: white;"></i><span style="color: white;">All</span></a>
                     </li>
                     <li>
-                        <a class="pt-1 pb-0" href="{{ route('home') }}" style="color: white;">{{ __('translate.sell_on_aladdine') }}</a>
+                        <a class="pt-1 pb-0" href="{{ route('home') }}"
+                            style="color: white;">{{ __('translate.sell_on_aladdine') }}</a>
                     </li>
                     <!-- Start Category -->
                     @foreach($headerMenuCategories as $headerMenuCategory)
