@@ -58,8 +58,8 @@
                             <h4 class="widget-title text-dark">{{ __('translate.get_to_know_us') }}</h4>
 
                             <ul class="links">
-                                <li><a href="{{ route('about') }}" style="color: #777;">{{ __('translate.about') }}</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.career') }}</a></li>
+                                <li><a href="{{ route('about') }}" style="color: #777;">{{ __('translate.about_aladdine') }}</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.careers') }}</a></li>
                                 <li><a href="{{ route('privacy-policy') }}" style="color: #777;">{{ __('translate.privacy_policy') }}</a></li>
                                 <li><a href="{{ route('terms-condition') }}" style="color: #777;">{{ __('translate.terms_and_condition') }}</a></li>
                                 <li><a href="{{ route('shipping-and-delivery') }}" style="color: #777;">{{ __('translate.shipping_and_delivery') }}</a></li>
