@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
     'sign_in' => 'Sign In',
     'get_to_know_us' => 'Get To Know Us',
@@ -49,5 +49,16 @@ return [
     'subscribe_to_newsletter' => 'Subscribe to Newsletter',
     'subscribe' => 'Subscribe',
     'add_to_cart' => 'Add to Cart',
-    'buy_now' => 'Buy Now'
+    'buy_now' => 'Buy Now',
+    'contact_info' => 'Contact Info',
+    'address' => 'Address',
+    'phone_number' => 'Phone Number',
+    'email_address' => 'E-mail Address',
+    'working_days_hours' => 'Working Days/Hours',
+    'sending_us_message' => 'Send Us a Message',
+    'your_name' => 'Your Name',
+    'your_email' => 'Your Email',
+    'your_message' => 'Your Message',
+    'send_message' => 'Send Message',
+    'frequently_asked_questions' => 'Frequently Asked Questions',
 ];
