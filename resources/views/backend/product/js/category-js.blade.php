@@ -164,6 +164,7 @@ $(document).ready(function() {
 
     $(document).on('click', '.update_form', function(e) {
         let id = $(this).data('id');
+        let name = $(this).data('name');
         let parent_category_id = $(this).data('parent_category_id');
         let product_feature_id = $(this).data('product_feature_id');
         let top_menu = $(this).data('top_menu');
@@ -177,14 +178,9 @@ $(document).ready(function() {
         let variation_type = $(this).data('variation_type');
         let vendor_commission_percentage = $(this).data('vendor_commission_percentage');
         let is_active = $(this).data('is_active');
-
-        @foreach(Config::get('languages') as $locale => $localeuage)
-        var lang = $(this).data('{{$locale}}');
-        $('#name_{{$locale}}').val(lang);
-        @endforeach
-
         $('#cu_id').val(id);
         $('#id').val(id);
+        $('#name').val(name);
         $('.category_id').val(parent_category_id).trigger("change");
         $('.product_feature_id').val(product_feature_id).trigger("change");
         $('#top_menu').val(top_menu);
