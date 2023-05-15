@@ -20,7 +20,7 @@
                                   <div class="form-group">
                                       <label for="name_{{ $lang }}">{{ ucfirst($lang) }} Name</label>
                                       <input type="text" class="form-control" id="name_{{ $lang }}"
-                                          name="translations[{{ $lang }}][name]" placeholder="Enter {{ $language }}" required>
+                                          name="translations[{{ $lang }}][name]" placeholder="Enter {{ $language }}">
                                   </div>
                               </div>
                           @endforeach
