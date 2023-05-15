@@ -119,9 +119,9 @@
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
                         <a href="{{ route('catalog', ['id'=>$top_show_category->id]) }}">
                             <figure>
-                                <img class="lazy-load" data-src="{{ asset('storage/'.$top_show_category->image) }}"
+                                <!-- <img class="lazy-load" data-src="{{ asset('storage/'.$top_show_category->image) }}"
                                     alt="category" width="280" height="240"
-                                    style="width: 100px; height: 100px; border-radius: 50%;" />
+                                    style="width: 100px; height: 100px; border-radius: 50%;" /> -->
                             </figure>
                             <div class="category-content p-0">
                                 <span
@@ -155,9 +155,9 @@
                             <div class="col-6 p-0">
                                 <a href="{{ route('catalog', ['id'=>$feature_setting_detail->category_id]) }}">
                                     <div class="card mb-0">
-                                        <img class="card-img-top lazy-load"
+                                        <!-- <img class="card-img-top lazy-load"
                                             data-src="{{ asset('storage/'.$feature_setting_detail->Category->image) }}"
-                                            style="height: 150px;">
+                                            style="height: 150px;"> -->
                                         <div class="text-center text-dark">
                                             <span>{{$feature_setting_detail->Category->name}}</span>
                                         </div>
@@ -179,8 +179,8 @@
                             @foreach($top_feature->TopFeatureSetting->ProductFeature->Advertisement as $advertisement)
                             <div class="col-12 p-0">
                                     <div class="card mb-0">
-                                        <img class="card-img-top lazy-load"
-                                            data-src="{{ asset('storage/'.$advertisement->ads) }}">
+                                        <!-- <img class="card-img-top lazy-load"
+                                            data-src="{{ asset('storage/'.$advertisement->ads) }}"> -->
                                     </div>
                                 <!-- End Product -->
                             </div>
@@ -241,11 +241,11 @@
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
                             <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
-                                <img class="lazy-load" @if($product->ProductMainImage)
+                                <!-- <img class="lazy-load" @if($product->ProductMainImage)
                                 data-src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
                                 @endif style="width: 239px; height: 239px; filter: brightness(0.9)
                                 contrast(1.2) saturate(1.1);"
-                                width="239" height="239" alt="product">
+                                width="239" height="239" alt="product"> -->
                             </a>
                             <div class="btn-icon-group">
                                 <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
