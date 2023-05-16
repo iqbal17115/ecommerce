@@ -21,7 +21,7 @@
 
                     <div class="col-md-1">
                         <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
-                            style="font-size: 18px;">{{ __('translate.language') }}</span>
+                            style="font-size: 18px;">Language</span>
                     </div>
                     <div class="col-md-1">
                         @if($company_info && $company_info->country_flag)
@@ -33,14 +33,14 @@
                     </div>
                     <div class="col-md-2">
                         <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
-                            style="font-size: 18px;">{{ __('translate.subscribe_to_newsletter') }}</span>
+                            style="font-size: 18px;">Subscribe to Newsletter</span>
                     </div>
                     <div class="col-md-4">
                         <form action="#" class="mb-0">
                             <div class="footer-submit-wrapper d-flex">
                                 <input type="email" class="form-control mb-0" placeholder="Enter your Email address..."
                                     required>
-                                <button type="submit" class="btn btn-md btn-dark">{{ __('translate.subscribe') }}</button>
+                                <button type="submit" class="btn btn-md btn-dark">Subscribe</button>
                             </div>
                         </form>
                     </div>
@@ -55,15 +55,15 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-2">
                         <div class="widget">
-                            <h4 class="widget-title text-dark">{{ __('translate.get_to_know_us') }}</h4>
+                            <h4 class="widget-title text-dark">Get to know us</h4>
 
                             <ul class="links">
-                                <li><a href="{{ route('about') }}" style="color: #777;">{{ __('translate.about_aladdine') }}</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.careers') }}</a></li>
-                                <li><a href="{{ route('privacy-policy') }}" style="color: #777;">{{ __('translate.privacy_policy') }}</a></li>
-                                <li><a href="{{ route('terms-condition') }}" style="color: #777;">{{ __('translate.terms_and_condition') }}</a></li>
-                                <li><a href="{{ route('shipping-and-delivery') }}" style="color: #777;">{{ __('translate.shipping_and_delivery') }}</a></li>
-                                <li><a href="{{ route('contact-us') }}" style="color: #777;">{{ __('translate.contact_us') }}</a></li>
+                                <li><a href="{{ route('about') }}" style="color: #777;">About Aladdine</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Careers</a></li>
+                                <li><a href="{{ route('privacy-policy') }}" style="color: #777;">Privacy Policy</a></li>
+                                <li><a href="{{ route('terms-condition') }}" style="color: #777;">Terms and condition</a></li>
+                                <li><a href="{{ route('shipping-and-delivery') }}" style="color: #777;">Shipping and delivery</a></li>
+                                <li><a href="{{ route('contact-us') }}" style="color: #777;">Contact Us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -72,9 +72,9 @@
                             <h4 class="widget-title text-dark">{{ __('translate.customer_service') }}</h4>
 
                             <ul class="links">
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.your_account') }}</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.your_order') }}</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.track_shipment') }}</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Your Account</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Your Order</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Track Shipment</a></li>
                             </ul>
                         </div>
                     </div>
@@ -84,10 +84,10 @@
                             <h4 class="widget-title text-dark">{{ __('translate.make_money_with_us') }}</h4>
 
                             <ul class="links">
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.sell_on_aladdine') }}</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.blog') }}</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.advertise_your_product') }}</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.protect_and_build_your_brand') }}</a>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Sell On Aladdine</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Blog</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Advertise your product</a></li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Protect And Build Your Brand</a>
                                 </li>
                             </ul>
                         </div>
@@ -95,45 +95,45 @@
 
                     <div class="col-md-2">
                         <div class="contact-widget follow">
-                            <h4 class="widget-title ls-n-10 text-dark">{{ __('translate.connect_with_us') }}</h4>
+                            <h4 class="widget-title ls-n-10 text-dark">Connect with us</h4>
                             <div class="social-icons" style="margin-bottom: 5px;">
-                                <a 
-                                @if($company_info && $company_info->facebook_link) 
-                                    href="{{$company_info->facebook_link}}" 
-                                @endif 
+                                <a
+                                @if($company_info && $company_info->facebook_link)
+                                    href="{{$company_info->facebook_link}}"
+                                @endif
                                     class="social-icon social-facebook icon-facebook text-dark" target="_blank"></a>
-                                <a 
-                                @if($company_info && $company_info->twitter_link) 
-                                    href="{{$company_info->twitter_link}}" 
-                                @endif 
+                                <a
+                                @if($company_info && $company_info->twitter_link)
+                                    href="{{$company_info->twitter_link}}"
+                                @endif
                                 class="social-icon social-twitter icon-twitter text-dark"  target="_blank"></a>
-                                <a 
-                                @if($company_info && $company_info->instagram_link) 
-                                    href="{{$company_info->instagram_link}}" 
-                                @endif 
+                                <a
+                                @if($company_info && $company_info->instagram_link)
+                                    href="{{$company_info->instagram_link}}"
+                                @endif
                                 class="social-icon social-instagram icon-instagram text-dark"
                                     target="_blank"></a>
-                                <a 
-                                @if($company_info && $company_info->linkedin_link) 
-                                    href="{{$company_info->linkedin_link}}" 
-                                @endif 
+                                <a
+                                @if($company_info && $company_info->linkedin_link)
+                                    href="{{$company_info->linkedin_link}}"
+                                @endif
                                     class="social-icon social-linkedin fab fa-linkedin-in text-dark"
                                     target="_blank"></a>
                             </div><!-- End .social-icons -->
                             <ul class="links">
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.email') }}: @if($company_info &&
+                                <li><a href="Javascript:void(0);" style="color: #777;">Email: @if($company_info &&
                                         $company_info->email) {{$company_info->email}} @endif</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">{{ __('translate.whatsapp') }}: @if($company_info &&
+                                <li><a href="Javascript:void(0);" style="color: #777;">Whatsapp: @if($company_info &&
                                         $company_info->phone) {{$company_info->phone}} @endif</a></li>
                                 <li>
-                                    <h5>{{ __('translate.download_your_app') }} </h5>
+                                    <h5>Download Your App </h5>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="col-md-2"></div>
-                    
+
                 </div>
             </div>
             @endif

@@ -164,7 +164,7 @@
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
-                    {{ __('translate.sign_in') }} <i class="fas fa-user text-light"></i>
+                     Sign In <i class="fas fa-user text-light"></i>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-mobile-menu" style="font-size: 16px;">
                     <div class="d-flex flex-column align-items-center">
@@ -213,7 +213,7 @@
                             <a href="javascript:void(0);" title="Close (Esc)" class="btn-close">×</a>
 
                             <div class="dropdownmenu-wrapper custom-scrollbar">
-                                <div class="dropdown-cart-header">{{ __('translate.shopping_cart') }}</div>
+                                <div class="dropdown-cart-header">Shopping Cart</div>
                                 <!-- End .dropdown-cart-header -->
 
                                 <div class="dropdown-cart-products">
@@ -255,7 +255,7 @@
                                 <!-- End .cart-product -->
 
                                 <div class="dropdown-cart-total">
-                                    <span>{{ __('translate.sub_total') }}:</span>
+                                    <span>Sub Total:</span>
 
                                     <span class="cart-total-price float-right">{{$currency->icon}}{{$total}}</span>
                                 </div>
@@ -263,9 +263,9 @@
 
                                 <div class="dropdown-cart-action">
                                     <a href="{{ route('cart') }}"
-                                        class="btn btn-gray btn-block view-cart">{{ __('translate.shopping_cart') }}</a>
+                                        class="btn btn-gray btn-block view-cart">Shopping Cart</a>
                                     <a href="{{ route('checkout') }}"
-                                        class="btn btn-dark btn-block">{{ __('translate.check_out') }}</a>
+                                        class="btn btn-dark btn-block">Check Out</a>
                                 </div>
                                 <!-- End .dropdown-cart-total -->
                             </div>
@@ -297,7 +297,7 @@
                     </li>
                     <li>
                         <a class="pt-1 pb-0" href="{{ route('home') }}"
-                            style="color: white;">{{ __('translate.sell_on_aladdine') }}</a>
+                            style="color: white;">Sell On aladdine</a>
                     </li>
                     <!-- Start Category -->
                     @foreach($headerMenuCategories as $headerMenuCategory)

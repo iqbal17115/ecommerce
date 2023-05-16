@@ -4,13 +4,13 @@
     <div class="container checkout-container">
         <ul class="checkout-progress-bar d-flex justify-content-center flex-wrap">
             <li>
-                <a href="{{ route('cart') }}">{{ __('translate.shopping_cart') }}:</a>
+                <a href="{{ route('cart') }}">Shopping_cart:</a>
             </li>
             <li class="active">
-                <a href="checkout.html">{{ __('translate.check_out') }}</a>
+                <a href="checkout.html">Check Out</a>
             </li>
             <li class="disabled">
-                <a href="#">{{ __('translate.order_complete') }}</a>
+                <a href="#">Order Complete</a>
             </li>
         </ul>
 
@@ -18,7 +18,7 @@
             @if(!Auth::user())
             <h4>Returning customer?
                 <button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                    aria-controls="collapseOne" class="btn btn-link btn-toggle">{{ __('translate.login') }}</button>
+                    aria-controls="collapseOne" class="btn btn-link btn-toggle">Login</button>
             </h4>
             @endif
             <div id="collapseOne" class="collapse">
@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="mb-0 pb-1">{{ __('translate.email') }} <span
+                                        <label class="mb-0 pb-1">Email<span
                                                 class="required">*</span></label>
                                         <input type="text" name="mobile" class="form-control" required />
                                     </div>
@@ -42,13 +42,13 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="mb-0 pb-1">{{ __('translate.password') }} <span class="required">*</span></label>
+                                        <label class="mb-0 pb-1">Password<span class="required">*</span></label>
                                         <input type="password" name="password" class="form-control" required />
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn">{{ __('translate.login') }}</button>
+                            <button type="submit" class="btn">Login</button>
 
                             <div class="form-footer mb-1">
                                 <div class="custom-control custom-checkbox mb-0 mt-0">
@@ -179,7 +179,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label> {{ __('translate.name') }}
+                                        <label> Name
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" name="name" class="form-control" required />
@@ -188,17 +188,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label>{{ __('translate.phone') }} <abbr class="required" title="required">*</abbr></label>
+                                <label>Phone<abbr class="required" title="required">*</abbr></label>
                                 <input type="tel" name="mobile" class="form-control" required />
                             </div>
                             <div class="form-group">
-                                <label> {{ __('translate.password') }}
+                                <label> Password
                                     <abbr class="required" title="required">*</abbr></label>
                                 <input type="password" name="password" placeholder="Password" class="form-control"
                                     required />
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-danger btn-sm btn-block">{{ __('translate.submit') }}</button>
+                                <button class="btn btn-danger btn-sm btn-block">Submit</button>
                             </div>
                         </form>
                     </li>
@@ -209,12 +209,12 @@
 
             <div class="col-lg-5">
                 <div class="order-summary">
-                    <h3>{{ __('translate.your_order') }}</h3>
+                    <h3>Your Order</h3>
 
                     <table class="table table-mini-cart">
                         <thead>
                             <tr>
-                                <th colspan="2">{{ __('translate.product') }}</th>
+                                <th colspan="2">Product</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -239,7 +239,7 @@
                             $total_size += ($product->ProductMoreDetail->item_length * $product->ProductMoreDetail->item_width * $product->ProductMoreDetail->item_height);
                             }
                             @endphp
-                            @if($product->ProductMoreDetail) 
+                            @if($product->ProductMoreDetail)
                                {{$product->ProductMoreDetail->package_weight}}
                             @endif
                             <tr>
@@ -255,14 +255,14 @@
                             </tr>
                             @endforeach
                             @endif
-                            @php 
+                            @php
                               $charge_for_weight = ($total_weight * $weight->inside_amount);
                             @endphp
                         </tbody>
                         <tfoot>
                             <tr class="cart-subtotal">
                                 <td>
-                                    <h4>{{ __('translate.sub_total') }}</h4>
+                                    <h4>Sub Total</h4>
                                 </td>
 
                                 <td class="price-col">
@@ -271,12 +271,12 @@
                             </tr>
                             <tr class="order-shipping">
                                 <td class="text-left" colspan="2">
-                                    <h4 class="m-b-sm">{{ __('translate.shipping') }}</h4>
+                                    <h4 class="m-b-sm">Shipping</h4>
 
                                     <div class="form-group form-group-custom-control">
                                         <div class="custom-control custom-radio d-flex">
                                             <input type="radio" class="custom-control-input" name="radio" checked />
-                                            <label class="custom-control-label">{{ __('translate.local_pickup') }}</label>
+                                            <label class="custom-control-label">Local pickup</label>
                                         </div>
                                         <!-- End .custom-checkbox -->
                                     </div>
@@ -285,7 +285,7 @@
                                     <div class="form-group form-group-custom-control mb-0">
                                         <div class="custom-control custom-radio d-flex mb-0">
                                             <input type="radio" name="radio" class="custom-control-input">
-                                            <label class="custom-control-label">{{ __('translate.flat_rate') }}</label>
+                                            <label class="custom-control-label">Flat Rate</label>
                                         </div>
                                         <!-- End .custom-checkbox -->
                                     </div>
@@ -296,7 +296,7 @@
 
                             <tr class="order-total">
                                 <td>
-                                    <h4>{{ __('translate.total') }}</h4>
+                                    <h4>Total</h4>
                                 </td>
                                 <td>
                                     <b class="total-price"><span>{{$currency->icon}}{{$total + $charge_for_weight + $default_charge}}</span></b>
@@ -306,7 +306,7 @@
                     </table>
 
                     <div class="payment-methods">
-                        <h4 class="">{{ __('translate.payment_methods') }}</h4>
+                        <h4 class="">Payment Methods</h4>
                         <div class="info-box with-icon p-0">
                             <p>
                                 Sorry, it seems that there are no available payment methods for your state. Please
@@ -316,7 +316,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-dark btn-place-order" form="shipping-address-form">
-                    {{ __('translate.place_order') }}
+                    Place_order
                     </button>
                 </div>
                 <!-- End .cart-summary -->

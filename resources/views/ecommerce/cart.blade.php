@@ -72,7 +72,7 @@
                                                     <input type="text" class="form-control form-control-sm"
                                                         placeholder="Coupon Code" required>
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-sm" type="submit">{{ __('translate.apply_coupon') }}</button>
+                                                        <button class="btn btn-sm" type="submit">Apply Coupon</button>
                                                     </div>
                                                 </div><!-- End .input-group -->
                                             </form>
@@ -81,7 +81,7 @@
 
                                     <div class="float-right">
                                         <button type="submit" class="btn btn-shop btn-update-cart">
-                                        {{ __('translate.update_cart') }}
+                                        Updaten Cart
                                         </button>
                                     </div><!-- End .float-right -->
                                 </td>
