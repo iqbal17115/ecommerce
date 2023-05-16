@@ -229,7 +229,7 @@
            function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'en',
-        includedLanguages: 'en,bn' // Specify the language codes you want to include
+        includedLanguages: 'en,bn,ar' // Specify the language codes you want to include
     }, 'google_translate_element');
 }
         </script>
