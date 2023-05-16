@@ -156,25 +156,7 @@
                                 @endif
                             @endforeach
                         </select> -->
-                    <div class="top-links-item grey" id="topActionSwitchLang">
-                        <span>{{ __('translate.language') }}</span>
-                        <div class="lzd-switch-popup top-popup-wrap" id="lzdSwitchPop">
-                            <div class="top-popup-content lzd-switch-content">
-                                @foreach (Config::get('languages') as $lang => $language)
-                                <div class="lzd-switch-item language_switcher @if(App::getLocale() == $lang) currentSelected @endif" data-lang="{{ $lang }}">
-                                    <span class="lzd-switch-icon lzd-switch-icon-{{ $lang }}"></span>
-                                    {{$language}}
-                                    <div class="lzd-switch-checked"></div>
-                                </div>
-                                @endforeach
-                                <!-- <div class="lzd-switch-item currentSelected" data-lang="en">
-                                    <span class="lzd-switch-icon lzd-switch-icon-en"></span>
-                                    EN / English
-                                    <div class="lzd-switch-checked"></div>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
+                        <div id="google_translate_element"></div>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">

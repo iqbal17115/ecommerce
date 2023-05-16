@@ -225,31 +225,46 @@
     <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
+    <script type="text/javascript">
+           function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,bn' // Specify the language codes you want to include
+    }, 'google_translate_element');
+}
+        </script>
+     
+        <script type="text/javascript"
+                src= "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+        </script>
+        <style>
+            body{
+                top: 0px !important; 
+                position: static !important; 
+            }
+            .goog-te-banner-frame{
+                display:none !important
+            }
+            .goog-te-combo{
+                width: 100%;
+                height: 30px;
+                border-radius: 5px;
+            }
+            .goog-te-gadget {
+                color: #040f1c00;
+            }
+            .goog-logo-link, .goog-logo-link:link, .goog-logo-link:visited, .goog-logo-link:hover, .goog-logo-link:active {
+             font-size: 12px;
+             font-weight: bold;
+             color: #040f1c00;
+             text-decoration: none;
+             visibility: hidden;
+            }
+            #google_translate_element img, iframe, .skiptranslate  a {
+                display: none;
+            }
+        </style>
     <script>
-         $('#topActionSwitchLang').on('click', function() {
-    $('#lzdSwitchPop').toggle();
-  });
-        $("body").on("click", ".language_switcher", function(event) {
-    event.preventDefault();
-    var lang = $(this).data('lang');
-    var url = "{{ route('lang.switch', ':lang') }}";
-
-    url = url.replace(':lang', lang);
-    $.ajax({
-        type: "GET",
-        url: url,
-        data: {
-            lang: lang,
-        },
-        success: function() {
-            window.location.reload();
-        },
-        error: function() {
-            window.location.reload();
-        }
-    });
-});
     $(document).ready(function() {
         $(".menu-toggle").click(function(e) {
             e.preventDefault();
