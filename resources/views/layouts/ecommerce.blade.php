@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
 
     <meta charset="UTF-8">
@@ -161,10 +162,62 @@
         transform: rotate(-45deg);
         -webkit-transform: rotate(-45deg);
     }
+
     body {
         font-family: 'Roboto', sans-serif;
+
     }
-    </style>
+
+    .minicart-icon {
+        border-color: #fff
+    }
+
+    .cart-count {
+        top: -5px;
+        right: -8px;
+        background-color: #222529;
+        font-size: 1rem;
+    }
+
+    .sticky-header.fixed .minicart-icon {
+        border-color: #222529;
+    }
+
+    .sticky-header.fixed .header-icon {
+        color: #222529;
+    }
+
+    .sticky-logo {
+        display: none;
+    }
+
+    .header-middle.fixed .logo img:not(.sticky-logo) {
+        display: none;
+    }
+
+    .header-middle.fixed .sticky-logo {
+        display: block;
+    }
+
+    .header-middle.fixed .mobile-menu-toggler {
+        color: #222529;
+    }
+
+    .header-bottom.fixed .logo {
+        max-width: 100px;
+    }
+
+    .header-search-inline {
+        margin-right: 1.5rem;
+    }
+    .header-search-wrapper{display:flex;display:-ms-flexbox;position:absolute;right:-2.3rem;z-index:999;margin-top:10px;color:#8d8d8d;box-sizing:content-box;height:48px;border-radius:5rem;border:0 solid #d0d5d8}.header-search-wrapper:after{display:block;clear:both;content:""}
+    .header-search-inline .form-control{width:448px;font-size:1.4rem;padding-left:3rem;padding-right:1.5rem}
+    .header-search-wrapper .btn{position:relative;padding:0 0 3px 0;border:0;border-left:1px solid #e7e7e7;min-width:65px;color:#222529;font-size:2rem;background:#fff}.header-search-wrapper .btn:before{display:inline-block;margin-top:5px;font-weight:800}
+    .header-search .form-control,.header-search .select-custom{background:#fff}
+    
+    
+</style>
+
     <!-- <script src="jquery-3.6.1.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -206,44 +259,55 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript">
-           function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,bn,ar' // Specify the language codes you want to include
-    }, 'google_translate_element');
-}
-        </script>
-     
-        <script type="text/javascript"
-                src= "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-        </script>
-        <style>
-            body{
-                top: 0px !important; 
-                position: static !important; 
-            }
-            .goog-te-banner-frame{
-                display:none !important
-            }
-            .goog-te-combo{
-                width: 100%;
-                height: 30px;
-                border-radius: 5px;
-            }
-            .goog-te-gadget {
-                color: #040f1c00;
-            }
-            .goog-logo-link, .goog-logo-link:link, .goog-logo-link:visited, .goog-logo-link:hover, .goog-logo-link:active {
-             font-size: 12px;
-             font-weight: bold;
-             color: #040f1c00;
-             text-decoration: none;
-             visibility: hidden;
-            }
-            #google_translate_element img, iframe, .skiptranslate  a {
-                display: none;
-            }
-        </style>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,bn,ar' // Specify the language codes you want to include
+        }, 'google_translate_element');
+    }
+    </script>
+
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+    <style>
+    body {
+        top: 0px !important;
+        position: static !important;
+    }
+
+    .goog-te-banner-frame {
+        display: none !important
+    }
+
+    .goog-te-combo {
+        width: 100%;
+        height: 30px;
+        border-radius: 5px;
+    }
+
+    .goog-te-gadget {
+        color: #040f1c00;
+    }
+
+    .goog-logo-link,
+    .goog-logo-link:link,
+    .goog-logo-link:visited,
+    .goog-logo-link:hover,
+    .goog-logo-link:active {
+        font-size: 12px;
+        font-weight: bold;
+        color: #040f1c00;
+        text-decoration: none;
+        visibility: hidden;
+    }
+
+    #google_translate_element img,
+    iframe,
+    .skiptranslate a {
+        display: none;
+    }
+    </style>
     <script>
     $(document).ready(function() {
         $(".menu-toggle").click(function(e) {
