@@ -147,6 +147,9 @@
         color: #000000;
     }
 
+    .sidebar-nav li:hover {
+        /* background: #846bab; */
+    }
 
     .arrow {
         border: solid #707070;
@@ -160,6 +163,23 @@
     .right {
         transform: rotate(-45deg);
         -webkit-transform: rotate(-45deg);
+    }
+
+    @media (min-width: 992px) {
+        .mobile-sidebar-menu {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .responsive-desktop-menu {
+            display: none;
+        }
+    }
+    @media screen and (min-width: 480px) {
+        .responsive-mobile-menu {
+            display: none;
+        }
     }
     body {
         font-family: 'Roboto', sans-serif;
