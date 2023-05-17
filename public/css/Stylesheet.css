@@ -6,7 +6,7 @@
 .inputBox:hover {
     border-color: purple;
  }
- .editButton:hover {background-color: #47f14d}
- .deleteButton:hover {background-color: #e73c3c}
+ .editButton:hover {background-color: #47f14d;}
+ .deleteButton:hover {background-color: #e73c3c;}
 
 
