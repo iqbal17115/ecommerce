@@ -162,20 +162,13 @@
                     <!-- <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a> -->
 
                     <!-- form-inline class -->
-                    <form action="{{ route('search') }}" class="my-2 my-lg-0" style="min-width: 40px;">
-                        <div class="input-group" style="display: flex;
-  justify-content: center;">
-                            <input name="q" id="q" class="form-control mr-0" type="search"
-                                placeholder="What are you looking for?" aria-label="Search"
-                                style="background: white; border-radius: 5px 0px 0px 5px; max-width: 600px;">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1" style="background: black;"><i
-                                        class="fa fa-search" style="color: white;"></i></span>
-                            </div>
-
-                        </div>
+                    <form action="#" method="get">
+                        <div class="header-search-wrapper" style="justify-content: center;">
+                            <input type="search" class="form-control" name="q" id="q" placeholder="I'm searching for..."
+                                required>
+                            <button class="btn icon-magnifier bg-dark text-white" title="search" type="submit"></button>
+                        </div><!-- End .header-search-wrapper -->
                     </form>
-
                 </div>
                 <!-- End .header-search -->
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
@@ -188,7 +181,7 @@
                                 @endif
                             @endforeach
                         </select> -->
-                        <div id="google_translate_element"></div>
+                        <div id="google_translate_element" style="margin-top: 5px;padding:0px;"></div>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
