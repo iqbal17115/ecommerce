@@ -278,7 +278,7 @@
 
     <!--Class Of bottom line header-bottom  -->
     <!-- border-top: 1px solid #acacac; -->
-    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4631b; height: 35px;"
+    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4941b; height: 35px;"
         data-sticky-options="{'mobile': false}">
         <!-- container class -->
         <div class="">
@@ -286,7 +286,7 @@
                 <ul class="menu w-100">
                     <li>
                         <a class="btn pt-1 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
-                                style="color: white;"></i><span style="color: white;">{{ __('translate.all') }}</span></a>
+                                style="color: white;"></i><span style="color: white;">All</span></a>
                     </li>
                     <li>
                         <a class="pt-1 pb-0" href="{{ route('home') }}"
