@@ -130,7 +130,7 @@
                     <!-- <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a> -->
 
                     <!-- form-inline class -->
-                    <form action="#" method="get">
+                    <form action="{{ route('search') }}" method="get">
                         <div class="header-search-wrapper" style="justify-content: center;">
                             <input type="search" class="form-control" name="q" id="q" placeholder="I'm searching for..."
                                 required>
