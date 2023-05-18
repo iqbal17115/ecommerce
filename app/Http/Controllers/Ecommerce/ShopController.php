@@ -29,7 +29,7 @@ class ShopController extends Controller
 
         $filter_type = 2;
         $filter_for = $request->q;
-        return view('ecommerce.shop', compact(['products', 'filter_type', 'filter_for', 'brands', 'categories', 'related_category']));
+        return view('ecommerce.shop', compact(['products', 'filter_type', 'filter_for', 'brands', 'related_category']));
     }
     public function productOrderBy(Request $request)
     {
