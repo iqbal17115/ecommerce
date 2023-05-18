@@ -213,17 +213,6 @@
 @include('ecommerce.sidebar-js')
 <script>
 
-        $.ajax({
-            url: '{{ route("get-main-content") }}',
-            type: 'GET',
-            success: function(data) {
-                // Handle the response data
-                $('body #ecom-main-content').html(data);
-            }
-        });
-</script>
-<script>
-
 function lazyLoad() {
     const lazyImages = document.querySelectorAll('.lazy-load');
     lazyImages.forEach(img => {
