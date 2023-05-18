@@ -281,7 +281,7 @@ $(document).ready(function() {
             type: 'GET',
             success: function(data) {
                 // Handle the response data
-                $('#ecom-main-content').html(data);
+                $('body #ecom-main-content').html(data);
             }
         });
 </script>
