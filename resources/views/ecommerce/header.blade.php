@@ -278,7 +278,7 @@
 
     <!--Class Of bottom line header-bottom  -->
     <!-- border-top: 1px solid #acacac; -->
-    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4941b; height: 35px;"
+    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #e95d18; height: 35px;"
         data-sticky-options="{'mobile': false}">
         <!-- container class -->
         <div class="">
