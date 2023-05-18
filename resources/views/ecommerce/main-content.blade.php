@@ -156,7 +156,6 @@
 @endforeach
 
     <!-- Plugins JS File -->
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.min.js"></script>
     <script src="{{ URL::asset('aladdinne/') }}/assets/js/bootstrap.bundle.min.js"></script>
     <script src="{{ URL::asset('aladdinne/') }}/assets/js/optional/isotope.pkgd.min.js"></script>
     <script src="{{ URL::asset('aladdinne/') }}/assets/js/plugins.min.js"></script>
