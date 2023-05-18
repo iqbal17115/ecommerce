@@ -247,6 +247,10 @@
                                 contrast(1.2) saturate(1.1);"
                                 width="239" height="239" alt="product">
                             </a>
+                            <div class="label-group">
+                                {{-- <div class="product-label label-hot">HOT</div> --}}
+                                <div class="product-label label-sale">27%</div>
+                            </div>
                             <div class="btn-icon-group">
                                 <a href="javascript:void(0);" title="Add To Cart" data-id="{{$product->id}}"
                                     data-name="{{$product->name}}" data-your_price="{{$product->your_price}}"
