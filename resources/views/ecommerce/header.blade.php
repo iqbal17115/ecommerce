@@ -149,7 +149,7 @@
                                 @endif
                             @endforeach
                         </select> -->
-                        <div id="google_translate_element"></div>
+                        <div id="google_translate_element" style="margin-top: 5px;padding:0px;"></div>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
