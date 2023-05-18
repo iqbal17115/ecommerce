@@ -365,6 +365,16 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $(document).ready(function() {
+    $.ajax({
+        url: '{{ route("get-main-content") }}',
+        type: 'GET',
+        success: function(data) {
+            // Handle the response data
+            $('#ecom-main-content').html(data);
+        }
+    });
+});
     </script>
 
 </body>
