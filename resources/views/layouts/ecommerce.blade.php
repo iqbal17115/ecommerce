@@ -268,7 +268,7 @@
     <!-- Start Mobile Responseive Footer -->
     @include('ecommerce.mobile-responsive-footer')
     <!-- Start Mobile Responseive Footer -->
- 
+
 
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
@@ -366,9 +366,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $(document).ready(function() {
 
-    });
     </script>
 
 </body>
