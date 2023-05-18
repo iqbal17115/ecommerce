@@ -268,7 +268,7 @@
     <!-- Start Mobile Responseive Footer -->
     @include('ecommerce.mobile-responsive-footer')
     <!-- Start Mobile Responseive Footer -->
-
+ 
 
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
@@ -297,6 +297,7 @@
     <script type="text/javascript"
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
+    @stack('scripts')
     <style>
     body {
         top: 0px !important;
@@ -366,15 +367,8 @@
         }
     });
     $(document).ready(function() {
-    $.ajax({
-        url: '{{ route("get-main-content") }}',
-        type: 'GET',
-        success: function(data) {
-            // Handle the response data
-            $('#ecom-main-content').html(data);
-        }
+
     });
-});
     </script>
 
 </body>

@@ -212,6 +212,20 @@
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
 <script>
+            $.ajax({
+        url: '{{ route("get-main-content") }}',
+        type: 'GET',
+        success: function(data) {
+            alert(true);
+            // Handle the response data
+            $('#ecom-main-content').html(data);
+        }
+    });
+</script>
+<script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.min.js"></script>
+
+<script>
+
 function lazyLoad() {
     const lazyImages = document.querySelectorAll('.lazy-load');
     lazyImages.forEach(img => {

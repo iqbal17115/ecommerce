@@ -16,7 +16,7 @@ class HomeController extends Controller
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $product_features = ProductFeature::whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $top_features = ProductFeature::whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
-        return view('ecommerce.main-content', compact(['sliders', 'top_show_categories', 'product_features', 'top_features']));
+        return view('ecommerce.main-content', compact(['sliders', 'top_show_categories', 'product_features', 'top_features']))->render();
     }
     public function contactUs() {
         return view('ecommerce.contact');
