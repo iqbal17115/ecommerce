@@ -216,7 +216,6 @@
         url: '{{ route("get-main-content") }}',
         type: 'GET',
         success: function(data) {
-            alert(true);
             // Handle the response data
             $('#ecom-main-content').html(data);
         }
