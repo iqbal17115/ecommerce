@@ -20,7 +20,7 @@ class ShopController extends Controller
             ->select('brands.id', 'brands.name')
             ->distinct('brands.name')
             ->get();
-        $categories = Product::join('categories', 'categories.id', '=', 'products.category_id')
+        $related_category = Product::join('categories', 'categories.id', '=', 'products.category_id')
             ->where('products.name', 'like', '%' . $request->q . '%')->orderBy('id', 'desc')
             ->orderBy('products.id', 'desc')
             ->select('categories.id', 'categories.name')
@@ -29,7 +29,7 @@ class ShopController extends Controller
 
         $filter_type = 2;
         $filter_for = $request->q;
-        return view('ecommerce.shop', compact(['products', 'filter_type', 'filter_for', 'brands', 'categories']));
+        return view('ecommerce.shop', compact(['products', 'filter_type', 'filter_for', 'brands', 'categories', 'related_category']));
     }
     public function productOrderBy(Request $request)
     {
