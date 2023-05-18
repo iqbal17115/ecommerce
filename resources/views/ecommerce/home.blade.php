@@ -261,28 +261,4 @@ $(document).ready(function() {
 });
 </script>
 
-    <!-- Plugins JS File -->
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/optional/isotope.pkgd.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/plugins.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.appear.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.plugin.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.countdown.min.js"></script>
-
-    <!-- Main JS File -->
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script>
-
-        $.ajax({
-            url: '{{ route("get-main-content") }}',
-            type: 'GET',
-            success: function(data) {
-                // Handle the response data
-                $('body #ecom-main-content').html(data);
-            }
-        });
-</script>
 @endsection
