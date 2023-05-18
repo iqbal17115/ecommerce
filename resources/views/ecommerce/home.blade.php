@@ -211,6 +211,8 @@
 @include('ecommerce.footer')
 <!-- footer-area-end -->
 @include('ecommerce.sidebar-js')
+<script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.min.js"></script>
+
 <script>
             $.ajax({
         url: '{{ route("get-main-content") }}',
@@ -221,7 +223,6 @@
         }
     });
 </script>
-<script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.min.js"></script>
 
 <script>
 
@@ -236,17 +237,7 @@ function lazyLoad() {
     });
 }
 
-// using Javascript we doing split the producuct name into two lines
-// Get the product name element
-var productName = document.getElementById('product-name');
-// Split the product name into two lines
-var words = productName.textContent.split(' ');
-var halfLength = Math.ceil(words.length / 2);
-var firstLine = words.slice(0, halfLength).join(' ');
-var secondLine = words.slice(halfLength).join(' ');
-// Set the product name with two lines
-productName.innerHTML = firstLine + '<br>' + secondLine;
-// end of using Javascript we doing split the producuct name into two lines
+
 
 // Check for visible images on page load
 document.addEventListener("DOMContentLoaded", lazyLoad);
