@@ -25,7 +25,7 @@ class ShopController extends Controller
             ->orderBy('products.id', 'desc')
             ->select('categories.id', 'categories.name')
             ->distinct('categories.name')
-            ->get();
+            ->first();
 
         $filter_type = 2;
         $filter_for = $request->q;
