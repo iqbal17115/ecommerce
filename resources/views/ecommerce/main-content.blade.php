@@ -41,7 +41,7 @@
             <figure>
                 <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
                     <img class="lazy-load" @if($product->ProductMainImage)
-                    data-src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
+                    data-src="https://aladdinne.com/storage/product_photo/8jNmtVxTAu2zxRcnwSbE366X6E4MqQyFKPd6Wjbj.jpg"
                     @endif style="width: 239px; height: 239px; filter: brightness(0.9)
                     contrast(1.2) saturate(1.1);"
                     width="239" height="239" alt="product">
@@ -154,18 +154,4 @@
 <!-- End Card Feature -->
 @endif
 @endforeach
-
-    <!-- Plugins JS File -->
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/optional/isotope.pkgd.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/plugins.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.appear.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.plugin.min.js"></script>
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/jquery.countdown.min.js"></script>
-
-    <!-- Main JS File -->
-    <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-
+@include('layouts.parts.js-links')
