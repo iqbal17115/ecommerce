@@ -264,7 +264,7 @@
                                 {{-- <a href="{{ route('product-detail', ['id'=>$product->id]) }}"
                                     class="product-name">{{$product->name}}</a> --}}
                                 <a href="{{ route('product-detail', ['id'=>$product->id]) }}"
-                                    class="product-name" id="product-name">{{$product->name}}</a>
+                                    class="product-name" id="product-name">{{substr($product->name,0,15)}}</a>
 
                                 {{-- rating add html code --}}
                                 <span class="five-star-rating">
