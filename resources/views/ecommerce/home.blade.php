@@ -220,7 +220,7 @@
         $(document).ready(function() {
             setTimeout(() => {
                 get_main_content();
-            }, 1000);
+            }, 0);
         });
     </script>
 @endpush
