@@ -217,9 +217,10 @@
 
 @push('scripts')
     <script>
+                get_main_content();
+
         $(document).ready(function() {
             setTimeout(() => {
-                get_main_content();
             }, 0);
         });
     </script>
