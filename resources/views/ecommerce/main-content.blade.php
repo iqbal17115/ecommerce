@@ -168,4 +168,4 @@
         <!-- End Card Feature -->
     @endif
 @endforeach
-@include('layouts.parts.js-links')
+<!-- @include('layouts.parts.js-links') -->

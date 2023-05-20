@@ -98,14 +98,15 @@
     });
     function get_main_content() {
             $.ajax({
-                url: '{{ route('get-main-content') }}',
+                url: '{{ route("get-main-content") }}',
                 type: 'GET',
                 beforeSend: function() {
                     $('#ecom_main_content').html('');
                 },
                 success: function(data) {
                     // Handle the response data
-                    $('#ecom_main_content').html(data);
+                    console.log(data);
+                    $('#ecom_main_content').html(data.html);
                 }
             });
         }
