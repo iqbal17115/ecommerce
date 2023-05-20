@@ -35,8 +35,7 @@
         <!-- main-area -->
         @yield('content')
         <!-- main-area-end -->
-<!-- Code to load after rendering content -->
-@yield('after-content')
+
     </div>
 
     <!-- Start Mobile Responseive Footer -->
@@ -49,7 +48,8 @@
 
     @include('layouts.parts.js-links')
     @stack('scripts')
-
+<!-- Code to load after rendering content -->
+@yield('after-content')
 </body>
 
 </html>
