@@ -48,8 +48,7 @@
 
     @include('layouts.parts.js-links')
     @stack('scripts')
-<!-- Code to load after rendering content -->
-@yield('after-content')
+
 </body>
 
 </html>

@@ -383,9 +383,10 @@
 
 
 @endsection
-@push('after-content')
+@push('scripts')
   <script>
-    
+    window.onload = function() {
+    // Code to be executed after rendering the full layout
 function lazyLoad() {
     const lazyImages = document.querySelectorAll('.lazy-load');
     lazyImages.forEach(img => {
@@ -399,7 +400,6 @@ function lazyLoad() {
 
 // Check for visible images on page load
 document.addEventListener("DOMContentLoaded", lazyLoad);
-$(document).ready(function() {
     // Get an array of all the image elements you want to load
     var images = document.getElementsByClassName('lazy-load');
 
@@ -430,6 +430,7 @@ $(document).ready(function() {
         var image = images[i];
         observer.observe(image);
     }
-});
+};
+
   </script>
 @endpush

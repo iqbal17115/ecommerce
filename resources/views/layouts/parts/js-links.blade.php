@@ -43,6 +43,7 @@ $.ajaxSetup({
     }
 });
 
+
 </script>
 @include('ecommerce.sidebar-js')
 @include('ecommerce.cart-js')
