@@ -35,7 +35,8 @@
         <!-- main-area -->
         @yield('content')
         <!-- main-area-end -->
-
+<!-- Code to load after rendering content -->
+@yield('after-content')
     </div>
 
     <!-- Start Mobile Responseive Footer -->
