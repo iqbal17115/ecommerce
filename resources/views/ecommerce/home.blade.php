@@ -245,11 +245,11 @@
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
                             <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-                                <!-- <img class="lazy-load"
+                                <img class="lazy-load"
                                     @if ($product->ProductMainImage) data-src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}" @endif
                                     style="width: 239px; height: 239px; filter: brightness(0.9)
                     contrast(1.2) saturate(1.1);"
-                                    width="239" height="239" alt="product"> -->
+                                    width="239" height="239" alt="product">
                             </a>
                             <div class="btn-icon-group">
                                 <a href="javascript:void(0);" title="Add To Cart" data-id="{{ $product->id }}"
