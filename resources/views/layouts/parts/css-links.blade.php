@@ -58,6 +58,7 @@
         .skiptranslate a {
             display: none;
         }
+
         .owl-dots {
             display: none;
         }
@@ -253,7 +254,15 @@
         .header-search .select-custom {
             background: #fff
         }
+
+        .product-name {
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: normal !important;
+        }
     </style>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
-
