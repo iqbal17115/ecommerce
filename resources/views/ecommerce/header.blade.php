@@ -152,7 +152,7 @@
         <a href="{{ route('home') }}" class="logo" style="max-width: 180px;">
             <img data-src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5 lazy-load"
                 width="111" height="44"
-                style="height: 54px;width: 151px;filter: brightness(4) contrast(1.5) saturate(1.5);" alt="Porto Logo">
+                style="height: 64px;width: 151px;filter: brightness(4) contrast(1.5) saturate(1.5);" alt="Porto Logo">
         </a>
         @endif
         <div class="container">
@@ -162,7 +162,7 @@
                     <!-- <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a> -->
 
                     <!-- form-inline class -->
-                    <form action="#" method="get">
+                    <form action="{{ route('search') }}" method="get">
                         <div class="header-search-wrapper" style="justify-content: center;">
                             <input type="search" class="form-control" name="q" id="q" placeholder="I'm searching for..."
                                 required>
@@ -310,7 +310,7 @@
 
     <!--Class Of bottom line header-bottom  -->
     <!-- border-top: 1px solid #acacac; -->
-    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #f4631b; height: 35px;"
+    <div class="sticky-header d-none d-lg-flex pt-0 mt-0" style="background-color: #e95d18; height: 35px;"
         data-sticky-options="{'mobile': false}">
         <!-- container class -->
         <div class="">
@@ -318,7 +318,7 @@
                 <ul class="menu w-100">
                     <li>
                         <a class="btn pt-1 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
-                                style="color: white;"></i><span style="color: white;">{{ __('translate.all') }}</span></a>
+                                style="color: white;"></i><span style="color: white;">All</span></a>
                     </li>
                     <li>
                         <a class="pt-1 pb-0" href="{{ route('home') }}"

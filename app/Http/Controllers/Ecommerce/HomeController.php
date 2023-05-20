@@ -8,9 +8,17 @@ use App\Models\Backend\Product\ProductFeature;
 use App\Models\Backend\WebSetting\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
+    public function getMainContent() {
+        $product_features = ProductFeature::whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        $top_features = ProductFeature::whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        $html = View::make('ecommerce.main-content', compact('product_features', 'top_features'))->render();
+
+        return response()->json(['html' => $html]);
+    }
     public function contactUs() {
         return view('ecommerce.contact');
     }
@@ -35,7 +43,7 @@ class HomeController extends Controller
         } else {
             $categories = Category::with('SubCategory')->whereSidebarMenu(1)->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get();
         }
-        
+
         return response()->json(['categories' => $categories]);
     }
     public function checkSubCategory(Request $request) {
@@ -45,7 +53,7 @@ class HomeController extends Controller
         } else {
             return 0;
         }
-        
+
     }
     public function getSubCategory(Request $request) {
         $sub_categories = Category::with('SubCategory')->whereParentCategoryId($request->id)->orderBy('position', 'ASC')->get();

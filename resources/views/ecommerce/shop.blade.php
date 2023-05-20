@@ -376,6 +376,9 @@
 <!-- Start Sidebar -->
 @include('ecommerce.sidebar-js')
 <!-- End Sidebar -->
+
+@endsection
+@push('scripts')
 <script>
     count = 12;
 filter_type = '';
@@ -515,4 +518,4 @@ $(document).on('click', '.pagination a', function(e) {
     pagination(page, count);
 });
 </script>
-@endsection
+@endpush
