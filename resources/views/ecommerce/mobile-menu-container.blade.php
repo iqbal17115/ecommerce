@@ -1,5 +1,5 @@
 <div class="mobile-menu-overlay"></div>
-<div class="sticky-navbar">
+<div class="sticky-navbar" style="background-color: rgb(244, 99, 27)">
     <div class="sticky-info">
         <a href="{{ route('home') }}">
             <i class="icon-home"></i>Home
