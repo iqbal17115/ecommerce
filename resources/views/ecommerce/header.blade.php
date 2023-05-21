@@ -1,8 +1,18 @@
 <header class="header">
 
     <head>
-        <link rel="canonical" href="https://www.aladdinne.com">
-        <script type='application/ld+json'>
+            @if($company_info && $company_info->key_word)
+             <meta name="keywords" content="{{ $company_info->key_word }}">
+            @endif
+
+            @if($company_info && $company_info->description)
+             <meta name="description" content="{{ $company_info->description }}">
+            @endif
+
+            <meta name="author" content="SW-THEMES">
+            <meta name="csrf-token" content="Lm72jSotbJFP3pwSgJu1vSMLBiArGVGib04QzFVR">
+            <link rel="canonical" href="https://www.aladdinne.com">
+            <script type='application/ld+json'>
             {
               "@context": "http://www.schema.org",
               "@type": "ShoppingCenter",
@@ -32,89 +42,89 @@
                 "telephone": "+8801975340753"
               }
             }
-             </script>
+        </script>
     </head>
 
     <style>
-    .top-links-item {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-    }
+        .top-links-item {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
 
-    .top-links-item span {
-        display: inline-block;
-        padding: 5px;
-        cursor: pointer;
-    }
+        .top-links-item span {
+            display: inline-block;
+            padding: 5px;
+            cursor: pointer;
+        }
 
-    .top-links-item .lzd-switch-popup {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        display: none;
-        min-width: 160px;
-        padding: 5px 0;
-        margin: 2px 0 0;
-        font-size: 14px;
-        text-align: left;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    }
+        .top-links-item .lzd-switch-popup {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            min-width: 160px;
+            padding: 5px 0;
+            margin: 2px 0 0;
+            font-size: 14px;
+            text-align: left;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        }
 
-    .top-links-item .lzd-switch-popup .top-popup-content {
-        max-height: 200px;
-        overflow: auto;
-    }
+        .top-links-item .lzd-switch-popup .top-popup-content {
+            max-height: 200px;
+            overflow: auto;
+        }
 
-    .top-links-item .lzd-switch-item {
-        display: block;
-        padding: 3px 20px;
-        clear: both;
-        font-weight: 400;
-        line-height: 1.42857143;
-        color: #333;
-        white-space: nowrap;
-        cursor: pointer;
-    }
+        .top-links-item .lzd-switch-item {
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.42857143;
+            color: #333;
+            white-space: nowrap;
+            cursor: pointer;
+        }
 
-    .top-links-item .lzd-switch-item:hover,
-    .top-links-item .lzd-switch-item:focus {
-        color: #262626;
-        background-color: #f5f5f5;
-    }
+        .top-links-item .lzd-switch-item:hover,
+        .top-links-item .lzd-switch-item:focus {
+            color: #262626;
+            background-color: #f5f5f5;
+        }
 
-    .top-links-item .lzd-switch-item.currentSelected .lzd-switch-checked {
-        float: right;
-        margin-top: 3px;
-        margin-right: -10px;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #f0ad4e;
-    }
+        .top-links-item .lzd-switch-item.currentSelected .lzd-switch-checked {
+            float: right;
+            margin-top: 3px;
+            margin-right: -10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #f0ad4e;
+        }
 
-    .top-links-item .lzd-switch-item .lzd-switch-icon {
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-        margin-right: 10px;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        vertical-align: middle;
-    }
+        .top-links-item .lzd-switch-item .lzd-switch-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            vertical-align: middle;
+        }
 
-    .top-links-item .lzd-switch-item .lzd-switch-icon-bn {
-        background-image: url('flag/bengali-flag-icon.png');
-    }
+        .top-links-item .lzd-switch-item .lzd-switch-icon-bn {
+            background-image: url('flag/bengali-flag-icon.png');
+        }
 
-    .top-links-item .lzd-switch-item .lzd-switch-icon-en {
-        background-image: url('flag/english-flag-icon.png');
-    }
+        .top-links-item .lzd-switch-item .lzd-switch-icon-en {
+            background-image: url('flag/english-flag-icon.png');
+        }
     </style>
     <!-- Start Sidebar -->
     <div id="wrapper">
@@ -181,7 +191,7 @@
                                 @endif
                             @endforeach
                         </select> -->
-                        <div id="google_translate_element" style="margin-top: 5px;padding:0px;"></div>
+                    <div id="google_translate_element" style="margin-top: 5px;padding:0px;"></div>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
@@ -189,7 +199,7 @@
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
-                     Sign In <i class="fas fa-user text-light"></i>
+                    Sign In <i class="fas fa-user text-light"></i>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-mobile-menu" style="font-size: 16px;">
                     <div class="d-flex flex-column align-items-center">
@@ -228,7 +238,8 @@
                                     class="img-fluid icon-cart-thick pb-0 mb-0" style="height: 20px;">
                                 @endif
                                 <span class="cart-count badge-circle"
-                                    style="top: 5px; left: 27px; background: darkblue;">{{ count((array) session('cart')) }}</span>
+                                    style="top: 5px; left: 27px; background: darkblue;">{{ count((array)
+                                    session('cart')) }}</span>
                             </a>
                             <span class="text-dark small responsive-mobile-menu">Cart</span>
                         </div>
@@ -249,13 +260,13 @@
                                     <div class="product cart-{{ $id }}" data-id="{{ $id }}">
                                         <div class="product-details">
                                             <h4 class="product-title">
-                                                <a
-                                                    href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name'] }}</a>
+                                                <a href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name']
+                                                    }}</a>
                                             </h4>
 
                                             <span class="cart-product-info">
-                                                <span
-                                                    class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
+                                                <span class="cart-product-qty card-product-qty-{{ $id }}">{{
+                                                    $details['quantity'] }}</span>
                                                 ×
                                                 {{$currency->icon}}{{ $details['sale_price'] }}
                                             </span>
@@ -287,10 +298,9 @@
                                 <!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">
-                                    <a href="{{ route('cart') }}"
-                                        class="btn btn-gray btn-block view-cart">Shopping Cart</a>
-                                    <a href="{{ route('checkout') }}"
-                                        class="btn btn-dark btn-block">Check Out</a>
+                                    <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">Shopping
+                                        Cart</a>
+                                    <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">Check Out</a>
                                 </div>
                                 <!-- End .dropdown-cart-total -->
                             </div>
@@ -321,8 +331,7 @@
                                 style="color: white;"></i><span style="color: white;">All</span></a>
                     </li>
                     <li>
-                        <a class="pt-1 pb-0" href="{{ route('home') }}"
-                            style="color: white;">Sell On aladdine</a>
+                        <a class="pt-1 pb-0" href="{{ route('home') }}" style="color: white;">Sell On aladdine</a>
                     </li>
                     <!-- Start Category -->
                     @foreach($headerMenuCategories as $headerMenuCategory)

@@ -147,6 +147,21 @@ div#variation_content {
                                     <i class="now-ui-icons ui-2_settings-90"></i> Shipping & Delivery
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#keyword" role="tab">
+                                    <i class="now-ui-icons ui-2_settings-90"></i> Keyword
+                                </a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#description" role="tab">
+                                    <i class="now-ui-icons ui-2_settings-90"></i> Description
+                                </a>
+                            </li>
+
+
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#activeInactiveStatus" role="tab">
                                     <i class="now-ui-icons ui-2_settings-90"></i> Status
@@ -267,7 +282,7 @@ div#variation_content {
                                                         class="form-control">
                                                 </div>
                                                 <!-- End -->
-                                                
+
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">About Us Image</label>
@@ -500,7 +515,7 @@ div#variation_content {
                                                         placeholder="About Us">
                                                         @if($company_info && $company_info->about_us)
                                                         {!! $company_info->about_us !!}
-                                                        @endif 
+                                                        @endif
                                                     </textarea>
                                                 </div>
                                                 <!-- End -->
@@ -533,7 +548,7 @@ div#variation_content {
                                                         id="terms_condition" placeholder="Terms & Condition">
                                                         @if($company_info && $company_info->terms_condition)
                                                         {!! $company_info->terms_condition !!}
-                                                        @endif 
+                                                        @endif
                                                     </textarea>
                                                 </div>
                                                 <!-- End -->
@@ -565,7 +580,7 @@ div#variation_content {
                                                         id="privacy_policy" placeholder="Privacy Policy">
                                                         @if($company_info && $company_info->privacy_policy)
                                                         {!! $company_info->privacy_policy !!}
-                                                        @endif 
+                                                        @endif
                                                     </textarea>
                                                 </div>
                                                 <!-- End -->
@@ -597,7 +612,7 @@ div#variation_content {
                                                         id="return_policy" placeholder="Return Policy">
                                                         @if($company_info && $company_info->return_policy)
                                                         {!! $company_info->return_policy !!}
-                                                        @endif 
+                                                        @endif
                                                     </textarea>
                                                 </div>
                                                 <!-- End -->
@@ -630,7 +645,7 @@ div#variation_content {
                                                         id="shipping_and_delivery" placeholder="Shipping & Delivery">
                                                         @if($company_info && $company_info->shipping_and_delivery)
                                                         {!! $company_info->shipping_and_delivery !!}
-                                                        @endif 
+                                                        @endif
                                                     </textarea>
                                                 </div>
                                                 <!-- End -->
@@ -646,6 +661,78 @@ div#variation_content {
                                 </form>
                                 <!-- End Shipping & Delivery -->
                             </div>
+
+                            <div class="tab-pane" id="keyword" role="tabpanel">
+                                <!-- Start About Us -->
+                                <form method="post" id="keyword_save">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Keyword</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <textarea class="form-control" name="key_word" id="keyWord"
+                                                        placeholder="KeyWord">
+                                                        @if($company_info && $company_info->key_word)
+                                                        {!! $company_info->key_word !!}
+                                                        @endif
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
+                                                </div>
+                                                <!-- End -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                        <!-- End -->
+                                    </div>
+                                </form>
+                                <!-- End About Us -->
+                            </div>
+
+
+                            <div class="tab-pane" id="description" role="tabpanel">
+                                <!-- Start About Us -->
+                                <form method="post" id="description_save">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-4 mt-md-3">
+                                                    <label class="col-form-label float-md-right"
+                                                        style="font-size: 14px;">Description</label>
+                                                </div>
+                                                <div class="col-md-8 mt-md-3">
+                                                    <textarea class="form-control" name="description" id="Description"
+                                                        placeholder="Description">
+                                                        @if($company_info && $company_info->description)
+                                                        {!! $company_info->description !!}
+                                                        @endif
+                                                    </textarea>
+                                                </div>
+                                                <!-- End -->
+
+                                                <div class="col-md-12 mt-md-3">
+                                                    <button class="float-right btn btn-success btn-sm">Save</button>
+                                                </div>
+                                                <!-- End -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                        <!-- End -->
+                                    </div>
+                                </form>
+                                <!-- End About Us -->
+                            </div>
+
+
+
                             <!-- End -->
                             <div class="tab-pane" id="activeInactiveStatus" role="tabpanel">
                                 <!-- Start Return Policy -->
@@ -792,6 +879,19 @@ $('#return_policy').summernote({
 $('#shipping_and_delivery').summernote({
     height: 120
 });
+
+$('#keyWord').summernote({
+    height: 120
+});
+
+$('#Description').summernote({
+    height: 120
+});
+
+
+
+
+
 // $('.file-upload').file_upload();
 </script>
 @include('backend.setting.setting-js')

@@ -45,6 +45,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('currency', Currency::whereIsDefault(1)->first());
         });
 
-        
+
     }
 }

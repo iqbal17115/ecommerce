@@ -77,7 +77,7 @@ Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name(
 Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
 Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
 Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
-// 
+//
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
@@ -102,6 +102,8 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::post('add-privacy_policy', [CompanyInfoController::class, 'addPrivacyPolicy'])->name('add.privacy_policy');
             Route::post('add-return_policy', [CompanyInfoController::class, 'addReturnPolicy'])->name('add.return_policy');
             Route::post('add-shipping_and_delivery', [CompanyInfoController::class, 'addShippingAndDelivery'])->name('add.shipping_and_delivery');
+            Route::post('keyword', [CompanyInfoController::class, 'keyword'])->name('add.key_word');
+            Route::post('description', [CompanyInfoController::class, 'description'])->name('add.description');
             Route::post('add-status', [CompanyInfoController::class, 'addStatus'])->name('add.status');
         }
     );
@@ -255,7 +257,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::get('feature-setting', [FeatureSettingController::class, 'index'])->name('feature-setting');
             Route::post('add-feature_setting', [FeatureSettingController::class, 'addFeatureSetting'])->name('add.feature_setting');
             Route::get('feature-setting-list', [FeatureSettingController::class, 'featureSettingList'])->name('feature-setting-list');
-            
+
         }
     );
     // End Feature Setting
