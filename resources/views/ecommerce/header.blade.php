@@ -187,10 +187,12 @@
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
                     Bangladesh
                 </div>
+                @if(!Auth::user())
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
                      <a href="{{ route('customer-sign-in') }}">Sign In <i class="fas fa-user text-light"></i></a>
                 </div>
+                @endif
                 <div class="text-light font-weight-bold mr-2 responsive-mobile-menu" style="font-size: 16px;">
                     <div class="d-flex flex-column align-items-center">
                         <i class="text-dark">اللغة العربية</i>
@@ -338,10 +340,10 @@
                                 class="icon-phone-1" style="font-size: 1rem;"></i>{{$company_info->mobile}}</a>
                         @endif
                     </li>
-                    <!-- @if(Auth::user())
+                     @if(Auth::user())
                     <li class="float-right"><a class="pt-1 pb-0" href="{{ route('customer-logout') }}"
                             style="color: white;">Logout</a></li>
-                    @endif -->
+                    @endif
                     <!-- <li class="float-right"><a class="pt-1 pb-0" href="#" style="color: white;">Flash Deals</a></li> -->
                     @if(isset($all_active_advertisements['Header']['1']['ads']))
                     <!-- Start Header Ads -->

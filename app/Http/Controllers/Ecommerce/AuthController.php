@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-                return redirect(route('checkout'));
+                return redirect(route('home'));
         }
 
         return back()->withErrors([
@@ -79,7 +79,7 @@ class AuthController extends Controller
                 if (Auth::user()->hasAnyRole('admin|user')) {
                     return redirect('/admin');
                 } else {
-                    return redirect(route('checkout'));
+                    return redirect(route('home'));
                 }
             }
         }

@@ -268,12 +268,13 @@ body {
 
             <div class="or"><span>OR</span></div>
 
-            <form action="">
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <input type="checkbox" id="remember">
+            <form method="POST" action="{{ route('customer-login') }}" id="login-form">
+                @csrf
+                <input type="text" name="mobile"  placeholder="Phone Number" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="checkbox" id="remember" >
                 <label for="remember">Keep me sign in</label>
-                <a href="#" class="btn-signin" style="visibility: hidden;">Sign Up</a>
+                <button type="submit" class="btn-signin">Sign In</button>
 
                 <a href="javascript:void(0)" class="btn-reset btn-fade">Recover your password <i class="fa fa-long-arrow-right"
                                                                                 aria-hidden="true"></i></a>

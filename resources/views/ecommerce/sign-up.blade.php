@@ -118,14 +118,19 @@
         <div class="header">
             <h1>Create an Account</h1>
         </div>
-        <form>
+        <form method="POST" action="{{ route('customer-register') }}" id="checkout-form">
+            @csrf
+            <div class="input">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" name="name" placeholder="Name" />
+            </div>
             <div class="input">
                 <i class="fa-solid fa-envelope"></i>
-                <input type="email" placeholder="Email" />
+                <input type="text" name="mobile" placeholder="Mobile" />
             </div>
             <div class="input">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" placeholder="Password" />
+                <input type="password" name="password" placeholder="Password" />
             </div>
             <input class="signup-btn" type="submit" value="SIGN UP" />
         </form>
