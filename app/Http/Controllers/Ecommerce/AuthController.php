@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function signUpIndex() {
+        return view('ecommerce.sign-up');
+    }
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([

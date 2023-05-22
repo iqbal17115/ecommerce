@@ -189,7 +189,7 @@
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
-                     Sign In <i class="fas fa-user text-light"></i>
+                     <a href="{{ route('customer-sign-in') }}">Sign In <i class="fas fa-user text-light"></i></a>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-mobile-menu" style="font-size: 16px;">
                     <div class="d-flex flex-column align-items-center">

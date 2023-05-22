@@ -73,11 +73,13 @@ Route::get('about', [HomeController::class, 'aboutUs'])->name('about');
 Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('terms-condition', [HomeController::class, 'termsAndCondition'])->name('terms-condition');
 Route::get('shipping-and-delivery', [HomeController::class, 'addShippingAndDelivery'])->name('shipping-and-delivery');
-Route::Post('customer_sign_in', [LoginController::class, 'authenticate'])->name('customer_sign_in');
+Route::get('customer-sign-in', [LoginController::class, 'index'])->name('customer-sign-in');
+Route::Post('customer-sign-in', [LoginController::class, 'authenticate'])->name('customer-sign-in');
+Route::get('sign-up', [AuthController::class, 'signUpIndex'])->name('sign-up');
 Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
 Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
 Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
-// 
+//
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
@@ -255,7 +257,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::get('feature-setting', [FeatureSettingController::class, 'index'])->name('feature-setting');
             Route::post('add-feature_setting', [FeatureSettingController::class, 'addFeatureSetting'])->name('add.feature_setting');
             Route::get('feature-setting-list', [FeatureSettingController::class, 'featureSettingList'])->name('feature-setting-list');
-            
+
         }
     );
     // End Feature Setting
