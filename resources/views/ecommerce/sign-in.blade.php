@@ -23,9 +23,9 @@ body {
 }
 
 .sign-panels {
-    width: 650px;
+    width: 470px;
     background: #fff;
-    padding: 40px 80px;
+    padding: 10px 20px;
     margin: 40px auto;
     border-radius: 20px;
     text-align: center;
@@ -161,12 +161,11 @@ body {
 
 .btn-signin {
     display: inline-block;
-    width: 50%;
+    width: 40%;
     margin-top: 10px;
-    height: 50px;
     background: #ec581e;
     border-radius: 50px;
-    padding: 11px;
+    padding: 8px;
     font-size: 20px;
     color: #fff;
     text-decoration: none;
