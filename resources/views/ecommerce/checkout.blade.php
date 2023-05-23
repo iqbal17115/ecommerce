@@ -328,6 +328,9 @@
     <!-- End .container -->
 </main>
 <!-- End .main -->
+   <!-- footer-area -->
+   @include('ecommerce.footer')
+   <!-- footer-area-end -->
 @include('ecommerce.checkout-js')
 @include('ecommerce.sidebar-js')
 
