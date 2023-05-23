@@ -32,12 +32,12 @@
 
 .brand-container {
     background-color: #f7f7f7;
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 5px;
+    margin-bottom: 2px;
 }
 .category-container {
     background-color: #f7f7f7;
-    padding: 10px;
+    padding: 5px;
     margin-bottom: 5px;
 }
 .brand-label h5 {
@@ -111,16 +111,16 @@
                 <div class="col-lg-7 col-md-6 product-single-details">
                     <h1 class="product-title">{{$product_detail->name}}</h1>
                     @if($product_detail->Brand)
-                    <div class="row g-3 align-items-center brand-container">
+                    <div class="row g-3 align-items-center brand-container" style="border: 2px solid #eaeaea;">
                         <div class="col-md-3">
                             <h5 class="fw-bold m-0 p-0">Brand:</h5>
                         </div>
                         <div class="col-md-9">
-                            <h4 class="text-danger m-0 p-0">{{$product_detail->Brand->name}}</h4>
+                            <span class="m-0 p-0" style="font-weight: bold; font-size: 18px;color: #f4631b;">{{$product_detail->Brand->name}}</span>
                         </div>
                     </div>
                     @endif
-                    <div class="row g-3 align-items-center category-container">
+                    <div class="row g-3 align-items-center category-container" style="border: 2px solid #eaeaea;">
                         @foreach ($product_detail->category->getParentsAttribute() as $parentCategory)
                         {{ $parentCategory->name }}
                         @if (!$loop->last)
