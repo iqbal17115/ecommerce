@@ -148,7 +148,10 @@
 @include('ecommerce.cart-js')
 @include('ecommerce.sidebar-js')
 
-<script>
+@push('scripts')
+  <script>
+    window.onload = function() {
+    // Code to be executed after rendering the full layout
 function lazyLoad() {
     const lazyImages = document.querySelectorAll('.lazy-load');
     lazyImages.forEach(img => {
@@ -162,7 +165,6 @@ function lazyLoad() {
 
 // Check for visible images on page load
 document.addEventListener("DOMContentLoaded", lazyLoad);
-$(document).ready(function() {
     // Get an array of all the image elements you want to load
     var images = document.getElementsByClassName('lazy-load');
 
@@ -182,7 +184,8 @@ $(document).ready(function() {
                 image.classList.remove(
                     'lazy-load'
                 ); // Remove the class to prevent the image from being loaded again
-                observer.unobserve(image); // Stop observing the image once it has been loaded
+                observer.unobserve(
+                    image); // Stop observing the image once it has been loaded
             }
         });
     }, options);
@@ -192,6 +195,7 @@ $(document).ready(function() {
         var image = images[i];
         observer.observe(image);
     }
-});
-</script>
-@endsection
+};
+
+  </script>
+@endpush
