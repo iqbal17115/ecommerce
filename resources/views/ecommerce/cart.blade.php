@@ -142,6 +142,9 @@
 
     <div class="mb-6"></div><!-- margin -->
 </main><!-- End .main -->
+<!-- footer-area -->
+@include('ecommerce.footer')
+<!-- footer-area-end -->
 @include('ecommerce.cart-js')
 @include('ecommerce.sidebar-js')
 
