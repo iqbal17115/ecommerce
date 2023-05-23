@@ -270,7 +270,7 @@ body {
 
             <form method="POST" action="{{ route('customer-login') }}" id="login-form">
                 @csrf
-                <input type="text" name="mobile"  placeholder="Phone Number" required>
+                <input type="text" name="identifier"  placeholder="Email or Mobile" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="checkbox" id="remember" >
                 <label for="remember">Keep me sign in</label>
