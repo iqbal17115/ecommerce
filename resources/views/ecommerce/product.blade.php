@@ -113,10 +113,7 @@
                     @if($product_detail->Brand)
                     <div class="row g-3 align-items-center brand-container" style="border: 2px solid #eaeaea;">
                         <div class="col-md-3">
-                            <h5 class="fw-bold m-0 p-0">Brand:</h5>
-                        </div>
-                        <div class="col-md-9">
-                            <span class="m-0 p-0" style="font-weight: bold; font-size: 18px;color: #f4631b;">{{$product_detail->Brand->name}}</span>
+                            <h5 class="fw-bold m-0 p-0">Brand: <span class="m-0 p-0" style="font-weight: bold; font-size: 15px;color: #f4631b;">{{$product_detail->Brand->name}}</span></h5>
                         </div>
                     </div>
                     @endif
