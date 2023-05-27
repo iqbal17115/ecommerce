@@ -255,7 +255,7 @@
                             $offerPercentage = round(((($product->your_price - $product->sale_price) / $product->your_price) * 100), 0); // Calculate the offer percentage
                             ?>
                             <div class="label-group">
-                                <div class="product-label label-sale">{{$offerPercentage}}%</div>
+                                <div class="product-label label-sale">-{{$offerPercentage}}%</div>
                             </div>
                             @endif
                             <div class="btn-icon-group">
