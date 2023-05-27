@@ -8,6 +8,33 @@ use Illuminate\Http\Request;
 
 class CompanyInfoController extends Controller
 {
+    // Keyword Save
+    public function keyword(Request $request)
+    {
+        $company_info = CompanyInfo::firstOrNew();
+        $company_info->key_word = $request->key_word;
+        $company_info->save();
+        return response()->json([
+            'status' => 201
+        ]);
+    }
+    //End  Keyword Save
+
+
+    // Start Description Save
+    public function description(Request $request)
+    {
+        $company_info = CompanyInfo::firstOrNew();
+        $company_info->description = $request->description;
+        $company_info->save();
+
+        return response()->json([
+            'status' => 201
+        ]);
+    }
+    // End  Description Save
+
+
     public function addStatus(Request $request)
     {
         $company_info = CompanyInfo::firstOrNew();
@@ -19,7 +46,6 @@ class CompanyInfoController extends Controller
         $company_info->is_footer_block2_active = $request->is_footer_block2_active == null ? 0 : 1;
         $company_info->is_footer_block3_active = $request->is_footer_block3_active == null ? 0 : 1;
         $company_info->save();
-
         return response()->json([
             'status' => 201
         ]);
@@ -34,6 +60,10 @@ class CompanyInfoController extends Controller
             'status' => 201
         ]);
     }
+
+
+
+
     public function addReturnPolicy(Request $request)
     {
         $company_info = CompanyInfo::firstOrNew();
@@ -151,7 +181,7 @@ class CompanyInfoController extends Controller
             $company_info->about_us_image = $about_us_image;
         }
 
-        
+
         $company_info->footer_ads = $request->footer_ads;
         $company_info->phone = $request->phone;
         $company_info->mobile = $request->mobile;
