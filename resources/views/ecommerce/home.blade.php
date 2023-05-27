@@ -241,7 +241,7 @@
                     @foreach ($product_feature->Product as $product)
                     <div class="product-default inner-quickview inner-icon">
                         <figure>
-                            <a href="{{ route('product-detail', ['id' => $product->id]) }}">
+                            <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}">
                                 <img class="lazy-load" @if ($product->ProductMainImage)
                                 data-src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
                                 @endif

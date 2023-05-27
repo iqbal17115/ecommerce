@@ -57,6 +57,7 @@ Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagin
 Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
 Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
 Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
+Route::get('shop/products/{name}', [ProductDetailController::class, 'productDetail'])->name('products.show');
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::get('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
