@@ -1,120 +1,84 @@
 <header class="header">
-
-    <head>
-        <link rel="canonical" href="https://www.aladdinne.com">
-        <script type='application/ld+json'>
-            {
-              "@context": "http://www.schema.org",
-              "@type": "ShoppingCenter",
-              "name": "Aladdinne.com",
-              "url": "https://www.aladdinne.com/",
-              "logo": "https://www.aladdinne.com/storage/company_info/logos/Lpzoe54rj1p8i4K6mpwVRIxdPmS6CSfP59liCSyR.png",
-              "image": "https://www.aladdinne.com/storage/company_info/logos/Lpzoe54rj1p8i4K6mpwVRIxdPmS6CSfP59liCSyR.png",
-              "description": "Aladdinne is an e-commerce marketplace platform that connects multiple buyers and sellers to facilitate buyers and sellers both by the buying and selling of a wide range of products and services in our marketplace, such as big brands selling items ranging from electronics, Fashion, home Decor & appliances, gadgets, garden supplies, groceries, etc. Aladdinne provides service through the aladdinne.com website, mobile app, and other platforms.",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Office No:523, 5th Floor, Alpona Plaza",
-                "addressLocality": "Dhaka",
-                "addressRegion": "Dhaka",
-                "postalCode": "1205",
-                "addressCountry": "Bangladesh"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": "23.7386671",
-                "longitude": "90.381785"
-              },
-              "hasMap": "https://www.google.com/maps/search/https:%2F%2Fwww.google.com%2Fmaps%2Fplace%2FAladdinne.com%2F@23.7386622,90.3843599,15z%2Fdata%3D!4m6!3m5!1s0x3755b9ecc12ae8c5:0x29d5b7fd67107fe5!8m2!3d23.7386622!4d90.3843599!16s%252Fg%252F11tcg4q1dx/@23.7386671,90.381785,17z/data=!3m1!4b1",
-              "openingHours": "Mo, Tu, We, Th, Fr, Sa, Su 08:00-17:00",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "contactType": "support @aladdinne.com",
-                "telephone": "+8801975340753"
-              }
-            }
-             </script>
-    </head>
-
     <style>
-    .top-links-item {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-    }
+        .top-links-item {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
 
-    .top-links-item span {
-        display: inline-block;
-        padding: 5px;
-        cursor: pointer;
-    }
+        .top-links-item span {
+            display: inline-block;
+            padding: 5px;
+            cursor: pointer;
+        }
 
-    .top-links-item .lzd-switch-popup {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        display: none;
-        min-width: 160px;
-        padding: 5px 0;
-        margin: 2px 0 0;
-        font-size: 14px;
-        text-align: left;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    }
+        .top-links-item .lzd-switch-popup {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            min-width: 160px;
+            padding: 5px 0;
+            margin: 2px 0 0;
+            font-size: 14px;
+            text-align: left;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        }
 
-    .top-links-item .lzd-switch-popup .top-popup-content {
-        max-height: 200px;
-        overflow: auto;
-    }
+        .top-links-item .lzd-switch-popup .top-popup-content {
+            max-height: 200px;
+            overflow: auto;
+        }
 
-    .top-links-item .lzd-switch-item {
-        display: block;
-        padding: 3px 20px;
-        clear: both;
-        font-weight: 400;
-        line-height: 1.42857143;
-        color: #333;
-        white-space: nowrap;
-        cursor: pointer;
-    }
+        .top-links-item .lzd-switch-item {
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.42857143;
+            color: #333;
+            white-space: nowrap;
+            cursor: pointer;
+        }
 
-    .top-links-item .lzd-switch-item:hover,
-    .top-links-item .lzd-switch-item:focus {
-        color: #262626;
-        background-color: #f5f5f5;
-    }
+        .top-links-item .lzd-switch-item:hover,
+        .top-links-item .lzd-switch-item:focus {
+            color: #262626;
+            background-color: #f5f5f5;
+        }
 
-    .top-links-item .lzd-switch-item.currentSelected .lzd-switch-checked {
-        float: right;
-        margin-top: 3px;
-        margin-right: -10px;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #f0ad4e;
-    }
+        .top-links-item .lzd-switch-item.currentSelected .lzd-switch-checked {
+            float: right;
+            margin-top: 3px;
+            margin-right: -10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #f0ad4e;
+        }
 
-    .top-links-item .lzd-switch-item .lzd-switch-icon {
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-        margin-right: 10px;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-        vertical-align: middle;
-    }
+        .top-links-item .lzd-switch-item .lzd-switch-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            vertical-align: middle;
+        }
 
-    .top-links-item .lzd-switch-item .lzd-switch-icon-bn {
-        background-image: url('flag/bengali-flag-icon.png');
-    }
+        .top-links-item .lzd-switch-item .lzd-switch-icon-bn {
+            background-image: url('flag/bengali-flag-icon.png');
+        }
 
-    .top-links-item .lzd-switch-item .lzd-switch-icon-en {
-        background-image: url('flag/english-flag-icon.png');
-    }
+        .top-links-item .lzd-switch-item .lzd-switch-icon-en {
+            background-image: url('flag/english-flag-icon.png');
+        }
     </style>
     <!-- Start Sidebar -->
     <div id="wrapper">
@@ -181,7 +145,7 @@
                                 @endif
                             @endforeach
                         </select> -->
-                        <div id="google_translate_element" style="margin-top: 5px;padding:0px;"></div>
+                    <div id="google_translate_element" style="margin-top: 5px;padding:0px;"></div>
                 </div>
                 <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
@@ -230,7 +194,8 @@
                                     class="img-fluid icon-cart-thick pb-0 mb-0" style="height: 20px;">
                                 @endif
                                 <span class="cart-count badge-circle"
-                                    style="top: 5px; left: 27px; background: darkblue;">{{ count((array) session('cart')) }}</span>
+                                    style="top: 5px; left: 27px; background: darkblue;">{{ count((array)
+                                    session('cart')) }}</span>
                             </a>
                             <span class="text-dark small responsive-mobile-menu">Cart</span>
                         </div>
@@ -251,13 +216,13 @@
                                     <div class="product cart-{{ $id }}" data-id="{{ $id }}">
                                         <div class="product-details">
                                             <h4 class="product-title">
-                                                <a
-                                                    href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name'] }}</a>
+                                                <a href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name']
+                                                    }}</a>
                                             </h4>
 
                                             <span class="cart-product-info">
-                                                <span
-                                                    class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
+                                                <span class="cart-product-qty card-product-qty-{{ $id }}">{{
+                                                    $details['quantity'] }}</span>
                                                 ×
                                                 {{$currency->icon}}{{ $details['sale_price'] }}
                                             </span>
@@ -289,10 +254,9 @@
                                 <!-- End .dropdown-cart-total -->
 
                                 <div class="dropdown-cart-action">
-                                    <a href="{{ route('cart') }}"
-                                        class="btn btn-gray btn-block view-cart">Shopping Cart</a>
-                                    <a href="{{ route('checkout') }}"
-                                        class="btn btn-dark btn-block">Check Out</a>
+                                    <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">Shopping
+                                        Cart</a>
+                                    <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">Check Out</a>
                                 </div>
                                 <!-- End .dropdown-cart-total -->
                             </div>
@@ -323,8 +287,7 @@
                                 style="color: white;"></i><span style="color: white;">All</span></a>
                     </li>
                     <li>
-                        <a class="pt-1 pb-0" href="{{ route('home') }}"
-                            style="color: white;">Sell On aladdine</a>
+                        <a class="pt-1 pb-0" href="{{ route('home') }}" style="color: white;">Sell On aladdine</a>
                     </li>
                     <!-- Start Category -->
                     @foreach($headerMenuCategories as $headerMenuCategory)
