@@ -129,7 +129,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                         <div class="product-default inner-quickview inner-icon">
                             <figure>
-                                <a href="{{ route('product-detail', ['id'=>$product->id]) }}">
+                                <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}">
                                     @if($product->ProductMainImage)
                                     <img src="{{ asset('storage/product_photo/'.$product->ProductMainImage->image) }}"
                                         width="239" height="239" style="width: 239px; height: 239px;" alt="product">
@@ -145,7 +145,7 @@
                             </figure>
                             <div class="product-details">
                                 <h3 class="product-title">
-                                    <a href="{{ route('product-detail', ['id'=>$product->id]) }}"
+                                    <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}"
                                         class="product-name">{{$product->name}}</a>
                                     {{-- rating add html code --}}
                                     <span class="five-star-rating">

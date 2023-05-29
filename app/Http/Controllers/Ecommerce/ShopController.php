@@ -50,11 +50,11 @@ class ShopController extends Controller
                 $query->orderBy('sale_price', 'desc');
                 break;
         }
-
+        $query->join('categories', 'categories.id', '=', 'products.category_id');
         if ($request->filter_type == 1 && !$request->category_id) {
-            $query->where('category_id', $request->filter_for);
+            $query->where('categories.name', $request->filter_for);
         } else if ($request->filter_type == 2) {
-            $query->where('name', 'like', '%' . $request->filter_for . '%');
+            $query->where('products.name', 'like', '%' . $request->filter_for . '%');
         }
 
         if ($request->brand_id) {
@@ -69,6 +69,7 @@ class ShopController extends Controller
 
             $query->whereBetween('sale_price', [$request->min_price, $request->max_price]);
         }
+        $query->select('products.*');
         $products = $query->paginate($request->count);
 
         return view('ecommerce.paginate-shop', compact('products'))->render();
@@ -85,20 +86,19 @@ class ShopController extends Controller
         $products = Product::latest()->paginate($request->count);
         return view('ecommerce.paginate-shop', compact('products'))->render();
     }
-    public function shop($id)
+    public function shop($name)
     {
-        $products = Product::whereCategoryId($id)->orderBy('id', 'desc')->paginate(12);
+        $products = Product::join('categories', 'categories.id', '=', 'products.category_id')->where('categories.name', '=', $name)->orderBy('products.id', 'desc')->select('products.*')->paginate(12);
         $brands = Product::join('categories', 'categories.id', '=', 'products.category_id')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
-            ->where('products.category_id', $id)
             ->orderBy('products.id', 'desc')
             ->select('brands.id', 'brands.name')
             ->distinct('brands.name')
             ->get();
 
-        $related_category = Category::find($id);
+        $related_category = Category::where('categories.name', '=', $name)->first();
         $filter_type = 1;
-        $filter_for = $id;
+        $filter_for = $name;
         return view('ecommerce.shop', compact(['products', 'brands', 'related_category', 'filter_type', 'filter_for']));
     }
 }
