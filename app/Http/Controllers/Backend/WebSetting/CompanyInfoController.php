@@ -38,10 +38,6 @@ class CompanyInfoController extends Controller
     public function addStatus(Request $request)
     {
         $company_info = CompanyInfo::firstOrNew();
-        $company_info->is_phone_active = $request->is_phone_active == null ? 0 : 1;
-        $company_info->is_mobile_active = $request->is_mobile_active == null ? 0 : 1;
-        $company_info->is_email_active = $request->is_email_active == null ? 0 : 1;
-        $company_info->is_hotline_active = $request->is_hotline_active == null ? 0 : 1;
         $company_info->is_footer_block1_active = $request->is_footer_block1_active == null ? 0 : 1;
         $company_info->is_footer_block2_active = $request->is_footer_block2_active == null ? 0 : 1;
         $company_info->is_footer_block3_active = $request->is_footer_block3_active == null ? 0 : 1;
@@ -184,9 +180,13 @@ class CompanyInfoController extends Controller
 
         $company_info->footer_ads = $request->footer_ads;
         $company_info->phone = $request->phone;
+        $company_info->is_phone_active = $request->is_phone_active == null ? 0 : 1;
         $company_info->mobile = $request->mobile;
+        $company_info->is_mobile_active = $request->is_mobile_active == null ? 0 : 1;
         $company_info->email = $request->email;
+        $company_info->is_email_active = $request->is_email_active == null ? 0 : 1;
         $company_info->hotline = $request->hotline;
+        $company_info->is_hotline_active = $request->is_hotline_active == null ? 0 : 1;
         $company_info->address = $request->address;
         $company_info->google_map_location = $request->google_map_location;
         $company_info->web = $request->web;
