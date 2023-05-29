@@ -119,6 +119,7 @@ $(document).ready(function() {
         let your_price = $(this).data("your_price");
         let sale_price = $(this).data("sale_price");
         let image = $(this).data("image");
+        let is_buy_now = $(this).hasClass('btn-buy-now')
 
         // ajax
         $.ajax({
@@ -157,6 +158,10 @@ $(document).ready(function() {
                     );
                     $('.img-preview-' + data['new_product']['id']).attr("src", '/storage/product_photo/' + data['new_product']['image']);
                         $('.product-unique-' + data['new_product']['id']).attr('href', "{{ route('product-detail', ['id' => ' ']) }}" + data['new_product']['id']);
+                }
+                // Check buy now button
+                if (is_buy_now) {
+                    window.location.href = '/checkout';  // Replace with the actual URL of the checkout page
                 }
             },
             error: function(err) {
