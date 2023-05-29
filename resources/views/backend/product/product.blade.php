@@ -355,7 +355,7 @@ div#variation_content {
                                         <div class="col-md-10">
                                             <!-- Start Content -->
                                             <div class="row">
-                                                
+
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Feature</label>
@@ -453,7 +453,7 @@ div#variation_content {
                                                     </textarea>
                                                 </div>
                                                 <!-- End -->
-                                               
+
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
                                                         style="font-size: 14px;">Item Booking Date</label>
@@ -690,7 +690,7 @@ div#variation_content {
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="your_price">AED</span>
+                                                            <span class="input-group-text" id="your_price">{{$currency? $currency->icon : ''}}</span>
                                                         </div>
                                                         <input type="text" name="your_price" id="your_price"
                                                             @if($productInfo) value="{{$productInfo->your_price}}"
@@ -707,7 +707,7 @@ div#variation_content {
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text" id="sale_price">AED</span>
+                                                            <span class="input-group-text" id="sale_price">{{$currency? $currency->icon : ''}}</span>
                                                         </div>
                                                         <input type="text" name="sale_price" id="sale_price"
                                                             @if($productInfo) value="{{$productInfo->sale_price}}"
@@ -762,7 +762,7 @@ div#variation_content {
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"
-                                                                id="retail_price_inclusive_vat">AED</span>
+                                                                id="retail_price_inclusive_vat">{{$currency? $currency->icon : ''}}</span>
                                                         </div>
                                                         <input type="text" name="retail_price" id="retail_price"
                                                             @if($productInfo) value="{{$productInfo->retail_price}}"
@@ -1681,8 +1681,8 @@ div#variation_content {
                                                     <textarea class="form-control" name="short_deacription"
                                                         id="short_deacription">
                                                         @if($productInfo &&
-                                                        $productInfo->ProductDetail) 
-                                                          {{$productInfo->ProductDetail->short_deacription}} 
+                                                        $productInfo->ProductDetail)
+                                                          {{$productInfo->ProductDetail->short_deacription}}
                                                         @endif
                                                     </textarea>
                                                 </div>
@@ -1694,8 +1694,8 @@ div#variation_content {
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="product_description"
                                                         id="product_description">
-                                                        @if($productInfo && $productInfo->ProductDetail) 
-                                                           {{$productInfo->ProductDetail->description}} 
+                                                        @if($productInfo && $productInfo->ProductDetail)
+                                                           {{$productInfo->ProductDetail->description}}
                                                         @endif
                                                     </textarea>
                                                 </div>
@@ -1707,8 +1707,8 @@ div#variation_content {
                                                 <div class="col-md-8 mt-md-3">
                                                     <textarea class="form-control" name="product_content"
                                                         id="product_content">
-                                                        @if($productInfo && $productInfo->ProductDetail) 
-                                                           {{$productInfo->ProductDetail->product_content}} 
+                                                        @if($productInfo && $productInfo->ProductDetail)
+                                                           {{$productInfo->ProductDetail->product_content}}
                                                         @endif
                                                     </textarea>
                                                 </div>
