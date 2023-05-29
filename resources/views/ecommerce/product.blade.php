@@ -424,6 +424,17 @@
                         <h3 class="product-title">
                             <a
                                 href="{{ route('product-detail', ['id'=>$product_category_product->id]) }}">{{$product_category_product->name}}</a>
+                                                                {{-- rating add html code --}}
+                                                                <span class="five-star-rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    {{-- end of rating add html code --}}
+                                                                </span>
+                                                                <span class="rating-number">-</span>
+                                                                <span class="rating-number" style="font-size: 11px;">33,213</span>
                         </h3>
                         <!-- End .product-container -->
                         <div class="price-box">

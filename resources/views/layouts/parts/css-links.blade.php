@@ -263,6 +263,35 @@
             text-overflow: ellipsis !important;
             white-space: normal !important;
         }
+
+        /* five start css code */
+        .five-star-rating {
+            color: #F4631B;
+            /* Set the color of the stars */
+            font-size: 12px;
+            margin-left: 11px;
+            /* Adjust the size of the stars */
+        }
+
+        .five-star-rating i {
+            display: inline-block;
+        }
+
+        /* If you are using FontAwesome for the star icons */
+        .five-star-rating .fa-star:before {
+            content: "\f005";
+            /* Use the appropriate Unicode for the star icon */
+        }
+
+        /* end of five start css code */
+
+        /* two line name show css code */
+
+
+        .product-name {
+            display: inline-block;
+            word-wrap: break-word;
+        }
     </style>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
