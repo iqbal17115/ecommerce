@@ -88,6 +88,7 @@ class ShopController extends Controller
     }
     public function shop($name)
     {
+        $name = urldecode($name);
         $products = Product::join('categories', 'categories.id', '=', 'products.category_id')->where('categories.name', '=', $name)->orderBy('products.id', 'desc')->select('products.*')->paginate(12);
         $brands = Product::join('categories', 'categories.id', '=', 'products.category_id')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
