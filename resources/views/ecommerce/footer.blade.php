@@ -4,38 +4,38 @@
         <div class="footer-top" style="background: #f4631b;padding-top: 2rem;padding-bottom: 2rem;">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-1">
+                    <div class="col-md-1" style="display: flex; justify-content: center; align-items: center;">
                         @if($company_info && $company_info->footer_logo)
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('home') }}" style="display: inline-block; text-align: center;">
                             <img data-src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo" class="logo lazy-load"
                                 style="height: 50px;">
                         </a>
                         @endif
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="display: inline-block; text-align: center;">
                         <span
                             class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">@if($company_info
                             && $company_info->footer_ads) {{$company_info->footer_ads}} @endif</span>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-1" style="display: inline-block; text-align: center;">
                         <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
                             style="font-size: 18px;">Language</span>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1" style="display: inline-block; text-align: center;">
                         @if($company_info && $company_info->country_flag)
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('home') }}" style="display: inline-block; text-align: center;">
                             <img data-src="{{ asset('storage/'.$company_info->country_flag) }}" alt="Logo" class="logo lazy-load"
                                 style="height: 50px;">
                         </a>
                         @endif
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" style="display: inline-block; text-align: center;">
                         <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
                             style="font-size: 18px;">Subscribe to Newsletter</span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="display: inline-block; text-align: center;">
                         <form action="#" class="mb-0">
                             <div class="footer-submit-wrapper d-flex">
                                 <input type="email" class="form-control mb-0" placeholder="Enter your Email address..."

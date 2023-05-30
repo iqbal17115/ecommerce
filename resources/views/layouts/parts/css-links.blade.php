@@ -292,6 +292,7 @@
             display: inline-block;
             word-wrap: break-word;
         }
+
     </style>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>

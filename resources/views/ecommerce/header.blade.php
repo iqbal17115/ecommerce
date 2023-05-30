@@ -79,6 +79,10 @@
         .top-links-item .lzd-switch-item .lzd-switch-icon-en {
             background-image: url('flag/english-flag-icon.png');
         }
+
+        .skiptranslate:contains("দ্বারা পরিচালিত") {
+            display: none !important;
+        }
     </style>
     <!-- Start Sidebar -->
     <div id="wrapper">
