@@ -90,7 +90,7 @@
                         }">
                     @foreach ($top_show_categories as $top_show_category)
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
-                        <a href="{{ route('catalog', ['id' => $top_show_category->id]) }}">
+                        <a href="{{ route('catalog.show', ['name' => urlencode($top_show_category->name)]) }}">
                             <figure>
                                 <img class="lazy-load" data-src="{{ asset('storage/' . $top_show_category->image) }}"
                                     alt="category" width="280" height="240"
@@ -125,7 +125,7 @@
                         <div class="row">
                             @foreach ($top_feature->TopFeatureSetting->FeatureSettingDetail as $feature_setting_detail)
                             <div class="col-6 p-0">
-                                <a href="{{ route('catalog', ['id' => $feature_setting_detail->category_id]) }}">
+                                <a href="{{ route('catalog.show', ['name' => urlencode($feature_setting_detail->Category->name)]) }}">
                                     <div class="card mb-0">
                                         <img class="card-img-top lazy-load"
                                             data-src="{{ asset('storage/' . $feature_setting_detail->Category->image) }}"

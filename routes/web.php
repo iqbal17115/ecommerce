@@ -51,6 +51,7 @@ Route::get('/check_sub_category', [HomeController::class, 'checkSubCategory'])->
 Route::get('/get_sub_category', [HomeController::class, 'getSubCategory'])->name('get_sub_category');
 Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])->name('get_parent_category');
 Route::get('/catalog/{id}', [ShopController::class, 'shop'])->name('catalog');
+Route::get('/catalog/{name}', [ShopController::class, 'shop'])->name('catalog.show');
 Route::get('/get-main-content', [HomeController::class, 'getMainContent'])->name('get-main-content');
 Route::get('/search/{q?}', [ShopController::class, 'shopSearch'])->name('search');
 Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagination']);
