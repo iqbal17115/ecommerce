@@ -88,7 +88,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 35px 0;
+        /* margin: 35px 0; */
         font-weight: 600;
         color: #9f9f9f;
     }
