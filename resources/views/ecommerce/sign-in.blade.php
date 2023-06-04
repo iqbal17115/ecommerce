@@ -354,7 +354,7 @@
         background: #E74B37;
     }
 </style>
-<div class="wrapper">
+<div class="wrapper" style="background-color: #fff;">
     <div class="sign-panels">
         <div class="login">
             <div class="title">
