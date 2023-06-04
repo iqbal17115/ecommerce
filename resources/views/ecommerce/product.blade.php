@@ -69,7 +69,17 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
                     <li class="breadcrumb-item"><a href="#">Products : <span
-                                style="color: black;">{{ $product_detail->Category->name }}</span></a>
+                                style="color: black;">
+                                @foreach ($product_detail->category->getParentsAttribute() as $parentCategory)
+                                {{ $parentCategory->name }}
+                                @if (!$loop->last)
+                                    &raquo;
+                                @else
+                                    &raquo;
+                                    {{ $product_detail->category->name }}
+                                @endif
+                            @endforeach
+                            </span></a>
                     </li>
                 </ol>
             </div>
@@ -116,22 +126,11 @@
                             <div class="row g-3 align-items-center brand-container" style="border: 2px solid #eaeaea;">
                                 <div class="col-md-3">
                                     <h5 class="fw-bold m-0 p-0">Brand: <span class="m-0 p-0"
-                                            style="font-weight: bold; font-size: 15px;color: #f4631b;">{{ $product_detail->Brand->name }}</span>
+                                            style="font-weight: bold;color: #f4631b;">{{ $product_detail->Brand->name }}</span>
                                     </h5>
                                 </div>
                             </div>
                         @endif
-                        <div class="row g-3 align-items-center category-container" style="border: 2px solid #eaeaea;">
-                            @foreach ($product_detail->category->getParentsAttribute() as $parentCategory)
-                                {{ $parentCategory->name }}
-                                @if (!$loop->last)
-                                    &raquo;
-                                @else
-                                    &raquo;
-                                    {{ $product_detail->category->name }}
-                                @endif
-                            @endforeach
-                        </div>
 
                         {{-- star Rating --}}
                         <div class="rating-container">
