@@ -157,7 +157,7 @@ $(document).ready(function() {
                         '" alt=""></a><a class="btn-remove" title="Remove Product"><span>×</span></a></figure></div>'
                     );
                     $('.img-preview-' + data['new_product']['id']).attr("src", '/storage/product_photo/' + data['new_product']['image']);
-                        $('.product-unique-' + data['new_product']['id']).attr('href', "{{ route('product-detail', ['id' => ' ']) }}" + data['new_product']['id']);
+                        $('.product-unique-' + data['new_product']['id']).attr('href', "{{ route('products.show', ['name' => ' ']) }}" + data['new_product']['name']);
                 }
                 // Check buy now button
                 if (is_buy_now) {
@@ -165,8 +165,6 @@ $(document).ready(function() {
                 }
             },
             error: function(err) {
-        alert(id);
-
                 var error = err.responseJSON;
                 console.log(error);
             }

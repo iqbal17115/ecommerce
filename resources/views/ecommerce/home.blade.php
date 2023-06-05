@@ -243,7 +243,7 @@
                         </figure>
                         <div class="product-details">
                             <h3 class="product-title">
-                                <a href="{{ route('product-detail', ['id' => $product->id]) }}" class="product-name"
+                                <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}" class="product-name"
                                     id="product-name">{{ $product->name }}</a>
 
                                 {{-- rating add html code --}}
@@ -279,7 +279,7 @@
                             </div>
                             <!-- End .price-box -->
                             @guest
-                            <a href="{{ route('customer-sign-in') }}" class="btn btn-dark btn-add-cart btn-shop text-light" style="width: 100%; background-color: #ae016a;;">
+                            <a href="{{ route('customer-sign-in') }}" class="btn btn-dark btn-shop text-light" style="width: 100%; background-color: #ae016a;padding: 0 1.4rem;font-size: 1.2rem;font-weight: 600;text-align: center;">
                                 LOGIN TO ORDER
                             </a>
                             @endguest

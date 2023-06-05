@@ -426,11 +426,12 @@
                             @if ($product_category_product->id != $product_detail->id)
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
-                                        <a href="{{ route('product-detail', ['id' => $product_category_product->id]) }}">
+                                        <a href="{{ route('products.show', ['name' => urlencode($product_category_product->name)]) }}">
                                             <img @if ($product_category_product->ProductMainImage) src="{{ asset('storage/product_photo/' . $product_category_product->ProductMainImage->image) }}" @endif
                                                 width="239" height="239" style="width: 239px; height: 239px;"
                                                 alt="product">
                                         </a>
+                                        @auth
                                         <div class="btn-icon-group">
                                             <a href="javascript:void(0);" title="Add To Cart"
                                                 data-id="{{ $product_category_product->id }}"
@@ -442,11 +443,12 @@
                                 btn-add-cart product-type-simple"><i
                                                     class="icon-shopping-cart"></i></a>
                                         </div>
+                                        @endauth
                                     </figure>
                                     <div class="product-details">
                                         <h3 class="product-title">
                                             <a
-                                                href="{{ route('product-detail', ['id' => $product_category_product->id]) }}">{{ $product_category_product->name }}</a>
+                                                href="{{ route('products.show', ['name' => urlencode($product_category_product->name)]) }}">{{ $product_category_product->name }}</a>
                                             {{-- rating add html code --}}
                                             <span class="five-star-rating">
                                                 <i class="fas fa-star"></i>
@@ -482,7 +484,7 @@
                                         </div>
                                         <!-- End .price-box -->
                                         @guest
-                                        <a href="{{ route('customer-sign-in') }}" class="btn btn-dark btn-add-cart btn-shop text-light" style="width: 100%; background-color: #ae016a;;">
+                                        <a href="{{ route('customer-sign-in') }}" class="btn btn-dark btn-shop text-light" style="width: 100%; background-color: #ae016a;padding: 0 1.4rem;font-size: 1.2rem;font-weight: 600;text-align: center;">
                                             LOGIN TO ORDER
                                         </a>
                                         @endguest
