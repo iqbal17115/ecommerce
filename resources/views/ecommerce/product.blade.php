@@ -481,6 +481,11 @@
                                             @endphp
                                         </div>
                                         <!-- End .price-box -->
+                                        @guest
+                                        <a href="{{ route('customer-sign-in') }}" class="btn btn-dark btn-add-cart btn-shop text-light" style="width: 100%; background-color: #ae016a;;">
+                                            LOGIN TO ORDER
+                                        </a>
+                                        @endguest
                                     </div>
                                     <!-- End .product-details -->
                                 </div>

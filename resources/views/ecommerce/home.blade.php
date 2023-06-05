@@ -36,7 +36,6 @@
 }
 
 
-
 /* two line name show css code */
 </style>
 <main class="main">
@@ -125,7 +124,7 @@
                         <div class="row">
                             @foreach ($top_feature->TopFeatureSetting->FeatureSettingDetail as $feature_setting_detail)
                             <div class="col-6 p-0">
-                                <a href="{{ route('catalog.show', ['name' => urlencode($feature_setting_detail->Category->name)]) }}">
+                                <a href="{{ route('catalog.show', ['name' => urlencode($feature_setting_detail->Category->name)]) }}"  style="text-decoration: none;">
                                     <div class="card mb-0">
                                         <img class="card-img-top lazy-load"
                                             data-src="{{ asset('storage/' . $feature_setting_detail->Category->image) }}"
@@ -231,6 +230,7 @@
                                 <div class="product-label label-sale">-{{$offerPercentage}}%</div>
                             </div>
                             @endif
+                            @auth
                             <div class="btn-icon-group">
                                 <a href="javascript:void(0);" title="Add To Cart" data-id="{{ $product->id }}"
                                     data-name="{{ $product->name }}" data-your_price="{{ $product->your_price }}"
@@ -239,6 +239,7 @@
                                     class="btn-icon
                                     btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
                             </div>
+                            @endauth
                         </figure>
                         <div class="product-details">
                             <h3 class="product-title">
@@ -277,6 +278,11 @@
                                 @endphp
                             </div>
                             <!-- End .price-box -->
+                            @guest
+                            <a href="{{ route('customer-sign-in') }}" class="btn btn-dark btn-add-cart btn-shop text-light" style="width: 100%; background-color: #ae016a;;">
+                                LOGIN TO ORDER
+                            </a>
+                            @endguest
                         </div>
                         <!-- End .product-details -->
                     </div>

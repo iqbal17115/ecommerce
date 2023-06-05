@@ -60,7 +60,6 @@ Route::get('/search/{q?}', [ShopController::class, 'shopSearch'])->name('search'
 Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagination']);
 Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
 Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
-Route::get('product-detail/{id}', [ProductDetailController::class, 'productDetail'])->name('product-detail');
 Route::get('shop/products/{name}', [ProductDetailController::class, 'productDetail'])->name('products.show');
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::get('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
