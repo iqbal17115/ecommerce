@@ -24,6 +24,7 @@ use App\Http\Controllers\Ecommerce\AuthController;
 use App\Http\Controllers\Ecommerce\ShopController;
 use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
+use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Review
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::get('/', function () {

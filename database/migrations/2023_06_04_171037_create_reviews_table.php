@@ -20,6 +20,7 @@ class CreateReviewsTable extends Migration
             $table->integer('rating');
             $table->text('comment');
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->boolean('is_active')->nullable()->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

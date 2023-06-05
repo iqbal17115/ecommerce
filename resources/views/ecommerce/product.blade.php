@@ -68,17 +68,16 @@
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Products : <span
-                                style="color: black;">
+                    <li class="breadcrumb-item"><a href="#">Products : <span style="color: black;">
                                 @foreach ($product_detail->category->getParentsAttribute() as $parentCategory)
-                                {{ $parentCategory->name }}
-                                @if (!$loop->last)
-                                    &raquo;
-                                @else
-                                    &raquo;
-                                    {{ $product_detail->category->name }}
-                                @endif
-                            @endforeach
+                                    {{ $parentCategory->name }}
+                                    @if (!$loop->last)
+                                        &raquo;
+                                    @else
+                                        &raquo;
+                                        {{ $product_detail->category->name }}
+                                    @endif
+                                @endforeach
                             </span></a>
                     </li>
                 </ol>
@@ -270,7 +269,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content"
-                            role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews (1)</a>
+                            role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews ({{count($product_detail->reviews)}})</a>
                     </li>
                 </ul>
 
@@ -294,13 +293,13 @@
                     <div class="tab-pane fade" id="product-reviews-content" role="tabpanel"
                         aria-labelledby="product-tab-reviews">
                         <div class="product-reviews-content">
-                            <h3 class="reviews-title">1 review for Men Black Sports Shoes</h3>
+                            <h3 class="reviews-title">{{count($product_detail->reviews)}} review for {{$product_detail->name}}</h3>
 
                             <div class="comment-list">
+                                @foreach($product_detail->reviews as $review)
                                 <div class="comments">
                                     <figure class="img-thumbnail">
-                                        <img src="{{ asset('aladdinne/assets/images/blog/author.jpg') }}" alt="author"
-                                            width="80" height="80">
+                                        <img src="{{ asset('aladdinne/assets/images/blog/author.jpg') }}" alt="author" width="80" height="80">
                                     </figure>
 
                                     <div class="comment-block">
@@ -309,7 +308,7 @@
 
                                             <div class="ratings-container float-sm-right">
                                                 <div class="product-ratings">
-                                                    <span class="ratings" style="width:60%"></span>
+                                                    <span class="ratings" style="width: {{ $review->rating*2 }}0%"></span>
                                                     <!-- End .ratings -->
                                                     <span class="tooltiptext tooltip-top"></span>
                                                 </div>
@@ -317,23 +316,26 @@
                                             </div>
 
                                             <span class="comment-by">
-                                                <strong>Joe Doe</strong> – April 12, 2018
+                                                <strong>{{ $review->user->name }}</strong> - {{ $review->created_at->format('F d, Y') }}
                                             </span>
                                         </div>
 
                                         <div class="comment-content">
-                                            <p>Excellent.</p>
+                                            <p>{{ $review->comment }}</p>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
+
 
                             <div class="divider"></div>
 
                             <div class="add-product-review">
                                 <h3 class="review-title">Add a review</h3>
 
-                                <form action="#" class="comment-form m-0">
+                                <form class="comment-form m-0" id="reviewForm">
+                                    <input name="product_id" id="product_id" value="{{ $product_detail->id }}" hidden />
                                     <div class="rating-form">
                                         <label for="rating">Your rating <span class="required">*</span></label>
                                         <span class="rating-stars">
@@ -356,12 +358,12 @@
 
                                     <div class="form-group">
                                         <label>Your review <span class="required">*</span></label>
-                                        <textarea cols="5" rows="6" class="form-control form-control-sm"></textarea>
+                                        <textarea cols="5" rows="6" name="comment" id="comment" class="form-control form-control-sm"></textarea>
                                     </div>
                                     <!-- End .form-group -->
 
 
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-6 col-xl-12">
                                             <div class="form-group">
                                                 <label>Name <span class="required">*</span></label>
@@ -386,9 +388,10 @@
                                                     comment.</label>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <input type="submit" class="btn btn-primary" value="Submit">
+                                    </div> --}}
+                                    @if (Auth::user())
+                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                    @endif
                                 </form>
                             </div>
                             <!-- End .add-product-review -->
@@ -495,7 +498,8 @@
         @if (isset($all_active_advertisements['Details']['4']['ads']))
             <div>
                 <center>
-                    <img src="{{ asset('storage/' . $all_active_advertisements['Details']['4']['ads']) }}" class="">
+                    <img src="{{ asset('storage/' . $all_active_advertisements['Details']['4']['ads']) }}"
+                        class="">
                 </center>
             </div>
         @endif
@@ -510,7 +514,6 @@
     <!-- Start Sidebar -->
     @include('ecommerce.sidebar-js')
     <!-- End Sidebar -->
-
     <script>
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-load');
@@ -546,7 +549,7 @@
                             'lazy-load'
                         ); // Remove the class to prevent the image from being loaded again
                         observer.unobserve(
-                        image); // Stop observing the image once it has been loaded
+                            image); // Stop observing the image once it has been loaded
                     }
                 });
             }, options);
@@ -559,3 +562,36 @@
         });
     </script>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#reviewForm').submit(function(event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+                // Get the form data
+                var formData = {
+                    product_id: $('#product_id').val(),
+                    rating: $('#rating').val(),
+                    comment: $('textarea[name=comment]').val()
+                };
+                console.log(formData);
+                // Send an AJAX POST request
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('reviews.store') }}', // Replace with your Laravel route
+                    data: formData,
+                    success: function(response) {
+                        // Handle success response
+                        $('#rating').val('');
+                        $('textarea[name=comment]').val('');
+                        // You can perform any additional actions here, like updating the UI or showing a success message
+                    },
+                    error: function(error) {
+                        // Handle error response
+                        alert('Error submitting the review');
+                        // You can display an error message or handle the error in any other way
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

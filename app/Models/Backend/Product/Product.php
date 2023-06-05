@@ -9,6 +9,7 @@ use App\Models\Backend\Product\ProductMoreDetail;
 use App\Models\Backend\Product\ProductKeyword;
 use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductImage;
+use App\Models\FrontEnd\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,7 +19,11 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-    public function ProductMainImage()
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }    public function ProductMainImage()
     {
         return $this->hasOne(ProductImage::class);
     }
