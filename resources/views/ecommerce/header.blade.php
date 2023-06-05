@@ -220,7 +220,7 @@
                                     <div class="product cart-{{ $id }}" data-id="{{ $id }}">
                                         <div class="product-details">
                                             <h4 class="product-title">
-                                                <a href="{{ route('product-detail', ['id'=>$id]) }}">{{ $details['name']
+                                                <a href="#">{{ $details['name']
                                                     }}</a>
                                             </h4>
 
@@ -234,7 +234,7 @@
                                         <!-- End .product-details -->
 
                                         <figure class="product-image-container">
-                                            <a href="{{ route('product-detail', ['id'=>$id]) }}"
+                                            <a href="#"
                                                 class="product-image lazy-load">
                                                 <img data-src="{{ asset('storage/product_photo/'.$details['image']) }}"
                                                     alt="product" width="80" height="80">
