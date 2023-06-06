@@ -136,18 +136,16 @@
                                                     alt="product">
                                             @endif
                                         </a>
-                                        @auth
-                                            <div class="btn-icon-group">
-                                                <a href="javascript:void(0);" title="Add To Cart"
-                                                    data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                                                    data-your_price="{{ $product->your_price }}"
-                                                    data-sale_price="{{ $product->sale_price }}"
-                                                    @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
-                                                    class="btn-icon
+                                        <div class="btn-icon-group">
+                                            <a href="javascript:void(0);" title="Add To Cart"
+                                                data-id="{{ $product->id }}" data-name="{{ $product->name }}"
+                                                data-your_price="{{ $product->your_price }}"
+                                                data-sale_price="{{ $product->sale_price }}"
+                                                @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
+                                                class="btn-icon
                                         btn-add-cart product-type-simple"><i
-                                                        class="icon-shopping-cart"></i></a>
-                                            </div>
-                                        @endauth
+                                                    class="icon-shopping-cart"></i></a>
+                                        </div>
                                     </figure>
                                     <div class="product-details">
                                         <h3 class="product-title">
@@ -189,13 +187,6 @@
                                             @endphp
                                         </div>
                                         <!-- End .price-box -->
-                                        @guest
-                                            <a href="{{ route('customer-sign-in') }}"
-                                                class="btn btn-dark btn-shop text-light"
-                                                style="width: 100%; background-color: #ae016a;padding: 0 1.4rem;font-size: 1.2rem;font-weight: 600;text-align: center;">
-                                                LOGIN TO ORDER
-                                            </a>
-                                        @endguest
                                     </div>
                                     <!-- End .product-details -->
                                 </div>
@@ -234,7 +225,8 @@
                         @if (isset($all_active_advertisements['Category']['3']['ads']))
                             <div class="mt-1">
                                 <center>
-                                    <img src="{{ asset('storage/' . $all_active_advertisements['Category']['3']['ads']) }}">
+                                    <img
+                                        src="{{ asset('storage/' . $all_active_advertisements['Category']['3']['ads']) }}">
                                 </center>
                             </div>
                         @endif
@@ -373,7 +365,8 @@
                         @if (isset($all_active_advertisements['Category']['2']['ads']))
                             <div class="mt-1">
                                 <center>
-                                    <img src="{{ asset('storage/' . $all_active_advertisements['Category']['2']['ads']) }}">
+                                    <img
+                                        src="{{ asset('storage/' . $all_active_advertisements['Category']['2']['ads']) }}">
                                 </center>
                             </div>
                         @endif

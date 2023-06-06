@@ -23,7 +23,7 @@
     }
 
     .sign-panels {
-        width: 570px;
+        width: 750px;
         background: #fff;
         padding: 10px 20px;
         margin: 40px auto;
@@ -287,7 +287,7 @@
     .loginBtn {
         box-sizing: border-box;
         position: relative;
-        /* width: 13em;  - apply for fixed size */
+        width: 100%;
         margin: 0.2em;
         padding: 0 15px 0 46px;
         border: none;
@@ -379,12 +379,13 @@
                         <input type="text" name="identifier" placeholder="Email or Mobile" required>
                         <input type="password" name="password" placeholder="Password" required>
                         <input type="checkbox" id="remember">
-                        {{-- <label for="remember">Keep me sign in</label> --}}
-                        <button type="submit" class="btn-signin">Sign In</button>
+                        <label for="remember">Remember me</label>
 
-                        <a href="javascript:void(0)" class="btn-reset btn-fade">Recover your password <i
+                        <a href="javascript:void(0)" class="btn-reset btn-fade" style="padding-top: 9px;">Forgot <span style="color: #077e7e;">password<span>? <i
                                 class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                        <a href="{{ route('sign-up') }}" class="btn-member btn-fade">Not a member yet? <i
+                        <button type="submit" class="btn-signin" style="width: 100%;">Sign In</button>
+
+                        <a href="{{ route('sign-up') }}" class="btn-member btn-fade">Don't have an Account? <span style="color: #077e7e;"><span>Sign Up</span> <i
                                 class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                     </form>
                 </div>

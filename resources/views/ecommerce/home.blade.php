@@ -230,7 +230,6 @@
                                 <div class="product-label label-sale">-{{$offerPercentage}}%</div>
                             </div>
                             @endif
-                            @auth
                             <div class="btn-icon-group">
                                 <a href="javascript:void(0);" title="Add To Cart" data-id="{{ $product->id }}"
                                     data-name="{{ $product->name }}" data-your_price="{{ $product->your_price }}"
@@ -239,7 +238,6 @@
                                     class="btn-icon
                                     btn-add-cart product-type-simple"><i class="icon-shopping-cart"></i></a>
                             </div>
-                            @endauth
                         </figure>
                         <div class="product-details">
                             <h3 class="product-title">
@@ -278,11 +276,6 @@
                                 @endphp
                             </div>
                             <!-- End .price-box -->
-                            @guest
-                            <a href="{{ route('customer-sign-in') }}" class="btn btn-dark btn-shop text-light" style="width: 100%; background-color: #ae016a;padding: 0 1.4rem;font-size: 1.2rem;font-weight: 600;text-align: center;">
-                                LOGIN TO ORDER
-                            </a>
-                            @endguest
                         </div>
                         <!-- End .product-details -->
                     </div>
