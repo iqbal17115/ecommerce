@@ -114,6 +114,10 @@ $(document).ready(function() {
     });
     // Add To cart
     $(".btn-add-cart").click(function() {
+         @guest
+            window.location.href = '/customer-sign-in';
+            return true;
+         @endguest
         let id = $(this).data("id");
         let name = $(this).data("name");
         let your_price = $(this).data("your_price");
