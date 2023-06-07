@@ -461,24 +461,12 @@
                                         </h3>
                                         <!-- End .product-container -->
                                         <div class="price-box">
-                                            @php
-                                                echo $product_category_product->your_price
-                                                    ? '<span
-                                class="old-price">' .
-                                                        $currency->icon .
-                                                        '' .
-                                                        number_format((float) $product_category_product->your_price, 2) .
-                                                        '</span>'
-                                                    : '';
-                                                echo $product_category_product->sale_price
-                                                    ? '<span
-                                class="product-price">' .
-                                                        $currency->icon .
-                                                        '' .
-                                                        number_format((float) $product_category_product->sale_price, 2) .
-                                                        '</span>'
-                                                    : '';
-                                            @endphp
+                                            @if ($product_category_product->sale_price && $product_category_product->offer_start_date && $product_category_product->offer_end_date && $product_category_product->offer_start_date <= now() && $product_category_product->offer_end_date >= now())
+                                                <del class="old-price">{{ $currency->icon }}{{ number_format($product_category_product->your_price, 2) }}</del>
+                                                <span class="product-price">{{ $currency->icon }}{{ number_format($product_category_product->sale_price, 2) }}</span>
+                                            @else
+                                                <span class="product-price">{{ $currency->icon }}{{ number_format($product_category_product->your_price, 2) }}</span>
+                                            @endif
                                         </div>
                                         <!-- End .price-box -->
 

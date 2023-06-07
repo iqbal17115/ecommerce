@@ -18,24 +18,12 @@
                 </h3>
                 <!-- End .product-container -->
                 <div class="price-box">
-                    @php
-                        echo $product->your_price
-                            ? '<span
-                                    class="old-price">' .
-                                $currency->icon .
-                                '' .
-                                number_format((float) $product->your_price, 2) .
-                                '</span>'
-                            : '';
-                        echo $product->sale_price
-                            ? '<span
-                                    class="product-price">' .
-                                $currency->icon .
-                                '' .
-                                number_format((float) $product->sale_price, 2) .
-                                '</span>'
-                            : '';
-                    @endphp
+                    @if ($product->sale_price && $product->offer_start_date && $product->offer_end_date && $product->offer_start_date <= now() && $product->offer_end_date >= now())
+                        <del class="old-price">{{ $currency->icon }}{{ number_format($product->your_price, 2) }}</del>
+                        <span class="product-price">{{ $currency->icon }}{{ number_format($product->sale_price, 2) }}</span>
+                    @else
+                        <span class="product-price">{{ $currency->icon }}{{ number_format($product->your_price, 2) }}</span>
+                    @endif
                 </div>
                 <!-- End .price-box -->
             </div>
