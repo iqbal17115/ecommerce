@@ -39,14 +39,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Review
-Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::controller(ReviewController::class)->group(function () {
+    Route::get('/reviews', 'getReview')->name('reviews');
+    Route::post('/reviews', 'store')->name('reviews.store');
+});
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
 Route::get('/', function () {
     return view('auth.login');
 });
 // Language
-Route::get('lang/{lang}',[LanguageController::class, 'switchLang'])->name('lang.switch');
+Route::get('lang/{lang}', [LanguageController::class, 'switchLang'])->name('lang.switch');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/get_sidebar_content', [HomeController::class, 'getSidebarContent'])->name('get_sidebar_content');
