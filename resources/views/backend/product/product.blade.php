@@ -685,7 +685,7 @@ div#variation_content {
                                     <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Your Price</label>
+                                                        style="font-size: 14px;">Regular Price</label>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
                                                     <div class="input-group">
@@ -701,7 +701,7 @@ div#variation_content {
                                                 <!-- End -->
                                                 <div class="col-md-4 mt-md-3">
                                                     <label class="col-form-label float-md-right"
-                                                        style="font-size: 14px;">Sale Price</label>
+                                                        style="font-size: 14px;">Offer Price</label>
                                                     <span class="text-danger float-md-right">*</span>
                                                 </div>
                                                 <div class="col-md-8 mt-md-3">
