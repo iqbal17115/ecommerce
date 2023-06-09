@@ -60,7 +60,7 @@
                                     data-name="{{$category->name}}"
                                     data-parent_category_id="{{$category->parent_category_id}}"
                                     data-product_feature_id="{{$category->product_feature_id}}"
-                                    data-top_menu="{{$category->top_menu}}" 
+                                    data-top_menu="{{$category->top_menu}}"
                                     data-sidebar_menu="{{$category->sidebar_menu}}"
                                     data-header_menu="{{$category->header_menu}}"
                                     data-position="{{$category->position}}"
@@ -101,7 +101,7 @@
     integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    
+
 $(document).ready(function() {
     $(".variation_type").select2({
         dropdownParent: $("#categoryModal"),

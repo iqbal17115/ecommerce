@@ -90,6 +90,12 @@ Route::post('customer-login', [AuthController::class, 'authenticate'])->name('cu
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
+    // Review
+    Route::controller(ReviewController::class)->group(function () {
+        Route::get('/reviews', 'reviews')->name('reviews.index');
+        Route::post('/review-status', 'statusChange');
+    });
+
     // Order Start
     Route::group(
         [],

@@ -8,17 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Aladdinne</title>
-    @if($company_info && $company_info->key_word)
-    <meta name="keywords" content="{{ $company_info->key_word }}">
-   @endif
+    @if ($company_info && $company_info->key_word)
+        <meta name="keywords" content="{{ $company_info->key_word }}">
+    @endif
 
-   @if($company_info && $company_info->description)
-    <meta name="description" content="{{ $company_info->description }}">
-   @endif
+    @if ($company_info && $company_info->description)
+        <meta name="description" content="{{ $company_info->description }}">
+    @endif
 
-   <meta name="author" content="SW-THEMES">
-   <link rel="canonical" href="https://www.aladdinne.com">
-   <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="author" content="SW-THEMES">
+    <link rel="canonical" href="https://www.aladdinne.com">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type='application/ld+json'>
         {
           "@context": "http://www.schema.org",
@@ -54,7 +54,7 @@
     @if ($company_info && $company_info->icon)
         <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $company_info->icon) }}">
     @endif
-   @include('layouts.parts.css-links')
+    @include('layouts.parts.css-links')
 
 </head>
 

@@ -14,6 +14,34 @@ use Illuminate\Contracts\View\View;
 
 class ReviewController extends Controller
 {
+    public function statusChange(Request $request)
+    {
+        // Get the review ID and status from the request
+        $reviewId = $request->input('review_id');
+        $status = $request->input('status');
+
+        // Change the review status using the ReviewService
+        (new ReviewService())->changeStatus($reviewId, $status);
+
+        return response()->json(['message' => 'Review status changed successfully']);
+    }
+    /**
+     * Get all reviews
+     *
+     * @return View|\Illuminate\Foundation\Application|Factory|Application
+     */
+    public function reviews(): View|\Illuminate\Foundation\Application|Factory|Application
+    {
+        // Get products of type "product"
+        $reviews = (new ReviewService())->getReviewByStatus([ReviewStatusEnum::DENY->value], 1, true);
+
+        // Prepare the content array with the required data
+        $content = [
+            "deny_lists" => $reviews['deny'] ?? []
+        ];
+        // Return the view with the content array
+        return view('backend.review-feedback.reviews', compact('content'));
+    }
     /**
      * Get review by status
      *

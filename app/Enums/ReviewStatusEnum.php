@@ -8,6 +8,7 @@ enum ReviewStatusEnum: string
 {
     use BaseEnum;
 
+    case PENDING = "pending";
     case APPROVE = "approve";
     case DENY = "deny";
 }

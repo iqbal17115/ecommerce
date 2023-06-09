@@ -3,34 +3,35 @@
 namespace App\Services;
 
 use App\Models\FrontEnd\Review;
+use Illuminate\Database\Eloquent\Collection;
 
 class ReviewService
 {
+    public function changeStatus($reviewId, $status)
+    {
+        // Find the review by ID
+        $review = Review::findOrFail($reviewId);
+        $review->status = $status;
+        $review->save();
+    }
     /**
      * Get Review By Status
      *
      * @param $status
      * @return array
      */
-    public function getReviewByStatus($status = null): array
+    public function getReviewByStatus($status = null, $limit = null, $pagination = true): \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Support\Collection|array
     {
-        // Prepare the query to retrieve review
-        $query = Review::query();
+        $query = Review::select("reviews.*")
+            ->when($status !== null, function ($query) use ($status) {
+                return $query->whereIn("status", $status);
+            })
+            ->latest('created_at');
 
-        $query->when($status !== null, function ($query) use ($status) {
-            return $query->whereIn("status", $status);
-        });
-
-        // Retrieve the review
-        $reviews = $query->get();
-
-        // Prepare the content array with the required data dynamically
-        $content = [];
-
-        foreach ($reviews as $review) {
-            $content[$review->status . '_lists'][] = $review;
+        if ($pagination) {
+            return $query->paginate($limit)->groupBy('status');
         }
 
-        return $content;
+        return $query->get()->groupBy('status');
     }
 }

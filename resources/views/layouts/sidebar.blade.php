@@ -105,6 +105,9 @@
                            <i class="bx bx-layout"></i>
                            <span>Review & Feedback</span>
                        </a>
+                       <ul class="sub-menu" aria-expanded="false">
+                           <li><a href="{{ route('reviews.index') }}">Reviews</a></li>
+                       </ul>
                    </li>
 
                    <li>

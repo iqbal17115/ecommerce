@@ -15,7 +15,7 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['approve', 'deny'])->nullable();
+            $table->enum('status', ['pending', 'approve', 'deny'])->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('rating');
