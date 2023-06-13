@@ -83,6 +83,12 @@
         .skiptranslate:contains("দ্বারা পরিচালিত") {
             display: none !important;
         }
+
+        @media (max-width: 2000px) {
+            .header-image {
+                display: none;
+            }
+        }
     </style>
     <!-- Start Sidebar -->
     <div id="wrapper">
@@ -96,13 +102,15 @@
                             style="font-weight: bold; font-size: 28px; color: red;" class="close" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button></a></li>
-                @foreach($sidebarMenuCategories as $sidebarMenuCategory)
-                <li style="list-style: none;padding-bottom: 0px;" class="list-group-item"><a
-                        style="font-family: inherit;" href="javascript:void(0);" @if($sidebarMenuCategory->SubCategory)
-                        class="parent_category"
-                        data-id="{{$sidebarMenuCategory->id}}" @endif>{{$sidebarMenuCategory->name}}
-                        @if(count($sidebarMenuCategory->SubCategory) > 0)<i class="arrow right float-right"></i>
-                        @endif</a></li>
+                @foreach ($sidebarMenuCategories as $sidebarMenuCategory)
+                    <li style="list-style: none;padding-bottom: 0px;" class="list-group-item"><a
+                            style="font-family: inherit;" href="javascript:void(0);"
+                            @if ($sidebarMenuCategory->SubCategory) class="parent_category"
+                        data-id="{{ $sidebarMenuCategory->id }}" @endif>{{ $sidebarMenuCategory->name }}
+                            @if (count($sidebarMenuCategory->SubCategory) > 0)
+                                <i class="arrow right float-right"></i>
+                            @endif
+                        </a></li>
                 @endforeach
             </ul>
         </div>
@@ -111,17 +119,18 @@
 
     <div class="pt-0 pb-2 header-middle sticky-header" data-sticky-options="{'mobile': true}"
         style="background-color: #f4631b;">
-        <a class="btn mobile-sidebar-menu pb-0 pr-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
-                style="color: white;"></i></a>
+        <a class="btn mobile-sidebar-menu pb-0 pr-0 menu-toggle" id=""><i
+                class="custom-icon-toggle-menu d-inline-table" style="color: white;"></i></a>
         <!-- <button class="mobile-menu-toggler text-dark mr-2" type="button">
             <i class="fas fa-bars"></i>
         </button> -->
-        @if($company_info && $company_info->logo)
-        <a href="{{ route('home') }}" class="logo" style="max-width: 180px;">
-            <img data-src="{{ asset('storage/'.$company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5 lazy-load"
-                width="111" height="44"
-                style="height: 64px;width: 151px;filter: brightness(4) contrast(1.5) saturate(1.5);" alt="Porto Logo">
-        </a>
+        @if ($company_info && $company_info->logo)
+            <a href="{{ route('home') }}" class="logo" style="max-width: 180px;">
+                <img data-src="{{ asset('storage/' . $company_info->logo) }}" class="w-100 ml-sm-0 ml-md-5 lazy-load"
+                    width="111" height="44"
+                    style="height: 64px;width: 151px;filter: brightness(4) contrast(1.5) saturate(1.5);"
+                    alt="Porto Logo">
+            </a>
         @endif
         <div class="container">
             <div class="header-right w-lg-max">
@@ -132,9 +141,10 @@
                     <!-- form-inline class -->
                     <form action="{{ route('search') }}" method="get">
                         <div class="header-search-wrapper" style="justify-content: center;">
-                            <input type="search" class="form-control" name="q" id="q" placeholder="I'm searching for..."
-                                required>
-                            <button class="btn icon-magnifier bg-dark text-white" title="search" type="submit"></button>
+                            <input type="search" class="form-control" name="q" id="q"
+                                placeholder="I'm searching for..." required>
+                            <button class="btn icon-magnifier bg-dark text-white" title="search"
+                                type="submit"></button>
                         </div><!-- End .header-search-wrapper -->
                     </form>
                 </div>
@@ -144,10 +154,10 @@
                     <!-- <select name="" class="form-control language_switcher" style="height: 25px;">
                             <option>{{ Config::get('languages')[App::getLocale()] }}</option>
                             @foreach (Config::get('languages') as $lang => $language)
-                                @if ($lang != App::getLocale())
-                                       <option value="{{ $lang }}"> <a class="dropdown-item" href="#"> {{$language}}</a> </option>
-                                @endif
-                            @endforeach
+@if ($lang != App::getLocale())
+<option value="{{ $lang }}"> <a class="dropdown-item" href="#"> {{ $language }}</a> </option>
+@endif
+@endforeach
                         </select> -->
                     <div id="google_translate_element" style="margin-top: 5px;padding:0px;"></div>
                 </div>
@@ -155,11 +165,11 @@
                     style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
                     Bangladesh
                 </div>
-                @if(!Auth::user())
-                <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
-                    style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
-                     <a href="{{ route('customer-sign-in') }}">Sign In <i class="fas fa-user text-light"></i></a>
-                </div>
+                @if (!Auth::user())
+                    <div class="text-light font-weight-bold mr-2 responsive-desktop-menu"
+                        style="font-size: 14px; padding-right: 14px; padding-left: 14px;">
+                        <a href="{{ route('customer-sign-in') }}">Sign In <i class="fas fa-user text-light"></i></a>
+                    </div>
                 @endif
                 <div class="text-light font-weight-bold mr-2 responsive-mobile-menu" style="font-size: 16px;">
                     <div class="d-flex flex-column align-items-center">
@@ -179,8 +189,14 @@
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
                             <span style="color: #020100d1;">Welcome</span>
-                            <h4 class="mb-0" style="color: #ffffff;">@if(Auth::user()) {{Auth::user()->name}} @else My
-                                Account @endif</h4>
+                            <h4 class="mb-0" style="color: #ffffff;">
+@if (Auth::user())
+{{ Auth::user()->name }}
+@else
+My
+                                Account
+@endif
+</h4>
                         </div>
                     </div>
                 </a> -->
@@ -190,16 +206,15 @@
                         <div class="d-flex flex-column align-items-center">
                             <a href="javascript:void(0);" title="Cart"
                                 class="dropdown-toggle dropdown-arrow cart-toggle ml-2" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"
-                                style="min-height: 30px;">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                data-display="static" style="min-height: 30px;">
 
-                                @if($company_info && $company_info->icon)
-                                <img src="{{ asset('storage/'.$company_info->icon) }}" alt="Your Image"
-                                    class="img-fluid icon-cart-thick pb-0 mb-0" style="height: 20px;">
+                                @if ($company_info && $company_info->icon)
+                                    <img src="{{ asset('storage/' . $company_info->icon) }}" alt="Your Image"
+                                        class="img-fluid icon-cart-thick pb-0 mb-0" style="height: 20px;">
                                 @endif
                                 <span class="cart-count badge-circle"
-                                    style="top: 5px; left: 27px; background: darkblue;">{{ count((array)
-                                    session('cart')) }}</span>
+                                    style="top: 5px; left: 27px; background: darkblue;">{{ count((array) session('cart')) }}</span>
                             </a>
                             <span class="text-dark small responsive-mobile-menu">Cart</span>
                         </div>
@@ -214,38 +229,37 @@
 
                                 <div class="dropdown-cart-products">
                                     @php $total = 0 @endphp
-                                    @if(session('cart'))
-                                    @foreach(session('cart') as $id => $details)
-                                    @php $total += $details['sale_price'] * $details['quantity'] @endphp
-                                    <div class="product cart-{{ $id }}" data-id="{{ $id }}">
-                                        <div class="product-details">
-                                            <h4 class="product-title">
-                                                <a href="#">{{ $details['name']
-                                                    }}</a>
-                                            </h4>
+                                    @if (session('cart'))
+                                        @foreach (session('cart') as $id => $details)
+                                            @php $total += $details['sale_price'] * $details['quantity'] @endphp
+                                            <div class="product cart-{{ $id }}"
+                                                data-id="{{ $id }}">
+                                                <div class="product-details">
+                                                    <h4 class="product-title">
+                                                        <a href="#">{{ $details['name'] }}</a>
+                                                    </h4>
 
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty card-product-qty-{{ $id }}">{{
-                                                    $details['quantity'] }}</span>
-                                                ×
-                                                {{$currency->icon}}{{ $details['sale_price'] }}
-                                            </span>
-                                        </div>
-                                        <!-- End .product-details -->
+                                                    <span class="cart-product-info">
+                                                        <span
+                                                            class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
+                                                        ×
+                                                        {{ $currency->icon }}{{ $details['sale_price'] }}
+                                                    </span>
+                                                </div>
+                                                <!-- End .product-details -->
 
-                                        <figure class="product-image-container">
-                                            <a href="#"
-                                                class="product-image lazy-load">
-                                                <img data-src="{{ asset('storage/product_photo/'.$details['image']) }}"
-                                                    alt="product" width="80" height="80">
-                                            </a>
+                                                <figure class="product-image-container">
+                                                    <a href="#" class="product-image lazy-load">
+                                                        <img data-src="{{ asset('storage/product_photo/' . $details['image']) }}"
+                                                            alt="product" width="80" height="80">
+                                                    </a>
 
-                                            <a href="javascript:void(0);" class="btn-remove"
-                                                title="Remove Product"><span>×</span></a>
-                                        </figure>
-                                    </div>
-                                    <!-- End .product -->
-                                    @endforeach
+                                                    <a href="javascript:void(0);" class="btn-remove"
+                                                        title="Remove Product"><span>×</span></a>
+                                                </figure>
+                                            </div>
+                                            <!-- End .product -->
+                                        @endforeach
                                     @endif
                                 </div>
                                 <!-- End .cart-product -->
@@ -253,7 +267,8 @@
                                 <div class="dropdown-cart-total">
                                     <span>Sub Total:</span>
 
-                                    <span class="cart-total-price float-right">{{$currency->icon}}{{$total}}</span>
+                                    <span
+                                        class="cart-total-price float-right">{{ $currency->icon }}{{ $total }}</span>
                                 </div>
                                 <!-- End .dropdown-cart-total -->
 
@@ -287,46 +302,48 @@
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li>
-                        <a class="btn pt-1 pb-0 menu-toggle" id=""><i class="custom-icon-toggle-menu d-inline-table"
-                                style="color: white;"></i><span style="color: white;">All</span></a>
+                        <a class="btn pt-1 pb-0 menu-toggle" id=""><i
+                                class="custom-icon-toggle-menu d-inline-table" style="color: white;"></i><span
+                                style="color: white;">All</span></a>
                     </li>
                     <li>
                         <a class="pt-1 pb-0" href="{{ route('home') }}" style="color: white;">Sell On aladdine</a>
                     </li>
                     <!-- Start Category -->
-                    @foreach($headerMenuCategories as $headerMenuCategory)
-                    <li>
-                        <a class="pt-1 pb-0" href="{{ route('catalog', ['id'=>$headerMenuCategory->id]) }}"
-                            style="color: white;">{{$headerMenuCategory->name}}</a>
-                    </li>
+                    @foreach ($headerMenuCategories as $headerMenuCategory)
+                        <li>
+                            <a class="pt-1 pb-0" href="{{ route('catalog', ['id' => $headerMenuCategory->id]) }}"
+                                style="color: white;">{{ $headerMenuCategory->name }}</a>
+                        </li>
                     @endforeach
                     <!-- End Category -->
                     <li class="phone">
-                        @if($company_info && $company_info->is_mobile_active)
-                        <a href="#" class="d-flex align-items-center pt-1 pb-0" style="color: white;"><i
-                                class="icon-phone-1" style="font-size: 1rem;"></i>{{$company_info->mobile}}</a>
+                        @if ($company_info && $company_info->is_mobile_active)
+                            <a href="#" class="d-flex align-items-center pt-1 pb-0" style="color: white;"><i
+                                    class="icon-phone-1" style="font-size: 1rem;"></i>{{ $company_info->mobile }}</a>
                         @endif
                     </li>
-                     @if(Auth::user())
-                    <li class="float-right"><a class="pt-1 pb-0" href="{{ route('customer-logout') }}"
-                            style="color: white;">Logout</a></li>
+                    @if (Auth::user())
+                        <li class="float-right"><a class="pt-1 pb-0" href="{{ route('customer-logout') }}"
+                                style="color: white;">Logout</a></li>
                     @endif
                     <!-- <li class="float-right"><a class="pt-1 pb-0" href="#" style="color: white;">Flash Deals</a></li> -->
-                    @if(isset($all_active_advertisements['Header']['1']['ads']))
-                    <!-- Start Header Ads -->
-                    <li class="" style="width: 360px;">
-                        <div class="float-right">
-                            <center>
-                                <img data-src="{{ asset('storage/'.$all_active_advertisements['Header']['1']['ads']) }}"
-                                    class="w-100 ml-sm-0 ml-md-5 lazy-load" width="111" height="44"
-                                    style="height: 30px;;" alt="Porto Logo">
+                    @if (isset($all_active_advertisements['Header']['1']['ads']))
+                        <!-- Start Header Ads -->
+                        <li class="header-image" style="">
+                            <div class="">
                                 <center>
-                        </div>
-                    </li>
-                    <!-- End Header Ads -->
+                                    <img data-src="{{ asset('storage/' . $all_active_advertisements['Header']['1']['ads']) }}"
+                                        class="w-100 ml-sm-0 ml-md-5 lazy-load " width="111" height="44"
+                                        style="max-width: 100%; height: auto; max-height: 30px;" alt="Porto Logo">
+                                    <center>
+                            </div>
+                        </li>
+                        <!-- End Header Ads -->
                     @endif
 
                 </ul>
+
             </nav>
         </div>
         <!-- End .container -->
