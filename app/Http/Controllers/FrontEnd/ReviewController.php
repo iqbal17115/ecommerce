@@ -19,7 +19,6 @@ class ReviewController extends Controller
         // Get the review ID and status from the request
         $reviewId = $request->input('review_id');
         $status = $request->input('status');
-
         // Change the review status using the ReviewService
         (new ReviewService())->changeStatus($reviewId, $status);
 
@@ -33,11 +32,10 @@ class ReviewController extends Controller
     public function reviews(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         // Get products of type "product"
-        $reviews = (new ReviewService())->getReviewByStatus([ReviewStatusEnum::DENY->value], 1, true);
-
+        $reviews = (new ReviewService())->getReviewByStatus([ReviewStatusEnum::PENDING->value], 20, true);
         // Prepare the content array with the required data
         $content = [
-            "deny_lists" => $reviews['deny'] ?? []
+            "pending_lists" => $reviews['pending'] ?? []
         ];
         // Return the view with the content array
         return view('backend.review-feedback.reviews', compact('content'));
@@ -50,11 +48,10 @@ class ReviewController extends Controller
     public function getReview(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         // Get products of type "product"
-        $reviews = (new ReviewService())->getReviewByStatus([ReviewStatusEnum::DENY->value]);
-        dd($reviews);
+        $reviews = (new ReviewService())->getReviewByStatus([ReviewStatusEnum::PENDING->value]);
         // Prepare the content array with the required data
         $content = [
-            "product_lists" => $products['product_lists'] ?? null
+            "product_lists" => $reviews['deny'] ?? []
         ];
         // Return the view with the content array
         return view('frontend.product', compact('content'));
