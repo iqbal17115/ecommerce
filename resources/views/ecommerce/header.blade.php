@@ -84,7 +84,7 @@
             display: none !important;
         }
 
-        @media (max-width: 2000px) {
+        @media (max-width: 1960px) {
             .header-image {
                 display: none;
             }
