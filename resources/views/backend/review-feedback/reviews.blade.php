@@ -109,7 +109,6 @@
             });
 
             $('.reply-review').click(function() {
-                alert(true);
                 var reviewId = $(this).data('review_id');
                 $('#parentReviewId').val(reviewId); // Set the parent review id in the hidden input field
                 $('#replyModal').modal('show'); // Show the reply modal

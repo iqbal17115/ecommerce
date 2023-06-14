@@ -67,8 +67,9 @@ class ReviewController extends Controller
         $review = Review::whereUserId(Auth::user()->id)->whereProductId($validatedData['product_id'])->firstOrNew();
         $review->product_id = $validatedData['product_id'];
         $review->user_id = Auth::user()->id;
-        $review->rating = $validatedData['rating'];
-        $review->comment = $validatedData['comment'];
+        $review->rating = $request->rating;
+        $review->comment = $request->comment;
+        $review->status = 'pending';
         // Save the review
         $review->save();
 
