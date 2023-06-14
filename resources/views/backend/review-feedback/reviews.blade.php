@@ -69,6 +69,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="parentReviewId">
+                    <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
                     <div class="form-group">
                         <label for="replyComment">Reply Comment:</label>
                         <textarea class="form-control" id="replyComment" rows="3"></textarea>
@@ -118,14 +119,15 @@
             $('#replySubmit').click(function() {
                 var parentReviewId = $('#parentReviewId').val();
                 var replyComment = $('#replyComment').val();
-
+                var user_id = $('#user_id').val();
                 // Send an AJAX request to submit the reply
                 $.ajax({
-                    url: '/reviews/submitReply',
+                    url: '/reply',
                     type: 'POST',
                     data: {
-                        parent_review_id: parentReviewId,
-                        reply_comment: replyComment
+                        review_id: parentReviewId,
+                        user_id: user_id,
+                        reply: replyComment,
                     },
                     success: function(response) {
                         // Handle the success response here

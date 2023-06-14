@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reply extends Model
 {
     use HasFactory;
-    protected $fillable = ['review_id', 'customer_id', 'reply'];
+    protected $fillable = ['review_id', 'user_id', 'reply'];
 
     public function review()
     {
