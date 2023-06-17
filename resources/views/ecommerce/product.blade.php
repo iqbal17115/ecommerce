@@ -130,21 +130,41 @@
                         @endif
 
                         {{-- star Rating --}}
-                        <div class="rating-container">
-                            <div class="star-rating">
-                                <input type="radio" id="star5" name="rating" value="5" />
-                                <label for="star5" class="star">&#9733;</label>
-                                <input type="radio" id="star4" name="rating" value="4" />
-                                <label for="star4" class="star">&#9733;</label>
-                                <input type="radio" id="star3" name="rating" value="3" />
-                                <label for="star3" class="star">&#9733;</label>
-                                <input type="radio" id="star2" name="rating" value="2" />
-                                <label for="star2" class="star">&#9733;</label>
-                                <input type="radio" id="star1" name="rating" value="1" />
-                                <label for="star1" class="star">&#9733;</label>
-                            </div>
-                            <span class="rating-text">598 ratings |</span>
-                        </div>
+                        <span class="five-star-rating">
+                            @if ($product_detail->reviews()->avg('rating') >= 1)
+                                <i class="fas fa-star"></i>
+                            @else
+                                <i class="far fa-star"></i>
+                            @endif
+
+                            @if ($product_detail->reviews()->avg('rating') >= 2)
+                                <i class="fas fa-star"></i>
+                            @else
+                                <i class="far fa-star"></i>
+                            @endif
+
+                            @if ($product_detail->reviews()->avg('rating') >= 3)
+                                <i class="fas fa-star"></i>
+                            @else
+                                <i class="far fa-star"></i>
+                            @endif
+
+                            @if ($product_detail->reviews()->avg('rating') >= 4)
+                                <i class="fas fa-star"></i>
+                            @else
+                                <i class="far fa-star"></i>
+                            @endif
+
+                            @if ($product_detail->reviews()->avg('rating') >= 5)
+                                <i class="fas fa-star"></i>
+                            @else
+                                <i class="far fa-star"></i>
+                            @endif
+                        </span>
+
+                        <span class="rating-number">-</span>
+                        <span class="rating-number"
+                            style="font-size: 11px;">{{ $product_detail->reviews()->sum('rating') }} ratings |</span>
                         {{-- end star Rating --}}
                         @if (isset($all_active_advertisements['Details']['2']['ads']))
                             <div class="" style="width: 600px;">
