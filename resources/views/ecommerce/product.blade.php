@@ -8,7 +8,7 @@
 
         .star-rating {
             display: inline-block;
-            font-size: 0;
+            font-size: 4px;
         }
 
         .star-rating input[type="radio"] {
@@ -16,7 +16,7 @@
         }
 
         .star-rating label.star {
-            font-size: 24px;
+            font-size: 17px;
             color: #F85506;
             cursor: pointer;
         }
@@ -68,7 +68,7 @@
             <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Products : <span style="color: black;">
+                    <li class="breadcrumb-item"><a href="#">Rule : <span style="color: black;">
                                 @foreach ($product_detail->category->getParentsAttribute() as $parentCategory)
                                     {{ $parentCategory->name }}
                                     @if (!$loop->last)
