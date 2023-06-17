@@ -153,15 +153,39 @@
                                                 class="product-name">{{ $product->name }}</a>
                                             {{-- rating add html code --}}
                                             <span class="five-star-rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                {{-- end of rating add html code --}}
+                                                @if ($product->reviews()->avg('rating') >= 1)
+                                                    <i class="fas fa-star"></i>
+                                                @else
+                                                    <i class="far fa-star"></i>
+                                                @endif
+
+                                                @if ($product->reviews()->avg('rating') >= 2)
+                                                    <i class="fas fa-star"></i>
+                                                @else
+                                                    <i class="far fa-star"></i>
+                                                @endif
+
+                                                @if ($product->reviews()->avg('rating') >= 3)
+                                                    <i class="fas fa-star"></i>
+                                                @else
+                                                    <i class="far fa-star"></i>
+                                                @endif
+
+                                                @if ($product->reviews()->avg('rating') >= 4)
+                                                    <i class="fas fa-star"></i>
+                                                @else
+                                                    <i class="far fa-star"></i>
+                                                @endif
+
+                                                @if ($product->reviews()->avg('rating') >= 5)
+                                                    <i class="fas fa-star"></i>
+                                                @else
+                                                    <i class="far fa-star"></i>
+                                                @endif
                                             </span>
                                             <span class="rating-number">-</span>
-                                            <span class="rating-number" style="font-size: 11px;">33,213</span>
+                                            <span class="rating-number"
+                                                style="font-size: 11px;">{{ $product->reviews()->sum('rating') }}</span>
                                         </h3>
 
 
