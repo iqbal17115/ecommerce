@@ -67,8 +67,6 @@
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
             <div class="container">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Rule : <span style="color: black;">
                                 @foreach ($product_detail->category->getParentsAttribute() as $parentCategory)
                                     {{ $parentCategory->name }}
                                     @if (!$loop->last)
