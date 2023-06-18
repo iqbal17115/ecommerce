@@ -111,12 +111,25 @@
         color: #6366f1;
         text-decoration: none;
     }
+
+    .alert-message {
+        background-color: #dc3545;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+    }
 </style>
 <!-- Add your signup form here -->
 <div class="signup-form">
     <div class="container">
         <div class="header">
             <h1>Create an Account</h1>
+            @if (session('message'))
+                <div class="alert-message">
+                    {{ session('message') }}
+                </div>
+            @endif
+
         </div>
         <form method="POST" action="{{ route('customer-register') }}" id="checkout-form">
             @csrf
