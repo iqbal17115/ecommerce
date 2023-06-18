@@ -260,7 +260,7 @@
                             <div class="collapse show" id="widget-body-2">
                                 <div class="widget-body">
                                     <ul class="cat-list">
-                                        @if ($related_category->Parent && $related_category->Parent != null && $related_category->Parent->SubCategory)
+                                        @if ($related_category && $related_category->Parent && $related_category->Parent->SubCategory)
                                             @foreach ($related_category->Parent->SubCategory as $cat)
                                                 <li>
                                                     <input type="checkbox" name="category[]"
