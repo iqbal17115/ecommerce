@@ -94,9 +94,9 @@
                         arrow_signal = check_sub_category == 1 ?
                             '<i class="arrow right float-right"></i>' : '';
 
-                        var url = '{{ route('catalog', ':id') }}';
+                        var url = '{{ route('catalog.show', ':name') }}';
                         url = check_sub_category == 0 ?
-                            url.replace(':id', data['sub_categories'][i]['id']) :
+                            url.replace(':name', data['sub_categories'][i]['name']) :
                             'javascript:void(0)';
                         //  url = url.replace(':id', data['sub_categories'][i]['id']);
                         sub_category_list +=
