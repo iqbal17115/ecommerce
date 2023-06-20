@@ -141,6 +141,9 @@
                            <i class="bx bx-layout"></i>
                            <span>Orders</span>
                        </a>
+                       <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('new-order') }}">New Order</a></li>
+                    </ul>
                    </li>
 
                    <li>
