@@ -24,7 +24,7 @@ $(document).ready(function() {
                 modal_content +=
                     '<th scope="row"><div><img id="order-product-id-'+data['order_detail'][i]['id']+'" src="assets/images/product/img-7.png" alt="" class="avatar-sm"></div></th>';
                 modal_content +=
-                    '<td><div><h5 class="text-truncate font-size-14">'+data['order_detail'][i]['product']['name']+'</h5><p class="text-muted mb-0">$ '+data['order_detail'][i]['unit_price']+' x '+data['order_detail'][i]['quantity']+'</p></div></td>';
+                    '<td><div><h5 class="text-truncate font-size-14" style="word-wrap: break-word;white-space: pre-line;">'+data['order_detail'][i]['product']['name']+'</h5><p class="text-muted mb-0">$ '+data['order_detail'][i]['unit_price']+' x '+data['order_detail'][i]['quantity']+'</p></div></td>';
                 modal_content += '<td>$ '+ (data['order_detail'][i]['unit_price'] * data['order_detail'][i]['quantity'])+'</td>';
                 modal_content += '</tr>';
                 $('#order-product-id-' + data['order_detail'][i]['id']).attr("src",
