@@ -97,6 +97,10 @@ class AuthController extends Controller
         } else {
             $user = User::where('mobile', $data['mobile'])->first();
         }
+
+        if($user) {
+            return redirect()->back()->with('message', 'Already exist');
+        }
         // $data['password'] = $data['password'];
         $check = $this->create($data);
         $check->assignRole('customer');

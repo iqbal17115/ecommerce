@@ -14,55 +14,6 @@
                 </li>
             </ul>
 
-            <div class="login-form-container">
-                @if (!Auth::user())
-                    <h4>Returning customer?
-                        <button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                            aria-controls="collapseOne" class="btn btn-link btn-toggle">Login</button>
-                    </h4>
-                @endif
-                <div id="collapseOne" class="collapse">
-                    <div class="login-section feature-box">
-                        <div class="feature-box-content">
-                            <form method="POST" action="{{ route('customer-login') }}" id="login-form">
-                                @csrf
-                                <p>
-                                    If you have shopped with us before, please enter your details below. If you are a new
-                                    customer, please proceed to the Billing & Shipping section.
-                                </p>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="mb-0 pb-1">Email<span class="required">*</span></label>
-                                            <input type="text" name="mobile" class="form-control" required />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="mb-0 pb-1">Password<span class="required">*</span></label>
-                                            <input type="password" name="password" class="form-control" required />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="btn">Login</button>
-
-                                <div class="form-footer mb-1">
-                                    <div class="custom-control custom-checkbox mb-0 mt-0">
-                                        <input type="checkbox" class="custom-control-input" id="lost-password" />
-                                        <label class="custom-control-label mb-0" for="lost-password">Remember
-                                            me</label>
-                                    </div>
-
-                                    <a href="forgot-password.html" class="forget-password">Lost your password?</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
 
@@ -168,41 +119,6 @@
 
                         </div>
                     </div>
-                    @if (!Auth::user())
-                        <ul class="checkout-steps">
-                            <li>
-                                <h2 class="step-title">Billing details</h2>
-
-                                <form method="POST" action="{{ route('customer-register') }}" id="checkout-form">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label> Name
-                                                    <abbr class="required" title="required">*</abbr>
-                                                </label>
-                                                <input type="text" name="name" class="form-control" required />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Phone<abbr class="required" title="required">*</abbr></label>
-                                        <input type="tel" name="mobile" class="form-control" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <label> Password
-                                            <abbr class="required" title="required">*</abbr></label>
-                                        <input type="password" name="password" placeholder="Password"
-                                            class="form-control" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-danger btn-sm btn-block">Submit</button>
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
-                    @endif
                 </div>
                 <!-- End .col-lg-8 -->
 
@@ -332,7 +248,6 @@
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
-    @include('ecommerce.checkout-js')
     @include('ecommerce.sidebar-js')
 
     <script>
@@ -383,3 +298,6 @@
         });
     </script>
 @endsection
+@push('scripts')
+@include('ecommerce.checkout-js')
+@endpush

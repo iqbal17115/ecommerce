@@ -287,7 +287,6 @@
 
         /* two line name show css code */
 
-
         .product-name {
             display: inline-block;
             word-wrap: break-word;

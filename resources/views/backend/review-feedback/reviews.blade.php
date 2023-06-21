@@ -132,6 +132,7 @@
                     success: function(response) {
                         // Handle the success response here
                         console.log(response);
+                        location.reload();
                         $('#replyModal').modal('hide'); // Hide the reply modal
                         // Perform any other necessary actions, such as updating the UI
                     },

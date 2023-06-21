@@ -104,13 +104,11 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     });
 
     // Order Start
-    Route::group(
-        [],
-        function () {
-            Route::get('new-order', [OrderController::class, 'index'])->name('new-order');
-            Route::get('order-detail', [OrderController::class, 'orderDetail'])->name('order-detail');
-        }
-    );
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('new-order', 'index')->name('new-order');
+        Route::get('order-detail', 'orderDetail')->name('order-detail');
+        Route::get('/orders/{order}', 'destroy')->name('orders.destroy');
+    });
 
     // Start Manage Company
     Route::group(
