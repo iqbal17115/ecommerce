@@ -88,6 +88,20 @@
                                         <td class="text-right">{{ $currency->icon }}{{ $orderDetail->unit_price }}</td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <td colspan="2" class="text-right">Sub Total</td>
+                                    <td class="text-right">{{ $currency->icon }}1397.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="border-0 text-right">
+                                        <strong>Shipping</strong></td>
+                                    <td class="border-0 text-right">{{ $currency->icon }}13.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="border-0 text-right">
+                                        <strong>Total</strong></td>
+                                    <td class="border-0 text-right"><h4 class="m-0">{{ $currency->icon }}1410.00</h4></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
