@@ -1,11 +1,8 @@
 @extends('layouts.backend_app')
 
 @section('content')
-<style>
-
-</style>
     <!-- start page title -->
-    <div class="row">
+    <div class="row d-print-none">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
                 <h4 class="mb-0 font-size-18">Detail</h4>
@@ -69,7 +66,7 @@
                         <h3 class="font-size-15 font-weight-bold">Order summary</h3>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-nowrap" >
+                        <table class="table table-nowrap">
                             <thead class="thead-dark">
                                 <tr>
                                     <th style="width: 70px;">No.</th>
@@ -84,23 +81,27 @@
                                 @foreach ($order->OrderDetail as $orderDetail)
                                     <tr>
                                         <td>{{ ++$i }}</td>
-                                        <td style="word-wrap: break-word;">{{ $orderDetail->Product->name }}</td>
-                                        <td class="text-right">{{ $currency->icon }}{{ $orderDetail->unit_price }}</td>
+                                        <td style="word-wrap: break-word; white-space: pre-line;">{{ $orderDetail->Product->name }}</td>
+                                        <td class="text-right">{{ $currency->icon }}{{ number_format($orderDetail->unit_price, 2) }}</td>
                                     </tr>
                                 @endforeach
                                 <tr>
                                     <td colspan="2" class="text-right">Sub Total</td>
-                                    <td class="text-right">{{ $currency->icon }}1397.00</td>
+                                    <td class="text-right">{{ $currency->icon }}{{ number_format($order->OrderDetail->sum('unit_price'), 2) }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="border-0 text-right">
-                                        <strong>Shipping</strong></td>
-                                    <td class="border-0 text-right">{{ $currency->icon }}13.00</td>
+                                        <strong>Shipping</strong>
+                                    </td>
+                                    <td class="border-0 text-right">{{ $currency->icon }}0.00</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="border-0 text-right">
-                                        <strong>Total</strong></td>
-                                    <td class="border-0 text-right"><h4 class="m-0">{{ $currency->icon }}1410.00</h4></td>
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="border-0 text-right">
+                                        <h4 class="m-0">{{ $currency->icon }}{{ number_format($order->OrderDetail->sum('unit_price'), 2) }}</h4>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
