@@ -41,8 +41,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($new_orders as $new_order)
-                            <tr id="order-row-{{$new_order->id}}">
+                        @foreach ($new_orders as $order)
+                            <tr id="order-row-{{$order->id}}">
                                 <td>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck2">
@@ -50,14 +50,14 @@
                                     </div>
                                 </td>
                                 <td><a href="javascript: void(0);"
-                                        class="text-body font-weight-bold">{{ $new_order->code }}</a>
+                                        class="text-body font-weight-bold">{{ $order->code }}</a>
                                 </td>
-                                <td>{{ $new_order->Contact->first_name }}</td>
+                                <td>{{ $order->Contact->first_name }}</td>
                                 <td>
-                                    {{ date('d-M-Y', strtotime($new_order->order_date)) }}
+                                    {{ date('d-M-Y', strtotime($order->order_date)) }}
                                 </td>
                                 <td>
-                                    ${{ $new_order->payable_amount }}
+                                    ${{ $order->payable_amount }}
                                 </td>
                                 <td>
                                     <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
@@ -67,20 +67,27 @@
                                 </td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <button type="button" data-order_id="{{ $new_order->id }}"
+                                    <button type="button" data-order_id="{{ $order->id }}"
                                         class="btn btn-primary btn-sm btn-rounded new-order" data-toggle="modal"
                                         data-target=".exampleModal">
                                         View Details
                                     </button>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip"
-                                        data-placement="top" title="" data-original-title="Edit"><i
-                                            class="mdi mdi-pencil font-size-18"></i></a>
-                                    <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip"
-                                        data-placement="top" title="" data-original-title="Delete" onclick="deleteOrder({{ $new_order->id }})"><i
-                                            class="mdi mdi-close font-size-18"></i></a>
-                                </td>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                            Action
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" class="dropdown-item"> Download</a></li>
+                                            <li><a href="{{ route('invoices-detail', ['order' => $order]) }}" class="dropdown-item"> View Invoice</a></li>
+                                            <li><a href="#" class="dropdown-item"> View Details</a></li>
+                                            <li><a href="#" class="dropdown-item"> Track Order</a></li>
+                                            <li><a href="#" class="dropdown-item"> Delivery Status</a></li>
+                                            <li><a href="#" class="dropdown-item"> Send</a></li>
+                                        </ul>
+                                    </div>
+                                  </td>
                             </tr>
                         @endforeach
                     </tbody>
