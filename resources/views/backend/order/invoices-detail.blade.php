@@ -29,7 +29,7 @@
                     <div class="invoice-title">
                         <h4 class="float-right font-size-16">Order # 12345</h4>
                         <div class="mb-4">
-                            <img src="assets/images/logo-dark.png" alt="logo" height="20" />
+                            <img src="{{ asset('storage/' . $company_info->logo) }}" alt="logo" height="20" />
                         </div>
                     </div>
                     <hr>
