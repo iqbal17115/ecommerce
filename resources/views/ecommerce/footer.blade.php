@@ -21,7 +21,7 @@
 
                     <div class="col-md-1" style="display: inline-block; text-align: center;">
                         <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
-                            style="font-size: 18px;">Language</span>
+                            style="font-size: 18px;">Taka</span>
                     </div>
                     <div class="col-md-1" style="display: inline-block; text-align: center;">
                         @if($company_info && $company_info->country_flag)
