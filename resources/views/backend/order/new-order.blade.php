@@ -30,40 +30,40 @@
                                     <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                 </div>
                             </th>
-                            <th>Order ID</th>
-                            <th>Billing Name</th>
-                            <th>Date</th>
-                            <th>Total</th>
-                            <th>Payment Status</th>
-                            <th>Payment Method</th>
+                            <th>Order Date</th>
+                            <th>Order Details</th>
+                            <th>Product</th>
                             <th>View Details</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($new_orders as $order)
-                            <tr id="order-row-{{$order->id}}">
+                            <tr id="order-row-{{ $order->id }}">
                                 <td>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck2">
                                         <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                     </div>
                                 </td>
-                                <td><a href="javascript: void(0);"
-                                        class="text-body font-weight-bold">{{ $order->code }}</a>
-                                </td>
-                                <td>{{ $order->Contact->first_name }}</td>
                                 <td>
-                                    {{ date('d-M-Y', strtotime($order->order_date)) }}
+                                    {{ \Carbon\Carbon::parse($order->order_date)->diffForHumans() }}<br>
+                                    {{ date('d-M-Y H:i', strtotime($order->order_date)) }}
                                 </td>
                                 <td>
-                                    ${{ $order->payable_amount }}
+                                    {{ $order->code }}<br>
+                                    {{ $order->Contact->first_name }}
                                 </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-mastercard mr-1"></i> Mastercard
+                                <td style="word-wrap: break-word; white-space: pre-line;">
+                                    @php
+                                    $subtotals = $order->OrderDetail->map(function ($orderDetail) {
+                                        return $orderDetail?->Product?->name .'<br>Quantity:'. $orderDetail->quantity .'<br>Item subtotal: '.$orderDetail->quantity * $orderDetail->unit_price.'<br>Condition: '. $orderDetail->Product?->ProductDetail?->Condition?->name .'<hr style="padding: 0px; margin: 0px; width: 100px;">';
+                                    });
+                                    $formattedSubtotals = implode("", $subtotals->all());
+                                @endphp
+                                
+                                {!! $formattedSubtotals !!}
+                                
                                 </td>
                                 <td>
                                     <!-- Button trigger modal -->
@@ -74,7 +74,7 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <div class="dropdown">
+                                    {{-- <div class="dropdown">
                                         <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
                                             Action
                                         </a>
@@ -86,8 +86,18 @@
                                             <li><a href="#" class="dropdown-item"> Delivery Status</a></li>
                                             <li><a href="#" class="dropdown-item"> Send</a></li>
                                         </ul>
-                                    </div>
-                                  </td>
+                                    </div> --}}
+                                    <a class="btn btn-success waves-effect waves-light text-light">
+                                        <i class="bx bx-check-double font-size-16 align-middle mr-2"></i> Confirm
+                                    </a>
+                                    <a href="{{ route('invoices-detail', ['order' => $order]) }}"
+                                        class="btn btn-info waves-effect waves-light text-light">
+                                        <i class="dripicons-print"></i> Print
+                                    </a>
+                                    <a class="btn btn-danger waves-effect waves-light text-light">
+                                        <i class="bx bx-block font-size-16 align-middle mr-2"></i> Cancel
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
