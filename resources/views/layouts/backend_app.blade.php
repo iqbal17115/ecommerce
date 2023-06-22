@@ -31,7 +31,7 @@
     @yield('css')
 
     @include('layouts.head-scripts')
-
+    @stack('css')
 </head>
 
 <body data-sidebar="dark">
