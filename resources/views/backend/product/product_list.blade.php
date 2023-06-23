@@ -31,7 +31,7 @@
                         @foreach($products as $product)
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
-                            <td>{{$product->name}}</td>
+                            <td style="word-wrap: break-word; white-space: pre-line;">{{$product->name}}</td>
                             <td>{{$product->your_price}}</td>
                             <td>{{$product->sale_price}}</td>
                             <td>
