@@ -110,10 +110,10 @@
                                 </td>
                                 <td class="border-0 text-right">
                                     <h4 class="m-0">
-                                        {{ 
+                                        {{
                                             $order->OrderDetail->sum(function ($orderDetail) {
                                                return $orderDetail->quantity * $orderDetail->unit_price;
-                                           }) 
+                                           })
                                         }}
                                     </h4>
                                 </td>

@@ -25,6 +25,16 @@ class OrderController extends Controller
      * @param Order $order
      * @return View|\Illuminate\Foundation\Application|Factory|Application
      */
+    public function orderShow(Order $order): View|\Illuminate\Foundation\Application|Factory|Application
+    {
+        return view('backend.order.confirm-order', compact('order'));
+    }
+    /**
+     * Order
+     *
+     * @param Order $order
+     * @return View|\Illuminate\Foundation\Application|Factory|Application
+     */
     public function invoicesDetail(Order $order): View|\Illuminate\Foundation\Application|Factory|Application
     {
         return view('backend.order.invoices-detail', compact('order'));

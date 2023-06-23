@@ -61,9 +61,9 @@
                                     });
                                     $formattedSubtotals = implode("", $subtotals->all());
                                 @endphp
-                                
+
                                 {!! $formattedSubtotals !!}
-                                
+
                                 </td>
                                 <td>
                                     <!-- Button trigger modal -->
@@ -74,28 +74,15 @@
                                     </button>
                                 </td>
                                 <td>
-                                    {{-- <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                            Action
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" class="dropdown-item"> Download</a></li>
-                                            <li><a href="{{ route('invoices-detail', ['order' => $order]) }}" class="dropdown-item"> View Invoice</a></li>
-                                            <li><a href="#" class="dropdown-item"> View Details</a></li>
-                                            <li><a href="#" class="dropdown-item"> Track Order</a></li>
-                                            <li><a href="#" class="dropdown-item"> Delivery Status</a></li>
-                                            <li><a href="#" class="dropdown-item"> Send</a></li>
-                                        </ul>
-                                    </div> --}}
-                                    <a class="btn btn-success waves-effect waves-light text-light">
-                                        <i class="bx bx-check-double font-size-16 align-middle mr-2"></i> Confirm
-                                    </a>
+                                    <a href="{{ route('confirm-order', ['order' => $order]) }}" class="btn btn-success waves-effect waves-light text-light btn-block btn-sm">
+                                        <i class="bx bx-check-double font-size-16 align-middle"></i> Confirm
+                                    </a><br>
                                     <a href="{{ route('invoices-detail', ['order' => $order]) }}"
-                                        class="btn btn-info waves-effect waves-light text-light">
+                                        class="btn btn-info waves-effect waves-light text-light btn-block btn-sm">
                                         <i class="dripicons-print"></i> Print
-                                    </a>
-                                    <a class="btn btn-danger waves-effect waves-light text-light">
-                                        <i class="bx bx-block font-size-16 align-middle mr-2"></i> Cancel
+                                    </a><br>
+                                    <a class="btn btn-danger waves-effect waves-light text-light btn-block btn-sm">
+                                        <i class="bx bx-block font-size-16 align-middle"></i> Cancel
                                     </a>
                                 </td>
                             </tr>
