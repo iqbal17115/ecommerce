@@ -72,7 +72,7 @@
                     <h5 class="card-title mb-4">Order Details</h5>
                     <!-- Assuming you have an array of products called 'products' -->
                     @foreach ($order->OrderDetail as $orderDetail)
-                    <div class="row">
+                    <div class="row shadow-sm py-2">
                         <div class="col-md-1">
                             <img src="{{ asset('storage/product_photo/'.$orderDetail->Product?->ProductImage?->first()->image) }}" style="width:70px; height: 70px;" class="img-responsive">
                         </div>
@@ -86,9 +86,6 @@
                                 <p class="mb-2">{{ $orderDetail->quantity * $orderDetail->unit_price }} Taka</p>
                                 <p class="mb-0">Quantity: {{ $orderDetail->quantity }}</p>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <hr class="m-0 p-0 mb-2">
                         </div>
                     </div>
                     @endforeach
