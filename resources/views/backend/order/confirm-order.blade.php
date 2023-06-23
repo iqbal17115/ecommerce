@@ -74,7 +74,7 @@
                     @foreach ($order->OrderDetail as $orderDetail)
                     <div class="row">
                         <div class="col-md-1">
-                            <img src="{{ asset('storage/'.$orderDetail->Product?->ProductImage?->first()->image) }}" class="img-responsive">
+                            <img src="{{ asset('storage/product_photo/'.$orderDetail->Product?->ProductImage?->first()->image) }}" class="img-responsive">
                         </div>
                         <div class="col-md-7">
                             <h6 class="mb-3">{{ $orderDetail->Product->name }}</h6>
