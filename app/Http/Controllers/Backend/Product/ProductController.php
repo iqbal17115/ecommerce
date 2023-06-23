@@ -29,7 +29,7 @@ class ProductController extends Controller
             ProductKeyword::whereProductId($request->id)->delete();
             ProductCompliance::whereProductId($request->id)->delete();
             ProductMoreDetail::whereProductId($request->id)->delete();
-            
+
             return response()->json(['status' => 201]);
         });
     }
@@ -215,7 +215,8 @@ class ProductController extends Controller
         return DB::transaction(function () use ($request) {
 
             $Query = Product::find($request->product_offer_id);
-            
+
+            $Query->seller_sku = $request->seller_sku;
             $Query->opening_qty = $request->opening_qty;
             $Query->quantity_unit = $request->quantity_unit;
             $Query->your_price = $request->your_price;

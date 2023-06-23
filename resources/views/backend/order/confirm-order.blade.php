@@ -76,12 +76,12 @@
                         <div class="col-md-1">
                             <img src="{{ asset('storage/product_photo/'.$orderDetail->Product?->ProductImage?->first()->image) }}" style="width:70px; height: 70px;" class="img-responsive">
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-5">
                             <h6 class="mb-3">{{ $orderDetail->Product->name }}</h6>
                             <p class="mb-2">SKU: {{ $orderDetail->Product->seller_sku }}</p>
                             <p class="mb-0">Price:  (Inclusive Tax)</p>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="price-info">
                                 <p class="mb-2">{{ $orderDetail->quantity * $orderDetail->unit_price }} Taka</p>
                                 <p class="mb-0">Quantity: {{ $orderDetail->quantity }}</p>
