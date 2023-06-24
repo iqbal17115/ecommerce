@@ -58,7 +58,7 @@
                                 <p class="mb-2">{{ $order?->Contact?->District?->name }},
                                     {{ $order?->Contact?->Division?->name }}</p>
                                 <p class="mb-2">{{ $order?->Contact?->Union?->name }},
-                                    {{ $order?->Contact?->Union?->name }}</p>
+                                    {{ $order?->Contact?->Upazila?->name }}</p>
                                 <p class="mb-2">{{ $order?->Contact?->shipping_address }}</p>
                             </div>
                         </div>
