@@ -19,13 +19,25 @@ class OrderController extends Controller
     {
         $this->orderService = $orderService;
     }
+
     /**
-     * Order
+     * Cancel Order
      *
      * @param Order $order
-     * @return View|\Illuminate\Foundation\Application|Factory|Application
+     * @return View|
      */
-    public function orderShow(Order $order): View|\Illuminate\Foundation\Application|Factory|Application
+    public function cancelOrderShow(Order $order): View
+    {
+        return view('backend.order.cancel-order', compact('order'));
+    }
+
+    /**
+     * Confirm Order
+     *
+     * @param Order $order
+     * @return View|
+     */
+    public function confirmOrderShow(Order $order): View
     {
         return view('backend.order.confirm-order', compact('order'));
     }
