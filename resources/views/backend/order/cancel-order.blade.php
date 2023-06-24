@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0 font-size-18">Confirm Order</h4>
+                <h4 class="mb-0 font-size-18">Cancel Order</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6 h6">Schedule Order</div>
+                        <div class="col-md-6 h6">Order Cancellation</div>
                         <div class="col-md-6 text-right h6">Order ID: <span
                                 class="font-weight-bold">{{ $order?->code }}</span></div>
                     </div>
@@ -36,6 +36,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-md-12">
+                            <h6 class="mb-3">Order Summary</h6>
+                        </div>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-6">
@@ -58,14 +61,13 @@
         <div class="col-4">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="mb-3">Shipping To:</h6>
+                    <h6 class="mb-3">Ship To</h6>
                     <div class="address">
                         <p class="mb-2">{{ $order->Contact->first_name }}</p>
                         <p class="mb-2">{{ $order?->Contact?->District?->name }},
                             {{ $order?->Contact?->Division?->name }}</p>
                         <p class="mb-2">{{ $order?->Contact?->Union?->name }},
-                            {{ $order?->Contact?->Upazila?->name }}</p>
-                        <p class="mb-2">{{ $order?->Contact?->shipping_address }}</p>
+                            {{ $order?->Contact?->Upazila?->name }},<span class="text-danger font-weight-bold"> {{ $order?->Contact?->shipping_address }}</span></p>
                     </div>
                 </div>
             </div>
