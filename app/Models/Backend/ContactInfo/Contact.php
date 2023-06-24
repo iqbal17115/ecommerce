@@ -46,7 +46,7 @@ class Contact extends Model
         return $this->belongsTo(Union::class);
     }
     public function Upazila(){
-        return $this->belongsTo(Upazila::class);
+        return $this->belongsTo(Upazila::class, 'upazilla_id');
     }
     public function District(){
         return $this->belongsTo(District::class);
