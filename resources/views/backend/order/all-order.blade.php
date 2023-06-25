@@ -49,8 +49,8 @@
                                 <th>Total</th>
                                 <th>Seller</th>
                                 <th>Payment Status</th>
-                                <th>Fullfilment Status</th>
                                 <th>Delivery Type</th>
+                                <th>Fullfilment Status</th>
                             </tr>
                         </thead>
                         <tbody>
