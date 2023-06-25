@@ -22,8 +22,8 @@ class OrderController extends Controller
     }
     public function allOrderIndex()
     {
-        $orders = $this->orderService->getOrdersByStatus([ProductStatusEnum::PENDING->value, ProductStatusEnum::APPROVE->value, ProductStatusEnum::CANCEL->value]);
-        return view('backend.order.all-order', compact('orders'));
+        // $orders = $this->orderService->getOrdersByStatus([ProductStatusEnum::PENDING->value, ProductStatusEnum::APPROVE->value, ProductStatusEnum::CANCEL->value]);
+        return view('backend.order.all-order');
     }
 
     /**
