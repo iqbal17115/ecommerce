@@ -111,6 +111,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('/invoices-detail/{order}', 'invoicesDetail')->name('invoices-detail');
         Route::get('confirm-order/{order}', 'confirmOrderShow')->name('confirm-order');
         Route::get('cancel-order/{order}', 'cancelOrderShow')->name('cancel-order');
+        Route::get('all-order', 'allOrderIndex')->name('all-order');
     });
 
     // Start Manage Company

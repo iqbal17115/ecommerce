@@ -143,6 +143,7 @@
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('new-order') }}">New Order</a></li>
+                        <li><a href="{{ route('all-order') }}">All Order</a></li>
                     </ul>
                    </li>
 

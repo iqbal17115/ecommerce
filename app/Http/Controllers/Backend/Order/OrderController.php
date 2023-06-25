@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Order;
 
+use App\Enums\ProductStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\FrontEnd\Order;
 use App\Models\FrontEnd\OrderDetail;
@@ -18,6 +19,11 @@ class OrderController extends Controller
     public function __construct(OrderService $orderService)
     {
         $this->orderService = $orderService;
+    }
+    public function allOrderIndex()
+    {
+        $orders = $this->orderService->getOrdersByStatus([ProductStatusEnum::PENDING->value, ProductStatusEnum::APPROVE->value, ProductStatusEnum::CANCEL->value]);
+        return view('backend.order.all-order', compact('orders'));
     }
 
     /**
