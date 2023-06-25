@@ -111,20 +111,41 @@
                                 <div class="d-flex justify-content-end">
                                   <button class="btn btn-danger me-3" onclick="cancelOrder()">Order Cancel</button>
                                 </div>
-                                <div class="reasons-for-cancellation">
-                                  <p class="mb-1">Reason For Cancellation:</p>
-                                  <label class="checkbox-label mb-1">
-                                    <input type="checkbox" name="reason" value="shipping_undeliverable">
-                                    Shipping Address Undeliverable
-                                  </label>
-                                  <label class="checkbox-label mb-1">
-                                    <input type="checkbox" name="reason" value="pricing_error">
-                                    Pricing Error
-                                  </label>
-                                  <label class="checkbox-label mb-1">
-                                    <input type="checkbox" name="reason" value="out_of_stock">
-                                    Out of Stock
-                                  </label>
+                                <div class="reasons-for-cancellation mt-2">
+                                  {{-- start cancel  --}}
+                                  <div id="accordion">
+                                  <div class="card mb-1 shadow-none">
+                                    <div class="card-header" id="headingTwo">
+                                            <a href="#collapseTwo" class="text-dark collapsed" data-toggle="collapse"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                        <h6 class="text-center m-0">
+                                                    Reason For Cancellation
+                                        </h6>
+
+                                            </a>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                            data-parent="#accordion">
+                                        <div class="card-body">
+                                          <label class="checkbox-label mb-1">
+                                            <input type="checkbox" name="reason" value="shipping_undeliverable">
+                                            Shipping Address Undeliverable
+                                          </label>
+                                          <label class="checkbox-label mb-1">
+                                            <input type="checkbox" name="reason" value="pricing_error">
+                                            Pricing Error
+                                          </label>
+                                          <label class="checkbox-label mb-1">
+                                            <input type="checkbox" name="reason" value="out_of_stock">
+                                            Out of Stock
+                                          </label>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                                  {{-- end cancel  --}}
+                                  
                                 </div>
                               </td>
                             </tr>
