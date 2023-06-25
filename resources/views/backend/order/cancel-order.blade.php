@@ -67,7 +67,8 @@
                         <p class="mb-2">{{ $order?->Contact?->District?->name }},
                             {{ $order?->Contact?->Division?->name }}</p>
                         <p class="mb-2">{{ $order?->Contact?->Union?->name }},
-                            {{ $order?->Contact?->Upazila?->name }},<span class="text-danger font-weight-bold"> {{ $order?->Contact?->shipping_address }}</span></p>
+                            {{ $order?->Contact?->Upazila?->name }},<span class="text-danger font-weight-bold">
+                                {{ $order?->Contact?->shipping_address }}</span></p>
                     </div>
                 </div>
             </div>
@@ -80,57 +81,59 @@
                     <!-- Assuming you have an array of products called 'products' -->
                     <div class="table-responsive">
                         <table class="table">
-                          <thead>
-                            <tr>
-                              <th>Order ID</th>
-                              <th>Image</th>
-                              <th>Product Name</th>
-                              <th>Quantity</th>
-                              <th>Unit Price</th>
-                              <th>Total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            @foreach ($order->OrderDetail as $orderDetail)
-                            <tr>
-                              <td>{{ $order->code }}</td>
-                              <td>
-                                <img src="{{ asset('storage/product_photo/' . $orderDetail->Product->ProductImage->first()->image) }}"
-                                  style="width:70px; height: 70px;" class="img-responsive">
-                              </td>
-                              <td>{{ $orderDetail->Product->name }}</td>
-                              <td>{{ $orderDetail->quantity }}</td>
-                              <td>{{ $orderDetail->unit_price }}</td>
-                              <td>{{ $orderDetail->quantity * $orderDetail->unit_price }}</td>
-                            </tr>
-                            @endforeach
-                          </tbody>
-                          <tfoot>
-                            <tr>
-                              <td colspan="6">
-                                <div class="d-flex justify-content-end">
-                                  <button class="btn btn-danger me-3" onclick="cancelOrder()">Order Cancel</button>
-                                </div>
-                                <div class="reasons-for-cancellation">
-                                  <p class="mb-1">Reason For Cancellation:</p>
-                                  <label class="checkbox-label mb-1">
-                                    <input type="checkbox" name="reason" value="shipping_undeliverable">
-                                    Shipping Address Undeliverable
-                                  </label>
-                                  <label class="checkbox-label mb-1">
-                                    <input type="checkbox" name="reason" value="pricing_error">
-                                    Pricing Error
-                                  </label>
-                                  <label class="checkbox-label mb-1">
-                                    <input type="checkbox" name="reason" value="out_of_stock">
-                                    Out of Stock
-                                  </label>
-                                </div>
-                              </td>
-                            </tr>
-                          </tfoot>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($order->OrderDetail as $orderDetail)
+                                    <tr>
+                                        <td>{{ $order->code }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/product_photo/' . $orderDetail->Product->ProductImage->first()->image) }}"
+                                                style="width:70px; height: 70px;" class="img-responsive">
+                                        </td>
+                                        <td>{{ $orderDetail->Product->name }}</td>
+                                        <td>{{ $orderDetail->quantity }}</td>
+                                        <td>{{ $orderDetail->unit_price }}</td>
+                                        <td>{{ $orderDetail->quantity * $orderDetail->unit_price }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">
+                                        <label class="col-form-label">Reason For Cancellation</label>
+                                    </td>
+                                    <td colspan="1">
+                                        {{-- start cancel  --}}
+                                        <div class="form-group mb-0">
+                                            <select class="custom-select">
+                                                <option value="">-- Select --</option>
+                                                <option value="1">Shipping Address
+                                                    Undeliverable</option>
+                                                <option value="2">Pricing Error</option>
+                                                <option value="3">Out of Stock</option>
+                                            </select>
+                                        </div>
+                                        {{-- end cancel  --}}
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-danger me-3" onclick="cancelOrder()">Order
+                                                Cancel</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
-                      </div>
+                    </div>
 
 
                 </div>
