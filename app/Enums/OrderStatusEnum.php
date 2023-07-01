@@ -4,20 +4,20 @@ namespace App\Enums;
 
 use App\Traits\BaseEnum;
 
-enum OrderStatusEnum: string
+class OrderStatusEnum
 {
     use BaseEnum;
 
-    case PENDING = "pending";
-    case PROCESSING = "processing";
-    case SHIPPED = "shipped";
-    case DELIVERED = "delivered";
-    case CANCELLED = "cancelled";
-    case REFUNDED = "refunded";
-    case HOLD = "hold";
-    case BACKORDERED = "backordered";
-    case PARTIALLY_SHIPPED = "partially_shipped";
-    case FAILED = "failed";
-    case OUT_FOR_dELIVERY = "out_for_delivery";
-    case PRE_ORDER = "pre_order";
+    public const PENDING = "pending";
+    public const PROCESSING = "processing";
+    public const SHIPPED = "shipped";
+    public const DELIVERED = "delivered";
+    public const CANCELLED = "cancelled";
+    public const REFUNDED = "refunded";
+    public const HOLD = "hold";
+    public const BACKORDERED = "backordered";
+    public const PARTIALLY_SHIPPED = "partially_shipped";
+    public const FAILED = "failed";
+    public const OUT_FOR_DELIVERY = "out_for_delivery";
+    public const PRE_ORDER = "pre_order";
 }
