@@ -11,8 +11,12 @@ class OrderStatusEnum
     public const PENDING = "pending";
     public const PROCESSING = "processing";
     public const SHIPPED = "shipped";
+    public const ARRIVAL_AT_DISTRIBUTION_CENTER = "arrival_at_distribution_center";
     public const DELIVERED = "delivered";
+    public const DELIVERY_ATTEMPTED = "delivery_attempted";
+    public const DELIVERY_RESCHEDULING = "delivery_rescheduling";
     public const CANCELLED = "cancelled";
+    public const RETURNED = "returned";
     public const REFUNDED = "refunded";
     public const HOLD = "hold";
     public const BACKORDERED = "backordered";

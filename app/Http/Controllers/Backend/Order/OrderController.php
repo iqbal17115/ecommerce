@@ -23,8 +23,8 @@ class OrderController extends Controller
     }
     public function allOrderIndex()
     {
-        // $orders = $this->orderService->getOrdersByStatus([ProductStatusEnum::PENDING->value, ProductStatusEnum::APPROVE->value, ProductStatusEnum::CANCEL->value]);
-        return view('backend.order.all-order');
+        $orders = $this->orderService->getOrdersByStatus([OrderStatusEnum::PENDING, OrderStatusEnum::PROCESSING, OrderStatusEnum::SHIPPED, OrderStatusEnum::ARRIVAL_AT_DISTRIBUTION_CENTER, OrderStatusEnum::OUT_FOR_DELIVERY, OrderStatusEnum::DELIVERY_ATTEMPTED, OrderStatusEnum::DELIVERY_RESCHEDULING, OrderStatusEnum::DELIVERED, OrderStatusEnum::FAILED, OrderStatusEnum::CANCELLED, OrderStatusEnum::RETURNED, OrderStatusEnum::REFUNDED, OrderStatusEnum::BACKORDERED, OrderStatusEnum::HOLD, OrderStatusEnum::PRE_ORDER, OrderStatusEnum::PARTIALLY_SHIPPED], 30);
+        return view('backend.order.all-order', compact('orders'));
     }
 
     /**
@@ -72,7 +72,7 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $new_orders = $this->orderService->getOrdersByStatus([OrderStatusEnum::PENDING], 100);
+        $new_orders = $this->orderService->getOrdersByStatus([OrderStatusEnum::PENDING], 30);
         return view('backend.order.new-order', compact('new_orders'));
     }
 }
