@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Order;
 
+use App\Enums\OrderStatusEnum;
 use App\Enums\ProductStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\FrontEnd\Order;
@@ -71,7 +72,7 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $new_orders = Order::whereStatus('processing')->get();
+        $new_orders = $this->orderService->getOrdersByStatus([OrderStatusEnum::PENDING], 100);
         return view('backend.order.new-order', compact('new_orders'));
     }
 }

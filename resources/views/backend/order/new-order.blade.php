@@ -34,6 +34,7 @@
                             <th>Order Details</th>
                             <th>Product</th>
                             <th>View Details</th>
+                            <th>status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -70,8 +71,11 @@
                                     <button type="button" data-order_id="{{ $order->id }}"
                                         class="btn btn-primary btn-sm btn-rounded new-order" data-toggle="modal"
                                         data-target=".exampleModal">
-                                        View Details
+                                        View
                                     </button>
+                                </td>
+                                <td>
+                                    <span class="badge badge-danger font-size-14">{{ ucwords($order->status) }} </span>
                                 </td>
                                 <td>
                                     <a href="{{ route('confirm-order', ['order' => $order]) }}" class="btn btn-success waves-effect waves-light text-light btn-block btn-sm">
@@ -90,7 +94,8 @@
                     </tbody>
                 </table>
             </div>
-            <ul class="pagination pagination-rounded justify-content-end mb-2">
+            {{$new_orders->links()}}
+            {{-- <ul class="pagination pagination-rounded justify-content-end mb-2">
                 <li class="page-item disabled">
                     <a class="page-link" href="javascript: void(0);" aria-label="Previous">
                         <i class="mdi mdi-chevron-left"></i>
@@ -106,7 +111,7 @@
                         <i class="mdi mdi-chevron-right"></i>
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
         </div>
     </div>
     <!-- Modal -->
