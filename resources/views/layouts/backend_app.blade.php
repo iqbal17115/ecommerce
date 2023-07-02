@@ -31,6 +31,7 @@
     @yield('css')
 
     @include('layouts.head-scripts')
+    @stack('links')
     @stack('css')
 </head>
 

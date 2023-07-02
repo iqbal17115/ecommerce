@@ -21,6 +21,9 @@ class CustomerController extends Controller
     {
         $this->customerService = $customerService;
     }
+    public function profile(User $user) {
+        return view('backend.customer.customer-profile', compact('user'));
+    }
     public function search(Request $request)
     {
         $perPage = $request->input('perPage', 50);

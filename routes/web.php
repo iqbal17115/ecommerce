@@ -96,6 +96,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::controller(CustomerController::class)->group(function () {
         Route::get('manage-customer', 'manageCustomer')->name('manage.customer');
         Route::get('customers-search', 'search')->name('customers.search');
+        Route::get('customers-profile/{user}', 'profile')->name('customers.profile');
     });
 
     // Reply

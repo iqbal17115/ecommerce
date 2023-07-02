@@ -161,7 +161,7 @@
                                                             <i class="mdi mdi-dots-horizontal font-size-18"></i>
                                                         </a>
                                                         <ul class="dropdown-menu dropdown-menu-right">
-                                                            <li><a href="#" class="dropdown-item">Details</a></li>
+                                                            <li><a href="{{ route('customers.profile', ['user' => $customer]) }}" class="dropdown-item">Details</a></li>
                                                             <li><a href="#" class="dropdown-item">Edit</a></li>
                                                             <li><a href="#" class="dropdown-item">Active</a></li>
                                                             <li><a href="#" class="dropdown-item">Inactive</a></li>
