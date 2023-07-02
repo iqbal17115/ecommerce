@@ -91,7 +91,7 @@
                                          <td>{{$customer->name}}</td>
                                          <td>{{$customer->email}}</td>
                                          <td>{{$customer->mobile}}</td>
-                                         <td>{{ $customer->Contact?->Order->count() ?? 0 }}</td>
+                                         <td>{{ $customer->Contact?->Order }}</td>
                                          <td>{{ $customer->Contact?->Order->count() > 0 ? $customer->Contact?->Order->max('created_at')->diffForHumans() : 'No orders' }}</td>
                                          <td>
                                             {{$customer->address}}
