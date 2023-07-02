@@ -92,20 +92,20 @@
 
                                     <div class="col-xl col-md-1 mt-3">
                                         <div class="custom-control custom-checkbox  custom-checkbox-success mt-3">
-                                            <input type="checkbox" class="custom-control-input" id="active">
+                                            <input type="checkbox" class="custom-control-input check-status" id="active">
                                             <label class="custom-control-label" for="active">Active</label>
                                         </div>
                                     </div>
 
                                     <div class="col-xl col-md-1 mt-3">
                                         <div class="custom-control custom-checkbox  custom-checkbox-warning mt-3">
-                                            <input type="checkbox" class="custom-control-input" id="inactive">
+                                            <input type="checkbox" class="custom-control-input check-status" id="inactive">
                                             <label class="custom-control-label" for="inactive">Inactive</label>
                                         </div>
                                     </div>
                                     <div class="col-xl col-md-1 mt-3">
                                         <div class="custom-control custom-checkbox custom-checkbox-info mt-3">
-                                            <input type="checkbox" class="custom-control-input" id="incomplete">
+                                            <input type="checkbox" class="custom-control-input check-status" id="incomplete">
                                             <label class="custom-control-label" for="incomplete">Incomplete</label>
                                         </div>
                                     </div>
@@ -227,6 +227,9 @@
             });
         }
         $(document).ready(function() {
+            $('.check-status').on('click', function() {
+                customerSearch();
+            });
             // Get Union By Upazila
             $("body").on("change", "#union_id", function(e) {
                 customerSearch();
