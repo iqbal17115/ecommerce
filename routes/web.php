@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Currency\CurrencyController;
+use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\ProductDetailController;
@@ -90,6 +91,11 @@ Route::post('customer-login', [AuthController::class, 'authenticate'])->name('cu
 //
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+
+    // Customer
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('manage-customer', 'manageCustomer')->name('manage.customer');
+    });
 
     // Reply
     Route::controller(ReplyController::class)->group(function () {
