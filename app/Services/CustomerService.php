@@ -21,6 +21,7 @@ class CustomerService
             // ->when($status, function ($query, $status) {
             //     return $query->where('users.status', $status);
             // })
+            ->select('users.*')
             ->orderBy('users.id', 'desc')
             ->paginate($perPage);
 

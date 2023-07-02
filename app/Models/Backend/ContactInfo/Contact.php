@@ -34,7 +34,7 @@ class Contact extends Model
         return $this->hasMany(SalePayment::class);
     }
     public function Order(){
-        return $this->hasMany(Order::class)->orderBy('id', 'DESC');
+        return $this->hasMany(Order::class);
     }
     public function PaymentMethod(){
         return $this->belongsTo(PaymentMethod::class);

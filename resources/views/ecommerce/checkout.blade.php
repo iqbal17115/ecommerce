@@ -46,7 +46,7 @@
                                 <input type="hidden" name="shipping_union_id" id="shipping_union_id"
                                     value="{{ Auth::user()->Contact->union_id }}" />
                             @endif
-                            <form action="{{ route('confirm-order') }}" method="POST" id="shipping-address-form">
+                            <form action="{{ route('confirm.order') }}" method="POST" id="shipping-address-form">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\CustomerService;
 use Exception;
 use Illuminate\Http\Request;
