@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ecommerce\Setting\Division;
 use App\Models\User;
 use App\Services\CustomerService;
 use Exception;
@@ -20,6 +21,13 @@ class CustomerController extends Controller
     {
         $this->customerService = $customerService;
     }
+    public function search(Request $request)
+    {
+        $perPage = $request->input('perPage', 50);
+        $searchTerm = $request->all();
+        $customers = $this->customerService->getCustomers($searchTerm, $perPage);
+        return view('backend.customer.partials.customers_table', compact('customers'))->render();
+    }
     /**
      * List Page
      *
@@ -32,7 +40,9 @@ class CustomerController extends Controller
             $searchTerm = $request->input('searchTerm');
 
             $customers = $this->customerService->getCustomers($searchTerm, $perPage);
-            return view('backend.customer.manage-customer', compact('customers'));
+
+            $divisions = Division::get();
+            return view('backend.customer.manage-customer', compact('customers', 'divisions'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while fetching the products: ' . $e->getMessage());
         }
