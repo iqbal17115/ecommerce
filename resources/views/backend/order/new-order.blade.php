@@ -57,13 +57,13 @@
                                 </td>
                                 <td style="word-wrap: break-word; white-space: pre-line;">
                                     @php
-                                    $subtotals = $order->OrderDetail->map(function ($orderDetail) {
-                                        return $orderDetail?->Product?->name .'<br>Quantity:'. $orderDetail->quantity .'<br>Item subtotal: '.$orderDetail->quantity * $orderDetail->unit_price.'<br>Condition: '. $orderDetail->Product?->ProductDetail?->Condition?->name .'<hr style="padding: 0px; margin: 0px; width: 100px;">';
-                                    });
-                                    $formattedSubtotals = implode("", $subtotals->all());
-                                @endphp
+                                        $subtotals = $order->OrderDetail->map(function ($orderDetail) {
+                                            return $orderDetail?->Product?->name . '<br>Quantity:' . $orderDetail->quantity . '<br>Item subtotal: ' . $orderDetail->quantity * $orderDetail->unit_price . '<br>Condition: ' . $orderDetail->Product?->ProductDetail?->Condition?->name . '<hr style="padding: 0px; margin: 0px; width: 100px;">';
+                                        });
+                                        $formattedSubtotals = implode('', $subtotals->all());
+                                    @endphp
 
-                                {!! $formattedSubtotals !!}
+                                    {!! $formattedSubtotals !!}
 
                                 </td>
                                 <td>
@@ -78,14 +78,16 @@
                                     <span class="badge badge-danger font-size-14">{{ ucwords($order->status) }} </span>
                                 </td>
                                 <td>
-                                    <a href="{{ route('confirm-order', ['order' => $order]) }}" class="btn btn-success waves-effect waves-light text-light btn-block btn-sm">
+                                    <a href="{{ route('confirm-order', ['order' => $order]) }}"
+                                        class="btn btn-success waves-effect waves-light text-light btn-block btn-sm">
                                         <i class="bx bx-check-double font-size-16 align-middle"></i> Confirm
                                     </a><br>
                                     <a href="{{ route('invoices-detail', ['order' => $order]) }}"
                                         class="btn btn-info waves-effect waves-light text-light btn-block btn-sm">
                                         <i class="dripicons-print"></i> QR Code
                                     </a><br>
-                                    <a href="{{ route('cancel-order', ['order' => $order]) }}" class="btn btn-danger waves-effect waves-light text-light btn-block btn-sm">
+                                    <a href="{{ route('cancel-order', ['order' => $order]) }}"
+                                        class="btn btn-danger waves-effect waves-light text-light btn-block btn-sm">
                                         <i class="bx bx-block font-size-16 align-middle"></i> Cancel
                                     </a>
                                 </td>
@@ -94,7 +96,7 @@
                     </tbody>
                 </table>
             </div>
-            {{$new_orders->links()}}
+            {{ $new_orders->links() }}
         </div>
     </div>
     <!-- Modal -->

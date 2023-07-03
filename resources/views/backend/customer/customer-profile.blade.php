@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-xl-7">
             <div class="card">
-               
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
@@ -39,8 +39,10 @@
 
                                 <div class="col-sm-8">
                                     <h5 class="font-size-15 text-truncate">{{ $user->name }}</h5>
-                                    <p class="text-muted mb-0 text-truncate">Joined {{ $user->created_at->diffForHumans() }}</p>
-                                    <p class="text-muted mb-0 text-truncate">Joined Date: {{ date('d-M-Y H:i', strtotime($user->created_at)) }}</p>
+                                    <p class="text-muted mb-0 text-truncate">Joined {{ $user->created_at->diffForHumans() }}
+                                    </p>
+                                    <p class="text-muted mb-0 text-truncate">Joined Date:
+                                        {{ date('d-M-Y H:i', strtotime($user->created_at)) }}</p>
                                     <p class="text-muted mb-0 text-truncate">Status: {{ ucwords($user->status) }}</p>
                                 </div>
                             </div>
@@ -56,17 +58,20 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <p class="text-muted mb-0">Total Spent</p>
-                                        <h5 class="font-size-18">125</h5>
+                                        <h5 class="font-size-18">
+                                            {{ $currency->icon }}{{ $user->Contact?->Order->sum('total_amount') }}</h5>
                                     </div>
 
                                     <div class="col-sm-4">
                                         <p class="text-muted mb-0">Last Order</p>
-                                        <h5 class="font-size-18">1 week ago</h5>
+                                        <h5 class="font-size-18">
+                                            {{ $user->Contact?->Order->count() > 0 ? $user->Contact?->Order->max('created_at')->diffForHumans() : 'No orders' }}
+                                        </h5>
                                     </div>
 
                                     <div class="col-sm-4">
                                         <p class="text-muted mb-0">Total Orders</p>
-                                        <h5 class="font-size-18">$1245</h5>
+                                        <h5 class="font-size-18">{{ $user?->Contact?->Order?->count() }}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -108,71 +113,74 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">My Projects</h4>
-                    <div class="table-responsive">
-                        <table class="table table-nowrap table-hover mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Projects</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">Deadline</th>
-                                    <th scope="col">Budget</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Skote admin UI</td>
-                                    <td>2 Sep, 2019</td>
-                                    <td>20 Oct, 2019</td>
-                                    <td>$506</td>
-                                </tr>
+                    <h4 class="card-title mb-4">Transactions</h4>
 
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Skote admin Logo</td>
-                                    <td>1 Sep, 2019</td>
-                                    <td>2 Sep, 2019</td>
-                                    <td>$94</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Redesign - Landing page</td>
-                                    <td>21 Sep, 2019</td>
-                                    <td>29 Sep, 2019</td>
-                                    <td>$156</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>App Landing UI</td>
-                                    <td>29 Sep, 2019</td>
-                                    <td>04 Oct, 2019</td>
-                                    <td>$122</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Blog Template</td>
-                                    <td>05 Oct, 2019</td>
-                                    <td>16 Oct, 2019</td>
-                                    <td>$164</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td>Redesign - Multipurpose Landing</td>
-                                    <td>17 Oct, 2019</td>
-                                    <td>05 Nov, 2019</td>
-                                    <td>$192</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>Logo Branding</td>
-                                    <td>04 Nov, 2019</td>
-                                    <td>05 Nov, 2019</td>
-                                    <td>$94</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <ul class="nav nav-pills bg-light rounded" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#transactions-all-tab" role="tab">Orders
+                                ({{ $user?->Contact?->Order?->count() }})</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#transactions-buy-tab" role="tab">Reviews
+                                (0)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Wishlist</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Stores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Personal
+                                Info</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-4">
+                        <div class="tab-pane active" id="transactions-all-tab" role="tabpanel">
+                            <div class="table-responsive" data-simplebar style="max-height: 330px;">
+                                <table class="table table-centered table-nowrap mb-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Status</th>
+                                            <th>Delivery Method</th>
+                                            <th>Date</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($user?->Contact?->Order as $order)
+                                            <tr>
+                                                <td><a href="javascript: void(0);"
+                                                        class="text-body font-weight-bold">{{ $order->code }}</a> </td>
+                                                <td>{{ ucwords($order->status) }}</td>
+                                                <td>
+                                                    COD
+                                                </td>
+                                                <td>
+                                                    {{ date('d-M-Y H:i', strtotime($order->order_date)) }}
+                                                </td>
+                                                <td>
+                                                    {{ $order->total_amount }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="transactions-buy-tab" role="tabpanel">
+                            <div class="table-responsive" data-simplebar style="max-height: 330px;">
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="transactions-sell-tab" role="tabpanel">
+                            <div class="table-responsive" data-simplebar style="max-height: 330px;">
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
