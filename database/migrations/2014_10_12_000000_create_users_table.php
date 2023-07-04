@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->enum('type', ['Admin', 'User', 'Customer', 'Seller', 'Editor', 'Manager'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status', ['active', 'inactive', 'incomplete'])->default('inactive');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->foreignId('branch_id')->nullable();

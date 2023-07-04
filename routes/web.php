@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\Currency\CurrencyController;
+use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\ProductDetailController;
@@ -75,7 +76,7 @@ Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('get-district', [CheckoutController::class, 'getDistrict'])->name('get-district');
 Route::get('get-upazila', [CheckoutController::class, 'getUpazila'])->name('get-upazila');
 Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-union');
-Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm-order');
+Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm.order');
 Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('about', [HomeController::class, 'aboutUs'])->name('about');
 Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');
@@ -90,6 +91,13 @@ Route::post('customer-login', [AuthController::class, 'authenticate'])->name('cu
 //
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+
+    // Customer
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('manage-customer', 'manageCustomer')->name('manage.customer');
+        Route::get('customers-search', 'search')->name('customers.search');
+        Route::get('customers-profile/{user}', 'profile')->name('customers.profile');
+    });
 
     // Reply
     Route::controller(ReplyController::class)->group(function () {
@@ -108,6 +116,10 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('new-order', 'index')->name('new-order');
         Route::get('order-detail', 'orderDetail')->name('order-detail');
         Route::get('/orders/{order}', 'destroy')->name('orders.destroy');
+        Route::get('/invoices-detail/{order}', 'invoicesDetail')->name('invoices-detail');
+        Route::get('confirm-order/{order}', 'confirmOrderShow')->name('confirm-order');
+        Route::get('cancel-order/{order}', 'cancelOrderShow')->name('cancel-order');
+        Route::get('all-order', 'allOrderIndex')->name('all-order');
     });
 
     // Start Manage Company

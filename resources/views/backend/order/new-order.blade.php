@@ -30,79 +30,73 @@
                                     <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                 </div>
                             </th>
-                            <th>Order ID</th>
-                            <th>Billing Name</th>
-                            <th>Date</th>
-                            <th>Total</th>
-                            <th>Payment Status</th>
-                            <th>Payment Method</th>
+                            <th>Order Date</th>
+                            <th>Order Details</th>
+                            <th>Product</th>
                             <th>View Details</th>
+                            <th>status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($new_orders as $new_order)
-                            <tr id="order-row-{{$new_order->id}}">
+                        @foreach ($new_orders as $order)
+                            <tr id="order-row-{{ $order->id }}">
                                 <td>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck2">
                                         <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                     </div>
                                 </td>
-                                <td><a href="javascript: void(0);"
-                                        class="text-body font-weight-bold">{{ $new_order->code }}</a>
-                                </td>
-                                <td>{{ $new_order->Contact->first_name }}</td>
                                 <td>
-                                    {{ date('d-M-Y', strtotime($new_order->order_date)) }}
+                                    {{ \Carbon\Carbon::parse($order->order_date)->diffForHumans() }}<br>
+                                    {{ date('d-M-Y H:i', strtotime($order->order_date)) }}
                                 </td>
                                 <td>
-                                    ${{ $new_order->payable_amount }}
+                                    {{ $order->code }}<br>
+                                    {{ $order->Contact->first_name }}
                                 </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-mastercard mr-1"></i> Mastercard
+                                <td style="word-wrap: break-word; white-space: pre-line;">
+                                    @php
+                                        $subtotals = $order->OrderDetail->map(function ($orderDetail) {
+                                            return $orderDetail?->Product?->name . '<br>Quantity:' . $orderDetail->quantity . '<br>Item subtotal: ' . $orderDetail->quantity * $orderDetail->unit_price . '<br>Condition: ' . $orderDetail->Product?->ProductDetail?->Condition?->name . '<hr style="padding: 0px; margin: 0px; width: 100px;">';
+                                        });
+                                        $formattedSubtotals = implode('', $subtotals->all());
+                                    @endphp
+
+                                    {!! $formattedSubtotals !!}
+
                                 </td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <button type="button" data-order_id="{{ $new_order->id }}"
+                                    <button type="button" data-order_id="{{ $order->id }}"
                                         class="btn btn-primary btn-sm btn-rounded new-order" data-toggle="modal"
                                         data-target=".exampleModal">
-                                        View Details
+                                        View
                                     </button>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip"
-                                        data-placement="top" title="" data-original-title="Edit"><i
-                                            class="mdi mdi-pencil font-size-18"></i></a>
-                                    <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip"
-                                        data-placement="top" title="" data-original-title="Delete" onclick="deleteOrder({{ $new_order->id }})"><i
-                                            class="mdi mdi-close font-size-18"></i></a>
+                                    <span class="badge badge-danger font-size-14">{{ ucwords($order->status) }} </span>
+                                </td>
+                                <td>
+                                    <a href="{{ route('confirm-order', ['order' => $order]) }}"
+                                        class="btn btn-success waves-effect waves-light text-light btn-block btn-sm">
+                                        <i class="bx bx-check-double font-size-16 align-middle"></i> Confirm
+                                    </a><br>
+                                    <a href="{{ route('invoices-detail', ['order' => $order]) }}"
+                                        class="btn btn-info waves-effect waves-light text-light btn-block btn-sm">
+                                        <i class="dripicons-print"></i> QR Code
+                                    </a><br>
+                                    <a href="{{ route('cancel-order', ['order' => $order]) }}"
+                                        class="btn btn-danger waves-effect waves-light text-light btn-block btn-sm">
+                                        <i class="bx bx-block font-size-16 align-middle"></i> Cancel
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <ul class="pagination pagination-rounded justify-content-end mb-2">
-                <li class="page-item disabled">
-                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                        <i class="mdi mdi-chevron-left"></i>
-                    </a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                        <i class="mdi mdi-chevron-right"></i>
-                    </a>
-                </li>
-            </ul>
+            {{ $new_orders->links() }}
         </div>
     </div>
     <!-- Modal -->

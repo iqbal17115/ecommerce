@@ -15,7 +15,19 @@
                            <span>Dashboards</span>
                        </a>
                    </li>
+                   <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-layout"></i>
+                        <span>Customers</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="javascript:void(0);">Dashboard</a></li>
+                        <li><a href="{{ route('manage.customer') }}">Manage Customers</a></li>
+                        <li><a href="javascript:void(0);">Customer Login</a></li>
+                        <li><a href="javascript:void(0);">Customer Registration</a></li>
 
+                    </ul>
+                </li>
                    <li>
                        <a href="javascript: void(0);" class="has-arrow waves-effect">
                            <i class="bx bx-layout"></i>
@@ -142,8 +154,9 @@
                            <span>Orders</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('new-order') }}">New Order</a></li>
-                    </ul>
+                           <li><a href="{{ route('new-order') }}">New Order</a></li>
+                           <li><a href="{{ route('all-order') }}">All Order</a></li>
+                       </ul>
                    </li>
 
                    <li>
