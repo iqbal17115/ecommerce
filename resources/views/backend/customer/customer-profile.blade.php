@@ -113,7 +113,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Transactions</h4>
+                    <h4 class="card-title mb-4">Personal Info</h4>
 
                     <ul class="nav nav-pills bg-light rounded" role="tablist">
                         <li class="nav-item">
@@ -121,7 +121,7 @@
                                 ({{ $user?->Contact?->Order?->count() }})</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transactions-buy-tab" role="tab">Reviews
+                            <a class="nav-link" data-toggle="tab" href="#customer-review-tab" role="tab">Reviews
                                 (0)</a>
                         </li>
                         <li class="nav-item">
@@ -169,9 +169,33 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane" id="transactions-buy-tab" role="tabpanel">
-                            <div class="table-responsive" data-simplebar style="max-height: 330px;">
-
+                        <div class="tab-pane" id="customer-review-tab" role="tabpanel">
+                            <div class="table-responsive">
+                            <table class="table table-centered table-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Rating</th>
+                                                        <th>Review</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($user?->reviews as $review)
+                                                    <tr>
+                                                        <td style="word-wrap: break-word; white-space: pre-line;">{{ $review?->Product->name}}</td>
+                                                        <td>
+                                                        <span class="badge badge-success font-size-12"><i class="mdi mdi-star mr-1"></i> {{$review->rating}}</span>
+                                                        </td>
+                                                        
+                                                        <td>{{$review->comment}}</td>
+                                                        <td>{{ ucwords($review->status) }}</td>
+                                                        <td>{{ date('d-M-Y', strtotime($review->created_at)) }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                             </div>
                         </div>
 
