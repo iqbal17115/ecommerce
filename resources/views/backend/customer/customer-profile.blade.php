@@ -131,7 +131,7 @@
                             <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Stores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Personal
+                            <a class="nav-link" data-toggle="tab" href="#personal-info-tab" role="tab">Personal
                                 Info</a>
                         </li>
                     </ul>
@@ -202,6 +202,89 @@
                         <div class="tab-pane" id="transactions-sell-tab" role="tabpanel">
                             <div class="table-responsive" data-simplebar style="max-height: 330px;">
 
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="personal-info-tab" role="tabpanel">
+                            <div class="table-responsive" data-simplebar>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form class="needs-validation" novalidate>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label for="validationTooltip01">Full Name</label>
+                                                        <input type="text" class="form-control" id="validationTooltip01" placeholder="Full Name" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="gender">Gender</label>
+                                                        <select id="gender" class="form-control">
+                                                            <option value="">Choose...</option>
+                                                            <option value="male">Male</option>
+                                                            <option value="female">Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label for="inlineFormemail2">Email</label>
+                                                        <div class="input-group mb-2 mr-sm-3">
+                                                          <div class="input-group-prepend">
+                                                            <div class="input-group-text">@</div>
+                                                          </div>
+                                                          <input type="email" class="form-control" id="inlineFormemail2" placeholder="Enter Email">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label>Date Of Birth</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" placeholder="dd M, yyyy"  data-date-format="dd M, yyyy" data-provide="datepicker">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                                </div>
+                                                            </div><!-- input-group -->
+                                                        </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label for="phone">Phone</label>
+                                                        <input type="text" class="form-control" id="phone" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label for="alternative_phone">Alternative Phone</label>
+                                                        <input type="text" class="form-control" id="alternative_phone" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group position-relative">
+                                                        <label for="facebook">Facebook</label>
+                                                        <input type="text" class="form-control" id="facebook" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group position-relative">
+                                                        <label for="instagram">Instagram</label>
+                                                        <input type="text" class="form-control" id="instagram" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group position-relative">
+                                                        <label for="twitter">Twitter</label>
+                                                        <input type="text" class="form-control" id="twitter" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Submit form</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- end card -->
                             </div>
                         </div>
 
