@@ -122,7 +122,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#customer-review-tab" role="tab">Reviews
-                                (0)</a>
+                                ({{ $user?->reviews->count() }})</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Wishlist</a>
@@ -188,7 +188,7 @@
                                                         <td>
                                                         <span class="badge badge-success font-size-12"><i class="mdi mdi-star mr-1"></i> {{$review->rating}}</span>
                                                         </td>
-                                                        
+
                                                         <td>{{$review->comment}}</td>
                                                         <td>{{ ucwords($review->status) }}</td>
                                                         <td>{{ date('d-M-Y', strtotime($review->created_at)) }}</td>
@@ -214,7 +214,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group position-relative">
                                                         <label for="validationTooltip01">Full Name</label>
-                                                        <input type="text" class="form-control" id="validationTooltip01" placeholder="Full Name" required>
+                                                        <input type="text" class="form-control" id="validationTooltip01" value="{{ $user->name }}" placeholder="Full Name" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -234,7 +234,7 @@
                                                           <div class="input-group-prepend">
                                                             <div class="input-group-text">@</div>
                                                           </div>
-                                                          <input type="email" class="form-control" id="inlineFormemail2" placeholder="Enter Email">
+                                                          <input type="email" class="form-control" id="inlineFormemail2" value="{{ $user->email }}" placeholder="Enter Email">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -252,7 +252,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group position-relative">
                                                         <label for="phone">Phone</label>
-                                                        <input type="text" class="form-control" id="phone" placeholder="+1234567890" required>
+                                                        <input type="text" class="form-control" id="phone" value="{{ $user->mobile }}" placeholder="+1234567890" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
