@@ -105,7 +105,8 @@
                                     </div>
                                     <div class="col-xl col-md-1 mt-3">
                                         <div class="custom-control custom-checkbox custom-checkbox-info mt-3">
-                                            <input type="checkbox" class="custom-control-input check-status" id="incomplete">
+                                            <input type="checkbox" class="custom-control-input check-status"
+                                                id="incomplete">
                                             <label class="custom-control-label" for="incomplete">Incomplete</label>
                                         </div>
                                     </div>
@@ -146,12 +147,17 @@
                                                 <td>{{ $customer->email }}</td>
                                                 <td>{{ $customer->mobile }}</td>
                                                 <td>{{ $customer->Contact?->Order->count() ?? 0 }}</td>
-                                                <td>{{ $customer->Contact?->Order->count() > 0 ? $customer->Contact?->Order->max('created_at')->diffForHumans() : 'No orders' }}</td>
+                                                <td>{{ $customer->Contact?->Order->count() > 0 ? $customer->Contact?->Order->max('created_at')->diffForHumans() : 'No orders' }}
+                                                </td>
                                                 <td>
                                                     {{ $customer->address }}
                                                 </td>
                                                 <td>
-                                                    <span class="badge badge-success font-size-10">Completed</span>
+                                                    <button class="toggle-status-btn custom-btn btn-block"
+                                                        data-customer-id="{{ $customer->id }}"
+                                                        data-toggle="{{ $customer->status == 'active' ? 'inactive' : 'active' }}">
+                                                        {{ $customer->status == 'active' ? 'Inactive' : 'Active' }}
+                                                    </button>
                                                 </td>
                                                 <td>
                                                     <div class="dropdown">
@@ -160,10 +166,9 @@
                                                             <i class="mdi mdi-dots-horizontal font-size-18"></i>
                                                         </a>
                                                         <ul class="dropdown-menu dropdown-menu-right">
-                                                            <li><a href="{{ route('customers.profile', ['user' => $customer]) }}" class="dropdown-item">Details</a></li>
+                                                            <li><a href="{{ route('customers.profile', ['user' => $customer]) }}"
+                                                                    class="dropdown-item">Details</a></li>
                                                             <li><a href="#" class="dropdown-item">Edit</a></li>
-                                                            <li><a href="#" class="dropdown-item">Active</a></li>
-                                                            <li><a href="#" class="dropdown-item">Inactive</a></li>
                                                             <li><a href="#" class="dropdown-item">Make Vendor</a>
                                                             </li>
                                                             <li><a href="#" class="dropdown-item">Delete</a></li>
@@ -188,6 +193,38 @@
 
 @push('script')
     <script type="text/javascript">
+        $(document).ready(function() {
+            $('.toggle-status-btn').click(function() {
+                var customerId = $(this).data('customer-id');
+                var toggleStatus = $(this).data('toggle');
+                var confirmation = confirm('Are you sure you want to ' + toggleStatus + ' this customer?');
+
+                if (confirmation) {
+                    $.ajax({
+                        type: 'PUT',
+                        url: '/customers/' + customerId + '/customer-status',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                // Update the button text and data-toggle attribute
+                                $('.toggle-status-btn[data-customer-id="' + customerId + '"]')
+                                    .text(toggleStatus === 'active' ? 'Inactive' : 'Active')
+                                    .data('toggle', toggleStatus === 'active' ? 'inactive' :
+                                        'active');
+                            } else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                }
+            });
+        });
+
         // search customer
         function customerSearch() {
             // Get references to the checkboxes

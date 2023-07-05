@@ -6,6 +6,16 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerService
 {
+    public function findCustomer($id)
+    {
+        return User::find($id);
+    }
+
+    public function toggleStatus(User $user)
+    {
+        $user->status = $user->status == 'active'? 'inactive':'active';
+        $user->save();
+    }
     public function getCustomers($searchTerm, $perPage)
     {
         $query = User::query()
