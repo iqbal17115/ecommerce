@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerService
 {
+    public function getAllCustomer($perPage)
+    {
+        $query = User::orderBy('id', 'desc')->paginate($perPage);
+
+        return $query;
+    }
     public function findCustomer($id)
     {
         return User::find($id);
@@ -13,7 +19,7 @@ class CustomerService
 
     public function toggleStatus(User $user)
     {
-        $user->status = $user->status == 'active'? 'inactive':'active';
+        $user->status = $user->status == 'active' ? 'inactive' : 'active';
         $user->save();
     }
     public function getCustomers($searchTerm, $perPage)
@@ -41,6 +47,15 @@ class CustomerService
                     })
                     ->when(isset($searchTerm['incomplete']) && $searchTerm['incomplete'], function ($query) {
                         $query->orWhere('users.status', 'incomplete');
+                    })
+                    ->when(isset($searchTerm['search_key']), function ($query) use ($searchTerm) {
+                        $query->orWhere('users.name', 'LIKE', '%' . $searchTerm['search_key'] . '%');
+                    })
+                    ->when(isset($searchTerm['search_key']), function ($query) use ($searchTerm) {
+                        $query->orWhere('users.email', 'LIKE', '%' . $searchTerm['search_key'] . '%');
+                    })
+                    ->when(isset($searchTerm['search_key']), function ($query) use ($searchTerm) {
+                        $query->orWhere('users.mobile', 'LIKE', '%' . $searchTerm['search_key'] . '%');
                     });
             })
             ->select('users.*')
