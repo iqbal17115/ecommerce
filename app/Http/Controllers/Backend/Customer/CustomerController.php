@@ -21,6 +21,18 @@ class CustomerController extends Controller
     {
         $this->customerService = $customerService;
     }
+    public function customerStatus(Request $request, $id)
+    {
+        $customer = $this->customerService->findCustomer($id);
+
+        if ($customer) {
+            $this->customerService->toggleStatus($customer);
+
+            return response()->json(['success' => true, 'message' => 'Customer status updated successfully.']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Customer not found.']);
+    }
     public function profile(User $user) {
         return view('backend.customer.customer-profile', compact('user'));
     }

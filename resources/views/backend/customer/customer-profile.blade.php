@@ -113,7 +113,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Transactions</h4>
+                    <h4 class="card-title mb-4">Personal Info</h4>
 
                     <ul class="nav nav-pills bg-light rounded" role="tablist">
                         <li class="nav-item">
@@ -121,8 +121,8 @@
                                 ({{ $user?->Contact?->Order?->count() }})</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transactions-buy-tab" role="tab">Reviews
-                                (0)</a>
+                            <a class="nav-link" data-toggle="tab" href="#customer-review-tab" role="tab">Reviews
+                                ({{ $user?->reviews->count() }})</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Wishlist</a>
@@ -131,7 +131,7 @@
                             <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Stores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Personal
+                            <a class="nav-link" data-toggle="tab" href="#personal-info-tab" role="tab">Personal
                                 Info</a>
                         </li>
                     </ul>
@@ -169,15 +169,122 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane" id="transactions-buy-tab" role="tabpanel">
-                            <div class="table-responsive" data-simplebar style="max-height: 330px;">
+                        <div class="tab-pane" id="customer-review-tab" role="tabpanel">
+                            <div class="table-responsive">
+                            <table class="table table-centered table-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Rating</th>
+                                                        <th>Review</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($user?->reviews as $review)
+                                                    <tr>
+                                                        <td style="word-wrap: break-word; white-space: pre-line;">{{ $review?->Product->name}}</td>
+                                                        <td>
+                                                        <span class="badge badge-success font-size-12"><i class="mdi mdi-star mr-1"></i> {{$review->rating}}</span>
+                                                        </td>
 
+                                                        <td>{{$review->comment}}</td>
+                                                        <td>{{ ucwords($review->status) }}</td>
+                                                        <td>{{ date('d-M-Y', strtotime($review->created_at)) }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                             </div>
                         </div>
 
                         <div class="tab-pane" id="transactions-sell-tab" role="tabpanel">
                             <div class="table-responsive" data-simplebar style="max-height: 330px;">
 
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="personal-info-tab" role="tabpanel">
+                            <div class="table-responsive" data-simplebar>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form class="needs-validation" novalidate>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label for="validationTooltip01">Full Name</label>
+                                                        <input type="text" class="form-control" id="validationTooltip01" value="{{ $user->name }}" placeholder="Full Name" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="gender">Gender</label>
+                                                        <select id="gender" class="form-control">
+                                                            <option value="">Choose...</option>
+                                                            <option value="male">Male</option>
+                                                            <option value="female">Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label for="inlineFormemail2">Email</label>
+                                                        <div class="input-group mb-2 mr-sm-3">
+                                                          <div class="input-group-prepend">
+                                                            <div class="input-group-text">@</div>
+                                                          </div>
+                                                          <input type="email" class="form-control" id="inlineFormemail2" value="{{ $user->email }}" placeholder="Enter Email">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label>Date Of Birth</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" placeholder="dd M, yyyy"  data-date-format="dd M, yyyy" data-provide="datepicker">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                                                </div>
+                                                            </div><!-- input-group -->
+                                                        </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label for="phone">Phone</label>
+                                                        <input type="text" class="form-control" id="phone" value="{{ $user->mobile }}" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group position-relative">
+                                                        <label for="alternative_phone">Alternative Phone</label>
+                                                        <input type="text" class="form-control" id="alternative_phone" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group position-relative">
+                                                        <label for="facebook">Facebook</label>
+                                                        <input type="text" class="form-control" id="facebook" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group position-relative">
+                                                        <label for="instagram">Instagram</label>
+                                                        <input type="text" class="form-control" id="instagram" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group position-relative">
+                                                        <label for="twitter">Twitter</label>
+                                                        <input type="text" class="form-control" id="twitter" placeholder="+1234567890" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Submit form</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- end card -->
                             </div>
                         </div>
 
