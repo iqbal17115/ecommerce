@@ -25,6 +25,7 @@ use App\Http\Controllers\Ecommerce\AuthController;
 use App\Http\Controllers\Ecommerce\ShopController;
 use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
+use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
@@ -88,6 +89,16 @@ Route::get('sign-up', [AuthController::class, 'signUpIndex'])->name('sign-up');
 Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
 Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
 Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::controller(WishlistController::class)->group(function () {
+        Route::post('wishlist/add', 'addToWishlist');
+        Route::post('wishlist/remove', 'removeFromWishlist');
+        Route::get('wishlist', 'getWishlist');
+        Route::get('/wishlist/count', 'getWishlistCount');
+    });
+});
+
 //
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);

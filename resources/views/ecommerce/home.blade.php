@@ -287,7 +287,7 @@
                                                 </span>
 
                                                 {{-- Add to wishlist --}}
-                                                <a href="wishlist.html" class="btn-icon-wish" title="Add To Wishlist"><i
+                                                <a href="javascript:void(0);" class="btn-icon-wish" data-product_id="{{ $product->id }}" title="Add To Wishlist"><i
                                                         class="icon-heart"></i></a>
                                             </div>
                                             <!-- End .product-container -->
@@ -392,6 +392,7 @@
 
 @endsection
 @push('scripts')
+@include('ecommerce.wishlist-js')
     <script>
         window.onload = function() {
             // Code to be executed after rendering the full layout

@@ -201,6 +201,10 @@ My
                     </div>
                 </a> -->
                 <div style="" class="rounded">
+                    <a href="wishlist.html" class="header-icon position-relative" title="wishlist">
+                        <i class="icon-wishlist-2"></i>
+                        <span class="wishlist-count badge-circle">0</span>
+                    </a>
                     <!-- Start Cart -->
                     <div class="dropdown cart-dropdown" style="display: inline-block;">
                         <div class="d-flex flex-column align-items-center">
