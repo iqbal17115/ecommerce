@@ -184,7 +184,7 @@
                                                 <tbody>
                                                     @foreach($user?->reviews as $review)
                                                     <tr>
-                                                        <td style="word-wrap: break-word; white-space: pre-line;">{{ $review?->Product->name}}</td>
+                                                        <td style="word-wrap: break-word; white-space: pre-line;">{{ $review?->Product?->name}}</td>
                                                         <td>
                                                         <span class="badge badge-success font-size-12"><i class="mdi mdi-star mr-1"></i> {{$review->rating}}</span>
                                                         </td>
