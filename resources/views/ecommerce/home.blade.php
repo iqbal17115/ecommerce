@@ -287,7 +287,7 @@
                                                 </span>
 
                                                 {{-- Add to wishlist --}}
-                                                <a href="wishlist.html" class="btn-icon-wish"><i
+                                                <a href="wishlist.html" class="btn-icon-wish" title="Add To Wishlist"><i
                                                         class="icon-heart"></i></a>
                                             </div>
                                             <!-- End .product-container -->
