@@ -249,8 +249,9 @@
                                             <h3 class="product-title">
                                                 <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}"
                                                     class="product-name" id="product-name">{{ $product->name }}</a>
-
-                                                <span class="five-star-rating">
+                                            </h3>
+                                            <div class="category-wrap">
+                                                <span class="five-star-rating ml-0 mb-1">
                                                     @if ($product->reviews()->avg('rating') >= 1)
                                                         <i class="fas fa-star"></i>
                                                     @else
@@ -280,12 +281,15 @@
                                                     @else
                                                         <i class="far fa-star"></i>
                                                     @endif
-                                                </span>
-
-                                                <span class="rating-number">-</span>
+                                                    <span class="rating-number">-</span>
                                                 <span class="rating-number"
                                                     style="font-size: 11px;">{{ $product->reviews()->sum('rating') }}</span>
-                                            </h3>
+                                                </span>
+
+                                                {{-- Add to wishlist --}}
+                                                <a href="wishlist.html" class="btn-icon-wish"><i
+                                                        class="icon-heart"></i></a>
+                                            </div>
                                             <!-- End .product-container -->
                                             <div class="price-box">
                                                 @if (
