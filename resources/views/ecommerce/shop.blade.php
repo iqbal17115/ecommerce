@@ -13,7 +13,7 @@
             color: #F4631B;
             /* Set the color of the stars */
             font-size: 12px;
-            margin-left: 11px;
+            /* margin-left: 11px; */
             /* Adjust the size of the stars */
         }
 

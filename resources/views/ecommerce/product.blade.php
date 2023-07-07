@@ -26,7 +26,7 @@
         }
 
         .rating-text {
-            margin-left: 10px;
+            /* margin-left: 10px; */
             font-size: 16px;
         }
 
@@ -120,7 +120,7 @@
                     <div class="col-lg-7 col-md-6 product-single-details">
                         <h1 class="product-title">{{ $product_detail->name }}</h1>
                         @if ($product_detail->Brand)
-                            <div class="row g-3 align-items-center brand-container" style="border: 2px solid #eaeaea;">
+                            <div class="row g-3 align-items-center">
                                 <div class="col-md-3">
                                     <h5 class="fw-bold m-0 p-0">Brand: <span class="m-0 p-0"
                                             style="font-weight: bold;color: #f4631b;">{{ $product_detail->Brand->name }}</span>
