@@ -2,6 +2,7 @@
 
 namespace App\Models\Frontend\Wishlist;
 
+use App\Models\Backend\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
