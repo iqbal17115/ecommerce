@@ -201,7 +201,7 @@ My
                     </div>
                 </a> -->
                 <div style="" class="rounded">
-                    <a href="wishlist.html" class="header-icon position-relative" title="wishlist">
+                    <a href="javascript:void(0);" class="header-icon position-relative" title="wishlist">
                         <i class="icon-wishlist-2"></i>
                         <span class="wishlist-count badge-circle">0</span>
                     </a>
