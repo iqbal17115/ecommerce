@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use App\Models\Backend\ContactInfo\Contact;
 use App\Models\FrontEnd\Review;
+use App\Models\Frontend\Wishlist\Wishlist;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -63,7 +64,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
     public function reviews()
     {
         return $this->hasMany(Review::class);
