@@ -90,13 +90,13 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <ul class="list-inline font-size-20 contact-links mb-0">
-                                                <li class="list-inline-item px-2">
+                                            <span class="list-inline contact-links mb-0">
+                                                <span class="list-inline-item">
                                                     <a href="{{ route('customers.profile', ['user' => $customer]) }}"
                                                         data-toggle="tooltip" data-placement="top" title="Profile"><i
-                                                            class="bx bx-user-circle"></i></a>
-                                                </li>
-                                            </ul>
+                                                            class="bx bx-user-circle font-size-20"></i></a>
+                                                </span>
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach
