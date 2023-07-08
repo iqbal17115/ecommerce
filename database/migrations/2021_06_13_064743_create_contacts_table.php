@@ -40,8 +40,8 @@ class CreateContactsTable extends Migration
             $table->foreignId('branch_id')->nullable();
             $table->foreignId('created_by');
             $table->boolean('is_active')->nullable()->default(1);
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

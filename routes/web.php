@@ -117,6 +117,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('customers-profile/{user}', 'profile')->name('customers.profile');
         Route::put('/customers/{id}/customer-status', 'customerStatus')->name('customers.customerStatus');
         Route::get('all-customer', 'allCustomerIndex')->name('all.customer');
+        Route::delete('/customers/{user}', 'destroy')->name('customers.delete');
     });
 
     // Reply

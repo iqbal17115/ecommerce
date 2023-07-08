@@ -171,7 +171,9 @@
                                                             <li><a href="#" class="dropdown-item">Edit</a></li>
                                                             <li><a href="#" class="dropdown-item">Make Vendor</a>
                                                             </li>
-                                                            <li><a href="#" class="dropdown-item">Delete</a></li>
+                                                            <li><a href="javascript::void(0);"
+                                                                    class="dropdown-item delete-action"
+                                                                    data-customer-id="{{ $customer->id }}">Delete</a></li>
                                                         </ul>
                                                     </div>
                                                 </td>
@@ -194,6 +196,37 @@
 @push('script')
     <script type="text/javascript">
         $(document).ready(function() {
+            $('.delete-action').click(function(e) {
+                e.preventDefault();
+
+                // Get the customer ID from the data attribute
+                var customerId = $(this).data('customer-id');
+                var deleteButton = $(this); // Store the reference to the delete button
+
+                // Show a confirmation dialog
+                if (confirm('Are you sure you want to delete this customer?')) {
+                    // Send the AJAX request to delete the customer
+                    $.ajax({
+                        url: '/customers/' + customerId, // Update the route accordingly
+                        type: 'POST',
+                        data: {
+                            _method: 'DELETE',
+                            _token: '{{ csrf_token() }}',
+                            customer_id: customerId
+                        },
+                        success: function(response) {
+                            // Handle the success response, if needed
+                            // For example, you can remove the deleted customer from the table
+                            deleteButton.closest('tr').remove();
+                        },
+                        error: function(xhr) {
+                            // Handle the error response, if needed
+                            console.log(xhr.responseText);
+                        }
+                    });
+                }
+            });
+
             $('.toggle-status-btn').click(function() {
                 var customerId = $(this).data('customer-id');
                 var toggleStatus = $(this).data('toggle');

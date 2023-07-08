@@ -21,6 +21,13 @@ class CustomerController extends Controller
     {
         $this->customerService = $customerService;
     }
+    public function destroy(User $user)
+    {
+        // Delete the customer
+        $this->customerService->deleteCustomer($user);
+
+        return response()->json(['message' => 'Customer deleted successfully']);
+    }
     public function allCustomerIndex(Request $request): View|\Illuminate\Foundation\Application|Factory|Application
     {
         try {

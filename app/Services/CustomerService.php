@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerService
 {
+    public function deleteCustomer(User $user)
+    {
+        // Delete the customer
+        $user->delete();
+    }
     public function getAllCustomer($perPage)
     {
         $query = User::orderBy('id', 'desc')->paginate($perPage);
@@ -63,6 +68,5 @@ class CustomerService
             ->paginate($perPage);
 
         return $query;
-
     }
 }

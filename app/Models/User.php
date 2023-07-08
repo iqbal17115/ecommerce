@@ -14,17 +14,14 @@ use App\Models\Frontend\Wishlist\Wishlist;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use HasTeams;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
-    use HasRoles;
+    use HasApiTokens, HasFactory, HasProfilePhoto, HasTeams, Notifiable, TwoFactorAuthenticatable, HasRoles, SoftDeletes;
 
+    protected $dates = ['deleted_at'];
     public $timestamps = true;
     /**
      * The attributes that are mass assignable.
