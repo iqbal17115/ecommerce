@@ -135,6 +135,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
             Route::post('add-privacy_policy', [CompanyInfoController::class, 'addPrivacyPolicy'])->name('add.privacy_policy');
             Route::post('add-return_policy', [CompanyInfoController::class, 'addReturnPolicy'])->name('add.return_policy');
             Route::post('add-shipping_and_delivery', [CompanyInfoController::class, 'addShippingAndDelivery'])->name('add.shipping_and_delivery');
+            Route::post('title', [CompanyInfoController::class, 'Title'])->name('add.title');
             Route::post('keyword', [CompanyInfoController::class, 'keyword'])->name('add.key_word');
             Route::post('description', [CompanyInfoController::class, 'description'])->name('add.description');
             Route::post('add-status', [CompanyInfoController::class, 'addStatus'])->name('add.status');

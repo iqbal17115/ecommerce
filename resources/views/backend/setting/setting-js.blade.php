@@ -1,4 +1,46 @@
 <script type="text/javascript">
+
+// Start Title Save
+$(document).on('submit', '#title_save', function(e) {
+    e.preventDefault();
+    var form = this;
+    $.ajax({
+        url: "{{route('add.title')}}",
+        method: 'post',
+        data: new FormData(form),
+        processData: false,
+        dataType: 'json',
+        contentType: false,
+        success: function(data) {
+            console.log(data);
+            if (data.status == 201) {
+                Command: toastr["success"]("Title Saved Successfully",
+                    "Success")
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            }
+        },
+    });
+});
+// End Title Save
+
+
+
 // Start Keyword Save
 $(document).on('submit', '#keyword_save', function(e) {
     e.preventDefault();
