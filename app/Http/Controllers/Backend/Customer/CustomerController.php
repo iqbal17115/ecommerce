@@ -21,6 +21,25 @@ class CustomerController extends Controller
     {
         $this->customerService = $customerService;
     }
+    public function destroy(User $user)
+    {
+        // Delete the customer
+        $this->customerService->deleteCustomer($user);
+
+        return response()->json(['message' => 'Customer deleted successfully']);
+    }
+    public function allCustomerIndex(Request $request): View|\Illuminate\Foundation\Application|Factory|Application
+    {
+        try {
+            $perPage = $request->input('perPage', 10);
+
+            $customers = $this->customerService->getAllCustomer($perPage);
+
+            return view('backend.customer.all-customer', compact('customers'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while fetching the products: ' . $e->getMessage());
+        }
+    }
     public function customerStatus(Request $request, $id)
     {
         $customer = $this->customerService->findCustomer($id);
@@ -35,6 +54,12 @@ class CustomerController extends Controller
     }
     public function profile(User $user) {
         return view('backend.customer.customer-profile', compact('user'));
+    }
+    public function allCustomerSearch(Request $request) {
+        $perPage = $request->input('perPage', 10);
+        $searchTerm = $request->all();
+        $customers = $this->customerService->getCustomers($searchTerm, $perPage);
+        return view('backend.customer.partials.all_customers_table', compact('customers'))->render();
     }
     public function search(Request $request)
     {

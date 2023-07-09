@@ -18,8 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $dates = ['deleted_at'];
     public function PurchaseInvoice(){
         return $this->hasMany(PurchaseInvoice::class);

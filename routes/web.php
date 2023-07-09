@@ -25,6 +25,8 @@ use App\Http\Controllers\Ecommerce\AuthController;
 use App\Http\Controllers\Ecommerce\ShopController;
 use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
+use App\Http\Controllers\Ecommerce\MyAccount\MyAccountController;
+use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
@@ -88,6 +90,21 @@ Route::get('sign-up', [AuthController::class, 'signUpIndex'])->name('sign-up');
 Route::post('customer-register', [AuthController::class, 'customRegistration'])->name('customer-register');
 Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
 Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
+
+Route::group(['middleware' => 'auth'], function () {
+    // My account
+    Route::controller(MyAccountController::class)->group(function () {
+        Route::get('my-account', 'index')->name('my.account');
+    });
+    // Wishlist
+    Route::controller(WishlistController::class)->group(function () {
+        Route::post('wishlist/add', 'addToWishlist');
+        Route::post('wishlist/remove', 'removeFromWishlist');
+        Route::get('wishlist', 'getWishlist');
+        Route::get('/wishlist/count', 'getWishlistCount');
+    });
+});
+
 //
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
@@ -96,8 +113,11 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::controller(CustomerController::class)->group(function () {
         Route::get('manage-customer', 'manageCustomer')->name('manage.customer');
         Route::get('customers-search', 'search')->name('customers.search');
+        Route::get('all-customers-search', 'allCustomerSearch')->name('all.customers.search');
         Route::get('customers-profile/{user}', 'profile')->name('customers.profile');
         Route::put('/customers/{id}/customer-status', 'customerStatus')->name('customers.customerStatus');
+        Route::get('all-customer', 'allCustomerIndex')->name('all.customer');
+        Route::delete('/customers/{user}', 'destroy')->name('customers.delete');
     });
 
     // Reply

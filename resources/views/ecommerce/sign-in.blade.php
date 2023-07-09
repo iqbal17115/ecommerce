@@ -24,7 +24,7 @@
 
     .sign-panels {
         width: 750px;
-        background: #fff;
+        background: #dbdbdb;
         padding: 10px 20px;
         margin: 40px auto;
         border-radius: 20px;

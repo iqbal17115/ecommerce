@@ -125,7 +125,7 @@
                                 ({{ $user?->reviews->count() }})</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Wishlist</a>
+                            <a class="nav-link" data-toggle="tab" href="#wishlist-tab" role="tab">Wishlist</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#transactions-sell-tab" role="tab">Stores</a>
@@ -171,32 +171,72 @@
                         </div>
                         <div class="tab-pane" id="customer-review-tab" role="tabpanel">
                             <div class="table-responsive">
-                            <table class="table table-centered table-nowrap">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Product</th>
-                                                        <th>Rating</th>
-                                                        <th>Review</th>
-                                                        <th>Status</th>
-                                                        <th>Date</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($user?->reviews as $review)
-                                                    <tr>
-                                                        <td style="word-wrap: break-word; white-space: pre-line;">{{ $review?->Product->name}}</td>
-                                                        <td>
-                                                        <span class="badge badge-success font-size-12"><i class="mdi mdi-star mr-1"></i> {{$review->rating}}</span>
-                                                        </td>
+                                <table class="table table-centered table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Rating</th>
+                                            <th>Review</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($user?->reviews as $review)
+                                            <tr>
+                                                <td style="word-wrap: break-word; white-space: pre-line;">
+                                                    {{ $review?->Product?->name }}</td>
+                                                <td>
+                                                    <span class="badge badge-success font-size-12"><i
+                                                            class="mdi mdi-star mr-1"></i> {{ $review->rating }}</span>
+                                                </td>
 
-                                                        <td>{{$review->comment}}</td>
-                                                        <td>{{ ucwords($review->status) }}</td>
-                                                        <td>{{ date('d-M-Y', strtotime($review->created_at)) }}</td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                <td>{{ $review->comment }}</td>
+                                                <td>{{ ucwords($review->status) }}</td>
+                                                <td>{{ date('d-M-Y', strtotime($review->created_at)) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
+
+                        <div class="tab-pane" id="wishlist-tab" role="tabpanel">
+                            <table class="table table-centered mb-0 table-nowrap">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Auth::user()?->wishlist as $list)
+                                        <tr>
+                                            <td>
+                                                <img @if ($list?->product?->ProductMainImage) src="{{ asset('storage/product_photo/' . $list?->product?->ProductMainImage->image) }}" @endif
+                                                    alt="product-img" title="product-img" class="avatar-md" />
+                                            </td>
+                                            <td style="word-wrap: break-word; white-space: pre-line;">
+                                                <h5 class="font-size-14 text-truncate"><a
+                                                        href="ecommerce-product-detail.html"
+                                                        class="text-dark">{{ $list?->product->name }}</a></h5>
+                                            </td>
+                                            <td>
+                                                @if ($list?->product->sale_price &&
+                                                        $list?->product->sale_start_date &&
+                                                        $list?->product->sale_end_date &&
+                                                        $list?->product->sale_start_date <= now() &&
+                                                        $list?->product->sale_end_date >= now())
+                                                    {{ $currency->icon }}{{ number_format($list?->product->sale_price, 2) }}
+                                                @else
+                                                    {{ $currency->icon }}{{ number_format($list?->product->your_price, 2) }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
 
                         <div class="tab-pane" id="transactions-sell-tab" role="tabpanel">
@@ -214,7 +254,9 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group position-relative">
                                                         <label for="validationTooltip01">Full Name</label>
-                                                        <input type="text" class="form-control" id="validationTooltip01" value="{{ $user->name }}" placeholder="Full Name" required>
+                                                        <input type="text" class="form-control"
+                                                            id="validationTooltip01" value="{{ $user->name }}"
+                                                            placeholder="Full Name" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -231,52 +273,63 @@
                                                     <div class="form-group position-relative">
                                                         <label for="inlineFormemail2">Email</label>
                                                         <div class="input-group mb-2 mr-sm-3">
-                                                          <div class="input-group-prepend">
-                                                            <div class="input-group-text">@</div>
-                                                          </div>
-                                                          <input type="email" class="form-control" id="inlineFormemail2" value="{{ $user->email }}" placeholder="Enter Email">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">@</div>
+                                                            </div>
+                                                            <input type="email" class="form-control"
+                                                                id="inlineFormemail2" value="{{ $user->email }}"
+                                                                placeholder="Enter Email">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group position-relative">
                                                         <label>Date Of Birth</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" placeholder="dd M, yyyy"  data-date-format="dd M, yyyy" data-provide="datepicker">
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                                                                </div>
-                                                            </div><!-- input-group -->
-                                                        </div>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="dd M, yyyy" data-date-format="dd M, yyyy"
+                                                                data-provide="datepicker">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i
+                                                                        class="mdi mdi-calendar"></i></span>
+                                                            </div>
+                                                        </div><!-- input-group -->
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group position-relative">
                                                         <label for="phone">Phone</label>
-                                                        <input type="text" class="form-control" id="phone" value="{{ $user->mobile }}" placeholder="+1234567890" required>
+                                                        <input type="text" class="form-control" id="phone"
+                                                            value="{{ $user->mobile }}" placeholder="+1234567890"
+                                                            required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group position-relative">
                                                         <label for="alternative_phone">Alternative Phone</label>
-                                                        <input type="text" class="form-control" id="alternative_phone" placeholder="+1234567890" required>
+                                                        <input type="text" class="form-control" id="alternative_phone"
+                                                            placeholder="+1234567890" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group position-relative">
                                                         <label for="facebook">Facebook</label>
-                                                        <input type="text" class="form-control" id="facebook" placeholder="+1234567890" required>
+                                                        <input type="text" class="form-control" id="facebook"
+                                                            placeholder="+1234567890" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group position-relative">
                                                         <label for="instagram">Instagram</label>
-                                                        <input type="text" class="form-control" id="instagram" placeholder="+1234567890" required>
+                                                        <input type="text" class="form-control" id="instagram"
+                                                            placeholder="+1234567890" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group position-relative">
                                                         <label for="twitter">Twitter</label>
-                                                        <input type="text" class="form-control" id="twitter" placeholder="+1234567890" required>
+                                                        <input type="text" class="form-control" id="twitter"
+                                                            placeholder="+1234567890" required>
                                                     </div>
                                                 </div>
                                             </div>

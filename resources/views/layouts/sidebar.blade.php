@@ -23,6 +23,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="javascript:void(0);">Dashboard</a></li>
                         <li><a href="{{ route('manage.customer') }}">Manage Customers</a></li>
+                        <li><a href="{{ route('all.customer') }}">Customers</a></li>
                         <li><a href="javascript:void(0);">Customer Login</a></li>
                         <li><a href="javascript:void(0);">Customer Registration</a></li>
 
