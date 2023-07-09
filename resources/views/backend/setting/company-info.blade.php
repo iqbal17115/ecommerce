@@ -149,6 +149,12 @@
                                 </li>
 
                                 <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#Title" role="tab">
+                                        <i class="now-ui-icons ui-2_settings-90"></i> Title
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#keyword" role="tab">
                                         <i class="now-ui-icons ui-2_settings-90"></i> Keyword
                                     </a>
@@ -703,6 +709,38 @@
                                     <!-- End Shipping & Delivery -->
                                 </div>
 
+                                <div class="tab-pane" id="Title" role="tabpanel">
+                                    <form method="post" id="title_save">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="row">
+                                                    <div class="col-md-4 mt-md-3">
+                                                        <label class="col-form-label float-md-right"
+                                                            style="font-size: 14px;">Title</label>
+                                                    </div>
+                                                    <div class="col-md-8 mt-md-3">
+                                                        <textarea class="form-control" name="title" id="title" placeholder="Title">
+                                                        @if ($company_info && $company_info->title)
+                                                           {!! $company_info->title !!}
+                                                        @endif
+                                                        </textarea>
+                                                    </div>
+                                                    <!-- End -->
+
+                                                    <div class="col-md-12 mt-md-3">
+                                                        <button class="float-right btn btn-success btn-sm">Save</button>
+                                                    </div>
+                                                    <!-- End -->
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <!-- End -->
+                                        </div>
+                                    </form>
+                                    <!-- End About Us -->
+                                </div>
+
                                 <div class="tab-pane" id="keyword" role="tabpanel">
                                     <!-- Start About Us -->
                                     <form method="post" id="keyword_save">
@@ -863,6 +901,10 @@
         });
 
         $('#shipping_and_delivery').summernote({
+            height: 120
+        });
+
+        $('#title').summernote({
             height: 120
         });
 

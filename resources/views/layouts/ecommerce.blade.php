@@ -6,15 +6,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@if($company_info && $company_info->title) {!! strip_tags($company_info->title) !!} @endif</title>
 
-    <title>Aladdinne</title>
+    {{-- @if ($company_info && $company_info->description)
+        <meta name="description" content="{!! trim($company_info->description) !!}">
+    @endif --}}
+
     @if ($company_info && $company_info->key_word)
-        <meta name="keywords" content="{{ $company_info->key_word }}">
+        <meta name="keywords" content="{!! $company_info->key_word !!}">
     @endif
 
-    @if ($company_info && $company_info->description)
-        <meta name="description" content="{{ $company_info->description }}">
-    @endif
 
     <meta name="author" content="SW-THEMES">
     <link rel="canonical" href="https://www.aladdinne.com">

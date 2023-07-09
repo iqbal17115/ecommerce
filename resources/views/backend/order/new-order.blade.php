@@ -84,7 +84,7 @@
                                     </a><br>
                                     <a href="{{ route('invoices-detail', ['order' => $order]) }}"
                                         class="btn btn-info waves-effect waves-light text-light btn-block btn-sm">
-                                        <i class="dripicons-print"></i> QR Code
+                                        <i class="dripicons-print"></i> Print Details
                                     </a><br>
                                     <a href="{{ route('cancel-order', ['order' => $order]) }}"
                                         class="btn btn-danger waves-effect waves-light text-light btn-block btn-sm">

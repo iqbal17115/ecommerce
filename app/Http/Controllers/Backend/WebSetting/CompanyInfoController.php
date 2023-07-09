@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 
 class CompanyInfoController extends Controller
 {
+
+   // Title Save
+   public function Title(Request $request)
+   {
+       $company_info = CompanyInfo::firstOrNew();
+       $company_info->title = $request->title;
+       $company_info->save();
+       return response()->json([
+           'status' => 201
+       ]);
+   }
+   //End  Title Save
+
+
     // Keyword Save
     public function keyword(Request $request)
     {
