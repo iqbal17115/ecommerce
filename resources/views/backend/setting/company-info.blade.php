@@ -150,20 +150,20 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#Title" role="tab">
-                                        <i class="now-ui-icons ui-2_settings-90"></i> Title
+                                        <i class="now-ui-icons ui-2_settings-90"></i>Meta Title
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#keyword" role="tab">
-                                        <i class="now-ui-icons ui-2_settings-90"></i> Keyword
+                                        <i class="now-ui-icons ui-2_settings-90"></i>Meta Keyword
                                     </a>
                                 </li>
 
 
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#description" role="tab">
-                                        <i class="now-ui-icons ui-2_settings-90"></i> Description
+                                        <i class="now-ui-icons ui-2_settings-90"></i>Meta Description
                                     </a>
                                 </li>
 
@@ -717,12 +717,12 @@
                                                 <div class="row">
                                                     <div class="col-md-4 mt-md-3">
                                                         <label class="col-form-label float-md-right"
-                                                            style="font-size: 14px;">Title</label>
+                                                            style="font-size: 14px;">Meta Title</label>
                                                     </div>
                                                     <div class="col-md-8 mt-md-3">
-                                                        <textarea class="form-control" name="title" id="title" placeholder="Title">
-                                                        @if ($company_info && $company_info->title)
-                                                           {!! $company_info->title !!}
+                                                        <textarea class="form-control" name="meta_title" id="title" placeholder="Meta Title">
+                                                        @if ($company_info && $company_info->meta_title)
+                                                           {!! $company_info->meta_title !!}
                                                         @endif
                                                         </textarea>
                                                     </div>
@@ -750,12 +750,12 @@
                                                 <div class="row">
                                                     <div class="col-md-4 mt-md-3">
                                                         <label class="col-form-label float-md-right"
-                                                            style="font-size: 14px;">Keyword</label>
+                                                            style="font-size: 14px;">Meta Keyword</label>
                                                     </div>
                                                     <div class="col-md-8 mt-md-3">
-                                                        <textarea class="form-control" name="key_word" id="keyWord" placeholder="KeyWord">
-                                                        @if ($company_info && $company_info->key_word)
-                                                           {!! $company_info->key_word !!}
+                                                        <textarea class="form-control" name="meta_keyword" id="keyWord" placeholder="Meta KeyWord">
+                                                        @if ($company_info && $company_info->meta_keyword)
+                                                           {!! $company_info->meta_keyword !!}
                                                         @endif
                                                     </textarea>
                                                     </div>
@@ -784,12 +784,12 @@
                                                 <div class="row">
                                                     <div class="col-md-4 mt-md-3">
                                                         <label class="col-form-label float-md-right"
-                                                            style="font-size: 14px;">Description</label>
+                                                            style="font-size: 14px;">Meta Description</label>
                                                     </div>
                                                     <div class="col-md-8 mt-md-3">
-                                                        <textarea class="form-control" name="description" id="Description" placeholder="Description">
-                                                        @if ($company_info && $company_info->description)
-                                                           {!! $company_info->description !!}
+                                                        <textarea class="form-control" name="meta_description" id="Description" placeholder="Meta Description">
+                                                        @if ($company_info && $company_info->meta_description)
+                                                           {!! $company_info->meta_description !!}
                                                         @endif
                                                     </textarea>
                                                     </div>

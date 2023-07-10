@@ -6,14 +6,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@if($company_info && $company_info->title) {!! strip_tags($company_info->title) !!} @endif</title>
+    <title>@if($company_info && $company_info->meta_title) {!! strip_tags($company_info->meta_title) !!} @endif</title>
 
     {{-- @if ($company_info && $company_info->description)
-        <meta name="description" content="{!! trim($company_info->description) !!}">
+        <meta name="description" content="{!! trim($company_info->meta_description) !!}">
     @endif --}}
 
     @if ($company_info && $company_info->key_word)
-        <meta name="keywords" content="{!! $company_info->key_word !!}">
+        <meta name="keywords" content="{!! $company_info->meta_keyword !!}">
     @endif
 
 
