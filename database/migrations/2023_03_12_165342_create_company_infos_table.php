@@ -41,6 +41,7 @@ class CreateCompanyInfosTable extends Migration
             $table->text('terms_condition')->nullable();
             $table->text('privacy_policy')->nullable();
             $table->text('return_policy')->nullable();
+            $table->text('title')->nullable();
             $table->boolean('is_phone_active')->nullable()->default(1);
             $table->boolean('is_mobile_active')->nullable()->default(1);
             $table->boolean('is_email_active')->nullable()->default(1);
