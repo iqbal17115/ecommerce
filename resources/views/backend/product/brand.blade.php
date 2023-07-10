@@ -68,6 +68,34 @@
 </script>
 </div>
 
+{{-- Sweet alert javascript added --}}
+
+<script>
+    // Handle delete button click event
+    $('.delete_brand').click(function() {
+        var brandId = $(this).data('id');
+
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, perform the delete action
+                deleteBrand(brandId);
+            }
+        });
+    });
+</script>
+
+{{-- Sweet alert javascript added --}}
+
+
 @include('backend.product.modal.brand')
 
 @endsection
