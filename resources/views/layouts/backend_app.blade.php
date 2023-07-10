@@ -26,16 +26,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    {{-- sweet alert plugin add --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18"></script>
-    {{-- sweet alert plugin add --}}
-
-    {{-- jquery plugin --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {{-- jquery plugin --}}
-
-
-
 
     @yield('individual__link')
     @yield('css')
