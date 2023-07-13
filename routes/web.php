@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\Product\MaterialController;
 use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\Product\ConditionController;
 use App\Http\Controllers\Backend\Product\ProductFeatureController;
+use App\Http\Controllers\Backend\Seo\SeoPageController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
@@ -108,6 +109,17 @@ Route::group(['middleware' => 'auth'], function () {
 //
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+
+    // SeoPage
+    Route::controller(SeoPageController::class)->group(function () {
+        Route::get('/seo-pages', 'index')->name('seo-pages.index');
+        Route::get('/seo-pages/create', 'create')->name('seo-pages.create');
+        Route::post('/seo-pages', 'store')->name('seo-pages.store');
+        Route::get('/seo-pages/{seoPage}/edit', 'edit')->name('seo-pages.edit');
+        Route::post('/seo-pages/{seoPage}', 'update')->name('seo-pages.update');
+        Route::delete('/seo-pages/{seoPage}', 'destroy')->name('seo-pages.destroy');
+
+    });
 
     // Customer
     Route::controller(CustomerController::class)->group(function () {

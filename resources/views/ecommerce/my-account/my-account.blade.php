@@ -652,9 +652,6 @@
         .table-wishlist .product-row {
             background-color: #ffffff;
         }
-
-
-
     </style>
     <main class="main">
         <div class="container">
@@ -784,7 +781,8 @@
                                                 @foreach ($user->Contact?->Order as $order)
                                                     <tr>
                                                         <td><a href="javascript: void(0);"
-                                                                class="text-body font-weight-bold">{{ $order->code }}</a> </td>
+                                                                class="text-body font-weight-bold">{{ $order->code }}</a>
+                                                        </td>
                                                         <td>
                                                             {{ date('d-M-Y H:i', strtotime($order->order_date)) }}
                                                         </td>

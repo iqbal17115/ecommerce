@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <link href="{{ URL::asset('assets/css/common.css') }}" rel="stylesheet" type="text/css" />
 
     @yield('individual__link')
     @yield('css')

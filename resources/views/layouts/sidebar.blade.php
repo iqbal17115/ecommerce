@@ -107,7 +107,18 @@
                        <ul class="sub-menu" aria-expanded="false">
                            <li><a href="javascript:void(0);">Email</a></li>
                            <li><a href="javascript:void(0);">SMS</a></li>
-                           <li><a href="javascript:void(0);">Digital Marketing</a></li>
+                           <li>
+                               <a href="javascript:void(0);" class="has-arrow">Digital Marketing</a>
+                               <ul class="sub-menu" aria-expanded="true">
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow">SEO</a>
+                                    <ul class="sub-menu" aria-expanded="true">
+                                        <li><a href="{{ route('seo-pages.index') }}">Add Page</a></li>
+                                        <li><a href="{{ route('seo-pages.index') }}">All Page</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                           </li>
                            <li><a href="javascript:void(0);">Analog Marketing</a></li>
                            <li><a href="javascript:void(0);">Affiliat</a></li>
                        </ul>
