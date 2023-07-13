@@ -17,7 +17,7 @@ class CreateSeoPagesTable extends Migration
         Schema::create('seo_pages', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('title');
-            $table->string('url')->unique();
+            $table->text('url')->unique();
             $table->text('image')->nullable();
             $table->text('description')->nullable();
             $table->text('keyword')->nullable();
