@@ -113,7 +113,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     // SeoPage
     Route::controller(SeoPageController::class)->group(function () {
         Route::get('/seo-pages', 'index')->name('seo-pages.index');
-        Route::get('/seo-pages/create', 'create')->name('seo-pages.create');
+        Route::get('/seo-pages-create', 'create')->name('seo_pages_create');
         Route::post('/seo-pages', 'store')->name('seo-pages.store');
         Route::get('/seo-pages/{seoPage}/edit', 'edit')->name('seo-pages.edit');
         Route::post('/seo-pages/{seoPage}', 'update')->name('seo-pages.update');

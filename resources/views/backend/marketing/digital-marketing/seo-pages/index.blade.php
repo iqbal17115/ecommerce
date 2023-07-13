@@ -11,7 +11,7 @@
                                 <h4 class="mb-0 font-size-18">SEO Page</h4>
 
                                 <div class="page-title-right">
-                                    <a href="{{ route('seo-pages.create') }}" class="btn btn-primary">
+                                    <a href="{{ route('seo_pages_create') }}" class="btn btn-primary">
                                         <i class="fas fa-plus"></i> Create
                                     </a>
                                 </div>
