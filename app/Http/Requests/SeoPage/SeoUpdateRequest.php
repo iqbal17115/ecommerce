@@ -25,11 +25,12 @@ class SeoUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'image' => 'nullable',
             'description' => 'required',
             'keyword' => 'required',
-            'date' => 'nullable',
             'is_image_active' => 'required|boolean',
             'is_icon_active' => 'required|boolean',
+            'is_date_active' => 'required|boolean'
         ];
     }
 }

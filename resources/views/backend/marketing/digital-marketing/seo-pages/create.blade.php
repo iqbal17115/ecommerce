@@ -15,10 +15,10 @@
                             </div>
                         </div>
                     </div>
-                    <form action="{{ route('seo-pages.store') }}" method="POST">
+                    <form action="{{ route('seo-pages.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -31,7 +31,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -39,6 +40,20 @@
                                         </h5>
                                         <div class="form-group">
                                             <input type="text" name="url" id="url" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-link"></i> Image <span class="mandatory">*</span>
+                                        </h5>
+                                        <div class="form-group">
+                                            <input type="file" name="image" id="image" class="form-control"
                                                 required>
                                         </div>
                                     </div>
@@ -103,9 +118,12 @@
                             <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title"><i class="fas fa-calendar"></i> Date</h5>
+                                        <h5 class="card-title"><i class="fas fa-calendar"></i> Date Active</h5>
                                         <div class="form-group">
-                                            <input type="date" name="date" id="date" class="form-control">
+                                            <select name="is_date_active" id="is_date_active" class="form-control" required>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

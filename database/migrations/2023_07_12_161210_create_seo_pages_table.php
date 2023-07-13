@@ -18,11 +18,13 @@ class CreateSeoPagesTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('title');
             $table->string('url')->unique();
+            $table->text('image')->nullable();
             $table->text('description')->nullable();
             $table->text('keyword')->nullable();
             $table->date('date')->nullable();
             $table->boolean('is_image_active');
             $table->boolean('is_icon_active');
+            $table->boolean('is_date_active');
             $table->foreignId('created_by')->nullable()->index();
             $table->foreignId('updated_by')->nullable()->index();
             $table->foreignId('deleted_by')->nullable()->index();

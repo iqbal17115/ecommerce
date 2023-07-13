@@ -13,12 +13,12 @@ class SeoPage extends Model
     protected $fillable = [
         'title',
         'url',
+        'image',
         'description',
         'keyword',
         'date',
         'is_image_active',
         'is_icon_active',
-        'is_image_active',
-        'is_image_active'
+        'is_date_active'
     ];
 }

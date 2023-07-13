@@ -40,7 +40,11 @@ class SeoPageController extends Controller
     public function store(StoreSeoPageRequest $request)
     {
         try {
-            $this->seoPageService->createSeoPage($request->validated());
+            $validatedData = $request->validated();
+            $validatedData['date'] = now()->toDateString();
+
+            $this->seoPageService->createSeoPage($validatedData);
+
             return redirect()->route('seo-pages.index')->with('success', 'SEO page created successfully.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while SEO page create: ' . $e->getMessage());

@@ -15,11 +15,11 @@
                             </div>
                         </div>
                     </div>
-                    <form action="{{ route('seo-pages.update', $seoPage->id) }}" method="POST">
+                    <form action="{{ route('seo-pages.update', $seoPage->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -32,7 +32,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -41,6 +42,20 @@
                                         <div class="form-group">
                                             <input type="text" name="url" id="url" value="{{ $seoPage->url }}"
                                                 class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-link"></i> Image
+                                        </h5>
+                                        <div class="form-group">
+                                            <input type="file" name="image" id="image" value="{{ $seoPage->url }}"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -81,8 +96,8 @@
                                         <h5 class="card-title"><i class="fas fa-icons"></i> Icon Active</h5>
                                         <div class="form-group">
                                             <select name="is_icon_active" id="is_icon_active" class="form-control">
-                                                <option value="1">Yes</option>
-                                                <option value="0">No</option>
+                                                <option {{$seoPage->is_icon_active == 1 ? 'selected' : ''}} value="1">Yes</option>
+                                                <option {{$seoPage->is_icon_active == 0 ? 'selected' : ''}} value="0">No</option>
                                             </select>
                                         </div>
                                     </div>
@@ -95,8 +110,8 @@
                                         <div class="form-group">
                                             <select name="is_image_active" id="is_image_active" class="form-control"
                                                 required>
-                                                <option value="1">Yes</option>
-                                                <option value="0">No</option>
+                                                <option {{$seoPage->is_image_active == 1 ? 'selected' : ''}} value="1">Yes</option>
+                                                <option {{$seoPage->is_image_active == 0 ? 'selected' : ''}} value="0">No</option>
                                             </select>
                                         </div>
                                     </div>
@@ -105,10 +120,12 @@
                             <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title"><i class="fas fa-calendar"></i> Date</h5>
+                                        <h5 class="card-title"><i class="fas fa-calendar"></i> Date Active</h5>
                                         <div class="form-group">
-                                            <input type="date" name="date" id="date" value="{{ $seoPage->date }}"
-                                                class="form-control">
+                                            <select name="is_date_active" id="is_date_active" class="form-control" required>
+                                                <option {{$seoPage->is_date_active == 1 ? 'selected' : ''}} value="1">Yes</option>
+                                                <option {{$seoPage->is_date_active == 0 ? 'selected' : ''}} value="0">No</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -119,6 +136,8 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
+                                        <img src="{{ asset('storage/'.$seoPage->image) }}" class="rounded"
+                style="width: 55px; height: 40px;" />
                                         <button type="submit" class="btn btn-primary float-right">
                                             <i class="fas fa-edit"></i> Update
                                         </button>

@@ -26,11 +26,12 @@ class StoreSeoPageRequest extends FormRequest
         return [
             'title' => 'required',
             'url' => 'required|unique:seo_pages',
+            'image' => 'required',
             'description' => 'required',
             'keyword' => 'required',
-            'date' => 'nullable',
             'is_image_active' => 'required|boolean',
             'is_icon_active' => 'required|boolean',
+            'is_date_active' => 'required|boolean'
         ];
     }
 }
