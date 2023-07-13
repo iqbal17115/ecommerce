@@ -113,7 +113,7 @@
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow">SEO</a>
                                     <ul class="sub-menu" aria-expanded="true">
-                                        <li><a href="{{ route('seo-pages.index') }}">Add Page</a></li>
+                                        <li><a href="{{ route('seo_pages_create') }}">Add Page</a></li>
                                         <li><a href="{{ route('seo-pages.index') }}">All Page</a></li>
                                     </ul>
                                 </li>
