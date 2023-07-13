@@ -129,3 +129,15 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script>
+        $('#description').summernote({
+            height: 120
+        });
+        $('#keyword').summernote({
+            height: 120
+        });
+    </script>
+@endpush

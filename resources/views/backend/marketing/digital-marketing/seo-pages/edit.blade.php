@@ -26,8 +26,8 @@
                                             <i class="fas fa-heading"></i> Title <span class="mandatory">*</span>
                                         </h5>
                                         <div class="form-group">
-                                            <input type="text" name="title" id="title" value="{{ $seoPage->title }}" class="form-control"
-                                                required>
+                                            <input type="text" name="title" id="title"
+                                                value="{{ $seoPage->title }}" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -39,8 +39,8 @@
                                             <i class="fas fa-link"></i> URL <span class="mandatory">*</span>
                                         </h5>
                                         <div class="form-group">
-                                            <input type="text" name="url" id="url" value="{{ $seoPage->url }}" class="form-control"
-                                                required>
+                                            <input type="text" name="url" id="url" value="{{ $seoPage->url }}"
+                                                class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +107,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><i class="fas fa-calendar"></i> Date</h5>
                                         <div class="form-group">
-                                            <input type="date" name="date" id="date" value="{{ $seoPage->date }}" class="form-control">
+                                            <input type="date" name="date" id="date" value="{{ $seoPage->date }}"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -131,3 +132,15 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script>
+        $('#description').summernote({
+            height: 120
+        });
+        $('#keyword').summernote({
+            height: 120
+        });
+    </script>
+@endpush
