@@ -114,6 +114,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::controller(ShippingChargeController::class)->group(function () {
         Route::get('/shipping-charge', 'index')->name('shipping_charge.index');
         Route::post('/store', 'store')->name('shipping_charge.store');
+        Route::get('/shipping-charge/{shippingCharge}/edit', 'edit')->name('shipping_charge.edit');
         Route::put('/update/{id}', 'update')->name('shipping_charge.update');
         Route::delete('/delete/{id}', 'destroy')->name('shipping_charge.delete');
     });

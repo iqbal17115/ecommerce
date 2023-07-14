@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend\Shipping;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Shipping\ShippingChargeRequest;
+use App\Models\Backend\Shipping\ShippingCharge;
 use App\Services\ShippingChargeService;
 use Exception;
 use Illuminate\Http\Request;
@@ -49,27 +51,10 @@ class ShippingChargeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ShippingChargeRequest $request)
     {
-        $this->validate($request, [
-            'shipping_method_id' => 'required|exists:shipping_methods,id',
-            'shipping_class_id' => 'required|exists:shipping_classes,id',
-            'length' => 'required|numeric',
-            'width' => 'required|numeric',
-            'height' => 'required|numeric',
-            'weight' => 'required|numeric',
-            'charge' => 'required|numeric',
-            'min_quantity' => 'nullable|integer',
-            'max_quantity' => 'nullable|integer',
-            'area' => 'nullable|integer',
-            'min_amount' => 'nullable|numeric',
-            'max_amount' => 'nullable|numeric',
-            'free_shipping' => 'nullable',
-            'minimum_amount_for_free_shipping' => 'nullable|numeric',
-            'maximum_amount_for_free_shipping' => 'nullable|numeric',
-        ]);
-
-        $shippingCharge = $this->shippingChargeService->createShippingCharge($request->all());
+        $request->validated()['free_shipping'] = $request->validated()['free_shipping'] == 'on' ? 1 : 0;
+        $shippingCharge = $this->shippingChargeService->createShippingCharge($request->validated());
 
         return response()->json([
             'success' => 'Shipping charge created successfully.',
@@ -89,29 +74,20 @@ class ShippingChargeController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(ShippingCharge $shippingCharge)
     {
-        //
+        return $shippingCharge;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $shippingCharge = $this->shippingChargeService->updateShippingCharge($request->all(), $id);
 
+        return response()->json([
+            'success' => 'Shipping charge updated successfully.',
+            'shippingCharge' => $shippingCharge,
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *

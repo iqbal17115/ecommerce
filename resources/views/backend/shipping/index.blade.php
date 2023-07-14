@@ -157,14 +157,14 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="minQuantity">Min Quantity</label>
-                                    <input type="text" class="form-control" id="minQuantity" name="min_quantity">
+                                    <label for="min_quantity">Min Quantity</label>
+                                    <input type="text" class="form-control" id="min_quantity" name="min_quantity">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="maxQuantity">Max Quantity</label>
-                                    <input type="text" class="form-control" id="maxQuantity" name="max_quantity">
+                                    <label for="max_quantity">Max Quantity</label>
+                                    <input type="text" class="form-control" id="max_quantity" name="max_quantity">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -182,16 +182,16 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="minAmount">Min Amount</label>
-                                    <input type="text" class="form-control" id="minAmount" name="min_amount">
+                                    <input type="text" class="form-control" id="min_amount" name="min_amount">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="maxAmount">Max Amount</label>
-                                    <input type="text" class="form-control" id="maxAmount" name="max_amount">
+                                    <label for="max_amount">Max Amount</label>
+                                    <input type="text" class="form-control" id="max_amount" name="max_amount">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="freeShipping">Free Shipping</label>
                                     <div class="custom-control custom-checkbox">
@@ -201,18 +201,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="minAmountFreeShipping">Min Amount for Free Shipping</label>
                                     <input type="text" class="form-control" id="minAmountFreeShipping"
                                         name="minimum_amount_for_free_shipping">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="maxAmountFreeShipping">Max Amount for Free Shipping</label>
-                                    <input type="text" class="form-control" id="maxAmountFreeShipping"
-                                        name="maximum_amount_for_free_shipping">
                                 </div>
                             </div>
                         </div>
@@ -258,7 +251,7 @@
             var shippingChargeId = $(this).data('id');
 
             $.ajax({
-                url: '/shipping_charge/' + shippingChargeId + '/edit',
+                url: '{{ route("shipping_charge.edit", ":id") }}'.replace(':id', shippingChargeId),
                 type: 'GET',
                 success: function(response) {
                     $('#editShippingChargeModal .modal-content').html(response);

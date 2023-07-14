@@ -27,4 +27,14 @@ class ShippingCharge extends Model
         'maximum_amount_for_free_shipping',
     ];
 
+    public function shippingMethod()
+    {
+        return $this->belongsTo(ShippingMethod::class);
+    }
+
+    public function shippingClass()
+    {
+        return $this->belongsTo(ShippingClass::class);
+    }
+
 }
