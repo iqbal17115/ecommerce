@@ -16,19 +16,19 @@
                        </a>
                    </li>
                    <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
-                        <span>Customers</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="javascript:void(0);">Dashboard</a></li>
-                        <li><a href="{{ route('manage.customer') }}">Manage Customers</a></li>
-                        <li><a href="{{ route('all.customer') }}">Customers</a></li>
-                        <li><a href="javascript:void(0);">Customer Login</a></li>
-                        <li><a href="javascript:void(0);">Customer Registration</a></li>
+                       <a href="javascript: void(0);" class="has-arrow waves-effect">
+                           <i class="bx bx-layout"></i>
+                           <span>Customers</span>
+                       </a>
+                       <ul class="sub-menu" aria-expanded="false">
+                           <li><a href="javascript:void(0);">Dashboard</a></li>
+                           <li><a href="{{ route('manage.customer') }}">Manage Customers</a></li>
+                           <li><a href="{{ route('all.customer') }}">Customers</a></li>
+                           <li><a href="javascript:void(0);">Customer Login</a></li>
+                           <li><a href="javascript:void(0);">Customer Registration</a></li>
 
-                    </ul>
-                </li>
+                       </ul>
+                   </li>
                    <li>
                        <a href="javascript: void(0);" class="has-arrow waves-effect">
                            <i class="bx bx-layout"></i>
@@ -94,7 +94,6 @@
                            <li><a href="javascript:void(0);">Terms & Condition</a></li>
                            <li><a href="javascript:void(0);">Privacy Policy</a></li>
                            <li><a href="javascript:void(0);">Return Policy</a></li>
-                           <li><a href="{{ route('shipping-charge') }}">Shipping & Delivery</a></li>
                            <li><a href="javascript:void(0);">Blog</a></li>
                        </ul>
                    </li>
@@ -110,17 +109,27 @@
                            <li>
                                <a href="javascript:void(0);" class="has-arrow">Digital Marketing</a>
                                <ul class="sub-menu" aria-expanded="true">
-                                <li>
-                                    <a href="javascript: void(0);" class="has-arrow">SEO</a>
-                                    <ul class="sub-menu" aria-expanded="true">
-                                        <li><a href="{{ route('seo_pages_create') }}">Add Page</a></li>
-                                        <li><a href="{{ route('seo-pages.index') }}">All Page</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                   <li>
+                                       <a href="javascript: void(0);" class="has-arrow">SEO</a>
+                                       <ul class="sub-menu" aria-expanded="true">
+                                           <li><a href="{{ route('seo_pages_create') }}">Add Page</a></li>
+                                           <li><a href="{{ route('seo-pages.index') }}">All Page</a></li>
+                                       </ul>
+                                   </li>
+                               </ul>
                            </li>
                            <li><a href="javascript:void(0);">Analog Marketing</a></li>
                            <li><a href="javascript:void(0);">Affiliat</a></li>
+                       </ul>
+                   </li>
+
+                   <li>
+                       <a href="javascript: void(0);" class="has-arrow waves-effect">
+                           <i class="bx bx-layout"></i>
+                           <span>Shipping</span>
+                       </a>
+                       <ul class="sub-menu" aria-expanded="false">
+                           <li><a href="{{ route('shipping_charge.index') }}">Shipping & Delivery</a></li>
                        </ul>
                    </li>
 
