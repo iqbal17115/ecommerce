@@ -24,7 +24,7 @@ class ShippingChargeService
 
     public function createShippingCharge(array $data)
     {
-        return ShippingCharge::create($data);
+        ShippingCharge::create($data);
     }
 
     public function getShippingChargeById($id)
@@ -36,8 +36,6 @@ class ShippingChargeService
     {
         $shippingCharge = ShippingCharge::findOrFail($id);
         $shippingCharge->update($data);
-
-        return $shippingCharge;
     }
 
     public function deleteShippingCharge($id)

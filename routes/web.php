@@ -113,10 +113,11 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     // Shipping
     Route::controller(ShippingChargeController::class)->group(function () {
         Route::get('/shipping-charge', 'index')->name('shipping_charge.index');
-        Route::post('/store', 'store')->name('shipping_charge.store');
-        Route::get('/shipping-charge/{shippingCharge}/edit', 'edit')->name('shipping_charge.edit');
-        Route::put('/update/{id}', 'update')->name('shipping_charge.update');
-        Route::delete('/delete/{id}', 'destroy')->name('shipping_charge.delete');
+        Route::get('/shipping-charge/create', 'create')->name('shipping_charge.create');
+        Route::post('/shipping-charge', 'store')->name('shipping_charge.store');
+        Route::get('/shipping-charge/{id}/edit', 'edit')->name('shipping_charge.edit');
+        Route::put('/shipping-charge/{id}', 'update')->name('shipping_charge.update');
+        Route::delete('/shipping-charge/{id}', 'destroy')->name('shipping_charge.destroy');
     });
 
     // SeoPage

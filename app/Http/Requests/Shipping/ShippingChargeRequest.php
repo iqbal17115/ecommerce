@@ -33,12 +33,11 @@ class ShippingChargeRequest extends FormRequest
             'charge' => 'required|numeric',
             'min_quantity' => 'nullable|integer',
             'max_quantity' => 'nullable|integer',
-            'area' => 'nullable|integer',
+            'arear' => 'nullable|boolean',
             'min_amount' => 'nullable|numeric',
             'max_amount' => 'nullable|numeric',
-            'free_shipping' => 'nullable',
+            'free_shipping' => 'required|in:yes,no',
             'minimum_amount_for_free_shipping' => 'nullable|numeric',
-            'maximum_amount_for_free_shipping' => 'nullable|numeric',
         ];
     }
 }
