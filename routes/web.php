@@ -14,12 +14,13 @@ use App\Http\Controllers\Backend\Product\MaterialController;
 use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\Product\ConditionController;
 use App\Http\Controllers\Backend\Product\ProductFeatureController;
+use App\Http\Controllers\Backend\Seo\SeoPageController;
+use App\Http\Controllers\Backend\Shipping\ShippingChargeController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
 use App\Http\Controllers\Backend\WebSetting\CouponController;
 use App\Http\Controllers\Backend\WebSetting\FeatureSettingController;
-use App\Http\Controllers\Backend\WebSetting\ShippingChargeController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
 use App\Http\Controllers\Ecommerce\AuthController;
 use App\Http\Controllers\Ecommerce\ShopController;
@@ -108,6 +109,26 @@ Route::group(['middleware' => 'auth'], function () {
 //
 Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+
+    // Shipping
+    Route::controller(ShippingChargeController::class)->group(function () {
+        Route::get('/shipping-charge', 'index')->name('shipping_charge.index');
+        Route::post('/store', 'store')->name('shipping_charge.store');
+        Route::get('/shipping-charge/{shippingCharge}/edit', 'edit')->name('shipping_charge.edit');
+        Route::put('/update/{id}', 'update')->name('shipping_charge.update');
+        Route::delete('/delete/{id}', 'destroy')->name('shipping_charge.delete');
+    });
+
+    // SeoPage
+    Route::controller(SeoPageController::class)->group(function () {
+        Route::get('/seo-pages', 'index')->name('seo-pages.index');
+        Route::get('/seo-pages-create', 'create')->name('seo_pages_create');
+        Route::post('/seo-pages', 'store')->name('seo-pages.store');
+        Route::get('/seo-pages/{seoPage}/edit', 'edit')->name('seo-pages.edit');
+        Route::post('/seo-pages/{seoPage}', 'update')->name('seo-pages.update');
+        Route::delete('/seo-pages/{seoPage}', 'destroy')->name('seo-pages.destroy');
+
+    });
 
     // Customer
     Route::controller(CustomerController::class)->group(function () {
@@ -279,18 +300,6 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         }
     );
     // End Product
-
-    // Start Slider
-    Route::group(
-        [],
-        function () {
-            Route::get('shipping-charge', [ShippingChargeController::class, 'index'])->name('shipping-charge');
-            Route::post('add-shipping-charge', [ShippingChargeController::class, 'addShippingCharge'])->name('add.shipping-charge');
-            Route::post('delete-shipping-charge', [ShippingChargeController::class, 'deleteShippingCharge'])->name('delete.shipping-charge');
-            Route::get('pagination/shipping-charge-pagination-data', [ShippingChargeController::class, 'pagination']);
-        }
-    );
-    // End Slider
 
     // Start Slider
     Route::group(
