@@ -46,19 +46,19 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="length">Length</label>
                                     <input type="text" class="form-control" id="length" name="length" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="width">Width</label>
                                     <input type="text" class="form-control" id="width" name="width" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="height">Height</label>
                                     <input type="text" class="form-control" id="height" name="height" required>
