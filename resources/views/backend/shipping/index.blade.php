@@ -75,7 +75,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="11">No shipping charges found.</td>
+                                        <td class="text-center" colspan="11">No shipping charges found.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
