@@ -25,6 +25,9 @@ class CreateProductsTable extends Migration
             $table->double('your_price', 10, 2)->nullable();
             $table->double('sale_price', 10, 2)->nullable();
             $table->double('retail_price', 10, 2)->nullable();
+            $table->double('length', 10, 2)->nullable();
+            $table->double('width', 10, 2)->nullable();
+            $table->double('height', 10, 2)->nullable();
             $table->tinyInteger('max_order_qty')->nullable();
             $table->string('model_number', 100)->nullable();
             $table->string('model_name', 100)->nullable();
@@ -37,6 +40,7 @@ class CreateProductsTable extends Migration
             $table->boolean('brand_available')->nullable()->default(0);
             $table->string('varition_type_data', 191)->nullable();
             $table->text('variation')->nullable();
+            $table->foreignId('shipping_class_id')->nullable();
             $table->foreignId('region_publication_id')->nullable();
             $table->foreignId('category_id');
             $table->foreignId('brand_id')->nullable();
