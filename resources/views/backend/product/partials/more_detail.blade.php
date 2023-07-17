@@ -358,11 +358,11 @@
                                 <input type="text" name="package_height" id="package_height"
                                     @if($productInfo && $productInfo->ProductMoreDetail)
                                 value="{{$productInfo->ProductMoreDetail->package_height}}"
-                                @endif class="form-control m-input" placeholder="3.45">
+                                @endif class="form-control m-input" placeholder="3.45" required>
                             </div>
                             <div class="col-md-6">
                                 <select name="package_height_unit" id="package_height_unit"
-                                    class="form-select">
+                                    class="form-select" required>
                                     <option value="">Select Option</option>
                                     <option @if($productInfo && $productInfo->
                                         ProductMoreDetail &&
@@ -440,11 +440,11 @@
                                     @if($productInfo && $productInfo->ProductMoreDetail)
                                 value="{{$productInfo->ProductMoreDetail->package_length}}"
                                 @endif class="form-control m-input" placeholder="400, 2, 3,
-                                3.54">
+                                3.54" required>
                             </div>
                             <div class="col-md-6">
                                 <select name="package_length_unit" id="package_length_unit"
-                                    class="form-select">
+                                    class="form-select" required>
                                     <option value="">Select Option</option>
                                     <option @if($productInfo && $productInfo->
                                         ProductMoreDetail &&
@@ -522,11 +522,11 @@
                                     @if($productInfo && $productInfo->ProductMoreDetail)
                                 value="{{$productInfo->ProductMoreDetail->package_width}}"
                                 @endif class="form-control m-input" placeholder="400, 2, 3,
-                                3.54">
+                                3.54" required>
                             </div>
                             <div class="col-md-6">
                                 <select name="package_width_unit" id="package_width_unit"
-                                    class="form-select">
+                                    class="form-select" required>
                                     <option @if($productInfo && $productInfo->
                                         ProductMoreDetail &&
                                         $productInfo->ProductMoreDetail->package_width_unit=="dm")
@@ -605,11 +605,11 @@
                         <input name="package_weight" id="package_weight" @if($productInfo &&
                             $productInfo->ProductMoreDetail)
                         value="{{$productInfo->ProductMoreDetail->package_weight}}" @endif
-                        class="form-control" placeholder="45" />
+                        class="form-control" placeholder="45" required/>
                     </div>
                     <div class="col-md-4 mt-md-3">
                         <select name="package_weight_unit" id="package_weight_unit"
-                            class="form-select">
+                            class="form-select" required>
                             <option value="">Select Option</option>
                             <option @if($productInfo && $productInfo->ProductMoreDetail &&
                                 $productInfo->ProductMoreDetail->package_weight_unit=="lb")
