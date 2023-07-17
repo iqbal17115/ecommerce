@@ -311,7 +311,6 @@
                     $(".shipping_amount").text(response.charge);
                     var totalAmount = parseFloat(response.charge) + parseFloat({{ $total }});
                    $(".total-price").text(totalAmount);
-                   alert(1);
                 },
                 error: function(xhr, status, error) {
                     // Handle AJAX error, if any
