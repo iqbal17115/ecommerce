@@ -40,13 +40,7 @@
                                 <tr>
                                     <th>Shipping Method</th>
                                     <th>Shipping Class</th>
-                                    <th>Length</th>
-                                    <th>Width</th>
-                                    <th>Height</th>
-                                    <th>Weight</th>
                                     <th>Charge</th>
-                                    <th>Min Quantity</th>
-                                    <th>Max Quantity</th>
                                     <!-- Add other table headers for other columns -->
                                     <th>Action</th>
                                 </tr>
@@ -56,13 +50,7 @@
                                     <tr>
                                         <td>{{ $shippingCharge->shippingMethod->name }}</td>
                                         <td>{{ $shippingCharge->shippingClass->name }}</td>
-                                        <td>{{ $shippingCharge->length }}</td>
-                                        <td>{{ $shippingCharge->width }}</td>
-                                        <td>{{ $shippingCharge->height }}</td>
-                                        <td>{{ $shippingCharge->weight }}</td>
                                         <td>{{ $shippingCharge->charge }}</td>
-                                        <td>{{ $shippingCharge->min_quantity }}</td>
-                                        <td>{{ $shippingCharge->max_quantity }}</td>
                                         <!-- Add other table data for other columns -->
                                         <td>
                                             <a href="{{ route('shipping_charge.edit', $shippingCharge->id) }}" class="btn btn-primary btn-sm">Edit</a>
@@ -75,7 +63,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center" colspan="11">No shipping charges found.</td>
+                                        <td class="text-center" colspan="4">No shipping charges found.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+
     public function decreaseQty(Request $request) {
         $cart = session()->get('cart', []);
         if (isset($cart[$request->id]) && $cart[$request->id]['quantity'] > 1) {

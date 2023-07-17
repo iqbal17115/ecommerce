@@ -92,6 +92,9 @@ Route::post('customer-register', [AuthController::class, 'customRegistration'])-
 Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
 Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
 
+// Define the route for the calculateShippingCharge method
+Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'calculateShippingCharge'])->name('calculateShippingCharge');
+
 Route::group(['middleware' => 'auth'], function () {
     // My account
     Route::controller(MyAccountController::class)->group(function () {

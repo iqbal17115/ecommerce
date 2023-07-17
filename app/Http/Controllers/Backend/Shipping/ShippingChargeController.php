@@ -17,7 +17,10 @@ class ShippingChargeController extends Controller
     {
         $this->shippingChargeService = $shippingChargeService;
     }
-
+    public function calculateShippingCharge() {
+        $totalShippingCharge = $this->shippingChargeService->calculateShippingCharge();
+        return response()->json(['charge' => $totalShippingCharge->getData()->charge]);
+    }
     public function index()
     {
         $shippingClasses  = $this->shippingChargeService->getAllShippingClasses();

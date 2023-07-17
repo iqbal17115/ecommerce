@@ -74,7 +74,7 @@ class CheckoutController extends Controller
                 //   Delete Add To Cart
                 $request->session()->forget('cart');
 
-           
+
             }
         });
         return Redirect::back();
@@ -97,9 +97,6 @@ class CheckoutController extends Controller
     public function index()
     {
         $divisions = Division::get();
-        $charge = ShippingCharge::whereType('Default')->first();
-        $weight = ShippingCharge::whereType('Weight')->first();
-        $area = ShippingCharge::whereType('Area')->first();
-        return view('ecommerce.checkout', compact('divisions', 'charge', 'weight', 'area'));
+        return view('ecommerce.checkout', compact('divisions'));
     }
 }
