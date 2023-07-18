@@ -256,10 +256,6 @@ class ProductController extends Controller
             $Query->model_number = $request->model_number;
             $Query->model_name = $request->model_name;
             $Query->booking_date = $request->booking_date;
-            $Query->length = $request->length;
-            $Query->width = $request->width;
-            $Query->height = $request->height;
-            $Query->weight = $request->weight;
             $Query->shipping_class_id = $request->shipping_class_id;
             $Query->save();
 

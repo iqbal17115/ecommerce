@@ -83,45 +83,6 @@
                     <!-- End -->
 
                     <div class="col-md-4 mt-md-3">
-                        <label class="col-form-label float-md-right" style="font-size: 14px;">Dimension</label>
-                    </div>
-                    <div class="col-md-8 mt-md-3">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <input name="length" id="length"
-                                    value="{{ $productInfo?->length }}"
-                                    class="form-control" placeholder="Enter Length" required/>
-                            </div>
-                            {{-- end --}}
-
-                            <div class="col-md-4">
-                                <input name="width" id="width"
-                                    value="{{ $productInfo?->width }}"
-                                    class="form-control" placeholder="Enter Width" required/>
-                            </div>
-                            {{-- end --}}
-
-                            <div class="col-md-4">
-                                <input name="height" id="height"
-                                    value="{{ $productInfo?->height }}"
-                                    class="form-control" placeholder="Enter Height" required/>
-                            </div>
-                            {{-- end --}}
-                        </div>
-
-                    </div>
-                    <!-- End -->
-                    <div class="col-md-4 mt-md-3">
-                        <label class="col-form-label float-md-right" style="font-size: 14px;">Weight</label>
-                    </div>
-                    <div class="col-md-8 mt-md-3">
-                        <input name="weight" id="weight"
-                            value="{{ $productInfo?->weight }}"
-                            class="form-control" placeholder="Enter Weight" />
-                    </div>
-                    <!-- End -->
-
-                    <div class="col-md-4 mt-md-3">
                         <label class="col-form-label float-md-right" style="font-size: 14px;">Condition</label>
                         <span class="text-danger float-md-right">*</span>
                     </div>
