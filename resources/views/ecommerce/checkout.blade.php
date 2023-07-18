@@ -109,8 +109,7 @@
                                             <label>Street address <abbr class="required" title="required">*</abbr></label>
                                             <input type="text" name="shipping_address"
                                                 @if (Auth::user()) value="{{ Auth::user()->Contact->shipping_address }}" @endif
-                                                class="form-control" placeholder="House number and street name"
-                                                required />
+                                                class="form-control" placeholder="House number and street name" required />
                                         </div>
                                     </div>
                                 </div>
@@ -136,23 +135,12 @@
                                 @php
                                     $total = 0;
                                     $default_charge = 0;
-                                    $total_weight = 0;
-                                    $total_size = 0;
                                 @endphp
                                 @if (session('cart'))
                                     @foreach (session('cart') as $id => $details)
-                                        @if ($charge)
-                                            @php
-                                                $default_charge += $charge->inside_amount;
-                                            @endphp
-                                        @endif
                                         @php
                                             $total += $details['sale_price'] * $details['quantity'];
                                             $product = \App\Models\Backend\Product\Product::find($id);
-                                            if ($product->ProductMoreDetail) {
-                                                $total_weight += $product->ProductMoreDetail->package_weight;
-                                                $total_size += $product->ProductMoreDetail->item_length * $product->ProductMoreDetail->item_width * $product->ProductMoreDetail->item_height;
-                                            }
                                         @endphp
                                         @if ($product->ProductMoreDetail)
                                             {{ $product->ProductMoreDetail->package_weight }}
@@ -170,9 +158,7 @@
                                         </tr>
                                     @endforeach
                                 @endif
-                                @php
-                                    $charge_for_weight = $total_weight * $weight->inside_amount;
-                                @endphp
+
                             </tbody>
                             <tfoot>
                                 <tr class="cart-subtotal">
@@ -209,14 +195,21 @@
                                     </td>
 
                                 </tr>
+                                <tr class="shipping-total">
+                                    <td>
+                                        <h4>Shipping Carge</h4>
+                                    </td>
 
+                                    <td class="shipping-col">
+                                        <span>{{ $currency->icon }}<span class="shipping_amount">{{ $total }}</span></span>
+                                    </td>
+                                </tr>
                                 <tr class="order-total">
                                     <td>
                                         <h4>Total</h4>
                                     </td>
                                     <td>
-                                        <b
-                                            class="total-price"><span>{{ $currency->icon }}{{ $total + $charge_for_weight + $default_charge }}</span></b>
+                                        <b >{{ $currency->icon }}<span class="total-price">{{ $total + $default_charge }}</span></b>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -285,7 +278,7 @@
                             'lazy-load'
                         ); // Remove the class to prevent the image from being loaded again
                         observer.unobserve(
-                        image); // Stop observing the image once it has been loaded
+                            image); // Stop observing the image once it has been loaded
                     }
                 });
             }, options);
@@ -299,5 +292,32 @@
     </script>
 @endsection
 @push('scripts')
-@include('ecommerce.checkout-js')
+    @include('ecommerce.checkout-js')
+    <script>
+        // Assume you have a function to fetch cart data and make the AJAX request
+        function calculateShippingCharges() {
+            // ... Code to fetch cart data and construct the data object for the request
+
+            // Make the AJAX request
+            $.ajax({
+                url: '/calculate-shipping-charge', // Your Laravel route to the controller method
+                method: 'POST',
+                dataType: 'json',
+                success: function(response) {
+                    // The AJAX request was successful
+                    // Get the totalShippingCharge from the response JSON
+                    console.log(response.charge);
+                    // Set shipping charge
+                    $(".shipping_amount").text(response.charge);
+                    var totalAmount = parseFloat(response.charge) + parseFloat({{ $total }});
+                   $(".total-price").text(totalAmount);
+                },
+                error: function(xhr, status, error) {
+                    // Handle AJAX error, if any
+                    console.error('Error:', error);
+                },
+            });
+        }
+        calculateShippingCharges();
+    </script>
 @endpush

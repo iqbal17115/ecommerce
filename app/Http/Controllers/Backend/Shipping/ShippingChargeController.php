@@ -17,85 +17,55 @@ class ShippingChargeController extends Controller
     {
         $this->shippingChargeService = $shippingChargeService;
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function calculateShippingCharge() {
+        $totalShippingCharge = $this->shippingChargeService->calculateShippingCharge();
+        return response()->json(['charge' => $totalShippingCharge->getData()->charge]);
+    }
     public function index()
     {
-        try {
-            $shippingClasses  = $this->shippingChargeService->getAllShippingClasses();
-            $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
-            $shippingCharges = $this->shippingChargeService->getAllShippingCharges();
-            return view('backend.shipping.index', compact('shippingClasses', 'shippingMethods', 'shippingCharges'));
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while fetching shipping charge: ' . $e->getMessage());
-        }
+        $shippingClasses  = $this->shippingChargeService->getAllShippingClasses();
+        $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
+        $shippingCharges = $this->shippingChargeService->getAllShippingCharges();
+
+        return view('backend.shipping.index', compact('shippingClasses', 'shippingMethods', 'shippingCharges'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        // Fetch any necessary data from other models if needed and pass it to the view
+        $shippingClasses  = $this->shippingChargeService->getAllShippingClasses();
+        $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
+
+        return view('backend.shipping.create', compact('shippingClasses', 'shippingMethods'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ShippingChargeRequest $request)
     {
-        $request->validated()['free_shipping'] = $request->validated()['free_shipping'] == 'on' ? 1 : 0;
-        $shippingCharge = $this->shippingChargeService->createShippingCharge($request->validated());
+        $this->shippingChargeService->createShippingCharge($request->validated());
 
-        return response()->json([
-            'success' => 'Shipping charge created successfully.',
-            'shippingCharge' => $shippingCharge,
-        ]);
+        return redirect()->route('shipping_charge.index')->with('success', 'Shipping charge created successfully.');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function edit($id)
     {
-        //
+        $shippingCharge = $this->shippingChargeService->getShippingChargeById($id);
+        $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
+        $shippingClasses  = $this->shippingChargeService->getAllShippingClasses();
+
+        return view('backend.shipping.edit', compact('shippingMethods', 'shippingClasses', 'shippingCharge'));
     }
 
-    public function edit(ShippingCharge $shippingCharge)
+    public function update(ShippingChargeRequest $request, $id)
     {
-        return $shippingCharge;
+        $this->shippingChargeService->updateShippingCharge($request->validated(), $id);
+
+        return redirect()->route('shipping_charge.index')->with('success', 'Shipping charge updated successfully.');
     }
 
-    public function update(Request $request, $id)
-    {
-        $shippingCharge = $this->shippingChargeService->updateShippingCharge($request->all(), $id);
-
-        return response()->json([
-            'success' => 'Shipping charge updated successfully.',
-            'shippingCharge' => $shippingCharge,
-        ]);
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $this->shippingChargeService->deleteShippingCharge($id);
+
+        return redirect()->route('shipping_charge.index')->with('success', 'Shipping charge deleted successfully.');
     }
 }

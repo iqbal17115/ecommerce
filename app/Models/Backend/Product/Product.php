@@ -19,7 +19,20 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+// Your other model properties and relationships go here
 
+public function isFreeShippingEligible($totalAmount)
+{
+    if ($this->free_shipping === 'yes') {
+        // Check if the product meets the minimum and maximum amount conditions for free shipping
+        if (($this->minimum_amount_for_free_shipping === null || $totalAmount >= $this->minimum_amount_for_free_shipping)
+            && ($this->maximum_amount_for_free_shipping === null || $totalAmount <= $this->maximum_amount_for_free_shipping)) {
+            return true;
+        }
+    }
+
+    return false;
+}
     public function reviews()
     {
         return $this->hasMany(Review::class);

@@ -12,6 +12,7 @@ use App\Models\Backend\Product\ProductImage;
 use App\Models\Backend\Product\ProductKeyword;
 use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductMoreDetail;
+use App\Services\ShippingChargeService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -255,6 +256,11 @@ class ProductController extends Controller
             $Query->model_number = $request->model_number;
             $Query->model_name = $request->model_name;
             $Query->booking_date = $request->booking_date;
+            $Query->length = $request->length;
+            $Query->width = $request->width;
+            $Query->height = $request->height;
+            $Query->weight = $request->weight;
+            $Query->shipping_class_id = $request->shipping_class_id;
             $Query->save();
 
             $ProductDetailQuery = ProductDetail::whereProductId($Query->id)->firstOrNew();
@@ -301,12 +307,13 @@ class ProductController extends Controller
         $materials = Material::orderBy('id', 'DESC')->get();
         $conditions = Condition::orderBy('id', 'DESC')->get();
         $product_features = ProductFeature::orderBy('id', 'DESC')->whereIsActive(1)->get();
+        $shippingClasses  = (new ShippingChargeService)->getAllShippingClasses();
         $productInfo = null;
         $id = $request->id;
         if ($id) {
             $id = $id;
             $productInfo = Product::whereId($id)->first();
         }
-        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features'));
+        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'shippingClasses'));
     }
 }

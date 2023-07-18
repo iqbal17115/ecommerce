@@ -26,19 +26,21 @@ class ShippingChargeRequest extends FormRequest
         return [
             'shipping_method_id' => 'required|exists:shipping_methods,id',
             'shipping_class_id' => 'required|exists:shipping_classes,id',
-            'length' => 'required|numeric',
-            'width' => 'required|numeric',
-            'height' => 'required|numeric',
-            'weight' => 'required|numeric',
+            'from_length' => 'required|numeric',
+            'to_length' => 'required|numeric',
+            'from_width' => 'required|numeric',
+            'to_width' => 'required|numeric',
+            'from_height' => 'required|numeric',
+            'to_height' => 'required|numeric',
+            'from_weight' => 'required|numeric',
+            'to_weight' => 'required|numeric',
             'charge' => 'required|numeric',
             'min_quantity' => 'nullable|integer',
             'max_quantity' => 'nullable|integer',
-            'area' => 'nullable|integer',
             'min_amount' => 'nullable|numeric',
             'max_amount' => 'nullable|numeric',
-            'free_shipping' => 'nullable',
+            'free_shipping' => 'required|in:yes,no',
             'minimum_amount_for_free_shipping' => 'nullable|numeric',
-            'maximum_amount_for_free_shipping' => 'nullable|numeric',
         ];
     }
 }
