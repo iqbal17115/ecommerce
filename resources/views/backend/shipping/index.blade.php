@@ -40,10 +40,6 @@
                                 <tr>
                                     <th>Shipping Method</th>
                                     <th>Shipping Class</th>
-                                    <th>Length</th>
-                                    <th>Width</th>
-                                    <th>Height</th>
-                                    <th>Weight</th>
                                     <th>Charge</th>
                                     <!-- Add other table headers for other columns -->
                                     <th>Action</th>
@@ -54,10 +50,6 @@
                                     <tr>
                                         <td>{{ $shippingCharge->shippingMethod->name }}</td>
                                         <td>{{ $shippingCharge->shippingClass->name }}</td>
-                                        <td>{{ $shippingCharge?->from_length }}-{{ $shippingCharge?->to_length }}</td>
-                                        <td>{{ $shippingCharge?->from_width }}-{{ $shippingCharge?->to_width }}</td>
-                                        <td>{{ $shippingCharge?->from_height }}-{{ $shippingCharge?->to_height }}</td>
-                                        <td>{{ $shippingCharge?->from_weight }}-{{ $shippingCharge?->to_weight }}</td>
                                         <td>{{ $shippingCharge->charge }}</td>
                                         <!-- Add other table data for other columns -->
                                         <td>

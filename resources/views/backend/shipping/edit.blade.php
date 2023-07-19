@@ -51,53 +51,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="length">Length</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" id="from_length" name="from_length" value="{{ $shippingCharge->from_length }}" placeholder="From" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" id="to_length" name="to_length" value="{{ $shippingCharge->to_length }}" placeholder="To" required>
-                                        </div>
-                                    </div>
+                                    <input type="text" class="form-control" id="length" name="length" value="{{ $shippingCharge->length }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="width">Width</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" id="from_width" name="from_width" value="{{ $shippingCharge->from_width }}" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" id="to_width" name="to_width" value="{{ $shippingCharge->to_width }}" required>
-                                        </div>
-                                    </div>
+                                    <input type="text" class="form-control" id="width" name="width" value="{{ $shippingCharge->width }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="height">Height</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" id="from_height" name="from_height" value="{{ $shippingCharge->from_height }}" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" id="to_height" name="to_height" value="{{ $shippingCharge->to_height }}" required>
-                                        </div>
-                                    </div>
+                                    <input type="text" class="form-control" id="height" name="height" value="{{ $shippingCharge->height }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="weight">Weight</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" id="from_weight" name="from_weight" value="{{ $shippingCharge->from_weight }}" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" id="to_weight" name="to_weight" value="{{ $shippingCharge->to_weight }}" required>
-                                        </div>
-                                    </div>
+                                    <input type="text" class="form-control" id="weight" name="weight" value="{{ $shippingCharge->weight }}" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
