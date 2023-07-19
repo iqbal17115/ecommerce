@@ -49,13 +49,27 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="length">Area</label>
-                                    <input type="text" class="form-control" id="area" name="area" placeholder="Area" required>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="from_area" name="from_area" placeholder="From Area" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="to_area" name="to_area" placeholder="To Area" required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="length">Wight</label>
-                                    <input type="text" class="form-control" id="weight" name="weight" placeholder="Weight" required>
+                                    <label for="length">Weight</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="from_weight" name="from_weight" placeholder="From Weight" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="to_weight" name="to_weight" placeholder="To Weight" required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">

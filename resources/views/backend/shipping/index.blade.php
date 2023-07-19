@@ -53,8 +53,8 @@
                                     <tr>
                                         <td>{{ $shippingCharge->shippingMethod->name }}</td>
                                         <td>{{ $shippingCharge->shippingClass->name }}</td>
-                                        <td>{{ $shippingCharge->area }}</td>
-                                        <td>{{ $shippingCharge->weight }}</td>
+                                        <td>{{ $shippingCharge->from_area }}-{{ $shippingCharge->to_area }}</td>
+                                        <td>{{ $shippingCharge->from_weight }}-{{ $shippingCharge->to_weight }}</td>
                                         <td>{{ $shippingCharge->charge }}</td>
                                         <td>{{ $shippingCharge->min_quantity }}</td>
                                         <td>{{ $shippingCharge->max_quantity }}</td>

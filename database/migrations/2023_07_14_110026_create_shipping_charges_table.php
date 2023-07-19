@@ -18,8 +18,10 @@ class CreateShippingChargesTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('shipping_method_id');
             $table->uuid('shipping_class_id');
-            $table->float('area');
-            $table->float('weight');
+            $table->float('from_area');
+            $table->float('to_area');
+            $table->float('from_weight');
+            $table->float('to_weight');
             $table->decimal('charge', 8, 2);
             $table->integer('min_quantity')->nullable();
             $table->integer('max_quantity')->nullable();

@@ -51,13 +51,27 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="area">Area</label>
-                                    <input type="text" class="form-control" id="area" name="area" value="{{ $shippingCharge->area }}" required>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="from_area" name="from_area" value="{{ $shippingCharge->from_area }}" placeholder="From" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="to_area" name="to_area" value="{{ $shippingCharge->to_area }}" placeholder="To" required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="weight">Weight</label>
-                                    <input type="text" class="form-control" id="weight" name="weight" value="{{ $shippingCharge->weight }}" required>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="from_weight" name="from_weight" value="{{ $shippingCharge->from_weight }}" placeholder="From" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="to_weight" name="to_weight" value="{{ $shippingCharge->to_weight }}" placeholder="To" required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
