@@ -50,20 +50,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="length">Length</label>
-                                    <input type="text" class="form-control" id="length" name="length" value="{{ $shippingCharge->length }}" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="width">Width</label>
-                                    <input type="text" class="form-control" id="width" name="width" value="{{ $shippingCharge->width }}" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="height">Height</label>
-                                    <input type="text" class="form-control" id="height" name="height" value="{{ $shippingCharge->height }}" required>
+                                    <label for="area">Area</label>
+                                    <input type="text" class="form-control" id="area" name="area" value="{{ $shippingCharge->area }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -92,12 +80,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="area">Area</label>
-                                    <input type="text" class="form-control" id="area" name="area" value="{{ $shippingCharge->area }}">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
                                     <label for="minAmount">Min Amount</label>
                                     <input type="text" class="form-control" id="minAmount" name="min_amount" value="{{ $shippingCharge->min_amount }}">
                                 </div>
@@ -108,7 +90,7 @@
                                     <input type="text" class="form-control" id="maxAmount" name="max_amount" value="{{ $shippingCharge->max_amount }}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="freeShipping">Free Shipping</label>
                                     <select class="form-control" id="freeShipping" name="free_shipping" required>
@@ -117,13 +99,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="minAmountFreeShipping">Minimum Amount for Free Shipping</label>
                                     <input type="text" class="form-control" id="minAmountFreeShipping" name="minimum_amount_for_free_shipping" value="{{ $shippingCharge->minimum_amount_for_free_shipping }}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="maxAmountFreeShipping">Maximum Amount for Free Shipping</label>
                                     <input type="text" class="form-control" id="maxAmountFreeShipping" name="maximum_amount_for_free_shipping" value="{{ $shippingCharge->maximum_amount_for_free_shipping }}">

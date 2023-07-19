@@ -40,8 +40,11 @@
                                 <tr>
                                     <th>Shipping Method</th>
                                     <th>Shipping Class</th>
+                                    <th>Area</th>
+                                    <th>Weight</th>
                                     <th>Charge</th>
-                                    <!-- Add other table headers for other columns -->
+                                    <th>Min Quantity</th>
+                                    <th>Max Quantity</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -50,8 +53,11 @@
                                     <tr>
                                         <td>{{ $shippingCharge->shippingMethod->name }}</td>
                                         <td>{{ $shippingCharge->shippingClass->name }}</td>
+                                        <td>{{ $shippingCharge->area }}</td>
+                                        <td>{{ $shippingCharge->weight }}</td>
                                         <td>{{ $shippingCharge->charge }}</td>
-                                        <!-- Add other table data for other columns -->
+                                        <td>{{ $shippingCharge->min_quantity }}</td>
+                                        <td>{{ $shippingCharge->max_quantity }}</td>
                                         <td>
                                             <a href="{{ route('shipping_charge.edit', $shippingCharge->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                             <form action="{{ route('shipping_charge.destroy', $shippingCharge->id) }}" method="POST" style="display: inline-block">
