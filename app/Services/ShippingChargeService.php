@@ -15,55 +15,53 @@ class ShippingChargeService
         $totalShippingCharge = 0;
 
         foreach ($products as $productId => $productData) {
-            $product = Product::find($productId); // Find product
+            $product = Product::find($productId);
             $quantity = $productData['quantity'];
-            $length = $product->ProductMoreDetail->package_length ?? 0; // Assuming have 'length' field in the product data
-            $width = $product->ProductMoreDetail->package_width ?? 0; // Assuming have 'width' field in the product data
-            $height = $product->ProductMoreDetail->package_height ?? 0; // Assuming have 'height' field in the product data
-            $weight = $product->ProductMoreDetail->package_weight ?? 0;; // Assuming have 'weight' field in the product data
-            $shippingMethodId = $product->shipping_method_id ?? null;
-            $shippingClassId = $product->shipping_class_id ?? null;
+            $shippingMethodId = 'ee1f0de6-223e-11ee-aaf7-5811220534bb';
+            $shippingClassId = $product->shipping_class_id;
 
-            // Calculate the total amount for all products in the cart
-            $totalAmount += $productData['sale_price'] * $quantity;
+            $totalAmount = $quantity * $product->sale_price; // Total Amount
 
             // Check for specific product free shipping
-            // if ($product && $product->isFreeShippingEligible($totalAmount)) {
-            //     continue; // Skip to the next product
+            // if ($productId) {
+            //     if ($product && $product->isFreeShippingEligible($totalAmount)) {
+            //         continue; // Skip to the next product
+            //     }
             // }
-            // Calculate regular shipping charges for the product
+
+            // Calculate total area based on package dimensions
+            $packageHeight = $product->ProductMoreDetail->package_height;
+            $packageLength = $product->ProductMoreDetail->package_length;
+            $packageWidth = $product->ProductMoreDetail->package_width;
+            $totalArea = $packageHeight * $packageLength * $packageWidth;
+
+            $totalWeight = $product->ProductMoreDetail->package_weight; // Package weight
+
+            // Calculate regular shipping charges
             $charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
                 ->where('shipping_class_id', $shippingClassId)
-                ->where('from_length', '<=', $length)
-                ->where('to_length', '>=', $length)
-                ->where('from_width', '<=', $width)
-                ->where('to_width', '>=', $width)
-                ->where('from_height', '<=', $height)
-                ->where('to_height', '>=', $height)
-                ->where('from_weight', '<=', $weight)
-                ->where('to_weight', '>=', $weight)
+                ->where('from_area', '<=', $totalArea)
+                ->where('to_area', '>=', $totalArea)
+                ->where('from_weight', '<=', $totalWeight)
+                ->where('to_weight', '>=', $totalWeight)
                 ->where(function ($query) use ($quantity, $totalAmount) {
                     $query->where(function ($query) use ($quantity, $totalAmount) {
                         $query->whereNull('min_quantity')
-                            ->whereNull('max_quantity')
-                            ->whereNull('min_amount')
-                            ->whereNull('max_amount');
+                            ->whereNull('max_quantity');
                     })->orWhere(function ($query) use ($quantity, $totalAmount) {
                         $query->where('min_quantity', '<=', $quantity)
-                            ->where('max_quantity', '>=', $quantity)
-                            ->where('min_amount', '<=', $totalAmount)
-                            ->where('max_amount', '>=', $totalAmount);
+                            ->where('max_quantity', '>=', $quantity);
                     });
                 })
-                ->orderBy('from_length')
-                ->orderBy('from_width')
-                ->orderBy('from_height')
+                ->orderBy('from_area')
+                ->orderBy('from_weight')
                 ->first();
+
             if ($charge) {
                 $totalShippingCharge += $charge->charge;
             } else {
                 // Handle the case where no shipping charge is found for a product
-                // return response()->json(['error' => 'No shipping charge found for one or more products.']);
+                return response()->json(['error' => 'No shipping charge found for one or more products.']);
             }
         }
 

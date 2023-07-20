@@ -25,10 +25,10 @@ class CreateShippingChargesTable extends Migration
             $table->decimal('charge', 10, 2);
             $table->integer('min_quantity')->nullable();
             $table->integer('max_quantity')->nullable();
-            $table->decimal('min_amount', 8, 2)->nullable();
-            $table->decimal('max_amount', 8, 2)->nullable();
+            $table->integer('min_amount')->nullable();
+            $table->integer('max_amount')->nullable();
             $table->string('free_shipping');
-            $table->decimal('minimum_amount_for_free_shipping', 8, 2)->nullable();
+            $table->integer('minimum_amount_for_free_shipping')->nullable();
             $table->timestamps();
         });
 

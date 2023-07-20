@@ -25,6 +25,7 @@ $(document).ready(function() {
                     return curr + prev;
                 });
                 $('.cart-total-price').text(total);
+                calculateShippingCharges();
             },
             error: function(err) {
                 var error = err.responseJSON;
@@ -57,6 +58,7 @@ $(document).ready(function() {
                     return curr + prev;
                 });
                 $('.cart-total-price').text(total);
+                calculateShippingCharges();
             },
             error: function(err) {
                 var error = err.responseJSON;

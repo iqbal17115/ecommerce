@@ -18,11 +18,19 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\ProductFeature;
+use App\Services\UnitConversionService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function deleteProduct(Request $request) {
+    protected $unitConversionService;
+
+    public function __construct(UnitConversionService $unitConversionService)
+    {
+        $this->unitConversionService = $unitConversionService;
+    }
+    public function deleteProduct(Request $request)
+    {
         return DB::transaction(function () use ($request) {
             Product::find($request->id)->delete();
             ProductImage::whereProductId($request->id)->delete();
@@ -113,13 +121,13 @@ class ProductController extends Controller
         $Query->item_width_unit = $request->item_width_unit;
         $Query->item_height = $request->item_height;
         $Query->item_height_unit = $request->item_height_unit;
-        $Query->package_height = $request->package_height;
+        $Query->package_height = $this->unitConversionService->convertLengthTo($request->package_height, $request->package_height_unit, 'm');
         $Query->package_height_unit = $request->package_height_unit;
-        $Query->package_length = $request->package_length;
+        $Query->package_length = $this->unitConversionService->convertLengthTo($request->package_length, $request->package_length_unit, 'm');
         $Query->package_length_unit = $request->package_length_unit;
-        $Query->package_width = $request->package_width;
+        $Query->package_width = $this->unitConversionService->convertLengthTo($request->package_width, $request->package_width_unit, 'm');
         $Query->package_width_unit = $request->package_width_unit;
-        $Query->package_weight = $request->package_weight;
+        $Query->package_weight = $this->unitConversionService->convertWeightTo($request->package_weight, $request->package_weight_unit, 'gm');
         $Query->package_weight_unit = $request->package_weight_unit;
         $Query->league_name = $request->league_name;
         $Query->warranty = $request->warranty;
@@ -303,13 +311,14 @@ class ProductController extends Controller
         $materials = Material::orderBy('id', 'DESC')->get();
         $conditions = Condition::orderBy('id', 'DESC')->get();
         $product_features = ProductFeature::orderBy('id', 'DESC')->whereIsActive(1)->get();
-        $shippingClasses  = (new ShippingChargeService)->getAllShippingClasses();
+        $shippingClasses = (new ShippingChargeService)->getAllShippingClasses();
         $productInfo = null;
         $id = $request->id;
         if ($id) {
             $id = $id;
             $productInfo = Product::whereId($id)->first();
         }
-        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'shippingClasses'));
+        $unitConversionService = $this->unitConversionService;
+        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'shippingClasses', 'unitConversionService'));
     }
 }
