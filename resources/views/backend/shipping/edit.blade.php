@@ -50,26 +50,46 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="area">Area</label>
+                                    <label for="area">Area (meter)</label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="from_area" name="from_area" value="{{ $shippingCharge->from_area }}" placeholder="From" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="from_area" name="from_area" value="{{ $shippingCharge->from_area }}" placeholder="From" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">meter</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="to_area" name="to_area" value="{{ $shippingCharge->to_area }}" placeholder="To" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="to_area" name="to_area" value="{{ $shippingCharge->to_area }}" placeholder="To" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">meter</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="weight">Weight</label>
+                                    <label for="weight">Weight (gram)</label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="from_weight" name="from_weight" value="{{ $shippingCharge->from_weight }}" placeholder="From" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="from_weight" name="from_weight" value="{{ $shippingCharge->from_weight }}" placeholder="From" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">gram</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="to_weight" name="to_weight" value="{{ $shippingCharge->to_weight }}" placeholder="To" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="to_weight" name="to_weight" value="{{ $shippingCharge->to_weight }}" placeholder="To" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">gram</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -77,19 +97,19 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="charge">Charge</label>
-                                    <input type="text" class="form-control" id="charge" name="charge" value="{{ $shippingCharge->charge }}">
+                                    <input type="text" class="form-control" id="charge" name="charge" value="{{ $shippingCharge->charge }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="minQuantity">Min Quantity</label>
-                                    <input type="text" class="form-control" id="minQuantity" name="min_quantity" value="{{ $shippingCharge->min_quantity }}">
+                                    <input type="text" class="form-control" id="minQuantity" name="min_quantity" value="{{ $shippingCharge->min_quantity }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="maxQuantity">Max Quantity</label>
-                                    <input type="text" class="form-control" id="maxQuantity" name="max_quantity" value="{{ $shippingCharge->max_quantity }}">
+                                    <input type="text" class="form-control" id="maxQuantity" name="max_quantity" value="{{ $shippingCharge->max_quantity }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">

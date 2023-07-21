@@ -43,8 +43,7 @@
                                     <th>Area</th>
                                     <th>Weight</th>
                                     <th>Charge</th>
-                                    <th>Min Quantity</th>
-                                    <th>Max Quantity</th>
+                                    <th>Quantity</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -56,8 +55,7 @@
                                         <td>{{ $shippingCharge->from_area }}-{{ $shippingCharge->to_area }}</td>
                                         <td>{{ $shippingCharge->from_weight }}-{{ $shippingCharge->to_weight }}</td>
                                         <td>{{ $shippingCharge->charge }}</td>
-                                        <td>{{ $shippingCharge->min_quantity }}</td>
-                                        <td>{{ $shippingCharge->max_quantity }}</td>
+                                        <td>{{ $shippingCharge->min_quantity }}-{{ $shippingCharge->max_quantity }}</td>
                                         <td>
                                             <a href="{{ route('shipping_charge.edit', $shippingCharge->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                             <form action="{{ route('shipping_charge.destroy', $shippingCharge->id) }}" method="POST" style="display: inline-block">

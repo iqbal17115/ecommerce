@@ -48,26 +48,46 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="length">Area</label>
+                                    <label for="length">Area (meter)</label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="from_area" name="from_area" placeholder="From Area" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="from_area" name="from_area" placeholder="From Area" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">meter</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="to_area" name="to_area" placeholder="To Area" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="to_area" name="to_area" placeholder="To Area" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">meter</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="length">Weight</label>
+                                    <label for="length">Weight (gram)</label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="from_weight" name="from_weight" placeholder="From Weight" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="from_weight" name="from_weight" placeholder="From Weight" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">gram</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="to_weight" name="to_weight" placeholder="To Weight" required>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="to_weight" name="to_weight" placeholder="To Weight" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">gram</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -81,13 +101,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="minQuantity">Min Quantity</label>
-                                    <input type="text" class="form-control" id="minQuantity" name="min_quantity">
+                                    <input type="text" class="form-control" id="minQuantity" name="min_quantity" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="maxQuantity">Max Quantity</label>
-                                    <input type="text" class="form-control" id="maxQuantity" name="max_quantity">
+                                    <input type="text" class="form-control" id="maxQuantity" name="max_quantity" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
