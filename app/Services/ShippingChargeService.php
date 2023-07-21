@@ -34,7 +34,6 @@ class ShippingChargeService
             $packageLength = $product->ProductMoreDetail->package_length;
             $packageWidth = $product->ProductMoreDetail->package_width;
             $totalArea = $packageHeight * $packageLength * $packageWidth;
-
             $totalWeight = $product->ProductMoreDetail->package_weight; // Package weight
 
             // Calculate regular shipping charges
