@@ -37,6 +37,7 @@ class CreateProductsTable extends Migration
             $table->boolean('brand_available')->nullable()->default(0);
             $table->string('varition_type_data', 191)->nullable();
             $table->text('variation')->nullable();
+            $table->boolean('free_shipping')->default(0);
             $table->foreignId('shipping_class_id')->nullable();
             $table->foreignId('region_publication_id')->nullable();
             $table->foreignId('category_id');

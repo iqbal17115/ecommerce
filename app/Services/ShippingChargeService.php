@@ -23,11 +23,11 @@ class ShippingChargeService
             $totalAmount = $quantity * $product->sale_price; // Total Amount
 
             // Check for specific product free shipping
-            // if ($productId) {
-            //     if ($product && $product->isFreeShippingEligible($totalAmount)) {
-            //         continue; // Skip to the next product
-            //     }
-            // }
+            if ($productId) {
+                if ($product && $product->isFreeShippingEligible()) {
+                    continue; // Skip to the next product
+                }
+            }
 
             // Calculate total area based on package dimensions
             $packageHeight = $product->ProductMoreDetail->package_height;

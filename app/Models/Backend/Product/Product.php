@@ -21,14 +21,15 @@ class Product extends Model
     protected $dates = ['deleted_at'];
 // Your other model properties and relationships go here
 
-public function isFreeShippingEligible($totalAmount)
+public function isFreeShippingEligible()
 {
-    if ($this->free_shipping === 'yes') {
+    if ($this->free_shipping === 1) {
         // Check if the product meets the minimum and maximum amount conditions for free shipping
-        if (($this->minimum_amount_for_free_shipping === null || $totalAmount >= $this->minimum_amount_for_free_shipping)
-            && ($this->maximum_amount_for_free_shipping === null || $totalAmount <= $this->maximum_amount_for_free_shipping)) {
-            return true;
-        }
+        // if (($this->minimum_amount_for_free_shipping === null || $totalAmount >= $this->minimum_amount_for_free_shipping)
+        //     && ($this->maximum_amount_for_free_shipping === null || $totalAmount <= $this->maximum_amount_for_free_shipping)) {
+        //     return true;
+        // }
+        return true;
     }
 
     return false;

@@ -164,6 +164,21 @@
                         </select>
                     </div>
                     <!-- End -->
+
+                    <div class="col-md-4 mt-md-3">
+                        <label class="col-form-label float-md-right"
+                            style="font-size: 14px;">Free Shipping</label>
+                         <span class="text-danger float-md-right">*</span>
+                    </div>
+                    <div class="col-md-8 mt-md-3">
+                         <select name="free_shipping" id="free_shipping" class="form-select" required>
+                            <option value="">Select Option</option>
+                            <option @if($productInfo && $productInfo->free_shipping==1) selected @endif value="1">Yes</option>
+                            <option @if($productInfo && $productInfo->free_shipping==0) selected @endif value="0">No</option>
+                        </select>
+                     </div>
+                    <!-- End -->
+
                     <div class="col-md-12 mt-md-3">
                         <button class="float-right btn btn-success btn-sm ml-2">Save and
                             finish</button>

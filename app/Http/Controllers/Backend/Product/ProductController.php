@@ -293,6 +293,7 @@ class ProductController extends Controller
         $Query->name = $request->name;
         $Query->category_id = $request->category_id;
         $Query->type = $request->type;
+        $Query->free_shipping = $request->free_shipping;
         $Query->brand_available = $request->brand_available;
         $Query->brand_id = $request->brand_available == 1 ? $request->brand_id : null;
         $Query->save();
