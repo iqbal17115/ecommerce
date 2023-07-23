@@ -23,7 +23,7 @@ class Product extends Model
 
 public function isFreeShippingEligible()
 {
-    if ($this->free_shipping === 1) {
+    if ($this->free_shipping == 1) {
         // Check if the product meets the minimum and maximum amount conditions for free shipping
         // if (($this->minimum_amount_for_free_shipping === null || $totalAmount >= $this->minimum_amount_for_free_shipping)
         //     && ($this->maximum_amount_for_free_shipping === null || $totalAmount <= $this->maximum_amount_for_free_shipping)) {
