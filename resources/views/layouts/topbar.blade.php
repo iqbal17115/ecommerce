@@ -393,7 +393,7 @@
                         Lock screen</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{ route('customer-logout') }}"><i
-                            class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout1</a> 
+                            class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout1</a>
                 </div>
             </div>
 
