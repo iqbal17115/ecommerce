@@ -180,6 +180,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        App\Providers\ShippingServiceProvider::class,
 
     ],
 

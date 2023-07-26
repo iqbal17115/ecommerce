@@ -7,7 +7,7 @@ use InvalidArgumentException;
 trait UnitConversion
 {
 
-    public function convertWeightTo(float $weight, string $targetUnit, string $fromUnit): float
+    public function convertWeightTo(float $weight, string $fromUnit, string $targetUnit): float
     {
         // First, convert the weight to kilograms (base unit)
         switch ($fromUnit) {

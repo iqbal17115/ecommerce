@@ -14,11 +14,13 @@ class ShippingChargeService
         $totalAmount = 0; // Initialize total amount to 0
         $totalShippingCharge = 0;
 
+        // Get shipping charge classes from configuration
+        $shippingChargeClasses = config('shipping.charge_classes');
+
         foreach ($products as $productId => $productData) {
             $product = Product::find($productId);
             $quantity = $productData['quantity'];
             $shippingMethodId = 'ee1f0de6-223e-11ee-aaf7-5811220534bb';
-            $shippingClassId = $product->shipping_class_id;
 
             $totalAmount = $quantity * $product->sale_price; // Total Amount
 
@@ -36,9 +38,18 @@ class ShippingChargeService
             $totalArea = $packageHeight * $packageLength * $packageWidth;
             $totalWeight = $product->ProductMoreDetail->package_weight; // Package weight
 
+            // Find the matching shipping charge class based on area and weight without using a loop
+            $matchingClasses = array_filter($shippingChargeClasses, function ($classData) use ($totalArea, $totalWeight) {
+                return ($totalArea >= $classData['from_area'] && $totalArea <= $classData['to_area'] &&
+                    $totalWeight >= $classData['from_weight'] && $totalWeight <= $classData['to_weight']);
+            });
+
+            $matchingClass = count($matchingClasses) > 0 ? array_keys($matchingClasses)[0] : null;
+
+dd($matchingClass);
             // Calculate regular shipping charges
             $charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
-                ->where('shipping_class_id', $shippingClassId)
+                ->where('shipping_class', $matchingClass)
                 ->where('from_area', '<=', $totalArea)
                 ->where('to_area', '>=', $totalArea)
                 ->where('from_weight', '<=', $totalWeight)
