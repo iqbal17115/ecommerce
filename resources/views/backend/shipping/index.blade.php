@@ -51,7 +51,7 @@
                                 @forelse ($shippingCharges as $shippingCharge)
                                     <tr>
                                         <td>{{ $shippingCharge->shippingMethod->name }}</td>
-                                        <td>{{ $shippingCharge->shippingClass->name }}</td>
+                                        <td>{{ $shippingCharge?->shipping_class }}</td>
                                         <td>{{ $shippingCharge->from_area }}-{{ $shippingCharge->to_area }}</td>
                                         <td>{{ $shippingCharge->from_weight }}-{{ $shippingCharge->to_weight }}</td>
                                         <td>{{ $shippingCharge->charge }}</td>

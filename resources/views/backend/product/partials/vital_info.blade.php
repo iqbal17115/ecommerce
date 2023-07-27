@@ -68,21 +68,6 @@
                     <!-- End -->
 
                     <div class="col-md-4 mt-md-3">
-                        <label class="col-form-label float-md-right" style="font-size: 14px;">Shipping Class</label>
-                    </div>
-                    <div class="col-md-8 mt-md-3">
-                        <select name="shipping_class_id" id="shipping_class_id" class="form-select" style="width: 100%;" required>
-                            <option value="">Select</option>
-                            @foreach ($shippingClasses as $shippingClass)
-                                <option @if ($productInfo && $productInfo->shipping_class_id == $shippingClass->id) selected @endif value="{{ $shippingClass->id }}">
-                                    {{ $shippingClass->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <!-- End -->
-
-                    <div class="col-md-4 mt-md-3">
                         <label class="col-form-label float-md-right" style="font-size: 14px;">Condition</label>
                         <span class="text-danger float-md-right">*</span>
                     </div>

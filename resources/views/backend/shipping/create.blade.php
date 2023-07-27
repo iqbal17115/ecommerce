@@ -38,10 +38,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="shippingClass">Shipping Class</label>
-                                    <select class="form-control" id="shippingClass" name="shipping_class_id" required>
-                                        @foreach ($shippingClasses as $shippingClass)
-                                            <option value="{{ $shippingClass->id }}">{{ $shippingClass->name }}</option>
+                                    <label for="shipping_class">Shipping Class</label>
+                                    <select class="form-control" id="shipping_class" name="shipping_class" required>
+                                        <option value="">Select</option>
+                                        @foreach ($shippingChargeClasses as $className => $classData)
+                                            @foreach ($classData as $criteria)
+                                               <option value="{{ $criteria['name'] }}">{{ $criteria['name'] }}</option>
+                                            @endforeach
                                         @endforeach
                                     </select>
                                 </div>

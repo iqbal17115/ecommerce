@@ -264,7 +264,6 @@ class ProductController extends Controller
             $Query->model_number = $request->model_number;
             $Query->model_name = $request->model_name;
             $Query->booking_date = $request->booking_date;
-            $Query->shipping_class_id = $request->shipping_class_id;
             $Query->save();
 
             $ProductDetailQuery = ProductDetail::whereProductId($Query->id)->firstOrNew();
@@ -312,7 +311,6 @@ class ProductController extends Controller
         $materials = Material::orderBy('id', 'DESC')->get();
         $conditions = Condition::orderBy('id', 'DESC')->get();
         $product_features = ProductFeature::orderBy('id', 'DESC')->whereIsActive(1)->get();
-        $shippingClasses = (new ShippingChargeService)->getAllShippingClasses();
         $productInfo = null;
         $id = $request->id;
         if ($id) {
@@ -320,6 +318,6 @@ class ProductController extends Controller
             $productInfo = Product::whereId($id)->first();
         }
         $unitConversionService = $this->unitConversionService;
-        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'shippingClasses', 'unitConversionService'));
+        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService'));
     }
 }

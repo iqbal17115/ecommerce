@@ -11,7 +11,7 @@ class ShippingCharge extends Model
     use HasFactory, BaseModel;
     protected $fillable = [
         'shipping_method_id',
-        'shipping_class_id',
+        'shipping_class',
         'from_area',
         'to_area',
         'from_weight',
@@ -29,11 +29,6 @@ class ShippingCharge extends Model
     public function shippingMethod()
     {
         return $this->belongsTo(ShippingMethod::class);
-    }
-
-    public function shippingClass()
-    {
-        return $this->belongsTo(ShippingClass::class);
     }
 
 }

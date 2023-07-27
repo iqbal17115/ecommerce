@@ -23,20 +23,19 @@ class ShippingChargeController extends Controller
     }
     public function index()
     {
-        $shippingClasses  = $this->shippingChargeService->getAllShippingClasses();
         $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
         $shippingCharges = $this->shippingChargeService->getAllShippingCharges();
 
-        return view('backend.shipping.index', compact('shippingClasses', 'shippingMethods', 'shippingCharges'));
+        return view('backend.shipping.index', compact('shippingMethods', 'shippingCharges'));
     }
 
     public function create()
     {
         // Fetch any necessary data from other models if needed and pass it to the view
-        $shippingClasses  = $this->shippingChargeService->getAllShippingClasses();
         $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
+        $shippingChargeClasses = config('shipping.charge_classes');
 
-        return view('backend.shipping.create', compact('shippingClasses', 'shippingMethods'));
+        return view('backend.shipping.create', compact('shippingChargeClasses', 'shippingMethods'));
     }
 
     public function store(ShippingChargeRequest $request)
@@ -50,9 +49,9 @@ class ShippingChargeController extends Controller
     {
         $shippingCharge = $this->shippingChargeService->getShippingChargeById($id);
         $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
-        $shippingClasses  = $this->shippingChargeService->getAllShippingClasses();
+        $shippingChargeClasses = config('shipping.charge_classes');
 
-        return view('backend.shipping.edit', compact('shippingMethods', 'shippingClasses', 'shippingCharge'));
+        return view('backend.shipping.edit', compact('shippingMethods', 'shippingChargeClasses', 'shippingCharge'));
     }
 
     public function update(ShippingChargeRequest $request, $id)

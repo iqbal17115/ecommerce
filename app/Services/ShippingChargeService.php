@@ -3,19 +3,65 @@ namespace App\Services;
 
 use App\Models\Backend\Product\Product;
 use App\Models\Backend\Shipping\ShippingCharge;
-use App\Models\Backend\Shipping\ShippingClass;
 use App\Models\Backend\Shipping\ShippingMethod;
 
 class ShippingChargeService
 {
+    private $shippingChargeClasses;
+
+    public function __construct()
+    {
+        $this->shippingChargeClasses = config('shipping.charge_classes');
+    }
+
+    private function calculateDimensionalWeight(float $length, float $width, float $height, $dimensionalWeightFactor): float
+    {
+        $dimensionalWeight = ($length * $width * $height) / $dimensionalWeightFactor;
+
+        return $dimensionalWeight;
+    }
+
+    private function findMatchingClass(float $dimensionalWeight, float $weight): ?array
+    {
+        foreach ($this->shippingChargeClasses as $className => $classData) {
+            foreach ($classData as $criteria) {
+                if (
+                    $dimensionalWeight >= $criteria['from_area'] && $dimensionalWeight <= $criteria['to_area'] &&
+                    $weight >= $criteria['from_weight'] && $weight <= $criteria['to_weight']
+                ) {
+                    return $criteria;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private function getDefaultClass(): ?array
+    {
+        foreach ($this->shippingChargeClasses as $className => $classData) {
+            foreach ($classData as $criteria) {
+                if (isset($criteria['default']) && $criteria['default']) {
+                    return $criteria;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private function calculateCharge(array $matchingClass): float
+    {
+        // Calculate the shipping charge based on the matching class data
+        // Implement your calculation logic here, e.g., based on weight, distance, carrier rates, etc.
+        // For demonstration purposes, I'll return a fixed value of $10 for the shipping charge.
+        return 10.0;
+    }
     public function calculateShippingCharge()
     {
         $products = session('cart');
         $totalAmount = 0; // Initialize total amount to 0
         $totalShippingCharge = 0;
-
-        // Get shipping charge classes from configuration
-        $shippingChargeClasses = config('shipping.charge_classes');
 
         foreach ($products as $productId => $productData) {
             $product = Product::find($productId);
@@ -38,18 +84,23 @@ class ShippingChargeService
             $totalArea = $packageHeight * $packageLength * $packageWidth;
             $totalWeight = $product->ProductMoreDetail->package_weight; // Package weight
 
-            // Find the matching shipping charge class based on area and weight without using a loop
-            $matchingClasses = array_filter($shippingChargeClasses, function ($classData) use ($totalArea, $totalWeight) {
-                return ($totalArea >= $classData['from_area'] && $totalArea <= $classData['to_area'] &&
-                    $totalWeight >= $classData['from_weight'] && $totalWeight <= $classData['to_weight']);
-            });
+            // Calculate the dimensional weight
+            $dimensionalWeight = $this->calculateDimensionalWeight($packageLength, $packageWidth, $packageHeight, $totalWeight);
 
-            $matchingClass = count($matchingClasses) > 0 ? array_keys($matchingClasses)[0] : null;
+            // Get the class that matches the criteria
+            $matchingClass = $this->findMatchingClass($dimensionalWeight, $totalWeight);
+            if (!$matchingClass) {
+                $matchingClass['name'] = null;
+            }
 
-dd($matchingClass);
+            // If no matching class found, use the default class
+            if (!$matchingClass) {
+                $matchingClass = $this->getDefaultClass();
+            }
+
             // Calculate regular shipping charges
             $charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
-                ->where('shipping_class', $matchingClass)
+                ->where('shipping_class', $matchingClass['name'])
                 ->where('from_area', '<=', $totalArea)
                 ->where('to_area', '>=', $totalArea)
                 ->where('from_weight', '<=', $totalWeight)
@@ -71,16 +122,11 @@ dd($matchingClass);
                 $totalShippingCharge += $charge->charge;
             } else {
                 // Handle the case where no shipping charge is found for a product
-                return response()->json(['error' => 'No shipping charge found for one or more products.']);
+                // return response()->json(['error' => 'No shipping charge found for one or more products.']);
             }
+
         }
-
         return response()->json(['charge' => $totalShippingCharge]);
-    }
-
-    public function getAllShippingClasses()
-    {
-        return ShippingClass::get();
     }
 
     public function getAllShippingMethods()
@@ -90,7 +136,7 @@ dd($matchingClass);
 
     public function getAllShippingCharges()
     {
-        return ShippingCharge::with(['shippingMethod', 'shippingClass'])->get();
+        return ShippingCharge::with(['shippingMethod'])->get();
     }
 
     public function createShippingCharge(array $data)
