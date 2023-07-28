@@ -4,9 +4,11 @@ namespace App\Services;
 use App\Models\Backend\Product\Product;
 use App\Models\Backend\Shipping\ShippingCharge;
 use App\Models\Backend\Shipping\ShippingMethod;
+use App\Traits\UnitConversion;
 
 class ShippingChargeService
 {
+    use UnitConversion;
     private $shippingChargeClasses;
 
     public function __construct()
@@ -16,19 +18,21 @@ class ShippingChargeService
 
     private function calculateDimensionalWeight(float $length, float $width, float $height, $dimensionalWeightFactor): float
     {
-        $dimensionalWeight = ($length * $width * $height) / $dimensionalWeightFactor;
+        $dimensionalWeight = ($this->convertLengthTo($length, 'm', 'cm') * $this->convertLengthTo($width, 'm', 'cm') * $this->convertLengthTo($height, 'm', 'cm')) / 5000;
+        $dimensionalWeightFactor = $this->convertWeightTo($dimensionalWeightFactor, 'gm', 'kg');
 
-        return $dimensionalWeight;
+        if($dimensionalWeightFactor > $dimensionalWeight) {
+           $dimensionalWeight = $dimensionalWeightFactor;
+        }
+
+        return $this->convertWeightTo($dimensionalWeight, 'kg', 'gm');
     }
 
     private function findMatchingClass(float $dimensionalWeight, float $weight): ?array
     {
         foreach ($this->shippingChargeClasses as $className => $classData) {
             foreach ($classData as $criteria) {
-                if (
-                    $dimensionalWeight >= $criteria['from_area'] && $dimensionalWeight <= $criteria['to_area'] &&
-                    $weight >= $criteria['from_weight'] && $weight <= $criteria['to_weight']
-                ) {
+                if ($dimensionalWeight >= $criteria['from_weight'] && $dimensionalWeight <= $criteria['to_weight']) {
                     return $criteria;
                 }
             }
@@ -94,17 +98,14 @@ class ShippingChargeService
             }
 
             // If no matching class found, use the default class
-            if (!$matchingClass) {
-                $matchingClass = $this->getDefaultClass();
-            }
-
+            // if (!$matchingClass) {
+            //     $matchingClass = $this->getDefaultClass();
+            // }
             // Calculate regular shipping charges
             $charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
                 ->where('shipping_class', $matchingClass['name'])
-                ->where('from_area', '<=', $totalArea)
-                ->where('to_area', '>=', $totalArea)
-                ->where('from_weight', '<=', $totalWeight)
-                ->where('to_weight', '>=', $totalWeight)
+                ->where('from_weight', '<=', $dimensionalWeight)
+                ->where('to_weight', '>=', $dimensionalWeight)
                 ->where(function ($query) use ($quantity, $totalAmount) {
                     $query->where(function ($query) use ($quantity, $totalAmount) {
                         $query->whereNull('min_quantity')

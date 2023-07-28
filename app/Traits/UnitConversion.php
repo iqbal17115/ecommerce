@@ -55,8 +55,6 @@ trait UnitConversion
         }
     }
 
-
-
     /**
      * Length conversion from base unit (meter) to target unit.
      *
