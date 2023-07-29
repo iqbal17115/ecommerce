@@ -120,6 +120,8 @@ class ShippingChargeService
             if ($charge) {
                 $totalShippingCharge += $charge->charge;
             } else {
+        dd($charge, $dimensionalWeight);
+
                 // Handle the case where no shipping charge is found for a product
                 // return response()->json(['error' => 'No shipping charge found for one or more products.']);
             }
