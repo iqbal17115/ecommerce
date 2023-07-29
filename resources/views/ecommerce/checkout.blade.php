@@ -142,9 +142,7 @@
                                             $total += $details['sale_price'] * $details['quantity'];
                                             $product = \App\Models\Backend\Product\Product::find($id);
                                         @endphp
-                                        @if ($product->ProductMoreDetail)
-                                            {{ $product->ProductMoreDetail->package_weight }}
-                                        @endif
+
                                         <tr>
                                             <td class="product-col">
                                                 <h3 class="product-title">
@@ -163,12 +161,9 @@
                             <tfoot>
                                 <tr class="cart-subtotal">
                                     <td>
-                                        <h4>Sub Total</h4>
+                                        <h4>Subtotal</h4>
                                     </td>
-
-                                    <td class="price-col">
-                                        <span>{{ $currency->icon }}{{ $total }}</span>
-                                    </td>
+                                    <td class="price-col">{{ $currency->icon }} <span class="cart_total_price">{{ $total }}</span></td>
                                 </tr>
                                 <tr class="order-shipping">
                                     <td class="text-left" colspan="2">
@@ -201,7 +196,7 @@
                                     </td>
 
                                     <td class="shipping-col">
-                                        <span>{{ $currency->icon }}<span class="shipping_amount">{{ $total }}</span></span>
+                                        <span>{{ $currency->icon }} <span class="shipping_amount"></span></span>
                                     </td>
                                 </tr>
                                 <tr class="order-total">
@@ -209,7 +204,7 @@
                                         <h4>Total</h4>
                                     </td>
                                     <td>
-                                        <b >{{ $currency->icon }}<span class="total-price">{{ $total + $default_charge }}</span></b>
+                                        <b >{{ $currency->icon }}<span class="total-price">0.00</span></b>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -293,4 +288,5 @@
 @endsection
 @push('scripts')
     @include('ecommerce.checkout-js')
+    <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
 @endpush
