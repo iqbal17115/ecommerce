@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend\Shipping;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shipping\ShippingChargeRequest;
-use App\Models\Backend\Shipping\ShippingCharge;
 use App\Services\ShippingChargeService;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,12 +20,26 @@ class ShippingChargeController extends Controller
         $totalShippingCharge = $this->shippingChargeService->calculateShippingCharge();
         return response()->json(['charge' => $totalShippingCharge->getData()->charge]);
     }
-    public function index()
+
+    public function index(Request $request)
     {
         $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
-        $shippingCharges = $this->shippingChargeService->getAllShippingCharges();
 
-        return view('backend.shipping.index', compact('shippingMethods', 'shippingCharges'));
+        $shippingClass = $request->query('shipping_charge_class');
+        $shippingMethod = $request->query('shipping_method');
+        $per_page = $request->query('per_page');
+
+        $shippingCharges = $this->shippingChargeService->searchShippingCharges($shippingClass, $shippingMethod, $per_page);
+
+        if ($request->ajax()) {
+            return view('backend.shipping.shipping_charge.shipping_charge_table', compact('shippingCharges'));
+        }
+
+        $shippingCharges = $this->shippingChargeService->getAllShippingCharges();
+        $shippingMethods = $this->shippingChargeService->getAllShippingMethods();
+        $shippingChargeClasses = config('shipping.charge_classes');
+
+        return view('backend.shipping.index', compact('shippingCharges', 'shippingChargeClasses', 'shippingMethods'));
     }
 
     public function create()

@@ -16,6 +16,20 @@ class ShippingChargeService
         $this->shippingChargeClasses = config('shipping.charge_classes');
     }
 
+    public function searchShippingCharges($shippingClass, $shippingMethod, $per_page)
+    {
+        $query = ShippingCharge::query();
+
+        if (!empty($shippingClass)) {
+            $query->where('shipping_class', $shippingClass);
+        }
+
+        if (!empty($shippingMethod)) {
+                $query->where('shipping_method_id', $shippingMethod);
+        }
+        return $query->paginate($per_page);
+    }
+
     private function calculateDimensionalWeight(float $length, float $width, float $height, $dimensionalWeightFactor): float
     {
         $dimensionalWeight = ($this->convertLengthTo($length, 'm', 'cm') * $this->convertLengthTo($width, 'm', 'cm') * $this->convertLengthTo($height, 'm', 'cm')) / 5000;
@@ -137,7 +151,7 @@ class ShippingChargeService
 
     public function getAllShippingCharges()
     {
-        return ShippingCharge::with(['shippingMethod'])->get();
+        return ShippingCharge::with(['shippingMethod'])->paginate(10);
     }
 
     public function createShippingCharge(array $data)
