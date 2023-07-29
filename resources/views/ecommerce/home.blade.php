@@ -282,12 +282,13 @@
                                                         <i class="far fa-star"></i>
                                                     @endif
                                                     <span class="rating-number">-</span>
-                                                <span class="rating-number"
-                                                    style="font-size: 11px;">{{ $product->reviews()->sum('rating') }}</span>
+                                                    <span class="rating-number"
+                                                        style="font-size: 11px;">{{ $product->reviews()->sum('rating') }}</span>
                                                 </span>
 
                                                 {{-- Add to wishlist --}}
-                                                <a href="javascript:void(0);" class="btn-icon-wish" data-product_id="{{ $product->id }}" title="Add To Wishlist"><i
+                                                <a href="javascript:void(0);" class="btn-icon-wish"
+                                                    data-product_id="{{ $product->id }}" title="Add To Wishlist"><i
                                                         class="icon-heart"></i></a>
                                             </div>
                                             <!-- End .product-container -->
@@ -392,7 +393,7 @@
 
 @endsection
 @push('scripts')
-@include('ecommerce.wishlist-js')
+    @include('ecommerce.wishlist-js')
     <script>
         window.onload = function() {
             // Code to be executed after rendering the full layout
@@ -441,4 +442,5 @@
             }
         };
     </script>
+    <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
 @endpush

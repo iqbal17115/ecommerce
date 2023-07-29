@@ -105,8 +105,7 @@
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td>{{ $currency->icon }} <span class="cart_total_price">{{ $total }}</span>
-                                    </td>
+                                    <td>{{ $currency->icon }} <span class="cart_total_price">{{ $total }}</span></td>
                                 </tr>
 
                                 <tr>
