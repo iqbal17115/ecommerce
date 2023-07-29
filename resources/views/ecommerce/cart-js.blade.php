@@ -84,7 +84,9 @@ $(document).ready(function() {
                 total = price_qty.reduce(function(curr, prev) {
                     return curr + prev;
                 });
-                $('.cart-total-price').text(total);
+                $('.cart_total_price').text(total);
+                calculateShippingCharges()
+
             }
         });
 
@@ -110,7 +112,8 @@ $(document).ready(function() {
                         return curr + prev;
                     });
                 }
-                $('.cart-total-price').text(total);
+                $('.cart_total_price').text(total);
+                calculateShippingCharges()
             }
         });
     });
@@ -145,7 +148,7 @@ $(document).ready(function() {
                 total = price_qty.reduce(function(curr, prev) {
                     return curr + prev;
                 });
-                $('.cart-total-price').text(total);
+                $('.cart_total_price').text(total);
                 if (data['new_product'].length != 0) {
                     var imageSrc = "{{ asset('storage/images/my-image.png') }}";
                     $('.cart-count').text(Object.keys(data['cart']).length);
@@ -165,6 +168,7 @@ $(document).ready(function() {
                     $('.img-preview-' + data['new_product']['id']).attr("src", '/storage/product_photo/' + data['new_product']['image']);
                         $('.product-unique-' + data['new_product']['id']).attr('href', "{{ route('products.show', ['name' => ' ']) }}" + data['new_product']['name']);
                 }
+                calculateShippingCharges();
                 // Check buy now button
                 if (is_buy_now) {
                     window.location.href = '/checkout';  // Replace with the actual URL of the checkout page
