@@ -29,7 +29,8 @@
                                     <label for="shippingMethod">Shipping Method</label>
                                     <select class="form-control" id="shippingMethod" name="shipping_method_id" required>
                                         @foreach ($shippingMethods as $shippingMethod)
-                                            <option value="{{ $shippingMethod->id }}" {{ $shippingMethod->id == $shippingCharge->shipping_method_id ? 'selected' : '' }}>
+                                            <option value="{{ $shippingMethod->id }}"
+                                                {{ $shippingMethod->id == $shippingCharge->shipping_method_id ? 'selected' : '' }}>
                                                 {{ $shippingMethod->name }}
                                             </option>
                                         @endforeach
@@ -43,7 +44,8 @@
                                         <option value="">Select</option>
                                         @foreach ($shippingChargeClasses as $className => $classData)
                                             @foreach ($classData as $criteria)
-                                                <option value="{{ $criteria['name'] }}" {{ $criteria['name'] == $shippingCharge->shipping_class ? 'selected' : '' }}>
+                                                <option value="{{ $criteria['name'] }}"
+                                                    {{ $criteria['name'] == $shippingCharge->shipping_class ? 'selected' : '' }}>
                                                     {{ $criteria['name'] }}
                                                 </option>
                                             @endforeach
@@ -52,112 +54,87 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="area">Area (meter)</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="from_area" name="from_area" value="{{ $shippingCharge->from_area }}" placeholder="From" required>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">meter</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="to_area" name="to_area" value="{{ $shippingCharge->to_area }}" placeholder="To" required>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">meter</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <label for="weight">Weight (gram)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="from_weight" name="from_weight"
+                                        value="{{ $shippingCharge->from_weight }}" placeholder="From" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">gram</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="weight">Weight (gram)</label>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="from_weight" name="from_weight" value="{{ $shippingCharge->from_weight }}" placeholder="From" required>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">gram</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="to_weight" name="to_weight" value="{{ $shippingCharge->to_weight }}" placeholder="To" required>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">gram</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <label for="weight">Weight (gram)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="to_weight" name="to_weight"
+                                        value="{{ $shippingCharge->to_weight }}" placeholder="To" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">gram</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="charge">Charge</label>
-                                    <input type="text" class="form-control" id="charge" name="charge" value="{{ $shippingCharge->charge }}" required>
+                                    <input type="text" class="form-control" id="charge" name="charge"
+                                        value="{{ $shippingCharge->charge }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="minQuantity">Min Quantity</label>
-                                    <input type="text" class="form-control" id="minQuantity" name="min_quantity" value="{{ $shippingCharge->min_quantity }}" required>
+                                    <input type="text" class="form-control" id="minQuantity" name="min_quantity"
+                                        value="{{ $shippingCharge->min_quantity }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="maxQuantity">Max Quantity</label>
-                                    <input type="text" class="form-control" id="maxQuantity" name="max_quantity" value="{{ $shippingCharge->max_quantity }}" required>
+                                    <input type="text" class="form-control" id="maxQuantity" name="max_quantity"
+                                        value="{{ $shippingCharge->max_quantity }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="minAmount">Min Amount</label>
-                                    <input type="text" class="form-control" id="minAmount" name="min_amount" value="{{ $shippingCharge->min_amount }}">
+                                    <input type="text" class="form-control" id="minAmount" name="min_amount"
+                                        value="{{ $shippingCharge->min_amount }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="maxAmount">Max Amount</label>
-                                    <input type="text" class="form-control" id="maxAmount" name="max_amount" value="{{ $shippingCharge->max_amount }}">
+                                    <input type="text" class="form-control" id="maxAmount" name="max_amount"
+                                        value="{{ $shippingCharge->max_amount }}">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="freeShipping">Free Shipping</label>
                                     <select class="form-control" id="freeShipping" name="free_shipping" required>
-                                        <option value="yes" {{ $shippingCharge->free_shipping === 'yes' ? 'selected' : '' }}>Yes</option>
-                                        <option value="no" {{ $shippingCharge->free_shipping === 'no' ? 'selected' : '' }}>No</option>
+                                        <option value="yes"
+                                            {{ $shippingCharge->free_shipping === 'yes' ? 'selected' : '' }}>Yes</option>
+                                        <option value="no"
+                                            {{ $shippingCharge->free_shipping === 'no' ? 'selected' : '' }}>No</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="minAmountFreeShipping">Minimum Amount for Free Shipping</label>
-                                    <input type="text" class="form-control" id="minAmountFreeShipping" name="minimum_amount_for_free_shipping" value="{{ $shippingCharge->minimum_amount_for_free_shipping }}">
+                                    <input type="text" class="form-control" id="minAmountFreeShipping"
+                                        name="minimum_amount_for_free_shipping"
+                                        value="{{ $shippingCharge->minimum_amount_for_free_shipping }}">
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="maxAmountFreeShipping">Maximum Amount for Free Shipping</label>
-                                    <input type="text" class="form-control" id="maxAmountFreeShipping" name="maximum_amount_for_free_shipping" value="{{ $shippingCharge->maximum_amount_for_free_shipping }}">
-                                </div>
-                            </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
-
                 </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+
             </div>
         </div>
     </div>
+    </div>
     <!-- end row -->
-
 @endsection
-

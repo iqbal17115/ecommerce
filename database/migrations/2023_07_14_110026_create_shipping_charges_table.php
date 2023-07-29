@@ -17,9 +17,7 @@ class CreateShippingChargesTable extends Migration
         Schema::create('shipping_charges', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('shipping_method_id');
-            $table->uuid('shipping_class_id');
-            $table->decimal('from_area',10, 4);
-            $table->decimal('to_area', 10, 4);
+            $table->uuid('shipping_class');
             $table->decimal('from_weight', 10, 4);
             $table->decimal('to_weight', 10, 4);
             $table->decimal('charge', 10, 2);
@@ -34,7 +32,6 @@ class CreateShippingChargesTable extends Migration
 
         Schema::table('shipping_charges', function (Blueprint $table) {
             $table->foreign('shipping_method_id')->references('id')->on('shipping_methods')->onDelete('cascade');
-            $table->foreign('shipping_class_id')->references('id')->on('shipping_classes')->onDelete('cascade');
         });
     }
 

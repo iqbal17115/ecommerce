@@ -40,7 +40,6 @@
                                 <tr>
                                     <th>Shipping Method</th>
                                     <th>Shipping Class</th>
-                                    <th>Area</th>
                                     <th>Weight</th>
                                     <th>Charge</th>
                                     <th>Quantity</th>
@@ -52,7 +51,6 @@
                                     <tr>
                                         <td>{{ $shippingCharge->shippingMethod->name }}</td>
                                         <td>{{ $shippingCharge?->shipping_class }}</td>
-                                        <td>{{ $shippingCharge->from_area }}-{{ $shippingCharge->to_area }}</td>
                                         <td>{{ $shippingCharge->from_weight }}-{{ $shippingCharge->to_weight }}</td>
                                         <td>{{ $shippingCharge->charge }}</td>
                                         <td>{{ $shippingCharge->min_quantity }}-{{ $shippingCharge->max_quantity }}</td>
@@ -67,7 +65,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center" colspan="4">No shipping charges found.</td>
+                                        <td class="text-center" colspan="6">No shipping charges found.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

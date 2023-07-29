@@ -28,7 +28,7 @@ class ShippingChargeService
         return $this->convertWeightTo($dimensionalWeight, 'kg', 'gm');
     }
 
-    private function findMatchingClass(float $dimensionalWeight, float $weight): ?array
+    private function findMatchingClass(float $dimensionalWeight): ?array
     {
         foreach ($this->shippingChargeClasses as $className => $classData) {
             foreach ($classData as $criteria) {
@@ -85,14 +85,13 @@ class ShippingChargeService
             $packageHeight = $product->ProductMoreDetail->package_height;
             $packageLength = $product->ProductMoreDetail->package_length;
             $packageWidth = $product->ProductMoreDetail->package_width;
-            $totalArea = $packageHeight * $packageLength * $packageWidth;
             $totalWeight = $product->ProductMoreDetail->package_weight; // Package weight
 
             // Calculate the dimensional weight
             $dimensionalWeight = $this->calculateDimensionalWeight($packageLength, $packageWidth, $packageHeight, $totalWeight);
 
             // Get the class that matches the criteria
-            $matchingClass = $this->findMatchingClass($dimensionalWeight, $totalWeight);
+            $matchingClass = $this->findMatchingClass($dimensionalWeight);
             if (!$matchingClass) {
                 $matchingClass['name'] = null;
             }
@@ -115,7 +114,6 @@ class ShippingChargeService
                             ->where('max_quantity', '>=', $quantity);
                     });
                 })
-                ->orderBy('from_area')
                 ->orderBy('from_weight')
                 ->first();
 

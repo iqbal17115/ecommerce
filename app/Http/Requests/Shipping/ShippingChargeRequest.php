@@ -26,8 +26,6 @@ class ShippingChargeRequest extends FormRequest
         return [
             'shipping_method_id' => 'required|exists:shipping_methods,id',
             'shipping_class' => 'required',
-            'from_area' => 'required|numeric',
-            'to_area' => 'required|numeric',
             'from_weight' => 'required|numeric',
             'to_weight' => 'required|numeric',
             'charge' => 'required|numeric',
