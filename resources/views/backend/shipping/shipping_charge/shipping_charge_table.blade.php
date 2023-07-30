@@ -4,7 +4,6 @@
             <th class="bg-light">#</th>
             <th class="bg-light">Shipping Method</th>
             <th class="bg-light">Shipping Class</th>
-            <th class="bg-light">Weight</th>
             <th class="bg-light">Charge</th>
             <th class="bg-light">Quantity</th>
             <th class="bg-light">Action</th>
@@ -19,7 +18,6 @@
                 <td>{{ $i++ }}</td>
                 <td>{{ $shippingCharge->shippingMethod->name }}</td>
                 <td>{{ $shippingCharge->shipping_class }}</td>
-                <td>{{ $shippingCharge->from_weight }}-{{ $shippingCharge->to_weight }}</td>
                 <td>{{ $shippingCharge->charge }}</td>
                 <td>{{ $shippingCharge->min_quantity }}-{{ $shippingCharge->max_quantity }}</td>
                 <td>

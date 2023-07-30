@@ -118,11 +118,8 @@ class ShippingChargeService
             // Calculate regular shipping charges
             $shipping_charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
             ->where('shipping_class', $matchingClass['name'])
-            ->where('from_weight', '<=', $dimensionalWeight)
-            ->where('to_weight', '>=', $dimensionalWeight)
             ->where('min_quantity', '<=', $quantity)
             ->where('max_quantity', '>=', $quantity)
-            ->orderBy('from_weight')
             ->first();
 
             if ($shipping_charge) {

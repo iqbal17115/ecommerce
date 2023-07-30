@@ -53,26 +53,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="weight">Weight (gram)</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="from_weight" name="from_weight"
-                                        value="{{ $shippingCharge->from_weight }}" placeholder="From" required>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">gram</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="weight">Weight (gram)</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="to_weight" name="to_weight"
-                                        value="{{ $shippingCharge->to_weight }}" placeholder="To" required>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">gram</span>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="charge">Charge</label>
