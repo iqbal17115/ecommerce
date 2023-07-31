@@ -91,6 +91,9 @@ class CheckoutController extends Controller
     }
     public function getDistrict(Request $request)
     {
+        $contact = Contact::whereUserId($request->user()->id)->first();
+        $contact->division_id = $request->division_id;
+        $contact->save();
         $district = District::where('division_id', '=', $request->division_id)->get();
         return response()->json(['district' => $district], 200);
     }

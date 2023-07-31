@@ -85,6 +85,7 @@ $(document).ready(function() {
                     }
                     district += '<option '+dis_selected+' value='+value['id']+'>'+value['name']+'</option>';
                 });
+                calculateShippingCharges();
                 $("#district").html(district);
                 $('#district').trigger('change');
             },
