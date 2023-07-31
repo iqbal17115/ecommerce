@@ -53,13 +53,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="charge">Charge</label>
-                                    <input type="text" class="form-control" id="charge" name="charge"
-                                        value="{{ $shippingCharge->charge }}" required>
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="minQuantity">Min Quantity</label>
@@ -105,6 +98,20 @@
                                     <input type="text" class="form-control" id="minAmountFreeShipping"
                                         name="minimum_amount_for_free_shipping"
                                         value="{{ $shippingCharge->minimum_amount_for_free_shipping }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="charge_1">Charge(Inside Dhaka)</label>
+                                    <input type="text" class="form-control" id="charge_1" name="charge_1"
+                                        value="{{ $shippingCharge->charge_1 }}" placeholder="Inside Amount" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="charge_2">Charge(Outside Dhaka)</label>
+                                    <input type="text" class="form-control" id="charge_2" name="charge_2"
+                                        value="{{ $shippingCharge->charge_2 }}" placeholder="Outside Amount" required>
                                 </div>
                             </div>
                         </div>

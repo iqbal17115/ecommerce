@@ -5,6 +5,7 @@ use App\Models\Backend\Product\Product;
 use App\Models\Backend\Shipping\ShippingCharge;
 use App\Models\Backend\Shipping\ShippingMethod;
 use App\Traits\UnitConversion;
+use Illuminate\Support\Facades\Auth;
 
 class ShippingChargeService
 {
@@ -78,16 +79,13 @@ class ShippingChargeService
     public function calculateShippingCharge()
     {
         $products = session('cart');
-        $totalAmount = 0; // Initialize total amount to 0
         $totalShippingCharge = 0;
         $shippingMethodId = 'ee1f0de6-223e-11ee-aaf7-5811220534bb';
+        $inside = Auth::user()?->Contact?->Division?->id == 6 ? true : false;
+
         foreach ($products as $productId => $productData) {
             $product = Product::find($productId);
             $quantity = $productData['quantity'];
-
-
-            $totalAmount = $quantity * $product->sale_price; // Total Amount
-
             // Check for specific product free shipping
             if ($productId) {
                 if ($product && $product->isFreeShippingEligible()) {
@@ -123,7 +121,7 @@ class ShippingChargeService
             ->first();
 
             if ($shipping_charge) {
-                $totalShippingCharge += $shipping_charge->charge;
+                $totalShippingCharge += $inside == true ? $shipping_charge->charge_1 : $shipping_charge->charge_2;
             } else {
 
                 // dd($shippingMethodId, $quantity, $shipping_charge, $dimensionalWeight, $matchingClass['name']);

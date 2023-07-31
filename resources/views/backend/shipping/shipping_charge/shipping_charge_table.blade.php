@@ -4,7 +4,7 @@
             <th class="bg-light">#</th>
             <th class="bg-light">Shipping Method</th>
             <th class="bg-light">Shipping Class</th>
-            <th class="bg-light">Charge</th>
+            <th class="bg-light">Charge(Inside-Outside)</th>
             <th class="bg-light">Quantity</th>
             <th class="bg-light">Action</th>
         </tr>
@@ -18,7 +18,7 @@
                 <td>{{ $i++ }}</td>
                 <td>{{ $shippingCharge->shippingMethod->name }}</td>
                 <td>{{ $shippingCharge->shipping_class }}</td>
-                <td>{{ $shippingCharge->charge }}</td>
+                <td>{{ $shippingCharge->charge_1 }}-{{ $shippingCharge->charge_2 }}</td>
                 <td>{{ $shippingCharge->min_quantity }}-{{ $shippingCharge->max_quantity }}</td>
                 <td>
                     <a href="{{ route('shipping_charge.edit', $shippingCharge->id) }}"
