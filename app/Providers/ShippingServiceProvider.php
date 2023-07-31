@@ -121,11 +121,16 @@ class ShippingServiceProvider extends ServiceProvider
                 ],
                 [
                     'name' => 'medium_Package_13',
+                    'from_weight' => 17001,
+                    'to_weight' => 18000,
+                ],
+                [
+                    'name' => 'medium_Package_14',
                     'from_weight' => 18001,
                     'to_weight' => 19000,
                 ],
                 [
-                    'name' => 'medium_Package_14',
+                    'name' => 'medium_Package_15',
                     'from_weight' => 19001,
                     'to_weight' => 20000,
                 ],
