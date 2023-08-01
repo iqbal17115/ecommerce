@@ -155,7 +155,7 @@ class ShippingChargeService
 
     public function updateShippingCharge(array $data, $id)
     {
-        $shippingCharge = ShippingCharge::findOrFail($id);
+        $shippingCharge = ShippingCharge::find($id);
         $shippingCharge->update($data);
     }
 

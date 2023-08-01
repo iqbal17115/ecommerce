@@ -12,7 +12,8 @@ class ShippingCharge extends Model
     protected $fillable = [
         'shipping_method_id',
         'shipping_class',
-        'charge',
+        'charge_1',
+        'charge_2',
         'min_quantity',
         'max_quantity',
         'min_amount',
