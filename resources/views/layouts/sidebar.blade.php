@@ -129,7 +129,9 @@
                            <span>Shipping</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="{{ route('shipping_charge.index') }}">Shipping & Delivery</a></li>
+                           <li><a href="{{ route('shipping_charge.index') }}">Shipping Charge</a></li>
+                           <li><a href="{{ route('shipping_methods.index') }}">Manage</a></li>
+                           <li><a href="{{ route('shipping_method_setting.index') }}">Setting</a></li>
                        </ul>
                    </li>
 

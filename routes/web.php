@@ -5,7 +5,6 @@ use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\ProductDetailController;
-use App\Http\Controllers\FrontEnt\LoginController;
 use App\Http\Controllers\Backend\Product\UnitController;
 use App\Http\Controllers\Backend\Product\VariantController;
 use App\Http\Controllers\Backend\Product\BrandController;
@@ -16,6 +15,7 @@ use App\Http\Controllers\Backend\Product\ConditionController;
 use App\Http\Controllers\Backend\Product\ProductFeatureController;
 use App\Http\Controllers\Backend\Seo\SeoPageController;
 use App\Http\Controllers\Backend\Shipping\ShippingChargeController;
+use App\Http\Controllers\Backend\Shipping\ShippingMethodController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
@@ -121,6 +121,15 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('/shipping-charge/{id}/edit', 'edit')->name('shipping_charge.edit');
         Route::put('/shipping-charge/{id}', 'update')->name('shipping_charge.update');
         Route::delete('/shipping-charge/{id}', 'destroy')->name('shipping_charge.destroy');
+    });
+
+    // Shipping Method
+    Route::controller(ShippingMethodController::class)->group(function () {
+        Route::get('/shipping_methods', 'index')->name('shipping_methods.index');
+        Route::patch('/shipping_methods/{shippingMethod}', 'update')->name('shipping_methods.update');
+        Route::get('/shipping_method_setting', 'setting')->name('shipping_method_setting.index');
+        Route::patch('/shipping_methods/{shippingMethod}/update_status', 'updateStatus')->name('shipping_methods.update_status');
+
     });
 
     // SeoPage

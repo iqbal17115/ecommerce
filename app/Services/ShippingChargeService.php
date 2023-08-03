@@ -26,7 +26,7 @@ class ShippingChargeService
         }
 
         if (!empty($shippingMethod)) {
-                $query->where('shipping_method_id', $shippingMethod);
+            $query->where('shipping_method_id', $shippingMethod);
         }
         return $query->paginate($per_page);
     }
@@ -36,8 +36,8 @@ class ShippingChargeService
         $dimensionalWeight = ($this->convertLengthTo($length, 'm', 'cm') * $this->convertLengthTo($width, 'm', 'cm') * $this->convertLengthTo($height, 'm', 'cm')) / 5000;
         $dimensionalWeight = $this->convertWeightTo($dimensionalWeight, 'kg', 'gm');
 
-        if($dimensionalWeightFactor > $dimensionalWeight) {
-           $dimensionalWeight = $dimensionalWeightFactor;
+        if ($dimensionalWeightFactor > $dimensionalWeight) {
+            $dimensionalWeight = $dimensionalWeightFactor;
         }
 
         return $dimensionalWeight;
@@ -76,13 +76,29 @@ class ShippingChargeService
         // For demonstration purposes, I'll return a fixed value of $10 for the shipping charge.
         return 10.0;
     }
+    public function getShippingMethodByName($name)
+    {
+        return ShippingMethod::withName($name)->whereIsActive(1)->first();
+    }
     public function calculateShippingCharge()
     {
         $products = session('cart');
         $totalShippingCharge = 0;
+        $freeShippingMethod = $this->getShippingMethodByName('Free');
+        $cashOnDelivery = $this->getShippingMethodByName('Cash On Delivery');
+        // Map the cart items to their subtotals
+        if ($freeShippingMethod) {
+            $subtotals = collect($products)->map(function ($productData, $productId) {
+                $product = Product::find($productId);
+                $quantity = $productData['quantity'];
+                return $product->sale_price * $quantity;
+            });
+            if ($subtotals && $subtotals->sum() >= $freeShippingMethod->value) {
+                return response()->json(['charge' => 0]);
+            }
+        }
         $shippingMethodId = 'ee1f0de6-223e-11ee-aaf7-5811220534bb';
         $inside = Auth::user()?->Contact?->Division?->id == 6 ? true : false;
-
         foreach ($products as $productId => $productData) {
             $product = Product::find($productId);
             $quantity = $productData['quantity'];
@@ -115,10 +131,10 @@ class ShippingChargeService
             // }
             // Calculate regular shipping charges
             $shipping_charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
-            ->where('shipping_class', $matchingClass['name'])
-            ->where('min_quantity', '<=', $quantity)
-            ->where('max_quantity', '>=', $quantity)
-            ->first();
+                ->where('shipping_class', $matchingClass['name'])
+                ->where('min_quantity', '<=', $quantity)
+                ->where('max_quantity', '>=', $quantity)
+                ->first();
 
             if ($shipping_charge) {
                 $totalShippingCharge += $inside == true ? $shipping_charge->charge_1 : $shipping_charge->charge_2;
@@ -130,7 +146,15 @@ class ShippingChargeService
             }
 
         }
-        return response()->json(['charge' => $totalShippingCharge]);
+        if ($cashOnDelivery && $cashOnDelivery->type == 'percent') {
+            // If the type is 'percent', calculate the percentage of $totalShippingCharge and add it to the shipping charge
+            $percentage = $cashOnDelivery->value / 100;
+            $totalShippingCharge += $totalShippingCharge * $percentage;
+        } elseif ($cashOnDelivery && $cashOnDelivery->type == 'amount') {
+            // If the type is 'amount', simply add the value to the shipping charge
+            $totalShippingCharge += $cashOnDelivery->value;
+        }
+        return response()->json(['charge' => ceil($totalShippingCharge)]);
     }
 
     public function getAllShippingMethods()

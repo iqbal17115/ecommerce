@@ -17,6 +17,9 @@ class CreateShippingMethodsTable extends Migration
         Schema::create('shipping_methods', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('name');
+            $table->enum('type', ['percent', 'amount'])->nullable();
+            $table->double('value', 10, 2)->nullable();
+            $table->boolean('is_active')->nullable()->default(0);
             $table->timestamps();
         });
     }
