@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Ecommerce;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\ContactInfo\Contact;
 use App\Models\Backend\Product\Product;
-use App\Models\Backend\WebSetting\ShippingCharge;
 use App\Models\Ecommerce\Setting\District;
 use Illuminate\Http\Request;
 use App\Models\Ecommerce\Setting\Division;
@@ -17,14 +16,26 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
+    public function showOrderConfirmation(Request $request)
+    {
+        // Retrieve the confirmed order data from the session
+        $confirmedOrder = Session::get('confirmed_order');
+
+        // Clear the order data from the session after retrieving it
+        // Session::forget('confirmed_order');
+
+        // Pass the order data to the view
+        return view('ecommerce.order_confirmation', compact('confirmedOrder'));
+    }
     public function confirmOrder(Request $request)
     {
         DB::transaction(function () use ($request) {
             $total = 0;
-            if(!session('cart')) {
+            if (!session('cart')) {
                 return Redirect::back();
             }
             foreach (session('cart') as $id => $details) {
@@ -55,7 +66,7 @@ class CheckoutController extends Controller
                 $Order->save();
 
                 // Add To Order Details
-                foreach (session('cart') as $key=>$OrderProductDetail) {
+                foreach (session('cart') as $key => $OrderProductDetail) {
                     // $OrderProductDetails = json_decode($OrderProductDetail->data);
                     $ProductQuery = Product::find($key);
 
@@ -74,10 +85,11 @@ class CheckoutController extends Controller
                 //   Delete Add To Cart
                 $request->session()->forget('cart');
 
-
+                $request->session()->put('confirmed_order', $Order);
             }
         });
-        return Redirect::back();
+
+        return redirect()->route('order_confirmation');
     }
     public function getUnion(Request $request)
     {

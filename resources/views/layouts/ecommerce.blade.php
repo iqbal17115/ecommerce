@@ -56,7 +56,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $company_info->icon) }}">
     @endif
     @include('layouts.parts.css-links')
-
+    @stack('css')
 </head>
 
 <body>
