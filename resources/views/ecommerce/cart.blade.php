@@ -20,6 +20,9 @@
                         <table class="table table-cart">
                             <thead>
                                 <tr>
+                                    <th class="checkbox-col">
+                                        <input type="checkbox" id="selectAllProducts">
+                                    </th>
                                     <th class="thumbnail-col"></th>
                                     <th class="product-col">Product</th>
                                     <th class="price-col">Price</th>
@@ -33,6 +36,9 @@
                                     @foreach (session('cart') as $id => $details)
                                         @php $total += $details['sale_price'] * $details['quantity'] @endphp
                                         <tr class="product-row cart-{{ $id }}" data-id="{{ $id }}">
+                                            <td class="checkbox-col">
+                                                <input type="checkbox" class="product-checkbox">
+                                            </td>
                                             <td>
                                                 <figure class="product-image-container">
                                                     <a href="javascript:void(0);" class="product-image">
@@ -136,6 +142,23 @@
                                         <span>{{ $currency->icon }} <span class="shipping_amount"></span></span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="float-left">
+                                            <div class="cart-discount mb-0">
+                                                <form action="#">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            placeholder="Coupon Code" required>
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-sm" type="submit">Apply Coupon</button>
+                                                        </div>
+                                                    </div><!-- End .input-group -->
+                                                </form>
+                                            </div>
+                                        </div><!-- End .float-left -->
+                                    </td>
+                                </tr>
                             </tbody>
 
                             <tfoot>
@@ -212,5 +235,6 @@
     </script>
 @endsection
 @push('scripts')
+<script src="{{ asset('backend_js/cart.js') }}"></script>
 <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
 @endpush
