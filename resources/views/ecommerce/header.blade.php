@@ -270,27 +270,8 @@ My
 
                                 <table class="table table-totals">
                                     <tbody>
-                                        <tr>
-                                            <td>Subtotal</td>
-                                            <td>{{ $currency->icon }} <span class="cart_total_price">{{ $total }}</span></td>
-                                        </tr>
-                                        <tr class="shipping-total">
-                                            <td>
-                                                <h4>Shipping</h4>
-                                            </td>
 
-                                            <td class="shipping-col">
-                                                <span>{{ $currency->icon }} <span class="shipping_amount"></span></span>
-                                            </td>
-                                        </tr>
                                     </tbody>
-
-                                    <tfoot>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>{{ $currency->icon }} <span class="total-price">0.00</span></td>
-                                        </tr>
-                                    </tfoot>
                                 </table>
 
                                 <div class="dropdown-cart-action">

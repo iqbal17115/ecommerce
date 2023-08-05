@@ -442,5 +442,4 @@
             }
         };
     </script>
-    <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
 @endpush

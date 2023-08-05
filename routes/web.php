@@ -50,6 +50,8 @@ Route::controller(ReviewController::class)->group(function () {
 });
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
+Route::post('/update-product-status',[CartController::class, 'updateProductStatus'])->name('update-product-status');
+
 Route::get('/', function () {
     return view('auth.login');
 });

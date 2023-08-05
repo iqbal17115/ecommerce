@@ -3,11 +3,24 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
-use App\Models\Backend\Product\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function updateProductStatus(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $status = $request->input('status');
+
+        $cart = session()->get('cart', []);
+        if (isset($cart[$product_id])) {
+            $cart[$product_id]['status'] = $status;
+        }
+        session()->put('cart', $cart);
+
+        return response()->json(['message' => 'Product status updated successfully!']);
+    }
 
     public function decreaseQty(Request $request) {
         $cart = session()->get('cart', []);
@@ -48,7 +61,8 @@ class CartController extends Controller
                 "quantity" => 1,
                 "your_price" => $request->your_price,
                 "sale_price" => $request->sale_price,
-                "image" => $request->image
+                "image" => $request->image,
+                "status" => 0
             ];
             $new_product = array(
                 "id" => $request->id,
@@ -56,7 +70,8 @@ class CartController extends Controller
                 "quantity" => 1,
                 "your_price" => $request->your_price,
                 "sale_price" => $request->sale_price,
-                "image" => $request->image
+                "image" => $request->image,
+                "status" => 0,
             );
         }
 
@@ -67,6 +82,8 @@ class CartController extends Controller
 
     public function index()
     {
-        return view('ecommerce.cart');
+        $cart_products = session('cart');
+        $estimatedDeliveryDate = Carbon::today()->addDay()->format('d F');
+        return view('ecommerce.cart', compact('cart_products', 'estimatedDeliveryDate'));
     }
 }

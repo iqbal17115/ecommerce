@@ -2,17 +2,6 @@
 @section('content')
     <main class="main">
         <div class="container">
-            <ul class="checkout-progress-bar d-flex justify-content-center flex-wrap">
-                <li class="active">
-                    <a href="{{ route('cart') }}">Shopping Cart</a>
-                </li>
-                <li>
-                    <a href="{{ route('checkout') }}">Checkout</a>
-                </li>
-                <li class="disabled">
-                    <a href="{{ route('cart') }}">Order Complete</a>
-                </li>
-            </ul>
 
             <div class="row">
                 <div class="col-lg-8">
@@ -23,21 +12,26 @@
                                     <th class="checkbox-col">
                                         <input type="checkbox" id="selectAllProducts">
                                     </th>
-                                    <th class="thumbnail-col"></th>
-                                    <th class="product-col">Product</th>
-                                    <th class="price-col">Price</th>
-                                    <th class="qty-col">Quantity</th>
-                                    <th class="text-right">Subtotal</th>
+                                    <td class="text-right" colspan="5" style="text-transform: capitalize;">
+                                        <span class="text-dark">Standard, Estimate Delivery</span> <span
+                                            style="color: #ff6600; font-weight: bold;">{{ $estimatedDeliveryDate }}</span>
+                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $total = 0 @endphp
-                                @if (session('cart'))
-                                    @foreach (session('cart') as $id => $details)
-                                        @php $total += $details['sale_price'] * $details['quantity'] @endphp
+                                @if ($cart_products)
+                                    @foreach ($cart_products as $id => $details)
+                                        @php
+                                        print_r($details);
+                                            $total += $details['status'] == 1? $details['sale_price'] * $details['quantity'] : 0;
+                                        @endphp
                                         <tr class="product-row cart-{{ $id }}" data-id="{{ $id }}">
                                             <td class="checkbox-col">
-                                                <input type="checkbox" class="product-checkbox">
+                                                <input type="checkbox" class="product-checkbox"
+                                                    data-product-id="{{ $id }}"
+                                                    {{ $details['status'] == 1? 'checked' : '' }}
+                                                    data-product-status="{{ $details['status'] }}">
                                             </td>
                                             <td>
                                                 <figure class="product-image-container">
@@ -65,7 +59,7 @@
                                                 </div><!-- End .product-single-qty -->
                                             </td>
                                             <td class="text-right"><span
-                                                    class="subtotal-price subtotal-price-{{ $id }}">{{ $currency->icon }}{{ $details['quantity'] * $details['sale_price'] }}</span>
+                                                    class="subtotal-price subtotal-price-{{ $id }}">{{ $details['quantity'] * $details['sale_price'] }}</span>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -85,7 +79,8 @@
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td>{{ $currency->icon }} <span class="cart_total_price">{{ $total }}</span></td>
+                                    <td>{{ $currency->icon }} <span class="cart_total_price">{{ $total }}</span>
+                                    </td>
                                 </tr>
 
                                 <tr>
@@ -138,7 +133,7 @@
                             <tfoot>
                                 <tr>
                                     <td>Total</td>
-                                    <td>{{ $currency->icon }} <span class="total-price">0.00</span></td>
+                                    <td>{{ $currency->icon }} <span class="total-price"></span></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -206,9 +201,11 @@
                 observer.observe(image);
             }
         });
+
     </script>
 @endsection
 @push('scripts')
 <script src="{{ asset('backend_js/cart.js') }}"></script>
-<script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
+
+    <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
 @endpush
