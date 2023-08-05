@@ -23,7 +23,6 @@
                                 @if ($cart_products)
                                     @foreach ($cart_products as $id => $details)
                                         @php
-                                        print_r($details);
                                             $total += $details['status'] == 1? $details['sale_price'] * $details['quantity'] : 0;
                                         @endphp
                                         <tr class="product-row cart-{{ $id }}" data-id="{{ $id }}">
