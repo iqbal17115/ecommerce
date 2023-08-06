@@ -16,7 +16,7 @@
         @forelse ($shippingCharges as $shippingCharge)
             <tr>
                 <td>{{ $i++ }}</td>
-                <td>{{ $shippingCharge->shippingMethod->name }}</td>
+                <td>{{ $shippingCharge?->shippingMethod?->name }}</td>
                 <td>{{ $shippingCharge->shipping_class }}</td>
                 <td>{{ $shippingCharge->charge_1 }}-{{ $shippingCharge->charge_2 }}</td>
                 <td>{{ $shippingCharge->min_quantity }}-{{ $shippingCharge->max_quantity }}</td>
