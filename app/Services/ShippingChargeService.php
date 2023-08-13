@@ -82,7 +82,13 @@ class ShippingChargeService
     }
     public function calculateShippingCharge()
     {
-        $products = session('cart');
+        $allProducts = session('cart');
+        $products = [];
+
+        $products = array_filter($allProducts, function ($details) {
+            return $details['status'] == 1;
+        });
+
         $totalShippingCharge = 0;
         $freeShippingMethod = $this->getShippingMethodByName('Free');
         $cashOnDelivery = $this->getShippingMethodByName('Cash On Delivery');

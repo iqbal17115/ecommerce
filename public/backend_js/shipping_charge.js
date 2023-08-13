@@ -13,8 +13,9 @@ function calculateShippingCharges() {
             console.log(response.charge);
             // Set shipping charge
             $(".shipping_amount").text(response.charge);
-            var totalAmount = parseFloat($(".cart_total_price:first").text()) + response.charge;
-            $(".total-price").text(totalAmount);
+            updateTotalPrice(response.charge);
+            // var totalAmount = parseFloat($(".cart_total_price:first").text()) + response.charge;
+            // $(".total-price").text(totalAmount);
         },
         error: function(xhr, status, error) {
             // Handle AJAX error, if any

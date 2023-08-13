@@ -19,17 +19,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $total = 0 @endphp
+                                @php
+                                    $total = 0;
+                                    $allStatus1 = true;
+                                @endphp
                                 @if ($cart_products)
                                     @foreach ($cart_products as $id => $details)
                                         @php
-                                            $total += $details['status'] == 1? $details['sale_price'] * $details['quantity'] : 0;
+                                            $total += $details['status'] == 1 ? $details['sale_price'] * $details['quantity'] : 0;
+                                            if ($details['status'] != 1) {
+                                                $allStatus1 = false;
+                                            }
                                         @endphp
+                                        {{-- @php $total += $details['sale_price'] * $details['quantity'] @endphp --}}
+
                                         <tr class="product-row cart-{{ $id }}" data-id="{{ $id }}">
                                             <td class="checkbox-col">
                                                 <input type="checkbox" class="product-checkbox"
                                                     data-product-id="{{ $id }}"
-                                                    {{ $details['status'] == 1? 'checked' : '' }}
+                                                    {{ $details['status'] == 1 ? 'checked' : '' }}
                                                     data-product-status="{{ $details['status'] }}">
                                             </td>
                                             <td>
@@ -151,7 +159,6 @@
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
-    @include('ecommerce.cart-js')
     @include('ecommerce.sidebar-js')
 
     <script>
@@ -200,11 +207,13 @@
                 observer.observe(image);
             }
         });
-
     </script>
 @endsection
 @push('scripts')
-<script src="{{ asset('backend_js/cart.js') }}"></script>
-
+    <script src="{{ asset('backend_js/cart.js') }}"></script>
     <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
+    <script>
+        // Check or uncheck the "selectAllProducts" checkbox on page load
+        $('#selectAllProducts').prop('checked', {{ $allStatus1 ? 'true' : 'false' }});
+    </script>
 @endpush

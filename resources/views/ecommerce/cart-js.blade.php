@@ -39,6 +39,7 @@ $(document).ready(function() {
         var ele = $(this);
         id = ele.parents("tr").attr("data-id");
         var quantity = $(".product-quantity-" + id).val();
+
         // ajax
         $.ajax({
             url: "increase-product-qty",

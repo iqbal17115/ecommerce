@@ -39,7 +39,7 @@ $(document).ready(function () {
                 },
                 success: function (response) {
                     console.log('Product status updated successfully!');
-                    updateTotalPrice();
+                    calculateShippingCharges();
                 },
                 error: function (xhr) {
                     console.log('Error updating product status.');
@@ -72,7 +72,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log('Product status updated successfully!');
-                updateTotalPrice();
+                calculateShippingCharges();
             },
             error: function (xhr) {
                 console.log('Error updating product status.');
@@ -81,15 +81,15 @@ $(document).ready(function () {
     });
 });
 
-function updateTotalPrice() {
+function updateTotalPrice(shipping_charge) {
     var total = 0;
     $('.product-checkbox:checked').each(function () {
         var subtotal = parseFloat($(this).closest('tr').find('.subtotal-price').text().replace('{{ $currency->icon }}', ''));
         total += subtotal;
     });
 
-    $('.cart_total_price').text(total.toFixed(2)); // Assuming you want to show two decimal places
-    var shippingAmount = parseFloat($('.shipping_amount').text());
+    $('.cart_total_price').text(total.toFixed(0)); // Assuming you want to show two decimal places
+    var shippingAmount = shipping_charge;
     $('.total-price').text(total + shippingAmount); // Assuming you want to show two decimal places
 }
 
