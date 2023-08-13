@@ -65,7 +65,6 @@ $(document).ready(function() {
     // Get District By Division
     $("body").on("change", "#division", function(e) {
         division_id = $(this).val();
-
         // Ajax
         $.ajax({
             url: "get-district",
@@ -80,14 +79,17 @@ $(document).ready(function() {
                 district += '<option value="" selected="selected"></option>';
                 Object.entries(data['district']).forEach(([key, value]) => {
                     dis_selected = '';
+
                     if(dis_value == value['id']) {
+
                         dis_selected = 'selected';
                     }
                     district += '<option '+dis_selected+' value='+value['id']+'>'+value['name']+'</option>';
                 });
-                calculateShippingCharges();
                 $("#district").html(district);
                 $('#district').trigger('change');
+                calculateShippingCharges();
+
             },
             error: function(err) {
                 var error = err.responseJSON;
