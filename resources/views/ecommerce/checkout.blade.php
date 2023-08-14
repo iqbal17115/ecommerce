@@ -45,7 +45,7 @@
                                             <h6 class="mb-0">Deliver to:</h6>
                                             <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
                                                 data-target="#shippingModal">
-                                                Change
+                                                <i class="fas fa-plus-circle"></i> Shipping Address
                                             </button>
                                         </div>
                                         <div class="row">
@@ -54,17 +54,17 @@
                                             <div class="col-md-8">
                                                 <p class="shipping-address">
                                                     <span
-                                                        class="shipping-name text-dark">{{ Auth::user()->name }}</span><br>
+                                                        class="shipping-name text-dark">{{ Auth::user()?->name }}</span><br>
                                                     <span
-                                                        class="shipping-info text-dark">{{ Auth::user()->Contact->shipping_address }}</span><br>
+                                                        class="shipping-info text-dark">{{ Auth::user()?->Contact?->shipping_address }}</span><br>
                                                     <span
-                                                        class="shipping-info text-dark">{{ Auth::user()->Contact->division->name }}-
-                                                        {{ Auth::user()->Contact->district->name }}-
-                                                        {{ Auth::user()->Contact->upazila->name }}-
-                                                        {{ Auth::user()->Contact->union->name }}</span><br>
+                                                        class="shipping-info text-dark">{{ Auth::user()?->Contact?->division?->name }}-
+                                                        {{ Auth::user()?->Contact?->district?->name }}-
+                                                        {{ Auth::user()?->Contact?->upazila?->name }}-
+                                                        {{ Auth::user()?->Contact?->union?->name }}</span><br>
                                                     <span
-                                                        class="shipping-info text-dark">{{ Auth::user()->Contact->mobile }}</span><br>
-                                                    <span class="shipping-email text-dark">{{ Auth::user()->email }}</span>
+                                                        class="shipping-info text-dark">{{ Auth::user()?->Contact->mobile }}</span><br>
+                                                    <span class="shipping-email text-dark">{{ Auth::user()?->email }}</span>
                                                 </p>
                                                 <p class="text-dark" style="font-size: 12px;">
                                                     Collect your parcel from the nearest Aladdinne Pick-up
@@ -204,11 +204,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('confirm_order') }}" method="POST" id="shipping-address-form">
+                <form action="{{ route('save_shipping_address') }}" method="POST" id="shipping-address-add-form">
+                    <div class="modal-body" style="height: 100%;">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="form-group mb-1 pb-2">
+                                    <label>Street address <abbr class="required" title="required">*</abbr></label>
+                                    <input type="text" name="shipping_address"
+                                        @if (Auth::user()) value="{{ Auth::user()->Contact->shipping_address }}" @endif
+                                        class="form-control" placeholder="House number and street name" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group mb-1 pb-2">
                                     <label>Name <abbr class="required" title="required">*</abbr></label>
                                     <input type="text" name="shipping_contact_no"
@@ -216,7 +224,7 @@
                                         class="form-control" placeholder="Name" required />
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group mb-1 pb-2">
                                     <label>Contact No. <abbr class="required" title="required">*</abbr></label>
                                     <input type="text" name="shipping_contact_no"
@@ -261,23 +269,13 @@
                                     </select>
                                 </div>
                             </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-group mb-1 pb-2">
-                                    <label>Street address <abbr class="required" title="required">*</abbr></label>
-                                    <input type="text" name="shipping_address"
-                                        @if (Auth::user()) value="{{ Auth::user()->Contact->shipping_address }}" @endif
-                                        class="form-control" placeholder="House number and street name" required />
-                                </div>
-                            </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveShippingChanges">Save Changes</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -334,11 +332,33 @@
                 observer.observe(image);
             }
         });
+
     </script>
 @endsection
 @push('scripts')
-
     @include('ecommerce.checkout-js')
-     <script src="{{ asset('backend_js/cart.js') }}"></script>
+    <script src="{{ asset('backend_js/cart.js') }}"></script>
     <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
+    <script>
+$(document).ready(function() {
+            $("#shipping-address-add-form").submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                var formData = $(this).serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('save_shipping_address') }}",
+                    data: formData,
+                    success: function(response) {
+                        // Handle success response here
+                        window.location.reload();
+                    },
+                    error: function(error) {
+                        // Handle error response here
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
 @endpush
