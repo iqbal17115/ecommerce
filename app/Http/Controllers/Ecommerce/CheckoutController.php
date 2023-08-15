@@ -127,9 +127,16 @@ class CheckoutController extends Controller
     public function index()
     {
         $divisions = Division::get();
-        $products = array_filter(session('cart'), function ($details) {
-            return $details['status'] == 1;
-        });
+        if (!is_null(session('cart'))) {
+            $products = array_filter(session('cart'), function ($details) {
+                return $details['status'] == 1;
+            });
+        } else {
+            // Handle the case where session('cart') is null or not set
+            // You might want to set $products to an empty array or handle it accordingly
+            $products = [];
+        }
+       
         return view('ecommerce.checkout', compact('divisions', 'products'));
     }
 }
