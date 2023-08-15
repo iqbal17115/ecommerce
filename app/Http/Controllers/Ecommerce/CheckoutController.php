@@ -20,19 +20,20 @@ use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
-    public function addShippingAddress(Request $request) {
-       //    Add Customer
-       $Query = Contact::whereUserId(Auth::user()->id)->first();
-       $Query->type = 'Customer';
-       $Query->division_id = $request->division_id;
-       $Query->district_id = $request->district_id;
-       $Query->upazilla_id = $request->upazilla_id;
-       $Query->union_id = $request->union_id;
-       $Query->shipping_address = $request->shipping_address;
-       $Query->mobile = $request->shipping_contact_no;
-       $Query->save();
+    public function addShippingAddress(Request $request)
+    {
+        //    Add Customer
+        $Query = Contact::whereUserId(Auth::user()->id)->first();
+        $Query->type = 'Customer';
+        $Query->division_id = $request->division_id;
+        $Query->district_id = $request->district_id;
+        $Query->upazilla_id = $request->upazilla_id;
+        $Query->union_id = $request->union_id;
+        $Query->shipping_address = $request->shipping_address;
+        $Query->mobile = $request->shipping_contact_no;
+        $Query->save();
 
-       return response()->json(['status' => 'success', 'message' => 'Shipping address saved successfully']);
+        return response()->json(['status' => 'success', 'message' => 'Shipping address saved successfully']);
     }
     public function showOrderConfirmation(Request $request)
     {

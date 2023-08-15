@@ -114,6 +114,7 @@
                 </div>
                 <!-- End .col-lg-4 -->
                 {{-- Start Show Products --}}
+                @if ($products)
                 <div class="card p-4">
                     <div class="row">
                         <div class="col-md-12">
@@ -205,6 +206,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 {{-- End Show Products --}}
             </div>
             <!-- End .row -->

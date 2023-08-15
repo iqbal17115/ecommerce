@@ -7,17 +7,19 @@
                 <div class="col-lg-8">
                     <div class="cart-table-container">
                         <table class="table table-cart">
-                            <thead>
-                                <tr>
-                                    <th class="checkbox-col">
-                                        <input type="checkbox" id="selectAllProducts">
-                                    </th>
-                                    <td class="text-right" colspan="5" style="text-transform: capitalize;">
-                                        <span class="text-dark">Standard, Estimate Delivery</span> <span
-                                            style="color: #ff6600; font-weight: bold;">{{ $estimatedDeliveryDate }}</span>
-                                    </td>
-                                </tr>
-                            </thead>
+                            @if ($cart_products)
+                                <thead>
+                                    <tr>
+                                        <th class="checkbox-col">
+                                            <input type="checkbox" id="selectAllProducts">
+                                        </th>
+                                        <td class="text-right" colspan="5" style="text-transform: capitalize;">
+                                            <span class="text-dark">Standard, Estimate Delivery</span> <span
+                                                style="color: #ff6600; font-weight: bold;">{{ $estimatedDeliveryDate }}</span>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            @endif
                             <tbody>
                                 @php
                                     $total = 0;
