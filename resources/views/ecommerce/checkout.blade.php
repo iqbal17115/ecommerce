@@ -107,7 +107,7 @@
                         </table>
 
                         <button type="submit" class="btn btn-dark btn-place-order" form="shipping-address-form">
-                            Place_order
+                            Place Order
                         </button>
                     </div>
                     <!-- End .cart-summary -->
@@ -115,7 +115,7 @@
                 <!-- End .col-lg-4 -->
                 {{-- Start Show Products --}}
                 @if ($products)
-                <div class="card p-4">
+                <div class="card p-4 mx-3" style="width: 100%;">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
@@ -182,24 +182,21 @@
                                 <div class="col-md-4">
                                     <div class="delivery-options">
                                         <h4>Choose a delivery option:</h4>
+
                                         <div class="form-group form-group-custom-control">
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" name="delivery_option" id="one-day-delivery">
-                                                <label class="custom-control-label" for="one-day-delivery">One-Day Delivery with — Get it TOMORROW, {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-custom-control">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" name="delivery_option" id="free-delivery">
-                                                <label class="custom-control-label" for="free-delivery">Free Delivery on this order – get it {{ \Carbon\Carbon::now()->addDays(2)->format('l d F') }}</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-custom-control">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" name="delivery_option" id="express-delivery">
-                                                <label class="custom-control-label" for="express-delivery">Taka 100.00 Express Delivery – get it Tomorrow, {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
-                                            </div>
-                                        </div>
+                                                <input type="radio" class="custom-control-input" name="radio" value="ee1f0de6-223e-11ee-aaf7-5811220534bb" checked>
+                                                <label class="custom-control-label">Standard Delivery — Estimate Delivery Date, {{ \Carbon\Carbon::now()->addDay(3)->format('d F') }}</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group form-group-custom-control mb-0">
+                                            <div class="custom-control custom-radio mb-0">
+                                                <input type="radio" name="radio" value="13eef465-31ed-11ee-be5c-5811220534bb" class="custom-control-input">
+                                                <label class="custom-control-label">Express Delivery – get it Tomorrow, {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-group -->
+
                                     </div>
                                 </div>
                             </div>
@@ -377,6 +374,12 @@
                         console.log(error);
                     }
                 });
+            });
+
+            // Shipping Method Checked
+            $(".custom-control-input").on('change', function(event) {
+              shipping_method_id = $(this).val();
+              calculateShippingCharges(shipping_method_id);
             });
         });
     </script>

@@ -277,7 +277,7 @@ My
                                 <div class="dropdown-cart-action">
                                     <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">Shopping
                                         Cart</a>
-                                    <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">Check Out</a>
+                                    {{-- <a href="{{ route('checkout') }}" class="btn btn-dark btn-block">Check Out</a> --}}
                                 </div>
                                 <!-- End .dropdown-cart-total -->
                             </div>

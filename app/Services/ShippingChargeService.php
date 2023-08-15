@@ -80,7 +80,7 @@ class ShippingChargeService
     {
         return ShippingMethod::withName($name)->whereIsActive(1)->first();
     }
-    public function calculateShippingCharge()
+    public function calculateShippingCharge($shipping_method_id = 'ee1f0de6-223e-11ee-aaf7-5811220534bb')
     {
         $allProducts = session('cart');
         $products = [];
@@ -109,7 +109,7 @@ class ShippingChargeService
                 return $product->sale_price * $quantity;
             })->sum();
         }
-        $shippingMethodId = 'ee1f0de6-223e-11ee-aaf7-5811220534bb';
+        $shippingMethodId = $shipping_method_id;
         $inside = Auth::user()?->Contact?->Division?->id == 6 ? true : false;
         foreach ($products as $productId => $productData) {
             $product = Product::find($productId);
@@ -137,10 +137,6 @@ class ShippingChargeService
                 $matchingClass['name'] = null;
             }
 
-            // If no matching class found, use the default class
-            // if (!$matchingClass) {
-            //     $matchingClass = $this->getDefaultClass();
-            // }
             // Calculate regular shipping charges
             $shipping_charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
                 ->where('shipping_class', $matchingClass['name'])
@@ -152,9 +148,6 @@ class ShippingChargeService
                 $totalShippingCharge += $inside == true ? $shipping_charge->charge_1 : $shipping_charge->charge_2;
             } else {
 
-                // dd($shippingMethodId, $quantity, $shipping_charge, $dimensionalWeight, $matchingClass['name']);
-                // Handle the case where no shipping charge is found for a product
-                // return response()->json(['error' => 'No shipping charge found for one or more products.']);
             }
 
         }

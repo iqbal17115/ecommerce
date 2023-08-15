@@ -92,25 +92,6 @@
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <td colspan="2" class="text-left">
-                                        <h4>Shipping</h4>
-
-                                        <div class="form-group form-group-custom-control">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" name="radio" checked>
-                                                <label class="custom-control-label">Local pickup</label>
-                                            </div><!-- End .custom-checkbox -->
-                                        </div><!-- End .form-group -->
-
-                                        <div class="form-group form-group-custom-control mb-0">
-                                            <div class="custom-control custom-radio mb-0">
-                                                <input type="radio" name="radio" class="custom-control-input">
-                                                <label class="custom-control-label">Flat rate</label>
-                                            </div><!-- End .custom-checkbox -->
-                                        </div><!-- End .form-group -->
-                                    </td>
-                                </tr>
                                 <tr class="shipping-total">
                                     <td>
                                         <h4>Shipping Carge</h4>

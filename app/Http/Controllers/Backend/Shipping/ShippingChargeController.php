@@ -20,8 +20,9 @@ class ShippingChargeController extends Controller
     public function managePage() {
         return view('backend.shipping.manage');
     }
-    public function calculateShippingCharge() {
-        $totalShippingCharge = $this->shippingChargeService->calculateShippingCharge();
+    public function calculateShippingCharge(Request $request) {
+        $shipping_method_id = $request->shipping_method_id;
+        $totalShippingCharge = $this->shippingChargeService->calculateShippingCharge($shipping_method_id);
         return response()->json(['charge' => $totalShippingCharge->getData()->charge, 'sub_total' => $totalShippingCharge->getData()->sub_total]);
     }
 
