@@ -84,7 +84,7 @@ class ShippingChargeService
     {
         $allProducts = session('cart');
         $products = [];
-
+        $sub_total = 0;
         $products = array_filter($allProducts, function ($details) {
             return $details['status'] == 1;
         });
@@ -94,14 +94,20 @@ class ShippingChargeService
         $cashOnDelivery = $this->getShippingMethodByName('Cash On Delivery');
         // Map the cart items to their subtotals
         if ($freeShippingMethod) {
-            $subtotals = collect($products)->map(function ($productData, $productId) {
+            $sub_total = collect($products)->map(function ($productData, $productId) {
                 $product = Product::find($productId);
                 $quantity = $productData['quantity'];
                 return $product->sale_price * $quantity;
             });
-            if ($subtotals && $subtotals->sum() >= $freeShippingMethod->value) {
+            if ($sub_total && $sub_total->sum() >= $freeShippingMethod->value) {
                 return response()->json(['charge' => 0]);
             }
+        } else {
+            $sub_total = collect($products)->map(function ($productData, $productId) {
+                $product = Product::find($productId);
+                $quantity = $productData['quantity'];
+                return $product->sale_price * $quantity;
+            })->sum();
         }
         $shippingMethodId = 'ee1f0de6-223e-11ee-aaf7-5811220534bb';
         $inside = Auth::user()?->Contact?->Division?->id == 6 ? true : false;
@@ -160,7 +166,10 @@ class ShippingChargeService
             // If the type is 'amount', simply add the value to the shipping charge
             $totalShippingCharge += $cashOnDelivery->value;
         }
-        return response()->json(['charge' => ceil($totalShippingCharge)]);
+        return response()->json([
+            'charge' => ceil($totalShippingCharge), // Rounded shipping charge
+            'sub_total' => $sub_total
+        ]);
     }
 
     public function getAllShippingMethods()

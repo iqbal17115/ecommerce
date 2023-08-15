@@ -81,15 +81,10 @@ $(document).ready(function () {
     });
 });
 
-function updateTotalPrice(shipping_charge) {
-    var total = 0;
-    $('.product-checkbox:checked').each(function () {
-        var subtotal = parseFloat($(this).closest('tr').find('.subtotal-price').text().replace('{{ $currency->icon }}', ''));
-        total += subtotal;
-    });
-    $('.cart_total_price').text(total.toFixed(0)); // Assuming you want to show two decimal places
-    var shippingAmount = shipping_charge;
-    $('.total-price').text(total + shippingAmount); // Assuming you want to show two decimal places
+function updateTotalPrice(sub_total, shipping_charge) {
+    $('.cart_total_price').text(sub_total.toFixed(0)); // Assuming you want to show two decimal places
+     $(".shipping_amount").text(shipping_charge);
+    $('.total-price').text(sub_total + shipping_charge); // Assuming you want to show two decimal places
 }
 
 function updateSubtotalPrice(productId, quantity, salePrice) {

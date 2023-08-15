@@ -126,6 +126,9 @@ class CheckoutController extends Controller
     public function index()
     {
         $divisions = Division::get();
-        return view('ecommerce.checkout', compact('divisions'));
+        $products = array_filter(session('cart'), function ($details) {
+            return $details['status'] == 1;
+        });
+        return view('ecommerce.checkout', compact('divisions', 'products'));
     }
 }

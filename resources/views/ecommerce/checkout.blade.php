@@ -2,17 +2,6 @@
 @section('content')
     <main class="main main-test">
         <div class="container checkout-container">
-            <ul class="checkout-progress-bar d-flex justify-content-center flex-wrap">
-                <li>
-                    <a href="{{ route('cart') }}">Shopping Cart</a>
-                </li>
-                <li class="active">
-                    <a href="checkout.html">Check Out</a>
-                </li>
-                <li class="disabled">
-                    <a href="#">Order Complete</a>
-                </li>
-            </ul>
 
             <div class="row">
 
@@ -64,7 +53,8 @@
                                                         {{ Auth::user()?->Contact?->union?->name }}</span><br>
                                                     <span
                                                         class="shipping-info text-dark">{{ Auth::user()?->Contact->mobile }}</span><br>
-                                                    <span class="shipping-email text-dark">{{ Auth::user()?->email }}</span>
+                                                    <span
+                                                        class="shipping-email text-dark">{{ Auth::user()?->email }}</span>
                                                 </p>
                                                 <p class="text-dark" style="font-size: 12px;">
                                                     Collect your parcel from the nearest Aladdinne Pick-up
@@ -84,76 +74,21 @@
 
                 <div class="col-lg-5">
                     <div class="order-summary">
-                        <h3>Your Order</h3>
+                        <h3>Order Summary</h3>
 
                         <table class="table table-mini-cart">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Product</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $total = 0;
-                                    $default_charge = 0;
-                                @endphp
-                                @if (session('cart'))
-                                    @foreach (session('cart') as $id => $details)
-                                        @php
-                                            $total += $details['sale_price'] * $details['quantity'];
-                                            $product = \App\Models\Backend\Product\Product::find($id);
-                                        @endphp
-
-                                        <tr>
-                                            <td class="product-col">
-                                                <h3 class="product-title">
-                                                    {{ $details['name'] }} ×
-                                                    <span class="product-qty">{{ $details['quantity'] }}</span>
-                                                </h3>
-                                            </td>
-                                            <td class="price-col">
-                                                <span>{{ $currency->icon }}{{ $details['quantity'] * $details['sale_price'] }}</span>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-
-                            </tbody>
                             <tfoot>
                                 <tr class="cart-subtotal">
                                     <td>
-                                        <h4>Subtotal</h4>
+                                        <h4>Subtotal({{ count($products) }} Item{{ count($products) > 1 ? 's' : '' }})
+                                        </h4>
                                     </td>
-                                    <td class="price-col">{{ $currency->icon }} <span
-                                            class="cart_total_price">{{ $total }}</span></td>
-                                </tr>
-                                <tr class="order-shipping">
-                                    <td class="text-left" colspan="2">
-                                        <h4 class="m-b-sm">Shipping</h4>
-
-                                        <div class="form-group form-group-custom-control">
-                                            <div class="custom-control custom-radio d-flex">
-                                                <input type="radio" class="custom-control-input" name="radio" checked />
-                                                <label class="custom-control-label">Local pickup</label>
-                                            </div>
-                                            <!-- End .custom-checkbox -->
-                                        </div>
-                                        <!-- End .form-group -->
-
-                                        <div class="form-group form-group-custom-control mb-0">
-                                            <div class="custom-control custom-radio d-flex mb-0">
-                                                <input type="radio" name="radio" class="custom-control-input">
-                                                <label class="custom-control-label">Flat Rate</label>
-                                            </div>
-                                            <!-- End .custom-checkbox -->
-                                        </div>
-                                        <!-- End .form-group -->
+                                    <td class="price-col">{{ $currency->icon }} <span class="cart_total_price">0</span>
                                     </td>
-
                                 </tr>
                                 <tr class="shipping-total">
                                     <td>
-                                        <h4>Shipping Carge</h4>
+                                        <h4>Shipping Fee</h4>
                                     </td>
 
                                     <td class="shipping-col">
@@ -162,24 +97,14 @@
                                 </tr>
                                 <tr class="order-total">
                                     <td>
-                                        <h4>Total</h4>
+                                        <h4>Total (VAT Inclusive if Applicable)</h4>
                                     </td>
                                     <td>
-                                        <b>{{ $currency->icon }}<span class="total-price">0.00</span></b>
+                                        <b>{{ $currency->icon }} <span class="total-price">0.00</span></b>
                                     </td>
                                 </tr>
                             </tfoot>
                         </table>
-
-                        <div class="payment-methods">
-                            <h4 class="">Payment Methods</h4>
-                            <div class="info-box with-icon p-0">
-                                <p>
-                                    Sorry, it seems that there are no available payment methods for your state. Please
-                                    contact us if you require assistance or wish to make alternate arrangements.
-                                </p>
-                            </div>
-                        </div>
 
                         <button type="submit" class="btn btn-dark btn-place-order" form="shipping-address-form">
                             Place_order
@@ -188,6 +113,99 @@
                     <!-- End .cart-summary -->
                 </div>
                 <!-- End .col-lg-4 -->
+                {{-- Start Show Products --}}
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="cart-table-container">
+                                        <div class="review-section">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="mb-0 text-dark">Standard Delivery Date: {{ \Carbon\Carbon::now()->addDays(1)->format('d M Y') }}</p>
+                                                    <p class="mb-0 text-dark">Items shipped from <strong>Aladdinne.com</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <table class="table table-cart">
+                                            <tbody>
+                                                @php
+                                                    $total = 0;
+                                                    $allStatus1 = true;
+                                                @endphp
+                                                @if ($products)
+                                                    @foreach ($products as $id => $details)
+                                                        <tr class="product-row cart-{{ $id }}"
+                                                            data-id="{{ $id }}">
+                                                            <td>
+                                                                <figure class="product-image-container">
+                                                                    <a href="javascript:void(0);" class="product-image">
+                                                                        <img src="{{ asset('storage/product_photo/' . $details['image']) }}"
+                                                                            alt="product">
+                                                                    </a>
+
+                                                                    <a href="javascript:void(0);"
+                                                                        class="btn-remove remove-from-cart icon-cancel"
+                                                                        title="Remove Product"></a>
+                                                                </figure>
+                                                            </td>
+                                                            <td class="product-col">
+                                                                <h5 class="product-title">
+                                                                    <a
+                                                                        href="javascript:void(0);">{{ $details['name'] }}</a>
+                                                                </h5>
+                                                            </td>
+                                                            <td>{{ $currency->icon }}{{ $details['sale_price'] }}</td>
+                                                            <td>
+                                                                <div class="product-single-qty">
+                                                                    <input value="{{ $details['quantity'] }}"
+                                                                        class="horizontal-quantity form-control product-quantity-{{ $id }}"
+                                                                        type="text">
+                                                                </div><!-- End .product-single-qty -->
+                                                            </td>
+                                                            <td class="text-right"><span
+                                                                    class="subtotal-price subtotal-price-{{ $id }}">{{ $details['quantity'] * $details['sale_price'] }}</span>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+
+                                            </tbody>
+
+                                        </table>
+                                    </div><!-- End .cart-table-container -->
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="delivery-options">
+                                        <h4>Choose a delivery option:</h4>
+                                        <div class="form-group form-group-custom-control">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" name="delivery_option" id="one-day-delivery">
+                                                <label class="custom-control-label" for="one-day-delivery">One-Day Delivery with — Get it TOMORROW, {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-custom-control">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" name="delivery_option" id="free-delivery">
+                                                <label class="custom-control-label" for="free-delivery">Free Delivery on this order – get it {{ \Carbon\Carbon::now()->addDays(2)->format('l d F') }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-custom-control">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" name="delivery_option" id="express-delivery">
+                                                <label class="custom-control-label" for="express-delivery">Taka 100.00 Express Delivery – get it Tomorrow, {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- End Show Products --}}
             </div>
             <!-- End .row -->
         </div>
@@ -332,15 +350,14 @@
                 observer.observe(image);
             }
         });
-
     </script>
 @endsection
 @push('scripts')
     @include('ecommerce.checkout-js')
-    <script src="{{ asset('backend_js/cart.js') }}"></script>
-    <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
+    <script src="{{ asset('backend_js/cart_charge_check.js') }}"></script>
+    <script src="{{ asset('backend_js/shipping_charge_checkout.js') }}"></script>
     <script>
-$(document).ready(function() {
+        $(document).ready(function() {
             $("#shipping-address-add-form").submit(function(event) {
                 event.preventDefault(); // Prevent the default form submission
 
