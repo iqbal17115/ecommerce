@@ -26,5 +26,3 @@ function calculateShippingCharges(shipping_method_id = '13eee98c-31ed-11ee-be5c-
         },
     });
 }
-// ggggggff
-calculateShippingCharges();

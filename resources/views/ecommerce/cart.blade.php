@@ -198,5 +198,6 @@
     <script>
         // Check or uncheck the "selectAllProducts" checkbox on page load
         $('#selectAllProducts').prop('checked', {{ $allStatus1 ? 'true' : 'false' }});
+        calculateShippingCharges();
     </script>
 @endpush
