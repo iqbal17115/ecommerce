@@ -80,7 +80,7 @@ class ShippingChargeService
     {
         return ShippingMethod::withName($name)->whereIsActive(1)->first();
     }
-    public function calculateShippingCharge($shipping_method_id = 'ee1f0de6-223e-11ee-aaf7-5811220534bb')
+    public function calculateShippingCharge($shipping_method_id = '13eee98c-31ed-11ee-be5c-5811220534bb')
     {
         $allProducts = session('cart');
         $products = [];

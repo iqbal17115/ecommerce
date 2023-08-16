@@ -261,7 +261,7 @@
                                             <div class="form-group form-group-custom-control">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" class="custom-control-input" name="radio"
-                                                        value="ee1f0de6-223e-11ee-aaf7-5811220534bb" checked>
+                                                        value="13eee98c-31ed-11ee-be5c-5811220534bb" checked>
                                                     <label class="custom-control-label">Standard Delivery — Estimate
                                                         Delivery Date,
                                                         {{ \Carbon\Carbon::now()->addDay(3)->format('d F') }}</label>
