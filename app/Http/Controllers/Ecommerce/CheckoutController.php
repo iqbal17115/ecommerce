@@ -57,21 +57,11 @@ class CheckoutController extends Controller
                 $total += $details['sale_price'] * $details['quantity'];
             }
             if (count(session('cart')) > 0) {
-                //    Add Customer
-                $Query = Contact::whereUserId(Auth::user()->id)->first();
-                $Query->type = 'Customer';
-                $Query->division_id = $request->division_id;
-                $Query->district_id = $request->district_id;
-                $Query->upazilla_id = $request->upazilla_id;
-                $Query->union_id = $request->union_id;
-                $Query->shipping_address = $request->shipping_address;
-                $Query->mobile = $request->shipping_contact_no;
-                $Query->save();
 
                 //    Add Order
                 $Order = new Order();
                 $Order->code = 'OC' . floor(time() - 999999999);
-                $Order->contact_id = $Query->id;
+                $Order->contact_id = Auth::user()->Contact->id;
                 $Order->order_date = Carbon::now();
                 $Order->total_amount = $total;
                 $Order->payable_amount = $total;
@@ -104,7 +94,8 @@ class CheckoutController extends Controller
             }
         });
 
-        return redirect()->route('order_confirmation');
+        return response()->json(['status' => 'success']);
+
     }
     public function getUnion(Request $request)
     {
@@ -136,7 +127,7 @@ class CheckoutController extends Controller
             // You might want to set $products to an empty array or handle it accordingly
             $products = [];
         }
-       
+
         return view('ecommerce.checkout', compact('divisions', 'products'));
     }
 }

@@ -1,5 +1,17 @@
 @extends('layouts.ecommerce')
 @section('content')
+    <style>
+        .payment-icon {
+            display: inline-block;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .payment-icon.active {
+            opacity: 1;
+        }
+    </style>
     <main class="main main-test">
         <div class="container checkout-container">
 
@@ -106,7 +118,7 @@
                             </tfoot>
                         </table>
 
-                        <button type="submit" class="btn btn-dark btn-place-order" form="shipping-address-form">
+                        <button type="submit" class="btn btn-dark btn-place-order" id="btn-place-order">
                             Place Order
                         </button>
                     </div>
@@ -115,94 +127,163 @@
                 <!-- End .col-lg-4 -->
                 {{-- Start Show Products --}}
                 @if ($products)
-                <div class="card p-4 mx-3" style="width: 100%;">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="cart-table-container">
-                                        <div class="review-section">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <p class="mb-0 text-dark">Standard Delivery Date: {{ \Carbon\Carbon::now()->addDays(1)->format('d M Y') }}</p>
-                                                    <p class="mb-0 text-dark">Items shipped from <strong>Aladdinne.com</strong></p>
+                    {{-- Start payment Method --}}
+                    <div class="card p-4 mx-3" style="width: 100%;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="cart-table-container">
+                                            <form action="{{ route('confirm_order') }}" method="POST" id="checkout-form">
+                                                @csrf
+                                                <!-- Other form fields -->
+                                                <div class="payment-methods">
+                                                    <h4>Select Payment Method</h4>
+                                                    <div class="payment-icons">
+                                                        <div class="row">
+                                                            <div class="col-md-1">
+                                                                <a href="javascript:void(0);" class="payment-icon"
+                                                                    data-payment="bkash">
+                                                                    <img style="height: 50px;"
+                                                                        src="{{ asset('payments/path_to_bkash_icon.png') }}"
+                                                                        alt="bKash">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <a href="javascript:void(0);" class="payment-icon"
+                                                                    data-payment="rocket">
+                                                                    <img style="height: 50px;"
+                                                                        src="{{ asset('payments/path_to_rocket_icon.png') }}"
+                                                                        alt="Rocket">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <a href="javascript:void(0);" class="payment-icon"
+                                                                    data-payment="nogod">
+                                                                    <img style="height: 50px;"
+                                                                        src="{{ asset('payments/path_to_nogod_icon.png') }}"
+                                                                        alt="Nogod">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <a href="javascript:void(0);" class="payment-icon"
+                                                                    data-payment="cod">
+                                                                    <img style="height: 50px;"
+                                                                        src="{{ asset('payments/path_to_cod_icon.png') }}"
+                                                                        alt="Cash on Delivery">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-
-                                        <table class="table table-cart">
-                                            <tbody>
-                                                @php
-                                                    $total = 0;
-                                                    $allStatus1 = true;
-                                                @endphp
-                                                @if ($products)
-                                                    @foreach ($products as $id => $details)
-                                                        <tr class="product-row cart-{{ $id }}"
-                                                            data-id="{{ $id }}">
-                                                            <td>
-                                                                <figure class="product-image-container">
-                                                                    <a href="javascript:void(0);" class="product-image">
-                                                                        <img src="{{ asset('storage/product_photo/' . $details['image']) }}"
-                                                                            alt="product">
-                                                                    </a>
-
-                                                                    <a href="javascript:void(0);"
-                                                                        class="btn-remove remove-from-cart icon-cancel"
-                                                                        title="Remove Product"></a>
-                                                                </figure>
-                                                            </td>
-                                                            <td class="product-col">
-                                                                <h5 class="product-title">
-                                                                    <a
-                                                                        href="javascript:void(0);">{{ $details['name'] }}</a>
-                                                                </h5>
-                                                            </td>
-                                                            <td>{{ $currency->icon }}{{ $details['sale_price'] }}</td>
-                                                            <td>
-                                                                <div class="product-single-qty">
-                                                                    <input value="{{ $details['quantity'] }}"
-                                                                        class="horizontal-quantity form-control product-quantity-{{ $id }}"
-                                                                        type="text">
-                                                                </div><!-- End .product-single-qty -->
-                                                            </td>
-                                                            <td class="text-right"><span
-                                                                    class="subtotal-price subtotal-price-{{ $id }}">{{ $details['quantity'] * $details['sale_price'] }}</span>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
-
-                                            </tbody>
-
-                                        </table>
-                                    </div><!-- End .cart-table-container -->
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="delivery-options">
-                                        <h4>Choose a delivery option:</h4>
-
-                                        <div class="form-group form-group-custom-control">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" name="radio" value="ee1f0de6-223e-11ee-aaf7-5811220534bb" checked>
-                                                <label class="custom-control-label">Standard Delivery — Estimate Delivery Date, {{ \Carbon\Carbon::now()->addDay(3)->format('d F') }}</label>
-                                            </div><!-- End .custom-checkbox -->
-                                        </div><!-- End .form-group -->
-
-                                        <div class="form-group form-group-custom-control mb-0">
-                                            <div class="custom-control custom-radio mb-0">
-                                                <input type="radio" name="radio" value="13eef465-31ed-11ee-be5c-5811220534bb" class="custom-control-input">
-                                                <label class="custom-control-label">Express Delivery – get it Tomorrow, {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
-                                            </div><!-- End .custom-checkbox -->
-                                        </div><!-- End .form-group -->
-
+                                                <input type="hidden" name="selected_payment" id="selected-payment"
+                                                    value="" required>
+                                            </form>
+                                        </div><!-- End .cart-table-container -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    {{-- End Payment Method --}}
+                    <div class="card p-4 mx-3" style="width: 100%;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="cart-table-container">
+                                            <div class="review-section">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <p class="mb-0 text-dark">Standard Delivery Date:
+                                                            {{ \Carbon\Carbon::now()->addDays(1)->format('d M Y') }}</p>
+                                                        <p class="mb-0 text-dark">Items shipped from
+                                                            <strong>Aladdinne.com</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <table class="table table-cart">
+                                                <tbody>
+                                                    @php
+                                                        $total = 0;
+                                                        $allStatus1 = true;
+                                                    @endphp
+                                                    @if ($products)
+                                                        @foreach ($products as $id => $details)
+                                                            <tr class="product-row cart-{{ $id }}"
+                                                                data-id="{{ $id }}">
+                                                                <td>
+                                                                    <figure class="product-image-container">
+                                                                        <a href="javascript:void(0);"
+                                                                            class="product-image">
+                                                                            <img src="{{ asset('storage/product_photo/' . $details['image']) }}"
+                                                                                alt="product">
+                                                                        </a>
+
+                                                                        <a href="javascript:void(0);"
+                                                                            class="btn-remove remove-from-cart icon-cancel"
+                                                                            title="Remove Product"></a>
+                                                                    </figure>
+                                                                </td>
+                                                                <td class="product-col">
+                                                                    <h5 class="product-title">
+                                                                        <a
+                                                                            href="javascript:void(0);">{{ $details['name'] }}</a>
+                                                                    </h5>
+                                                                </td>
+                                                                <td>{{ $currency->icon }}{{ $details['sale_price'] }}</td>
+                                                                <td>
+                                                                    <div class="product-single-qty">
+                                                                        <input value="{{ $details['quantity'] }}"
+                                                                            class="horizontal-quantity form-control product-quantity-{{ $id }}"
+                                                                            type="text">
+                                                                    </div><!-- End .product-single-qty -->
+                                                                </td>
+                                                                <td class="text-right"><span
+                                                                        class="subtotal-price subtotal-price-{{ $id }}">{{ $details['quantity'] * $details['sale_price'] }}</span>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+
+                                                </tbody>
+
+                                            </table>
+                                        </div><!-- End .cart-table-container -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="delivery-options">
+                                            <h4>Choose a delivery option:</h4>
+
+                                            <div class="form-group form-group-custom-control">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="custom-control-input" name="radio"
+                                                        value="ee1f0de6-223e-11ee-aaf7-5811220534bb" checked>
+                                                    <label class="custom-control-label">Standard Delivery — Estimate
+                                                        Delivery Date,
+                                                        {{ \Carbon\Carbon::now()->addDay(3)->format('d F') }}</label>
+                                                </div><!-- End .custom-checkbox -->
+                                            </div><!-- End .form-group -->
+
+                                            <div class="form-group form-group-custom-control mb-0">
+                                                <div class="custom-control custom-radio mb-0">
+                                                    <input type="radio" name="radio"
+                                                        value="13eef465-31ed-11ee-be5c-5811220534bb"
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label">Express Delivery – get it Tomorrow,
+                                                        {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
+                                                </div><!-- End .custom-checkbox -->
+                                            </div><!-- End .form-group -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endif
                 {{-- End Show Products --}}
             </div>
@@ -357,6 +438,77 @@
     <script src="{{ asset('backend_js/shipping_charge_checkout.js') }}"></script>
     <script>
         $(document).ready(function() {
+            $("#btn-place-order").click(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Validate save_shipping_address form
+                if ($("#shipping-address-add-form")[0].checkValidity()) {
+                    // If the save_shipping_address form is valid, submit it
+                    submitShippingAddressForm();
+                } else {
+                    // Show validation errors for save_shipping_address form
+                    $("#shipping-address-add-form").addClass('was-validated');
+                }
+            });
+
+            function submitShippingAddressForm() {
+                var shippingFormData = $("#shipping-address-add-form").serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('save_shipping_address') }}",
+                    data: shippingFormData,
+                    success: function(response) {
+                        // Handle success response here, e.g. show success message or continue to checkout form
+                        console.log(response);
+                        // Optionally, you can add your own success handling logic here
+                        submitCheckoutForm();
+                    },
+                    error: function(error) {
+                        // Handle error response here
+                        console.log(error);
+                    }
+                });
+            }
+
+            function submitCheckoutForm() {
+                // Validate checkout-form
+                if ($("#checkout-form")[0].checkValidity()) {
+                    var selectedPayment = $('.payment-icon.active').data('payment');
+                    var checkoutFormData = $("#checkout-form").serialize();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('confirm_order') }}",
+                        data: checkoutFormData + '&selected_payment=' + selectedPayment,
+                        success: function(response) {
+                            if (response.status === 'success') {
+                                window.location.href = "{{ route('order_confirmation') }}"; // Redirect to order_confirmation page
+                            }
+                        },
+                        error: function(error) {
+                            // Handle error response here
+                            console.log(error);
+                        }
+                    });
+                } else {
+                    // Show validation errors for checkout-form
+                    $("#checkout-form").addClass('was-validated');
+                }
+            }
+
+
+
+            $('.payment-icon').click(function(event) {
+                event.preventDefault();
+                $('.payment-icon').removeClass('active');
+                $(this).addClass('active');
+
+                var selectedPayment = $(this).data('payment');
+
+                $('#selected-payment').val(selectedPayment);
+            });
+
             $("#shipping-address-add-form").submit(function(event) {
                 event.preventDefault(); // Prevent the default form submission
 
@@ -378,8 +530,8 @@
 
             // Shipping Method Checked
             $(".custom-control-input").on('change', function(event) {
-              shipping_method_id = $(this).val();
-              calculateShippingCharges(shipping_method_id);
+                shipping_method_id = $(this).val();
+                calculateShippingCharges(shipping_method_id);
             });
         });
     </script>
