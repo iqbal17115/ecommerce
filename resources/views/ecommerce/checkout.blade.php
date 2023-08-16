@@ -538,5 +538,7 @@
                 calculateShippingCharges(shipping_method_id);
             });
         });
+calculateShippingCharges();
+
     </script>
 @endpush
