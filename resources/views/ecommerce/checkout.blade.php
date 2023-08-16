@@ -459,10 +459,13 @@
                     url: "{{ route('save_shipping_address') }}",
                     data: shippingFormData,
                     success: function(response) {
-                        // Handle success response here, e.g. show success message or continue to checkout form
-                        console.log(response);
-                        // Optionally, you can add your own success handling logic here
-                        submitCheckoutForm();
+                        var selectedPayment = $('.payment-icon.active').data('payment');
+                        if (selectedPayment) {
+                            // If the selected payment option is validated, proceed to submitShippingAddressForm
+                            submitCheckoutForm();
+                        } else {
+                            alert('Select payment Method Please');
+                        }
                     },
                     error: function(error) {
                         // Handle error response here
@@ -483,7 +486,8 @@
                         data: checkoutFormData + '&selected_payment=' + selectedPayment,
                         success: function(response) {
                             if (response.status === 'success') {
-                                window.location.href = "{{ route('order_confirmation') }}"; // Redirect to order_confirmation page
+                                window.location.href =
+                                "{{ route('order_confirmation') }}"; // Redirect to order_confirmation page
                             }
                         },
                         error: function(error) {
