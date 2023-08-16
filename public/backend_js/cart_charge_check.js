@@ -83,6 +83,8 @@ $(document).ready(function () {
 
 function updateTotalPrice(sub_total, shipping_charge) {
     $('.cart_total_price').text(sub_total.toFixed(0)); // Assuming you want to show two decimal places
+    alert(shipping_charge);
+
      $(".shipping_amount").text(shipping_charge);
     $('.total-price').text(sub_total + shipping_charge); // Assuming you want to show two decimal places
 }
