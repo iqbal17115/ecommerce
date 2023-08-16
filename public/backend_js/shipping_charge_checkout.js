@@ -11,6 +11,7 @@ function calculateShippingCharges(shipping_method_id = '13eee98c-31ed-11ee-be5c-
             'shipping_method_id': shipping_method_id
         },
         success: function(response) {
+            console.log(response);
             // The AJAX request was successful;
             updateTotalPrice(response.sub_total, response.charge);
         },
