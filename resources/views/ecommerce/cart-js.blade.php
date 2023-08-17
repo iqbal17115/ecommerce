@@ -26,7 +26,6 @@ $(document).ready(function() {
                 });
                 $('.cart-total-price').text(total);
                 calculateShippingCharges();
-                updateTotalPrice();
             },
             error: function(err) {
                 var error = err.responseJSON;
@@ -61,7 +60,6 @@ $(document).ready(function() {
                 });
                 $('.cart-total-price').text(total);
                 calculateShippingCharges();
-                updateTotalPrice();
             },
             error: function(err) {
                 var error = err.responseJSON;
@@ -89,7 +87,6 @@ $(document).ready(function() {
                 });
                 $('.cart_total_price').text(total);
                 calculateShippingCharges();
-                updateTotalPrice();
             }
         });
 
@@ -117,7 +114,6 @@ $(document).ready(function() {
                 }
                 $('.cart_total_price').text(total);
                 calculateShippingCharges();
-                updateTotalPrice();
             }
         });
     });
