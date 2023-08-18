@@ -78,7 +78,7 @@
     <script src="{{ URL::asset('assets/js/pages/dashboard.init.js') }}"></script>
 
     <!-- App js -->
-    <script src="resources/assets/js/app.js"></script>
+    <script src="assets/js/app.js"></script>
 
     <!-- App js -->
     <!-- <script src="{{ URL::asset('assets/js/app.min.js') }}"></script> -->
