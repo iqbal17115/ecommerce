@@ -37,6 +37,8 @@
 </head>
 
 <body data-sidebar="dark">
+    {{-- Preloader --}}
+    @include('layouts.preloader')
 
     <div id="layout-wrapper">
         @include('layouts.topbar')

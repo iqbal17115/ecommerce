@@ -50,7 +50,7 @@ Route::controller(ReviewController::class)->group(function () {
 });
 
 Route::get('cart', [CartController::class, 'index'])->name('cart');
-Route::post('/update-product-status',[CartController::class, 'updateProductStatus'])->name('update-product-status');
+Route::post('/update-product-status', [CartController::class, 'updateProductStatus'])->name('update-product-status');
 
 Route::get('/', function () {
     return view('auth.login');
@@ -172,7 +172,26 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
 
     // Order Start
     Route::controller(OrderController::class)->group(function () {
-        Route::get('new-order', 'index')->name('new-order');
+        Route::get('pending-order', 'pendingOrderPage')->name('pending-order');
+        Route::get('new-order', 'newOrderPage')->name('new-order');
+        Route::get('shipped-order', 'shippedOrderPage')->name('shipped-order');
+        Route::get('in_transit-order', 'inTransitOrderPage')->name('in_transit-order');
+        Route::get('arrival_at_distribution_center-order', 'arrivalAtDistributionCenterOrderPage')->name('arrival_at_distribution_center-order');
+        Route::get('out_for_delivery-order', 'outForDeliveryOrderPage')->name('out_for_delivery-order');
+        Route::get('delivery_attempted-order', 'deliveryAttemptedOrderPage')->name('delivery_attempted-order');
+        Route::get('delivery_rescheduling-order', 'deliveryReschedulingOrderPage')->name('delivery_rescheduling-order');
+        Route::get('delivered-order', 'deliveredOrderPage')->name('delivered-order');
+        Route::get('payment_collected-order', 'paymentCollectedOrderPage')->name('payment_collected-order');
+        Route::get('completed-order', 'completedOrderPage')->name('completed-order');
+        Route::get('hold-order', 'holdOrderPage')->name('hold-order');
+        Route::get('failed-order', 'failedOrderPage')->name('failed-order');
+        Route::get('cancelled-order', 'cancelledOrderPage')->name('cancelled-order');
+        Route::get('returned-order', 'returnedOrderPage')->name('returned-order');
+        Route::get('refunded-order', 'refundedOrderPage')->name('refunded-order');
+        Route::get('pre_order-order', 'preOrderOrderPage')->name('pre_order-order');
+        Route::get('backordered-order', 'backOrderedOrderPage')->name('backordered-order');
+        Route::get('partially_shipped-order', 'partiallyShippedOrderPage')->name('partially_shipped-order');
+        Route::get('order_data', 'orderData')->name('order_data');
         Route::get('order-detail', 'orderDetail')->name('order-detail');
         Route::get('/orders/{order}', 'destroy')->name('orders.destroy');
         Route::get('/invoices-detail/{order}', 'invoicesDetail')->name('invoices-detail');

@@ -10,8 +10,8 @@ class OrderService
     /**
      * Get Products By Type
      *
-     * @param null $status
-     * @param null $limit
+     * @param  $status
+     * @param  $limit
      * @return array|Collection
      */
     public function getOrdersByStatus($status = null, $limit = null): \Illuminate\Support\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator

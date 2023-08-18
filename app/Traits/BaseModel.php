@@ -2,16 +2,58 @@
 
 namespace App\Traits;
 
+use App\Services\GenerateViewService;
 use Exception;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 trait BaseModel
 {
-    use UsesUuid;
+    use Searchable, Sortable, Filterable;
+
+    /**
+     * Generate View
+     *
+     * @param string $viewPath
+     * @param mixed $model
+     * @param array|null $collections
+     * @return View|JsonResponse
+     * @throws Exception
+     */
+    public function generateView(string $viewPath, mixed $model = [], ?array $collections = []): View|JsonResponse
+    {
+        return GenerateViewService::factory()
+            ->setViewPath($viewPath)
+            ->setMainRoute($this->mainRoute)
+            ->setIsFilterExists($this->isFilterExists)
+            ->setTableHeaders($this->tableHeaders)
+            ->setCollections($collections)
+            ->setModel($model)
+            ->generate();
+    }
+
+    /**
+     * List scope
+     *
+     * @param $query
+     * @param $request
+     * @return mixed
+     */
+    public function scopeList($query, $request): mixed
+    {
+        // Apply the search, ordering, and pagination scopes to the query
+        return $query
+            ->when(isset($request['search']), fn($query) => $query->ofSearch($request['search']))
+            ->when(isset($request['filters']), fn($query) => $query->ofFilter($request['filters']))
+            // ->when(isset($request['start_date']), fn($query) => $query->ofDateChange($request['start_date'], $request['end_date']))
+            ->ofOrderBy($request['sort_by'] ?? null, $request['sort_order'] ?? null);
+    }
 
     /**
      * Get Lists
      *
+     * @param $query
      * @param array $validatedData
      * @param string $resourceClass
      * @return mixed
@@ -23,6 +65,44 @@ trait BaseModel
 
         // Set collection
         return $lists->setCollection(collect($resourceClass::collection($lists->items())));
+    }
+
+    /**
+     * Generate a JSON-encoded response for a data table.
+     *
+     * @param array $validatedData The validated data received for the data table.
+     * @param string $resourceClass The resource class to use for data transformation.
+     *
+     * @return string|bool  The JSON-encoded response for the data table.
+     */
+    public function dataTable($query, array $validatedData, string $resourceClass): string|bool
+    {
+        $validatedData['search'] = $validatedData['search']['value'] ?? null;
+        $validatedData['sort_by'] = $validatedData['order'][0]['column'] ?? null;
+        $validatedData['sort_order'] = $validatedData['order'][0]['dir'] ?? null;
+
+        // Apply the list scope to the query
+        $query->list($validatedData);
+
+        // Clone the query to count the records
+        $countQuery = clone $query;
+
+        // Get the total record count
+        $records = $countQuery->count();
+
+        // Get the paginated data
+        $lists = $query->offset($validatedData['start'])->limit($validatedData['length'])->get();
+
+        // Build the JSON data for the response
+        $json_data = [
+            'draw' => $validatedData['draw'] ?? 0,
+            'recordsTotal' => $records,
+            'recordsFiltered' => $records,
+            'data' => $resourceClass::collection($lists),
+        ];
+
+        // Encode the data as JSON and return
+        return json_encode($json_data);
     }
 
     /**

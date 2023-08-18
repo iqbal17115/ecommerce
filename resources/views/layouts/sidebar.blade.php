@@ -177,7 +177,25 @@
                            <span>Orders</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="{{ route('new-order') }}">New Order</a></li>
+                           <li><a href="{{ route('pending-order') }}">Pending</a></li>
+                           <li><a href="{{ route('new-order') }}">Processing</a></li>
+                           <li><a href="{{ route('shipped-order') }}">Shipped</a></li>
+                           <li><a href="{{ route('in_transit-order') }}">In Transit</a></li>
+                           <li><a href="{{ route('arrival_at_distribution_center-order') }}">Arrival At Distribution Center</a></li>
+                           <li><a href="{{ route('out_for_delivery-order') }}">Out For Delivery</a></li>
+                           <li><a href="{{ route('delivery_attempted-order') }}">Delivery Attempted</a></li>
+                           <li><a href="{{ route('delivery_rescheduling-order') }}">Delivery Rescheduling</a></li>
+                           <li><a href="{{ route('delivered-order') }}">Delivered</a></li>
+                           <li><a href="{{ route('payment_collected-order') }}">Payment Collected</a></li>
+                           <li><a href="{{ route('completed-order') }}">Completed</a></li>
+                           <li><a href="{{ route('hold-order') }}">Hold</a></li>
+                           <li><a href="{{ route('failed-order') }}">Failed</a></li>
+                           <li><a href="{{ route('cancelled-order') }}">Cancelled</a></li>
+                           <li><a href="{{ route('returned-order') }}">Returned</a></li>
+                           <li><a href="{{ route('refunded-order') }}">Refunded</a></li>
+                           <li><a href="{{ route('pre_order-order') }}">Pre Order</a></li>
+                           <li><a href="{{ route('backordered-order') }}">Backordered</a></li>
+                           <li><a href="{{ route('partially_shipped-order') }}">Partially Shipped</a></li>
                            <li><a href="{{ route('all-order') }}">All Order</a></li>
                        </ul>
                    </li>
