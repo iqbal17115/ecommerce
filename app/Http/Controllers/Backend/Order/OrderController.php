@@ -28,7 +28,11 @@ class OrderController extends Controller
     }
     public function orderData(Request $request)
     {
-        $query = Order::where('status', $request->status);
+        $query = Order::query();
+
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
 
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $start_date = Carbon::createFromFormat('Y-m-d', $request->input('start_date'))->startOfDay();
@@ -41,8 +45,9 @@ class OrderController extends Controller
     }
     public function allOrderIndex()
     {
-        $orders = $this->orderService->getOrdersByStatus([OrderStatusEnum::PENDING, OrderStatusEnum::PROCESSING, OrderStatusEnum::SHIPPED, OrderStatusEnum::ARRIVAL_AT_DISTRIBUTION_CENTER, OrderStatusEnum::OUT_FOR_DELIVERY, OrderStatusEnum::DELIVERY_ATTEMPTED, OrderStatusEnum::DELIVERY_RESCHEDULING, OrderStatusEnum::DELIVERED, OrderStatusEnum::FAILED, OrderStatusEnum::CANCELLED, OrderStatusEnum::RETURNED, OrderStatusEnum::REFUNDED, OrderStatusEnum::BACKORDERED, OrderStatusEnum::HOLD, OrderStatusEnum::PRE_ORDER, OrderStatusEnum::PARTIALLY_SHIPPED], 30);
-        return view('backend.order.all-order', compact('orders'));
+        $reflectionClass = new \ReflectionClass(OrderStatusEnum::class);
+        $statusValues = array_values($reflectionClass->getConstants());
+        return view('backend.order.all-order', compact('statusValues'));
     }
 
     /**

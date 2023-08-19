@@ -177,6 +177,7 @@
                            <span>Orders</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
+                           <li><a href="{{ route('all-order') }}">All Order</a></li>
                            <li><a href="{{ route('pending-order') }}">Pending</a></li>
                            <li><a href="{{ route('new-order') }}">Processing</a></li>
                            <li><a href="{{ route('shipped-order') }}">Shipped</a></li>
@@ -196,7 +197,6 @@
                            <li><a href="{{ route('pre_order-order') }}">Pre Order</a></li>
                            <li><a href="{{ route('backordered-order') }}">Backordered</a></li>
                            <li><a href="{{ route('partially_shipped-order') }}">Partially Shipped</a></li>
-                           <li><a href="{{ route('all-order') }}">All Order</a></li>
                        </ul>
                    </li>
 
