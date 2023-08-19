@@ -12,6 +12,7 @@ use App\Models\Ecommerce\Setting\Union;
 use App\Models\Ecommerce\Setting\Upazila;
 use App\Models\FrontEnd\Order;
 use App\Models\FrontEnd\OrderDetail;
+use App\Services\ShippingChargeService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,12 @@ use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
+    protected $shippingChargeService;
+
+    public function __construct(ShippingChargeService $shippingChargeService)
+    {
+        $this->shippingChargeService = $shippingChargeService;
+    }
     public function addShippingAddress(Request $request)
     {
         //    Add Customer
@@ -53,18 +60,17 @@ class CheckoutController extends Controller
             if (!session('cart')) {
                 return Redirect::back();
             }
-            foreach (session('cart') as $id => $details) {
-                $total += $details['sale_price'] * $details['quantity'];
-            }
-            if (count(session('cart')) > 0) {
+            $detail_data = $this->shippingChargeService->calculateShippingCharge($request->shipping_method);
 
+            if (count(session('cart')) > 0) {
                 //    Add Order
                 $Order = new Order();
                 $Order->code = 'OC' . floor(time() - 999999999);
                 $Order->contact_id = Auth::user()->Contact->id;
                 $Order->order_date = Carbon::now();
-                $Order->total_amount = $total;
-                $Order->payable_amount = $total;
+                $Order->total_amount = $detail_data->getData()->sub_total;
+                $Order->shipping_charge = $detail_data->getData()->charge;
+                $Order->payable_amount = $detail_data->getData()->sub_total + $detail_data->getData()->charge;
                 $Order->status = 'processing';
                 $Order->note = $request->note;
                 $Order->is_active = 1;

@@ -96,8 +96,8 @@
                                                         class="product-image" alt="Product Image">
                                                 </td>
                                                 <td>{{ $orderDetail->quantity }}</td>
-                                                <td>${{ $orderDetail->unit_price }}</td>
-                                                <td>${{ $orderDetail->unit_price * $orderDetail->quantity }}</td>
+                                                <td>{{ $currency->icon }} {{ $orderDetail->unit_price }}</td>
+                                                <td>{{ $currency->icon }} {{ $orderDetail->unit_price * $orderDetail->quantity }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -105,9 +105,18 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="3" class="text-right">Total Amount:</th>
-                                            <td>${{ $confirmedOrder->total_amount }}</td>
+                                            <td>{{ $currency->icon }} {{ number_format($confirmedOrder->total_amount, 2) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" class="text-right">Shipping Charge:</th>
+                                            <td>{{ $currency->icon }} {{ number_format($confirmedOrder->shipping_charge, 2) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" class="text-right">Payable Amount:</th>
+                                            <td>{{ $currency->icon }} {{ number_format($confirmedOrder->payable_amount, 2) }}</td>
                                         </tr>
                                     </tfoot>
+
                                 </table>
                             </div>
                             <p><strong>Note:</strong> {{ $confirmedOrder->note }}</p>

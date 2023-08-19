@@ -479,11 +479,11 @@
                 if ($("#checkout-form")[0].checkValidity()) {
                     var selectedPayment = $('.payment-icon.active').data('payment');
                     var checkoutFormData = $("#checkout-form").serialize();
-
+                    var selectedValue = $('input.custom-control-input:checked').val();
                     $.ajax({
                         type: "POST",
                         url: "{{ route('confirm_order') }}",
-                        data: checkoutFormData + '&selected_payment=' + selectedPayment,
+                        data: checkoutFormData + '&selected_payment=' + selectedPayment + '&shipping_method=' + selectedValue,
                         success: function(response) {
                             if (response.status === 'success') {
                                 window.location.href =

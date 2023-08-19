@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class WishlistController extends Controller
 {
     protected $wishlistService;
-    
+
     public function __construct(WishlistService $wishlistService)
     {
         $this->wishlistService = $wishlistService;
