@@ -28,6 +28,7 @@ use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountController;
 use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
+use App\Http\Controllers\Frontend\BarcodeController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
@@ -43,6 +44,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 // Review
 Route::controller(ReviewController::class)->group(function () {
     Route::get('/reviews', 'getReview')->name('reviews');
@@ -198,6 +200,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('confirm-order/{order}', 'confirmOrderShow')->name('confirm-order');
         Route::get('cancel-order/{order}', 'cancelOrderShow')->name('cancel-order');
         Route::get('all-order', 'allOrderIndex')->name('all-order');
+        Route::get('/generate-barcodes', 'generateBarcodes')->name('generate.barcodes');
     });
 
     // Start Manage Company

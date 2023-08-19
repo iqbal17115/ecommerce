@@ -9,6 +9,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\FrontEnd\Order;
 use App\Models\FrontEnd\OrderDetail;
 use App\Services\OrderService;
+use App\Traits\Barcode;
 use App\Traits\BaseModel;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -18,13 +19,35 @@ use Illuminate\Contracts\View\View;
 
 class OrderController extends Controller
 {
-    use BaseModel;
+    use BaseModel, Barcode;
 
     protected $orderService;
 
     public function __construct(OrderService $orderService)
     {
         $this->orderService = $orderService;
+    }
+    public function generateBarcodes(Request $request)
+    {
+        // Get the barcode content array from the request
+        $contents = $request->product_codes;
+
+        // Create an array to store barcode data (image and content)
+        $barcodesData = [];
+
+        foreach ($contents as $content) {
+            // Generate the barcode image using the function you provided
+            $barcodeImage = $this->generateBarcodeImageFromString($content);
+
+            // Store barcode image and content
+            $barcodesData[] = [
+                'image' => $barcodeImage,
+                'content' => $content,
+            ];
+        }
+
+        // Set the appropriate response headers for the images
+        return response()->view('barcodes', ['barcodesData' => $barcodesData]);
     }
     public function orderData(Request $request)
     {

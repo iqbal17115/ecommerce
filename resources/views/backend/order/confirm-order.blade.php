@@ -80,8 +80,14 @@
                                     style="width:70px; height: 70px;" class="img-responsive">
                             </div>
                             <div class="col-md-2">
+                                @php
+                                    $product_codes = [];
+                                @endphp
                                 @for ($i = 1; $i <= $orderDetail->quantity; $i++)
                                     <p>{{ $order?->code }}{{ $orderDetail->id }}{{ $i }}</p>
+                                    @php
+                                        $product_codes[] = $order->code . $orderDetail->id . $i;
+                                    @endphp
                                 @endfor
                             </div>
                             <div class="col-md-5">
@@ -96,7 +102,8 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <a href="" target="_blank" class="btn btn-primary">Generate QR Code</a>
+                                <a href="{{ route('generate.barcodes', ['product_codes' => $product_codes]) }}" target="_blank" class="btn btn-primary">Generate
+                                    Bar Code</a>
                             </div>
                         </div>
                     @endforeach
@@ -123,69 +130,74 @@
     <!-- end row -->
 @endsection
 @push('script')
-<script>
-    $(document).ready(function() {
-        $('#package_qty').on('change', function() {
-            var packageQty = $(this).val();
-            if (packageQty > 0) {
-                $('#box_qty').text(packageQty + ' BOX');
-                $('#box_details').empty();
+    <script>
+        $(document).ready(function() {
+            $('#package_qty').on('change', function() {
+                var packageQty = $(this).val();
+                if (packageQty > 0) {
+                    $('#box_qty').text(packageQty + ' BOX');
+                    $('#box_details').empty();
 
-                var products = {!! json_encode($order->OrderDetail) !!};
-                for (var i = 1; i <= packageQty; i++) {
-                    var boxHtml = '<div class="box border p-3 mb-3">';
-                    boxHtml += '<h6>Select Box Number Box no: ' + i + '</h6>';
-                    boxHtml += '<div class="row">';
-                    boxHtml += '<div class="col-md-3">';
-                    boxHtml += '<div class="package">';
-                    boxHtml += '<label for="weight_' + i + '">Package Weight</label>';
-                    boxHtml += '<input type="number" id="weight_' + i + '" name="weight_' + i + '" class="form-control">';
-                    boxHtml += '</div>';
-                    boxHtml += '</div>';
-                    boxHtml += '<div class="col-md-3">';
-                    boxHtml += '<div class="package">';
-                    boxHtml += '<label for="length_' + i + '">Length</label>';
-                    boxHtml += '<input type="number" id="length_' + i + '" name="length_' + i + '" class="form-control">';
-                    boxHtml += '</div>';
-                    boxHtml += '</div>';
-                    boxHtml += '<div class="col-md-3">';
-                    boxHtml += '<div class="package">';
-                    boxHtml += '<label for="width_' + i + '">Width</label>';
-                    boxHtml += '<input type="number" id="width_' + i + '" name="width_' + i + '" class="form-control">';
-                    boxHtml += '</div>';
-                    boxHtml += '</div>';
-                    boxHtml += '<div class="col-md-3">';
-                    boxHtml += '<div class="package">';
-                    boxHtml += '<label for="height_' + i + '">Height</label>';
-                    boxHtml += '<input type="number" id="height_' + i + '" name="height_' + i + '" class="form-control">';
-                    boxHtml += '</div>';
-                    boxHtml += '</div>';
-                    boxHtml += '<div class="col-md-12">';
-                    boxHtml += '<div class="package">';
-                    boxHtml += '<label for="product_' + i + '">Select Product</label>';
-                    boxHtml += '<select id="product_' + i + '" name="product_' + i + '" class="form-control" multiple>';
+                    var products = {!! json_encode($order->OrderDetail) !!};
+                    for (var i = 1; i <= packageQty; i++) {
+                        var boxHtml = '<div class="box border p-3 mb-3">';
+                        boxHtml += '<h6>Select Box Number Box no: ' + i + '</h6>';
+                        boxHtml += '<div class="row">';
+                        boxHtml += '<div class="col-md-3">';
+                        boxHtml += '<div class="package">';
+                        boxHtml += '<label for="weight_' + i + '">Package Weight</label>';
+                        boxHtml += '<input type="number" id="weight_' + i + '" name="weight_' + i +
+                            '" class="form-control">';
+                        boxHtml += '</div>';
+                        boxHtml += '</div>';
+                        boxHtml += '<div class="col-md-3">';
+                        boxHtml += '<div class="package">';
+                        boxHtml += '<label for="length_' + i + '">Length</label>';
+                        boxHtml += '<input type="number" id="length_' + i + '" name="length_' + i +
+                            '" class="form-control">';
+                        boxHtml += '</div>';
+                        boxHtml += '</div>';
+                        boxHtml += '<div class="col-md-3">';
+                        boxHtml += '<div class="package">';
+                        boxHtml += '<label for="width_' + i + '">Width</label>';
+                        boxHtml += '<input type="number" id="width_' + i + '" name="width_' + i +
+                            '" class="form-control">';
+                        boxHtml += '</div>';
+                        boxHtml += '</div>';
+                        boxHtml += '<div class="col-md-3">';
+                        boxHtml += '<div class="package">';
+                        boxHtml += '<label for="height_' + i + '">Height</label>';
+                        boxHtml += '<input type="number" id="height_' + i + '" name="height_' + i +
+                            '" class="form-control">';
+                        boxHtml += '</div>';
+                        boxHtml += '</div>';
+                        boxHtml += '<div class="col-md-12">';
+                        boxHtml += '<div class="package">';
+                        boxHtml += '<label for="product_' + i + '">Select Product</label>';
+                        boxHtml += '<select id="product_' + i + '" name="product_' + i +
+                            '" class="form-control" multiple>';
 
-                    var optionsHtml = '';
-                    for (var j = 0; j < products.length; j++) {
-                        optionsHtml += '<option value="' + products[j].id + '">' + products[j]['product'].name + '</option>';
+                        var optionsHtml = '';
+                        for (var j = 0; j < products.length; j++) {
+                            optionsHtml += '<option value="' + products[j].id + '">' + products[j][
+                                'product'].name + '</option>';
+                        }
+                        boxHtml += optionsHtml;
+
+                        boxHtml += '</select>';
+                        boxHtml += '</div>';
+                        boxHtml += '</div>';
+                        boxHtml += '</div>'; // end row
+                        boxHtml += '</div>'; // end box
+
+                        $('#box_details').append(boxHtml);
                     }
-                    boxHtml += optionsHtml;
 
-                    boxHtml += '</select>';
-                    boxHtml += '</div>';
-                    boxHtml += '</div>';
-                    boxHtml += '</div>'; // end row
-                    boxHtml += '</div>'; // end box
-
-                    $('#box_details').append(boxHtml);
+                    $('#package_info').show();
+                } else {
+                    $('#package_info').hide();
                 }
-
-                $('#package_info').show();
-            } else {
-                $('#package_info').hide();
-            }
+            });
         });
-    });
-</script>
-
+    </script>
 @endpush
