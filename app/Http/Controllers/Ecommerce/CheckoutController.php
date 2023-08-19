@@ -71,7 +71,7 @@ class CheckoutController extends Controller
                 $Order->total_amount = $detail_data->getData()->sub_total;
                 $Order->shipping_charge = $detail_data->getData()->charge;
                 $Order->payable_amount = $detail_data->getData()->sub_total + $detail_data->getData()->charge;
-                $Order->status = 'processing';
+                $Order->status = 'pending';
                 $Order->note = $request->note;
                 $Order->is_active = 1;
                 $Order->save();
