@@ -190,8 +190,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                ${new Date(order.order_date).toLocaleDateString('bn-BD', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }<br>
-                                                ${new Date(order.order_date).toLocaleDateString('bn-BD', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }
+                                                ${new Date(order.order_date).toLocaleDateString('en-US', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }<br>
+                                                ${new Date(order.order_date).toLocaleDateString('en-US', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }
                                             </td>
                                             <td>
                                                 ${order.code}<br>
