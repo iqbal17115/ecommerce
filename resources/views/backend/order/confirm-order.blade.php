@@ -126,7 +126,6 @@
                 </div>
             </div>
         </div><!-- end col -->
-<<<<<<< HEAD
 
         {{-- Start package handover --}}
         <div class="col-12">
@@ -230,8 +229,6 @@
 
         {{-- End shipping fee --}}
 {{-- gy --}}
-=======
->>>>>>> parent of 40ef1f1 (Order Confirm Page Design)
     </div>
     <!-- end row -->
 @endsection
