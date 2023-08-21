@@ -102,8 +102,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <a href="{{ route('generate.barcodes', ['product_codes' => $product_codes]) }}"
-                                    target="_blank" class="btn btn-primary">Generate
+                                <a href="{{ route('generate.barcodes', ['product_codes' => $product_codes]) }}" target="_blank" class="btn btn-primary">Generate
                                     Bar Code</a>
                             </div>
                         </div>
@@ -127,6 +126,7 @@
                 </div>
             </div>
         </div><!-- end col -->
+<<<<<<< HEAD
 
         {{-- Start package handover --}}
         <div class="col-12">
@@ -230,6 +230,8 @@
 
         {{-- End shipping fee --}}
 {{-- gy --}}
+=======
+>>>>>>> parent of 40ef1f1 (Order Confirm Page Design)
     </div>
     <!-- end row -->
 @endsection
@@ -284,8 +286,7 @@
                         var optionsHtml = '';
                         for (var j = 0; j < products.length; j++) {
                             optionsHtml += '<option value="' + products[j].id + '">' + products[j][
-                                'product'
-                            ].name + '</option>';
+                                'product'].name + '</option>';
                         }
                         boxHtml += optionsHtml;
 
