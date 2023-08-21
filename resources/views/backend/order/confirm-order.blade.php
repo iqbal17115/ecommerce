@@ -102,7 +102,8 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <a href="{{ route('generate.barcodes', ['product_codes' => $product_codes]) }}" target="_blank" class="btn btn-primary">Generate
+                                <a href="{{ route('generate.barcodes', ['product_codes' => $product_codes]) }}"
+                                    target="_blank" class="btn btn-primary">Generate
                                     Bar Code</a>
                             </div>
                         </div>
@@ -114,13 +115,11 @@
         <div class="col-12">
             <div class="card shadow">
                 <div class="card-body">
-                    <div>
-                        <label for="package_qty">Package Box Quantity</label>
-                        <input type="number" id="package_qty" name="package_qty" class="form-control">
+                    <div class="mb-4">
+                        <input data-repeater-create type="button" data-box_no="1" id="package_qty" name="package_qty" class="btn btn-success inner" value="Add Box"/>
                     </div>
 
-                    <div id="package_info" style="display: none;">
-                        <h5>Package Box Quantity <span id="box_qty"></span></h5>
+                    <div id="package_info">
                         <div id="box_details"></div>
                     </div>
                 </div>
@@ -233,73 +232,67 @@
 @endsection
 @push('script')
     <script>
+        let box_no = 1;
         $(document).ready(function() {
-            $('#package_qty').on('change', function() {
-                var packageQty = $(this).val();
-                if (packageQty > 0) {
-                    $('#box_qty').text(packageQty + ' BOX');
-                    $('#box_details').empty();
+            $('#package_qty').on('click', function() {
 
-                    var products = {!! json_encode($order->OrderDetail) !!};
-                    for (var i = 1; i <= packageQty; i++) {
-                        var boxHtml = '<div class="box border p-3 mb-3">';
-                        boxHtml += '<h6>Select Box Number Box no: ' + i + '</h6>';
-                        boxHtml += '<div class="row">';
-                        boxHtml += '<div class="col-md-3">';
-                        boxHtml += '<div class="package">';
-                        boxHtml += '<label for="weight_' + i + '">Package Weight</label>';
-                        boxHtml += '<input type="number" id="weight_' + i + '" name="weight_' + i +
-                            '" class="form-control">';
-                        boxHtml += '</div>';
-                        boxHtml += '</div>';
-                        boxHtml += '<div class="col-md-3">';
-                        boxHtml += '<div class="package">';
-                        boxHtml += '<label for="length_' + i + '">Length</label>';
-                        boxHtml += '<input type="number" id="length_' + i + '" name="length_' + i +
-                            '" class="form-control">';
-                        boxHtml += '</div>';
-                        boxHtml += '</div>';
-                        boxHtml += '<div class="col-md-3">';
-                        boxHtml += '<div class="package">';
-                        boxHtml += '<label for="width_' + i + '">Width</label>';
-                        boxHtml += '<input type="number" id="width_' + i + '" name="width_' + i +
-                            '" class="form-control">';
-                        boxHtml += '</div>';
-                        boxHtml += '</div>';
-                        boxHtml += '<div class="col-md-3">';
-                        boxHtml += '<div class="package">';
-                        boxHtml += '<label for="height_' + i + '">Height</label>';
-                        boxHtml += '<input type="number" id="height_' + i + '" name="height_' + i +
-                            '" class="form-control">';
-                        boxHtml += '</div>';
-                        boxHtml += '</div>';
-                        boxHtml += '<div class="col-md-12">';
-                        boxHtml += '<div class="package">';
-                        boxHtml += '<label for="product_' + i + '">Select Product</label>';
-                        boxHtml += '<select id="product_' + i + '" name="product_' + i +
-                            '" class="form-control" multiple>';
+                var products = {!! json_encode($order->OrderDetail) !!};
+                var boxHtml = '<div class="box border p-3 mb-3">';
+                boxHtml += '<h6>Select Box Number Box no: ' + box_no + '</h6>';
+                boxHtml += '<div class="row">';
+                boxHtml += '<div class="col-md-3">';
+                boxHtml += '<div class="package">';
+                boxHtml += '<label for="weight_' + box_no + '">Package Weight</label>';
+                boxHtml += '<input type="number" id="weight_' + box_no + '" name="weight_' + box_no +
+                    '" class="form-control">';
+                boxHtml += '</div>';
+                boxHtml += '</div>';
+                boxHtml += '<div class="col-md-3">';
+                boxHtml += '<div class="package">';
+                boxHtml += '<label for="length_' + box_no + '">Length</label>';
+                boxHtml += '<input type="number" id="length_' + box_no + '" name="length_' + box_no +
+                    '" class="form-control">';
+                boxHtml += '</div>';
+                boxHtml += '</div>';
+                boxHtml += '<div class="col-md-3">';
+                boxHtml += '<div class="package">';
+                boxHtml += '<label for="width_' + box_no + '">Width</label>';
+                boxHtml += '<input type="number" id="width_' + box_no + '" name="width_' + box_no +
+                    '" class="form-control">';
+                boxHtml += '</div>';
+                boxHtml += '</div>';
+                boxHtml += '<div class="col-md-3">';
+                boxHtml += '<div class="package">';
+                boxHtml += '<label for="height_' + box_no + '">Height</label>';
+                boxHtml += '<input type="number" id="height_' + box_no + '" name="height_' + box_no +
+                    '" class="form-control">';
+                boxHtml += '</div>';
+                boxHtml += '</div>';
+                boxHtml += '<div class="col-md-12">';
+                boxHtml += '<div class="package">';
+                boxHtml += '<label for="product_' + box_no + '">Select Product</label>';
+                boxHtml += '<select id="product_' + box_no + '" name="product_' + box_no +
+                    '" class="form-control" multiple>';
 
-                        var optionsHtml = '';
-                        for (var j = 0; j < products.length; j++) {
-                            optionsHtml += '<option value="' + products[j].id + '">' + products[j][
-                                'product'].name + '</option>';
-                        }
-                        boxHtml += optionsHtml;
-
-                        boxHtml += '</select>';
-                        boxHtml += '</div>';
-                        boxHtml += '</div>';
-                        boxHtml += '</div>'; // end row
-                        boxHtml += '</div>'; // end box
-
-                        $('#box_details').append(boxHtml);
-                    }
-
-                    $('#package_info').show();
-                } else {
-                    $('#package_info').hide();
+                var optionsHtml = '';
+                for (var j = 0; j < products.length; j++) {
+                    optionsHtml += '<option value="' + products[j].id + '">' + products[j][
+                        'product'
+                    ].name + '</option>';
                 }
+                boxHtml += optionsHtml;
+
+                boxHtml += '</select>';
+                boxHtml += '</div>';
+                boxHtml += '</div>';
+                boxHtml += '</div>'; // end row
+                boxHtml += '</div>'; // end box
+
+                $('#box_details').append(boxHtml);
+                box_no++;
+
             });
+
         });
     </script>
 @endpush
