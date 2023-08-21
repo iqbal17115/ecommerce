@@ -126,6 +126,112 @@
                 </div>
             </div>
         </div><!-- end col -->
+<<<<<<< HEAD
+
+        {{-- Start package handover --}}
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Schedule</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="scheduleDropOff" name="scheduleType"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="scheduleDropOff">Schedule DropOff</label>
+                                </div>
+                                <div class="form-group" id="dropOffDescription">
+                                    <p>I will prepare the package and I will drop it off at the courier location.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="schedulePickup" name="scheduleType"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="schedulePickup">Schedule Pickup</label>
+                                </div>
+                                <div class="form-group" id="pickupDescription">
+                                    <p>I will prepare the package and I want Aladdin to pickup the items from my location.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <center>
+                        <button id="getSlotButton" class="btn btn-primary">Get Slot</button>
+                    </center>
+                </div>
+            </div>
+        </div><!-- end col -->
+        {{-- End package handover --}}
+
+        {{-- Start pickup slot --}}
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Pickup Slot</h5>
+                    <p class="mb-3">Pickup Slot (note: indicative time; exact pickup time may vary)</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="pickupDate">Pickup Day</label>
+                                <input type="date" id="pickupDate" name="pickupDate" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="pickupTime">Pickup Time</label>
+                                <select id="pickupTime" name="pickupTime" class="form-control">
+                                    <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                                    <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM</option>
+                                    <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                                    <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
+                                    <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                                    <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
+                                    <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                                    <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
+                                    <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                                    <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
+                                    <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                                    <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
+                                    <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                                    <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
+                                    <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
+                                    <option value="5:30 PM - 6:30 PM">5:30 PM - 6:30 PM</option>
+                                    <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
+                                    <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end col -->
+        {{-- End pickup slot --}}
+
+        {{-- Start shipping fee --}}
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Total Easy Ship Fee: </h3>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <h2 class="bg-info">{{ $order->shipping_charge }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end col -->
+
+        {{-- End shipping fee --}}
+{{-- gy --}}
+=======
+>>>>>>> parent of 40ef1f1 (Order Confirm Page Design)
     </div>
     <!-- end row -->
 @endsection
