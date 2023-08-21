@@ -115,12 +115,11 @@
         <div class="col-12">
             <div class="card shadow">
                 <div class="card-body">
-                    <div class="mb-4">
-                        <input data-repeater-create type="button" data-box_no="1" id="package_qty" name="package_qty" class="btn btn-success inner" value="Add Box"/>
-                    </div>
-
                     <div id="package_info">
                         <div id="box_details"></div>
+                    </div>
+                    <div class="mt-4">
+                        <input data-repeater-create type="button" data-box_no="1" id="package_qty" name="package_qty" class="btn btn-success inner float-right" value="Add Box"/>
                     </div>
                 </div>
             </div>
@@ -292,7 +291,8 @@
                 box_no++;
 
             });
-
+            $('#package_qty').click();
         });
+
     </script>
 @endpush
