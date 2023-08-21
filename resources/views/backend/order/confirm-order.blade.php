@@ -229,7 +229,7 @@
         </div><!-- end col -->
 
         {{-- End shipping fee --}}
-
+{{-- gy --}}
     </div>
     <!-- end row -->
 @endsection
