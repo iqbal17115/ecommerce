@@ -36,7 +36,7 @@
     @stack('css')
 </head>
 
-<body data-sidebar="dark">
+<body data-sidebar="dark" style="font-family: Lato;">
 
     <div id="layout-wrapper">
         @include('layouts.topbar')
