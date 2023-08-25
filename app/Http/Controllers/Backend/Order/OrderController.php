@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Backend\Order;
 
-use App\Enums\OrderStatusEnum;
-use App\Enums\ProductStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Models\FrontEnd\Order;
@@ -66,12 +64,7 @@ class OrderController extends Controller
 
         return $this->dataTable($query, $request->all(), OrderResource::class);
     }
-    public function allOrderIndex()
-    {
-        $reflectionClass = new \ReflectionClass(OrderStatusEnum::class);
-        $statusValues = array_values($reflectionClass->getConstants());
-        return view('backend.order.all-order', compact('statusValues'));
-    }
+
 
     /**
      * Cancel Order

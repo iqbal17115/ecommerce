@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Backend\Customer\CustomerController;
+use App\Http\Controllers\Backend\Order\AllOrderController;
 use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\ProductDetailController;
@@ -172,6 +173,13 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('/reviews/submitReply', [ReviewController::class, 'submitReply'])->name('reviews.submitReply');
     });
 
+    // Start All Order
+    Route::controller(AllOrderController::class)->group(function () {
+        Route::get('all-order', 'index')->name('all-order');
+        Route::get('advance-edit/{order}', 'advanceEdit')->name('advance-edit');
+    });
+    // End All Order
+
     // Order Start
     Route::controller(OrderController::class)->group(function () {
         Route::get('pending-order', 'pendingOrderPage')->name('pending-order');
@@ -199,7 +207,6 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('/invoices-detail/{order}', 'invoicesDetail')->name('invoices-detail');
         Route::get('confirm-order/{order}', 'confirmOrderShow')->name('confirm-order');
         Route::get('cancel-order/{order}', 'cancelOrderShow')->name('cancel-order');
-        Route::get('all-order', 'allOrderIndex')->name('all-order');
         Route::get('/generate-barcodes', 'generateBarcodes')->name('generate.barcodes');
     });
 
@@ -304,6 +311,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         }
     );
     // End Condition
+
     // Start Product Feature
     Route::group(
         [],
@@ -317,6 +325,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         }
     );
     // End Product Feature
+
     // Start Product
     Route::group(
         [],
