@@ -251,7 +251,8 @@
                                         <!-- Add more options -->
                                     </select>
                                     <div class="input-group-append">
-                                        <button type="button" class="btn btn-outline-primary" id="openShippingMethodModal">
+                                        <button type="button" class="btn btn-outline-primary"
+                                            id="openShippingMethodModal">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </div>
@@ -289,9 +290,19 @@
                     </div>
                 </div>
 
+                <div class="card">
+                    <div class="card-body">
+                        <div id="package_info">
+                            <div id="box_details"></div>
+                        </div>
+                        <div class="mt-4">
+                            <input data-repeater-create type="button" data-box_no="1" id="package_qty"
+                                name="package_qty" class="btn btn-success inner float-right" value="Add Box" />
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-
         </div>
         <div class="col-2">
             <div class="card">
@@ -401,19 +412,20 @@
 
             <div class="card">
                 <div class="card-header text-dark">
-                  Order Cancellation/Return
+                    Order Cancellation/Return
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                      <div class="col-md-6">
-                        <button type="submit" class="btn btn-danger" name="action" value="cancel">Cancellation</button>
-                      </div>
-                      <div class="col-md-6">
-                        <button type="submit" class="btn btn-warning" name="action" value="return">Return</button>
-                      </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-danger" name="action"
+                                value="cancel">Cancellation</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-warning" name="action" value="return">Return</button>
+                        </div>
                     </div>
                 </div>
-              </div>
+            </div>
 
         </div>
         {{-- End Content --}}
@@ -422,17 +434,89 @@
 @endsection
 @push('script')
     <script>
-        $(document).ready(function() {
-            // When the Confirm Order button is clicked
-            $("#confirmOrderBtn").click(function() {
-                // Show the Print Invoice button
-                $("#printInvoiceBtn").show();
-            });
+        function generateBoxInputs(boxNumber, lengthUnits) {
+            var html = '<div class="box">';
 
-            // When the Cancel Order button is clicked
-            $("#cancelOrderBtn").click(function() {
-                // Hide the Print Invoice button
-                $("#printInvoiceBtn").hide();
+            // Start of row (Bootstrap row class)
+            html += '<div class="row">';
+
+            // Package Weight
+            html += '<div class="col-md-2">';
+            html += '<label for="package_weight_' + boxNumber + '">Package Weight</label>';
+            html += '<input type="text" id="package_weight_' + boxNumber +
+                '" name="package_weight[]" placeholder="Package Weight" class="form-control">';
+            html += '</div>';
+
+            // Select for Package Weight
+            html += '<div class="col-md-2">';
+            html += '<label>&nbsp;</label>';
+            html += '<select name="package_weight_unit_' + boxNumber + '" class="form-control">';
+            for (var unitValue in lengthUnits) {
+                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+            }
+            html += '</select>';
+            html += '</div>';
+
+            // Package Length
+            html += '<div class="col-md-2">';
+            html += '<label for="package_length_' + boxNumber + '">Package Length</label>';
+            html += '<input type="text" id="package_length_' + boxNumber +
+                '" name="package_length[]" placeholder="Package Length" class="form-control">';
+            html += '</div>';
+
+            // Select for Package Length
+            html += '<div class="col-md-2">';
+            html += '<label>&nbsp;</label>';
+            html += '<select name="package_length_unit_' + boxNumber + '" class="form-control">';
+            for (var unitValue in lengthUnits) {
+                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+            }
+            html += '</select>';
+            html += '</div>';
+
+
+            // Package Height
+            html += '<div class="col-md-2">';
+            html += '<label for="package_height_' + boxNumber + '">Package Height</label>';
+            html += '<input type="text" id="package_height_' + boxNumber +
+                '" name="package_height[]" placeholder="Package Height" class="form-control">';
+            html += '</div>';
+
+            // Select for Package Height
+            html += '<div class="col-md-2">';
+            html += '<label>&nbsp;</label>';
+            html += '<select name="package_height_unit_' + boxNumber + '" class="form-control">';
+            for (var unitValue in lengthUnits) {
+                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+            }
+            html += '</select>';
+            html += '</div>';
+
+            // End of row
+            html += '</div>';
+
+            // Product Name and Quantity
+            for (var j = 0; j < products.length; j++) {
+            html += '<div class="col-md-6">';
+            html += '<label>Product</label>';
+            html += '<input type="text" name="product_name_' + boxNumber + '" value="' + products[boxNumber - 1]['product']['name'] + '" class="form-control" disabled>';
+            html += '<label>Quantity</label>';
+            html += '<input type="text" name="product_qty_' + boxNumber + '" value="' + products[boxNumber - 1]['quantity'] + '" class="form-control" disabled>';
+            html += '</div>';
+        }
+            // End of box
+            html += '</div>';
+            return html;
+        }
+
+        $(document).ready(function() {
+            var boxCounter = 1; // To keep track of box numbers
+            var lengthUnits = <?php echo json_encode($lengthUnits); ?>;
+
+            $('#package_qty').click(function() {
+                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits);
+                $('#box_details').append(newBoxHtml);
+                boxCounter++;
             });
         });
     </script>

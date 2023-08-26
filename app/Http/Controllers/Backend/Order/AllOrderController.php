@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Order;
 
+use App\Enums\LengthUnitEnum;
 use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\FrontEnd\Order;
@@ -9,7 +10,9 @@ use App\Models\FrontEnd\Order;
 class AllOrderController extends Controller
 {
     public function advanceEdit(Order $order) {
-        return view('backend.order.advance-edit', compact('order'));
+        $lengthUnits = LengthUnitEnum::getOptions();
+
+        return view('backend.order.advance-edit', compact('order', 'lengthUnits'));
     }
 
     public function index()
