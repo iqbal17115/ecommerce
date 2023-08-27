@@ -1,6 +1,21 @@
 @extends('layouts.backend_app')
 
 @section('content')
+    <style>
+        .box {
+            position: relative;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .close-icon {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+    </style>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -296,11 +311,74 @@
                             <div id="box_details"></div>
                         </div>
                         <div class="mt-4">
+                            <button class="btn btn-sm btn-info">Get Slot</button>
                             <input data-repeater-create type="button" data-box_no="1" id="package_qty"
-                                name="package_qty" class="btn btn-success inner float-right" value="Add Box" />
+                                name="package_qty" class="btn btn-sm btn-success inner float-right" value="Add Box" />
                         </div>
                     </div>
                 </div>
+
+                {{-- Start pickup slot --}}
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Pickup Slot</h5>
+                        <p class="mb-3">Pickup Slot (note: indicative time; exact pickup time may vary)</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pickupDate">Pickup Day</label>
+                                    <input type="date" id="pickupDate" name="pickupDate" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pickupTime">Pickup Time</label>
+                                    <select id="pickupTime" name="pickupTime" class="form-control">
+                                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                                        <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM</option>
+                                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                                        <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
+                                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                                        <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
+                                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                                        <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
+                                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                                        <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
+                                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                                        <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
+                                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                                        <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
+                                        <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
+                                        <option value="5:30 PM - 6:30 PM">5:30 PM - 6:30 PM</option>
+                                        <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
+                                        <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
+                                    </select>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- End pickup slot --}}
+
+                {{-- Start shipping fee --}}
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="mb-2">Total Easy Ship Fee</h4>
+                                <p class="text-muted">Shipping Charge</p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <div class="rounded-circle p-3">
+                                    <h3 class="m-0">{{ $order->shipping_charge }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- End shipping fee --}}
 
             </div>
         </div>
@@ -426,31 +504,34 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
         {{-- End Content --}}
     </div>
     <!-- end row -->
 @endsection
 @push('script')
     <script>
-        function generateBoxInputs(boxNumber, lengthUnits) {
-            var html = '<div class="box">';
+        function removeBox(boxNumber) {
+            $('#box_' + boxNumber).remove();
+        }
 
+        function generateBoxInputs(boxNumber, lengthUnits, products) {
+            var html = '<div class="box card" id="box_' + boxNumber + '">';
+            html += '<div class="close-icon" onclick="removeBox(' + boxNumber + ')">&times;</div>';
             // Start of row (Bootstrap row class)
-            html += '<div class="row">';
-
+            html += '<div class="row p-2">';
+            // Box no
+            html += '<div class="col-md-12"><h3>Select Box No: ' + boxNumber + '</h3></div>';
             // Package Weight
             html += '<div class="col-md-2">';
-            html += '<label for="package_weight_' + boxNumber + '">Package Weight</label>';
             html += '<input type="text" id="package_weight_' + boxNumber +
-                '" name="package_weight[]" placeholder="Package Weight" class="form-control">';
+                '" name="package_weight[]" placeholder="Package Weight" class="form-control form-control-sm">';
             html += '</div>';
 
             // Select for Package Weight
             html += '<div class="col-md-2">';
-            html += '<label>&nbsp;</label>';
-            html += '<select name="package_weight_unit_' + boxNumber + '" class="form-control">';
+            html += '<select name="package_weight_unit_' + boxNumber + '" class="form-control form-control-sm">';
             for (var unitValue in lengthUnits) {
                 html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
             }
@@ -459,15 +540,13 @@
 
             // Package Length
             html += '<div class="col-md-2">';
-            html += '<label for="package_length_' + boxNumber + '">Package Length</label>';
             html += '<input type="text" id="package_length_' + boxNumber +
-                '" name="package_length[]" placeholder="Package Length" class="form-control">';
+                '" name="package_length[]" placeholder="Package Length" class="form-control form-control-sm">';
             html += '</div>';
 
             // Select for Package Length
             html += '<div class="col-md-2">';
-            html += '<label>&nbsp;</label>';
-            html += '<select name="package_length_unit_' + boxNumber + '" class="form-control">';
+            html += '<select name="package_length_unit_' + boxNumber + '" class="form-control form-control-sm">';
             for (var unitValue in lengthUnits) {
                 html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
             }
@@ -477,15 +556,13 @@
 
             // Package Height
             html += '<div class="col-md-2">';
-            html += '<label for="package_height_' + boxNumber + '">Package Height</label>';
             html += '<input type="text" id="package_height_' + boxNumber +
-                '" name="package_height[]" placeholder="Package Height" class="form-control">';
+                '" name="package_height[]" placeholder="Package Height" class="form-control form-control-sm">';
             html += '</div>';
 
             // Select for Package Height
             html += '<div class="col-md-2">';
-            html += '<label>&nbsp;</label>';
-            html += '<select name="package_height_unit_' + boxNumber + '" class="form-control">';
+            html += '<select name="package_height_unit_' + boxNumber + '" class="form-control form-control-sm">';
             for (var unitValue in lengthUnits) {
                 html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
             }
@@ -497,13 +574,24 @@
 
             // Product Name and Quantity
             for (var j = 0; j < products.length; j++) {
-            html += '<div class="col-md-6">';
-            html += '<label>Product</label>';
-            html += '<input type="text" name="product_name_' + boxNumber + '" value="' + products[boxNumber - 1]['product']['name'] + '" class="form-control" disabled>';
-            html += '<label>Quantity</label>';
-            html += '<input type="text" name="product_qty_' + boxNumber + '" value="' + products[boxNumber - 1]['quantity'] + '" class="form-control" disabled>';
-            html += '</div>';
-        }
+                html += '<div class="col-md-12 row mt-2">';
+                html += '<div class="col-md-8">';
+                html += '<div class="custom-control custom-checkbox mt-2">';
+                html += '<input type="checkbox" class="custom-control-input" id="product_name_' + j + '_' + boxNumber +
+                    '">';
+                html += '<label class="custom-control-label" name="product_name_' + j + '" for="product_name_' + j + '_' +
+                    boxNumber + '">' + products[j]['product'].name + '</label>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="col-md-2">';
+                html += '' + products[j]['quantity'] + '';
+                html += '</div>';
+                html += '<div class="col-md-2">';
+                html += '<input type="text" name="product_expected_qty_' + j +
+                    '" placeholder="Qty"  class="form-control form-control-sm">';
+                html += '</div>';
+                html += '</div>';
+            }
             // End of box
             html += '</div>';
             return html;
@@ -512,12 +600,17 @@
         $(document).ready(function() {
             var boxCounter = 1; // To keep track of box numbers
             var lengthUnits = <?php echo json_encode($lengthUnits); ?>;
+            var products = {!! json_encode($order->OrderDetail) !!};
 
             $('#package_qty').click(function() {
-                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits);
+                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, products);
                 $('#box_details').append(newBoxHtml);
                 boxCounter++;
             });
+
+            var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, products);
+            $('#box_details').append(newBoxHtml);
+            boxCounter++;
         });
     </script>
 @endpush
