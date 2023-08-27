@@ -60,9 +60,13 @@
                 {{-- Start Payment status --}}
                 <div class="col-md-6">
                     <div class="card text-center ">
-                        <div class="card-body">
-                            <h5 class="font-size-15"><a href="#" class="text-dark">Payment Status</a></h5>
-                        </div>
+                            <div class="card-body d-flex justify-content-center">
+                                <h5 class="font-size-15 d-flex align-items-center">
+                                    <i class="fas fa-money-bill text-success bx-md me-2"></i>
+                                    <a href="#" class="text-dark">Payment Status</a>
+                                </h5>
+                            </div>
+
                         <div class="card-footer bg-transparent border-top">
                             <div class="contact-links d-flex font-size-20">
                                 <div class="flex-fill">
@@ -77,9 +81,13 @@
                 {{-- Start Shipment status --}}
                 <div class="col-md-6">
                     <div class="card text-center ">
-                        <div class="card-body">
-                            <h5 class="font-size-15"><a href="#" class="text-dark">Fullfilment Status</a></h5>
+                        <div class="card-body d-flex justify-content-center">
+                            <h5 class="font-size-15 d-flex align-items-center">
+                                <i class="bx bx-car text-success bx-md me-2"></i>
+                                <a href="#" class="text-dark">Fullfilment Status</a>
+                            </h5>
                         </div>
+
                         <div class="card-footer bg-transparent border-top">
                             <div class="contact-links d-flex font-size-20">
                                 <div class="flex-fill">
