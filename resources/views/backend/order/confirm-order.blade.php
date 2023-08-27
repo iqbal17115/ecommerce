@@ -1,6 +1,21 @@
 @extends('layouts.backend_app')
 
 @section('content')
+<style>
+    .box {
+        position: relative;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .close-icon {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+    }
+</style>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -112,6 +127,188 @@
             </div>
         </div> <!-- end col -->
 
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Payment Method</h5>
+                            <p class="mb-0">Cash On Delivery (COD)</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Payment ID</h5>
+                            <p class="mb-0">568746646464</p>
+                            <p class="mb-0">23/08/2023 - 10:45 AM</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Payment Status</h5>
+                            <p class="mb-0">Paid</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Shipping Panel</h5>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="courier">Courier:</label>
+                                <div class="input-group">
+                                    <select class="form-control" id="courier" name="courier">
+                                        <option value="pathao">Pathao</option>
+                                        <option value="dhl">DHL</option>
+                                        <!-- Add more options -->
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-primary" id="openCourierModal">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="shippingMethod">Shipping Method:</label>
+                                <div class="input-group">
+                                    <select class="form-control" id="shippingMethod" name="shippingMethod">
+                                        <option value="standard">Standard Delivery</option>
+                                        <option value="express">Express Delivery</option>
+                                        <!-- Add more options -->
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-primary" id="openShippingMethodModal">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="trackingId">Tracking ID:</label>
+                            <input type="text" class="form-control" id="trackingId" name="trackingId">
+                        </div>
+                        <div class="form-group">
+                            <label for="dispatchDate">Dispatch Date:</label>
+                            <input type="datetime-local" class="form-control" id="dispatchDate" name="dispatchDate">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Carrier & Delivery</h5>
+                                <p>Pathao</p>
+                                <p>Standard Delivery</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h5>Tracking ID</h5>
+                                <p>568746646464</p>
+                                <p>23/08/2023 - 10:45 AM</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h5>Estimate Delivery Date</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div id="package_info">
+                            <div id="box_details"></div>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-sm btn-info">Get Slot</button>
+                            <input data-repeater-create type="button" data-box_no="1" id="package_qty"
+                                name="package_qty" class="btn btn-sm btn-success inner float-right" value="Add Box" />
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Start pickup slot --}}
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Pickup Slot</h5>
+                        <p class="mb-3">Pickup Slot (note: indicative time; exact pickup time may vary)</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pickupDate">Pickup Day</label>
+                                    <input type="date" id="pickupDate" name="pickupDate" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="pickupTime">Pickup Time</label>
+                                    <select id="pickupTime" name="pickupTime" class="form-control">
+                                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                                        <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM</option>
+                                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                                        <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
+                                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                                        <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
+                                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                                        <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
+                                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                                        <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
+                                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                                        <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
+                                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                                        <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
+                                        <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
+                                        <option value="5:30 PM - 6:30 PM">5:30 PM - 6:30 PM</option>
+                                        <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
+                                        <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
+                                    </select>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- End pickup slot --}}
+
+                {{-- Start shipping fee --}}
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="mb-2">Total Easy Ship Fee</h4>
+                                <p class="text-muted">Shipping Charge</p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <div class="rounded-circle p-3">
+                                    <h3 class="m-0">{{ $order->shipping_charge }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- End shipping fee --}}
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="package_info">
+                        <div id="box_details"></div>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-sm btn-info">Get Slot</button>
+                        <input data-repeater-create type="button" data-box_no="1" id="package_qty"
+                            name="package_qty" class="btn btn-sm btn-success inner float-right" value="Add Box" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="col-12">
             <div class="card shadow">
                 <div class="card-body">
@@ -119,7 +316,8 @@
                         <div id="box_details"></div>
                     </div>
                     <div class="mt-4">
-                        <input data-repeater-create type="button" data-box_no="1" id="package_qty" name="package_qty" class="btn btn-success inner float-right" value="Add Box"/>
+                        <input data-repeater-create type="button" data-box_no="1" id="package_qty" name="package_qty"
+                            class="btn btn-success inner float-right" value="Add Box" />
                     </div>
                 </div>
             </div>
@@ -231,68 +429,105 @@
 @endsection
 @push('script')
     <script>
-        let box_no = 1;
+        function removeBox(boxNumber) {
+            $('#box_' + boxNumber).remove();
+        }
+
+        function generateBoxInputs(boxNumber, lengthUnits, products) {
+            var html = '<div class="box card" id="box_' + boxNumber + '">';
+            html += '<div class="close-icon" onclick="removeBox(' + boxNumber + ')">&times;</div>';
+            // Start of row (Bootstrap row class)
+            html += '<div class="row p-2">';
+            // Box no
+            html += '<div class="col-md-12"><h3>Select Box No: ' + boxNumber + '</h3></div>';
+            // Package Weight
+            html += '<div class="col-md-2">';
+            html += '<input type="text" id="package_weight_' + boxNumber +
+                '" name="package_weight[]" placeholder="Package Weight" class="form-control form-control-sm">';
+            html += '</div>';
+
+            // Select for Package Weight
+            html += '<div class="col-md-2">';
+            html += '<select name="package_weight_unit_' + boxNumber + '" class="form-control form-control-sm">';
+            for (var unitValue in lengthUnits) {
+                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+            }
+            html += '</select>';
+            html += '</div>';
+
+            // Package Length
+            html += '<div class="col-md-2">';
+            html += '<input type="text" id="package_length_' + boxNumber +
+                '" name="package_length[]" placeholder="Package Length" class="form-control form-control-sm">';
+            html += '</div>';
+
+            // Select for Package Length
+            html += '<div class="col-md-2">';
+            html += '<select name="package_length_unit_' + boxNumber + '" class="form-control form-control-sm">';
+            for (var unitValue in lengthUnits) {
+                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+            }
+            html += '</select>';
+            html += '</div>';
+
+
+            // Package Height
+            html += '<div class="col-md-2">';
+            html += '<input type="text" id="package_height_' + boxNumber +
+                '" name="package_height[]" placeholder="Package Height" class="form-control form-control-sm">';
+            html += '</div>';
+
+            // Select for Package Height
+            html += '<div class="col-md-2">';
+            html += '<select name="package_height_unit_' + boxNumber + '" class="form-control form-control-sm">';
+            for (var unitValue in lengthUnits) {
+                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+            }
+            html += '</select>';
+            html += '</div>';
+
+            // End of row
+            html += '</div>';
+
+            // Product Name and Quantity
+            for (var j = 0; j < products.length; j++) {
+                html += '<div class="col-md-12 row mt-2">';
+                html += '<div class="col-md-8">';
+                html += '<div class="custom-control custom-checkbox mt-2">';
+                html += '<input type="checkbox" class="custom-control-input" id="product_name_' + j + '_' + boxNumber +
+                    '">';
+                html += '<label class="custom-control-label" name="product_name_' + j + '" for="product_name_' + j + '_' +
+                    boxNumber + '">' + products[j]['product'].name + '</label>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="col-md-2">';
+                html += '' + products[j]['quantity'] + '';
+                html += '</div>';
+                html += '<div class="col-md-2">';
+                html += '<input type="text" name="product_expected_qty_' + j +
+                    '" placeholder="Qty"  class="form-control form-control-sm">';
+                html += '</div>';
+                html += '</div>';
+            }
+            // End of box
+            html += '</div>';
+            return html;
+        }
+
         $(document).ready(function() {
-            $('#package_qty').on('click', function() {
+            var boxCounter = 1; // To keep track of box numbers
+            var lengthUnits = <?php echo json_encode($lengthUnits); ?>;
+            var products = {!! json_encode($order->OrderDetail) !!};
 
-                var products = {!! json_encode($order->OrderDetail) !!};
-                var boxHtml = '<div class="box border p-3 mb-3">';
-                boxHtml += '<h6>Select Box Number Box no: ' + box_no + '</h6>';
-                boxHtml += '<div class="row">';
-                boxHtml += '<div class="col-md-3">';
-                boxHtml += '<div class="package">';
-                boxHtml += '<label for="weight_' + box_no + '">Package Weight</label>';
-                boxHtml += '<input type="number" id="weight_' + box_no + '" name="weight_' + box_no +
-                    '" class="form-control">';
-                boxHtml += '</div>';
-                boxHtml += '</div>';
-                boxHtml += '<div class="col-md-3">';
-                boxHtml += '<div class="package">';
-                boxHtml += '<label for="length_' + box_no + '">Length</label>';
-                boxHtml += '<input type="number" id="length_' + box_no + '" name="length_' + box_no +
-                    '" class="form-control">';
-                boxHtml += '</div>';
-                boxHtml += '</div>';
-                boxHtml += '<div class="col-md-3">';
-                boxHtml += '<div class="package">';
-                boxHtml += '<label for="width_' + box_no + '">Width</label>';
-                boxHtml += '<input type="number" id="width_' + box_no + '" name="width_' + box_no +
-                    '" class="form-control">';
-                boxHtml += '</div>';
-                boxHtml += '</div>';
-                boxHtml += '<div class="col-md-3">';
-                boxHtml += '<div class="package">';
-                boxHtml += '<label for="height_' + box_no + '">Height</label>';
-                boxHtml += '<input type="number" id="height_' + box_no + '" name="height_' + box_no +
-                    '" class="form-control">';
-                boxHtml += '</div>';
-                boxHtml += '</div>';
-                boxHtml += '<div class="col-md-12">';
-                boxHtml += '<div class="package">';
-                boxHtml += '<label for="product_' + box_no + '">Select Product</label>';
-                boxHtml += '<select id="product_' + box_no + '" name="product_' + box_no +
-                    '" class="form-control" multiple>';
-
-                var optionsHtml = '';
-                for (var j = 0; j < products.length; j++) {
-                    optionsHtml += '<option value="' + products[j].id + '">' + products[j][
-                        'product'
-                    ].name + '</option>';
-                }
-                boxHtml += optionsHtml;
-
-                boxHtml += '</select>';
-                boxHtml += '</div>';
-                boxHtml += '</div>';
-                boxHtml += '</div>'; // end row
-                boxHtml += '</div>'; // end box
-
-                $('#box_details').append(boxHtml);
-                box_no++;
-
+            $('#package_qty').click(function() {
+                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, products);
+                $('#box_details').append(newBoxHtml);
+                boxCounter++;
             });
-            $('#package_qty').click();
-        });
 
+            var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, products);
+            $('#box_details').append(newBoxHtml);
+            boxCounter++;
+        });
     </script>
 @endpush

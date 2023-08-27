@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Order;
 
+use App\Enums\LengthUnitEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Models\FrontEnd\Order;
@@ -85,7 +86,8 @@ class OrderController extends Controller
      */
     public function confirmOrderShow(Order $order): View
     {
-        return view('backend.order.confirm-order', compact('order'));
+        $lengthUnits = LengthUnitEnum::getOptions();
+        return view('backend.order.confirm-order', compact('order', 'lengthUnits'));
     }
     /**
      * Order
