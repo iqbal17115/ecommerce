@@ -62,12 +62,28 @@
                                         <input type="text" name="product_order_remaining_qty_{{$orderDetail->Product->id}}" id="product_order_remaining_qty_{{$orderDetail->Product->id}}" class="form-control form-control-sm" readonly/>
                                     </div>
                                     <div class="col-md-12 mt-2">
-                                        <input type="text" name="product_return reason_{{$orderDetail->Product->id}}" id="product_return_reason_{{$orderDetail->Product->id}}" class="form-control form-control-sm" placeholder="Reason For Return"/>
+                                        <select name="product_return reason_{{$orderDetail->Product->id}}" id="product_return reason_{{$orderDetail->Product->id}}" class="form-control form-control-sm">
+                                            <option value="">Select Product Return Reason</option>
+                                            <?php
+                                            foreach ($return_reasons as $value => $label) {
+                                                echo '<option value="' . $value . '">' . $label . '</option>';
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
                     @endforeach
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-end mt-3">
+                                <button type="button" class="btn btn-primary btn-sm mr-2">Save</button>
+                                <button type="button" class="btn btn-secondary btn-sm">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
