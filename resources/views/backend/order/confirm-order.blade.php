@@ -278,26 +278,13 @@
         </div>
 
         {{-- Start shipping fee --}}
-        <div class="col-12">
-            {{-- Start shipping fee --}}
-            <div class="card border-0 shadow">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4 class="mb-2">Total Easy Ship Fee</h4>
-                            <p class="text-muted">Shipping Charge</p>
-                        </div>
-                        <div class="col-md-6 text-md-end">
-                            <div class="rounded-circle p-3">
-                                <h3 class="m-0">{{ $order->shipping_charge }}</h3>
-                            </div>
-                        </div>
-                    </div>
+        <div class="card border-0 shadow">
+            <div class="card-body align-items-center">
+                <div>
+                    <p class="text-dark"><center class="h4">Total Shipping Charge: <span class="h3">{{ $order->shipping_charge }}</span></center></p>
                 </div>
             </div>
-            {{-- End shipping fee --}}
-        </div><!-- end col -->
-
+        </div>
         {{-- End shipping fee --}}
     </div>
     <!-- end row -->
