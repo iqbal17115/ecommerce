@@ -326,10 +326,10 @@
                         <br>
                         <div id="accordion">
                             <div class="card mb-1 shadow-none">
-                                <div class="card-header" id="headingOne">
+                                <div class="card-header bg-mute" id="headingOne">
                                     <h6 class="m-0 text-center" href="#collapseOne" data-toggle="collapse"
                                         aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;">
-                                        <a class="text-dark">
+                                        <a class="btn btn-sm btn-outline-primary text-dark">
                                             Get Slot
                                         </a>
                                     </h6>
