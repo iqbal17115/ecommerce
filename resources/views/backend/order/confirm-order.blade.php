@@ -279,9 +279,9 @@
 
         {{-- Start shipping fee --}}
         <div class="card border-0 shadow">
-            <div class="card-body align-items-center">
+            <div class="card-body">
                 <div>
-                    <p class="text-dark"><center class="h4">Total Shipping Charge: <span class="h3">{{ $order->shipping_charge }}</span></center></p>
+                    <p class="text-dark h5">Total Shipping Charge: {{ $currency->icon }} {{ $order->shipping_charge }}</p>
                 </div>
             </div>
         </div>
