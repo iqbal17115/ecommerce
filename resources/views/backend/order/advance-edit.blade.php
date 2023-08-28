@@ -537,7 +537,7 @@
             $('#box_' + boxNumber).remove();
         }
 
-        function generateBoxInputs(boxNumber, lengthUnits, products) {
+        function generateBoxInputs(boxNumber, lengthUnits, weightUnits, products) {
             var html = '<div class="box card" id="box_' + boxNumber + '">';
             html += '<div class="close-icon" onclick="removeBox(' + boxNumber + ')">&times;</div>';
             // Start of row (Bootstrap row class)
@@ -553,8 +553,8 @@
             // Select for Package Weight
             html += '<div class="col-md-2">';
             html += '<select name="package_weight_unit_' + boxNumber + '" class="form-control form-control-sm">';
-            for (var unitValue in lengthUnits) {
-                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+            for (var weightValue in weightUnits) {
+                html += '<option value="' + weightValue + '">' + weightUnits[weightValue] + '</option>';
             }
             html += '</select>';
             html += '</div>';
@@ -621,15 +621,16 @@
         $(document).ready(function() {
             var boxCounter = 1; // To keep track of box numbers
             var lengthUnits = <?php echo json_encode($lengthUnits); ?>;
+            var weightUnits = <?php echo json_encode($weightUnits); ?>;
             var products = {!! json_encode($order->OrderDetail) !!};
 
             $('#package_qty').click(function() {
-                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, products);
+                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products);
                 $('#box_details').append(newBoxHtml);
                 boxCounter++;
             });
 
-            var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, products);
+            var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products);
             $('#box_details').append(newBoxHtml);
             boxCounter++;
         });

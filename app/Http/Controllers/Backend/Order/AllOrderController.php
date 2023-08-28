@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Order;
 
 use App\Enums\LengthUnitEnum;
 use App\Enums\OrderStatusEnum;
+use App\Enums\WeightUnitEnum;
 use App\Http\Controllers\Controller;
 use App\Models\FrontEnd\Order;
 
@@ -11,8 +12,9 @@ class AllOrderController extends Controller
 {
     public function advanceEdit(Order $order) {
         $lengthUnits = LengthUnitEnum::getOptions();
+        $weightUnits = WeightUnitEnum::getWeightOptions();
 
-        return view('backend.order.advance-edit', compact('order', 'lengthUnits'));
+        return view('backend.order.advance-edit', compact('order', 'lengthUnits', 'weightUnits'));
     }
 
     public function index()
