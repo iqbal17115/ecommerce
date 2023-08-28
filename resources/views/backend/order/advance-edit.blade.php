@@ -60,12 +60,12 @@
                 {{-- Start Payment status --}}
                 <div class="col-md-6">
                     <div class="card text-center ">
-                            <div class="card-body d-flex justify-content-center">
-                                <h5 class="font-size-15 d-flex align-items-center">
-                                    <i class="fas fa-money-bill text-success bx-md me-2"></i>
-                                    <a href="#" class="text-dark">Payment Status</a>
-                                </h5>
-                            </div>
+                        <div class="card-body d-flex justify-content-center">
+                            <h5 class="font-size-15 d-flex align-items-center">
+                                <i class="fas fa-money-bill text-success bx-md me-2"></i>
+                                <a href="#" class="text-dark">Payment Status</a>
+                            </h5>
+                        </div>
 
                         <div class="card-footer bg-transparent border-top">
                             <div class="contact-links d-flex font-size-20">
@@ -319,56 +319,70 @@
                             <div id="box_details"></div>
                         </div>
                         <div class="mt-4">
-                            <button class="btn btn-sm btn-info">Get Slot</button>
                             <input data-repeater-create type="button" data-box_no="1" id="package_qty"
                                 name="package_qty" class="btn btn-sm btn-success inner float-right" value="Add Box" />
                         </div>
-                    </div>
-                </div>
-
-                {{-- Start pickup slot --}}
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title mb-4">Pickup Slot</h5>
-                        <p class="mb-3">Pickup Slot (note: indicative time; exact pickup time may vary)</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="pickupDate">Pickup Day</label>
-                                    <input type="date" id="pickupDate" name="pickupDate" class="form-control">
+                        <br>
+                        <br>
+                        <div id="accordion">
+                            <div class="card mb-1 shadow-none">
+                                <div class="card-header" id="headingOne">
+                                    <h6 class="m-0 text-center" href="#collapseOne" data-toggle="collapse"
+                                        aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;">
+                                        <a class="text-dark">
+                                            Get Slot
+                                        </a>
+                                    </h6>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="pickupTime">Pickup Time</label>
-                                    <select id="pickupTime" name="pickupTime" class="form-control">
-                                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
-                                        <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM</option>
-                                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
-                                        <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
-                                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
-                                        <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
-                                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
-                                        <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
-                                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
-                                        <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
-                                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
-                                        <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
-                                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
-                                        <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
-                                        <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
-                                        <option value="5:30 PM - 6:30 PM">5:30 PM - 6:30 PM</option>
-                                        <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
-                                        <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
-                                    </select>
+
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                    data-parent="#accordion">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">Pickup Slot</h5>
+                                        <p class="mb-3">Pickup Slot (note: indicative time; exact pickup time may vary)
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="pickupDate">Pickup Day</label>
+                                                    <input type="date" id="pickupDate" name="pickupDate"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="pickupTime">Pickup Time</label>
+                                                    <select id="pickupTime" name="pickupTime" class="form-control">
+                                                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                                                        <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM</option>
+                                                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                                                        <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
+                                                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                                                        <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
+                                                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                                                        <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
+                                                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                                                        <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
+                                                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                                                        <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
+                                                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                                                        <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
+                                                        <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
+                                                        <option value="5:30 PM - 6:30 PM">5:30 PM - 6:30 PM</option>
+                                                        <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
+                                                        <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
+                                                    </select>
 
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{-- End pickup slot --}}
 
                 {{-- Start shipping fee --}}
                 <div class="card border-0 shadow">
@@ -503,11 +517,10 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-danger" name="action"
-                                value="cancel">Cancellation</button>
+                            <a type="submit" class="btn btn-danger" href="{{ route('cancellation_product', ['order' =>$order->id]) }}">Cancellation</a>
                         </div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-warning" name="action" value="return">Return</button>
+                            <a type="submit" class="btn btn-warning" href="{{ route('return_product', ['order' =>$order->id]) }}">Return</a>
                         </div>
                     </div>
                 </div>

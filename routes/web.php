@@ -4,6 +4,8 @@ use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\AllOrderController;
 use App\Http\Controllers\Backend\Order\OrderController;
+use App\Http\Controllers\Backend\OrderProduct\OrderProductCancellationController;
+use App\Http\Controllers\Backend\OrderProduct\OrderProductReturnController;
 use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\ProductDetailController;
 use App\Http\Controllers\Backend\Product\UnitController;
@@ -103,6 +105,17 @@ Route::post('customer-login', [AuthController::class, 'authenticate'])->name('cu
 Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'calculateShippingCharge'])->name('calculateShippingCharge');
 
 Route::group(['middleware' => 'auth'], function () {
+
+     // Manage Cancellation Order Product
+     Route::controller(OrderProductReturnController::class)->group(function () {
+        Route::get('return-product/{order}', 'index')->name('return_product');
+    });
+
+    // Manage Cancellation Order Product
+    Route::controller(OrderProductCancellationController::class)->group(function () {
+        Route::get('cancellation-product/{order}', 'index')->name('cancellation_product');
+    });
+
     // My account
     Route::controller(MyAccountController::class)->group(function () {
         Route::get('my-account', 'index')->name('my.account');
