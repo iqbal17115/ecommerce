@@ -214,10 +214,7 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <a href="/advance-edit/${order.id}"
-                                                    class="btn btn-info waves-effect waves-light text-light btn-block btn-sm">
-                                                    Advance Edit
-                                                </a>
+                                                <a href="/advance-edit/${order.id}" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="Advance Edit" data-original-title="Advance Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
                                             </td>
                                         </tr>
                                       `;

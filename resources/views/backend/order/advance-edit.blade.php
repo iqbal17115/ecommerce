@@ -91,7 +91,7 @@
                         <div class="card-footer bg-transparent border-top">
                             <div class="contact-links d-flex font-size-20">
                                 <div class="flex-fill">
-                                    <span class="badge badge-pill badge-danger font-size-12">Unshipped</span>
+                                    <span class="badge badge-pill {{$order->status == 'shipped' ? 'badge-success' : 'badge-danger'}} font-size-12">{{ucwords($order->status)}}</span>
                                 </div>
                             </div>
                         </div>
