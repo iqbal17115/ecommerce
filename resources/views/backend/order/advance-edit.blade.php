@@ -40,13 +40,36 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6"><span>Order Id: {{ $order?->code }}</span> - <span>
+                        <div class="col-md-5"><span>Order Id: {{ $order?->code }}</span> - <span>
                                 {{ $order ? date('M d, Y h:i A', strtotime($order->order_date)) : 'N/A' }} </span></div>
-                        <div class="col-md-6 text-right h6">
-                            <button id="confirmOrderBtn" class="btn btn-success btn-sm">Confirm Order</button>
-                            <button id="cancelOrderBtn" class="btn btn-danger btn-sm">Cancel Order</button>
-                            <button id="printInvoiceBtn" class="btn btn-success btn-sm" style="display: none;">Print
-                                Invoice</button>
+                        <div class="col-md-7 text-right h6">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <form id="cancelReasonForm" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <select id="cancelReasonInput" class="form-control form-control-sm"
+                                                    name="cancelReasonInput">
+                                                    <option value="">Select</option>
+                                                    @foreach ($cancel_reasons as $value => $label)
+                                                        <option value="{{ $value }}">{{ $label }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button id="saveCancelReasonBtn"
+                                                    class="btn btn-primary btn-sm">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-5">
+                                    <button id="confirmOrderBtn" class="btn btn-success btn-sm">Confirm Order</button>
+                                    <button id="cancelOrderBtn" class="btn btn-danger btn-sm">Cancel Order</button>
+                                    <button id="printInvoiceBtn" class="btn btn-success btn-sm" style="display: none;">Print
+                                        Invoice</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,7 +114,8 @@
                         <div class="card-footer bg-transparent border-top">
                             <div class="contact-links d-flex font-size-20">
                                 <div class="flex-fill">
-                                    <span class="badge badge-pill {{$order->status == 'shipped' ? 'badge-success' : 'badge-danger'}} font-size-12">{{ucwords($order->status)}}</span>
+                                    <span
+                                        class="badge badge-pill {{ $order->status == 'shipped' ? 'badge-success' : 'badge-danger' }} font-size-12">{{ ucwords($order->status) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -388,7 +412,8 @@
                 <div class="card border-0 shadow">
                     <div class="card-body">
                         <div>
-                            <p class="text-dark h5">Total Shipping Charge: {{ $currency->icon }} {{ $order->shipping_charge }}</p>
+                            <p class="text-dark h5">Total Shipping Charge: {{ $currency->icon }}
+                                {{ $order->shipping_charge }}</p>
                         </div>
                     </div>
                 </div>
@@ -509,10 +534,12 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <a type="submit" class="btn btn-danger" href="{{ route('cancellation_product', ['order' =>$order->id]) }}">Cancellation</a>
+                            <a type="submit" class="btn btn-danger"
+                                href="{{ route('cancellation_product', ['order' => $order->id]) }}">Cancellation</a>
                         </div>
                         <div class="col-md-6">
-                            <a type="submit" class="btn btn-warning" href="{{ route('return_product', ['order' =>$order->id]) }}">Return</a>
+                            <a type="submit" class="btn btn-warning"
+                                href="{{ route('return_product', ['order' => $order->id]) }}">Return</a>
                         </div>
                     </div>
                 </div>
@@ -625,6 +652,35 @@
             var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products);
             $('#box_details').append(newBoxHtml);
             boxCounter++;
+        });
+
+        $("#confirmOrderBtn").click(function() {
+            $(this).prop("disabled", true);
+            $("#cancelOrderBtn").prop("disabled", false);
+            $("#printInvoiceBtn").show();
+            $("#cancelReasonSelect").hide();
+            $("#cancelReasonForm").hide();
+        });
+
+        $("#cancelOrderBtn").click(function() {
+            $(this).prop("disabled", true);
+            $("#confirmOrderBtn").prop("disabled", false);
+            $("#printInvoiceBtn").hide();
+            $("#cancelReasonSelect").hide();
+            $("#cancelReasonForm").show();
+        });
+
+        $("#saveCancelReasonBtn").click(function() {
+            var reason = $("#cancelReasonInput").val();
+            if (reason !== "") {
+                // You can perform an AJAX request here to save the reason on the server
+                // For demonstration purposes, we'll just log the reason to the console
+                console.log("Reason for cancellation: " + reason);
+
+                // Hide the form and show the select
+                $("#cancelReasonForm").hide();
+                $("#cancelReasonSelect").show();
+            }
         });
     </script>
 @endpush
