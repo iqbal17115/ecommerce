@@ -497,8 +497,9 @@
                             <div class="col-md-8">
                                 <select class="form-control form-control-sm" id="noteType" name="noteType">
                                     <option value="">Change Status</option>
-                                    <option value="shipped">Shipped</option>
-                                    <option value="unshipped">Unshipped</option>
+                                    @foreach ($orderStatuses as $statusValue)
+                                        <option value="{{ $statusValue }}">{{ $statusValue }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-4">

@@ -15,8 +15,9 @@ class AllOrderController extends Controller
         $lengthUnits = LengthUnitEnum::getOptions();
         $weightUnits = WeightUnitEnum::getWeightOptions();
         $cancel_reasons = ProductCancelReasonEnum::getCancelOptions();
-
-        return view('backend.order.advance-edit', compact('order', 'lengthUnits', 'weightUnits', 'cancel_reasons'));
+        $reflectionClass = new \ReflectionClass(OrderStatusEnum::class);
+        $orderStatuses = array_values($reflectionClass->getConstants());
+        return view('backend.order.advance-edit', compact('order', 'lengthUnits', 'weightUnits', 'cancel_reasons', 'orderStatuses'));
     }
 
     public function index()
