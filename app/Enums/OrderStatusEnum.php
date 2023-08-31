@@ -25,4 +25,29 @@ class OrderStatusEnum
     public const PRE_ORDER = "pre_order";
     public const BACKORDERED = "backordered";
     public const PARTIALLY_SHIPPED = "partially_shipped";
+
+    public static function getOrderStatuses()
+    {
+        return [
+            self::PENDING => 'Pending',
+            self::PROCESSING => 'Processing',
+            self::SHIPPED => 'Shipped',
+            self::IN_TRANSIT => 'In Transit',
+            self::ARRIVAL_AT_DISTRIBUTION_CENTER => 'Arrival at Distribution Center',
+            self::OUT_FOR_DELIVERY => 'Out for Delivery',
+            self::DELIVERY_ATTEMPTED => 'Delivery Attempted',
+            self::DELIVERY_RESCHEDULING => 'Delivery Rescheduling',
+            self::DELIVERED => 'Delivered',
+            self::PAYMENT_COLLECTED => 'Payment Collected',
+            self::COMPLETED => 'Completed',
+            self::HOLD => 'Hold',
+            self::FAILED => 'Failed',
+            self::CANCELLED => 'Cancelled',
+            self::RETURNED => 'Returned',
+            self::REFUNDED => 'Refunded',
+            self::PRE_ORDER => 'Pre Order',
+            self::BACKORDERED => 'Backordered',
+            self::PARTIALLY_SHIPPED => 'Partially Shipped',
+        ];
+    }
 }

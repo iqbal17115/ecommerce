@@ -11,6 +11,7 @@ use App\Models\FrontEnd\Order;
 
 class AllOrderController extends Controller
 {
+    
     public function advanceEdit(Order $order) {
         $lengthUnits = LengthUnitEnum::getOptions();
         $weightUnits = WeightUnitEnum::getWeightOptions();

@@ -65,7 +65,9 @@
                                 </div>
                                 <div class="col-md-5">
                                     <button id="confirmOrderBtn" class="btn btn-success btn-sm">Confirm Order</button>
-                                    <button id="cancelOrderBtn" class="btn btn-danger btn-sm">Cancel Order</button>
+                                    <button type="button" class="btn btn-danger waves-effect waves-light btn-sm"
+                                        data-toggle="modal" data-target=".cancel-order">Cancel</button>
+                                    {{-- <button id="cancelOrderBtn" class="btn btn-danger btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-center">Cancel Order</button> --}}
                                     <button id="printInvoiceBtn" class="btn btn-success btn-sm" style="display: none;">Print
                                         Invoice</button>
                                 </div>
@@ -550,8 +552,40 @@
         {{-- End Content --}}
     </div>
     <!-- end row -->
+
+    <!-- Cancel Modal -->
+    <div class="modal fade cancel-order" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="" id="canceOrderlReason">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title mt-0">Reason For Cancellation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <select id="cancelReasonInput" class="form-control form-control-sm" name="status" required>
+                            <option value="">Select</option>
+                            @foreach ($cancel_reasons as $value => $label)
+                                <option value="{{ $value }}">{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Ok</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 @push('script')
+    <script src="{{ asset('backend_js/order_product/advance_edit.js') }}"></script>
     <script>
         function removeBox(boxNumber) {
             $('#box_' + boxNumber).remove();
@@ -661,14 +695,6 @@
             $("#printInvoiceBtn").show();
             $("#cancelReasonSelect").hide();
             $("#cancelReasonForm").hide();
-        });
-
-        $("#cancelOrderBtn").click(function() {
-            $(this).prop("disabled", true);
-            $("#confirmOrderBtn").prop("disabled", false);
-            $("#printInvoiceBtn").hide();
-            $("#cancelReasonSelect").hide();
-            $("#cancelReasonForm").show();
         });
 
         $("#saveCancelReasonBtn").click(function() {
