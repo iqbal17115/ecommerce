@@ -10,7 +10,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico') }}">
-
+   <!-- Sweet Alert-->
+   <link href="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
     <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
         type="text/css" />
@@ -86,6 +87,11 @@
     <!-- App js -->
     <!-- <script src="{{ URL::asset('assets/js/app.min.js') }}"></script> -->
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+  <!-- Sweet Alerts js -->
+  <script src="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
+  <!-- Sweet alert init js-->
+  <script src="{{ URL::asset('assets/js/pages/sweet-alerts.init.js') }}"></script>
 
     <script>
         $(document).ready(function() {

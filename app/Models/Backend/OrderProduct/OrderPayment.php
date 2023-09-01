@@ -10,4 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class OrderPayment extends Model
 {
     use HasFactory, SoftDeletes, BaseModel;
+
+    protected $fillable = [
+        'order_id',
+        'payment_type',
+        'payment_method',
+        'payment_id',
+        'payment_date'
+    ];
 }

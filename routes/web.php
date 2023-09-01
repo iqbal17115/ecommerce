@@ -190,7 +190,13 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
     Route::controller(AllOrderController::class)->group(function () {
         Route::get('all-order', 'index')->name('all-order');
         Route::get('advance-edit/{order}', 'advanceEdit')->name('advance-edit');
-        Route::post('/cancel-order', 'cancelOrder')->name('cancel.order');
+        Route::post('/cancel-order/{order}', 'cancelOrder')->name('cancel.order');
+        Route::post('/confirm-order/{order}', 'confirmOrder')->name('confirm.order');
+        Route::post('/order-note/{order}', 'orderNote')->name('order.note');
+        Route::post('/order-payment/{order}', 'orderPaymentStatus')->name('order_payment.status');
+        Route::post('/order-payment-submit/{order}', 'orderPaymentSave')->name('order_payment.submit');
+        Route::post('/order-payment-note-submit/{order}', 'orderNotePaymentSave')->name('order_payment_note.submit');
+        Route::post('/order-fulfilment-note-submit/{order}', 'orderFulfilmentNotetSave')->name('order_fulfilment_note.submit');
     });
     // End All Order
 

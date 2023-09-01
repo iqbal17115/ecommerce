@@ -1,31 +1,202 @@
 $(document).ready(function () {
+    $('#orderPaymentSubmit').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
 
-        $('#canceOrderlReason').submit(function(event) {
-            event.preventDefault(); // Prevent default form submission
-            var form = $(this);
-            var url = form.attr('action');
-    
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: form.serialize(), // Serialize the form data
-                success: function(response) {
-                    // Handle success, e.g., show a success message
-                    alert(response.message);
-                },
-                error: function(xhr, status, error) {
-                    // Handle error, e.g., show an error message
-                    alert('An error occurred');
-                }
-            });
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                Swal.fire({
+                    position: "top-end",
+                    type: "success",
+                    title: response.message,
+                    showConfirmButton: !1,
+                    timer: 1500
+                });
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
         });
+    });
 
-    const cancelOrderBtn = document.getElementById("cancelOrderBtn");
-    const cancelModal = document.getElementById("cancelModal");
-    const cancelForm = document.getElementById("cancelForm");
+    $('#orderPaymentStatusSubmit').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
 
-    cancelOrderBtn.addEventListener("click", function () {
-        cancelModal.style.display = "block";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                Swal.fire({
+                    position: "top-end",
+                    type: "success",
+                    title: response.message,
+                    showConfirmButton: !1,
+                    timer: 1500
+                });
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
+        });
+    });
+
+    $('#orderFulfilmentNoteSubmit').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                var note = response.data.note;
+                var noteType = response.data.note_type;
+                $("#fulfilment_note").val(null);
+                $("#order_fulfilment_note_type").val("");
+                // Create a new list item
+                var listItem = $("<li class='list-group-item d-flex justify-content-between align-items-center'></li>");
+
+                // Set the content of the list item
+                listItem.html(note + '<span class="badge badge-primary badge-pill">' + noteType + '</span>');
+
+                // Append the new list item to the list group
+                $("#list-group-payment-order-fulfilment-note").append(listItem);
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
+        });
+    });
+
+    $('#orderPaymentNoteSubmit').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                var note = response.data.note;
+                var noteType = response.data.note_type;
+                $("#payment_note").val(null);
+                $("#order_payment_note_type").val("");
+                // Create a new list item
+                var listItem = $("<li class='list-group-item d-flex justify-content-between align-items-center'></li>");
+
+                // Set the content of the list item
+                listItem.html(note + '<span class="badge badge-primary badge-pill">' + noteType + '</span>');
+
+                // Append the new list item to the list group
+                $("#list-group-payment-order-note").append(listItem);
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
+        });
+    });
+
+    $('#orderNoteSubmit').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                var note = response.data.note;
+                var noteType = response.data.note_type;
+                $("#order_note").val(null);
+                $("#order_note_type").val("");
+                // Create a new list item
+                var listItem = $("<li class='list-group-item d-flex justify-content-between align-items-center'></li>");
+
+                // Set the content of the list item
+                listItem.html(note + '<span class="badge badge-primary badge-pill">' + noteType + '</span>');
+
+                // Append the new list item to the list group
+                $("#list-group-order-note").append(listItem);
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
+        });
+    });
+
+    $('#confirmOrderForm').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                $("#cancelOrderBtn").prop("disabled", false);
+                $("#confirmOrderBtn").prop("disabled", true);
+                $(".order_fulfilment_status").val(response.data.status);
+                $(".order_fulfilment_status_show").text(response.data.status.charAt(0).toUpperCase() + response.data.status.slice(1).toLowerCase());
+                Swal.fire({
+                    position: "top-end",
+                    type: "success",
+                    title: response.message,
+                    showConfirmButton: !1,
+                    timer: 1500
+                });
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
+        });
+    });
+
+    $('#canceOrderlReason').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                $(".cancel-order").modal("hide");
+                $("#cancelOrderBtn").prop("disabled", true);
+                $("#confirmOrderBtn").prop("disabled", false);
+                $(".order_fulfilment_status").val(response.data.status);
+                $("#order_fulfilment_note").val(response.data.fulfilment_note);
+                $(".order_fulfilment_status_show").text(response.data.status.charAt(0).toUpperCase() + response.data.status.slice(1).toLowerCase());
+                Swal.fire({
+                    position: "top-end",
+                    type: "success",
+                    title: response.message,
+                    showConfirmButton: !1,
+                    timer: 1500
+                });
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
+        });
     });
 
     cancelForm.addEventListener("submit", function (event) {

@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\PaymentMethodEnum;
+use App\Enums\PaymentTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +19,8 @@ class CreateOrderPaymentsTable extends Migration
         Schema::create('order_payments', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->foreignId('order_id');
-            $table->string('payment_type');
-            $table->string('payment_method');
+            $table->enum('payment_type', array_keys(PaymentTypeEnum::getPaymentTypes()));
+            $table->enum('payment_method', array_keys(PaymentMethodEnum::getPaymentMethods()));
             $table->string('payment_id');
             $table->dateTime('payment_date');
             $table->foreignId('created_by')->nullable()->index();

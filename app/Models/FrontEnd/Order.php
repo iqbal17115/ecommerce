@@ -7,6 +7,8 @@ use App\Models\Backend\ContactInfo\Contact;
 use App\Models\District;
 use App\Models\FrontEnd\OrderDetail;
 use App\Models\Backend\Inventory\SaleInvoice;
+use App\Models\Backend\OrderProduct\OrderNoteStatus;
+use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Traits\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +18,8 @@ class Order extends Model
 {
     use HasFactory, SoftDeletes, BaseModel;
     protected $dates = ['deleted_at'];
+    
+
 
     protected $searchable = [
         'code',
@@ -25,6 +29,16 @@ class Order extends Model
     protected $sortable = [
         'order_date'
     ];
+
+    public function orderPayment()
+    {
+        return $this->hasOne(OrderPayment::class);
+    }
+
+    public function orderNoteStatus()
+    {
+        return $this->hasOne(OrderNoteStatus::class);
+    }
 
     public function SaleInvoice()
     {

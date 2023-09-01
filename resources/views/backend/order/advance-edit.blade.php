@@ -64,11 +64,18 @@
                                     </form>
                                 </div>
                                 <div class="col-md-5">
-                                    <button id="confirmOrderBtn" class="btn btn-success btn-sm">Confirm Order</button>
-                                    <button type="button" class="btn btn-danger waves-effect waves-light btn-sm"
+                                    <form action="{{ route('confirm.order', ['order' => $order->id]) }}"
+                                        id="confirmOrderForm" style="display: inline;">
+                                        @csrf
+                                        <button id="confirmOrderBtn" type="submit"
+                                            class="btn btn-success btn-sm {{ $order->status == 'processing' ? 'disabled' : '' }}">Confirm
+                                            Order</button>
+                                    </form>
+                                    <button id="cancelOrderBtn"
+                                        class="btn btn-danger waves-effect waves-light btn-sm {{ $order->status == 'cancelled' ? 'disabled' : '' }}"
                                         data-toggle="modal" data-target=".cancel-order">Cancel</button>
-                                    {{-- <button id="cancelOrderBtn" class="btn btn-danger btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-center">Cancel Order</button> --}}
-                                    <button id="printInvoiceBtn" class="btn btn-success btn-sm" style="display: none;">Print
+                                    <button id="printInvoiceBtn" class="btn btn-success btn-sm"
+                                        style="display: {{ $order->status == 'processing' ? 'inline' : 'none' }};">Print
                                         Invoice</button>
                                 </div>
                             </div>
@@ -117,7 +124,7 @@
                             <div class="contact-links d-flex font-size-20">
                                 <div class="flex-fill">
                                     <span
-                                        class="badge badge-pill {{ $order->status == 'shipped' ? 'badge-success' : 'badge-danger' }} font-size-12">{{ ucwords($order->status) }}</span>
+                                        class="badge badge-pill order_fulfilment_status_show {{ $order->status == 'shipped' ? 'badge-success' : 'badge-danger' }} font-size-12">{{ ucwords($order->status) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +137,7 @@
         {{-- End Order status --}}
 
         {{-- Start Content --}}
-        <div class="col-10">
+        <div class="col-9">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -204,41 +211,42 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title mb-4">Payment Panel</h5>
-                    <form>
+                    <form action="{{ route('order_payment.submit', ['order' => $order->id]) }}" id="orderPaymentSubmit">
                         <div class="form-group row">
-                            <label for="paymentType" class="col-sm-3 col-form-label">Payment Type:</label>
+                            <label for="payment_type" class="col-sm-3 col-form-label">Payment Type:</label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="paymentType" name="paymentType">
-                                    <option value="creditCard">Credit Card</option>
-                                    <option value="paypal">PayPal</option>
-                                    <option value="bankTransfer">Bank Transfer</option>
+                                <select class="form-control" id="payment_type" name="payment_type" required>
+                                    <option value="">Select</option>
+                                    @foreach ($paymentTypes as $index => $paymentType)
+                                        <option value="{{ $index }}" {{ $order?->orderPayment?->payment_type == $index ? 'selected' : ''}}>{{ $paymentType }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="paymentMethod" class="col-sm-3 col-form-label">Payment Method:</label>
+                            <label for="payment_method" class="col-sm-3 col-form-label">Payment Method:</label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="paymentMethod" name="paymentMethod">
-                                    <option value="visa">Visa</option>
-                                    <option value="mastercard">MasterCard</option>
-                                    <option value="paypal">PayPal</option>
-                                    <option value="bank">Bank Transfer</option>
+                                <select class="form-control" id="payment_method" name="payment_method" required>
+                                    <option value="">Select</option>
+                                    @foreach ($paymentMethods as $index => $paymentMethod)
+                                        <option value="{{ $index }}" {{ $order?->orderPayment?->payment_method == $index ? 'selected' : ''}}>{{ $paymentMethod }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="paymentId" class="col-sm-3 col-form-label">Payment ID:</label>
+                            <label for="payment_id" class="col-sm-3 col-form-label">Payment ID:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="paymentId" name="paymentId">
+                                <input type="text" class="form-control" id="payment_id" name="payment_id" value="{{ $order?->orderPayment?->payment_id }}" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="paymentDate" class="col-sm-3 col-form-label">Payment Date:</label>
+                            <label for="payment_date" class="col-sm-3 col-form-label">Payment Date:</label>
                             <div class="col-sm-9">
-                                <input type="datetime-local" class="form-control" id="paymentDate" name="paymentDate">
+                                <input type="datetime-local" class="form-control" id="payment_date" name="payment_date" value="{{ $order?->orderPayment?->payment_date }}" required>
                             </div>
                         </div>
 
@@ -249,26 +257,27 @@
                         </div>
                     </form>
                 </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h5>Payment Method</h5>
-                                <p class="mb-0">Cash On Delivery (COD)</p>
-                            </div>
-                            <div class="col-md-4">
-                                <h5>Payment ID</h5>
-                                <p class="mb-0">568746646464</p>
-                                <p class="mb-0">23/08/2023 - 10:45 AM</p>
-                            </div>
-                            <div class="col-md-4">
-                                <h5>Payment Status</h5>
-                                <p class="mb-0">Paid</p>
+                @if ($order?->orderPayment)
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5>Payment Method</h5>
+                                    <p class="mb-0">{{ ucwords($order?->orderPayment?->payment_method) }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Payment ID</h5>
+                                    <p class="mb-0">{{ $order?->orderPayment?->payment_id }}</p>
+                                    <p class="mb-0">{{ $order?->orderPayment?->payment_date }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>Payment Status</h5>
+                                    <p class="mb-0">Paid</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
 
             <div class="card">
@@ -398,8 +407,6 @@
                                                         <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
                                                         <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
                                                     </select>
-
-
                                                 </div>
                                             </div>
                                         </div>
@@ -423,22 +430,44 @@
 
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-3">
             <div class="card">
                 <div class="card-header text-dark">
                     Order Notes
                 </div>
                 <div class="card-body">
-                    <form>
+                    <ul class="list-group" id="list-group-order-note">
+                        @if ($order->orderNoteStatus && $order->orderNoteStatus->order_note)
+                            @php
+                                $notes = json_decode($order->orderNoteStatus->order_note, true);
+                            @endphp
+                    
+                            @foreach ($notes as $note)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ $note['note'] }}
+                                    <span class="badge badge-primary badge-pill">{{ $note['note_type'] }}</span>
+                                </li>
+                            @endforeach
+                        @endif
+                    </ul>
+                    
+                    
+                    <form action="{{ route('order.note', ['order' => $order->id]) }}" id="orderNoteSubmit">
+                        @csrf
                         <div class="form-group">
-                            <label for="note">Add Note:</label>
-                            <input type="text" class="form-control form-control-sm" id="note" name="note">
+                            <textarea type="text" class="form-control form-control-sm" id="order_note" name="order_note" placeholder="Add Note" required></textarea>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-8">
-                                <select class="form-control form-control-sm" id="noteType" name="noteType">
-                                    <option value="private">Private Note</option>
-                                    <option value="customer">Note to Customer</option>
+                                <select class="form-control form-control-sm" id="order_note_type" name="order_note_type"
+                                    required>
+                                    <option value="">Select</option>
+                                    <option value="private"
+                                        {{ $order?->orderNoteStatus?->order_note_type == 'private' ? 'selected' : '' }}>
+                                        Private Note</option>
+                                    <option value="note_to_customer"
+                                        {{ $order?->orderNoteStatus?->order_note_type == 'note_to_customer' ? 'selected' : '' }}>
+                                        Note to Customer</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -454,13 +483,17 @@
                     Update Payment Status
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="{{ route('order_payment.status', ['order' => $order->id]) }}"
+                        id="orderPaymentStatusSubmit">
                         <div class="form-group row">
                             <div class="col-md-8">
-                                <select class="form-control form-control-sm" id="noteType" name="noteType">
+                                <select class="form-control form-control-sm" id="payment_status" name="payment_status">
                                     <option value="">Change Status</option>
-                                    <option value="paid">Paid</option>
-                                    <option value="unpaid">Unpaid</option>
+                                    @foreach ($paymentStatuses as $index => $paymentStatus)
+                                        <option value="{{ $index }}"
+                                            {{ $order?->orderNoteStatus?->payment_status == $index ? 'selected' : '' }}>
+                                            {{ $paymentStatus }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -469,16 +502,33 @@
                         </div>
                     </form>
 
-                    <form>
+                    <ul class="list-group" id="list-group-payment-order-note">
+                        @if ($order->orderNoteStatus && $order->orderNoteStatus->payment_note)
+                            @php
+                                $notes = json_decode($order->orderNoteStatus->payment_note, true);
+                            @endphp
+                    
+                            @foreach ($notes as $note)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ $note['note'] }}
+                                    <span class="badge badge-primary badge-pill">{{ $note['note_type'] }}</span>
+                                </li>
+                            @endforeach
+                        @endif
+                    </ul>
+
+                    <form action="{{ route('order_payment_note.submit', ['order' => $order->id]) }}" id="orderPaymentNoteSubmit">
+                        @csrf
                         <div class="form-group">
-                            <label for="note">Add Note:</label>
-                            <input type="text" class="form-control form-control-sm" id="note" name="note">
+                            <label for="payment_note">Add Note:</label>
+                            <input type="text" class="form-control form-control-sm" id="payment_note" name="payment_note">
                         </div>
                         <div class="form-group row">
                             <div class="col-md-8">
-                                <select class="form-control form-control-sm" id="noteType" name="noteType">
+                                <select class="form-control form-control-sm" id="order_payment_note_type" name="order_payment_note_type">
+                                    <option value="">Select</option>
                                     <option value="private">Private Note</option>
-                                    <option value="customer">Note to Customer</option>
+                                    <option value="note_to_customer">Note to Customer</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -497,10 +547,13 @@
                     <form>
                         <div class="form-group row">
                             <div class="col-md-8">
-                                <select class="form-control form-control-sm" id="noteType" name="noteType">
+                                <select class="form-control form-control-sm order_fulfilment_status" id="order_status"
+                                    name="order_status">
                                     <option value="">Change Status</option>
                                     @foreach ($orderStatuses as $statusValue)
-                                        <option value="{{ $statusValue }}">{{ $statusValue }}</option>
+                                        <option value="{{ $statusValue }}"
+                                            {{ $order->status == $statusValue ? 'selected' : '' }}>{{ $statusValue }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -510,16 +563,33 @@
                         </div>
                     </form>
 
-                    <form>
+                    <ul class="list-group" id="list-group-payment-order-fulfilment-note">
+                        @if ($order->orderNoteStatus && $order->orderNoteStatus->fulfilment_note)
+                            @php
+                                $notes = json_decode($order->orderNoteStatus->fulfilment_note, true);
+                            @endphp
+                    
+                            @foreach ($notes as $note)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ $note['note'] }}
+                                    <span class="badge badge-primary badge-pill">{{ $note['note_type'] }}</span>
+                                </li>
+                            @endforeach
+                        @endif
+                    </ul>
+
+                    <form action="{{ route('order_fulfilment_note.submit', ['order' => $order->id]) }}" id="orderFulfilmentNoteSubmit">
                         <div class="form-group">
-                            <label for="note">Add Note:</label>
-                            <input type="text" class="form-control form-control-sm" id="note" name="note">
+                            <label for="fulfilment_note">Add Note:</label>
+                            <input type="text" class="form-control form-control-sm" id="fulfilment_note"
+                                name="fulfilment_note">
                         </div>
                         <div class="form-group row">
                             <div class="col-md-8">
-                                <select class="form-control form-control-sm" id="noteType" name="noteType">
+                                <select class="form-control form-control-sm" id="order_fulfilment_note_type" name="order_fulfilment_note_type">
+                                    <option value="">Select</option>
                                     <option value="private">Private Note</option>
-                                    <option value="customer">Note to Customer</option>
+                                    <option value="note_to_customer">Note to Customer</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -558,7 +628,7 @@
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="" id="canceOrderlReason">
+                <form action="{{ route('cancel.order', ['order' => $order->id]) }}" id="canceOrderlReason">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title mt-0">Reason For Cancellation</h5>
@@ -567,10 +637,14 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <select id="cancelReasonInput" class="form-control form-control-sm" name="status" required>
+                        <input type="hidden" name="status" id="status" value="cancelled" />
+                        <select id="cancelReasonInput" class="form-control form-control-sm" name="fulfilment_note"
+                            required>
                             <option value="">Select</option>
-                            @foreach ($cancel_reasons as $value => $label)
-                                <option value="{{ $value }}">{{ $label }}</option>
+                            @foreach ($cancel_reasons as $label)
+                                <option value="{{ $label }}"
+                                    {{ $order?->orderNoteStatus?->fulfilment_note == $label ? 'selected' : '' }}>
+                                    {{ $label }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -689,25 +763,12 @@
             boxCounter++;
         });
 
-        $("#confirmOrderBtn").click(function() {
-            $(this).prop("disabled", true);
-            $("#cancelOrderBtn").prop("disabled", false);
-            $("#printInvoiceBtn").show();
-            $("#cancelReasonSelect").hide();
-            $("#cancelReasonForm").hide();
-        });
-
-        $("#saveCancelReasonBtn").click(function() {
-            var reason = $("#cancelReasonInput").val();
-            if (reason !== "") {
-                // You can perform an AJAX request here to save the reason on the server
-                // For demonstration purposes, we'll just log the reason to the console
-                console.log("Reason for cancellation: " + reason);
-
-                // Hide the form and show the select
-                $("#cancelReasonForm").hide();
-                $("#cancelReasonSelect").show();
-            }
-        });
+        // $("#confirmOrderBtn").click(function() {
+        //     $(this).prop("disabled", true);
+        //     $("#cancelOrderBtn").prop("disabled", false);
+        //     $("#printInvoiceBtn").show();
+        //     $("#cancelReasonSelect").hide();
+        //     $("#cancelReasonForm").hide();
+        // });
     </script>
 @endpush
