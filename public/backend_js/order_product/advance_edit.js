@@ -1,4 +1,22 @@
 $(document).ready(function () {
+    $('#orderPackageSubmit').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
+        });
+    });
     $('#orderPaymentSubmit').submit(function (event) {
         event.preventDefault(); // Prevent default form submission
         var form = $(this);

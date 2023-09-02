@@ -349,6 +349,8 @@
                 </div>
 
                 <div class="card">
+                    <form action="{{ route('order_package.submit', ['order' => $order->id]) }}" id="orderPackageSubmit">
+                        @csrf
                     <div class="card-body">
                         <div id="package_info">
                             <div id="box_details"></div>
@@ -379,15 +381,15 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="pickupDate">Pickup Day</label>
-                                                    <input type="date" id="pickupDate" name="pickupDate"
+                                                    <label for="pickup_day">Pickup Day</label>
+                                                    <input type="date" id="pickup_day" name="pickup_day"
                                                         class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="pickupTime">Pickup Time</label>
-                                                    <select id="pickupTime" name="pickupTime" class="form-control">
+                                                    <label for="pickup_time">Pickup Time</label>
+                                                    <select id="pickup_time" name="pickup_time" class="form-control">
                                                         <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
                                                         <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM</option>
                                                         <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
@@ -415,6 +417,8 @@
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
                 </div>
 
                 {{-- Start shipping fee --}}
@@ -441,7 +445,7 @@
                             @php
                                 $notes = json_decode($order->orderNoteStatus->order_note, true);
                             @endphp
-                    
+
                             @foreach ($notes as $note)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     {{ $note['note'] }}
@@ -450,8 +454,8 @@
                             @endforeach
                         @endif
                     </ul>
-                    
-                    
+
+
                     <form action="{{ route('order.note', ['order' => $order->id]) }}" id="orderNoteSubmit">
                         @csrf
                         <div class="form-group">
@@ -507,7 +511,7 @@
                             @php
                                 $notes = json_decode($order->orderNoteStatus->payment_note, true);
                             @endphp
-                    
+
                             @foreach ($notes as $note)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     {{ $note['note'] }}
@@ -568,7 +572,7 @@
                             @php
                                 $notes = json_decode($order->orderNoteStatus->fulfilment_note, true);
                             @endphp
-                    
+
                             @foreach ($notes as $note)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     {{ $note['note'] }}
@@ -664,8 +668,19 @@
         function removeBox(boxNumber) {
             $('#box_' + boxNumber).remove();
         }
-
+        var boxes = {};
         function generateBoxInputs(boxNumber, lengthUnits, weightUnits, products) {
+            // Create an object to store the details of this box
+            var box = {
+                packageWeight: '',
+                weightUnit: '',
+                packageLength: '',
+                lengthUnit: '',
+                packageHeight: '',
+                heightUnit: '',
+                products: []
+            };
+
             var html = '<div class="box card" id="box_' + boxNumber + '">';
             html += '<div class="close-icon" onclick="removeBox(' + boxNumber + ')">&times;</div>';
             // Start of row (Bootstrap row class)
@@ -674,13 +689,11 @@
             html += '<div class="col-md-12"><h3>Select Box No: ' + boxNumber + '</h3></div>';
             // Package Weight
             html += '<div class="col-md-2">';
-            html += '<input type="text" id="package_weight_' + boxNumber +
-                '" name="package_weight[]" placeholder="Package Weight" class="form-control form-control-sm">';
+            html += '<input type="text" name="package_weight[]" placeholder="Package Weight" class="form-control form-control-sm">';
             html += '</div>';
 
-            // Select for Package Weight
             html += '<div class="col-md-2">';
-            html += '<select name="package_weight_unit_' + boxNumber + '" class="form-control form-control-sm">';
+            html += '<select name="weight_unit[]" class="form-control form-control-sm">';
             for (var weightValue in weightUnits) {
                 html += '<option value="' + weightValue + '">' + weightUnits[weightValue] + '</option>';
             }
@@ -689,58 +702,65 @@
 
             // Package Length
             html += '<div class="col-md-2">';
-            html += '<input type="text" id="package_length_' + boxNumber +
-                '" name="package_length[]" placeholder="Package Length" class="form-control form-control-sm">';
+            html += '<input type="text" name="length[]" placeholder="Package Length" class="form-control form-control-sm">';
             html += '</div>';
 
             // Select for Package Length
             html += '<div class="col-md-2">';
-            html += '<select name="package_length_unit_' + boxNumber + '" class="form-control form-control-sm">';
+            html += '<select name="length_unit[]" class="form-control form-control-sm">';
             for (var unitValue in lengthUnits) {
                 html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
             }
             html += '</select>';
             html += '</div>';
-
-
-            // Package Height
-            html += '<div class="col-md-2">';
-            html += '<input type="text" id="package_height_' + boxNumber +
-                '" name="package_height[]" placeholder="Package Height" class="form-control form-control-sm">';
+  // Package Height
+  html += '<div class="col-md-2">';
+            html += '<input type="text" name="height[]" placeholder="Package Height" class="form-control form-control-sm">';
             html += '</div>';
 
             // Select for Package Height
             html += '<div class="col-md-2">';
-            html += '<select name="package_height_unit_' + boxNumber + '" class="form-control form-control-sm">';
+            html += '<select name="height_unit[]" class="form-control form-control-sm">';
             for (var unitValue in lengthUnits) {
                 html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
             }
             html += '</select>';
             html += '</div>';
 
-            // End of row
-            html += '</div>';
 
             // Product Name and Quantity
             for (var j = 0; j < products.length; j++) {
+                var product = {
+                    productId: products[j]['product'].id,
+                    productName: products[j]['product'].name,
+                    quantity: ''
+                };
+
+                // Add product details to the box
+                box.products.push(product);
+
                 html += '<div class="col-md-12 row mt-2">';
                 html += '<div class="col-md-8">';
                 html += '<div class="custom-control custom-checkbox mt-2">';
-                html += '<input type="checkbox" class="custom-control-input" id="product_name_' + j + '_' + boxNumber +
-                    '">';
-                html += '<label class="custom-control-label" name="product_name_' + j + '" for="product_name_' + j + '_' +
-                    boxNumber + '">' + products[j]['product'].name + '</label>';
+                html += `<input type="checkbox" class="custom-control-input" name="choose_box[]">`;
+                html += `<input type="hidden" name="box_number[]" value="${boxNumber}" class="form-control form-control-sm">`;
+                html += `<input type="hidden" name="product_id[]" value="${product.productId}" class="form-control form-control-sm">`;
+                html += `<input type="hidden" name="product_name[]" value="${product.productName}" class="form-control form-control-sm">`;
+                html += '<label class="custom-control-label" for="product_name">' + product.productName + '</label>';
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="col-md-2">';
                 html += '' + products[j]['quantity'] + '';
                 html += '</div>';
                 html += '<div class="col-md-2">';
-                html += '<input type="text" name="product_expected_qty_' + j +
-                    '" placeholder="Qty"  class="form-control form-control-sm">';
+                html += '<input type="text" name="product_expected_qty[]" placeholder="Qty" class="form-control form-control-sm">';
                 html += '</div>';
                 html += '</div>';
             }
+
+            // Add the box to the boxes object
+            boxes[boxNumber] = box;
+
             // End of box
             html += '</div>';
             return html;

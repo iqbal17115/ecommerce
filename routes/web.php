@@ -197,6 +197,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('/order-payment-submit/{order}', 'orderPaymentSave')->name('order_payment.submit');
         Route::post('/order-payment-note-submit/{order}', 'orderNotePaymentSave')->name('order_payment_note.submit');
         Route::post('/order-fulfilment-note-submit/{order}', 'orderFulfilmentNotetSave')->name('order_fulfilment_note.submit');
+        Route::post('/order-package-submit/{order}', 'orderPackageSave')->name('order_package.submit');
     });
     // End All Order
 

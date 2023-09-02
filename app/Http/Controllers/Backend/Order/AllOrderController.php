@@ -12,6 +12,7 @@ use App\Enums\WeightUnitEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderFulfilmentNoteRequest;
 use App\Http\Requests\Order\OrderNoteRequest;
+use App\Http\Requests\Order\OrderPackageRequest;
 use App\Http\Requests\Order\OrderPaymentNoteRequest;
 use App\Http\Requests\Order\OrderPaymentRequest;
 use App\Http\Requests\Order\OrderPaymentStatusRequest;
@@ -23,6 +24,40 @@ use App\Models\FrontEnd\Order;
 
 class AllOrderController extends Controller
 {
+    public function orderPackageSave(OrderPackageRequest $orderPackageRequest, Order $order) {
+         // Retrieve the submitted form data
+    $formData = $orderPackageRequest->all();
+    // Separate the product data by box number
+    $boxes = [];
+    foreach ($formData['box_number'] as $index => $boxNumber) {
+        // Initialize a new box if it doesn't exist
+        if (!isset($boxes[$boxNumber])) {
+            $boxes[$boxNumber] = [
+                'package_weight' => $formData['package_weight'][$index],
+                'weight_unit' => $formData['weight_unit'][$index],
+                'length' => $formData['length'][$index],
+                'length_unit' => $formData['length_unit'][$index],
+                'height' => $formData['height'][$index],
+                'height_unit' => $formData['height_unit'][$index],
+                'products' => [],
+            ];
+        }
+
+        // Add product details to the box
+        $boxes[$boxNumber]['products'][] = [
+            'product_id' => $formData['product_id'][$index],
+            'product_name' => $formData['product_name'][$index],
+            'product_expected_qty' => $formData['product_expected_qty'][$index],
+        ];
+    }
+
+    // Now, $boxes contains an array of boxes with their associated product details
+    // You can convert it to JSON and store it in your database or process it further
+
+    // Example: Convert $boxes to JSON and store it in the database
+    $boxesJson = json_encode($boxes);
+    dd($boxesJson);
+    }
     public function orderPaymentSave(OrderPaymentRequest $orderPaymentRequest, Order $order)
     {
         $orderpayment = OrderPayment::firstOrNew(['order_id' => $order->id]);
@@ -66,7 +101,7 @@ class AllOrderController extends Controller
             'note_type' => $orderFulfilmentNoteRequest->validated()['order_fulfilment_note_type'],
             'created_at' => now()->format('F j, Y h:i A'), // Format the date and time
         ];
-        
+
         $existingOrderNote[] = $newNote;
 
         $orderNote->fulfilment_note = json_encode($existingOrderNote);
@@ -92,7 +127,7 @@ class AllOrderController extends Controller
             'note_type' => $orderPaymentNoteRequest->validated()['order_payment_note_type'],
             'created_at' => now()->format('F j, Y h:i A'), // Format the date and time
         ];
-        
+
         $existingOrderNote[] = $newNote;
 
         $orderNote->payment_note = json_encode($existingOrderNote);
@@ -118,7 +153,7 @@ class AllOrderController extends Controller
             'note_type' => $orderNoteRequest->validated()['order_note_type'],
             'created_at' => now()->format('F j, Y h:i A'), // Format the date and time
         ];
-        
+
         $existingOrderNote[] = $newNote;
 
         $orderNote->order_note = json_encode($existingOrderNote);

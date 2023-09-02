@@ -17,13 +17,11 @@ class CreateOrderProductBoxesTable extends Migration
         Schema::create('order_product_boxes', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->foreignId('order_id');
-            $table->tinyInteger('nox_no');
+            $table->tinyInteger('box_no');
             $table->double('weight', 10, 4)->nullable();
             $table->string('weight_unit', 30)->nullable();
             $table->double('length', 10, 4)->nullable();
             $table->string('length_unit', 30)->nullable();
-            $table->double('width', 10, 4)->nullable();
-            $table->string('width_unit', 30)->nullable();
             $table->double('height', 10, 4)->nullable();
             $table->string('height_unit', 30)->nullable();
             $table->date('pickup_day')->nullable();
