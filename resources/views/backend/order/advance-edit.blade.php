@@ -218,7 +218,9 @@
                                 <select class="form-control" id="payment_type" name="payment_type" required>
                                     <option value="">Select</option>
                                     @foreach ($paymentTypes as $index => $paymentType)
-                                        <option value="{{ $index }}" {{ $order?->orderPayment?->payment_type == $index ? 'selected' : ''}}>{{ $paymentType }}</option>
+                                        <option value="{{ $index }}"
+                                            {{ $order?->orderPayment?->payment_type == $index ? 'selected' : '' }}>
+                                            {{ $paymentType }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -230,7 +232,9 @@
                                 <select class="form-control" id="payment_method" name="payment_method" required>
                                     <option value="">Select</option>
                                     @foreach ($paymentMethods as $index => $paymentMethod)
-                                        <option value="{{ $index }}" {{ $order?->orderPayment?->payment_method == $index ? 'selected' : ''}}>{{ $paymentMethod }}</option>
+                                        <option value="{{ $index }}"
+                                            {{ $order?->orderPayment?->payment_method == $index ? 'selected' : '' }}>
+                                            {{ $paymentMethod }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -239,14 +243,16 @@
                         <div class="form-group row">
                             <label for="payment_id" class="col-sm-3 col-form-label">Payment ID:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="payment_id" name="payment_id" value="{{ $order?->orderPayment?->payment_id }}" required>
+                                <input type="text" class="form-control" id="payment_id" name="payment_id"
+                                    value="{{ $order?->orderPayment?->payment_id }}" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="payment_date" class="col-sm-3 col-form-label">Payment Date:</label>
                             <div class="col-sm-9">
-                                <input type="datetime-local" class="form-control" id="payment_date" name="payment_date" value="{{ $order?->orderPayment?->payment_date }}" required>
+                                <input type="datetime-local" class="form-control" id="payment_date" name="payment_date"
+                                    value="{{ $order?->orderPayment?->payment_date }}" required>
                             </div>
                         </div>
 
@@ -351,64 +357,71 @@
                 <div class="card">
                     <form action="{{ route('order_package.submit', ['order' => $order->id]) }}" id="orderPackageSubmit">
                         @csrf
-                    <div class="card-body">
-                        <div id="package_info">
-                            <div id="box_details"></div>
-                        </div>
-                        <div class="mt-4">
-                            <input data-repeater-create type="button" data-box_no="1" id="package_qty"
-                                name="package_qty" class="btn btn-sm btn-success inner float-right" value="Add Box" />
-                        </div>
-                        <br>
-                        <br>
-                        <div id="accordion">
-                            <div class="card mb-1 shadow-none">
-                                <div class="card-header bg-mute" id="headingOne">
-                                    <h6 class="m-0 text-center" href="#collapseOne" data-toggle="collapse"
-                                        aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;">
-                                        <a class="btn btn-sm btn-outline-primary text-dark">
-                                            Get Slot
-                                        </a>
-                                    </h6>
-                                </div>
+                        <div class="card-body">
+                            <div id="package_info">
+                                <div id="box_details"></div>
+                            </div>
+                            <div class="mt-4">
+                                <input data-repeater-create type="button" data-box_no="1" id="package_qty"
+                                    name="package_qty" class="btn btn-sm btn-success inner float-right"
+                                    value="Add Box" />
+                            </div>
+                            <br>
+                            <br>
+                            <div id="accordion">
+                                <div class="card mb-1 shadow-none">
+                                    <div class="card-header bg-mute" id="headingOne">
+                                        <h6 class="m-0 text-center" href="#collapseOne" data-toggle="collapse"
+                                            aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;">
+                                            <a class="btn btn-sm btn-outline-primary text-dark">
+                                                Get Slot
+                                            </a>
+                                        </h6>
+                                    </div>
 
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                                    data-parent="#accordion">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-4">Pickup Slot</h5>
-                                        <p class="mb-3">Pickup Slot (note: indicative time; exact pickup time may vary)
-                                        </p>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="pickup_day">Pickup Day</label>
-                                                    <input type="date" id="pickup_day" name="pickup_day"
-                                                        class="form-control">
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                        data-parent="#accordion">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4">Pickup Slot</h5>
+                                            <p class="mb-3">Pickup Slot (note: indicative time; exact pickup time may
+                                                vary)
+                                            </p>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="pickup_day">Pickup Day</label>
+                                                        <input type="date" id="pickup_day" name="pickup_day"
+                                                            class="form-control">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="pickup_time">Pickup Time</label>
-                                                    <select id="pickup_time" name="pickup_time" class="form-control">
-                                                        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
-                                                        <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM</option>
-                                                        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
-                                                        <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM</option>
-                                                        <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
-                                                        <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
-                                                        <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
-                                                        <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
-                                                        <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
-                                                        <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
-                                                        <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
-                                                        <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
-                                                        <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
-                                                        <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
-                                                        <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
-                                                        <option value="5:30 PM - 6:30 PM">5:30 PM - 6:30 PM</option>
-                                                        <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
-                                                        <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
-                                                    </select>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="pickup_time">Pickup Time</label>
+                                                        <select id="pickup_time" name="pickup_time" class="form-control">
+                                                            <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM
+                                                            </option>
+                                                            <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM
+                                                            </option>
+                                                            <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM
+                                                            </option>
+                                                            <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM
+                                                            </option>
+                                                            <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
+                                                            <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
+                                                            <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                                                            <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
+                                                            <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                                                            <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
+                                                            <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                                                            <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
+                                                            <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                                                            <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
+                                                            <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
+                                                            <option value="5:30 PM - 6:30 PM">5:30 PM - 6:30 PM</option>
+                                                            <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
+                                                            <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -416,8 +429,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
                     </form>
                 </div>
 
@@ -459,7 +471,8 @@
                     <form action="{{ route('order.note', ['order' => $order->id]) }}" id="orderNoteSubmit">
                         @csrf
                         <div class="form-group">
-                            <textarea type="text" class="form-control form-control-sm" id="order_note" name="order_note" placeholder="Add Note" required></textarea>
+                            <textarea type="text" class="form-control form-control-sm" id="order_note" name="order_note"
+                                placeholder="Add Note" required></textarea>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-8">
@@ -521,15 +534,18 @@
                         @endif
                     </ul>
 
-                    <form action="{{ route('order_payment_note.submit', ['order' => $order->id]) }}" id="orderPaymentNoteSubmit">
+                    <form action="{{ route('order_payment_note.submit', ['order' => $order->id]) }}"
+                        id="orderPaymentNoteSubmit">
                         @csrf
                         <div class="form-group">
                             <label for="payment_note">Add Note:</label>
-                            <input type="text" class="form-control form-control-sm" id="payment_note" name="payment_note">
+                            <input type="text" class="form-control form-control-sm" id="payment_note"
+                                name="payment_note">
                         </div>
                         <div class="form-group row">
                             <div class="col-md-8">
-                                <select class="form-control form-control-sm" id="order_payment_note_type" name="order_payment_note_type">
+                                <select class="form-control form-control-sm" id="order_payment_note_type"
+                                    name="order_payment_note_type">
                                     <option value="">Select</option>
                                     <option value="private">Private Note</option>
                                     <option value="note_to_customer">Note to Customer</option>
@@ -582,7 +598,8 @@
                         @endif
                     </ul>
 
-                    <form action="{{ route('order_fulfilment_note.submit', ['order' => $order->id]) }}" id="orderFulfilmentNoteSubmit">
+                    <form action="{{ route('order_fulfilment_note.submit', ['order' => $order->id]) }}"
+                        id="orderFulfilmentNoteSubmit">
                         <div class="form-group">
                             <label for="fulfilment_note">Add Note:</label>
                             <input type="text" class="form-control form-control-sm" id="fulfilment_note"
@@ -590,7 +607,8 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-8">
-                                <select class="form-control form-control-sm" id="order_fulfilment_note_type" name="order_fulfilment_note_type">
+                                <select class="form-control form-control-sm" id="order_fulfilment_note_type"
+                                    name="order_fulfilment_note_type">
                                     <option value="">Select</option>
                                     <option value="private">Private Note</option>
                                     <option value="note_to_customer">Note to Customer</option>
@@ -669,7 +687,8 @@
             $('#box_' + boxNumber).remove();
         }
         var boxes = {};
-        function generateBoxInputs(boxNumber, lengthUnits, weightUnits, products) {
+
+        function generateBoxInputs(boxNumber, lengthUnits, weightUnits, products, order_id) {
             // Create an object to store the details of this box
             var box = {
                 packageWeight: '',
@@ -689,7 +708,8 @@
             html += '<div class="col-md-12"><h3>Select Box No: ' + boxNumber + '</h3></div>';
             // Package Weight
             html += '<div class="col-md-2">';
-            html += '<input type="text" name="package_weight[]" placeholder="Package Weight" class="form-control form-control-sm">';
+            html +=
+                '<input type="text" name="package_weight[]" placeholder="Package Weight" class="form-control form-control-sm">';
             html += '</div>';
 
             html += '<div class="col-md-2">';
@@ -713,8 +733,8 @@
             }
             html += '</select>';
             html += '</div>';
-  // Package Height
-  html += '<div class="col-md-2">';
+            // Package Height
+            html += '<div class="col-md-2">';
             html += '<input type="text" name="height[]" placeholder="Package Height" class="form-control form-control-sm">';
             html += '</div>';
 
@@ -726,7 +746,6 @@
             }
             html += '</select>';
             html += '</div>';
-
 
             // Product Name and Quantity
             for (var j = 0; j < products.length; j++) {
@@ -740,20 +759,24 @@
                 box.products.push(product);
 
                 html += '<div class="col-md-12 row mt-2">';
-                html += '<div class="col-md-8">';
-                html += '<div class="custom-control custom-checkbox mt-2">';
-                html += `<input type="checkbox" class="custom-control-input" name="choose_box[]">`;
-                html += `<input type="hidden" name="box_number[]" value="${boxNumber}" class="form-control form-control-sm">`;
-                html += `<input type="hidden" name="product_id[]" value="${product.productId}" class="form-control form-control-sm">`;
-                html += `<input type="hidden" name="product_name[]" value="${product.productName}" class="form-control form-control-sm">`;
-                html += '<label class="custom-control-label" for="product_name">' + product.productName + '</label>';
-                html += '</div>';
+                html += '<div class="col-md-8 d-flex">';
+                html += `<input type="checkbox" class="mr-2" name="choose_product[${boxNumber}]" id="choose_product_${boxNumber}_${product.id}">`;
+                html += '<label class="" for="product_name_${boxNumber}">' + product.productName + '</label>';
+                html +=
+                    `<input type="hidden" name="box_number[]" value="${boxNumber}" class="form-control form-control-sm">`;
+                html +=
+                    `<input type="hidden" name="order_id[]" value="${order_id}" class="form-control form-control-sm">`;
+                html +=
+                    `<input type="hidden" name="product_id[]" value="${product.productId}" class="form-control form-control-sm">`;
+                html +=
+                    `<input type="hidden" name="product_name[]" value="${product.productName}" class="form-control form-control-sm">`;
                 html += '</div>';
                 html += '<div class="col-md-2">';
                 html += '' + products[j]['quantity'] + '';
                 html += '</div>';
                 html += '<div class="col-md-2">';
-                html += '<input type="text" name="product_expected_qty[]" placeholder="Qty" class="form-control form-control-sm">';
+                html +=
+                    '<input type="text" name="product_expected_qty[]" placeholder="Qty" class="form-control form-control-sm">';
                 html += '</div>';
                 html += '</div>';
             }
@@ -766,19 +789,22 @@
             return html;
         }
 
+
         $(document).ready(function() {
             var boxCounter = 1; // To keep track of box numbers
+            var order_id = <?php echo $order->id; ?>;
             var lengthUnits = <?php echo json_encode($lengthUnits); ?>;
             var weightUnits = <?php echo json_encode($weightUnits); ?>;
             var products = {!! json_encode($order->OrderDetail) !!};
 
             $('#package_qty').click(function() {
-                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products);
+                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products,
+                order_id);
                 $('#box_details').append(newBoxHtml);
                 boxCounter++;
             });
 
-            var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products);
+            var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products, order_id);
             $('#box_details').append(newBoxHtml);
             boxCounter++;
         });

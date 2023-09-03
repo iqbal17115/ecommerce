@@ -24,22 +24,24 @@ class OrderPackageRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-        $rules = [];
+
 
         foreach ($request->input('package_weight') as $key => $value) {
-            $rules['package_weight.' . $key] = 'required|numeric';
+            $rules['order_id.' . $key] = 'required';
+            $rules['package_weight.' . $key] = 'required';
             $rules['weight_unit.' . $key] = 'required';
-            $rules['length.' . $key] = 'required|numeric';
+            $rules['length.' . $key] = 'required';
             $rules['length_unit.' . $key] = 'required';
-            $rules['height.' . $key] = 'required|numeric';
+            $rules['height.' . $key] = 'required';
             $rules['height_unit.' . $key] = 'required';
         }
 
         foreach ($request->input('product_expected_qty') as $key => $value) {
             $rules['box_number.' . $key] = 'required';
+            $rules['choose_product.' . $key] = 'nullable';
             $rules['product_id.' . $key] = 'required';
             $rules['product_name.' . $key] = 'required';
-            $rules['product_expected_qty.' . $key] = 'required|numeric';
+            $rules['product_expected_qty.' . $key] = 'required';
         }
 
         return $rules;

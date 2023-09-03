@@ -20,44 +20,72 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Order\OrderStatusRequest;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
+use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\FrontEnd\Order;
 
 class AllOrderController extends Controller
 {
-    public function orderPackageSave(OrderPackageRequest $orderPackageRequest, Order $order) {
-         // Retrieve the submitted form data
+    public function orderPackageSave(OrderPackageRequest $orderPackageRequest, Order $order)
+{
+    // Retrieve the submitted form data
     $formData = $orderPackageRequest->all();
-    // Separate the product data by box number
-    $boxes = [];
+
+    // Initialize an array to store the formatted boxes
+    $formattedBoxes = [];
+    $i = 0;
     foreach ($formData['box_number'] as $index => $boxNumber) {
-        // Initialize a new box if it doesn't exist
-        if (!isset($boxes[$boxNumber])) {
-            $boxes[$boxNumber] = [
-                'package_weight' => $formData['package_weight'][$index],
-                'weight_unit' => $formData['weight_unit'][$index],
-                'length' => $formData['length'][$index],
-                'length_unit' => $formData['length_unit'][$index],
-                'height' => $formData['height'][$index],
-                'height_unit' => $formData['height_unit'][$index],
+        // Create a box if it doesn't exist in the formatted boxes array
+        if (!isset($formattedBoxes[$boxNumber])) {
+            $formattedBoxes[$boxNumber] = [
+                'box_number' => $boxNumber,
+                'package_weight' => $formData['package_weight'][$i] ?? null,
+                'weight_unit' => $formData['weight_unit'][$i] ?? null,
+                'package_length' => $formData['length'][$i] ?? null,
+                'length_unit' => $formData['length_unit'][$i] ?? null,
+                'package_height' => $formData['height'][$i] ?? null,
+                'height_unit' => $formData['height_unit'][$i] ?? null,
                 'products' => [],
             ];
+
+            $i++;
         }
 
         // Add product details to the box
-        $boxes[$boxNumber]['products'][] = [
-            'product_id' => $formData['product_id'][$index],
-            'product_name' => $formData['product_name'][$index],
-            'product_expected_qty' => $formData['product_expected_qty'][$index],
+        $formattedBoxes[$boxNumber]['products'][] = [
+            'id' => $formData['product_id'][$index] ?? null,
+            'choose_product' => $formData['choose_product'][$index] ?? null,
+            'name' => $formData['product_name'][$index] ?? null,
+            'expected_qty' => $formData['product_expected_qty'][$index] ?? null,
         ];
     }
 
-    // Now, $boxes contains an array of boxes with their associated product details
-    // You can convert it to JSON and store it in your database or process it further
+    // Now, $formattedBoxes contains an array of boxes with their associated product details
 
-    // Example: Convert $boxes to JSON and store it in the database
-    $boxesJson = json_encode($boxes);
-    dd($boxesJson);
+    // Convert $formattedBoxes to JSON
+    $boxesJson = json_encode(array_values($formattedBoxes));
+
+    // Create and save an OrderProductBox for each box
+    foreach ($formattedBoxes as $index => $box) {
+            $orderProductBox = new OrderProductBox();
+            $orderProductBox->box_no = $box['box_number'];
+            $orderProductBox->order_id =22; // You may need to adjust this depending on how the order ID is handled
+            $orderProductBox->weight = $box['package_weight'];
+            $orderProductBox->weight_unit = $box['weight_unit'];
+            $orderProductBox->length = $box['package_length'];
+            $orderProductBox->length_unit = $box['length_unit'];
+            $orderProductBox->height = $box['package_height'];
+            $orderProductBox->height_unit = $box['height_unit'];
+            $orderProductBox->pickup_day = null; // You may need to set the pickup day
+            $orderProductBox->pickup_time = null; // You may need to set the pickup time
+            $orderProductBox->product_info = json_encode($box);
+            $orderProductBox->save();
     }
+
+    // Return the JSON representation of the formatted boxes if needed
+    return response()->json($formattedBoxes);
+}
+
+
     public function orderPaymentSave(OrderPaymentRequest $orderPaymentRequest, Order $order)
     {
         $orderpayment = OrderPayment::firstOrNew(['order_id' => $order->id]);
