@@ -390,38 +390,51 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="pickup_day">Pickup Day</label>
-                                                        <input type="date" id="pickup_day" name="pickup_day"
-                                                            class="form-control">
+                                                        <input type="date" id="pickup_day" name="pickup_day" value="{{ $order?->orderProductBox?->first()['pickup_day'] ?? '' }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="pickup_time">Pickup Time</label>
+                                                        <label for="pickup_time" required>Pickup Time</label>
                                                         <select id="pickup_time" name="pickup_time" class="form-control">
-                                                            <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM
+                                                            <option value="">-- Select --</option>
+                                                            <option value="10:00 AM - 11:00 AM" {{ isset($order?->orderProductBox?->first()['pickup_time']) == '10:00 AM - 11:00 AM' ? 'selected' : '' ?? '' }}>10:00 AM - 11:00 AM
                                                             </option>
-                                                            <option value="10:30 AM - 11:30 AM">10:30 AM - 11:30 AM
+                                                            <option value="10:30 AM - 11:30 AM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='10:30 AM - 11:30 AM' ? 'selected' : '' ?? '' }}>10:30 AM - 11:30 AM
                                                             </option>
-                                                            <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM
+                                                            <option value="11:00 AM - 12:00 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='11:00 AM - 12:00 PM' ? 'selected' : '' ?? '' }}>11:00 AM - 12:00 PM
                                                             </option>
-                                                            <option value="11:30 AM - 12:30 PM">11:30 AM - 12:30 PM
+                                                            <option value="11:30 AM - 12:30 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='11:30 AM - 12:30 PM' ? 'selected' : '' ?? '' }}>11:30 AM - 12:30 PM
                                                             </option>
-                                                            <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
-                                                            <option value="12:30 PM - 1:30 PM">12:30 PM - 1:30 PM</option>
-                                                            <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
-                                                            <option value="1:30 PM - 2:30 PM">1:30 PM - 2:30 PM</option>
-                                                            <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
-                                                            <option value="2:30 PM - 3:30 PM">2:30 PM - 3:30 PM</option>
-                                                            <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
-                                                            <option value="3:30 PM - 4:30 PM">3:30 PM - 4:30 PM</option>
-                                                            <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
-                                                            <option value="4:30 PM - 5:30 PM">4:30 PM - 5:30 PM</option>
-                                                            <option value="5:00 PM - 6:00 PM">5:00 PM - 6:00 PM</option>
-                                                            <option value="5:30 PM - 6:30 PM">5:30 PM - 6:30 PM</option>
-                                                            <option value="6:00 PM - 7:00 PM">6:00 PM - 7:00 PM</option>
-                                                            <option value="6:30 PM - 7:30 PM">6:30 PM - 7:30 PM</option>
+                                                            <option value="12:00 PM - 1:00 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='12:00 PM - 1:00 PM' ? 'selected' : '' ?? '' }}>12:00 PM - 1:00 PM</option>
+                                                            <option value="12:30 PM - 1:30 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='12:30 PM - 1:30 PM' ? 'selected' : '' ?? '' }}>12:30 PM - 1:30 PM</option>
+                                                            <option value="1:00 PM - 2:00 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='1:00 PM - 2:00 PM' ? 'selected' : '' ?? '' }}>1:00 PM - 2:00 PM</option>
+                                                            <option value="1:30 PM - 2:30 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='1:30 PM - 2:30 PM' ? 'selected' : '' ?? '' }}>1:30 PM - 2:30 PM</option>
+                                                            <option value="2:00 PM - 3:00 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='2:00 PM - 3:00 PM' ? 'selected' : '' ?? '' }}>2:00 PM - 3:00 PM</option>
+                                                            <option value="2:30 PM - 3:30 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='2:30 PM - 3:30 PM' ? 'selected' : '' ?? '' }}>2:30 PM - 3:30 PM</option>
+                                                            <option value="3:00 PM - 4:00 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='3:00 PM - 4:00 PM' ? 'selected' : '' ?? '' }}>3:00 PM - 4:00 PM</option>
+                                                            <option value="3:30 PM - 4:30 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='3:30 PM - 4:30 PM' ? 'selected' : '' ?? '' }}>3:30 PM - 4:30 PM</option>
+                                                            <option value="4:00 PM - 5:00 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='4:00 PM - 5:00 PM' ? 'selected' : '' ?? '' }}>4:00 PM - 5:00 PM</option>
+                                                            <option value="4:30 PM - 5:30 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='4:30 PM - 5:30 PM' ? 'selected' : '' ?? '' }}>4:30 PM - 5:30 PM</option>
+                                                            <option value="5:00 PM - 6:00 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='5:00 PM - 6:00 PM' ? 'selected' : '' ?? '' }}>5:00 PM - 6:00 PM</option>
+                                                            <option value="5:30 PM - 6:30 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='5:30 PM - 6:30 PM' ? 'selected' : '' ?? '' }}>5:30 PM - 6:30 PM</option>
+                                                            <option value="6:00 PM - 7:00 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='6:00 PM - 7:00 PM' ? 'selected' : '' ?? '' }}>6:00 PM - 7:00 PM</option>
+                                                            <option value="6:30 PM - 7:30 PM" {{ isset($order?->orderProductBox?->first()['pickup_time']) =='6:30 PM - 7:30 PM' ? 'selected' : '' ?? '' }}>6:30 PM - 7:30 PM</option>
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @if ($order?->status != 'processing')
+                                                        <button id="print_package_submit" type="submit" class="btn btn-success">Confirm & Get
+                                                            Slip</button>
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-6">
+                                                        <a id="print_package_barcode"
+                                                            href="{{ route('package_barcodes.barcodes', ['order' => $order->id]) }}"
+                                                            target="_blank"
+                                                            class="btn btn-outline-primary float-right"  {{$order?->status == 'processing' ? '' : 'hidden'}}>Print</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -429,7 +442,6 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success">Submit</button>
                     </form>
                 </div>
 
@@ -688,7 +700,7 @@
         }
         var boxes = {};
 
-        function generateBoxInputs(boxNumber, lengthUnits, weightUnits, products, order_id) {
+        function generateBoxInputs(boxNumber, lengthUnits, weightUnits, products, order_id, box_details) {
             // Create an object to store the details of this box
             var box = {
                 packageWeight: '',
@@ -699,6 +711,11 @@
                 heightUnit: '',
                 products: []
             };
+            var productInfo = {};
+            if (box_details['product_info']) {
+                // Check if 'product_info' is not empty, then parse it as JSON
+                productInfo = JSON.parse(box_details['product_info']);
+            }
 
             var html = '<div class="box card" id="box_' + boxNumber + '">';
             html += '<div class="close-icon" onclick="removeBox(' + boxNumber + ')">&times;</div>';
@@ -708,41 +725,56 @@
             html += '<div class="col-md-12"><h3>Select Box No: ' + boxNumber + '</h3></div>';
             // Package Weight
             html += '<div class="col-md-2">';
+            var packageWeightValue = box_details['weight'] ? box_details['weight'] : '';
             html +=
-                '<input type="text" name="package_weight[]" placeholder="Package Weight" class="form-control form-control-sm">';
+                '<input type="text" name="package_weight[]" placeholder="Package Weight" value="' + packageWeightValue +
+                '" class="form-control form-control-sm" required>';
             html += '</div>';
 
             html += '<div class="col-md-2">';
-            html += '<select name="weight_unit[]" class="form-control form-control-sm">';
+            html += '<select name="weight_unit[]" class="form-control form-control-sm" required>';
+            html += '<option value="">Select</option>';
             for (var weightValue in weightUnits) {
-                html += '<option value="' + weightValue + '">' + weightUnits[weightValue] + '</option>';
+                var weightunitSelected = weightValue == box_details['weight_unit'] ? 'selected' : '';
+                html += '<option ' + weightunitSelected + ' value="' + weightValue + '">' + weightUnits[weightValue] +
+                    '</option>';
             }
             html += '</select>';
             html += '</div>';
 
             // Package Length
             html += '<div class="col-md-2">';
-            html += '<input type="text" name="length[]" placeholder="Package Length" class="form-control form-control-sm">';
+            var packageLengthValue = box_details['length'] ? box_details['length'] : '';
+            html += '<input type="text" name="length[]" placeholder="Package Length" value="' + packageLengthValue +
+                '" class="form-control form-control-sm" required>';
             html += '</div>';
 
             // Select for Package Length
             html += '<div class="col-md-2">';
-            html += '<select name="length_unit[]" class="form-control form-control-sm">';
+            html += '<select name="length_unit[]" class="form-control form-control-sm" required>';
+            html += '<option value="">Select</option>';
             for (var unitValue in lengthUnits) {
-                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+                var lengthUnitSelected = unitValue == box_details['length_unit'] ? 'selected' : '';
+                html += '<option ' + lengthUnitSelected + ' value="' + unitValue + '">' + lengthUnits[unitValue] +
+                    '</option>';
             }
             html += '</select>';
             html += '</div>';
             // Package Height
             html += '<div class="col-md-2">';
-            html += '<input type="text" name="height[]" placeholder="Package Height" class="form-control form-control-sm">';
+            var packageHeightValue = box_details['height'] ? box_details['height'] : '';
+            html += '<input type="text" name="height[]" placeholder="Package Height" value="' + packageHeightValue +
+                '" class="form-control form-control-sm" required>';
             html += '</div>';
 
             // Select for Package Height
             html += '<div class="col-md-2">';
-            html += '<select name="height_unit[]" class="form-control form-control-sm">';
+            html += '<select name="height_unit[]" class="form-control form-control-sm" required>';
+            html += '<option value="">Select</option>';
             for (var unitValue in lengthUnits) {
-                html += '<option value="' + unitValue + '">' + lengthUnits[unitValue] + '</option>';
+                var heightUnitSelected = unitValue == box_details['height_unit'] ? 'selected' : '';
+                html += '<option ' + heightUnitSelected + ' value="' + unitValue + '">' + lengthUnits[unitValue] +
+                    '</option>';
             }
             html += '</select>';
             html += '</div>';
@@ -758,14 +790,18 @@
                 // Add product details to the box
                 box.products.push(product);
 
+                var expectedQty = ''; // Default value
+                if (productInfo['products'] && productInfo['products'][j] && productInfo['products'][j]['expected_qty']) {
+                    expectedQty = productInfo['products'][j]['expected_qty'];
+                }
+
                 html += '<div class="col-md-12 row mt-2">';
                 html += '<div class="col-md-8 d-flex">';
-                html += `<input type="checkbox" class="mr-2" name="choose_product[${boxNumber}]" id="choose_product_${boxNumber}_${product.id}">`;
-                html += '<label class="" for="product_name_${boxNumber}">' + product.productName + '</label>';
+                html += `<input type="checkbox" class="mr-2" name="choose_product[]">`;
+                html += '<label class="" for="product_name_' + boxNumber + '">' + product.productName + '</label>';
                 html +=
                     `<input type="hidden" name="box_number[]" value="${boxNumber}" class="form-control form-control-sm">`;
-                html +=
-                    `<input type="hidden" name="order_id[]" value="${order_id}" class="form-control form-control-sm">`;
+                html += `<input type="hidden" name="order_id[]" value="${order_id}" class="form-control form-control-sm">`;
                 html +=
                     `<input type="hidden" name="product_id[]" value="${product.productId}" class="form-control form-control-sm">`;
                 html +=
@@ -775,8 +811,8 @@
                 html += '' + products[j]['quantity'] + '';
                 html += '</div>';
                 html += '<div class="col-md-2">';
-                html +=
-                    '<input type="text" name="product_expected_qty[]" placeholder="Qty" class="form-control form-control-sm">';
+                html += '<input type="text" name="product_expected_qty[]" value="' + expectedQty +
+                    '" placeholder="Qty" class="form-control form-control-sm">';
                 html += '</div>';
                 html += '</div>';
             }
@@ -796,25 +832,30 @@
             var lengthUnits = <?php echo json_encode($lengthUnits); ?>;
             var weightUnits = <?php echo json_encode($weightUnits); ?>;
             var products = {!! json_encode($order->OrderDetail) !!};
+            var order_product_box = {!! json_encode($order->orderProductBox) !!};
+
 
             $('#package_qty').click(function() {
-                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products,
-                order_id);
+                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products, order_id,
+                    "");
+                $('#box_details').append(newBoxHtml);
+                boxCounter++;
+            });
+            var order_product_box = {!! json_encode($order->orderProductBox) !!};
+
+            order_product_box.forEach(function(box) {
+                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products, order_id,
+                    box);
                 $('#box_details').append(newBoxHtml);
                 boxCounter++;
             });
 
-            var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products, order_id);
-            $('#box_details').append(newBoxHtml);
-            boxCounter++;
-        });
+            if (!order_product_box) {
+                var newBoxHtml = generateBoxInputs(boxCounter, lengthUnits, weightUnits, products, order_id, "");
+                $('#box_details').append(newBoxHtml);
+                boxCounter++;
+            }
 
-        // $("#confirmOrderBtn").click(function() {
-        //     $(this).prop("disabled", true);
-        //     $("#cancelOrderBtn").prop("disabled", false);
-        //     $("#printInvoiceBtn").show();
-        //     $("#cancelReasonSelect").hide();
-        //     $("#cancelReasonForm").hide();
-        // });
+        });
     </script>
 @endpush

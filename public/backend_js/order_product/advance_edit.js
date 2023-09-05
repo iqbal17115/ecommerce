@@ -3,62 +3,38 @@ $(document).ready(function () {
         event.preventDefault(); // Prevent default form submission
         var form = $(this);
         var url = form.attr('action');
-
-        var boxDetails = [];
-
-        // Collect box details for each box
-        var boxes = document.querySelectorAll('.box');
-
-        boxes.forEach(function(box) {
-            var boxNumber = box.getAttribute('data-box-number');
-            var packageWeight = box.querySelector('input[name="package_weight[]"]').value;
-            var weightUnit = box.querySelector('select[name="weight_unit[]"]').value;
-            var packageLength = box.querySelector('input[name="length[]"]').value;
-            var lengthUnit = box.querySelector('select[name="length_unit[]"]').value;
-            var packageHeight = box.querySelector('input[name="height[]"]').value;
-            var heightUnit = box.querySelector('select[name="height_unit[]"]').value;
-
-            var boxProducts = [];
-
-            var products = box.querySelectorAll('input[name="product_id[]"]');
-
-            products.forEach(function(product) {
-                var productId = product.value;
-                var productName = product.getAttribute('data-product-name');
-                var productExpectedQty = product.nextElementSibling.value;
-
-                var productInfo = {
-                    id: productId,
-                    name: productName,
-                    expected_qty: productExpectedQty
-                };
-
-                boxProducts.push(productInfo);
-            });
-
-            var boxInfo = {
-                box_number: boxNumber,
-                package_weight: packageWeight,
-                weight_unit: weightUnit,
-                package_length: packageLength,
-                length_unit: lengthUnit,
-                package_height: packageHeight,
-                height_unit: heightUnit,
-                products: boxProducts
-            };
-
-            boxDetails.push(boxInfo);
-        });
-
-        // Convert the box details to JSON format
-        var boxDetailsJson = JSON.stringify(boxDetails);
-
         $.ajax({
             type: 'POST',
             url: url,
             data: form.serialize(), // Serialize the form data
             success: function (response) {
-                console.log(response);
+                Swal.fire({
+                    position: "top-end",
+                    type: "success",
+                    title: "Package Info Saved!!",
+                    showConfirmButton: !1,
+                    timer: 1500
+                });
+
+
+
+                var anchorElement = document.getElementById('print_package_barcode');
+                if (anchorElement) {
+                    var href = anchorElement.getAttribute('href');
+
+                    window.location.href = href;
+                }
+                // Get the anchor element by its ID
+                var anchorElement = document.getElementById('myAnchor');
+
+                if (anchorElement) {
+                    // Get the href attribute
+                    var href = anchorElement.getAttribute('href');
+
+                    // Navigate to the URL using window.location
+                    window.location.href = href;
+                }
+
             },
             error: function (xhr, status, error) {
                 // Handle error, e.g., show an error message
@@ -264,18 +240,5 @@ $(document).ready(function () {
                 alert('An error occurred');
             }
         });
-    });
-
-    cancelForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const selectedReason = document.getElementById("cancelReasonInput").value;
-        if (selectedReason) {
-            // Here you can perform further actions, like submitting the reason to the server
-            console.log("Selected Reason:", selectedReason);
-            // Close the modal
-            cancelModal.style.display = "none";
-        } else {
-            alert("Please select a cancellation reason.");
-        }
     });
 });

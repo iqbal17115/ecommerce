@@ -41,7 +41,7 @@ class OrderPackageRequest extends FormRequest
             $rules['choose_product.' . $key] = 'nullable';
             $rules['product_id.' . $key] = 'required';
             $rules['product_name.' . $key] = 'required';
-            $rules['product_expected_qty.' . $key] = 'required';
+            $rules['product_expected_qty.' . $key] = 'nullable';
         }
 
         return $rules;

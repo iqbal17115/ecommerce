@@ -26,7 +26,7 @@ class CreateOrderProductBoxesTable extends Migration
             $table->string('height_unit', 30)->nullable();
             $table->date('pickup_day')->nullable();
             $table->string('pickup_time')->nullable();
-            $table->string('product_info')->nullable();
+            $table->text('product_info')->nullable();
             $table->foreignId('created_by')->nullable()->index();
             $table->foreignId('updated_by')->nullable()->index();
             $table->foreignId('deleted_by')->nullable()->index();

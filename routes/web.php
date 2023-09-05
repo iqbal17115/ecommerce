@@ -198,6 +198,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::post('/order-payment-note-submit/{order}', 'orderNotePaymentSave')->name('order_payment_note.submit');
         Route::post('/order-fulfilment-note-submit/{order}', 'orderFulfilmentNotetSave')->name('order_fulfilment_note.submit');
         Route::post('/order-package-submit/{order}', 'orderPackageSave')->name('order_package.submit');
+        Route::get('/generate-package_barcodes/{order}', 'generatePackageBarcodes')->name('package_barcodes.barcodes');
     });
     // End All Order
 

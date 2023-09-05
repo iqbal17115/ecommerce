@@ -9,6 +9,7 @@ use App\Models\FrontEnd\OrderDetail;
 use App\Models\Backend\Inventory\SaleInvoice;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
+use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Traits\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,7 +19,7 @@ class Order extends Model
 {
     use HasFactory, SoftDeletes, BaseModel;
     protected $dates = ['deleted_at'];
-    
+
 
 
     protected $searchable = [
@@ -30,6 +31,10 @@ class Order extends Model
         'order_date'
     ];
 
+    public function orderProductBox()
+    {
+        return $this->hasMany(OrderProductBox::class);
+    }
     public function orderPayment()
     {
         return $this->hasOne(OrderPayment::class);
