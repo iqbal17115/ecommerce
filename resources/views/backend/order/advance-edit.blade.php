@@ -521,6 +521,7 @@
                     <form action="{{ route('order.note', ['order' => $order->id]) }}" id="orderNoteSubmit">
                         @csrf
                         <div class="form-group">
+                            <label for="order_note">Add Note:</label>
                             <textarea type="text" class="form-control form-control-sm" id="order_note" name="order_note"
                                 placeholder="Add Note" required></textarea>
                         </div>
