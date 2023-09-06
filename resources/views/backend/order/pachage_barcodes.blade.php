@@ -4,119 +4,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generated Barcodes</title>
+    <title>Print Example</title>
     <style>
-        body {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: flex-start;
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin: 0;
-            font-family: Arial, sans-serif;
+        /* Custom row class */
+        .custom-row::after {
+            content: "";
+            display: table;
+            clear: both;
         }
 
-        .barcode-card {
-            /* width: 200px; */
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #fff;
-            margin: 10px;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        /* Custom column classes for a flexible grid layout */
+        .custom-col-1 {
+            width: 8.33%;
+            /* 1/12 */
+            float: left;
         }
 
-        .barcode-image {
-            /* width: 100px; */
-            /* height: 60px; */
-            margin-bottom: 10px;
+        .custom-col-2 {
+            width: 16.66%;
+            /* 2/12 */
+            float: left;
         }
 
-        .barcode-content {
-            font-size: 14px;
+        .custom-col-3 {
+            width: 25%;
+            /* 3/12 */
+            float: left;
         }
 
-        /* CSS Styles */
-        .address-container {
-            display: grid;
-            grid-template-columns: 70% 30%;
-            /* 70% for addresses, 30% for box_no */
-            gap: 10px;
-            /* Add some spacing between sections */
+        .custom-col-4 {
+            width: 33.33%;
+            /* 4/12 */
+            float: left;
         }
 
-        .address-section {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            background-color: #f9f9f9;
+        .custom-col-5 {
+            width: 41.66%;
+            /* 5/12 */
+            float: left;
         }
 
-        .box-no-section {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            background-color: #f9f9f9;
+        .custom-col-6 {
+            width: 50%;
+            /* 6/12 */
+            float: left;
         }
 
-        .address-section strong,
-        .box-no-section strong {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
+        .custom-col-7 {
+            width: 58.33%;
+            /* 7/12 */
+            float: left;
         }
 
-        .address-section br,
-        .box-no-section br {
-            display: none;
+        .custom-col-8 {
+            width: 66.66%;
+            /* 8/12 */
+            float: left;
         }
 
-        .address-section p,
-        .box-no-section p {
-            margin: 0;
-            font-size: 14px;
+        .custom-col-9 {
+            width: 75%;
+            /* 9/12 */
+            float: left;
+        }
+
+        .custom-col-10 {
+            width: 83.33%;
+            /* 10/12 */
+            float: left;
+        }
+
+        .custom-col-11 {
+            width: 91.66%;
+            /* 11/12 */
+            float: left;
+        }
+
+        .custom-col-12 {
+            width: 100%;
+            /* 12/12 (full-width) */
+            float: left;
+        }
+
+        @media print {
+            table {
+                border-collapse: collapse;
+            }
+
+            table,
+            tr,
+            td {
+                border: 2px solid black;
+                /* Set the table row and cell borders for print */
+            }
         }
     </style>
+    <!-- Include Bootstrap CSS here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 
 <body>
-    @foreach ($barcodesData as $barcodeData)
-        <div>
-            <div class="barcode-card">
+    <!-- Your custom row and column layout -->
+    <div class="custom-row">
+        @foreach ($barcodesData as $barcodeData)
+            <div class="custom-col-7">
                 <div class="address-container">
                     <div class="address-section">
-                        <strong>Billed To:</strong><br>
-                        {{ $order->Contact->first_name }}<br>
-                        {{ $order?->Contact?->address }}<br>
+                        <strong>Return To:</strong><br>
+                        <strong>{{ $company_info?->name }}</strong>
+                        <strong>{{ $company_info?->address }}</strong>
+                        <div class="address-section">
+                            <strong>Ship To:</strong><br>
+                            <strong>{{ $order->Contact->first_name }}</strong>
+                            <strong>{{ $order?->Contact?->address }}</strong>
+                        </div>
                     </div>
-                    <div class="box-no-section">
-                        {{ $barcodeData['pickup_day'] }}<br>
-                        <br>
-                        {{ $barcodeData['pickup_time'] }}<br>
-                    </div>
-                    <div class="address-section">
-                        <strong>Shipped To:</strong><br>
-                        {{ $order?->Contact?->District?->name }}, {{ $order?->Contact?->Division?->name }}<br>
-                        {{ $order?->Contact?->Union?->name }}, {{ $order?->Contact?->Union?->name }}<br>
-                        {{ $order?->Contact?->shipping_address }}<br>
-                    </div>
-                    <div class="box-no-section">
-                        <strong>{{ $order->code }}</strong><br>
-                    </div>
-
                 </div>
-<br>
-                <img class="barcode-image"
-                    src="data:image/png;base64,{{ base64_encode($barcodeData['image']) }}" alt="Barcode">
-                <div class="barcode-content">{{ $barcodeData['content'] }}</div>
             </div>
-        </div>
-    @endforeach
+            <div class="custom-col-5">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>COD</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Pkg {{ $barcodeData['box_no'] }} of {{ count($order->orderProductBox) }}</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">{{ $barcodeData['content'] }}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>{{ $order->orderProductBox->first()->pickup_time }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="custom-col-12">
+                <h3 class="text-center">
+                    EAD: {{ $order->orderProductBox->first()->pickup_day }}
+                </h3>
+                <hr style="padding-top: 2px;">
+                <center>
+                    <img class="barcode-image" src="data:image/png;base64,{{ base64_encode($barcodeData['image']) }}"
+                        alt="Barcode">
+                </center>
+                <h3 class="order_id">
+                    <center>Order Id: {{ $order->code }}</center>
+                </h3>
+                <hr style="padding-top: 2px;">
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        @endforeach
 
+
+    </div>
+    <!-- Include Bootstrap JavaScript and jQuery (if needed) here -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
+    </script>
+
+    <!-- JavaScript to trigger the print dialog -->
     <script>
-        window.print();
+        // Make sure the content is ready and Bootstrap styles are applied
+        window.onload = function() {
+            window.print();
+        };
     </script>
 </body>
 

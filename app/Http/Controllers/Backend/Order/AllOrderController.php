@@ -23,6 +23,7 @@ use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\FrontEnd\Order;
 use App\Traits\Barcode;
+use Illuminate\Support\Facades\Auth;
 
 class AllOrderController extends Controller
 {
@@ -48,6 +49,7 @@ class AllOrderController extends Controller
             ];
         }
 
+        $user = Auth::user();
         // Set the appropriate response headers for the images
         return response()->view('backend.order.pachage_barcodes', ['barcodesData' => $barcodesData, 'order' => $order]);
     }
