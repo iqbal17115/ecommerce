@@ -134,11 +134,14 @@
                             <td>Pkg {{ $barcodeData['box_no'] }} of {{ count($order->orderProductBox) }}</td>
                         </tr>
                         <tr>
-                            <td rowspan="2">{{ $barcodeData['content'] }}</td>
+                            <td rowspan="2">{{ $order->orderProductBox->first()->weight }}{{$order->orderProductBox->first()->weight_unit}}</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">{{ $order->orderProductBox->first()->length }}{{$order->orderProductBox->first()->length_unit}} * {{ $order->orderProductBox->first()->height }}{{$order->orderProductBox->first()->height_unit}}</td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td>{{ $order->orderProductBox->first()->pickup_time }}</td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
@@ -148,13 +151,24 @@
                     EAD: {{ $order->orderProductBox->first()->pickup_day }}
                 </h3>
                 <hr style="padding-top: 2px;">
-                <center>
-                    <img class="barcode-image" src="data:image/png;base64,{{ base64_encode($barcodeData['image']) }}"
-                        alt="Barcode">
-                </center>
-                <h3 class="order_id">
-                    <center>Order Id: {{ $order->code }}</center>
-                </h3>
+                <div class="custom-row">
+                    <div class="custom-col-6">
+                        <center>
+                            <img class="barcode-image"
+                                src="data:image/png;base64,{{ base64_encode($barcodeData['image']) }}" alt="Barcode">
+                        </center>
+                        <div class="order_id" style="font-size: 14px;"><center>Tracking ID: {{ $barcodeData['content'] }}</center></div>
+                    </div>
+                    <div class="custom-col-6">
+                        <center>
+                            <img class="barcode-image"
+                                src="data:image/png;base64,{{ base64_encode($barcodeOrderImage) }}" alt="Barcode">
+                        </center>
+                        <div class="order_id" style="font-size: 14px;">
+                            <center>Order ID: {{ $order->code }}</center>
+                        </div>
+                    </div>
+                </div>
                 <hr style="padding-top: 2px;">
             </div>
             <br>

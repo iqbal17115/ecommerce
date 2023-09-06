@@ -33,6 +33,7 @@ class AllOrderController extends Controller
 
         // Create an array to store barcode data (image and content)
         $barcodesData = [];
+        $barcodeOrderImage = $this->generatePackageBarcodeImageFromString($order->code);
 
         foreach ($order->orderProductBox as $product_box) {
             // Generate the barcode image using the function you provided
@@ -51,7 +52,7 @@ class AllOrderController extends Controller
 
         $user = Auth::user();
         // Set the appropriate response headers for the images
-        return response()->view('backend.order.pachage_barcodes', ['barcodesData' => $barcodesData, 'order' => $order]);
+        return response()->view('backend.order.pachage_barcodes', ['barcodesData' => $barcodesData, 'order' => $order, 'barcodeOrderImage' =>$barcodeOrderImage]);
     }
     public function orderPackageSave(OrderPackageRequest $orderPackageRequest, Order $order)
     {
