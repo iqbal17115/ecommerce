@@ -112,11 +112,11 @@
                 <div class="address-container">
                     <div class="address-section">
                         <strong>Return To:</strong><br>
-                        <strong>{{ $company_info?->name }}</strong>
-                        <strong>{{ $company_info?->address }}</strong>
-                        <div class="address-section">
+                        <strong>{{ $company_info?->name }}</strong><br>
+                        <strong>{{ $company_info?->address }}</strong><br>
+                        <div class="address-section" style="margin-top: 10px;">
                             <strong>Ship To:</strong><br>
-                            <strong>{{ $order->Contact->first_name }}</strong>
+                            <strong>{{ $order->Contact->first_name }}</strong><br>
                             <strong>{{ $order?->Contact?->address }}</strong>
                         </div>
                     </div>
