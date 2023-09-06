@@ -517,7 +517,7 @@
                         @endif
                     </ul>
 
-
+{{-- Test --}}
                     <form action="{{ route('order.note', ['order' => $order->id]) }}" id="orderNoteSubmit">
                         @csrf
                         <div class="form-group">
