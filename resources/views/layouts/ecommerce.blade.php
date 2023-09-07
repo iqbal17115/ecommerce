@@ -83,7 +83,6 @@
 
     @include('layouts.parts.js-links')
     @stack('scripts')
-
 </body>
 
 </html>
