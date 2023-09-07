@@ -661,6 +661,10 @@
         .card {
             height: 100%;
         }
+
+        .view-account {
+            font-family: Arial, sans-serif;
+        }
     </style>
     <main class="main">
         <div class="container">
