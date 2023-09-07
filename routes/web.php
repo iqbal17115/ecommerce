@@ -31,7 +31,6 @@ use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountController;
 use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
-use App\Http\Controllers\Frontend\BarcodeController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
@@ -101,13 +100,21 @@ Route::post('customer-register', [AuthController::class, 'customRegistration'])-
 Route::get('customer-logout', [AuthController::class, 'logout'])->name('customer-logout');
 Route::post('customer-login', [AuthController::class, 'authenticate'])->name('customer-login');
 
+Route::group(['middleware' => 'auth'], function () {
+    // My Account
+    Route::controller(MyAccountController::class)->group(function () {
+        Route::get('/user/orders', 'getUserOrders');
+    });
+
+});
+
+
 // Define the route for the calculateShippingCharge method
 Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'calculateShippingCharge'])->name('calculateShippingCharge');
-
 Route::group(['middleware' => 'auth'], function () {
 
-     // Manage Cancellation Order Product
-     Route::controller(OrderProductReturnController::class)->group(function () {
+    // Manage Cancellation Order Product
+    Route::controller(OrderProductReturnController::class)->group(function () {
         Route::get('return-product/{order}', 'index')->name('return_product');
     });
 

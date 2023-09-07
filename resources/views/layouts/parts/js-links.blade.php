@@ -19,7 +19,7 @@ WebFontConfig = {
 <!-- Main JS File -->
 <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
 <!-- Common JS File -->
-<script src="{{ URL::asset('aladdinne/') }}/assets/custom_js/js/common.js"></script>
+<script src="{{ URL::asset('aladdinne/') }}/assets/custom/js/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $(".menu-toggle").click(function(e) {
