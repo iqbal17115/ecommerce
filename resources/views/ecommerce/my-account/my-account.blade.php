@@ -1,5 +1,6 @@
 @extends('layouts.ecommerce')
 @push('links')
+
 @endpush
 @push('css')
 @endpush
@@ -652,6 +653,14 @@
         .table-wishlist .product-row {
             background-color: #ffffff;
         }
+
+        .font_size {
+            font-size: 50px;
+        }
+
+        .card {
+            height: 100%;
+        }
     </style>
     <main class="main">
         <div class="container">
@@ -671,214 +680,18 @@
                                     <li class="email"><a href="#">{{ Auth::user()->mobile }}</a></li>
                                 </ul>
                             </div>
-                            <nav class="side-menu">
-                                <ul class="nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="#orders" data-toggle="tab">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            Your Orders
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#address" data-toggle="tab">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            Your Address
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#order-status" data-toggle="tab">
-                                            <i class="fas fa-check-circle"></i>
-                                            Order Status
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#mobile-app" data-toggle="tab">
-                                            <i class="fas fa-mobile-alt"></i>
-                                            Mobile App
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#wishlist" data-toggle="tab">
-                                            <i class="fas fa-heart"></i>
-                                            Wishlist
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#reward-gift-card" data-toggle="tab">
-                                            <i class="fas fa-gift"></i>
-                                            Reward & Gift Card
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#your-payment" data-toggle="tab">
-                                            <i class="fas fa-credit-card"></i>
-                                            Your Payment
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#transactions" data-toggle="tab">
-                                            <i class="fas fa-exchange-alt"></i>
-                                            Transactions
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#installation-plan" data-toggle="tab">
-                                            <i class="fas fa-wrench"></i>
-                                            Installation Plan
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#return-exchange" data-toggle="tab">
-                                            <i class="fas fa-exchange-alt"></i>
-                                            Return & Exchange
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#review-feedback" data-toggle="tab">
-                                            <i class="fas fa-comment"></i>
-                                            Review & Feedback
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#contact-us" data-toggle="tab">
-                                            <i class="fas fa-envelope"></i>
-                                            Contact Us
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#switch-accounts" data-toggle="tab">
-                                            <i class="fas fa-users"></i>
-                                            Switch Accounts
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#sign-out" data-toggle="tab">
-                                            <i class="fas fa-sign-out-alt"></i>
-                                            Sign Out
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            @include('ecommerce.my-account.partials.side_menu')
                         </div>
 
                         <div class="content-panel">
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="orders">
-                                    <h6 class="tab-title">Your Orders</h6>
-                                    <div class="table-responsive">
-                                        <table class="table table-wishlist shadow">
-                                            <thead>
-                                                <tr>
-                                                    <th class="thumbnail-col"></th>
-                                                    <th class="product-col">Product</th>
-                                                    <th class="price-col">Price</th>
-                                                    <th class="status-col">Stock Status</th>
-                                                    <th class="action-col">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                @foreach ($user->Contact?->Order as $order)
-                                                    <tr>
-                                                        <td><a href="javascript: void(0);"
-                                                                class="text-body font-weight-bold">{{ $order->code }}</a>
-                                                        </td>
-                                                        <td>
-                                                            {{ date('d-M-Y H:i', strtotime($order->order_date)) }}
-                                                        </td>
-                                                        <td>
-                                                            {{ ucwords($order->status) }}
-                                                        </td>
-                                                        <td>
-                                                            {{ $order->total_amount }}
-                                                        </td>
-                                                        <td>
-
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="address">
-                                    <h6 class="tab-title">Your Address</h6>
-                                    <form>
-                                        <!-- Address form fields go here -->
-                                    </form>
-                                </div>
-                                <div class="tab-pane fade" id="order-status">
-                                    <h6 class="tab-title">Order Status</h6>
-                                    <p>This is the order status page.</p>
-                                </div>
-                                <div class="tab-pane fade" id="mobile-app">
-                                    <h6 class="tab-title">Mobile App</h6>
-                                    <p>Download our mobile app for a better shopping experience.</p>
-                                </div>
-                                <div class="tab-pane fade" id="wishlist">
-                                    <h6 class="tab-title">Wishlist</h6>
-                                    <table class="table table-wishlist mb-0 shadow">
-                                        <thead>
-                                            <tr>
-                                                <th class="thumbnail-col"></th>
-                                                <th class="product-col">Product</th>
-                                                <th class="price-col">Price</th>
-                                                <th class="status-col">Stock Status</th>
-                                                <th class="action-col">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($user?->wishlist as $list)
-                                                <tr class="product-row">
-                                                    <td>
-                                                        <figure class="product-image-container">
-                                                            <a href="product.html" class="product-image">
-                                                                <img @if ($list?->product?->ProductMainImage) src="{{ asset('storage/product_photo/' . $list?->product?->ProductMainImage->image) }}" @endif
-                                                                    alt="product">
-                                                            </a>
-
-                                                            <a href="#" class="btn-remove icon-cancel"
-                                                                title="Remove Product"></a>
-                                                        </figure>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="product-title">
-                                                            <a href="product.html">{{ $list?->product->name }}</a>
-                                                        </h5>
-                                                    </td>
-                                                    <td class="price-box">
-                                                        @if (
-                                                            $list?->product->sale_price &&
-                                                                $list?->product->sale_start_date &&
-                                                                $list?->product->sale_end_date &&
-                                                                $list?->product->sale_start_date <= now() &&
-                                                                $list?->product->sale_end_date >= now())
-                                                            {{ $currency->icon }}{{ number_format($list?->product->sale_price, 2) }}
-                                                        @else
-                                                            {{ $currency->icon }}{{ number_format($list?->product->your_price, 2) }}
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <span class="stock-status">In stock</span>
-                                                    </td>
-                                                    <td class="action">
-                                                        <button href="javascript:void(0);" title="Add To Cart"
-                                                            data-id="{{ $list?->product->id }}"
-                                                            data-name="{{ $list?->product->name }}"
-                                                            data-your_price="{{ $list?->product->your_price }}"
-                                                            data-sale_price="{{ $list?->product->sale_price }}"
-                                                            @if ($list?->product->ProductMainImage) data-image="{{ $list?->product->ProductMainImage->image }}" @endif
-                                                            class="btn btn-dark btn-add-cart product-type-simple btn-shop">
-                                                            ADD TO CART
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                    <hr class="mt-0 mb-3 pb-2" />
-
-                                </div>
+                                @include('ecommerce.my-account.partials.dashboard')
+                                @include('ecommerce.my-account.partials.orders')
+                                @include('ecommerce.my-account.partials.your_address')
+                                @include('ecommerce.my-account.partials.order_status')
+                                @include('ecommerce.my-account.partials.mobile_app')
+                                @include('ecommerce.my-account.partials.mobile_app')
+                                @include('ecommerce.my-account.partials.wishlist')
                             </div>
                         </div>
                     </div>
