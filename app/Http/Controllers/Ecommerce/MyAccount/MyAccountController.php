@@ -12,8 +12,8 @@ class MyAccountController extends Controller
     // In your controller
     public function getUserOrders(Request $request)
     {
-        $user = User::with('Contact.Order.orderProductBox', 'Contact.Order.OrderDetail.Product')->find($request->user_id);
-        $orders = $user->Contact->Order;
+        $user = User::with('Contact.Order.orderProductBox', 'Contact.Order.OrderDetail.Product.ProductImage')->find($request->user_id);
+                $orders = $user->Contact->Order;
 
         if ($request->code) {
             $orders = $orders->filter(function ($order) use ($request) {
