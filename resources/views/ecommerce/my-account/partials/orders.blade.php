@@ -24,15 +24,15 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="">Date Wise Search</span>
                             </div>
-                            <input type="date" id="from_date" class="form-control">
-                            <input type="date" id="to_date" class="form-control">
+                            <input type="date" id="from_date" class="form-control search_parameter">
+                            <input type="date" id="to_date" class="form-control search_parameter">
                         </div>
                     </div>
                     {{-- End From Date --}}
 
                     {{-- Start Item Per Page --}}
                     <div class="col-md-3">
-                        <select class="form-control form-control-sm" id="itemsPerPageSelect" style="height: 25px;">
+                        <select class="form-control search_parameter form-control-sm" id="items_per_page_select" style="height: 25px;">
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>

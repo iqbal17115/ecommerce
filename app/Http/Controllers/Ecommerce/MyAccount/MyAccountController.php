@@ -14,8 +14,26 @@ class MyAccountController extends Controller
     {
         $user = User::with('Contact.Order.orderProductBox', 'Contact.Order.OrderDetail.Product')->find($request->user_id);
         $orders = $user->Contact->Order;
-        if($request->code) {
-            $orders->where('status', $request->code);
+
+        if ($request->code) {
+            $orders = $orders->filter(function ($order) use ($request) {
+                return str_contains($order->code, $request->code);
+            });
+        }
+        $fromDate = \Carbon\Carbon::parse($request->from_date)->startOfDay();
+        $toDate = \Carbon\Carbon::parse($request->to_date)->endOfDay();
+
+
+        if ($fromDate && $toDate) {
+            $orders = $orders->whereBetween('order_date', [$fromDate, $toDate]);
+        } elseif ($fromDate) {
+            $orders = $orders->where('order_date', '>=', $fromDate);
+        } elseif ($toDate) {
+            $orders = $orders->where('order_date', '<=', $toDate);
+        }
+
+        if ($request->items_per_page_select) {
+            $orders = $orders->limit($request->items_per_page_select);
         }
 
         return response()->json(['orders' => $orders]);
