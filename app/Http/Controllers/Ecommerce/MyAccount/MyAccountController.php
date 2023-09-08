@@ -33,7 +33,7 @@ class MyAccountController extends Controller
         }
 
         if ($request->items_per_page_select) {
-            $orders = $orders->limit($request->items_per_page_select);
+            $orders = $orders->take($request->items_per_page_select);
         }
 
         return response()->json(['orders' => $orders]);
