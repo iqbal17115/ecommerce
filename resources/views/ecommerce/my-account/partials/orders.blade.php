@@ -12,8 +12,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="saerch_box"><i class='fas fa-search'></i></span>
                             </div>
-                            <input type="text" class="form-control search_parameter" id="search_value" placeholder="Search..." aria-label="Search"
-                                aria-describedby="saerch_box">
+                            <input type="text" class="form-control search_parameter" id="search_value"
+                                placeholder="Search..." aria-label="Search" aria-describedby="saerch_box">
                         </div>
                     </div>
                     {{-- End Search Box --}}
@@ -24,15 +24,16 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="">Date Wise Search</span>
                             </div>
-                            <input type="date" id="from_date" class="form-control">
-                            <input type="date" id="to_date" class="form-control">
+                            <input type="date" id="from_date" class="form-control search_parameter">
+                            <input type="date" id="to_date" class="form-control search_parameter">
                         </div>
                     </div>
                     {{-- End From Date --}}
 
                     {{-- Start Item Per Page --}}
                     <div class="col-md-3">
-                        <select class="form-control form-control-sm" id="itemsPerPageSelect" style="height: 25px;">
+                        <select class="form-control search_parameter form-control-sm" id="items_per_page_select"
+                            style="height: 25px;">
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
@@ -48,13 +49,8 @@
         </div>
     </div>
 
-    <div class="table-responsive">
-        <div class="card shadow">
-            <h5 class="card-title mb-4">Order Details</h5>
-            <div class="card-body" id="orders-container">
-
-
-            </div>
-        </div>
+    <div class="card shadow">
+        <h5 class="card-title mb-4">Order Details</h5>
+        <div class="card-body" id="orders-container"></div>
     </div>
 </div>
