@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\ContactInfo\Contact;
+use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\Product\Product;
 use App\Models\Ecommerce\Setting\District;
 use Illuminate\Http\Request;
@@ -75,6 +76,15 @@ class CheckoutController extends Controller
                 $Order->note = $request->note;
                 $Order->is_active = 1;
                 $Order->save();
+
+                // Order Tracking
+                $order = OrderTracking::updateOrCreate(
+                    ['order_id' => $Order->id],
+                    [
+                        'status' => 'pending',
+                        'created_by' => Auth::user()->id
+                    ],
+                );
 
                 // Add To Order Details
                 foreach (session('cart') as $key => $OrderProductDetail) {

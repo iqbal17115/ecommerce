@@ -1,4 +1,30 @@
 $(document).ready(function () {
+    // Order Status Save
+    $('#orderStatusSubmit').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: form.serialize(), // Serialize the form data
+            success: function (response) {
+                Swal.fire({
+                    position: "top-end",
+                    type: "success",
+                    title: response.message,
+                    showConfirmButton: !1,
+                    timer: 1500
+                });
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                alert('An error occurred');
+            }
+        });
+    });
+
     $('#orderPackageSubmit').submit(function (event) {
         event.preventDefault(); // Prevent default form submission
         var form = $(this);

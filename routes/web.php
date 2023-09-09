@@ -199,6 +199,7 @@ Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
         Route::get('advance-edit/{order}', 'advanceEdit')->name('advance-edit');
         Route::post('/cancel-order/{order}', 'cancelOrder')->name('cancel.order');
         Route::post('/confirm-order/{order}', 'confirmOrder')->name('confirm.order');
+        Route::post('/track-status/{order}', 'createUpdateStatus')->name('track_status.order');
         Route::post('/order-note/{order}', 'orderNote')->name('order.note');
         Route::post('/order-payment/{order}', 'orderPaymentStatus')->name('order_payment.status');
         Route::post('/order-payment-submit/{order}', 'orderPaymentSave')->name('order_payment.submit');

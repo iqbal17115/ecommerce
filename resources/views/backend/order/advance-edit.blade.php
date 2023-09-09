@@ -615,7 +615,7 @@
                     Update Fullfilment Status
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="{{ route('track_status.order', ['order' => $order->id]) }}" id="orderStatusSubmit">
                         <div class="form-group row">
                             <div class="col-md-8">
                                 <select class="form-control form-control-sm order_fulfilment_status" id="order_status"

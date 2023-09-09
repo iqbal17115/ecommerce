@@ -18,6 +18,7 @@ use App\Http\Requests\Order\OrderPaymentRequest;
 use App\Http\Requests\Order\OrderPaymentStatusRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Order\OrderStatusRequest;
+use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
@@ -28,6 +29,27 @@ use Illuminate\Support\Facades\Auth;
 class AllOrderController extends Controller
 {
     use Barcode;
+
+    public function createUpdateStatus(OrderStatusRequest $orderStatusRequest, Order $order) {
+        $order = OrderTracking::updateOrCreate(
+            [
+                'order_id' => $order->id,
+                'status' => $orderStatusRequest->order_status,
+            ],
+            [
+                'status' => $orderStatusRequest->order_status,
+                'created_by' => Auth::user()->id
+            ],
+        );
+
+        return response()->json(
+            [
+                'message' => 'Order Status Changed Successfully!'
+            ],
+            200
+        );
+    }
+
     public function generatePackageBarcodes(Order $order)
     {
 
@@ -58,6 +80,18 @@ class AllOrderController extends Controller
     {
         $order->status = 'processing';
         $order->save(); // update order status
+
+        $order = OrderTracking::updateOrCreate(
+            [
+                'order_id' => $order->id,
+                'status' => 'processing',
+            ],
+            [
+                'status' => 'processing',
+                'created_by' => Auth::user()->id
+            ],
+        );
+
 
         // Retrieve the submitted form data
         $formData = $orderPackageRequest->all();
@@ -238,6 +272,18 @@ class AllOrderController extends Controller
     {
         $order->status = 'processing';
         $order->save();
+
+        $order = OrderTracking::updateOrCreate(
+            [
+                'order_id' => $order->id,
+                'status' => 'processing',
+            ],
+            [
+                'status' => 'processing',
+                'created_by' => Auth::user()->id
+            ],
+        );
+
 
         $data = [
             'status' => "processing"
