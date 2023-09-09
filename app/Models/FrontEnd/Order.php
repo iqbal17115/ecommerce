@@ -7,6 +7,7 @@ use App\Models\Backend\ContactInfo\Contact;
 use App\Models\District;
 use App\Models\FrontEnd\OrderDetail;
 use App\Models\Backend\Inventory\SaleInvoice;
+use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
@@ -31,6 +32,10 @@ class Order extends Model
         'order_date'
     ];
 
+    public function orderTracking()
+    {
+        return $this->hasMany(OrderTracking::class);
+    }
     public function orderProductBox()
     {
         return $this->hasMany(OrderProductBox::class);

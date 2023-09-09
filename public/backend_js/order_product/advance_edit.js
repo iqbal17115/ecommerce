@@ -10,6 +10,18 @@ $(document).ready(function () {
             url: url,
             data: form.serialize(), // Serialize the form data
             success: function (response) {
+                var status = response.data.status;
+                var created_at = response.data.created_at;
+
+                var listOrderTracking = $("<li class='list-group-item d-flex justify-content-between align-items-center'></li>");
+
+                // Set the content of the list item
+                listOrderTracking.html(status + '<span class="badge badge-primary badge-pill">' + created_at + '</span>');
+
+                // Append the new list item to the list group
+                $("#list-group-order-tracking").append(listOrderTracking);
+                $("#order_status").val('');
+
                 Swal.fire({
                     position: "top-end",
                     type: "success",

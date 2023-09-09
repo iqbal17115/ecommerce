@@ -31,6 +31,7 @@ use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountController;
 use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
+use App\Http\Controllers\Frontend\OrderTracking\OrderTrackingController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
@@ -102,10 +103,14 @@ Route::post('customer-login', [AuthController::class, 'authenticate'])->name('cu
 
 Route::group(['middleware' => 'auth'], function () {
     // My Account
+    Route::controller(OrderTrackingController::class)->group(function () {
+        Route::get('/orders-tracking/{id}', 'orderTracking')->name('orders.tracking');
+    });
+
+    // My Account
     Route::controller(MyAccountController::class)->group(function () {
         Route::get('/user/orders', 'getUserOrders');
     });
-
 });
 
 

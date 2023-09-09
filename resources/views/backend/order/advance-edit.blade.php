@@ -615,6 +615,15 @@
                     Update Fullfilment Status
                 </div>
                 <div class="card-body">
+                    <ul class="list-group" id="list-group-order-tracking">
+                            @foreach ($order->orderTracking as $orderTracking)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ $orderTracking->status }}
+                                    <span class="badge badge-primary badge-pill">{{ date('d M Y', strtotime($orderTracking->created_at)) }}</span>
+                                </li>
+                            @endforeach
+                    </ul>
+
                     <form action="{{ route('track_status.order', ['order' => $order->id]) }}" id="orderStatusSubmit">
                         <div class="form-group row">
                             <div class="col-md-8">
@@ -622,9 +631,7 @@
                                     name="order_status">
                                     <option value="">Change Status</option>
                                     @foreach ($orderStatuses as $statusValue)
-                                        <option value="{{ $statusValue }}"
-                                            {{ $order->status == $statusValue ? 'selected' : '' }}>{{ $statusValue }}
-                                        </option>
+                                        <option value="{{ $statusValue }}">{{ $statusValue }}</option>
                                     @endforeach
                                 </select>
                             </div>

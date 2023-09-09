@@ -757,7 +757,7 @@
                         orderHtml += '</div>';
                         orderHtml += '</div>';
                         orderHtml += '<div class="col-md-2 justify-content-center align-items-center">';
-                        orderHtml += '<button class="btn btn-sm btn-primary mb-2">Track Package</button><br>';
+                        orderHtml += `<a href="orders-tracking/${order.id}" class="btn btn-sm btn-primary mb-2">Track Package</a><br>`;
                         orderHtml += '<button class="btn btn-sm btn-danger mb-2">Cancel Order</button><br>';
                         orderHtml += '<button class="btn btn-sm btn-success">Print Invoice</button>';
                         orderHtml += '</div>'; // Close the button div

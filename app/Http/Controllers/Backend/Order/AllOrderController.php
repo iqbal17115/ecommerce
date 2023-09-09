@@ -31,7 +31,7 @@ class AllOrderController extends Controller
     use Barcode;
 
     public function createUpdateStatus(OrderStatusRequest $orderStatusRequest, Order $order) {
-        $order = OrderTracking::updateOrCreate(
+        $orderTracking = OrderTracking::updateOrCreate(
             [
                 'order_id' => $order->id,
                 'status' => $orderStatusRequest->order_status,
@@ -42,9 +42,15 @@ class AllOrderController extends Controller
             ],
         );
 
+        $data = [
+            'status' => $orderTracking->status,
+            'created_at' => date('d M Y', strtotime($orderTracking->created_at))
+        ];
+
         return response()->json(
             [
-                'message' => 'Order Status Changed Successfully!'
+                'message' => 'Order Status Changed Successfully!',
+                'data' => $data
             ],
             200
         );
