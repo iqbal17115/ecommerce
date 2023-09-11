@@ -103,7 +103,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-10 hh-grayBox pt45 pb20">
-                    <div class="row justify-content-between">
+                    <div class="row justify-content-between mb-3">
 
                         @foreach ($orderStatuses as $orderStatus)
                             @php
@@ -124,21 +124,31 @@
 
                             <div class="order-tracking {{ $completed ? 'completed' : '' }}">
                                 <span class="is-complete"></span>
-                                <p>{{ ucfirst($orderStatus) }}<br><span>{{ $desiredCreatedAt ? date('d M Y', strtotime($desiredCreatedAt)) : '' }}</span></p>
+                                <p>{{ ucfirst($orderStatus) }}<br><span>{{ $desiredCreatedAt ? date('d M Y', strtotime($desiredCreatedAt)) : '' }}</span>
+                                </p>
                             </div>
                         @endforeach
 
-
-
-                        {{-- <div class="order-tracking completed">
-                            <span class="is-complete"></span>
-                            <p>Shipped<br><span>Tue, June 25</span></p>
-                        </div>
-                        <div class="order-tracking">
-                            <span class="is-complete"></span>
-                            <p>Delivered<br><span>Fri, June 28</span></p>
-                        </div> --}}
                     </div>
+
+                        @php
+                            $statusMessages = [
+                                'pending' => 'Thank you for shopping at Aladdinne.com ! Your order Is being verified. ',
+                                'processing' => 'Your order is now being processed and prepared for shipment.',
+                                'shipped' => 'Your Package has been packed and its being handed over to logistic partner',
+                                'out_for_delivery' => 'Your order is out for delivery and will be at your doorstep soon. Please ensure someone is available to receive it.',
+                                'delivered' => 'Your order has been successfully delivered., Thank you for Shopping at Aladdinne.com!',
+                            ];
+                        @endphp
+                        @foreach ($trackingData as $index => $item)
+                            @if ($item['status'] == 'pending' || $item['status'] == 'processing' || $item['status'] == 'shipped' || $item['status'] == 'out_for_delivery' || $item['status'] == 'delivered')
+                                <div class="d-flex p-3" style="font-size: 16px;">
+                                    <span
+                                    class="badge badge-primary badge-pill mr-5">{{ date('d M Y h:i', strtotime($item['created_at'])) }}</span>
+                                     {{$statusMessages[$item['status']]}}
+                                </div>
+                            @endif
+                        @endforeach
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@ class OrderTrackingController extends Controller
                 'status' => $item->status,
                 'created_at' => $item->created_at->toDateTimeString(), // Format created_at as a string
             ];
-        })->toArray();
+        })->sortByDesc('created_at')->toArray();
 
        return view('ecommerce.my-account.order_tracking.track_order', compact('order', 'orderStatuses', 'trackingData'));
     }

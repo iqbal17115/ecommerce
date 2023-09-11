@@ -8,6 +8,7 @@ class OrderStatusEnum
 
     public const PENDING = "pending";
     public const PROCESSING = "processing";
+    public const WAITING_FOR_HANDOVER = "waiting_for_handover";
     public const SHIPPED = "shipped";
     public const IN_TRANSIT = "in_transit";
     public const ARRIVAL_AT_DISTRIBUTION_CENTER = "arrival_at_distribution_center";
