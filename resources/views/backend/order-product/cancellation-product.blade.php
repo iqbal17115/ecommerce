@@ -20,7 +20,7 @@
                             </div>
                         </div>
                     </h5>
-                    
+
                     <!-- Assuming you have an array of products called 'products' -->
                     @foreach ($order->OrderDetail as $orderDetail)
                         <div class="row shadow-sm py-2">
@@ -28,6 +28,7 @@
                                 <img src="{{ asset('storage/product_photo/' . $orderDetail->Product?->ProductImage?->first()->image) }}"
                                     style="width:50px; height: 50px;" class="img-responsive">
                             </div>
+                            <input type="hidden" value="{{ $orderDetail->id }}" name="order_detail_id[]" id="order_detail_id"/>
                             <div class="col-md-2">
                                 @php
                                     $product_codes = [];
@@ -53,13 +54,13 @@
                             <div class="col-md-3">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <input type="text" value="{{ $orderDetail->quantity }}" name="product_order_qty_{{$orderDetail->Product->id}}" id="product_order_qty_{{$orderDetail->Product->id}}" class="form-control form-control-sm" readonly/>
+                                        <input type="text" value="{{ $orderDetail->quantity }}" name="previous_quantity[]" id="previous_quantity{{$orderDetail->Product->id}}" class="form-control form-control-sm" readonly/>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="product_order_cancel_qty_{{$orderDetail->Product->id}}" id="product_order_cancel_qty_{{$orderDetail->Product->id}}" class="form-control form-control-sm" readonly/>
+                                        <input type="text" name="product_order_cancel_qty[]" id="product_order_cancel_qty_{{$orderDetail->Product->id}}" class="form-control form-control-sm" readonly/>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="product_order_remaining_qty_{{$orderDetail->Product->id}}" id="product_order_remaining_qty_{{$orderDetail->Product->id}}" class="form-control form-control-sm" readonly/>
+                                        <input type="text" name="new_quantity[]" id="new_quantity{{$orderDetail->Product->id}}" class="form-control form-control-sm" readonly/>
                                     </div>
                                     <div class="col-md-12 mt-2">
                                         <select name="product_return reason_{{$orderDetail->Product->id}}" id="product_return reason_{{$orderDetail->Product->id}}" class="form-control form-control-sm">
@@ -84,11 +85,11 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-     
+
         {{-- End Content --}}
     </div>
     <!-- end row -->
@@ -101,7 +102,7 @@
 $(document).ready(function() {
     $('.product-return-qty').keyup(function() {
         var productId = $(this).data('product_id');
-        var orderedQty = parseFloat($('#product_order_qty_' + productId).val());
+        var orderedQty = parseFloat($('#previous_quantity' + productId).val());
         var cancelQty = parseFloat($('#product_order_cancel_qty_' + productId).val());
         var returnQty = parseFloat($(this).val());
 
@@ -113,10 +114,10 @@ $(document).ready(function() {
             var remainingQty = orderedQty - returnQty;
         }
 
-        
+
 
         $('#product_order_cancel_qty_' + productId).val(returnQty);
-        $('#product_order_remaining_qty_' + productId).val(remainingQty);
+        $('#new_quantity' + productId).val(remainingQty);
     });
 });
 </script>
