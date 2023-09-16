@@ -14,6 +14,10 @@ class OrderDetail extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+    protected $fillable = [
+        'quantity'
+    ];
+
     public function ProductMainImage()
     {
         return $this->hasOne(ProductImage::class, 'product_id', 'product_id');

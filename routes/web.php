@@ -125,7 +125,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Manage Cancellation Order Product
     Route::controller(OrderProductCancellationController::class)->group(function () {
-        Route::get('cancellation-product/{order}', 'index')->name('cancellation_product');
+        Route::get('cancellation-product/{order}', 'index')->name('cancellation_product.show');
+        Route::post('cancellation-product', 'storeOrUpdate')->name('cancellation_product');
     });
 
     // My account

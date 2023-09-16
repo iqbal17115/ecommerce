@@ -21,7 +21,9 @@ class Order extends Model
     use HasFactory, SoftDeletes, BaseModel;
     protected $dates = ['deleted_at'];
 
-
+    protected $fillable = [
+        'total_amount'
+    ];
 
     protected $searchable = [
         'code',

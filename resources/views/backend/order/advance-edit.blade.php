@@ -688,7 +688,7 @@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <a type="submit" class="btn btn-danger"
-                                href="{{ route('cancellation_product', ['order' => $order->id]) }}">Cancellation</a>
+                                href="{{ route('cancellation_product.show', ['order' => $order->id]) }}">Cancellation</a>
                         </div>
                         <div class="col-md-6">
                             <a type="submit" class="btn btn-warning"
