@@ -4,7 +4,6 @@ $(document).ready(function () {
         event.preventDefault(); // Prevent default form submission
         var form = $(this);
         var url = form.attr('action');
-alert(1);
         $.ajax({
             type: 'POST',
             url: url,

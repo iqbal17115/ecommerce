@@ -75,7 +75,7 @@
                                         <div class="col-md-12 mt-2">
                                             <select name="change_reason"
                                                 id="product_return reason_{{ $orderDetail->Product->id }}"
-                                                class="form-control form-control-sm" required>
+                                                class="form-control form-control-sm">
                                                 <option value="">Select Product Cancel Reason</option>
                                                 <?php
                                                 foreach ($cancel_reasons as $value => $label) {

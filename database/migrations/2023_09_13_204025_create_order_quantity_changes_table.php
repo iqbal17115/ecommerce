@@ -20,7 +20,6 @@ class CreateOrderQuantityChangesTable extends Migration
             $table->double('previous_quantity')->nullable();
             $table->double('new_quantity');
             $table->string('change_reason')->nullable();
-            $table->unsignedInteger('version')->default(1);
             $table->foreignId('created_by')->nullable()->index();
             $table->foreignId('updated_by')->nullable()->index();
             $table->foreignId('deleted_by')->nullable()->index();

@@ -18,38 +18,29 @@ class OrderProductCancellationController extends Controller
 
         DB::transaction(function () use ($data) {
             foreach ($data['order_detail_id'] as $index => $orderDetailId) {
-                $previousQuantity = $data['previous_quantity'][$index];
-                $newQuantity = $data['new_quantity'][$index];
+                if (isset($data['new_quantity'][$index]) && $data['new_quantity'][$index]) {
+                    $previousQuantity = $data['previous_quantity'][$index];
+                    $newQuantity = $data['new_quantity'][$index];
+                        // Create a new record.
+                        OrderQuantityChange::create([
+                            'order_detail_id' => $orderDetailId,
+                            'previous_quantity' => $previousQuantity,
+                            'new_quantity' => $newQuantity,
+                        ]);
 
-                // Check if a record with the same order_detail_id exists.
-                $existingRecord = OrderQuantityChange::where('order_detail_id', $orderDetailId)->first();
+                    // Update OrderDetail with the new quantity.
+                    $orderDetail = OrderDetail::find($orderDetailId);
 
-                if ($existingRecord) {
-                    // Update the existing record.
-                    $existingRecord->update([
-                        'previous_quantity' => $previousQuantity,
-                        'new_quantity' => $newQuantity,
-                    ]);
-                } else {
-                    // Create a new record.
-                    OrderQuantityChange::create([
-                        'order_detail_id' => $orderDetailId,
-                        'previous_quantity' => $previousQuantity,
-                        'new_quantity' => $newQuantity,
-                    ]);
-                }
+                    if ($orderDetail) {
+                        $orderDetail->update(['quantity' => $newQuantity]);
+                    }
 
-                // Update OrderDetail with the new quantity.
-                $orderDetail = OrderDetail::find($orderDetailId);
-                if ($orderDetail) {
-                    $orderDetail->update(['quantity' => $newQuantity]);
-                }
-
-                // Update Order with the new total amount.
-                $order = Order::find($orderDetail->order_id);
-                if ($order) {
-                    $newTotalAmount = $order->total_amount + ($orderDetail->unit_price * ($newQuantity - $previousQuantity));
-                    $order->update(['total_amount' => $newTotalAmount]);
+                    // Update Order with the new total amount.
+                    $order = Order::find($orderDetail->order_id);
+                    if ($order) {
+                        $newTotalAmount = $order->total_amount + ($orderDetail->unit_price * ($newQuantity - $previousQuantity));
+                        $order->update(['total_amount' => $newTotalAmount]);
+                    }
                 }
             }
         });

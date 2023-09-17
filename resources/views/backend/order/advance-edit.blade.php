@@ -686,6 +686,18 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
+                        <div class="col-md-12">
+                             @foreach($order?->OrderDetail as $orderDetail)
+                                @if ($orderDetail?->orderQuantityChange)
+                                    {{$orderDetail?->Product?->name}} ::
+                                @endif
+                                @foreach($orderDetail?->orderQuantityChange as $orderQuantityChange)
+                                    {{$orderQuantityChange->previous_quantity}} => {{$orderQuantityChange->new_quantity}},
+                                @endforeach
+                                <br>
+                             @endforeach
+                        </div>
+
                         <div class="col-md-6">
                             <a type="submit" class="btn btn-danger"
                                 href="{{ route('cancellation_product.show', ['order' => $order->id]) }}">Cancellation</a>

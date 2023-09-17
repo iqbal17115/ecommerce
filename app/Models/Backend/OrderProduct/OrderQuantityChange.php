@@ -14,7 +14,6 @@ class OrderQuantityChange extends Model
         'order_detail_id',
         'previous_quantity',
         'new_quantity',
-        'change_reason',
-        'version'
+        'change_reason'
     ];
 }
