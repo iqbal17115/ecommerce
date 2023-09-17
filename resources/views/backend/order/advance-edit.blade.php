@@ -688,13 +688,16 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                              @foreach($order?->OrderDetail as $orderDetail)
-                                @if ($orderDetail?->orderQuantityChange)
-                                    {{$orderDetail?->Product?->name}} ::
+                                @if (count($orderDetail?->orderQuantityChange) > 0)
+                                    {{$orderDetail?->Product?->name}}
                                 @endif
                                 @foreach($orderDetail?->orderQuantityChange as $orderQuantityChange)
                                     {{$orderQuantityChange->previous_quantity}} => {{$orderQuantityChange->new_quantity}},
                                 @endforeach
+                                @if (count($orderDetail?->orderQuantityChange) > 0)
                                 <br>
+                                @endif
+
                              @endforeach
                         </div>
 
