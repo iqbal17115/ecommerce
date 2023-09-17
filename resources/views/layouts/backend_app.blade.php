@@ -92,7 +92,13 @@
 
   <!-- Sweet alert init js-->
   <script src="{{ URL::asset('assets/js/pages/sweet-alerts.init.js') }}"></script>
+<script src="{{asset('js/panel/action.js')}}"></script>
+<script src="{{asset('js/panel/common.js')}}"></script>
+<script src="{{ asset('js/select2.js') }}"></script>
 
+<link rel="stylesheet" href="{{ asset('css/common.css') }}">
+<!-- Common JS -->
+<script src="{{ asset('js/common.js') }}"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({

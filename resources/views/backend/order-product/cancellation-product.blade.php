@@ -9,7 +9,10 @@
                 <div class="card-body">
                     <h5 class="card-title mb-4">
                         <div class="row">
-                            <div class="col-md-9 text-success">Cancellation Product</div>
+                            <div class="col-md-9 text-success">
+                                Cancellation Product<br><br>
+                                <input type="checkbox" id="manage_check_boxes" class="ml-4"> &nbsp;<span class="text-dark" style="opacity: 0.7;">Select All</span>
+                            </div>
                             <div class="col-md-3">
                                 <div class="row">
                                     <div class="col-md-4 text-center text-danger">Quantity</div>
@@ -24,7 +27,10 @@
                         <!-- Assuming you have an array of products called 'products' -->
                         @foreach ($order->OrderDetail as $orderDetail)
                             <div class="row shadow-sm py-2">
-                                <div class="col-md-1">
+                                <div class="col-md-1 d-flex justify-content-between">
+                                    <div class="custom-control custom-checkbox custom-control-lg">
+                                        <input type="checkbox" id="checkbox{{$orderDetail->id}}" name="order_detail_id[]" value="{{$orderDetail->id}}">
+                                    </div>
                                     <img src="{{ asset('storage/product_photo/' . $orderDetail->Product?->ProductImage?->first()->image) }}"
                                         style="width:50px; height: 50px;" class="img-responsive">
                                 </div>

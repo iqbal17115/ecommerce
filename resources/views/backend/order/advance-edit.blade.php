@@ -517,7 +517,7 @@
                         @endif
                     </ul>
 
-{{-- Test --}}
+                    {{-- Test --}}
                     <form action="{{ route('order.note', ['order' => $order->id]) }}" id="orderNoteSubmit">
                         @csrf
                         <div class="form-group">
@@ -590,7 +590,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="payment_note">Add Note:</label>
-                                <textarea type="text" class="form-control form-control-sm" id="payment_note" name="payment_note"
+                            <textarea type="text" class="form-control form-control-sm" id="payment_note" name="payment_note"
                                 placeholder="Add Note" required></textarea>
                         </div>
                         <div class="form-group row">
@@ -616,12 +616,13 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group" id="list-group-order-tracking">
-                            @foreach ($order->orderTracking as $orderTracking)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{ $orderTracking->status }}
-                                    <span class="badge badge-primary badge-pill">{{ date('d M Y', strtotime($orderTracking->created_at)) }}</span>
-                                </li>
-                            @endforeach
+                        @foreach ($order->orderTracking as $orderTracking)
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ $orderTracking->status }}
+                                <span
+                                    class="badge badge-primary badge-pill">{{ date('d M Y', strtotime($orderTracking->created_at)) }}</span>
+                            </li>
+                        @endforeach
                     </ul>
 
                     <form action="{{ route('track_status.order', ['order' => $order->id]) }}" id="orderStatusSubmit">
@@ -687,18 +688,30 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-12">
-                             @foreach($order?->OrderDetail as $orderDetail)
-                                @if (count($orderDetail?->orderQuantityChange) > 0)
-                                    {{$orderDetail?->Product?->name}}
-                                @endif
-                                @foreach($orderDetail?->orderQuantityChange as $orderQuantityChange)
-                                    {{$orderQuantityChange->previous_quantity}} => {{$orderQuantityChange->new_quantity}},
+                            <ul class="list-group">
+                                @foreach ($order?->OrderDetail as $orderDetail)
+                                    <li class="list-group-item align-items-center">
+                                        <img src="{{ asset('storage/product_photo/' . $orderDetail?->Product?->ProductImage?->first()->image) }}"
+                                            style="width:40px; height: 40px;" class="img-responsive mb-1">
+                                        <ul class="list-group">
+                                            @foreach ($orderDetail?->orderQuantityChange as $orderQuantityChange)
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <span style="font-size: 12px;">{{ $orderQuantityChange->previous_quantity }}
+                                                        To
+                                                        {{ $orderQuantityChange->new_quantity }}
+                                                    </span>
+                                                    <span
+                                                        class="" style="font-size: 12px; opacity: 0.7;">
+                                                        {{ date('Y-m-d', strtotime($orderQuantityChange->created_at)) }}
+                                                    </span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
                                 @endforeach
-                                @if (count($orderDetail?->orderQuantityChange) > 0)
-                                <br>
-                                @endif
+                            </ul>
 
-                             @endforeach
                         </div>
 
                         <div class="col-md-6">
