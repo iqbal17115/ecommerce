@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\ContactInfo\Contact;
 use App\Models\Backend\Order\OrderTracking;
@@ -72,7 +73,7 @@ class CheckoutController extends Controller
                 $Order->total_amount = $detail_data->getData()->sub_total;
                 $Order->shipping_charge = $detail_data->getData()->charge;
                 $Order->payable_amount = $detail_data->getData()->sub_total + $detail_data->getData()->charge;
-                $Order->status = 'pending';
+                $Order->status = OrderStatusEnum::PROCESSING;
                 $Order->note = $request->note;
                 $Order->is_active = 1;
                 $Order->save();
@@ -81,7 +82,7 @@ class CheckoutController extends Controller
                 $order = OrderTracking::updateOrCreate(
                     ['order_id' => $Order->id],
                     [
-                        'status' => 'pending',
+                        'status' => OrderStatusEnum::PROCESSING,
                         'created_by' => Auth::user()->id
                     ],
                 );

@@ -32,7 +32,7 @@ $(document).ready(function () {
             '',
             (data) => {
                 toastrSuccessMessage(data.message);
-                window.location.reload();
+
             },
             (error) => {
                 toastrErrorMessage(error.responseJSON.message);
