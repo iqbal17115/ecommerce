@@ -18,6 +18,9 @@ class OrderDetail extends Model
     protected $fillable = [
         'quantity'
     ];
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
 
     public function orderQuantityChange()
     {

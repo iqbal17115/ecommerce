@@ -23,22 +23,51 @@ $(document).ready(function () {
         }
     });
 
+    // Function to handle form submission
+    function submitForm(formData) {
+        saveAction(
+            "store",
+            "/cancellation-product",
+            formData,
+            '',
+            (data) => {
+                toastrSuccessMessage(data.message);
+                window.location.reload();
+            },
+            (error) => {
+                toastrErrorMessage(error.responseJSON.message);
+            }
+        );
+    }
+
     // Order Status Save
     $('#order_product_cancellation').submit(function (event) {
         event.preventDefault(); // Prevent default form submission
-        var form = $(this);
-        var url = form.attr('action');
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: form.serialize(), // Serialize the form data
-            success: function (response) {
-                toastrSuccessMessage("Test");
-            },
-            error: function (xhr, status, error) {
-                // Handle error, e.g., show an error message
-                alert('An error occurred');
-            }
-        });
+
+        const orderDetailIds = $("input[name='order_detail_id[]']").map(function () {
+            return {
+                id: $(this).val(),
+                checked: $(this).is(":checked")
+            };
+        }).get();
+
+        const previousQuantities = $("input[name='previous_quantity[]']").map(function () {
+            return $(this).val();
+        }).get();
+
+        const newQuantities = $("input[name='new_quantity[]']").map(function () {
+            return $(this).val();
+        }).get();
+
+        const data = {
+            order_detail_ids: orderDetailIds,
+            previous_quantities: previousQuantities,
+            new_quantities: newQuantities
+        };
+
+
+        console.log(data);
+        // Submit the form
+        submitForm(data);
     });
 });

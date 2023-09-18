@@ -24,11 +24,9 @@ class OrderProductCancellationRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_detail_id.*' => 'required_if:new_quantity.*,!=,null|exists:order_details,id',
-            'previous_quantity.*' => 'required_if:new_quantity.*,!=,null|integer|min:0',
-            'new_quantity.*' => 'nullable|string|max:255',
+            'order_detail_ids' => 'required|array',
+            'previous_quantities' => 'required|array',
+            'new_quantities' => 'array',
         ];
-
-
     }
 }

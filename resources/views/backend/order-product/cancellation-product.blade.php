@@ -29,13 +29,11 @@
                             <div class="row shadow-sm py-2">
                                 <div class="col-md-1 d-flex justify-content-between">
                                     <div class="custom-control custom-checkbox custom-control-lg">
-                                        <input type="checkbox" id="checkbox{{$orderDetail->id}}" name="order_detail_id[]" value="{{$orderDetail->id}}">
+                                        <input type="checkbox" name="order_detail_id[]" value="{{$orderDetail->id}}">
                                     </div>
                                     <img src="{{ asset('storage/product_photo/' . $orderDetail->Product?->ProductImage?->first()->image) }}"
                                         style="width:50px; height: 50px;" class="img-responsive">
                                 </div>
-                                <input type="hidden" value="{{ $orderDetail->id }}" name="order_detail_id[]"
-                                    id="order_detail_id" />
                                 <div class="col-md-2">
                                     @php
                                         $product_codes = [];
