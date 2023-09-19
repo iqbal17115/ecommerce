@@ -51,6 +51,7 @@
           }
         }
     </script>
+
     <!-- Favicon -->
     @if ($company_info && $company_info->icon)
         <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $company_info->icon) }}">

@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Backend\OrderProduct\OrderProductCancellationController;
 use App\Http\Controllers\Backend\OrderProduct\OrderProductReturnController;
 use App\Http\Controllers\Ecommerce\HomeController;
+use App\Http\Controllers\Ecommerce\MyAccount\CancelOrderController;
 use App\Http\Controllers\Ecommerce\ProductDetailController;
 use App\Http\Controllers\Backend\Product\UnitController;
 use App\Http\Controllers\Backend\Product\VariantController;
@@ -117,6 +118,12 @@ Route::group(['middleware' => 'auth'], function () {
 // Define the route for the calculateShippingCharge method
 Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'calculateShippingCharge'])->name('calculateShippingCharge');
 Route::group(['middleware' => 'auth'], function () {
+
+    // View Route
+    Route::controller(CancelOrderController::class)->group(function () {
+        Route::get('user-cancel-order/{order}', 'index')->name('user_cancel_order.view');
+        Route::post('user-cancellation-product', 'storeOrUpdate')->name('user_cancellation_product');
+    });
 
     // Manage Cancellation Order Product
     Route::controller(OrderProductReturnController::class)->group(function () {
