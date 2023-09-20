@@ -661,6 +661,19 @@
         .view-account {
             font-family: Arial, sans-serif;
         }
+
+        .dashed-border-card {
+            border: 2px dashed #ccc;
+        }
+
+        .plus-icon {
+            font-size: 48px;
+            color: #ccc;
+        }
+
+        .add-address-text {
+            font-size: 18px;
+        }
     </style>
     <main class="main">
         <div class="container">
