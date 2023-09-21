@@ -16,25 +16,17 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id'); // Assuming this links to the users table
             $table->string('mobile');
+            $table->string('optional_mobile')->nullable();
             $table->string('street_address')->nullable();
             $table->string('building_name')->nullable();
             $table->string('nearest_landmark')->nullable();
             $table->enum('type', ['home', 'office']); // Address type: home or office
             $table->boolean('is_default')->default(false);
-            $table->foreignId('division_id');
-            $table->foreignId('district_id');
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
+            $table->uuid('district_id')->index(); // Foreign key to districts table
+            $table->softDeletes();
             $table->timestamps();
-        });
-
-        Schema::table('addresses', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

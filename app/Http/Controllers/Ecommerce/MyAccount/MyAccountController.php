@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Ecommerce\MyAccount;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address\Country;
+use App\Models\Address\District;
+use App\Models\Address\Division;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +44,9 @@ class MyAccountController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('ecommerce.my-account.my-account', compact('user'));
+        $countries =  Country::get();
+        $divisions =  Division::get();
+        $districts =  District::get();
+        return view('ecommerce.my-account.my-account', compact('user', 'countries', 'divisions', 'districts'));
     }
 }
