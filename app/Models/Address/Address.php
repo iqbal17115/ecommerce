@@ -2,6 +2,9 @@
 
 namespace App\Models\Address;
 
+use App\Models\Address\Country;
+use App\Models\Address\Division;
+use App\Models\Address\District;
 use App\Traits\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +23,18 @@ class Address extends Model
         'nearest_landmark',
         'type',
         'is_default',
+        'country_id',
+        'division_id',
         'district_id'
     ];
+
+    public function district(){
+        return $this->belongsTo(District::class);
+    }
+    public function division(){
+        return $this->belongsTo(Division::class);
+    }
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
 }

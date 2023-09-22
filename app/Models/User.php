@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\AccountsSettings\Branch;
+use App\Models\Address\Address;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -61,6 +62,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function address()
+    {
+        return $this->hasMany(Address::class);
+    }
+
     public function wishlist()
     {
         return $this->hasMany(Wishlist::class);

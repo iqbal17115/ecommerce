@@ -24,9 +24,15 @@ class CreateAddressesTable extends Migration
             $table->string('nearest_landmark')->nullable();
             $table->enum('type', ['home', 'office']); // Address type: home or office
             $table->boolean('is_default')->default(false);
-            $table->uuid('district_id')->index(); // Foreign key to districts table
+            $table->uuid('country_id')->index();
+            $table->uuid('division_id')->index();
+            $table->uuid('district_id')->index();
             $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
         });
     }
 

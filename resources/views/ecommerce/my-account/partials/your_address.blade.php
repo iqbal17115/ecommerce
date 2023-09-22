@@ -1,18 +1,8 @@
 <div class="tab-pane fade" id="address">
     <h6 class="tab-title">Your Address</h6>
     <!-- Address form fields go here -->
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card text-center dashed-border-card" data-toggle="modal" data-target="#userAddressModal">
-                <div class="card-body">
-                    <i class="fas fa-plus-circle plus-icon"></i>
-                    <p class="card-text add-address-text">Add Address</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">1</div>
-        <div class="col-md-3">1</div>
-        <div class="col-md-3">1</div>
+    <div class="row" id="address_content">
+
     </div>
     <!-- Button trigger modal -->
     <!-- Modal -->
@@ -26,15 +16,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form id="addressForm">
+                <form id="targeted_form">
+                    <div class="modal-body">
+                        <input name="row_id" id="row_id" value="" hidden />
+                        <input name="user_id" id="user_id" value="{{$user->id}}" hidden/>
                         <div class="form-group">
                             <label for="country_id">Country</label>
                             <select class="form-control form-control-sm" id="country_id" name="country_id">
-                                <option> -- Select --</option>
-                                @foreach ($countries as $country)
-                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                @endforeach
                             </select>
                         </div>
 
@@ -105,12 +93,12 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Address</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Address</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

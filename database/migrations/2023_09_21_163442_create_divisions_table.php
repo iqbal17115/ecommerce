@@ -22,6 +22,10 @@ class CreateDivisionsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::table('divisions', function (Blueprint $table) {
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+        });
     }
 
     /**

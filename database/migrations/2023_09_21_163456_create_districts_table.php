@@ -22,6 +22,10 @@ class CreateDistrictsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::table('districts', function (Blueprint $table) {
+            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade');
+        });
     }
 
     /**

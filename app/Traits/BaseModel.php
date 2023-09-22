@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 trait BaseModel
 {
-    use Searchable, Sortable, Filterable;
+    use CreatedUpdatedBy, Searchable, Sortable, Filterable, UsesUuid;
 
     /**
      * Generate View
@@ -25,9 +25,9 @@ trait BaseModel
     {
         return GenerateViewService::factory()
             ->setViewPath($viewPath)
-            ->setMainRoute($this->mainRoute)
-            ->setIsFilterExists($this->isFilterExists)
-            ->setTableHeaders($this->tableHeaders)
+            ->setMainRoute($this->mainRoute ?? "")
+            ->setIsFilterExists($this->isFilterExists ?? false)
+            ->setTableHeaders($this->tableHeaders ?? [])
             ->setCollections($collections)
             ->setModel($model)
             ->generate();
@@ -46,7 +46,7 @@ trait BaseModel
         return $query
             ->when(isset($request['search']), fn($query) => $query->ofSearch($request['search']))
             ->when(isset($request['filters']), fn($query) => $query->ofFilter($request['filters']))
-            // ->when(isset($request['start_date']), fn($query) => $query->ofDateChange($request['start_date'], $request['end_date']))
+            ->when(isset($request['start_date']), fn($query) => $query->ofDateChange($request['start_date'], $request['end_date']))
             ->ofOrderBy($request['sort_by'] ?? null, $request['sort_order'] ?? null);
     }
 
@@ -61,7 +61,7 @@ trait BaseModel
     public static function getLists($query, array $validatedData, string $resourceClass): mixed
     {
         // Get all lists
-        $lists = $query->list($validatedData)->paginate(20);
+        $lists = $query->list($validatedData)->paginate(8);
 
         // Set collection
         return $lists->setCollection(collect($resourceClass::collection($lists->items())));
@@ -77,6 +77,7 @@ trait BaseModel
      */
     public function dataTable($query, array $validatedData, string $resourceClass): string|bool
     {
+        // Update the validatedData array
         $validatedData['search'] = $validatedData['search']['value'] ?? null;
         $validatedData['sort_by'] = $validatedData['order'][0]['column'] ?? null;
         $validatedData['sort_order'] = $validatedData['order'][0]['dir'] ?? null;
@@ -100,7 +101,6 @@ trait BaseModel
             'recordsFiltered' => $records,
             'data' => $resourceClass::collection($lists),
         ];
-
         // Encode the data as JSON and return
         return json_encode($json_data);
     }

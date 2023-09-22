@@ -719,9 +719,10 @@
 @endsection
 @push('scripts')
     @include('ecommerce.wishlist-js')
-
+    <script src="{{asset('js/panel/address/address.js')}}"></script>
     <!-- My Account JS File -->
     <script>
+        loadUserAddress(@json($user->id ?? null));
         $(document).ready(function() {
             function loadUserOrder(user_id) {
                 var search_value = $("#search_value").val();

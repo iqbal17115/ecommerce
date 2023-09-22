@@ -117,7 +117,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 // Define the route for the calculateShippingCharge method
 Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'calculateShippingCharge'])->name('calculateShippingCharge');
+
 Route::group(['middleware' => 'auth'], function () {
+
+
+
 
     // View Route
     Route::controller(CancelOrderController::class)->group(function () {
