@@ -12,7 +12,6 @@ use App\Models\Backend\Product\ProductImage;
 use App\Models\Backend\Product\ProductKeyword;
 use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductMoreDetail;
-use App\Services\ShippingChargeService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;

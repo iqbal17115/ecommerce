@@ -17,6 +17,8 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->foreignId('user_id'); // Assuming this links to the users table
+            $table->string('name', 50);
+            $table->string('instruction')->nullable();
             $table->string('mobile');
             $table->string('optional_mobile')->nullable();
             $table->string('street_address')->nullable();

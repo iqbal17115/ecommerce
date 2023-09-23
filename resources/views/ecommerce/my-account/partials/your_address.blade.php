@@ -16,20 +16,29 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <input name="user_id" id="user_id_val" value="{{$user->id}}" hidden/>
                 <form id="targeted_form">
                     <div class="modal-body">
                         <input name="row_id" id="row_id" value="" hidden />
                         <input name="user_id" id="user_id" value="{{$user->id}}" hidden/>
                         <div class="form-group">
                             <label for="country_id">Country</label>
-                            <select class="form-control form-control-sm" id="country_id" name="country_id">
+                            <select class="form-control form-control-sm" id="country_id" name="country_id" required>
+                                <option> -- Select --</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <label for="mobile">Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="Enter mobile number" value="{{$user->name}}" required>
+                        </div>
                         <div class="form-group">
                             <label for="mobile">Mobile</label>
                             <input type="text" class="form-control" id="mobile" name="mobile"
-                                placeholder="Enter mobile number" required>
+                                placeholder="Enter name" required>
                         </div>
                         <div class="form-group">
                             <label for="optional_mobile">Optional Mobile</label>
@@ -39,34 +48,33 @@
 
                         <div class="form-group">
                             <label for="division_id">City/Province</label>
-                            <select class="form-control form-control-sm" id="division_id" name="division_id">
-                                <option> -- Select --</option>
+                            <select class="form-control form-control-sm" id="division_id" name="division_id" required>
                                 @foreach ($divisions as $division)
-                                    <option value="{{ $division->id }}">{{ $division->name }}</option>
-                                @endforeach
+                                <option value="{{ $division->id }}">{{ $division->name }}</option>
+                            @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="district_id">District/Area</label>
-                            <select class="form-control form-control-sm" id="district_id" name="district_id">
+                            <select class="form-control form-control-sm" id="district_id" name="district_id" required>
                                 <option> -- Select --</option>
                                 @foreach ($districts as $district)
-                                    <option value="{{ $district->id }}">{{ $district->name }}</option>
-                                @endforeach
+                                <option value="{{ $district->id }}">{{ $district->name }}</option>
+                            @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="street_address">Street Address</label>
                             <input type="text" class="form-control" id="street_address" name="street_address"
-                                placeholder="Enter street address">
+                                placeholder="Enter street address" required>
                         </div>
 
                         <div class="form-group">
                             <label for="building_name">Building Name</label>
                             <input type="text" class="form-control" id="building_name" name="building_name"
-                                placeholder="Enter building name">
+                                placeholder="Enter building name" required>
                         </div>
 
                         <div class="form-group">
@@ -95,7 +103,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" id="close_button" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save Address</button>
                     </div>
                 </form>

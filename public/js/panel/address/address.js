@@ -1,9 +1,109 @@
+$(document).on("click", "#set_as_default_address", function (event) {
+    const address_id = $(this).data('address_id');
+    const user_id = $("#user_id_val").val();
+    const data = {
+        address_id: address_id,
+        user_id: user_id
+    };
+
+    saveAction(
+        "store",
+        "/api/user-address/default",
+        data,
+        address_id,
+        (data) => {
+            userAddress();
+        },
+        (error) => {
+
+        }
+    );
+});
+$(document).on("click", "#remove_address", function (event) {
+    const address_id = $(this).data('address_id');
+
+    // Get details
+  //Delete
+  deleteAction(
+    '/user-address/' + row_id,
+    (data) => {
+        table.clear().draw();
+        // Success callback
+        toastrSuccessMessage(data.message);
+    },
+    (error) => {
+        // Error callback
+        toastrErrorMessage(error.responseJSON.message);
+    }
+);
+});
+
+function setEditData(data) {
+    document.getElementById('address_modal').click();
+
+    // Set 'row_id'
+    $('#row_id').val(data.row_id);
+
+    // Set 'user_id'
+    $('#user_id').val(data.user_id);
+
+    // Set 'name'
+    $('#name').val(data.name);
+
+    // Set 'mobile'
+    $('#mobile').val(data.mobile);
+
+    // Set 'optional_mobile'
+    $('#optional_mobile').val(data.optional_mobile);
+
+    // Set 'country_id'
+    $('.country_id').val(data.country_id);
+
+    // Set 'division_id'
+    $('#division_id').val(data.division_id);
+
+    // Set 'district_id'
+    $('#district_id').val(data.district_id);
+
+    // Set 'street_address'
+    $('#street_address').val(data.street_address);
+
+    // Set 'building_name'
+    $('#building_name').val(data.building_name);
+
+    // Set 'nearest_landmark'
+    $('#nearest_landmark').val(data.nearest_landmark);
+
+    // Set 'type' (assuming 'type' is a radio button)
+    if (data.type === 'home') {
+        $('#home').prop('checked', true);
+    } else if (data.type === 'office') {
+        $('#office').prop('checked', true);
+    }
+
+    $('#userAddressModal').modal('show');
+}
+
+$(document).on("click", "#edit_address", function (event) {
+    const address_id = $(this).data('address_id');
+
+    // Get details
+    getDetails(
+        "/api/user-address/" + address_id,
+        (data) => {
+            setEditData(data.results);
+        },
+        (error) => {
+
+        }
+    );
+});
 function setAddressData(data) {
     // Initialize an empty variable to store the card HTML
     let cardHTML = '';
     cardHTML += `
     <div class="col-md-3 mb-3">
-    <div class="card text-center dashed-border-card address_modal" data-toggle="modal"
+    <div class="card text-center dashed-border-card address_modal" id="address_modal" data-toggle="modal"
         data-target="#userAddressModal">
         <div class="card-body">
             <i class="fas fa-plus-circle plus-icon"></i>
@@ -14,35 +114,43 @@ function setAddressData(data) {
 `;
     // Loop through the dataArray
     data.forEach(data => {
-        const address = data.is_default == 1 ? 'Default Address' : 'Address';
+        const address = data.is_default == 1 ? 'Default' : '';
+        const set_as_default_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="set_as_default_address" data-address_id="${data.id}">Set As Default</a>` : '';
+
         cardHTML += `
         <div class="col-md-3 mb-3">
         <div class="card bg-light mb-3">
-            <div class="card-header">${address}</div>
+        <div class="card-header">
+        <div class="d-flex justify-content-between">
+  <span class="mr-3">Address</span>
+  <span class="mx-auto">${address}</span>
+  <span class="ml-auto">${data.type}</span>
+</div>
+
+      </div>
+
             <div class="card-body">
-                <h5 class="card-title"></h5>
+                <h4 class="card-title">${data.name}</h4>
                 <div class="card-text">${data.street_address}</div>
                 <div class="card-text">${data.building_name}</div>
                 <div class="card-text">${data.nearest_landmark}</div>
                 <div class="card-text">${data.district}, ${data.division}</div>
                 <div class="card-text">${data.country}</div>
-                <div class="card-text">Phone Number: ${data.mobile}</div>
-                <div class="card-text">Phone Number(Option): ${data.optional_mobile}</div>
+                <div class="card-text">Phone No: ${data.mobile}</div>
+                <div class="card-text">Additional No: ${data.optional_mobile}</div>
                 <a href="" class="text-info mt-1 text-decoration-none">Add delivery instructions<a>
             </div>
             <div class="card-footer">
-                <a class="text-sm">Edit</a>
+                <a href="javascript:void(0);" class="text-sm" id="edit_address" data-address_id="${data.id}">Edit</a>
                 <span class="mx-1">|</span>
-                <a class="text-sm">Remove</a>
-                <span class="mx-1">|</span>
-                <a class="text-sm">Set As Default</a>
+                <a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>
+                ${set_as_default_address}
             </div>
         </div>
         </div>
     `;
     });
     cardHTML += ``;
-    console.log(cardHTML);
 
     $("#address_content").html(cardHTML);
 }
@@ -50,6 +158,7 @@ function loadUserAddress(user_id) {
     getDetails(
         "/api/user-address/lists?user_id=" + user_id,
         (data) => {
+            console.log(data.results.data);
             setAddressData(data.results.data);
         },
         (error) => {
@@ -66,9 +175,10 @@ $("#targeted_form").submit(function (event) {
     // Load the selected details and submit the form
     const data = {
         user_id: $("#targeted_form #user_id").val(),
-        country_id: $("#targeted_form #country_id").val(),
+        name: $("#targeted_form #name").val(),
         mobile: $("#targeted_form #mobile").val(),
         optional_mobile: $("#targeted_form #optional_mobile").val(),
+        country_id: $("#targeted_form #country_id").val(),
         division_id: $("#targeted_form #division_id").val(),
         district_id: $("#targeted_form #district_id").val(),
         street_address: $("#targeted_form #street_address").val(),
@@ -77,7 +187,8 @@ $("#targeted_form").submit(function (event) {
         type: $("input[name='type']:checked").val(),
         is_default: 0
     };
-
+    console.log(data);
+    console.log(id);
     // Submit the form
     submitForm(data, id);
 });
@@ -90,7 +201,9 @@ function submitForm(formData, selectedId = "") {
         formData,
         selectedId,
         (data) => {
-            window.location.reload();
+            document.getElementById('close_button').click();
+            userAddress();
+            $('#targeted_form')[0].reset();
         },
         (error) => {
 

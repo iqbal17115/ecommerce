@@ -4,7 +4,7 @@ namespace App\Http\Resources\Panel\API\Address;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AddressListResource extends JsonResource
+class AddressUpdateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -24,9 +24,9 @@ class AddressListResource extends JsonResource
             'nearest_landmark' => $this->nearest_landmark,
             'type' => $this->type,
             'is_default' => $this->is_default,
-            'country' => $this->country->name,
-            'division' => $this->division->name,
-            'district' => $this->district->name,
+            'country_id' => $this->country_id,
+            'division_id' => $this->division_id,
+            'district_id' => $this->district_id,
         ];
     }
 }

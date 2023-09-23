@@ -24,6 +24,8 @@ class Address extends Model
         'type',
         'is_default',
         'country_id',
+        'name',
+        'instruction',
         'division_id',
         'district_id'
     ];

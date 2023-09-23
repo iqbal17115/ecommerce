@@ -4,7 +4,7 @@ namespace App\Http\Requests\Order\MyAccount\Address;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddressCreateRequest extends FormRequest
+class AddressUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,6 @@ class AddressCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
             'country_id' => 'required',
             'name' => 'required',
             'instruction' => 'nullable',

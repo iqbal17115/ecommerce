@@ -22,7 +22,8 @@ Route::controller(AddressController::class)->group(function () {
     Route::get('user-address/lists', 'myAddressList')->name('user_address.lists');
     Route::get('user-address/{address}', 'show')->name('user_address.show');
     Route::post('user-address', 'store')->name('user_address.store');
-    Route::put('user-address/{address}', 'update')->name('user_address.update');
+    Route::post('user-address/default', 'setAsDefault')->name('user_address_default.store');
+    Route::post('user-address/{address}', 'update')->name('user_address.update');
     Route::delete('user-address/{address}', 'destroy')->name('user_address.delete');
 });
 
