@@ -127,7 +127,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div>
-                                <h2>Property Type</h2>
+                                <h3>Property Type</h3>
                             </div>
                             <div class="properties-selector">
                                 <input type="radio" id="proprty_house" name="property" class="weekday" />
@@ -159,7 +159,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 @foreach ($day_of_weeks as $index => $day_of_week)
-                                                    <div class="col-md-4 mb-4">
+                                                    <div class="col-md-3 mb-4">
                                                         <div class="weekDays-selector">
                                                             <div class="font-weight-bold">{{ $day_of_week }}</div>
                                                             <input type="radio"
