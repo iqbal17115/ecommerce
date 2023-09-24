@@ -5,7 +5,7 @@ $(document).on("click", "#set_as_default_address", function (event) {
         address_id: address_id,
         user_id: user_id
     };
-
+    confirmAction('Default Address', 'Are You want to set as default address?', () => {
     saveAction(
         "store",
         "/api/user-address/default",
@@ -19,19 +19,18 @@ $(document).on("click", "#set_as_default_address", function (event) {
         }
     );
 });
+
+});
 $(document).on("click", "#remove_address", function (event) {
     const address_id = $(this).data('address_id');
-
-    // Get details
   //Delete
   deleteAction(
-    '/user-address/' + row_id,
+    '/api/user-address/' + address_id,
     (data) => {
-        table.clear().draw();
-        // Success callback
-        toastrSuccessMessage(data.message);
+        userAddress();
     },
     (error) => {
+        alert(0);
         // Error callback
         toastrErrorMessage(error.responseJSON.message);
     }
@@ -42,7 +41,7 @@ function setEditData(data) {
     document.getElementById('address_modal').click();
 
     // Set 'row_id'
-    $('#row_id').val(data.row_id);
+    $('#row_id').val(data.id);
 
     // Set 'user_id'
     $('#user_id').val(data.user_id);
@@ -116,6 +115,7 @@ function setAddressData(data) {
     data.forEach(data => {
         const address = data.is_default == 1 ? 'Default' : '';
         const set_as_default_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="set_as_default_address" data-address_id="${data.id}">Set As Default</a>` : '';
+        const remove_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>` : '';
 
         cardHTML += `
         <div class="col-md-3 mb-3">
@@ -142,8 +142,7 @@ function setAddressData(data) {
             </div>
             <div class="card-footer">
                 <a href="javascript:void(0);" class="text-sm" id="edit_address" data-address_id="${data.id}">Edit</a>
-                <span class="mx-1">|</span>
-                <a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>
+                ${remove_address}
                 ${set_as_default_address}
             </div>
         </div>
@@ -188,7 +187,7 @@ $("#targeted_form").submit(function (event) {
         is_default: 0
     };
     console.log(data);
-    console.log(id);
+
     // Submit the form
     submitForm(data, id);
 });
@@ -203,7 +202,7 @@ function submitForm(formData, selectedId = "") {
         (data) => {
             document.getElementById('close_button').click();
             userAddress();
-            $('#targeted_form')[0].reset();
+            // $('#targeted_form')[0].reset();
         },
         (error) => {
 

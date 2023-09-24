@@ -51,9 +51,7 @@
           }
         }
     </script>
-    <script src="{{asset('js/panel/action.js')}}"></script>
-    <script src="{{asset('js/panel/common.js')}}"></script>
-    <script src="{{ asset('js/select2.js') }}"></script>
+
     <!-- Favicon -->
     @if ($company_info && $company_info->icon)
         <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $company_info->icon) }}">

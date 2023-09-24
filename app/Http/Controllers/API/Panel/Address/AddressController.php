@@ -20,6 +20,26 @@ class AddressController extends Controller
     use BaseModel;
 
     /**
+     * Address Delete
+     *
+     * @param Address $address
+     * @return JsonResponse
+     */
+    public function destroy(Address $address): JsonResponse
+    {
+        try {
+            // Call the function delete address
+            $address->delete();
+
+            //Success Response
+            return Message::success(__("messages.success_delete"));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
+        }
+    }
+
+    /**
      * Store Address
      *
      * @param Address $address
