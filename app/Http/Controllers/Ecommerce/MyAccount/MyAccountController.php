@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ecommerce\MyAccount;
 
+use App\Enums\DayOfWeekEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Address\Country;
 use App\Models\Address\District;
@@ -47,6 +48,7 @@ class MyAccountController extends Controller
         $countries =  Country::get();
         $divisions =  Division::get();
         $districts =  District::get();
-        return view('ecommerce.my-account.my-account', compact('user', 'countries', 'divisions', 'districts'));
+        $day_of_weeks = DayOfWeekEnum::getDaysOfWeek();
+        return view('ecommerce.my-account.my-account', compact('user', 'countries', 'divisions', 'districts', 'day_of_weeks'));
     }
 }

@@ -138,7 +138,7 @@ function setAddressData(data) {
                 <div class="card-text">${data.country}</div>
                 <div class="card-text">Phone No: ${data.mobile}</div>
                 <div class="card-text">Additional No: ${data.optional_mobile}</div>
-                <a href="" class="text-info mt-1 text-decoration-none">Add delivery instructions<a>
+                <a href="javascript:void(0);" class="text-info mt-1 text-decoration-none" data-toggle="modal" data-target="#exampleModal">Add delivery instructions<a>
             </div>
             <div class="card-footer">
                 <a href="javascript:void(0);" class="text-sm" id="edit_address" data-address_id="${data.id}">Edit</a>

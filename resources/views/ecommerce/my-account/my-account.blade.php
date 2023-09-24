@@ -674,6 +674,80 @@
         .add-address-text {
             font-size: 18px;
         }
+
+        .properties-selector input[type=radio] {
+  display: none !important;
+}
+
+.properties-selector input[type=radio] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.properties-selector input[type=radio]:checked + label {
+  background: #2AD705;
+  color: #ffffff;
+}
+/* Style the accordion container */
+.accordion {
+    margin: 0 auto;
+}
+
+/* Style accordion titles */
+.accordion-title {
+    background-color: #f0f0f0;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Hide the checkboxes */
+.accordion-input {
+    display: none;
+}
+
+/* Style accordion content (hidden by default) */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+/* Style the active accordion item (when input is checked) */
+.accordion-input:checked + .accordion-title + .accordion-content {
+    max-height: 1000px; /* Set to a large enough value to show all content */
+}
+
+.weekDays-selector input[type=radio] {
+    display: none!important;
+}
+
+.weekDays-selector label {
+    display: inline-block;
+    border-radius: 6px;
+    background: #dddddd;
+    margin-right: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.weekDays-selector input[type=radio]:checked + label {
+    background: #688A85;
+    color: #ffffff;
+}
+
     </style>
     <main class="main">
         <div class="container">
