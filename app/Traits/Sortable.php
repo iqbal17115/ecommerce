@@ -28,6 +28,6 @@ trait Sortable
         }
 
         // Default sorting by "id" in ascending order
-        return $builder->orderBy("id", "desc");
+        return $builder->orderBy("created_at", "desc");
     }
 }

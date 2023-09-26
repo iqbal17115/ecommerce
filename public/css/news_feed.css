@@ -1,0 +1,95 @@
+  .td {
+      display: table-cell;
+      vertical-align: middle;
+  }
+
+  a {
+      text-decoration: none;
+  }
+
+  .post {
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 3px 3px #ddd;
+  }
+
+  .p-p-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+  }
+
+  .p-p-pic img {
+      width: 100%;
+      display: block;
+      border: 0;
+  }
+
+  .p-r-hdr {
+      vertical-align: top;
+      padding-left: 20px;
+  }
+
+  .p-u-info {
+      color: #5a5959;
+      font-size: 15px;
+      margin-bottom: 7px;
+  }
+
+  .p-u-info a {
+      color: #4267b2;
+  }
+
+  .p-dt {
+      color: #a8a8a8;
+      font-size: 13px;
+  }
+
+  .p-dt i {
+      font-size: 14px;
+      margin-right: 2px;
+  }
+
+  .p-dt span {
+      position: relative;
+      top: -2px;
+  }
+
+  .p-opt {
+      position: relative;
+      right: -3px;
+      width: 1px;
+      color: #ccc;
+      cursor: pointer;
+      vertical-align: top;
+  }
+
+  .p-cnt-v {
+      display: block;
+      margin: 20px -20px;
+      cursor: pointer;
+  }
+
+  .p-acts {
+      overflow: hidden;
+  }
+
+  .p-act {
+      width: 24px;
+      height: 24px;
+      color: #a3a6aa;
+      cursor: pointer;
+  }
+
+
+  #data-container {
+      max-height: 700px;
+      overflow-y: auto;
+  }
+
+  .post {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin-bottom: 10px;
+  }

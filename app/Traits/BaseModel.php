@@ -77,6 +77,7 @@ trait BaseModel
      */
     public function dataTable($query, array $validatedData, string $resourceClass): string|bool
     {
+
         // Update the validatedData array
         $validatedData['search'] = $validatedData['search']['value'] ?? null;
         $validatedData['sort_by'] = $validatedData['order'][0]['column'] ?? null;
@@ -101,6 +102,7 @@ trait BaseModel
             'recordsFiltered' => $records,
             'data' => $resourceClass::collection($lists),
         ];
+
         // Encode the data as JSON and return
         return json_encode($json_data);
     }
@@ -123,7 +125,6 @@ trait BaseModel
         if ($totalModels == 0) {
             throw new Exception("No models found for the provided IDs.");
         }
-
         // Calculate the total number of chunks needed
         $totalChunks = ceil($totalModels / $chunkSize);
 

@@ -3,6 +3,7 @@ use App\Http\Controllers\API\Panel\Address\AddressController;
 use App\Http\Controllers\API\Panel\Address\CountryController;
 use App\Http\Controllers\API\Panel\Address\DistrictController;
 use App\Http\Controllers\API\Panel\Address\DivisionController;
+use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Country
+Route::controller(ShopSettingCountryController::class)->group(function () {
+    Route::get('shop-setting-countries/lists', 'lists')->name('shop_setting_countries.lists');
+    Route::get('countries/select-lists', 'selectLists')->name('countries.select_lists');
+    Route::get('countries/{country}', 'show')->name('countries.show');
+    Route::post('countries', 'store')->name('countries.store');
+    Route::put('countries/{country}', 'update')->name('countries.update');
+    Route::delete('countries/{country}', 'destroy')->name('countries.delete');
+});
 
 // My Group Posts
 Route::controller(AddressController::class)->group(function () {

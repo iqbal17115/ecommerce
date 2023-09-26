@@ -1,0 +1,190 @@
+
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td.no-btn:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th.no-btn:first-child:before {
+    content: none;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control, table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
+    padding-left: 6px !important;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+    display: none !important
+}
+
+/* .dataTables_scrollBody thead{display: none !important} */
+
+.dataTables_scrollBody {
+    max-height: calc(100vh - 103px) !important;
+    /* height: calc(100vh - 103px) !important; */
+    background: transparent !important
+}
+
+div.dataTables_wrapper div.dataTables_processing {
+    padding: 0 !important
+}
+
+.dataTables_processing.card {
+    border: 0 !important;
+    background: transparent !important;
+}
+
+div.dataTables_processing > div:last-child {
+    position: relative;
+    width: 80px;
+    margin: 0 auto !important;
+}
+
+.dataTables_processing.dts_loading {
+    display: none !important
+}
+
+/* media query */
+@media (max-width: 991px) {
+    .dataTables_scrollBody {
+        max-height: calc(100vh - 163px) !important;
+        height: calc(100vh - 163px) !important;
+    }
+
+    .page-sidebar-wrapper {
+        border-right: 0 !important;
+    }
+
+    #attendee_report_data_container {
+        height: calc(100vh - 214px);
+        overflow: scroll;
+    }
+
+    .item-head-default-new .f-14,
+    .item-head-default-new div:nth-child(2) .form-control {
+        font-size: 12px !important;
+    }
+
+    .item-head-default-new div:nth-child(2) .form-control,
+    .item-head-default-new div:nth-child(2) .input-group .btn {
+        max-height: 22px;
+        min-height: 22px;
+    }
+
+    .item-head-default-new div:nth-child(2) .input-group .btn {
+        padding: 1px 6px;
+    }
+
+    .item-head-default-new .iconic_btn img {
+        height: 22px
+    }
+
+    .trigger_filter_btn i.fa {
+        font-size: 19px;
+    }
+
+    .item-head-default-new {
+        padding: 4px 10px 4px;
+        height: 32px;
+    }
+
+    .item-head-default-new > div:nth-child(1) {
+        display: flex;
+        justify-content: center;
+    }
+
+    .table-footer-section {
+        padding-left: 10px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .table-footer-section .btn.buttons-colvis {
+        padding-top: 5px;
+        padding-bottom: 4px;
+        font-size: 12px;
+    }
+
+    .table-footer-section .dt-buttons.btn-group {
+        width: auto;
+        margin-bottom: 0;
+    }
+
+    .new-overflow .form-container {
+        height: calc(100vh - 107px);
+    }
+}
+
+@media (max-width: 400px) {
+    .item-head-default-new .w-280p {
+        width: 140px !important
+    }
+
+    .table-footer-section .dataTables_info {
+        font-size: 10px;
+    }
+
+    .table-footer-section .btn.buttons-colvis {
+        font-size: 10px;
+    }
+}
+
+/* media query */
+
+/* form loader  */
+div.form_processing, .list_to_form_processing {
+    position: absolute;
+    text-align: center;
+    padding: 2px;
+
+    width: 100%;
+    height: calc(100% - 40px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: transparent;
+    z-index: 999;
+    border-radius: 0;
+    border: 0;
+}
+
+
+div.form_processing > div:last-child,
+.list_to_form_processing > div:last-child {
+    position: relative;
+    width: 80px;
+    height: 15px;
+    margin: auto
+}
+
+div.form_processing > div:last-child > div,
+.list_to_form_processing > div:last-child > div {
+    position: absolute;
+    top: 0;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: rgb(2, 117, 216);
+    background: rgb(var(--dt-row-selected));
+    animation-timing-function: cubic-bezier(0, 1, 1, 0)
+}
+
+div.form_processing > div:last-child > div:nth-child(1),
+div.list_to_form_processing > div:last-child > div:nth-child(1) {
+    left: 8px;
+    animation: form-loader-1 .6s infinite
+}
+
+div.form_processing > div:last-child > div:nth-child(2),
+div.list_to_form_processing > div:last-child > div:nth-child(2) {
+    left: 8px;
+    animation: form-loader-2 .6s infinite
+}
+
+div.form_processing > div:last-child > div:nth-child(3),
+div.list_to_form_processing > div:last-child > div:nth-child(3) {
+    left: 32px;
+    animation: form-loader-2 .6s infinite
+}
+
+div.form_processing > div:last-child > div:nth-child(4),
+div.list_to_form_processing > div:last-child > div:nth-child(4) {
+    left: 56px;
+    animation: form-loader-3 .6s infinite
+}

@@ -55,6 +55,7 @@
                        <ul class="sub-menu" aria-expanded="false">
                            <li><a href="{{ route('company-info') }}"> Basic Info</a></li>
                            <li><a href="javascript:void(0);"> Social Media Link</a></li>
+                           <li><a href="{{ route('countries.view') }}">Country</a></li>
                            <li><a href="{{ route('currency') }}">Currency</a></li>
                            <li><a href="javascript:void(0);">Language</a></li>
                        </ul>

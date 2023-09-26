@@ -36,6 +36,7 @@ use App\Http\Controllers\Frontend\OrderTracking\OrderTrackingController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
+use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingCountryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -121,7 +122,7 @@ Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'cal
 Route::group(['middleware' => 'auth'], function () {
 
 
-
+    Route::get('countries', ShopSettingCountryController::class)->name('countries.view');
 
     // View Route
     Route::controller(CancelOrderController::class)->group(function () {

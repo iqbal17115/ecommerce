@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Helpers\Message;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
@@ -21,7 +22,7 @@ trait Searchable
                     //get parent table name
                     $table = $query->getModel()->getTable();
 
-                    if (Str::contains($searchable, '.')) {
+                    if (str_contains($searchable, '.')) {
                         // If the property is a relation, extract the relation and column
                         $relation = Str::beforeLast($searchable, '.');
                         $column = Str::afterLast($searchable, '.');
