@@ -16,4 +16,13 @@ class Division extends Model
         'name',
         'status'
     ];
+
+    public function Country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    protected array $searchable = [
+        'name'
+    ];
 }

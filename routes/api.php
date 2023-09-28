@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Panel\Address\CountryController;
 use App\Http\Controllers\API\Panel\Address\DistrictController;
 use App\Http\Controllers\API\Panel\Address\DivisionController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
+use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDivisionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Division
+Route::controller(ShopSettingDivisionController::class)->group(function () {
+    Route::get('shop-setting-divisions/lists', 'lists')->name('shop_setting_divisions.lists');
+    Route::get('divisions/select-lists', 'selectLists')->name('divisions.select_lists');
+    Route::get('divisions/{division}', 'show')->name('divisions.show');
+    Route::post('divisions', 'store')->name('divisions.store');
+    Route::put('divisions/{division}', 'update')->name('divisions.update');
+    Route::delete('divisions/{division}', 'destroy')->name('divisions.delete');
+    Route::get('divisions/select-lists', 'select_division')->name('divisions.select_lists');
+});
+
 // Country
 Route::controller(ShopSettingCountryController::class)->group(function () {
     Route::get('shop-setting-countries/lists', 'lists')->name('shop_setting_countries.lists');
@@ -26,6 +38,7 @@ Route::controller(ShopSettingCountryController::class)->group(function () {
     Route::post('countries', 'store')->name('countries.store');
     Route::put('countries/{country}', 'update')->name('countries.update');
     Route::delete('countries/{country}', 'destroy')->name('countries.delete');
+    Route::get('countries/select-lists', 'select_country')->name('countries.select_lists');
 });
 
 // My Group Posts
@@ -49,6 +62,7 @@ Route::controller(DivisionController::class)->group(function () {
 Route::controller(CountryController::class)->group(function () {
     Route::get('countries/lists', 'lists')->name('countries.lists');
 });
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

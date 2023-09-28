@@ -4,33 +4,19 @@ namespace App\Http\Controllers\API\Panel\ShopSetting;
 
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminPanel\ShopSetting\CountryCreateRequest;
-use App\Http\Requests\AdminPanel\ShopSetting\CountryUpdateRequest;
-use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingCountryListResource;
-use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingCountryUpdateResource;
-use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDatatableResource;
-use App\Models\Address\Country;
+use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingDivisionCreateRequest;
+use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingDivisionUpdateRequest;
+use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDivisionDatatableResource;
+use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDivisionUpdateResource;
+use App\Models\Address\Division;
 use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ShopSettingCountryController extends Controller
+class ShopSettingDivisionController extends Controller
 {
     use BaseModel;
-
-    public function select_country(Request $request): JsonResponse
-    {
-        try {
-            // Get the lists
-            $lists = Country::getLists(Country::query(), $request->all(), ShopSettingCountryListResource::class);
-
-            // Return success response with the lists
-            return Message::success(null, $lists);
-        } catch (Exception $ex) {
-            return Message::error($ex->getMessage());
-        }
-    }
 
     /**
      * Lists
@@ -41,7 +27,7 @@ class ShopSettingCountryController extends Controller
     public function lists(Request $request): bool|string
     {
         try {
-            return $this->dataTable(Country::query(), $request->all(), ShopSettingDatatableResource::class);
+            return $this->dataTable(Division::query(), $request->all(), ShopSettingDivisionDatatableResource::class);
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
         }
@@ -57,7 +43,7 @@ class ShopSettingCountryController extends Controller
     {
         try {
             // Get the lists
-            $lists = Country::getLists(Country::query(), $request->all(), SelectListResource::class);
+            $lists = Division::getLists(Division::query(), $request->all(), SelectListResource::class);
 
             // Return success response with the lists
             return Message::success(null, $lists);
@@ -67,32 +53,32 @@ class ShopSettingCountryController extends Controller
     }
 
     /**
-     * Country Info
+     * Division Info
      *
-     * @param Country $country
+     * @param Division $division
      * @return JsonResponse
      */
-    public function show(Country $country): JsonResponse
+    public function show(Division $division): JsonResponse
     {
         try {
-            // Return success response with the country info
-            return Message::success(null, new ShopSettingCountryUpdateResource($country));
+            // Return success response with the division info
+            return Message::success(null, new ShopSettingDivisionUpdateResource($division));
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
         }
     }
 
     /**
-     * Store Country
+     * Store Division
      *
-     * @param CountryCreateRequest $countryCreateRequest
+     * @param ShopSettingDivisionCreateRequest $shopSettingDivisionCreateRequest
      * @return JsonResponse
      */
-    public function store(CountryCreateRequest $countryCreateRequest): JsonResponse
+    public function store(ShopSettingDivisionCreateRequest $shopSettingDivisionCreateRequest): JsonResponse
     {
         try {
-            // Country save
-            Country::create($countryCreateRequest->validated());
+            // Division save
+            Division::create($shopSettingDivisionCreateRequest->validated());
 
             //Success Response
             return Message::success(__("messages.success_add"));
@@ -103,17 +89,17 @@ class ShopSettingCountryController extends Controller
     }
 
     /**
-     * Update Country
+     * Update Division
      *
-     * @param CountryUpdateRequest $countryUpdateRequest
-     * @param Country $country
+     * @param ShopSettingDivisionUpdateRequest $shopSettingDivisionUpdateRequest
+     * @param Division $division
      * @return JsonResponse
      */
-    public function update(CountryUpdateRequest $countryUpdateRequest, Country $country): JsonResponse
+    public function update(ShopSettingDivisionUpdateRequest $shopSettingDivisionUpdateRequest, Division $division): JsonResponse
     {
         try {
-            // Update country
-            $country->update($countryUpdateRequest->validated());
+            // Update division
+            $division->update($shopSettingDivisionUpdateRequest->validated());
 
             //Success Response
             return Message::success(__("messages.success_update"));
@@ -124,16 +110,16 @@ class ShopSettingCountryController extends Controller
     }
 
     /**
-     * Country Delete
+     * Division Delete
      *
-     * @param Country $country
+     * @param Division $division
      * @return JsonResponse
      */
-    public function destroy(Country $country): JsonResponse
+    public function destroy(Division $division): JsonResponse
     {
         try {
-            // Call the function delete country
-            $country->delete();
+            // Call the function delete division
+            $division->delete();
 
             //Success Response
             return Message::success(__("messages.success_delete"));

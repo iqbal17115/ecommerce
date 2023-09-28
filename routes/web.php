@@ -37,6 +37,7 @@ use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingCountryController;
+use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -123,6 +124,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('countries', ShopSettingCountryController::class)->name('countries.view');
+    Route::get('divisions', ShopSettingDivisionController::class)->name('divisions.view');
 
     // View Route
     Route::controller(CancelOrderController::class)->group(function () {
