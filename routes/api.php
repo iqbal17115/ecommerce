@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Panel\Address\CountryController;
 use App\Http\Controllers\API\Panel\Address\DistrictController;
 use App\Http\Controllers\API\Panel\Address\DivisionController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
+use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDivisionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,15 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// District
+Route::controller(ShopSettingDistrictController::class)->group(function () {
+    Route::get('shop-setting-districts/lists', 'lists')->name('shop_setting_districts.lists');
+    Route::get('districts/{district}', 'show')->name('districts.show');
+    Route::post('districts', 'store')->name('districts.store');
+    Route::put('districts/{district}', 'update')->name('districts.update');
+    Route::delete('districts/{district}', 'destroy')->name('districts.delete');
+});
 
 // Division
 Route::controller(ShopSettingDivisionController::class)->group(function () {

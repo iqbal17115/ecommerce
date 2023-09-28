@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingDivisionCreateRequest;
 use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingDivisionUpdateRequest;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDivisionDatatableResource;
+use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDivisionListResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDivisionUpdateResource;
 use App\Models\Address\Division;
 use App\Traits\BaseModel;
@@ -17,6 +18,19 @@ use Illuminate\Http\Request;
 class ShopSettingDivisionController extends Controller
 {
     use BaseModel;
+
+    public function select_division(Request $request): JsonResponse
+    {
+        try {
+            // Get the lists
+            $lists = Division::getLists(Division::query(), $request->all(), ShopSettingDivisionListResource::class);
+
+            // Return success response with the lists
+            return Message::success(null, $lists);
+        } catch (Exception $ex) {
+            return Message::error($ex->getMessage());
+        }
+    }
 
     /**
      * Lists

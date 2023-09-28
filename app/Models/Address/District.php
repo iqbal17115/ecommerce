@@ -16,4 +16,9 @@ class District extends Model
         'name',
         'status'
     ];
+
+    public function Division()
+    {
+        return $this->belongsTo(Division::class);
+    }
 }

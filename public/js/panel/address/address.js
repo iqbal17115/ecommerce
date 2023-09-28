@@ -165,6 +165,41 @@ function loadUserAddress(user_id) {
         }
     );
 }
+
+function getDayStatus(index) {
+    var radioClosed = document.getElementById('weekday_' + index + '_closed');
+    var radioOpen = document.getElementById('weekday_' + index + '_open');
+
+    if (radioClosed && radioClosed.checked) {
+        return "closed";
+    } else if (radioOpen && radioOpen.checked) {
+        return "open";
+    }
+
+    return null;
+}
+$("#instruction_form").submit(function (event) {
+    event.preventDefault();
+    var selectedPropertyElement = document.querySelector('input[name="property"]:checked');
+    var selectedPropertyName = selectedPropertyElement ? selectedPropertyElement.nextElementSibling.textContent : null;
+
+    // Create an object to store the selected property name and checked days for open/closed
+    var formData = {
+        propertyName: selectedPropertyName,
+        deliveryDays: {},
+    };
+
+    // Manually handle each day of the week
+    formData.deliveryDays['Sunday'] = getDayStatus('sunday');
+    formData.deliveryDays['Monday'] = getDayStatus('monday');
+    formData.deliveryDays['Tuesday'] = getDayStatus('tuesday');
+    formData.deliveryDays['Wednesday'] = getDayStatus('wednesday');
+    formData.deliveryDays['Thursday'] = getDayStatus('thursday');
+    formData.deliveryDays['Friday'] = getDayStatus('friday');
+    formData.deliveryDays['Saturday'] = getDayStatus('saturday');
+
+        console.log(formData);
+});
 // Attach event listener for form submission
 $("#targeted_form").submit(function (event) {
     event.preventDefault();

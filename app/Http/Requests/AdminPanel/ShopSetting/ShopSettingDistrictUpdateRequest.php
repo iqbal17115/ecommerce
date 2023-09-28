@@ -5,7 +5,7 @@ namespace App\Http\Requests\AdminPanel\ShopSetting;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ShopSettingDivisionUpdateRequest extends FormRequest
+class ShopSettingDistrictUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class ShopSettingDivisionUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $divisionId = $this->route('division');
+        $districtId = $this->route('district');
         return [
-            'country_id' => 'required',
-            'name' => ['required', 'max:50', Rule::unique('divisions', 'name')->ignore($divisionId)->whereNull('deleted_at')]
+            'division_id' => 'required',
+            'name' => ['required', 'max:50', Rule::unique('districts', 'name')->ignore($districtId)->whereNull('deleted_at')]
         ];
     }
 }
