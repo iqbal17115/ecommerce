@@ -21,7 +21,7 @@ class Country extends Model
         'name'
     ];
 
-    protected array $searchable = [
+    protected $searchable = [
         'name'
     ];
 }

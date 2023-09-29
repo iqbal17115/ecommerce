@@ -16,7 +16,7 @@ class CreateDivisionsTable extends Migration
     {
         Schema::create('divisions', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->uuid('country_id')->index(); // Foreign key to countries table
+            $table->uuid('country_id')->index();
             $table->string('name');
             $table->boolean('status')->default(false);
             $table->softDeletes();
