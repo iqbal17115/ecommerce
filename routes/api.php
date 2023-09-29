@@ -55,7 +55,9 @@ Route::controller(ShopSettingCountryController::class)->group(function () {
 Route::controller(AddressController::class)->group(function () {
     Route::get('user-address/lists', 'myAddressList')->name('user_address.lists');
     Route::get('user-address/{address}', 'show')->name('user_address.show');
+    Route::get('user-address-instruction/{address}', 'addressInstructionShow')->name('user_address_instruction.show');
     Route::post('user-address', 'store')->name('user_address.store');
+    Route::post('/user-address-instruction', 'storeInstruction')->name('user_address_instruction.store');
     Route::post('user-address/default', 'setAsDefault')->name('user_address_default.store');
     Route::put('user-address/{address}', 'update')->name('user_address.update');
     Route::delete('/user-address/{address}', 'destroy')->name('user_address.delete');

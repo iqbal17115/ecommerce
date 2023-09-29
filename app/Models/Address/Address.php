@@ -30,6 +30,9 @@ class Address extends Model
         'district_id'
     ];
 
+    public function addressInstruction(){
+        return $this->hasOne(AddressInstruction::class);
+    }
     public function district(){
         return $this->belongsTo(District::class);
     }

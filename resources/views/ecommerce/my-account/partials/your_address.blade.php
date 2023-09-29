@@ -124,6 +124,7 @@
                     </button>
                 </div>
                 <form id="instruction_form">
+                    <input name="address_id" id="address_id" value="" hidden />
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -131,14 +132,14 @@
                                 <h3>Property Type</h3>
                             </div>
                             <div class="properties-selector">
-                                <input type="radio" id="proprty_house" name="property" class="weekday" />
-                                <label for="proprty_house">House</label>
-                                <input type="radio" id="proprty_apartment" name="property" class="weekday" />
-                                <label for="proprty_apartment">Apartment</label>
-                                <input type="radio" id="proprty_business" name="property" class="weekday" />
-                                <label for="proprty_business">Business</label>
-                                <input type="radio" id="proprty_other" name="property" class="weekday" />
-                                <label for="proprty_other">Other</label>
+                                <input type="radio" id="house" name="property" class="weekday" />
+                                <label for="house">House</label>
+                                <input type="radio" id="apartment" name="property" class="weekday" />
+                                <label for="apartment">Apartment</label>
+                                <input type="radio" id="business" name="property" class="weekday" />
+                                <label for="business">Business</label>
+                                <input type="radio" id="other" name="property" class="weekday" />
+                                <label for="other">Other</label>
                             </div>
                         </div>
 
@@ -199,32 +200,32 @@
                                                 <div class="col-md-12">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1">
-                                                        <label class="ml-2 form-check-label" for="flexRadioDefault1">
+                                                            name="package_leave_address" id="front_door">
+                                                        <label class="ml-2 form-check-label" for="front_door">
                                                             Front door
                                                         </label>
                                                     </div>
 
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1">
-                                                        <label class="ml-2 form-check-label" for="flexRadioDefault1">
+                                                            name="package_leave_address" id="building_receiption">
+                                                        <label class="ml-2 form-check-label" for="building_receiption">
                                                             Building Receiption
                                                         </label>
                                                     </div>
 
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1">
-                                                        <label class="ml-2 form-check-label" for="flexRadioDefault1">
+                                                            name="package_leave_address" id="security_guard">
+                                                        <label class="ml-2 form-check-label" for="security_guard">
                                                             With a security Guard
                                                         </label>
                                                     </div>
 
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1">
-                                                        <label class="ml-2 form-check-label" for="flexRadioDefault1">
+                                                            name="package_leave_address" id="no_preference">
+                                                        <label class="ml-2 form-check-label" for="no_preference">
                                                             No preference
                                                         </label>
                                                     </div>
@@ -233,7 +234,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" cols="2" placeholder="For example navigations, Provide Details such as building description, or nearby landmark" style="height: 50px;"></textarea>
+                                        <input class="form-control" id="description" placeholder="For example navigations, Provide Details such as building description, or nearby landmark">
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +243,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" id="instruction_close_button" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
                 </form>

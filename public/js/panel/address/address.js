@@ -6,35 +6,35 @@ $(document).on("click", "#set_as_default_address", function (event) {
         user_id: user_id
     };
     confirmAction('Default Address', 'Are You want to set as default address?', () => {
-    saveAction(
-        "store",
-        "/api/user-address/default",
-        data,
-        address_id,
-        (data) => {
-            userAddress();
-        },
-        (error) => {
+        saveAction(
+            "store",
+            "/api/user-address/default",
+            data,
+            address_id,
+            (data) => {
+                userAddress();
+            },
+            (error) => {
 
-        }
-    );
-});
+            }
+        );
+    });
 
 });
 $(document).on("click", "#remove_address", function (event) {
     const address_id = $(this).data('address_id');
-  //Delete
-  deleteAction(
-    '/api/user-address/' + address_id,
-    (data) => {
-        userAddress();
-    },
-    (error) => {
-        alert(0);
-        // Error callback
-        toastrErrorMessage(error.responseJSON.message);
-    }
-);
+    //Delete
+    deleteAction(
+        '/api/user-address/' + address_id,
+        (data) => {
+            userAddress();
+        },
+        (error) => {
+            alert(0);
+            // Error callback
+            toastrErrorMessage(error.responseJSON.message);
+        }
+    );
 });
 
 function setEditData(data) {
@@ -82,6 +82,56 @@ function setEditData(data) {
 
     $('#userAddressModal').modal('show');
 }
+
+function setAddressInstructionData(data) {
+
+     $('input[name="property"]').each(function () {
+
+        if ($(this).attr('id') == data.property_type) {
+            $(this).prop('checked', true);
+        } else {
+            $(this).prop('checked', false);
+        }
+    });
+
+    $("#"+data['package_leave_address']).prop("checked", true);
+    $("#description").val(data['description']);
+
+    // Parse the closed_day_for_delivery JSON
+    const deliveryDays = JSON.parse(data.closed_day_for_delivery);
+
+    // Set the radio inputs for each day
+    for (const day in deliveryDays) {
+        if (deliveryDays.hasOwnProperty(day)) {
+            const value = deliveryDays[day];
+            const formattedDay = day.charAt(0).toLowerCase() + day.slice(1);
+            $(`input[name="${formattedDay}"][value="${value}"]`).prop('checked', true);
+        }
+    }
+}
+
+function getAddresInstruction(address_id) {
+    // Get details
+    getDetails(
+        "/api/user-address-instruction/" + address_id,
+        (data) => {
+            setAddressInstructionData(data.results);
+        },
+        (error) => {
+
+        }
+    );
+}
+
+$(document).on("click", "#instruction_modal", function (event) {
+    const address_id = $(this).data('id');
+    $('#address_id').val(address_id);
+    $('#instruction_form input[type="radio"]').prop('checked', false);
+    $('#instruction_form input[name="package_leave_address"]').prop('checked', false);
+    $('#description').val('');
+
+    getAddresInstruction(address_id);
+});
 
 $(document).on("click", "#edit_address", function (event) {
     const address_id = $(this).data('address_id');
@@ -138,7 +188,7 @@ function setAddressData(data) {
                 <div class="card-text">${data.country}</div>
                 <div class="card-text">Phone No: ${data.mobile}</div>
                 <div class="card-text">Additional No: ${data.optional_mobile}</div>
-                <a href="javascript:void(0);" class="text-info mt-1 text-decoration-none" data-toggle="modal" data-target="#exampleModal">Add delivery instructions<a>
+                <a href="javascript:void(0);" id="instruction_modal" class="text-info mt-1 text-decoration-none" data-toggle="modal" data-id="${data.id}" data-target="#exampleModal">Add delivery instructions<a>
             </div>
             <div class="card-footer">
                 <a href="javascript:void(0);" class="text-sm" id="edit_address" data-address_id="${data.id}">Edit</a>
@@ -178,18 +228,47 @@ function getDayStatus(index) {
 
     return null;
 }
+
+
+// Function to handle form submission
+function submitInstructions(formData, selectedId = "") {
+    saveAction(
+        "store",
+        "/api/user-address-instruction",
+        formData,
+        '',
+        (data) => {
+            document.getElementById('instruction_close_button').click();
+        },
+        (error) => {
+
+        }
+    );
+}
+
 $("#instruction_form").submit(function (event) {
     event.preventDefault();
     var selectedPropertyElement = document.querySelector('input[name="property"]:checked');
     var selectedPropertyName = selectedPropertyElement ? selectedPropertyElement.nextElementSibling.textContent : null;
+    const address_id = $("#instruction_form #address_id").val();
+    const description = $("#instruction_form #description").val();
 
-    // Create an object to store the selected property name and checked days for open/closed
+    var selectedPackageLeaveAddressId = '';
+    var checkedPackageLeaveAddress = $('input[name="package_leave_address"]:checked');
+
+    // Check if any radio input is checked
+    if (checkedPackageLeaveAddress.length > 0) {
+        selectedPackageLeaveAddressId = checkedPackageLeaveAddress.attr('id');
+    }
+
     var formData = {
+        address_id: address_id,
         propertyName: selectedPropertyName,
         deliveryDays: {},
+        package_leave_address: selectedPackageLeaveAddressId,
+        description: description
     };
 
-    // Manually handle each day of the week
     formData.deliveryDays['Sunday'] = getDayStatus('sunday');
     formData.deliveryDays['Monday'] = getDayStatus('monday');
     formData.deliveryDays['Tuesday'] = getDayStatus('tuesday');
@@ -198,7 +277,8 @@ $("#instruction_form").submit(function (event) {
     formData.deliveryDays['Friday'] = getDayStatus('friday');
     formData.deliveryDays['Saturday'] = getDayStatus('saturday');
 
-        console.log(formData);
+
+    submitInstructions(formData, address_id);
 });
 // Attach event listener for form submission
 $("#targeted_form").submit(function (event) {

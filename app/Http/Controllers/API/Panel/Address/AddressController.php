@@ -6,9 +6,11 @@ use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\MyAccount\Address\AddressCreateRequest;
 use App\Http\Requests\Order\MyAccount\Address\AddressUpdateRequest;
+use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingAddressInstructionResource;
 use App\Http\Resources\Panel\API\Address\AddressListResource;
 use App\Http\Resources\Panel\API\Address\AddressUpdateResource;
 use App\Models\Address\Address;
+use App\Models\Address\AddressInstruction;
 use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +20,23 @@ use Illuminate\Support\Facades\Auth;
 class AddressController extends Controller
 {
     use BaseModel;
+
+    /**
+     * Address Info
+     *
+     * @param Address $institute
+     * @return JsonResponse
+     */
+    public function addressInstructionShow(Address $address): JsonResponse
+    {
+        try {
+            $address_instruction = AddressInstruction::where('address_id', $address->id)->first();
+            // Return success response with the address info
+            return Message::success(null, new ShopSettingAddressInstructionResource($address_instruction));
+        } catch (Exception $ex) {
+            return Message::error($ex->getMessage());
+        }
+    }
 
     /**
      * Address Delete
@@ -109,6 +128,40 @@ class AddressController extends Controller
             return Message::success(null, $list);
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
+        }
+    }
+
+
+    public function storeInstruction(Request $request): JsonResponse
+    {
+        try {
+            // Address save
+            $formData = json_decode($request->getContent(), true);
+            $address = Address::find($request->address_id);
+            if ($address->addressInstruction) {
+                // Update the existing instruction
+                $address->addressInstruction->update([
+                    'property_type' => $formData['propertyName'],
+                    'closed_day_for_delivery' => json_encode($formData['deliveryDays']),
+                    'package_leave_address' => $formData['package_leave_address'],
+                    'description' => $formData['description']
+                ]);
+            } else {
+                // Create a new instruction
+                AddressInstruction::create([
+                    'address_id' => $address->id,
+                    'property_type' => $formData['propertyName'],
+                    'closed_day_for_delivery' => json_encode($formData['deliveryDays']),
+                    'package_leave_address' => $formData['package_leave_address'],
+                    'description' => $formData['description']
+                ]);
+            }
+
+            //Success Response
+            return Message::success(__("messages.success_add"));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
         }
     }
 
