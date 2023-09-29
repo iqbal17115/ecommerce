@@ -74,7 +74,7 @@
                             @endif
                             <li><a href="{{ route('cart') }}">Cart</a></li>
                             @if (!Auth::user())
-                            <li><a href="{{ route('login') }}" class="login-link">Log In</a></li>
+                            <li><a href="{{ route('login') }}">Log In</a></li>
                             @endif
                         </ul>
                     </div>
