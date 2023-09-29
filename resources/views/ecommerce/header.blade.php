@@ -134,7 +134,7 @@
                     <div class="header-user">
                         <i class="icon-user-2"></i>
                         <div class="header-userinfo">
-                            <span>Welcome</span>
+                            <span class="text-dark">Welcome</span>
                             <h4 class="mb-0">My Account</h4>
                         </div>
                     </div>
