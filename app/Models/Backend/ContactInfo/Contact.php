@@ -2,6 +2,7 @@
 
 namespace App\Models\Backend\ContactInfo;
 
+use App\Models\Address\Division;
 use App\Models\Backend\Inventory\PurchaseInvoice;
 use App\Models\Backend\Inventory\PurchasePayment;
 use App\Models\Backend\Inventory\SaleInvoice;
@@ -10,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\FrontEnd\Order;
 use App\Models\Backend\Transaction\Payment;
 use App\Models\Ecommerce\Setting\District;
-use App\Models\Ecommerce\Setting\Division;
 use App\Models\Ecommerce\Setting\Union;
 use App\Models\Ecommerce\Setting\Upazila;
 use Illuminate\Database\Eloquent\Model;

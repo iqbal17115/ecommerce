@@ -5,11 +5,7 @@
     <link rel="stylesheet" href="{{ URL::asset('aladdinne/') }}/assets/css/demo36.min.css">
     <link rel="stylesheet" type="text/css"
         href="{{ URL::asset('aladdinne/') }}/assets/vendor/fontawesome-free/css/all.min.css">
-
-    <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{ URL::asset('aladdinne/') }}/assets/css/style.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="{{ URL::asset('aladdinne/') }}/assets/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('web_css/global.css') }}">
     <style>
         body {
             top: 0px !important;
@@ -196,63 +192,6 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-        }
-
-        .sticky-header.fixed .header-icon {
-            color: #222529;
-        }
-
-        .sticky-logo {
-            display: none;
-        }
-
-        .header-middle.fixed .logo img:not(.sticky-logo) {
-            display: none;
-        }
-
-        .header-middle.fixed .sticky-logo {
-            display: block;
-        }
-
-        .header-middle.fixed .mobile-menu-toggler {
-            color: #222529;
-        }
-
-        .header-bottom.fixed .logo {
-            max-width: 100px;
-        }
-
-        .header-search-inline {
-            margin-right: 1.5rem;
-        }
-
-        .header-search-inline .form-control {
-            width: 448px;
-            font-size: 1.4rem;
-            padding-left: 3rem;
-            padding-right: 1.5rem
-        }
-
-        .header-search-wrapper .btn {
-            position: relative;
-            padding: 0 0 3px 0;
-            border: 0;
-            border-left: 1px solid #e7e7e7;
-            min-width: 65px;
-            color: #222529;
-            font-size: 2rem;
-            background: #fff
-        }
-
-        .header-search-wrapper .btn:before {
-            display: inline-block;
-            margin-top: 5px;
-            font-weight: 800
-        }
-
-        .header-search .form-control,
-        .header-search .select-custom {
-            background: #fff
         }
 
         .product-name {

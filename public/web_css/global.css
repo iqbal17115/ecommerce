@@ -1,0 +1,11 @@
+.header-middle {
+    background: #f4631b;
+}
+
+.header-search-category .form-control {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.header-search-category .btn {
+    background-color: #111;
+}

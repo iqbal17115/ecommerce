@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $view->with('parentCategories', Category::whereParentCategoryId(null)->whereTopMenu(1)->orderBy('position', 'asc')->get());
             $view->with('sidebarMenuCategories', Category::whereSidebarMenu(1)->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get());
-            $view->with('headerMenuCategories', Category::whereHeaderMenu(1)->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')->get());
+            $view->with('headerMenuCategories', Category::whereHeaderMenu(1)->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')->limit(6)->get());
             $view->with('all_active_advertisements', Advertisement::orderBy('position')->whereIsActive(1)
             ->get()
             ->groupBy('page')

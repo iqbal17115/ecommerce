@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Address\District;
+use App\Models\Address\Division;
 use App\Models\Backend\ContactInfo\Contact;
 use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\Product\Product;
-use App\Models\Ecommerce\Setting\District;
 use Illuminate\Http\Request;
-use App\Models\Ecommerce\Setting\Division;
 use App\Models\Ecommerce\Setting\Union;
 use App\Models\Ecommerce\Setting\Upazila;
 use App\Models\FrontEnd\Order;
