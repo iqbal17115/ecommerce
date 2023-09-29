@@ -16,7 +16,7 @@ class CreateDistrictsTable extends Migration
     {
         Schema::create('districts', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->uuid('division_id')->nullable()->index();
+            $table->uuid('division_id')->index();
             $table->string('name');
             $table->boolean('status')->default(false);
             $table->softDeletes();
