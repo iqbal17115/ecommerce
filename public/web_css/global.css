@@ -9,3 +9,14 @@
 .header-search-category .btn {
     background-color: #111;
 }
+
+.mobile-menu-toggler-custom {
+    border: 0;
+    background: transparent;
+    color: #222529;
+    padding: 1rem 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 20px;
+    line-height: 0;
+    cursor: pointer;
+  }

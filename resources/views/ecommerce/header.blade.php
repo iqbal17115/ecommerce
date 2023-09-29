@@ -1,3 +1,30 @@
+<!-- Start Sidebar -->
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <input type="hidden" name="category_data[]" id="category_data" value="" />
+        <ul class="sidebar-nav list-group" id="category_show">
+            <li class="text-center h4" style="background-color: brown;">Aladdinne</li>
+            <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: black; "><i
+                        id="category_back" class="fa fa-arrow-left" style="display: none;"></i> Shop By Department
+                    <button id="minimizeSidebar" type="button"
+                        style="font-weight: bold; font-size: 28px; color: red;" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></a></li>
+            @foreach ($sidebarMenuCategories as $sidebarMenuCategory)
+                <li style="list-style: none;padding-bottom: 0px;" class="list-group-item"><a
+                        style="font-family: inherit;" href="javascript:void(0);"
+                        @if ($sidebarMenuCategory->SubCategory) class="parent_category"
+                    data-id="{{ $sidebarMenuCategory->id }}" @endif>{{ $sidebarMenuCategory->name }}
+                        @if (count($sidebarMenuCategory->SubCategory) > 0)
+                            <i class="arrow right float-right"></i>
+                        @endif
+                    </a></li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+<!-- End Sidebar -->
+
 <header class="header">
     <div class="header-top">
         <div class="container">
@@ -77,7 +104,8 @@
     <div class="header-middle sticky-header" data-sticky-options="{'mobile': true}">
         <div class="container">
             <div class="header-left col-lg-2 w-auto pl-0">
-                <button class="mobile-menu-toggler text-dark mr-2" type="button">
+                {{-- when need only for mobile then use class mobile-menu-toggler and remove custom css --}}
+                <button class="mobile-menu-toggler-custom text-dark mr-2 menu-toggle" type="button">
                     <i class="fas fa-bars"></i>
                 </button>
                 @if ($company_info && $company_info->logo)
