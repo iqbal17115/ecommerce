@@ -33,7 +33,7 @@
                     <i class="icon-shipping"></i>
 
                     <div class="info-box-content">
-                        <h4 class="text-transform-none">FREE Express Shipping On Orders $99+</h4>
+                        <h4 class="text-transform-none">FREE Express Shipping On Orders 499TK</h4>
                     </div>
                     <!-- End .info-box-content -->
                 </div>
