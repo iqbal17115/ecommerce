@@ -7,7 +7,7 @@ use App\Traits\BaseModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 
-class ShopSettingDivisionController extends Controller
+class ShopSettingUpazilaController extends Controller
 {
     use BaseModel;
 
@@ -15,9 +15,9 @@ class ShopSettingDivisionController extends Controller
     {
         parent::__construct();
 
-        $this->mainRoute = "divisions";
-        $this->viewPath = "admin_panel.shop_setting.division";
-        $this->tableHeaders = config("tables.divisions");
+        $this->mainRoute = "upazilas";
+        $this->viewPath = "admin_panel.shop_setting.upazila";
+        $this->tableHeaders = config("tables.upazilas");
         $this->isFilterExists = false;
     }
 

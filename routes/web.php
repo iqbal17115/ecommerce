@@ -39,6 +39,7 @@ use App\Http\Controllers\Language\LanguageController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
+use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -127,6 +128,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('countries', ShopSettingCountryController::class)->name('countries.view');
     Route::get('divisions', ShopSettingDivisionController::class)->name('divisions.view');
     Route::get('districts', ShopSettingDistrictController::class)->name('districts.view');
+    Route::get('upazilas', ShopSettingUpazilaController::class)->name('upazilas.view');
 
     // View Route
     Route::controller(CancelOrderController::class)->group(function () {

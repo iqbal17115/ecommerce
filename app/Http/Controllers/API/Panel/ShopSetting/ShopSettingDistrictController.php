@@ -8,6 +8,7 @@ use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingDistrictCreateRequest;
 use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingDistrictUpdateRequest;
 use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingLocationUpdateRequest;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictDatatableResource;
+use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictListResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictUpdateResource;
 use App\Models\Address\District;
 use App\Models\Address\Division;
@@ -20,6 +21,19 @@ class ShopSettingDistrictController extends Controller
 {
     use BaseModel;
 
+
+    public function select_district(Request $request): JsonResponse
+    {
+        try {
+            // Get the lists
+            $lists = District::getLists(District::query(), $request->all(), ShopSettingDistrictListResource::class);
+
+            // Return success response with the lists
+            return Message::success(null, $lists);
+        } catch (Exception $ex) {
+            return Message::error($ex->getMessage());
+        }
+    }
     /**
      * Lists
      *
@@ -45,7 +59,7 @@ class ShopSettingDistrictController extends Controller
     {
         try {
             // Get the lists
-            $lists = Division::getLists(Division::query(), $request->all(), SelectListResource::class);
+            $lists = District::getLists(District::query(), $request->all(), SelectListResource::class);
 
             // Return success response with the lists
             return Message::success(null, $lists);

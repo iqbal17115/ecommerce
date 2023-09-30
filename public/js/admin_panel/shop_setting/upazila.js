@@ -1,10 +1,10 @@
 // Function to set the selected company ID and name in the form
-function setCompanySelectedId(districts) {
+function setUpazilaSelectedId(districts) {
     $("#targeted_form #row_id").val(districts['id']);
     $("#targeted_form #name").val(districts['name']);
-    appendSelect2Option('#parent_divisions #division_id', {
-        'name': districts['division_name'],
-        'id': districts['division_id']
+    appendSelect2Option('#parent_districts #district_id', {
+        'name': districts['district_name'],
+        'id': districts['district_id']
     });
 
     var myModal = new bootstrap.Modal(document.getElementById("countryModal"));
@@ -15,14 +15,14 @@ function setCompanySelectedId(districts) {
 $(document).on("click", ".update_row", function (event) {
     event.preventDefault(); // Prcountryhe form from submitting immediately
 
-    // Get the districts ID from the data attribute
+    // Get the upazilas ID from the data attribute
     const row_id = $(this).data("id");
-    // Get districts details and show them in a modal
+    // Get upazilas details and show them in a modal
     getDetails(
-        "/api/districts/" + row_id,
+        "/api/upazilas/" + row_id,
         (data) => {
-            setCompanySelectedId(data.results);
-            divisionsInitialize();
+            setUpazilaSelectedId(data.results);
+            upazilasInitialize();
         },
         (error) => {
             toastrErrorMessage(error.responseJSON.message);
@@ -33,8 +33,7 @@ $(document).on("click", ".update_row", function (event) {
 $(document).on("click", ".add-new", function (event) {
     $("#targeted_form #row_id").val("");
     $("#targeted_form #name").val("");
-
-    divisionsInitialize();
+    upazilasInitialize();
 });
 
 // Attach a click event handler to the delete link
@@ -44,9 +43,9 @@ $(document).on("click", ".delete_row", function (event) {
     // Get the company ID from the data attribute
     const row_id = $(this).data("id");
 
-    // Delete the division
+    // Delete the upazilas
     deleteAction(
-        '/api/districts/' + row_id,
+        '/api/upazilas/' + row_id,
         (data) => {
             table.clear().draw();
             // Success callback
@@ -67,20 +66,20 @@ $("#targeted_form").submit(function (event) {
     const id = $("#targeted_form #row_id").val();
 
     // Load the selected country details and submit the form
-    const division = {
-        division_id: $("#targeted_form #division_id").val(),
+    const district = {
+        district_id: $("#targeted_form #district_id").val(),
         name: $("#targeted_form #name").val()
     };
 
     // Submit the form
-    submitCountryForm(division, id);
+    submitUpazilaForm(district, id);
 });
 
 // Function to handle form submission
-function submitCountryForm(formData, selectedId = "") {
+function submitUpazilaForm(formData, selectedId = "") {
     saveAction(
         selectedId.trim() !== "" ? "update" : "store",
-        "/api/districts",
+        "/api/upazilas",
         formData,
         selectedId,
         (data) => {
@@ -94,63 +93,14 @@ function submitCountryForm(formData, selectedId = "") {
     );
 }
 
-function submitChangeLocation(formData, selectedId = "") {
-    confirmAction('Change Location', 'Are you sure want to change location', () => {
-        saveAction(
-            "update",
-            "/api/districts-location",
-            formData,
-            selectedId,
-            (data) => {
-                toastrSuccessMessage(data.message);
-                table.clear().draw();
-            },
-            (error) => {
-                toastrErrorMessage(error.responseJSON.message);
-            }
-        );
-    });
-}
-
-$(document).on("click", ".change_location", function (event) {
-    const row_id = $(this).data("id");
-    const location = $(this).data("location");
-
-    const form_data = {
-        location: location
-    };
-
-    // Submit the form
-    submitChangeLocation(form_data, row_id);
-});
-function changeLocation(id, location) {
-    const locationButton = location == 'inside'
-        ? `
-            <button data-location="outside" data-id="${id}" class="btn btn-sm btn-outline-danger change_location">
-                <span class="">Outside</span>
-            </button>
-          `
-        : `
-            <button data-location="inside" data-id="${id}" class="btn btn-sm btn-outline-success change_location">
-                <span class="">Inside</span>
-            </button>
-          `;
-
-    return locationButton;
-}
 
 // Load the company data table
 function loadDataTable() {
     initializeDataTable(
-        `/api/shop-setting-districts/lists`,
+        `/api/shop-setting-upazilas/lists`,
         [
             generateColumn('name', null, 'name'),
-            generateColumn('division_name', null, 'division_name'),
-            generateColumn('country_name', null, 'country_name'),
-            generateColumn('location', (data, type, row) => {
-                return row.location == 'inside' ? 'Inside' : 'Outside';
-            }, 'location'),
-            generateColumn('change_location', (data, type, row) => changeLocation(row.id, row.location), 'name'),
+            generateColumn('district_name', null, 'district_name'),
             generateColumn('status', (data, type, row) => {
                 return row.status == 1 ? 'Active' : 'Inactive';
             }, 'status'),
@@ -167,7 +117,7 @@ function linkableActions(id, text) {
     `;
 }
 
-//Initialize divisions
-function divisionsInitialize() {
-    select2Initialize('/api/divisions/select-lists', 'divisions', "Please Select Division Name", true);
+//Initialize upazilas
+function upazilasInitialize() {
+    select2Initialize('/api/districts/select-lists', 'districts', "Please Select District Name", true);
 }

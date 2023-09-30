@@ -23,4 +23,11 @@ return [
         'status' => ['title' => 'Status', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
+
+    'upazilas' => [
+        'name' => ['title' => 'Name', 'sorting' => true],
+        'District' => ['title' => 'District', 'sorting' => true],
+        'status' => ['title' => 'Status', 'sorting' => true],
+        'actions' => ['title' => 'Action', 'sorting' => false],
+    ],
 ];

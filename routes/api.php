@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Panel\Address\DivisionController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDivisionController;
+use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingUpazilaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,14 +21,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Upazila
+Route::controller(ShopSettingUpazilaController::class)->group(function () {
+    Route::get('shop-setting-upazilas/lists', 'lists')->name('shop_setting_upazilas.lists');
+    Route::get('upazilas/select-lists', 'selectLists')->name('upazilas.select_lists');
+    Route::get('upazilas/{upazila}', 'show')->name('upazilas.show');
+    Route::post('upazilas', 'store')->name('upazilas.store');
+    Route::put('upazilas/{upazila}', 'update')->name('upazilas.update');
+    Route::delete('upazilas/{upazila}', 'destroy')->name('upazilas.delete');
+    Route::get('upazilas/select-lists', 'select_upazila')->name('upazilas.select_lists');
+});
+
+
 // District
 Route::controller(ShopSettingDistrictController::class)->group(function () {
     Route::get('shop-setting-districts/lists', 'lists')->name('shop_setting_districts.lists');
+    Route::get('districts/select-lists', 'selectLists')->name('districts.select_lists');
     Route::get('districts/{district}', 'show')->name('districts.show');
     Route::post('districts', 'store')->name('districts.store');
     Route::put('districts/{district}', 'update')->name('districts.update');
     Route::put('districts-location/{district}', 'locationUpdate')->name('districts_location.update');
     Route::delete('districts/{district}', 'destroy')->name('districts.delete');
+    Route::get('districts/select-lists', 'select_district')->name('districts.select_lists');
 });
 
 // Division
