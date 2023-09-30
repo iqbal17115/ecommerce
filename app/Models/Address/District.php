@@ -15,7 +15,8 @@ class District extends Model
     protected $fillable = [
         'division_id',
         'name',
-        'status'
+        'status',
+        'location'
     ];
 
     protected $sortable = [

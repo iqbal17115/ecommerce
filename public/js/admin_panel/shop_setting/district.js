@@ -93,6 +93,51 @@ function submitCountryForm(formData, selectedId = "") {
     );
 }
 
+function submitChangeLocation(formData, selectedId = "") {
+    confirmAction('Change Location', 'Are you sure want to change location', () => {
+        saveAction(
+            "update",
+            "/api/districts-location",
+            formData,
+            selectedId,
+            (data) => {
+                toastrSuccessMessage(data.message);
+                table.clear().draw();
+            },
+            (error) => {
+                toastrErrorMessage(error.responseJSON.message);
+            }
+        );
+    });
+}
+
+$(document).on("click", ".change_location", function (event) {
+    const row_id = $(this).data("id");
+    const location = $(this).data("location");
+
+    const form_data = {
+        location: location
+    };
+
+    // Submit the form
+    submitChangeLocation(form_data, row_id);
+});
+function changeLocation(id, location) {
+    const locationButton = location == 'inside'
+        ? `
+            <button data-location="outside" data-id="${id}" class="btn btn-sm btn-outline-danger change_location">
+                <span class="">Outside</span>
+            </button>
+          `
+        : `
+            <button data-location="inside" data-id="${id}" class="btn btn-sm btn-outline-success change_location">
+                <span class="">Inside</span>
+            </button>
+          `;
+
+    return locationButton;
+}
+
 // Load the company data table
 function loadDataTable() {
     initializeDataTable(
@@ -101,6 +146,10 @@ function loadDataTable() {
             generateColumn('name', null, 'name'),
             generateColumn('division_name', null, 'division_name'),
             generateColumn('country_name', null, 'country_name'),
+            generateColumn('location', (data, type, row) => {
+                return row.location == 'inside' ? 'Inside' : 'Outside';
+            }, 'location'),
+            generateColumn('change_location', (data, type, row) => changeLocation(row.id, row.location), 'name'),
             generateColumn('status', (data, type, row) => {
                 return row.status == 1 ? 'Active' : 'Inactive';
             }, 'status'),
