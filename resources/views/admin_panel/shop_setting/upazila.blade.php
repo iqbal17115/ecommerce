@@ -30,7 +30,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myUpazilaLabel">Upazila</h5>
+                        <h5 class="modal-title mt-0" id="myUpazilaLabel">Area</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -48,9 +48,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="name">Upazila Name</label>
+                                    <label for="name">Area Name</label>
                                     <input type="text" name="name" id="name" class="form-control"
-                                        placeholder="Enter Upazila Name" required>
+                                        placeholder="Enter Area Name" required>
                                     <span class="text-danger"></span>
                                 </div>
                             </div>
