@@ -18,12 +18,16 @@ class Division extends Model
         'status'
     ];
 
-    public function Country()
-    {
-        return $this->belongsTo(Country::class);
-    }
+    protected $sortable = [
+        'name'
+    ];
 
     protected $searchable = [
         'name'
     ];
+
+    public function Country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

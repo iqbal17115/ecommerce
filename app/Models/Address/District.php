@@ -18,6 +18,14 @@ class District extends Model
         'status'
     ];
 
+    protected $sortable = [
+        'name'
+    ];
+
+    protected $searchable = [
+        'name'
+    ];
+
     public function Division()
     {
         return $this->belongsTo(Division::class);
