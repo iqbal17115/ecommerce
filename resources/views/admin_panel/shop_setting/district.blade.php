@@ -30,7 +30,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myDivisionLabel">Division</h5>
+                        <h5 class="modal-title mt-0" id="myDistrictLabel">District</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -44,9 +44,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="name">Division Name</label>
+                                    <label for="name">District Name</label>
                                     <input type="text" name="name" id="name" class="form-control"
-                                        placeholder="Enter Division Name" required>
+                                        placeholder="Enter District Name" required>
                                     <span class="text-danger"></span>
                                 </div>
                             </div>
