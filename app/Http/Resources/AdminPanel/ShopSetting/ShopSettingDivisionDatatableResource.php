@@ -17,7 +17,7 @@ class ShopSettingDivisionDatatableResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'country_name' => $this->Country->name,
+            'country_name' => $this?->Country?->name,
             'status' => $this->status,
         ];
     }
