@@ -232,7 +232,7 @@
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li class="active">
-                        <a href="demo36.html">Home</a>
+                        <a href="{{ route('home') }}">Home</a>
                     </li>
                     @foreach ($headerMenuCategories as $headerMenuCategory)
                         <li>
