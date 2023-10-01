@@ -187,7 +187,7 @@
                                             <!-- End .product-details -->
 
                                             <figure class="product-image-container">
-                                                <a href="#" class="product-image lazy-load">
+                                                <a href="{{ route('home') }}" class="product-image lazy-load">
                                                     <img data-src="{{ asset('storage/product_photo/' . $details['image']) }}"
                                                         alt="product" width="80" height="80">
                                                 </a>
