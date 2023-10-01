@@ -106,7 +106,7 @@
             <div class="header-left col-lg-2 w-auto pl-0">
                 {{-- when need only for mobile then use class mobile-menu-toggler and remove custom css --}}
                 <button class="mobile-menu-toggler-custom text-dark mr-2 menu-toggle" type="button">
-                    <i class="fas fa-bars"></i>
+                    All <i class="fas fa-bars"></i>
                 </button>
                 @if ($company_info && $company_info->logo)
                 <a href="{{ route('home') }}" class="logo">
