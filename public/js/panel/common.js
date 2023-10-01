@@ -92,3 +92,15 @@ function generatePagination(total, perPage, currentPage) {
     return paginationHtml;
 }
 
+let profile = document.querySelector('.profile');
+let menu = document.querySelector('.profile_menu');
+
+profile.onmouseover = function () {
+    menu.classList.add('active');
+}
+
+profile.onmouseout = function () {
+    menu.classList.remove('active');
+}
+
+

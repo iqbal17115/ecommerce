@@ -676,78 +676,81 @@
         }
 
         .properties-selector input[type=radio] {
-  display: none !important;
-}
+            display: none !important;
+        }
 
-.properties-selector input[type=radio] + label {
-  display: inline-block;
-  border-radius: 6px;
-  background: #dddddd;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 3px;
-  text-align: center;
-  cursor: pointer;
-}
+        .properties-selector input[type=radio]+label {
+            display: inline-block;
+            border-radius: 6px;
+            background: #dddddd;
+            padding: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-right: 3px;
+            text-align: center;
+            cursor: pointer;
+        }
 
-.properties-selector input[type=radio]:checked + label {
-  background: #2AD705;
-  color: #ffffff;
-}
-/* Style the accordion container */
-.accordion {
-    margin: 0 auto;
-}
+        .properties-selector input[type=radio]:checked+label {
+            background: #2AD705;
+            color: #ffffff;
+        }
 
-/* Style accordion titles */
-.accordion-title {
-    background-color: #f0f0f0;
-    padding: 10px;
-    cursor: pointer;
-    user-select: none;
-    border-bottom: 1px solid #ccc;
-}
+        /* Style the accordion container */
+        .accordion {
+            margin: 0 auto;
+        }
 
-/* Hide the checkboxes */
-.accordion-input {
-    display: none;
-}
+        /* Style accordion titles */
+        .accordion-title {
+            background-color: #f0f0f0;
+            padding: 10px;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid #ccc;
+        }
 
-/* Style accordion content (hidden by default) */
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-}
+        /* Hide the checkboxes */
+        .accordion-input {
+            display: none;
+        }
 
-/* Style the active accordion item (when input is checked) */
-.accordion-input:checked + .accordion-title + .accordion-content {
-    max-height: 1000px; /* Set to a large enough value to show all content */
-}
+        /* Style accordion content (hidden by default) */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
 
-.weekDays-selector input[type=radio] {
-    display: none!important;
-}
+        /* Style the active accordion item (when input is checked) */
+        .accordion-input:checked+.accordion-title+.accordion-content {
+            max-height: 1000px;
+            /* Set to a large enough value to show all content */
+        }
 
-.weekDays-selector label {
-    display: inline-block;
-    border-radius: 6px;
-    background: #dddddd;
-    margin-right: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: center;
-    cursor: pointer;
-}
+        .weekDays-selector input[type=radio] {
+            display: none !important;
+        }
 
-.weekDays-selector input[type=radio]:checked + label {
-    background: #688A85;
-    color: #ffffff;
-}
-body {
+        .weekDays-selector label {
+            display: inline-block;
+            border-radius: 6px;
+            background: #dddddd;
+            margin-right: 3px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .weekDays-selector input[type=radio]:checked+label {
+            background: #688A85;
+            color: #ffffff;
+        }
+
+        body {
             font-family: 'Roboto', sans-serif;
         }
     </style>

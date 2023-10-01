@@ -106,11 +106,11 @@
             <div class="header-left col-lg-2 w-auto pl-0">
                 {{-- when need only for mobile then use class mobile-menu-toggler and remove custom css --}}
                 <button class="mobile-menu-toggler-custom text-dark mr-2 menu-toggle" type="button">
-                    All <i class="fas fa-bars"></i>
+                     {{-- <i class="fas fa-bars"></i> --}}
                 </button>
                 @if ($company_info && $company_info->logo)
                 <a href="{{ route('home') }}" class="logo">
-                    <img src="{{ asset('storage/' . $company_info->logo) }}" class="w-100" width="111" height="44" alt="Porto Logo">
+                    <img src="{{ asset('storage/' . $company_info->logo) }}" class="w-100" width="111" height="44" alt="{{$company_info->name}}">
                     @endif
                 </a>
             </div>
@@ -129,20 +129,33 @@
                     </form>
                 </div>
                 <!-- End .header-search -->
-                @if (!Auth::user())
-                <a href="{{ route('login') }}" class="d-lg-block d-none">
-                    <div class="header-user">
-                        <i class="icon-user-2"></i>
-                        <div class="header-userinfo">
+                @if (Auth::user())
+                    <div class="header-user d-lg-block d-none">
+                        <div class="profile">
+                            <div class="user">
+                                <h3>{{ Auth::user()->name }}</h3>
+                                <p>{{ Auth::user()->mobile }}</p>
+                            </div>
+                            <div class="img-box">
+                                <img src="{{ asset('customer.jpg') }}" alt="some user image">
+                            </div>
+                        </div>
+                        <div class="profile_menu">
+                            <ul>
+                                <li><a href="{{ route('my.account') }}"><i class="fas fa-user text-sm"></i>&nbsp;My Account</a></li>
+                                <li><a href="{{ route('customer-logout') }}"><i class="fas fa-sign-out"></i>&nbsp;Sign Out</a></li>
+                            </ul>
+                        </div>
+                        {{-- <i class="icon-user-2"></i> --}}
+                        {{-- <div class="header-userinfo">
                             <span class="text-dark">Welcome</span>
                             <h4 class="mb-0">My Account</h4>
-                        </div>
+                        </div> --}}
                     </div>
-                </a>
                 @endif
                 <a href="{{ route('my.account') }}" class="header-icon position-relative" title="wishlist">
                     <i class="icon-wishlist-2"></i>
-                    <span class="wishlist-count badge-circle">0</span>
+                    <span class="wishlist-count badge-circle" style="background: darkblue;">0</span>
                 </a>
 
                 <div class="dropdown cart-dropdown">
