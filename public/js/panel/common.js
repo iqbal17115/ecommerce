@@ -92,11 +92,3 @@ function generatePagination(total, perPage, currentPage) {
     return paginationHtml;
 }
 
-$(document).ready(function () {
-    $('.summernote').summernote({
-        height: 150,   //set editable area's height
-        codemirror: { // codemirror options
-            theme: 'monokai'
-        }
-    });
-});
