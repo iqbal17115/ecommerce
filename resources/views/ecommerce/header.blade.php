@@ -83,15 +83,7 @@
                 <!-- End .header-dropown -->
 
                 <div class="social-icons">
-                    @if($company_info && $company_info->facebook_link)
-                        <a href="{{$company_info->facebook_link}}" class="social-icon social-facebook icon-facebook" target="_blank"></a>
-                    @endif
-                    @if($company_info && $company_info->twitter_link)
-                        <a href="{{$company_info->twitter_link}}" class="social-icon social-twitter icon-twitter" target="_blank"></a>
-                    @endif
-                    @if($company_info && $company_info->instagram_link)
-                    <a href="{{$company_info->instagram_link}}" class="social-icon social-instagram icon-instagram" target="_blank"></a>
-                    @endif
+
                 </div>
                 <!-- End .social-icons -->
             </div>
