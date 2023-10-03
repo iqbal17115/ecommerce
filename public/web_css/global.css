@@ -291,8 +291,8 @@ opacity: .6;
 
 .profile .img-box {
 position: relative;
-width: 48px;
-height: 48px;
+width: 30px;
+height: 30px;
 border-radius: 50%;
 overflow: hidden;
 }
@@ -305,8 +305,6 @@ width: 100%;
 height: 100%;
 object-fit: cover;
 }
-
-/* menu (the right one) */
 
 .profile_menu {
 position: absolute;
@@ -341,8 +339,6 @@ transform: translateY(0);
 visibility: visible;
 }
 
-/* profile_menu links */
-
 .profile_menu ul {
 position: relative;
 display: flex;
@@ -370,4 +366,11 @@ gap: 6px;
 
 .profile_menu ul li a i {
 font-size: 1.2em;
+}
+
+.wishlist_icon {
+    height: 10px;
+}
+.cart_icon {
+    height: 28px;
 }

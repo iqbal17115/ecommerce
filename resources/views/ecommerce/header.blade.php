@@ -122,20 +122,20 @@
                 </div>
                 <!-- End .header-search -->
                 @if (Auth::user())
-                    <div class="header-user d-lg-block d-none">
+                    <div class="header-user d-lg-block d-none profile-container">
                         <div class="profile">
-                            <div class="user">
-                                <h3>{{ Auth::user()->name }}</h3>
-                                <p>{{ Auth::user()->mobile }}</p>
-                            </div>
                             <div class="img-box">
                                 <img src="{{ asset('customer.jpg') }}" alt="some user image">
                             </div>
+                            <div class="user">
+                                <div class="text-white p-0 m-0">Hello, {{ \Illuminate\Support\Str::limit(Auth::user()->name, 10, '...') }}</div>
+                                <div class="text-white font-weight-bold">Account & Lists</div>
+                            </div>
                         </div>
                         <div class="profile_menu">
-                            <ul>
-                                <li><a href="{{ route('my.account') }}"><i class="fas fa-user text-sm"></i>&nbsp;My Account</a></li>
-                                <li><a href="{{ route('customer-logout') }}"><i class="fas fa-sign-out"></i>&nbsp;Sign Out</a></li>
+                            <ul class="m-4">
+                                <li><a href="{{ route('my.account') }}" class="p-0 m-1">&nbsp;My Account</a></li>
+                                <li class="mt-1"><a href="{{ route('customer-logout') }}" class="p-0 m-1">&nbsp;Sign Out</a></li>
                             </ul>
                         </div>
                         {{-- <i class="icon-user-2"></i> --}}
@@ -145,16 +145,16 @@
                         </div> --}}
                     </div>
                 @endif
-                <a href="{{ route('my.account') }}" class="header-icon position-relative" title="wishlist">
-                    <i class="icon-wishlist-2"></i>
+                <a href="{{ route('my.account') }}" class="header-icon position-relative mb-0" title="wishlist">
+                    <i class="icon-wishlist-2 wishlist_icon"></i>
                     <span class="wishlist-count badge-circle" style="background: darkblue;">0</span>
                 </a>
 
                 <div class="dropdown cart-dropdown">
                     <a href="#" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         @if ($company_info && $company_info->icon)
-                            <img src="{{ asset('storage/' . $company_info->icon) }}" alt="Your Image"
-                                        class="img-fluid icon-cart-thick pb-0 mb-0" style="height: 20px;">
+                            <img src="{{ asset('storage/' . $company_info->icon) }}"
+                                        class="img-fluid icon-cart-thick pb-0 mb-0 cart_icon">
                         @endif
                         {{-- <span class="cart-count badge-circle">3</span> --}}
                         <span class="cart-count badge-circle"

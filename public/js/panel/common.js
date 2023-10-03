@@ -92,15 +92,19 @@ function generatePagination(total, perPage, currentPage) {
     return paginationHtml;
 }
 
-let profile = document.querySelector('.profile');
+let profileContainer = document.querySelector('.profile-container');
 let menu = document.querySelector('.profile_menu');
 
-profile.onmouseover = function () {
+profileContainer.addEventListener('mouseover', function () {
     menu.classList.add('active');
-}
+});
 
-profile.onmouseout = function () {
-    menu.classList.remove('active');
-}
+profileContainer.addEventListener('mouseout', function (e) {
+    // Check if the mouse is not over the menu itself before removing the 'active' class
+    if (!menu.contains(e.relatedTarget)) {
+        menu.classList.remove('active');
+    }
+});
+
 
 
