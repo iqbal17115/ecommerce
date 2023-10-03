@@ -374,3 +374,15 @@ font-size: 1.2em;
 .cart_icon {
     height: 28px;
 }
+
+/* CSS for the mobile menu, initially hidden */
+.top_header_mobile_menu {
+    display: none;
+}
+
+/* Media query to show the mobile menu on screens up to 767px (adjust as needed) */
+@media (max-width: 767px) {
+    .top_header_mobile_menu {
+        display: block; /* Show the mobile menu on smaller screens */
+    }
+}
