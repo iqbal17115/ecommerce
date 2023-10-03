@@ -3,11 +3,12 @@
     <div id="sidebar-wrapper">
         <input type="hidden" name="category_data[]" id="category_data" value="" />
         <ul class="sidebar-nav list-group" id="category_show">
-            <li class="text-center h4" style="background-color: #f4631b;">
+            <li class="text-center h4  d-flex justify-content-center align-items-center" style="background-color: #f4631b;">
                 @if ($company_info && $company_info->logo)
                     <a href="{{ route('home') }}" class="logo">
                         <img src="{{ asset('storage/' . $company_info->logo) }}" class="w-100" width="111"
                             height="44" alt="{{ $company_info->name }}">
+                    </a>
                 @endif
             </li>
             <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: black; "><i
