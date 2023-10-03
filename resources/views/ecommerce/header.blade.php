@@ -3,7 +3,13 @@
     <div id="sidebar-wrapper">
         <input type="hidden" name="category_data[]" id="category_data" value="" />
         <ul class="sidebar-nav list-group" id="category_show">
-            <li class="text-center h4" style="background-color: brown;">Aladdinne</li>
+            <li class="text-center h4" style="background-color: #f4631b;">
+                @if ($company_info && $company_info->logo)
+                    <a href="{{ route('home') }}" class="logo">
+                        <img src="{{ asset('storage/' . $company_info->logo) }}" class="w-100" width="111"
+                            height="44" alt="{{ $company_info->name }}">
+                @endif
+            </li>
             <li id="category_content"><a style="font-weight: bold; font-size: 18px; color: black; "><i
                         id="category_back" class="fa fa-arrow-left" style="display: none;"></i> Shop By Department
                     <button id="minimizeSidebar" type="button" style="font-weight: bold; font-size: 28px; color: red;"
