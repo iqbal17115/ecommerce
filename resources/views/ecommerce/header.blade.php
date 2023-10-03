@@ -81,7 +81,7 @@
         <div class="container">
             <div class="header-left col-lg-2 w-auto pl-0">
                 {{-- when need only for mobile then use class mobile-menu-toggler and remove custom css --}}
-                <button class="mobile-menu-toggler-custom text-dark mr-2 menu-toggle" type="button">
+                <button class="mobile-menu-toggler-custom text-dark mr-2 menu-toggle" type="button" style="cursor: pointer;">
                     {{-- <i class="fas fa-bars"></i> --}}
                 </button>
                 @if ($company_info && $company_info->logo)
@@ -96,7 +96,7 @@
             <div class="header-right w-lg-max">
                 <div
                     class="header-icon header-search header-search-inline header-search-category w-lg-max text-right mb-0">
-                    <a href="#" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
+                    <a href="javascript::void(0);" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
                     <form action="{{ route('search') }}" method="get">
                         <div class="header-search-wrapper" style="border: 0px;">
                             <input type="search" class="form-control" name="q" id="q"
