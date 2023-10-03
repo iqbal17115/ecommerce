@@ -754,6 +754,8 @@
             font-family: 'Roboto', sans-serif;
         }
     </style>
+        <link rel="stylesheet" type="text/css" href="{{ asset('web_css/global.css') }}">
+
     <main class="main">
         <div class="container">
             <div class="view-account">
