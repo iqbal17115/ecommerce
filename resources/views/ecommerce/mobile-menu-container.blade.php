@@ -6,17 +6,17 @@
         </a>
     </div>
     <div class="sticky-info">
-        <a href="demo36-shop.html" class="">
+        <a href="javascript::void();">
             <i class="icon-bars"></i>Categories
         </a>
     </div>
     <div class="sticky-info">
-        <a href="wishlist.html" class="">
+        <a href="javascript::void();" class="">
             <i class="icon-wishlist-2"></i>Wishlist
         </a>
     </div>
     <div class="sticky-info">
-        <a href="{{ route('checkout') }}" class="">
+        <a href="{{ route('my.account') }}" class="">
             <i class="icon-user-2"></i>Account
         </a>
     </div>

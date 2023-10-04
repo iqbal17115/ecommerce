@@ -81,7 +81,7 @@
         <div class="container">
             <div class="header-left col-lg-2 w-auto pl-0">
                 {{-- when need only for mobile then use class mobile-menu-toggler and remove custom css --}}
-                <button class="mobile-menu-toggler-custom text-dark mr-2 menu-toggle" type="button" style="cursor: pointer;">
+                <button class="mobile-menu-toggler-custom text-dark mr-2 menu-toggle menu_toggle_desgn" type="button" style="cursor: pointer;">
                     {{-- <i class="fas fa-bars"></i> --}}
                 </button>
                 @if ($company_info && $company_info->logo)
@@ -139,12 +139,12 @@
                     <a href="{{ route('customer-sign-in') }}" class="header-icon position-relative mb-0 text-white font-weight-bold mr-0">
                         Sign In
                     </a>
-                    <span class="mx-2 text-white">|</span> 
+                    <span class="mx-2 text-white">|</span>
                     <a href="{{ route('sign-up') }}" class="header-icon position-relative mb-0 text-white font-weight-bold">
                         Sign Up
                     </a>
                 </div>
-                
+
                 @endif
                 <a href="{{ route('my.account') }}" class="header-icon position-relative mb-0" title="wishlist">
                     <i class="icon-wishlist-2 wishlist_icon"></i>
