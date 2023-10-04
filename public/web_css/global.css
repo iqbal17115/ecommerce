@@ -386,3 +386,7 @@ font-size: 1.2em;
         display: block; /* Show the mobile menu on smaller screens */
     }
 }
+
+.brand_color {
+    background-color: #f4631b;
+}

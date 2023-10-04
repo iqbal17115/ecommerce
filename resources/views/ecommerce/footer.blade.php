@@ -13,7 +13,7 @@
             <form action="#" class="mb-0 w-lg-max mt-2 mt-md-0">
                 <div class="footer-submit-wrapper d-flex align-items-center">
                     <input type="email" class="form-control mb-0" placeholder="Your E-mail Address" size="40" required>
-                    <button type="submit" class="btn btn-primary btn-sm">Subscribe
+                    <button type="submit" class="btn btn-sm brand_color">Subscribe
                         Now!</button>
                 </div>
             </form>
