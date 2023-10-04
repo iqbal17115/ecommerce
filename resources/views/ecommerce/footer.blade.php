@@ -1,63 +1,31 @@
-<footer>
-    <div class="footer">
-        @if($company_info && $company_info->is_footer_block1_active)
-        <div class="footer-top" style="background: #f4631b;padding-top: 2rem;padding-bottom: 2rem;">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-1" style="display: flex; justify-content: center; align-items: center;">
-                        @if($company_info && $company_info->footer_logo)
-                        <a href="{{ route('home') }}" style="display: inline-block; text-align: center;">
-                            <img data-src="{{ asset('storage/'.$company_info->footer_logo) }}" alt="Logo" class="logo lazy-load"
-                                style="height: 50px;">
-                        </a>
-                        @endif
-                    </div>
-
-                    <div class="col-md-3" style="display: inline-block; text-align: center;">
-                        <span
-                            class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white">@if($company_info
-                            && $company_info->footer_ads) {{$company_info->footer_ads}} @endif</span>
-                    </div>
-
-                    <div class="col-md-1" style="display: inline-block; text-align: center;">
-                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
-                            style="font-size: 18px;">Taka</span>
-                    </div>
-                    <div class="col-md-1" style="display: inline-block; text-align: center;">
-                        @if($company_info && $company_info->country_flag)
-                        <a href="{{ route('home') }}" style="display: inline-block; text-align: center;">
-                            <img data-src="{{ asset('storage/'.$company_info->country_flag) }}" alt="Logo" class="logo lazy-load"
-                                style="height: 50px;">
-                        </a>
-                        @endif
-                    </div>
-                    <div class="col-md-2" style="display: inline-block; text-align: center;">
-                        <span class="widget-newsletter-content d-block font-weight-bold ls-n-10 text-white"
-                            style="font-size: 18px;">Subscribe to Newsletter</span>
-                    </div>
-                    <div class="col-md-4" style="display: inline-block; text-align: center;">
-                        <form action="#" class="mb-0">
-                            <div class="footer-submit-wrapper d-flex">
-                                <input type="email" class="form-control mb-0" placeholder="Enter your Email address..."
-                                    required>
-                                <button type="submit" class="btn btn-md btn-dark">Subscribe</button>
-                            </div>
-                        </form>
-                    </div>
+<footer class="footer font2">
+    <div class="container">
+        <div class="widget-newsletter d-flex align-items-center align-items-sm-start flex-column flex-lg-row  justify-content-lg-between">
+            <div class="widget-newsletter-info text-center text-sm-left d-flex flex-column flex-sm-row align-items-center mb-1 mb-xl-0">
+                <i class="icon-envolope"></i>
+                <div class="widget-info-content">
+                    <h5 class="widget-newsletter-title mb-0">
+                        Subscribe To Our Newsletter</h5>
+                    <p class="widget-newsletter-content mb-0">Get all the latest information on Events, Sales and Offers.
+                    </p>
                 </div>
             </div>
+            <form action="#" class="mb-0 w-lg-max mt-2 mt-md-0">
+                <div class="footer-submit-wrapper d-flex align-items-center">
+                    <input type="email" class="form-control mb-0" placeholder="Your E-mail Address" size="40" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Subscribe
+                        Now!</button>
+                </div>
+            </form>
         </div>
-        @endif
-        <div class="container">
-            @if($company_info && $company_info->is_footer_block2_active)
-            <div class="footer-middle">
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h4 class="widget-title text-dark">Get to know us</h4>
 
-                            <ul class="links">
+        <div class="footer-top">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget">
+                        <h3 class="widget-title">Get to know us</h3>
+                        <div class="widget-content">
+                            <ul>
                                 <li><a href="{{ route('about') }}" style="color: #777;">About Aladdine</a></li>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Careers</a></li>
                                 <li><a href="{{ route('privacy-policy') }}" style="color: #777;">Privacy Policy</a></li>
@@ -67,57 +35,57 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h4 class="widget-title text-dark">{{ __('translate.customer_service') }}</h4>
-
-                            <ul class="links">
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget">
+                        <h3 class="widget-title">Customer Service</h3>
+                        <div class="widget-content">
+                            <ul>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Your Account</a></li>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Your Order</a></li>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Track Shipment</a></li>
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h4 class="widget-title text-dark">{{ __('translate.make_money_with_us') }}</h4>
-
-                            <ul class="links">
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget">
+                        <h3 class="widget-title">Make Money With Us</h3>
+                        <div class="widget-content">
+                            <ul>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Sell On Aladdine</a></li>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Blog</a></li>
                                 <li><a href="Javascript:void(0);" style="color: #777;">Advertise your product</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Protect And Build Your Brand</a>
-                                </li>
+                                <li><a href="Javascript:void(0);" style="color: #777;">Protect And Build Your Brand</a></li>
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-2">
-                        <div class="contact-widget follow">
-                            <h4 class="widget-title ls-n-10 text-dark">Connect with us</h4>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget">
+                        <h4 class="widget-title ls-n-10 text-dark">Connect with us</h4>
                             <div class="social-icons" style="margin-bottom: 5px;">
                                 <a
                                 @if($company_info && $company_info->facebook_link)
                                     href="{{$company_info->facebook_link}}"
                                 @endif
-                                    class="social-icon social-facebook icon-facebook text-dark" target="_blank"></a>
+                                    class="social-icon social-facebook icon-facebook" target="_blank"></a>
                                 <a
                                 @if($company_info && $company_info->twitter_link)
                                     href="{{$company_info->twitter_link}}"
                                 @endif
-                                class="social-icon social-twitter icon-twitter text-dark"  target="_blank"></a>
+                                class="social-icon social-twitter icon-twitter"  target="_blank"></a>
                                 <a
                                 @if($company_info && $company_info->instagram_link)
                                     href="{{$company_info->instagram_link}}"
                                 @endif
-                                class="social-icon social-instagram icon-instagram text-dark"
+                                class="social-icon social-instagram icon-instagram"
                                     target="_blank"></a>
                                 <a
                                 @if($company_info && $company_info->linkedin_link)
                                     href="{{$company_info->linkedin_link}}"
                                 @endif
-                                    class="social-icon social-linkedin fab fa-linkedin-in text-dark"
+                                    class="social-icon social-linkedin fab fa-linkedin-in"
                                     target="_blank"></a>
                             </div><!-- End .social-icons -->
                             <ul class="links">
@@ -129,29 +97,24 @@
                                     <h5>Download Your App </h5>
                                 </li>
                             </ul>
-                        </div>
                     </div>
-
-                    <div class="col-md-2"></div>
-
                 </div>
             </div>
-            @endif
-            @if($company_info && $company_info->is_footer_block3_active)
-            <div class="footer-bottom d-sm-flex align-items-center">
-                <div class="footer-left">
-                    <span class="footer-copyright">© {{date("Y")}} @if($company_info && $company_info->name)
-                        {{$company_info->name}} @endif | All Rights
-                        Reserved.</span>
-                </div>
-
-                <div class="footer-right ml-auto mt-1 mt-sm-0">
-                    <img @if($company_info && $company_info->footer_payment_image)
-                    data-src="{{asset('storage/'.$company_info->footer_payment_image)}}" @endif  class="lazy-load" style="max-width: 1000px;" alt="payment">
-                </div>
-            </div>
-            @endif
-        </div><!-- End .footer-bottom -->
+        </div>
     </div>
+    @if($company_info && $company_info->is_footer_block3_active)
+    <div class="footer-bottom d-sm-flex align-items-center">
+        <div class="footer-left">
+            <span class="footer-copyright">© {{date("Y")}} @if($company_info && $company_info->name)
+                {{$company_info->name}} @endif | All Rights
+                Reserved.</span>
+        </div>
+
+        <div class="footer-right ml-auto mt-1 mt-sm-0">
+            <img @if($company_info && $company_info->footer_payment_image)
+            data-src="{{asset('storage/'.$company_info->footer_payment_image)}}" @endif  class="lazy-load" style="max-width: 1000px;" alt="payment">
+        </div>
+    </div>
+    @endif
 </footer>
 <!-- End .footer -->
