@@ -372,7 +372,7 @@ font-size: 1.2em;
     height: 10px;
 }
 .cart_icon {
-    height: 28px;
+    height: 34px;
 }
 
 /* CSS for the mobile menu, initially hidden */
@@ -390,3 +390,7 @@ font-size: 1.2em;
 .brand_color {
     background-color: #f4631b;
 }
+
+.header-icon i {
+    font-size: 2.6rem !important;
+  }

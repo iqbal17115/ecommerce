@@ -148,7 +148,7 @@
                 @endif
                 <a href="{{ route('my.account') }}" class="header-icon position-relative mb-0" title="wishlist">
                     <i class="icon-wishlist-2 wishlist_icon"></i>
-                    <span class="wishlist-count badge-circle" style="background: darkblue;">0</span>
+                    <span class="wishlist-count badge-circle" style="background: #111;">0</span>
                 </a>
 
                 <div class="dropdown cart-dropdown">
@@ -161,7 +161,7 @@
                         @endif
                         {{-- <span class="cart-count badge-circle">3</span> --}}
                         <span class="cart-count badge-circle"
-                            style="top: 5px; left: 27px; background: darkblue;">{{ count((array) session('cart')) }}</span>
+                            style="top: 5px; left: 27px; background: #111;">{{ count((array) session('cart')) }}</span>
                     </a>
 
                     <div class="cart-overlay"></div>
