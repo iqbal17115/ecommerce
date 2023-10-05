@@ -720,9 +720,9 @@
                                                             style="font-size: 14px;">Meta Title</label>
                                                     </div>
                                                     <div class="col-md-8 mt-md-3">
-                                                        <textarea class="form-control" name="meta_title" id="title" placeholder="Meta Title">
-                                                        @if ($company_info && $company_info->meta_title)
-                                                           {!! $company_info->meta_title !!}
+                                                        <textarea class="form-control" name="title" id="title" placeholder="Meta Title">
+                                                        @if ($company_info && $company_info->title)
+                                                           {!! $company_info->title !!}
                                                         @endif
                                                         </textarea>
                                                     </div>
@@ -753,9 +753,9 @@
                                                             style="font-size: 14px;">Meta Keyword</label>
                                                     </div>
                                                     <div class="col-md-8 mt-md-3">
-                                                        <textarea class="form-control" name="meta_keyword" id="keyWord" placeholder="Meta KeyWord">
-                                                        @if ($company_info && $company_info->meta_keyword)
-                                                           {!! $company_info->meta_keyword !!}
+                                                        <textarea class="form-control" name="key_word" id="key_word" placeholder="Meta KeyWord">
+                                                        @if ($company_info && $company_info->key_word)
+                                                           {!! $company_info->key_word !!}
                                                         @endif
                                                     </textarea>
                                                     </div>
@@ -787,9 +787,9 @@
                                                             style="font-size: 14px;">Meta Description</label>
                                                     </div>
                                                     <div class="col-md-8 mt-md-3">
-                                                        <textarea class="form-control" name="meta_description" id="Description" placeholder="Meta Description">
-                                                        @if ($company_info && $company_info->meta_description)
-                                                           {!! $company_info->meta_description !!}
+                                                        <textarea class="form-control" name="description" id="Description" placeholder="Meta Description">
+                                                        @if ($company_info && $company_info->description)
+                                                           {!! $company_info->description !!}
                                                         @endif
                                                     </textarea>
                                                     </div>

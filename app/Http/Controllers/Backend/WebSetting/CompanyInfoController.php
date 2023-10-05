@@ -13,7 +13,7 @@ class CompanyInfoController extends Controller
    public function Title(Request $request)
    {
        $company_info = CompanyInfo::firstOrNew();
-       $company_info->meta_title = $request->meta_title;
+       $company_info->title = $request->title;
        $company_info->save();
        return response()->json([
            'status' => 201
@@ -26,7 +26,7 @@ class CompanyInfoController extends Controller
     public function keyword(Request $request)
     {
         $company_info = CompanyInfo::firstOrNew();
-        $company_info->meta_keyword = $request->meta_keyword;
+        $company_info->key_word = $request->key_word;
         $company_info->save();
         return response()->json([
             'status' => 201
@@ -39,7 +39,7 @@ class CompanyInfoController extends Controller
     public function description(Request $request)
     {
         $company_info = CompanyInfo::firstOrNew();
-        $company_info->meta_description = $request->meta_description;
+        $company_info->description = $request->description;
         $company_info->save();
 
         return response()->json([
