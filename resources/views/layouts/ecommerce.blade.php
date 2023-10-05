@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     @php
-    $urlWithoutProtocol = preg_replace('/^https?:\/\//', '', Request::root());
-    $currentUrl = 'www.' . $urlWithoutProtocol . Request::getRequestUri();
-@endphp
+        $urlWithoutProtocol = preg_replace('/^https?:\/\//', '', Request::root());
+        $currentUrl = 'www.' . $urlWithoutProtocol . Request::getRequestUri();
+    @endphp
 
-<link rel="canonical" href="{{ $currentUrl }}">
+    <link rel="canonical" href="{{ $currentUrl }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
         @if ($company_info && $company_info->title)
