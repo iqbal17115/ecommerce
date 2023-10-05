@@ -80,15 +80,15 @@ Route::controller(AddressController::class)->group(function () {
 });
 
 Route::controller(DistrictController::class)->group(function () {
-    Route::get('districts/lists', 'lists')->name('districts.lists');
+    Route::get('districts-select/lists', 'lists')->name('districts.lists');
 });
 
 Route::controller(DivisionController::class)->group(function () {
-    Route::get('divisions/lists', 'lists')->name('divisions.lists');
+    Route::get('divisions-select/lists', 'lists')->name('divisions.lists');
 });
 
 Route::controller(CountryController::class)->group(function () {
-    Route::get('countries/lists', 'lists')->name('countries.lists');
+    Route::get('countries-select/lists', 'lists')->name('countries_lists.lists');
 });
 
 

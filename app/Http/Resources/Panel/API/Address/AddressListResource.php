@@ -24,9 +24,9 @@ class AddressListResource extends JsonResource
             'nearest_landmark' => $this->nearest_landmark,
             'type' => $this->type,
             'is_default' => $this->is_default,
-            'country' => $this->country->name,
-            'division' => $this->division->name,
-            'district' => $this->district->name,
+            'country' => $this->country?->name,
+            'division' => $this->division?->name,
+            'district' => $this->district?->name,
         ];
     }
 }

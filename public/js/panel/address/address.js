@@ -1,3 +1,50 @@
+$(document).on("change", "#division_id", function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+    const division_id = $("#division_id").val();
+    // Get details
+    getDetails(
+        "/api/districts-select/lists?division_id=" + division_id,
+        (data) => {
+            setDistrictData(data.results.data);
+        },
+        (error) => {
+
+        }
+    );
+});
+
+
+$(document).on("change", "#country_id", function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+    const country_id = $("#country_id").val();
+    // Get details
+    getDetails(
+        "/api/divisions-select/lists?country_id=" + country_id,
+        (data) => {
+            setDivisionData(data.results.data);
+        },
+        (error) => {
+
+        }
+    );
+});
+
+$(document).on("click", ".address_modal", function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+
+    // Get details
+    getDetails(
+        "/api/countries-select/lists",
+        (data) => {
+            // console.log(data);
+            setCountryData(data.results.data);
+        },
+        (error) => {
+
+        }
+    );
+});
+
 $(document).on("click", "#set_as_default_address", function (event) {
     const address_id = $(this).data('address_id');
     const user_id = $("#user_id_val").val();
@@ -38,7 +85,6 @@ $(document).on("click", "#remove_address", function (event) {
 });
 
 function setEditData(data) {
-    document.getElementById('address_modal').click();
 
     // Set 'row_id'
     $('#row_id').val(data.id);
@@ -54,15 +100,6 @@ function setEditData(data) {
 
     // Set 'optional_mobile'
     $('#optional_mobile').val(data.optional_mobile);
-
-    // Set 'country_id'
-    $('.country_id').val(data.country_id);
-
-    // Set 'division_id'
-    $('#division_id').val(data.division_id);
-
-    // Set 'district_id'
-    $('#district_id').val(data.district_id);
 
     // Set 'street_address'
     $('#street_address').val(data.street_address);
@@ -80,12 +117,12 @@ function setEditData(data) {
         $('#office').prop('checked', true);
     }
 
-    $('#userAddressModal').modal('show');
+    // $('#userAddressModal').modal('show');
 }
 
 function setAddressInstructionData(data) {
 
-     $('input[name="property"]').each(function () {
+    $('input[name="property"]').each(function () {
 
         if ($(this).attr('id') == data.property_type) {
             $(this).prop('checked', true);
@@ -94,7 +131,7 @@ function setAddressInstructionData(data) {
         }
     });
 
-    $("#"+data['package_leave_address']).prop("checked", true);
+    $("#" + data['package_leave_address']).prop("checked", true);
     $("#description").val(data['description']);
 
     // Parse the closed_day_for_delivery JSON
@@ -133,19 +170,44 @@ $(document).on("click", "#instruction_modal", function (event) {
     getAddresInstruction(address_id);
 });
 
-$(document).on("click", "#edit_address", function (event) {
+$(document).on("click", ".edit_address", function (event) {
     const address_id = $(this).data('address_id');
 
     // Get details
     getDetails(
         "/api/user-address/" + address_id,
         (data) => {
-            setEditData(data.results);
+            // Assuming that getDetails is an asynchronous function, you can add the event listener
+            // after the data has been successfully fetched.
+            document.getElementById('address_modal').addEventListener('click', function () {
+                // Code to execute after the click event
+                setEditData(data.results);
+
+                setTimeout(function () {
+                    $('.country_id').val(data.results.country_id);
+                    $('.country_id').trigger('change');
+                }, 1000);
+
+                setTimeout(function () {
+                    $('#division_id').val(data.results.division_id);
+                    $('#division_id').trigger('change');
+                }, 1500);
+
+                setTimeout(function () {
+                    $('#district_id').val(data.results.district_id);
+                    $('#district_id').trigger('change');
+                }, 2000);
+
+            });
+
+            // Trigger the click event after adding the listener
+            document.getElementById('address_modal').click();
         },
         (error) => {
-
+            // Handle the error here
         }
     );
+
 });
 function setAddressData(data) {
     // Initialize an empty variable to store the card HTML
@@ -191,7 +253,7 @@ function setAddressData(data) {
                 <a href="javascript:void(0);" id="instruction_modal" class="text-info mt-1 text-decoration-none" data-toggle="modal" data-id="${data.id}" data-target="#exampleModal">Add delivery instructions<a>
             </div>
             <div class="card-footer">
-                <a href="javascript:void(0);" class="text-sm" id="edit_address" data-address_id="${data.id}">Edit</a>
+                <a href="javascript:void(0);" class="text-sm edit_address" id="edit_address" data-address_id="${data.id}">Edit</a>
                 ${remove_address}
                 ${set_as_default_address}
             </div>
@@ -387,49 +449,3 @@ function setCountryData(data) {
         selectElement.appendChild(option);
     });
 }
-
-$(document).on("change", "#division_id", function (event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-    const division_id = $("#division_id").val();
-    // Get details
-    getDetails(
-        "/api/districts/lists?division_id=" + division_id,
-        (data) => {
-            setDistrictData(data.results.data);
-        },
-        (error) => {
-
-        }
-    );
-});
-
-
-$(document).on("change", "#country_id", function (event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-    const country_id = $("#country_id").val();
-    // Get details
-    getDetails(
-        "/api/divisions/lists?country_id=" + country_id,
-        (data) => {
-            setDivisionData(data.results.data);
-        },
-        (error) => {
-
-        }
-    );
-});
-
-$(document).on("click", ".address_modal", function (event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-
-    // Get details
-    getDetails(
-        "/api/countries/lists",
-        (data) => {
-            setCountryData(data.results.data);
-        },
-        (error) => {
-
-        }
-    );
-});
