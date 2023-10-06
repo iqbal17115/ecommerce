@@ -80,6 +80,10 @@ Route::controller(AddressController::class)->group(function () {
 });
 
 Route::controller(DistrictController::class)->group(function () {
+    Route::get('areas-select/lists', 'lists')->name('districts.lists');
+});
+
+Route::controller(DistrictController::class)->group(function () {
     Route::get('districts-select/lists', 'lists')->name('districts.lists');
 });
 

@@ -27,7 +27,8 @@ class Address extends Model
         'name',
         'instruction',
         'division_id',
-        'district_id'
+        'district_id',
+        'upazila_id'
     ];
 
     public function addressInstruction(){

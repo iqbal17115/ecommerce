@@ -1,3 +1,18 @@
+$(document).on("change", "#district_id", function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+    const district_id = $("#district_id").val();
+    // Get details
+    getDetails(
+        "/api/areas-select/lists?district_id=" + district_id,
+        (data) => {
+            setUpazilaData(data.results.data);
+        },
+        (error) => {
+
+        }
+    );
+});
+
 $(document).on("change", "#division_id", function (event) {
     event.preventDefault(); // Prevent the form from submitting immediately
     const division_id = $("#division_id").val();
@@ -198,6 +213,11 @@ $(document).on("click", ".edit_address", function (event) {
                     $('#district_id').trigger('change');
                 }, 2000);
 
+                setTimeout(function () {
+                    $('#upazila_id').val(data.results.upazila_id);
+                    $('#upazila_id').trigger('change');
+                }, 2500);
+
             });
 
             // Trigger the click event after adding the listener
@@ -357,6 +377,7 @@ $("#targeted_form").submit(function (event) {
         country_id: $("#targeted_form #country_id").val(),
         division_id: $("#targeted_form #division_id").val(),
         district_id: $("#targeted_form #district_id").val(),
+        upazila_id: $("#targeted_form #upazila_id").val(),
         street_address: $("#targeted_form #street_address").val(),
         building_name: $("#targeted_form #building_name").val(),
         nearest_landmark: $("#targeted_form #nearest_landmark").val(),
@@ -385,6 +406,27 @@ function submitForm(formData, selectedId = "") {
 
         }
     );
+}
+
+function setUpazilaData(data) {
+    const selectElement = document.getElementById('upazila_id');
+
+    selectElement.innerHTML = '';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = 'Select a Upazila';
+    defaultOption.setAttribute('selected', 'selected');
+
+    selectElement.appendChild(defaultOption);
+
+    data.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.text = item.name;
+
+        selectElement.appendChild(option);
+    });
 }
 
 function setDistrictData(data) {

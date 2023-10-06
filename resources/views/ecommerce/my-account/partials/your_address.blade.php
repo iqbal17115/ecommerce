@@ -58,6 +58,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="upazila_id">Area</label>
+                            <select class="form-control form-control-sm" id="upazila_id" name="upazila_id" required>
+                                <option> -- Select --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="street_address">Street Address</label>
                             <input type="text" class="form-control" id="street_address" name="street_address"
                                 placeholder="Enter street address" required>
