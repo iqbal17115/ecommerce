@@ -34,6 +34,11 @@ class Address extends Model
     public function addressInstruction(){
         return $this->hasOne(AddressInstruction::class);
     }
+
+    public function upazila(){
+        return $this->belongsTo(Upazila::class);
+    }
+
     public function district(){
         return $this->belongsTo(District::class);
     }

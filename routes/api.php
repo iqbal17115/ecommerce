@@ -3,6 +3,7 @@ use App\Http\Controllers\API\Panel\Address\AddressController;
 use App\Http\Controllers\API\Panel\Address\CountryController;
 use App\Http\Controllers\API\Panel\Address\DistrictController;
 use App\Http\Controllers\API\Panel\Address\DivisionController;
+use App\Http\Controllers\API\Panel\Address\UpazilaController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDivisionController;
@@ -79,7 +80,7 @@ Route::controller(AddressController::class)->group(function () {
     Route::delete('/user-address/{address}', 'destroy')->name('user_address.delete');
 });
 
-Route::controller(DistrictController::class)->group(function () {
+Route::controller(UpazilaController::class)->group(function () {
     Route::get('areas-select/lists', 'lists')->name('districts.lists');
 });
 

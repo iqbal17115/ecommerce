@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\DayOfWeekEnum;
 use App\Enums\PropertyTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

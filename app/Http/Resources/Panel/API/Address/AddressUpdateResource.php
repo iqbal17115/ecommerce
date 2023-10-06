@@ -27,6 +27,7 @@ class AddressUpdateResource extends JsonResource
             'country_id' => $this->country_id,
             'division_id' => $this->division_id,
             'district_id' => $this->district_id,
+            'upazila_id' => $this->upazila_id,
         ];
     }
 }

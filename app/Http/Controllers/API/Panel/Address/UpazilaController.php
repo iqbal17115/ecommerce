@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Panel\Address;
 
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingUpazilaListResource;
 use App\Models\Address\Upazila;
 use App\Traits\BaseModel;
 use Exception;
@@ -23,7 +24,7 @@ class UpazilaController extends Controller
     public function lists(Request $request): JsonResponse|bool|string
     {
         try {
-            $list = Upazila::getLists(Upazila::where('district_id', $request->district_id), $request->all(), DistrictListResource::class);
+            $list = Upazila::getLists(Upazila::where('district_id', $request->district_id), $request->all(), ShopSettingUpazilaListResource::class);
 
             return Message::success(null, $list);
         } catch (Exception $ex) {

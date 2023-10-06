@@ -1,6 +1,7 @@
 $(document).on("change", "#district_id", function (event) {
     event.preventDefault(); // Prevent the form from submitting immediately
     const district_id = $("#district_id").val();
+
     // Get details
     getDetails(
         "/api/areas-select/lists?district_id=" + district_id,
