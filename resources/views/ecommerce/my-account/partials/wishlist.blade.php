@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="wishlist">
-    <h6 class="tab-title">Wishlist</h6>
+    <h2 class="tab-title">Wishlist</h2>
     <table class="table table-wishlist mb-0 shadow">
         <thead>
             <tr>

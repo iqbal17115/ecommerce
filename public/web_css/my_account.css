@@ -1,10 +1,5 @@
 /* Responsive Styles */
-body {
-    background: #f9f9fb !important;
-}
-
 .view-account {
-    background: #FFFFFF !important;
     margin-top: 20px !important;
 }
 
@@ -86,13 +81,11 @@ body {
 
 .view-account .side-bar .side-menu .nav>li>a:hover {
     color: #616670 !important;
-    background: none !important;
 }
 
 .view-account .side-bar .side-menu .nav>li.active a {
     color: #40babd !important;
     border-bottom: 2px solid #40babd !important;
-    background: none !important;
     border-right: none !important;
 }
 
@@ -118,7 +111,7 @@ body {
 }
 
 .view-account .content-panel {
-    padding: 30px !important;
+    padding: 0 30px !important;
 }
 
 .view-account .content-panel .title {
@@ -194,22 +187,6 @@ body {
     float: left !important;
 }
 
-.view-account .content-panel .mails-wrapper .mail-item .icheck {
-    background-color: #fff !important;
-}
-
-.view-account .content-panel .mails-wrapper .mail-item:hover {
-    background: #f9f9fb !important;
-}
-
-.view-account .content-panel .mails-wrapper .mail-item:nth-child(even) {
-    background: #fcfcfd !important;
-}
-
-.view-account .content-panel .mails-wrapper .mail-item:nth-child(even):hover {
-    background: #f9f9fb !important;
-}
-
 .view-account .content-panel .mails-wrapper .mail-item a {
     color: #616670 !important;
 }
@@ -263,26 +240,6 @@ body {
     color: #fff !important;
 }
 
-.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-1 {
-    background: #f77b6b !important;
-}
-
-.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-2 {
-    background: #58bbee !important;
-}
-
-.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-3 {
-    background: #f8a13f !important;
-}
-
-.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-4 {
-    background: #ea5395 !important;
-}
-
-.view-account .content-panel .mails-wrapper .mail-item .mail-subject .label-color-5 {
-    background: #8a40a7 !important;
-}
-
 .view-account .content-panel .mails-wrapper .mail-item .time-container {
     display: inline-block !important;
     position: absolute !important;
@@ -310,7 +267,6 @@ body {
 
 .drive-wrapper {
     padding: 15px !important;
-    background: #f5f5f5 !important;
     overflow: hidden !important;
 }
 
@@ -584,11 +540,9 @@ body {
     }
 
     .view-account .side-bar .side-menu .nav>li>a:hover {
-        background: #f9f9fb !important;
     }
 
     .view-account .side-bar .side-menu .nav>li.active a {
-        background: #f9f9fb !important;
         border-right: 4px solid #40babd !important;
         border-bottom: none !important;
     }
@@ -637,12 +591,10 @@ body {
 .table-wishlist th.price-col,
 .table-wishlist th.status-col,
 .table-wishlist th.action-col {
-    background-color: #f8f9fa;
     font-weight: bold;
 }
 
 .table-wishlist .product-row {
-    background-color: #ffffff;
 }
 
 .font_size {
@@ -677,7 +629,6 @@ body {
 .properties-selector input[type=radio]+label {
     display: inline-block;
     border-radius: 6px;
-    background: #dddddd;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -687,7 +638,6 @@ body {
 }
 
 .properties-selector input[type=radio]:checked+label {
-    background: #2AD705;
     color: #ffffff;
 }
 
@@ -698,7 +648,6 @@ body {
 
 /* Style accordion titles */
 .accordion-title {
-    background-color: #f0f0f0;
     padding: 10px;
     cursor: pointer;
     user-select: none;
@@ -730,7 +679,6 @@ body {
 .weekDays-selector label {
     display: inline-block;
     border-radius: 6px;
-    background: #dddddd;
     margin-right: 3px;
     padding-left: 10px;
     padding-right: 10px;
@@ -741,10 +689,24 @@ body {
 }
 
 .weekDays-selector input[type=radio]:checked+label {
-    background: #688A85;
     color: #ffffff;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-}
+.tab-title {
+    list-style-type: none; 
+    margin: 0; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+  }
+
+  .card-title {
+    font-size: 1.25rem; 
+    font-weight: bold; 
+    margin-bottom: 10px; 
+    color: #333; 
+    padding: 10px;
+  }
+
+  .side-bar{
+    background-color: #fff;
+  }

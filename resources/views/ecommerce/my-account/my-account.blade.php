@@ -3,10 +3,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/my_account.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('web_css/custom_modal.css') }}">
 @endpush
 @section('content')
     <main class="main">
-        <div class="container">
+        <div class="bg-gray pt-2 pb-5">
+            <div class="container">
             <div class="view-account">
                 <section class="module">
                     <div class="module-inner">
@@ -40,6 +42,7 @@
                     </div>
                 </section>
             </div>
+        </div>
         </div>
     </main><!-- End .main -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>

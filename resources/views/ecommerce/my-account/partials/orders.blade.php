@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="orders">
-    <h6 class="tab-title">Your Orders</h6>
+    <h2 class="tab-title">Your Orders</h2>
 
     {{-- Order Searching Menu --}}
     <div class="row">

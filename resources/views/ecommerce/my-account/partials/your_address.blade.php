@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="address">
-    <h6 class="tab-title">Your Address</h6>
+    <h2 class="tab-title">Your Address</h2>
     <!-- Address form fields go here -->
     <div class="row" id="address_content">
 
