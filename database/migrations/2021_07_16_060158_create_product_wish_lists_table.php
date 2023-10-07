@@ -15,9 +15,9 @@ class CreateProductWishListsTable extends Migration
     {
         Schema::create('product_wish_lists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->nullable();
-            $table->foreignId('branch_id')->default(0);
-            $table->foreignId('created_by');
+            $table->uuid('product_id')->nullable()->index();
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();

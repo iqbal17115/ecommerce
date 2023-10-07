@@ -3,6 +3,8 @@
 namespace App\Models\Backend\Inventory;
 use App\Models\Backend\ContactInfo\Contact;
 use App\Models\Backend\Inventory\StockManager;
+use App\Traits\BaseModel;
+use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,9 +12,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
+    
     public function StockManager(){
         return $this->hasMany(StockManager::class);
     }

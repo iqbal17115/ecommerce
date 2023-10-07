@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateVariantsTable extends Migration
@@ -14,12 +15,12 @@ class CreateVariantsTable extends Migration
     public function up()
     {
         Schema::create('variants', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->enum('type', ['Size', 'Color', 'Material_Type']);
             $table->string('name', 30);
             $table->string('color_code', 20)->nullable();
-            $table->foreignId('branch_id');
-            $table->foreignId('user_id');
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('user_id')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();
             $table->timestamps();

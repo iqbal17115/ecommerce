@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateAdvertisementsTable extends Migration
@@ -14,12 +15,12 @@ class CreateAdvertisementsTable extends Migration
     public function up()
     {
         Schema::create('advertisements', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->enum('page', ['Home', 'Category', 'Details', 'Header']);
             $table->enum('width', ['Full', 'Half', 'One Third']);
             $table->tinyInteger('position')->nullable();
             $table->text('ads')->nullable();
-            $table->foreignId('product_feature_id')->nullable();
+            $table->uuid('product_feature_id')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
         });

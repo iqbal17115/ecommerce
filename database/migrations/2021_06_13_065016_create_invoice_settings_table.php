@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateInvoiceSettingsTable extends Migration
@@ -14,7 +15,7 @@ class CreateInvoiceSettingsTable extends Migration
     public function up()
     {
         Schema::create('invoice_settings', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->enum('type',['Invoice','Receipt']);
             $table->string('logo',200)->nullable();
             $table->string('invoice_header',200)->nullable();
@@ -24,13 +25,12 @@ class CreateInvoiceSettingsTable extends Migration
             $table->string('vat_area_code',20)->nullable();
             $table->string('vat_text',100)->nullable();
             $table->string('website',100)->nullable();
-            $table->foreignId('currency_id');
+            $table->uuid('currency_id')->nullable()->index();
             $table->boolean('is_paid_due_hide')->nullable()->default(0);
             $table->boolean('is_memo_no_hide')->nullable()->default(0);
             $table->boolean('is_chalan_no_hide')->nullable()->default(0);
-            $table->foreignId('branch_id');
-            $table->foreignId('created_by');
-            // $table->boolean('is_active')->nullable()->default(1);
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

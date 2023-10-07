@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateProductCompliancesTable extends Migration
@@ -14,7 +15,7 @@ class CreateProductCompliancesTable extends Migration
     public function up()
     {
         Schema::create('product_compliances', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('battery_cell_type', 60)->nullable();
             $table->string('battery_type', 40)->nullable();
             $table->integer('number_of_battery_require')->nullable();
@@ -36,7 +37,7 @@ class CreateProductCompliancesTable extends Migration
             $table->integer('flash_point')->nullable();
             $table->double('item_weight', 10, 2)->nullable();
             $table->string('item_weight_unit', 30)->nullable();
-            $table->foreignId('product_id')->nullable();
+            $table->uuid('product_id')->nullable()->index();
             $table->timestamps();
         });
     }

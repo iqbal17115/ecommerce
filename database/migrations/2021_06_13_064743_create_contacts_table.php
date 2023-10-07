@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateContactsTable extends Migration
@@ -14,8 +15,8 @@ class CreateContactsTable extends Migration
     public function up()
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->nullable();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('user_id')->nullable();
             $table->enum('type', ['Customer', 'Supplier', 'Staff', 'Both'])->nullable();
             $table->enum('contact_type', ['Retailer', 'Wholesale'])->nullable();
             $table->string('first_name', 100)->nullable();
@@ -31,9 +32,9 @@ class CreateContactsTable extends Migration
             $table->date('due_date')->nullable();
             $table->date('birthday')->nullable();
             $table->double('opening_balance')->nullable()->default(0);
-            $table->foreignId('contact_category_id')->nullable();
-            $table->foreignId('branch_id')->nullable();
-            $table->foreignId('created_by');
+            $table->uuid('contact_category_id')->nullable()->index();
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();
             $table->timestamps();

@@ -15,10 +15,10 @@ class CreateProductBarcodesTable extends Migration
     {
         Schema::create('product_barcodes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->nullable();
+            $table->uuid('product_id')->nullable()->index();
             $table->string('barcode', 50)->nullable();
-            $table->foreignId('branch_id');
-            $table->foreignId('created_by');
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();

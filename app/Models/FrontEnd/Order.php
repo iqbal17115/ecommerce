@@ -12,13 +12,14 @@ use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Traits\BaseModel;
+use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes, BaseModel;
+    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
 
     protected $fillable = [

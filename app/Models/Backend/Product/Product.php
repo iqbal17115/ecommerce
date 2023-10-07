@@ -10,25 +10,20 @@ use App\Models\Backend\Product\ProductKeyword;
 use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductImage;
 use App\Models\FrontEnd\Review;
+use App\Traits\BaseModel;
+use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
-// Your other model properties and relationships go here
 
 public function isFreeShippingEligible()
 {
     if ($this->free_shipping == 1) {
-        // Check if the product meets the minimum and maximum amount conditions for free shipping
-        // if (($this->minimum_amount_for_free_shipping === null || $totalAmount >= $this->minimum_amount_for_free_shipping)
-        //     && ($this->maximum_amount_for_free_shipping === null || $totalAmount <= $this->maximum_amount_for_free_shipping)) {
-        //     return true;
-        // }
         return true;
     }
 

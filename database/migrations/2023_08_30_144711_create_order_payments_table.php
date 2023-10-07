@@ -18,14 +18,14 @@ class CreateOrderPaymentsTable extends Migration
     {
         Schema::create('order_payments', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->foreignId('order_id');
+            $table->uuid('order_id')->nullable()->index();
             $table->enum('payment_type', array_keys(PaymentTypeEnum::getPaymentTypes()));
             $table->enum('payment_method', array_keys(PaymentMethodEnum::getPaymentMethods()));
             $table->string('payment_id');
             $table->dateTime('payment_date');
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

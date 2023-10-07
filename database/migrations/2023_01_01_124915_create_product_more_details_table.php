@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateProductMoreDetailsTable extends Migration
@@ -14,7 +15,7 @@ class CreateProductMoreDetailsTable extends Migration
     public function up()
     {
         Schema::create('product_more_details', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('closure_type', 100)->nullable();
             $table->string('manufacturer', 100)->nullable();
             $table->string('manufacturer_part_number', 60)->nullable();
@@ -49,7 +50,7 @@ class CreateProductMoreDetailsTable extends Migration
             $table->string('pocket_description', 100)->nullable();
             $table->string('sheel_type', 60)->nullable();
             $table->string('wheel_type', 60)->nullable();
-            $table->foreignId('product_id')->nullable();
+            $table->uuid('product_id')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

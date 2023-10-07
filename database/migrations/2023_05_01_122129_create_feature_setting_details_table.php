@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateFeatureSettingDetailsTable extends Migration
@@ -14,10 +15,10 @@ class CreateFeatureSettingDetailsTable extends Migration
     public function up()
     {
         Schema::create('feature_setting_details', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('feature_setting_id')->nullable();
-            $table->foreignId('category_id')->nullable();
-            $table->foreignId('position')->nullable();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('feature_setting_id')->nullable()->index();
+            $table->uuid('category_id')->nullable()->index();
+            $table->tinyInteger('position')->nullable();
             $table->timestamps();
         });
     }

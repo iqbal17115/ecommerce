@@ -25,9 +25,9 @@ class CreateSeoPagesTable extends Migration
             $table->boolean('is_image_active');
             $table->boolean('is_icon_active');
             $table->boolean('is_date_active');
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

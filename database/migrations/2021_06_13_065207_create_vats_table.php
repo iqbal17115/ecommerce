@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateVatsTable extends Migration
@@ -14,13 +15,13 @@ class CreateVatsTable extends Migration
     public function up()
     {
         Schema::create('vats', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code', 20)->nullable();
             $table->string('name',200)->nullable();
             $table->double('rate_percent')->default(0);
             $table->double('rate_fixed')->nullable()->default(0);
-            $table->foreignId('branch_id');
-            $table->foreignId('created_by');
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();

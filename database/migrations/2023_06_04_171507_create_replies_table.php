@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateRepliesTable extends Migration
@@ -14,14 +15,11 @@ class CreateRepliesTable extends Migration
     public function up()
     {
         Schema::create('replies', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('review_id');
-            $table->unsignedBigInteger('user_id');
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('review_id')->nullable()->index();
+            $table->uuid('user_id')->nullable()->index();
             $table->text('reply');
             $table->timestamps();
-
-            $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

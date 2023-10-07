@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateCategoriesTable extends Migration
@@ -14,10 +15,10 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('name', 50);
-            $table->foreignId('parent_category_id')->nullable();
-            $table->foreignId('product_feature_id')->nullable();
+            $table->uuid('parent_category_id')->nullable()->index();
+            $table->uuid('product_feature_id')->nullable()->index();
             $table->boolean('top_menu')->nullable()->default(0);
             $table->boolean('sidebar_menu')->nullable()->default(0);
             $table->boolean('header_menu')->nullable()->default(0);
@@ -28,8 +29,8 @@ class CreateCategoriesTable extends Migration
             $table->text('image')->nullable();
             $table->double('vendor_commission_percentage')->nullable();
             $table->string('variation_type')->nullable();
-            $table->foreignId('branch_id');
-            $table->foreignId('user_id');
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('user_id')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();
             $table->timestamps();

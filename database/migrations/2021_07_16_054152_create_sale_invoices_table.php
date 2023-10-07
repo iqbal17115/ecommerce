@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateSaleInvoicesTable extends Migration
@@ -14,10 +15,10 @@ class CreateSaleInvoicesTable extends Migration
     public function up()
     {
         Schema::create('sale_invoices', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code', 191);
-            $table->foreignId('order_id')->nullable();
-            $table->foreignId('contact_id')->nullable();
+            $table->uuid('order_id')->nullable()->index();
+            $table->uuid('contact_id')->nullable()->index();
             $table->dateTime('sale_date')->nullable();
             $table->double('total_amount')->nullable();
             $table->double('other_amount')->nullable();
@@ -27,9 +28,9 @@ class CreateSaleInvoicesTable extends Migration
             $table->double('payable_amount')->nullable();
             $table->text('note')->nullable();
             $table->enum('invoice_channel', ['Web-Sale', 'Sale-Terminal'])->comment('Backend Sale or Online Sale');
-            $table->foreignId('coupon_code_id')->nullable();
-            $table->foreignId('branch_id');
-            $table->foreignId('created_by');
+            $table->uuid('coupon_code_id')->nullable()->index();
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();

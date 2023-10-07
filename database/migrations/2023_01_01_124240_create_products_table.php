@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateProductsTable extends Migration
@@ -14,7 +15,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code', 40);
             $table->string('name', 100);
             $table->enum('type', ['GTIN', 'EAN', 'GCID', 'UPC', 'ASIN', 'ISBN'])->nullable();
@@ -38,14 +39,14 @@ class CreateProductsTable extends Migration
             $table->string('varition_type_data', 191)->nullable();
             $table->text('variation')->nullable();
             $table->boolean('free_shipping')->default(0);
-            $table->foreignId('shipping_class_id')->nullable();
-            $table->foreignId('region_publication_id')->nullable();
-            $table->foreignId('category_id');
-            $table->foreignId('brand_id')->nullable();
-            $table->foreignId('product_feature_id')->nullable();
-            $table->foreignId('branch_id')->nullable();
-            $table->foreignId('created_by');
-            $table->foreignId('vendor_id')->nullable();
+            $table->uuid('shipping_class_id')->nullable()->index();
+            $table->uuid('region_publication_id')->nullable()->index();
+            $table->uuid('category_id')->nullable()->index();
+            $table->uuid('brand_id')->nullable()->index();
+            $table->uuid('product_feature_id')->nullable()->index();
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('vendor_id')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();
             $table->timestamps();

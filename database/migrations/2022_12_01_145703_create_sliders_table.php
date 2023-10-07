@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateSlidersTable extends Migration
@@ -14,11 +15,11 @@ class CreateSlidersTable extends Migration
     public function up()
     {
         Schema::create('sliders', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->text('link')->nullable();
             $table->text('image');
             $table->tinyInteger('position')->nullable();
-            $table->foreignId('category_id')->nullable();
+            $table->uuid('category_id')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
         });

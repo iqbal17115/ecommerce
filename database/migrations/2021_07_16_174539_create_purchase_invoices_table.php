@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreatePurchaseInvoicesTable extends Migration
@@ -14,9 +15,9 @@ class CreatePurchaseInvoicesTable extends Migration
     public function up()
     {
         Schema::create('purchase_invoices', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code', 191);
-            $table->foreignId('contact_id')->nullable();
+            $table->uuid('contact_id')->nullable()->index();
             $table->dateTime('purchase_date')->nullable();
             $table->double('total_amount')->nullable();
             $table->double('other_amount')->nullable();
@@ -26,8 +27,8 @@ class CreatePurchaseInvoicesTable extends Migration
             $table->double('vat')->nullable();
             $table->double('payable_amount')->nullable();
             $table->text('note')->nullable();
-            $table->foreignId('branch_id');
-            $table->foreignId('created_by');
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();

@@ -5,6 +5,8 @@ namespace App\Models\FrontEnd;
 use App\Models\Backend\OrderProduct\OrderQuantityChange;
 use App\Models\Backend\Product\ProductImage;
 use App\Models\Backend\ProductInfo\Product;
+use App\Traits\BaseModel;
+use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,8 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderDetail extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
     protected $fillable = [
         'quantity'

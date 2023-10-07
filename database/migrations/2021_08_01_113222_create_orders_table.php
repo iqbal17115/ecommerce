@@ -3,6 +3,7 @@
 use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateOrdersTable extends Migration
@@ -15,9 +16,9 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code')->nullable();
-            $table->foreignId('contact_id')->nullable();
+            $table->uuid('contact_id')->nullable()->index();
             $table->dateTime('order_date')->nullable();
             $table->double('total_amount')->nullable();
             $table->double('other_amount')->nullable();
@@ -26,7 +27,7 @@ class CreateOrdersTable extends Migration
             $table->double('vat')->nullable();
             $table->double('payable_amount')->nullable();
             $table->text('note')->nullable();
-            $table->foreignId('coupon_code_id')->nullable();
+            $table->uuid('coupon_code_id')->nullable()->index();
             $table->enum('status', array_keys(OrderStatusEnum::getOrderStatuses()))->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();

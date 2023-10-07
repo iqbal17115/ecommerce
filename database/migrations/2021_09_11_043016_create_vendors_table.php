@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateVendorsTable extends Migration
@@ -14,8 +15,8 @@ class CreateVendorsTable extends Migration
     public function up()
     {
         Schema::create('vendors', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('user_id')->nullable()->index();
             $table->string('name', 191);
             $table->string('business_name', 191);
             $table->string('trade_license', 191);
@@ -23,7 +24,7 @@ class CreateVendorsTable extends Migration
             $table->text('profile_photo_path')->nullable();
             $table->string('email', 100)->unique()->nullable();
             $table->string('business_location', 191);
-            $table->foreignId('district_id');
+            $table->uuid('district_id')->nullable()->index();
             $table->string('mobile')->unique()->nullable();
             $table->enum('account_type',['Individual', 'Seller']);
             $table->enum('status', ['Pending', 'Approved', 'Cancel'])->default('Pending');

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateStockManagersTable extends Migration
@@ -14,13 +15,9 @@ class CreateStockManagersTable extends Migration
     public function up()
     {
         Schema::create('stock_managers', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->timestamp('date');
-            //$table->string('code', 100)->nullable();
-            $table->foreignId('product_id')->nullable();
-            // $table->foreignId('invoice_id')->nullable();
-            // $table->foreignId('stock_adjustment_id')->nullable();
-            // $table->enum('flow', ['In', 'Out'])->nullable();
+            $table->uuid('product_id')->nullable()->index();
             $table->double('quantity', 20, 4)->nullable();
             $table->double('price', 20, 4)->nullable();
             $table->double('vat', 20, 4)->nullable();
@@ -33,9 +30,9 @@ class CreateStockManagersTable extends Migration
             $table->double('stock_out_sale', 20, 4)->nullable()->default(0);
             $table->double('stock_out_sale_web', 20, 4)->nullable()->default(0);
             $table->double('stock_out_inventory', 20, 4)->nullable()->default(0);
-            $table->foreignId('warehouse_id')->nullable();
-            $table->foreignId('branch_id');
-            $table->foreignId('created_by');
+            $table->uuid('warehouse_id')->nullable()->index();
+            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();

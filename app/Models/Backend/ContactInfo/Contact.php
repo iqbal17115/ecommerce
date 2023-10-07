@@ -13,12 +13,14 @@ use App\Models\Backend\Transaction\Payment;
 use App\Models\Ecommerce\Setting\District;
 use App\Models\Ecommerce\Setting\Union;
 use App\Models\Ecommerce\Setting\Upazila;
+use App\Traits\BaseModel;
+use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
     public function PurchaseInvoice(){
         return $this->hasMany(PurchaseInvoice::class);

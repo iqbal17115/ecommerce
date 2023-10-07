@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateProductVariantsTable extends Migration
@@ -14,7 +15,7 @@ class CreateProductVariantsTable extends Migration
     public function up()
     {
         Schema::create('product_variants', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('size', 40)->nullable();
             $table->string('bottom_size', 40)->nullable();
             $table->string('bottom_size_map', 40)->nullable();
@@ -32,7 +33,7 @@ class CreateProductVariantsTable extends Migration
             $table->enum('type', ['GTIN', 'EAN', 'GCID', 'UPC', 'ASIN', 'ISBN'])->nullable();
             $table->double('price', 20, 4)->nullable();
             $table->double('quantity', 20, 4)->nullable();
-            $table->foreignId('condition_id')->nullable();
+            $table->uuid('condition_id')->nullable()->index();
             $table->timestamps();
         });
     }

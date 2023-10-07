@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateOffersTable extends Migration
@@ -14,7 +15,7 @@ class CreateOffersTable extends Migration
     public function up()
     {
         Schema::create('offers', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code',40);
             $table->string('title', 191);
             $table->text('image')->nullable();
@@ -24,7 +25,7 @@ class CreateOffersTable extends Migration
             $table->text('link')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->enum('status',['view'])->nullable();
-            $table->foreignId('created_by');
+            $table->uuid('created_by')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

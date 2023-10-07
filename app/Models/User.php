@@ -12,6 +12,8 @@ use Laravel\Jetstream\HasProfilePhoto;
 use App\Models\Backend\ContactInfo\Contact;
 use App\Models\FrontEnd\Review;
 use App\Models\Frontend\Wishlist\Wishlist;
+use App\Traits\BaseModel;
+use App\Traits\DisplayNameTrait;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -20,8 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasProfilePhoto, HasTeams, Notifiable, TwoFactorAuthenticatable, HasRoles, SoftDeletes;
-
+    use HasApiTokens, HasFactory, HasProfilePhoto, HasTeams, Notifiable, TwoFactorAuthenticatable, HasRoles, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
     public $timestamps = true;
     /**

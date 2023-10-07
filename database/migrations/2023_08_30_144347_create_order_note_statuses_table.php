@@ -17,14 +17,14 @@ class CreateOrderNoteStatusesTable extends Migration
     {
         Schema::create('order_note_statuses', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->foreignId('order_id');
+            $table->uuid('order_id')->nullable()->index();
             $table->longText('order_note')->nullable();
             $table->enum('payment_status',array_keys(PaymentStatusEnum::getPaymentStatuses()))->nullable();
             $table->longText('payment_note')->nullable();
             $table->longText('fulfilment_note')->nullable();
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

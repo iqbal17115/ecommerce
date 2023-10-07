@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreatePermissionCategoriesTable extends Migration
@@ -14,7 +15,7 @@ class CreatePermissionCategoriesTable extends Migration
     public function up()
     {
         Schema::create('permission_categories', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('title',191)->nullable();
             $table->string('name',191)->nullable();
             $table->string('type',191)->nullable();
