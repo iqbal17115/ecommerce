@@ -30,6 +30,9 @@ class CreateOrdersTable extends Migration
             $table->uuid('coupon_code_id')->nullable()->index();
             $table->enum('status', array_keys(OrderStatusEnum::getOrderStatuses()))->nullable();
             $table->boolean('is_active')->nullable()->default(1);
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -34,6 +34,9 @@ class CreateProductVariantsTable extends Migration
             $table->double('price', 20, 4)->nullable();
             $table->double('quantity', 20, 4)->nullable();
             $table->uuid('condition_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
         });
     }

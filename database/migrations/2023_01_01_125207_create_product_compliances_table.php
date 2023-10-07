@@ -38,6 +38,9 @@ class CreateProductCompliancesTable extends Migration
             $table->double('item_weight', 10, 2)->nullable();
             $table->string('item_weight_unit', 30)->nullable();
             $table->uuid('product_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
         });
     }

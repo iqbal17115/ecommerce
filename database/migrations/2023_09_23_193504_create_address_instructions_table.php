@@ -22,6 +22,9 @@ class CreateAddressInstructionsTable extends Migration
             $table->text('closed_day_for_delivery')->nullable();
             $table->string('package_leave_address')->nullable();
             $table->string('description')->nullable();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

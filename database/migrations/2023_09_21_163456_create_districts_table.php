@@ -20,6 +20,9 @@ class CreateDistrictsTable extends Migration
             $table->string('name');
             $table->boolean('status')->default(false);
             $table->enum('location', ['inside', 'outside'])->default('outside');
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

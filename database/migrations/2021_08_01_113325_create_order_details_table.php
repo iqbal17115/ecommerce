@@ -22,6 +22,9 @@ class CreateOrderDetailsTable extends Migration
             $table->double('unit_price')->nullable();
             $table->double('quantity')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

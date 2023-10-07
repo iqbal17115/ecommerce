@@ -16,14 +16,14 @@ class CreateOrderShipmentsTable extends Migration
     {
         Schema::create('order_shipments', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->foreignId('order_id');
-            $table->foreignId('courier_id');
-            $table->foreignId('shipping_method_id');
+            $table->uuid('order_id')->nullable()->index();
+            $table->uuid('courier_id')->nullable()->index();
+            $table->uuid('shipping_method_id')->nullable()->index();
             $table->string('transaction_id', 50);
             $table->dateTime('shipping_date');
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

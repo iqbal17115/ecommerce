@@ -52,6 +52,9 @@ class CreateCompanyInfosTable extends Migration
             $table->boolean('is_footer_block2_active')->nullable()->default(1);
             $table->boolean('is_footer_block3_active')->nullable()->default(1);
             $table->boolean('is_hotline_active')->nullable()->default(1);
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
         });
     }

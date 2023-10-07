@@ -46,6 +46,8 @@ class CreateProductsTable extends Migration
             $table->uuid('product_feature_id')->nullable()->index();
             $table->uuid('branch_id')->nullable()->index();
             $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->uuid('vendor_id')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->softDeletes();

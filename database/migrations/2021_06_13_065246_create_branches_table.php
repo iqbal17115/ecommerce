@@ -21,6 +21,8 @@ class CreateBranchesTable extends Migration
             $table->string('address',200)->nullable();
             $table->string('mobile',20)->nullable();
             $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();

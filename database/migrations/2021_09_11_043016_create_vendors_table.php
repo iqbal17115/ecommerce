@@ -28,6 +28,9 @@ class CreateVendorsTable extends Migration
             $table->string('mobile')->unique()->nullable();
             $table->enum('account_type',['Individual', 'Seller']);
             $table->enum('status', ['Pending', 'Approved', 'Cancel'])->default('Pending');
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
 

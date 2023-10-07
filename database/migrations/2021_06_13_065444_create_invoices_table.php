@@ -31,6 +31,8 @@ class CreateInvoicesTable extends Migration
             $table->double('expense_point_amount', 20, 4)->nullable();
             $table->double('grand_total', 20, 4)->nullable();
             $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->uuid('branch_id')->nullable()->index();
             $table->enum('status', ['Pending', 'In Process', 'Delivered', 'Accepted', 'Rescheduled', 'Picked Up', 'Cancel', 'Return']);
             $table->timestamps();

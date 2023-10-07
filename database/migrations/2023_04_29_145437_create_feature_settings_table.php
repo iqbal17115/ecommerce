@@ -20,6 +20,9 @@ class CreateFeatureSettingsTable extends Migration
             $table->uuid('product_feature_id')->nullable()->index();
             $table->boolean('apply_for_offer')->nullable()->default(0);
             $table->boolean('apply_for_coupon')->nullable()->default(0);
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
         });
     }

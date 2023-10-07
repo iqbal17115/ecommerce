@@ -16,13 +16,13 @@ class CreateOrderQuantityChangesTable extends Migration
     {
         Schema::create('order_quantity_changes', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->foreignId('order_detail_id');
+            $table->uuid('order_detail_id')->nullable()->index();
             $table->double('previous_quantity')->nullable();
             $table->double('new_quantity');
             $table->string('change_reason')->nullable();
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

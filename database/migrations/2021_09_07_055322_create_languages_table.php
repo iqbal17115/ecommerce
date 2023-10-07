@@ -74,6 +74,9 @@ class CreateLanguagesTable extends Migration
             $table->string('no_product_alert')->nullable();
             $table->string('cash_on_delivery_text')->nullable();
             $table->boolean('is_default')->default(0);
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
 

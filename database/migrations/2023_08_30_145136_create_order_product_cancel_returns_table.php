@@ -16,7 +16,7 @@ class CreateOrderProductCancelReturnsTable extends Migration
     {
         Schema::create('order_product_cancel_returns', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->foreignId('order_id');
+            $table->uuid('order_id')->nullable()->index();
             $table->tinyInteger('nox_no');
             $table->double('weight', 10, 4)->nullable();
             $table->string('weight_unit', 30)->nullable();
@@ -29,9 +29,9 @@ class CreateOrderProductCancelReturnsTable extends Migration
             $table->date('pickup_day')->nullable();
             $table->string('pickup_time')->nullable();
             $table->string('product_info')->nullable();
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

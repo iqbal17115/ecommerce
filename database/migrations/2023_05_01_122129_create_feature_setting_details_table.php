@@ -19,6 +19,9 @@ class CreateFeatureSettingDetailsTable extends Migration
             $table->uuid('feature_setting_id')->nullable()->index();
             $table->uuid('category_id')->nullable()->index();
             $table->tinyInteger('position')->nullable();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
         });
     }

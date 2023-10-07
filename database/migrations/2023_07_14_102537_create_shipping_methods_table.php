@@ -20,6 +20,9 @@ class CreateShippingMethodsTable extends Migration
             $table->enum('type', ['percent', 'amount'])->nullable();
             $table->double('value', 10, 2)->nullable();
             $table->boolean('is_active')->nullable()->default(0);
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
         });
     }

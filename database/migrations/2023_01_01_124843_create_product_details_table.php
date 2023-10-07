@@ -29,6 +29,9 @@ class CreateProductDetailsTable extends Migration
             $table->uuid('product_id')->nullable()->index();
             $table->uuid('material_type_id')->nullable()->index();
             $table->uuid('condition_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

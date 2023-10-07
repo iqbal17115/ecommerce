@@ -26,6 +26,8 @@ class CreateOffersTable extends Migration
             $table->boolean('is_active')->nullable()->default(1);
             $table->enum('status',['view'])->nullable();
             $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

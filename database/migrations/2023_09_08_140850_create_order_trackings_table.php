@@ -17,11 +17,11 @@ class CreateOrderTrackingsTable extends Migration
     {
         Schema::create('order_trackings', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->foreignId('order_id');
+            $table->uuid('order_id')->nullable()->index();
             $table->enum('status', array_keys(OrderStatusEnum::getOrderStatuses()))->nullable();
-            $table->foreignId('created_by')->nullable()->index();
-            $table->foreignId('updated_by')->nullable()->index();
-            $table->foreignId('deleted_by')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

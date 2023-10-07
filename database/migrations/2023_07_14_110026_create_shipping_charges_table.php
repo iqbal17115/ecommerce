@@ -26,6 +26,9 @@ class CreateShippingChargesTable extends Migration
             $table->integer('max_amount')->nullable();
             $table->string('free_shipping');
             $table->integer('minimum_amount_for_free_shipping')->nullable();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
         });
 

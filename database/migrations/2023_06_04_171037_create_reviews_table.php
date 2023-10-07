@@ -22,6 +22,9 @@ class CreateReviewsTable extends Migration
             $table->integer('rating');
             $table->text('comment');
             $table->uuid('parent_id')->nullable()->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
         });
     }

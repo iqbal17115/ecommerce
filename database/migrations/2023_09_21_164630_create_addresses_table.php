@@ -30,6 +30,9 @@ class CreateAddressesTable extends Migration
             $table->uuid('division_id')->index();
             $table->uuid('district_id')->index();
             $table->uuid('upazila_id')->index();
+            $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->softDeletes();
             $table->timestamps();
         });

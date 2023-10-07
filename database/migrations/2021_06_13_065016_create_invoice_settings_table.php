@@ -31,6 +31,8 @@ class CreateInvoiceSettingsTable extends Migration
             $table->boolean('is_chalan_no_hide')->nullable()->default(0);
             $table->uuid('branch_id')->nullable()->index();
             $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -19,6 +19,8 @@ class CreateSizesTable extends Migration
             $table->string('code', 191);
             $table->string('size_name', 191);
             $table->uuid('created_by')->nullable()->index();
+            $table->uuid('updated_by')->nullable()->index();
+            $table->uuid('deleted_by')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
