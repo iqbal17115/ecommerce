@@ -27,6 +27,13 @@ class CreateContactCategoriesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::table('contact_categories', function (Blueprint $table) {
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**

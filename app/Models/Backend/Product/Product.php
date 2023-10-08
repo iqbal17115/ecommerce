@@ -21,14 +21,14 @@ class Product extends Model
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
 
-public function isFreeShippingEligible()
-{
-    if ($this->free_shipping == 1) {
-        return true;
-    }
+    public function isFreeShippingEligible()
+    {
+        if ($this->free_shipping == 1) {
+            return true;
+        }
 
-    return false;
-}
+        return false;
+    }
     public function reviews()
     {
         return $this->hasMany(Review::class);

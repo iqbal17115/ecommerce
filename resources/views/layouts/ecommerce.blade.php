@@ -7,13 +7,11 @@
     <link rel="canonical" href="{{ url()->current() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-        @if ($company_info && $company_info->title)
-            {!! strip_tags($company_info->title) !!}
-        @endif
+            {!! strip_tags($company_info?->title) !!}
     </title>
 
-    <meta name="description" content="{{ htmlspecialchars(strip_tags($company_info->description)) }}">
-    <meta name="keywords" content="{{ htmlspecialchars($company_info->key_word) }}">
+    <meta name="description" content="{{ htmlspecialchars(strip_tags($company_info?->description)) }}">
+    <meta name="keywords" content="{{ htmlspecialchars($company_info?->key_word) }}">
 
 
 

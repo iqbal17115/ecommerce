@@ -17,6 +17,7 @@ class CreateProductFeaturesTable extends Migration
         Schema::create('product_features', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('name', 100);
+            $table->tinyInteger('card_feature')->nullable();
             $table->boolean('feature_type')->nullable();
             $table->boolean('top_menu')->nullable();
             $table->tinyInteger('position')->nullable();
@@ -26,6 +27,13 @@ class CreateProductFeaturesTable extends Migration
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps();
+        });
+
+        Schema::table('product_features', function (Blueprint $table) {
+            $table->foreign('product_feature_id')->references('id')->on('product_features')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
