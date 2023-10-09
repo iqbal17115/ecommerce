@@ -33,7 +33,7 @@ class AuthController extends Controller
             $user = User::where('mobile', $identifier)->first();
         }
 
-        if ($user && Auth::attempt($credentials)) {
+        if ($user) {
         dd($user);
 
             $request->session()->regenerate();
