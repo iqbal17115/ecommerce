@@ -162,7 +162,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 //
 Route::group([], function () {
-    Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['verified']);
+    Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
     // Shipping
     Route::controller(ShippingChargeController::class)->group(function () {
