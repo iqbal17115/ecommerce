@@ -32,11 +32,13 @@ class AuthController extends Controller
         } else {
             $user = User::where('mobile', $identifier)->first();
         }
-        dd($user);
+
         if ($user && Auth::attempt($credentials)) {
             $request->session()->regenerate();
                 return redirect('/admin');
         }
+        
+        dd($user);
 
         return back()->withErrors([
             'mobile' => 'The provided credentials do not match our records.',
