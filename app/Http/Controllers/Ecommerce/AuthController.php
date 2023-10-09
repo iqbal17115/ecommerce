@@ -29,7 +29,6 @@ class AuthController extends Controller
         $user = User::where('mobile', $request->mobile)->first();
         $guard = Auth::guard('web');
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
 
             // Store the user object in the session
             Session::put('user', $user);
