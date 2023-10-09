@@ -26,13 +26,13 @@ class AuthController extends Controller
         $credentials['mobile'] = !$credentials['email'] ? $credentials['identifier'] : null;
         unset($credentials['identifier']);
         $credentials = array_filter($credentials);
-dd($credentials);
+
         if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
             $user = User::where('email', $identifier)->first();
         } else {
             $user = User::where('mobile', $identifier)->first();
         }
-
+        dd($user);
         if ($user && Auth::attempt($credentials)) {
             $request->session()->regenerate();
                 return redirect('/admin');
