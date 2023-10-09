@@ -17,21 +17,24 @@ class AuthController extends Controller
     }
     public function authenticate(Request $request)
     {
-    $user = User::where('mobile', $request->mobile)->first();
+        $request->validate([
+            'mobile' => 'required',
+            'password' => 'required'
+        ]);
 
-    if ($user) {
-        $credentials = [
-            'mobile' => $request->mobile,
-            'password' => $request->password,
-        ];
+        $credentials = $request->only('mobile', 'password');
 
+
+        $user = User::where('mobile', $request->mobile)->first();
         $guard = Auth::guard('web');
-    
-        if ($guard->attempt($credentials)) {
-            return redirect('/admin');
-        }
-    }
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
+            // Store the user object in the session
+            Session::put('user', $user);
+    
+                return redirect('/admin');
+        }
 
 
         return back()->withErrors([
