@@ -29,7 +29,6 @@ class AuthController extends Controller
         $user = User::where('mobile', $identifier)->first();
 
         if (Auth::attempt($credentials)) {
-            dd($user);
             $request->session()->regenerate();
                 return redirect('/admin');
         }
