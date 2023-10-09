@@ -7,7 +7,6 @@ use App\Models\Backend\ContactInfo\Contact;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -18,21 +17,19 @@ class AuthController extends Controller
     }
     public function authenticate(Request $request)
     {
-        $request->validate([
-            'mobile' => 'required',
-            'password' => 'required'
+        $credentials = $request->validate([
+            'identifier' => 'required',
+            'password' => 'required',
         ]);
+        $identifier = $credentials['identifier'];
+        $credentials['mobile'] = $credentials['identifier'];
+        unset($credentials['identifier']);
+        $credentials = array_filter($credentials);
 
-        $credentials = $request->only('mobile', 'password');
+        $user = User::where('mobile', $identifier)->first();
 
-
-        $user = User::where('mobile', $request->mobile)->first();
-        $guard = Auth::guard('web');
         if (Auth::attempt($credentials)) {
-
-            // Store the user object in the session
-            Session::put('user', $user);
-    
+            $request->session()->regenerate();
                 return redirect('/admin');
         }
 
