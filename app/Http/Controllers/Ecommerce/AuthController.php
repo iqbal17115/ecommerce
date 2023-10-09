@@ -18,15 +18,18 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'mobile' => 'required',
+            'identifier' => 'required',
             'password' => 'required',
         ]);
+        $identifier = $credentials['identifier'];
+        $credentials['mobile'] = $credentials['identifier'];
+        unset($credentials['identifier']);
+        $credentials = array_filter($credentials);
 
-
-  
         $user = User::where('mobile', $identifier)->first();
 
-        if ($user && Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
+            dd($user);
             $request->session()->regenerate();
                 return redirect('/admin');
         }
