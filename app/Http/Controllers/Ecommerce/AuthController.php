@@ -34,7 +34,6 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt($credentials)) {
-            dd(1);
             $request->session()->regenerate();
                 return redirect('/admin');
         }
