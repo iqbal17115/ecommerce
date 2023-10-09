@@ -60,7 +60,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]), function (User $user) use ($data) {
-            $user->assignRole('customer');
+            $user->roles()->sync($roleIds);
             $contact = Contact::whereMobile($user->mobile)->firstOrNew();
             $contact->first_name = $user->name;
             $contact->address = $user->address;
@@ -99,7 +99,7 @@ class AuthController extends Controller
         }
         // $data['password'] = $data['password'];
         $check = $this->create($data);
-        $check->assignRole('customer');
+        $check->roles()->sync($roleIds);
 
         if ($check) {
             $credentials = $request->validate([
