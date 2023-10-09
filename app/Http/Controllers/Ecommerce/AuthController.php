@@ -26,7 +26,7 @@ class AuthController extends Controller
         $credentials['mobile'] = !$credentials['email'] ? $credentials['identifier'] : null;
         unset($credentials['identifier']);
         $credentials = array_filter($credentials);
-
+dd($credentials);
         if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
             $user = User::where('email', $identifier)->first();
         } else {
@@ -110,11 +110,7 @@ class AuthController extends Controller
             $field = filter_var($credentials['identifier'], FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
             if (Auth::attempt([$field => $credentials['identifier'], 'password' => $credentials['password']])) {
                 $request->session()->regenerate();
-                if (Auth::user()->hasAnyRole('admin|user')) {
                     return redirect('/admin');
-                } else {
-                    return redirect(route('home'));
-                }
             }
         }
     }
