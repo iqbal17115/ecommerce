@@ -27,7 +27,7 @@ class AuthController extends Controller
         $credentials = array_filter($credentials);
 
         $user = User::where('mobile', $identifier)->first();
-
+        $guard = Auth::guard('web');
         if (Auth::attempt($credentials)) {
                 return redirect('/admin');
         }
