@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\AllOrderController;
@@ -160,7 +161,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 //
-Route::group(['middleware' => []], function () {
+Route::group([], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
     // Shipping
