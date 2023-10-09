@@ -16,13 +16,13 @@ use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany; // Import the default BelongsToMany class
 
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasProfilePhoto, HasTeams, Notifiable, TwoFactorAuthenticatable, HasRoles, SoftDeletes, BaseModel, DisplayNameTrait;
+    use HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
     public $timestamps = true;
     /**
@@ -63,6 +63,16 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, "users_roles", "user_id", "role_id")->withTimestamps()->as('user_role');
+    }
+
+    public function permissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permissiom::class, 'users_permissions', 'user_id', 'permission_id')->withTimestamps()->as('user_permission');
+    }
 
     public function address()
     {

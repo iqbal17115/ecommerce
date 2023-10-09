@@ -17,13 +17,9 @@ class LoginController extends Controller
             'mobile' => ['required'],
             'password' => ['required'],
         ]);
+        dd(1);
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            if (Auth::user()->hasAnyRole('admin|user')) {
-                return redirect('/admin');
-            } else {
-                return redirect(route('home'));
-            }
+            return redirect(route('home'));
         }
 
         return back()->withErrors([

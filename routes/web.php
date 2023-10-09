@@ -161,7 +161,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 //
-Route::group(['middleware' => ['role:admin|user|manager|editor']], function () {
+Route::group(['middleware' => []], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
     // Shipping
