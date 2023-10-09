@@ -21,11 +21,5 @@ class ShopSettingUpazilaController extends Controller
         $this->isFilterExists = false;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function __invoke(): View|JsonResponse
-    {
-        return $this->generateView($this->viewPath);
-    }
+   
 }
