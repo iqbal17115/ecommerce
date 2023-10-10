@@ -52,7 +52,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::group(['middleware' => 'web'], function () {
 // Review
 Route::controller(ReviewController::class)->group(function () {
     Route::get('/reviews', 'getReview')->name('reviews');
@@ -480,4 +480,5 @@ Route::group([], function () {
     );
     // End Currency
 
+});
 });
