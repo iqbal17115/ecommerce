@@ -31,13 +31,15 @@ class AuthController extends Controller
 
                 // Create Personal Access Token for logged-in user
                 $token = AuthHelper::createPersonalAccessToken($user, 'Personal Access Token');
-                $loginRequest->session()->regenerate();
+
+                return redirect('/admin');
+
                 // Pass necessary data to the success method
-                return Message::success(__("messages.success_login"), [
-                    'access_token' => $token,
-                    'token_type' => 'bearer',
-                    'user' => LoginResource::make($user)
-                ]);
+                // return Message::success(__("messages.success_login"), [
+                //     'access_token' => $token,
+                //     'token_type' => 'bearer',
+                //     'user' => LoginResource::make($user)
+                // ]);
             }
 
             return Message::error(__("messages.invalid_username_password"));
