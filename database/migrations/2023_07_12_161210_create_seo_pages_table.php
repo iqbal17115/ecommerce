@@ -31,12 +31,6 @@ class CreateSeoPagesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        Schema::table('seo_pages', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
-        });
     }
 
     /**

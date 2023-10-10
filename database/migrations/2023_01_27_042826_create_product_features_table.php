@@ -31,9 +31,6 @@ class CreateProductFeaturesTable extends Migration
 
         Schema::table('product_features', function (Blueprint $table) {
             $table->foreign('product_feature_id')->references('id')->on('product_features')->onDelete('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
