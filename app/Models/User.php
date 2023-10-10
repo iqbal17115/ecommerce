@@ -25,6 +25,7 @@ class User extends Authenticatable
     use HasProfilePhoto, HasApiTokens, Notifiable, TwoFactorAuthenticatable, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
     public $timestamps = true;
+    protected $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
