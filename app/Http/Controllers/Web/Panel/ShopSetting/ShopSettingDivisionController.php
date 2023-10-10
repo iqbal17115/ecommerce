@@ -21,10 +21,10 @@ class ShopSettingDivisionController extends Controller
         $this->isFilterExists = false;
     }
 
-    /**
+ /**
      * @throws Exception
      */
-    public function __invoke(): View|JsonResponse
+    public function index(): View|JsonResponse
     {
         return $this->generateView($this->viewPath);
     }

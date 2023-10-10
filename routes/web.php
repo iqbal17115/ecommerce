@@ -125,10 +125,10 @@ Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'cal
 Route::group(['middleware' => 'auth'], function () {
 
 
-    Route::get('countries', ShopSettingCountryController::class)->name('countries.view');
-    Route::get('divisions', ShopSettingDivisionController::class)->name('divisions.view');
-    Route::get('districts', ShopSettingDistrictController::class)->name('districts.view');
-    Route::get('upazilas', ShopSettingUpazilaController::class)->name('upazilas.view');
+    Route::get('countries', [ShopSettingCountryController::class, 'index'])->name('countries.view');
+    Route::get('divisions', [ShopSettingDivisionController::class, 'index'])->name('divisions.view');
+    Route::get('districts', [ShopSettingDistrictController::class, 'index'])->name('districts.view');
+    Route::get('upazilas', [ShopSettingUpazilaController::class, 'index'])->name('upazilas.view');
 
     // View Route
     Route::controller(CancelOrderController::class)->group(function () {
