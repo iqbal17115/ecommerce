@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Helpers\AuthHelper;
+use App\Helpers\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\Auth\LoginResource;
 use App\Models\Backend\ContactInfo\Contact;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,27 +20,30 @@ class AuthController extends Controller
     {
         return view('ecommerce.sign-in');
     }
-    public function authenticate(Request $request)
+    public function authenticate(LoginRequest $loginRequest)
     {
-        $credentials = $request->validate([
-            'identifier' => 'required',
-            'password' => 'required',
-        ]);
-        $identifier = $credentials['identifier'];
-        $credentials['mobile'] = $credentials['identifier'];
-        unset($credentials['identifier']);
-        $credentials = array_filter($credentials);
+        try {
+            if (Auth::attempt($loginRequest->validated())) {
+                // Get the authenticated user.
+                $user = AuthHelper::getAuthenticatedUser();
+                // Check if the user's email has been verified.
+                AuthHelper::isNotVerifiedUser($user);
 
-        $user = User::where('mobile', $identifier)->first();
-        if (Auth::attempt($credentials)) {
-    $request->session()->regenerateToken();
-                return redirect('/admin');
+                // Create Personal Access Token for logged-in user
+                $token = AuthHelper::createPersonalAccessToken($user, 'Personal Access Token');
+
+                // Pass necessary data to the success method
+                return Message::success(__("messages.success_login"), [
+                    'access_token' => $token,
+                    'token_type' => 'bearer',
+                    'user' => LoginResource::make($user)
+                ]);
+            }
+
+            return Message::error(__("messages.invalid_username_password"));
+        } catch (Exception $ex) {
+            return Message::error($ex->getMessage());
         }
-
-
-        return back()->withErrors([
-            'mobile' => 'The provided credentials do not match our records.',
-        ]);
     }
     public function signUpIndex()
     {

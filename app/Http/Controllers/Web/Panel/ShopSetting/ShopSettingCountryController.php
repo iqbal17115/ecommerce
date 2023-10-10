@@ -24,7 +24,7 @@ class ShopSettingCountryController extends Controller
     /**
      * @throws Exception
      */
-    public function __invoke(): View|JsonResponse
+    public function index(): View|JsonResponse
     {
         return $this->generateView($this->viewPath);
     }

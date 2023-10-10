@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany; // Import the default 
 
 class User extends Authenticatable
 {
-    use HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, SoftDeletes, BaseModel, DisplayNameTrait;
+    use HasProfilePhoto, HasApiTokens, Notifiable, TwoFactorAuthenticatable, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
     public $timestamps = true;
     /**

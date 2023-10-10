@@ -3,9 +3,11 @@
 namespace App\Helpers;
 
 use App\Enums\LogKeyEnums;
+use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class AuthHelper
@@ -79,7 +81,7 @@ class AuthHelper
     public static function isNotVerifiedUser($user): ?Authenticatable
     {
         // check if user is valid
-        if (!is_null($user) && !$user->hasVerifiedEmail()) {
+        if (!$user) {
             Message::throwException("User Not Verified");
         }
 
@@ -108,7 +110,7 @@ class AuthHelper
             $roleDetails = null;
 
             // Iterate over user roles
-            foreach ($user->roles as $role) {
+            foreach ($user?->roles as $role) {
                 // Filter roles by roleIds if provided
                 if (!empty($roleId) && ($role->id === $roleId)) {
                     $roleDetails = $role;
@@ -197,5 +199,24 @@ class AuthHelper
         }
 
         return $filteredPermissions;
+    }
+
+    /**
+     * Get Role Is  admin
+     *
+     * @return bool
+     */
+    public static function getRoleIsAdmin(): bool
+    {
+        $userId = auth()->id();
+        $roleId = Session::get('selected_role_id_' . $userId);
+
+        $role = $roleId ? $roleId : optional(auth()->user()->roles->first())->id;
+
+        if(!is_object($roleId)){
+            $role = Role::find($roleId);
+        }
+
+        return $role?->is_admin;
     }
 }
