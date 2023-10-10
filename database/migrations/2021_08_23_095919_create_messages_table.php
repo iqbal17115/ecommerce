@@ -22,7 +22,7 @@ class CreateMessagesTable extends Migration
             $table->string('phone', 100);
             $table->text('subject');
             $table->text('message');
-            $table->uuid('user_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();

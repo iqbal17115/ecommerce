@@ -30,7 +30,7 @@ class CreateCategoriesTable extends Migration
             $table->double('vendor_commission_percentage')->nullable();
             $table->string('variation_type')->nullable();
             $table->uuid('branch_id')->nullable()->index();
-            $table->uuid('user_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();

@@ -17,7 +17,7 @@ class CreateRepliesTable extends Migration
         Schema::create('replies', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('review_id')->nullable()->index();
-            $table->uuid('user_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->text('reply');
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();

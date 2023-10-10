@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->enum('status', ['pending', 'approve', 'deny'])->nullable();
-            $table->uuid('user_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->uuid('product_id')->nullable()->index();
             $table->integer('rating');
             $table->text('comment');

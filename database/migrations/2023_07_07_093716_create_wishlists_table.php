@@ -16,7 +16,7 @@ class CreateWishlistsTable extends Migration
     {
         Schema::create('wishlists', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->uuid('user_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->uuid('product_id')->nullable()->index();
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
