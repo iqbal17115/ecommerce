@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\Auth\LoginResource;
 use App\Models\Backend\ContactInfo\Contact;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
@@ -32,7 +33,7 @@ class AuthController extends Controller
                 // Create Personal Access Token for logged-in user
                 $token = AuthHelper::createPersonalAccessToken($user, 'Personal Access Token');
 
-                return redirect('/admin');
+                return redirect('/my-account');
 
                 // Pass necessary data to the success method
                 // return Message::success(__("messages.success_login"), [
@@ -62,10 +63,11 @@ class AuthController extends Controller
         return tap(User::create([
             'name' => $data['name'],
             'mobile' => $data['mobile'],
-            'email' => $data['email'],
+            // 'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]), function (User $user) use ($data) {
-            $user->roles()->sync($roleIds);
+            $role = Role::where("name", 'User')->first();
+            $user->roles()->sync($role->id);
             $contact = Contact::whereMobile($user->mobile)->firstOrNew();
             $contact->first_name = $user->name;
             $contact->address = $user->address;
@@ -73,7 +75,7 @@ class AuthController extends Controller
             $contact->user_id = $user->id;
             $contact->type = 'Customer';
             $contact->mobile = $user->mobile;
-            $contact->email = $user->email;
+            // $contact->email = $user->email;
             $contact->created_by = $user->id;
             $contact->save();
         });
@@ -83,39 +85,32 @@ class AuthController extends Controller
 
         $request->validate([
             'name' => 'required|max:20',
-            'identifier' => ['required', 'string', 'max:255'],
+            'mobile' => ['required', 'string', 'max:255'],
             'password' => ['required', 'min:2'],
         ], [
-                'name.required' => 'Name is required',
-            ]);
+            'name.required' => 'Name is required',
+        ]);
 
         $data = $request->all();
-        $data['email'] = filter_var($data['identifier'], FILTER_VALIDATE_EMAIL) ? $data['identifier'] : null;
-        $data['mobile'] = !$data['email'] ? $data['identifier'] : null;
-        // Validate email and mobile
-        if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $user = User::where('email', $data['email'])->first();
-        } else {
-            $user = User::where('mobile', $data['mobile'])->first();
-        }
+        $user = User::where('mobile', $data['mobile'])->first();
 
-        if($user) {
+        if ($user) {
             return redirect()->back()->with('message', 'Already exist');
         }
         // $data['password'] = $data['password'];
         $check = $this->create($data);
-        $check->roles()->sync($roleIds);
+        $role = Role::where("name", 'User')->first();
+        $check->roles()->sync($role->id);
 
         if ($check) {
             $credentials = $request->validate([
-                'identifier' => 'required',
+                'mobile' => 'required',
                 'password' => 'required',
             ]);
 
-            $field = filter_var($credentials['identifier'], FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
-            if (Auth::attempt([$field => $credentials['identifier'], 'password' => $credentials['password']])) {
+            if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-                    return redirect('/admin');
+                return redirect('/admin');
             }
         }
     }

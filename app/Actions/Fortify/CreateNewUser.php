@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\Backend\ContactInfo\Contact;
+use App\Models\Role;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,7 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'business_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'mobile' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
         ])->validate();
@@ -40,7 +41,8 @@ class CreateNewUser implements CreatesNewUsers
                 'password' => Hash::make($input['password']),
             ]), function (User $user) use ($input) {
                 $this->createTeam($user);
-                $user->assignRole('customer');
+                $role = Role::where("name", 'User')->first();
+                $user->roles()->sync($role->id);
                 $contact = Contact::whereMobile($user->mobile)->firstOrNew();
                 $contact->business_name = $input['business_name'];
                 $contact->first_name = $user->name;

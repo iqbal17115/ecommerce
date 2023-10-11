@@ -45,6 +45,7 @@ class CreateCompanyInfosTable extends Migration
             $table->text('meta_title')->nullable();
             $table->text('meta_keyword')->nullable();
             $table->text('meta_description')->nullable();
+            $table->string('footer_ads', 100)->nullable();
             $table->boolean('is_phone_active')->nullable()->default(1);
             $table->boolean('is_mobile_active')->nullable()->default(1);
             $table->boolean('is_email_active')->nullable()->default(1);

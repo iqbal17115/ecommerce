@@ -29,7 +29,7 @@
                 </div>
                 <div class="input">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="text" name="identifier" placeholder="Email or Mobile" />
+                    <input type="text" name="mobile" placeholder="Mobile" />
                 </div>
                 <div class="input">
                     <i class="fa-solid fa-lock"></i>
