@@ -44,7 +44,7 @@ class CreateCompanyInfosTable extends Migration
             $table->text('return_policy')->nullable();
             $table->text('shipping_and_delivery')->nullable();
             $table->text('title')->nullable();
-            $table->text('key_word')->nullable();
+            $table->longText('key_word')->nullable();
             $table->text('description')->nullable();
             $table->string('footer_ads', 100)->nullable();
             $table->boolean('is_phone_active')->nullable()->default(1);
