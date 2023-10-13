@@ -59,7 +59,7 @@
                                                     <a href="javascript:void(0);">{{ $details['name'] }}</a>
                                                 </h5>
                                             </td>
-                                            <td>{{ $currency->icon }}{{ $details['sale_price'] }}</td>
+                                            <td>{{ $currency?->icon }}{{ $details['sale_price'] }}</td>
                                             <td>
                                                 <div class="product-single-qty">
                                                     <input value="{{ $details['quantity'] }}"
@@ -88,7 +88,7 @@
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td>{{ $currency->icon }} <span class="cart_total_price">{{ $total }}</span>
+                                    <td>{{ $currency?->icon }} <span class="cart_total_price">{{ $total }}</span>
                                     </td>
                                 </tr>
 
@@ -98,7 +98,7 @@
                                     </td>
 
                                     <td class="shipping-col">
-                                        <span>{{ $currency->icon }} <span class="shipping_amount"></span></span>
+                                        <span>{{ $currency?->icon }} <span class="shipping_amount"></span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -123,7 +123,7 @@
                             <tfoot>
                                 <tr>
                                     <td>Total</td>
-                                    <td>{{ $currency->icon }} <span class="total-price"></span></td>
+                                    <td>{{ $currency?->icon }} <span class="total-price"></span></td>
                                 </tr>
                             </tfoot>
                         </table>

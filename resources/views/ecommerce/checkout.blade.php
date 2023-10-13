@@ -44,8 +44,7 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h6 class="mb-0">Deliver to:</h6>
-                                            <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
-                                                data-target="#shippingModal">
+                                            <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#first-modal">
                                                 <i class="fas fa-plus-circle"></i> Shipping Address
                                             </button>
                                         </div>
@@ -95,7 +94,7 @@
                                         <h4>Subtotal({{ count($products) }} Item{{ count($products) > 1 ? 's' : '' }})
                                         </h4>
                                     </td>
-                                    <td class="price-col">{{ $currency->icon }} <span class="cart_total_price">0</span>
+                                    <td class="price-col">{{ $currency?->icon }} <span class="cart_total_price">0</span>
                                     </td>
                                 </tr>
                                 <tr class="shipping-total">
@@ -104,7 +103,7 @@
                                     </td>
 
                                     <td class="shipping-col">
-                                        <span>{{ $currency->icon }} <span class="shipping_amount"></span></span>
+                                        <span>{{ $currency?->icon }} <span class="shipping_amount"></span></span>
                                     </td>
                                 </tr>
                                 <tr class="order-total">
@@ -112,7 +111,7 @@
                                         <h4>Total (VAT Inclusive if Applicable)</h4>
                                     </td>
                                     <td>
-                                        <b>{{ $currency->icon }} <span class="total-price">0.00</span></b>
+                                        <b>{{ $currency?->icon }} <span class="total-price">0.00</span></b>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -234,7 +233,7 @@
                                                                             href="javascript:void(0);">{{ $details['name'] }}</a>
                                                                     </h5>
                                                                 </td>
-                                                                <td>{{ $currency->icon }}{{ $details['sale_price'] }}</td>
+                                                                <td>{{ $currency?->icon }}{{ $details['sale_price'] }}</td>
                                                                 <td>
                                                                     <div class="product-single-qty">
                                                                         <input value="{{ $details['quantity'] }}"
@@ -293,96 +292,13 @@
     </main>
     <!-- End .main -->
     <!-- Shipping Address Modal -->
-    <div class="modal fade" id="shippingModal" tabindex="-1" role="dialog" aria-labelledby="shippingModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="shippingModalLabel">Update Shipping Address</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('save_shipping_address') }}" method="POST" id="shipping-address-add-form">
-                    <div class="modal-body" style="height: 100%;">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group mb-1 pb-2">
-                                    <label>Street address <abbr class="required" title="required">*</abbr></label>
-                                    <input type="text" name="shipping_address"
-                                        @if (Auth::user()) value="{{ Auth::user()->Contact->shipping_address }}" @endif
-                                        class="form-control" placeholder="House number and street name" required />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-1 pb-2">
-                                    <label>Name <abbr class="required" title="required">*</abbr></label>
-                                    <input type="text" name="shipping_contact_no"
-                                        @if (Auth::user()) value="{{ Auth::user()->name }}" @endif
-                                        class="form-control" placeholder="Name" required />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group mb-1 pb-2">
-                                    <label>Contact No. <abbr class="required" title="required">*</abbr></label>
-                                    <input type="text" name="shipping_contact_no"
-                                        @if (Auth::user()) value="{{ Auth::user()->Contact->mobile }}" @endif
-                                        class="form-control" placeholder="Contact No." required />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="division">Province</label>
-                                    <select name="division_id" id="division" class="form-control" required>
-                                        <option value="" selected="selected"></option>
-                                        @foreach ($divisions as $division)
-                                            <option @if (Auth::user() && Auth::user()->Contact->division_id == $division->id) selected @endif
-                                                value="{{ $division->id }}">{{ $division->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="district">District</label>
-                                    <select name="district_id" id="district" class="form-control" required>
-
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="upazila">Upazila</label>
-                                    <select name="upazilla_id" id="upazila" class="form-control" required>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="union">Union</label>
-                                    <select name="union_id" id="union" class="form-control" required>
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    @include('ecommerce.checkout.partials.address_modal')
     <!-- End Shipping Address Modal -->
 
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
-    @include('ecommerce.sidebar-js')
+
 
     <script>
         function lazyLoad() {
@@ -433,9 +349,7 @@
     </script>
 @endsection
 @push('scripts')
-    @include('ecommerce.checkout-js')
-    <script src="{{ asset('backend_js/cart_charge_check.js') }}"></script>
-    <script src="{{ asset('backend_js/shipping_charge_checkout.js') }}"></script>
+    <script src="{{ asset('js/panel/web/checkout/address.js') }}"></script>
     <script>
         $(document).ready(function() {
             $("#btn-place-order").click(function(event) {
@@ -462,7 +376,7 @@
                         var selectedPayment = $('.payment-icon.active').data('payment');
                         if (selectedPayment) {
                             // If the selected payment option is validated, proceed to submitShippingAddressForm
-                            submitCheckoutForm();
+                            // submitCheckoutForm();
                         } else {
                             alert('Select payment Method Please');
                         }
@@ -538,7 +452,7 @@
                 calculateShippingCharges(shipping_method_id);
             });
         });
-calculateShippingCharges();
+// calculateShippingCharges();
 
     </script>
 @endpush

@@ -2,7 +2,9 @@
 
 namespace App\Models\Backend\ContactInfo;
 
+use App\Models\Address\District;
 use App\Models\Address\Division;
+use App\Models\Address\Upazila;
 use App\Models\Backend\Inventory\PurchaseInvoice;
 use App\Models\Backend\Inventory\PurchasePayment;
 use App\Models\Backend\Inventory\SaleInvoice;
@@ -10,9 +12,6 @@ use App\Models\Backend\Inventory\SalePayment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\FrontEnd\Order;
 use App\Models\Backend\Transaction\Payment;
-use App\Models\Ecommerce\Setting\District;
-use App\Models\Ecommerce\Setting\Union;
-use App\Models\Ecommerce\Setting\Upazila;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -42,9 +41,6 @@ class Contact extends Model
     }
     public function Payment(){
         return $this->hasMany(Payment::class);
-    }
-    public function Union(){
-        return $this->belongsTo(Union::class);
     }
     public function Upazila(){
         return $this->belongsTo(Upazila::class, 'upazilla_id');
