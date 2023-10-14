@@ -23,7 +23,8 @@
                         <input name="user_id" id="user_id" value="{{ $user->id }}" hidden />
                         <div class="form-group">
                             <label for="country_id">Country</label>
-                            <select class="form-control form-control-sm country_id" id="country_id" name="country_id" required>
+                            <select class="form-control form-control-sm country_id" id="country_id" name="country_id"
+                                required>
                                 <option> -- Select --</option>
                             </select>
                         </div>
@@ -124,127 +125,131 @@
                 </div>
                 <form id="instruction_form">
                     <input name="address_id" id="address_id" value="" hidden />
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div>
-                                <h3>Property Type</h3>
-                            </div>
-                            <div class="properties-selector">
-                                <input type="radio" id="house" name="property" class="weekday" />
-                                <label for="house">House</label>
-                                <input type="radio" id="apartment" name="property" class="weekday" />
-                                <label for="apartment">Apartment</label>
-                                <input type="radio" id="business" name="property" class="weekday" />
-                                <label for="business">Business</label>
-                                <input type="radio" id="other" name="property" class="weekday" />
-                                <label for="other">Other</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="accordion" id="accordionExample">
-                                <div class="card m-0">
-                                    <div class="card-header" id="headingOne">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left" type="button"
-                                                data-toggle="collapse" data-target="#collapseOne"
-                                                aria-expanded="true" aria-controls="collapseOne">
-                                                Is this address closed for deliveries on below days?
-                                            </button>
-                                        </h2>
-                                    </div>
-
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                        data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                @foreach ($day_of_weeks as $index => $day_of_week)
-                                                    <div class="col-md-3 mb-4">
-                                                        <div class="weekDays-selector">
-                                                            <div class="font-weight-bold">{{ $day_of_week }}</div>
-                                                            <input type="radio"
-                                                                id="weekday_{{ $index }}_closed"
-                                                                name="{{ $index }}"
-                                                                class="{{ $index }}" value="closed" />
-                                                            <label
-                                                                for="weekday_{{ $index }}_closed">Closed</label>
-                                                            <input type="radio"
-                                                                id="weekday_{{ $index }}_open"
-                                                                name="{{ $index }}"
-                                                                class="{{ $index }}" value="open" />
-                                                            <label for="weekday_{{ $index }}_open">Open</label>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <h3>Property Type</h3>
                                 </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingTwo">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                                data-toggle="collapse" data-target="#collapseTwo"
-                                                aria-expanded="false" aria-controls="collapseTwo">
-                                                Where should we leave your packages at this address?
-                                            </button>
-                                        </h2>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                        data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="package_leave_address" id="front_door">
-                                                        <label class="ml-2 form-check-label" for="front_door">
-                                                            Front door
-                                                        </label>
-                                                    </div>
+                                <div class="properties-selector">
+                                    <input type="radio" id="house" name="property" class="weekday" />
+                                    <label for="house">House</label>
+                                    <input type="radio" id="apartment" name="property" class="weekday" />
+                                    <label for="apartment">Apartment</label>
+                                    <input type="radio" id="business" name="property" class="weekday" />
+                                    <label for="business">Business</label>
+                                    <input type="radio" id="other" name="property" class="weekday" />
+                                    <label for="other">Other</label>
+                                </div>
+                            </div>
 
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="package_leave_address" id="building_receiption">
-                                                        <label class="ml-2 form-check-label" for="building_receiption">
-                                                            Building Receiption
-                                                        </label>
-                                                    </div>
+                            <div class="col-md-12">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card m-0">
+                                        <div class="card-header" id="headingOne">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-link btn-block text-left" type="button"
+                                                    data-toggle="collapse" data-target="#collapseOne"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                    Is this address closed for deliveries on below days?
+                                                </button>
+                                            </h2>
+                                        </div>
 
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="package_leave_address" id="security_guard">
-                                                        <label class="ml-2 form-check-label" for="security_guard">
-                                                            With a security Guard
-                                                        </label>
-                                                    </div>
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    @foreach ($day_of_weeks as $index => $day_of_week)
+                                                        <div class="col-md-3 mb-4">
+                                                            <div class="weekDays-selector">
+                                                                <div class="font-weight-bold">{{ $day_of_week }}</div>
+                                                                <input type="radio"
+                                                                    id="weekday_{{ $index }}_closed"
+                                                                    name="{{ $index }}"
+                                                                    class="{{ $index }}" value="closed" />
+                                                                <label
+                                                                    for="weekday_{{ $index }}_closed">Closed</label>
+                                                                <input type="radio"
+                                                                    id="weekday_{{ $index }}_open"
+                                                                    name="{{ $index }}"
+                                                                    class="{{ $index }}" value="open" />
+                                                                <label
+                                                                    for="weekday_{{ $index }}_open">Open</label>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
 
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="package_leave_address" id="no_preference">
-                                                        <label class="ml-2 form-check-label" for="no_preference">
-                                                            No preference
-                                                        </label>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <input class="form-control" id="description" placeholder="For example navigations, Provide Details such as building description, or nearby landmark">
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <button class="btn btn-link btn-block text-left collapsed"
+                                                    type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                                    aria-expanded="false" aria-controls="collapseTwo">
+                                                    Where should we leave your packages at this address?
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="package_leave_address" id="front_door">
+                                                            <label class="ml-2 form-check-label" for="front_door">
+                                                                Front door
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="package_leave_address" id="building_receiption">
+                                                            <label class="ml-2 form-check-label"
+                                                                for="building_receiption">
+                                                                Building Receiption
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="package_leave_address" id="security_guard">
+                                                            <label class="ml-2 form-check-label" for="security_guard">
+                                                                With a security Guard
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="package_leave_address" id="no_preference">
+                                                            <label class="ml-2 form-check-label" for="no_preference">
+                                                                No preference
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input class="form-control" id="description"
+                                                placeholder="For example navigations, Provide Details such as building description, or nearby landmark">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="instruction_close_button" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="instruction_close_button"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
                 </form>
             </div>
         </div>
