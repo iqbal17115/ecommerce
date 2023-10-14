@@ -22,7 +22,7 @@
         {
           "@context": "http://www.schema.org",
           "@type": "ShoppingCenter",
-          "name": "Aladdinne.com",
+          "name": "Aladdinne.ae",
           "url": "https://www.aladdinne.ae/",
           "logo": "https://www.aladdinne.ae/storage/company_info/logos/Lpzoe54rj1p8i4K6mpwVRIxdPmS6CSfP59liCSyR.png",
           "image": "https://www.aladdinne.ae/storage/company_info/logos/Lpzoe54rj1p8i4K6mpwVRIxdPmS6CSfP59liCSyR.png",
