@@ -23,10 +23,10 @@
           "@context": "http://www.schema.org",
           "@type": "ShoppingCenter",
           "name": "Aladdinne.com",
-          "url": "https://www.aladdinne.com/",
-          "logo": "https://www.aladdinne.com/storage/company_info/logos/Lpzoe54rj1p8i4K6mpwVRIxdPmS6CSfP59liCSyR.png",
-          "image": "https://www.aladdinne.com/storage/company_info/logos/Lpzoe54rj1p8i4K6mpwVRIxdPmS6CSfP59liCSyR.png",
-          "description": "Aladdinne is an e-commerce marketplace platform that connects multiple buyers and sellers to facilitate buyers and sellers both by the buying and selling of a wide range of products and services in our marketplace, such as big brands selling items ranging from electronics, Fashion, home Decor & appliances, gadgets, garden supplies, groceries, etc. Aladdinne provides service through the aladdinne.com website, mobile app, and other platforms.",
+          "url": "https://www.aladdinne.ae/",
+          "logo": "https://www.aladdinne.ae/storage/company_info/logos/Lpzoe54rj1p8i4K6mpwVRIxdPmS6CSfP59liCSyR.png",
+          "image": "https://www.aladdinne.ae/storage/company_info/logos/Lpzoe54rj1p8i4K6mpwVRIxdPmS6CSfP59liCSyR.png",
+          "description": "Aladdinne is an e-commerce marketplace platform that connects multiple buyers and sellers to facilitate buyers and sellers both by the buying and selling of a wide range of products and services in our marketplace, such as big brands selling items ranging from electronics, Fashion, home Decor & appliances, gadgets, garden supplies, groceries, etc. Aladdinne provides service through the aladdinne.ae website, mobile app, and other platforms.",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Office No:523, 5th Floor, Alpona Plaza",
@@ -44,7 +44,7 @@
           "openingHours": "Mo, Tu, We, Th, Fr, Sa, Su 08:00-17:00",
           "contactPoint": {
             "@type": "ContactPoint",
-            "contactType": "support @aladdinne.com",
+            "contactType": "support @aladdinne.ae",
             "telephone": "+8801975340753"
           }
         }
