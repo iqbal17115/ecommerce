@@ -67,11 +67,13 @@ class AddressController extends Controller
     public function setAsDefault(Request $request): JsonResponse
     {
         try {
-            Address::where('user_id', $request->user_id)->update(['is_default' => 0]);
-            // Address save
-            $address = Address::find($request->address_id);
-            $address->is_default = 1;
-            $address->save();
+            $userId = $request->user_id;
+            $addressId = $request->address_id;
+
+            Address::where('user_id', $userId)->update(['is_default' => 0]);
+
+            Address::where('user_id', $userId)->where('id', $addressId)->update(['is_default' => 1]);
+
             //Success Response
             return Message::success(__("messages.success_add"));
         } catch (Exception $e) {

@@ -144,7 +144,7 @@ class CheckoutController extends Controller
             // You might want to set $products to an empty array or handle it accordingly
             $products = [];
         }
-
-        return view('ecommerce.checkout', compact('divisions', 'products'));
+        $user = Auth::user();
+        return view('ecommerce.checkout', compact('divisions', 'products', 'user'));
     }
 }

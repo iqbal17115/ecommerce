@@ -1,15 +1,3 @@
-
-
-$('.btn-toggle-fade').on('click', function () {
-    if ($('.modal').hasClass('fade')) {
-        $('.modal').removeClass('fade');
-        $(this).removeClass('btn-success');
-    } else {
-        $('.modal').addClass('fade');
-        $(this).addClass('btn-success');
-    }
-});
-
 $(document).on("change", "#district_id", function (event) {
     event.preventDefault(); // Prevent the form from submitting immediately
     const district_id = $("#district_id").val();
@@ -245,17 +233,6 @@ $(document).on("click", ".edit_address", function (event) {
 function setAddressData(data) {
     // Initialize an empty variable to store the card HTML
     let cardHTML = '';
-    cardHTML += `
-    <div class="col-md-3 mb-3">
-    <div class="card text-center dashed-border-card address_modal" id="address_modal" data-toggle="modal"
-        data-target="#userAddressModal">
-        <div class="card-body">
-            <i class="fas fa-plus-circle plus-icon"></i>
-            <p class="card-text add-address-text">Add Address</p>
-        </div>
-    </div>
-    </div>
-`;
     // Loop through the dataArray
     data.forEach(data => {
         const address = data.is_default == 1 ? 'Default' : '';
@@ -263,7 +240,7 @@ function setAddressData(data) {
         const remove_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>` : '';
 
         cardHTML += `
-        <div class="col-md-3 mb-3">
+        <div class="col-md-4 mb-3">
         <div class="card bg-light mb-3">
         <div class="card-header">
         <div class="d-flex justify-content-between">
@@ -283,7 +260,6 @@ function setAddressData(data) {
                 <div class="card-text">${data.country}</div>
                 <div class="card-text">Phone No: ${data.mobile}</div>
                 <div class="card-text">Additional No: ${data.optional_mobile}</div>
-                <a href="javascript:void(0);" id="instruction_modal" class="text-info mt-1 text-decoration-none" data-toggle="modal" data-id="${data.id}" data-target="#exampleModal">Add delivery instructions<a>
             </div>
             <div class="card-footer">
                 <a href="javascript:void(0);" class="text-sm edit_address" id="edit_address" data-address_id="${data.id}">Edit</a>
@@ -295,6 +271,7 @@ function setAddressData(data) {
     `;
     });
     cardHTML += ``;
+
     $("#address_content").html(cardHTML);
 }
 function loadUserAddress(user_id) {
@@ -503,6 +480,3 @@ function setCountryData(data) {
         selectElement.appendChild(option);
     });
 }
-
-
-

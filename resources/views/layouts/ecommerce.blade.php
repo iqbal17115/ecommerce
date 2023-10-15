@@ -40,7 +40,7 @@
             "latitude": "23.7386671",
             "longitude": "90.381785"
           },
-          "hasMap": "https://www.google.com/maps/search/https:%2F%2Fwww.google.com%2Fmaps%2Fplace%2FAladdinne.com%2F@23.7386622,90.3843599,15z%2Fdata%3D!4m6!3m5!1s0x3755b9ecc12ae8c5:0x29d5b7fd67107fe5!8m2!3d23.7386622!4d90.3843599!16s%252Fg%252F11tcg4q1dx/@23.7386671,90.381785,17z/data=!3m1!4b1",
+          "hasMap": "https://www.google.com/maps/search/https:%2F%2Fwww.google.com%2Fmaps%2Fplace%2FAladdinne.ae%2F@23.7386622,90.3843599,15z%2Fdata%3D!4m6!3m5!1s0x3755b9ecc12ae8c5:0x29d5b7fd67107fe5!8m2!3d23.7386622!4d90.3843599!16s%252Fg%252F11tcg4q1dx/@23.7386671,90.381785,17z/data=!3m1!4b1",
           "openingHours": "Mo, Tu, We, Th, Fr, Sa, Su 08:00-17:00",
           "contactPoint": {
             "@type": "ContactPoint",

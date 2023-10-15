@@ -14,7 +14,7 @@
     </style>
     <main class="main main-test">
         <div class="container checkout-container">
-
+            <input name="user_id" id="user_id_val" value="{{ $user->id }}" hidden />
             <div class="row">
 
                 <div class="col-lg-7">
@@ -273,105 +273,30 @@
             <!-- End .row -->
         </div>
         <!-- End .container -->
+        <!-- Shipping Address Modal -->
+        @include('ecommerce.checkout.partials.address_modal')
+        <!-- End Shipping Address Modal -->
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </main>
     <!-- End .main -->
-    <!-- Shipping Address Modal -->
-    @include('ecommerce.checkout.partials.address_modal')
-    <!-- End Shipping Address Modal -->
 
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
-    <script src="{{ asset('js/panel/address/address.js') }}"></script>
+    <script src="{{ asset('js/panel/users/checkout/address.js') }}"></script>
 
     <script>
         function userAddress() {
             loadUserAddress(@json($user->id ?? null));
         }
+
         $(document).ready(function() {
-
-
             userAddress();
-
-            function setAddressData(data) {
-                // Initialize an empty variable to store the card HTML
-                let cardHTML = '';
-                cardHTML += `
-    <div class="col-md-3 mb-3">
-    <div class="card text-center dashed-border-card address_modal" id="address_modal" data-toggle="modal"
-        data-target="#userAddressModal">
-        <div class="card-body">
-            <i class="fas fa-plus-circle plus-icon"></i>
-            <p class="card-text add-address-text">Add Address</p>
-        </div>
-    </div>
-    </div>
-`;
-                // Loop through the dataArray
-                data.forEach(data => {
-                    const address = data.is_default == 1 ? 'Default' : '';
-                    const set_as_default_address = data.is_default == 0 ?
-                        `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="set_as_default_address" data-address_id="${data.id}">Set As Default</a>` :
-                        '';
-                    const remove_address = data.is_default == 0 ?
-                        `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>` :
-                        '';
-
-                    cardHTML += `
-        <div class="col-md-3 mb-3">
-        <div class="card bg-light mb-3">
-        <div class="card-header">
-        <div class="d-flex justify-content-between">
-  <span class="mr-3">Address</span>
-  <span class="mx-auto">${address}</span>
-  <span class="ml-auto">${data.type}</span>
-</div>
-
-      </div>
-
-            <div class="card-body">
-                <h4 class="card-title">${data.name}</h4>
-                <div class="card-text">${data.street_address}</div>
-                <div class="card-text">${data.building_name}</div>
-                <div class="card-text">${data.nearest_landmark}</div>
-                <div class="card-text">${data.district}, ${data.division}</div>
-                <div class="card-text">${data.country}</div>
-                <div class="card-text">Phone No: ${data.mobile}</div>
-                <div class="card-text">Additional No: ${data.optional_mobile}</div>
-                <a href="javascript:void(0);" id="instruction_modal" class="text-info mt-1 text-decoration-none" data-toggle="modal" data-id="${data.id}" data-target="#exampleModal">Add delivery instructions<a>
-            </div>
-            <div class="card-footer">
-                <a href="javascript:void(0);" class="text-sm edit_address" id="edit_address" data-address_id="${data.id}">Edit</a>
-                ${remove_address}
-                ${set_as_default_address}
-            </div>
-        </div>
-        </div>
-    `;
-                });
-                cardHTML += ``;
-
-                $("#address_content").html(cardHTML);
-            }
-
-            function loadUserAddress(user_id) {
-                getDetails(
-                    "/api/user-address/lists?user_id=" + user_id,
-                    (data) => {
-                        console.log(data.results.data);
-                        setAddressData(data.results.data);
-                    },
-                    (error) => {
-
-                    }
-                );
-            }
         });
-
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-load');
             lazyImages.forEach(img => {
@@ -420,7 +345,6 @@
     </script>
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/panel/web/checkout/address.js') }}"></script>
     <script>
         $(document).ready(function() {
             $("#btn-place-order").click(function(event) {
