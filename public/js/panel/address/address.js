@@ -228,7 +228,6 @@ $(document).on("click", ".edit_address", function (event) {
             // Handle the error here
         }
     );
-
 });
 function setAddressData(data) {
     // Initialize an empty variable to store the card HTML

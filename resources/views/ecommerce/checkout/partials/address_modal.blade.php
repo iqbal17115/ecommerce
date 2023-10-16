@@ -9,8 +9,8 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body row" id="address_content"></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div class="modal-footer justify-content-between" id="address_footer">
+
         </div>
       </div>
 

@@ -93,7 +93,6 @@ $(document).on("click", "#remove_address", function (event) {
             userAddress();
         },
         (error) => {
-            alert(0);
             // Error callback
             toastrErrorMessage(error.responseJSON.message);
         }
@@ -186,50 +185,7 @@ $(document).on("click", "#instruction_modal", function (event) {
     getAddresInstruction(address_id);
 });
 
-$(document).on("click", ".edit_address", function (event) {
-    const address_id = $(this).data('address_id');
 
-    // Get details
-    getDetails(
-        "/api/user-address/" + address_id,
-        (data) => {
-            // Assuming that getDetails is an asynchronous function, you can add the event listener
-            // after the data has been successfully fetched.
-            document.getElementById('address_modal').addEventListener('click', function () {
-                // Code to execute after the click event
-                setEditData(data.results);
-
-                setTimeout(function () {
-                    $('.country_id').val(data.results.country_id);
-                    $('.country_id').trigger('change');
-                }, 1000);
-
-                setTimeout(function () {
-                    $('#division_id').val(data.results.division_id);
-                    $('#division_id').trigger('change');
-                }, 1500);
-
-                setTimeout(function () {
-                    $('#district_id').val(data.results.district_id);
-                    $('#district_id').trigger('change');
-                }, 2000);
-
-                setTimeout(function () {
-                    $('#upazila_id').val(data.results.upazila_id);
-                    $('#upazila_id').trigger('change');
-                }, 2500);
-
-            });
-
-            // Trigger the click event after adding the listener
-            document.getElementById('address_modal').click();
-        },
-        (error) => {
-            // Handle the error here
-        }
-    );
-
-});
 function setAddressData(data) {
     // Initialize an empty variable to store the card HTML
     let cardHTML = '';
@@ -273,6 +229,14 @@ function setAddressData(data) {
     cardHTML += ``;
 
     $("#address_content").html(cardHTML);
+
+    var modalFooterHTML = `
+    <button type="button" class="btn btn-sm" id="add_another_address">
+        <i class="fas fa-plus brand_text_color"></i> Add New Address
+    </button>
+    <button type="button" class="btn btn-sm brand_color" data-dismiss="modal">Close</button>`;
+
+    $('#address_footer').html(modalFooterHTML);
 }
 function loadUserAddress(user_id) {
     getDetails(
@@ -480,3 +444,419 @@ function setCountryData(data) {
         selectElement.appendChild(option);
     });
 }
+
+function editAddressForm() {
+    var formHTML = `
+<form id="targeted_form">
+        <input name="row_id" id="row_id" value="" hidden />
+        <div class="row">
+        <div class="col-md-12">
+            <label for="country_id">Country</label>
+            <select class="form-control form-control-sm country_id" id="country_id" name="country_id"
+                required>
+                <option> -- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="mobile">Name</label>
+            <input type="text" class="form-control" id="name" name="name"
+                placeholder="Enter mobile number" value="" required>
+        </div>
+        <div class="col-md-12">
+            <label for="mobile">Mobile</label>
+            <input type="text" class="form-control" id="mobile" name="mobile"
+                placeholder="Enter name" required>
+        </div>
+        <div class="col-md-12">
+            <label for "optional_mobile">Optional Mobile</label>
+            <input type="text" class="form-control" id="optional_mobile" name="optional_mobile"
+                placeholder="Enter optional mobile number">
+        </div>
+        <div class="col-md-12">
+            <label for="division_id">City/Province</label>
+            <select class="form-control form-control-sm" id="division_id" name="division_id" required>
+                <option> -- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="district_id">District/Area</label>
+            <select class="form-control form-control-sm" id="district_id" name="district_id" required>
+                <option> -- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="upazila_id">Area</label>
+            <select class="form-control form-control-sm" id="upazila_id" name="upazila_id" required>
+                <option> -- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="street_address">Street Address</label>
+            <input type="text" class="form-control" id="street_address" name="street_address"
+                placeholder="Enter street address" required>
+        </div>
+        <div class="col-md-12">
+            <label for="building_name">Building Name</label>
+            <input type="text" class="form-control" id="building_name" name="building_name"
+                placeholder="Enter building name" required>
+        </div>
+        <div class="col-md-12">
+            <label for="nearest_landmark">Nearest Landmark</label>
+            <input type="text" class="form-control" id="nearest_landmark" name="nearest_landmark"
+                placeholder="Enter nearest landmark">
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="home" name="type"
+                            value="home" checked>
+                        <label class="form-check-label ml-2" for="home"> Home</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="office" name="type"
+                        value="office">
+                    <label class="form-check-label ml-2" for="office"> Office</label>
+                </div>
+            </div>
+        </div>
+        </div>
+</form>`;
+
+var modalFooterHTML = `
+    <button type="button" class="btn btn-sm address_lists">
+       <i class="fas fa-list-ul"></i>
+    </button>
+    <button type="button" class="btn btn-sm brand_color" id="add_address">Confirm</button>`;
+
+    $('#address_content').html(formHTML);
+    $('#address_footer').html(modalFooterHTML);
+
+    setCountry();
+}
+
+function addressForm(user) {
+    var formHTML = `
+<form id="targeted_form">
+        <input name="row_id" id="row_id" value="" hidden />
+        <input name="user_id" id="user_id" value="${user.id}" hidden />
+        <div class="row">
+        <div class="col-md-12">
+            <label for="country_id">Country</label>
+            <select class="form-control form-control-sm country_id" id="country_id" name="country_id"
+                required>
+                <option> -- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="mobile">Name</label>
+            <input type="text" class="form-control" id="name" name="name"
+                placeholder="Enter mobile number" value="${user.name}" required>
+        </div>
+        <div class="col-md-12">
+            <label for="mobile">Mobile</label>
+            <input type="text" class="form-control" id="mobile" name="mobile"
+                placeholder="Enter name" required>
+        </div>
+        <div class="col-md-12">
+            <label for "optional_mobile">Optional Mobile</label>
+            <input type="text" class="form-control" id="optional_mobile" name="optional_mobile"
+                placeholder="Enter optional mobile number">
+        </div>
+        <div class="col-md-12">
+            <label for="division_id">City/Province</label>
+            <select class="form-control form-control-sm" id="division_id" name="division_id" required>
+                <option> -- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="district_id">District/Area</label>
+            <select class="form-control form-control-sm" id="district_id" name="district_id" required>
+                <option> -- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="upazila_id">Area</label>
+            <select class="form-control form-control-sm" id="upazila_id" name="upazila_id" required>
+                <option> -- Select --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <label for="street_address">Street Address</label>
+            <input type="text" class="form-control" id="street_address" name="street_address"
+                placeholder="Enter street address" required>
+        </div>
+        <div class="col-md-12">
+            <label for="building_name">Building Name</label>
+            <input type="text" class="form-control" id="building_name" name="building_name"
+                placeholder="Enter building name" required>
+        </div>
+        <div class="col-md-12">
+            <label for="nearest_landmark">Nearest Landmark</label>
+            <input type="text" class="form-control" id="nearest_landmark" name="nearest_landmark"
+                placeholder="Enter nearest landmark">
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="home" name="type"
+                            value="home" checked>
+                        <label class="form-check-label ml-2" for="home"> Home</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="office" name="type"
+                        value="office">
+                    <label class="form-check-label ml-2" for="office"> Office</label>
+                </div>
+            </div>
+        </div>
+        </div>
+</form>`;
+
+var modalFooterHTML = `
+    <button type="button" class="btn btn-sm address_lists">
+       <i class="fas fa-list-ul"></i>
+    </button>
+    <button type="button" class="btn btn-sm brand_color" id="add_address">Confirm</button>`;
+
+    $('#address_content').html(formHTML);
+    $('#address_footer').html(modalFooterHTML);
+
+    setCountry();
+}
+
+$(document).on("change", "#district_id", function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+    const district_id = $("#district_id").val();
+
+    // Get details
+    getDetails(
+        "/api/areas-select/lists?district_id=" + district_id,
+        (data) => {
+            setUpazilaData(data.results.data);
+        },
+        (error) => {
+
+        }
+    );
+});
+
+$(document).on("change", "#division_id", function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+    const division_id = $("#division_id").val();
+    // Get details
+    getDetails(
+        "/api/districts-select/lists?division_id=" + division_id,
+        (data) => {
+            setDistrictData(data.results.data);
+        },
+        (error) => {
+
+        }
+    );
+});
+
+
+$(document).on("change", "#country_id", function (event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+    const country_id = $("#country_id").val();
+    // Get details
+    getDetails(
+        "/api/divisions-select/lists?country_id=" + country_id,
+        (data) => {
+            setDivisionData(data.results.data);
+        },
+        (error) => {
+
+        }
+    );
+});
+
+function setCountry() {
+    // Get details
+    getDetails(
+        "/api/countries-select/lists",
+        (data) => {
+            // console.log(data);
+            setCountryData(data.results.data);
+        },
+        (error) => {
+
+        }
+    );
+}
+
+function setUpazilaData(data) {
+    const selectElement = document.getElementById('upazila_id');
+
+    selectElement.innerHTML = '';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = 'Select a Upazila';
+    defaultOption.setAttribute('selected', 'selected');
+
+    selectElement.appendChild(defaultOption);
+
+    data.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.text = item.name;
+
+        selectElement.appendChild(option);
+    });
+}
+
+function setDistrictData(data) {
+    const selectElement = document.getElementById('district_id');
+
+    selectElement.innerHTML = '';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = 'Select a District';
+    defaultOption.setAttribute('selected', 'selected');
+
+    selectElement.appendChild(defaultOption);
+
+    data.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.text = item.name;
+
+        selectElement.appendChild(option);
+    });
+}
+
+function setDivisionData(data) {
+    const selectElement = document.getElementById('division_id');
+
+    selectElement.innerHTML = '';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = 'Select a Division';
+    defaultOption.setAttribute('selected', 'selected');
+
+    selectElement.appendChild(defaultOption);
+
+    data.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.text = item.name;
+
+        selectElement.appendChild(option);
+    });
+}
+
+function setCountryData(data) {
+    const selectElement = document.getElementById('country_id');
+
+    selectElement.innerHTML = '';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = 'Select a Country';
+    defaultOption.setAttribute('selected', 'selected');
+
+    selectElement.appendChild(defaultOption);
+
+    data.forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.text = item.name;
+
+        selectElement.appendChild(option);
+    });
+}
+
+// Attach event listener for form submission
+$(document).on('click', '#add_address', function (event) {
+    //get id
+    // const id = $("#targeted_form #row_id").val();
+
+    // Load the selected details and submit the form
+    const data = {
+        user_id: $("#targeted_form #user_id").val(),
+        name: $("#targeted_form #name").val(),
+        mobile: $("#targeted_form #mobile").val(),
+        optional_mobile: $("#targeted_form #optional_mobile").val(),
+        country_id: $("#targeted_form #country_id").val(),
+        division_id: $("#targeted_form #division_id").val(),
+        district_id: $("#targeted_form #district_id").val(),
+        upazila_id: $("#targeted_form #upazila_id").val(),
+        street_address: $("#targeted_form #street_address").val(),
+        building_name: $("#targeted_form #building_name").val(),
+        nearest_landmark: $("#targeted_form #nearest_landmark").val(),
+        type: $("input[name='type']:checked").val(),
+        is_default: 0
+    };
+    console.log(data);
+
+    // Submit the form
+    submitForm(data);
+});
+
+// Function to handle form submission
+function submitForm(formData, selectedId = "") {
+    saveAction(
+        selectedId.trim() !== "" ? "update" : "store",
+        "/api/user-address",
+        formData,
+        selectedId,
+        (data) => {
+            userAddress();
+        },
+        (error) => {
+
+        }
+    );
+}
+
+$(document).on("click", ".address_lists", function (event) {
+    userAddress();
+});
+
+$(document).on("click", ".edit_address", function (event) {
+    editAddressForm();
+
+    const address_id = $(this).data('address_id');
+    // Get details
+    getDetails(
+        "/api/user-address/" + address_id,
+        (data) => {
+                setEditData(data.results);
+
+                setTimeout(function () {
+                    $('.country_id').val(data.results.country_id);
+                    $('.country_id').trigger('change');
+                }, 1000);
+
+                setTimeout(function () {
+                    $('#division_id').val(data.results.division_id);
+                    $('#division_id').trigger('change');
+                }, 100);
+
+                setTimeout(function () {
+                    $('#district_id').val(data.results.district_id);
+                    $('#district_id').trigger('change');
+                }, 1000);
+
+                setTimeout(function () {
+                    $('#upazila_id').val(data.results.upazila_id);
+                    $('#upazila_id').trigger('change');
+                }, 1000);
+
+        },
+        (error) => {
+            // Handle the error here
+        }
+    );
+});

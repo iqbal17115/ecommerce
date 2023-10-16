@@ -290,6 +290,12 @@
     <script src="{{ asset('js/panel/users/checkout/address.js') }}"></script>
 
     <script>
+
+
+    $(document).on('click', '#add_another_address', function () {
+        var user = <?php echo json_encode($user); ?>;
+        addressForm(user);
+});
         function userAddress() {
             loadUserAddress(@json($user->id ?? null));
         }
