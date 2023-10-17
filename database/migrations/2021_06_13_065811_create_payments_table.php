@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->string('code')->nullable();
             $table->string('date')->nullable();
             $table->enum('type', ['CustomerPayment', 'SupplierPayment']);
-            $table->uuid('contact_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->uuid('invoice_id')->nullable()->index();
             $table->double('amount', 20,4)->nullable();
             $table->double('charge', 20,4)->nullable();

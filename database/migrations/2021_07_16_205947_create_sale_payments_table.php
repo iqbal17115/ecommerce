@@ -18,7 +18,7 @@ class CreateSalePaymentsTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code')->nullable();
             $table->string('date')->nullable();
-            $table->uuid('contact_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->uuid('sale_invoice_id')->nullable()->index();
             $table->double('total_amount', 20,4)->nullable();
             $table->double('charge', 20,4)->nullable();

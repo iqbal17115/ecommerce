@@ -18,7 +18,7 @@ class CreateStockAdjustmentsTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->date('date');
             $table->enum('type',['Transfer','Decrease','Increase']);
-            $table->uuid('contact_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->uuid('from_branch_id')->nullable()->index();
             $table->uuid('to_branch_id')->nullable()->index();
             $table->uuid('from_warehouse_id')->nullable()->index();

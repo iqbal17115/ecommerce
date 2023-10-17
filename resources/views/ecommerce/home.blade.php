@@ -300,12 +300,12 @@
                                                         $product->sale_start_date <= now() &&
                                                         $product->sale_end_date >= now())
                                                     <del
-                                                        class="old-price">{{ $currency->icon }}{{ number_format($product->your_price, 2) }}</del>
+                                                        class="old-price">{{ $currency?->icon }}{{ number_format($product->your_price, 2) }}</del>
                                                     <span
-                                                        class="product-price">{{ $currency->icon }}{{ number_format($product->sale_price, 2) }}</span>
+                                                        class="product-price">{{ $currency?->icon }}{{ number_format($product->sale_price, 2) }}</span>
                                                 @else
                                                     <span
-                                                        class="product-price">{{ $currency->icon }}{{ number_format($product->your_price, 2) }}</span>
+                                                        class="product-price">{{ $currency?->icon }}{{ number_format($product->your_price, 2) }}</span>
                                                 @endif
                                             </div>
                                             <!-- End .price-box -->

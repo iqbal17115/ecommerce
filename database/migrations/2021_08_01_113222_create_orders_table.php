@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code')->nullable();
-            $table->uuid('contact_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->dateTime('order_date')->nullable();
             $table->double('total_amount')->nullable();
             $table->double('other_amount')->nullable();

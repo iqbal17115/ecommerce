@@ -188,7 +188,7 @@
                                                     <span
                                                         class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
                                                     ×
-                                                    {{ $currency->icon }}{{ $details['sale_price'] }}
+                                                    {{ $currency?->icon }}{{ $details['sale_price'] }}
                                                 </span>
                                             </div>
                                             <!-- End .product-details -->

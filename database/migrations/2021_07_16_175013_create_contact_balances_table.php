@@ -15,7 +15,7 @@ class CreateContactBalancesTable extends Migration
     {
         Schema::create('contact_balances', function (Blueprint $table) {
             $table->id();
-            $table->uuid('contact_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->double('opening_balance')->nullable();
             $table->double('purchase_amount')->nullable();
             $table->double('sale_amount')->nullable();

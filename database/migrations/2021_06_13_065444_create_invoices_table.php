@@ -19,7 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->enum('type', ['Order', 'Sales', 'Purchase', 'Quate']);
             $table->timestamp('date');
             $table->string('code', 100)->nullable();
-            $table->uuid('contact_id')->nullable()->index();
+            $table->uuid('user_id')->nullable()->index();
             $table->double('subtotal', 20, 4)->nullable();
             $table->double('vat_total', 20, 4)->nullable();
             $table->double('discount_value', 20, 4)->nullable();

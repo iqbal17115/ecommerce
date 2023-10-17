@@ -18,7 +18,7 @@ class CreateSaleInvoicesTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code', 191);
             $table->uuid('order_id')->nullable()->index();
-            $table->uuid('contact_id')->nullable()->index();
+            $table->foreignUuid('user_id')->nullable()->index();
             $table->dateTime('sale_date')->nullable();
             $table->double('total_amount')->nullable();
             $table->double('other_amount')->nullable();
