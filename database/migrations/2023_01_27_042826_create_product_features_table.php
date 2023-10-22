@@ -19,7 +19,7 @@ class CreateProductFeaturesTable extends Migration
             $table->string('name', 100);
             $table->tinyInteger('card_feature')->nullable();
             $table->boolean('feature_type')->nullable();
-            $table->boolean('top_menu')->nullable();
+            $table->boolean('top_menu')->default(0);
             $table->tinyInteger('position')->nullable();
             $table->uuid('product_feature_id')->nullable()->index();
             $table->boolean('is_active')->nullable()->default(1);

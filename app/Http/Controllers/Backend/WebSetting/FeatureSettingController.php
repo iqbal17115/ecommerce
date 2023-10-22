@@ -14,7 +14,7 @@ class FeatureSettingController extends Controller
 {
     public function featureSettingList() {
         $feature_settings = FeatureSetting::orderBy('id', 'DESC')->get();
-    
+
         return view('backend.web-setting.feature-setting-list', compact('feature_settings'));
     }
     public function addFeatureSetting(Request $request)
@@ -30,16 +30,16 @@ class FeatureSettingController extends Controller
             if (!$Query) {
                 $Query = new FeatureSetting();
             }
-            
+
             $Query->parent_product_feature_id = $request->parent_product_feature_id;
             $Query->product_feature_id = $request->feature_id;
             $Query->apply_for_offer = $request->apply_for_offer;
             $Query->apply_for_coupon = $request->apply_for_coupon;
             $Query->save();
-            
+
             if($request->category_id){
                FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereNotIn('category_id', $request->category_id)->delete();
-            
+
             foreach($request->category_id as $key => $category_id) {
                 $FeatureSettingQuery = FeatureSettingDetail::whereFeatureSettingId($Query->id)->whereCategoryId($category_id)->first();
                 if (!$FeatureSettingQuery) {
