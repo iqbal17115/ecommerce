@@ -31,7 +31,15 @@ class ProductFeature extends Model
     }
     public function Product()
     {
-        return $this->hasMany(Product::class)->take(20);
+        $today = now();
+        return $this->hasMany(Product::class)
+        ->whereNull('sale_start_date')
+        ->whereNull('sale_end_date')
+        ->orWhere(function ($query) use ($today) {
+            $query->whereDate('sale_start_date', '<=', $today)
+                ->whereDate('sale_end_date', '>=', $today);
+        })
+        ->take(20);
     }
 
 }
