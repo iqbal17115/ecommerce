@@ -222,7 +222,7 @@ class ProductController extends Controller
     {
         return DB::transaction(function () use ($request) {
 
-            $Query = Product::find($request->product_offer_id);
+            $Query = Product::where('id', $request->product_offer_id)->first();
 
             $Query->seller_sku = $request->seller_sku;
             $Query->opening_qty = $request->opening_qty;

@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->uuid('id')->default(DB::raw('(UUID())'));
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code', 40);
             $table->string('name', 100);
             $table->enum('type', ['GTIN', 'EAN', 'GCID', 'UPC', 'ASIN', 'ISBN'])->nullable();
