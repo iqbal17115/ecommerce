@@ -16,7 +16,7 @@
                     <div class="col-md-4">
                         <input name="code" id="code" @if($productInfo)
                             value="{{$productInfo->code}}" @endif class="form-control"
-                            placeholder="Enter product Id" required/>
+                            placeholder="Enter product Id"/>
                     </div>
                     <div class="col-md-4">
                         <select name="type" id="type" class="form-select">
