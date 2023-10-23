@@ -19,7 +19,7 @@
                             placeholder="Enter product Id" required/>
                     </div>
                     <div class="col-md-4">
-                        <select name="type" id="type" class="form-select" required>
+                        <select name="type" id="type" class="form-select">
                             <option value="">Select Option</option>
                             <option @if($productInfo && $productInfo->type=='GTIN') selected
                                 @endif value="GTIN">GTIN</option>
