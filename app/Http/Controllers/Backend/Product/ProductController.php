@@ -203,7 +203,7 @@ class ProductController extends Controller
     }
     public function addProductImageInfo(Request $request)
     {
-
+        if (is_array($request->product_image)) {
         foreach ($request->product_image as $key => $product_image) {
             $Query = ProductImage::whereSerial($key)->whereProductId($request->product_image_id)->first();
             if (!$Query) {
@@ -215,6 +215,7 @@ class ProductController extends Controller
             $Query->product_id = $request->product_image_id;
             $Query->save();
         }
+    }
         // $request->product_image
         return response()->json(['status' => 201]);
     }
