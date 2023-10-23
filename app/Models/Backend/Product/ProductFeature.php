@@ -33,9 +33,8 @@ class ProductFeature extends Model
     {
         $today = now();
         return $this->hasMany(Product::class)
-        ->whereNull('start_selling_date')
-        ->orWhere(function ($query) use ($today) {
-            $query->whereDate('start_selling_date', '>=', $today);
+        ->where(function ($query) use ($today) {
+            $query->whereDate('start_selling_date', '<=', $today);
         })
         ->take(20);
     }

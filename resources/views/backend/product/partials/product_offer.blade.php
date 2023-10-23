@@ -209,7 +209,7 @@
                             <input type="date" name="start_selling_date"
                                 id="start_selling_date" @if($productInfo)
                                 value="{{$productInfo->start_selling_date}}" @endif
-                                class="form-control" aria-describedby="start_selling_date1">
+                                class="form-control" aria-describedby="start_selling_date1" required>
                         </div>
                     </div>
                     <!-- End -->
