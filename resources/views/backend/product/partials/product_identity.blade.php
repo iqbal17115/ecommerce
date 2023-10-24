@@ -148,12 +148,12 @@
                         </select>
                      </div>
                     <!-- End -->
-                    <div class="col-md-4 mt-md-3 brand_available_contant" style="display: none;">
+                    <div class="col-md-4 mt-md-3 brand_available_contant" style="display: {{ $productInfo->brand_available == 1 ? 'block' : 'none' }};">
                         <label class="col-form-label float-md-right"
                             style="font-size: 14px;">Brand Name</label>
                         <span class="text-danger float-md-right">*</span>
                     </div>
-                    <div class="col-md-8 mt-md-3 brand_available_contant" style="display: none;">
+                    <div class="col-md-8 mt-md-3 brand_available_contant" style="display: {{ $productInfo->brand_available == 1 ? 'block' : 'none' }};">
                         <select name="brand_id" id="brand_id" class="form-select" style="width: 100%;">
                             <option value=""></option>
                             @foreach($brands as $brand)
