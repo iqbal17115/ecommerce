@@ -14,53 +14,11 @@
                             style="font-size: 14px;">Key Product Features</label>
                         <span class="text-danger float-md-right">*</span>
                     </div>
-                    @if($productInfo && count($productInfo->ProductKeyword) > 0)
-                    <div class="col-md-8 mt-md-3">
-                        @foreach($productInfo->ProductKeyword as $ProductKeyword)
-
-                        <div id="row">
-                            <div class="input-group m-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-danger" id="DeleteRow"
-                                        type="button">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </div>
-                                <input type="text" name="keyword[]" id="keyword"
-                                    value="{{$ProductKeyword->keyword}}"
-                                    class="form-control m-input">
-                            </div>
-                        </div>
-                        @endforeach
-
-                        <div id="newinput"></div>
-                        <button id="rowAdder" type="button" class="btn btn-dark">
-                            <i class="fas fa-plus-square"></i> ADD
-                        </button>
+                    <input type="text" id="keyword_hidden" value="{{$productInfo?->ProductMoreDetail?->product_keyword}}" hidden>
+                    <div class="col-md-8 mt-md-3 sendTo" id="commaSep">
+                        <input type="text" name="keyword[]" id="keyword">
                     </div>
                     <!-- End -->
-                    @else
-                    <div class="col-md-8 mt-md-3">
-                        <div id="row">
-                            <div class="input-group m-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-danger" id="DeleteRow"
-                                        type="button">
-                                        <i class="mdi mdi-delete"></i>
-                                    </button>
-                                </div>
-                                <input type="text" name="keyword[]" id="keyword"
-                                    class="form-control m-input">
-                            </div>
-                        </div>
-
-                        <div id="newinput"></div>
-                        <button id="rowAdder" type="button" class="btn btn-dark">
-                            <i class="fas fa-plus-square"></i> ADD
-                        </button>
-                    </div>
-                    <!-- End -->
-                    @endif
                     <div class="col-md-12 mt-md-3">
                         <button class="float-right btn btn-success btn-sm ml-2">Save and
                             finish</button>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
         integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/product.css') }}">
     <style>
         .drop-zone {
             max-width: 200px;
@@ -238,6 +239,61 @@
         startDateInput.value = endDateInput.value = '';
     }
 });
+
+(function ($) {
+    $.fn.commaSeparated = function () {
+        return this.each(function () {
+            var block = $(this);
+            var field = block.find('input[type="text"]');
+
+            // Function to initialize spans based on the field's value
+            function initializeSpans() {
+                var keywords = field.val().split(",");
+                for (var i = 0; i < keywords.length; i++) {
+                    var keyword = keywords[i].trim();
+                    if (keyword) {
+                        block.append('<span class="removeName comma_parent">' + keyword + '<small class="comma_child">x</small></span>');
+                    }
+                }
+            }
+
+            // Initialize spans when the page loads
+            initializeSpans();
+
+            field.keyup(function (e) {
+                if (e.keyCode == 188) {
+                    var $this = $(this);
+                    var n = $this.val().split(",");
+                    var str = n[n.length - 2];
+                    if (str) {
+                        $this.before('<span class="removeName comma_parent">' + str + '<small class="comma_child">x</small></span>');
+                    }
+                    $this.val('');
+                }
+            });
+        });
+    };
+    function updateKeywordsDisplay() {
+    var keywords = $('#keyword_hidden').val().split(",");
+    var block = $("#commaSep");
+
+    for (var i = 0; i < keywords.length; i++) {
+        var keyword = keywords[i].trim();
+        if (keyword) {
+            block.prepend('<span class="removeName comma_parent">' + keyword + '<small class="comma_child">x</small></span>');
+        }
+    }
+}
+
+updateKeywordsDisplay();
+
+    $(document).on('click', 'span.removeName small', function () {
+        $(this).closest('span').remove();
+    });
+
+    // Fire commaSeparated
+    $("#commaSep").commaSeparated();
+})(jQuery);
 
     </script>
     @include('backend.product.js.product-js')

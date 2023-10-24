@@ -179,16 +179,12 @@ class ProductController extends Controller
     }
     public function addProductKeywordInfo(Request $request)
     {
-        foreach ($request->keyword as $key => $keyword) {
-            $Query = ProductKeyword::whereSerial($key)->whereProductId($request->product_keyword_id)->first();
-            if (!$Query) {
-                $Query = new ProductKeyword();
-            }
-            $Query->keyword = $keyword;
-            $Query->serial = $key;
-            $Query->product_id = $request->product_keyword_id;
+        $Query = ProductMoreDetail::whereProductId($request->product_keyword_id)->first();
+        if (!$Query) {
+            $Query = new ProductMoreDetail();
+        } 
+            $Query->product_keyword = $request->keyword;
             $Query->save();
-        }
         // $request->product_image
         return response()->json(['status' => 201]);
     }
@@ -223,7 +219,7 @@ class ProductController extends Controller
     {
         return DB::transaction(function () use ($request) {
 
-            $Query = Product::where('id', $request->product_offer_id)->first();
+            $Query = Product::whereId($request->product_offer_id)->first();
 
             $Query->seller_sku = $request->seller_sku;
             $Query->opening_qty = $request->opening_qty;
@@ -257,7 +253,7 @@ class ProductController extends Controller
                 $Query->branch_id = 1;
                 $Query->created_by = Auth::user()->id;
             } else {
-                $Query = Product::find($request->vital_info_id);
+                $Query = Product::whereId($request->vital_info_id)->first();
             }
 
             $Query->product_feature_id = $request->product_feature_id;
@@ -285,7 +281,7 @@ class ProductController extends Controller
             $Query->branch_id = 1;
             $Query->created_by = Auth::user()->id;
         } else {
-            $Query = Product::find($request->product_identity_id);
+            $Query = Product::whereId($request->product_identity_id)->first();
         }
 
         $Query->code = $request->code;

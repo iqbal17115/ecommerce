@@ -610,7 +610,7 @@
                 $(".drop-zone_4").css("background-image", "url(" + imageUrl4 + ")");
                 $(".drop-zone_5").css("background-image", "url(" + imageUrl5 + ")");
                 updateVariantByCategory(get_category_id);
-                updateVariationType(variation);
+                // updateVariationType(variation);
             });
         </script>
     @endif

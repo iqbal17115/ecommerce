@@ -40,6 +40,7 @@ class CreateProductMoreDetailsTable extends Migration
             $table->float('warranty')->nullable();
             $table->enum('warranty_unit', ['day', 'month', 'year'])->nullable();
             $table->text('warranty_description')->nullable();
+            $table->text('product_keyword')->nullable();
             $table->string('team_name', 80)->nullable();
             $table->string('age_range_description', 100)->nullable();
             $table->string('lining_description', 100)->nullable();
