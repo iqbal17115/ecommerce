@@ -20,7 +20,6 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
-    protected $primaryKey = 'id';
 
     public function isFreeShippingEligible()
     {
