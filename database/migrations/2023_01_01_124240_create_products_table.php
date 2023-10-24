@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->enum('type', ['GTIN', 'EAN', 'GCID', 'UPC', 'ASIN', 'ISBN'])->nullable();
             $table->string('seller_sku', 100)->nullable();
             $table->double('purchase_price', 10, 2)->nullable();
-            $table->integer('opening_qty', 10, 2)->nullable();
+            $table->double('opening_qty', 10, 2)->nullable();
             $table->enum('quantity_unit', ['pcs', 'kg', 'gram'])->nullable();
             $table->double('your_price', 10, 2)->nullable();
             $table->double('sale_price', 10, 2)->nullable();
