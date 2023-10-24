@@ -273,19 +273,8 @@
             });
         });
     };
-    function updateKeywordsDisplay() {
-    var keywords = $('#keyword_hidden').val().split(",");
-    var block = $("#commaSep");
 
-    for (var i = 0; i < keywords.length; i++) {
-        var keyword = keywords[i].trim();
-        if (keyword) {
-            block.prepend('<span class="removeName comma_parent">' + keyword + '<small class="comma_child">x</small></span>');
-        }
-    }
-}
 
-updateKeywordsDisplay();
 
     $(document).on('click', 'span.removeName small', function () {
         $(this).closest('span').remove();
@@ -295,6 +284,20 @@ updateKeywordsDisplay();
     $("#commaSep").commaSeparated();
 })(jQuery);
 
+$( document ).ready(function() {
+    function updateKeywordsDisplay() {
+    var keywords_hidden = $('#keyword_hidden').val().split(",");
+    var block = $("#commaSep");
+console.log(keywords_hidden);
+    for (var i = 0; i < keywords_hidden.length; i++) {
+        var keyword_hidden = keywords_hidden[i].trim();
+        if (keyword_hidden) {
+            block.prepend('<span class="removeName comma_parent">' + keyword_hidden + '<small class="comma_child">x</small></span>');
+        }
+    }
+}
+    updateKeywordsDisplay();
+});
     </script>
     @include('backend.product.js.product-js')
     {!! Toastr::message() !!}

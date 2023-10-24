@@ -184,6 +184,7 @@ class ProductController extends Controller
             $Query = new ProductMoreDetail();
         } 
             $Query->product_keyword = $request->keyword;
+            $Query->product_id = $request->product_keyword_id;
             $Query->save();
         // $request->product_image
         return response()->json(['status' => 201]);
