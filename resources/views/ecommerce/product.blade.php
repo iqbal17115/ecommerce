@@ -298,7 +298,10 @@
                             @if ($product_detail && $product_detail->ProductDetail)
                                 {!! $product_detail->ProductDetail->description !!}
                             @endif
-
+                            <br>
+                            @if ($product_detail && $product_detail->ProductDetail)
+                                {!! $product_detail->ProductDetail->condition_note !!}
+                            @endif
                             <br>
                             @if ($product_detail && $product_detail->ProductDetail)
                                 {!! $product_detail->ProductDetail->product_content !!}
