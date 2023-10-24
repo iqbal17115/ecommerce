@@ -53,7 +53,7 @@
                             <input type="text" name="your_price" id="your_price"
                                 @if($productInfo) value="{{$productInfo->your_price}}"
                                 @endif class="form-control" placeholder="Ex: 50.00"
-                                aria-describedby="your_price">
+                                aria-describedby="your_price" required>
                         </div>
                     </div>
                     <!-- End -->
@@ -65,18 +65,18 @@
                     <div class="col-md-8 mt-md-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="sale_price">{{$currency? $currency->icon : ''}}</span>
+                                <span class="input-group-text">{{$currency? $currency->icon : ''}}</span>
                             </div>
                             <input type="text" name="sale_price" id="sale_price"
                                 @if($productInfo) value="{{$productInfo->sale_price}}"
                                 @endif class="form-control" placeholder="Ex: 50.00"
-                                aria-describedby="sale_price" required>
+                                aria-describedby="sale_price">
                         </div>
                     </div>
                     <!-- End -->
                     <div class="col-md-4 mt-md-3">
                         <label class="col-form-label float-md-right"
-                            style="font-size: 14px;">Sale Start Date</label>
+                            style="font-size: 14px;">Offer Start Date</label>
                         <span class="text-danger float-md-right">*</span>
                     </div>
                     <div class="col-md-8 mt-md-3">
@@ -89,13 +89,13 @@
                             <input type="date" name="sale_start_date" id="sale_start_date"
                                 @if($productInfo) value="{{$productInfo->sale_start_date}}"
                                 @endif class="form-control"
-                                aria-describedby="sale_start_date1" required>
+                                aria-describedby="sale_start_date1">
                         </div>
                     </div>
                     <!-- End -->
                     <div class="col-md-4 mt-md-3">
                         <label class="col-form-label float-md-right"
-                            style="font-size: 14px;">Sale End Date</label>
+                            style="font-size: 14px;">Offer End Date</label>
                         <span class="text-danger float-md-right">*</span>
                     </div>
                     <div class="col-md-8 mt-md-3">
@@ -108,7 +108,7 @@
                             <input type="date" name="sale_end_date" id="sale_end_date"
                                 @if($productInfo) value="{{$productInfo->sale_end_date}}"
                                 @endif class="form-control"
-                                aria-describedby="sale_end_date1" required>
+                                aria-describedby="sale_end_date1">
                         </div>
                     </div>
                     <!-- End -->

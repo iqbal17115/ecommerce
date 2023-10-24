@@ -201,6 +201,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
         integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         $('#category_id').select2({
             placeholder: 'Select An Option'
@@ -227,6 +228,17 @@
             placeholder: 'Select An Option'
         });
         // $('.file-upload').file_upload();
+        document.getElementById('sale_price').addEventListener('input', function() {
+    var salePrice = this.value;
+    var startDateInput = document.getElementById('sale_start_date');
+    var endDateInput = document.getElementById('sale_end_date');
+
+    startDateInput.required = endDateInput.required = salePrice !== '';
+    if (salePrice === '') {
+        startDateInput.value = endDateInput.value = '';
+    }
+});
+
     </script>
     @include('backend.product.js.product-js')
     {!! Toastr::message() !!}
