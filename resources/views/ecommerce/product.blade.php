@@ -175,26 +175,21 @@
                             <hr class="short-divider">
                         @endif
 
-
                         <div class="price-box">
-                            @php
-                                echo $product_detail->your_price
-                                    ? '<span
-                            class="old-price">' .
-                                        $currency?->icon .
-                                        '' .
-                                        number_format((float) $product_detail->your_price, 2) .
-                                        '</span>'
-                                    : '';
-                                echo $product_detail->sale_price
-                                    ? '<span
-                            class="new-price">' .
-                                        $currency?->icon .
-                                        '' .
-                                        number_format((float) $product_detail->sale_price, 2) .
-                                        '</span>'
-                                    : '';
-                            @endphp
+                            @if (
+                                $product_detail->sale_price &&
+                                    $product_detail->sale_start_date &&
+                                    $product_detail->sale_end_date &&
+                                    $product_detail->sale_start_date <= now() &&
+                                    $product_detail->sale_end_date >= now())
+                                {{-- <del
+                                    class="old-price">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</del> --}}
+                                <span
+                                    class="product-price">{{ $currency?->icon }} {{ number_format($product_detail->sale_price, 2) }}</span>
+                            @else
+                                <span
+                                    class="product-price">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</span>
+                            @endif
                         </div>
                         <!-- End .price-box -->
 
