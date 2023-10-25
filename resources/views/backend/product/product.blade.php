@@ -261,22 +261,23 @@
                     // Initialize spans when the page loads
                     initializeSpans();
 
-                    field.on('input', function() {
-                        var $this = $(this);
-                        var values = $this.val().split(",");
+                    field.keyup(function(e) {
+                        if (e.keyCode == 188) {
+                            var $this = $(this);
+                            var values = $this.val().split(",");
+                            $this.val('');
 
-                        // Clear the input field
-                        $this.val('');
-
-                        // Loop through the values and create an element for each
-                        for (var i = 0; i < values.length; i++) {
-                            var value = values[i].trim(); // Remove leading/trailing whitespace
-                            if (value) {
-                                $this.before('<span class="removeName comma_parent">' + value +
-                                    '<small class="comma_child">x</small></span>');
+                            // Loop through the values and create an element for each
+                            for (var i = 0; i < values.length; i++) {
+                                var value = values[i].trim(); // Remove leading/trailing whitespace
+                                if (value) {
+                                    $this.before('<span class="removeName comma_parent">' + value +
+                                        '<small class="comma_child">x</small></span>');
+                                }
                             }
                         }
                     });
+
                 });
             };
 
