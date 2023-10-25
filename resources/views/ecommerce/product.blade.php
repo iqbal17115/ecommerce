@@ -182,8 +182,8 @@
                                     $product_detail->sale_end_date &&
                                     $product_detail->sale_start_date <= now() &&
                                     $product_detail->sale_end_date >= now())
-                                {{-- <del
-                                    class="old-price">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</del> --}}
+                                <del
+                                    class="old-price">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</del>
                                 <span
                                     class="product-price">{{ $currency?->icon }} {{ number_format($product_detail->sale_price, 2) }}</span>
                             @else
