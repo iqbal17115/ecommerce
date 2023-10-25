@@ -226,9 +226,9 @@
                                                     width="239" height="239" alt="product">
                                             </a>
                                             <!-- Check if your_price is not null -->
-                                            @if ($product->your_price)
+                                            @if ($product->sale_price)
                                                 <?php
-                                                $offerPercentage = round((($product->your_price - $product->sale_price) / $product->your_price) * 100, 0); // Calculate the offer percentage
+                                                $offerPercentage = round((($product->sale_price - $product->your_price) / $product->sale_price) * 100, 0); // Calculate the offer percentage
                                                 ?>
                                                 <div class="label-group">
                                                     <div class="product-label label-sale">-{{ $offerPercentage }}%</div>
