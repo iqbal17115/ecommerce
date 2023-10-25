@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
         integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/product.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/product.css') }}">
     <style>
         .drop-zone {
             max-width: 200px;
@@ -230,74 +230,81 @@
         });
         // $('.file-upload').file_upload();
         document.getElementById('sale_price').addEventListener('input', function() {
-    var salePrice = this.value;
-    var startDateInput = document.getElementById('sale_start_date');
-    var endDateInput = document.getElementById('sale_end_date');
+            var salePrice = this.value;
+            var startDateInput = document.getElementById('sale_start_date');
+            var endDateInput = document.getElementById('sale_end_date');
 
-    startDateInput.required = endDateInput.required = salePrice !== '';
-    if (salePrice === '') {
-        startDateInput.value = endDateInput.value = '';
-    }
-});
+            startDateInput.required = endDateInput.required = salePrice !== '';
+            if (salePrice === '') {
+                startDateInput.value = endDateInput.value = '';
+            }
+        });
 
-(function ($) {
-    $.fn.commaSeparated = function () {
-        return this.each(function () {
-            var block = $(this);
-            var field = block.find('input[type="text"]');
+        (function($) {
+            $.fn.commaSeparated = function() {
+                return this.each(function() {
+                    var block = $(this);
+                    var field = block.find('input[type="text"]');
 
-            // Function to initialize spans based on the field's value
-            function initializeSpans() {
-                var keywords = field.val().split(",");
-                for (var i = 0; i < keywords.length; i++) {
-                    var keyword = keywords[i].trim();
-                    if (keyword) {
-                        block.append('<span class="removeName comma_parent">' + keyword + '<small class="comma_child">x</small></span>');
+                    // Function to initialize spans based on the field's value
+                    function initializeSpans() {
+                        var keywords = field.val().split(",");
+                        for (var i = 0; i < keywords.length; i++) {
+                            var keyword = keywords[i].trim();
+                            if (keyword) {
+                                block.append('<span class="removeName comma_parent">' + keyword +
+                                    '<small class="comma_child">x</small></span>');
+                            }
+                        }
+                    }
+
+                    // Initialize spans when the page loads
+                    initializeSpans();
+
+                    field.on('input', function() {
+                        var $this = $(this);
+                        var values = $this.val().split(",");
+
+                        // Clear the input field
+                        $this.val('');
+
+                        // Loop through the values and create an element for each
+                        for (var i = 0; i < values.length; i++) {
+                            var value = values[i].trim(); // Remove leading/trailing whitespace
+                            if (value) {
+                                $this.before('<span class="removeName comma_parent">' + value +
+                                    '<small class="comma_child">x</small></span>');
+                            }
+                        }
+                    });
+                });
+            };
+
+
+
+            $(document).on('click', 'span.removeName small', function() {
+                $(this).closest('span').remove();
+            });
+
+            // Fire commaSeparated
+            $("#commaSep").commaSeparated();
+        })(jQuery);
+
+        $(document).ready(function() {
+            function updateKeywordsDisplay() {
+                var keywords_hidden = $('#keyword_hidden').val().split(",");
+                var block = $("#commaSep");
+
+                for (var i = 0; i < keywords_hidden.length; i++) {
+                    var keyword_hidden = keywords_hidden[i].trim();
+                    if (keyword_hidden) {
+                        block.prepend('<span class="removeName comma_parent">' + keyword_hidden +
+                            '<small class="comma_child">x</small></span>');
                     }
                 }
             }
-
-            // Initialize spans when the page loads
-            initializeSpans();
-
-            field.keyup(function (e) {
-                if (e.keyCode == 188) {
-                    var $this = $(this);
-                    var n = $this.val().split(",");
-                    var str = n[n.length - 2];
-                    if (str) {
-                        $this.before('<span class="removeName comma_parent">' + str + '<small class="comma_child">x</small></span>');
-                    }
-                    $this.val('');
-                }
-            });
+            updateKeywordsDisplay();
         });
-    };
-
-
-
-    $(document).on('click', 'span.removeName small', function () {
-        $(this).closest('span').remove();
-    });
-
-    // Fire commaSeparated
-    $("#commaSep").commaSeparated();
-})(jQuery);
-
-$( document ).ready(function() {
-    function updateKeywordsDisplay() {
-    var keywords_hidden = $('#keyword_hidden').val().split(",");
-    var block = $("#commaSep");
-console.log(keywords_hidden);
-    for (var i = 0; i < keywords_hidden.length; i++) {
-        var keyword_hidden = keywords_hidden[i].trim();
-        if (keyword_hidden) {
-            block.prepend('<span class="removeName comma_parent">' + keyword_hidden + '<small class="comma_child">x</small></span>');
-        }
-    }
-}
-    updateKeywordsDisplay();
-});
     </script>
     @include('backend.product.js.product-js')
     {!! Toastr::message() !!}
