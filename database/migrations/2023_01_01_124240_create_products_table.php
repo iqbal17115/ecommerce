@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('code', 40)->nullable();
-            $table->string('name', 100);
+            $table->text('name');
             $table->enum('type', ['GTIN', 'EAN', 'GCID', 'UPC', 'ASIN', 'ISBN'])->nullable();
             $table->string('seller_sku', 100)->nullable();
             $table->double('purchase_price', 10, 2)->nullable();
