@@ -294,9 +294,8 @@
                                 {!! $product_detail->ProductDetail->description !!}
                             @endif
                             <br>
-                            @if ($product_detail && $product_detail->ProductDetail)
-                                {!! $product_detail->ProductDetail->condition_note !!}
-                            @endif
+                                {!! $product_detail?->ProductDetail?->condition_note ? '<h3>Product Condition:</h3>':'' !!}
+                                {!! $product_detail?->ProductDetail?->condition_note !!}
                             <br>
                             @if ($product_detail && $product_detail->ProductDetail)
                                 {!! $product_detail->ProductDetail->product_content !!}
