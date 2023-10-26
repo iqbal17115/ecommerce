@@ -5,7 +5,7 @@
             <input type="hidden" name="product_image_id" id="product_image_id"
                 @if($productInfo) value="{{$productInfo->id}}" @else value="-1" @endif />
             <div class="col-md-2">
-                <div class="drop-zone drop-zone_0" style="background-size: 100%;">
+                <div class="drop-zone drop-zone_0" style="background-size: 100%; background-size: cover;">
                     <span class="drop-zone__prompt"></span>
                     <input type="file" name="product_image[]" id="product_image"
                         class="drop-zone__input">
@@ -13,7 +13,7 @@
             </div>
             <!-- End -->
             <div class="col-md-2">
-                <div class="drop-zone drop-zone_1" style="background-size: 100%;">
+                <div class="drop-zone drop-zone_1" style="background-size: 100%; background-size: cover;">
                     <span class="drop-zone__prompt"></span>
                     <input type="file" name="product_image[]" id="product_image"
                         class="drop-zone__input">
@@ -21,7 +21,7 @@
             </div>
             <!-- End -->
             <div class="col-md-2">
-                <div class="drop-zone drop-zone_2" style="background-size: 100%;">
+                <div class="drop-zone drop-zone_2" style="background-size: 100%; background-size: cover;">
                     <span class="drop-zone__prompt"></span>
                     <input type="file" name="product_image[]" id="product_image"
                         class="drop-zone__input">
@@ -29,7 +29,7 @@
             </div>
             <!-- End -->
             <div class="col-md-2">
-                <div class="drop-zone drop-zone_3" style="background-size: 100%;">
+                <div class="drop-zone drop-zone_3" style="background-size: 100%; background-size: cover;">
                     <span class="drop-zone__prompt"></span>
                     <input type="file" name="product_image[]" id="product_image"
                         class="drop-zone__input">
@@ -37,7 +37,7 @@
             </div>
             <!-- End -->
             <div class="col-md-2">
-                <div class="drop-zone drop-zone_4" style="background-size: 100%;">
+                <div class="drop-zone drop-zone_4" style="background-size: 100%; background-size: cover;">
                     <span class="drop-zone__prompt"></span>
                     <input type="file" name="product_image[]" id="product_image"
                         class="drop-zone__input">
@@ -45,7 +45,7 @@
             </div>
             <!-- End -->
             <div class="col-md-2">
-                <div class="drop-zone drop-zone_5" style="background-size: 100%;">
+                <div class="drop-zone drop-zone_5" style="background-size: 100%; background-size: cover;">
                     <span class="drop-zone__prompt"></span>
                     <input type="file" name="product_image[]" id="product_image"
                         class="drop-zone__input">

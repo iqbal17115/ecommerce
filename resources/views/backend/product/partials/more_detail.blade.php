@@ -596,19 +596,10 @@
 
                 var variation = $("#variation").val();
                 var get_category_id = $("#get_category_id").val();
-                var imageUrl0 = 'storage/product_photo/' + $("#product_info_image_0").val();
-                var imageUrl1 = 'storage/product_photo/' + $("#product_info_image_1").val();
-                var imageUrl2 = 'storage/product_photo/' + $("#product_info_image_2").val();
-                var imageUrl3 = 'storage/product_photo/' + $("#product_info_image_3").val();
-                var imageUrl4 = 'storage/product_photo/' + $("#product_info_image_4").val();
-                var imageUrl5 = 'storage/product_photo/' + $("#product_info_image_5").val();
-
-                $(".drop-zone_0").css("background-image", "url(" + imageUrl0 + ")");
-                $(".drop-zone_1").css("background-image", "url(" + imageUrl1 + ")");
-                $(".drop-zone_2").css("background-image", "url(" + imageUrl2 + ")");
-                $(".drop-zone_3").css("background-image", "url(" + imageUrl3 + ")");
-                $(".drop-zone_4").css("background-image", "url(" + imageUrl4 + ")");
-                $(".drop-zone_5").css("background-image", "url(" + imageUrl5 + ")");
+                for (let i = 0; i <= 5; i++) {
+    var imageUrl = 'storage/product_photo/' + $("#product_info_image_" + i).val();
+    $(".drop-zone_" + i).css("background-image", "url(" + imageUrl + ")");
+}
                 updateVariantByCategory(get_category_id);
                 // updateVariationType(variation);
             });
