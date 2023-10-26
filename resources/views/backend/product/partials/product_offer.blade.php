@@ -33,7 +33,7 @@
                     <!-- End -->
                     <div class="col-md-4 mt-md-3">
             <select name="quantity_unit" id="quantity_unit"
-                class="form-select">
+                class="form-select" required>
                 <option value="">Select Option</option>
                 <option @if($productInfo && $productInfo->quantity_unit=='pcs') selected @endif value="pcs">PCS</option>
                 <option @if($productInfo && $productInfo->quantity_unit=='kg') selected @endif value="kg">Kg</option>
