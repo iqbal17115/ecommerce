@@ -191,11 +191,18 @@
 
                                         <!-- End .product-container -->
                                         <div class="price-box">
-                                            @if ($product->sale_price && $product->sale_start_date && $product->sale_end_date && $product->sale_start_date <= now() && $product->sale_end_date >= now())
-                                                <del class="old-price">{{ $currency->icon }}{{ number_format($product->your_price, 2) }}</del>
-                                                <span class="product-price">{{ $currency->icon }}{{ number_format($product->sale_price, 2) }}</span>
+                                            @if ($product->sale_price &&
+                                                    $product->sale_start_date &&
+                                                    $product->sale_end_date &&
+                                                    $product->sale_start_date <= now() &&
+                                                    $product->sale_end_date >= now())
+                                                <del
+                                                    class="old-price">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</del>
+                                                <span
+                                                    class="product-price">{{ $currency?->icon }} {{ number_format($product->sale_price, 2) }}</span>
                                             @else
-                                                <span class="product-price">{{ $currency->icon }}{{ number_format($product->your_price, 2) }}</span>
+                                                <span
+                                                    class="product-price">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</span>
                                             @endif
                                         </div>
                                         <!-- End .price-box -->
