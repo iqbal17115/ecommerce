@@ -118,16 +118,14 @@
                     <!-- End .product-single-gallery -->
 
                     <div class="col-lg-7 col-md-6 product-single-details">
-                        <h1 class="product-title">{{ $product_detail->name }}</h1>
-                        @if ($product_detail->Brand)
+                        <h1 class="product-title">{{ $product_detail?->name }}</h1>
                             <div class="row g-3 align-items-center">
                                 <div class="col-md-3">
-                                    <h5 class="fw-bold m-0 p-0">Brand: <span class="m-0 p-0"
-                                            style="font-weight: bold;color: #f4631b;">{{ $product_detail->Brand->name }}</span>
+                                    <h5 class="fw-bold m-0 p-0">{{ $product_detail?->Brand?->name ? 'Brand:':''}} <span class="m-0 p-0"
+                                            style="font-weight: bold;color: #f4631b;">{{ $product_detail?->Brand?->name }}</span>
                                     </h5>
                                 </div>
                             </div>
-                        @endif
 
                         {{-- star Rating --}}
                         <span class="five-star-rating">
@@ -198,6 +196,16 @@
                                 @if ($product_detail && $product_detail->ProductDetail)
                                     {!! $product_detail->ProductDetail->short_deacription !!}
                                 @endif
+                            </p>
+                        </div>
+                        <!-- End .product-desc -->
+                        <div class="product-desc">
+                            <p class="text-dark">{{$product_detail?->ProductDetail?->Condition?->title ? 'Condition: ':''}} <span class="brand_text_color">{{ $product_detail?->ProductDetail?->Condition?->title }} </span>
+                            </p>
+                        </div>
+                        <!-- End .product-desc -->
+                        <div class="product-desc">
+                            <p class="text-dark">{{$product_detail?->ProductMoreDetail?->warranty ? 'Warranty: ':''}} <span class="brand_text_color">{{ $product_detail?->ProductMoreDetail?->warranty }} {{ $product_detail?->ProductMoreDetail?->warranty_unit }}</span>
                             </p>
                         </div>
                         <!-- End .product-desc -->
@@ -294,8 +302,11 @@
                                 {!! $product_detail->ProductDetail->description !!}
                             @endif
                             <br>
-                                {!! $product_detail?->ProductDetail?->condition_note ? '<h3>Product Condition:</h3>':'' !!}
+                                {!! $product_detail?->ProductDetail?->condition_note ? '<span class="h4 brand_text_color">Product Condition: </span>':'' !!}
                                 {!! $product_detail?->ProductDetail?->condition_note !!}
+                            <br>
+                                {!! $product_detail?->ProductMoreDetail?->warranty_description ? '<span class="h4 brand_text_color">Warranty Description: </span>':'' !!}
+                                {!! $product_detail?->ProductMoreDetail?->warranty_description !!}
                             <br>
                             @if ($product_detail && $product_detail->ProductDetail)
                                 {!! $product_detail->ProductDetail->product_content !!}
