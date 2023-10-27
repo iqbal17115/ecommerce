@@ -589,17 +589,34 @@
         <input type="hidden" name="variation" id="variation" value="{{ $productInfo->variation }}">
         @foreach ($productInfo->ProductImage as $product_info_image)
             <input type="text" name="product_info_image[]"
-                id="product_info_image_{{ $product_info_image->serial }}" value="{{ $product_info_image->image }}">
+                id="product_info_image_{{ $product_info_image->serial }}" data-id="{{ $product_info_image->id }}" value="{{ $product_info_image->image }}">
         @endforeach
         <script>
             $(document).ready(function() {
-
                 var variation = $("#variation").val();
                 var get_category_id = $("#get_category_id").val();
                 for (let i = 0; i <= 5; i++) {
-    var imageUrl = 'storage/product_photo/' + $("#product_info_image_" + i).val();
-    $(".drop-zone_" + i).css("background-image", "url(" + imageUrl + ")");
-}
+                    if (typeof $("#product_info_image_" + i).val() !== "undefined") {
+                    var imageUrl = 'storage/product_photo/' + $("#product_info_image_" + i).val();
+                    $(".drop-zone_" + i).css("background-image", "url(" + imageUrl + ")");
+                    $("#img_zone_" + i).addClass("cross-icon");
+                    $("#img_zone_" + i).attr("data-id", $("#product_info_image_" + i).data('id'));
+                    $("#img_zone_" + i).on("click", function() {
+                        deleteAction('/api/delete-product-image/' + $(this).data('id'),
+                            (data) => {
+                                $("#img_zone_" + i).removeClass("cross-icon");
+                                $(".drop-zone_" + i).css("background-image", "url()");
+                                // Success callback
+                                toastrSuccessMessage(data.message);
+                            },
+                            (error) => {
+                                // Error callback
+                                toastrErrorMessage(error.responseJSON.message);
+                            }
+                        );
+                    });
+                }
+                }
                 updateVariantByCategory(get_category_id);
                 // updateVariationType(variation);
             });

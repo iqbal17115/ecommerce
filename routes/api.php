@@ -4,6 +4,7 @@ use App\Http\Controllers\API\Panel\Address\CountryController;
 use App\Http\Controllers\API\Panel\Address\DistrictController;
 use App\Http\Controllers\API\Panel\Address\DivisionController;
 use App\Http\Controllers\API\Panel\Address\UpazilaController;
+use App\Http\Controllers\API\Panel\Admin\Product\ProductController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDivisionController;
@@ -21,6 +22,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Upazila
+Route::controller(ProductController::class)->group(function () {
+    Route::delete('delete-product-image/{productImage}', [ProductController::class, 'destroy'])->name('delete_product_image');
+});
+
 
 // Upazila
 Route::controller(ShopSettingUpazilaController::class)->group(function () {

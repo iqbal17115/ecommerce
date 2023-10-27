@@ -28,6 +28,7 @@ class ProductController extends Controller
     {
         $this->unitConversionService = $unitConversionService;
     }
+    
     public function deleteProduct(Request $request)
     {
         return DB::transaction(function () use ($request) {

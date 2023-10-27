@@ -87,16 +87,27 @@
         }
 
         .select-form {
-            /* margin: 4px, 4px; */
-            /* padding: 4px; */
             width: 100%;
         }
 
         .input-form {
-            /* margin-top: 8px; */
-            /* padding: 3px; */
             width: 100%;
             height: 25px;
+        }
+
+        .cross-icon {
+            position: relative;
+            background-size: cover;
+        }
+
+        .cross-icon::before {
+            content: "✖";
+            position: absolute;
+            top: 15px;
+            left: 8px;
+            font-size: 15px;
+            color: red;
+            cursor: pointer;
         }
     </style>
 @endsection
