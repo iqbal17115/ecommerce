@@ -52,7 +52,7 @@
                                     data-sale_price="{{ $product->sale_price }}"
                                     @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
                                     class="btn-icon
-                        btn-add-cart product-type-simple"><i
+                         product-type-simple"><i
                                         class="icon-shopping-cart"></i></a>
                             </div>
                         </figure>
