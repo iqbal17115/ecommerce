@@ -63,7 +63,7 @@ class HomeController extends Controller
         return view('backend.dashboard');
     }
     public function index() {
-        $user_id = auth()?->user()->id;
+        $user_id = auth()?->user()->id ?? null;
         $sliders = Slider::whereIsActive(1)->get();
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $product_features = ProductFeature::whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
