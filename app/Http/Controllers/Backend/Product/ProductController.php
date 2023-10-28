@@ -28,7 +28,6 @@ class ProductController extends Controller
     {
         $this->unitConversionService = $unitConversionService;
     }
-    
     public function deleteProduct(Request $request)
     {
         return DB::transaction(function () use ($request) {
@@ -183,7 +182,7 @@ class ProductController extends Controller
         $Query = ProductMoreDetail::whereProductId($request->product_keyword_id)->first();
         if (!$Query) {
             $Query = new ProductMoreDetail();
-        } 
+        }
             $Query->product_keyword = $request->keyword;
             $Query->product_id = $request->product_keyword_id;
             $Query->save();

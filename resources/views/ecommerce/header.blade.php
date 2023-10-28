@@ -161,7 +161,7 @@
                         @endif
                         {{-- <span class="cart-count badge-circle">3</span> --}}
                         <span class="cart-count badge-circle"
-                            style="top: 5px; left: 27px; background: #111;">{{ count((array) session('cart')) }}</span>
+                            style="top: 5px; left: 27px; background: #111;">0</span>
                     </a>
 
                     <div class="cart-overlay"></div>
@@ -173,40 +173,7 @@
                             <div class="dropdown-cart-header">Shopping Cart</div>
                             <!-- End .dropdown-cart-header -->
 
-                            <div class="dropdown-cart-products">
-                                @php $total = 0 @endphp
-                                @if (session('cart'))
-                                    @foreach (session('cart') as $id => $details)
-                                        @php $total += $details['sale_price'] * $details['quantity'] @endphp
-                                        <div class="product cart-{{ $id }}" data-id="{{ $id }}">
-                                            <div class="product-details">
-                                                <h4 class="product-title">
-                                                    <a href="#">{{ $details['name'] }}</a>
-                                                </h4>
-
-                                                <span class="cart-product-info">
-                                                    <span
-                                                        class="cart-product-qty card-product-qty-{{ $id }}">{{ $details['quantity'] }}</span>
-                                                    ×
-                                                    {{ $currency?->icon }}{{ $details['sale_price'] }}
-                                                </span>
-                                            </div>
-                                            <!-- End .product-details -->
-
-                                            <figure class="product-image-container">
-                                                <a href="{{ route('home') }}" class="product-image lazy-load">
-                                                    <img data-src="{{ asset('storage/product_photo/' . $details['image']) }}"
-                                                        alt="product" width="80" height="80">
-                                                </a>
-
-                                                <a href="javascript:void(0);" class="btn-remove"
-                                                    title="Remove Product"><span>×</span></a>
-                                            </figure>
-                                        </div>
-                                        <!-- End .product -->
-                                    @endforeach
-                                @endif
-                            </div>
+                            <div class="dropdown-cart-products" id="cart_container"></div>
                             <!-- End .cart-product -->
 
                             <table class="table table-totals">

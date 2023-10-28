@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\API\Panel\Address\AddressController;
 use App\Http\Controllers\API\Panel\Address\CountryController;
 use App\Http\Controllers\API\Panel\Address\DistrictController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDivisionController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingUpazilaController;
+use App\Http\Controllers\API\Panel\User\Cart\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Cart
+Route::controller(CartController::class)->group(function () {
+    Route::post('cart/add', 'addToCart')->name('cart_add');
+    Route::get('cart/lists', 'getCart');
+    Route::put('cart/update/{item}', 'updateCartItem');
+    Route::delete('cart-remove/{cartItem}', 'removeCartItem')->name('cart_remove');
+});
 
 // Upazila
 Route::controller(ProductController::class)->group(function () {

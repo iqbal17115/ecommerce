@@ -38,6 +38,7 @@
 
         /* two line name show css code */
     </style>
+    <div id="temp_user_id" data-user_id="{{$user_id}}"></div>
     <main class="main">
         <div class="bg-gray pb-5">
             <div class="container pb-2">
@@ -236,12 +237,9 @@
                                             @endif
                                             <div class="btn-icon-group">
                                                 <a href="javascript:void(0);" title="Add To Cart"
-                                                    data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                                                    data-your_price="{{ $product->your_price }}"
-                                                    data-sale_price="{{ $product->sale_price }}"
+                                                    data-product_id="{{ $product->id }}"
                                                     @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
-                                                    class="btn-icon
-                                    btn-add-cart product-type-simple"><i
+                                                    class="btn-icon add_cart_item product-type-simple"><i
                                                         class="icon-shopping-cart"></i></a>
                                             </div>
                                         </figure>
@@ -394,6 +392,7 @@
 @endsection
 @push('scripts')
     @include('ecommerce.wishlist-js')
+    <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
     <script>
         window.onload = function() {
             // Code to be executed after rendering the full layout

@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use App\Models\Backend\ContactInfo\Contact;
+use App\Models\Backend\Product\Product;
+use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Review;
 use App\Models\Frontend\Wishlist\Wishlist;
 use App\Traits\BaseModel;
@@ -64,6 +66,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 
     public function roles(): BelongsToMany
     {

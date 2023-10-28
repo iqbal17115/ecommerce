@@ -549,7 +549,6 @@
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
-    @include('ecommerce.cart-js')
     <!-- Start Sidebar -->
     @include('ecommerce.sidebar-js')
     <!-- End Sidebar -->

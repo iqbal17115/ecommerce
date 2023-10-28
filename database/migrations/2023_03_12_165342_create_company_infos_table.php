@@ -39,10 +39,10 @@ class CreateCompanyInfosTable extends Migration
             $table->text('instagram_link')->nullable();
             $table->text('linkedin_link')->nullable();
             $table->text('about_us')->nullable();
-            $table->text('terms_condition')->nullable();
-            $table->text('privacy_policy')->nullable();
-            $table->text('return_policy')->nullable();
-            $table->text('shipping_and_delivery')->nullable();
+            $table->longText('terms_condition')->nullable();
+            $table->longText('privacy_policy')->nullable();
+            $table->longText('return_policy')->nullable();
+            $table->longText('shipping_and_delivery')->nullable();
             $table->text('title')->nullable();
             $table->longText('key_word')->nullable();
             $table->text('description')->nullable();

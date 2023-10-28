@@ -406,9 +406,6 @@
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
-    <!-- Start Cart -->
-    @include('ecommerce.cart-js')
-    <!-- End Cart -->
 
     <!-- Start Sidebar -->
     @include('ecommerce.sidebar-js')

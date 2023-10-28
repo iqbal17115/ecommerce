@@ -82,11 +82,6 @@ Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'sho
 Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
 Route::get('shop/products/{name}', [ProductDetailController::class, 'productDetail'])->name('products.show');
 Route::get('cart', [CartController::class, 'index'])->name('cart');
-Route::get('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
-Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
-Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove-from-cart');
-Route::post('increase-product-qty', [CartController::class, 'increaseQty']);
-Route::post('decrease-product-qty', [CartController::class, 'decreaseQty']);
 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('get-district', [CheckoutController::class, 'getDistrict'])->name('get-district');
 Route::get('get-upazila', [CheckoutController::class, 'getUpazila'])->name('get-upazila');
