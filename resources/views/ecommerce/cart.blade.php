@@ -1,13 +1,13 @@
 @extends('layouts.ecommerce')
 @section('content')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/cart_page.css') }}">
     <main class="main">
         <div class="container">
-
+            <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="cart-table-container">
                         <table class="table table-cart">
-                            @if ($cart_products)
                                 <thead>
                                     <tr>
                                         <th class="checkbox-col">
@@ -19,62 +19,7 @@
                                         </td>
                                     </tr>
                                 </thead>
-                            @endif
-                            <tbody>
-                                @php
-                                    $total = 0;
-                                    $allStatus1 = true;
-                                @endphp
-                                @if ($cart_products)
-                                    @foreach ($cart_products as $id => $details)
-                                        @php
-                                            $total += $details['status'] == 1 ? $details['sale_price'] * $details['quantity'] : 0;
-                                            if ($details['status'] != 1) {
-                                                $allStatus1 = false;
-                                            }
-                                        @endphp
-                                        {{-- @php $total += $details['sale_price'] * $details['quantity'] @endphp --}}
-
-                                        <tr class="product-row cart-{{ $id }}" data-id="{{ $id }}">
-                                            <td class="checkbox-col">
-                                                <input type="checkbox" class="product-checkbox"
-                                                    data-product-id="{{ $id }}"
-                                                    {{ $details['status'] == 1 ? 'checked' : '' }}
-                                                    data-product-status="{{ $details['status'] }}">
-                                            </td>
-                                            <td>
-                                                <figure class="product-image-container">
-                                                    <a href="javascript:void(0);" class="product-image">
-                                                        <img src="{{ asset('storage/product_photo/' . $details['image']) }}"
-                                                            alt="product">
-                                                    </a>
-
-                                                    <a href="javascript:void(0);"
-                                                        class="btn-remove remove-from-cart icon-cancel"
-                                                        title="Remove Product"></a>
-                                                </figure>
-                                            </td>
-                                            <td class="product-col">
-                                                <h5 class="product-title">
-                                                    <a href="javascript:void(0);">{{ $details['name'] }}</a>
-                                                </h5>
-                                            </td>
-                                            <td>{{ $currency?->icon }}{{ $details['sale_price'] }}</td>
-                                            <td>
-                                                <div class="product-single-qty">
-                                                    <input value="{{ $details['quantity'] }}"
-                                                        class="horizontal-quantity form-control product-quantity-{{ $id }}"
-                                                        type="text">
-                                                </div><!-- End .product-single-qty -->
-                                            </td>
-                                            <td class="text-right"><span
-                                                    class="subtotal-price subtotal-price-{{ $id }}">{{ $details['quantity'] * $details['sale_price'] }}</span>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-
-                            </tbody>
+                            <tbody id="table_body">
 
                         </table>
                     </div><!-- End .cart-table-container -->
@@ -88,7 +33,7 @@
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td>{{ $currency?->icon }} <span class="cart_total_price">{{ $total }}</span>
+                                    <td>{{ $currency?->icon }} <span class="cart_total_price"></span>
                                     </td>
                                 </tr>
 
@@ -142,8 +87,9 @@
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
-    @include('ecommerce.sidebar-js')
-
+@endsection
+@push('scripts')
+    <script src="{{ asset('js/panel/users/cart/cart_page.js') }}"></script>
     <script>
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-load');
@@ -190,14 +136,5 @@
                 observer.observe(image);
             }
         });
-    </script>
-@endsection
-@push('scripts')
-    <script src="{{ asset('backend_js/cart.js') }}"></script>
-    <script src="{{ asset('backend_js/shipping_charge.js') }}"></script>
-    <script>
-        // Check or uncheck the "selectAllProducts" checkbox on page load
-        $('#selectAllProducts').prop('checked', {{ $allStatus1 ? 'true' : 'false' }});
-        calculateShippingCharges();
     </script>
 @endpush

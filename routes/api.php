@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(CartController::class)->group(function () {
     Route::post('cart/add', 'addToCart')->name('cart_add');
     Route::get('cart/lists', 'getCart');
-    Route::put('cart/update/{item}', 'updateCartItem');
+    Route::put('cart-update/{cartItem}', 'updateCartItem')->name('cart_update');
     Route::delete('cart-remove/{cartItem}', 'removeCartItem')->name('cart_remove');
 });
 

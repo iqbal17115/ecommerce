@@ -47,12 +47,11 @@ class CartController extends Controller
         return Message::success(null, $cart);
     }
 
-    public function updateCartItem(UpdateCartItemRequest $updateCartItemRequest, $id)
+    public function updateCartItem(UpdateCartItemRequest $updateCartItemRequest, CartItem $cartItem)
     {
-        $user = auth()->user();
-        $cartItem = $this->cartService->updateCartItem($user, $id, $quantity);
+        $cartItem->update(['quantity' => $updateCartItemRequest->quantity]);
 
-        return response()->json(['message' => 'Cart item updated', 'cart_item' => $cartItem]);
+        return Message::success(__("messages.success_add"), new CartItemDetailResource($cartItem));
     }
 
     public function removeCartItem(CartItem $cartItem)
