@@ -24,9 +24,9 @@ function showCartTableData(data) {
           <a style="text-decoration: none;">${item.product_info.name}</a>
         </h5>
       </td>
-      <td>${item.currency?.icon || ''}${item.product_info.product_price}</td>
+      <td class="mx-2">${item.currency?.icon || ''}${item.product_info.product_price}</td>
       <td>
-      <div class="col-md-4 mb-3">
+      <div class="mb-3">
       <div class="qty-container">
           <button class="qty-btn-minus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button"><i class="fa fa-minus"></i></button>
           <input type="text" name="qty" value="${item.quantity}" class="input-qty"/>
