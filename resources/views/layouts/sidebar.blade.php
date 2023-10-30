@@ -45,6 +45,7 @@
                            <li><a href="{{ route('product-variant') }}">Variation</a></li>
                            <li><a href="{{ route('product-material') }}">Material</a></li>
                            <li><a href="{{ route('condition') }}">Condition</a></li>
+                           <li><a href="{{ route('feature') }}">Feature</a></li>
                        </ul>
                    </li>
                    <li>
