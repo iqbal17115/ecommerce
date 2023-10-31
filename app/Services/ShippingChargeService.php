@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\Backend\Product\Product;
@@ -80,89 +81,55 @@ class ShippingChargeService
     {
         return ShippingMethod::withName($name)->whereIsActive(1)->first();
     }
-    public function calculateShippingCharge($shipping_method_id = '13eee98c-31ed-11ee-be5c-5811220534bb')
+    public function getPrice(Product $product)
     {
-        $allProducts = session('cart');
-        $products = [];
-        $sub_total = 0;
-        $products = array_filter($allProducts, function ($details) {
-            return $details['status'] == 1;
-        });
+        $currentDate = now();
+        if (
+            $product->sale_price &&
+            $product->sale_start_date &&
+            $product->sale_end_date &&
+            $product->sale_start_date <= $currentDate &&
+            $product->sale_end_date >= $currentDate
+        ) {
+            return $product->sale_price;
+        }
 
+        return $product->your_price;
+    }
+    public function calculateShippingCharges(Product $product, $quantity)
+    {
         $totalShippingCharge = 0;
         $freeShippingMethod = $this->getShippingMethodByName('Free');
         $cashOnDelivery = $this->getShippingMethodByName('Cash On Delivery');
-        // Map the cart items to their subtotals
-        if ($freeShippingMethod) {
-            $sub_total = collect($products)->map(function ($productData, $productId) {
-                $product = Product::find($productId);
-                $quantity = $productData['quantity'];
-                return $product->sale_price * $quantity;
-            });
-            if ($sub_total && $sub_total->sum() >= $freeShippingMethod->value) {
-                return response()->json(['charge' => 0]);
-            }
-        } else {
-            $sub_total = collect($products)->map(function ($productData, $productId) {
-                $product = Product::find($productId);
-                $quantity = $productData['quantity'];
-                return $product->sale_price * $quantity;
-            })->sum();
+        $product_price = $this->getPrice($product);
+        // Calculate total area based on package dimensions
+        $packageHeight = $product->ProductMoreDetail->package_height;
+        $packageLength = $product->ProductMoreDetail->package_length;
+        $packageWidth = $product->ProductMoreDetail->package_width;
+        $totalWeight = $product->ProductMoreDetail->package_weight; // Package weight
+
+        // Calculate the dimensional weight
+        $dimensionalWeight = $this->calculateDimensionalWeight($packageLength, $packageWidth, $packageHeight, $totalWeight);
+
+        // Get the class that matches the criteria
+        $matchingClass = $this->findMatchingClass($dimensionalWeight);
+
+        if (!$matchingClass) {
+            $matchingClass['name'] = null;
         }
-        $shippingMethodId = $shipping_method_id;
-        $inside = Auth::user()?->Contact?->Division?->id == 6 ? true : false;
-        foreach ($products as $productId => $productData) {
-            $product = Product::find($productId);
-            $quantity = $productData['quantity'];
-            // Check for specific product free shipping
-            if ($productId) {
-                if ($product && $product->isFreeShippingEligible()) {
-                    continue; // Skip to the next product
-                }
-            }
+        $shippingMethodId = "eef9baf0-75a5-11ee-93d1-3cecef4d4f08";
+        // Calculate regular shipping charges
+        $shipping_charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
+            ->where('shipping_class', $matchingClass['name'])
+            ->where('min_quantity', '<=', $quantity)
+            ->where('max_quantity', '>=', $quantity)
+            ->first();
 
-            // Calculate total area based on package dimensions
-            $packageHeight = $product->ProductMoreDetail->package_height;
-            $packageLength = $product->ProductMoreDetail->package_length;
-            $packageWidth = $product->ProductMoreDetail->package_width;
-            $totalWeight = $product->ProductMoreDetail->package_weight; // Package weight
-
-            // Calculate the dimensional weight
-            $dimensionalWeight = $this->calculateDimensionalWeight($packageLength, $packageWidth, $packageHeight, $totalWeight);
-
-            // Get the class that matches the criteria
-            $matchingClass = $this->findMatchingClass($dimensionalWeight);
-
-            if (!$matchingClass) {
-                $matchingClass['name'] = null;
-            }
-
-            // Calculate regular shipping charges
-            $shipping_charge = ShippingCharge::where('shipping_method_id', $shippingMethodId)
-                ->where('shipping_class', $matchingClass['name'])
-                ->where('min_quantity', '<=', $quantity)
-                ->where('max_quantity', '>=', $quantity)
-                ->first();
-
-            if ($shipping_charge) {
-                $totalShippingCharge += $inside == true ? $shipping_charge->charge_1 : $shipping_charge->charge_2;
-            } else {
-
-            }
-
+        if (($shipping_charge && $shipping_charge->free_shipping != 'no') || ($shipping_charge && $shipping_charge->minimum_amount_for_free_shipping && (($product_price * $quantity)>= $shipping_charge->minimum_amount_for_free_shipping))) {
+            return 0;
         }
-        if ($cashOnDelivery && $cashOnDelivery->type == 'percent') {
-            // If the type is 'percent', calculate the percentage of $totalShippingCharge and add it to the shipping charge
-            $percentage = $cashOnDelivery->value / 100;
-            $totalShippingCharge += $totalShippingCharge * $percentage;
-        } elseif ($cashOnDelivery && $cashOnDelivery->type == 'amount') {
-            // If the type is 'amount', simply add the value to the shipping charge
-            $totalShippingCharge += $cashOnDelivery->value;
-        }
-        return response()->json([
-            'charge' => ceil($totalShippingCharge), // Rounded shipping charge
-            'sub_total' => $sub_total
-        ]);
+        // dd($shipping_charge);
+        return  $shipping_charge->charge_1 ?? 0;
     }
 
     public function getAllShippingMethods()

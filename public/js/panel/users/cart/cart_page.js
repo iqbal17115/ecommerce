@@ -1,9 +1,10 @@
 function showCartTableData(data) {
     let htmlContent = '';
     let total = 0;
+    let total_shipping_charge = 0;
     data.forEach((item) => {
         total += item.product_info.product_price * item.quantity;
-        console.log(total);
+        total_shipping_charge += parseFloat(item.shipping_charge);
         htmlContent += `
     <tr class="product-row product cart_${item.id}" data-id="${item.id}">
       <td class="checkbox-col">
@@ -42,8 +43,9 @@ function showCartTableData(data) {
     });
 
     $('#table_body').html(htmlContent);
-
     $('.cart_total_price').text(total);
+    $('.shipping_charge_amount').text(total_shipping_charge);
+    $('.grand_total').text(total + total_shipping_charge);
 
 }
 
@@ -54,12 +56,13 @@ function updateCart(item) {
 
 function showHeaderCartData(data) {
     let total = 0;
+    let total_item_qty = 0;
     const cartContainer = document.getElementById('cart_container');
-    $('.cart-count').text(data.length);
     if (data.length > 0) {
         data.forEach(item => {
             const totalItemPrice = item.product_info.product_price * item.quantity;
             total += totalItemPrice;
+            total_item_qty += item.quantity;
 
             const productDiv = document.createElement('div');
             productDiv.className = `product cart_${item.id}`;
@@ -101,18 +104,27 @@ function showHeaderCartData(data) {
             cartContainer.appendChild(productDiv);
         });
     }
+
+    $('.cart-count').text(total_item_qty);
 }
 
 $(document).ready(function () {
 
     function calcaulateCartDetails(data) {
+        console.log(data);
         let cartTotal = 0;
+        let total_shipping_charge = 0;
+        let total_item_qty = 0;
         data.forEach(item => {
             cartTotal += item.product_info.product_price * item.quantity;
+            total_shipping_charge += parseFloat(item.shipping_charge);
+            total_item_qty += item.quantity;
         });
 
         $('.cart_total_price').text(cartTotal);
-
+        $('.shipping_charge_amount').text(total_shipping_charge);
+        $('.cart-count').text(total_item_qty);
+        $('.grand_total').text(cartTotal + total_shipping_charge);
     }
 
     function calculateCartTotal() {
@@ -147,7 +159,7 @@ $(document).ready(function () {
         const inputQty = $(this).siblings('.input-qty');
         const quantity = parseInt(inputQty.val(), 10);
         console.log(quantity);
-    
+
         const formData = {
             quantity: quantity,
         };

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User\Cart;
 
+use App\Services\ShippingChargeService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CartItemListResource extends JsonResource
@@ -14,10 +15,12 @@ class CartItemListResource extends JsonResource
      */
     public function toArray($request)
     {
+        $shippingService = new ShippingChargeService();
         return [
             "id" => $this->id,
             "product_info" => new CartProductDetailResource($this->product), // Correct the relationship name to 'product'
             "quantity" => $this->quantity,
+            "shipping_charge" => $shippingService->calculateShippingCharges($this->product, $this->quantity),
         ];
     }
 }

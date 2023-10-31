@@ -6,7 +6,7 @@
             <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="cart-table-container">
+                    <div class="cart-table-container p-3">
                         <table class="table table-cart">
                                 <thead>
                                     <tr>
@@ -25,7 +25,7 @@
                     </div><!-- End .cart-table-container -->
                 </div><!-- End .col-lg-8 -->
 
-                <div class="col-lg-4">
+                <div class="col-lg-4 card py-1">
                     <div class="cart-summary">
                         <h3>CART TOTALS</h3>
 
@@ -43,7 +43,7 @@
                                     </td>
 
                                     <td class="shipping-col">
-                                        <span>{{ $currency?->icon }} <span class="shipping_amount"></span></span>
+                                        <span>{{ $currency?->icon }} <span class="shipping_charge_amount"></span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -68,7 +68,7 @@
                             <tfoot>
                                 <tr>
                                     <td>Total</td>
-                                    <td>{{ $currency?->icon }} <span class="total-price"></span></td>
+                                    <td>{{ $currency?->icon }} <span class="total-price grand_total"></span></td>
                                 </tr>
                             </tfoot>
                         </table>

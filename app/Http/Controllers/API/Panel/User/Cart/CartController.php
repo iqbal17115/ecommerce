@@ -43,7 +43,6 @@ class CartController extends Controller
     {
         $cart = $this->getLists(CartItem::where("user_id", $request->user_id), $request->all(), CartItemListResource::class);
         // $cart = $this->cartService->getCart(User::find($request->user_id));
-
         return Message::success(null, $cart);
     }
 

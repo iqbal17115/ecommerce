@@ -56,13 +56,13 @@ function updateCart(item) {
 
 function showHeaderCartData(data) {
     let total = 0;
+    let total_item_qty = 0;
     const cartContainer = document.getElementById('cart_container');
-    $('.cart-count').text(data.length);
     if (data.length > 0) {
         data.forEach(item => {
             const totalItemPrice = item.product_info.sale_price * item.quantity;
             total += totalItemPrice;
-
+            total_item_qty += item.quantity;
             const productDiv = document.createElement('div');
             productDiv.className = `product cart_${item.id}`;
             productDiv.setAttribute('data-id', item.id);
@@ -103,6 +103,8 @@ function showHeaderCartData(data) {
             cartContainer.appendChild(productDiv);
         });
     }
+
+    $('.cart-count').text(total_item_qty);
 }
 
 $(document).ready(function () {
