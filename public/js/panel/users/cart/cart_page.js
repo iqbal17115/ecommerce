@@ -62,7 +62,7 @@ function showHeaderCartData(data) {
         data.forEach(item => {
             const totalItemPrice = item.product_info.product_price * item.quantity;
             total += totalItemPrice;
-            total_item_qty += item.quantity;
+            total_item_qty += parseInt(item.quantity);
 
             const productDiv = document.createElement('div');
             productDiv.className = `product cart_${item.id}`;
@@ -118,7 +118,7 @@ $(document).ready(function () {
         data.forEach(item => {
             cartTotal += item.product_info.product_price * item.quantity;
             total_shipping_charge += parseFloat(item.shipping_charge);
-            total_item_qty += item.quantity;
+            total_item_qty += parseInt(item.quantity);
         });
 
         $('.cart_total_price').text(cartTotal);

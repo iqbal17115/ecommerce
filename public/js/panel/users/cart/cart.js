@@ -62,7 +62,7 @@ function showHeaderCartData(data) {
         data.forEach(item => {
             const totalItemPrice = item.product_info.sale_price * item.quantity;
             total += totalItemPrice;
-            total_item_qty += item.quantity;
+            total_item_qty += parseInt(item.quantity);
             const productDiv = document.createElement('div');
             productDiv.className = `product cart_${item.id}`;
             productDiv.setAttribute('data-id', item.id);
