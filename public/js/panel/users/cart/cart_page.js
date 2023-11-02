@@ -4,7 +4,7 @@ function showCartTableData(data) {
     let total_shipping_charge = 0;
     let cheked_all_check_box = true;
     data.forEach((item) => {
-        if (item.is_active === 1) {
+        if (item.is_active == 1) {
             total += item.product_info.product_price * item.quantity;
             total_shipping_charge += parseFloat(item.shipping_charge);
         } else {
@@ -47,7 +47,7 @@ function showCartTableData(data) {
   `;
     });
 
-    if(cheked_all_check_box) {
+    if(cheked_all_check_box == true) {
         $("#select_all_products").prop("checked", true);
     }
     $('#table_body').html(htmlContent);
@@ -123,7 +123,7 @@ $(document).ready(function () {
         let total_shipping_charge = 0;
         let total_item_qty = 0;
         data.forEach(item => {
-            if (item.is_active === 1) {
+            if (item.is_active == 1) {
                 cartTotal += item.product_info.product_price * item.quantity;
                 total_shipping_charge += parseFloat(item.shipping_charge);
             }
@@ -167,7 +167,6 @@ $(document).ready(function () {
         const cart_item_id = $(this).data('cart_item_id');
         const inputQty = $(this).siblings('.input-qty');
         const quantity = parseInt(inputQty.val(), 10);
-        console.log(quantity);
 
         const formData = {
             quantity: quantity,
