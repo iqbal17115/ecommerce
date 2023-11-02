@@ -21,6 +21,7 @@ class CartItemListResource extends JsonResource
             "product_info" => new CartProductDetailResource($this->product), // Correct the relationship name to 'product'
             "quantity" => $this->quantity,
             "shipping_charge" => $shippingService->calculateShippingCharges($this->product, $this->quantity),
+            "is_active" => $this->is_active
         ];
     }
 }

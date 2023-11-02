@@ -30,6 +30,8 @@ Route::controller(CartController::class)->group(function () {
     Route::post('cart/add', 'addToCart')->name('cart_add');
     Route::get('cart/lists', 'getCart');
     Route::put('cart-update/{cartItem}', 'updateCartItem')->name('cart_update');
+    Route::put('cart-status-update/{cartItem}', 'updateCartItemStatus')->name('cart_status_update');
+    Route::post('all-cart-status-update', 'updateCartAllItemStatus')->name('all_cart_status_update');
     Route::delete('cart-remove/{cartItem}', 'removeCartItem')->name('cart_remove');
 });
 

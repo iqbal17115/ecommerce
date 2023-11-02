@@ -11,7 +11,7 @@
                                 <thead>
                                     <tr>
                                         <th class="checkbox-col">
-                                            <input type="checkbox" id="selectAllProducts">
+                                            <input type="checkbox" id="select_all_products">
                                         </th>
                                         <td class="text-right" colspan="5" style="text-transform: capitalize;">
                                             <span class="text-dark">Standard, Estimate Delivery</span> <span
@@ -19,8 +19,7 @@
                                         </td>
                                     </tr>
                                 </thead>
-                            <tbody id="table_body">
-
+                                <tbody id="table_body"></tbody>
                         </table>
                     </div><!-- End .cart-table-container -->
                 </div><!-- End .col-lg-8 -->

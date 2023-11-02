@@ -19,6 +19,7 @@ class CreateCartItemsTable extends Migration
             $table->foreignUuid('user_id')->nullable()->index();
             $table->uuid('product_id')->nullable()->index();
             $table->integer('quantity');
+            $table->boolean('is_active')->nullable()->default(0);
             $table->timestamps();
         });
     }
