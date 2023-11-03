@@ -11,7 +11,7 @@ function showCartTableData(data) {
             cheked_all_check_box = false;
         }
         htmlContent += `
-    <tr class="product-row product cart_${item.id}" data-id="${item.id}">
+    <tr class="product-row product_row shadow product cart_${item.id}" data-id="${item.id}">
       <td class="checkbox-col">
         <input type="checkbox" class="product-checkbox"
           data-cart_item_id="${item.id}"
