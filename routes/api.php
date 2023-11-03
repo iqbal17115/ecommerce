@@ -33,6 +33,7 @@ Route::controller(CartController::class)->group(function () {
     Route::put('cart-status-update/{cartItem}', 'updateCartItemStatus')->name('cart_status_update');
     Route::post('all-cart-status-update', 'updateCartAllItemStatus')->name('all_cart_status_update');
     Route::delete('cart-remove/{cartItem}', 'removeCartItem')->name('cart_remove');
+    Route::get('checkout/cart/lists', 'getCheckoutCart')->name('checkout_cart_lists');
 });
 
 // Upazila

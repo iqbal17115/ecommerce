@@ -1,30 +1,20 @@
 @extends('layouts.ecommerce')
 @section('content')
-    <style>
-        .payment-icon {
-            display: inline-block;
-            cursor: pointer;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-        }
-
-        .payment-icon.active {
-            opacity: 1;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/checkout_page.css') }}">
     <main class="main main-test">
         <div class="container checkout-container">
             <input name="user_id" id="user_id_val" value="{{ $user->id }}" hidden />
+            <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
             <div class="row">
 
                 <div class="col-lg-7">
-                    <div id="collapseFour" class="collapse @if (Auth::user()) show @endif">
+                    <div id="collapseFour" class="collapse card @if (Auth::user()) show @endif">
                         <div class="shipping-info">
 
                             <!-- Shipping Address -->
                             @if (Auth::user())
-                                <div class="card shipping-address-card">
-                                    <div class="card-body">
+                                <div class="shipping-address-card">
+                                    <div class="">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h6 class="mb-0">Deliver to:</h6>
                                             <button type="button" class="btn btn-link btn-sm" class="btn btn-primary"
@@ -66,41 +56,36 @@
                 </div>
                 <!-- End .col-lg-8 -->
 
-                <div class="col-lg-5">
+                <div class="col-lg-5 py-2 shadow">
                     <div class="order-summary">
-                        <h3>Order Summary</h3>
+                        <div class="summary-section-heading pl-2">Order Summary</div>
 
                         <table class="table table-mini-cart">
                             <tfoot>
                                 <tr class="cart-subtotal">
-                                    <td>
-                                        <h4>Subtotal({{ count($products) }} Item{{ count($products) > 1 ? 's' : '' }})
-                                        </h4>
-                                    </td>
+                                    <td>Subtotal({{ count($products) }} Item{{ count($products) > 1 ? 's' : '' }})</td>
                                     <td class="price-col">{{ $currency?->icon }} <span class="cart_total_price">0</span>
                                     </td>
                                 </tr>
                                 <tr class="shipping-total">
                                     <td>
-                                        <h4>Shipping Fee</h4>
+                                        <div class="summary-section-heading">Shipping Fee</div>
                                     </td>
 
                                     <td class="shipping-col">
-                                        <span>{{ $currency?->icon }} <span class="shipping_amount"></span></span>
+                                        <span>{{ $currency?->icon }} <span class="shipping_charge_amount"></span></span>
                                     </td>
                                 </tr>
                                 <tr class="order-total">
+                                    <td>Total (VAT Inclusive if Applicable)</td>
                                     <td>
-                                        <h4>Total (VAT Inclusive if Applicable)</h4>
-                                    </td>
-                                    <td>
-                                        <b>{{ $currency?->icon }} <span class="total-price">0.00</span></b>
+                                        <b>{{ $currency?->icon }} <span class="total-price grand_total">0.00</span></b>
                                     </td>
                                 </tr>
                             </tfoot>
                         </table>
 
-                        <button type="submit" class="btn btn-dark btn-place-order" id="btn-place-order">
+                        <button type="submit" class="btn brand_color btn-place-order" id="btn-place-order">
                             Place Order
                         </button>
                     </div>
@@ -108,7 +93,6 @@
                 </div>
                 <!-- End .col-lg-4 -->
                 {{-- Start Show Products --}}
-                @if ($products)
                     {{-- Start payment Method --}}
                     <div class="card p-4 mx-3" style="width: 100%;">
                         <div class="row">
@@ -180,7 +164,7 @@
                                                         <p class="mb-0 text-dark">Standard Delivery Date:
                                                             {{ \Carbon\Carbon::now()->addDays(1)->format('d M Y') }}</p>
                                                         <p class="mb-0 text-dark">Items shipped from
-                                                            <strong>Aladdinne.com</strong>
+                                                            <strong>Aladdinne.ae</strong>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -188,52 +172,7 @@
 
 
                                             <table class="table table-cart">
-                                                <tbody>
-                                                    @php
-                                                        $total = 0;
-                                                        $allStatus1 = true;
-                                                    @endphp
-                                                    @if ($products)
-                                                        @foreach ($products as $id => $details)
-                                                            <tr class="product-row cart-{{ $id }}"
-                                                                data-id="{{ $id }}">
-                                                                <td>
-                                                                    <figure class="product-image-container">
-                                                                        <a href="javascript:void(0);"
-                                                                            class="product-image">
-                                                                            <img src="{{ asset('storage/product_photo/' . $details['image']) }}"
-                                                                                alt="product">
-                                                                        </a>
-
-                                                                        <a href="javascript:void(0);"
-                                                                            class="btn-remove remove-from-cart icon-cancel"
-                                                                            title="Remove Product"></a>
-                                                                    </figure>
-                                                                </td>
-                                                                <td class="product-col">
-                                                                    <h5 class="product-title">
-                                                                        <a
-                                                                            href="javascript:void(0);">{{ $details['name'] }}</a>
-                                                                    </h5>
-                                                                </td>
-                                                                <td>{{ $currency?->icon }}{{ $details['sale_price'] }}
-                                                                </td>
-                                                                <td>
-                                                                    <div class="product-single-qty">
-                                                                        <input value="{{ $details['quantity'] }}"
-                                                                            class="horizontal-quantity form-control product-quantity-{{ $id }}"
-                                                                            type="text">
-                                                                    </div><!-- End .product-single-qty -->
-                                                                </td>
-                                                                <td class="text-right"><span
-                                                                        class="subtotal-price subtotal-price-{{ $id }}">{{ $details['quantity'] * $details['sale_price'] }}</span>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    @endif
-
-                                                </tbody>
-
+                                                <tbody id="table_body"></tbody>
                                             </table>
                                         </div><!-- End .cart-table-container -->
                                     </div>
@@ -267,7 +206,7 @@
                             </div>
                         </div>
                     </div>
-                @endif
+
                 {{-- End Show Products --}}
             </div>
             <!-- End .row -->
@@ -276,26 +215,23 @@
         <!-- Shipping Address Modal -->
         @include('ecommerce.checkout.partials.address_modal')
         <!-- End Shipping Address Modal -->
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </main>
     <!-- End .main -->
 
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
+@endsection
+@push('scripts')
     <script src="{{ asset('js/panel/users/checkout/address.js') }}"></script>
+    <script src="{{ asset('js/panel/users/cart/checkout_page_cart.js') }}"></script>
 
     <script>
+        $(document).on('click', '#add_another_address', function() {
+            var user = <?php echo json_encode($user); ?>;
+            addressForm(user);
+        });
 
-
-    $(document).on('click', '#add_another_address', function () {
-        var user = <?php echo json_encode($user); ?>;
-        addressForm(user);
-});
         function userAddress() {
             loadUserAddress(@json($user->id ?? null));
         }
@@ -303,6 +239,7 @@
         $(document).ready(function() {
             userAddress();
         });
+
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-load');
             lazyImages.forEach(img => {
@@ -348,112 +285,5 @@
                 observer.observe(image);
             }
         });
-    </script>
-@endsection
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $("#btn-place-order").click(function(event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                // Validate save_shipping_address form
-                if ($("#shipping-address-add-form")[0].checkValidity()) {
-                    // If the save_shipping_address form is valid, submit it
-                    submitShippingAddressForm();
-                } else {
-                    // Show validation errors for save_shipping_address form
-                    $("#shipping-address-add-form").addClass('was-validated');
-                }
-            });
-
-            function submitShippingAddressForm() {
-                var shippingFormData = $("#shipping-address-add-form").serialize();
-
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('save_shipping_address') }}",
-                    data: shippingFormData,
-                    success: function(response) {
-                        var selectedPayment = $('.payment-icon.active').data('payment');
-                        if (selectedPayment) {
-                            // If the selected payment option is validated, proceed to submitShippingAddressForm
-                            // submitCheckoutForm();
-                        } else {
-                            alert('Select payment Method Please');
-                        }
-                    },
-                    error: function(error) {
-                        // Handle error response here
-                        console.log(error);
-                    }
-                });
-            }
-
-            function submitCheckoutForm() {
-                // Validate checkout-form
-                if ($("#checkout-form")[0].checkValidity()) {
-                    var selectedPayment = $('.payment-icon.active').data('payment');
-                    var checkoutFormData = $("#checkout-form").serialize();
-                    var selectedValue = $('input.custom-control-input:checked').val();
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('confirm_order') }}",
-                        data: checkoutFormData + '&selected_payment=' + selectedPayment +
-                            '&shipping_method=' + selectedValue,
-                        success: function(response) {
-                            if (response.status === 'success') {
-                                window.location.href =
-                                    "{{ route('order_confirmation') }}"; // Redirect to order_confirmation page
-                            }
-                        },
-                        error: function(error) {
-                            // Handle error response here
-                            console.log(error);
-                        }
-                    });
-                } else {
-                    // Show validation errors for checkout-form
-                    $("#checkout-form").addClass('was-validated');
-                }
-            }
-
-
-
-            $('.payment-icon').click(function(event) {
-                event.preventDefault();
-                $('.payment-icon').removeClass('active');
-                $(this).addClass('active');
-
-                var selectedPayment = $(this).data('payment');
-
-                $('#selected-payment').val(selectedPayment);
-            });
-
-            $("#shipping-address-add-form").submit(function(event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                var formData = $(this).serialize();
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('save_shipping_address') }}",
-                    data: formData,
-                    success: function(response) {
-                        // Handle success response here
-                        window.location.reload();
-                    },
-                    error: function(error) {
-                        // Handle error response here
-                        console.log(error);
-                    }
-                });
-            });
-
-            // Shipping Method Checked
-            $(".custom-control-input").on('change', function(event) {
-                shipping_method_id = $(this).val();
-                calculateShippingCharges(shipping_method_id);
-            });
-        });
-        // calculateShippingCharges();
     </script>
 @endpush

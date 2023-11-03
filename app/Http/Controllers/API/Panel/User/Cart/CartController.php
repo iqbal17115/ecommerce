@@ -10,9 +10,8 @@ use App\Http\Requests\User\Cart\UpdateCartItemRequest;
 use App\Http\Requests\User\Cart\UpdateCartItemStatusRequest;
 use App\Http\Resources\User\Cart\CartItemDetailResource;
 use App\Http\Resources\User\Cart\CartItemListResource;
-use App\Models\Backend\Product\Product;
+use App\Http\Resources\User\Checkout\Cart\CartItemListResource as CartCartItemListResource;
 use App\Models\Cart\CartItem;
-use App\Models\User;
 use App\Services\CartService;
 use App\Traits\BaseModel;
 use Exception;
@@ -69,7 +68,7 @@ class CartController extends Controller
     public function getCart(Request $request)
     {
         $cart = $this->getLists(CartItem::where("user_id", $request->user_id), $request->all(), CartItemListResource::class);
-        // $cart = $this->cartService->getCart(User::find($request->user_id));
+
         return Message::success(null, $cart);
     }
 
@@ -91,5 +90,12 @@ class CartController extends Controller
             // Handle any exception that occurs during the process
             return Message::error($e->getMessage());
         }
+    }
+
+    public function getCheckoutCart(Request $request)
+    {
+        $cart = $this->getLists(CartItem::where('is_active', 1)->where("user_id", $request->user_id), $request->all(), CartCartItemListResource::class);
+
+        return Message::success(null, $cart);
     }
 }

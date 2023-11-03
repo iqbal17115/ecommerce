@@ -26,7 +26,7 @@
 
                 <div class="col-lg-4 shadow py-1">
                     <div class="cart-summary">
-                        <div class="summary-section-heading">Order Summary</div>
+                        <div class="summary-section-heading pl-2">Order Summary</div>
 
                         <table class="table table-totals">
                             <tbody>
