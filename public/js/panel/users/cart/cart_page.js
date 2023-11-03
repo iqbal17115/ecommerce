@@ -27,7 +27,7 @@ function showCartTableData(data) {
       </td>
       <td class="product-col">
         <h5 class="product-title">
-          <a style="text-decoration: none;">${item.product_info.name}</a>
+          <a style="text-decoration: none;" class="font_size_14">${item.product_info.name}</a>
         </h5>
       </td>
       <td class="mx-2">${item.currency?.icon || ''}${item.product_info.product_price}</td>
@@ -218,6 +218,7 @@ $(document).ready(function () {
                 let currentCount = parseInt(cartCountElement.textContent, 10);
                 currentCount -= 1;
                 cartCountElement.textContent = currentCount;
+                calculateCartTotal();
                 toastrSuccessMessage(data.message);
             },
             (error) => {

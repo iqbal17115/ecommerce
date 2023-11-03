@@ -8,8 +8,8 @@
                 <div class="col-lg-8">
                     <div class="cart-table-container px-3">
                         <table class="table table-cart">
-                                <thead>
-                                    <tr>
+                                <thead class="mb-3">
+                                    <tr class="shadow">
                                         <th class="checkbox-col">
                                             <input type="checkbox" id="select_all_products">
                                         </th>
@@ -24,9 +24,9 @@
                     </div><!-- End .cart-table-container -->
                 </div><!-- End .col-lg-8 -->
 
-                <div class="col-lg-4 card py-1">
+                <div class="col-lg-4 shadow py-1">
                     <div class="cart-summary">
-                        <h3>CART TOTALS</h3>
+                        <div class="summary-section-heading">Order Summary</div>
 
                         <table class="table table-totals">
                             <tbody>
@@ -38,7 +38,7 @@
 
                                 <tr class="shipping-total">
                                     <td>
-                                        <h4>Shipping Carge</h4>
+                                        <div class="summary-section-heading">Shipping Carge</div>
                                     </td>
 
                                     <td class="shipping-col">
@@ -47,7 +47,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <div class="float-left">
+                                        <div>
                                             <div class="cart-discount mb-0">
                                                 <form action="#">
                                                     <div class="input-group">
@@ -73,7 +73,7 @@
                         </table>
 
                         <div class="checkout-methods">
-                            <a href="{{ route('checkout') }}" class="btn btn-block btn-dark">Proceed to Checkout
+                            <a href="{{ route('checkout') }}" class="btn btn-block brand_color text-dark">Proceed to Checkout
                                 <i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div><!-- End .cart-summary -->
