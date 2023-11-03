@@ -6,7 +6,7 @@
             <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="cart-table-container p-3">
+                    <div class="cart-table-container px-3">
                         <table class="table table-cart">
                                 <thead>
                                     <tr>
