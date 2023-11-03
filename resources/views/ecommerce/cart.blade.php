@@ -49,7 +49,7 @@
                                     <td colspan="2">
                                         <div>
                                             <div class="cart-discount mb-0">
-                                                <form action="#">
+                                                <form class="mb-0" action="#">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control form-control-sm"
                                                             placeholder="Coupon Code" required>
