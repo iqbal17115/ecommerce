@@ -191,6 +191,16 @@ $(document).ready(function () {
         );
     }
 
+    $(document).on('input', '.input-qty', function () {
+        const cart_item_id = $(this).siblings('.qty-btn-minus').data('cart_item_id');
+        const quantity = parseInt($(this).val(), 10);
+        const formData = {
+            quantity: quantity,
+        };
+    
+        submitAddItem(formData, cart_item_id);
+    });
+
     $('.update-cart').click(function () {
         // Implement the logic to update the cart
         // Send an AJAX PUT request to the cart API
