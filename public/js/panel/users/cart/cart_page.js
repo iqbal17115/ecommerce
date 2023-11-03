@@ -15,7 +15,7 @@ function showCartTableData(data) {
       <td class="checkbox-col">
         <input type="checkbox" class="product-checkbox"
           data-cart_item_id="${item.id}"
-          data-product-status="1" ${item.is_active === 1 ? 'checked' : ''}>
+          data-product-status="1" ${item.is_active == 1 ? 'checked' : ''}>
       </td>
       <td>
         <figure class="product-image-container">
