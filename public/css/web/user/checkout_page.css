@@ -92,3 +92,7 @@
     position: relative;
     font-weight: 500;
   }
+
+  .card_design {
+    background-color: white;
+  }

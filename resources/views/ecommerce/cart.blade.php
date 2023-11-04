@@ -1,12 +1,12 @@
 @extends('layouts.ecommerce')
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/cart_page.css') }}">
-    <main class="main">
+    <main class="main bg-gray py-3">
         <div class="container">
             <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="cart-table-container px-3">
+                    <div class="cart-table-container">
                         <table class="table table-cart">
                                 <thead class="mb-3">
                                     <tr class="shadow">
@@ -24,8 +24,8 @@
                     </div><!-- End .cart-table-container -->
                 </div><!-- End .col-lg-8 -->
 
-                <div class="col-lg-4 shadow py-1">
-                    <div class="cart-summary">
+                <div class="col-lg-4">
+                    <div class="cart-summary card_design shadow p-2">
                         <div class="summary-section-heading pl-2">Order Summary</div>
 
                         <table class="table table-totals">

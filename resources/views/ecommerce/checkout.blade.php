@@ -1,14 +1,14 @@
 @extends('layouts.ecommerce')
 @section('content')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/checkout_page.css') }}">
-    <main class="main main-test">
+    <main class="main main-test bg-gray py-3">
         <div class="container checkout-container">
             <input name="user_id" id="user_id_val" value="{{ $user->id }}" hidden />
             <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
             <div class="row">
 
                 <div class="col-lg-7">
-                    <div id="collapseFour" class="collapse shadow p-3 @if (Auth::user()) show @endif">
+                    <div id="collapseFour" class="collapse card_design shadow p-3 @if (Auth::user()) show @endif">
                         <div class="shipping-info">
 
                             <!-- Shipping Address -->
@@ -56,7 +56,7 @@
                 </div>
                 <!-- End .col-lg-8 -->
 
-                <div class="col-lg-5 py-2 shadow">
+                <div class="col-lg-5 py-2 card_design shadow">
                     <div class="order-summary">
                         <div class="summary-section-heading pl-2">Order Summary</div>
 
@@ -94,7 +94,7 @@
                 <!-- End .col-lg-4 -->
                 {{-- Start Show Products --}}
                     {{-- Start payment Method --}}
-                    <div class="p-4 mx-3 mt-2 shadow" style="width: 100%;">
+                    <div class="p-4 ml-3 mt-2 card_design shadow" style="width: 100%;">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     {{-- End Payment Method --}}
-                    <div class="p-4 mx-3 shadow" style="width: 100%;">
+                    <div class="p-4 ml-3 card_design shadow" style="width: 100%;">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
