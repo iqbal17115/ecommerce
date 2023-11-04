@@ -8,7 +8,7 @@ function showCartTableData(data) {
             total_shipping_charge += parseFloat(item.shipping_charge);
 
         htmlContent += `
-    <tr class="product-row product_row shadow product cart_${item.id}" data-id="${item.id}">
+    <tr class="product-row product_row product cart_${item.id}" data-id="${item.id}" style="box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);">
       <td>
         <figure class="product-image-container">
           <a href="javascript:void(0);" class="product-image">

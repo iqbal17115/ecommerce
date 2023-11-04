@@ -8,7 +8,7 @@
             <div class="row">
 
                 <div class="col-lg-7">
-                    <div id="collapseFour" class="collapse card @if (Auth::user()) show @endif">
+                    <div id="collapseFour" class="collapse shadow p-3 @if (Auth::user()) show @endif">
                         <div class="shipping-info">
 
                             <!-- Shipping Address -->
@@ -94,7 +94,7 @@
                 <!-- End .col-lg-4 -->
                 {{-- Start Show Products --}}
                     {{-- Start payment Method --}}
-                    <div class="card p-4 mx-3" style="width: 100%;">
+                    <div class="p-4 mx-3 mt-2 shadow" style="width: 100%;">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     {{-- End Payment Method --}}
-                    <div class="card p-4 mx-3" style="width: 100%;">
+                    <div class="p-4 mx-3 shadow" style="width: 100%;">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
