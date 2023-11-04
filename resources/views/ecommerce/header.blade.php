@@ -202,7 +202,8 @@
     <!-- End .header-middle -->
 
     <div class="header-bottom sticky-header d-none d-lg-flex" data-sticky-options="{'mobile': false}">
-        <div class="container">
+        {{-- container class of below --}}
+        <div class="container" style="max-width: 100%;">
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li class="active">
