@@ -96,3 +96,22 @@
   .card_design {
     background-color: white;
   }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .left-content {
+    flex: 1; /* Takes up remaining space */
+  }
+  
+  .close {
+    float: left;
+  }
+  
+  .right-content {
+    text-align: right;
+  }
+  

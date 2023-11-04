@@ -27,6 +27,7 @@ class AddressListResource extends JsonResource
             'country' => $this->country?->name,
             'division' => $this->division?->name,
             'district' => $this->district?->name,
+            'upazila' => $this->upazila?->name,
         ];
     }
 }

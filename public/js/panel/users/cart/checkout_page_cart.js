@@ -3,6 +3,7 @@ function showCartTableData(data) {
     let total = 0;
     let total_shipping_charge = 0;
     let cheked_all_check_box = true;
+    
     data.forEach((item) => {
             total += item.product_info.product_price * item.quantity;
             total_shipping_charge += parseFloat(item.shipping_charge);

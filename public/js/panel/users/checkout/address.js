@@ -189,11 +189,31 @@ $(document).on("click", "#instruction_modal", function (event) {
 function setAddressData(data) {
     // Initialize an empty variable to store the card HTML
     let cardHTML = '';
+    let default_address_content  = '';
+    let count_default = 0;
     // Loop through the dataArray
     data.forEach(data => {
         const address = data.is_default == 1 ? 'Default' : '';
         const set_as_default_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="set_as_default_address" data-address_id="${data.id}">Set As Default</a>` : '';
         const remove_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>` : '';
+        if(data.is_default == 1) {
+            count_default = count_default + 1;
+            default_address_content += `
+            <div class="col-md-4"><strong class="text-dark">${count_default}. Shipping address</strong></div>
+            <div class="col-md-8">
+                <p class="shipping-address">
+                    <span class="shipping_name text-dark">${data.name}</span><br>
+                    <span class="shipping_address text-dark">${data.shipping_address}</span><br>
+                    <span class="shipping_area text-dark">${data.division}, ${data.district}, ${data.upazila}</span><br>
+                    <span class="shipping-info text-dark">${data.mobile}</span><br>
+                    <span class="shipping-email text-dark">${data.email}</span>
+                </p>
+                <p class="text-dark" style="font-size: 12px;">
+                    Collect your parcel from the nearest Aladdinne Pick-up Point with a reduced shipping fee <a href="">Check Pick-up Points</a>
+                </p>
+            </div>
+            `;
+        }
 
         cardHTML += `
         <div class="col-md-4 mb-3">
@@ -235,14 +255,14 @@ function setAddressData(data) {
         <i class="fas fa-plus brand_text_color"></i> Add New Address
     </button>
     <button type="button" class="btn btn-sm brand_color" data-dismiss="modal">Close</button>`;
-
+    
+    $('#default_address_content').html(default_address_content);
     $('#address_footer').html(modalFooterHTML);
 }
 function loadUserAddress(user_id) {
     getDetails(
         "/api/user-address/lists?user_id=" + user_id,
         (data) => {
-            console.log(data.results.data);
             setAddressData(data.results.data);
         },
         (error) => {

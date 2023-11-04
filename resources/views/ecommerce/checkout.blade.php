@@ -22,30 +22,8 @@
                                                 <i class="fas fa-plus-circle"></i> Shipping Address
                                             </button>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-4"><strong class="text-dark">1. Shipping address</strong>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <p class="shipping-address">
-                                                    <span
-                                                        class="shipping-name text-dark">{{ Auth::user()?->name }}</span><br>
-                                                    <span
-                                                        class="shipping-info text-dark">{{ Auth::user()?->Contact?->shipping_address }}</span><br>
-                                                    <span
-                                                        class="shipping-info text-dark">{{ Auth::user()?->Contact?->division?->name }}-
-                                                        {{ Auth::user()?->Contact?->district?->name }}-
-                                                        {{ Auth::user()?->Contact?->upazila?->name }}-
-                                                        {{ Auth::user()?->Contact?->union?->name }}</span><br>
-                                                    <span
-                                                        class="shipping-info text-dark">{{ Auth::user()?->Contact?->mobile }}</span><br>
-                                                    <span class="shipping-email text-dark">{{ Auth::user()?->email }}</span>
-                                                </p>
-                                                <p class="text-dark" style="font-size: 12px;">
-                                                    Collect your parcel from the nearest Aladdinne Pick-up
-                                                    Point with a reduced shipping fee <a href="">Check Pick-up
-                                                        Points</a>
-                                                </p>
-                                            </div>
+                                        <div class="row" id="default_address_content">
+                                            
                                         </div>
 
                                     </div>
