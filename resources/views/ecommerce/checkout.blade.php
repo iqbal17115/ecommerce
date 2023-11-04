@@ -63,7 +63,7 @@
                             </tfoot>
                         </table>
 
-                        <button type="submit" class="btn brand_color btn-place-order" id="btn-place-order">
+                        <button type="submit" class="btn brand_color btn-place-order float-right" id="btn-place-order" style="padding: .7em 1em; margin-right: 44px;">
                             Place Order
                         </button>
                     </div>

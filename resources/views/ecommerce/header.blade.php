@@ -185,7 +185,7 @@
                             <div class="dropdown-cart-action">
                                 {{-- <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">Shopping
                                     Cart</a> --}}
-                                <a href="{{ route('cart') }}" class="btn btn-dark btn-block">Shopping Cart</a>
+                                <a href="{{ route('cart') }}" class="btn btn-block text-dark brand_color">Shopping Cart</a>
                             </div>
                             <!-- End .dropdown-cart-total -->
                         </div>
