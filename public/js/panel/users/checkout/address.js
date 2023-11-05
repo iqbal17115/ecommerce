@@ -191,6 +191,7 @@ function setAddressData(data) {
     let cardHTML = '';
     let default_address_content  = '';
     let count_default = 0;
+    if(data.length != 0) {
     // Loop through the dataArray
     data.forEach(data => {
         const address = data.is_default == 1 ? 'Default' : '';
@@ -203,10 +204,9 @@ function setAddressData(data) {
             <div class="col-md-8">
                 <p class="shipping-address">
                     <span class="shipping_name text-dark">${data.name}</span><br>
-                    <span class="shipping_address text-dark">${data.shipping_address}</span><br>
+                    <span class="shipping_address text-dark">${data.street_address}, ${data.building_name}</span><br>
                     <span class="shipping_area text-dark">${data.division}, ${data.district}, ${data.upazila}</span><br>
-                    <span class="shipping-info text-dark">${data.mobile}</span><br>
-                    <span class="shipping-email text-dark">${data.email}</span>
+                    <span class="shipping-info text-dark">${data.mobile}</span>
                 </p>
                 <p class="text-dark" style="font-size: 12px;">
                     Collect your parcel from the nearest Aladdinne Pick-up Point with a reduced shipping fee <a href="">Check Pick-up Points</a>
@@ -255,9 +255,13 @@ function setAddressData(data) {
         <i class="fas fa-plus brand_text_color"></i> Add New Address
     </button>
     <button type="button" class="btn btn-sm brand_color" data-dismiss="modal">Close</button>`;
-    
+
     $('#default_address_content').html(default_address_content);
     $('#address_footer').html(modalFooterHTML);
+} else {
+    loadAddressForm();
+}
+
 }
 function loadUserAddress(user_id) {
     getDetails(

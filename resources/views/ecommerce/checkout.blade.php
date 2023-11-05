@@ -18,12 +18,12 @@
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h6 class="mb-0">Deliver to:</h6>
                                             <button type="button" class="btn btn-link btn-sm" class="btn btn-primary"
-                                                data-toggle="modal" data-target="#myModal">
+                                                data-toggle="modal" data-target="#myAddressModal" id="addressModalButton">
                                                 <i class="fas fa-plus-circle"></i> Shipping Address
                                             </button>
                                         </div>
                                         <div class="row" id="default_address_content">
-                                            
+
                                         </div>
 
                                     </div>
@@ -205,11 +205,14 @@
     <script src="{{ asset('js/panel/users/cart/checkout_page_cart.js') }}"></script>
 
     <script>
+        var user = <?php echo json_encode($user); ?>;
         $(document).on('click', '#add_another_address', function() {
-            var user = <?php echo json_encode($user); ?>;
             addressForm(user);
         });
 
+        function loadAddressForm() {
+            addressForm(user);
+        }
         function userAddress() {
             loadUserAddress(@json($user->id ?? null));
         }
