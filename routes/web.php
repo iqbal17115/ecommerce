@@ -23,7 +23,6 @@ use App\Http\Controllers\Backend\Shipping\ShippingMethodController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
-use App\Http\Controllers\Backend\WebSetting\CouponController;
 use App\Http\Controllers\Backend\WebSetting\FeatureSettingController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
 use App\Http\Controllers\Ecommerce\AuthController;
@@ -36,6 +35,7 @@ use App\Http\Controllers\Frontend\OrderTracking\OrderTrackingController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
+use App\Http\Controllers\Web\Panel\Coupon\CouponController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
@@ -120,6 +120,7 @@ Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'cal
 Route::group(['middleware' => 'auth'], function () {
 
 
+    Route::get('coupons', [CouponController::class, 'index'])->name('coupons.view');
     Route::get('countries', [ShopSettingCountryController::class, 'index'])->name('countries.view');
     Route::get('divisions', [ShopSettingDivisionController::class, 'index'])->name('divisions.view');
     Route::get('districts', [ShopSettingDistrictController::class, 'index'])->name('districts.view');
@@ -435,19 +436,6 @@ Route::group([], function () {
         }
     );
     // End Advertisement
-
-    // Start Coupon
-    Route::group(
-        [],
-        function () {
-            Route::get('coupon', [CouponController::class, 'index'])->name('coupon');
-            Route::post('add-coupon', [CouponController::class, 'addCoupon'])->name('add.coupon');
-            Route::post('delete-coupon', [CouponController::class, 'deleteCoupon'])->name('delete.coupon');
-            Route::get('pagination/coupon-pagination-data', [CouponController::class, 'pagination']);
-            Route::get('search-coupon', [CouponController::class, 'searchCoupon'])->name('search.coupon');
-        }
-    );
-    // End Coupon
 
     // Start Block
     Route::group(

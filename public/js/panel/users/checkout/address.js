@@ -189,17 +189,17 @@ $(document).on("click", "#instruction_modal", function (event) {
 function setAddressData(data) {
     // Initialize an empty variable to store the card HTML
     let cardHTML = '';
-    let default_address_content  = '';
+    let default_address_content = '';
     let count_default = 0;
-    if(data.length != 0) {
-    // Loop through the dataArray
-    data.forEach(data => {
-        const address = data.is_default == 1 ? 'Default' : '';
-        const set_as_default_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="set_as_default_address" data-address_id="${data.id}">Set As Default</a>` : '';
-        const remove_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>` : '';
-        if(data.is_default == 1) {
-            count_default = count_default + 1;
-            default_address_content += `
+    if (data.length != 0) {
+        // Loop through the dataArray
+        data.forEach(data => {
+            const address = data.is_default == 1 ? 'Default' : '';
+            const set_as_default_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="set_as_default_address" data-address_id="${data.id}">Set As Default</a>` : '';
+            const remove_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>` : '';
+            if (data.is_default == 1) {
+                count_default = count_default + 1;
+                default_address_content += `
             <div class="col-md-4"><strong class="text-dark">${count_default}. Shipping address</strong></div>
             <div class="col-md-8">
                 <p class="shipping-address">
@@ -213,9 +213,9 @@ function setAddressData(data) {
                 </p>
             </div>
             `;
-        }
+            }
 
-        cardHTML += `
+            cardHTML += `
         <div class="col-md-4 mb-3">
         <div class="card bg-light mb-3">
         <div class="card-header">
@@ -245,22 +245,22 @@ function setAddressData(data) {
         </div>
         </div>
     `;
-    });
-    cardHTML += ``;
+        });
+        cardHTML += ``;
 
-    $("#address_content").html(cardHTML);
+        $("#address_content").html(cardHTML);
 
-    var modalFooterHTML = `
+        var modalFooterHTML = `
     <button type="button" class="btn btn-sm" id="add_another_address">
         <i class="fas fa-plus brand_text_color"></i> Add New Address
     </button>
     <button type="button" class="btn btn-sm brand_color" data-dismiss="modal">Close</button>`;
 
-    $('#default_address_content').html(default_address_content);
-    $('#address_footer').html(modalFooterHTML);
-} else {
-    loadAddressForm();
-}
+        $('#default_address_content').html(default_address_content);
+        $('#address_footer').html(modalFooterHTML);
+    } else {
+        loadAddressForm();
+    }
 
 }
 function loadUserAddress(user_id) {
@@ -550,7 +550,7 @@ function editAddressForm() {
         </div>
 </form>`;
 
-var modalFooterHTML = `
+    var modalFooterHTML = `
     <button type="button" class="btn btn-sm address_lists">
        <i class="fas fa-list-ul"></i>
     </button>
@@ -644,7 +644,7 @@ function addressForm(user) {
         </div>
 </form>`;
 
-var modalFooterHTML = `
+    var modalFooterHTML = `
     <button type="button" class="btn btn-sm address_lists">
        <i class="fas fa-list-ul"></i>
     </button>
@@ -856,27 +856,27 @@ $(document).on("click", ".edit_address", function (event) {
     getDetails(
         "/api/user-address/" + address_id,
         (data) => {
-                setEditData(data.results);
+            setEditData(data.results);
 
-                setTimeout(function () {
-                    $('.country_id').val(data.results.country_id);
-                    $('.country_id').trigger('change');
-                }, 1000);
+            setTimeout(function () {
+                $('.country_id').val(data.results.country_id);
+                $('.country_id').trigger('change');
+            }, 1000);
 
-                setTimeout(function () {
-                    $('#division_id').val(data.results.division_id);
-                    $('#division_id').trigger('change');
-                }, 100);
+            setTimeout(function () {
+                $('#division_id').val(data.results.division_id);
+                $('#division_id').trigger('change');
+            }, 100);
 
-                setTimeout(function () {
-                    $('#district_id').val(data.results.district_id);
-                    $('#district_id').trigger('change');
-                }, 1000);
+            setTimeout(function () {
+                $('#district_id').val(data.results.district_id);
+                $('#district_id').trigger('change');
+            }, 1000);
 
-                setTimeout(function () {
-                    $('#upazila_id').val(data.results.upazila_id);
-                    $('#upazila_id').trigger('change');
-                }, 1000);
+            setTimeout(function () {
+                $('#upazila_id').val(data.results.upazila_id);
+                $('#upazila_id').trigger('change');
+            }, 1000);
 
         },
         (error) => {

@@ -206,6 +206,7 @@
 
     <script>
         var user = <?php echo json_encode($user); ?>;
+
         $(document).on('click', '#add_another_address', function() {
             addressForm(user);
         });

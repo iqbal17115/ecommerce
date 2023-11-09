@@ -82,7 +82,13 @@
                            <span>Promotion</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="{{ route('coupon') }}">Coupon Codes</a></li>
+                           <li>
+                               <a href="javascript:void(0);" class="has-arrow">Coupon Info</a>
+                               <ul class="sub-menu" aria-expanded="true">
+                                   <li><a href="{{ route('coupons.view') }}">Coupons</a></li>
+                                   <li><a href="{{ route('seo-pages.index') }}">Coupon Products</a></li>
+                               </ul>
+                           </li>
                            <li><a href="javascript:void(0);">Offer</a></li>
                            <li><a href="javascript:void(0);">Reward</a></li>
                            <li><a href="javascript:void(0);">Gift Option</a></li>
@@ -187,7 +193,8 @@
                            <li><a href="{{ route('new-order') }}">Processing</a></li>
                            <li><a href="{{ route('shipped-order') }}">Shipped</a></li>
                            <li><a href="{{ route('in_transit-order') }}">In Transit</a></li>
-                           <li><a href="{{ route('arrival_at_distribution_center-order') }}">Arrival At Distribution Center</a></li>
+                           <li><a href="{{ route('arrival_at_distribution_center-order') }}">Arrival At Distribution
+                                   Center</a></li>
                            <li><a href="{{ route('out_for_delivery-order') }}">Out For Delivery</a></li>
                            <li><a href="{{ route('delivery_attempted-order') }}">Delivery Attempted</a></li>
                            <li><a href="{{ route('delivery_rescheduling-order') }}">Delivery Rescheduling</a></li>
