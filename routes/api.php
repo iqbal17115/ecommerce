@@ -6,6 +6,7 @@ use App\Http\Controllers\API\Panel\Address\DistrictController;
 use App\Http\Controllers\API\Panel\Address\DivisionController;
 use App\Http\Controllers\API\Panel\Address\UpazilaController;
 use App\Http\Controllers\API\Panel\Admin\Coupon\CouponController;
+use App\Http\Controllers\API\Panel\Admin\Coupon\CouponProductController;
 use App\Http\Controllers\API\Panel\Admin\Product\ProductController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDistrictController;
@@ -26,9 +27,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Coupon Settings
+Route::controller(CouponProductController::class)->group(function () {
+    Route::get('coupon-products/lists', 'lists')->name('coupon_products.lists');
+    Route::get('coupon-products', 'index')->name("coupon_products.index");
+    Route::get('coupon-products/{couponProduct}', 'show')->name("coupon_products.show");
+    Route::post('coupon-products', 'store')->name("coupon_products.store");
+    Route::put('coupon-products/{couponProduct}', 'update')->name("coupon_products.update");
+    Route::delete('coupon-products/{couponProduct}', 'destroy')->name('coupon_products.destroy');
+});
+
 // Coupons
 Route::controller(CouponController::class)->group(function () {
     Route::get('coupons/lists', 'lists')->name('coupons.lists');
+    Route::get('coupons/select-lists', 'selectLists')->name('coupons.select_lists');
     Route::get('coupons', 'index')->name("coupons.index");
     Route::get('coupons/{coupon}', 'show')->name("coupons.show");
     Route::post('coupons', 'store')->name("coupons.store");

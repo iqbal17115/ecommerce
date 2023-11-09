@@ -30,6 +30,7 @@ return [
         'status' => ['title' => 'Status', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
+
     'coupons' => [
         'code' => ['title' => 'Code', 'sorting' => true],
         'valid_from' => ['title' => 'Valid From', 'sorting' => true],
@@ -38,6 +39,12 @@ return [
         'value' => ['title' => 'Value', 'sorting' => true],
         'max_uses' => ['title' => 'Max Uses', 'sorting' => true],
         'is_active' => ['title' => 'is_active', 'sorting' => true],
+        'actions' => ['title' => 'Action', 'sorting' => false],
+    ],
+
+    'coupon_products' => [
+        'coupon' => ['title' => 'Coupon', 'sorting' => true],
+        'product' => ['title' => 'Products', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
 ];

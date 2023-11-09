@@ -36,6 +36,7 @@ use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
 use App\Http\Controllers\Web\Panel\Coupon\CouponController;
+use App\Http\Controllers\Web\Panel\Coupon\CouponProductController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
@@ -120,6 +121,7 @@ Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'cal
 Route::group(['middleware' => 'auth'], function () {
 
 
+    Route::get('coupon-products', [CouponProductController::class, 'index'])->name('coupon_products.view');
     Route::get('coupons', [CouponController::class, 'index'])->name('coupons.view');
     Route::get('countries', [ShopSettingCountryController::class, 'index'])->name('countries.view');
     Route::get('divisions', [ShopSettingDivisionController::class, 'index'])->name('divisions.view');

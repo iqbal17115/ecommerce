@@ -4,20 +4,25 @@ namespace App\Http\Controllers\API\Panel\Admin\Coupon;
 
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminPanel\Coupon\CouponListRequest;
-use App\Http\Requests\AdminPanel\Coupon\CouponRequest;
-use App\Http\Resources\AdminPanel\Coupon\CouponDetailResource;
-use App\Http\Resources\AdminPanel\Coupon\CouponDatatableResource;
-use App\Http\Resources\AdminPanel\Coupon\SelectCouponResource;
-use App\Models\Coupon;
 use App\Traits\BaseModel;
+use App\Http\Requests\AdminPanel\CouponProduct\CouponProductRequest;
+use App\Http\Resources\AdminPanel\CouponProduct\CouponProductDatatableResource;
+use App\Models\Coupon;
+use App\Services\CouponProductService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CouponController extends Controller
+class CouponProductController extends Controller
 {
     use BaseModel;
+    protected $couponProductService;
+
+    public function __construct(CouponProductService $couponProductService)
+    {
+        $this->couponProductService = $couponProductService;
+    }
+
     /**
      * Lists
      *
@@ -27,7 +32,7 @@ class CouponController extends Controller
     public function lists(Request $request): bool|string
     {
         try {
-            return $this->dataTable(Coupon::query(), $request->all(), CouponDatatableResource::class);
+            return $this->dataTable(Coupon::query(), $request->all(), CouponProductDatatableResource::class);
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
         }
@@ -53,25 +58,6 @@ class CouponController extends Controller
     }
 
     /**
-     * Select Lists
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function selectLists(Request $request): JsonResponse
-    {
-        try {
-            // Get the lists
-            $lists = Coupon::getLists(Coupon::query(), $request->all(), SelectCouponResource::class);
-
-            // Return success response with the lists
-            return Message::success(null, $lists);
-        } catch (Exception $ex) {
-            return Message::error($ex->getMessage());
-        }
-    }
-
-    /**
      * Show
      *
      * @param Coupon $coupon
@@ -91,17 +77,17 @@ class CouponController extends Controller
     /**
      * Store
      *
-     * @param CouponRequest $couponRequest
+     * @param CouponProductRequest $couponProductRequest
      * @return JsonResponse
      */
-    public function store(CouponRequest $couponRequest): JsonResponse
+     public function store(CouponProductRequest $couponProductRequest): JsonResponse
     {
         try {
-            // Validate the couponRequest data and store the data
-            $coupon = Coupon::create($couponRequest->validated());
+            // Validate the couponProductRequest data and store the data
+            $coupon = $this->couponProductService->store($couponProductRequest->validated());
 
             // Return a success message with the stored data
-            return Message::success(__("message.save"), CouponDetailResource::make($coupon));
+            return Message::success(__("message.save"));
         } catch (Exception $ex) {
             // Return an error message containing the exception
             return $this->handleException($ex);

@@ -33,4 +33,8 @@ class Coupon extends Model
     protected $searchable = [
         'code'
     ];
+
+    public function coupon_products() {
+        return $this->hasMany(CouponProduct::class);
+    }
 }
