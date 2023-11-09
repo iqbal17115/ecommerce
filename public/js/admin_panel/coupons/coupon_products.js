@@ -107,10 +107,8 @@ function loadDataTable() {
 }
 
 function products(data) {
-    console.log(data.products.name);
-    return `
-       <a>${data}</a>
-    `;
+    const productNames = Object.values(data.products).map(product => product.products.name);
+    return productNames.map(name => `<a>${name}</a>`).join(', ');
 }
 
 // Generates linkable text for a coupon with an ID and text
