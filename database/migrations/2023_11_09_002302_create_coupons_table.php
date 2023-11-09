@@ -22,8 +22,8 @@ class CreateCouponsTable extends Migration
             $table->enum('type', array_keys(CouponTypeEnum::getCouponTypeTypes()));
             $table->decimal('value', 10, 2);
             $table->integer('max_uses')->nullable();
-            $table->dateTime('valid_from');
-            $table->dateTime('valid_to');
+            $table->date('valid_from');
+            $table->date('valid_to');
             $table->integer('minimum_order_amount')->nullable();
             $table->integer('usage_limit_per_user')->nullable();
             $table->integer('usage_count')->default(0);

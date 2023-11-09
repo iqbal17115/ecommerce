@@ -30,4 +30,14 @@ return [
         'status' => ['title' => 'Status', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
+    'coupons' => [
+        'code' => ['title' => 'Code', 'sorting' => true],
+        'valid_from' => ['title' => 'Valid From', 'sorting' => true],
+        'valid_to' => ['title' => 'Valid To', 'sorting' => true],
+        'type' => ['title' => 'Type', 'sorting' => true],
+        'value' => ['title' => 'Value', 'sorting' => true],
+        'max_uses' => ['title' => 'Max Uses', 'sorting' => true],
+        'is_active' => ['title' => 'is_active', 'sorting' => true],
+        'actions' => ['title' => 'Action', 'sorting' => false],
+    ],
 ];

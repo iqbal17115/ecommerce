@@ -17,6 +17,7 @@ class CouponController extends Controller
 
         $this->mainRoute = "coupons";
         $this->viewPath = "admin_panel.coupons.coupons";
+        $this->tableHeaders = config("tables.coupons");
         $this->isFilterExists = false;
     }
 

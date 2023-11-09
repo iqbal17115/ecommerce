@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Panel\Address\CountryController;
 use App\Http\Controllers\API\Panel\Address\DistrictController;
 use App\Http\Controllers\API\Panel\Address\DivisionController;
 use App\Http\Controllers\API\Panel\Address\UpazilaController;
+use App\Http\Controllers\API\Panel\Admin\Coupon\CouponController;
 use App\Http\Controllers\API\Panel\Admin\Product\ProductController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDistrictController;
@@ -24,6 +25,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Coupons
+Route::controller(CouponController::class)->group(function () {
+    Route::get('coupons/lists', 'lists')->name('coupons.lists');
+    Route::get('coupons', 'index')->name("coupons.index");
+    Route::get('coupons/{coupon}', 'show')->name("coupons.show");
+    Route::post('coupons', 'store')->name("coupons.store");
+    Route::put('coupons/{coupon}', 'update')->name("coupons.update");
+    Route::delete('coupons/{coupon}', 'destroy')->name('coupons.destroy');
+});
 
 // Cart
 Route::controller(CartController::class)->group(function () {
