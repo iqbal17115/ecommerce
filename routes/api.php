@@ -31,10 +31,10 @@ use Illuminate\Support\Facades\Route;
 Route::controller(CouponProductController::class)->group(function () {
     Route::get('coupon-products/lists', 'lists')->name('coupon_products.lists');
     Route::get('coupon-products', 'index')->name("coupon_products.index");
-    Route::get('coupon-products/{couponProduct}', 'show')->name("coupon_products.show");
+    Route::get('coupon-products/{coupon}', 'show')->name("coupon_products.show");
     Route::post('coupon-products', 'store')->name("coupon_products.store");
-    Route::put('coupon-products/{couponProduct}', 'update')->name("coupon_products.update");
-    Route::delete('coupon-products/{couponProduct}', 'destroy')->name('coupon_products.destroy');
+    Route::put('coupon-products/{coupon}', 'update')->name("coupon_products.update");
+    Route::delete('coupon-products/{coupon}', 'destroy')->name('coupon_products.destroy');
 });
 
 // Coupons

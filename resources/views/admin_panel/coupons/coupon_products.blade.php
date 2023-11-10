@@ -46,7 +46,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="product_id">Products</label>
-                                    <select class="form-control" name="product_id[]" id="product_id" multiple>
+                                    <select class="form-control" name="product_id[]" id="product_id" multiple style="width: 100%;" required>
                                         <option value="">-- Select --</option>
                                         @foreach($model as $product)
                                         <option value="{{$product->id}}">{{$product->name}}</option>

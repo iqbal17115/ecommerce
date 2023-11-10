@@ -1,15 +1,25 @@
 // Function to set the selected company ID and name in the form
-function setCouponData(coupon) {
-    $("#targeted_form #row_id").val(coupon['id']);
-    $("#targeted_form #code").val(coupon['code']);
-    $("#targeted_form #type").val(coupon['type']);
-    $("#targeted_form #value").val(coupon['value']);
-    $("#targeted_form #max_uses").val(coupon['max_uses']);
-    $("#targeted_form #valid_from").val(coupon['valid_from']);
-    $("#targeted_form #valid_to").val(coupon['valid_to']);
-    $("#targeted_form #minimum_order_amount").val(coupon['minimum_order_amount']);
-    $("#targeted_form #usage_limit_per_user").val(coupon['usage_limit_per_user']);
-    var myModal = new bootstrap.Modal(document.getElementById("couponModal"));
+function setCouponProductData(coupon_product) {
+    $("#targeted_form #row_id").val(coupon_product['id']);
+    const productIds = Object.values(coupon_product.products).map(product => product.products.id);
+
+    const selectElement = $("#targeted_form #product_id");
+    selectElement.find('option').each(function() {
+        const optionValue = $(this).val();
+        if (productIds.includes(optionValue)) {
+            $(this).prop('selected', true);
+        }
+    });
+
+    // Trigger change event to update the display (if needed)
+    selectElement.trigger('change');
+
+    appendSelect2Option('#parent_coupons #coupon_id', {
+        'name': coupon_product['code'],
+        'id': coupon_product['id']
+    });
+    couponsInitialize();
+    var myModal = new bootstrap.Modal(document.getElementById("couponProductModal"));
     myModal.show();
 }
 
@@ -24,8 +34,7 @@ $(document).on("click", ".update_row", function (event) {
     getDetails(
         "/api/coupon-products/" + row_id,
         (data) => {
-            console.log(data);
-            setCouponData(data.results);
+            setCouponProductData(data.results);
         },
         (error) => {
             toastrErrorMessage(error.responseJSON.message);
@@ -108,7 +117,7 @@ function loadDataTable() {
 
 function products(data) {
     const productNames = Object.values(data.products).map(product => product.products.name);
-    return productNames.map(name => `<a>${name}</a>`).join(', ');
+    return productNames.map(name => `<a>${name}</a><br>`).join('');
 }
 
 // Generates linkable text for a coupon with an ID and text

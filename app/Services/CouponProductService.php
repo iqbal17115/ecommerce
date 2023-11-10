@@ -26,7 +26,7 @@ class CouponProductService
 
             $couponId = $validatedData['coupon_id'];
             $productIds = $validatedData['product_id'];
-    
+
             // Get the current product associations for the given coupon
             $currentProductIds = CouponProduct::where('coupon_id', $couponId)->pluck('product_id')->all();
 
@@ -41,10 +41,10 @@ class CouponProductService
                     'product_id' => $productId,
                 ]);
             }
-    
-            // Remove product associations that are no longer needed
+
+            // // Remove product associations that are no longer needed
             CouponProduct::where('coupon_id', $couponId)
-                ->whereIn('product_id', [$productIdsToRemove])
+                ->whereIn('product_id', $productIdsToRemove)
                 ->delete();
 
             DB::commit();
