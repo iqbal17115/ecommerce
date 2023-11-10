@@ -38,7 +38,7 @@
 
                                 <tr class="shipping-total">
                                     <td>
-                                        <div class="summary-section-heading">Shipping Carge</div>
+                                        Shipping Carge
                                     </td>
 
                                     <td class="shipping-col">
@@ -47,7 +47,7 @@
                                 </tr>
                                 <tr class="discount-total">
                                     <td>
-                                        <div class="summary-section-heading">Discount</div>
+                                        Discount
                                     </td>
 
                                     <td class="shipping-col">
