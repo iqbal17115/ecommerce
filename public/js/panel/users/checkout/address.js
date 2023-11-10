@@ -361,7 +361,6 @@ $("#targeted_form").submit(function (event) {
         type: $("input[name='type']:checked").val(),
         is_default: 0
     };
-    console.log(data);
 
     // Submit the form
     submitForm(data, id);

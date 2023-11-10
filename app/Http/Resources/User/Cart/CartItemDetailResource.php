@@ -17,7 +17,7 @@ class CartItemDetailResource extends JsonResource
         return [
             "id" => $this->id,
             "product_info" => new CartProductDetailResource($this->product),
-            "quantity" => $this->quantity,
+            "quantity" => (int)$this->quantity,
         ];
     }
 }

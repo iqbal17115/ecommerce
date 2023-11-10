@@ -19,8 +19,9 @@ class CartItemListResource extends JsonResource
         return [
             "id" => $this->id,
             "product_info" => new CartProductDetailResource($this->product), // Correct the relationship name to 'product'
-            "quantity" => $this->quantity,
+            "quantity" => (int)$this->quantity,
             "shipping_charge" => $shippingService->calculateShippingCharges($this->product, $this->quantity),
+            "coupon_discount" => (float)$this?->cart_item_coupon?->value ?? 0,
             "is_active" => $this->is_active
         ];
     }

@@ -2,14 +2,18 @@ function showCartTableData(data) {
     let htmlContent = '';
     let total = 0;
     let total_shipping_charge = 0;
+    let coupon_discount = 0;
     let cheked_all_check_box = true;
     data.forEach((item) => {
+        console.log(item);
         if (item.is_active == 1) {
             total += item.product_info.product_price * item.quantity;
             total_shipping_charge += parseFloat(item.shipping_charge);
+            coupon_discount += item.coupon_discount;
         } else {
             cheked_all_check_box = false;
         }
+        console.log(coupon_discount);
         htmlContent += `
     <tr class="product-row product_row shadow product cart_${item.id}" data-id="${item.id}">
       <td class="checkbox-col">
@@ -47,13 +51,14 @@ function showCartTableData(data) {
   `;
     });
 
-    if(cheked_all_check_box == true) {
+    if (cheked_all_check_box == true) {
         $("#select_all_products").prop("checked", true);
     }
     $('#table_body').html(htmlContent);
     $('.cart_total_price').text(total);
     $('.shipping_charge_amount').text(total_shipping_charge);
-    $('.grand_total').text(total + total_shipping_charge);
+    $('.coupon_discount').text(coupon_discount);
+    $('.grand_total').text(total + total_shipping_charge - coupon_discount);
 
 }
 
@@ -122,10 +127,12 @@ $(document).ready(function () {
         let cartTotal = 0;
         let total_shipping_charge = 0;
         let total_item_qty = 0;
+        let coupon_discount = 0;
         data.forEach(item => {
             if (item.is_active == 1) {
                 cartTotal += item.product_info.product_price * item.quantity;
                 total_shipping_charge += parseFloat(item.shipping_charge);
+                coupon_discount += parseFloat(item.coupon_discount);
             }
             total_item_qty += parseInt(item.quantity);
         });
@@ -133,7 +140,8 @@ $(document).ready(function () {
         $('.cart_total_price').text(cartTotal);
         $('.shipping_charge_amount').text(total_shipping_charge);
         $('.cart-count').text(total_item_qty);
-        $('.grand_total').text(cartTotal + total_shipping_charge);
+        $('.coupon_discount').text(coupon_discount);
+        $('.grand_total').text(cartTotal + total_shipping_charge - coupon_discount);
     }
 
     function calculateCartTotal() {
@@ -148,6 +156,39 @@ $(document).ready(function () {
             }
         );
     }
+
+    // Function to handle form submission
+    function submitForm(formData, selectedId = "") {
+        saveAction(
+            "store",
+            "/api/coupon-apply",
+            formData,
+            selectedId,
+            (data) => {
+                calculateCartTotal();
+                $('#apply_coupon')[0].reset();
+                if (data.message == "Coupon applied successfully") {
+                    toastrSuccessMessage(data.message);
+                } else {
+                    toastrErrorMessage(data.message);
+                }
+            },
+            (error) => {
+
+            }
+        );
+    }
+
+    $("#apply_coupon").submit(function (event) {
+        event.preventDefault();
+
+        const formData = {
+            user_id: $("#temp_user_id").data('user_id'),
+            coupon_code: $("#coupon_code").val()
+        };
+
+        submitForm(formData, '');
+    });
 
     function getCartItem() {
         const user_id = $("#temp_user_id").data('user_id');
@@ -197,7 +238,7 @@ $(document).ready(function () {
         const formData = {
             quantity: quantity,
         };
-    
+
         submitAddItem(formData, cart_item_id);
     });
 

@@ -45,13 +45,22 @@
                                         <span>{{ $currency?->icon }} <span class="shipping_charge_amount"></span></span>
                                     </td>
                                 </tr>
+                                <tr class="discount-total">
+                                    <td>
+                                        <div class="summary-section-heading">Discount</div>
+                                    </td>
+
+                                    <td class="shipping-col">
+                                        <span>{{ $currency?->icon }} <span class="coupon_discount"></span></span>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td colspan="2">
                                         <div>
                                             <div class="cart-discount mb-0">
-                                                <form class="mb-0" action="#">
+                                                <form class="mb-0" id="apply_coupon">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control form-control-sm"
+                                                        <input type="text" name="coupon_code" id="coupon_code" class="form-control form-control-sm"
                                                             placeholder="Coupon Code" required>
                                                         <div class="input-group-append">
                                                             <button class="btn btn-sm" type="submit">Apply Coupon</button>
