@@ -32,7 +32,7 @@
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td>{{ $currency?->icon }} <span class="cart_total_price"></span>
+                                    <td style="text-align: right;">{{ $currency?->icon }} <span class="cart_total_price"></span>
                                     </td>
                                 </tr>
 
@@ -41,7 +41,7 @@
                                         Shipping Carge
                                     </td>
 
-                                    <td class="shipping-col">
+                                    <td class="shipping-col" style="text-align: right;">
                                         <span>{{ $currency?->icon }} <span class="shipping_charge_amount"></span></span>
                                     </td>
                                 </tr>
@@ -50,7 +50,7 @@
                                         Discount
                                     </td>
 
-                                    <td class="shipping-col">
+                                    <td class="shipping-col" style="text-align: right;">
                                         <span>{{ $currency?->icon }} <span class="coupon_discount"></span></span>
                                     </td>
                                 </tr>
@@ -63,7 +63,7 @@
                                                         <input type="text" name="coupon_code" id="coupon_code" class="form-control form-control-sm"
                                                             placeholder="Coupon Code" required>
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-sm" type="submit">Apply Coupon</button>
+                                                            <button class="btn btn-sm text-light" style="background-color: #25a5d8;" type="submit">Apply Coupon</button>
                                                         </div>
                                                     </div><!-- End .input-group -->
                                                 </form>
@@ -76,7 +76,7 @@
                             <tfoot>
                                 <tr>
                                     <td>Total</td>
-                                    <td>{{ $currency?->icon }} <span class="total-price grand_total"></span></td>
+                                    <td style="text-align: right;">{{ $currency?->icon }} <span class="total-price grand_total"></span></td>
                                 </tr>
                             </tfoot>
                         </table>
