@@ -113,7 +113,7 @@ class ApplyCouponProductService
             if ($is_apply) {
                 return 'Coupon applied successfully';
             } else {
-                return 'Something went wrong!';
+                return 'Coupon already applied!';
             }
             // Return a success response
 
