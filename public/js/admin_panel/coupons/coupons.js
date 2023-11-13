@@ -15,7 +15,7 @@ function setCouponData(coupon) {
 
 // Attach a click event handler to the update link
 $(document).on("click", ".update_row", function (event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
     // Get the countries ID from the data attribute
     const row_id = $(this).data("id");
@@ -99,6 +99,52 @@ function submitForm(formData, selectedId = "") {
     );
 }
 
+function submitChangeStatus(formData, selectedId = "") {
+    confirmAction('Change Status', 'Are you sure want to change status', () => {
+        saveAction(
+            "update",
+            "/api/coupons-status",
+            formData,
+            selectedId,
+            (data) => {
+                toastrSuccessMessage(data.message);
+                table.clear().draw();
+            },
+            (error) => {
+                toastrErrorMessage(error.responseJSON.message);
+            }
+        );
+    });
+}
+
+$(document).on("click", ".change_status", function (event) {
+    const row_id = $(this).data("id");
+    const is_active = $(this).data("is_active");
+
+    const form_data = {
+        is_active: is_active
+    };
+
+    // Submit the form
+    submitChangeStatus(form_data, row_id);
+});
+
+function changeStatus(id, is_active) {
+    const statusButton = is_active == 1
+        ? `
+            <button data-is_active="0" data-id="${id}" class="btn btn-sm btn-outline-danger change_status">
+                <span class="">Inactive</span>
+            </button>
+          `
+        : `
+            <button data-is_active="1" data-id="${id}" class="btn btn-sm btn-outline-success change_status">
+                <span class="">Active</span>
+            </button>
+          `;
+
+    return statusButton;
+}
+
 // Load the company data table
 function loadDataTable() {
     initializeDataTable(
@@ -110,7 +156,10 @@ function loadDataTable() {
             generateColumn('type', null, 'type'),
             generateColumn('value', null, 'value'),
             generateColumn('max_uses', null, 'max_uses'),
-            generateColumn('is_active', null, 'is_active'),
+            generateColumn('change_status', (data, type, row) => changeStatus(row.id, row.is_active), 'name'),
+            generateColumn('is_active', (data, type, row) => {
+                return row.is_active == 1 ? 'Active' : 'Inactive';
+            }, 'is_active'),
             generateColumn('action', (data, type, row) => linkableActions(row.id), 'name'),
         ]
     );

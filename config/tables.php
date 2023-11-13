@@ -38,7 +38,8 @@ return [
         'type' => ['title' => 'Type', 'sorting' => true],
         'value' => ['title' => 'Value', 'sorting' => true],
         'max_uses' => ['title' => 'Max Uses', 'sorting' => true],
-        'is_active' => ['title' => 'is_active', 'sorting' => true],
+        'change_status' => ['title' => 'Change Status', 'sorting' => true],
+        'is_active' => ['title' => 'Status', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
 

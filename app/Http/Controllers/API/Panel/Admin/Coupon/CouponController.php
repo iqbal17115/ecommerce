@@ -6,6 +6,7 @@ use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\Coupon\CouponListRequest;
 use App\Http\Requests\AdminPanel\Coupon\CouponRequest;
+use App\Http\Requests\AdminPanel\Coupon\CouponStatusUpdateRequest;
 use App\Http\Resources\AdminPanel\Coupon\CouponDetailResource;
 use App\Http\Resources\AdminPanel\Coupon\CouponDatatableResource;
 use App\Http\Resources\AdminPanel\Coupon\SelectCouponResource;
@@ -146,6 +147,27 @@ class CouponController extends Controller
         } catch (Exception $ex) {
             // Return an error message containing the exception
             return $this->handleException($ex);
+        }
+    }
+
+      /**
+     * Update District Location
+     *
+     * @param CouponStatusUpdateRequest $couponStatusUpdateRequest
+     * @param Coupon $coupon
+     * @return JsonResponse
+     */
+    public function statusUpdate(CouponStatusUpdateRequest $couponStatusUpdateRequest, Coupon $coupon): JsonResponse
+    {
+        try {
+            // Update coupon
+            $coupon->update($couponStatusUpdateRequest->validated());
+
+            //Success Response
+            return Message::success(__("messages.success_update"));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
         }
     }
 }

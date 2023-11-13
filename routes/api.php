@@ -52,6 +52,7 @@ Route::controller(CouponController::class)->group(function () {
     Route::post('coupons', 'store')->name("coupons.store");
     Route::put('coupons/{coupon}', 'update')->name("coupons.update");
     Route::delete('coupons/{coupon}', 'destroy')->name('coupons.destroy');
+    Route::put('coupons-status/{coupon}', 'statusUpdate')->name('coupons_status.update');
 });
 
 // Cart
