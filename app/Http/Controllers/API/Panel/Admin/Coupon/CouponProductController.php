@@ -10,6 +10,7 @@ use App\Traits\BaseModel;
 use App\Http\Requests\AdminPanel\CouponProduct\CouponProductRequest;
 use App\Http\Resources\AdminPanel\Coupon\CouponDetailResource;
 use App\Http\Resources\AdminPanel\CouponProduct\CouponProductDatatableResource;
+use App\Models\Backend\Product\Product;
 use App\Models\Coupon;
 use App\Services\CouponProductService;
 use Exception;
@@ -24,6 +25,17 @@ class CouponProductController extends Controller
     public function __construct(CouponProductService $couponProductService)
     {
         $this->couponProductService = $couponProductService;
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $query = $request->input('query');
+
+        $products = Product::where('name', 'like', '%' . $query . '%')
+            ->whereNotIn('id', $request->input('existingProducts'))
+            ->get();
+
+        return response()->json($products);
     }
 
     /**

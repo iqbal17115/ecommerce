@@ -86,7 +86,6 @@
                                <a href="javascript:void(0);" class="has-arrow">Coupon Info</a>
                                <ul class="sub-menu" aria-expanded="true">
                                    <li><a href="{{ route('coupons.view') }}">Coupons</a></li>
-                                   <li><a href="{{ route('coupon_products.view') }}">Coupon Products</a></li>
                                </ul>
                            </li>
                            <li><a href="javascript:void(0);">Offer</a></li>

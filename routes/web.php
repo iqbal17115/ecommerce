@@ -121,7 +121,7 @@ Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'cal
 Route::group(['middleware' => 'auth'], function () {
 
 
-    Route::get('coupon-products', [CouponProductController::class, 'index'])->name('coupon_products.view');
+    Route::get('coupon-products/{coupon}/view', [CouponProductController::class, 'index'])->name('coupon_products.view');
     Route::get('coupons', [CouponController::class, 'index'])->name('coupons.view');
     Route::get('countries', [ShopSettingCountryController::class, 'index'])->name('countries.view');
     Route::get('divisions', [ShopSettingDivisionController::class, 'index'])->name('divisions.view');

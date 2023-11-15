@@ -1,51 +1,91 @@
-// Function to set the selected company ID and name in the form
-function setCouponProductData(coupon_product) {
-    $("#targeted_form #row_id").val(coupon_product['id']);
-    const productIds = Object.values(coupon_product.products).map(product => product.products.id);
+var selectedProductIds = [];
 
-    const selectElement = $("#targeted_form #product_id");
-    selectElement.find('option').each(function() {
-        const optionValue = $(this).val();
-        if (productIds.includes(optionValue)) {
-            $(this).prop('selected', true);
-        }
+$('#searchInput').on('input', function () {
+    var query = $(this).val();
+    var data = { query: query, existingProducts: selectedProductIds };
+    getSearchProducts(data);
+});
+
+$(document).on('click', '#productList li', function () {
+    var productId = $(this).data('id');
+    addProductToList(productId);
+});
+
+$(document).on('click', '#selectedProducts button.remove-product', function () {
+    var productId = $(this).parent().data('id');
+    removeProductFromList(productId);
+});
+
+function displayProducts(products) {
+    var productList = $('#productList');
+    productList.empty();
+
+    products.forEach(function (product) {
+        productList.append('<li data-id="' + product.id + '">' + product.name + '</li>');
     });
 
-    // Trigger change event to update the display (if needed)
-    selectElement.trigger('change');
-
-    appendSelect2Option('#parent_coupons #coupon_id', {
-        'name': coupon_product['code'],
-        'id': coupon_product['id']
-    });
-    couponsInitialize();
-    var myModal = new bootstrap.Modal(document.getElementById("couponProductModal"));
-    myModal.show();
+    // Show the product list dropdown
+    productList.show();
 }
 
-// Attach a click event handler to the update link
-$(document).on("click", ".update_row", function (event) {
-    event.preventDefault();
+function addProductToList(productId) {
+    var selectedProductsList = $('#selectedProducts');
+    var productItem = $('#productList li[data-id="' + productId + '"]');
 
-    // Get the countries ID from the data attribute
-    const row_id = $(this).data("id");
+    // Check if the product is already in the selected list
+    if (selectedProductIds.indexOf(productId) === -1) {
+        // If not, add it to the list
+        selectedProductIds.push(productId);
+        selectedProductsList.append('<li data-id="' + productId + '">' + getProductDetails(productId) + '<button class="remove-product">Remove</button></li>');
+        // Remove the product from the search list
+        productItem.remove();
+        $("#searchInput").val("");
+        // Hide the product list dropdown
+        $('#productList').hide();
+    }
+}
 
-    // Get countries details and show them in a modal
-    getDetails(
-        "/api/coupon-products/" + row_id,
+function removeProductFromList(productId) {
+    // Remove the product from the selected list
+    var selectedProductsList = $('#selectedProducts');
+    selectedProductsList.find('li[data-id="' + productId + '"]').remove();
+
+    // Add the product back to the search list if needed
+    // (you might fetch it from the server again or use existing data)
+    // Example: productList.append('<li data-id="' + productId + '">' + getProductDetails(productId) + '</li>');
+
+    // Remove the product ID from the selectedProductIds array
+    selectedProductIds = selectedProductIds.filter(id => id !== productId);
+}
+
+function getProductDetails(productId) {
+    // Implement a function to get product details by ID
+    // This is a placeholder; replace it with your actual logic
+    return 'Product Name: ' + $('#productList li[data-id="' + productId + '"]').text();
+}
+
+// Close the product list dropdown when clicking outside of it
+$(document).on('click', function (e) {
+    if (!$(e.target).closest('#searchInput, #productList').length) {
+        $('#productList').hide();
+    }
+});
+
+// Function to handle form submission
+function getSearchProducts(formData, selectedId = "") {
+    saveAction(
+        "store",
+        "/api/search/coupon-product",
+        formData,
+        selectedId,
         (data) => {
-            setCouponProductData(data.results);
+            displayProducts(data);
         },
         (error) => {
             toastrErrorMessage(error.responseJSON.message);
         }
     );
-});
-
-$(document).on("click", "#add_new", function (event) {
-    $("#targeted_form")[0].reset();
-    couponsInitialize();
-});
+}
 
 // Attach a click event handler to the delete link
 $(document).on("click", ".delete_row", function (event) {
@@ -101,31 +141,6 @@ function submitForm(formData, selectedId = "") {
             toastrErrorMessage(error.responseJSON.message);
         }
     );
-}
-
-// Load the company data table
-function loadDataTable() {
-    initializeDataTable(
-        `/api/coupon-products/lists`,
-        [
-            generateColumn('coupons', null, 'coupons'),
-            generateColumn('products', (data, type, row) => products(row), 'products'),
-            generateColumn('action', (data, type, row) => linkableActions(row.id), 'name'),
-        ]
-    );
-}
-
-function products(data) {
-    const productNames = Object.values(data.products).map(product => product.products.name);
-    return productNames.map(name => `<a>${name}</a><br>`).join('');
-}
-
-// Generates linkable text for a coupon with an ID and text
-function linkableActions(id, text) {
-    return `
-       <a class="update_row btn btn-info text-light btn-sm" data-id="${id}" title="Update"><i class="mdi mdi-pencil font-size-16"></i></a>
-       <a class="delete_row btn btn-danger text-light btn-sm" data-id="${id}" title="Delete"> <i class="mdi mdi-trash-can font-size-16"></i></a>
-    `;
 }
 
 //Initialize divisions
