@@ -25,7 +25,7 @@ class CouponProductRequest extends FormRequest
     {
         return [
             'coupon_id' => 'required',
-            'product_id' => 'required|array'
+            'product_id' => 'required'
         ];
     }
 }

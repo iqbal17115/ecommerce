@@ -35,12 +35,12 @@ Route::controller(ApplyCouponController::class)->group(function () {
 
 // Coupon Settings
 Route::controller(CouponProductController::class)->group(function () {
-    Route::get('coupon-products/lists', 'lists')->name('coupon_products.lists');
+    Route::get('coupon-products/lists/{coupon}', 'lists')->name('coupon_products.lists');
     Route::get('coupon-products/{coupon}', 'index')->name("coupon_products.index");
     Route::get('coupon-products/{coupon}', 'show')->name("coupon_products.show");
     Route::post('coupon-products', 'store')->name("coupon_products.store");
     Route::put('coupon-products/{coupon}', 'update')->name("coupon_products.update");
-    Route::delete('coupon-products/{coupon}', 'destroy')->name('coupon_products.destroy');
+    Route::delete('coupon-products/{couponProduct}', 'destroy')->name('coupon_products.destroy');
     Route::post('search/coupon-product', 'searchProduct')->name("search.coupon_product");
 });
 

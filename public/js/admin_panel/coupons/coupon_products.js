@@ -6,6 +6,17 @@ $('#searchInput').on('input', function () {
     getSearchProducts(data);
 });
 
+function displayProducts(products) {
+    var productList = $('#productList');
+    productList.empty();
+
+    products.forEach(function (product) {
+        productList.append('<li data-id="' + product.id + '">' + product.name + '</li>');
+    });
+
+    productList.show();
+}
+
 $(document).on('click', '#productList li', function () {
     var productId = $(this).data('id');
     addProductToList(productId);
@@ -16,60 +27,31 @@ $(document).on('click', '#selectedProducts button.remove-product', function () {
     removeProductFromList(productId);
 });
 
-function displayProducts(products) {
-    var productList = $('#productList');
-    productList.empty();
-
-    products.forEach(function (product) {
-        productList.append('<li data-id="' + product.id + '">' + product.name + '</li>');
-    });
-
-    // Show the product list dropdown
-    productList.show();
-}
-
 function addProductToList(productId) {
     var selectedProductsList = $('#selectedProducts');
     var productItem = $('#productList li[data-id="' + productId + '"]');
 
-    // Check if the product is already in the selected list
     if (selectedProductIds.indexOf(productId) === -1) {
-        // If not, add it to the list
         selectedProductIds.push(productId);
         selectedProductsList.append('<li data-id="' + productId + '">' + getProductDetails(productId) + '<button class="remove-product">Remove</button></li>');
-        // Remove the product from the search list
         productItem.remove();
         $("#searchInput").val("");
-        // Hide the product list dropdown
+        $('#selectedProductIdsInput').val(selectedProductIds.join(',')); // Update the hidden input
         $('#productList').hide();
     }
 }
 
 function removeProductFromList(productId) {
-    // Remove the product from the selected list
     var selectedProductsList = $('#selectedProducts');
     selectedProductsList.find('li[data-id="' + productId + '"]').remove();
 
-    // Add the product back to the search list if needed
-    // (you might fetch it from the server again or use existing data)
-    // Example: productList.append('<li data-id="' + productId + '">' + getProductDetails(productId) + '</li>');
-
-    // Remove the product ID from the selectedProductIds array
     selectedProductIds = selectedProductIds.filter(id => id !== productId);
+    $('#selectedProductIdsInput').val(selectedProductIds.join(',')); // Update the hidden input
 }
 
 function getProductDetails(productId) {
-    // Implement a function to get product details by ID
-    // This is a placeholder; replace it with your actual logic
-    return 'Product Name: ' + $('#productList li[data-id="' + productId + '"]').text();
+    return $('#productList li[data-id="' + productId + '"]').text();
 }
-
-// Close the product list dropdown when clicking outside of it
-$(document).on('click', function (e) {
-    if (!$(e.target).closest('#searchInput, #productList').length) {
-        $('#productList').hide();
-    }
-});
 
 // Function to handle form submission
 function getSearchProducts(formData, selectedId = "") {
@@ -92,13 +74,13 @@ $(document).on("click", ".delete_row", function (event) {
     event.preventDefault(); // Prevent the form from submitting immediately
 
     // Get the company ID from the data attribute
-    const row_id = $(this).data("id");
+    const row_id = $(this).data("row_id");
 
     // Delete the company
     deleteAction(
         '/api/coupon-products/' + row_id,
         (data) => {
-            table.clear().draw();
+            removeProductFromList(row_id);
             // Success callback
             toastrSuccessMessage(data.message);
         },
@@ -113,13 +95,13 @@ $(document).on("click", ".delete_row", function (event) {
 $("#targeted_form").submit(function (event) {
     event.preventDefault();
     // Get the coupon ID
-    const id = $("#targeted_form #row_id").val();
-
+    const id = $("#targeted_form #coupon_id").val();
     // Load the selected coupon details and submit the form
     const formData = {
         coupon_id: $("#targeted_form #coupon_id").val(),
-        product_id: $("#targeted_form #product_id").val()
+        product_id: $('#targeted_form #selectedProductIdsInput').val()
     };
+    console.log(formData);
 
     // Submit the form
     submitForm(formData, id);
@@ -134,16 +116,53 @@ function submitForm(formData, selectedId = "") {
         selectedId,
         (data) => {
             toastrSuccessMessage(data.message);
-            document.getElementById('close_button').click();
-            table.clear().draw();
         },
         (error) => {
             toastrErrorMessage(error.responseJSON.message);
         }
     );
 }
+function setCouponData(data) {
+    if (data) {
+        const couponDetails = data;
 
-//Initialize divisions
-function couponsInitialize() {
-    select2Initialize('/api/coupons/select-lists', 'coupons', "Please Select Coupons", true);
+        // Check if 'products' property exists in couponDetails
+        if (couponDetails.products) {
+            const productsList = couponDetails.products;
+            // Extract product IDs from productsList
+            const productIds = productsList.map(product => product.id);
+
+            // Set the value of the hidden input
+            $('#selectedProductIdsInput').val(productIds.join(','));
+
+            // Update the selected products list
+            const selectedProductsList = $('#selectedProducts');
+            selectedProductsList.empty();  // Clear the existing list
+
+            // Append product details to the list
+            for (const product of productsList) {
+                const productId = product.id;
+                const productName = product.products.name;
+
+                // Append product details with a remove button
+                selectedProductsList.append('<li data-id="' + productId + '">' +
+                    '<span>' + productName + '</span>' +
+                    '<button class="delete_row" data-row_id="' + productId + '" data-id="' + productId + '">Remove</button>' +
+                    '</li>');
+            }
+        }
+    }
+}
+function loadData() {
+    const row_id = $("#targeted_form #coupon_id").val();
+    // Get countries details and show them in a modal
+    getDetails(
+        "/api/coupon-products/lists/" + row_id,
+        (data) => {
+            setCouponData(data.results);
+        },
+        (error) => {
+            toastrErrorMessage(error.responseJSON.message);
+        }
+    );
 }

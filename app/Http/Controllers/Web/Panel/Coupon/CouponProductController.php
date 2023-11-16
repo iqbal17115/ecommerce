@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web\Panel\Coupon;
 use App\Http\Controllers\Controller;
 use App\Traits\BaseModel;
 use Illuminate\Http\JsonResponse;
-use App\Models\Backend\Product\Product;
+use App\Models\Coupon;
 use Illuminate\View\View;
 
 class CouponProductController extends Controller
@@ -25,9 +25,8 @@ class CouponProductController extends Controller
     /**
      * return View
      */
-    public function index(): View|JsonResponse
+    public function index(Coupon $coupon): View|JsonResponse
     {
-        $product_lists = Product::get();
-        return $this->generateView($this->viewPath, $product_lists);
+        return $this->generateView($this->viewPath, $coupon);
     }
 }

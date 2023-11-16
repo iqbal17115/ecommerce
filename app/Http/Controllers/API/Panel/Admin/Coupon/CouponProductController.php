@@ -12,6 +12,7 @@ use App\Http\Resources\AdminPanel\Coupon\CouponDetailResource;
 use App\Http\Resources\AdminPanel\CouponProduct\CouponProductDatatableResource;
 use App\Models\Backend\Product\Product;
 use App\Models\Coupon;
+use App\Models\CouponProduct;
 use App\Services\CouponProductService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -41,13 +42,12 @@ class CouponProductController extends Controller
     /**
      * Lists
      *
-     * @param Request $request
-     * @return string|bool
+     * @param Coupon $coupon
      */
-    public function lists(Request $request): bool|string
+    public function lists(Coupon $coupon)
     {
         try {
-            return $this->dataTable(Coupon::query(), $request->all(), CouponProductDatatableResource::class);
+            return Message::success(null, CouponProductDetailResource::make($coupon));
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
         }
@@ -97,16 +97,16 @@ class CouponProductController extends Controller
      */
      public function store(CouponProductRequest $couponProductRequest): JsonResponse
     {
-        // try {
+        try {
             // Validate the couponProductRequest data and store the data
             $coupon = $this->couponProductService->store($couponProductRequest->validated());
 
             // Return a success message with the stored data
             return Message::success(__("message.save"));
-        // } catch (Exception $ex) {
-        //     // Return an error message containing the exception
-        //     return $this->handleException($ex);
-        // }
+        } catch (Exception $ex) {
+            // Return an error message containing the exception
+            return $this->handleException($ex);
+        }
     }
 
     /**
@@ -116,18 +116,18 @@ class CouponProductController extends Controller
      * @param Coupon $coupon
      * @return JsonResponse
      */
-    public function update(CouponProductRequest $couponRequest, Coupon $coupon): JsonResponse
+    public function update(CouponProductRequest $couponProductRequest, Coupon $coupon): JsonResponse
     {
-        try {
+        // try {
             // Validate the couponRequest data and update the data
-            $coupon->update($couponRequest->validated());
+            $this->couponProductService->store($couponProductRequest->validated(), $coupon);
 
             // Return a success message with the updated data
             return Message::success(__("message.update"), CouponDetailResource::make($coupon));
-        } catch (Exception $ex) {
-            // Return an error message containing the exception
-            return $this->handleException($ex);
-        }
+        // } catch (Exception $ex) {
+        //     // Return an error message containing the exception
+        //     return $this->handleException($ex);
+        // }
     }
 
     /**
@@ -136,15 +136,11 @@ class CouponProductController extends Controller
      * @param Coupon $coupon
      * @return JsonResponse
      */
-    public function destroy(Coupon $coupon): JsonResponse
+    public function destroy(CouponProduct $couponProduct): JsonResponse
     {
         try {
             // Delete coupon
-            foreach ($coupon->coupon_products as $couponProduct) {
                 $couponProduct->delete();
-            }
-
-            $coupon->delete();
 
             // Return a success message
             return Message::success(__("message.delete"));

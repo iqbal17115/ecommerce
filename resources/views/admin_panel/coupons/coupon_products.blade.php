@@ -53,15 +53,35 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        #selectedProducts button.delete_row {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 </style>
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-12">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Search for products">
-                    <ul id="productList"></ul>
-                    <ul id="selectedProducts"></ul>
-                </div>
+                <div class="col-md-12 text-center">
+                    <h2 class="text-white rounded mb-2 bg-primary mb-1">{{ $model->code }}</h2>
+                  </div>
+                <form id="targeted_form">
+                    <div class="col-md-12">
+                        <input type="text" id="searchInput" class="form-control mb-2" placeholder="Search for products">
+                        <ul id="productList"></ul>
+                        <ul id="selectedProducts"></ul>
+                    </div>
+
+                    <!-- Hidden input to store selected product IDs -->
+                    <input type="hidden" name="selectedProductIds" id="selectedProductIdsInput">
+                    <input type="hidden" name="coupon_id" id="coupon_id" value="{{ $model->id }}">
+
+                    <button type="submit" id="submitForm" class="float-right">Submit</button>
+                </form>
             </div>
         </div>
 
@@ -70,4 +90,7 @@
 @endsection
 @push('scripts')
 <script src="{{asset('js/admin_panel/coupons/coupon_products.js')}}"></script>
+<script>
+    loadData();
+</script>
 @endpush
