@@ -203,7 +203,7 @@
 
     <div class="header-bottom sticky-header d-none d-lg-flex" data-sticky-options="{'mobile': false}">
         {{-- container class of below --}}
-        <div class="container" style="max-width: 100%;">
+        <div class="container" style="max-width: 81%;">
             <nav class="main-nav w-100">
                 <ul class="menu w-100">
                     <li class="active">
@@ -215,16 +215,16 @@
                                 href="{{ route('catalog', ['id' => $headerMenuCategory->id]) }}">{{ $headerMenuCategory->name }}</a>
                         </li>
                     @endforeach
-                    <li class=" phone">
+                    <li class="phone">
 
                         @if ($company_info && $company_info->is_mobile_active)
                             <a href="javascript:void(0);" class="d-flex align-items-center"><i class="icon-phone-1"
                                     style="font-size: 1rem;"></i>{{ $company_info->mobile }}</a>
                         @endif
                     </li>
-                    <li class=""><a href="https://1.envato.market/DdLk5" target="_blank">NEW
-                            ARRIVALS</a></li>
-                    <li class=""><a href="#">FLASH DEALS</a></li>
+                    <li class=""><a href="https://1.envato.market/DdLk5" target="_blank">New
+                            Arrivals</a></li>
+                    <li class=""><a href="#">Flash Deals</a></li>
                 </ul>
             </nav>
         </div>
