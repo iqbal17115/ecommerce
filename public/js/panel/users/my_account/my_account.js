@@ -68,7 +68,7 @@ function showWishlistData(data) {
   <td>
     <figure class="product-image-container">
       <a class="product-image">
-        <img src="${item.product_info.image_url}" alt="product">
+        <img src="${item.product_info.image_url}" style="width:100px; height: 40px;" alt="product">
       </a>
       <a href="javascript:void(0);" class="btn-remove icon-cancel remove-from-wishlist" data-id="${item.id}" title="Remove Product"></a>
     </figure>
@@ -105,6 +105,7 @@ function updateCart(item) {
 function showHeaderCartData(data) {
     let total = 0;
     let total_item_qty = 0;
+    $("#cart_container").html();
     const cartContainer = document.getElementById('cart_container');
     if (data.length > 0) {
         data.forEach(item => {
