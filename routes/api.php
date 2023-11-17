@@ -14,6 +14,7 @@ use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingDivisionController;
 use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController;
 use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
+use App\Http\Controllers\API\Panel\User\MyAccount\MyAccountWishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Coupon Settings
+Route::controller(MyAccountWishlistController::class)->group(function () {
+    Route::get('my-account/wishlist', 'list')->name("my_account.wishlist");
+    Route::delete('wishlist-remove/{wishlist}', 'removeWishlist')->name('wishlist_remove');
+});
 
 // Coupon Settings
 Route::controller(ApplyCouponController::class)->group(function () {

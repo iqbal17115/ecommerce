@@ -55,8 +55,7 @@
 @endsection
 @push('scripts')
     @include('ecommerce.wishlist-js')
-    <script src="{{ asset('js/panel/users/my_account/wish_list.js') }}"></script>
-    <script src="{{ asset('js/panel/users/my_account/cart.js') }}"></script>
+    <script src="{{ asset('js/panel/users/my_account/my_account.js') }}"></script>
     <script src="{{ asset('js/panel/address/address.js') }}"></script>
 
     <!-- My Account JS File -->
