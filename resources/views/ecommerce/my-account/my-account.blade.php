@@ -4,9 +4,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/my_account.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/custom_modal.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account.css') }}">
 @endpush
 @section('content')
     <main class="main">
+        <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="bg-gray pt-2 pb-5">
             <div class="container">
             <div class="view-account">
@@ -37,6 +39,7 @@
                                 @include('ecommerce.my-account.partials.mobile_app')
                                 @include('ecommerce.my-account.partials.mobile_app')
                                 @include('ecommerce.my-account.partials.wishlist')
+                                @include('ecommerce.my-account.partials.cartlist')
                             </div>
                         </div>
                     </div>
@@ -52,6 +55,8 @@
 @endsection
 @push('scripts')
     @include('ecommerce.wishlist-js')
+    <script src="{{ asset('js/panel/users/my_account/wish_list.js') }}"></script>
+    <script src="{{ asset('js/panel/users/my_account/cart.js') }}"></script>
     <script src="{{ asset('js/panel/address/address.js') }}"></script>
 
     <!-- My Account JS File -->
@@ -61,7 +66,6 @@
         }
 
         $(document).ready(function() {
-
 
             userAddress();
 

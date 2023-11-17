@@ -66,6 +66,24 @@
                             <div class="card-body p-4">
                                 <div class="media d-flex">
                                     <div class="align-self-center">
+                                        <i class="fa fa-shopping-cart font-large-2 float-left font_size"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3>Cart</h3>
+                                        <span>View, Modify, Share your cart
+                                            list.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-content">
+                            <div class="card-body p-4">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
                                         <i class="far fa-heart font-large-2 float-left font_size"></i>
                                     </div>
                                     <div class="media-body text-right">
@@ -78,7 +96,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4 mb-4 under_development">
                     <div class="card shadow-sm">
                         <div class="card-content">
@@ -230,7 +247,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4"></div>
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-content">

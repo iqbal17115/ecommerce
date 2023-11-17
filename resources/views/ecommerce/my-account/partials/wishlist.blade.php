@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="wishlist">
     <h2 class="tab-title">Wishlist</h2>
-    <table class="table table-wishlist mb-0 shadow">
+    <table class="table table-wishlist mb-0 shadow common_bg">
         <thead>
             <tr>
                 <th class="thumbnail-col"></th>

@@ -1,6 +1,7 @@
 @extends('layouts.ecommerce')
 @section('content')
     <main class="main">
+        <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="page-header">
             <div class="container d-flex flex-column align-items-center">
                 <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -209,173 +210,11 @@
                                     <p>
                                         @if(Auth::user() && Auth::user()->Contact)<b>{{Auth::user()->Contact->shipping_address}}</b>@endif
                                     </p>
-
-                                    {{-- <div class="address-box">
-                                        You have not set up this type of address yet.
-                                    </div> --}}
-
-                                    {{-- <a href="#shipping" class="btn btn-default address-action link-to-tab">Add
-                                        Address</a> --}}
                                 </div>
                             </div>
                         </div>
                     </div><!-- End .tab-pane -->
 
-                    {{-- <div class="tab-pane fade" id="billing" role="tabpanel">
-                        <div class="address account-content mt-0 pt-2">
-                            <h4 class="title">Billing address</h4>
-
-                            <form class="mb-2" action="#">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>First name <span class="required">*</span></label>
-                                            <input type="text" class="form-control" required />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Last name <span class="required">*</span></label>
-                                            <input type="text" class="form-control" required />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Company </label>
-                                    <input type="text" class="form-control">
-                                </div>
-
-                                <div class="select-custom">
-                                    <label>Country / Region <span class="required">*</span></label>
-                                    <select name="orderby" class="form-control">
-                                        <option value="" selected="selected">British Indian Ocean Territory
-                                        </option>
-                                        <option value="1">Brunei</option>
-                                        <option value="2">Bulgaria</option>
-                                        <option value="3">Burkina Faso</option>
-                                        <option value="4">Burundi</option>
-                                        <option value="5">Cameroon</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Street address <span class="required">*</span></label>
-                                    <input type="text" class="form-control" placeholder="House number and street name"
-                                        required />
-                                    <input type="text" class="form-control"
-                                        placeholder="Apartment, suite, unit, etc. (optional)" required />
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Town / City <span class="required">*</span></label>
-                                    <input type="text" class="form-control" required />
-                                </div>
-
-                                <div class="form-group">
-                                    <label>State / Country <span class="required">*</span></label>
-                                    <input type="text" class="form-control" required />
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Postcode / ZIP <span class="required">*</span></label>
-                                    <input type="text" class="form-control" required />
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label>Phone <span class="required">*</span></label>
-                                    <input type="number" class="form-control" required />
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label>Email address <span class="required">*</span></label>
-                                    <input type="email" class="form-control" placeholder="editor@gmail.com" required />
-                                </div>
-
-                                <div class="form-footer mb-0">
-                                    <div class="form-footer-right">
-                                        <button type="submit" class="btn btn-dark py-4">
-                                            Save Address
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div><!-- End .tab-pane --> --}}
-
-                    {{-- <div class="tab-pane fade" id="shipping" role="tabpanel">
-                        <div class="address account-content mt-0 pt-2">
-                            <h4 class="title mb-3">Shipping Address</h4>
-
-                            <form class="mb-2" action="#">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>First name <span class="required">*</span></label>
-                                            <input type="text" class="form-control" required />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Last name <span class="required">*</span></label>
-                                            <input type="text" class="form-control" required />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Company </label>
-                                    <input type="text" class="form-control">
-                                </div>
-
-                                <div class="select-custom">
-                                    <label>Country / Region <span class="required">*</span></label>
-                                    <select name="orderby" class="form-control">
-                                        <option value="" selected="selected">British Indian Ocean Territory
-                                        </option>
-                                        <option value="1">Brunei</option>
-                                        <option value="2">Bulgaria</option>
-                                        <option value="3">Burkina Faso</option>
-                                        <option value="4">Burundi</option>
-                                        <option value="5">Cameroon</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Street address <span class="required">*</span></label>
-                                    <input type="text" class="form-control" placeholder="House number and street name"
-                                        required />
-                                    <input type="text" class="form-control"
-                                        placeholder="Apartment, suite, unit, etc. (optional)" required />
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Town / City <span class="required">*</span></label>
-                                    <input type="text" class="form-control" required />
-                                </div>
-
-                                <div class="form-group">
-                                    <label>State / Country <span class="required">*</span></label>
-                                    <input type="text" class="form-control" required />
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Postcode / ZIP <span class="required">*</span></label>
-                                    <input type="text" class="form-control" required />
-                                </div>
-
-                                <div class="form-footer mb-0">
-                                    <div class="form-footer-right">
-                                        <button type="submit" class="btn btn-dark py-4">
-                                            Save Address
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div><!-- End .tab-pane --> --}}
                 </div><!-- End .tab-content -->
             </div><!-- End .row -->
         </div><!-- End .container -->
@@ -383,3 +222,6 @@
         <div class="mb-5"></div><!-- margin -->
     </main><!-- End .main -->
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/panel/users/my_account/wish_list.js') }}"></script>
+@endpush

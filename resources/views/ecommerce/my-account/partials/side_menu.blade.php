@@ -31,6 +31,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="#cartlist" data-toggle="tab">
+                <i class="fa fa-shopping-cart"></i>
+                Cart
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#wishlist" data-toggle="tab">
                 <i class="fas fa-heart"></i>
                 Wishlist
