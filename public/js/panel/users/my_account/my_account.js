@@ -22,7 +22,7 @@ function showCartTableData(data) {
       <td>
         <figure class="product-image-container">
           <a href="javascript:void(0);" class="product-image">
-            <img src="${item.product_info.image_url}" style="width:100px; height: 40px;" alt="product">
+            <img src="${item.product_info.image_url}" style="width:100px; height: 50px;" alt="product">
           </a>
           <a href="javascript:void(0);" class="btn-remove remove-from-cart icon-cancel" data-id="${item.id}" title="Remove Product"></a>
         </figure>
@@ -68,7 +68,7 @@ function showWishlistData(data) {
   <td>
     <figure class="product-image-container">
       <a class="product-image">
-        <img src="${item.product_info.image_url}" style="width:100px; height: 40px;" alt="product">
+        <img src="${item.product_info.image_url}" style="width:100px; height: 50px;" alt="product">
       </a>
       <a href="javascript:void(0);" class="btn-remove icon-cancel remove-from-wishlist" data-id="${item.id}" title="Remove Product"></a>
     </figure>
