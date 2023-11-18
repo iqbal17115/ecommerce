@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="wishlist">
+<div class="tab-pane @if(isset($wishlist_status)) show active @endif fade" id="wishlist">
     <h2 class="tab-title">Wishlist</h2>
     <table class="table table-wishlist mb-0 shadow common_bg">
         <thead>

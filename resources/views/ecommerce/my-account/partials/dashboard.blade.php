@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="dashboard">
+<div class="tab-pane fade @if(!isset($wishlist_status)) show active @endif" id="dashboard">
     <div class="grey-bg container-fluid">
         <section id="minimal-statistics">
             <div class="row">
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Your Address</h3>
-                                        <span>Edit, Remove and Purchase a new Gift Card</span>
+                                        <span class="text-dark">Edit, Remove and Purchase a new Gift Card</span>
                                     </div>
                                 </div>
                             </div>
@@ -44,6 +44,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
+                    <a class="nav-link custom_link" href="#order_status" data-toggle="tab">
                     <div class="card shadow-sm">
                         <div class="card-content">
                             <div class="card-body p-4">
@@ -53,14 +54,16 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Order Status</h3>
-                                        <span>Track Your Order</span>
+                                        <span class="text-dark">Track Your Order</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
                 <div class="col-md-4 mb-4">
+                    <a class="nav-link custom_link" href="#cartlist" data-toggle="tab">
                     <div class="card shadow-sm">
                         <div class="card-content">
                             <div class="card-body p-4">
@@ -70,15 +73,17 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Cart</h3>
-                                        <span>View, Modify, Share your cart
+                                        <span class="text-dark">View, Modify, Share your cart
                                             list.</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
                 <div class="col-md-4 mb-4">
+                    <a class="nav-link custom_link" href="#wishlist" data-toggle="tab">
                     <div class="card shadow-sm">
                         <div class="card-content">
                             <div class="card-body p-4">
@@ -88,13 +93,14 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Wishlist</h3>
-                                        <span>View, Modify, Share your wish
+                                        <span class="text-dark">View, Modify, Share your wish
                                             list.</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
                 <div class="col-md-4 mb-4 under_development">
                     <div class="card shadow-sm">
@@ -106,7 +112,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Reward & Gift Card</h3>
-                                        <span>View Balance and Purchase a
+                                        <span class="text-dark">View Balance and Purchase a
                                             new Gift Card</span>
                                     </div>
                                 </div>
@@ -125,7 +131,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Your Payment</h3>
-                                        <span>View Aladdiinne Balance,
+                                        <span class="text-dark">View Aladdiinne Balance,
                                             Manage or Add Payment
                                             Methods.</span>
                                     </div>
@@ -145,7 +151,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Transaction</h3>
-                                        <span>View your Transactions.</span>
+                                        <span class="text-dark">View your Transactions.</span>
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +169,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Installment Plan</h3>
-                                        <span>View Installment Plans
+                                        <span class="text-dark">View Installment Plans
                                             Offered.</span>
                                     </div>
                                 </div>
@@ -182,7 +188,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Return & Exchange</h3>
-                                        <span>View and manage Your Raturn
+                                        <span class="text-dark">View and manage Your Raturn
                                             Orders</span>
                                     </div>
                                 </div>
@@ -201,7 +207,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Following Stores</h3>
-                                        <span>View and Modify your
+                                        <span class="text-dark">View and Modify your
                                             Following Stores</span>
                                     </div>
                                 </div>
@@ -220,7 +226,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Review & Feedback</h3>
-                                        <span>View the previous reviews &
+                                        <span class="text-dark">View the previous reviews &
                                             feedback you have submitted.</span>
                                     </div>
                                 </div>
@@ -239,7 +245,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Mobile App</h3>
-                                        <span>Download the Aladdinne
+                                        <span class="text-dark">Download the Aladdinne
                                             Mobile App.</span>
                                     </div>
                                 </div>
@@ -257,7 +263,7 @@
                                     </div>
                                     <div class="media-body text-right">
                                         <h3>Contact Us</h3>
-                                        <span>Massage, Help Article and
+                                        <span class="text-dark">Massage, Help Article and
                                             Contact Us.</span>
                                     </div>
                                 </div>

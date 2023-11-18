@@ -42,6 +42,16 @@ class MyAccountController extends Controller
 
         // return response()->json(['orders' => $orders]);
     }
+    public function wishlist() {
+        $user = Auth::user();
+        $countries =  Country::get();
+        $divisions =  Division::get();
+        $districts =  District::get();
+        $day_of_weeks = DayOfWeekEnum::getDaysOfWeek();
+        $user_id = auth()?->user()->id ?? null;
+        $wishlist_status = "active";
+        return view('ecommerce.my-account.my-account', compact('user_id', 'user', 'countries', 'divisions', 'districts', 'day_of_weeks', 'wishlist_status'));
+    }
     public function index()
     {
         $user = Auth::user();

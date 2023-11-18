@@ -146,7 +146,7 @@
                 </div>
 
                 @endif
-                <a href="{{ route('my.account') }}" class="header-icon position-relative mb-0" title="wishlist">
+                <a href="{{ route('my_account_wishlist') }}" class="header-icon position-relative mb-0" title="wishlist">
                     <i class="icon-wishlist-2 wishlist_icon"></i>
                     <span class="wishlist-count badge-circle" style="background: #111;">0</span>
                 </a>

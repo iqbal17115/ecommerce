@@ -148,6 +148,7 @@ Route::group(['middleware' => 'auth'], function () {
     // My account
     Route::controller(MyAccountController::class)->group(function () {
         Route::get('my-account', 'index')->name('my.account');
+        Route::get('my-account-wishlist', 'wishlist')->name('my_account_wishlist');
     });
     // Wishlist
     Route::controller(WishlistController::class)->group(function () {

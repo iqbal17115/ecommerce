@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="order-status">
+<div class="tab-pane fade" id="order_status">
     <div class="row">
         <div class="col-md-12">
             <div class="card" style="height: auto;">
