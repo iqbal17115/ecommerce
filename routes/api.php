@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(MyAccountWishlistController::class)->group(function () {
     Route::get('my-account/wishlist', 'list')->name("my_account.wishlist");
     Route::delete('wishlist-remove/{wishlist}', 'removeWishlist')->name('wishlist_remove');
+    Route::put('wishlist-to-cart/{wishlist}', 'wishlistToCart')->name('wishlist_to_cart');
 });
 
 // Coupon Settings

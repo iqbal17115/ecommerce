@@ -6,13 +6,39 @@ use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User\MyAccount\Wishlist\MyAccountWishlistResource;
 use App\Models\Frontend\Wishlist\Wishlist;
+use App\Services\CartService;
 use App\Traits\BaseModel;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class MyAccountWishlistController extends Controller
 {
     use BaseModel;
+    protected $cartService;
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+    /**
+     * Update
+     *
+     * @param Request $request
+     * @param Wishlist $wishlist
+     * @return JsonResponse
+     */
+    public function wishlistToCart(Request $request, Wishlist $wishlist): JsonResponse
+    {
+        try {
+            $cartItem = $this->cartService->addToCart($wishlist->user_id, $wishlist->product_id, 1);
+            $wishlist->delete();
+            // Return a success message with the updated data
+            return Message::success(__("message.update"));
+        } catch (Exception $ex) {
+            // Return an error message containing the exception
+            return $this->handleException($ex);
+        }
+    }
 
     public function list(Request $request)
     {

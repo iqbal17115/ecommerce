@@ -85,7 +85,7 @@ function showWishlistData(data) {
   <td class="action" id="wishlist_product_${item.product_info.id}">
   ${item.product_info.already_added
     ? `<span class="already-added-msg">Already Added</span>`
-    : `<button href="javascript:void(0);" title="Add To Cart" class="btn btn-dark btn-add-cart product-type-simple btn-shop add_wishlist_to_cart_item" data-product_id="${item.product_info.id}">
+    : `<button href="javascript:void(0);" title="Add To Cart" class="btn btn-dark btn-add-cart product-type-simple btn-shop add_wishlist_to_cart_item" data-product_id="${item.product_info.id}" data-wishlist_id="${item.id}">
         ADD TO CART
       </button>`
   }
@@ -350,13 +350,13 @@ $(document).ready(function () {
     }
     function submitWishlistToCart(formData, selectedId = "", action) {
         saveAction(
-            "store",
-            "/api/cart/add",
+            "update",
+            "/api/wishlist-to-cart",
             formData,
             selectedId,
             (data) => {
                 toastrSuccessMessage(data.message);
-                $(action).replaceWith('<span class="already-added-msg">Already Added</span>');
+                $(action).closest('.product-row').remove();
                 getCartItem();
             },
             (error) => {
@@ -366,15 +366,17 @@ $(document).ready(function () {
     }
 
     $(document).on('click', '.add_wishlist_to_cart_item', function () {
+        const wishlist_id = $(this).data('wishlist_id');
         const product_id = $(this).data('product_id');
         const user_id = $("#temp_user_id").data('user_id');
         const formData = {
             user_id: user_id,
+            wishlist_id: wishlist_id,
             product_id: product_id,
             quantity: 1,
         };
 
-        submitWishlistToCart(formData, "", this);
+        submitWishlistToCart(formData, wishlist_id, this);
     });
 
     function getWishlist() {

@@ -90,9 +90,7 @@ function submitWishlistToCart(formData, selectedId = "") {
         (data) => {
             toastrSuccessMessage(data.message);
             console.log(formData);
-            $("#wishlist_product_"+formData.id).html(`<span class="already-added-msg">Already Added</span>`);
-            getCartItem();
-            //
+            // wishlist_product_
         },
         (error) => {
             toastrErrorMessage(error.responseJSON.message);
