@@ -17,7 +17,7 @@ function showWishlistData(data) {
       <a>${item.product_info.name}</a>
     </h5>
   </td>
-  <td class="price-box">${item.product_info.product_price}</td>
+  <td class="price-box">{}${item.product_info.product_price}</td>
   <td>
     <span class="stock-status">In stock</span>
   </td>

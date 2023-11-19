@@ -76,7 +76,8 @@ function showHeaderCartData(data) {
 
             const cartProductInfo = document.createElement('span');
             cartProductInfo.className = 'cart-product-info';
-            cartProductInfo.innerHTML = `<span class="cart-product-qty card_product_qty_${item.id}">${item.quantity}</span> × ${item.product_info.product_price}`;
+            cartProductInfo.innerHTML = `<span class="cart-product-qty card_product_qty_${item.id}">${item.quantity}</span> ×  <span class="brand_text_design">${item?.active_currency.icon || ''}</span>
+            <span class="brand_text_design">${item.product_info.product_price}</span>`;
 
             productDetailsDiv.appendChild(productTitle);
             productDetailsDiv.appendChild(cartProductInfo);
@@ -108,7 +109,6 @@ function showHeaderCartData(data) {
 }
 
 $(document).ready(function () {
-
     function getCartItem() {
         const user_id = $("#temp_user_id").data('user_id');
         getDetails(

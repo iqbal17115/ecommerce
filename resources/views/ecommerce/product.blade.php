@@ -183,10 +183,10 @@
                                 <del
                                     class="old-price">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</del>
                                 <span
-                                    class="product-price">{{ $currency?->icon }} {{ number_format($product_detail->sale_price, 2) }}</span>
+                                    class="product-price brand_text_design">{{ $currency?->icon }} {{ number_format($product_detail->sale_price, 2) }}</span>
                             @else
                                 <span
-                                    class="product-price">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</span>
+                                    class="product-price brand_text_design">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</span>
                             @endif
                         </div>
                         <!-- End .price-box -->
@@ -387,34 +387,6 @@
                                         <textarea cols="5" rows="6" name="comment" id="comment" class="form-control form-control-sm"></textarea>
                                     </div>
                                     <!-- End .form-group -->
-
-
-                                    {{-- <div class="row">
-                                        <div class="col-md-6 col-xl-12">
-                                            <div class="form-group">
-                                                <label>Name <span class="required">*</span></label>
-                                                <input type="text" class="form-control form-control-sm" required>
-                                            </div>
-                                            <!-- End .form-group -->
-                                        </div>
-
-                                        <div class="col-md-6 col-xl-12">
-                                            <div class="form-group">
-                                                <label>Email <span class="required">*</span></label>
-                                                <input type="text" class="form-control form-control-sm" required>
-                                            </div>
-                                            <!-- End .form-group -->
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="save-name" />
-                                                <label class="custom-control-label mb-0" for="save-name">Save my
-                                                    name, email, and website in this browser for the next time I
-                                                    comment.</label>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     @if (Auth::user())
                                         <input type="submit" class="btn btn-primary" value="Submit">
                                     @endif
@@ -513,9 +485,9 @@
                                         <div class="price-box">
                                             @if ($product_category_product->sale_price && $product_category_product->sale_start_date && $product_category_product->sale_end_date && $product_category_product->sale_start_date <= now() && $product_category_product->sale_end_date >= now())
                                                 <del class="old-price">{{ $currency?->icon }}{{ number_format($product_category_product->your_price, 2) }}</del>
-                                                <span class="product-price">{{ $currency?->icon }}{{ number_format($product_category_product->sale_price, 2) }}</span>
+                                                <span class="product-price brand_text_design">{{ $currency?->icon }}{{ number_format($product_category_product->sale_price, 2) }}</span>
                                             @else
-                                                <span class="product-price">{{ $currency?->icon }}{{ number_format($product_category_product->your_price, 2) }}</span>
+                                                <span class="product-price brand_text_design">{{ $currency?->icon }}{{ number_format($product_category_product->your_price, 2) }}</span>
                                             @endif
                                         </div>
                                         <!-- End .price-box -->

@@ -300,10 +300,10 @@
                                                     <del
                                                         class="old-price">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</del>
                                                     <span
-                                                        class="product-price">{{ $currency?->icon }} {{ number_format($product->sale_price, 2) }}</span>
+                                                        class="product-price brand_text_design">{{ $currency?->icon }} {{ number_format($product->sale_price, 2) }}</span>
                                                 @else
                                                     <span
-                                                        class="product-price">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</span>
+                                                        class="product-price brand_text_design">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</span>
                                                 @endif
                                             </div>
                                             <!-- End .price-box -->

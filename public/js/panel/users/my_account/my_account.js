@@ -32,7 +32,7 @@ function showCartTableData(data) {
           <a style="text-decoration: none;" class="font_size_14">${item.product_info.name}</a>
         </h5>
       </td>
-      <td class="mx-2">${item.currency?.icon || ''}${item.product_info.product_price}</td>
+      <td class="mx-2 brand_text_design" style="width: 90px;">${item?.active_currency.icon || ''} ${item.product_info.product_price}</td>
       <td>
       <div class="mb-3">
       <div class="qty-container">
@@ -42,8 +42,11 @@ function showCartTableData(data) {
       </div>
   </div>
       </td>
-      <td class="text-right">
-        <span class="subtotal-price subtotal_price_${item.id}">${item.quantity * item.product_info.product_price}</span>
+      <td class="text-right" style="width: 90px;">
+      <span class="subtotal-price subtotal_price_${item.id}">
+      <span>${item?.active_currency.icon || ''}</span>
+      <span>${item.quantity * item.product_info.product_price}</span>
+  </span>
       </td>
     </tr>
   `;
@@ -78,7 +81,7 @@ function showWishlistData(data) {
       <a>${item.product_info.name}</a>
     </h5>
   </td>
-  <td class="price-box">${item.product_info.product_price}</td>
+  <td class="price-box brand_text_design" style="width: 90px;">${item?.active_currency.icon} ${item.product_info.product_price}</td>
   <td>
     <span class="stock-status">In stock</span>
   </td>
@@ -99,7 +102,8 @@ function showWishlistData(data) {
 
 function updateCart(item) {
     $(".card_product_qty_" + item.id).text(item.quantity);
-    $(".subtotal_price_" + item.id).text(item.quantity * item.product_info.product_price);
+    $(".subtotal_price_" + item.id).html(`<span>${item?.active_currency.icon || ''}</span>
+    <span>${item.quantity * item.product_info.product_price}</span>`);
 }
 
 function showHeaderCartData(data) {
@@ -126,7 +130,8 @@ function showHeaderCartData(data) {
 
             const cartProductInfo = document.createElement('span');
             cartProductInfo.className = 'cart-product-info';
-            cartProductInfo.innerHTML = `<span class="cart-product-qty card_product_qty_${item.id}">${item.quantity}</span> × ${item.product_info.product_price}`;
+            cartProductInfo.innerHTML = `<span class="cart-product-qty card_product_qty_${item.id}">${item.quantity}</span> ×  <span class="brand_text_design">${item?.active_currency.icon || ''}</span>
+            <span class="brand_text_design">${item.product_info.product_price}</span>`;
 
             productDetailsDiv.appendChild(productTitle);
             productDetailsDiv.appendChild(cartProductInfo);
