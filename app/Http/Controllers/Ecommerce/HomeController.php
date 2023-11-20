@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User\Home\HomeSliderResource;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\ProductFeature;
 use App\Models\Backend\WebSetting\Slider;
@@ -64,7 +65,7 @@ class HomeController extends Controller
     }
     public function index() {
         $user_id = auth()?->user()->id ?? null;
-        $sliders = Slider::whereIsActive(1)->get();
+        $sliders = HomeSliderResource::collection(Slider::whereIsActive(1)->get());
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $product_features = ProductFeature::whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $top_features = ProductFeature::whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
