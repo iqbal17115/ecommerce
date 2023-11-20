@@ -2,6 +2,8 @@
 
 return [
 
+    "spinner_path" => "images/spinner.png",
+
     "permissions" => [
         /**
          * Web

@@ -55,11 +55,16 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $company_info->icon) }}">
     @endif
     @include('layouts.parts.css-links')
+    <link rel="stylesheet" href="{{ asset('css/loader.css') }}">
     @stack('css')
 </head>
 
 <body>
-
+<div id="loader-overlay">
+    <div id="loader">
+        <img src="{{ asset('images/spinner.png') }}" alt="Spinner Image">
+    </div>
+</div>
     <!-- Scroll-top-end-->
     <div class="page-wrapper">
         <!-- header-area -->
@@ -81,6 +86,8 @@
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
     @include('layouts.parts.js-links')
+<script src="{{ asset('js/ajax_setup.js') }}"></script>
+
     @stack('scripts')
 </body>
 
