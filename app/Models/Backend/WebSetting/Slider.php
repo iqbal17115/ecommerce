@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Slider extends Model
 {
     use HasFactory, BaseModel, DisplayNameTrait;
-
+    protected $guarded = [];
     public function Category() {
         return $this->belongsTo(Category::class);
     }
