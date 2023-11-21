@@ -13,6 +13,7 @@
                                         <th class="checkbox-col">
                                             <input type="checkbox" id="select_all_products">
                                         </th>
+                                        <th><span id="vendor_name"></span></th>
                                         <td class="text-right" colspan="5" style="text-transform: capitalize;">
                                             <span class="text-dark">Standard, Estimate Delivery</span> <span
                                                 style="color: #ff6600; font-weight: bold;">{{ $estimatedDeliveryDate }}</span>

@@ -1,10 +1,12 @@
 function showCartTableData(data) {
+    console.log(data);
     let htmlContent = '';
     let total = 0;
     let total_shipping_charge = 0;
     let coupon_discount = 0;
     let cheked_all_check_box = true;
     data.forEach((item) => {
+        $("#vendor_name").text(item.vendor_name);
         if (item.is_active == 1) {
             total += item.product_info.product_price * item.quantity;
             total_shipping_charge += parseFloat(item.shipping_charge);

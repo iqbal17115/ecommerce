@@ -19,7 +19,6 @@ class CartItemListResource extends JsonResource
     {
         $shippingService = new ShippingChargeService();
         $activeCurrency = Currency::where('is_active', 1)->first();
-
         return [
             "id" => $this->id,
             "product_info" => new CartProductDetailResource($this->product), // Correct the relationship name to 'product'
@@ -28,6 +27,7 @@ class CartItemListResource extends JsonResource
             "coupon_discount" => (float)$this?->cart_item_coupon?->value ?? 0,
             "is_active" => $this->is_active,
             "active_currency" => new CurrencyResource($activeCurrency),
+            "vendor_name" => $this->product?->user?->name,
         ];
     }
 }

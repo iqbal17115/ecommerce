@@ -3,7 +3,7 @@
         <section id="minimal-statistics">
             <div class="row">
                 <div class="col-12 mt-3 mb-1">
-                    <h4 class="text-uppercase">Hossain's dashboard</h4>
+                    <h4 class="text-uppercase">{{ $user->name }}'s dashboard</h4>
                 </div>
             </div>
             <div class="row">

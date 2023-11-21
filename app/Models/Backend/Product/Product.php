@@ -10,16 +10,23 @@ use App\Models\Backend\Product\ProductKeyword;
 use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductImage;
 use App\Models\FrontEnd\Review;
+use App\Models\User;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
     public function isFreeShippingEligible()
     {
