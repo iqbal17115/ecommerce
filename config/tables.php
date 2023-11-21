@@ -21,6 +21,7 @@ return [
         'Location' => ['title' => 'Location', 'sorting' => true],
         'Change Location' => ['title' => 'Change Location', 'sorting' => true],
         'status' => ['title' => 'Status', 'sorting' => true],
+        'Change Status' => ['title' => 'Change Status', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
 

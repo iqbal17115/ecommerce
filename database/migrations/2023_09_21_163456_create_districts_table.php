@@ -18,7 +18,7 @@ class CreateDistrictsTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('division_id')->index();
             $table->string('name');
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(1);
             $table->enum('location', ['inside', 'outside'])->default('outside');
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();

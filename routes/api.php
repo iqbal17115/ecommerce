@@ -101,6 +101,7 @@ Route::controller(ShopSettingDistrictController::class)->group(function () {
     Route::post('districts', 'store')->name('districts.store');
     Route::put('districts/{district}', 'update')->name('districts.update');
     Route::put('districts-location/{district}', 'locationUpdate')->name('districts_location.update');
+    Route::put('districts-status/{district}', 'statusUpdate')->name('districts_status.update');
     Route::delete('districts/{district}', 'destroy')->name('districts.delete');
     Route::get('districts/select-lists', 'select_district')->name('districts.select_lists');
 });

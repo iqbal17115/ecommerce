@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingDistrictCreateRequest;
 use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingDistrictUpdateRequest;
 use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingLocationUpdateRequest;
+use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingStatusUpdateRequest;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictDatatableResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictListResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictUpdateResource;
@@ -116,6 +117,27 @@ class ShopSettingDistrictController extends Controller
         try {
             // Update district location
             $district->update($shopSettingLocationUpdateRequest->validated());
+
+            //Success Response
+            return Message::success(__("messages.success_update"));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
+        }
+    }
+
+     /**
+     * Update District Location
+     *
+     * @param ShopSettingStatusUpdateRequest $shopSettingStatusUpdateRequest
+     * @param District $district
+     * @return JsonResponse
+     */
+    public function statusUpdate(ShopSettingStatusUpdateRequest $shopSettingStatusUpdateRequest, District $district): JsonResponse
+    {
+        try {
+            // Update district location
+            $district->update($shopSettingStatusUpdateRequest->validated());
 
             //Success Response
             return Message::success(__("messages.success_update"));
