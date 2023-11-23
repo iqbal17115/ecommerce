@@ -12,7 +12,6 @@ use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictDatatableResour
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictListResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDistrictUpdateResource;
 use App\Models\Address\District;
-use App\Models\Address\Division;
 use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\JsonResponse;

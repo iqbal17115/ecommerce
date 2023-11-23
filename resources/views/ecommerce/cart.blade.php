@@ -13,7 +13,7 @@
                                         <th class="checkbox-col">
                                             <input type="checkbox" id="select_all_products">
                                         </th>
-                                        <th><span id="vendor_name"></span></th>
+                                        <td colspan="2"><span id="vendor_name"></span></td>
                                         <td class="text-right" colspan="5" style="text-transform: capitalize;">
                                             <span class="text-dark">Standard, Estimate Delivery</span> <span
                                                 style="color: #ff6600; font-weight: bold;">{{ $estimatedDeliveryDate }}</span>
@@ -99,6 +99,7 @@
 @endsection
 @push('scripts')
     <script src="{{ asset('js/panel/users/cart/cart_page.js') }}"></script>
+    <script src="{{ asset('js/panel/users/common.js') }}"></script>
     <script>
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-load');

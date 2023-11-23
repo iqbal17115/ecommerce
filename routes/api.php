@@ -15,6 +15,7 @@ use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController;
 use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
 use App\Http\Controllers\API\Panel\User\MyAccount\MyAccountWishlistController;
+use App\Http\Controllers\API\Panel\User\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Coupon Settings
+// My Account Wishlist
+Route::controller(WishlistController::class)->group(function () {
+    Route::get('wishlist-count', 'count')->name("wishlist_count");
+});
+
+// My Account Wishlist
 Route::controller(MyAccountWishlistController::class)->group(function () {
     Route::get('my-account/wishlist', 'list')->name("my_account.wishlist");
     Route::delete('wishlist-remove/{wishlist}', 'removeWishlist')->name('wishlist_remove');
