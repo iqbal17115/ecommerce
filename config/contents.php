@@ -2,6 +2,7 @@
 
 return [
 
+    "default_user_photo" => "images/user_icon.png",
     "spinner_path" => "images/spinner.png",
 
     "permissions" => [

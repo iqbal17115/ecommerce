@@ -16,6 +16,7 @@ use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
@@ -90,6 +91,7 @@ class AddressController extends Controller
      */
     public function update(AddressUpdateRequest $addressUpdateRequest, Address $address): JsonResponse
     {
+
         try {
             $address->update($addressUpdateRequest->validated());
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController;
 use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
 use App\Http\Controllers\API\Panel\User\MyAccount\MyAccountWishlistController;
+use App\Http\Controllers\API\Panel\User\UserInfoController;
 use App\Http\Controllers\API\Panel\User\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::middleware('web')->group(function () {
+
+    // User Info
+Route::controller(UserInfoController::class)->group(function () {
+    Route::get('user-info/{user}', 'userInfo')->name("user_info");
+});
 
 // My Account Wishlist
 Route::controller(WishlistController::class)->group(function () {
@@ -162,6 +169,7 @@ Route::controller(DivisionController::class)->group(function () {
 Route::controller(CountryController::class)->group(function () {
     Route::get('countries-select/lists', 'lists')->name('countries_lists.lists');
 });
+// });
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

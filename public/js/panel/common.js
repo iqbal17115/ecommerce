@@ -93,13 +93,14 @@ function generatePagination(total, perPage, currentPage) {
 }
 
 let profileContainer = document.querySelector('.profile-container');
-let menu = document.querySelector('.profile_menu');
 
 profileContainer.addEventListener('mouseover', function () {
+    let menu = document.querySelector('.profile_menu');
     menu.classList.add('active');
 });
 
 profileContainer.addEventListener('mouseout', function (e) {
+    let menu = document.querySelector('.profile_menu');
     // Check if the mouse is not over the menu itself before removing the 'active' class
     if (!menu.contains(e.relatedTarget)) {
         menu.classList.remove('active');

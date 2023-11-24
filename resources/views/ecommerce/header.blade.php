@@ -108,32 +108,7 @@
                     </form>
                 </div>
                 <!-- End .header-search -->
-                @if (Auth::user())
-                    <div class="header-user d-lg-block d-none profile-container">
-                        <div class="profile">
-                            <div class="img-box">
-                                <img src="{{ asset('customer.jpg') }}" alt="some user image">
-                            </div>
-                            <div class="user">
-                                <div class="text-white p-0 m-0">Hello,
-                                    {{ \Illuminate\Support\Str::limit(Auth::user()->name, 10, '...') }}</div>
-                                <div class="text-white font-weight-bold">Account & Lists</div>
-                            </div>
-                        </div>
-                        <div class="profile_menu">
-                            <ul class="m-4">
-                                <li><a href="{{ route('my.account') }}" class="p-0 m-1">&nbsp;My Account</a></li>
-                                <li class="mt-1"><a href="{{ route('customer-logout') }}" class="p-0 m-1">&nbsp;Sign
-                                        Out</a></li>
-                            </ul>
-                        </div>
-                        {{-- <i class="icon-user-2"></i> --}}
-                        {{-- <div class="header-userinfo">
-                            <span class="text-dark">Welcome</span>
-                            <h4 class="mb-0">My Account</h4>
-                        </div> --}}
-                    </div>
-                @endif
+                <div class="header-user d-lg-block d-none profile-container" id="user_profile_info"></div>
                 @if (!Auth::user())
                 <div class="header-user d-lg-block d-none profile-container">
                     <a href="{{ route('customer-sign-in') }}" class="header-icon position-relative mb-0 text-white font-weight-bold mr-0">
