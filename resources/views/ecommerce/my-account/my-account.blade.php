@@ -18,7 +18,7 @@
                             <div class="user-info">
                                 <center>
                                     <img class="img-profile img-circle img-responsive center-block"
-                                        style="border-radius: 50%;" src="{{ asset('customer.jpg') }}" alt="">
+                                        style="border-radius: 50%;" id="user_profile_img">
                                 </center>
                                 <ul class="meta list list-unstyled">
                                     <li class="name">{{ $user->name }}
