@@ -138,6 +138,7 @@ Route::controller(ShopSettingCountryController::class)->group(function () {
 Route::controller(AddressController::class)->group(function () {
     Route::get('user-address/lists', 'myAddressList')->name('user_address.lists');
     Route::get('user-address/{address}', 'show')->name('user_address.show');
+    Route::get('user-address-details/{address}', 'details')->name('user_address_details.show');
     Route::get('user-address-instruction/{address}', 'addressInstructionShow')->name('user_address_instruction.show');
     Route::post('user-address', 'store')->name('user_address.store');
     Route::post('/user-address-instruction', 'storeInstruction')->name('user_address_instruction.store');

@@ -12,9 +12,10 @@
               <h4 class="modal-title">Your Addresses</h4>
             </div>
         </div>
-
+    <form id="address_form">
         <div class="modal-body row" id="address_content"></div>
         <div class="modal-footer justify-content-between" id="address_footer"></div>
+    </form>
       </div>
 
     </div>

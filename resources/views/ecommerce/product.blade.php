@@ -227,13 +227,10 @@
                             </div>
                             <!-- End .product-single-qty -->
 
-                            <a href="javascript:void(0);" title="Add To Cart" data-id="{{ $product_detail->id }}"
-                                data-name="{{ $product_detail->name }}"
-                                data-your_price="{{ $product_detail->your_price }}"
-                                data-sale_price="{{ $product_detail->sale_price }}"
+                            <a href="javascript:void(0);" title="Add To Cart" data-product_id="{{ $product_detail->id }}"
                                 @if ($product_detail->ProductMainImage) data-image="{{ $product_detail->ProductMainImage->image }}" @endif
                                 class="btn btn-dark
-                            btn-add-cart add-cart mr-2"
+                                add_cart_item add-cart mr-2"
                                 title="Add to Cart">{{ __('translate.add_to_cart') }}</a>
 
                             <a href="javascript:void(0);" title="Buy Now" data-id="{{ $product_detail->id }}"
@@ -432,13 +429,10 @@
                                         </a>
                                         <div class="btn-icon-group">
                                             <a href="javascript:void(0);" title="Add To Cart"
-                                                data-id="{{ $product_category_product->id }}"
-                                                data-name="{{ $product_category_product->name }}"
-                                                data-your_price="{{ $product_category_product->your_price }}"
-                                                data-sale_price="{{ $product_category_product->sale_price }}"
+                                                data-product_id="{{ $product_category_product->id }}"
                                                 @if ($product_category_product->ProductMainImage) data-image="{{ $product_category_product->ProductMainImage->image }}" @endif
                                                 class="btn-icon
-                                btn-add-cart product-type-simple"><i
+                                                add_cart_item product-type-simple"><i
                                                     class="icon-shopping-cart"></i></a>
                                         </div>
                                     </figure>

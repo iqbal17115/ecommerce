@@ -30,7 +30,10 @@ class Address extends Model
         'district_id',
         'upazila_id'
     ];
-
+    public function userAddressesCount($userId)
+    {
+        return $this->where('user_id', $userId)->count();
+    }
     public function addressInstruction(){
         return $this->hasOne(AddressInstruction::class);
     }

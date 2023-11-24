@@ -52,7 +52,6 @@ $(document).on("click", ".address_modal", function (event) {
     getDetails(
         "/api/countries-select/lists",
         (data) => {
-            // console.log(data);
             setCountryData(data.results.data);
         },
         (error) => {
@@ -100,7 +99,7 @@ $(document).on("click", "#remove_address", function (event) {
 });
 
 function setEditData(data) {
-
+    console.log(data);
     // Set 'row_id'
     $('#row_id').val(data.id);
 
@@ -131,8 +130,81 @@ function setEditData(data) {
     } else if (data.type === 'office') {
         $('#office').prop('checked', true);
     }
+    var defaultOption = document.createElement('option');
+    defaultOption.text = 'Select';
 
-    // $('#userAddressModal').modal('show');
+    var countrySelector = document.getElementById('country_id');
+    var divisionSelector = document.getElementById('division_id');
+    var districtSelector = document.getElementById('district_id');
+    var upazilaSelector = document.getElementById('upazila_id');
+
+    var countries = data.countries;
+    var divisions = data.divisions;
+    var districts = data.districts;
+    var upazilas = data.upazilas;
+
+    countrySelector.innerHTML = '';
+    divisionSelector.innerHTML = '';
+    districtSelector.innerHTML = '';
+    upazilaSelector.innerHTML = '';
+
+    // Add a default option with no specific value
+    countrySelector.appendChild(defaultOption);
+    divisionSelector.appendChild(defaultOption);
+    districtSelector.appendChild(defaultOption);
+    upazilaSelector.appendChild(defaultOption);
+
+    // Populate options based on country data
+    countries.forEach(function (country) {
+        var option = document.createElement('option');
+        option.value = country.id;
+        option.text = country.name;
+        countrySelector.appendChild(option);
+
+        // Select the option with the specified division_id
+        if (country.id == data.country_id) {
+            option.selected = true;
+        }
+    });
+
+    // Populate options based on division data
+    divisions.forEach(function (division) {
+        var option = document.createElement('option');
+        option.value = division.id;
+        option.text = division.name;
+        divisionSelector.appendChild(option);
+
+        // Select the option with the specified division_id
+        if (division.id == data.division_id) {
+            option.selected = true;
+        }
+    });
+
+    // Populate options based on district data
+    districts.forEach(function (district) {
+        var option = document.createElement('option');
+        option.value = district.id;
+        option.text = district.name;
+        districtSelector.appendChild(option);
+
+        // Select the option with the specified district_id
+        if (district.id == data.district_id) {
+            option.selected = true;
+        }
+    });
+
+    // Populate options based on upazila data
+    upazilas.forEach(function (upazila) {
+        var option = document.createElement('option');
+        option.value = upazila.id;
+        option.text = upazila.name;
+        upazilaSelector.appendChild(option);
+
+        // Select the option with the specified upazila_id
+        if (upazila.id == data.upazila_id) {
+            option.selected = true;
+        }
+    });
 }
 
 function setAddressInstructionData(data) {
@@ -470,14 +542,12 @@ function setCountryData(data) {
 
 function editAddressForm() {
     var formHTML = `
-<form id="targeted_form">
         <input name="row_id" id="row_id" value="" hidden />
         <div class="row">
         <div class="col-md-12">
             <label for="country_id">Country</label>
             <select class="form-control form-control-sm country_id" id="country_id" name="country_id"
                 required>
-                <option> -- Select --</option>
             </select>
         </div>
         <div class="col-md-12">
@@ -546,24 +616,20 @@ function editAddressForm() {
                 </div>
             </div>
         </div>
-        </div>
-</form>`;
+        </div>`;
 
     var modalFooterHTML = `
     <button type="button" class="btn btn-sm address_lists">
        <i class="fas fa-list-ul"></i>
     </button>
-    <button type="button" class="btn btn-sm brand_color" id="add_address">Confirm</button>`;
+    <button type="submit" class="btn btn-sm brand_color" id="add_address">Confirm</button>`;
 
     $('#address_content').html(formHTML);
     $('#address_footer').html(modalFooterHTML);
-
-    setCountry();
 }
 
 function addressForm(user) {
     var formHTML = `
-<form id="targeted_form">
         <input name="row_id" id="row_id" value="" hidden />
         <input name="user_id" id="user_id" value="${user.id}" hidden />
         <div class="row">
@@ -640,14 +706,13 @@ function addressForm(user) {
                 </div>
             </div>
         </div>
-        </div>
-</form>`;
+        </div>`;
 
     var modalFooterHTML = `
     <button type="button" class="btn btn-sm address_lists">
        <i class="fas fa-list-ul"></i>
     </button>
-    <button type="button" class="btn btn-sm brand_color" id="add_address">Confirm</button>`;
+    <button type="submit" class="btn btn-sm brand_color" id="add_address">Confirm</button>`;
 
     $('#address_content').html(formHTML);
     $('#address_footer').html(modalFooterHTML);
@@ -707,7 +772,6 @@ function setCountry() {
     getDetails(
         "/api/countries-select/lists",
         (data) => {
-            // console.log(data);
             setCountryData(data.results.data);
         },
         (error) => {
@@ -801,34 +865,33 @@ function setCountryData(data) {
 }
 
 // Attach event listener for form submission
-$(document).on('click', '#add_address', function (event) {
+$(document).on('submit', '#address_form', function (event) {
+    event.preventDefault();
     //get id
-    // const id = $("#targeted_form #row_id").val();
-
+    const selectedId = $("#address_form #row_id").val();
     // Load the selected details and submit the form
     const data = {
-        user_id: $("#targeted_form #user_id").val(),
-        name: $("#targeted_form #name").val(),
-        mobile: $("#targeted_form #mobile").val(),
-        optional_mobile: $("#targeted_form #optional_mobile").val(),
-        country_id: $("#targeted_form #country_id").val(),
-        division_id: $("#targeted_form #division_id").val(),
-        district_id: $("#targeted_form #district_id").val(),
-        upazila_id: $("#targeted_form #upazila_id").val(),
-        street_address: $("#targeted_form #street_address").val(),
-        building_name: $("#targeted_form #building_name").val(),
-        nearest_landmark: $("#targeted_form #nearest_landmark").val(),
+        user_id: $("#address_form #user_id").val(),
+        name: $("#address_form #name").val(),
+        mobile: $("#address_form #mobile").val(),
+        optional_mobile: $("#address_form #optional_mobile").val(),
+        country_id: $("#address_form #country_id").val(),
+        division_id: $("#address_form #division_id").val(),
+        district_id: $("#address_form #district_id").val(),
+        upazila_id: $("#address_form #upazila_id").val(),
+        street_address: $("#address_form #street_address").val(),
+        building_name: $("#address_form #building_name").val(),
+        nearest_landmark: $("#address_form #nearest_landmark").val(),
         type: $("input[name='type']:checked").val(),
         is_default: 0
     };
-    console.log(data);
 
     // Submit the form
-    submitForm(data);
+    submitAddressForm(data, selectedId);
 });
 
 // Function to handle form submission
-function submitForm(formData, selectedId = "") {
+function submitAddressForm(formData, selectedId = "") {
     saveAction(
         selectedId.trim() !== "" ? "update" : "store",
         "/api/user-address",
@@ -853,30 +916,9 @@ $(document).on("click", ".edit_address", function (event) {
     const address_id = $(this).data('address_id');
     // Get details
     getDetails(
-        "/api/user-address/" + address_id,
+        "/api/user-address-details/" + address_id,
         (data) => {
             setEditData(data.results);
-
-            setTimeout(function () {
-                $('.country_id').val(data.results.country_id);
-                $('.country_id').trigger('change');
-            }, 1000);
-
-            setTimeout(function () {
-                $('#division_id').val(data.results.division_id);
-                $('#division_id').trigger('change');
-            }, 100);
-
-            setTimeout(function () {
-                $('#district_id').val(data.results.district_id);
-                $('#district_id').trigger('change');
-            }, 1000);
-
-            setTimeout(function () {
-                $('#upazila_id').val(data.results.upazila_id);
-                $('#upazila_id').trigger('change');
-            }, 1000);
-
         },
         (error) => {
             // Handle the error here

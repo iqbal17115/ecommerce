@@ -9,6 +9,7 @@ use App\Http\Requests\Order\MyAccount\Address\AddressUpdateRequest;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingAddressInstructionResource;
 use App\Http\Resources\Panel\API\Address\AddressListResource;
 use App\Http\Resources\Panel\API\Address\AddressUpdateResource;
+use App\Http\Resources\User\Checkout\Address\AddressUpdateDetailResource;
 use App\Models\Address\Address;
 use App\Models\Address\AddressInstruction;
 use App\Traits\BaseModel;
@@ -117,6 +118,22 @@ class AddressController extends Controller
     }
 
     /**
+     * Address Info
+     *
+     * @param Address $institute
+     * @return JsonResponse
+     */
+    public function details(Address $address): JsonResponse
+    {
+        try {
+            // Return success response with the address info
+            return Message::success(null, new AddressUpdateDetailResource($address));
+        } catch (Exception $ex) {
+            return Message::error($ex->getMessage());
+        }
+    }
+
+    /**
      * My Address Lists
      *
      * @param Request $request
@@ -175,8 +192,13 @@ class AddressController extends Controller
     public function store(AddressCreateRequest $addressCreateRequest): JsonResponse
     {
         try {
+            $validatedData = $addressCreateRequest->validated();
+            if ((new Address())->userAddressesCount($validatedData['user_id']) == 0) {
+                $validatedData['is_default'] = 1;
+            }
+
             // Address save
-            Address::create($addressCreateRequest->validated());
+            Address::create($validatedData);
 
             //Success Response
             return Message::success(__("messages.success_add"));
