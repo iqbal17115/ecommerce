@@ -15,6 +15,7 @@ use App\Http\Controllers\API\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController;
 use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
 use App\Http\Controllers\API\Panel\User\MyAccount\MyAccountWishlistController;
+use App\Http\Controllers\API\Panel\User\MyAccount\MyReviewController;
 use App\Http\Controllers\API\Panel\User\UserInfoController;
 use App\Http\Controllers\API\Panel\User\WishlistController;
 use Illuminate\Http\Request;
@@ -32,7 +33,12 @@ use Illuminate\Support\Facades\Route;
 */
 // Route::middleware('web')->group(function () {
 
-    // User Info
+// User Review
+Route::controller(MyReviewController::class)->group(function () {
+    Route::get('user-review/{user}', 'userReview')->name("user_review");
+});
+
+// User Info
 Route::controller(UserInfoController::class)->group(function () {
     Route::get('user-info/{user}', 'userInfo')->name("user_info");
 });

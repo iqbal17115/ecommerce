@@ -185,7 +185,19 @@ function showHeaderCartData(data) {
 }
 
 $(document).ready(function () {
+    function getReviewInfo() {
+        const user_id = $("#temp_user_id").data('user_id');
+        getDetails(
+            "/api/user-review/" + user_id,
+            (data) => {
+                console.log(data.results);
+            },
+            (error) => {
 
+            }
+        );
+    }
+    getReviewInfo();
     function getUserInfo() {
         const user_id = $("#temp_user_id").data('user_id');
         getDetails(
