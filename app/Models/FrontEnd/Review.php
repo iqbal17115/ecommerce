@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory, BaseModel, DisplayNameTrait;
-
+    protected $fillable = ['user_id', 'product_id', 'rating', 'comment', 'status', 'parent_id'];
     public function user()
     {
         return $this->belongsTo(User::class);

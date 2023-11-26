@@ -17,6 +17,7 @@ use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
 use App\Http\Controllers\API\Panel\User\MyAccount\MyAccountWishlistController;
 use App\Http\Controllers\API\Panel\User\MyAccount\MyReviewController;
 use App\Http\Controllers\API\Panel\User\UserInfoController;
+use App\Http\Controllers\API\Panel\User\UserReviewController;
 use App\Http\Controllers\API\Panel\User\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::middleware('web')->group(function () {
+
+// User Review
+Route::controller(UserReviewController::class)->group(function () {
+    Route::get('reviews/lists', 'lists')->name('reviews.lists');
+    Route::post('reviews', 'store')->name("reviews.store");
+    Route::put('reviews/{review}', 'update')->name("reviews.update");
+});
 
 // User Review
 Route::controller(MyReviewController::class)->group(function () {

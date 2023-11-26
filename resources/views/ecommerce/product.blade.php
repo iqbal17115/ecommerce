@@ -288,7 +288,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content"
-                            role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews ({{count($product_detail->reviews)}})</a>
+                            role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews <span class="total_review">0</span></a>
                     </li>
                 </ul>
 
@@ -317,40 +317,9 @@
                     <div class="tab-pane fade" id="product-reviews-content" role="tabpanel"
                         aria-labelledby="product-tab-reviews">
                         <div class="product-reviews-content">
-                            <h3 class="reviews-title">{{count($product_detail->reviews)}} review for {{$product_detail->name}}</h3>
+                            <h3 class="reviews-title"><span class="total_review">0</span> review for {{$product_detail->name}}</h3>
 
-                            <div class="comment-list">
-                                @foreach($product_detail->reviews as $review)
-                                <div class="comments">
-                                    <figure class="img-thumbnail">
-                                        <img src="{{ asset('aladdinne/assets/images/blog/author.jpg') }}" alt="author" width="80" height="80">
-                                    </figure>
-
-                                    <div class="comment-block">
-                                        <div class="comment-header">
-                                            <div class="comment-arrow"></div>
-
-                                            <div class="ratings-container float-sm-right">
-                                                <div class="product-ratings">
-                                                    <span class="ratings" style="width: {{ $review->rating*2 }}0%"></span>
-                                                    <!-- End .ratings -->
-                                                    <span class="tooltiptext tooltip-top"></span>
-                                                </div>
-                                                <!-- End .product-ratings -->
-                                            </div>
-
-                                            <span class="comment-by">
-                                                <strong>{{ $review->user->name }}</strong> - {{ $review->created_at->format('F d, Y') }}
-                                            </span>
-                                        </div>
-
-                                        <div class="comment-content">
-                                            <p>{{ $review->comment }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
+                            <div class="comment-list" id="comment_list"></div>
 
 
                             <div class="divider"></div>
@@ -358,7 +327,7 @@
                             <div class="add-product-review">
                                 <h3 class="review-title">Add a review</h3>
 
-                                <form class="comment-form m-0" id="reviewForm">
+                                <form class="comment-form m-0" id="review_form">
                                     <input name="product_id" id="product_id" value="{{ $product_detail->id }}" hidden />
                                     <div class="rating-form">
                                         <label for="rating">Your rating <span class="required">*</span></label>
@@ -370,7 +339,7 @@
                                             <a class="star-5" href="#">5</a>
                                         </span>
 
-                                        <select name="rating" id="rating" required="" style="display: none;">
+                                        <select name="rating" id="rating" required="" style="display: none;" required>
                                             <option value="">Rate…</option>
                                             <option value="5">Perfect</option>
                                             <option value="4">Good</option>
@@ -382,12 +351,10 @@
 
                                     <div class="form-group">
                                         <label>Your review <span class="required">*</span></label>
-                                        <textarea cols="5" rows="6" name="comment" id="comment" class="form-control form-control-sm"></textarea>
+                                        <textarea cols="5" rows="6" name="comment" id="comment" class="form-control form-control-sm" required></textarea>
                                     </div>
                                     <!-- End .form-group -->
-                                    @if (Auth::user())
-                                        <input type="submit" class="btn btn-primary" value="Submit">
-                                    @endif
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                             <!-- End .add-product-review -->
@@ -521,6 +488,7 @@
 @push('scripts')
 <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
 <script src="{{ asset('js/panel/users/common.js') }}"></script>
+<script src="{{ asset('js/panel/users/product_details/common.js') }}"></script>
 <script>
     function lazyLoad() {
         const lazyImages = document.querySelectorAll('.lazy-load');
