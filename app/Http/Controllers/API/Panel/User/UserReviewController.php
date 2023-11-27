@@ -33,6 +33,22 @@ class UserReviewController extends Controller
     }
 
     /**
+     * Country lists
+     *
+     * @param Request $request
+     * @return bool|JsonResponse|string
+     */
+    public function allReviews(Request $request): JsonResponse|bool|string
+    {
+        try {
+            $list = $this->getAllLists(Review::where('user_id', $request->user_id), $request->all(), UserReviewResource::class);
+            return Message::success(null, $list);
+        } catch (Exception $ex) {
+            return Message::error($ex->getMessage());
+        }
+    }
+
+    /**
      * Store Review
      *
      * @param UserReviewRequest $userReviewRequest

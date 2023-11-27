@@ -39,6 +39,7 @@
                                 @include('ecommerce.my-account.partials.mobile_app')
                                 @include('ecommerce.my-account.partials.mobile_app')
                                 @include('ecommerce.my-account.partials.wishlist')
+                                @include('ecommerce.my-account.partials.review_feedback')
                                 @include('ecommerce.my-account.partials.cartlist')
                             </div>
                         </div>

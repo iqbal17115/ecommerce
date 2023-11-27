@@ -216,7 +216,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-4 under_development">
+                <div class="col-md-4 mb-4">
+                    <a class="nav-link" href="#review_feedback" data-toggle="tab">
                     <div class="card shadow-sm">
                         <div class="card-content">
                             <div class="card-body p-4">
@@ -233,6 +234,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4 mb-4 under_development">

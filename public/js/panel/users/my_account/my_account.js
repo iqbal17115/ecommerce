@@ -1,3 +1,42 @@
+function setReviews(data) {
+    let reviewsHTML = ''; // Initialize an empty string to store the HTML
+
+    data.forEach(review => {
+        // Concatenate the HTML for each review
+        reviewsHTML += `
+            <div class="comments">
+                <figure class="img-thumbnail">
+                    <img src="${review.profile_photo}" alt="author" width="80" height="80">
+                </figure>
+
+                <div class="comment-block">
+                    <div class="comment-header">
+                        <div class="comment-arrow"></div>
+
+                        <div class="ratings-container float-sm-right">
+                            <div class="product-ratings">
+                                <span class="ratings" style="width: ${review.rating * 20}%"></span>
+                                <span class="tooltiptext tooltip-top"></span>
+                            </div>
+                        </div>
+
+                        <span class="comment-by">
+                            <strong>${review.product_name}</strong>
+                        </span>
+                    </div>
+
+                    <div class="comment-content">
+                        <p>${review.comment}</p> - ${review.created_at}
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    $("#comment_list").html(reviewsHTML)
+    $(".total_review").html(data.length)
+}
+
 function setUserData(data) {
     $("#user_profile_img").attr("src", data.profile_photo);
     var profileContent = `
@@ -184,6 +223,21 @@ function showHeaderCartData(data) {
     $('.cart-count').text(total_item_qty);
 }
 
+function getAllReview() {
+    const user_id = $("#temp_user_id").data('user_id');
+    const product_id= $("#product_id").val();
+    getDetails(
+        "/api/all-reviews/lists?user_id=" + user_id,
+        (data) => {
+            setReviews(data.results);
+        },
+        (error) => {
+
+        }
+    );
+}
+
+getAllReview();
 $(document).ready(function () {
     function getReviewInfo() {
         const user_id = $("#temp_user_id").data('user_id');

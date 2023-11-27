@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Route;
 
 // User Review
 Route::controller(UserReviewController::class)->group(function () {
+    Route::get('all-reviews/lists', 'allReviews')->name('all_reviews.lists');
     Route::get('reviews/lists', 'lists')->name('reviews.lists');
     Route::post('reviews', 'store')->name("reviews.store");
     Route::put('reviews/{review}', 'update')->name("reviews.update");

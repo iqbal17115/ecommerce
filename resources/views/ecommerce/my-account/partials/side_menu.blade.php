@@ -73,7 +73,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#review-feedback" data-toggle="tab">
+            <a class="nav-link" href="#review_feedback" data-toggle="tab">
                 <i class="fas fa-comment"></i>
                 Review & Feedback
             </a>
