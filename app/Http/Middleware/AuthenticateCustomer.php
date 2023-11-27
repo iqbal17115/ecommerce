@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticateCustomer
 {
@@ -12,7 +13,7 @@ class AuthenticateCustomer
         if (auth()->check()) {
             return $next($request);
         }
-        // If the user is not authenticated, redirect to the login page
-        return redirect()->route('customer-sign-in');
+
+        return response()->json(['error' => 'Unauthenticated', 'redirect' => route('customer-sign-in')], 401);
     }
 }

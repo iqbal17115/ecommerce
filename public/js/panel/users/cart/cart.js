@@ -145,7 +145,10 @@ $(document).ready(function () {
                 updateCart(data.results);
             },
             (error) => {
-                toastrErrorMessage(error.responseJSON.message);
+                if (error.responseJSON && error.responseJSON.redirect) {
+                    // Redirect to the specified URL
+                    window.location.href = error.responseJSON.redirect;
+                }
             }
         );
     }
