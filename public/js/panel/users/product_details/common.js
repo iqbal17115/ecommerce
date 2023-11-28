@@ -4,9 +4,9 @@ function setReviews(data) {
     data.forEach(review => {
         // Concatenate the HTML for each review
         reviewsHTML += `
-            <div class="comments">
+            <div class="comments mb-2">
                 <figure class="img-thumbnail">
-                    <img src="${review.profile_photo}" alt="author" width="80" height="80">
+                    <img src="${review.profile_photo}" alt="author" width="80" height="80" style="width: 70x;height: 70x;">
                 </figure>
 
                 <div class="comment-block">

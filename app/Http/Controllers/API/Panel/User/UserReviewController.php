@@ -26,7 +26,7 @@ class UserReviewController extends Controller
     public function lists(Request $request): JsonResponse|bool|string
     {
         try {
-            $list = $this->getAllLists(Review::where('user_id', $request->user_id)->where('product_id', $request->product_id), $request->all(), UserReviewResource::class);
+            $list = $this->getAllLists(Review::where('product_id', $request->product_id), $request->all(), UserReviewResource::class);
             return Message::success(null, $list);
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
@@ -58,8 +58,15 @@ class UserReviewController extends Controller
     public function store(UserReviewRequest $userReviewRequest): JsonResponse
     {
         try {
-            // Review save
-            Review::create($userReviewRequest->validated());
+            $validatedData = $userReviewRequest->validated();
+            // Use updateOrCreate
+            Review::updateOrCreate(
+                [
+                    'user_id' => $validatedData['user_id'],
+                    'product_id' => $validatedData['product_id'],
+                ],
+                $validatedData
+            );
 
             //Success Response
             return Message::success(__("messages.success_add"));

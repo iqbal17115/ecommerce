@@ -1,5 +1,7 @@
 /* public/css/loader.css */
-
+.card_design {
+    background-color: white;
+  }
 #loader-overlay {
     position: fixed;
     top: 0;
