@@ -25,7 +25,7 @@ $(document).ready(function () {
     function getUserInfo() {
         const user_id = $("#temp_user_id").data('user_id');
         getDetails(
-            "/api/user-info/" + user_id,
+            "/api/user-info?user_id=" + user_id,
             (data) => {
                 setUserData(data.results);
             },

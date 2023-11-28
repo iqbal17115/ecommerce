@@ -18,9 +18,10 @@ class UserInfoController extends Controller
      * @param User $user
      * @return JsonResponse
      */
-    public function userInfo(User $user): JsonResponse
+    public function userInfo(Request $request): JsonResponse
     {
         try {
+            $user = User::find($request->user_id);
             // Return success response with the address info
             return Message::success(null, new UserInfoResource($user));
         } catch (Exception $ex) {

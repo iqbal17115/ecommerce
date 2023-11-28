@@ -49,7 +49,7 @@ Route::controller(MyReviewController::class)->group(function () {
 
 // User Info
 Route::controller(UserInfoController::class)->group(function () {
-    Route::get('user-info/{user}', 'userInfo')->name("user_info");
+    Route::get('user-info', 'userInfo')->name("user_info");
 });
 
 // My Account Wishlist
