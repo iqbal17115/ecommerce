@@ -10,53 +10,58 @@
 }
 
 /*--------------------------*/
-.qty-container{
+.qty-container {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .qty-container .input-qty{
+}
+
+.qty-container .input-qty {
     text-align: center;
     padding: 6px 10px;
     border: 1px solid #d4d4d4;
     max-width: 80px;
-  }
-  .qty-container .qty-btn-minus,
-  .qty-container .qty-btn-plus{
+}
+
+.qty-container .qty-btn-minus,
+.qty-container .qty-btn-plus {
     border: 1px solid #d4d4d4;
     padding: 10px 13px;
     font-size: 10px;
     height: 38px;
     width: 38px;
     transition: 0.3s;
-  }
-  .qty-container .qty-btn-plus{
+}
+
+.qty-container .qty-btn-plus {
     margin-left: -1px;
     cursor: pointer;
-  }
-  .qty-container .qty-btn-minus{
+}
+
+.qty-container .qty-btn-minus {
     margin-right: -1px;
     cursor: pointer;
-  }
+}
 
-
-  /*---------------------------*/
-  .btn-cornered,
-  .input-cornered{
+/*---------------------------*/
+.btn-cornered,
+.input-cornered {
     border-radius: 4px;
-  }
-  .btn-rounded{
+}
+
+.btn-rounded {
     border-radius: 50%;
-  }
-  .input-rounded{
+}
+
+.input-rounded {
     border-radius: 50px;
-  }
+}
 
-  .product-image-container {
+.product-image-container {
     position: relative;
-  }
+}
 
-  .product-image a.btn-remove {
+.product-image a.btn-remove {
     position: absolute;
     top: 0;
     right: 0;
@@ -67,51 +72,51 @@
     text-align: center;
     text-decoration: none;
     z-index: 1;
-  }
+}
 
-.table td, .table th {
+.table td,
+.table th {
     vertical-align: top;
     border-top: 0px solid #dee2e6;
-    }
+}
 
 .font_size_14 {
     display: block;
-  width: 100%;
-  max-height: 32px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-left: 0;
-  font-size: 14px;
-  color: #212121;
-  line-height: 16px;
-  }
+    width: 100%;
+    max-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 0;
+    font-size: 14px;
+    color: #212121;
+    line-height: 16px;
+}
 
-  .summary-section-heading {
+.summary-section-heading {
     font-size: 18px;
     color: #212121;
     position: relative;
     font-weight: 500;
-  }
+}
 
-  .card_design {
+.card_design {
     background-color: white;
-  }
+}
 
-  .modal-header {
+.modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
 
-  .left-content {
-    flex: 1; /* Takes up remaining space */
-  }
+.left-content {
+    flex: 1;
+}
 
-  .close {
+.close {
     float: left;
-  }
+}
 
-  .right-content {
+.right-content {
     text-align: right;
-  }
-
+}

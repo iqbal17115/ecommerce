@@ -99,7 +99,6 @@ $(document).on("click", "#remove_address", function (event) {
 });
 
 function setEditData(data) {
-    console.log(data);
     // Set 'row_id'
     $('#row_id').val(data.id);
 
@@ -912,12 +911,13 @@ $(document).on("click", ".address_lists", function (event) {
 
 $(document).on("click", ".edit_address", function (event) {
     editAddressForm();
-
     const address_id = $(this).data('address_id');
+
     // Get details
     getDetails(
         "/api/user-address-details/" + address_id,
         (data) => {
+            console.log(data.results);
             setEditData(data.results);
         },
         (error) => {
