@@ -128,7 +128,7 @@ class AddressController extends Controller
     public function details(Address $address): JsonResponse
     {
         try {
-            // Return success response with the address info
+            // Return success response with the address info comment test
             return Message::success(null, new AddressUpdateDetailResource($address));
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
