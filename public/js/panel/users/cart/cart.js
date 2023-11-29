@@ -134,7 +134,8 @@ $(document).ready(function () {
         submitAddItem(formData, "");
     });
 
-    function submitAddItem(formData, selectedId = "") {
+    function submitAddItem(formData, selectedId) {
+        console.log(formData);
         saveAction(
             "store",
             "/api/cart/add",
