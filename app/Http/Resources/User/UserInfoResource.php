@@ -18,7 +18,7 @@ class UserInfoResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => Str::limit($this->name, 10, '...'),
-            'profile_photo' => $this?->profile_photo ? url('storage/'.$this?->profile_photo) : url(config("contents.default_user_photo"))
+            'profile_photo' => $this?->profile_photo_path ? url('storage/'.$this?->profile_photo_path) : url(config("contents.default_user_photo"))
         ];
     }
 }

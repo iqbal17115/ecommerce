@@ -1,9 +1,8 @@
 function setUserData(data) {
-    console.log(data);
     var profileContent = `
     <div class="profile">
         <div class="img-box">
-            <img src="${data.profile_photo}">
+            <img src="${data.profile_photo}" id="user_profile_img">
         </div>
         <div class="user">
             <div class="text-white p-0 m-0">Hello, ${data.name}</div>

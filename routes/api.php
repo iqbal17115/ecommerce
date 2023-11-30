@@ -50,6 +50,7 @@ Route::controller(MyReviewController::class)->group(function () {
 // User Info
 Route::controller(UserInfoController::class)->group(function () {
     Route::get('user-info', 'userInfo')->name("user_info");
+    Route::put('update-profile-photo/{user}', 'update')->name("update_profile_photo");
 });
 
 // My Account Wishlist

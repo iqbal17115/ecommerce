@@ -16,10 +16,20 @@
                     <div class="module-inner">
                         <div class="side-bar">
                             <div class="user-info">
-                                <center>
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                            <label for="imageUpload"></label>
+                                        </div>
+                                        <div class="avatar-preview">
+                                            <div id="user_profile_img">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{-- <center>
                                     <img class="img-profile img-circle img-responsive center-block"
                                         style="border-radius: 50%;" id="user_profile_img">
-                                </center>
+                                </center> --}}
                                 <ul class="meta list list-unstyled">
                                     <li class="name">{{ $user->name }}
                                         {{-- <label class="label label-info">UX Designer</label> --}}

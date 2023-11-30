@@ -1,3 +1,48 @@
+function submitProfilePhoto(formData, selectedId = "") {
+    console.log(formData);
+    saveAction(
+        "update",
+        "/api/update-profile-photo",
+        formData,
+        selectedId,
+        (data) => {
+            toastrSuccessMessage(data.message);
+        },
+        (error) => {
+            toastrErrorMessage(error.responseJSON.message);
+        }
+    );
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var user_id = $("#temp_user_id").data('user_id');
+        // Declare a variable to store the result outside of the onload function
+        var imageData = '';
+
+        reader.onload = function (e) {
+            $('#user_profile_img').css('background-image', 'url(' + e.target.result + ')');
+            $('#user_profile_img').hide();
+            $('#user_profile_img').fadeIn(650);
+
+            // Store the result in the variable
+            imageData = e.target.result;
+            // Call submitProfilePhoto outside of the onload callback
+            const formData = {
+                img_path: imageData
+            };
+            submitProfilePhoto(formData, user_id);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imageUpload").change(function () {
+    readURL(this);
+});
+
 function setReviews(data) {
     let reviewsHTML = ''; // Initialize an empty string to store the HTML
 
@@ -38,11 +83,11 @@ function setReviews(data) {
 }
 
 function setUserData(data) {
-    $("#user_profile_img").attr("src", data.profile_photo);
+    $('#user_profile_img').css('background-image', 'url(' + data.profile_photo + ')');
     var profileContent = `
     <div class="profile">
         <div class="img-box">
-            <img src="${data.profile_photo}">
+            <img src="${data.profile_photo}" id="user_profile_img">
         </div>
         <div class="user">
             <div class="text-white p-0 m-0">Hello, ${data.name}</div>
@@ -57,7 +102,7 @@ function setUserData(data) {
     </div>
 `;
 
-$("#user_profile_info").html(profileContent);
+    $("#user_profile_info").html(profileContent);
 }
 function showCartTableData(data) {
     let htmlContent = '';
@@ -148,11 +193,11 @@ function showWishlistData(data) {
   </td>
   <td class="action" id="wishlist_product_${item.product_info.id}">
   ${item.product_info.already_added
-    ? `<span class="already-added-msg">Already Added</span>`
-    : `<button href="javascript:void(0);" title="Add To Cart" class="btn btn-dark btn-add-cart product-type-simple btn-shop add_wishlist_to_cart_item" data-product_id="${item.product_info.id}" data-wishlist_id="${item.id}">
+                ? `<span class="already-added-msg">Already Added</span>`
+                : `<button href="javascript:void(0);" title="Add To Cart" class="btn btn-dark btn-add-cart product-type-simple btn-shop add_wishlist_to_cart_item" data-product_id="${item.product_info.id}" data-wishlist_id="${item.id}">
         ADD TO CART
       </button>`
-  }
+            }
   </td>
 </tr>
 `;
@@ -225,7 +270,7 @@ function showHeaderCartData(data) {
 
 function getAllReview() {
     const user_id = $("#temp_user_id").data('user_id');
-    const product_id= $("#product_id").val();
+    const product_id = $("#product_id").val();
     getDetails(
         "/api/all-reviews/lists?user_id=" + user_id,
         (data) => {
