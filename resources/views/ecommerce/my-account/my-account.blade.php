@@ -22,7 +22,7 @@
                                             <label for="imageUpload"></label>
                                         </div>
                                         <div class="avatar-preview">
-                                            <div id="user_profile_img">
+                                            <div class="user_profile_img">
                                             </div>
                                         </div>
                                     </div>

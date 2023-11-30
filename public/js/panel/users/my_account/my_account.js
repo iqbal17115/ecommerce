@@ -22,9 +22,10 @@ function readURL(input) {
         var imageData = '';
 
         reader.onload = function (e) {
-            $('#user_profile_img').css('background-image', 'url(' + e.target.result + ')');
-            $('#user_profile_img').hide();
-            $('#user_profile_img').fadeIn(650);
+            $('.user_profile_img').css('background-image', 'url(' + e.target.result + ')');
+            $('.user_profile_img').hide();
+            $('.user_profile_img').fadeIn(650);
+            $('.user_profile_img_set').attr('src', e.target.result);
 
             // Store the result in the variable
             imageData = e.target.result;
@@ -83,11 +84,11 @@ function setReviews(data) {
 }
 
 function setUserData(data) {
-    $('#user_profile_img').css('background-image', 'url(' + data.profile_photo + ')');
+    $('.user_profile_img').css('background-image', 'url(' + data.profile_photo + ')');
     var profileContent = `
     <div class="profile">
         <div class="img-box">
-            <img src="${data.profile_photo}" id="user_profile_img">
+            <img src="${data.profile_photo}" class="user_profile_img_set">
         </div>
         <div class="user">
             <div class="text-white p-0 m-0">Hello, ${data.name}</div>
