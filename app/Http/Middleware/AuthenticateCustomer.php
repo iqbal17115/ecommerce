@@ -9,6 +9,7 @@ class AuthenticateCustomer
 {
     public function handle($request, Closure $next)
     {
+        dd(Auth::user());
         // Use the 'auth' middleware instead of checking with Auth::check()
         if (auth()->check()) {
             return $next($request);
