@@ -3,10 +3,34 @@
 namespace App\Services;
 
 use App\Models\FrontEnd\Order;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class OrderService
 {
+    /**
+     * Store order
+     *
+     * @return Order
+     * @throws Exception
+     */
+    public function store(array $validatedData): Order
+    {
+        DB::beginTransaction();
+        try {
+
+            DB::commit();
+
+            return $order;
+        } catch (Exception $ex) {
+            DB::rollBack();
+
+            // Re-throw the exception to be handled at a higher level
+            throw $ex;
+        }
+    }
+
     /**
      * Get Products By Type
      *

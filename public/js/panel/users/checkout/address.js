@@ -271,7 +271,7 @@ function setAddressData(data) {
             if (data.is_default == 1) {
                 count_default = count_default + 1;
                 default_address_content += `
-            <div class="col-md-4"><strong class="text-dark">${count_default}. Shipping address</strong></div>
+            <div class="col-md-4" id="default_address" data-default_address="${data.id}"><strong class="text-dark">${count_default}. Shipping address</strong></div>
             <div class="col-md-8">
                 <p class="shipping-address">
                     <span class="shipping_name text-dark">${data.name}</span><br>
@@ -326,7 +326,6 @@ function setAddressData(data) {
         <i class="fas fa-plus brand_text_color"></i> Add New Address
     </button>
     <button type="button" class="btn btn-sm brand_color" data-dismiss="modal">Close</button>`;
-
         $('#default_address_content').html(default_address_content);
         $('#address_footer').html(modalFooterHTML);
     } else {

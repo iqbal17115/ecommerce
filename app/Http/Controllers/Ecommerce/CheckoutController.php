@@ -112,7 +112,6 @@ class CheckoutController extends Controller
         });
 
         return response()->json(['status' => 'success']);
-
     }
     public function getUnion(Request $request)
     {

@@ -3,10 +3,10 @@ function showCartTableData(data) {
     let total = 0;
     let total_shipping_charge = 0;
     let cheked_all_check_box = true;
-    
+
     data.forEach((item) => {
-            total += item.product_info.product_price * item.quantity;
-            total_shipping_charge += parseFloat(item.shipping_charge);
+        total += item.product_info.product_price * item.quantity;
+        total_shipping_charge += parseFloat(item.shipping_charge);
 
         htmlContent += `
     <tr class="product-row product_row product cart_${item.id}" data-id="${item.id}" style="box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);">
@@ -43,7 +43,7 @@ function showCartTableData(data) {
   `;
     });
 
-    if(cheked_all_check_box == true) {
+    if (cheked_all_check_box == true) {
         $("#select_all_products").prop("checked", true);
     }
     $('#table_body').html(htmlContent);
@@ -115,8 +115,32 @@ function showHeaderCartData(data) {
     $('.cart-count').text(total_item_qty);
 }
 
+
 $(document).ready(function () {
 
+    function submitOrder(formData, selectedId = "") {
+        saveAction(
+            "store",
+            "/api/orders",
+            formData,
+            selectedId,
+            (data) => {
+                updateCart(data.results);
+                calculateCartTotal();
+            },
+            (error) => {
+                toastrErrorMessage(error.responseJSON.message);
+            }
+        );
+    }
+
+    $(document).on('click', '#btn_place_order', function () {
+        const formData = {
+            address_id: $("#default_address").data("default_address"),
+        };
+
+        submitOrder(formData, '');
+    });
     function calcaulateCartDetails(data) {
         let cartTotal = 0;
         let total_shipping_charge = 0;
