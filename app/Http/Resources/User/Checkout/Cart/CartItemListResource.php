@@ -23,8 +23,6 @@ class CartItemListResource extends JsonResource
         // Check if the cart info is already in the session
         $cartInfo = session($cacheKey);
 
-        // if ($cartInfo === null) {
-        // If not in session, calculate and store in the session
         $shippingService = new ShippingChargeService();
         $shippingCharge = $shippingService->calculateShippingCharges($this->product, $this->quantity);
 
@@ -38,11 +36,6 @@ class CartItemListResource extends JsonResource
             "shipping_charge" => $shippingCharge,
             "active_currency" => new CurrencyResource($activeCurrency),
         ];
-
-        // Store in the session
-        session([$cacheKey => $cartInfo]);
-        session(['cart_info' => $cartInfo]);
-        // }
 
         return $cartInfo;
     }

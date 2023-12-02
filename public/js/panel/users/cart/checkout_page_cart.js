@@ -121,12 +121,11 @@ $(document).ready(function () {
     function submitOrder(formData, selectedId = "") {
         saveAction(
             "store",
-            "/api/orders",
+            "/api/order-place",
             formData,
             selectedId,
             (data) => {
-                updateCart(data.results);
-                calculateCartTotal();
+
             },
             (error) => {
                 toastrErrorMessage(error.responseJSON.message);

@@ -14,13 +14,12 @@ class CartProductDetailResource extends JsonResource
      */
     public function toArray($request)
     {
-        $productPrice = $this->calculateProductPrice();
 
         return [
             "id" => $this->id,
             "name" => $this->name,
             "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/' . $this->getFirstProductImage()) : '',
-            "product_price" => $productPrice,
+            "product_price" => $this->calculateProductPrice(),
         ];
     }
 

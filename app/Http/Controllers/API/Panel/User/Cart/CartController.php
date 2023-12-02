@@ -102,7 +102,7 @@ class CartController extends Controller
     public function getCheckoutCart(Request $request)
     {
         $cart = $this->getLists(CartItem::where('is_active', 1)->where("user_id", $request->user_id), $request->all(), CartCartItemListResource::class);
-
+        session(['cart_info' => $cart]);
         return Message::success(null, $cart);
     }
 }
