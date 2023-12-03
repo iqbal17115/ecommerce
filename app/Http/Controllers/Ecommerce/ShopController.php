@@ -102,8 +102,8 @@ class ShopController extends Controller
             ->select('brands.id', 'brands.name')
             ->distinct('brands.name')
             ->get();
-
-            $related_category = Category::get();
-        return view('ecommerce.shop', compact(['products', 'brands', 'related_category']));
+            $user_id = auth()?->user()->id ?? null;
+            $categories = Category::where('parent_category_id', null)->get();
+        return view('ecommerce.shop', compact(['products', 'brands', 'categories', 'user_id']));
     }
 }

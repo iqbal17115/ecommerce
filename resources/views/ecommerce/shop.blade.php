@@ -37,6 +37,7 @@
         /* end of five start css code */
         /* end Start rating review Css */
     </style>
+    <div id="temp_user_id" data-user_id="{{$user_id}}"></div>
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
             <div class="container">
@@ -121,7 +122,7 @@
                             <div class="product-default inner-quickview inner-icon">
                                 <figure>
                                     <a href="{{ route('products.show', ['name' => urlencode($product['product_name'])]) }}">
-                                        <img src="{{ $product['image_url'] }}" width="239" height="239" alt="product">
+                                        <img class="lazy-load" data-src="{{ $product['image_url'] }}" width="239" height="239" alt="product">
                                     </a>
                                     @if($product['is_offer_active'])
                                     <div class="label-group">
@@ -174,20 +175,31 @@
                     <div class="sidebar-wrapper">
                         <div class="widget">
                             <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-body-2" role="button" aria-expanded="true"
-                                    aria-controls="widget-body-2">Categories</a>
+                                <a data-toggle="collapse" href="#widget-body-2" role="button" aria-expanded="true" aria-controls="widget-body-2">Categories</a>
                             </h3>
 
                             <div class="collapse show" id="widget-body-2">
                                 <div class="widget-body">
                                     <ul class="cat-list">
-                                            @foreach ($related_category as $cat)
-                                                <li>
-                                                    <input type="checkbox" name="category[]"
-                                                        value="{{ $cat->id }}">
-                                                    <a>{{ $cat->name }}</a>
-                                                </li>
-                                            @endforeach
+                                        {{-- <li>
+                                            <a href="#widget-category-1">
+                                                Cameras
+                                            </a>
+                                        </li> --}}
+                                        @foreach ($categories as $category)
+                                        <li>
+                                            <a href="#widget-category-{{ $category->id }}" class="collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="widget-category-{{ $category->id }}">
+                                                {{ $category->name }}<span class="toggle"></span>
+                                            </a>
+                                            <div class="collapse" id="widget-category-{{ $category->id }}">
+                                                <ul class="cat-sublist">
+                                                    @foreach ($category->SubCategory as $subCategory)
+                                                    <li>{{ $subCategory->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- End .widget-body -->
@@ -321,7 +333,7 @@
 
 @endsection
 @push('scripts')
-<script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
+    <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
     <script src="{{ asset('js/panel/users/common.js') }}"></script>
     <script>
         window.onload = function() {
