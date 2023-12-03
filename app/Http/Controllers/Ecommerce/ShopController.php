@@ -6,10 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\Brand;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Product;
+use App\Http\Resources\User\Shop\ShopProductDetailResource;
+use App\Traits\BaseModel;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    use BaseModel;
+
     public function shopSearch(Request $request)
     {
         $products = Product::where('name', 'like', '%' . $request->q . '%')->orderBy('id', 'desc')->paginate(12);
@@ -89,7 +93,9 @@ class ShopController extends Controller
     public function shop($name)
     {
         $name = urldecode($name);
-        $products = Product::join('categories', 'categories.id', '=', 'products.category_id')->where('categories.name', '=', $name)->orderBy('products.id', 'desc')->select('products.*')->paginate(12);
+        $products = $this->getAllLists(Product::whereHas('Category', function ($query) use ($name) {
+            $query->where('name', $name);
+        }), [], ShopProductDetailResource::class);
         $brands = Product::join('categories', 'categories.id', '=', 'products.category_id')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
             ->orderBy('products.id', 'desc')
@@ -97,9 +103,7 @@ class ShopController extends Controller
             ->distinct('brands.name')
             ->get();
 
-        $related_category = Category::where('categories.name', '=', $name)->first();
-        $filter_type = 1;
-        $filter_for = $name;
-        return view('ecommerce.shop', compact(['products', 'brands', 'related_category', 'filter_type', 'filter_for']));
+            $related_category = Category::get();
+        return view('ecommerce.shop', compact(['products', 'brands', 'related_category']));
     }
 }

@@ -38,13 +38,6 @@
         /* end Start rating review Css */
     </style>
     <main class="main">
-        @if (isset($all_active_advertisements['Category']['1']['ads']))
-            <div>
-                <center>
-                    <img src="{{ asset('storage/' . $all_active_advertisements['Category']['1']['ads']) }}">
-                </center>
-            </div>
-        @endif
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
             <div class="container">
                 <ol class="breadcrumb">
@@ -76,8 +69,6 @@
                                 </svg>
                                 <span>Filter</span>
                             </a>
-                            <input value="{{ $filter_type }}" name="filter_type" id="filter_type" type="hidden" />
-                            <input value="{{ $filter_for }}" name="filter_for" id="filter_for" type="hidden" />
                             <div class="toolbox-item toolbox-sort">
                                 <label>Sort By:</label>
 
@@ -124,133 +115,56 @@
                         <!-- End .toolbox-right -->
                     </nav>
 
-                    <div id="main-content" class="row row-joined divide-line products-group">
+                    <div class="row row-joined divide-line products-group">
                         @foreach ($products as $product)
-                            <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                                <div class="product-default inner-quickview inner-icon">
-                                    <figure>
-                                        <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}">
-                                            @if ($product->ProductMainImage)
-                                                <img src="{{ asset('storage/product_photo/' . $product->ProductMainImage->image) }}"
-                                                    width="239" height="239" style="width: 239px; height: 239px;"
-                                                    alt="product">
-                                            @endif
-                                        </a>
-                                        <div class="btn-icon-group">
-                                            <a href="javascript:void(0);" title="Add To Cart"
-                                                data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                                                data-your_price="{{ $product->your_price }}"
-                                                data-sale_price="{{ $product->sale_price }}"
-                                                @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
-                                                class="btn-icon
-                                        btn-add-cart product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
-                                        </div>
-                                    </figure>
-                                    <div class="product-details">
-                                        <h3 class="product-title">
-                                            <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}"
-                                                class="product-name">{{ $product->name }}</a>
-                                            {{-- rating add html code --}}
-                                            <span class="five-star-rating">
-                                                @if ($product->reviews()->avg('rating') >= 1)
-                                                    <i class="fas fa-star"></i>
-                                                @else
-                                                    <i class="far fa-star"></i>
-                                                @endif
-
-                                                @if ($product->reviews()->avg('rating') >= 2)
-                                                    <i class="fas fa-star"></i>
-                                                @else
-                                                    <i class="far fa-star"></i>
-                                                @endif
-
-                                                @if ($product->reviews()->avg('rating') >= 3)
-                                                    <i class="fas fa-star"></i>
-                                                @else
-                                                    <i class="far fa-star"></i>
-                                                @endif
-
-                                                @if ($product->reviews()->avg('rating') >= 4)
-                                                    <i class="fas fa-star"></i>
-                                                @else
-                                                    <i class="far fa-star"></i>
-                                                @endif
-
-                                                @if ($product->reviews()->avg('rating') >= 5)
-                                                    <i class="fas fa-star"></i>
-                                                @else
-                                                    <i class="far fa-star"></i>
-                                                @endif
-                                            </span>
-                                            <span class="rating-number">-</span>
-                                            <span class="rating-number"
-                                                style="font-size: 11px;">{{ $product->reviews()->sum('rating') }}</span>
-                                        </h3>
-
-
-                                        <!-- End .product-container -->
-                                        <div class="price-box">
-                                            @if ($product->sale_price &&
-                                                    $product->sale_start_date &&
-                                                    $product->sale_end_date &&
-                                                    $product->sale_start_date <= now() &&
-                                                    $product->sale_end_date >= now())
-                                                <del
-                                                    class="old-price">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</del>
-                                                <span
-                                                    class="product-price">{{ $currency?->icon }} {{ number_format($product->sale_price, 2) }}</span>
-                                            @else
-                                                <span
-                                                    class="product-price">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</span>
-                                            @endif
-                                        </div>
-                                        <!-- End .price-box -->
+                        <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
+                            <div class="product-default inner-quickview inner-icon">
+                                <figure>
+                                    <a href="{{ route('products.show', ['name' => urlencode($product['product_name'])]) }}">
+                                        <img src="{{ $product['image_url'] }}" width="239" height="239" alt="product">
+                                    </a>
+                                    @if($product['is_offer_active'])
+                                    <div class="label-group">
+                                        <div class="product-label label-sale">-{{ $product['offer_percentage'] }}%</div>
                                     </div>
-                                    <!-- End .product-details -->
+                                    @endif
+                                    <div class="btn-icon-group">
+                                        <a href="javascript:void(0);" data-product_id="{{ $product['id'] }}" class="btn-icon add_cart_item product-type-simple"><i
+                                                class="icon-shopping-cart"></i></a>
+                                    </div>
+                                </figure>
+                                <div class="product-details">
+                                    <div class="category-wrap">
+                                        <a href="javascript:void(0);" class="btn-icon-wish"
+                                        data-product_id="{{ $product['id'] }}"><i
+                                                class="icon-heart"></i></a>
+                                    </div>
+                                    <h3 class="product-title">
+                                        <a href="{{ route('products.show', ['name' => urlencode($product['product_name'])]) }}">{{$product['product_name']}}</a>
+                                    </h3>
+                                    <div class="ratings-container">
+                                        <div class="product-ratings">
+                                            <span class="ratings" style="width:100%"></span>
+                                            <!-- End .ratings -->
+                                            <span class="tooltiptext tooltip-top"></span>
+                                        </div>
+                                        <!-- End .product-ratings -->
+                                    </div>
+                                    <!-- End .product-container -->
+                                    <div class="price-box">
+                                        @if($product['is_offer_active'])
+                                        <span class="old-price">{{ $product['active_currency']['icon'] }}{{ $product['your_price'] }}</span>
+                                        @endif
+                                        <span class="product-price">{{ $product['active_currency']['icon'] }}{{ $product['is_offer_active'] ? $product['sale_price'] : $product['your_price'] }}</span>
+                                    </div>
+                                    <!-- End .price-box -->
                                 </div>
+                                <!-- End .product-details -->
                             </div>
-                        @endforeach
-                        <div class="col-12">
-                            <nav class="toolbox toolbox-pagination border-0">
-                                <ul class="pagination toolbox-item">
-                                    <li class="page-item">
-                                        {!! $products->links() !!}
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
-
+                        @endforeach
                     </div>
                     <!-- End .row -->
-                    <div class="col-md-12">
-                        <div class="toolbox-item toolbox-show">
-                            <label>Show:</label>
-
-                            <div class="select-custom">
-                                <select name="count_paginate" class="form-control count_paginate">
-                                    <option value="12">12</option>
-                                    <option value="24">24</option>
-                                    <option value="36">36</option>
-                                </select>
-                            </div>
-                            <!-- End .select-custom -->
-                        </div>
-                        <!-- End .toolbox-item -->
-                    </div>
-
-                    <!-- Start Ads -->
-                    <div class="col-12">
-                        @if (isset($all_active_advertisements['Category']['3']['ads']))
-                            <div class="mt-1">
-                                <center>
-                                    <img
-                                        src="{{ asset('storage/' . $all_active_advertisements['Category']['3']['ads']) }}">
-                                </center>
-                            </div>
-                        @endif
-                    </div>
-                    <!-- End Ads -->
 
                 </div>
                 <!-- End .col-lg-9 -->
@@ -267,15 +181,13 @@
                             <div class="collapse show" id="widget-body-2">
                                 <div class="widget-body">
                                     <ul class="cat-list">
-                                        @if ($related_category && $related_category->Parent && $related_category->Parent->SubCategory)
-                                            @foreach ($related_category->Parent->SubCategory as $cat)
+                                            @foreach ($related_category as $cat)
                                                 <li>
                                                     <input type="checkbox" name="category[]"
                                                         value="{{ $cat->id }}">
                                                     <a>{{ $cat->name }}</a>
                                                 </li>
                                             @endforeach
-                                        @endif
                                     </ul>
                                 </div>
                                 <!-- End .widget-body -->
@@ -407,154 +319,56 @@
     @include('ecommerce.footer')
     <!-- footer-area-end -->
 
-    <!-- Start Sidebar -->
-    @include('ecommerce.sidebar-js')
-    <!-- End Sidebar -->
-
 @endsection
 @push('scripts')
+<script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
+    <script src="{{ asset('js/panel/users/common.js') }}"></script>
     <script>
-        count = 12;
-        filter_type = '';
-        filter_for = '';
-
-        $(document).ready(function() {
-            filter_type = $("#filter_type").val();
-            filter_for = $("#filter_for").val();
-
-            // Filter By Category
-            $('input[name="category[]"]').on('change', function() {
-                minPrice = $('#min-price').val();
-                maxPrice = $('#max-price').val();
-
-                order = $(this).children("option:selected").val();
-                selectedBrands = $('input[name="brand[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-                selectedCategories = $('input[name="category[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-                $.ajax({
-                    url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
-                        '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                        selectedBrands + '&category_id=' + selectedCategories + '&min_price=' +
-                        minPrice + '&max_price=' + maxPrice,
-                    success: function(data) {
-                        $('#main-content').html(data);
+        window.onload = function() {
+            // Code to be executed after rendering the full layout
+            function lazyLoad() {
+                const lazyImages = document.querySelectorAll('.lazy-load');
+                lazyImages.forEach(img => {
+                    if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
+                        .bottom >= 0 && getComputedStyle(img).display !== 'none') {
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazyload');
                     }
-                })
-            });
+                });
+            }
 
-            // Filter By Price
-            $('#productFilterByPrice').submit(function(e) {
-                e.preventDefault(); // Prevent the default form submission
-                // Get the form values
-                minPrice = $('#min-price').val();
-                maxPrice = $('#max-price').val();
-                // Do something with the form values, such as sending an AJAX request to filter the product listing
-                order = $(this).children("option:selected").val();
-                selectedBrands = $('input[name="brand[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-                selectedCategories = $('input[name="category[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
+            // Check for visible images on page load
+            document.addEventListener("DOMContentLoaded", lazyLoad);
+            // Get an array of all the image elements you want to load
+            var images = document.getElementsByClassName('lazy-load');
 
-                $.ajax({
-                    url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
-                        '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                        selectedBrands + '&category_id=' + selectedCategories + '&min_price=' +
-                        minPrice + '&max_price=' + maxPrice,
-                    success: function(data) {
-                        $('#main-content').html(data);
+            // Set up an IntersectionObserver to detect when the images are in view
+            var options = {
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            var observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
+                    if (entry.isIntersecting) {
+                        var image = entry.target;
+                        var imageUrl = image.getAttribute('data-src');
+                        image.src = imageUrl;
+                        image.classList.remove(
+                            'lazy-load'
+                        ); // Remove the class to prevent the image from being loaded again
+                        observer.unobserve(
+                            image); // Stop observing the image once it has been loaded
                     }
-                })
-            });
+                });
+            }, options);
 
-            $('input[name="brand[]"]').on('change', function() {
-                minPrice = $('#min-price').val();
-                maxPrice = $('#max-price').val();
-
-                order = $(this).children("option:selected").val();
-                selectedBrands = $('input[name="brand[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-
-                selectedCategories = $('input[name="category[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-
-                $.ajax({
-                    url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
-                        '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                        selectedBrands + '&category_id=' + selectedCategories + '&min_price=' +
-                        minPrice + '&max_price=' + maxPrice,
-                    success: function(data) {
-                        $('#main-content').html(data);
-                    }
-                })
-            });
-
-            $("select.order_of_product").change(function() {
-                minPrice = $('#min-price').val();
-                maxPrice = $('#max-price').val();
-
-                order = $(this).children("option:selected").val();
-                selectedBrands = $('input[name="brand[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-
-                selectedCategories = $('input[name="category[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-
-                $.ajax({
-                    url: '/pagination/shop-order-total-data?count=' + count + '&order=' + order +
-                        '&filter_type=' + filter_type + '&filter_for=' + filter_for + '&brand_id=' +
-                        selectedBrands + '&category_id=' + selectedCategories + '&min_price=' +
-                        minPrice + '&max_price=' + maxPrice,
-                    success: function(data) {
-                        $('#main-content').html(data);
-                    }
-                })
-            });
-            $("select.count_paginate").change(function() {
-                minPrice = $('#min-price').val();
-                maxPrice = $('#max-price').val();
-
-                count = $(this).children("option:selected").val();
-                selectedBrands = $('input[name="brand[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-
-                selectedCategories = $('input[name="category[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-
-                $.ajax({
-                    url: '/pagination/shop-pagination-total-data?count=' + count + '&filter_type=' +
-                        filter_type + '&filter_for=' + filter_for + '&brand_id=' + selectedBrands +
-                        '&category_id=' + selectedCategories +
-                        '&min_price=' + minPrice + '&max_price=' + maxPrice,
-                    success: function(data) {
-                        $('#main-content').html(data);
-                    }
-                })
-            });
-        });
-
-        function pagination(page, count) {
-            $.ajax({
-                url: '/pagination/shop-pagination-data?count=' + count + '&page=' + page,
-                success: function(data) {
-                    $('#main-content').html(data);
-                }
-            })
-        }
-        $(document).on('click', '.pagination a', function(e) {
-            e.preventDefault();
-            let page = $(this).attr('href').split('page=')[1]
-            pagination(page, count);
-        });
+            // Loop through all the image elements and observe them with the IntersectionObserver
+            for (var i = 0; i < images.length; i++) {
+                var image = images[i];
+                observer.observe(image);
+            }
+        };
     </script>
 @endpush
