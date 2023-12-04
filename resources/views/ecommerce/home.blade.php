@@ -92,7 +92,7 @@
                         }">
                         @foreach ($top_show_categories as $top_show_category)
                             <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
-                                <a href="{{ route('catalog.show', ['name' => urlencode($top_show_category->name)]) }}">
+                                <a href="{{ route('catalog.show', ['category_name' => urlencode($top_show_category->name)]) }}">
                                     <figure>
                                         <img class="lazy-load"
                                             data-src="{{ asset('storage/' . $top_show_category->image) }}" alt="category"

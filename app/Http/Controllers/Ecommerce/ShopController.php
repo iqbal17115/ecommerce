@@ -90,20 +90,41 @@ class ShopController extends Controller
         $products = Product::latest()->paginate($request->count);
         return view('ecommerce.paginate-shop', compact('products'))->render();
     }
-    public function shop($name)
+    public function shop(Request $request)
     {
-        $name = urldecode($name);
-        $products = $this->getAllLists(Product::whereHas('Category', function ($query) use ($name) {
-            $query->where('name', $name);
-        }), [], ShopProductDetailResource::class);
+        $searchCriteria = $request->input('q', '');
+
+        $query = Product::query();
+
+        // Add additional filters based on the request
+        if ($searchCriteria) {
+            $query->where(function ($query) use ($searchCriteria) {
+                $query->where('name', 'like', '%' . $searchCriteria . '%');
+            });
+        }
+
+        // Handle category_name-based filtering
+        if ($request->category_name) {
+            $query->whereHas('category', function ($query) use ($request) {
+                $query->where('name', urldecode($request->category_name));
+            });
+        }
+
+        // Add more filters as needed
+
+        $products = $this->getAllLists($query, [], ShopProductDetailResource::class);
+
         $brands = Product::join('categories', 'categories.id', '=', 'products.category_id')
             ->join('brands', 'brands.id', '=', 'products.brand_id')
             ->orderBy('products.id', 'desc')
             ->select('brands.id', 'brands.name')
             ->distinct('brands.name')
             ->get();
-            $user_id = auth()?->user()->id ?? null;
-            $categories = Category::where('parent_category_id', null)->get();
-        return view('ecommerce.shop', compact(['products', 'brands', 'categories', 'user_id']));
+
+        $user_id = auth()->user()->id ?? null;
+        $categories = Category::where('parent_category_id', null)->get();
+$category = null;
+        // Pass the search criteria, category, and categories to the view
+        return view('ecommerce.shop', compact(['products', 'brands', 'categories', 'user_id', 'searchCriteria', 'category']));
     }
 }
