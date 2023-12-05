@@ -2,18 +2,64 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\Brand;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Product;
 use App\Http\Resources\User\Shop\ShopProductDetailResource;
 use App\Traits\BaseModel;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
     use BaseModel;
 
+    /**
+     * Search roduct
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchProduct(Request $request): JsonResponse
+    {
+        try {
+            $query = Product::query();
+
+            // Add additional filters based on the request
+            if ($request->searchCriteria  != 'null') {
+                $query->where(function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . urldecode($request->searchCriteria) . '%');
+                });
+            }
+
+            // Handle category_name-based filtering
+            if ($request->categoryName != 'null') {
+                $query->whereHas('category', function ($query) use ($request) {
+                    $query->where('name', urldecode($request->categoryName));
+                });
+            }
+
+            // Filter based on min_price and max_price
+            if ($request->min_price || $request->max_price) {
+                $minPrice = $request->min_price ?: 0;
+                $maxPrice = $request->max_price ?: PHP_FLOAT_MAX;
+                $currentDate = now(); // or get the current date/time based on your application logic
+                $query->filterByPriceRange($minPrice, $maxPrice, $currentDate);
+            }
+
+            // Add more filters as needed
+            $lists = $this->getLists($query, [], ShopProductDetailResource::class);
+
+            // Return a success message with the data
+            return Message::success(null, $lists);
+        } catch (Exception $ex) {
+            // Return an error message containing the exception
+            return $this->handleException($ex);
+        }
+    }
     public function shopSearch(Request $request)
     {
         $products = Product::where('name', 'like', '%' . $request->q . '%')->orderBy('id', 'desc')->paginate(12);
@@ -93,20 +139,20 @@ class ShopController extends Controller
     public function shop(Request $request)
     {
         $searchCriteria = $request->input('q', '');
-
+        $categoryName = $request->category_name;
         $query = Product::query();
 
         // Add additional filters based on the request
         if ($searchCriteria) {
             $query->where(function ($query) use ($searchCriteria) {
-                $query->where('name', 'like', '%' . $searchCriteria . '%');
+                $query->where('name', 'like', '%' . urldecode($searchCriteria) . '%');
             });
         }
 
         // Handle category_name-based filtering
-        if ($request->category_name) {
-            $query->whereHas('category', function ($query) use ($request) {
-                $query->where('name', urldecode($request->category_name));
+        if ($categoryName) {
+            $query->whereHas('category', function ($query) use ($categoryName) {
+                $query->where('name', urldecode($categoryName));
             });
         }
 
@@ -123,8 +169,8 @@ class ShopController extends Controller
 
         $user_id = auth()->user()->id ?? null;
         $categories = Category::where('parent_category_id', null)->get();
-$category = null;
+        $category = null;
         // Pass the search criteria, category, and categories to the view
-        return view('ecommerce.shop', compact(['products', 'brands', 'categories', 'user_id', 'searchCriteria', 'category']));
+        return view('ecommerce.shop', compact(['products', 'brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category']));
     }
 }

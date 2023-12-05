@@ -23,6 +23,21 @@ class Product extends Model
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
 
+    public function scopeFilterByPriceRange($query, $minPrice, $maxPrice, $currentDate)
+    {
+        return $query->where(function ($query) use ($minPrice, $maxPrice, $currentDate) {
+            $query->where(function ($query) use ($minPrice, $maxPrice) {
+                $query->where('your_price', '>=', $minPrice)
+                    ->where('your_price', '<=', $maxPrice);
+            })->orWhere(function ($query) use ($minPrice, $maxPrice, $currentDate) {
+                $query->where('sale_price', '>=', $minPrice)
+                    ->where('sale_price', '<=', $maxPrice)
+                    ->where('sale_start_date', '<=', $currentDate)
+                    ->where('sale_end_date', '>=', $currentDate);
+            });
+        });
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');

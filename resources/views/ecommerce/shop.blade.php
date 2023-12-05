@@ -116,55 +116,7 @@
                         <!-- End .toolbox-right -->
                     </nav>
 
-                    <div class="row row-joined divide-line products-group">
-                        @foreach ($products as $product)
-                        <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                            <div class="product-default inner-quickview inner-icon">
-                                <figure>
-                                    <a href="{{ route('products.show', ['name' => urlencode($product['product_name'])]) }}">
-                                        <img class="lazy-load" data-src="{{ $product['image_url'] }}" width="239" height="239" alt="product">
-                                    </a>
-                                    @if($product['is_offer_active'])
-                                    <div class="label-group">
-                                        <div class="product-label label-sale">-{{ $product['offer_percentage'] }}%</div>
-                                    </div>
-                                    @endif
-                                    <div class="btn-icon-group">
-                                        <a href="javascript:void(0);" data-product_id="{{ $product['id'] }}" class="btn-icon add_cart_item product-type-simple"><i
-                                                class="icon-shopping-cart"></i></a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <div class="category-wrap">
-                                        <a href="javascript:void(0);" class="btn-icon-wish"
-                                        data-product_id="{{ $product['id'] }}"><i
-                                                class="icon-heart"></i></a>
-                                    </div>
-                                    <h3 class="product-title">
-                                        <a href="{{ route('products.show', ['name' => urlencode($product['product_name'])]) }}">{{$product['product_name']}}</a>
-                                    </h3>
-                                    <div class="ratings-container">
-                                        <div class="product-ratings">
-                                            <span class="ratings" style="width:100%"></span>
-                                            <!-- End .ratings -->
-                                            <span class="tooltiptext tooltip-top"></span>
-                                        </div>
-                                        <!-- End .product-ratings -->
-                                    </div>
-                                    <!-- End .product-container -->
-                                    <div class="price-box">
-                                        @if($product['is_offer_active'])
-                                        <span class="old-price">{{ $product['active_currency']['icon'] }}{{ $product['your_price'] }}</span>
-                                        @endif
-                                        <span class="product-price">{{ $product['active_currency']['icon'] }}{{ $product['is_offer_active'] ? $product['sale_price'] : $product['your_price'] }}</span>
-                                    </div>
-                                    <!-- End .price-box -->
-                                </div>
-                                <!-- End .product-details -->
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
+                    <div class="row row-joined divide-line products-group" id="search_product_list"></div>
                     <!-- End .row -->
 
                 </div>
@@ -221,7 +173,7 @@
                                             <div class="col-md-4">
                                                 <div class="input-group">
                                                     <input type="number" class="form-control form-control-sm rounded"
-                                                        id="min-price" name="min-price" placeholder="Min" min="0"
+                                                        id="min_price" name="min-price" placeholder="Min" min="0"
                                                         style="-moz-appearance: textfield; height: 30px; font-size: 14px;"
                                                         required>
                                                 </div>
@@ -229,7 +181,7 @@
                                             <div class="col-md-4">
                                                 <div class="input-group">
                                                     <input type="number" class="form-control form-control-sm rounded"
-                                                        id="max-price" name="max-price" placeholder="Max" min="0"
+                                                        id="max_price" name="max-price" placeholder="Max" min="0"
                                                         style="-moz-appearance: textfield;height: 30px; font-size: 14px;"
                                                         required>
                                                 </div>
@@ -335,7 +287,93 @@
 @push('scripts')
     <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
     <script src="{{ asset('js/panel/users/common.js') }}"></script>
+
     <script>
+        function setProduct(data) {
+            let productHTML = ""
+
+    // Iterate through each product in the data
+    data.forEach(product => {
+        // Construct the HTML for each product
+        productHTML += `
+            <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
+                <div class="product-default inner-quickview inner-icon">
+                    <figure>
+                        <a href="{{ route('products.show', ['name' => urlencode('${product.product_name}')]) }}">
+                            <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
+                        </a>
+                        ${product.is_offer_active ? `
+                            <div class="label-group">
+                                <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                            </div>
+                        ` : ''}
+                        <div class="btn-icon-group">
+                            <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
+                                <i class="icon-shopping-cart"></i>
+                            </a>
+                        </div>
+                    </figure>
+                    <div class="product-details">
+                        <div class="category-wrap">
+                            <a href="javascript:void(0);" class="btn-icon-wish" data-product_id="${product.id}">
+                                <i class="icon-heart"></i>
+                            </a>
+                        </div>
+                        <h3 class="product-title">
+                            <a href="{{ route('products.show', ['name' => urlencode('${product.product_name}')]) }">${product.product_name}</a>
+                        </h3>
+                        <div class="ratings-container">
+                            <div class="product-ratings">
+                                <span class="ratings" style="width:100%"></span>
+                                <span class="tooltiptext tooltip-top"></span>
+                            </div>
+                        </div>
+                        <div class="price-box">
+                            ${product.is_offer_active ? `
+                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                            ` : ''}
+                            <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Append the product HTML to #search_product_list
+        $('#search_product_list').html(productHTML);
+    });
+}
+
+        function fetchData() {
+                const searchCriteria= @json($searchCriteria ?? null);
+                const categoryName= @json($categoryName ?? null);
+
+                const queryParams = new URLSearchParams({
+                    searchCriteria: searchCriteria,
+                    categoryName: categoryName,
+                    min_price: $("#min_price").val(),
+                    max_price: $("#max_price").val(),
+                });
+
+                const url = `/product-search?${queryParams.toString()}`;
+
+        getDetails(url,
+            (data) => {
+               setProduct(data.results.data);
+            }
+        );
+        }
+        fetchData();
+
+        function callProductFilter() {
+            fetchData();
+        }
+
+        $("#productFilterByPrice").submit(function (e) {
+            e.preventDefault();
+            callProductFilter();
+            });
+            e.preventDefault();
         window.onload = function() {
             // Code to be executed after rendering the full layout
             function lazyLoad() {
