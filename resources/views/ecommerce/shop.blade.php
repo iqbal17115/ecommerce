@@ -74,7 +74,7 @@
                                 <label>Sort By:</label>
 
                                 <div class="select-custom">
-                                    <select name="orderby" class="form-control order_of_product">
+                                    <select name="orderby" class="form-control order_of_product" id="order_of_product">
                                         <option value="1" selected="selected">Default sorting</option>
                                         <option value="2">Sort by price: low to high</option>
                                         <option value="3">Sort by price: high to low</option>
@@ -244,7 +244,7 @@
                                     <ul class="cat-list">
                                         @foreach ($brands as $brand)
                                             <li>
-                                                <input type="checkbox" name="brand[]" value="{{ $brand->id }}">
+                                                <input type="checkbox" class="select_brand" name="brand[]" value="{{ $brand->id }}">
                                                 <a>{{ $brand->name }}</a>
                                             </li>
                                         @endforeach
@@ -348,8 +348,17 @@
         function fetchData() {
                 const searchCriteria= @json($searchCriteria ?? null);
                 const categoryName= @json($categoryName ?? null);
+                var checkedBrandCheckboxes = $('.select_brand:checked');
 
+                // Extract brand IDs
+                var selectedBrandIds = checkedBrandCheckboxes.map(function () {
+                    return $(this).val();
+                }).get();
+
+                var orderOfProduct = $("#order_of_product").val();
                 const queryParams = new URLSearchParams({
+                    orderOfProduct: orderOfProduct,
+                    selectedBrandIds: selectedBrandIds,
                     searchCriteria: searchCriteria,
                     categoryName: categoryName,
                     min_price: $("#min_price").val(),
@@ -374,6 +383,11 @@
             e.preventDefault();
             callProductFilter();
         });
+
+        $('.select_brand, #order_of_product').on('change', function () {
+        callProductFilter();
+    })
+
         window.onload = function() {
             // Code to be executed after rendering the full layout
             function lazyLoad() {

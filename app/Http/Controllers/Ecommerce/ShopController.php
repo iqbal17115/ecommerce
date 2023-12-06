@@ -51,6 +51,23 @@ class ShopController extends Controller
                 $query->filterByPriceRange($minPrice, $maxPrice, $currentDate);
             }
 
+            if ($request->filled('selectedBrandIds')) {
+                $selectedBrandIds = $request->selectedBrandIds;
+
+                $query->whereIn('brand_id', explode(",", $selectedBrandIds));
+            }
+
+            $query->when($request->filled('orderOfProduct'), function ($query) use ($request) {
+                $orderByOptions = [
+                    2 => ['your_price', 'asc'],
+                    3 => ['your_price', 'desc'],
+                ];
+
+                $orderBy = $request->orderOfProduct;
+
+                // Apply sorting based on the mapping array
+                $query->orderBy(...$orderByOptions[$orderBy] ?? []);
+            });
             // Add more filters as needed
             $lists = $this->getLists($query, [], ShopProductDetailResource::class);
 
