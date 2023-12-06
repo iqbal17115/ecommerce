@@ -43,10 +43,11 @@ class ShopController extends Controller
             }
 
             // Filter based on min_price and max_price
-            if ($request->min_price || $request->max_price) {
+            if ($request->min_price && $request->max_price) {
                 $minPrice = $request->min_price ?: 0;
                 $maxPrice = $request->max_price ?: PHP_FLOAT_MAX;
-                $currentDate = now(); // or get the current date/time based on your application logic
+                $currentDate = date('Y-m-d');
+
                 $query->filterByPriceRange($minPrice, $maxPrice, $currentDate);
             }
 
