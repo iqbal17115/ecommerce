@@ -22,6 +22,18 @@ class Category extends Model
     public function Parent() {
        return $this->belongsTo(self::class, 'parent_category_id')->orderBy('position', 'ASC');
     }
+
+    public function subcategories()
+    {
+        return $this->hasMany(self::class, 'parent_category_id')->orderBy('position', 'ASC');
+    }
+
+    // Recursive relationship to get all descendants
+    public function allSubcategories()
+    {
+        return $this->subcategories()->with('allSubcategories');
+    }
+
     public function getParentsAttribute()
     {
         $parents = [];

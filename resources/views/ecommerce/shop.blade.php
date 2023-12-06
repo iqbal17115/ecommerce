@@ -133,24 +133,8 @@
                             <div class="collapse show" id="widget-body-2">
                                 <div class="widget-body">
                                     <ul class="cat-list">
-                                        {{-- <li>
-                                            <a href="#widget-category-1">
-                                                Cameras
-                                            </a>
-                                        </li> --}}
                                         @foreach ($categories as $category)
-                                        <li>
-                                            <a href="#widget-category-{{ $category->id }}" class="collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="widget-category-{{ $category->id }}">
-                                                {{ $category->name }}<span class="toggle"></span>
-                                            </a>
-                                            <div class="collapse" id="widget-category-{{ $category->id }}">
-                                                <ul class="cat-sublist">
-                                                    @foreach ($category->SubCategory as $subCategory)
-                                                    <li>{{ $subCategory->name }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </li>
+                                            @include('ecommerce.partials.category', ['category' => $category])
                                         @endforeach
                                     </ul>
                                 </div>
