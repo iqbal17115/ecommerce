@@ -290,6 +290,7 @@
 
     <script>
         function setProduct(data) {
+            $('#search_product_list').html('');
             let productHTML = ""
 
     // Iterate through each product in the data

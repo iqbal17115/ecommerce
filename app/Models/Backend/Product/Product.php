@@ -31,7 +31,9 @@ class Product extends Model
                     ->where('your_price', '<=', $maxPrice);
             })->orWhere(function ($query) use ($minPrice, $maxPrice, $currentDate) {
                 $query->where('sale_price', '>=', $minPrice)
-                    ->where('sale_price', '<=', $maxPrice);
+                    ->where('sale_price', '<=', $maxPrice)
+                    ->where('sale_start_date', '<=', $currentDate)
+                    ->where('sale_end_date', '>=', $currentDate);
             });
         });
     }
