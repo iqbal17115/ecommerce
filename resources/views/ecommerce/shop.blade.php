@@ -372,8 +372,7 @@
         $("#productFilterByPrice").submit(function (e) {
             e.preventDefault();
             callProductFilter();
-            });
-            e.preventDefault();
+        });
         window.onload = function() {
             // Code to be executed after rendering the full layout
             function lazyLoad() {
