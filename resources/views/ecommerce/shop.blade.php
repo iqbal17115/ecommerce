@@ -32,10 +32,58 @@
             word-wrap: break-word;
         }
 
+        .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+}
 
+.page-item {
+    margin: 0 2px;
+}
 
-        /* end of five start css code */
-        /* end Start rating review Css */
+.page-link {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.page-link:hover {
+    background-color: #f5f5f5;
+}
+
+.page-item.active .page-link {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.page-item.disabled .page-link {
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: #eee;
+    color: #777;
+    border: 1px solid #ddd;
+}
+
+.pagination_input_field {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.pagination_input_field::-webkit-inner-spin-button,
+.pagination_input_field::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
     </style>
     <div id="temp_user_id" data-user_id="{{$user_id}}"></div>
     <main class="main">
@@ -93,7 +141,7 @@
                                 <label>Show:</label>
 
                                 <div class="select-custom">
-                                    <select name="count_paginate" class="form-control count_paginate">
+                                    <select name="count_paginate" id="count_paginate" class="form-control count_paginate">
                                         <option value="12">12</option>
                                         <option value="24">24</option>
                                         <option value="36">36</option>
@@ -118,7 +166,11 @@
 
                     <div class="row row-joined divide-line products-group" id="search_product_list"></div>
                     <!-- End .row -->
-
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="pagination_container" class="mt-3"></div>
+                        </div>
+                    </div>
                 </div>
                 <!-- End .col-lg-9 -->
 
@@ -271,8 +323,10 @@
 @push('scripts')
     <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
     <script src="{{ asset('js/panel/users/common.js') }}"></script>
+    <script src="{{ asset('js/panel/pagination.js') }}"></script>
 
     <script>
+        const paginationContainer = document.getElementById('pagination_container');
         function setProduct(data) {
             $('#search_product_list').html('');
             let productHTML = ""
@@ -329,7 +383,7 @@
     });
 }
 
-        function fetchData() {
+        function fetchData(page) {
                 const searchCriteria= @json($searchCriteria ?? null);
                 const categoryName= @json($categoryName ?? null);
                 var checkedBrandCheckboxes = $('.select_brand:checked');
@@ -341,6 +395,8 @@
 
                 var orderOfProduct = $("#order_of_product").val();
                 const queryParams = new URLSearchParams({
+                    page: page,
+                    limit: $('#count_paginate').val(),
                     orderOfProduct: orderOfProduct,
                     selectedBrandIds: selectedBrandIds,
                     searchCriteria: searchCriteria,
@@ -354,23 +410,40 @@
         getDetails(url,
             (data) => {
                setProduct(data.results.data);
+               const paginationHtml = generatePagination(data.results.total, data.results.per_page, page);
+               paginationContainer.innerHTML = paginationHtml;
             }
         );
         }
-        fetchData();
+        fetchData(1);
 
         function callProductFilter() {
-            fetchData();
+            fetchData(1);
         }
 
         $("#productFilterByPrice").submit(function (e) {
             e.preventDefault();
-            callProductFilter();
+            callProductFilter(1);
         });
 
-        $('.select_brand, #order_of_product').on('change', function () {
-        callProductFilter();
-    })
+        $('.select_brand, #order_of_product, #count_paginate').on('change', function () {
+            callProductFilter();
+        })
+
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('pagination-link')) {
+            event.preventDefault();
+            const page = event.target.dataset.page;
+            fetchData(page);
+        }
+    });
+
+    $(document).on('click', '.go-button', () => {
+        const newPage = $('.page-input').val();
+        if (!isNaN(newPage) && newPage >= 1) {
+            fetchData(newPage);
+        }
+    });
 
         window.onload = function() {
             // Code to be executed after rendering the full layout

@@ -69,7 +69,7 @@ class ShopController extends Controller
                 $query->orderBy(...$orderByOptions[$orderBy] ?? []);
             });
             // Add more filters as needed
-            $lists = $this->getLists($query, [], ShopProductDetailResource::class);
+            $lists = $this->getLists($query, $request->all(), ShopProductDetailResource::class);
 
             // Return a success message with the data
             return Message::success(null, $lists);

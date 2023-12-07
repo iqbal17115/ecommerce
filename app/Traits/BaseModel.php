@@ -61,7 +61,7 @@ trait BaseModel
     public static function getLists($query, array $validatedData, string $resourceClass): mixed
     {
         // Get all lists
-        $lists = $query->list($validatedData)->paginate(8);
+        $lists = $query->list($validatedData)->paginate($validatedData['limit'] ?? 8);
 
         // Set collection
         return $lists->setCollection(collect($resourceClass::collection($lists->items())));
