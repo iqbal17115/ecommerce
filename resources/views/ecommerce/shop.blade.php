@@ -285,7 +285,7 @@
                 <div class="product-default inner-quickview inner-icon">
                     <figure>
                         <a href="{{ route('products.show', ['name' => urlencode('${product.product_name}')]) }}">
-                            <img class="lazy-load" src="${product.image_url}" width="239" height="239" alt="product">
+                            <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
                             <div class="label-group">
