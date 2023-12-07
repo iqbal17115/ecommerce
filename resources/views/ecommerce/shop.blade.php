@@ -75,7 +75,7 @@
 
                                 <div class="select-custom">
                                     <select name="orderby" class="form-control order_of_product" id="order_of_product">
-                                        <option value="1" selected="selected">Default sorting</option>
+                                        <option value="" selected="selected">Default sorting</option>
                                         <option value="2">Sort by price: low to high</option>
                                         <option value="3">Sort by price: high to low</option>
                                     </select>
