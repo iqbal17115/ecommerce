@@ -17,6 +17,7 @@ class ShopProductDetailResource extends JsonResource
     public function toArray($request)
     {
         $activeCurrency = Currency::where('is_active', 1)->first();
+
         return [
             "id" => $this->id,
             "product_name" => $this->name,

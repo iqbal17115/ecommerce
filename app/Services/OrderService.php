@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Order;
+use App\Models\FrontEnd\OrderDetail;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -24,27 +26,45 @@ class OrderService
         $cartCollection = collect($allCartInfo);
 
         $shippingChargeSum = collect($cartCollection['data'])->sum('shipping_charge');
+        $couponDiscount = collect($cartCollection['data'])->sum('coupon_discount');
+        $totalAmount = 0;
+
+        foreach ($cartCollection['data'] as $cartItem) {
+            $totalAmount += collect($cartItem['product_info'])['product_price'] * $cartItem['quantity'];
+        }
 
         // Create an order
         $order = new Order();
-        $order->user_id = auth()->id(); // Assuming you have user authentication
+        $order->user_id = auth()->id();
         $order->order_date = now();
-        $order->total_amount = 1111;
-        $order->other_amount = 11;
-        $order->discount = 1;
+        $order->total_amount = $totalAmount;
+        $order->other_amount = 0;
+        $order->discount = $couponDiscount;
         $order->shipping_charge = $shippingChargeSum;
-        $order->vat = 1;
-        $order->payable_amount = 11;
-        $order->note = $validatedData['note'];
-        $order->coupon_code_id = $validatedData['coupon_code_id'];
+        $order->vat = 0;
+        $order->payable_amount = ($totalAmount + $shippingChargeSum - $couponDiscount);
+        $order->note = 'Order';
         $order->status = 'pending';
         $order->is_active = 1;
         $order->save();
 
-        foreach ($cartCollection['data'] as $aaa) {
+        foreach ($cartCollection['data'] as $cartItem) {
+            $orderDetails = new OrderDetail();
+            $orderDetails->order_id = $order->id;
+            $orderDetails->product_id = $cartItem['product_info']['id'];
+            $orderDetails->unit_price = collect($cartItem['product_info'])['product_price'];
+            $orderDetails->quantity = $cartItem['quantity'];
+            $orderDetails->save();
         }
 
+        // Delete CartItem records for the current user
+        CartItem::where('user_id', auth()->id())->delete();
+
+        // Remove the cart_info session
+        session()->forget('cart_info');
         DB::beginTransaction();
+        return $order;
+
         try {
 
             DB::commit();

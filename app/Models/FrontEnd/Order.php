@@ -13,17 +13,29 @@ use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
+use App\Traits\GeneratesOrderCodeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
+    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait, GeneratesOrderCodeTrait;
     protected $dates = ['deleted_at'];
-
     protected $fillable = [
-        'total_amount'
+        'code',
+        'user_id',
+        'order_date',
+        'total_amount',
+        'other_amount',
+        'discount',
+        'shipping_charge',
+        'vat',
+        'payable_amount',
+        'note',
+        'coupon_code_id',
+        'status',
+        'is_active'
     ];
 
     protected $searchable = [
@@ -35,6 +47,10 @@ class Order extends Model
         'order_date'
     ];
 
+    protected static function booted()
+    {
+        static::bootGeneratesOrderCodeTrait();
+    }
     public function orderTracking()
     {
         return $this->hasMany(OrderTracking::class);

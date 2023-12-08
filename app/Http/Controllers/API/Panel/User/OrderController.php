@@ -23,14 +23,14 @@ class OrderController extends Controller
      * @param OrderPlaceRequest $orderPlaceRequest
      * @return JsonResponse
      */
-    public function store(OrderPlaceRequest $orderPlaceRequest): JsonResponse
+    public function store(OrderPlaceRequest $orderPlaceRequest)
     {
         try {
             // Validate the request data and store the data
-            $cart = $this->orderService->store($orderPlaceRequest->validated(), session('cart_info'));
+            $order = $this->orderService->store($orderPlaceRequest->validated(), session('cart_info'));
 
             // Return a success message with the stored data
-            return Message::success(__("message.save"));
+            return Message::success(__("message.save"), $order);
         } catch (Exception $ex) {
             // Return an error message containing the exception
             return $this->handleException($ex, 'SalesManController/store');

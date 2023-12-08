@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
-use App\Models\Backend\Product\Brand;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Product;
 use App\Http\Resources\User\Shop\ShopProductDetailResource;

@@ -125,7 +125,11 @@ $(document).ready(function () {
             formData,
             selectedId,
             (data) => {
+               // Assuming 'order_confirmation' is the route name
+            const orderConfirmationRoute = `/order-confirmation/${data.results.id}`;
 
+            // Redirect to the order confirmation page
+            window.location.href = orderConfirmationRoute;
             },
             (error) => {
                 toastrErrorMessage(error.responseJSON.message);

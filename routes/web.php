@@ -90,7 +90,7 @@ Route::get('get-upazila', [CheckoutController::class, 'getUpazila'])->name('get-
 Route::get('get-union', [CheckoutController::class, 'getUnion'])->name('get-union');
 Route::post('confirm-order', [CheckoutController::class, 'confirmOrder'])->name('confirm_order');
 Route::post('save-shipping-address', [CheckoutController::class, 'addShippingAddress'])->name('save_shipping_address');
-Route::get('order-confirmation', [CheckoutController::class, 'showOrderConfirmation'])->name('order_confirmation');
+Route::get('order-confirmation/{order}', [CheckoutController::class, 'showOrderConfirmation'])->name('order_confirmation');
 Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('about', [HomeController::class, 'aboutUs'])->name('about');
 Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy');

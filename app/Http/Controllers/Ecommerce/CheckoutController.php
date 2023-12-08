@@ -44,16 +44,12 @@ class CheckoutController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Shipping address saved successfully']);
     }
-    public function showOrderConfirmation(Request $request)
+    public function showOrderConfirmation(Order $order)
     {
-        // Retrieve the confirmed order data from the session
-        $confirmedOrder = Session::get('confirmed_order');
 
-        // Clear the order data from the session after retrieving it
-        // Session::forget('confirmed_order');
 
         // Pass the order data to the view
-        return view('ecommerce.order_confirmation', compact('confirmedOrder'));
+        return view('ecommerce.order_confirmation', compact('order'));
     }
     public function confirmOrder(Request $request)
     {
