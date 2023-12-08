@@ -95,14 +95,14 @@ p a {
 .col-left {
     margin-right: 2px;
     background: #ffffff;
-    -webkit-clip-path: polygon(0 0, 100% 5%, 100% 100%, 5% 95%);
-    clip-path: polygon(0 0, 100% 5%, 100% 100%, 5% 95%);
+    /* -webkit-clip-path: polygon(0 0, 100% 5%, 100% 100%, 5% 95%);
+    clip-path: polygon(0 0, 100% 5%, 100% 100%, 5% 95%); */
 }
 
 .col-right {
     background: #ffffff;
-    -webkit-clip-path: polygon(0 5%, 100% 0, 95% 95%, 0 100%);
-    clip-path: polygon(0 5%, 100% 0, 95% 95%, 0 100%);
+    /* -webkit-clip-path: polygon(0 5%, 100% 0, 95% 95%, 0 100%);
+    clip-path: polygon(0 5%, 100% 0, 95% 95%, 0 100%); */
 }
 
 @media(max-width: 575.98px) {
