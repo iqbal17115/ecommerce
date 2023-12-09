@@ -131,19 +131,29 @@ $(document).ready(function () {
             quantity: 1,
         };
 
-        submitAddItem(formData, "");
+        if (user_id.trim() !== "") {
+            // user_id is not an empty string
+            submitAddItem(formData, "");
+        } else {
+            // user_id is an empty string
+            window.location.href = 'customer-sign-in';
+        }
     });
 
     function submitAddItem(formData, selectedId) {
-        console.log(formData);
         saveAction(
             "store",
             "/api/cart/add",
             formData,
             selectedId,
             (data) => {
-                toastrSuccessMessage(data.message);
-                updateCart(data.results);
+                if (typeof data.results !== 'undefined') {
+                    updateCart(data.results);
+                    toastrSuccessMessage(data.message);
+                } else {
+                    window.location.href = 'customer-sign-in';
+                }
+
             },
             (error) => {
                 if (error.responseJSON && error.responseJSON.redirect) {

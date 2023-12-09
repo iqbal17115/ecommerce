@@ -46,8 +46,6 @@ class CheckoutController extends Controller
     }
     public function showOrderConfirmation(Order $order)
     {
-
-
         // Pass the order data to the view
         return view('ecommerce.order_confirmation', compact('order'));
     }

@@ -11,6 +11,7 @@ use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
+use App\Models\OrderAddress;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use App\Traits\GeneratesOrderCodeTrait;
@@ -47,6 +48,10 @@ class Order extends Model
         'order_date'
     ];
 
+    public function orderAddress()
+    {
+        return $this->hasOne(OrderAddress::class);
+    }
     protected static function booted()
     {
         static::bootGeneratesOrderCodeTrait();

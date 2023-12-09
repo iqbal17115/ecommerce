@@ -56,13 +56,6 @@ class CartController extends Controller
     public function addToCart(AddToCartRequest $addToCartRequest)
     {
         try {
-            if ($addToCartRequest->ajax()) {
-                // Check if the response indicates a redirect
-                if ($addToCartRequest->getStatusCode() == 401) {
-                    return response()->json(['error' => 'Unauthenticated', 'redirect' => route('customer-sign-in')]);
-                }
-            }
-
             $cartItem = $this->cartService->addToCart($addToCartRequest->user_id, $addToCartRequest->product_id, $addToCartRequest->quantity);
 
             return Message::success(__("messages.success_add"), new CartItemDetailResource($cartItem));

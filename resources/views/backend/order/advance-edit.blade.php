@@ -151,12 +151,11 @@
                         <div class="col-md-5">
                             <h6 class="mb-3">Shipping To:</h6>
                             <div class="address">
-                                <p class="mb-2">{{ $order->Contact->first_name }}</p>
-                                <p class="mb-2">{{ $order?->Contact?->District?->name }},
-                                    {{ $order?->Contact?->Division?->name }}</p>
-                                <p class="mb-2">{{ $order?->Contact?->Union?->name }},
-                                    {{ $order?->Contact?->Upazila?->name }}</p>
-                                <p class="mb-2">{{ $order?->Contact?->shipping_address }}</p>
+                                <p class="mb-2">{{ $order?->orderAddress?->country_name }}</p>
+                                <p class="mb-2">{{ $order?->orderAddress?->district_name }},
+                                    {{ $order?->orderAddress?->division_name }}</p>
+                                <p class="mb-2">{{ $order?->orderAddress?->upazila_name }}</p>
+                                <p class="mb-2">{{ $order?->orderAddress?->street_address }}</p>
                             </div>
                         </div>
                         <div class="col-md-2 text-info">

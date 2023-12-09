@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Models\Address\Address;
 use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Order;
 use App\Models\FrontEnd\OrderDetail;
+use App\Models\OrderAddress;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -56,6 +58,25 @@ class OrderService
             $orderDetails->quantity = $cartItem['quantity'];
             $orderDetails->save();
         }
+
+
+        $address = Address::find($validatedData['address_id']);
+
+        $orderAddress = new OrderAddress();
+        $orderAddress->order_id = $order->id;
+        $orderAddress->name = $address->name;
+        $orderAddress->instruction = $address->instruction;
+        $orderAddress->mobile = $address->mobile;
+        $orderAddress->optional_mobile = $address->optional_mobile;
+        $orderAddress->street_address = $address->street_address;
+        $orderAddress->building_name = $address->building_name;
+        $orderAddress->nearest_landmark = $address->nearest_landmark;
+        $orderAddress->type = $address->type;
+        $orderAddress->country_name = $address?->country?->name;
+        $orderAddress->division_name = $address?->division?->name;
+        $orderAddress->district_name = $address?->district?->name;
+        $orderAddress->upazila_name = $address?->upazila?->name;
+        $orderAddress->save();
 
         // Delete CartItem records for the current user
         CartItem::where('user_id', auth()->id())->delete();
