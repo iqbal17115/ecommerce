@@ -24,7 +24,7 @@ class OrderPlaceRequest extends FormRequest
     public function rules()
     {
         return [
-            'address_id' => 'required'
+            'address_id' => 'required',
         ];
     }
 }

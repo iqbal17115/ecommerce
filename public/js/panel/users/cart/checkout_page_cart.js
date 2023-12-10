@@ -125,11 +125,15 @@ $(document).ready(function () {
             formData,
             selectedId,
             (data) => {
-               // Assuming 'order_confirmation' is the route name
-            const orderConfirmationRoute = `/order-confirmation/${data.results.id}`;
-
-            // Redirect to the order confirmation page
-            window.location.href = orderConfirmationRoute;
+                if (typeof data.results !== 'undefined') {
+                    toastrSuccessMessage(data.message);
+                    // Assuming 'order_confirmation' is the route name
+                    const orderConfirmationRoute = `/order-confirmation/${data.results.id}`;
+                    // Redirect to the order confirmation page
+                    window.location.href = orderConfirmationRoute;
+                } else {
+                    toastrErrorMessage("Address Not Found");
+                }
             },
             (error) => {
                 toastrErrorMessage(error.responseJSON.message);
@@ -139,7 +143,7 @@ $(document).ready(function () {
 
     $(document).on('click', '#btn_place_order', function () {
         const formData = {
-            address_id: $("#default_address").data("default_address"),
+            address_id: $("#default_address").data("default_address") ?? null,
         };
 
         submitOrder(formData, '');
