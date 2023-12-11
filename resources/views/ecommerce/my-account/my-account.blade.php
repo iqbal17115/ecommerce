@@ -85,20 +85,10 @@
                 var to_date = $("#to_date").val();
                 var items_per_page_select = $("#items_per_page_select").val();
 
-                var url = `/user/orders`;
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {
-                        user_id: user_id,
-                        code: search_value,
-                        from_date: from_date,
-                        to_date: to_date,
-                        items_per_page_select: items_per_page_select
-                    },
-                    success: function(data) {
-                        console.log(data);
+                getDetails(
+            "/api/user-orders/lists?user_id=" + user_id,
+                (data) => {
+                    console.log(data);
                         var orders = data.orders;
                         var container = $('#orders-container');
                         container.empty();
@@ -176,13 +166,11 @@
                                 container.append(orderDetailHtml);
                             });
                         });
+                },
+                (error) => {
 
-
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+                }
+            );
             }
             $(document).on('change', 'select', function() {
                 loadUserOrder(@json($user->id ?? null));

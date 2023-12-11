@@ -108,11 +108,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(OrderTrackingController::class)->group(function () {
         Route::get('/orders-tracking/{id}', 'orderTracking')->name('orders.tracking');
     });
-
-    // My Account
-    Route::controller(MyAccountController::class)->group(function () {
-        Route::get('/user/orders', 'getUserOrders');
-    });
 });
 
 

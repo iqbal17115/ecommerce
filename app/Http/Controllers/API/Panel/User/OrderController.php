@@ -4,7 +4,10 @@ namespace App\Http\Controllers\API\Panel\User;
 
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Order\OrderListRequest;
 use App\Http\Requests\User\Order\OrderPlaceRequest;
+use App\Http\Resources\User\Order\OrderListResource;
+use App\Models\FrontEnd\Order;
 use App\Services\OrderService;
 use App\Traits\BaseModel;
 use Exception;
@@ -13,10 +16,22 @@ use Illuminate\Http\JsonResponse;
 class OrderController extends Controller
 {
     use BaseModel;
+
     protected $orderService;
     public function __construct(OrderService $orderService)
     {
         $this->orderService = $orderService;
+    }
+
+
+    public function lists(OrderListRequest $orderListRequest): JsonResponse
+    {
+            // Get list data
+            $lists = $this->getLists(Order::where('user_id', $orderListRequest->user_id), $orderListRequest->validated(), OrderListResource::class);
+            dd($lists);
+            // Return a success message with the data
+            return Message::success(null, $lists);
+
     }
 
     /**
@@ -27,7 +42,6 @@ class OrderController extends Controller
      */
     public function store(OrderPlaceRequest $orderPlaceRequest): JsonResponse
     {
-        dd($orderPlaceRequest->validated());
         try {
             // Validate the request data and store the data
             $order = $this->orderService->store($orderPlaceRequest->validated(), session('cart_info'));

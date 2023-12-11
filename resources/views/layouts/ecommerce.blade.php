@@ -86,6 +86,7 @@
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
     @include('layouts.parts.js-links')
+
 <script src="{{ asset('js/ajax_setup.js') }}"></script>
 
     @stack('scripts')

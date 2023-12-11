@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Route;
 // Order
 Route::controller(OrderController::class)->group(function () {
     Route::post('order-place', 'store')->name("order_place");
+    Route::get('/user-orders/lists', 'lists')->name('user_orders.lists');
 });
 
 // User Review
