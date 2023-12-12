@@ -16,6 +16,7 @@ class OrderListResource extends JsonResource
     {
         return [
             "id" => $this->id,
+            "code" => $this->code,
             "order_date" => $this->order_date,
             "total_amount" => $this->total_amount,
             "other_amount" => $this->other_amount,
@@ -25,6 +26,7 @@ class OrderListResource extends JsonResource
             "payable_amount" => $this->payable_amount,
             "note" => $this->note,
             "status" => $this->status,
+            "order_address" => new OrderAddressResource($this->orderAddress),
         ];
     }
 }

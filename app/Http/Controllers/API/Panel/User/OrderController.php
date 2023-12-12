@@ -27,8 +27,7 @@ class OrderController extends Controller
     public function lists(OrderListRequest $orderListRequest): JsonResponse
     {
             // Get list data
-            $lists = $this->getLists(Order::where('user_id', $orderListRequest->user_id), $orderListRequest->validated(), OrderListResource::class);
-            dd($lists);
+            $lists = Order::getLists(Order::where('user_id', $orderListRequest->user_id), $orderListRequest->validated(), OrderListResource::class);
             // Return a success message with the data
             return Message::success(null, $lists);
 

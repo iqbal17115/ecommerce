@@ -80,13 +80,13 @@
             userAddress();
 
             function loadUserOrder(user_id) {
-                var search_value = $("#search_value").val();
+                var code = $("#search_value").val();
                 var from_date = $("#from_date").val();
                 var to_date = $("#to_date").val();
                 var items_per_page_select = $("#items_per_page_select").val();
 
                 getDetails(
-            "/api/user-orders/lists?user_id=" + user_id,
+            "/api/user-orders/lists?user_id=" + user_id + "&code="+code,
                 (data) => {
                     console.log(data);
                         var orders = data.orders;
@@ -94,27 +94,27 @@
                         container.empty();
 
                         // Loop through the orders and append them to the container
-                        $.each(orders, function(index, order) {
+                        $.each(data.results.data, function(index, order) {
                             var orderHtml = '<div class="card p-2">';
                             orderHtml += '<div class="card border border-dark">';
                             orderHtml += '<div class="card-body">';
                             orderHtml += '<div class="row">';
                             orderHtml += '<div class="col-md-4">';
-                            orderHtml += '<h5 class="card-title">Order ID# ' + order.code +
+                            orderHtml += '<h5 class="card-title p-0 m-0">Order ID# ' + order.code +
                                 '</h5>';
-                            orderHtml += '<p class="card-text">Ordered On </p>';
+                            orderHtml += '<p class="card-text">Ordered On: <a href="https://www.aladdinne.ae/">aladdinne.ae</a> </p>';
                             orderHtml += '</div>';
                             orderHtml +=
                                 '<div class="col-md-4 d-flex justify-content-center align-items-center">';
                             orderHtml += '<div>';
-                            orderHtml += '<h5 class="card-title">Estimated Delivery</h5>';
+                            orderHtml += '<h5 class="card-title p-0 m-0">Estimated Delivery</h5>';
                             orderHtml += '<p class="card-text">By </p>';
                             orderHtml += '</div>';
                             orderHtml += '</div>';
                             orderHtml +=
                                 '<div class="col-md-2 d-flex justify-content-center align-items-center">';
                             orderHtml += '<div>';
-                            orderHtml += '<h5 class="card-title">Order Total</h5>';
+                            orderHtml += '<h5 class="card-title p-0 m-0">Order Total</h5>';
                             orderHtml += '<p class="card-text">Taka ' + order.payable_amount +
                                 '</p>';
                             orderHtml += '</div>';
