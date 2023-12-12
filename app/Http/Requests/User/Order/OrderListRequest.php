@@ -27,6 +27,8 @@ class OrderListRequest extends FormRequest
         return [
             'user_id' => 'required',
             'code' => 'nullable',
+            'start_date' => 'nullable',
+            'end_date' => 'nullable',
         ];
     }
 }

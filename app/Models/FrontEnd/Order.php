@@ -39,7 +39,7 @@ class Order extends Model
         'is_active'
     ];
 
-    protected $searchable = [
+    protected array $searchable = [
         'code',
         'order_date'
     ];

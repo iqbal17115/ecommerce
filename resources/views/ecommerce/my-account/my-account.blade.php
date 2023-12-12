@@ -76,17 +76,20 @@
         }
 
         $(document).ready(function() {
-
+$('#saerch_box').val();
+$('#from_date').val('');
+$('#to_date').val('');
+$('#saerch_box').val();
             userAddress();
 
             function loadUserOrder(user_id) {
                 var code = $("#search_value").val();
-                var from_date = $("#from_date").val();
-                var to_date = $("#to_date").val();
+                var start_date = $("#from_date").val();
+                var end_date = $("#to_date").val();
                 var items_per_page_select = $("#items_per_page_select").val();
 
                 getDetails(
-            "/api/user-orders/lists?user_id=" + user_id + "&code="+code,
+            "/api/user-orders/lists?user_id=" + user_id + "&code="+code+ "&start_date="+start_date+ "&end_date="+end_date,
                 (data) => {
                     console.log(data);
                         var orders = data.orders;
