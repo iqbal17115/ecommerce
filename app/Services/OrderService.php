@@ -29,12 +29,14 @@ class OrderService
             // Convert $allCartInfo to a collection
             $cartCollection = collect($allCartInfo);
 
-            $shippingChargeSum = collect($cartCollection['data'])->sum('shipping_charge');
-            $couponDiscount = collect($cartCollection['data'])->sum('coupon_discount');
+            $shippingChargeSum = collect($cartCollection['data'])->sum('shipping_charge') ?? 0;
+            $couponDiscount = collect($cartCollection['data'])->sum('coupon_discount') ?? 0;
             $totalAmount = 0;
 
-            foreach ($cartCollection['data'] as $cartItem) {
-                $totalAmount += collect($cartItem['product_info'])['product_price'] * $cartItem['quantity'];
+            if (isset($cartCollection['data'])) {
+                foreach ($cartCollection['data'] as $cartItem) {
+                    $totalAmount += collect($cartItem['product_info'])['product_price'] * $cartItem['quantity'];
+                }
             }
 
             // Create an order
@@ -52,6 +54,7 @@ class OrderService
             $order->is_active = 1;
             $order->save();
 
+            if (isset($cartCollection['data'])) {
             foreach ($cartCollection['data'] as $cartItem) {
                 $orderDetails = new OrderDetail();
                 $orderDetails->order_id = $order->id;
@@ -60,7 +63,7 @@ class OrderService
                 $orderDetails->quantity = $cartItem['quantity'];
                 $orderDetails->save();
             }
-
+        }
 
             $address = Address::find($validatedData['address_id']);
 
