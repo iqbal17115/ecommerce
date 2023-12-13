@@ -76,10 +76,11 @@
         }
 
         $(document).ready(function() {
-$('#saerch_box').val();
-$('#from_date').val('');
-$('#to_date').val('');
-$('#saerch_box').val();
+            $('#saerch_box').val();
+            $('#from_date').val('');
+            $('#to_date').val('');
+            $('#saerch_box').val();
+
             userAddress();
 
             function loadUserOrder(user_id) {

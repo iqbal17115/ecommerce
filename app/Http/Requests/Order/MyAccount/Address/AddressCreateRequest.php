@@ -32,7 +32,6 @@ class AddressCreateRequest extends FormRequest
             'optional_mobile' => 'nullable',
             'division_id' => 'required',
             'district_id' => 'required',
-            'upazila_id' => 'required',
             'street_address' => 'required',
             'building_name' => 'required',
             'nearest_landmark' => 'required',

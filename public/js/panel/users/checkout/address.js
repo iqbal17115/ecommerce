@@ -1,19 +1,3 @@
-$(document).on("change", "#district_id", function (event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-    const district_id = $("#district_id").val();
-
-    // Get details
-    getDetails(
-        "/api/areas-select/lists?district_id=" + district_id,
-        (data) => {
-            setUpazilaData(data.results.data);
-        },
-        (error) => {
-
-        }
-    );
-});
-
 $(document).on("change", "#division_id", function (event) {
     event.preventDefault(); // Prevent the form from submitting immediately
     const division_id = $("#division_id").val();
@@ -135,23 +119,22 @@ function setEditData(data) {
     var countrySelector = document.getElementById('country_id');
     var divisionSelector = document.getElementById('division_id');
     var districtSelector = document.getElementById('district_id');
-    var upazilaSelector = document.getElementById('upazila_id');
+
 
     var countries = data.countries;
     var divisions = data.divisions;
     var districts = data.districts;
-    var upazilas = data.upazilas;
+
 
     countrySelector.innerHTML = '';
     divisionSelector.innerHTML = '';
     districtSelector.innerHTML = '';
-    upazilaSelector.innerHTML = '';
+
 
     // Add a default option with no specific value
     countrySelector.appendChild(defaultOption);
     divisionSelector.appendChild(defaultOption);
     districtSelector.appendChild(defaultOption);
-    upazilaSelector.appendChild(defaultOption);
 
     // Populate options based on country data
     countries.forEach(function (country) {
@@ -188,19 +171,6 @@ function setEditData(data) {
 
         // Select the option with the specified district_id
         if (district.id == data.district_id) {
-            option.selected = true;
-        }
-    });
-
-    // Populate options based on upazila data
-    upazilas.forEach(function (upazila) {
-        var option = document.createElement('option');
-        option.value = upazila.id;
-        option.text = upazila.name;
-        upazilaSelector.appendChild(option);
-
-        // Select the option with the specified upazila_id
-        if (upazila.id == data.upazila_id) {
             option.selected = true;
         }
     });
@@ -262,12 +232,18 @@ function setAddressData(data) {
     let cardHTML = '';
     let default_address_content = '';
     let count_default = 0;
-    if (data.length != 0) {
+
+    if (data.length !== 0) {
         // Loop through the dataArray
-        data.forEach(data => {
-            const address = data.is_default == 1 ? 'Default' : '';
-            const set_as_default_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="set_as_default_address" data-address_id="${data.id}">Set As Default</a>` : '';
-            const remove_address = data.is_default == 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm" id="remove_address" data-address_id="${data.id}">Remove</a>` : '';
+        data.forEach((data, index) => {
+            const address = data.is_default === 1 ? 'Default' : '';
+            const set_as_default_address = data.is_default === 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm set_default_address" id="set_as_default_address" data-address_id="${data.id}">Set As Default</a>` : '';
+            const remove_address = data.is_default === 0 ? `<span class="mx-1">|</span><a href="javascript:void(0);" class="text-sm remove_address" data-address_id="${data.id}">Remove</a>` : '';
+
+            const radioChecked = data.is_default === 1 ? 'checked' : ''; // Check the radio button if it's the default address
+
+            const selectedClass = data.is_default === 1 ? 'selected-card' : ''; // Add a class for the selected card
+
             if (data.is_default == 1) {
                 count_default = count_default + 1;
                 default_address_content += `
@@ -287,52 +263,62 @@ function setAddressData(data) {
             }
 
             cardHTML += `
-        <div class="col-md-4 mb-3">
-        <div class="card bg-light mb-3">
-        <div class="card-header">
-        <div class="d-flex justify-content-between">
-  <span class="mr-3">Address</span>
-  <span class="mx-auto">${address}</span>
-  <span class="ml-auto">${data.type}</span>
-</div>
+                <div class="col-md-4 p-0 m-0 ${selectedClass} ml-2">
+                    <input type="radio" name="addressRadio" ${radioChecked} class="hidden-radio" id="address_${data.id}" data-address_id="${data.id}" hidden>
+                    <label for="address_${data.id}" style="display: inline;">
+                        <div class="card p-0 m-0 bg-light" style="height: 100%;">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <span class="mr-3">Address</span>
+                                    <span class="mx-auto">${address}</span>
+                                    <span class="ml-auto">${data.type}</span>
+                                </div>
+                            </div>
 
-      </div>
-
-            <div class="card-body">
-                <h4 class="card-title">${data.name}</h4>
-                <div class="card-text">${data.street_address}</div>
-                <div class="card-text">${data.building_name}</div>
-                <div class="card-text">${data.nearest_landmark}</div>
-                <div class="card-text">${data.district}, ${data.division}</div>
-                <div class="card-text">${data.country}</div>
-                <div class="card-text">Phone No: ${data.mobile}</div>
-                <div class="card-text">Additional No: ${data.optional_mobile}</div>
-            </div>
-            <div class="card-footer">
-                <a href="javascript:void(0);" class="text-sm edit_address" id="edit_address" data-address_id="${data.id}">Edit</a>
-                ${remove_address}
-                ${set_as_default_address}
-            </div>
-        </div>
-        </div>
-    `;
+                            <div class="card-body">
+                                <h4 class="card-title">${data.name}</h4>
+                                <div class="card-text">${data.street_address}</div>
+                                <div class="card-text">${data.building_name}</div>
+                                <div class="card-text">${data.nearest_landmark}</div>
+                                <div class="card-text">${data.district}, ${data.division}</div>
+                                <div class="card-text">${data.country}</div>
+                                <div class="card-text">Phone No: ${data.mobile}</div>
+                                <div class="card-text">Additional No: ${data.optional_mobile}</div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="javascript:void(0);" class="text-sm edit_address" data-address_id="${data.id}">Edit</a>
+                                ${remove_address}
+                                ${set_as_default_address}
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            `;
         });
-        cardHTML += ``;
 
         $("#address_content").html(cardHTML);
 
+        // Add click event to update the selected card
+        $(".hidden-radio").on("change", function () {
+            $(".selected-card").removeClass("selected-card");
+            $(this).closest(".col-md-4").addClass("selected-card");
+        });
+
         var modalFooterHTML = `
-    <button type="button" class="btn btn-sm" id="add_another_address">
-        <i class="fas fa-plus brand_text_color"></i> Add New Address
-    </button>
-    <button type="button" class="btn btn-sm brand_color" data-dismiss="modal">Close</button>`;
+            <button type="button" class="btn btn-sm" id="add_another_address">
+                <i class="fas fa-plus brand_text_color"></i> Add New Address
+            </button>
+            <button type="button" class="btn btn-sm brand_color" data-dismiss="modal">Close</button>`;
+
         $('#default_address_content').html(default_address_content);
         $('#address_footer').html(modalFooterHTML);
     } else {
         loadAddressForm();
     }
-
 }
+
+
+
 function loadUserAddress(user_id) {
     getDetails(
         "/api/user-address/lists?user_id=" + user_id,
@@ -424,7 +410,6 @@ $("#targeted_form").submit(function (event) {
         country_id: $("#targeted_form #country_id").val(),
         division_id: $("#targeted_form #division_id").val(),
         district_id: $("#targeted_form #district_id").val(),
-        upazila_id: $("#targeted_form #upazila_id").val(),
         street_address: $("#targeted_form #street_address").val(),
         building_name: $("#targeted_form #building_name").val(),
         nearest_landmark: $("#targeted_form #nearest_landmark").val(),
@@ -446,33 +431,11 @@ function submitForm(formData, selectedId = "") {
         (data) => {
             document.getElementById('close_button').click();
             userAddress();
-            // $('#targeted_form')[0].reset();
         },
         (error) => {
 
         }
     );
-}
-
-function setUpazilaData(data) {
-    const selectElement = document.getElementById('upazila_id');
-
-    selectElement.innerHTML = '';
-
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '';
-    defaultOption.text = 'Select a Upazila';
-    defaultOption.setAttribute('selected', 'selected');
-
-    selectElement.appendChild(defaultOption);
-
-    data.forEach((item) => {
-        const option = document.createElement('option');
-        option.value = item.id;
-        option.text = item.name;
-
-        selectElement.appendChild(option);
-    });
 }
 
 function setDistrictData(data) {
@@ -576,12 +539,6 @@ function editAddressForm() {
             </select>
         </div>
         <div class="col-md-12">
-            <label for="upazila_id">Area</label>
-            <select class="form-control form-control-sm" id="upazila_id" name="upazila_id" required>
-                <option> -- Select --</option>
-            </select>
-        </div>
-        <div class="col-md-12">
             <label for="street_address">Street Address</label>
             <input type="text" class="form-control" id="street_address" name="street_address"
                 placeholder="Enter street address" required>
@@ -666,12 +623,6 @@ function addressForm(user) {
             </select>
         </div>
         <div class="col-md-12">
-            <label for="upazila_id">Area</label>
-            <select class="form-control form-control-sm" id="upazila_id" name="upazila_id" required>
-                <option> -- Select --</option>
-            </select>
-        </div>
-        <div class="col-md-12">
             <label for="street_address">Street Address</label>
             <input type="text" class="form-control" id="street_address" name="street_address"
                 placeholder="Enter street address" required>
@@ -718,22 +669,6 @@ function addressForm(user) {
     setCountry();
 }
 
-$(document).on("change", "#district_id", function (event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-    const district_id = $("#district_id").val();
-
-    // Get details
-    getDetails(
-        "/api/areas-select/lists?district_id=" + district_id,
-        (data) => {
-            setUpazilaData(data.results.data);
-        },
-        (error) => {
-
-        }
-    );
-});
-
 $(document).on("change", "#division_id", function (event) {
     event.preventDefault(); // Prevent the form from submitting immediately
     const division_id = $("#division_id").val();
@@ -776,27 +711,6 @@ function setCountry() {
 
         }
     );
-}
-
-function setUpazilaData(data) {
-    const selectElement = document.getElementById('upazila_id');
-
-    selectElement.innerHTML = '';
-
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '';
-    defaultOption.text = 'Select a Upazila';
-    defaultOption.setAttribute('selected', 'selected');
-
-    selectElement.appendChild(defaultOption);
-
-    data.forEach((item) => {
-        const option = document.createElement('option');
-        option.value = item.id;
-        option.text = item.name;
-
-        selectElement.appendChild(option);
-    });
 }
 
 function setDistrictData(data) {
@@ -876,7 +790,6 @@ $(document).on('submit', '#address_form', function (event) {
         country_id: $("#address_form #country_id").val(),
         division_id: $("#address_form #division_id").val(),
         district_id: $("#address_form #district_id").val(),
-        upazila_id: $("#address_form #upazila_id").val(),
         street_address: $("#address_form #street_address").val(),
         building_name: $("#address_form #building_name").val(),
         nearest_landmark: $("#address_form #nearest_landmark").val(),

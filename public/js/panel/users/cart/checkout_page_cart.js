@@ -143,7 +143,7 @@ $(document).ready(function () {
 
     $(document).on('click', '#btn_place_order', function () {
         const formData = {
-            address_id: $("#default_address").data("default_address") ?? null,
+            address_id: $('input[name="addressRadio"]:checked').data('address_id') ?? null,
         };
 
         submitOrder(formData, '');
