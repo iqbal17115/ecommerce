@@ -24,8 +24,8 @@ class OrderService
         DB::beginTransaction();
         try {
             // Retrieve all cart information from the session
-            $allCartInfo = session('cart_info');
-
+            $allCartInfo = $cartInfo;
+dd($allCartInfo);
             // Convert $allCartInfo to a collection
             $cartCollection = collect($allCartInfo);
 

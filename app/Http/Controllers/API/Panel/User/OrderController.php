@@ -46,7 +46,7 @@ class OrderController extends Controller
     {
         try {
             // Validate the request data and store the data
-            $order = $this->orderService->store($orderPlaceRequest->validated(), session('cart_info'));
+            $order = $this->orderService->store($orderPlaceRequest->validated(), $orderPlaceRequest->session()->get('cart_info'));
 
             // Return a success message with the stored data
             return Message::success(__("messages.success_add"), $order);
