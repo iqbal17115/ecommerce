@@ -28,7 +28,7 @@ class OrderService
 
             // Convert $allCartInfo to a collection
             $cartCollection = collect($allCartInfo);
-dd($cartCollection);
+
             $shippingChargeSum = collect($cartCollection['data'])->sum('shipping_charge') ?? 0;
             $couponDiscount = collect($cartCollection['data'])->sum('coupon_discount') ?? 0;
             $totalAmount = 0;
