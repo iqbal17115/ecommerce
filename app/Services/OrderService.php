@@ -25,7 +25,7 @@ class OrderService
         try {
             // Retrieve all cart information from the session
             $allCartInfo = $cartInfo;
-dd($allCartInfo);
+
             // Convert $allCartInfo to a collection
             $cartCollection = collect($allCartInfo);
 
