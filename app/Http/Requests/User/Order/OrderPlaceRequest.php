@@ -25,6 +25,7 @@ class OrderPlaceRequest extends FormRequest
     {
         return [
             'address_id' => 'required',
+            'user_id' => 'required',
         ];
     }
 }

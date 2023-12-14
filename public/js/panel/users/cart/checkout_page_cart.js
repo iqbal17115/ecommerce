@@ -144,6 +144,7 @@ $(document).ready(function () {
     $(document).on('click', '#btn_place_order', function () {
         const formData = {
             address_id: $('input[name="addressRadio"]:checked').data('address_id') ?? null,
+            user_id: $("#temp_user_id").data('user_id') ?? null,
         };
 
         submitOrder(formData, '');
