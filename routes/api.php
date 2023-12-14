@@ -34,12 +34,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::middleware('web')->group(function () {
-    Route::middleware('auth:sanctum')->group(function () {
+
 // Order
 Route::controller(OrderController::class)->group(function () {
     Route::post('order-place', 'store')->name("order_place");
     Route::get('/user-orders/lists', 'lists')->name('user_orders.lists');
-});
 });
 
 // User Review
@@ -100,7 +99,7 @@ Route::controller(CouponController::class)->group(function () {
     Route::delete('coupons/{coupon}', 'destroy')->name('coupons.destroy');
     Route::put('coupons-status/{coupon}', 'statusUpdate')->name('coupons_status.update');
 });
-Route::middleware('auth:sanctum')->group(function () {
+
 // Cart
 Route::controller(CartController::class)->group(function () {
     Route::post('cart/add', 'addToCart')->name('cart_add');
@@ -110,7 +109,6 @@ Route::controller(CartController::class)->group(function () {
     Route::post('all-cart-status-update', 'updateCartAllItemStatus')->name('all_cart_status_update');
     Route::delete('cart-remove/{cartItem}', 'removeCartItem')->name('cart_remove');
     Route::get('checkout/cart/lists', 'getCheckoutCart')->name('checkout_cart_lists');
-});
 });
 
 // Upazila
