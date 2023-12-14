@@ -12,6 +12,7 @@ use App\Services\OrderService;
 use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -42,11 +43,11 @@ class OrderController extends Controller
      * @param OrderPlaceRequest $orderPlaceRequest
      * @return JsonResponse
      */
-    public function store(OrderPlaceRequest $orderPlaceRequest): JsonResponse
+    public function store(OrderPlaceRequest $orderPlaceRequest, Request $request): JsonResponse
     {
         try {
             // Validate the request data and store the data
-            $order = $this->orderService->store($orderPlaceRequest->validated(), $orderPlaceRequest->session()->get('cart_info'));
+            $order = $this->orderService->store($orderPlaceRequest->validated(), $request->session()->get('cart_info'));
 
             // Return a success message with the stored data
             return Message::success(__("messages.success_add"), $order);
