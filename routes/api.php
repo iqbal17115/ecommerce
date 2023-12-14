@@ -34,12 +34,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::middleware('web')->group(function () {
-Route::middleware(['web'])->group(function () {
-    // Order
-    Route::controller(OrderController::class)->group(function () {
-        Route::post('order-place', 'store')->name("order_place");
-        Route::get('/user-orders/lists', 'lists')->name('user_orders.lists');
-    });
+
+// Order
+Route::controller(OrderController::class)->group(function () {
+    Route::post('order-place', 'store')->name("order_place");
+    Route::get('/user-orders/lists', 'lists')->name('user_orders.lists');
 });
 
 // User Review
@@ -100,18 +99,16 @@ Route::controller(CouponController::class)->group(function () {
     Route::delete('coupons/{coupon}', 'destroy')->name('coupons.destroy');
     Route::put('coupons-status/{coupon}', 'statusUpdate')->name('coupons_status.update');
 });
-Route::middleware(['web'])->group(function () {
 
-    // Cart
-    Route::controller(CartController::class)->group(function () {
-        Route::post('cart/add', 'addToCart')->name('cart_add');
-        Route::get('cart/lists', 'getCart');
-        Route::put('cart-update/{cartItem}', 'updateCartItem')->name('cart_update');
-        Route::put('cart-status-update/{cartItem}', 'updateCartItemStatus')->name('cart_status_update');
-        Route::post('all-cart-status-update', 'updateCartAllItemStatus')->name('all_cart_status_update');
-        Route::delete('cart-remove/{cartItem}', 'removeCartItem')->name('cart_remove');
-        Route::get('checkout/cart/lists', 'getCheckoutCart')->name('checkout_cart_lists');
-    });
+// Cart
+Route::controller(CartController::class)->group(function () {
+    Route::post('cart/add', 'addToCart')->name('cart_add');
+    Route::get('cart/lists', 'getCart');
+    Route::put('cart-update/{cartItem}', 'updateCartItem')->name('cart_update');
+    Route::put('cart-status-update/{cartItem}', 'updateCartItemStatus')->name('cart_status_update');
+    Route::post('all-cart-status-update', 'updateCartAllItemStatus')->name('all_cart_status_update');
+    Route::delete('cart-remove/{cartItem}', 'removeCartItem')->name('cart_remove');
+    Route::get('checkout/cart/lists', 'getCheckoutCart')->name('checkout_cart_lists');
 });
 
 // Upazila
