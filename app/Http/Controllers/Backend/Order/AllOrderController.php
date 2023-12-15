@@ -10,6 +10,7 @@ use App\Enums\PaymentTypeEnum;
 use App\Enums\ProductCancelReasonEnum;
 use App\Enums\WeightUnitEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Order\OrderCancelRequest;
 use App\Http\Requests\Order\OrderFulfilmentNoteRequest;
 use App\Http\Requests\Order\OrderNoteRequest;
 use App\Http\Requests\Order\OrderPackageRequest;
@@ -300,21 +301,21 @@ class AllOrderController extends Controller
             'data' => $data
         ], 200);
     }
-    public function cancelOrder(OrderStatusRequest $orderStatusRequest, Order $order)
+    public function cancelOrder(OrderCancelRequest $orderCancelRequest, Order $order)
     {
-        DB::transaction(function () use ($orderStatusRequest, $order) {
-            $order->status = $orderStatusRequest->validated()['status'];
+        DB::transaction(function () use ($orderCancelRequest, $order) {
+            $order->status = $orderCancelRequest->validated()['status'];
             $order->save();
 
             $orderNoteStatus = OrderNoteStatus::firstOrNew(['order_id' => $order->id]);
-            $orderNoteStatus->fulfilment_note = $orderStatusRequest->validated()['fulfilment_note'];
+            $orderNoteStatus->fulfilment_note = $orderCancelRequest->validated()['fulfilment_note'];
             $orderNoteStatus->save();
 
         });
 
         $data = [
-            'status' => $orderStatusRequest->validated()['status'],
-            'fulfilment_note' => $orderStatusRequest->validated()['fulfilment_note']
+            'status' => $orderCancelRequest->validated()['status'],
+            'fulfilment_note' => $orderCancelRequest->validated()['fulfilment_note']
         ];
 
         return response()->json([
