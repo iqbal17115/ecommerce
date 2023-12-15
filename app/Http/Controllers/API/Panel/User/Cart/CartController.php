@@ -53,6 +53,30 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
+    public function addToCartBuyNowWithQuantity(AddToCartRequest $addToCartRequest)
+    {
+        try {
+            $cartItem = $this->cartService->byNowWithQuantity($addToCartRequest->user_id, $addToCartRequest->product_id, $addToCartRequest->quantity);
+
+            return Message::success(__("messages.success_add"), new CartItemDetailResource($cartItem));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
+        }
+    }
+
+    public function addToCartWithQuantity(AddToCartRequest $addToCartRequest)
+    {
+        try {
+            $cartItem = $this->cartService->addToCartWithQuantity($addToCartRequest->user_id, $addToCartRequest->product_id, $addToCartRequest->quantity);
+
+            return Message::success(__("messages.success_add"), new CartItemDetailResource($cartItem));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
+        }
+    }
+
     public function addToCart(AddToCartRequest $addToCartRequest)
     {
         try {

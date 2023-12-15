@@ -103,6 +103,8 @@ Route::controller(CouponController::class)->group(function () {
 // Cart
 Route::controller(CartController::class)->group(function () {
     Route::post('cart/add', 'addToCart')->name('cart_add');
+    Route::post('cart/add-with-quantity', 'addToCartWithQuantity')->name('cart_add.with_quantity');
+    Route::post('cart/buy-now-with-quantity', 'addToCartBuyNowWithQuantity')->name('cart_add.buy_now_with_quantity');
     Route::get('cart/lists', 'getCart');
     Route::put('cart-update/{cartItem}', 'updateCartItem')->name('cart_update');
     Route::put('cart-status-update/{cartItem}', 'updateCartItemStatus')->name('cart_status_update');

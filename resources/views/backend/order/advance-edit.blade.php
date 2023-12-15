@@ -507,12 +507,14 @@
                                 $notes = json_decode($order->orderNoteStatus->order_note, true);
                             @endphp
 
+                            @if($notes)
                             @foreach ($notes as $note)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     {{ $note['note'] }}
                                     <span class="badge badge-primary badge-pill">{{ $note['note_type'] }}</span>
                                 </li>
                             @endforeach
+                            @endif
                         @endif
                     </ul>
 
@@ -574,13 +576,14 @@
                             @php
                                 $notes = json_decode($order->orderNoteStatus->payment_note, true);
                             @endphp
-
+@if($notes)
                             @foreach ($notes as $note)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     {{ $note['note'] }}
                                     <span class="badge badge-primary badge-pill">{{ $note['note_type'] }}</span>
                                 </li>
                             @endforeach
+                        @endif
                         @endif
                     </ul>
 
@@ -646,13 +649,14 @@
                             @php
                                 $notes = json_decode($order->orderNoteStatus->fulfilment_note, true);
                             @endphp
-
+@if($notes)
                             @foreach ($notes as $note)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     {{ $note['note'] }}
                                     <span class="badge badge-primary badge-pill">{{ $note['note_type'] }}</span>
                                 </li>
                             @endforeach
+                        @endif
                         @endif
                     </ul>
 

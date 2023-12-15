@@ -7,6 +7,50 @@ use App\Models\User;
 
 class CartService
 {
+    public function byNowWithQuantity($user_id, $productId, $quantity)
+    {
+        $cartItem = CartItem::where('user_id', $user_id)
+            ->where('product_id', $productId)
+            ->first();
+
+        if ($cartItem) {
+            $cartItem->quantity = $quantity;
+            $cartItem->is_active = 1;
+            $cartItem->save();
+        } else {
+            $cartItem = new CartItem([
+                'user_id' => $user_id,
+                'product_id' => $productId,
+                'quantity' => $quantity,
+                'is_active' => 1,
+            ]);
+            $cartItem->save();
+        }
+
+        return $cartItem;
+    }
+
+    public function addToCartWithQuantity($user_id, $productId, $quantity)
+    {
+        $cartItem = CartItem::where('user_id', $user_id)
+            ->where('product_id', $productId)
+            ->first();
+
+        if ($cartItem) {
+            $cartItem->quantity = $quantity;
+            $cartItem->save();
+        } else {
+            $cartItem = new CartItem([
+                'user_id' => $user_id,
+                'product_id' => $productId,
+                'quantity' => $quantity,
+            ]);
+            $cartItem->save();
+        }
+
+        return $cartItem;
+    }
+
     public function addToCart($user_id, $productId, $quantity)
     {
         $cartItem = CartItem::where('user_id', $user_id)

@@ -223,23 +223,21 @@
                                     @endphp
                                 @endif
                                 <input class="horizontal-quantity form-control product-quantity-{{ $product_detail->id }}"
-                                    value="{{ $cart_qty }}" type="text">
+                                    value="{{ $cart_qty }}" id="current_product_quantity" type="text">
                             </div>
                             <!-- End .product-single-qty -->
 
                             <a href="javascript:void(0);" title="Add To Cart" data-product_id="{{ $product_detail->id }}"
                                 @if ($product_detail->ProductMainImage) data-image="{{ $product_detail->ProductMainImage->image }}" @endif
                                 class="btn btn-dark
-                                add_cart_item add-cart mr-2"
+                                add_cart_item_quantity add-cart mr-2"
                                 title="Add to Cart">{{ __('translate.add_to_cart') }}</a>
 
                             <a href="javascript:void(0);" title="Buy Now" data-id="{{ $product_detail->id }}"
-                                data-name="{{ $product_detail->name }}"
-                                data-your_price="{{ $product_detail->your_price }}"
-                                data-sale_price="{{ $product_detail->sale_price }}"
+                                data-product_id="{{ $product_detail->id }}"
                                 @if ($product_detail->ProductMainImage) data-image="{{ $product_detail->ProductMainImage->image }}" @endif
                                 class="btn
-                            btn-add-cart add-cart btn-buy-now mr-2"
+                                buy_now_with_quantity btn-buy-now mr-2"
                                 style="background-color: #F4631B; color: white;"
                                 title="Buy
                             Now">{{ __('translate.buy_now') }}</a>
@@ -486,7 +484,7 @@
 
 @endsection
 @push('scripts')
-<script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
+<script src="{{ asset('js/panel/users/cart/product.js') }}"></script>
 <script src="{{ asset('js/panel/users/common.js') }}"></script>
 <script src="{{ asset('js/panel/users/product_details/common.js') }}"></script>
 <script>
