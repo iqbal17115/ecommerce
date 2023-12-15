@@ -9,6 +9,7 @@ use App\Models\Backend\Product\ProductMoreDetail;
 use App\Models\Backend\Product\ProductKeyword;
 use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductImage;
+use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Review;
 use App\Models\User;
 use App\Traits\BaseModel;
@@ -16,6 +17,7 @@ use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
@@ -68,6 +70,11 @@ class Product extends Model
                     ->where('sale_end_date', '>=', $currentDate);
             });
         });
+    }
+
+    public function cartItem(): HasOne
+    {
+        return $this->hasOne(CartItem::class);
     }
 
     public function user(): BelongsTo

@@ -230,7 +230,7 @@
                             <a href="javascript:void(0);" title="Add To Cart" data-product_id="{{ $product_detail->id }}"
                                 @if ($product_detail->ProductMainImage) data-image="{{ $product_detail->ProductMainImage->image }}" @endif
                                 class="btn btn-dark
-                                add_cart_item_quantity add-cart mr-2"
+                                add_cart_item_quantity add-cart @if($product_detail->cartItem) added-to-cart @endif mr-2"
                                 title="Add to Cart">{{ __('translate.add_to_cart') }}</a>
 
                             <a href="javascript:void(0);" title="Buy Now" data-id="{{ $product_detail->id }}"
