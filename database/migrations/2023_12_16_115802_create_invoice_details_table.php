@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSaleInvoiceDetailsTable extends Migration
+class CreateInvoiceDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,11 @@ class CreateSaleInvoiceDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sale_invoice_details', function (Blueprint $table) {
+        Schema::create('invoice_details', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->uuid('sale_invoice_id')->nullable()->index();
-            $table->uuid('product_id')->nullable()->index();
-            $table->double('unit_price')->nullable();
+            $table->uuid('invoice_id')->nullable()->index();
+            $table->uuid('product_id')->index();
+            $table->decimal('unit_price', 10, 2)->default(0.00);
             $table->double('quantity')->nullable();
             $table->uuid('branch_id')->nullable()->index();
             $table->uuid('created_by')->nullable()->index();
@@ -27,6 +27,12 @@ class CreateSaleInvoiceDetailsTable extends Migration
             $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('invoice_details', function (Blueprint $table) {
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -37,6 +43,6 @@ class CreateSaleInvoiceDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sale_invoice_details');
+        Schema::dropIfExists('invoice_details');
     }
 }
