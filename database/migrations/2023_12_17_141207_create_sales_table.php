@@ -1,13 +1,12 @@
 <?php
 
 use App\Enums\InvoiceChannelTypeEnums;
-use App\Enums\InvoiceTypeEnums;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoicesTable extends Migration
+class CreateSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +15,9 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->enum('type', InvoiceTypeEnums::getValues())->comment('Sale Type');
-            $table->string('code', 4);
+            $table->string('invoice_no')->unique();
             $table->uuid('order_id')->nullable()->index();
             $table->foreignUuid('user_id')->nullable()->index();
             $table->dateTime('date')->nullable();
@@ -38,14 +36,6 @@ class CreateInvoicesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-
-
-        Schema::table('invoices', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
-        });
     }
 
     /**
@@ -55,6 +45,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('sales');
     }
 }

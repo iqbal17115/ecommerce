@@ -34,9 +34,6 @@ class CreateJournalEntriesTable extends Migration
         Schema::table('journal_entries', function (Blueprint $table) {
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

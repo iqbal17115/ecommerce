@@ -37,9 +37,6 @@ class CreateAccountsTable extends Migration
         Schema::table('accounts', function (Blueprint $table) {
             $table->foreign('account_category_id')->references('id')->on('account_categories')->onDelete('cascade');
             $table->foreign('parent_account_id')->references('id')->on('accounts')->onDelete('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoiceDetailsTable extends Migration
+class CreateSaleDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,25 +14,22 @@ class CreateInvoiceDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_details', function (Blueprint $table) {
+        Schema::create('sale_details', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->uuid('invoice_id')->nullable()->index();
+            $table->uuid('sale_id')->nullable()->index();
             $table->uuid('product_id')->index();
             $table->decimal('unit_price', 10, 2)->default(0.00);
             $table->double('quantity')->nullable();
-            $table->uuid('branch_id')->nullable()->index();
+            $table->decimal('total_price', 10, 2);
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();
-            $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::table('invoice_details', function (Blueprint $table) {
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('cascade');
+        Schema::table('sale_details', function (Blueprint $table) {
+            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
         });
     }
 
@@ -43,6 +40,6 @@ class CreateInvoiceDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_details');
+        Schema::dropIfExists('sale_details');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\PaymentStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -16,26 +17,21 @@ class CreateSalePaymentsTable extends Migration
     {
         Schema::create('sale_payments', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->string('code')->nullable();
-            $table->string('date')->nullable();
-            $table->foreignUuid('user_id')->nullable()->index();
-            $table->uuid('sale_invoice_id')->nullable()->index();
-            $table->double('total_amount', 20,4)->nullable();
-            $table->double('charge', 20,4)->nullable();
-            $table->double('vat', 20,4)->nullable();
-            $table->double('discount', 20,4)->nullable();
-            $table->double('net_amount', 20,4)->nullable();
-            $table->uuid('payment_method_id')->nullable()->index();
-            $table->string('transaction_id')->nullable();
-            $table->string('receipt_no')->nullable();
-            $table->string('note',500)->nullable();
-            $table->uuid('branch_id')->nullable()->index();
+            $table->uuid('sale_id');
+            $table->decimal('total_sale_price', 10, 2);
+            $table->decimal('discount', 10, 2);
+            $table->decimal('shipping_charge', 10, 2);
+            $table->decimal('due_amount', 10, 2);
+            $table->enum('payment_status', PaymentStatusEnum::getValues())->default(PaymentStatusEnum::PENDING);
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();
-            $table->boolean('is_active')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('sale_payments', function (Blueprint $table) {
+            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
         });
     }
 

@@ -3,6 +3,7 @@ namespace App\Enums;
 
 class PaymentMethodEnum
 {
+    public const CASH = 'cash';
     public const VISA = 'visa';
     public const MASTERCARD = 'mastercard';
     public const PAYPAL = 'paypal';
@@ -16,9 +17,10 @@ class PaymentMethodEnum
     public const CASH_APP = 'cashapp';
     public const VENMO = 'venmo';
 
-    public static function getPaymentMethods()
+    public static function getValues()
     {
         return [
+            self::CASH => 'cash',
             self::VISA => 'Visa',
             self::MASTERCARD => 'MasterCard',
             self::PAYPAL => 'PayPal',

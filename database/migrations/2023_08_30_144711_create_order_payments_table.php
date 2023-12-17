@@ -20,7 +20,7 @@ class CreateOrderPaymentsTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('order_id')->nullable()->index();
             $table->enum('payment_type', array_keys(PaymentTypeEnum::getPaymentTypes()));
-            $table->enum('payment_method', array_keys(PaymentMethodEnum::getPaymentMethods()));
+            $table->enum('payment_method', array_keys(PaymentMethodEnum::getValues()));
             $table->string('payment_id');
             $table->dateTime('payment_date');
             $table->uuid('created_by')->nullable()->index();

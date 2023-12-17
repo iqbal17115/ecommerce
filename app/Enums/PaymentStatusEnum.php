@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Enums;
 
 class PaymentStatusEnum
@@ -18,23 +18,23 @@ class PaymentStatusEnum
     public const PENDING_SETTLEMENT = 'pending_settlement';
     public const COMPLETE = 'complete';
 
-    public static function getPaymentStatuses()
+    public static function getValues()
     {
         return [
-            self::PENDING => 'Pending',
-            self::AUTHORIZED => 'Authorized',
-            self::PAID => 'Paid',
-            self::FAILED => 'Failed',
-            self::REFUNDED => 'Refunded',
-            self::CHARGEBACK => 'Chargeback',
-            self::CANCELLED => 'Cancelled',
-            self::ON_HOLD => 'On-Hold',
-            self::EXPIRED => 'Expired',
-            self::PARTIALLY_PAID => 'Partially Paid',
-            self::PROCESSING => 'Processing',
-            self::WAITING_FOR_CONFIRMATION => 'Waiting for Confirmation',
-            self::PENDING_SETTLEMENT => 'Pending Settlement',
-            self::COMPLETE => 'Complete',
+            self::PENDING => 'pending',
+            self::AUTHORIZED => 'authorized',
+            self::PAID => 'paid',
+            self::FAILED => 'failed',
+            self::REFUNDED => 'refunded',
+            self::CHARGEBACK => 'chargeback',
+            self::CANCELLED => 'cancelled',
+            self::ON_HOLD => 'on_hold',
+            self::EXPIRED => 'expired',
+            self::PARTIALLY_PAID => 'partially_paid',
+            self::PROCESSING => 'processing',
+            self::WAITING_FOR_CONFIRMATION => 'waiting_for_confirmation',
+            self::PENDING_SETTLEMENT => 'pending_settlement',
+            self::COMPLETE => 'complete',
         ];
     }
 }
