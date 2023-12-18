@@ -56,7 +56,7 @@ return [
     'transaction_account_name' => [
         'commission_debit_account_name' => 'Commission Receivable',
         'commission_credit_account_name' => 'Commission Revenue',
-        'sale_debit_account_name' => 'Account Receivable'
-        'sale_credit_account_name' => 'Products'
+        'sale_debit_account_name' => 'Account Receivable',
+        'sale_credit_account_name' => 'Products & Goods'
     ],
 ];

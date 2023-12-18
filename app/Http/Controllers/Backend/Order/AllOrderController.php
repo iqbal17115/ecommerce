@@ -24,12 +24,20 @@ use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\FrontEnd\Order;
+use App\Services\OrderToSaleService;
 use App\Traits\Barcode;
 use Illuminate\Support\Facades\Auth;
 
 class AllOrderController extends Controller
 {
     use Barcode;
+
+    private $orderToSaleService;
+
+    public function __construct(OrderToSaleService $orderToSaleService)
+    {
+        $this->orderToSaleService = $orderToSaleService;
+    }
 
     public function createUpdateStatus(OrderStatusRequest $orderStatusRequest, Order $order) {
         $orderTracking = OrderTracking::updateOrCreate(
@@ -277,6 +285,7 @@ class AllOrderController extends Controller
 
     public function confirmOrder(Order $order)
     {
+        $this->orderToSaleService->store($order);
         $order->status = 'processing';
         $order->save();
 
@@ -331,7 +340,7 @@ class AllOrderController extends Controller
         $cancel_reasons = ProductCancelReasonEnum::getCancelOptions();
         $reflectionClass = new \ReflectionClass(OrderStatusEnum::class);
         $orderStatuses = array_values($reflectionClass->getConstants());
-        $paymentStatuses = PaymentStatusEnum::getPaymentStatuses();
+        $paymentStatuses = PaymentStatusEnum::getValues();
         $paymentTypes = PaymentTypeEnum::getPaymentTypes();
         $paymentMethods = PaymentMethodEnum::getValues();
         return view('backend.order.advance-edit', compact('order', 'lengthUnits', 'weightUnits', 'cancel_reasons', 'orderStatuses', 'paymentStatuses', 'paymentTypes', 'paymentMethods'));

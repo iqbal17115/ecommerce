@@ -2,14 +2,19 @@
 
 namespace App\Services;
 
-use App\Enums\EntryTypeEnum;
 use App\Enums\EntryTypeEnums;
+use App\Enums\OrderStatusEnum;
 use App\Enums\TransactionTypeEnums;
 use App\Models\Account;
 use App\Models\Commission;
 use App\Models\CommissionSupplier;
 use App\Models\JournalEntry;
+use App\Models\Sale;
+use App\Models\SaleDetail;
 use App\Models\Transaction;
+use App\Models\InvoiceNumberSetting;
+use App\Enums\InvoiceNumberSettingEnum;
+use App\Helpers\Utils;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -30,7 +35,6 @@ class OrderToSaleService extends TransactionService
                     'amount' => DB::raw('amount + ' . $totalAmount)
                 ]
             );
-
         } catch (Exception $ex) {
 
             // Re-throw the exception to be handled at a higher level
@@ -57,7 +61,6 @@ class OrderToSaleService extends TransactionService
                     ];
                 })->toArray()
             );
-
         } catch (Exception $ex) {
 
             // Re-throw the exception to be handled at a higher level
@@ -124,43 +127,72 @@ class OrderToSaleService extends TransactionService
         }
     }
 
-    /**
-     * Store Commission Process
-     *
-     * @param $validatedData
-     * @return Commission
-     * @throws Exception
-     */
-    public function store(array $validatedData)
+    public function convertToSale($order): Sale
     {
         DB::beginTransaction();
         try {
-            $sale = $this->convertToSale($validatedData);
+            $sale = Sale::create([
+                'invoice_no' => $this->getLatestPurchaseInvoiceNumber(),
+                'order_id' => $order->id,
+                'user_id' => $order->user_id,
+                'date' => $order->order_date,
+                'total_amount' => $order->total_amount,
+                'discount' => $order->discount,
+                'shipping_charge' => $order->shipping_charge,
+                'payable_amount' => $order->payable_amount,
+                'invoice_channel' => 'web_sale'
+            ]);
 
-            // Call createTransaction function
-            $validatedData['description'] = 'Sale';
-            $transaction = $this->createTransaction(TransactionTypeEnums::SALE, $validatedData);
+            foreach ($order->OrderDetail as $orderDetail) {
+                SaleDetail::create([
+                    'sale_id' => $sale->id,
+                    'product_id' => $orderDetail->product_id,
+                    'unit_price' => $orderDetail->unit_price,
+                    'quantity' => $orderDetail->quantity,
+                    'total_price' => $orderDetail->unit_price * $orderDetail->quantity,
+                ]);
+            }
 
-            // Call journal for debit entry
-            $account = $this->getAccountByName(config('settings.transaction_account_name.sale_debit_account_name'));
-            $this->createJournalEntry($transaction, $account, $totalAmount, TransactionTypeEnums::SALE, EntryTypeEnums::DEBIT);
-
-            // Call journal for credit entry
-            $account = $this->getAccountByName(config('settings.transaction_account_name.sale_credit_account_name'));
-            $this->createJournalEntry($transaction, $account, $totalAmount, TransactionTypeEnums::SALE, EntryTypeEnums::CREDIT);
-
-            // Create commission
-            $commission = $this->createCommission($transaction, $validatedData);
-
-            // Create commission product
-            $this->createCommissionProducts($commission, $validatedData['commission_products']);
-
-            // Create or update supplier commission
-            $this->createOrUpdateSupplierCommission($validatedData['supplier_id'], $totalAmount);
+            // Update order status
+            $order->update(['status' => OrderStatusEnum::PROCESSING]);
 
             DB::commit();
 
-            return $commission;
+            return $sale;
+        } catch (Exception $ex) {
+            DB::rollBack();
+
+            // Re-throw the exception to be handled at a higher level
+            throw $ex;
+        }
+    }
+    /**
+     * Store Sale
+     *
+     * @param $order
+     * @throws Exception
+     */
+    public function store($order): Sale
+    {
+        DB::beginTransaction();
+        try {
+            $sale = $this->convertToSale($order);
+
+            // Call createTransaction function
+            $sale['note'] = 'Sale';
+            $transaction = $this->createTransaction(TransactionTypeEnums::SALE, $sale);
+
+            // Call journal for debit entry
+            $account = $this->getAccountByName(config('settings.transaction_account_name.sale_debit_account_name'));
+            $this->createJournalEntry($transaction, $account, $sale->payable_amount, TransactionTypeEnums::SALE, EntryTypeEnums::DEBIT);
+
+            // Call journal for credit entry
+            $account = $this->getAccountByName(config('settings.transaction_account_name.sale_credit_account_name'));
+            $this->createJournalEntry($transaction, $account, $sale->payable_amount, TransactionTypeEnums::SALE, EntryTypeEnums::CREDIT);
+
+            DB::commit();
+
+            return $sale;
         } catch (Exception $ex) {
             DB::rollBack();
 
@@ -189,5 +221,20 @@ class OrderToSaleService extends TransactionService
     function getAccountByName($accountName)
     {
         return Account::where('name', $accountName)->first();
+    }
+
+    /**
+     * Generate Latest Purchase Invoice Number
+     *
+     * @return string
+     */
+    protected function getLatestPurchaseInvoiceNumber(): string
+    {
+        //Get Latest Purchase Data
+        $result = Sale::latest();
+        //Get Invoice Number Prefix
+        $invoiceNumberPrefix = InvoiceNumberSetting::getPrefixByType(InvoiceNumberSettingEnum::PURCHASE);
+        //Generate Order No
+        return Utils::generateInvoiceNumber($result->first()->invoice_no ?? 'Invoice', $invoiceNumberPrefix);
     }
 }
