@@ -11,6 +11,7 @@ class InvoiceNumberSettingEnum
     public const COMMISSION = 'commission';
     public const PURCHASE = 'purchase';
     public const SALE = 'sale';
+    public const ORDER = 'order';
 
     public static function getValues()
     {
@@ -22,7 +23,8 @@ class InvoiceNumberSettingEnum
             self::MANUAL_JOURNAL => 'manual_journal',
             self::COMMISSION => 'commission',
             self::PURCHASE => 'purchase',
-            self::SALE => 'sale'
+            self::SALE => 'sale',
+            self::ORDER => 'order'
         ];
     }
 }

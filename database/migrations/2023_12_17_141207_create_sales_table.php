@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\InvoiceChannelTypeEnums;
+use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->enum('status', array_keys(OrderStatusEnum::getOrderStatuses()))->nullable();
             $table->string('invoice_no')->unique();
             $table->uuid('order_id')->nullable()->index();
             $table->foreignUuid('user_id')->nullable()->index();

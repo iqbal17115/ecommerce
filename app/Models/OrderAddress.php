@@ -10,5 +10,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderAddress extends Model
 {
-    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
+    use HasFactory, BaseModel, SoftDeletes, DisplayNameTrait;
+
+    protected $table = 'order_addresses';
+
+    protected $fillable = [
+        'order_id',
+        'name',
+        'instruction',
+        'mobile',
+        'optional_mobile',
+        'street_address',
+        'building_name',
+        'nearest_landmark',
+        'type',
+        'country_name',
+        'division_name',
+        'district_name',
+        'upazila_name'
+    ];
+
 }

@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->enum('status', array_keys(OrderStatusEnum::getOrderStatuses()))->nullable();
             $table->string('code')->nullable();
             $table->foreignUuid('user_id')->nullable()->index();
             $table->dateTime('order_date')->nullable();
@@ -28,7 +29,6 @@ class CreateOrdersTable extends Migration
             $table->double('payable_amount')->nullable();
             $table->text('note')->nullable();
             $table->uuid('coupon_code_id')->nullable()->index();
-            $table->enum('status', array_keys(OrderStatusEnum::getOrderStatuses()))->nullable();
             $table->boolean('is_active')->nullable()->default(1);
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();

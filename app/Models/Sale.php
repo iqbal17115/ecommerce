@@ -12,6 +12,7 @@ class Sale extends Model
     use HasFactory, BaseModel, DisplayNameTrait;
 
     protected $fillable = [
+        'status',
         'invoice_no',
         'order_id',
         'user_id',

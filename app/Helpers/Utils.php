@@ -145,6 +145,28 @@ class Utils
      * @param $addOrRemovePrefix
      * @return string
      */
+    public static function getLatestOrderCode($lastOrderId, $addOrRemovePrefix): string
+    {
+        // Determine the offset to remove the prefix
+        $offset = strlen($addOrRemovePrefix);
+
+        // Set the numeric part based on whether lastOrderId is null or not
+        $numericPart = ($lastOrderId === null) ? '0000000' : substr($lastOrderId, $offset);
+
+        // Convert the numeric part to an integer and increment
+        $incrementedValue = intval($numericPart) + 1;
+
+        // Format the incremented value back to the original padding length
+        return sprintf("%s%07d", $addOrRemovePrefix, $incrementedValue);
+    }
+
+     /**
+     * Generate Invoice Number
+     *
+     * @param $lastOrderId
+     * @param $addOrRemovePrefix
+     * @return string
+     */
     public static function generateInvoiceNumber($lastInvoiceId, $addOrRemovePrefix): string
     {
         // Determine the offset to remove the prefix

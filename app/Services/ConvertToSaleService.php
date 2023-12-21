@@ -15,82 +15,18 @@ use App\Models\Transaction;
 use App\Models\InvoiceNumberSetting;
 use App\Enums\InvoiceNumberSettingEnum;
 use App\Helpers\Utils;
+use App\Http\Requests\Order\OrderCancelRequest;
+use App\Models\Backend\Order\OrderTracking;
+use App\Models\Backend\OrderProduct\OrderNoteStatus;
+use App\Models\FrontEnd\Order;
+use App\Traits\BaseModel;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class OrderToSaleService extends TransactionService
+class ConvertToSaleService extends TransactionService
 {
-    /**
-     * Create or update supplier commission
-     *
-     * @param $supplierId
-     * @param $totalAmount
-     */
-    public function createOrUpdateSupplierCommission($supplierId, $totalAmount): void
-    {
-        try {
-            CommissionSupplier::updateOrCreate(
-                ['supplier_id' => $supplierId],
-                [
-                    'amount' => DB::raw('amount + ' . $totalAmount)
-                ]
-            );
-        } catch (Exception $ex) {
-
-            // Re-throw the exception to be handled at a higher level
-            throw $ex;
-        }
-    }
-
-    /**
-     * Create commission
-     *
-     * @param $commission
-     * @param $commissionProducts
-     */
-    public function createCommissionProducts($commission, $commissionProducts): void
-    {
-        try {
-            $commission->commissionProducts()->createMany(
-                collect($commissionProducts)->map(function ($product) {
-                    return [
-                        'product_id' => $product['product_id'],
-                        'purchase_qty' => $product['purchase_qty'],
-                        'per_qty_amount' => $product['per_qty_amount'],
-                        'total_amount' => $product['purchase_qty'] * $product['per_qty_amount'],
-                    ];
-                })->toArray()
-            );
-        } catch (Exception $ex) {
-
-            // Re-throw the exception to be handled at a higher level
-            throw $ex;
-        }
-    }
-
-    /**
-     * Create commission
-     *
-     * @param Transaction $transaction
-     * @param $validateData
-     */
-    public function createCommission($transaction, $validateData): Commission
-    {
-        try {
-            $commission = Commission::create([
-                'commission_date' => $validateData['date'],
-                'supplier_id' => $validateData['supplier_id'],
-                'transaction_id' => $transaction->id,
-                'commission_note' => $validateData['commission_note']
-            ]);
-
-            return $commission;
-        } catch (Exception $ex) {
-
-            // Re-throw the exception to be handled at a higher level
-            throw $ex;
-        }
-    }
+    use BaseModel;
 
     /**
      * Create a journal entry for a specific account
@@ -131,6 +67,9 @@ class OrderToSaleService extends TransactionService
     {
         DB::beginTransaction();
         try {
+            if($order->sale) {
+                return $order->sale;
+            }
             $sale = Sale::create([
                 'invoice_no' => $this->getLatestPurchaseInvoiceNumber(),
                 'order_id' => $order->id,
@@ -165,52 +104,6 @@ class OrderToSaleService extends TransactionService
             // Re-throw the exception to be handled at a higher level
             throw $ex;
         }
-    }
-    /**
-     * Store Sale
-     *
-     * @param $order
-     * @throws Exception
-     */
-    public function store($order): Sale
-    {
-        DB::beginTransaction();
-        try {
-            $sale = $this->convertToSale($order);
-
-            // Call createTransaction function
-            $sale['note'] = 'Sale';
-            $transaction = $this->createTransaction(TransactionTypeEnums::SALE, $sale);
-
-            // Call journal for debit entry
-            $account = $this->getAccountByName(config('settings.transaction_account_name.sale_debit_account_name'));
-            $this->createJournalEntry($transaction, $account, $sale->payable_amount, TransactionTypeEnums::SALE, EntryTypeEnums::DEBIT);
-
-            // Call journal for credit entry
-            $account = $this->getAccountByName(config('settings.transaction_account_name.sale_credit_account_name'));
-            $this->createJournalEntry($transaction, $account, $sale->payable_amount, TransactionTypeEnums::SALE, EntryTypeEnums::CREDIT);
-
-            DB::commit();
-
-            return $sale;
-        } catch (Exception $ex) {
-            DB::rollBack();
-
-            // Re-throw the exception to be handled at a higher level
-            throw $ex;
-        }
-    }
-
-    /**
-     * Calculate Total Amount
-     *
-     * @param $commissionProducts
-     */
-    function calculateTotalAmount($commissionProducts)
-    {
-        return collect($commissionProducts)->sum(function ($product) {
-            return $product['purchase_qty'] * $product['per_qty_amount'];
-        });
     }
 
     /**

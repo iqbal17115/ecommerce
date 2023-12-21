@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait, GeneratesOrderCodeTrait;
+    use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
     protected $dates = ['deleted_at'];
     protected $fillable = [
         'code',
@@ -52,18 +52,17 @@ class Order extends Model
     {
         return $this->hasOne(OrderAddress::class);
     }
-    protected static function booted()
-    {
-        static::bootGeneratesOrderCodeTrait();
-    }
+
     public function orderTracking()
     {
         return $this->hasMany(OrderTracking::class);
     }
+
     public function orderProductBox()
     {
         return $this->hasMany(OrderProductBox::class);
     }
+
     public function orderPayment()
     {
         return $this->hasOne(OrderPayment::class);

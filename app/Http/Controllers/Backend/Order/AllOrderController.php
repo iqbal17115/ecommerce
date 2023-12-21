@@ -24,7 +24,7 @@ use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\FrontEnd\Order;
-use App\Services\OrderToSaleService;
+use App\Services\AdvanceEditOrderService;
 use App\Traits\Barcode;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,37 +32,18 @@ class AllOrderController extends Controller
 {
     use Barcode;
 
-    private $orderToSaleService;
+    private $advanceEditOrderService;
 
-    public function __construct(OrderToSaleService $orderToSaleService)
+    public function __construct(AdvanceEditOrderService $advanceEditOrderService)
     {
-        $this->orderToSaleService = $orderToSaleService;
+        $this->advanceEditOrderService = $advanceEditOrderService;
     }
 
-    public function createUpdateStatus(OrderStatusRequest $orderStatusRequest, Order $order) {
-        $orderTracking = OrderTracking::updateOrCreate(
-            [
-                'order_id' => $order->id,
-                'status' => $orderStatusRequest->order_status,
-            ],
-            [
-                'status' => $orderStatusRequest->order_status,
-                'created_by' => Auth::user()->id
-            ],
-        );
+    public function createUpdateStatus(OrderStatusRequest $orderStatusRequest, Order $order)
+    {
+        $response = $this->advanceEditOrderService->createUpdateStatus($orderStatusRequest, $order);
 
-        $data = [
-            'status' => $orderTracking->status,
-            'created_at' => date('d M Y', strtotime($orderTracking->created_at))
-        ];
-
-        return response()->json(
-            [
-                'message' => 'Order Status Changed Successfully!',
-                'data' => $data
-            ],
-            200
-        );
+        return $response;
     }
 
     public function generatePackageBarcodes(Order $order)
@@ -74,7 +55,7 @@ class AllOrderController extends Controller
 
         foreach ($order->orderProductBox as $product_box) {
             // Generate the barcode image using the function you provided
-            $box_no = $order->code.'B'.$product_box->box_no;
+            $box_no = $order->code . 'B' . $product_box->box_no;
             $barcodeImage = $this->generatePackageBarcodeImageFromString($box_no);
 
             // Store barcode image and content
@@ -89,7 +70,7 @@ class AllOrderController extends Controller
 
         $user = Auth::user();
         // Set the appropriate response headers for the images
-        return response()->view('backend.order.pachage_barcodes', ['barcodesData' => $barcodesData, 'order' => $order, 'barcodeOrderImage' =>$barcodeOrderImage]);
+        return response()->view('backend.order.pachage_barcodes', ['barcodesData' => $barcodesData, 'order' => $order, 'barcodeOrderImage' => $barcodeOrderImage]);
     }
     public function orderPackageSave(OrderPackageRequest $orderPackageRequest, Order $order)
     {
@@ -285,7 +266,7 @@ class AllOrderController extends Controller
 
     public function confirmOrder(Order $order)
     {
-        $this->orderToSaleService->store($order);
+        $this->advanceEditOrderService->store($order);
         $order->status = 'processing';
         $order->save();
 
@@ -310,26 +291,16 @@ class AllOrderController extends Controller
             'data' => $data
         ], 200);
     }
+
     public function cancelOrder(OrderCancelRequest $orderCancelRequest, Order $order)
     {
         DB::transaction(function () use ($orderCancelRequest, $order) {
-            $order->status = $orderCancelRequest->validated()['status'];
-            $order->save();
-
-            $orderNoteStatus = OrderNoteStatus::firstOrNew(['order_id' => $order->id]);
-            $orderNoteStatus->fulfilment_note = $orderCancelRequest->validated()['fulfilment_note'];
-            $orderNoteStatus->save();
-
+            $this->advanceEditOrderService->cancelOrder($orderCancelRequest, $order);
         });
-
-        $data = [
-            'status' => $orderCancelRequest->validated()['status'],
-            'fulfilment_note' => $orderCancelRequest->validated()['fulfilment_note']
-        ];
 
         return response()->json([
             'message' => 'Order canceled successfully',
-            'data' => $data
+            'data' => $this->advanceEditOrderService->getOrderAndSaleData($orderCancelRequest)
         ], 200);
     }
 

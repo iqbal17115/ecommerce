@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Enums\InvoiceNumberSettingEnum;
+use App\Helpers\Utils;
 use App\Models\Address\Address;
 use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Order;
 use App\Models\FrontEnd\OrderDetail;
+use App\Models\InvoiceNumberSetting;
 use App\Models\OrderAddress;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -41,6 +44,7 @@ class OrderService
 
             // Create an order
             $order = new Order();
+            $order->code = $this->getLatestOrderCode();
             $order->user_id = auth()->id();
             $order->order_date = now();
             $order->total_amount = $totalAmount;
@@ -55,15 +59,15 @@ class OrderService
             $order->save();
 
             if (isset($cartCollection['data'])) {
-            foreach ($cartCollection['data'] as $cartItem) {
-                $orderDetails = new OrderDetail();
-                $orderDetails->order_id = $order->id;
-                $orderDetails->product_id = $cartItem['product_info']['id'];
-                $orderDetails->unit_price = collect($cartItem['product_info'])['product_price'];
-                $orderDetails->quantity = $cartItem['quantity'];
-                $orderDetails->save();
+                foreach ($cartCollection['data'] as $cartItem) {
+                    $orderDetails = new OrderDetail();
+                    $orderDetails->order_id = $order->id;
+                    $orderDetails->product_id = $cartItem['product_info']['id'];
+                    $orderDetails->unit_price = collect($cartItem['product_info'])['product_price'];
+                    $orderDetails->quantity = $cartItem['quantity'];
+                    $orderDetails->save();
+                }
             }
-        }
 
             $address = Address::find($validatedData['address_id']);
 
@@ -128,5 +132,20 @@ class OrderService
 
         // You can also delete associated order details if needed
         $order->OrderDetail()->delete();
+    }
+
+    /**
+     * Generate Latest Order Code
+     *
+     * @return string
+     */
+    protected function getLatestOrderCode(): string
+    {
+        //Get Latest Order Data
+        $result = Order::latest();
+        //Get OrderCode Prefix
+        $orderCodePrefix = InvoiceNumberSetting::getPrefixByType(InvoiceNumberSettingEnum::ORDER);
+        //Generate Order No
+        return Utils::generateInvoiceNumber($result->first()->code ?? '', $orderCodePrefix);
     }
 }
