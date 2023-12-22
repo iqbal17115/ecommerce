@@ -48,6 +48,19 @@
                            <li><a href="{{ route('feature') }}">Feature</a></li>
                        </ul>
                    </li>
+
+                   {{-- Start purchase --}}
+                   <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-layout"></i>
+                        <span>Purchase</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('purchases.index') }}">Add Purchase</a></li>
+                        <li><a href="{{ route('product-product') }}">Manage Purchase</a></li>
+                    </ul>
+                </li>
+                   {{-- End purchase --}}
                    <li>
                        <a href="javascript: void(0);" class="has-arrow waves-effect">
                            <i class="bx bx-layout"></i>

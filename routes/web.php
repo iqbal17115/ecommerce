@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\Product\MaterialController;
 use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\Product\ConditionController;
 use App\Http\Controllers\Backend\Product\ProductFeatureController;
+use App\Http\Controllers\Backend\Purchase\PurchaseController;
 use App\Http\Controllers\Backend\Seo\SeoPageController;
 use App\Http\Controllers\Backend\Shipping\ShippingChargeController;
 use App\Http\Controllers\Backend\Shipping\ShippingMethodController;
@@ -158,6 +159,15 @@ Route::group(['middleware' => 'auth'], function () {
 //
 Route::group([], function () {
     Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+
+    //Purchase
+    Route::controller(PurchaseController::class)->group(function () {
+        Route::get('purchases', 'index')->name("purchases.index");
+        Route::get('purchases/{purchase}', 'show')->name("purchases.show");
+        Route::post('purchases', 'store')->name("purchases.store");
+        Route::put('purchases/{purchase}', 'update')->name("purchases.update");
+        Route::delete('purchases', 'destroy')->name("purchases.delete");
+    });
 
     // Shipping
     Route::controller(ShippingChargeController::class)->group(function () {

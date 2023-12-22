@@ -86,8 +86,12 @@
 
     <script src="{{ URL::asset('assets/js/pages/dashboard.init.js') }}"></script>
 
+    <!-- form repeater js -->
+    <script src="{{ URL::asset('assets/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
+
+    <script src="{{ URL::asset('assets/js/pages/form-repeater.int.js') }}"></script>
     <!-- App js -->
-    <script src="assets/js/app.js"></script>
+    <script src="{{ URL::asset('assets/js/app.js') }}"></script>
 
     <!-- App js -->
     <!-- <script src="{{ URL::asset('assets/js/app.min.js') }}"></script> -->
