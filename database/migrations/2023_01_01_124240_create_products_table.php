@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->double('your_price', 10, 2)->nullable();
             $table->double('sale_price', 10, 2)->nullable();
             $table->double('retail_price', 10, 2)->nullable();
+            $table->integer('stock_qty', 10, 2);
             $table->tinyInteger('max_order_qty')->nullable();
             $table->string('model_number', 100)->nullable();
             $table->string('model_name', 100)->nullable();

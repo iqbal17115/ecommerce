@@ -17,6 +17,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Stock qty</th>
                             <th scope="col">Your Price</th>
                             <th scope="col">Sale Price</th>
                             <th scope="col">Category</th>
@@ -32,6 +33,10 @@
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
                             <td style="word-wrap: break-word; white-space: pre-line;">{{$product->name}}</td>
+                            <td>
+                                <a class="badge badge-secondary product_stock_qty_{{$product->id}}" data-product_id="{{$product->id}}" data-stock_qty="{{$product->stock_qty}}" data-toggle="modal"
+                                data-target="#productStockQtyModal" id="product_stock_qty">{{$product->stock_qty}}</a>
+                            </td>
                             <td>{{$product->your_price}}</td>
                             <td>{{$product->sale_price}}</td>
                             <td>
@@ -66,11 +71,45 @@
 
 </div>
 
+<!-- sample modal content -->
+<div id="productStockQtyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myCountryLabel" aria-hidden="true">
+    <form action="" method="post" id="stock_qty_targeted_form">
+        @csrf
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myCountryLabel">Country</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="row_id" id="row_id" value="" hidden/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="stock_qty">Increase Stock qty</label>
+                                <input type="text" name="stock_qty" id="stock_qty" class="form-control"
+                                    placeholder="Increase Stock qty" required>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" id="close_button" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light" id="show_button">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </form>
+</div><!-- /.modal -->
+
 @include('backend.product.modal.brand')
 
 @endsection
 @section('script')
 
 @include('backend.product.js.product_list-js')
-
+<script src="{{asset('js/admin_panel/product/product_list.js')}}"></script>
 @endsection

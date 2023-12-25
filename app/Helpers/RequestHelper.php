@@ -17,7 +17,6 @@ class RequestHelper
             'start_date' => ['nullable'],
             'end_date' => ['nullable'],
             'search' => ['nullable'],
-            'filters' => ['nullable'],
             'sort_by' => ['nullable'],
             'sort_order' => ['nullable']
         ];

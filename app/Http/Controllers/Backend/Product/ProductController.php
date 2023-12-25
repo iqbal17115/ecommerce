@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Product;
 
+use App\Helpers\Message;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Brand;
 use App\Models\Backend\Product\Material;
@@ -28,7 +29,15 @@ class ProductController extends Controller
     {
         $this->unitConversionService = $unitConversionService;
     }
-    
+
+    public function updateStockQty(Request $request) {
+        $product = Product::find($request->id);
+        $product->increment('stock_qty', $request->stock_qty);
+
+    // Retrieve the updated model separately
+    $updatedProduct = Product::find($request->id);
+        return Message::success(__("messages.success_add"), $updatedProduct);
+    }
     public function deleteProduct(Request $request)
     {
         return DB::transaction(function () use ($request) {
