@@ -35,7 +35,7 @@
             }
         }
 
-        .sold_out {
+.sold_out {
     top: 2em;
     left: -4em;
     color: #fff;
@@ -65,7 +65,6 @@
     transform: scale(0.7);
     -webkit-transform: scale(0.7);
     border: 2px rgba(255,255,255,0.7) dashed;
-
 }
         /* two line name show css code */
     </style>
@@ -267,11 +266,13 @@
                                                 </div>
                                             @endif
                                             <div class="btn-icon-group">
+                                                @if ($product->stock_qty > 0)
                                                 <a href="javascript:void(0);" title="Add To Cart"
                                                     data-product_id="{{ $product->id }}"
                                                     @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
                                                     class="btn-icon add_cart_item product-type-simple"><i
                                                         class="icon-shopping-cart"></i></a>
+                                                    @endif
                                             </div>
                                         </figure>
                                         <div class="product-details">

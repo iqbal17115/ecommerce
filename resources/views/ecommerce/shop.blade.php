@@ -84,6 +84,37 @@
     margin: 0;
 }
 
+.sold_out {
+    top: 2em;
+    left: -4em;
+    color: #fff;
+    display: block;
+    position:absolute;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: .06em;
+    background-color: #A00;
+    padding: 0.5em 5em 0.4em 5em;
+    text-shadow: 0 0 0.75em #444;
+    box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
+    font: bold 16px/1.2em Arial, Sans-Serif;
+    -webkit-text-shadow: 0 0 0.75em #444;
+    -webkit-box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
+    -webkit-transform: rotate(-45deg) scale(0.75,1);
+    z-index:10;
+}
+.sold_out:before {
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    margin: -0.3em -5em;
+    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    border: 2px rgba(255,255,255,0.7) dashed;
+}
     </style>
     <div id="temp_user_id" data-user_id="{{$user_id}}"></div>
     <main class="main">
@@ -336,7 +367,7 @@
         // Construct the HTML for each product
         productHTML += `
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
-                <div class="product-default inner-quickview inner-icon">
+                <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
                         <a href="{{ route('products.show', ['name' => urlencode('${product.product_name}')]) }}">
                             <img src="${product.image_url}" width="239" height="239" alt="product">
@@ -374,6 +405,7 @@
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
+                    ${product.stock_qty <= 0 ? `<a class="sold_out" style="color: #fff;">Sold out</a>` : ''}
                 </div>
             </div>
         `;

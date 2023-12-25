@@ -24,6 +24,7 @@ class ShopProductDetailResource extends JsonResource
             "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/'.$this->getFirstProductImage()) : '',
             "your_price" => (float)$this->your_price,
             "sale_price" => (float)$this->sale_price,
+            "stock_qty" => $this->stock_qty,
             "is_offer_active" => $this->offerActive(),
             'offer_percentage' =>$this->offerActive() ? round((($this->sale_price - $this->your_price) / $this->sale_price) * 100, 0) : 0,
             "active_currency" => new CurrencyResource($activeCurrency),
