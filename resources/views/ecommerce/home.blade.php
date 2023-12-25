@@ -341,7 +341,7 @@
                                         </div>
                                         <!-- End .product-details -->
                                         @if ($product->stock_qty <= 0)
-                                        <a class="sold_out">Sold out</a>
+                                        <a class="sold_out" style="color: #fff;">Sold out</a>
                                         @endif
                                     </div>
                                 @endforeach
