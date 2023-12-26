@@ -26,6 +26,7 @@ use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\FrontEnd\Order;
 use App\Services\AdvanceEditOrderService;
 use App\Traits\Barcode;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AllOrderController extends Controller
@@ -304,8 +305,9 @@ class AllOrderController extends Controller
         ], 200);
     }
 
-    public function advanceEdit(Order $order)
+    public function advanceEdit(Request $request)
     {
+        $order = Order::find($request->id);
         $lengthUnits = LengthUnitEnum::getOptions();
         $weightUnits = WeightUnitEnum::getWeightOptions();
         $cancel_reasons = ProductCancelReasonEnum::getCancelOptions();

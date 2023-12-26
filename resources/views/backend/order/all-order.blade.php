@@ -187,6 +187,7 @@
                 orderContainer.empty(); // Clear any previous content
 
                 data['data'].forEach(function(order, index) {
+                    var url = `/advance-edit?id=${order.id}`;
                     const orderHtml = `
                                         <tr class="shadow-sm" id="order-row-${order.id}">
                                             <td style="font-weight: bold; font-size: 15px;">
@@ -214,7 +215,7 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <a href="/advance-edit/${order.id}" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="Advance Edit" data-original-title="Advance Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                <a href="${url}" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="Advance Edit" data-original-title="Advance Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
                                             </td>
                                         </tr>
                                       `;

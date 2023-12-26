@@ -26,4 +26,29 @@ class Sale extends Model
         'invoice_channel',
         'coupon_code_id'
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($sale) {
+            if ($sale->status == 'pending') {
+                $sale->updateProductStock(-$sale->saleDetails->quantity);
+            } elseif ($sale->status == 'cancelled') {
+                $sale->updateProductStock($sale->saleDetails->quantity);
+            }
+        });
+    }
+
+    public function updateProductStock($quantity)
+    {
+        foreach ($this->saleDetails as $saleDetail) {
+            $product = $saleDetail->product;
+            $product->stock_qty += $quantity;
+            $product->save();
+        }
+    }
+
+    public function saleDetail()
+    {
+        return $this->hasMany(SaleDetail::class);
+    }
 }

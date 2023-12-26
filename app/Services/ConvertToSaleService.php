@@ -2,12 +2,8 @@
 
 namespace App\Services;
 
-use App\Enums\EntryTypeEnums;
 use App\Enums\OrderStatusEnum;
-use App\Enums\TransactionTypeEnums;
 use App\Models\Account;
-use App\Models\Commission;
-use App\Models\CommissionSupplier;
 use App\Models\JournalEntry;
 use App\Models\Sale;
 use App\Models\SaleDetail;
@@ -15,13 +11,8 @@ use App\Models\Transaction;
 use App\Models\InvoiceNumberSetting;
 use App\Enums\InvoiceNumberSettingEnum;
 use App\Helpers\Utils;
-use App\Http\Requests\Order\OrderCancelRequest;
-use App\Models\Backend\Order\OrderTracking;
-use App\Models\Backend\OrderProduct\OrderNoteStatus;
-use App\Models\FrontEnd\Order;
 use App\Traits\BaseModel;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ConvertToSaleService extends TransactionService
@@ -84,7 +75,8 @@ class ConvertToSaleService extends TransactionService
 
             foreach ($order->OrderDetail as $orderDetail) {
                 SaleDetail::create([
-                    'sale_id' => $sale->id,
+                    'sale_id' => OrderStatusEnum::PROCESSING,
+                    'status' => $sale->id,
                     'product_id' => $orderDetail->product_id,
                     'unit_price' => $orderDetail->unit_price,
                     'quantity' => $orderDetail->quantity,

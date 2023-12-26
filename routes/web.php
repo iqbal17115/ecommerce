@@ -236,7 +236,7 @@ Route::group(['middleware' => 'web'], function () {
         // Start All Order
         Route::controller(AllOrderController::class)->group(function () {
             Route::get('all-order', 'index')->name('all-order');
-            Route::get('advance-edit/{order}', 'advanceEdit')->name('advance-edit');
+            Route::get('advance-edit', 'advanceEdit')->name('advance.edit');
             Route::post('/cancel-order/advance-edit/{order}', 'cancelOrder')->name('cancel_order.advance_edit');
             Route::post('/confirm-order/{order}', 'confirmOrder')->name('confirm.order');
             Route::post('/track-status/{order}', 'createUpdateStatus')->name('track_status.order');
