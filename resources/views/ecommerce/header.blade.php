@@ -191,15 +191,14 @@
                         </li>
                     @endforeach
                     <li class="phone">
-
                         @if ($company_info && $company_info->is_mobile_active)
                             <a href="javascript:void(0);" class="d-flex align-items-center"><i class="icon-phone-1"
                                     style="font-size: 1rem;"></i>{{ $company_info->mobile }}</a>
                         @endif
                     </li>
-                    <li class=""><a href="https://1.envato.market/DdLk5" target="_blank">New
+                    {{-- <li class=""><a href="https://1.envato.market/DdLk5" target="_blank">New
                             Arrivals</a></li>
-                    <li class=""><a href="#">Flash Deals</a></li>
+                    <li class=""><a href="#">Flash Deals</a></li> --}}
                 </ul>
             </nav>
         </div>
