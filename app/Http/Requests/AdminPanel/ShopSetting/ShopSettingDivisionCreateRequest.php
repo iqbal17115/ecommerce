@@ -26,7 +26,7 @@ class ShopSettingDivisionCreateRequest extends FormRequest
     {
         return [
             'country_id' => 'required',
-            'name' => ['required', 'max:50', Rule::unique('divisions', 'name')->whereNull('deleted_at')]
+            'name' => ['required', 'max:100', Rule::unique('divisions', 'name')->whereNull('deleted_at')]
         ];
     }
 }

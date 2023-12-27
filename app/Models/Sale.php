@@ -29,25 +29,32 @@ class Sale extends Model
 
     protected static function booted()
     {
-        static::saved(function ($sale) {
-            if ($sale->status == 'pending') {
-                $sale->updateProductStock(-$sale->saleDetails->quantity);
-            } elseif ($sale->status == 'cancelled') {
-                $sale->updateProductStock($sale->saleDetails->quantity);
+        static::saved(function (Sale $sale) {
+            // Reload the saleDetails relationship after saving
+            $sale->load('saleDetails');
+
+            // Access the associated SaleDetails
+            $saleDetails = $sale->saleDetails;
+            // Iterate through each SaleDetail
+            foreach ($saleDetails as $saleDetail) {
+                $quantity = $saleDetail->quantity;
+
+                if ($sale->status == 'processing') {
+                    $sale->updateProductStock($saleDetail->product, -$quantity);
+                } elseif ($sale->status == 'cancelled') {
+                    $sale->updateProductStock($saleDetail->product, $quantity);
+                }
             }
         });
     }
 
-    public function updateProductStock($quantity)
+    public function updateProductStock($product, $quantity)
     {
-        foreach ($this->saleDetails as $saleDetail) {
-            $product = $saleDetail->product;
-            $product->stock_qty += $quantity;
-            $product->save();
-        }
+        $product->stock_qty += $quantity;
+        $product->save();
     }
 
-    public function saleDetail()
+    public function saleDetails()
     {
         return $this->hasMany(SaleDetail::class);
     }

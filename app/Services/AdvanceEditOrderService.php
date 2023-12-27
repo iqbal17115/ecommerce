@@ -99,4 +99,8 @@ class AdvanceEditOrderService extends ConvertToSaleService
         ];
     }
 
+    public function store($order)
+    {
+        $this->convertToSale($order);
+    }
 }

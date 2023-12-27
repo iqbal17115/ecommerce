@@ -26,7 +26,7 @@ class ShopSettingUpazilaCreateRequest extends FormRequest
     {
         return [
             'district_id' => 'required',
-            'name' => ['required', 'max:50', Rule::unique('upazilas', 'name')->whereNull('deleted_at')]
+            'name' => ['required', 'max:100', Rule::unique('upazilas', 'name')->whereNull('deleted_at')]
         ];
     }
 }

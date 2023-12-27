@@ -64,6 +64,7 @@ class ConvertToSaleService extends TransactionService
             $sale = Sale::create([
                 'invoice_no' => $this->getLatestPurchaseInvoiceNumber(),
                 'order_id' => $order->id,
+                'status' => OrderStatusEnum::PROCESSING,
                 'user_id' => $order->user_id,
                 'date' => $order->order_date,
                 'total_amount' => $order->total_amount,
@@ -75,8 +76,7 @@ class ConvertToSaleService extends TransactionService
 
             foreach ($order->OrderDetail as $orderDetail) {
                 SaleDetail::create([
-                    'sale_id' => OrderStatusEnum::PROCESSING,
-                    'status' => $sale->id,
+                    'sale_id' => $sale->id,
                     'product_id' => $orderDetail->product_id,
                     'unit_price' => $orderDetail->unit_price,
                     'quantity' => $orderDetail->quantity,

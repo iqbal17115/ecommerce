@@ -18,4 +18,10 @@ class SaleDetail extends Model
         'quantity',
         'total_price'
     ];
+
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
 }

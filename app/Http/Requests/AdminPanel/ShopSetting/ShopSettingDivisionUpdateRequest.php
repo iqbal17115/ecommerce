@@ -27,7 +27,7 @@ class ShopSettingDivisionUpdateRequest extends FormRequest
         $divisionId = $this->route('division');
         return [
             'country_id' => 'required',
-            'name' => ['required', 'max:50', Rule::unique('divisions', 'name')->ignore($divisionId)->whereNull('deleted_at')]
+            'name' => ['required', 'max:100', Rule::unique('divisions', 'name')->ignore($divisionId)->whereNull('deleted_at')]
         ];
     }
 }

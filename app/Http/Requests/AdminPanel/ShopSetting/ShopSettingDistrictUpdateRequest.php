@@ -27,7 +27,7 @@ class ShopSettingDistrictUpdateRequest extends FormRequest
         $districtId = $this->route('district');
         return [
             'division_id' => 'required',
-            'name' => ['required', 'max:50', Rule::unique('districts', 'name')->ignore($districtId)->whereNull('deleted_at')]
+            'name' => ['required', 'max:100', Rule::unique('districts', 'name')->ignore($districtId)->whereNull('deleted_at')]
         ];
     }
 }
