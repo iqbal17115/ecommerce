@@ -30,14 +30,15 @@ class ProductController extends Controller
         $this->unitConversionService = $unitConversionService;
     }
 
-    public function updateStockQty(Request $request) {
-        $product = Product::find($request->id);
-        $product->increment('stock_qty', $request->stock_qty);
+    public function updateStockQty(Request $request)
+    {
+        $updatedProduct = Product::where('id', $request->id)
+            ->update(['stock_qty' => $request->stock_qty]);
 
-    // Retrieve the updated model separately
-    $updatedProduct = Product::find($request->id);
+        $updatedProduct = Product::find($request->id);
         return Message::success(__("messages.success_add"), $updatedProduct);
     }
+
     public function deleteProduct(Request $request)
     {
         return DB::transaction(function () use ($request) {
@@ -193,9 +194,9 @@ class ProductController extends Controller
         if (!$Query) {
             $Query = new ProductMoreDetail();
         }
-            $Query->product_keyword = $request->keyword;
-            $Query->product_id = $request->product_keyword_id;
-            $Query->save();
+        $Query->product_keyword = $request->keyword;
+        $Query->product_id = $request->product_keyword_id;
+        $Query->save();
         // $request->product_image
         return response()->json(['status' => 201]);
     }
@@ -211,18 +212,18 @@ class ProductController extends Controller
     public function addProductImageInfo(Request $request)
     {
         if (is_array($request->product_image)) {
-        foreach ($request->product_image as $key => $product_image) {
-            $Query = ProductImage::whereSerial($key)->whereProductId($request->product_image_id)->first();
-            if (!$Query) {
-                $Query = new ProductImage();
+            foreach ($request->product_image as $key => $product_image) {
+                $Query = ProductImage::whereSerial($key)->whereProductId($request->product_image_id)->first();
+                if (!$Query) {
+                    $Query = new ProductImage();
+                }
+                $path = $product_image->store('/public/product_photo');
+                $Query->image = basename($path);
+                $Query->serial = $key;
+                $Query->product_id = $request->product_image_id;
+                $Query->save();
             }
-            $path = $product_image->store('/public/product_photo');
-            $Query->image = basename($path);
-            $Query->serial = $key;
-            $Query->product_id = $request->product_image_id;
-            $Query->save();
         }
-    }
         // $request->product_image
         return response()->json(['status' => 201]);
     }
