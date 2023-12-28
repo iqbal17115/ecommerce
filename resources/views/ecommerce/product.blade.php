@@ -57,39 +57,40 @@
         }
 
         .sold_out {
-    top: 2em;
-    left: -4em;
-    color: #fff;
-    display: block;
-    position:absolute;
-    text-align: center;
-    text-decoration: none;
-    letter-spacing: .06em;
-    background-color: #A00;
-    padding: 0.5em 5em 0.4em 5em;
-    text-shadow: 0 0 0.75em #444;
-    box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
-    font: bold 16px/1.2em Arial, Sans-Serif;
-    -webkit-text-shadow: 0 0 0.75em #444;
-    -webkit-box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
-    -webkit-transform: rotate(-45deg) scale(0.75,1);
-    z-index:10;
-}
-.sold_out:before {
-    content: '';
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    margin: -0.3em -5em;
-    transform: scale(0.7);
-    -webkit-transform: scale(0.7);
-    border: 2px rgba(255,255,255,0.7) dashed;
-}
+            top: 2em;
+            left: -4em;
+            color: #fff;
+            display: block;
+            position: absolute;
+            text-align: center;
+            text-decoration: none;
+            letter-spacing: .06em;
+            background-color: #A00;
+            padding: 0.5em 5em 0.4em 5em;
+            text-shadow: 0 0 0.75em #444;
+            box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+            font: bold 16px/1.2em Arial, Sans-Serif;
+            -webkit-text-shadow: 0 0 0.75em #444;
+            -webkit-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+            -webkit-transform: rotate(-45deg) scale(0.75, 1);
+            z-index: 10;
+        }
+
+        .sold_out:before {
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            margin: -0.3em -5em;
+            transform: scale(0.7);
+            -webkit-transform: scale(0.7);
+            border: 2px rgba(255, 255, 255, 0.7) dashed;
+        }
     </style>
     <main class="main">
-        <div id="temp_user_id" data-user_id="{{$user_id}}"></div>
+        <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         @if (isset($all_active_advertisements['Details']['1']['ads']))
             <div>
                 <center>
@@ -100,16 +101,16 @@
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
             <div class="container">
                 <ol class="breadcrumb">
-                                @foreach ($product_detail?->category?->getParentsAttribute() as $parentCategory)
-                                    {{ $parentCategory->name }}
-                                    @if (!$loop->last)
-                                        &raquo;
-                                    @else
-                                        &raquo;
-                                        {{ $product_detail->category->name }}
-                                    @endif
-                                @endforeach
-                            </span></a>
+                    @foreach ($product_detail?->category?->getParentsAttribute() as $parentCategory)
+                        {{ $parentCategory->name }}
+                        @if (!$loop->last)
+                            &raquo;
+                        @else
+                            &raquo;
+                            {{ $product_detail->category->name }}
+                        @endif
+                    @endforeach
+                    </span></a>
                     </li>
                 </ol>
             </div>
@@ -152,13 +153,22 @@
 
                     <div class="col-lg-7 col-md-6 product-single-details">
                         <h1 class="product-title">{{ $product_detail?->name }}</h1>
-                            <div class="row g-3 align-items-center">
-                                <div class="col-md-3">
-                                    <h5 class="fw-bold m-0 p-0">{{ $product_detail?->Brand?->name ? 'Brand:':''}} <span class="m-0 p-0"
-                                            style="font-weight: bold;color: #f4631b;">{{ $product_detail?->Brand?->name }}</span>
-                                    </h5>
-                                </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-3">
+                                <h5 class="fw-bold m-0 p-0">
+                                    {{ $product_detail->Brand ? 'Brand:' : '' }}
+                                    <span class="m-0 p-0" style="font-weight: bold; color: #f4631b;">
+                                        {{ $product_detail->Brand ? $product_detail->Brand->name : '' }}
+                                    </span>
+
+                                    {!! $product_detail->stock_qty > 0
+                                        ? 'Stock qty: <span class="m-0 p-0" style="font-weight: bold; color: #f4631b;">' .
+                                            $product_detail->stock_qty .
+                                            '</span>'
+                                        : '<span class="m-0 p-0" style="font-weight: bold;">Sold Out</span>' !!}
+                                </h5>
                             </div>
+                        </div>
 
                         {{-- star Rating --}}
                         <span class="five-star-rating">
@@ -213,13 +223,13 @@
                                     $product_detail->sale_end_date &&
                                     $product_detail->sale_start_date <= now() &&
                                     $product_detail->sale_end_date >= now())
-                                <del
-                                    class="old-price">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</del>
-                                <span
-                                    class="product-price brand_text_design">{{ $currency?->icon }} {{ number_format($product_detail->sale_price, 2) }}</span>
+                                <del class="old-price">{{ $currency?->icon }}
+                                    {{ number_format($product_detail->your_price, 2) }}</del>
+                                <span class="product-price brand_text_design">{{ $currency?->icon }}
+                                    {{ number_format($product_detail->sale_price, 2) }}</span>
                             @else
-                                <span
-                                    class="product-price brand_text_design">{{ $currency?->icon }} {{ number_format($product_detail->your_price, 2) }}</span>
+                                <span class="product-price brand_text_design">{{ $currency?->icon }}
+                                    {{ number_format($product_detail->your_price, 2) }}</span>
                             @endif
                         </div>
                         <!-- End .price-box -->
@@ -233,12 +243,16 @@
                         </div>
                         <!-- End .product-desc -->
                         <div class="product-desc">
-                            <p class="text-dark">{{$product_detail?->ProductDetail?->Condition?->title ? 'Condition: ':''}} <span class="brand_text_color">{{ $product_detail?->ProductDetail?->Condition?->title }} </span>
+                            <p class="text-dark">
+                                {{ $product_detail?->ProductDetail?->Condition?->title ? 'Condition: ' : '' }} <span
+                                    class="">{{ $product_detail?->ProductDetail?->Condition?->title }} </span>
                             </p>
                         </div>
                         <!-- End .product-desc -->
                         <div class="product-desc">
-                            <p class="text-dark">{{$product_detail?->ProductMoreDetail?->warranty ? 'Warranty: ':''}} <span class="brand_text_color">{{ $product_detail?->ProductMoreDetail?->warranty }} {{ $product_detail?->ProductMoreDetail?->warranty_unit }}</span>
+                            <p class="text-dark">{{ $product_detail?->ProductMoreDetail?->warranty ? 'Warranty: ' : '' }}
+                                <span class="">{{ $product_detail?->ProductMoreDetail?->warranty }}
+                                    {{ $product_detail?->ProductMoreDetail?->warranty_unit }}</span>
                             </p>
                         </div>
                         <!-- End .product-desc -->
@@ -261,14 +275,14 @@
 
                             <a href="javascript:void(0);" title="Add To Cart" data-product_id="{{ $product_detail->id }}"
                                 @if ($product_detail->ProductMainImage) data-image="{{ $product_detail->ProductMainImage->image }}" @endif
-                                class="btn btn-dark
-                                add_cart_item_quantity add-cart @if($product_detail->cartItem) added-to-cart @endif mr-2"
+                                class="btn btn-dark {{ $product_detail->stock_qty == 0 ? 'non-clickable' : '' }}
+                                add_cart_item_quantity add-cart @if ($product_detail->cartItem) added-to-cart @endif mr-2"
                                 title="Add to Cart">{{ __('translate.add_to_cart') }}</a>
 
                             <a href="javascript:void(0);" title="Buy Now" data-id="{{ $product_detail->id }}"
                                 data-product_id="{{ $product_detail->id }}"
                                 @if ($product_detail->ProductMainImage) data-image="{{ $product_detail->ProductMainImage->image }}" @endif
-                                class="btn
+                                class="btn {{ $product_detail->stock_qty == 0 ? 'non-clickable' : '' }}
                                 buy_now_with_quantity btn-buy-now mr-2"
                                 style="background-color: #F4631B; color: white;"
                                 title="Buy
@@ -318,7 +332,8 @@
 
                     <li class="nav-item">
                         <a class="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content"
-                            role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews <span class="total_review">0</span></a>
+                            role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews <span
+                                class="total_review">0</span></a>
                     </li>
                 </ul>
 
@@ -330,11 +345,15 @@
                                 {!! $product_detail->ProductDetail->description !!}
                             @endif
                             <br>
-                                {!! $product_detail?->ProductDetail?->condition_note ? '<span class="h4 brand_text_color">Product Condition: </span>':'' !!}
-                                {!! $product_detail?->ProductDetail?->condition_note !!}
+                            {!! $product_detail?->ProductDetail?->condition_note
+                                ? '<span class="h4 brand_text_color">Product Condition: </span>'
+                                : '' !!}
+                            {!! $product_detail?->ProductDetail?->condition_note !!}
                             <br>
-                                {!! $product_detail?->ProductMoreDetail?->warranty_description ? '<span class="h4 brand_text_color">Warranty Description: </span>':'' !!}
-                                {!! $product_detail?->ProductMoreDetail?->warranty_description !!}
+                            {!! $product_detail?->ProductMoreDetail?->warranty_description
+                                ? '<span class="h4 brand_text_color">Warranty Description: </span>'
+                                : '' !!}
+                            {!! $product_detail?->ProductMoreDetail?->warranty_description !!}
                             <br>
                             @if ($product_detail && $product_detail->ProductDetail)
                                 {!! $product_detail->ProductDetail->product_content !!}
@@ -347,7 +366,8 @@
                     <div class="tab-pane fade" id="product-reviews-content" role="tabpanel"
                         aria-labelledby="product-tab-reviews">
                         <div class="product-reviews-content">
-                            <h3 class="reviews-title"><span class="total_review">0</span> review for {{$product_detail->name}}</h3>
+                            <h3 class="reviews-title"><span class="total_review">0</span> review for
+                                {{ $product_detail->name }}</h3>
 
                             <div class="comment-list" id="comment_list"></div>
 
@@ -369,7 +389,8 @@
                                             <a class="star-5" href="#">5</a>
                                         </span>
 
-                                        <select name="rating" id="rating" required="" style="display: none;" required>
+                                        <select name="rating" id="rating" required="" style="display: none;"
+                                            required>
                                             <option value="">Rate…</option>
                                             <option value="5">Perfect</option>
                                             <option value="4">Good</option>
@@ -381,10 +402,11 @@
 
                                     <div class="form-group">
                                         <label>Your review <span class="required">*</span></label>
-                                        <textarea cols="5" rows="6" name="comment" id="comment" class="form-control form-control-sm" required></textarea>
+                                        <textarea cols="5" rows="6" name="comment" id="comment" class="form-control form-control-sm"
+                                            required></textarea>
                                     </div>
                                     <!-- End .form-group -->
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                             <!-- End .add-product-review -->
@@ -419,20 +441,21 @@
                             @if ($product_category_product->id != $product_detail->id)
                                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                                     <figure>
-                                        <a href="{{ route('products.show', ['name' => urlencode($product_category_product->name)]) }}">
+                                        <a
+                                            href="{{ route('products.show', ['name' => urlencode($product_category_product->name)]) }}">
                                             <img @if ($product_category_product->ProductMainImage) src="{{ asset('storage/product_photo/' . $product_category_product->ProductMainImage->image) }}" @endif
                                                 width="239" height="239" style="width: 239px; height: 239px;"
                                                 alt="product">
                                         </a>
                                         @if ($product_detail->stock_qty > 0)
-                                        <div class="btn-icon-group">
-                                            <a href="javascript:void(0);" title="Add To Cart"
-                                                data-product_id="{{ $product_category_product->id }}"
-                                                @if ($product_category_product->ProductMainImage) data-image="{{ $product_category_product->ProductMainImage->image }}" @endif
-                                                class="btn-icon
+                                            <div class="btn-icon-group">
+                                                <a href="javascript:void(0);" title="Add To Cart"
+                                                    data-product_id="{{ $product_category_product->id }}"
+                                                    @if ($product_category_product->ProductMainImage) data-image="{{ $product_category_product->ProductMainImage->image }}" @endif
+                                                    class="btn-icon
                                                 add_cart_item product-type-simple"><i
-                                                    class="icon-shopping-cart"></i></a>
-                                        </div>
+                                                        class="icon-shopping-cart"></i></a>
+                                            </div>
                                         @endif
                                     </figure>
                                     <div class="product-details">
@@ -477,18 +500,26 @@
                                         </h3>
                                         <!-- End .product-container -->
                                         <div class="price-box">
-                                            @if ($product_category_product->sale_price && $product_category_product->sale_start_date && $product_category_product->sale_end_date && $product_category_product->sale_start_date <= now() && $product_category_product->sale_end_date >= now())
-                                                <del class="old-price">{{ $currency?->icon }}{{ number_format($product_category_product->your_price, 2) }}</del>
-                                                <span class="product-price brand_text_design">{{ $currency?->icon }}{{ number_format($product_category_product->sale_price, 2) }}</span>
+                                            @if (
+                                                $product_category_product->sale_price &&
+                                                    $product_category_product->sale_start_date &&
+                                                    $product_category_product->sale_end_date &&
+                                                    $product_category_product->sale_start_date <= now() &&
+                                                    $product_category_product->sale_end_date >= now())
+                                                <del
+                                                    class="old-price">{{ $currency?->icon }}{{ number_format($product_category_product->your_price, 2) }}</del>
+                                                <span
+                                                    class="product-price brand_text_design">{{ $currency?->icon }}{{ number_format($product_category_product->sale_price, 2) }}</span>
                                             @else
-                                                <span class="product-price brand_text_design">{{ $currency?->icon }}{{ number_format($product_category_product->your_price, 2) }}</span>
+                                                <span
+                                                    class="product-price brand_text_design">{{ $currency?->icon }}{{ number_format($product_category_product->your_price, 2) }}</span>
                                             @endif
                                         </div>
                                         <!-- End .price-box -->
 
                                     </div>
                                     <!-- End .product-details -->
-                                    @if ($product_detail->stock_qty <= 0)
+                                    @if ($product_category_product->stock_qty <= 0)
                                         <a class="sold_out" style="color: #fff;">Sold out</a>
                                     @endif
                                 </div>
@@ -521,56 +552,56 @@
 
 @endsection
 @push('scripts')
-<script src="{{ asset('js/panel/users/cart/product.js') }}"></script>
-<script src="{{ asset('js/panel/users/common.js') }}"></script>
-<script src="{{ asset('js/panel/users/product_details/common.js') }}"></script>
-<script>
-    function lazyLoad() {
-        const lazyImages = document.querySelectorAll('.lazy-load');
-        lazyImages.forEach(img => {
-            if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
-                .bottom >= 0 && getComputedStyle(img).display !== 'none') {
-                img.src = img.dataset.src;
-                img.classList.remove('lazyload');
-            }
-        });
-    }
-
-    // Check for visible images on page load
-    document.addEventListener("DOMContentLoaded", lazyLoad);
-    $(document).ready(function() {
-        // Get an array of all the image elements you want to load
-        var images = document.getElementsByClassName('lazy-load');
-
-        // Set up an IntersectionObserver to detect when the images are in view
-        var options = {
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        var observer = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-                // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
-                if (entry.isIntersecting) {
-                    var image = entry.target;
-                    var imageUrl = image.getAttribute('data-src');
-                    image.src = imageUrl;
-                    image.classList.remove(
-                        'lazy-load'
-                    ); // Remove the class to prevent the image from being loaded again
-                    observer.unobserve(
-                        image); // Stop observing the image once it has been loaded
+    <script src="{{ asset('js/panel/users/cart/product.js') }}"></script>
+    <script src="{{ asset('js/panel/users/common.js') }}"></script>
+    <script src="{{ asset('js/panel/users/product_details/common.js') }}"></script>
+    <script>
+        function lazyLoad() {
+            const lazyImages = document.querySelectorAll('.lazy-load');
+            lazyImages.forEach(img => {
+                if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
+                    .bottom >= 0 && getComputedStyle(img).display !== 'none') {
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazyload');
                 }
             });
-        }, options);
-
-        // Loop through all the image elements and observe them with the IntersectionObserver
-        for (var i = 0; i < images.length; i++) {
-            var image = images[i];
-            observer.observe(image);
         }
-    });
-</script>
+
+        // Check for visible images on page load
+        document.addEventListener("DOMContentLoaded", lazyLoad);
+        $(document).ready(function() {
+            // Get an array of all the image elements you want to load
+            var images = document.getElementsByClassName('lazy-load');
+
+            // Set up an IntersectionObserver to detect when the images are in view
+            var options = {
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            var observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
+                    if (entry.isIntersecting) {
+                        var image = entry.target;
+                        var imageUrl = image.getAttribute('data-src');
+                        image.src = imageUrl;
+                        image.classList.remove(
+                            'lazy-load'
+                        ); // Remove the class to prevent the image from being loaded again
+                        observer.unobserve(
+                            image); // Stop observing the image once it has been loaded
+                    }
+                });
+            }, options);
+
+            // Loop through all the image elements and observe them with the IntersectionObserver
+            for (var i = 0; i < images.length; i++) {
+                var image = images[i];
+                observer.observe(image);
+            }
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('#reviewForm').submit(function(event) {
