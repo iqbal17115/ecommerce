@@ -89,13 +89,17 @@
                                     target="_blank"></a>
                             </div><!-- End .social-icons -->
                             <ul class="links">
-                                <li><a href="Javascript:void(0);" style="color: #777;">Email: @if($company_info &&
-                                        $company_info->email) {{$company_info->email}} @endif</a></li>
-                                <li><a href="Javascript:void(0);" style="color: #777;">Whatsapp: @if($company_info &&
-                                        $company_info->phone) {{$company_info->phone}} @endif</a></li>
-                                <li>
+                                @if($company_info &&
+                                        $company_info->email)
+                                <li><a href="Javascript:void(0);" style="color: #777;">Email: {{$company_info->email}} </a></li>
+                                @endif
+                                @if($company_info &&
+                                        $company_info->phone)
+                                <li><a href="Javascript:void(0);" style="color: #777;">Whatsapp:  {{$company_info->phone}} </a></li>
+                                @endif
+                                {{-- <li>
                                     <h5>Download Your App </h5>
-                                </li>
+                                </li> --}}
                             </ul>
                     </div>
                 </div>
