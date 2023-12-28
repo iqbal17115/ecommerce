@@ -369,7 +369,7 @@
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
-                        <a href="{{ route('products.show', ['name' => urlencode('${product.product_name}')]) }}">
+                        <a href="{{ route('products.show', ['name' => rawurlencode('${product.product_name}')]) }}">
                             <img src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
@@ -390,7 +390,7 @@
                             </a>
                         </div>
                         <h3 class="product-title">
-                            <a href="{{ route('products.show', ['name' => urlencode('${product.product_name}')]) }">${product.product_name}</a>
+                            <a href="{{ route('products.show', ['name' => rawurlencode('${product.product_name}')]) }">${product.product_name}</a>
                         </h3>
                         <div class="ratings-container">
                             <div class="product-ratings">

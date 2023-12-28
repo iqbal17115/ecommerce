@@ -122,7 +122,7 @@
                         }">
                         @foreach ($top_show_categories as $top_show_category)
                             <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
-                                <a href="{{ route('catalog.show', ['category_name' => urlencode($top_show_category->name)]) }}">
+                                <a href="{{ route('catalog.show', ['category_name' => rawurlencode($top_show_category->name)]) }}">
                                     <figure>
                                         <img class="lazy-load"
                                             data-src="{{ asset('storage/' . $top_show_category->image) }}" alt="category"
@@ -157,7 +157,7 @@
                                         <div class="row">
                                             @foreach ($top_feature->TopFeatureSetting->FeatureSettingDetail as $feature_setting_detail)
                                                 <div class="col-6 p-0">
-                                                    <a href="{{ route('catalog.show', ['name' => urlencode($feature_setting_detail->Category->name)]) }}"
+                                                    <a href="{{ route('catalog.show', ['name' => rawurlencode($feature_setting_detail->Category->name)]) }}"
                                                         style="text-decoration: none;">
                                                         <div class="card mb-0">
                                                             <img class="card-img-top lazy-load"
@@ -249,7 +249,7 @@
                                 @foreach ($product_feature->Product as $product)
                                     <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                                         <figure>
-                                            <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}">
+                                            <a href="{{ route('products.show', ['name' => rawurlencode($product->name)]) }}">
                                                 <img class="lazy-load"
                                                     @if ($product->ProductMainImage) data-src="{{ asset('storage/product_photo/' . $product->ProductMainImage->image) }}" @endif
                                                     style="width: 239px; height: 239px; filter: brightness(0.9)
@@ -277,7 +277,7 @@
                                         </figure>
                                         <div class="product-details">
                                             <h3 class="product-title">
-                                                <a href="{{ route('products.show', ['name' => urlencode($product->name)]) }}"
+                                                <a href="{{ route('products.show', ['name' => rawurlencode($product->name)]) }}"
                                                     class="product-name" id="product-name">{{ $product->name }}</a>
                                             </h3>
                                             <div class="category-wrap">

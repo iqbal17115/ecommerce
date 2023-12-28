@@ -438,11 +438,12 @@
                     }">
                     @if ($product_detail && $product_detail->Category && $product_detail->Category->Product)
                         @foreach ($product_detail->Category->Product as $product_category_product)
+                        {{ $product_category_product->id }}
                             @if ($product_category_product->id != $product_detail->id)
                                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                                     <figure>
                                         <a
-                                            href="{{ route('products.show', ['name' => urlencode($product_category_product->name)]) }}">
+                                            href="{{ route('products.show', ['name' => rawurlencode($product_category_product->name)]) }}">
                                             <img @if ($product_category_product->ProductMainImage) src="{{ asset('storage/product_photo/' . $product_category_product->ProductMainImage->image) }}" @endif
                                                 width="239" height="239" style="width: 239px; height: 239px;"
                                                 alt="product">
@@ -461,7 +462,7 @@
                                     <div class="product-details">
                                         <h3 class="product-title">
                                             <a
-                                                href="{{ route('products.show', ['name' => urlencode($product_category_product->name)]) }}">{{ $product_category_product->name }}</a>
+                                                href="{{ route('products.show', ['name' => $product_category_product->name, 'id' => $product_category_product->id]) }}">{{ $product_category_product->name }}</a>
                                             {{-- rating add html code --}}
                                             <span class="five-star-rating">
                                                 @if ($product_category_product->reviews()->avg('rating') >= 1)
