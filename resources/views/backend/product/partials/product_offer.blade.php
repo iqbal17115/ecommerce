@@ -25,8 +25,8 @@
                         <span class="text-danger float-md-right">*</span>
                     </div>
                     <div class="col-md-4 mt-md-3">
-                        <input name="opening_qty" id="opening_qty" @if($productInfo)
-                            value="{{$productInfo->opening_qty}}" @endif
+                        <input name="stock_qty" id="stock_qty" @if($productInfo)
+                            value="{{$productInfo->stock_qty}}" @endif
                             class="form-control" placeholder="Opening Qty" name=""
                             id="" required/>
                     </div>

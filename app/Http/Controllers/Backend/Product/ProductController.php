@@ -234,7 +234,7 @@ class ProductController extends Controller
             $Query = Product::whereId($request->product_offer_id)->first();
 
             $Query->seller_sku = $request->seller_sku;
-            $Query->opening_qty = $request->opening_qty;
+            $Query->stock_qty = $request->stock_qty;
             $Query->quantity_unit = $request->quantity_unit;
             $Query->your_price = $request->your_price;
             $Query->sale_price = $request->sale_price;
