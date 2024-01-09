@@ -477,7 +477,7 @@
     //     }
     // });
 
-        window.onload = function() {
+    window.onload = function() {
             // Code to be executed after rendering the full layout
             function lazyLoad() {
                 const lazyImages = document.querySelectorAll('.lazy-load');
