@@ -33,90 +33,91 @@
         }
 
         .pagination {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    justify-content: center;
-}
+            display: flex;
+            list-style: none;
+            padding: 0;
+            justify-content: center;
+        }
 
-.page-item {
-    margin: 0 2px;
-}
+        .page-item {
+            margin: 0 2px;
+        }
 
-.page-link {
-    display: block;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    color: #333;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
+        .page-link {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
 
-.page-link:hover {
-    background-color: #f5f5f5;
-}
+        .page-link:hover {
+            background-color: #f5f5f5;
+        }
 
-.page-item.active .page-link {
-    background-color: #007bff;
-    color: #fff;
-    border: 1px solid #007bff;
-}
+        .page-item.active .page-link {
+            background-color: #007bff;
+            color: #fff;
+            border: 1px solid #007bff;
+        }
 
-.page-item.disabled .page-link {
-    pointer-events: none;
-    cursor: not-allowed;
-    background-color: #eee;
-    color: #777;
-    border: 1px solid #ddd;
-}
+        .page-item.disabled .page-link {
+            pointer-events: none;
+            cursor: not-allowed;
+            background-color: #eee;
+            color: #777;
+            border: 1px solid #ddd;
+        }
 
-.pagination_input_field {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
+        .pagination_input_field {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
 
-.pagination_input_field::-webkit-inner-spin-button,
-.pagination_input_field::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
-}
+        .pagination_input_field::-webkit-inner-spin-button,
+        .pagination_input_field::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
 
-.sold_out {
-    top: 2em;
-    left: -4em;
-    color: #fff;
-    display: block;
-    position:absolute;
-    text-align: center;
-    text-decoration: none;
-    letter-spacing: .06em;
-    background-color: #A00;
-    padding: 0.5em 5em 0.4em 5em;
-    text-shadow: 0 0 0.75em #444;
-    box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
-    font: bold 16px/1.2em Arial, Sans-Serif;
-    -webkit-text-shadow: 0 0 0.75em #444;
-    -webkit-box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
-    -webkit-transform: rotate(-45deg) scale(0.75,1);
-    z-index:10;
-}
-.sold_out:before {
-    content: '';
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    margin: -0.3em -5em;
-    transform: scale(0.7);
-    -webkit-transform: scale(0.7);
-    border: 2px rgba(255,255,255,0.7) dashed;
-}
+        .sold_out {
+            top: 2em;
+            left: -4em;
+            color: #fff;
+            display: block;
+            position: absolute;
+            text-align: center;
+            text-decoration: none;
+            letter-spacing: .06em;
+            background-color: #A00;
+            padding: 0.5em 5em 0.4em 5em;
+            text-shadow: 0 0 0.75em #444;
+            box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+            font: bold 16px/1.2em Arial, Sans-Serif;
+            -webkit-text-shadow: 0 0 0.75em #444;
+            -webkit-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+            -webkit-transform: rotate(-45deg) scale(0.75, 1);
+            z-index: 10;
+        }
+
+        .sold_out:before {
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            margin: -0.3em -5em;
+            transform: scale(0.7);
+            -webkit-transform: scale(0.7);
+            border: 2px rgba(255, 255, 255, 0.7) dashed;
+        }
     </style>
-    <div id="temp_user_id" data-user_id="{{$user_id}}"></div>
+    <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
             <div class="container">
@@ -210,14 +211,17 @@
                     <div class="sidebar-wrapper">
                         <div class="widget">
                             <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-body-2" role="button" aria-expanded="true" aria-controls="widget-body-2">Categories</a>
+                                <a data-toggle="collapse" href="#widget-body-2" role="button" aria-expanded="true"
+                                    aria-controls="widget-body-2">Categories</a>
                             </h3>
 
                             <div class="collapse show" id="widget-body-2">
                                 <div class="widget-body">
                                     <ul class="cat-list">
                                         @foreach ($categories as $category)
-                                            @include('ecommerce.partials.category', ['category' => $category])
+                                            @include('ecommerce.partials.category', [
+                                                'category' => $category,
+                                            ])
                                         @endforeach
                                     </ul>
                                 </div>
@@ -311,7 +315,8 @@
                                     <ul class="cat-list">
                                         @foreach ($brands as $brand)
                                             <li>
-                                                <input type="checkbox" class="select_brand" name="brand[]" value="{{ $brand->id }}">
+                                                <input type="checkbox" class="select_brand" name="brand[]"
+                                                    value="{{ $brand->id }}">
                                                 <a>{{ $brand->name }}</a>
                                             </li>
                                         @endforeach
@@ -349,7 +354,9 @@
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
-
+    @php
+        $baseRoute = route('products.show', ['name' => '']);
+    @endphp
 @endsection
 @push('scripts')
     <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
@@ -358,25 +365,26 @@
 
     <script>
         const paginationContainer = document.getElementById('pagination_container');
+
         function setProduct(data) {
             $('#search_product_list').html('');
             let productHTML = ""
-
-    // Iterate through each product in the data
-    data.forEach(product => {
-        // Construct the HTML for each product
-        productHTML += `
+            var baseRoute = "{!! $baseRoute !!}";
+            // Iterate through each product in the data
+            data.forEach(product => {
+                // Construct the HTML for each product
+                productHTML += `
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
-                        <a href="{{ route('products.show', ['name' => rawurlencode('${product.product_name}')]) }}">
+                        <a href="${baseRoute}/${encodeURIComponent(product.product_name)}">
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                            <div class="label-group">
-                                <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                            </div>
-                        ` : ''}
+                                <div class="label-group">
+                                    <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                </div>
+                            ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -390,7 +398,7 @@
                             </a>
                         </div>
                         <h3 class="product-title">
-                            <a href="{{ route('products.show', ['name' => rawurlencode('${product.product_name}')]) }">${product.product_name}</a>
+                            <a href="${baseRoute}/${encodeURIComponent(product.product_name)}">${product.product_name}</a>
                         </h3>
                         <div class="ratings-container">
                             <div class="product-ratings">
@@ -400,8 +408,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                            ` : ''}
+                                    <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -410,42 +418,42 @@
             </div>
         `;
 
-        // Append the product HTML to #search_product_list
-        $('#search_product_list').html(productHTML);
-    });
-}
+                // Append the product HTML to #search_product_list
+                $('#search_product_list').html(productHTML);
+            });
+        }
 
         function fetchData(page) {
-                const searchCriteria= @json($searchCriteria ?? null);
-                const categoryName= @json($categoryName ?? null);
-                var checkedBrandCheckboxes = $('.select_brand:checked');
+            const searchCriteria = @json($searchCriteria ?? null);
+            const categoryName = @json($categoryName ?? null);
+            var checkedBrandCheckboxes = $('.select_brand:checked');
 
-                // Extract brand IDs
-                var selectedBrandIds = checkedBrandCheckboxes.map(function () {
-                    return $(this).val();
-                }).get();
+            // Extract brand IDs
+            var selectedBrandIds = checkedBrandCheckboxes.map(function() {
+                return $(this).val();
+            }).get();
 
-                var orderOfProduct = $("#order_of_product").val();
-                const queryParams = new URLSearchParams({
-                    page: page,
-                    limit: $('#count_paginate').val(),
-                    orderOfProduct: orderOfProduct,
-                    selectedBrandIds: selectedBrandIds,
-                    searchCriteria: searchCriteria,
-                    categoryName: categoryName,
-                    min_price: $("#min_price").val(),
-                    max_price: $("#max_price").val(),
-                });
+            var orderOfProduct = $("#order_of_product").val();
+            const queryParams = new URLSearchParams({
+                page: page,
+                limit: $('#count_paginate').val(),
+                orderOfProduct: orderOfProduct,
+                selectedBrandIds: selectedBrandIds,
+                searchCriteria: searchCriteria,
+                categoryName: categoryName,
+                min_price: $("#min_price").val(),
+                max_price: $("#max_price").val(),
+            });
 
-                const url = `/product-search?${queryParams.toString()}`;
+            const url = `/product-search?${queryParams.toString()}`;
 
-        getDetails(url,
-            (data) => {
-               setProduct(data.results.data);
-               const paginationHtml = generatePagination(data.results.total, data.results.per_page, page);
-               paginationContainer.innerHTML = paginationHtml;
-            }
-        );
+            getDetails(url,
+                (data) => {
+                    setProduct(data.results.data);
+                    const paginationHtml = generatePagination(data.results.total, data.results.per_page, page);
+                    paginationContainer.innerHTML = paginationHtml;
+                }
+            );
         }
         fetchData(1);
 
@@ -453,31 +461,31 @@
             fetchData(1);
         }
 
-        $("#productFilterByPrice").submit(function (e) {
+        $("#productFilterByPrice").submit(function(e) {
             e.preventDefault();
             callProductFilter(1);
         });
 
-        $('.select_brand, #order_of_product, #count_paginate').on('change', function () {
+        $('.select_brand, #order_of_product, #count_paginate').on('change', function() {
             callProductFilter();
         })
 
-    document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('pagination-link')) {
-            event.preventDefault();
-            const page = event.target.dataset.page;
-            fetchData(page);
-        }
-    });
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('pagination-link')) {
+                event.preventDefault();
+                const page = event.target.dataset.page;
+                fetchData(page);
+            }
+        });
 
-    // $(document).on('click', '.go-button', () => {
-    //     const newPage = $('.page-input').val();
-    //     if (!isNaN(newPage) && newPage >= 1) {
-    //         fetchData(newPage);
-    //     }
-    // });
+        // $(document).on('click', '.go-button', () => {
+        //     const newPage = $('.page-input').val();
+        //     if (!isNaN(newPage) && newPage >= 1) {
+        //         fetchData(newPage);
+        //     }
+        // });
 
-    window.onload = function() {
+        window.onload = function() {
             // Code to be executed after rendering the full layout
             function lazyLoad() {
                 const lazyImages = document.querySelectorAll('.lazy-load');
