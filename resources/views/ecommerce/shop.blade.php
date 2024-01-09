@@ -370,7 +370,7 @@
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
                         <a href="{{ route('products.show', ['name' => rawurlencode('${product.product_name}')]) }}">
-                            <img src="${product.image_url}" width="239" height="239" alt="product">
+                            <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
                             <div class="label-group">
@@ -470,12 +470,12 @@
         }
     });
 
-    $(document).on('click', '.go-button', () => {
-        const newPage = $('.page-input').val();
-        if (!isNaN(newPage) && newPage >= 1) {
-            fetchData(newPage);
-        }
-    });
+    // $(document).on('click', '.go-button', () => {
+    //     const newPage = $('.page-input').val();
+    //     if (!isNaN(newPage) && newPage >= 1) {
+    //         fetchData(newPage);
+    //     }
+    // });
 
         window.onload = function() {
             // Code to be executed after rendering the full layout
