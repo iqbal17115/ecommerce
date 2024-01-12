@@ -2,24 +2,13 @@
 
 namespace App\Services;
 
-use App\Enums\EntryTypeEnums;
-use App\Enums\OrderStatusEnum;
-use App\Enums\TransactionTypeEnums;
-use App\Models\Account;
-use App\Models\Commission;
-use App\Models\CommissionSupplier;
-use App\Models\JournalEntry;
-use App\Models\Sale;
-use App\Models\SaleDetail;
-use App\Models\Transaction;
-use App\Models\InvoiceNumberSetting;
-use App\Enums\InvoiceNumberSettingEnum;
-use App\Helpers\Utils;
+use App\Enums\DecreaseStatusEnum;
+use App\Enums\IncreaseStatusEnum;
 use App\Http\Requests\Order\OrderCancelRequest;
 use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
+use App\Models\Backend\Product\Product;
 use App\Models\FrontEnd\Order;
-use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -67,6 +56,7 @@ class AdvanceEditOrderService extends ConvertToSaleService
         DB::transaction(function () use ($validatedData, $order) {
             $sale = $this->convertToSale($order);
             $this->updateOrderStatus($validatedData, $order);
+            $this->updateStockQty($validatedData, $order);
         });
 
         $data = $this->getOrderStatusData($validatedData);
@@ -75,6 +65,44 @@ class AdvanceEditOrderService extends ConvertToSaleService
             'message' => 'Order Status Changed Successfully!',
             'data' => $data
         ], 200);
+    }
+
+    public function updateStockQty($validatedData, Order $order)
+    {
+        $newStatus = $validatedData['order_status'];
+        $oldStatus = $order->status;
+
+        if ($newStatus == $oldStatus) {
+            return;
+        }
+
+        $products = $order->OrderDetail;
+
+        if (in_array($oldStatus, DecreaseStatusEnum::DECREASE_STATUSES())) {
+            $this->increaseStockQty($products);
+        }
+
+        if (in_array($newStatus, DecreaseStatusEnum::DECREASE_STATUSES())) {
+            $this->decreaseStockQty($products);
+        } elseif (in_array($newStatus, IncreaseStatusEnum::INCREASE_STATUSES())) {
+            $this->increaseStockQty($products);
+        }
+    }
+
+    protected function decreaseStockQty($products)
+    {
+        foreach ($products as $product) {
+            $quantity = $product->quantity;
+            Product::where('id', $product->product_id)->decrement('stock_qty', $quantity);
+        }
+    }
+
+    protected function increaseStockQty($products)
+    {
+        foreach ($products as $product) {
+            $quantity = $product->quantity;
+            Product::where('id', $product->product_id)->increment('stock_qty', $quantity);
+        }
     }
 
     public function updateOrderStatus($validatedData, Order $order)

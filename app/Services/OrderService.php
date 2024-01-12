@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\InvoiceNumberSettingEnum;
 use App\Helpers\Utils;
 use App\Models\Address\Address;
+use App\Models\Backend\Product\Product;
 use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Order;
 use App\Models\FrontEnd\OrderDetail;
@@ -60,6 +61,10 @@ class OrderService
 
             if (isset($cartCollection['data'])) {
                 foreach ($cartCollection['data'] as $cartItem) {
+                    Product::where('id', $cartItem['product_info']['id'])
+                        ->where('stock_qty', '>=', $cartItem['quantity'])
+                        ->decrement('stock_qty', $cartItem['quantity']);
+
                     $orderDetails = new OrderDetail();
                     $orderDetails->order_id = $order->id;
                     $orderDetails->product_id = $cartItem['product_info']['id'];
