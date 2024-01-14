@@ -172,21 +172,21 @@ return [
         [
             'name' => 'Super Admin',
             'email' => 'superadmin@gmail.com',
-            'phone' => '01717777777',
+            'phone' => '017177777771',
             'password' => '123456789',
             'roles' => ["Super Admin", "User"]
         ],
         [
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'phone' => '01718888888',
+            'phone' => '017188888881',
             'password' => '123456789',
             'roles' => ["Admin", "User"]
         ],
         [
             'name' => 'User',
             'email' => 'user@gmail.com',
-            'phone' => '01719999999',
+            'phone' => '017199999991',
             'password' => '123456789',
             'roles' => ["User"]
         ],
