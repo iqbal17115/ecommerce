@@ -25,6 +25,7 @@ use App\Http\Controllers\Backend\Seo\SeoPageController;
 use App\Http\Controllers\Backend\Shipping\ShippingChargeController;
 use App\Http\Controllers\Backend\Shipping\ShippingMethodController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\UserViewController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
@@ -165,7 +166,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::group([], function () {
         Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
 
-        Route::get('users', UserController::class)->name('users.view');
+        Route::get('users', UserViewController::class)->name('users.view');
+
+        // User
+        Route::controller(UserController::class)->group(function () {
+            Route::get('users/lists', 'lists')->name('users.lists');
+            Route::get('users/{user}', 'show')->name('users.show');
+            Route::post('users', 'store')->name('users.store');
+            Route::put('users/{user}', 'update')->name('users.update');
+            Route::delete('users/{user}', 'destroy')->name('users.delete');
+        });
 
         Route::get('roles', RoleViewController::class)->name('roles.view');
 
