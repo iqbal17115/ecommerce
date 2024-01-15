@@ -49,4 +49,14 @@ return [
         'product' => ['title' => 'Products', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
+
+    'roles' => [
+        'name' => ['title' => 'Name', 'sorting' => true],
+        'details' => ['title' => 'Details', 'sorting' => true],
+        'is_permanent' => ['title' => 'Is Permanent', 'sorting' => true],
+        'is_admin' => ['title' => 'Is Admin', 'sorting' => true],
+        'is_registered' => ['title' => 'Is Registered', 'sorting' => true],
+        'created_at' => ['title' => 'Created At', 'sorting' => true],
+        'actions' => ['title' => 'Action', 'sorting' => false]
+    ],
 ];

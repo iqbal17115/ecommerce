@@ -18,6 +18,17 @@
                    <li>
                        <a href="javascript: void(0);" class="has-arrow waves-effect">
                            <i class="bx bx-layout"></i>
+                           <span>Settings</span>
+                       </a>
+                       <ul class="sub-menu" aria-expanded="false">
+                           <li><a href="{{ route('users.view') }}">Users</a></li>
+                           <li><a href="{{ route('roles.view') }}">Roles</a></li>
+                       </ul>
+                   </li>
+
+                   <li>
+                       <a href="javascript: void(0);" class="has-arrow waves-effect">
+                           <i class="bx bx-layout"></i>
                            <span>Customers</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
@@ -49,30 +60,30 @@
                        </ul>
                    </li>
 
-                    {{-- Start purchase --}}
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-layout"></i>
-                            <span>Supplier</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{ route('suppliers.index') }}">Add Supplier</a></li>
-                            <li><a href="{{ route('product-product') }}">Manage Supplier</a></li>
-                        </ul>
-                    </li>
-                       {{-- End purchase --}}
+                   {{-- Start purchase --}}
+                   <li>
+                       <a href="javascript: void(0);" class="has-arrow waves-effect">
+                           <i class="bx bx-layout"></i>
+                           <span>Supplier</span>
+                       </a>
+                       <ul class="sub-menu" aria-expanded="false">
+                           <li><a href="{{ route('suppliers.index') }}">Add Supplier</a></li>
+                           <li><a href="{{ route('product-product') }}">Manage Supplier</a></li>
+                       </ul>
+                   </li>
+                   {{-- End purchase --}}
 
                    {{-- Start purchase --}}
                    <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-layout"></i>
-                        <span>Purchase</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('purchases.index') }}">Add Purchase</a></li>
-                        <li><a href="{{ route('product-product') }}">Manage Purchase</a></li>
-                    </ul>
-                </li>
+                       <a href="javascript: void(0);" class="has-arrow waves-effect">
+                           <i class="bx bx-layout"></i>
+                           <span>Purchase</span>
+                       </a>
+                       <ul class="sub-menu" aria-expanded="false">
+                           <li><a href="{{ route('purchases.index') }}">Add Purchase</a></li>
+                           <li><a href="{{ route('product-product') }}">Manage Purchase</a></li>
+                       </ul>
+                   </li>
                    {{-- End purchase --}}
 
                    <li>

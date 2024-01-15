@@ -19,9 +19,12 @@ use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\Product\ConditionController;
 use App\Http\Controllers\Backend\Product\ProductFeatureController;
 use App\Http\Controllers\Backend\Purchase\PurchaseController;
+use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\RoleViewController;
 use App\Http\Controllers\Backend\Seo\SeoPageController;
 use App\Http\Controllers\Backend\Shipping\ShippingChargeController;
 use App\Http\Controllers\Backend\Shipping\ShippingMethodController;
+use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\WebSetting\AdvertisementController;
 use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
@@ -161,6 +164,23 @@ Route::group(['middleware' => 'web'], function () {
     //
     Route::group([], function () {
         Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+
+        Route::get('users', UserController::class)->name('users.view');
+
+        Route::get('roles', RoleViewController::class)->name('roles.view');
+
+        //Role
+        Route::controller(RoleController::class)->group(function () {
+            Route::get('roles/lists', 'lists')->name('roles.lists');
+            Route::get('roles/{role}', 'show')->name('roles.show');
+            Route::post('roles', 'store')->name('roles.store');
+            Route::put('roles/{role}', 'update')->name('roles.update');
+            Route::delete('roles/{role}', 'destroy')->name('roles.delete');
+            Route::post('role/set-selected-role', 'setSelectedRole')->name('roles.set_selected_role')->withoutMiddleware(['permission']);
+            Route::get('permissions', 'permissions')->name('permissions.show');
+            Route::get('role-permissions/{role}', 'getRolePermissions')->name('role_permissions');
+            Route::put('assign-permissions/{role}', 'storeAssignPermission')->name('assign_permissions');
+        });
 
         //Supplier
         Route::controller(SupplierController::class)->group(function () {
