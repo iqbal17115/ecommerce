@@ -137,7 +137,7 @@ $(document).ready(function () {
             submitByNowWithQuantity(formData, "");
         } else {
             // user_id is an empty string
-            window.location.href = 'customer-sign-in';
+            window.location.href = '/customer-sign-in';
         }
     });
 
@@ -152,7 +152,7 @@ $(document).ready(function () {
                     updateCart(data.results);
                     window.location.href = '/checkout';
                 } else {
-                    window.location.href = 'customer-sign-in';
+                    window.location.href = '/customer-sign-in';
                 }
 
             },
@@ -179,7 +179,7 @@ $(document).ready(function () {
             submitAddItemWithQuantity(formData, "");
         } else {
             // user_id is an empty string
-            window.location.href = 'customer-sign-in';
+            window.location.href = '/customer-sign-in';
         }
     });
 
@@ -194,7 +194,7 @@ $(document).ready(function () {
                     updateCart(data.results);
                     toastrSuccessMessage(data.message);
                 } else {
-                    window.location.href = 'customer-sign-in';
+                    window.location.href = '/customer-sign-in';
                 }
 
             },
@@ -221,7 +221,7 @@ $(document).ready(function () {
             submitAddItem(formData, "");
         } else {
             // user_id is an empty string
-            window.location.href = 'customer-sign-in';
+            window.location.href = '/customer-sign-in';
         }
     });
 
@@ -236,7 +236,7 @@ $(document).ready(function () {
                     updateCart(data.results);
                     toastrSuccessMessage(data.message);
                 } else {
-                    window.location.href = 'customer-sign-in';
+                    window.location.href = '/customer-sign-in';
                 }
 
             },

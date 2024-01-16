@@ -12,13 +12,13 @@ class UserUpdateResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'phone' => $this->phone,
+            'mobile' => $this->mobile,
             'password' => $this->password,
             'role_id' => $this->roles->pluck('id'),
         ];

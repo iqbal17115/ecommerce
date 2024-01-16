@@ -6,7 +6,7 @@ function setSelectedData(data) {
     $("#targeted_form #row_id").val(data['id']);
     $("#targeted_form #name").val(data['name']);
     $("#targeted_form #email").val(data['email']);
-    $("#targeted_form #phone").val(data['phone']);
+    $("#targeted_form #mobile").val(data['mobile']);
     $("#targeted_form #password").val(data['password']);
     var selectedRoleIds = data['role_id'];
     $("#targeted_form #role_id").val(selectedRoleIds);
@@ -16,7 +16,7 @@ $(document).on("click", ".add_user", function (event) {
     $("#targeted_form #row_id").val("");
     $("#targeted_form #name").val("");
     $("#targeted_form #email").val("");
-    $("#targeted_form #phone").val("");
+    $("#targeted_form #mobile").val("");
     $("#targeted_form #role_id").val("");
     $("#targeted_form #password").val("");
     $('#targetedModal').modal('show');
@@ -76,7 +76,7 @@ $("#targeted_form").submit(function (event) {
     const data = {
         name: $("#targeted_form #name").val(),
         email: $("#targeted_form #email").val(),
-        phone: $("#targeted_form #phone").val(),
+        mobile: $("#targeted_form #mobile").val(),
         password: $("#targeted_form #password").val(),
         role_id: selectedOptions.map(function () {
             return $(this).val();
@@ -115,7 +115,7 @@ function loadDataTable() {
         [
             generateColumn('name', null, 'name'),
             generateColumn('email', null, 'email'),
-            generateColumn('phone', null, 'phone'),
+            generateColumn('mobile', null, 'mobile'),
             generateColumn('user_roles', null, 'user_roles'), // Add a column for user roles
             generateColumn('created_at', null, 'created_at'),
             generateColumn('action', (data, type, row) => linkableActions(row.id), 'name'),

@@ -50,9 +50,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="col-form-label" for="phone">Phone<span class="red-asterisk"></span></label>
-                        <input class="form-control" name="phone" id="phone"
-                               placeholder="Phone" required/>
+                        <label class="col-form-label" for="mobile">Mobile<span class="red-asterisk"></span></label>
+                        <input class="form-control" name="mobile" id="mobile"
+                               placeholder="Mobile" required/>
                     </div>
 
                     <div class="mb-3">

@@ -62,7 +62,7 @@ return [
     'users' => [
         'name' => ['title' => 'Name', 'sorting' => true],
         'email' => ['title' => 'Email', 'sorting' => true],
-        'phone' => ['title' => 'Phone', 'sorting' => true],
+        'mobile' => ['title' => 'Mobile', 'sorting' => true],
         'roles' => ['title' => 'Roles', 'sorting' => true],
         'created_at' => ['title' => 'Created At', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false]

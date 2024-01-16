@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Setting;
 
-use App\Models\Permission;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class AssignRoleRequest extends FormRequest
+class DepartmentCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,11 +18,12 @@ class AssignRoleRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'permissions' => ['array']
+            'name' => ['required', 'max:100', Rule::unique('departments', 'name')->whereNull('deleted_at')]
         ];
     }
 }
