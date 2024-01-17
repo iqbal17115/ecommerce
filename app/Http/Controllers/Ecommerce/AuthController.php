@@ -28,8 +28,8 @@ class AuthController extends Controller
                 // Get the authenticated user.
                 $user = AuthHelper::getAuthenticatedUser();
                 // Check if the user's email has been verified.
-                AuthHelper::isNotVerifiedUser($user);
-
+                // AuthHelper::isNotVerifiedUser($user);
+dd($user);
                 // Create Personal Access Token for logged-in user
                 $token = AuthHelper::createPersonalAccessToken($user, 'Personal Access Token');
 

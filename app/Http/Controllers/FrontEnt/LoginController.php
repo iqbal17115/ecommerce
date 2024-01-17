@@ -17,6 +17,8 @@ class LoginController extends Controller
             'mobile' => ['required'],
             'password' => ['required'],
         ]);
+
+        dd(1);
         if (Auth::attempt($credentials)) {
             return redirect(route('home'));
         }
