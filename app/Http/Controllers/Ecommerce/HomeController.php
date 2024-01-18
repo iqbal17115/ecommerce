@@ -16,33 +16,41 @@ class HomeController extends Controller
 {
     use BaseModel;
 
-    public function getMainContent() {
+    public function getMainContent()
+    {
         $product_features = ProductFeature::whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $top_features = ProductFeature::whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $html = View::make('ecommerce.main-content', compact('product_features', 'top_features'))->render();
 
         return response()->json(['html' => $html]);
     }
-    public function contactUs() {
+    public function contactUs()
+    {
         return view('ecommerce.contact');
     }
-    public function addShippingAndDelivery() {
+    public function addShippingAndDelivery()
+    {
         return view('ecommerce.shipping-and-delivery');
     }
-    public function privacyPolicy() {
+    public function privacyPolicy()
+    {
         return view('ecommerce.privacy-policy');
     }
-    public function termsAndCondition() {
+    public function termsAndCondition()
+    {
         return view('ecommerce.terms-and-condition');
     }
-    public function aboutUs() {
+    public function aboutUs()
+    {
         return view('ecommerce.about');
     }
-    public function getSidebarContent() {
+    public function getSidebarContent()
+    {
         return view('ecommerce.sidebar-content')->render();
     }
-    public function getParentCategory(Request $request) {
-        if(isset($request->id[0]) && count($request->id[0]) > 0) {
+    public function getParentCategory(Request $request)
+    {
+        if (isset($request->id[0]) && count($request->id[0]) > 0) {
             $categories = Category::with('SubCategory')->whereIN('id', $request->id[0])->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get();
         } else {
             $categories = Category::with('SubCategory')->whereSidebarMenu(1)->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get();
@@ -50,23 +58,30 @@ class HomeController extends Controller
 
         return response()->json(['categories' => $categories]);
     }
-    public function checkSubCategory(Request $request) {
+    public function checkSubCategory(Request $request)
+    {
         $category = Category::find($request->id);
-        if(count($category->SubCategory) > 0) {
+        if (count($category->SubCategory) > 0) {
             return 1;
         } else {
             return 0;
         }
-
     }
-    public function getSubCategory(Request $request) {
+    public function getSubCategory(Request $request)
+    {
         $sub_categories = Category::with('SubCategory')->whereParentCategoryId($request->id)->orderBy('position', 'ASC')->get();
         return response()->json(['sub_categories' => $sub_categories]);
     }
-    public function adminDashboard() {
-        return view('backend.dashboard');
+    public function adminDashboard()
+    {
+        if (Auth::check() && Auth::user()->roles->where('is_admin', 1)->isNotEmpty()) {
+            return view('backend.dashboard');
+        } else {
+            return redirect()->route('my.account');
+        }
     }
-    public function index() {
+    public function index()
+    {
         $user_id = auth()?->user()->id ?? null;
         $sliders = HomeSliderResource::collection(Slider::whereIsActive(1)->get());
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();

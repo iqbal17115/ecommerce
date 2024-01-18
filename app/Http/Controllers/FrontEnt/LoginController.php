@@ -18,7 +18,6 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        dd(1);
         if (Auth::attempt($credentials)) {
             return redirect(route('home'));
         }
