@@ -6,78 +6,116 @@ return [
     "spinner_path" => "images/spinner.png",
 
     "permissions" => [
+
         /**
          * Web
          */
-        ["name" => "Company View", "route" => "companies.view", "type" => "companies", "feature" => "web"],
-        ["name" => "Institute View", "route" => "institutes.view", "type" => "users", "feature" => "web"],
-        ["name" => "Department View", "route" => "departments.view", "type" => "departments", "feature" => "web"],
-        ["name" => "Roles View", "route" => "roles.view", "type" => "roles", "feature" => "web"],
-        ["name" => "Users View", "route" => "users.view", "type" => "users", "feature" => "web"],
 
-        //Manage Groups
-        ["name" => "Manage Groups List View", "route" => "manage_groups.view", "type" => "manage_groups", "feature" => "web"],
-        ["name" => "Manage Groups Create View", "route" => "manage_groups.create", "type" => "manage_groups", "feature" => "web"],
-        ["name" => "Manage Groups Update View", "route" => "manage_groups.edit", "type" => "manage_groups", "feature" => "web"],
+        // User
+        ["name" => "Lists", "route" => "users.lists", "type" => "users", "feature" => "web"],
+        ["name" => "Store", "route" => "users.store", "type" => "users", "feature" => "web"],
+        ["name" => "Update", "route" => "users.update", "type" => "users", "feature" => "web"],
+        ["name" => "Delete", "route" => "users.delete", "type" => "users", "feature" => "web"],
 
-        //Manage Groups Posts
-        ["name" => "Group Posts List View", "route" => "manage_group_posts.view", "type" => "manage_group_posts", "feature" => "web"],
+        // Role
+        ["name" => "Lists", "route" => "roles.lists", "type" => "roles", "feature" => "web"],
+        ["name" => "Store", "route" => "roles.store", "type" => "roles", "feature" => "web"],
+        ["name" => "Update", "route" => "roles.update", "type" => "roles", "feature" => "web"],
+        ["name" => "Delete", "route" => "roles.delete", "type" => "roles", "feature" => "web"],
 
-        //Manage Groups Members
-        ["name" => "Manage Group Members List View", "route" => "manage_group_members.view", "type" => "manage_group_members", "feature" => "web"],
+        // Product
+        ["name" => "Lists", "route" => "product-product", "type" => "product", "feature" => "web"],
+        ["name" => "Store", "route" => "product-product", "type" => "product", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.product", "type" => "product", "feature" => "web"],
 
-        /**
-         * Api
-         */
-        //companies
-        ["name" => "Lists", "route" => "companies.lists", "type" => "companies", "feature" => "api"],
-        ["name" => "Store", "route" => "companies.store", "type" => "companies", "feature" => "api"],
-        ["name" => "Update", "route" => "companies.update", "type" => "companies", "feature" => "api"],
-        ["name" => "Delete", "route" => "companies.delete", "type" => "companies", "feature" => "api"],
+        // Category
+        ["name" => "Lists", "route" => "product-category", "type" => "category", "feature" => "web"],
+        ["name" => "Store", "route" => "add.category", "type" => "category", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.category", "type" => "category", "feature" => "web"],
 
-        //departments
-        ["name" => "Lists", "route" => "departments.lists", "type" => "departments", "feature" => "api"],
-        ["name" => "Store", "route" => "departments.store", "type" => "departments", "feature" => "api"],
-        ["name" => "Update", "route" => "departments.update", "type" => "departments", "feature" => "api"],
-        ["name" => "Delete", "route" => "departments.delete", "type" => "departments", "feature" => "api"],
+        // Brand
+        ["name" => "Lists", "route" => "product-brand", "type" => "brands", "feature" => "web"],
+        ["name" => "Store", "route" => "add.brand", "type" => "brands", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.brand", "type" => "brands", "feature" => "web"],
 
-        //institutes
-        ["name" => "Lists", "route" => "institutes.lists", "type" => "institutes", "feature" => "api"],
-        ["name" => "Store", "route" => "institutes.store", "type" => "institutes", "feature" => "api"],
-        ["name" => "Update", "route" => "institutes.update", "type" => "institutes", "feature" => "api"],
-        ["name" => "Delete", "route" => "institutes.delete", "type" => "institutes", "feature" => "api"],
+        // Unit
+        ["name" => "Lists", "route" => "product-unit", "type" => "units", "feature" => "web"],
+        ["name" => "Store", "route" => "add.unit", "type" => "units", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.unit", "type" => "units", "feature" => "web"],
 
-        //users
-        ["name" => "Lists", "route" => "users.lists", "type" => "users", "feature" => "api"],
-        ["name" => "Store", "route" => "users.store", "type" => "users", "feature" => "api"],
-        ["name" => "Update", "route" => "users.update", "type" => "users", "feature" => "api"],
-        ["name" => "Delete", "route" => "users.delete", "type" => "users", "feature" => "api"],
+        // Material
+        ["name" => "Lists", "route" => "product-material", "type" => "materials", "feature" => "web"],
+        ["name" => "Store", "route" => "add.material", "type" => "materials", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.material", "type" => "materials", "feature" => "web"],
 
-        //roles
-        ["name" => "Lists", "route" => "roles.lists", "type" => "roles", "feature" => "api"],
-        ["name" => "Store", "route" => "roles.store", "type" => "roles", "feature" => "api"],
-        ["name" => "Update", "route" => "roles.update", "type" => "roles", "feature" => "api"],
-        ["name" => "Delete", "route" => "roles.delete", "type" => "roles", "feature" => "api"],
-        ["name" => "Assign Permissions", "route" => "assign_permissions", "type" => "roles", "feature" => "api"],
+        // Condition
+        ["name" => "Lists", "route" => "condition", "type" => "conditions", "feature" => "web"],
+        ["name" => "Store", "route" => "add.condition", "type" => "conditions", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.condition", "type" => "conditions", "feature" => "web"],
 
-        //manage groups
-        ["name" => "Lists", "route" => "manage_groups.lists", "type" => "manage_groups", "feature" => "api"],
-        ["name" => "Store", "route" => "manage_groups.store", "type" => "manage_groups", "feature" => "api"],
-        ["name" => "Update", "route" => "manage_groups.update", "type" => "manage_groups", "feature" => "api"],
-        ["name" => "Delete", "route" => "manage_groups.delete", "type" => "manage_groups", "feature" => "api"],
-        ["name" => "Delete Group Questions", "route" => "group_questions.delete", "type" => "manage_groups", "feature" => "api"],
-        ["name" => "Delete Group Question Options", "route" => "group_question_options.delete", "type" => "manage_groups", "feature" => "api"],
+        // Feature
+        ["name" => "Lists", "route" => "feature", "type" => "features", "feature" => "web"],
+        ["name" => "Store", "route" => "add.feature", "type" => "features", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.feature", "type" => "features", "feature" => "web"],
 
-        //manage group posts
-        ["name" => "Lists", "route" => "manage_group_posts.lists", "type" => "manage_group_posts", "feature" => "api"],
-        ["name" => "Store", "route" => "manage_group_posts.store", "type" => "manage_group_posts", "feature" => "api"],
-        ["name" => "Update", "route" => "manage_group_posts.update", "type" => "manage_group_posts", "feature" => "api"],
-        ["name" => "Delete", "route" => "manage_group_posts.delete", "type" => "manage_group_posts", "feature" => "api"],
-        ["name" => "Delete Group Questions", "route" => "group_questions.delete", "type" => "manage_groups", "feature" => "api"],
+        // Basic Info
+        ["name" => "Show", "route" => "company-info", "type" => "company_info", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.company_vital_info", "type" => "Vital Info", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.add_link", "type" => "Add Link", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.about_us", "type" => "About Us", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.terms_condition", "type" => "Terms & Condition", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.privacy_policy", "type" => "Privacy Policy", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.add.return_policy", "type" => "Return Policy", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.shipping_and_delivery", "type" => "Shipping & Delivery", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.title", "type" => "Title", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.key_word", "type" => "Keyword", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.description", "type" => "Description", "feature" => "web"],
+        ["name" => "Store Or Update", "route" => "add.status", "type" => "Status", "feature" => "web"],
 
-        //manage group members
-        ["name" => "Lists", "route" => "manage_group_members.lists", "type" => "manage_group_members", "feature" => "api"],
-        ["name" => "Update Join Request", "route" => "manage_group_members.update_join_request", "type" => "manage_groups", "feature" => "api"],
+        // Country
+        ["name" => "Lists", "route" => "shop_setting_countries.lists", "type" => "countries", "feature" => "web"],
+        ["name" => "Store", "route" => "countries.store", "type" => "countries", "feature" => "web"],
+        ["name" => "Update", "route" => "countries.update", "type" => "countries", "feature" => "web"],
+        ["name" => "Delete", "route" => "countries.delete", "type" => "countries", "feature" => "web"],
+
+        // Division
+        ["name" => "Lists", "route" => "shop_setting_divisions.lists", "type" => "divisions", "feature" => "web"],
+        ["name" => "Store", "route" => "divisions.store", "type" => "divisions", "feature" => "web"],
+        ["name" => "Update", "route" => "divisions.update", "type" => "divisions", "feature" => "web"],
+        ["name" => "Delete", "route" => "divisions.delete", "type" => "divisions", "feature" => "web"],
+
+        // District
+        ["name" => "Lists", "route" => "shop_setting_districts.lists", "type" => "districts", "feature" => "web"],
+        ["name" => "Store", "route" => "districts.store", "type" => "districts", "feature" => "web"],
+        ["name" => "Update", "route" => "districts.update", "type" => "districts", "feature" => "web"],
+        ["name" => "Delete", "route" => "districts.delete", "type" => "districts", "feature" => "web"],
+
+        // Upazila
+        ["name" => "Lists", "route" => "shop_setting_upazilas.lists", "type" => "upazilas", "feature" => "web"],
+        ["name" => "Store", "route" => "upazilas.store", "type" => "upazilas", "feature" => "web"],
+        ["name" => "Update", "route" => "upazilas.update", "type" => "upazilas", "feature" => "web"],
+        ["name" => "Delete", "route" => "upazilas.delete", "type" => "upazilas", "feature" => "web"],
+
+        // Currency
+        ["name" => "Lists", "route" => "currency", "type" => "currency", "feature" => "web"],
+        ["name" => "Store", "route" => "add.currency", "type" => "currency", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.currency", "type" => "currency", "feature" => "web"],
+
+        // Slider
+        ["name" => "Lists", "route" => "slider", "type" => "slider", "feature" => "web"],
+        ["name" => "Store", "route" => "add.slider", "type" => "slider", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.slider", "type" => "slider", "feature" => "web"],
+
+        // Advertisement
+        ["name" => "Lists", "route" => "advertisement", "type" => "advertisement", "feature" => "web"],
+        ["name" => "Store", "route" => "add.advertisement", "type" => "advertisement", "feature" => "web"],
+        ["name" => "Delete", "route" => "delete.slider", "type" => "advertisement", "feature" => "web"],
+
+        // Coupon
+        ["name" => "Lists", "route" => "coupons.lists", "type" => "coupon", "feature" => "web"],
+        ["name" => "Store", "route" => "coupons.store", "type" => "coupon", "feature" => "web"],
+        ["name" => "Update", "route" => "coupons.update", "type" => "coupon", "feature" => "web"],
+        ["name" => "Delete", "route" => "coupons.destroy", "type" => "coupon", "feature" => "web"],
     ],
 
     "system_permissions" => [
