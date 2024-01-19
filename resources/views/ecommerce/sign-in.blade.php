@@ -27,6 +27,9 @@
                 <p>
                   <a href="">Forget Password?</a>
                 </p>
+                <p>
+                    <a href="{{ route('sign-up') }}">Sign Up</a>
+                  </p>
               </form>
             </div>
           </div>

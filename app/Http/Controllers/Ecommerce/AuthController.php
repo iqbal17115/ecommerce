@@ -87,9 +87,8 @@ class AuthController extends Controller
             'name' => 'required|max:20',
             'mobile' => ['required', 'string', 'max:255'],
             'password' => ['required', 'min:2'],
-        ], [
-            'name.required' => 'Name is required',
         ]);
+        dd($request->name);
 
         $data = $request->all();
         $user = User::where('mobile', $data['mobile'])->first();

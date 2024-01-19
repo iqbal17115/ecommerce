@@ -63,7 +63,7 @@
                     <div class="header-menu d-flex justify-content-end">
                         <ul class="mb-0">
                             @if (!Auth::user())
-                                <li><a href="{{ route('login') }}">Log In</a></li>
+                                <li><a href="{{ route('customer-sign-in') }}">Log In</a></li>
                             @endif
                         </ul>
                     </div>

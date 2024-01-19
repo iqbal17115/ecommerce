@@ -165,9 +165,10 @@ Route::group(['middleware' => 'web'], function () {
     //
     Route::group([], function () {
         Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
+        Route::middleware(['permission'])->group(function () {
 
         Route::get('users', UserViewController::class)->name('users.view');
-
+    });
         // User
         Route::controller(UserController::class)->group(function () {
             Route::get('users/lists', 'lists')->name('users.lists');

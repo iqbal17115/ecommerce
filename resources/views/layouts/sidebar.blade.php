@@ -21,7 +21,9 @@
                            <span>Settings</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
+                        @can("users.lists")
                            <li><a href="{{ route('users.view') }}">Users</a></li>
+                        @endcan
                            <li><a href="{{ route('roles.view') }}">Roles</a></li>
                        </ul>
                    </li>
