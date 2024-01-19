@@ -8,7 +8,8 @@
             <div class="row">
 
                 <div class="col-lg-7">
-                    <div id="collapseFour" class="collapse card_design shadow p-3 @if (Auth::user()) show @endif">
+                    <div id="collapseFour"
+                        class="collapse card_design shadow p-3 @if (Auth::user()) show @endif">
                         <div class="shipping-info">
 
                             <!-- Shipping Address -->
@@ -63,7 +64,8 @@
                             </tfoot>
                         </table>
 
-                        <button type="submit" class="btn brand_color btn-place-order float-right" id="btn_place_order" style="padding: .7em 1em; margin-right: 44px;">
+                        <button type="submit" class="btn brand_color btn-place-order float-right" id="btn_place_order"
+                            style="padding: .7em 1em; margin-right: 44px;">
                             Place Order
                         </button>
                     </div>
@@ -71,119 +73,123 @@
                 </div>
                 <!-- End .col-lg-4 -->
                 {{-- Start Show Products --}}
-                    {{-- Start payment Method --}}
-                    <div class="p-4 ml-3 mt-2 card_design shadow" style="width: 100%;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="cart-table-container">
-                                            <form action="{{ route('confirm_order') }}" method="POST" id="checkout-form">
-                                                @csrf
-                                                <!-- Other form fields -->
-                                                <div class="payment-methods">
-                                                    <h4>Select Payment Method</h4>
-                                                    <div class="payment-icons">
-                                                        <div class="row">
-                                                            <div class="col-md-1">
-                                                                <a href="javascript:void(0);" class="payment-icon"
-                                                                    data-payment="bkash">
-                                                                    <img style="height: 50px;"
-                                                                        src="{{ asset('payments/path_to_bkash_icon.png') }}"
-                                                                        alt="bKash">
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <a href="javascript:void(0);" class="payment-icon"
-                                                                    data-payment="rocket">
-                                                                    <img style="height: 50px;"
-                                                                        src="{{ asset('payments/path_to_rocket_icon.png') }}"
-                                                                        alt="Rocket">
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <a href="javascript:void(0);" class="payment-icon"
-                                                                    data-payment="nogod">
-                                                                    <img style="height: 50px;"
-                                                                        src="{{ asset('payments/path_to_nogod_icon.png') }}"
-                                                                        alt="Nogod">
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <a href="javascript:void(0);" class="payment-icon"
-                                                                    data-payment="cod">
-                                                                    <img style="height: 50px;"
-                                                                        src="{{ asset('payments/path_to_cod_icon.png') }}"
-                                                                        alt="Cash on Delivery">
-                                                                </a>
+                {{-- Start payment Method --}}
+                <div class="p-4 ml-3 mt-2 card_design shadow" style="width: 100%;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="cart-table-container">
+                                        <form class="pb-0 mb-0" action="{{ route('confirm_order') }}" method="POST" id="checkout-form">
+                                            @csrf
+                                            <!-- Other form fields -->
+                                            <div class="payment-methods">
+                                                <h4>Select Payment Method</h4>
+                                                <div class="payment-icons">
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <div class="delivery-options">
+                                                                <div class="form-group form-group-custom-control">
+                                                                    <div class="custom-control custom-radio">
+                                                                        <input type="radio" class="custom-control-input" id="bkash" name="radio" value="">
+                                                                        <label class="custom-control-label" for="bkash">bKash</label>
+                                                                    </div><!-- End .custom-checkbox -->
+                                                                </div><!-- End .form-group -->
                                                             </div>
                                                         </div>
+
+                                                        <div class="col-md-1">
+                                                            <div class="form-group form-group-custom-control mb-0">
+                                                                <div class="custom-control custom-radio mb-0">
+                                                                    <input type="radio" id="rocket" name="radio" value="" class="custom-control-input">
+                                                                    <label class="custom-control-label" for="rocket">Rocket</label>
+                                                                </div><!-- End .custom-checkbox -->
+                                                            </div><!-- End .form-group -->
+                                                        </div>
+
+                                                        <div class="col-md-1">
+                                                            <div class="form-group form-group-custom-control mb-0">
+                                                                <div class="custom-control custom-radio mb-0">
+                                                                    <input type="radio" id="nogod" name="radio" value="" class="custom-control-input">
+                                                                    <label class="custom-control-label" for="nogod">Nogod</label>
+                                                                </div><!-- End .custom-checkbox -->
+                                                            </div><!-- End .form-group -->
+                                                        </div>
+
+                                                        <div class="col-md-1">
+                                                            <div class="form-group form-group-custom-control mb-0">
+                                                                <div class="custom-control custom-radio mb-0">
+                                                                    <input type="radio" id="cod" name="radio" value="" class="custom-control-input">
+                                                                    <label class="custom-control-label" for="cod">COD</label>
+                                                                </div><!-- End .custom-checkbox -->
+                                                            </div><!-- End .form-group -->
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <input type="hidden" name="selected_payment" id="selected-payment"
-                                                    value="" required>
-                                            </form>
-                                        </div><!-- End .cart-table-container -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- End Payment Method --}}
-                    <div class="p-4 ml-3 card_design shadow" style="width: 100%;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="cart-table-container">
-                                            <div class="review-section">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <p class="mb-0 text-dark">Standard Delivery Date:
-                                                            {{ \Carbon\Carbon::now()->addDays(1)->format('d M Y') }}</p>
-                                                        <p class="mb-0 text-dark">Items shipped from
-                                                            <strong>Aladdinne.ae</strong>
-                                                        </p>
-                                                    </div>
+
                                                 </div>
                                             </div>
-
-
-                                            <table class="table table-cart">
-                                                <tbody id="table_body"></tbody>
-                                            </table>
-                                        </div><!-- End .cart-table-container -->
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="delivery-options">
-                                            <h4>Choose a delivery option:</h4>
-
-                                            <div class="form-group form-group-custom-control">
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" class="custom-control-input" name="radio"
-                                                        value="13eee98c-31ed-11ee-be5c-5811220534bb" checked>
-                                                    <label class="custom-control-label">Standard Delivery — Estimate
-                                                        Delivery Date,
-                                                        {{ \Carbon\Carbon::now()->addDay(3)->format('d F') }}</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .form-group -->
-
-                                            <div class="form-group form-group-custom-control mb-0">
-                                                <div class="custom-control custom-radio mb-0">
-                                                    <input type="radio" name="radio"
-                                                        value="13eef465-31ed-11ee-be5c-5811220534bb"
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label">Express Delivery – get it Tomorrow,
-                                                        {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .form-group -->
-
+                                        </form>
+                                    </div><!-- End .cart-table-container -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- End Payment Method --}}
+                <div class="p-4 ml-3 card_design shadow" style="width: 100%;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="cart-table-container">
+                                        <div class="review-section">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="mb-0 text-dark">Standard Delivery Date:
+                                                        {{ \Carbon\Carbon::now()->addDays(1)->format('d M Y') }}</p>
+                                                    <p class="mb-0 text-dark">Items shipped from
+                                                        <strong>Aladdinne.ae</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
+
+
+                                        <table class="table table-cart">
+                                            <tbody id="table_body"></tbody>
+                                        </table>
+                                    </div><!-- End .cart-table-container -->
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="delivery-options">
+                                        <h4>Choose a delivery option:</h4>
+
+                                        <div class="form-group form-group-custom-control">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" name="radio"
+                                                    value="13eee98c-31ed-11ee-be5c-5811220534bb" checked>
+                                                <label class="custom-control-label">Standard Delivery — Estimate
+                                                    Delivery Date,
+                                                    {{ \Carbon\Carbon::now()->addDay(3)->format('d F') }}</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group form-group-custom-control mb-0">
+                                            <div class="custom-control custom-radio mb-0">
+                                                <input type="radio" name="radio"
+                                                    value="13eef465-31ed-11ee-be5c-5811220534bb"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label">Express Delivery – get it Tomorrow,
+                                                    {{ \Carbon\Carbon::now()->addDay()->format('d F') }}</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-group -->
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
                 {{-- End Show Products --}}
             </div>
@@ -215,6 +221,7 @@
         function loadAddressForm() {
             addressForm(user);
         }
+
         function userAddress() {
             loadUserAddress(@json($user->id ?? null));
         }
