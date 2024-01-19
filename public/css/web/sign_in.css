@@ -95,8 +95,6 @@ p a {
 .col-left {
     margin-right: 2px;
     background: #ffffff;
-    /* -webkit-clip-path: polygon(0 0, 100% 5%, 100% 100%, 5% 95%);
-    clip-path: polygon(0 0, 100% 5%, 100% 100%, 5% 95%); */
 }
 
 .col-right {
@@ -105,7 +103,7 @@ p a {
     clip-path: polygon(0 5%, 100% 0, 95% 95%, 0 100%); */
 }
 
-@media(max-width: 575.98px) {
+@media(max-width: 800px) {
     .container {
         flex-direction: column;
     }
