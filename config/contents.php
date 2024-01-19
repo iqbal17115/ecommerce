@@ -116,6 +116,37 @@ return [
         ["name" => "Store", "route" => "coupons.store", "type" => "coupon", "feature" => "web"],
         ["name" => "Update", "route" => "coupons.update", "type" => "coupon", "feature" => "web"],
         ["name" => "Delete", "route" => "coupons.destroy", "type" => "coupon", "feature" => "web"],
+
+        // Shipping Charge
+        ["name" => "Lists", "route" => "shipping_charge.index", "type" => "Shipping Charge", "feature" => "web"],
+        ["name" => "Store", "route" => "shipping_charge.create", "type" => "Shipping Charge", "feature" => "web"],
+        ["name" => "Update", "route" => "shipping_charge.edit", "type" => "Shipping Charge", "feature" => "web"],
+        ["name" => "Delete", "route" => "shipping_charge.destroy", "type" => "Shipping Charge", "feature" => "web"],
+
+        // Review List
+        ["name" => "Lists", "route" => "reviews.index", "type" => "Review List", "feature" => "web"],
+
+        // Orders
+        ["name" => "Lists", "route" => "all-order", "type" => "All Order", "feature" => "web"],
+        ["name" => "Update", "route" => "advance-edit", "type" => "Advance Edit", "feature" => "web"],
+        ["name" => "Lists", "route" => "pending-order", "type" => "Pending Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "new-order", "type" => "New Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "shipped-order", "type" => "Shipped Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "in_transit-order", "type" => "In Transit Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "arrival_at_distribution_center-order", "type" => "Arrival At Distribution Center Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "out_for_delivery-order", "type" => "Out For Delivery Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "delivery_attempted-order", "type" => "Delivery Attempted Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "delivery_rescheduling-order", "type" => "Delivery Rescheduling Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "payment_collected-order", "type" => "Payment Collected Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "completed-order", "type" => "Completed Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "'hold-order", "type" => "Hold Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "failed-order", "type" => "Failed Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "cancelled-order", "type" => "Cancelled Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "returned-order", "type" => "Returned Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "pre_order-order", "type" => "Pre Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "backordered-order", "type" => "Backordered Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "partially_shipped-order", "type" => "Partially Shipped Order", "feature" => "web"]
+
     ],
 
     "system_permissions" => [
