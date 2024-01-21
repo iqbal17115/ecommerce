@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->enum('status', array_keys(OrderStatusEnum::getOrderStatuses()))->nullable();
             $table->string('code')->nullable();
+            $table->string('payment_method')->nullable();
             $table->foreignUuid('user_id')->nullable()->index();
             $table->dateTime('order_date')->nullable();
             $table->double('total_amount')->nullable();

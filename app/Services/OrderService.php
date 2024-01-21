@@ -46,6 +46,7 @@ class OrderService
             // Create an order
             $order = new Order();
             $order->code = $this->getLatestOrderCode();
+            $order->payment_method = $validatedData['payment_method'];
             $order->user_id = auth()->id();
             $order->order_date = now();
             $order->total_amount = $totalAmount;

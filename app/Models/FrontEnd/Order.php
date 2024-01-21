@@ -25,6 +25,7 @@ class Order extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = [
         'code',
+        'payment_method',
         'user_id',
         'order_date',
         'total_amount',

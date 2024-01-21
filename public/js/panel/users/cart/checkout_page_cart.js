@@ -145,8 +145,9 @@ $(document).ready(function () {
         const formData = {
             address_id: $('input[name="addressRadio"]:checked').data('address_id') ?? null,
             user_id: $("#temp_user_id").data('user_id') ?? null,
+            payment_method: $('input[name="radio"]:checked').val() ?? null,
         };
-console.log(formData);
+
         submitOrder(formData, '');
     });
     function calcaulateCartDetails(data) {

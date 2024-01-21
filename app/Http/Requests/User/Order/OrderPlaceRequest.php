@@ -26,6 +26,7 @@ class OrderPlaceRequest extends FormRequest
         return [
             'address_id' => 'required',
             'user_id' => 'required',
+            'payment_method' => 'nullable',
         ];
     }
 }
