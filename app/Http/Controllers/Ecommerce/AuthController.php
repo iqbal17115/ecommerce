@@ -84,12 +84,11 @@ class AuthController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|max:20',
+            'name' => 'required|max:70',
             'mobile' => ['required', 'string', 'max:255'],
             'password' => ['required', 'min:2'],
-        ], [
-            'name.required' => 'Name is required',
         ]);
+
 
         $data = $request->all();
         $user = User::where('mobile', $data['mobile'])->first();
