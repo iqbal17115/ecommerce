@@ -263,7 +263,7 @@ function setAddressData(data) {
             }
 
             cardHTML += `
-                <div class="col-md-4 p-0 m-0 ${selectedClass} ml-2">
+                <div class="col-md-4 p-1 m-0 ${selectedClass}">
                     <input type="radio" name="addressRadio" ${radioChecked} class="hidden-radio" id="address_${data.id}" data-address_id="${data.id}" hidden>
                     <label for="address_${data.id}" style="display: inline;">
                         <div class="card p-0 m-0 bg-light" style="height: 100%;">
