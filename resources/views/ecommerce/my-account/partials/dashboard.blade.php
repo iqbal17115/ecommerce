@@ -1,4 +1,4 @@
-<div class="tab-pane fade @if(!isset($wishlist_status)) show active @endif" id="dashboard">
+<div class="tab-pane fade @if (!isset($wishlist_status)) show active @endif" id="dashboard">
     <div class="grey-bg container-fluid">
         <section id="minimal-statistics">
             <div class="row">
@@ -9,21 +9,23 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <a class="nav-link custom_link" href="#orders" data-toggle="tab">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="fa fa-shopping-cart text-info font-large-2 float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Your Orders</h3>
-                                        <span class="text-dark">View Orders, Cancel an Order, Download Invoice</span>
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i
+                                                class="fa fa-shopping-cart text-info font-large-2 float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Your Orders</h3>
+                                            <span class="text-dark">View Orders, Cancel an Order, Download
+                                                Invoice</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
@@ -45,62 +47,62 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <a class="nav-link custom_link" href="#order_status" data-toggle="tab">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="fas fa-truck font-large-2 float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Order Status</h3>
-                                        <span class="text-dark">Track Your Order</span>
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-truck font-large-2 float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Order Status</h3>
+                                            <span class="text-dark">Track Your Order</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
                     <a class="nav-link custom_link" href="#cartlist" data-toggle="tab">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="fa fa-shopping-cart font-large-2 float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Cart</h3>
-                                        <span class="text-dark">View, Modify, Share your cart
-                                            list.</span>
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fa fa-shopping-cart font-large-2 float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Cart</h3>
+                                            <span class="text-dark">View, Modify, Share your cart
+                                                list.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
                     <a class="nav-link custom_link" href="#wishlist" data-toggle="tab">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="far fa-heart font-large-2 float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Wishlist</h3>
-                                        <span class="text-dark">View, Modify, Share your wish
-                                            list.</span>
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="far fa-heart font-large-2 float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Wishlist</h3>
+                                            <span class="text-dark">View, Modify, Share your wish
+                                                list.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 </div>
                 <div class="col-md-4 mb-4 under_development">
                     <div class="card shadow-sm">
@@ -121,24 +123,26 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-4 under_development">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="fas fa-money-bill font-large-2 float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Your Payment</h3>
-                                        <span class="text-dark">View Aladdiinne Balance,
-                                            Manage or Add Payment
-                                            Methods.</span>
+                <div class="col-md-4 mb-4">
+                    <a class="nav-link custom_link" href="#your_payment" data-toggle="tab">
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-money-bill font-large-2 float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Your Payment</h3>
+                                            <span class="text-dark">View Aladdiinne Balance,
+                                                Manage or Add Payment
+                                                Methods.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4 mb-4">
@@ -218,22 +222,22 @@
 
                 <div class="col-md-4 mb-4">
                     <a class="nav-link" href="#review_feedback" data-toggle="tab">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="far fa-comments float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Review & Feedback</h3>
-                                        <span class="text-dark">View the previous reviews &
-                                            feedback you have submitted.</span>
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="far fa-comments float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Review & Feedback</h3>
+                                            <span class="text-dark">View the previous reviews &
+                                                feedback you have submitted.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </a>
                 </div>
 
@@ -275,5 +279,6 @@
                 </div>
                 <div class="col-md-4 mb-4"></div>
             </div>
+        </section>
     </div>
 </div>

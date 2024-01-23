@@ -87,40 +87,11 @@
                                                 <h4>Select Payment Method</h4>
                                                 <div class="payment-icons">
                                                     <div class="row">
-                                                        <div class="col-md-1">
-                                                            <div class="delivery-options">
-                                                                <div class="form-group form-group-custom-control">
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="bkash" name="radio" value="bKash">
-                                                                        <label class="custom-control-label" for="bkash">bKash</label>
-                                                                    </div><!-- End .custom-checkbox -->
-                                                                </div><!-- End .form-group -->
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-1">
-                                                            <div class="form-group form-group-custom-control mb-0">
-                                                                <div class="custom-control custom-radio mb-0">
-                                                                    <input type="radio" id="rocket" name="radio" value="rocket" class="custom-control-input">
-                                                                    <label class="custom-control-label" for="rocket">Rocket</label>
-                                                                </div><!-- End .custom-checkbox -->
-                                                            </div><!-- End .form-group -->
-                                                        </div>
-
-                                                        <div class="col-md-1">
-                                                            <div class="form-group form-group-custom-control mb-0">
-                                                                <div class="custom-control custom-radio mb-0">
-                                                                    <input type="radio" id="nogod" name="radio" value="nogod" class="custom-control-input">
-                                                                    <label class="custom-control-label" for="nogod">Nogod</label>
-                                                                </div><!-- End .custom-checkbox -->
-                                                            </div><!-- End .form-group -->
-                                                        </div>
-
-                                                        <div class="col-md-1">
+                                                        <div class="col-md-12">
                                                             <div class="form-group form-group-custom-control mb-0">
                                                                 <div class="custom-control custom-radio mb-0">
                                                                     <input type="radio" id="cod" name="radio" value="cod" class="custom-control-input" checked>
-                                                                    <label class="custom-control-label" for="cod">COD</label>
+                                                                    <label class="custom-control-label" for="cod">Cash On Delivery</label>
                                                                 </div><!-- End .custom-checkbox -->
                                                             </div><!-- End .form-group -->
                                                         </div>

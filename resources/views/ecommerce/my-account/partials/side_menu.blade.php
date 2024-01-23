@@ -1,7 +1,7 @@
 <nav class="side-menu">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link @if(!isset($wishlist_status)) active @endif" href="#dashboard" data-toggle="tab">
+            <a class="nav-link @if (!isset($wishlist_status)) active @endif" href="#dashboard" data-toggle="tab">
                 <i class="fas fa-shopping-cart"></i>
                 Dashboard
             </a>
@@ -37,7 +37,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link @if(isset($wishlist_status)) active @endif" href="#wishlist" data-toggle="tab">
+            <a class="nav-link @if (isset($wishlist_status)) active @endif" href="#wishlist" data-toggle="tab">
                 <i class="fas fa-heart"></i>
                 Wishlist
             </a>
@@ -49,13 +49,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#your-payment" data-toggle="tab">
+            <a class="nav-link" href="#your_payment" data-toggle="tab">
                 <i class="fas fa-credit-card"></i>
                 Your Payment
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#transactions" data-toggle="tab">
+            <a class="nav-link" href="#your_transactions" data-toggle="tab">
                 <i class="fas fa-exchange-alt"></i>
                 Transactions
             </a>
