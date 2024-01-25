@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountTransactionController;
 use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\AllOrderController;
@@ -123,6 +124,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['middleware' => 'auth'], function () {
 
+        // My Account Transaction
+        Route::controller(MyAccountTransactionController::class)->group(function () {
+            Route::get('my-trasaction', 'index')->name('my_trasaction');
+        });
 
         Route::get('coupon-products/{coupon}/view', [CouponProductController::class, 'index'])->name('coupon_products.view');
         Route::get('coupons', [CouponController::class, 'index'])->name('coupons.view');
