@@ -12,10 +12,12 @@ use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\OrderAddress;
+use App\Models\User;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use App\Traits\GeneratesOrderCodeTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
@@ -48,6 +50,10 @@ class Order extends Model
     protected $sortable = [
         'order_date'
     ];
+
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class);
+    }
 
     public function orderAddress()
     {

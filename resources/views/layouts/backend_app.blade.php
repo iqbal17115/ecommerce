@@ -118,8 +118,7 @@
   {{-- <link rel="stylesheet" href="{{ asset('css/common.css') }}"> --}}
   <!-- Common JS -->
   <script src="{{ asset('js/common.js') }}"></script>
-<!-- Common JS -->
-<script src="{{ asset('js/common.js') }}"></script>
+
     <script>
         $(document).ready(function() {
             $.ajaxSetup({

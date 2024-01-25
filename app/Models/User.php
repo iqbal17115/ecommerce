@@ -4,19 +4,17 @@ namespace App\Models;
 
 use App\Models\AccountsSettings\Branch;
 use App\Models\Address\Address;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use App\Models\Backend\ContactInfo\Contact;
-use App\Models\Backend\Product\Product;
 use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Review;
 use App\Models\Frontend\Wishlist\Wishlist;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
-use Laravel\Jetstream\HasTeams;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany; // Import the default BelongsToMany class

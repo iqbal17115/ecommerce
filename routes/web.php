@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountPaymentController;
 use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountTransactionController;
 use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\AllOrderController;
 use App\Http\Controllers\Backend\Order\OrderController;
+use App\Http\Controllers\Backend\OrderNotificationController;
 use App\Http\Controllers\Backend\OrderProduct\OrderProductCancellationController;
 use App\Http\Controllers\Backend\OrderProduct\OrderProductReturnController;
 use App\Http\Controllers\Backend\SupplierController;
@@ -123,6 +125,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'calculateShippingCharge'])->name('calculateShippingCharge');
 
     Route::group(['middleware' => 'auth'], function () {
+
+         // Order Notification
+         Route::controller(OrderNotificationController::class)->group(function () {
+            Route::get('order-notification', 'index')->name('order.notification');
+        });
+
+        // My Account Transaction
+        Route::controller(MyAccountPaymentController::class)->group(function () {
+            Route::get('my-payments', 'index')->name('my_payments');
+        });
 
         // My Account Transaction
         Route::controller(MyAccountTransactionController::class)->group(function () {
