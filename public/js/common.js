@@ -1,5 +1,6 @@
-let limit = 3;
+let limit = 5;
 let page = 1;
+let loading = false; // To prevent multiple simultaneous requests
 
 function showMyOrderNotificationlistData(data) {
     let orderNotificationList = '';
@@ -23,32 +24,34 @@ function showMyOrderNotificationlistData(data) {
         `;
     });
 
-    $('#orderNotificationId').html(orderNotificationList);
+    $('#orderNotificationId').append(orderNotificationList);
+    loading = false; // Mark loading as completed
 }
 
 function getOrderNotificationlist() {
-    getDetails(
-        `/order-notification?limit=${limit}&page=${page}`,
-        (data) => {
-            showMyOrderNotificationlistData(data.results.data);
-        },
-        (error) => {
-            // Handle error
-        }
-    );
-}
-
-function loadMore() {
-    // Increment page and call getOrderNotificationlist to fetch more data
-    page++;
-    getOrderNotificationlist();
+    if (!loading) {
+        loading = true; // Mark loading as in progress
+        getDetails(
+            `/order-notification?limit=${limit}&page=${page}`,
+            (data) => {
+                showMyOrderNotificationlistData(data.results.data);
+            },
+            (error) => {
+                // Handle error
+            }
+        );
+        page++;
+    }
 }
 
 $(document).ready(function () {
     getOrderNotificationlist();
 
-    // Event listener for the "View More" button
-    $('#viewMoreBtn').on('click', function () {
-        loadMore();
+    // Event listener for the "on-scroll load more" functionality
+    $('#orderNotificationId').on('scroll', function () {
+        if (this.scrollHeight - this.scrollTop === this.clientHeight) {
+            // User has reached the bottom, trigger load more
+            getOrderNotificationlist();
+        }
     });
 });
