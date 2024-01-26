@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\AllOrderController;
 use App\Http\Controllers\Backend\Order\OrderController;
+use App\Http\Controllers\API\Panel\User\OrderController as PlaceOrderOrderController;
 use App\Http\Controllers\Backend\OrderNotificationController;
 use App\Http\Controllers\Backend\OrderProduct\OrderProductCancellationController;
 use App\Http\Controllers\Backend\OrderProduct\OrderProductReturnController;
@@ -125,6 +126,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'calculateShippingCharge'])->name('calculateShippingCharge');
 
     Route::group(['middleware' => 'auth'], function () {
+
+        // Order
+        Route::controller(PlaceOrderOrderController::class)->group(function () {
+            Route::post('order-place', 'store')->name("order_place");
+            Route::get('/user-orders/lists', 'lists')->name('user_orders.lists');
+        });
 
          // Order Notification
          Route::controller(OrderNotificationController::class)->group(function () {

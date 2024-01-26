@@ -35,12 +35,6 @@ use Illuminate\Support\Facades\Route;
 */
 // Route::middleware('web')->group(function () {
 
-// Order
-Route::controller(OrderController::class)->group(function () {
-    Route::post('order-place', 'store')->name("order_place");
-    Route::get('/user-orders/lists', 'lists')->name('user_orders.lists');
-});
-
 // User Review
 Route::controller(UserReviewController::class)->group(function () {
     Route::get('all-reviews/lists', 'allReviews')->name('all_reviews.lists');

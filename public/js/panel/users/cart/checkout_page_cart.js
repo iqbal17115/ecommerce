@@ -121,7 +121,7 @@ $(document).ready(function () {
     function submitOrder(formData, selectedId = "") {
         saveAction(
             "store",
-            "/api/order-place",
+            "/order-place",
             formData,
             selectedId,
             (data) => {
