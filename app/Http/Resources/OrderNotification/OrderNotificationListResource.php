@@ -16,8 +16,8 @@ class OrderNotificationListResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->user->name,
-            'mobile' => $this->user->mobile,
+            'name' => $this->user->name ?? '',
+            'mobile' => $this->user->mobile ?? '',
             'code' => $this->code,
             'order_date' => Carbon::parse($this->order_date)->diffForHumans(),
             'profile_photo' => url(config("contents.default_user_photo")),
