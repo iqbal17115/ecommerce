@@ -189,9 +189,6 @@
                                             '</span>'
                                         : '<span class="m-0 p-0" style="font-weight: bold;">Sold Out</span>' !!}
 
-                                    <a class="write-review" id="write-a-review" role="button">
-                                        &nbsp; <span><i class="fas fa-pen"></i> Write a review</span>
-                                    </a>
                                 </h5>
                             </div>
                         </div>
@@ -232,6 +229,9 @@
                         <span class="rating-number">-</span>
                         <span class="rating-number"
                             style="font-size: 11px;">{{ $product_detail->reviews()->sum('rating') }} ratings |</span>
+                            <a class="write-review" id="write-a-review" role="button">
+                                &nbsp; <span><i class="fas fa-pen"></i> Write a review</span>
+                            </a>
                         {{-- end star Rating --}}
                         @if (isset($all_active_advertisements['Details']['2']['ads']))
                             <div class="" style="width: 600px;">
