@@ -88,6 +88,19 @@
             -webkit-transform: scale(0.7);
             border: 2px rgba(255, 255, 255, 0.7) dashed;
         }
+
+        #write-a-review {
+            text-transform: none;
+        }
+
+        #write-a-review {
+            color: #666 !important;
+            border-bottom: 1px solid #bdbbb4;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
     </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -154,7 +167,16 @@
                     <div class="col-lg-7 col-md-6 product-single-details">
                         <h1 class="product-title">{{ $product_detail?->name }}</h1>
                         <div class="row g-3 align-items-center">
-                            <div class="col-md-3">
+                            <div class="col-md-12">
+                                <h5 class="fw-bold m-0 p-0">
+                                    {{ $product_detail->code ? 'Item #:' : '' }}
+                                    <span class="m-0 p-0" style="font-weight: bold; color: #f4631b;">
+                                        {{ $product_detail->code ? $product_detail->code : '' }}
+                                    </span>
+                                </h5>
+                            </div>
+
+                            <div class="col-md-12">
                                 <h5 class="fw-bold m-0 p-0">
                                     {{ $product_detail->Brand ? 'Brand:' : '' }}
                                     <span class="m-0 p-0" style="font-weight: bold; color: #f4631b;">
@@ -162,10 +184,14 @@
                                     </span>
 
                                     {!! $product_detail->stock_qty > 0
-                                        ? 'Stock qty: <span class="m-0 p-0" style="font-weight: bold; color: #f4631b;">' .
+                                        ? 'Available Qty: <span class="m-0 p-0" style="font-weight: bold; color: #f4631b;">' .
                                             $product_detail->stock_qty .
                                             '</span>'
                                         : '<span class="m-0 p-0" style="font-weight: bold;">Sold Out</span>' !!}
+
+                                    <a class="write-review" id="write-a-review" role="button">
+                                        &nbsp; <span><i class="fas fa-pen"></i> Write a review</span>
+                                    </a>
                                 </h5>
                             </div>
                         </div>
@@ -438,7 +464,6 @@
                     }">
                     @if ($product_detail && $product_detail->Category && $product_detail->Category->Product)
                         @foreach ($product_detail->Category->Product as $product_category_product)
-                        {{ $product_category_product->id }}
                             @if ($product_category_product->id != $product_detail->id)
                                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                                     <figure>
@@ -633,5 +658,18 @@
                 });
             });
         });
+
+        document.getElementById('write-a-review').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default behavior of the link
+
+        // Use Bootstrap's tab show method to activate the Reviews tab
+        var reviewsTab = new bootstrap.Tab(document.getElementById('product-tab-reviews'));
+        reviewsTab.show();
+
+        // Delay the smooth scroll slightly to ensure tab activation has completed
+        setTimeout(function () {
+            document.getElementById('product-reviews-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 500); // You can adjust the delay as needed
+    });
     </script>
 @endpush
