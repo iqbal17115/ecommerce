@@ -5,8 +5,6 @@ let loading = false; // To prevent multiple simultaneous requests
 function showMyOrderNotificationlistData(data) {
     let orderNotificationList = '';
 
-    $("#total_pending_order").text(data.length);
-
     data.forEach((item) => {
         orderNotificationList += `
             <a href="" class="text-reset notification-item">
@@ -34,6 +32,8 @@ function getOrderNotificationlist() {
         getDetails(
             `/order-notification?limit=${limit}&page=${page}`,
             (data) => {
+                console.log(data);
+                $("#total_pending_order").text(data.results.total);
                 showMyOrderNotificationlistData(data.results.data);
             },
             (error) => {
