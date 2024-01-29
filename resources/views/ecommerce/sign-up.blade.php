@@ -41,12 +41,6 @@
                         </div>
                         <input class="signup-btn" type="submit" value="SIGN UP" />
                     </form>
-                    <p>Or sign up with</p>
-                    <div class="social-icons">
-                        <i class="fa-brands fa-facebook-f"></i>
-                        <i class="fa-brands fa-twitter"></i>
-                        <i class="fa-brands fa-google"></i>
-                    </div>
                     <p>Already have an account <a href="{{ route('customer-sign-in') }}">sign in</a></p>
                 </div>
             </div>

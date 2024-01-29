@@ -300,17 +300,17 @@
                                 <h6 class="m-0"> Notifications </h6>
                             </div>
                             <div class="col-auto">
-                                <a href="javascript::void();" class="small"> View All</a>
+                                <a href="{{ route('pending-order') }}" class="small"> View All</a>
                             </div>
                         </div>
                     </div>
                     <div data-simplebar style="max-height: 230px; overflow-y: scroll;" id="orderNotificationId"></div>
                     <div class="p-2 border-top" id="loadMoreContainer">
-                        <a id="viewMoreBtn" class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
+                        <a id="viewMoreBtn" class="btn btn-sm btn-link font-size-14 btn-block text-center" href="{{ route('pending-order') }}">
                             <i class="mdi mdi-arrow-right-circle mr-1"></i> View More..
                         </a>
                     </div>
-                 
+
                 </div>
             </div>
 
