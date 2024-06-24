@@ -82,7 +82,7 @@
                             </tfoot>
                         </table>
 
-                        <div class="checkout-methods">
+                        <div class="checkout-methods proceed_to_checkout">
                             <a href="{{ route('checkout') }}" class="btn btn-block brand_color text-dark">Proceed to Checkout
                                 <i class="fa fa-arrow-right"></i></a>
                         </div>

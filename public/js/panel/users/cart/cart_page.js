@@ -78,15 +78,18 @@ function showCartTableData(data) {
   `;
     });
 
-    if (cheked_all_check_box == true) {
+    if (data.length > 0 && cheked_all_check_box == true) {
         $("#select_all_products").prop("checked", true);
+    } else {
+        $("#select_all_products").prop("checked", true);
+        $('.proceed_to_checkout').addClass('disabled');
     }
+
     $('#table_body').html(htmlContent);
     $('.cart_total_price').text(total);
     $('.shipping_charge_amount').text(total_shipping_charge);
     $('.coupon_discount').text(coupon_discount);
     $('.grand_total').text(total + total_shipping_charge - coupon_discount);
-
 }
 
 function updateCart(item) {
