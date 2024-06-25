@@ -64,7 +64,7 @@ class CategoryController extends Controller
             $category = new Category();
             $category->user_id = Auth::user()->id;
         }
-        
+
         $category->name = $request->name;
         $category->parent_category_id = $request->id;
         $category->product_feature_id = $request->product_feature_id;
