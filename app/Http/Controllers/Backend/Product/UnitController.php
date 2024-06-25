@@ -42,7 +42,6 @@ class UnitController extends Controller
                 'is_active' => 'Status is required',
             ]
         );
-dd($request->cu_id);
 
         if($request->cu_id > 0) {
             $unit = Unit::find($request->cu_id);
