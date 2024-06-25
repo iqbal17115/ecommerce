@@ -42,7 +42,7 @@ class UnitController extends Controller
                 'is_active' => 'Status is required',
             ]
         );
-dd(Auth::user());
+
         if($request->cu_id > 0) {
             $unit = Unit::find($request->cu_id);
         }else {
@@ -51,14 +51,15 @@ dd(Auth::user());
         }
 
         $unit->name = $request->name;
-        $unit->short_name = $request->short_name;
-        $unit->branch_id = 1;
-        $unit->is_active = $request->is_active;
+        // $unit->short_name = $request->short_name;
+        // $unit->branch_id = 1;
+        // $unit->is_active = $request->is_active;
         $unit->save();
         return response()->json([
             'status' => 'success'
         ]);
     }
+
     public function index() {
         $units = Unit::latest()->paginate(5);
         return view('backend.product.unit', compact('units'));
