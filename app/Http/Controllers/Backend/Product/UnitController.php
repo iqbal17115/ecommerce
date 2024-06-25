@@ -42,7 +42,6 @@ class UnitController extends Controller
                 'is_active' => 'Status is required',
             ]
         );
-
         if($request->cu_id > 0) {
             $unit = Unit::find($request->cu_id);
         }else {
@@ -59,7 +58,6 @@ class UnitController extends Controller
             'status' => 'success'
         ]);
     }
-
     public function index() {
         $units = Unit::latest()->paginate(5);
         return view('backend.product.unit', compact('units'));
