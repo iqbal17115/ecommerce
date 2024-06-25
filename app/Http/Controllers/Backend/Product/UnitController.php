@@ -42,18 +42,18 @@ class UnitController extends Controller
                 'is_active' => 'Status is required',
             ]
         );
-
+dd($request->cu_id);
         if($request->cu_id > 0) {
             $unit = Unit::find($request->cu_id);
         }else {
             $unit = new Unit();
             $unit->user_id = Auth::user()->id;
         }
-dd($unit);
+
         $unit->name = $request->name;
-        // $unit->short_name = $request->short_name;
-        // $unit->branch_id = 1;
-        // $unit->is_active = $request->is_active;
+        $unit->short_name = $request->short_name;
+        $unit->branch_id = 1;
+        $unit->is_active = $request->is_active;
         $unit->save();
         return response()->json([
             'status' => 'success'
