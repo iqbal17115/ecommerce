@@ -49,7 +49,7 @@ class UnitController extends Controller
             $unit = new Unit();
             $unit->user_id = Auth::user()->id;
         }
-
+dd($unit);
         $unit->name = $request->name;
         // $unit->short_name = $request->short_name;
         // $unit->branch_id = 1;
