@@ -43,6 +43,7 @@ class UnitController extends Controller
             ]
         );
 dd($request->cu_id);
+
         if($request->cu_id > 0) {
             $unit = Unit::find($request->cu_id);
         }else {
