@@ -35,40 +35,42 @@
             }
         }
 
-.sold_out {
-    top: 2em;
-    left: -4em;
-    color: #fff;
-    display: block;
-    position:absolute;
-    text-align: center;
-    text-decoration: none;
-    letter-spacing: .06em;
-    background-color: #A00;
-    padding: 0.5em 5em 0.4em 5em;
-    text-shadow: 0 0 0.75em #444;
-    box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
-    font: bold 16px/1.2em Arial, Sans-Serif;
-    -webkit-text-shadow: 0 0 0.75em #444;
-    -webkit-box-shadow: 0 0 0.5em rgba(0,0,0,0.5);
-    -webkit-transform: rotate(-45deg) scale(0.75,1);
-    z-index:10;
-}
-.sold_out:before {
-    content: '';
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    margin: -0.3em -5em;
-    transform: scale(0.7);
-    -webkit-transform: scale(0.7);
-    border: 2px rgba(255,255,255,0.7) dashed;
-}
+        .sold_out {
+            top: 2em;
+            left: -4em;
+            color: #fff;
+            display: block;
+            position: absolute;
+            text-align: center;
+            text-decoration: none;
+            letter-spacing: .06em;
+            background-color: #A00;
+            padding: 0.5em 5em 0.4em 5em;
+            text-shadow: 0 0 0.75em #444;
+            box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+            font: bold 16px/1.2em Arial, Sans-Serif;
+            -webkit-text-shadow: 0 0 0.75em #444;
+            -webkit-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+            -webkit-transform: rotate(-45deg) scale(0.75, 1);
+            z-index: 10;
+        }
+
+        .sold_out:before {
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            margin: -0.3em -5em;
+            transform: scale(0.7);
+            -webkit-transform: scale(0.7);
+            border: 2px rgba(255, 255, 255, 0.7) dashed;
+        }
+
         /* two line name show css code */
     </style>
-    <div id="temp_user_id" data-user_id="{{$user_id}}"></div>
+    <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
     <main class="main">
         <div class="bg-gray pb-5">
             <div class="container pb-2">
@@ -122,7 +124,8 @@
                         }">
                         @foreach ($top_show_categories as $top_show_category)
                             <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
-                                <a href="{{ route('catalog.show', ['category_name' => rawurlencode($top_show_category->name)]) }}">
+                                <a
+                                    href="{{ route('catalog.show', ['category_name' => rawurlencode($top_show_category->name)]) }}">
                                     <figure>
                                         <img class="lazy-load"
                                             data-src="{{ asset('storage/' . $top_show_category->image) }}" alt="category"
@@ -249,7 +252,8 @@
                                 @foreach ($product_feature->Product as $product)
                                     <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                                         <figure>
-                                            <a href="{{ route('products.show', ['name' => rawurlencode($product->name)]) }}">
+                                            <a
+                                                href="{{ route('products.show', ['name' => rawurlencode($product->name)]) }}">
                                                 <img class="lazy-load"
                                                     @if ($product->ProductMainImage) data-src="{{ asset('storage/product_photo/' . $product->ProductMainImage->image) }}" @endif
                                                     style="width: 239px; height: 239px; filter: brightness(0.9)
@@ -267,12 +271,12 @@
                                             @endif
                                             <div class="btn-icon-group">
                                                 @if ($product->stock_qty > 0)
-                                                <a href="javascript:void(0);" title="Add To Cart"
-                                                    data-product_id="{{ $product->id }}"
-                                                    @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
-                                                    class="btn-icon add_cart_item product-type-simple"><i
-                                                        class="icon-shopping-cart"></i></a>
-                                                    @endif
+                                                    <a href="javascript:void(0);" title="Add To Cart"
+                                                        data-product_id="{{ $product->id }}"
+                                                        @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
+                                                        class="btn-icon add_cart_item product-type-simple"><i
+                                                            class="icon-shopping-cart"></i></a>
+                                                @endif
                                             </div>
                                         </figure>
                                         <div class="product-details">
@@ -329,20 +333,20 @@
                                                         $product->sale_end_date &&
                                                         $product->sale_start_date <= now() &&
                                                         $product->sale_end_date >= now())
-                                                    <del
-                                                        class="old-price">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</del>
-                                                    <span
-                                                        class="product-price brand_text_design">{{ $currency?->icon }} {{ number_format($product->sale_price, 2) }}</span>
+                                                    <del class="old-price">{{ $currency?->icon }}
+                                                        {{ number_format($product->your_price, 2) }}</del>
+                                                    <span class="product-price brand_text_design">{{ $currency?->icon }}
+                                                        {{ number_format($product->sale_price, 2) }}</span>
                                                 @else
-                                                    <span
-                                                        class="product-price brand_text_design">{{ $currency?->icon }} {{ number_format($product->your_price, 2) }}</span>
+                                                    <span class="product-price brand_text_design">{{ $currency?->icon }}
+                                                        {{ number_format($product->your_price, 2) }}</span>
                                                 @endif
                                             </div>
                                             <!-- End .price-box -->
                                         </div>
                                         <!-- End .product-details -->
                                         @if ($product->stock_qty <= 0)
-                                        <a class="sold_out" style="color: #fff;">Sold out</a>
+                                            <a class="sold_out" style="color: #fff;">Sold out</a>
                                         @endif
                                     </div>
                                 @endforeach
@@ -433,6 +437,7 @@
             // Code to be executed after rendering the full layout
             function lazyLoad() {
                 const lazyImages = document.querySelectorAll('.lazy-load');
+
                 lazyImages.forEach(img => {
                     if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
                         .bottom >= 0 && getComputedStyle(img).display !== 'none') {
