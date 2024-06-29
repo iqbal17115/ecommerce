@@ -156,6 +156,7 @@ Route::controller(ShopSettingCountryController::class)->group(function () {
     Route::get('countries/{country}', 'show')->name('countries.show');
     Route::post('countries', 'store')->name('countries.store');
     Route::put('countries/{country}', 'update')->name('countries.update');
+    Route::put('countries-status/{country}', 'statusUpdate')->name('countries_status.update');
     Route::delete('countries/{country}', 'destroy')->name('countries.delete');
     Route::get('countries/select-lists', 'select_country')->name('countries.select_lists');
 });

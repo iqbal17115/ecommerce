@@ -6,6 +6,7 @@ use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\ShopSetting\CountryCreateRequest;
 use App\Http\Requests\AdminPanel\ShopSetting\CountryUpdateRequest;
+use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingCountryStatusUpdateRequest;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingCountryListResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingCountryUpdateResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingDatatableResource;
@@ -114,6 +115,27 @@ class ShopSettingCountryController extends Controller
         try {
             // Update country
             $country->update($countryUpdateRequest->validated());
+
+            //Success Response
+            return Message::success(__("messages.success_update"));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
+        }
+    }
+
+    /**
+     * Update Country Location
+     *
+     * @param ShopSettingCountryStatusUpdateRequest $shopSettingCountryStatusUpdateRequest
+     * @param Country $country
+     * @return JsonResponse
+     */
+    public function statusUpdate(ShopSettingCountryStatusUpdateRequest $shopSettingCountryStatusUpdateRequest, Country $country): JsonResponse
+    {
+        try {
+            // Update country location
+            $country->update($shopSettingCountryStatusUpdateRequest->validated());
 
             //Success Response
             return Message::success(__("messages.success_update"));

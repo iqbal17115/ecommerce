@@ -96,9 +96,56 @@ function loadDataTable() {
             generateColumn('status', (data, type, row) => {
                 return row.status == 1 ? 'Active' : 'Inactive';
             }, 'status'),
+            generateColumn('change_status', (data, type, row) => changeStatus(row.id, row.status), 'name'),
             generateColumn('action', (data, type, row) => linkableActions(row.id), 'name'),
         ]
     );
+}
+
+function changeStatus(id, location) {
+    const locationButton = location == 1
+        ? `
+            <button data-status="0" data-id="${id}" class="btn btn-sm btn-outline-danger change_status">
+                <span class="">Inactive</span>
+            </button>
+          `
+        : `
+            <button data-status="1" data-id="${id}" class="btn btn-sm btn-outline-success change_status">
+                <span class="">Active</span>
+            </button>
+          `;
+
+    return locationButton;
+}
+
+$(document).on("click", ".change_status", function (event) {
+    const row_id = $(this).data("id");
+    const status = $(this).data("status");
+
+    const form_data = {
+        status: status
+    };
+
+    // Submit the form
+    submitChangeStatus(form_data, row_id);
+});
+
+function submitChangeStatus(formData, selectedId = "") {
+    confirmAction('Change Status', 'Are you sure want to change status', () => {
+        saveAction(
+            "update",
+            "/api/countries-status",
+            formData,
+            selectedId,
+            (data) => {
+                toastrSuccessMessage(data.message);
+                table.clear().draw();
+            },
+            (error) => {
+                toastrErrorMessage(error.responseJSON.message);
+            }
+        );
+    });
 }
 
 // Generates linkable text for a company with an ID and text
