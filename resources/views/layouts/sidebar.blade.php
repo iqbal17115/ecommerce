@@ -62,6 +62,18 @@
                        </ul>
                    </li>
 
+                   {{-- Product Variations --}}
+                   <li>
+                       <a href="javascript: void(0);" class="has-arrow waves-effect">
+                           <i class="bx bx-layout"></i>
+                           <span>Product Variations</span>
+                       </a>
+                       <ul class="sub-menu" aria-expanded="false">
+                           <li><a href="{{ route('attribute') }}">Attribute</a></li>
+                           <li><a href="{{ route('attribute-value') }}">Attribute Value</a></li>
+                       </ul>
+                   </li>
+
                    {{-- Start purchase --}}
                    <li>
                        <a href="javascript: void(0);" class="has-arrow waves-effect">

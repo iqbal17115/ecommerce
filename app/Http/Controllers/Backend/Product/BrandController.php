@@ -54,7 +54,7 @@ class BrandController extends Controller
             $brand = new Brand();
             $brand->user_id = Auth::user()->id;
         }
-        
+
         $brand->name = $request->name;
         if ($request->file('image')) {
             $imagePath = $request->file('image');
@@ -63,7 +63,7 @@ class BrandController extends Controller
             $image = $request->file('image')->store('images/blog_posts', 'public');
             $brand->image = $image;
         }
-        
+
         $brand->website = $request->website;
         $brand->branch_id = 1;
         $brand->is_active = $request->is_active;

@@ -45,6 +45,8 @@ use App\Http\Controllers\Frontend\OrderTracking\OrderTrackingController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
+use App\Http\Controllers\Panel\AttributeController;
+use App\Http\Controllers\Panel\AttributeValueController;
 use App\Http\Controllers\Web\Panel\Coupon\CouponController;
 use App\Http\Controllers\Web\Panel\Coupon\CouponProductController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingCountryController;
@@ -133,8 +135,8 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('/user-orders/lists', 'lists')->name('user_orders.lists');
         });
 
-         // Order Notification
-         Route::controller(OrderNotificationController::class)->group(function () {
+        // Order Notification
+        Route::controller(OrderNotificationController::class)->group(function () {
             Route::get('order-notification', 'index')->name('order.notification');
         });
 
@@ -190,7 +192,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::group([], function () {
         Route::get('admin', [HomeController::class, 'adminDashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);
         // Route::middleware(['permission'])->group(function () {
-            Route::get('users', UserViewController::class)->name('users.view');
+        Route::get('users', UserViewController::class)->name('users.view');
         // });
         // User
         Route::controller(UserController::class)->group(function () {
@@ -394,6 +396,33 @@ Route::group(['middleware' => 'web'], function () {
             }
         );
         // Unit Brand
+
+        // Attribute
+        Route::group(
+            [],
+            function () {
+                Route::get('attribute', [AttributeController::class, 'index'])->name('attribute');
+                Route::post('add-attribute', [AttributeController::class, 'addAttribute'])->name('add.attribute');
+                Route::post('delete-attribute', [AttributeController::class, 'deleteAttribute'])->name('delete.attribute');
+                Route::get('pagination/attribute-pagination-data', [AttributeController::class, 'pagination']);
+                Route::get('search-attribute', [AttributeController::class, 'searchAttribute'])->name('search.attribute');
+            }
+        );
+        // Attribute
+
+        // Attribute Value
+        Route::group(
+            [],
+            function () {
+                Route::get('attribute-value', [AttributeValueController::class, 'index'])->name('attribute-value');
+                Route::post('add-attribute-value', [AttributeValueController::class, 'addAttributeValue'])->name('add.attribute_value');
+                Route::post('delete-attribute-value', [AttributeValueController::class, 'deleteAttributeValue'])->name('delete.attribute_value');
+                Route::get('pagination/attribute-value-pagination-data', [AttributeValueController::class, 'pagination']);
+                Route::get('attribute.hierarchy', [AttributeValueController::class, 'attributeHierarchy'])->name('attribute_value.hierarchy');
+                Route::get('attribute_value', [AttributeValueController::class, 'searchAttributeValue'])->name('search.attribute_value');
+            }
+        );
+        // Attribute Value
 
         // Unit Category
         Route::group(
