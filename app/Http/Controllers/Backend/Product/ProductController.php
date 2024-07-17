@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
 use App\Models\Backend\Product\ProductFeature;
 use App\Services\UnitConversionService;
 use Illuminate\Http\Request;
@@ -322,9 +323,24 @@ class ProductController extends Controller
         $id = $request->id;
         if ($id) {
             $id = $id;
-            $productInfo = Product::whereId($id)->first();
+            $productInfo = Product::with('productVariations', 'productVariations.product', 'productVariations.variationAttributeValues', 'productVariations.variationAttributeValues.attributeValue', 'productVariations.variationAttributeValues.attributeValue.attribute')->whereId($id)->first();
+            $productInfo = $this->prepareProductInfo($productInfo);
         }
         $unitConversionService = $this->unitConversionService;
-        return view('backend.product.product', compact('categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService'));
+        $attributes = Attribute::orderBy('id', 'DESC')->get();
+        return view('backend.product.product', compact('attributes', 'categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService'));
+    }
+
+    private function prepareProductInfo($product)
+    {
+        foreach ($product->productVariations as $variation) {
+            $variation->groupedAttributeValues = $variation->variationAttributeValues->groupBy('group_number');
+            foreach ($variation->groupedAttributeValues as $groupNumber => $attributeValues) {
+                foreach ($attributeValues as $attributeValue) {
+                    $attributeValue->attribute = $attributeValue->attributeValue->attribute;
+                }
+            }
+        }
+        return $product;
     }
 }

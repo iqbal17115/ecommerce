@@ -109,6 +109,34 @@
             color: red;
             cursor: pointer;
         }
+
+        .variation-form {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.variation-form h3 {
+    margin-bottom: 15px;
+}
+
+.price-stock-container {
+    margin-top: 10px;
+}
+
+.price-stock-container .row {
+    margin-bottom: 10px;
+}
+
+.btn-secondary {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    margin-top: 15px;
+}
+
     </style>
 @endsection
 @section('content')
@@ -183,7 +211,7 @@
                                 <!-- Vital Info -->
                                 @include('backend.product.partials.vital_info')
                                 <!-- Variant -->
-                                @include('backend.product.partials.variant')
+                                @include('backend.product.partials.variations')
                                 <!-- Product Offer -->
                                 @include('backend.product.partials.product_offer')
                                 <!-- Compliance -->

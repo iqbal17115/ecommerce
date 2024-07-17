@@ -101,6 +101,39 @@
             text-transform: capitalize;
             cursor: pointer;
         }
+
+        .select-variation {
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .select-variation:hover {
+            background-color: #007bff;
+            border-color: #adb5bd;
+        }
+
+        .select-variation.active {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .attribute-value {
+            display: inline-block;
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        #variation-info {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
     </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -229,9 +262,9 @@
                         <span class="rating-number">-</span>
                         <span class="rating-number"
                             style="font-size: 11px;">{{ $product_detail->reviews()->sum('rating') }} ratings |</span>
-                            <a class="write-review" id="write-a-review" role="button">
-                                &nbsp; <span><i class="fas fa-pen"></i> Write a review</span>
-                            </a>
+                        <a class="write-review" id="write-a-review" role="button">
+                            &nbsp; <span><i class="fas fa-pen"></i> Write a review</span>
+                        </a>
                         {{-- end star Rating --}}
                         @if (isset($all_active_advertisements['Details']['2']['ads']))
                             <div class="" style="width: 600px;">
@@ -254,7 +287,7 @@
                                 <span class="product-price brand_text_design">{{ $currency?->icon }}
                                     {{ number_format($product_detail->sale_price, 2) }}</span>
                             @else
-                                <span class="product-price brand_text_design">{{ $currency?->icon }}
+                            <span class="brand_text_design">{{ $currency?->icon }}</span> <span class="product-price brand_text_design">
                                     {{ number_format($product_detail->your_price, 2) }}</span>
                             @endif
                         </div>
@@ -281,6 +314,31 @@
                                     {{ $product_detail?->ProductMoreDetail?->warranty_unit }}</span>
                             </p>
                         </div>
+
+                        {{-- Show Product Variations --}}
+                        <div class="product-desc">
+                            <div class="variation-select">
+                                @foreach ($product_detail->productVariations as $variation)
+                                    @php
+                                        $groupedAttributes = $variation->variationAttributeValues->groupBy(
+                                            'group_number',
+                                        );
+                                    @endphp
+                                    @foreach ($groupedAttributes as $groupNumber => $attributeValues)
+                                        <span class="select-variation badge badge-secondary mx-1 mb-2 brand_color"
+                                            data-price="{{ $variation->price }}" data-stock="{{ $variation->stock }}">
+                                            <span class="attribute">
+                                                @foreach ($attributeValues as $attributeValue)
+                                                    <span
+                                                        class="attribute-value">{{ $attributeValue->attributeValue->value }}</span>
+                                                @endforeach
+                                            </span>
+                                        </span>
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </div>
+
                         <!-- End .product-desc -->
                         <div class="product-action">
 
@@ -660,16 +718,19 @@
         });
 
         document.getElementById('write-a-review').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default behavior of the link
+            event.preventDefault(); // Prevent the default behavior of the link
 
-        // Use Bootstrap's tab show method to activate the Reviews tab
-        var reviewsTab = new bootstrap.Tab(document.getElementById('product-tab-reviews'));
-        reviewsTab.show();
+            // Use Bootstrap's tab show method to activate the Reviews tab
+            var reviewsTab = new bootstrap.Tab(document.getElementById('product-tab-reviews'));
+            reviewsTab.show();
 
-        // Delay the smooth scroll slightly to ensure tab activation has completed
-        setTimeout(function () {
-            document.getElementById('product-reviews-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 500); // You can adjust the delay as needed
-    });
+            // Delay the smooth scroll slightly to ensure tab activation has completed
+            setTimeout(function() {
+                document.getElementById('product-reviews-content').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 500); // You can adjust the delay as needed
+        });
     </script>
 @endpush

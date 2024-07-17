@@ -47,6 +47,7 @@ use App\Http\Controllers\FrontEnd\ReviewController;
 use App\Http\Controllers\Language\LanguageController;
 use App\Http\Controllers\Panel\AttributeController;
 use App\Http\Controllers\Panel\AttributeValueController;
+use App\Http\Controllers\Panel\ProductVariationController;
 use App\Http\Controllers\Web\Panel\Coupon\CouponController;
 use App\Http\Controllers\Web\Panel\Coupon\CouponProductController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingCountryController;
@@ -494,6 +495,7 @@ Route::group(['middleware' => 'web'], function () {
                 Route::post('add-add_product_compliance', [ProductController::class, 'addProductComplianceInfo'])->name('add.add_product_compliance');
                 Route::post('add-add_product_more_detail', [ProductController::class, 'addProductMoreDetailInfo'])->name('add.add_product_more_detail');
                 Route::post('add-add_variant_variant', [ProductController::class, 'addProductVariantInfo'])->name('add.add_variant_variant');
+                Route::post('products/{product}/variations', [ProductVariationController::class, 'storeVariations'])->name('products.store-variations');
                 Route::post('delete-product', [ProductController::class, 'deleteProduct'])->name('delete.product');
                 Route::post('product-stock-qty', [ProductController::class, 'updateStockQty'])->name('product_stock_qty.update');
                 Route::get('product_list', [ProductController::class, 'productList'])->name('product_list');

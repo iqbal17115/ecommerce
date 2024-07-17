@@ -11,4 +11,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Attribute extends Model
 {
     use HasFactory, BaseModel, SoftDeletes, DisplayNameTrait;
+
+    protected $fillable = [
+        'name'
+    ];
+
+    public function values()
+    {
+        return $this->hasMany(AttributeValue::class);
+    }
 }

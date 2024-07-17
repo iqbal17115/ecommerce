@@ -11,12 +11,14 @@ use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductImage;
 use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Review;
+use App\Models\ProductVariation;
 use App\Models\User;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -125,5 +127,10 @@ class Product extends Model
     public function Category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function productVariations(): HasMany
+    {
+        return $this->hasMany(ProductVariation::class);
     }
 }

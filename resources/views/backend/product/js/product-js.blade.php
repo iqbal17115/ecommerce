@@ -144,6 +144,48 @@
     });
     // End Product Compliance Add
 
+    // Start Product Variation Submit
+    $(document).on('submit', '#add_product_variation', function(e) {
+        e.preventDefault();
+        var form = this;
+        $.ajax({
+            url: "{{ route('products.store-variations', $productInfo->id) }}",
+            method: 'post',
+            data: new FormData(form),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 201) {
+                    // if (!tab_menu.includes(4)) {
+                    //     tab_menu.push(4);
+                    // }
+                    tabIndexPerform();
+                    Command: toastr["success"]("Product Compliance Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                }
+            },
+        });
+    });
+    // End Product variation Submit
+
     // Start Product Keyword Add
     $(document).on('submit', '#add_product_keyword', function(e) {
         e.preventDefault();
@@ -353,768 +395,6 @@
                 alert('Something went wrong to fetch datas...');
             }
         });
-    }
-
-    function getMaterialTypeVariant() {
-        $.ajax({
-            method: "GET",
-            url: "{{ url('/get-variant/4') }}",
-            success: (result) => {
-                variant = '';
-                Object.entries(result).forEach(([key, value]) => {
-                    variant += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
-                });
-                $('#individual_material_type').append(variant);
-            },
-            error: (error) => {
-                alert('Something went wrong to fetch datas...');
-            }
-        });
-    }
-
-    function getAllVariant(type) {
-        $.ajax({
-            method: "GET",
-            url: "{{ url('/get-variant') }}" + '/' + type,
-            success: (result) => {
-                variant = '';
-                Object.entries(result).forEach(([key, value]) => {
-                    variant += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
-                });
-                if (type == 1) {
-                    $('.bottom_size_map').empty();
-                    $('.bottom_size_map').append(variant);
-                } else if (type == 2) {
-                    $('.color_map').empty();
-                    $('.color_map').append(variant);
-                }
-            },
-            error: (error) => {
-                alert('Something went wrong to fetch datas...');
-            }
-        });
-    }
-
-    function variationManage(variation_type, val) {
-        var variation_menu = [];
-        if (!selected_variation.includes(variation_type)) {
-            selected_variation.push(variation_type);
-        }
-        $(".selected_variation").val(selected_variation);
-        if (variation_type == 1) {
-            var len = $("#variation_row").children().length;
-            if (!variation_menu.includes(1)) {
-                variation_menu.push(1);
-            }
-            if (len == 0) {
-                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                    '" style="display: flex;">';
-                variation_content +=
-                    '<div class="master_prev_1 master_prev text-center" style="width: 150px;"><input type="hidden" name="input_size[]" value="' +
-                    val + '"/>' + val + '</div>';
-                variation_content +=
-                    '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                variation_content +=
-                    '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                variation_content += '</div>';
-                $("#variation_row").append(variation_content);
-                $("#variation_head").prepend(
-                    '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Size</span></div>'
-                );
-            } else {
-                var variation_type_len = $(".master_type_" + variation_type).length;
-                if (variation_type_len != 0) {
-                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                        '" style="display: flex;">';
-                    variation_content +=
-                        '<div class="master_prev_1 master_prev text-center" style="width: 150px;"><input type="hidden" name="input_size[]" value="' +
-                        val + '"/>' + val + '</div>';
-                    variation_content +=
-                        '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                    variation_content +=
-                        '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                    variation_content += '</div>';
-                    $("#variation_row").append(variation_content);
-                } else {
-                    var already_1 = $(".already_1").length;
-                    if (already_1 == 0) {
-                        $('<div class="text-center already_1 available_class" style="width: 150px;"><input type="hidden" name="input_size[]" value="' +
-                            val + '"/>' + val + '</div>').insertBefore(".gender_id");
-                        $(".master_prev_1").removeClass("master_prev");
-                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Size</span></div>')
-                            .insertBefore("#gender_header");
-                    } else {
-
-                        var variation_element = document.querySelectorAll(".per-row");
-                        var variation_tags = '';
-                        var cart_div = document.getElementById("variation_row");
-                        var hidden_value_1 = $('#hidden_value_1').val();
-                        if (hidden_value_1 == 0) {
-                            var length = variation_element.length;
-                            $('#hidden_value_1').val(length);
-                        } else {
-                            var length = hidden_value_1;
-                        }
-                        for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML +=
-                                '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_size[]" value="' +
-                                val + '"/>' + variation_element[i].innerHTML + '</div>';
-                            $('.current_val .available_class').text(val);
-                        }
-                        $(".per-row").removeClass("current_val");
-                        console.log(variation_tags);
-                    }
-                }
-            }
-        } else if (variation_type == 2) {
-            var len = $("#variation_row").children().length;
-            if (!variation_menu.includes(2)) {
-                variation_menu.push(2);
-            }
-            if (len == 0) {
-                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                    '" style="display: flex;">';
-                variation_content +=
-                    '<div class="text-center master_prev_2 master_prev" style="width: 150px;"><input type="hidden" name="input_color[]" value="' +
-                    val + '"/>' + val + '</div>';
-                variation_content +=
-                    '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none; width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none; width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                variation_content += '</div>';
-                $("#variation_row").append(variation_content);
-                $("#variation_head").prepend(
-                    '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Color</span></div>'
-                );
-            } else {
-                var variation_type_len = $(".master_type_" + variation_type).length;
-                if (variation_type_len != 0) {
-                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                        '" style="display: flex;">';
-                    variation_content +=
-                        '<div class="text-center master_prev_2 master_prev" style="width: 150px;"><input type="hidden" name="input_color[]" value="' +
-                        val + '"/>' + val + '</div>';
-                    variation_content +=
-                        '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                    variation_content += '</div>';
-                    $("#variation_row").append(variation_content);
-                } else {
-                    var already_2 = $(".already_2").length;
-                    if (already_2 == 0) {
-                        $('<div class="text-center already_2 available_class" style="width: 150px;"><input type="hidden" name="input_color[]" value="' +
-                            val + '"/>' + val + '</div>').insertBefore(".gender_id");
-                        $(".master_prev_2").removeClass("master_prev");
-                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Color</span></div>')
-                            .insertBefore("#gender_header");
-                    } else {
-
-                        var variation_element = document.querySelectorAll(".per-row");
-                        var variation_tags = '';
-                        var cart_div = document.getElementById("variation_row");
-                        var hidden_value_2 = $('#hidden_value_2').val();
-                        if (hidden_value_2 == 0) {
-                            var length = variation_element.length;
-                            $('#hidden_value_2').val(length);
-                        } else {
-                            var length = hidden_value_2;
-                        }
-                        for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML +=
-                                '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_color[]" value="' +
-                                val + '"/>' + variation_element[i].innerHTML + '</div>';
-                            $('.current_val .available_class').text(val);
-                        }
-                        $(".per-row").removeClass("current_val");
-                        console.log(variation_tags);
-                    }
-                }
-            }
-        } else if (variation_type == 3) {
-            var len = $("#variation_row").children().length;
-            if (len == 0) {
-                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                    '" style="display: flex;">';
-                variation_content +=
-                    '<div class="text-center master_prev_3 master_prev" style="width: 150px;"><input type="hidden" name="input_package_qty[]" value="' +
-                    val + '"/>' + val + '</div>';
-                variation_content +=
-                    '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                variation_content +=
-                    '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                variation_content += '</div>';
-                $("#variation_row").append(variation_content);
-                $("#variation_head").prepend(
-                    '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">P. Qty</span></div>'
-                );
-            } else {
-                var variation_type_len = $(".master_type_" + variation_type).length;
-                if (variation_type_len != 0) {
-                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                        '" style="display: flex;">';
-                    variation_content +=
-                        '<div class="text-center master_prev_3 master_prev" style="width: 150px;"><input type="hidden" name="input_package_qty[]" value="' +
-                        val + '"/>' + val + '</div>';
-                    variation_content +=
-                        '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><select class="select-form color_map"></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                    variation_content += '</div>';
-                    $("#variation_row").append(variation_content);
-                } else {
-                    var already_3 = $(".already_3").length;
-                    if (already_3 == 0) {
-                        $('<div class="text-center already_3 available_class_3" style="width: 150px;"><input type="hidden" name="input_package_qty[]" value="' +
-                            val + '"/>' + val + '</div>').insertBefore(".gender_id");
-                        $(".master_prev_3").removeClass("master_prev");
-                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">P. Qty</span></div>')
-                            .insertBefore("#gender_header");
-                    } else {
-
-                        var variation_element = document.querySelectorAll(".per-row");
-                        var variation_tags = '';
-                        var cart_div = document.getElementById("variation_row");
-                        var hidden_value_3 = $('#hidden_value_3').val();
-                        if (hidden_value_3 == 0) {
-                            var length = variation_element.length;
-                            $('#hidden_value_3').val(length);
-                        } else {
-                            var length = hidden_value_3;
-                        }
-                        for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML +=
-                                '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_package_qty[]" value="' +
-                                val + '"/>' + variation_element[i].innerHTML + '</div>';
-                            $('.current_val .available_class_3').text(val);
-                        }
-                        $(".per-row").removeClass("current_val");
-                        console.log(variation_tags);
-                    }
-                }
-            }
-        } else if (variation_type == 4) {
-            var len = $("#variation_row").children().length;
-            if (len == 0) {
-                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                    '" style="display: flex;">';
-                variation_content +=
-                    '<div class="text-center master_prev_4 master_prev" style="width: 150px;"><input type="hidden" name="input_material_type[]" value="' +
-                    val + '"/>' + val + '</div>';
-                variation_content +=
-                    '<div class="gender_id" style="width: 150px;"><select class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                variation_content +=
-                    '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                variation_content += '</div>';
-                $("#variation_row").append(variation_content);
-                $("#variation_head").prepend(
-                    '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">M. Type</span></div>'
-                );
-            } else {
-                var variation_type_len = $(".master_type_" + variation_type).length;
-                if (variation_type_len != 0) {
-                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                        '" style="display: flex;">';
-                    variation_content +=
-                        '<div class="text-center master_prev_4 master_prev" style="width: 150px;"><input type="hidden" name="input_material_type[]" value="' +
-                        val + '"/>' + val + '</div>';
-                    variation_content +=
-                        '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                    variation_content +=
-                        '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                    variation_content += '</div>';
-                    $("#variation_row").append(variation_content);
-                } else {
-                    var already_4 = $(".already_4").length;
-                    if (already_4 == 0) {
-                        $('<div class="text-center already_4 available_class_4" style="width: 150px;"><input type="hidden" name="input_material_type[]" value="' +
-                            val + '"/>' + val + '</div>').insertBefore(".gender_id");
-                        $(".master_prev_4").removeClass("master_prev");
-                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">M. Type</span></div>')
-                            .insertBefore("#gender_header");
-                    } else {
-
-                        var variation_element = document.querySelectorAll(".per-row");
-                        var variation_tags = '';
-                        var cart_div = document.getElementById("variation_row");
-                        var hidden_value_4 = $('#hidden_value_4').val();
-                        if (hidden_value_4 == 0) {
-                            var length = variation_element.length;
-                            $('#hidden_value_4').val(length);
-                        } else {
-                            var length = hidden_value_4;
-                        }
-                        for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML +=
-                                '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_material_type[]" value="' +
-                                val + '"/>' + variation_element[i].innerHTML + '</div>';
-                            $('.current_val .available_class_4').text(val);
-                        }
-                        $(".per-row").removeClass("current_val");
-                        console.log(variation_tags);
-                    }
-                }
-            }
-        } else if (variation_type == 5) {
-            var len = $("#variation_row").children().length;
-            if (len == 0) {
-                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                    '" style="display: flex;">';
-                variation_content +=
-                    '<div class="text-center master_prev_5 master_prev" style="width: 150px;"><input type="hidden" name="input_wattage[]" value="' +
-                    val + '"/>' + val + '</div>';
-                variation_content +=
-                    '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                variation_content +=
-                    '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                variation_content += '</div>';
-                $("#variation_row").append(variation_content);
-                $("#variation_head").prepend(
-                    '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Wattage</span></div>'
-                );
-            } else {
-                var variation_type_len = $(".master_type_" + variation_type).length;
-                if (variation_type_len != 0) {
-                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                        '" style="display: flex;">';
-                    variation_content +=
-                        '<div class="text-center master_prev_5 master_prev" style="width: 150px;"><input type="hidden" name="input_wattage[]" value="' +
-                        val + '"/>' + val + '</div>';
-                    variation_content +=
-                        '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                    variation_content +=
-                        '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                    variation_content += '</div>';
-                    $("#variation_row").append(variation_content);
-                } else {
-                    var already_5 = $(".already_5").length;
-                    if (already_5 == 0) {
-                        $('<div class="text-center already_5 available_class_5" style="width: 150px;"><input type="hidden" name="input_wattage[]" value="' +
-                            val + '"/>' + val + '</div>').insertBefore(".gender_id");
-                        $(".master_prev_4").removeClass("master_prev");
-                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Wattage</span></div>')
-                            .insertBefore("#gender_header");
-                    } else {
-
-                        var variation_element = document.querySelectorAll(".per-row");
-                        var variation_tags = '';
-                        var cart_div = document.getElementById("variation_row");
-                        var hidden_value_5 = $('#hidden_value_5').val();
-                        if (hidden_value_5 == 0) {
-                            var length = variation_element.length;
-                            $('#hidden_value_5').val(length);
-                        } else {
-                            var length = hidden_value_5;
-                        }
-                        for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML +=
-                                '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_wattage[]" value="' +
-                                val + '"/>' + variation_element[i].innerHTML + '</div>';
-                            $('.current_val .available_class_5').text(val);
-                        }
-                        $(".per-row").removeClass("current_val");
-                        console.log(variation_tags);
-                    }
-                }
-            }
-        } else if (variation_type == 6) {
-            var len = $("#variation_row").children().length;
-            if (len == 0) {
-                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                    '" style="display: flex;">';
-                variation_content +=
-                    '<div class="text-center master_prev_6 master_prev" style="width: 150px;"><input type="hidden" name="input_number_of_item[]" value="' +
-                    val + '"/>' + val + '</div>';
-                variation_content +=
-                    '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                variation_content +=
-                    '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                variation_content += '</div>';
-                $("#variation_row").append(variation_content);
-                $("#variation_head").prepend(
-                    '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Items</span></div>'
-                );
-            } else {
-                var variation_type_len = $(".master_type_" + variation_type).length;
-                if (variation_type_len != 0) {
-                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                        '" style="display: flex;">';
-                    variation_content +=
-                        '<div class="text-center master_prev_6 master_prev" style="width: 150px;"><input type="hidden" name="input_number_of_item[]" value="' +
-                        val + '"/>' + val + '</div>';
-                    variation_content +=
-                        '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                    variation_content +=
-                        '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                    variation_content += '</div>';
-                    $("#variation_row").append(variation_content);
-                } else {
-                    var already_6 = $(".already_6").length;
-                    if (already_6 == 0) {
-                        $('<div class="text-center already_6 available_class_6" style="width: 150px;"><input type="hidden" name="input_number_of_item[]" value="' +
-                            val + '"/>' + val + '</div>').insertBefore(".gender_id");
-                        $(".master_prev_4").removeClass("master_prev");
-                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Items</span></div>')
-                            .insertBefore("#gender_header");
-                    } else {
-
-                        var variation_element = document.querySelectorAll(".per-row");
-                        var variation_tags = '';
-                        var cart_div = document.getElementById("variation_row");
-                        var hidden_value_6 = $('#hidden_value_6').val();
-                        if (hidden_value_6 == 0) {
-                            var length = variation_element.length;
-                            $('#hidden_value_6').val(length);
-                        } else {
-                            var length = hidden_value_6;
-                        }
-                        for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML +=
-                                '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_number_of_item[]" value="' +
-                                val + '"/>' + variation_element[i].innerHTML + '</div>';
-                            $('.current_val .available_class_6').text(val);
-                        }
-                        $(".per-row").removeClass("current_val");
-                        console.log(variation_tags);
-                    }
-                }
-            }
-        } else if (variation_type == 7) {
-            var len = $("#variation_row").children().length;
-            if (len == 0) {
-                variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                    '" style="display: flex;">';
-                variation_content +=
-                    '<div class="text-center master_prev_7 master_prev" style="width: 150px;"><input type="hidden" name="input_style_name[]" value="' +
-                    val + '"/>' + val + '</div>';
-                variation_content +=
-                    '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                variation_content +=
-                    '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                variation_content +=
-                    '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                variation_content += '</div>';
-                $("#variation_row").append(variation_content);
-                $("#variation_head").prepend(
-                    '<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Style</span></div>'
-                );
-            } else {
-                var variation_type_len = $(".master_type_" + variation_type).length;
-                if (variation_type_len != 0) {
-                    variation_content = '<div class="col-md-12 per-row master_type_' + variation_type +
-                        '" style="display: flex;">';
-                    variation_content +=
-                        '<div class="text-center master_prev_7 master_prev" style="width: 150px;"><input type="hidden" name="input_style_name[]" value="' +
-                        val + '"/>' + val + '</div>';
-                    variation_content +=
-                        '<div class="gender_id" style="width: 150px;"><select name="input_target_gender[]" class="select-form"><option value="">-Select-</option><option value="Male">Male</option><option value="Female">Female</option><option value="Unisex">Unisex</option></select></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><input name="input_bottom_size[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div class="div_size" style="display: none;width: 150px;"><select name="input_bottom_size_map[]" class="select-form bottom_size_map"></select></div>';
-                    variation_content +=
-                        '<div class="div_color" style="display: none;width: 150px;"><select name="input_color_map[]" class="select-form color_map"></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_description[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_seller_sku[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_product_code[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_type[]" class="select-form "><option value="">Select Option</option><option value="GTIN">GTIN</option><option value="EAN">EAN</option><option value="GCID">GCID</option><option value="UPC">UPC</option><option value="ASIN">ASIN</option><option value="ISBN">ISBN</option></select></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_your_price[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><input name="input_quantity[]" class="input-form" /></div>';
-                    variation_content +=
-                        '<div style="width: 150px;"><select name="input_product_code[]" class="select-form product_condition"></select></div>';
-                    variation_content += '</div>';
-                    $("#variation_row").append(variation_content);
-                } else {
-                    var already_7 = $(".already_7").length;
-                    if (already_7 == 0) {
-                        $('<div class="text-center already_7 available_class_7" style="width: 150px;"><input type="hidden" name="input_style_name[]" value="' +
-                            val + '"/>' + val + '</div>').insertBefore(".gender_id");
-                        $(".master_prev_4").removeClass("master_prev");
-                        $('<div class="text-center" style="width: 150px; font-size: 12px;"><span style="width: 100%;">Style</span></div>')
-                            .insertBefore("#gender_header");
-                    } else {
-
-                        var variation_element = document.querySelectorAll(".per-row");
-                        var variation_tags = '';
-                        var cart_div = document.getElementById("variation_row");
-                        var hidden_value_7 = $('#hidden_value_7').val();
-                        if (hidden_value_7 == 0) {
-                            var length = variation_element.length;
-                            $('#hidden_value_7').val(length);
-                        } else {
-                            var length = hidden_value_7;
-                        }
-                        for (var i = 0; i < length; i++) {
-                            cart_div.innerHTML +=
-                                '<div class="col-md-12 per-row current_val" style="display: flex;"><input type="hidden" name="input_style_name[]" value="' +
-                                val + '"/>' + variation_element[i].innerHTML + '</div>';
-                            $('.current_val .available_class_7').text(val);
-                        }
-                        $(".per-row").removeClass("current_val");
-                    }
-                }
-            }
-        }
-
-        if (variation_menu.includes(1)) {
-            $(".div_size").css("display", "inline");
-            getAllVariant(1);
-            // $('.bottom_size_map').select2({
-            //     placeholder: 'Select An Option'
-            // });
-        }
-        if (variation_menu.includes(2)) {
-            $(".div_color").css("display", "inline");
-            getAllVariant(2);
-            // $('.color_map').select2({
-            //     placeholder: 'Select An Option'
-            // });
-        }
-
-        getAllCondition();
-        // $('.product_condition').select2({
-        //     placeholder: 'Select An Option'
-        // });
-        $('select').children('option:enabled').eq(0).prop('selected', true);
-
     }
 
     $("body").on("click", "#add_style_name", function() {
@@ -1502,4 +782,69 @@
     $("body").on("click", "#DeleteRow", function() {
         $(this).parents("#row").remove();
     })
+
+
+    // Start Variation JS
+    document.addEventListener('DOMContentLoaded', function() {
+    let variationCount = $('#variations-container .variation-form').length;
+
+    document.getElementById('add-variation').addEventListener('click', function() {
+        const container = document.getElementById('variations-container');
+        const newVariationForm = document.createElement('div');
+        newVariationForm.classList.add('variation-form');
+        newVariationForm.innerHTML = `
+            <div class="price-stock-container">
+                <div class="row attribute-set">
+                    <div class="form-group mb-0 col-md-6">
+                        <label for="price_${variationCount}_0">Price</label>
+                        <input type="number" name="variations[${variationCount}][price]" id="price_${variationCount}_0" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-0 col-md-6">
+                        <label for="stock_${variationCount}_0">Stock Quantity</label>
+                        <input type="number" name="variations[${variationCount}][stock]" id="stock_${variationCount}_0" class="form-control" required>
+                    </div>
+                    @foreach($attributes as $attribute)
+                        <div class="form-group mb-0 col-md-3">
+                            <label for="attribute_{{ $attribute->id }}_${variationCount}_0">{{ $attribute->name }}</label>
+                            <select name="variations[${variationCount}][attribute_values][${variationCount}_0][]" id="attribute_{{ $attribute->id }}_${variationCount}_0" class="form-control" required>
+                                <option value="">-- Select --</option>
+                                @foreach($attribute->values as $value)
+                                    <option value="{{ $value->id }}">{{ $value->value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary add-multiple-variation btn-sm">Add Another Price/Stock</button>
+        `;
+        container.appendChild(newVariationForm);
+        variationCount++;
+    });
+
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('add-multiple-variation')) {
+            const currentVariationForm = e.target.closest('.variation-form');
+            const currentVariationIndex = currentVariationForm.querySelectorAll('.attribute-set').length;
+            const priceStockForm = document.createElement('div');
+            priceStockForm.classList.add('row', 'attribute-set');
+            priceStockForm.innerHTML = `
+                @foreach($attributes as $attribute)
+                    <div class="form-group mb-0 col-md-3">
+                        <label for="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}">{{ $attribute->name }}</label>
+                        <select name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][]" id="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}" class="form-control" required>
+                            <option value="">-- Select --</option>
+                            @foreach($attribute->values as $value)
+                                <option value="{{ $value->id }}">{{ $value->value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endforeach
+            `;
+            currentVariationForm.querySelector('.price-stock-container').appendChild(priceStockForm);
+        }
+    });
+});
+
+    // End Variation JS
 </script>

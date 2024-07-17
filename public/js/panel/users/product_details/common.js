@@ -85,4 +85,19 @@ $(document).ready(function () {
     });
 
     getReview();
+
+    // Select variation
+    $('.select-variation').on('click', function() {
+        var price = $(this).data('price');
+        var stock = $(this).data('stock');
+
+        $('.product-price').text(price);
+        $('#variation-stock').text(stock);
+
+        // Remove 'active' class from all select-variation elements
+        $('.select-variation').removeClass('active');
+
+        // Add 'active' class to the clicked element
+        $(this).addClass('active');
+    });
 });

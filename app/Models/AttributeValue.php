@@ -13,6 +13,11 @@ class AttributeValue extends Model
 {
     use HasFactory, BaseModel, SoftDeletes, DisplayNameTrait;
 
+    protected $fillable = [
+        'attribute_id',
+        'value'
+    ];
+
     public function attribute(): BelongsTo
     {
         return $this->belongsTo(Attribute::class);

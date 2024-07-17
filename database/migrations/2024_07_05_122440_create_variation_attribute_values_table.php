@@ -18,6 +18,7 @@ class CreateVariationAttributeValuesTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('product_variation_id');
             $table->uuid('attribute_value_id');
+            $table->text('group_number');
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();
