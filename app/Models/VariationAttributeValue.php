@@ -16,7 +16,8 @@ class VariationAttributeValue extends Model
     protected $fillable = [
         'product_variation_id',
         'attribute_value_id',
-        'group_number'
+        'group_number',
+        'stock'
     ];
 
     public function attributeValue(): BelongsTo

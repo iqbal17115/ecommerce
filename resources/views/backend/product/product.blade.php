@@ -111,32 +111,31 @@
         }
 
         .variation-form {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 15px;
-    background-color: #f9f9f9;
-}
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
 
-.variation-form h3 {
-    margin-bottom: 15px;
-}
+        .variation-form h3 {
+            margin-bottom: 5px;
+        }
 
-.price-stock-container {
-    margin-top: 10px;
-}
+        .price-stock-container {
+            margin-top: 10px;
+        }
 
-.price-stock-container .row {
-    margin-bottom: 10px;
-}
+        .price-stock-container .row {
+            margin-bottom: 10px;
+        }
 
-.btn-secondary {
-    margin-top: 10px;
-}
+        .btn-secondary {
+            margin-top: 10px;
+        }
 
-.btn-primary {
-    margin-top: 15px;
-}
-
+        .btn-primary {
+            margin-top: 15px;
+        }
     </style>
 @endsection
 @section('content')

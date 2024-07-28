@@ -19,12 +19,6 @@
                                                 id="price_{{ $variationKey }}" value="{{ $variation->price }}"
                                                 class="form-control">
                                         </div>
-                                        <div class="form-group mb-0 col-md-6">
-                                            <label for="stock_{{ $variationKey }}">Stock Quantity</label>
-                                            <input type="number" name="variations[{{ $variationKey }}][stock]"
-                                                id="stock_{{ $variationKey }}" value="{{ $variation->stock }}"
-                                                class="form-control" required>
-                                        </div>
                                     </div>
                                     @foreach ($variation->groupedAttributeValues as $groupNumber => $attributeValues)
                                         <div class="row">
@@ -54,6 +48,14 @@
                                                     </select>
                                                 </div>
                                             @endforeach
+
+                                            <div class="form-group mb-0 col-md-3">
+                                                <label for="stock_{{ $variationKey }}">Stock Quantity</label>
+                                                <input type="number" name="variations[{{ $variationKey }}][stock]"
+                                                    id="stock_{{ $variationKey }}" value="{{ $variation->stock }}"
+                                                    class="form-control" required>
+                                            </div>
+
                                         </div>
                                     @endforeach
                                 </div>
