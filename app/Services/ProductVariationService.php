@@ -15,28 +15,31 @@ class ProductVariationService
                 $productVariation = ProductVariation::updateOrCreate(
                     [
                         'product_id' => $product->id,
-                        'price' => $variationData['price'],
-                        'stock' => $variationData['stock']
+                        'price' => $variationData['price']
                     ],
                     [
-                        'price' => $variationData['price'],
-                        'stock' => $variationData['stock']
+                        'price' => $variationData['price']
                     ]
                 );
 
                 foreach ($variationData['attribute_values'] as $attrKey => $attributeIds) {
-                    foreach ($attributeIds as $attributeId) {
-                        VariationAttributeValue::updateOrCreate(
-                            [
-                                'product_variation_id' => $productVariation->id,
-                                'attribute_value_id' => $attributeId,
-                                'group_number' => isset($data['groups'][$attrKey][0]) ? $data['groups'][$attrKey][0] : $attrKey
-                            ],
-                            [
-                                'attribute_value_id' => $attributeId,
-                                'group_number' => isset($data['groups'][$attrKey][0]) ? $data['groups'][$attrKey][0] : $attrKey
-                            ]
-                        );
+                    if (is_array($attributeIds) || is_object($attributeIds)) {
+                        foreach ($attributeIds as $key => $attributeId) {
+                            if ($key != 'stock') {
+                                VariationAttributeValue::updateOrCreate(
+                                    [
+                                        'product_variation_id' => $productVariation->id,
+                                        'attribute_value_id' => $attributeId,
+                                        'group_number' => isset($data['groups'][$attrKey][0]) ? $data['groups'][$attrKey][0] : $attrKey
+                                    ],
+                                    [
+                                        'attribute_value_id' => $attributeId,
+                                        'group_number' => isset($data['groups'][$attrKey][0]) ? $data['groups'][$attrKey][0] : $attrKey,
+                                        'stock' => $attributeIds['stock']
+                                    ]
+                                );
+                            }
+                        }
                     }
                 }
             }

@@ -794,29 +794,29 @@
         newVariationForm.classList.add('variation-form');
         newVariationForm.innerHTML = `
             <div class="price-stock-container">
-                <div class="row attribute-set">
+                <div class="row">
                     <div class="form-group mb-0 col-md-6">
                         <label for="price_${variationCount}_0">Price</label>
-                        <input type="number" name="variations[${variationCount}][price]" id="price_${variationCount}_0" class="form-control" required>
+                        <input type="number" name="variations[${variationCount}][price]" id="price_${variationCount}_0" class="form-control form-control-sm" required>
                     </div>
-                    <div class="form-group mb-0 col-md-6">
-                        <label for="stock_${variationCount}_0">Stock Quantity</label>
-                        <input type="number" name="variations[${variationCount}][stock]" id="stock_${variationCount}_0" class="form-control" required>
-                    </div>
+                </div>
+                <div class="row attribute-set">
                     @foreach($attributes as $attribute)
                         <div class="form-group mb-0 col-md-3">
-                            <label for="attribute_{{ $attribute->id }}_${variationCount}_0">{{ $attribute->name }}</label>
-                            <select name="variations[${variationCount}][attribute_values][${variationCount}_0][]" id="attribute_{{ $attribute->id }}_${variationCount}_0" class="form-control" required>
-                                <option value="">-- Select --</option>
+                            <select name="variations[${variationCount}][attribute_values][${variationCount}_0][]" id="attribute_{{ $attribute->id }}_${variationCount}_0" class="form-control form-control-sm" required>
+                                <option value="">--{{ $attribute->name }}--</option>
                                 @foreach($attribute->values as $value)
                                     <option value="{{ $value->id }}">{{ $value->value }}</option>
                                 @endforeach
                             </select>
                         </div>
                     @endforeach
-                </div>
+                    <div class="form-group mb-0 col-md-3">
+                        <input type="number" name="variations[${variationCount}][attribute_values][${variationCount}_0][stock]" id="stock_${variationCount}_0" class="form-control form-control-sm" placeholder="Stock Quantity" required>
+                    </div>
+                    </div>
             </div>
-            <button type="button" class="btn btn-secondary add-multiple-variation btn-sm">Add Another Price/Stock</button>
+            <button type="button" class="btn btn-secondary add-multiple-variation btn-sm">Add</button>
         `;
         container.appendChild(newVariationForm);
         variationCount++;
@@ -831,15 +831,17 @@
             priceStockForm.innerHTML = `
                 @foreach($attributes as $attribute)
                     <div class="form-group mb-0 col-md-3">
-                        <label for="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}">{{ $attribute->name }}</label>
-                        <select name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][]" id="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}" class="form-control" required>
-                            <option value="">-- Select --</option>
+                        <select name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][]" id="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}" class="form-control form-control-sm" required>
+                            <option value="">--{{ $attribute->name }}--</option>
                             @foreach($attribute->values as $value)
                                 <option value="{{ $value->id }}">{{ $value->value }}</option>
                             @endforeach
                         </select>
                     </div>
                 @endforeach
+                <div class="form-group mb-0 col-md-3">
+                        <input type="number" name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][stock]" id="stock_${variationCount}_0" class="form-control form-control-sm" placeholder="Stock Quantity" required>
+                </div>
             `;
             currentVariationForm.querySelector('.price-stock-container').appendChild(priceStockForm);
         }

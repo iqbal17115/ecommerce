@@ -12,16 +12,16 @@
                         @foreach ($productInfo->productVariations as $variationKey => $variation)
                             <div class="variation-form">
                                 <div class="price-stock-container">
-                                    <div class="row attribute-set">
+                                    <div class="row">
                                         <div class="form-group mb-0 col-md-6">
                                             <label for="price_{{ $variationKey }}">Price</label>
                                             <input type="number" name="variations[{{ $variationKey }}][price]"
                                                 id="price_{{ $variationKey }}" value="{{ $variation->price }}"
-                                                class="form-control">
+                                                class="form-control form-control-sm">
                                         </div>
                                     </div>
                                     @foreach ($variation->groupedAttributeValues as $groupNumber => $attributeValues)
-                                        <div class="row">
+                                        <div class="row attribute-set">
                                             @foreach ($attributes as $attribute)
                                                 @php
                                                     // Find the selected value for the current attribute
@@ -32,13 +32,11 @@
                                                 @endphp
                                                 <div class="form-group mb-0 col-md-3">
                                                     <input type="hidden" name="groups[{{ $groupNumber }}][]" value="{{ $groupNumber }}">
-                                                    <label
-                                                        for="attribute_{{ $attribute->id }}_{{ $variationKey }}_{{ $groupNumber }}">{{ $attribute->name }}</label>
                                                     <select
                                                         name="variations[{{ $variationKey }}][attribute_values][{{ $groupNumber }}][]"
                                                         id="attribute_{{ $attribute->id }}_{{ $variationKey }}_{{ $groupNumber }}"
-                                                        class="form-control" required>
-                                                        <option value="">-- Select --</option>
+                                                        class="form-control form-control-sm" required>
+                                                        <option value="">--{{ $attribute->name }}--</option>
                                                         @foreach ($attribute->values as $value)
                                                             <option value="{{ $value->id }}"
                                                                 @if ($selectedValue && $selectedValue->attribute_value_id == $value->id) selected @endif>
@@ -50,10 +48,9 @@
                                             @endforeach
 
                                             <div class="form-group mb-0 col-md-3">
-                                                <label for="stock_{{ $variationKey }}">Stock Quantity</label>
-                                                <input type="number" name="variations[{{ $variationKey }}][stock]"
-                                                    id="stock_{{ $variationKey }}" value="{{ $variation->stock }}"
-                                                    class="form-control" required>
+                                                <input type="number" name="variations[{{ $variationKey }}][attribute_values][{{ $groupNumber }}][stock]"
+                                                    id="stock_{{ $variationKey }}" value="{{ $attributeValues->first()->stock }}"
+                                                    class="form-control form-control-sm" placeholder="Stock Quantity" required>
                                             </div>
 
                                         </div>
@@ -65,34 +62,32 @@
                     @else
                         <div class="variation-form">
                             <div class="price-stock-container">
-                                <div class="row attribute-set">
+                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="price_0_0">Price</label>
                                         <input type="number" name="variations[0][price]" id="price_0_0"
-                                            class="form-control" required>
+                                            class="form-control form-control-sm" required>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="stock_0_0">Stock Quantity</label>
-                                        <input type="number" name="variations[0][stock]" id="stock_0_0"
-                                            class="form-control" required>
-                                    </div>
+                                </div>
+                                <div class="row attribute-set">
                                     @foreach ($attributes as $attribute)
                                         <div class="form-group col-md-3">
-                                            <label
-                                                for="attribute_{{ $attribute->id }}_0_0">{{ $attribute->name }}</label>
                                             <select name="variations[0][attribute_values][0_0][]"
-                                                id="attribute_{{ $attribute->id }}_0_0" class="form-control" required>
-                                                <option value="">-- Select --</option>
+                                                id="attribute_{{ $attribute->id }}_0_0" class="form-control form-control-sm" required>
+                                                <option value="">--{{ $attribute->name }}--</option>
                                                 @foreach ($attribute->values as $value)
                                                     <option value="{{ $value->id }}">{{ $value->value }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     @endforeach
+                                    <div class="form-group col-md-3">
+                                        <input type="number" name="variations[0][attribute_values][0_0][stock]" id="stock_0_0"
+                                            class="form-control form-control-sm" placeholder="Stock Quantity" required>
+                                    </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-secondary add-multiple-variation">Add Another
-                                Price/Stock</button>
+                            <button type="button" class="btn btn-sm btn-secondary add-multiple-variation">Add</button>
                         </div>
                     @endif
                 </div>
