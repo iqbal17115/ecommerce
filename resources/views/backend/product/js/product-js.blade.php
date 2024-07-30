@@ -803,7 +803,7 @@
                 <div class="row attribute-set">
                     @foreach($attributes as $attribute)
                         <div class="form-group mb-0 col-md-3">
-                            <select name="variations[${variationCount}][attribute_values][${variationCount}_0][]" id="attribute_{{ $attribute->id }}_${variationCount}_0" class="form-control form-control-sm" required>
+                            <select name="variations[${variationCount}][attribute_values][${variationCount}_0][]" id="attribute_{{ $attribute->id }}_${variationCount}_0" class="form-control form-control-sm">
                                 <option value="">--{{ $attribute->name }}--</option>
                                 @foreach($attribute->values as $value)
                                     <option value="{{ $value->id }}">{{ $value->value }}</option>

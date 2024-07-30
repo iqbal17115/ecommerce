@@ -35,7 +35,7 @@
                                                     <select
                                                         name="variations[{{ $variationKey }}][attribute_values][{{ $groupNumber }}][]"
                                                         id="attribute_{{ $attribute->id }}_{{ $variationKey }}_{{ $groupNumber }}"
-                                                        class="form-control form-control-sm" required>
+                                                        class="form-control form-control-sm">
                                                         <option value="">--{{ $attribute->name }}--</option>
                                                         @foreach ($attribute->values as $value)
                                                             <option value="{{ $value->id }}"
@@ -73,7 +73,7 @@
                                     @foreach ($attributes as $attribute)
                                         <div class="form-group col-md-3">
                                             <select name="variations[0][attribute_values][0_0][]"
-                                                id="attribute_{{ $attribute->id }}_0_0" class="form-control form-control-sm" required>
+                                                id="attribute_{{ $attribute->id }}_0_0" class="form-control form-control-sm">
                                                 <option value="">--{{ $attribute->name }}--</option>
                                                 @foreach ($attribute->values as $value)
                                                     <option value="{{ $value->id }}">{{ $value->value }}</option>
