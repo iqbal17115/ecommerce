@@ -21,7 +21,7 @@ class ProductVariationController extends Controller
         $this->productVariationService->storeVariations($product, $request->all());
 
         return response()->json([
-            'status' => 'success'
+            'status' => 201
         ]);
     }
 }

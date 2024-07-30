@@ -161,7 +161,7 @@
                     //     tab_menu.push(4);
                     // }
                     tabIndexPerform();
-                    Command: toastr["success"]("Product Compliance Saved Successfully",
+                    Command: toastr["success"]("Product Variation Saved Successfully",
                         "Success")
                     toastr.options = {
                         "closeButton": true,
