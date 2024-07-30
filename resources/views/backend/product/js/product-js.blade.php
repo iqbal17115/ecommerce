@@ -831,7 +831,7 @@
             priceStockForm.innerHTML = `
                 @foreach($attributes as $attribute)
                     <div class="form-group mb-0 col-md-3">
-                        <select name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][]" id="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}" class="form-control form-control-sm" required>
+                        <select name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][]" id="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}" class="form-control form-control-sm">
                             <option value="">--{{ $attribute->name }}--</option>
                             @foreach($attribute->values as $value)
                                 <option value="{{ $value->id }}">{{ $value->value }}</option>

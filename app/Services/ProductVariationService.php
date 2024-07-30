@@ -22,10 +22,11 @@ class ProductVariationService
                     ]
                 );
 
+                if($variationData['attribute_values']) {
                 foreach ($variationData['attribute_values'] as $attrKey => $attributeIds) {
                     if (is_array($attributeIds) || is_object($attributeIds)) {
                         foreach ($attributeIds as $key => $attributeId) {
-                            if ($key != 'stock') {
+                            if ($key != 'stock' && $attributeId) {
                                 VariationAttributeValue::updateOrCreate(
                                     [
                                         'product_variation_id' => $productVariation->id,
@@ -42,6 +43,7 @@ class ProductVariationService
                         }
                     }
                 }
+            }
             }
         });
     }
