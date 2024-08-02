@@ -17,11 +17,13 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
+                            <th scope="col">SKU</th>
                             <th scope="col">Stock qty</th>
                             <th scope="col">Your Price</th>
                             <th scope="col">Sale Price</th>
                             <th scope="col">Category</th>
                             <th scope="col">Brand</th>
+                            <th scope="col">Variation</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -33,6 +35,7 @@
                         <tr>
                             <th scope="row">{{ ++$i }}</th>
                             <td style="word-wrap: break-word; white-space: pre-line;">{{$product->name}}</td>
+                            <td style="word-wrap: break-word; white-space: pre-line;">{{$product->seller_sku}}</td>
                             <td>
                                 <a class="badge badge-secondary product_stock_qty_{{$product->id}}" data-product_id="{{$product->id}}" data-stock_qty="{{$product->stock_qty}}" data-toggle="modal"
                                 data-target="#productStockQtyModal" id="product_stock_qty">{{$product->stock_qty}}</a>
@@ -48,6 +51,28 @@
                                 @if($product->Brand)
                                 {{$product->Brand->name}}
                                 @endif
+                            </td>
+                            <td>
+                                @foreach ($product->productVariations as $variation)
+                                    @php
+                                        $groupedAttributes = $variation->variationAttributeValues->groupBy(
+                                            'group_number',
+                                        );
+                                    @endphp
+                                    @foreach ($groupedAttributes as $groupNumber => $attributeValues)
+                                        <span class="select-variation badge badge-secondary mx-1 mb-2 brand_color"
+                                            data-price="{{ $variation->price }}" data-stock="{{ $attributeValues->first()->stock }}">
+                                            <span class="attribute">
+                                                @foreach ($attributeValues as $attributeValue)
+                                                    <span
+                                                        class="attribute-value">{{ $attributeValue->attributeValue->value }}</span>
+                                                @endforeach
+                                                <span
+                                                        class="attribute-value"> |Price:{{ $variation->price }} Stock:{{ $attributeValues->first()->stock }}</span>
+                                            </span>
+                                        </span>
+                                    @endforeach
+                                @endforeach
                             </td>
                             <td style="width: 100px;">
                                 <button type="button" class="btn btn-danger text-light btn-sm delete_product"

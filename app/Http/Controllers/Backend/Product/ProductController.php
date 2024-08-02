@@ -66,12 +66,12 @@ class ProductController extends Controller
     }
     public function pagination(Request $request)
     {
-        $products = Product::latest()->paginate(20);
+        $products = Product::with('productVariations', 'productVariations.product', 'productVariations.variationAttributeValues', 'productVariations.variationAttributeValues.attributeValue', 'productVariations.variationAttributeValues.attributeValue.attribute')->latest()->paginate(20);
         return view('backend.product.pagination-product', compact('products'))->render();
     }
     public function productList()
     {
-        $products = Product::latest()->paginate(20);
+        $products = Product::with('productVariations', 'productVariations.product', 'productVariations.variationAttributeValues', 'productVariations.variationAttributeValues.attributeValue', 'productVariations.variationAttributeValues.attributeValue.attribute')->latest()->paginate(20);
         return view('backend.product.product_list', compact('products'));
     }
     public function addProductVariantInfo(Request $request)
