@@ -326,7 +326,7 @@
                                     @endphp
                                     @foreach ($groupedAttributes as $groupNumber => $attributeValues)
                                         <span class="select-variation badge badge-secondary mx-1 mb-2 brand_color"
-                                            data-price="{{ $variation->price }}" data-stock="{{ $variation->stock }}">
+                                            data-price="{{ $variation->price }}" data-stock="{{ $attributeValues->first()->stock }}">
                                             <span class="attribute">
                                                 @foreach ($attributeValues as $attributeValue)
                                                     <span
