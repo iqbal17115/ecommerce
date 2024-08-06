@@ -148,8 +148,9 @@
     $(document).on('submit', '#add_product_variation', function(e) {
         e.preventDefault();
         var form = this;
+        console.log(form);
         $.ajax({
-            url: "{{ route('products.store-variations', $productInfo->id) }}",
+            url: "{{ route('products.store-variations') }}",
             method: 'post',
             data: new FormData(form),
             processData: false,

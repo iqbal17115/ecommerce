@@ -2,13 +2,13 @@
     {{-- <form method="post" id="add_variation">
         @csrf --}}
     <div class="row">
-        <input type="hidden" name="product_variant_info_id" id="product_variant_info_id"
-            @if ($productInfo) value="{{ $productInfo->id }}" @else value="-1" @endif />
         <div class="col-md-12">
             <form method="POST" id="add_product_variation">
                 @csrf
                 <div id="variations-container">
-                    @if ($productInfo->productVariations && count($productInfo->productVariations) > 0)
+                    <input type="hidden" name="product_variant_info_id" id="product_variant_info_id"
+            @if ($productInfo) value="{{ $productInfo->id }}" @else value="-1" @endif />
+                    @if (isset($productInfo->productVariations) && $productInfo->productVariations && count($productInfo->productVariations) > 0)
                         @foreach ($productInfo->productVariations as $variationKey => $variation)
                             <div class="variation-form">
                                 <div class="price-stock-container">

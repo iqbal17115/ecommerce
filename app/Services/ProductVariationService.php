@@ -2,14 +2,17 @@
 
 namespace App\Services;
 
+use App\Models\Backend\Product\Product;
 use App\Models\ProductVariation;
 use App\Models\VariationAttributeValue;
 use Illuminate\Support\Facades\DB;
 
 class ProductVariationService
 {
-    public function storeVariations($product, array $data)
+    public function storeVariations($data)
     {
+        $product = Product::find($data['product_variant_info_id']);
+
         DB::transaction(function () use ($product, $data) {
             foreach ($data['variations'] as $variationKey => $variationData) {
                 $productVariation = ProductVariation::updateOrCreate(
