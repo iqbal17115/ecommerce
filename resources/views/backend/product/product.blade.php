@@ -145,7 +145,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 ml-auto">
-                    <p class="category h4">Add Product 1111111111111111111111111111</p>
+                    <p class="category h4">Add Product</p>
                     <!-- Nav tabs -->
                     <div class="card">
                         <div class="card-header">
