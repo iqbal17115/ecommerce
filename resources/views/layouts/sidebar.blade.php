@@ -55,22 +55,11 @@
                            <li><a href="{{ route('product-category') }}">Category</a></li>
                            <li><a href="{{ route('product-brand') }}">Brand</a></li>
                            <li><a href="{{ route('product-unit') }}">Unit</a></li>
-                           <li><a href="{{ route('product-variant') }}">Variation</a></li>
+                           <li><a href="{{ route('attribute') }}">Attribute</a></li>
+                           <li><a href="{{ route('attribute-value') }}">Attribute Value</a></li>
                            <li><a href="{{ route('product-material') }}">Material</a></li>
                            <li><a href="{{ route('condition') }}">Condition</a></li>
                            <li><a href="{{ route('feature') }}">Feature</a></li>
-                       </ul>
-                   </li>
-
-                   {{-- Product Variations --}}
-                   <li>
-                       <a href="javascript: void(0);" class="has-arrow waves-effect">
-                           <i class="bx bx-layout"></i>
-                           <span>Product Variations</span>
-                       </a>
-                       <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="{{ route('attribute') }}">Attribute</a></li>
-                           <li><a href="{{ route('attribute-value') }}">Attribute Value</a></li>
                        </ul>
                    </li>
 
