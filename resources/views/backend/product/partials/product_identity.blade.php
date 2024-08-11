@@ -165,12 +165,16 @@
                     </div>
                     <!-- End -->
 
-                    <div class="col-md-12 mt-md-3">
-                        <button class="float-right btn btn-success btn-sm ml-2">Save and
-                            finish</button>
-                        <button type="submit"
-                            class="float-right btn btn-warning btn-sm">Save as
-                            draft</button>
+                    <div class="col-md-12 mt-3 text-right">
+                        <button class="btn btn-sm btn-warning ml-2">
+                            Save as Draft
+                        </button>
+                        <button class="btn btn-sm btn-info ml-2">
+                            Save and Next
+                        </button>
+                        <button class="btn btn-sm btn-success ml-2">
+                            Save and Finish
+                        </button>
                     </div>
                     <!-- End -->
                 </div>
