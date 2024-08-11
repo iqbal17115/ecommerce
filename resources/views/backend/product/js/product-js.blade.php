@@ -162,6 +162,8 @@
                     //     tab_menu.push(4);
                     // }
                     tabIndexPerform();
+                    $(".add_variant").removeClass("active");
+                    $(".add_product_offer").addClass("active");
                     Command: toastr["success"]("Product Variation Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -787,13 +789,13 @@
 
     // Start Variation JS
     document.addEventListener('DOMContentLoaded', function() {
-    let variationCount = $('#variations-container .variation-form').length;
+        let variationCount = $('#variations-container .variation-form').length;
 
-    document.getElementById('add-variation').addEventListener('click', function() {
-        const container = document.getElementById('variations-container');
-        const newVariationForm = document.createElement('div');
-        newVariationForm.classList.add('variation-form');
-        newVariationForm.innerHTML = `
+        document.getElementById('add-variation').addEventListener('click', function() {
+            const container = document.getElementById('variations-container');
+            const newVariationForm = document.createElement('div');
+            newVariationForm.classList.add('variation-form');
+            newVariationForm.innerHTML = `
             <div class="price-stock-container">
                 <div class="row">
                     <div class="form-group mb-0 col-md-6">
@@ -802,11 +804,11 @@
                     </div>
                 </div>
                 <div class="row attribute-set">
-                    @foreach($attributes as $attribute)
+                    @foreach ($attributes as $attribute)
                         <div class="form-group mb-0 col-md-3">
                             <select name="variations[${variationCount}][attribute_values][${variationCount}_0][]" id="attribute_{{ $attribute->id }}_${variationCount}_0" class="form-control form-control-sm">
                                 <option value="">--{{ $attribute->name }}--</option>
-                                @foreach($attribute->values as $value)
+                                @foreach ($attribute->values as $value)
                                     <option value="{{ $value->id }}">{{ $value->value }}</option>
                                 @endforeach
                             </select>
@@ -819,22 +821,23 @@
             </div>
             <button type="button" class="btn btn-secondary add-multiple-variation btn-sm">Add</button>
         `;
-        container.appendChild(newVariationForm);
-        variationCount++;
-    });
+            container.appendChild(newVariationForm);
+            variationCount++;
+        });
 
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('add-multiple-variation')) {
-            const currentVariationForm = e.target.closest('.variation-form');
-            const currentVariationIndex = currentVariationForm.querySelectorAll('.attribute-set').length;
-            const priceStockForm = document.createElement('div');
-            priceStockForm.classList.add('row', 'attribute-set');
-            priceStockForm.innerHTML = `
-                @foreach($attributes as $attribute)
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('add-multiple-variation')) {
+                const currentVariationForm = e.target.closest('.variation-form');
+                const currentVariationIndex = currentVariationForm.querySelectorAll('.attribute-set')
+                    .length;
+                const priceStockForm = document.createElement('div');
+                priceStockForm.classList.add('row', 'attribute-set');
+                priceStockForm.innerHTML = `
+                @foreach ($attributes as $attribute)
                     <div class="form-group mb-0 col-md-3">
                         <select name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][]" id="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}" class="form-control form-control-sm">
                             <option value="">--{{ $attribute->name }}--</option>
-                            @foreach($attribute->values as $value)
+                            @foreach ($attribute->values as $value)
                                 <option value="{{ $value->id }}">{{ $value->value }}</option>
                             @endforeach
                         </select>
@@ -844,10 +847,11 @@
                         <input type="number" name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][stock]" id="stock_${variationCount}_0" class="form-control form-control-sm" placeholder="Stock Quantity" required>
                 </div>
             `;
-            currentVariationForm.querySelector('.price-stock-container').appendChild(priceStockForm);
-        }
+                currentVariationForm.querySelector('.price-stock-container').appendChild(
+                priceStockForm);
+            }
+        });
     });
-});
 
     // End Variation JS
 </script>
