@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Product;
 use App\Http\Resources\User\Shop\ShopProductDetailResource;
+use App\Models\Backend\Product\Brand;
 use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -177,12 +178,7 @@ class ShopController extends Controller
 
         $products = $this->getAllLists($query, [], ShopProductDetailResource::class);
 
-        $brands = Product::join('categories', 'categories.id', '=', 'products.category_id')
-            ->join('brands', 'brands.id', '=', 'products.brand_id')
-            ->orderBy('products.id', 'desc')
-            ->select('brands.id', 'brands.name')
-            // ->distinct('brands.name')
-            ->get();
+        $brands = Brand::get();
 
         $user_id = auth()->user()->id ?? null;
         $categories = Category::where('parent_category_id', null)->get();
