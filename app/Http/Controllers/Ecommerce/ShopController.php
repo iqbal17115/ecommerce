@@ -181,7 +181,7 @@ class ShopController extends Controller
             ->join('brands', 'brands.id', '=', 'products.brand_id')
             ->orderBy('products.id', 'desc')
             ->select('brands.id', 'brands.name')
-            ->distinct('brands.name')
+            // ->distinct('brands.name')
             ->get();
 
         $user_id = auth()->user()->id ?? null;
