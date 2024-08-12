@@ -218,11 +218,11 @@
                             <div class="collapse show" id="widget-body-2">
                                 <div class="widget-body">
                                     <ul class="cat-list">
-                                        @foreach ($categories as $category)
+                                        {{-- @foreach ($categories as $category)
                                             @include('ecommerce.partials.category', [
                                                 'category' => $category,
                                             ])
-                                        @endforeach
+                                        @endforeach --}}
                                     </ul>
                                 </div>
                                 <!-- End .widget-body -->
@@ -313,13 +313,13 @@
                             <div class="collapse show" id="widget-body-7">
                                 <div class="widget-body pb-0">
                                     <ul class="cat-list">
-                                        @foreach ($brands as $brand)
+                                        {{-- @foreach ($brands as $brand)
                                             <li>
                                                 <input type="checkbox" class="select_brand" name="brand[]"
                                                     value="{{ $brand->id }}">
                                                 <a>{{ $brand->name }}</a>
                                             </li>
-                                        @endforeach
+                                        @endforeach --}}
                                     </ul>
                                 </div>
                                 <!-- End .widget-body -->
@@ -363,7 +363,7 @@
     <script src="{{ asset('js/panel/users/common.js') }}"></script>
     <script src="{{ asset('js/panel/pagination.js') }}"></script>
 
-    <script>
+    {{-- <script>
         const paginationContainer = document.getElementById('pagination_container');
 
         function setProduct(data) {
@@ -531,5 +531,5 @@
                 observer.observe(image);
             }
         };
-    </script>
+    </script> --}}
 @endpush
