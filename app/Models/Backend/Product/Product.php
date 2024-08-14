@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
+
     protected $fillable = [
         'code',
         'name',
@@ -57,6 +58,22 @@ class Product extends Model
         'vendor_id',
         'is_active',
     ];
+
+    protected array $searchable = [
+        'code',
+        'name',
+        'type',
+        'code',
+        'brand.name',
+        'category.name',
+        'purchase_price',
+        'your_price',
+        'sale_price',
+        'retail_price',
+        'model_number',
+        'model_name',
+    ];
+
     protected $dates = ['deleted_at'];
 
     public function scopeFilterByPriceRange($query, $minPrice, $maxPrice, $currentDate)

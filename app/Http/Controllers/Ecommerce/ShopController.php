@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShopPage\ShopPageRequest;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Product;
 use App\Http\Resources\User\Shop\ShopProductDetailResource;
@@ -154,29 +155,27 @@ class ShopController extends Controller
         $products = Product::latest()->paginate($request->count);
         return view('ecommerce.paginate-shop', compact('products'))->render();
     }
-    public function shop(Request $request)
+    public function shop(ShopPageRequest $shopPageRequest)
     {
-        $searchCriteria = $request->input('q', '');
-        $categoryName = $request->category_name;
-        $query = Product::query();
-
+        $searchCriteria = $shopPageRequest->input('q', '');
+        $categoryName = $shopPageRequest->category_name;
+        // $query = Product::query();
         // Add additional filters based on the request
-        if ($searchCriteria) {
-            $query->where(function ($query) use ($searchCriteria) {
-                $query->where('name', 'like', '%' . urldecode($searchCriteria) . '%');
-            });
-        }
+        // if ($searchCriteria) {
+        //     $query->where(function ($query) use ($searchCriteria) {
+        //         $query->where('name', 'like', '%' . urldecode($searchCriteria) . '%');
+        //     });
+        // }
 
-        // Handle category_name-based filtering
-        if ($categoryName) {
-            $query->whereHas('category', function ($query) use ($categoryName) {
-                $query->where('name', urldecode($categoryName));
-            });
-        }
+        // // Handle category_name-based filtering
+        // if ($categoryName) {
+        //     $query->whereHas('category', function ($query) use ($categoryName) {
+        //         $query->where('name', urldecode($categoryName));
+        //     });
+        // }
 
         // Add more filters as needed
-
-        $products = $this->getAllLists($query, [], ShopProductDetailResource::class);
+        $products = $this->getAllLists(Product::query(), [$shopPageRequest->validated()], ShopProductDetailResource::class);
 
         $brands = Brand::get();
 

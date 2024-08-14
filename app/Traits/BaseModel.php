@@ -44,7 +44,7 @@ trait BaseModel
     {
         // Apply the search, ordering, and pagination scopes to the query
         return $query
-            ->when(isset($request['search']), fn ($query) => $query->ofSearch($request['search']))
+            ->when(isset($request[0]['search']), fn ($query) => $query->ofSearch($request[0]['search']))
             ->when(isset($request['filters']), fn ($query) => $query->ofFilter($request['filters']))
             ->when(isset($request['start_date']), fn ($query) => $query->ofDateChange($request['start_date'], $request['end_date']))
             ->ofOrderBy($request['sort_by'] ?? null, $request['sort_order'] ?? null);

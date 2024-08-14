@@ -99,7 +99,7 @@
                     <a href="javascript::void(0);" class="search-toggle" role="button"><i class="icon-search-3"></i></a>
                     <form action="{{ route('catalog.show') }}" method="get">
                         <div class="header-search-wrapper" style="border: 0px;">
-                            <input type="search" class="form-control" name="q" id="q"
+                            <input type="search" class="form-control" name="search" id="search"
                                 placeholder="Search..." required>
                             <!-- End .select-custom -->
                             <button class="btn icon-magnifier p-0" title="search" type="submit"></button>

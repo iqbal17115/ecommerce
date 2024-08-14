@@ -363,7 +363,7 @@
     <script src="{{ asset('js/panel/users/common.js') }}"></script>
     <script src="{{ asset('js/panel/pagination.js') }}"></script>
 
-    {{-- <script>
+    <script>
         const paginationContainer = document.getElementById('pagination_container');
 
         function setProduct(data) {
@@ -531,5 +531,5 @@
                 observer.observe(image);
             }
         };
-    </script> --}}
+    </script>
 @endpush

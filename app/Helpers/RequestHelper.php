@@ -12,7 +12,7 @@ class RequestHelper
     public static function getCommonRulesForRequestLists(): array
     {
         return [
-            'page' => ['required', 'integer'],
+            // 'page' => ['required', 'integer'],
             'limit' => ['nullable', 'integer', 'min:1', 'max:100'],
             'start_date' => ['nullable'],
             'end_date' => ['nullable'],
