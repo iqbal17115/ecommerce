@@ -74,6 +74,12 @@ class Product extends Model
         'model_name',
     ];
 
+    protected array $sortable = [
+        'name' => 'name',
+        'your_price' => 'your_price',
+        'sale_price' => 'sale_price',
+    ];
+
     protected $dates = ['deleted_at'];
 
     public function scopeFilterByPriceRange($query, $minPrice, $maxPrice, $currentDate)

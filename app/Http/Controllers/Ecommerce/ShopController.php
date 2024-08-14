@@ -21,56 +21,14 @@ class ShopController extends Controller
     /**
      * Search roduct
      *
-     * @param Request $request
+     * @param ShopPageRequest $shopPageRequest
      * @return JsonResponse
      */
-    public function searchProduct(Request $request): JsonResponse
+    public function searchProduct(ShopPageRequest $shopPageRequest): JsonResponse
     {
         try {
-            $query = Product::query();
-
-            // Add additional filters based on the request
-            if ($request->searchCriteria  != 'null') {
-                $query->where(function ($query) use ($request) {
-                    $query->where('name', 'like', '%' . urldecode($request->searchCriteria) . '%');
-                });
-            }
-
-            // Handle category_name-based filtering
-            if ($request->categoryName != 'null') {
-                $query->whereHas('category', function ($query) use ($request) {
-                    $query->where('name', urldecode($request->categoryName));
-                });
-            }
-
-            // Filter based on min_price and max_price
-            if ($request->min_price && $request->max_price) {
-                $minPrice = $request->min_price ?: 0;
-                $maxPrice = $request->max_price ?: PHP_FLOAT_MAX;
-                $currentDate = date('Y-m-d');
-
-                $query->filterByPriceRange($minPrice, $maxPrice, $currentDate);
-            }
-
-            if ($request->filled('selectedBrandIds')) {
-                $selectedBrandIds = $request->selectedBrandIds;
-
-                $query->whereIn('brand_id', explode(",", $selectedBrandIds));
-            }
-
-            $query->when($request->filled('orderOfProduct'), function ($query) use ($request) {
-                $orderByOptions = [
-                    2 => ['your_price', 'asc'],
-                    3 => ['your_price', 'desc'],
-                ];
-
-                $orderBy = $request->orderOfProduct;
-
-                // Apply sorting based on the mapping array
-                $query->orderBy(...$orderByOptions[$orderBy] ?? []);
-            });
             // Add more filters as needed
-            $lists = $this->getLists($query, $request->all(), ShopProductDetailResource::class);
+            $lists = $this->getAllLists(Product::query(), $shopPageRequest->validated(), ShopProductDetailResource::class);
 
             // Return a success message with the data
             return Message::success(null, $lists);
@@ -157,7 +115,7 @@ class ShopController extends Controller
     }
     public function shop(ShopPageRequest $shopPageRequest)
     {
-        $searchCriteria = $shopPageRequest->input('q', '');
+        $searchCriteria = $shopPageRequest->input('search', '');
         $categoryName = $shopPageRequest->category_name;
         // $query = Product::query();
         // Add additional filters based on the request

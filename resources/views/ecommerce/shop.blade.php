@@ -156,8 +156,8 @@
                                 <div class="select-custom">
                                     <select name="orderby" class="form-control order_of_product" id="order_of_product">
                                         <option value="" selected="selected">Default sorting</option>
-                                        <option value="2">Sort by price: low to high</option>
-                                        <option value="3">Sort by price: high to low</option>
+                                        <option value="asc">Sort by price: low to high</option>
+                                        <option value="desc">Sort by price: high to low</option>
                                     </select>
                                 </div>
                                 <!-- End .select-custom -->
@@ -313,13 +313,13 @@
                             <div class="collapse show" id="widget-body-7">
                                 <div class="widget-body pb-0">
                                     <ul class="cat-list">
-                                        {{-- @foreach ($brands as $brand)
+                                        @foreach ($brands as $brand)
                                             <li>
                                                 <input type="checkbox" class="select_brand" name="brand[]"
                                                     value="{{ $brand->id }}">
                                                 <a>{{ $brand->name }}</a>
                                             </li>
-                                        @endforeach --}}
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- End .widget-body -->
@@ -433,13 +433,15 @@
                 return $(this).val();
             }).get();
 
-            var orderOfProduct = $("#order_of_product").val();
+            var sort_order = $("#order_of_product").val() || 'asc';
+
             const queryParams = new URLSearchParams({
                 page: page,
                 limit: $('#count_paginate').val(),
-                orderOfProduct: orderOfProduct,
+                sort_order: sort_order,
+                sort_by: 'your_price',
                 selectedBrandIds: selectedBrandIds,
-                searchCriteria: searchCriteria,
+                search: searchCriteria,
                 categoryName: categoryName,
                 min_price: $("#min_price").val(),
                 max_price: $("#max_price").val(),
@@ -449,7 +451,7 @@
 
             getDetails(url,
                 (data) => {
-                    setProduct(data.results.data);
+                    setProduct(data.results);
                     const paginationHtml = generatePagination(data.results.total, data.results.per_page, page);
                     paginationContainer.innerHTML = paginationHtml;
                 }
