@@ -28,7 +28,7 @@ class ShopController extends Controller
     {
         try {
             // Add more filters as needed
-            $lists = $this->getAllLists(Product::query(), $shopPageRequest->validated(), ShopProductDetailResource::class);
+            $lists = $this->getAllLists(Product::query(), $shopPageRequest->all(), ShopProductDetailResource::class);
 
             // Return a success message with the data
             return Message::success(null, $lists);

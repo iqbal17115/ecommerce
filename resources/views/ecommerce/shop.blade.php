@@ -381,10 +381,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                <div class="label-group">
-                                    <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                </div>
-                            ` : ''}
+                                    <div class="label-group">
+                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                    </div>
+                                ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -408,8 +408,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                    <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                ` : ''}
+                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                    ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -440,13 +440,14 @@
                 limit: $('#count_paginate').val(),
                 sort_order: sort_order,
                 sort_by: 'your_price',
-                selectedBrandIds: selectedBrandIds,
                 search: searchCriteria,
                 categoryName: categoryName,
                 min_price: $("#min_price").val(),
                 max_price: $("#max_price").val(),
             });
 
+            // Manually add filters[brand_ids]
+            queryParams.append('filters[brand_ids]', selectedBrandIds);
             const url = `/product-search?${queryParams.toString()}`;
 
             getDetails(url,

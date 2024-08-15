@@ -74,6 +74,10 @@ class Product extends Model
         'model_name',
     ];
 
+    protected array $filterable = [
+        'brand_ids' => 'filterByBrands'
+    ];
+
     protected array $sortable = [
         'name' => 'name',
         'your_price' => 'your_price',
@@ -155,5 +159,12 @@ class Product extends Model
     public function productVariations(): HasMany
     {
         return $this->hasMany(ProductVariation::class);
+    }
+
+    protected function filterByBrands($query, $value): mixed
+    {
+        return $query->whereHas('Brand', function ($query) use ($value) {
+            $query->whereIn('brand_id', explode(",", $value));
+        });
     }
 }
