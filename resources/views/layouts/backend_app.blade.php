@@ -10,8 +10,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico') }}">
-   <!-- Sweet Alert-->
-   <link href="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- twitter-bootstrap-wizard css -->
+    <link rel="stylesheet" href="{{ URL::asset('assets/libs/twitter-bootstrap-wizard/prettify.css') }}">
+
+    <!-- Sweet Alert-->
+    <link href="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
     <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
         type="text/css" />
@@ -81,6 +85,14 @@
     <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ URL::asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
+    <!-- twitter-bootstrap-wizard js -->
+    <script src="{{ URL::asset('assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+
+    <script src="{{ URL::asset('assets/libs/twitter-bootstrap-wizard/prettify.js') }}"></script>
+
+    <!-- form wizard init -->
+    <script src="{{ URL::asset('assets/js/pages/form-wizard.init.js') }}"></script>
+
     <!-- apexcharts -->
     <script src="{{ URL::asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
@@ -96,28 +108,28 @@
     <!-- App js -->
     <!-- <script src="{{ URL::asset('assets/js/app.min.js') }}"></script> -->
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  <!-- Sweet Alerts js -->
-  <script src="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <!-- Sweet Alerts js -->
+    <script src="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
-  <!-- Sweet alert init js-->
-  <script src="{{ URL::asset('assets/js/pages/sweet-alerts.init.js') }}"></script>
-  {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <!-- Sweet alert init js-->
+    <script src="{{ URL::asset('assets/js/pages/sweet-alerts.init.js') }}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <script src="{{asset('js/panel/action.js')}}"></script>
-  <script src="{{asset('js/panel/common.js')}}"></script>
-  <script src="{{ asset('js/select2.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('js/panel/action.js') }}"></script>
+    <script src="{{ asset('js/panel/common.js') }}"></script>
+    <script src="{{ asset('js/select2.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-  <!-- include summernote css/js -->
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <!-- include summernote css/js -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-  {{-- <link rel="stylesheet" href="{{ asset('css/common.css') }}"> --}}
-  <!-- Common JS -->
-  <script src="{{ asset('js/common.js') }}"></script>
+    {{-- <link rel="stylesheet" href="{{ asset('css/common.css') }}"> --}}
+    <!-- Common JS -->
+    <script src="{{ asset('js/common.js') }}"></script>
 
     <script>
         $(document).ready(function() {

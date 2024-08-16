@@ -1,4 +1,111 @@
 <script type="text/javascript">
+    // Start Product Validation According to wizard
+    $(document).ready(function() {
+    var forms = [
+        '#addProductIdentity',
+        '#addVitalInfo',
+        '#variations',
+        '#offer',
+        '#compliance',
+        '#images',
+        '#description',
+        '#keywords',
+        '#more_details',
+        '#progress-confirm-detail'
+    ];
+
+    var currentStep = 0;
+    var wizard = $('#progrss-wizard');
+    var navLinks = wizard.find('.nav-link');
+
+    function validateForm(formSelector) {
+        var $form = $(formSelector);
+        var isValid = true;
+
+        // Clear previous errors
+        $form.find(':input').removeClass('is-invalid');
+        $form.find('.invalid-feedback').remove();
+
+        // Validate required fields
+        $form.find(':input[required]').each(function() {
+            if ($(this).val() === '') {
+                isValid = false;
+                $(this).addClass('is-invalid');
+                $(this).after('<div class="invalid-feedback">This field is required.</div>');
+            }
+        });
+
+        return isValid;
+    }
+
+    function handleNextStep() {
+        var currentForm = forms[currentStep];
+        if (validateForm(currentForm)) {
+            if (currentStep < forms.length - 1) {
+                currentStep++;
+                updateTabState();
+            }
+        } else {
+            // Keep the current tab active if validation fails
+            updateTabState();
+        }
+    }
+
+    function handlePreviousStep() {
+        if (currentStep > 0) {
+            currentStep--;
+            updateTabState();
+        }
+    }
+
+    function updateTabState() {
+        // Remove active class from all nav-links
+        navLinks.removeClass('active');
+
+        // Hide all forms
+        $(forms.join(', ')).hide();
+
+        // Show the current form
+        $(forms[currentStep]).show();
+
+        // Add active class to the current nav-link
+        navLinks.eq(currentStep).addClass('active');
+
+        // Show the current tab
+        navLinks.eq(currentStep).tab('show');
+    }
+
+    // Prevent moving to the next tab unless the form is valid
+    navLinks.on('click', function(e) {
+        e.preventDefault();
+
+        var targetIndex = $(this).parent().index();
+        if (targetIndex <= currentStep) {
+            // Allow moving back to previous steps
+            currentStep = targetIndex;
+            updateTabState();
+        } else {
+            // Prevent moving forward unless the form is valid
+            handleNextStep();
+        }
+    });
+
+    $('.twitter-bs-wizard-next').on('click', function(e) {
+        e.preventDefault();
+        handleNextStep();
+    });
+
+    $('.pager .previous a').on('click', function(e) {
+        e.preventDefault();
+        handlePreviousStep();
+    });
+
+    // Initialize the first tab as active and show the first form
+    updateTabState();
+});
+
+
+    // End Product Validation According to wizard
     function getKeywords() {
         var keywords = [];
         $('#commaSep span.removeName').each(function() {
@@ -55,13 +162,6 @@
         pagination(page);
     });
 
-
-    function tabIndexPerform() {
-        for (let i = 0; i < tab_menu.length; i++) {
-            $(".p_" + tab_menu[i]).even().removeClass("disabled");
-            // $( "p" ).even().removeClass( "blue" );
-        }
-    }
     // Start Product Variant Add
     $(document).on('submit', '#add_variant_variant', function(e) {
         e.preventDefault();
@@ -115,10 +215,6 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
-                    // if (!tab_menu.includes(4)) {
-                    //     tab_menu.push(4);
-                    // }
-                    tabIndexPerform();
                     Command: toastr["success"]("Product Compliance Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -158,10 +254,6 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
-                    // if (!tab_menu.includes(4)) {
-                    //     tab_menu.push(4);
-                    // }
-                    tabIndexPerform();
                     $(".add_variant").removeClass("active");
                     $(".add_product_offer").addClass("active");
                     Command: toastr["success"]("Product Variation Saved Successfully",
@@ -233,7 +325,6 @@
                     if (!tab_menu.includes(6)) {
                         tab_menu.push(6);
                     }
-                    tabIndexPerform();
                     $(".add_description").removeClass("active");
                     $(".add_keywords").addClass("active");
                 }
@@ -267,7 +358,6 @@
                     if (!tab_menu.includes(8)) {
                         tab_menu.push(8);
                     }
-                    tabIndexPerform();
                     $(".add_product_image").removeClass("active");
                     $(".add_description").addClass("active");
                 }
@@ -292,7 +382,6 @@
                     if (!tab_menu.includes(4)) {
                         tab_menu.push(4);
                     }
-                    tabIndexPerform();
                     $(".add_product_offer").removeClass("active");
                     $(".add_product_image").addClass("active");
                 }
@@ -314,13 +403,6 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
-                    if (!tab_menu.includes(2)) {
-                        tab_menu.push(2);
-                    }
-                    if (!tab_menu.includes(3)) {
-                        tab_menu.push(3);
-                    }
-                    tabIndexPerform();
                     $("#product_identity_id").val(data.product_id);
                     $("#vital_info_id").val(data.product_id);
                     $("#product_offer_id").val(data.product_id);
@@ -330,8 +412,6 @@
                     $("#product_compliance_id").val(data.product_id);
                     $("#product_more_detail_id").val(data.product_id);
                     $("#product_variant_info_id").val(data.product_id);
-                    $(".add_product_identity").removeClass("active");
-                    $(".add_vital_info").addClass("active");
                 }
             },
             error: (error) => {
@@ -360,7 +440,6 @@
                     if (!tab_menu.includes(3)) {
                         tab_menu.push(3);
                     }
-                    tabIndexPerform();
                     $("#product_identity_id").val(data.product_id);
                     $("#vital_info_id").val(data.product_id);
                     $("#product_offer_id").val(data.product_id);
@@ -848,7 +927,7 @@
                 </div>
             `;
                 currentVariationForm.querySelector('.price-stock-container').appendChild(
-                priceStockForm);
+                    priceStockForm);
             }
         });
     });

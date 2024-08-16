@@ -148,7 +148,7 @@
                     <p class="category h4">Add Product</p>
                     <!-- Nav tabs -->
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <!-- justify-content-center -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
@@ -201,28 +201,102 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <!-- Product Identity -->
-                                @include('backend.product.partials.product_identity')
-                                <!-- Vital Info -->
-                                @include('backend.product.partials.vital_info')
-                                <!-- Variant -->
-                                @include('backend.product.partials.variations')
-                                <!-- Product Offer -->
-                                @include('backend.product.partials.product_offer')
-                                <!-- Compliance -->
-                                @include('backend.product.partials.compliance')
-                                <!-- Image -->
-                                @include('backend.product.partials.product_image')
-                                <!-- Description -->
-                                @include('backend.product.partials.description')
-                                <!-- Keywords -->
-                                @include('backend.product.partials.keyword')
-                                <!-- More Details -->
-                                @include('backend.product.partials.more_detail')
+                            <div id="progrss-wizard" class="twitter-bs-wizard">
+                                <ul class="twitter-bs-wizard-nav nav-justified">
+                                    <li class="nav-item">
+                                        <a href="#addProductIdentity" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">01</span> --}}
+                                            Product Identity
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#addVitalInfo" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">02</span> --}}
+                                            Vital Info
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="#variations" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            Variation
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#offer" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            Offer
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#compliance" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            Compliance
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#images" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            Images
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#description" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            Description
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#keywords" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            Keywords
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#more_details" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            More Details
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#progress-confirm-detail" class="nav-link" data-toggle="tab">
+                                            {{-- <span class="step-number mr-2">04</span> --}}
+                                            Confirm Detail
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div id="bar" class="progress mt-1">
+                                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"></div>
+                                </div>
+                                <div class="tab-content twitter-bs-wizard-tab-content">
+                                    <!-- Product Identity -->
+                                    @include('backend.product.partials.product_identity')
+                                    <!-- Vital Info -->
+                                    @include('backend.product.partials.vital_info')
+                                    <!-- Variant -->
+                                    @include('backend.product.partials.variations')
+                                    <!-- Product Offer -->
+                                    @include('backend.product.partials.product_offer')
+                                    <!-- Compliance -->
+                                    @include('backend.product.partials.compliance')
+                                    <!-- Image -->
+                                    @include('backend.product.partials.product_image')
+                                    <!-- Description -->
+                                    @include('backend.product.partials.description')
+                                    <!-- Keywords -->
+                                    @include('backend.product.partials.keyword')
+                                    <!-- More Details -->
+                                    @include('backend.product.partials.more_detail')
+                                    {{-- Confirm Detail --}}
+                                    @include('backend.product.partials.confirm_detail')
+                                </div>
+                                <ul class="pager wizard twitter-bs-wizard-pager-link">
+                                    <li class="previous"><a href="#">Previous</a></li>
+                                    <li class="next twitter-bs-wizard-next"><a href="#">Next</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>

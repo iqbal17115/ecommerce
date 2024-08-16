@@ -168,7 +168,7 @@
                 <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-            @include('layouts.footer')
+            {{-- @include('layouts.footer') --}}
         </div>
         <!-- end main content-->
     </div>
