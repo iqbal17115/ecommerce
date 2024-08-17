@@ -367,13 +367,14 @@
         const paginationContainer = document.getElementById('pagination_container');
 
         function setProduct(data) {
-            $('#search_product_list').html('');
-            let productHTML = ""
-            var baseRoute = "{!! $baseRoute !!}";
-            // Iterate through each product in the data
-            data.forEach(product => {
-                // Construct the HTML for each product
-                productHTML += `
+    $('#search_product_list').html('');
+    let productHTML = ""
+    var baseRoute = "{!! $baseRoute !!}";
+
+    // Iterate through each product in the data
+    data.forEach(product => {
+        // Construct the HTML for each product
+        productHTML += `
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
@@ -381,10 +382,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                    <div class="label-group">
-                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                    </div>
-                                                ` : ''}
+                            <div class="label-group">
+                                <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                            </div>
+                        ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -408,8 +409,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                    ` : ''}
+                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                            ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -417,11 +418,16 @@
                 </div>
             </div>
         `;
+    });
 
-                // Append the product HTML to #search_product_list
-                $('#search_product_list').html(productHTML);
-            });
-        }
+    // Append the product HTML to #search_product_list
+    $('#search_product_list').html(productHTML);
+
+    // Re-observe the newly added images
+    document.querySelectorAll('.lazy-load').forEach(img => {
+        observer.observe(img);
+    });
+}
 
         function fetchData(page) {
             const searchCriteria = @json($searchCriteria ?? null);
