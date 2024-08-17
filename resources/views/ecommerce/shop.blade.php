@@ -378,7 +378,7 @@
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
                         <a href="${baseRoute}/${encodeURIComponent(product.product_name)}">
-                            <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
+                            <img src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
                                                     <div class="label-group">
