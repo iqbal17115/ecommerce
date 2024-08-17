@@ -519,7 +519,7 @@
                     }
                 });
             }
-            lazyLoad();
+            // lazyLoad();
             // Check for visible images on page load
             // document.addEventListener("DOMContentLoaded", lazyLoad);
 
