@@ -54,6 +54,6 @@ class ShopProductDetailResource extends JsonResource
 
     protected function getFirstProductImage()
     {
-        return $this->ProductImage?->first()->image;
+        return $this->ProductImage?->first()?->image;
     }
 }

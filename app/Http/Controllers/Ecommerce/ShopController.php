@@ -113,6 +113,14 @@ class ShopController extends Controller
         $products = Product::latest()->paginate($request->count);
         return view('ecommerce.paginate-shop', compact('products'))->render();
     }
+
+    public function getSubcategories(Category $category)
+    {
+        $category->load('SubCategory'); // Load subcategories for the given category
+        return view('ecommerce.partials.subcategories', compact('category'))->render();
+    }
+
+
     public function shop(ShopPageRequest $shopPageRequest)
     {
         $searchCriteria = $shopPageRequest->input('search', '');
@@ -138,7 +146,9 @@ class ShopController extends Controller
         $brands = Brand::get();
 
         $user_id = auth()->user()->id ?? null;
-        $categories = Category::where('parent_category_id', null)->get();
+        // Load categories with one level of subcategories initially
+        $categories = Category::with(['SubCategory'])->where('parent_category_id', null)->get();
+
         $category = null;
         // Pass the search criteria, category, and categories to the view
         return view('ecommerce.shop', compact(['products', 'brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category']));
