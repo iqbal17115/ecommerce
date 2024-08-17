@@ -449,6 +449,7 @@
 
             // Check for visible images on page load
             document.addEventListener("DOMContentLoaded", lazyLoad);
+            
             // Get an array of all the image elements you want to load
             var images = document.getElementsByClassName('lazy-load');
 

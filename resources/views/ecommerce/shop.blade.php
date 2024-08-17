@@ -381,10 +381,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                        <div class="label-group">
-                                            <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                        </div>
-                                    ` : ''}
+                                            <div class="label-group">
+                                                <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                            </div>
+                                        ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -408,8 +408,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                            <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                        ` : ''}
+                                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                            ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -486,16 +486,16 @@
             var sublist = $('#sublist-' + categoryId);
 
             // if (sublist.is(':empty')) {
-                $.ajax({
-                    url: '/categories/' + categoryId + '/subcategories',
-                    method: 'GET',
-                    success: function(data) {
-                        sublist.html(data);
-                    },
-                    error: function() {
-                        alert('Failed to load subcategories.');
-                    }
-                });
+            $.ajax({
+                url: '/categories/' + categoryId + '/subcategories',
+                method: 'GET',
+                success: function(data) {
+                    sublist.html(data);
+                },
+                error: function() {
+                    alert('Failed to load subcategories.');
+                }
+            });
             // }
         });
 
@@ -507,51 +507,18 @@
         //     }
         // });
 
-        window.onload = function() {
-            // Code to be executed after rendering the full layout
-            function lazyLoad() {
-                const lazyImages = document.querySelectorAll('.lazy-load');
-                lazyImages.forEach(img => {
-                    if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
-                        .bottom >= 0 && getComputedStyle(img).display !== 'none') {
-                        img.src = img.dataset.src;
-                        img.classList.remove('lazyload');
-                    }
-                });
-            }
+        function lazyLoad() {
+            var images = document.querySelectorAll("img[data-src]");
+            images.forEach(function(img) {
+                if (img.getBoundingClientRect().top < window.innerHeight && img.getBoundingClientRect().bottom >
+                    0) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute("data-src");
+                    console.log("Image loaded:", img.src);
+                }
+            });
+        }
 
-            // Check for visible images on page load
-            document.addEventListener("DOMContentLoaded", lazyLoad);
-            // Get an array of all the image elements you want to load
-            var images = document.getElementsByClassName('lazy-load');
-
-            // Set up an IntersectionObserver to detect when the images are in view
-            var options = {
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            var observer = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(function(entry) {
-                    // If the image is in the viewport, load it by setting its `src` attribute to the appropriate URL
-                    if (entry.isIntersecting) {
-                        var image = entry.target;
-                        var imageUrl = image.getAttribute('data-src');
-                        image.src = imageUrl;
-                        image.classList.remove(
-                            'lazy-load'
-                        ); // Remove the class to prevent the image from being loaded again
-                        observer.unobserve(
-                            image); // Stop observing the image once it has been loaded
-                    }
-                });
-            }, options);
-
-            // Loop through all the image elements and observe them with the IntersectionObserver
-            for (var i = 0; i < images.length; i++) {
-                var image = images[i];
-                observer.observe(image);
-            }
-        };
+        document.addEventListener("DOMContentLoaded", lazyLoad);
     </script>
 @endpush
