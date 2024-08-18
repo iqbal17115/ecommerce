@@ -207,63 +207,63 @@
                                 <ul class="twitter-bs-wizard-nav nav-justified">
                                     <li class="nav-item">
                                         <a href="#addProductIdentity" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">01</span> --}}
-                                            Product Identity
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">1</span>
+                                            Identity
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#addVitalInfo" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">02</span> --}}
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">2</span>
                                             Vital Info
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="#variations" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">3</span>
                                             Variation
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#offer" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">4</span>
                                             Offer
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#compliance" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">5</span>
                                             Compliance
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#images" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">6</span>
                                             Images
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#description" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">7</span>
                                             Description
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#keywords" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">8</span>
                                             Keywords
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#more_details" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">03</span> --}}
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">9</span>
                                             More Details
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#progress-confirm-detail" class="nav-link" data-toggle="tab">
-                                            {{-- <span class="step-number mr-2">04</span> --}}
-                                            Confirm Detail
+                                            <span class="step-number mr-1" style="width: 23px; height: 23px; line-height: 18px;">10</span>
+                                            Confirm
                                         </a>
                                     </li>
                                 </ul>

@@ -1,6 +1,6 @@
 <script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
     // Start Product Validation According to wizard
-    $(document).ready(function() {
     var forms = [
         '#addProductIdentity',
         '#addVitalInfo',
@@ -14,97 +14,39 @@
         '#progress-confirm-detail'
     ];
 
-    var currentStep = 0;
-    var wizard = $('#progrss-wizard');
-    var navLinks = wizard.find('.nav-link');
-
-    function validateForm(formSelector) {
-        var $form = $(formSelector);
-        var isValid = true;
-
-        // Clear previous errors
-        $form.find(':input').removeClass('is-invalid');
-        $form.find('.invalid-feedback').remove();
-
-        // Validate required fields
-        $form.find(':input[required]').each(function() {
-            if ($(this).val() === '') {
-                isValid = false;
-                $(this).addClass('is-invalid');
-                $(this).after('<div class="invalid-feedback">This field is required.</div>');
-            }
-        });
-
-        return isValid;
-    }
-
-    function handleNextStep() {
-        var currentForm = forms[currentStep];
-        if (validateForm(currentForm)) {
-            if (currentStep < forms.length - 1) {
-                currentStep++;
-                updateTabState();
-            }
-        } else {
-            // Keep the current tab active if validation fails
-            updateTabState();
-        }
-    }
-
-    function handlePreviousStep() {
-        if (currentStep > 0) {
-            currentStep--;
-            updateTabState();
-        }
-    }
-
-    function updateTabState() {
-        // Remove active class from all nav-links
-        navLinks.removeClass('active');
-
-        // Hide all forms
-        $(forms.join(', ')).hide();
-
-        // Show the current form
-        $(forms[currentStep]).show();
-
-        // Add active class to the current nav-link
-        navLinks.eq(currentStep).addClass('active');
-
-        // Show the current tab
-        navLinks.eq(currentStep).tab('show');
-    }
-
-    // Prevent moving to the next tab unless the form is valid
-    navLinks.on('click', function(e) {
-        e.preventDefault();
-
-        var targetIndex = $(this).parent().index();
-        if (targetIndex <= currentStep) {
-            // Allow moving back to previous steps
-            currentStep = targetIndex;
-            updateTabState();
-        } else {
-            // Prevent moving forward unless the form is valid
-            handleNextStep();
-        }
-    });
-
     $('.twitter-bs-wizard-next').on('click', function(e) {
         e.preventDefault();
-        handleNextStep();
+
+        var currentStepIndex = $('.twitter-bs-wizard-nav .nav-link.active').parent().index();
+        var currentFormSelector = forms[currentStepIndex];
+        var currentForm = document.querySelector(currentFormSelector);
+
+        if (currentForm.checkValidity()) {
+            currentForm.reportValidity(); // This will highlight any invalid fields if found.
+            goToNextStep();
+        } else {
+            currentForm.reportValidity(); // This will show validation messages if the form is invalid.
+        }
     });
 
-    $('.pager .previous a').on('click', function(e) {
-        e.preventDefault();
-        handlePreviousStep();
-    });
+    function goToNextStep() {
+        var activeTab = $('.twitter-bs-wizard-nav .nav-link.active');
+        var nextTab = activeTab.parent().next().find('.nav-link');
 
-    // Initialize the first tab as active and show the first form
-    updateTabState();
+        if (nextTab.length) {
+            nextTab.tab('show'); // Move to the next tab
+            updateProgressBar();
+        }
+    }
+
+    function updateProgressBar() {
+        var currentIndex = $('.twitter-bs-wizard-nav .nav-link.active').parent().index();
+        var totalSteps = forms.length;
+        var percentage = ((currentIndex + 1) / totalSteps) * 100;
+
+        $('.progress-bar').css('width', percentage + '%');
+    }
 });
-
-
     // End Product Validation According to wizard
     function getKeywords() {
         var keywords = [];
@@ -176,8 +118,7 @@
             success: function(data) {
                 console.log(data);
                 if (data.status == 201) {
-                    $(".add_variant").removeClass("active");
-                    $(".add_product_offer").addClass("active");
+
                 }
             },
         });
@@ -254,8 +195,6 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
-                    $(".add_variant").removeClass("active");
-                    $(".add_product_offer").addClass("active");
                     Command: toastr["success"]("Product Variation Saved Successfully",
                         "Success")
                     toastr.options = {
@@ -301,10 +240,7 @@
             dataType: 'json',
             contentType: false,
             success: function(data) {
-                if (data.status == 201) {
-                    $(".add_keywords").removeClass("active");
-                    $(".add_more_details").addClass("active");
-                }
+
             },
         });
     });
@@ -325,8 +261,7 @@
                     if (!tab_menu.includes(6)) {
                         tab_menu.push(6);
                     }
-                    $(".add_description").removeClass("active");
-                    $(".add_keywords").addClass("active");
+
                 }
             },
         });
@@ -358,8 +293,7 @@
                     if (!tab_menu.includes(8)) {
                         tab_menu.push(8);
                     }
-                    $(".add_product_image").removeClass("active");
-                    $(".add_description").addClass("active");
+
                 }
             },
         });
@@ -382,8 +316,6 @@
                     if (!tab_menu.includes(4)) {
                         tab_menu.push(4);
                     }
-                    $(".add_product_offer").removeClass("active");
-                    $(".add_product_image").addClass("active");
                 }
             },
         });
@@ -449,8 +381,6 @@
                     $("#product_compliance_id").val(data.product_id);
                     $("#product_more_detail_id").val(data.product_id);
                     $("#product_variant_info_id").val(data.product_id);
-                    $(".add_vital_info").removeClass("active");
-                    $(".add_variant").addClass("active");
                 }
             },
             error: (error) => {
