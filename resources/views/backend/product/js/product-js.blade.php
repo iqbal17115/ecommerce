@@ -1,52 +1,65 @@
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function () {
-    // Start Product Validation According to wizard
-    var forms = [
-        '#addProductIdentity',
-        '#addVitalInfo',
-        '#variations',
-        '#offer',
-        '#compliance',
-        '#images',
-        '#description',
-        '#keywords',
-        '#more_details',
-        '#progress-confirm-detail'
-    ];
-
-    $('.twitter-bs-wizard-next').on('click', function(e) {
-        e.preventDefault();
-
-        var currentStepIndex = $('.twitter-bs-wizard-nav .nav-link.active').parent().index();
-        var currentFormSelector = forms[currentStepIndex];
-        var currentForm = document.querySelector(currentFormSelector);
-
-        if (currentForm.checkValidity()) {
-            currentForm.reportValidity(); // This will highlight any invalid fields if found.
-            goToNextStep();
-        } else {
-            currentForm.reportValidity(); // This will show validation messages if the form is invalid.
-        }
-    });
-
-    function goToNextStep() {
-        var activeTab = $('.twitter-bs-wizard-nav .nav-link.active');
-        var nextTab = activeTab.parent().next().find('.nav-link');
-
-        if (nextTab.length) {
-            nextTab.tab('show'); // Move to the next tab
-            updateProgressBar();
-        }
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+    const wizardNav = document.querySelectorAll('.twitter-bs-wizard-nav .nav-link');
+    const progressBar = document.getElementById('progress-bar');
+    let currentStep = 0;
 
     function updateProgressBar() {
-        var currentIndex = $('.twitter-bs-wizard-nav .nav-link.active').parent().index();
-        var totalSteps = forms.length;
-        var percentage = ((currentIndex + 1) / totalSteps) * 100;
-
-        $('.progress-bar').css('width', percentage + '%');
+        const percentage = ((currentStep + 1) / wizardNav.length) * 100;
+        progressBar.style.width = `${percentage}%`;
     }
+
+    function showStep(index) {
+        wizardNav[currentStep].classList.remove('active');
+        wizardNav[index].classList.add('active');
+
+        const tabs = document.querySelectorAll('.tab-pane');
+        tabs[currentStep].classList.remove('active');
+        tabs[index].classList.add('active');
+
+        currentStep = index;
+        updateProgressBar();
+    }
+
+    function validateCurrentStep() {
+        const currentForm = document.querySelector('.tab-pane.active form');
+        if (currentForm) {
+            return currentForm.checkValidity();
+        }
+        return false;
+    }
+
+    function handleNext() {
+        if (validateCurrentStep()) {
+            if (currentStep < wizardNav.length - 1) {
+                showStep(currentStep + 1);
+            }
+        } else {
+            const currentForm = document.querySelector('.tab-pane.active form');
+            if (currentForm) {
+                currentForm.reportValidity();
+            }
+        }
+    }
+
+    function handlePrev() {
+        if (currentStep > 0) {
+            showStep(currentStep - 1);
+        }
+    }
+
+    document.querySelectorAll('.next-btn').forEach(btn => {
+        btn.addEventListener('click', handleNext);
+    });
+
+    document.querySelectorAll('.prev-btn').forEach(btn => {
+        btn.addEventListener('click', handlePrev);
+    });
+
+    // Initialize first step as active and progress bar
+    showStep(0);
 });
+
     // End Product Validation According to wizard
     function getKeywords() {
         var keywords = [];

@@ -164,23 +164,16 @@
                         </select>
                     </div>
                     <!-- End -->
-
-                    <div class="col-md-12 mt-3 text-right">
-                        <button class="btn btn-sm btn-warning ml-2">
-                            Save as Draft
-                        </button>
-                        <button class="btn btn-sm btn-info ml-2">
-                            Save and Next
-                        </button>
-                        <button class="btn btn-sm btn-success ml-2">
-                            Save and Finish
-                        </button>
-                    </div>
-                    <!-- End -->
                 </div>
                 <!-- End Content -->
             </div>
             <div class="col-md-2"></div>
+            <!-- End -->
+
+            <div class="col-md-12 mt-3 text-right">
+                <button type="submit" class="prev-btn btn-warning float-left">Previous</button>
+                <button type="submit" class="next-btn  btn-success float-right">Next</button>
+            </div>
             <!-- End -->
         </div>
     </form>

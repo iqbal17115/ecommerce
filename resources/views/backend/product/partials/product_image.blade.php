@@ -59,11 +59,9 @@
                 </div>
             </div>
             <!-- End -->
-            <div class="col-md-12 mt-md-3">
-                <button class="float-right btn btn-success btn-sm ml-2">Save and
-                    finish</button>
-                <button class="float-right btn btn-warning btn-sm">Save as
-                    draft</button>
+            <div class="col-md-12 mt-3 text-right">
+                <button type="submit" class="prev-btn btn-warning float-left">Previous</button>
+                <button type="submit" class="next-btn  btn-success float-right">Next</button>
             </div>
             <!-- End -->
         </div>
