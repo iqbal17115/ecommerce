@@ -145,7 +145,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12 ml-auto">
-                    <p class="category h4">Add Product</p>
+                    <p class="category h4">Add Product <span><a href="{{ route('product_list') }}" class="btn btn-success text-light btn-sm float-right clean_form" style="width: 100px;">List</a></span></p>
                     <!-- Nav tabs -->
                     <div class="card">
                         {{-- <div class="card-header">

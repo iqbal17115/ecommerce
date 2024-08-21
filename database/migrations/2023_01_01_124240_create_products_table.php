@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ProductStatusEnums;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -49,7 +50,8 @@ class CreateProductsTable extends Migration
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();
             $table->uuid('vendor_id')->nullable()->index();
-            $table->boolean('is_active')->nullable()->default(1);
+            $table->enum('status', array_keys(ProductStatusEnums::getValues()));
+            $table->tinyInteger('step')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

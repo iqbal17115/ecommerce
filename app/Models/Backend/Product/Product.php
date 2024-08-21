@@ -55,6 +55,7 @@ class Product extends Model
         'brand_id',
         'product_feature_id',
         'branch_id',
+        'status',
         'vendor_id',
         'is_active',
     ];

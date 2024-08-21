@@ -497,6 +497,7 @@ Route::group(['middleware' => 'web'], function () {
                 Route::post('add-add_product_compliance', [ProductController::class, 'addProductComplianceInfo'])->name('add.add_product_compliance');
                 Route::post('add-add_product_more_detail', [ProductController::class, 'addProductMoreDetailInfo'])->name('add.add_product_more_detail');
                 Route::post('add-add_variant_variant', [ProductController::class, 'addProductVariantInfo'])->name('add.add_variant_variant');
+                Route::post('/product/save', [ProductController::class, 'saveProduct'])->name('product.save');
                 Route::post('products/variations', [ProductVariationController::class, 'storeVariations'])->name('products.store-variations');
                 Route::post('delete-product', [ProductController::class, 'deleteProduct'])->name('delete.product');
                 Route::post('product-stock-qty', [ProductController::class, 'updateStockQty'])->name('product_stock_qty.update');
