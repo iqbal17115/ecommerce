@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Product;
 
+use App\Enums\ProductStatusEnums;
 use App\Helpers\Message;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Brand;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminPanel\Product\ConfirmProductRequest;
 use App\Models\Attribute;
 use App\Models\Backend\Product\ProductFeature;
 use App\Services\UnitConversionService;
@@ -328,7 +330,10 @@ class ProductController extends Controller
         }
         $unitConversionService = $this->unitConversionService;
         $attributes = Attribute::orderBy('id', 'DESC')->get();
-        return view('backend.product.product', compact('attributes', 'categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService'));
+
+        $product_statuses = ProductStatusEnums::getValues();
+
+        return view('backend.product.product', compact('attributes', 'categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService', 'product_statuses'));
     }
 
     private function prepareProductInfo($product)
@@ -342,5 +347,14 @@ class ProductController extends Controller
             }
         }
         return $product;
+    }
+
+    public function saveProduct(ConfirmProductRequest $request)
+    {
+        // Attempt to find the product by its ID
+         $product = Product::find($request->input('product_id'));
+         $product->update(['status' => $request->input('status'), 'step' => 0]);
+
+        return redirect()->route('product_list');
     }
 }

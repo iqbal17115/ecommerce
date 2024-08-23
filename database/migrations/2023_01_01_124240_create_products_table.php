@@ -51,7 +51,7 @@ class CreateProductsTable extends Migration
             $table->uuid('deleted_by')->nullable()->index();
             $table->uuid('vendor_id')->nullable()->index();
             $table->enum('status', array_keys(ProductStatusEnums::getValues()));
-            $table->tinyInteger('step')->nullable();
+            $table->tinyInteger('step')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

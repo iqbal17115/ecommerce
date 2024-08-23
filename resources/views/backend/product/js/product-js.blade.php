@@ -150,7 +150,7 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
-                    window.location.href = "product_list";
+
                 }
             },
         });
@@ -357,6 +357,7 @@
                     $("#product_compliance_id").val(data.product_id);
                     $("#product_more_detail_id").val(data.product_id);
                     $("#product_variant_info_id").val(data.product_id);
+                    $(".product_id").val(data.product_id);
                 }
             },
             error: (error) => {
