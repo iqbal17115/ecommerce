@@ -253,7 +253,25 @@
             dataType: 'json',
             contentType: false,
             success: function(data) {
-
+                Command: toastr["success"]("Product Keyword Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
             },
         });
     });
@@ -271,10 +289,25 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
-                    if (!tab_menu.includes(6)) {
-                        tab_menu.push(6);
+                    Command: toastr["success"]("Product Description Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
                     }
-
                 }
             },
         });
@@ -329,6 +362,25 @@
                     if (!tab_menu.includes(4)) {
                         tab_menu.push(4);
                     }
+                    Command: toastr["success"]("Product Detail Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
                 }
             },
         });
@@ -348,6 +400,25 @@
             contentType: false,
             success: function(data) {
                 if (data.status == 201) {
+                    Command: toastr["success"]("Product Identity Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
                     $("#product_identity_id").val(data.product_id);
                     $("#vital_info_id").val(data.product_id);
                     $("#product_offer_id").val(data.product_id);
@@ -395,6 +466,26 @@
                     $("#product_compliance_id").val(data.product_id);
                     $("#product_more_detail_id").val(data.product_id);
                     $("#product_variant_info_id").val(data.product_id);
+
+                    Command: toastr["success"]("Vital Info Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
                 }
             },
             error: (error) => {
