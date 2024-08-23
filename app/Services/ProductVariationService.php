@@ -39,7 +39,9 @@ class ProductVariationService
                                     [
                                         'attribute_value_id' => $attributeId,
                                         'group_number' => isset($data['groups'][$attrKey][0]) ? $data['groups'][$attrKey][0] : $attrKey,
-                                        'stock' => $attributeIds['stock']
+                                        'stock' => $attributeIds['stock'],
+                                        'sku' => $attributeIds['sku'],
+                                        'status' => isset($attributeIds['status']) ? 1 : 0,
                                     ]
                                 );
                             }

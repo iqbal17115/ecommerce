@@ -342,7 +342,7 @@ class ProductController extends Controller
             $variation->groupedAttributeValues = $variation->variationAttributeValues->groupBy('group_number');
             foreach ($variation->groupedAttributeValues as $groupNumber => $attributeValues) {
                 foreach ($attributeValues as $attributeValue) {
-                    $attributeValue->attribute = $attributeValue->attributeValue->attribute;
+                    $attributeValue->attribute = $attributeValue?->attributeValue?->attribute;
                 }
             }
         }
@@ -352,8 +352,8 @@ class ProductController extends Controller
     public function saveProduct(ConfirmProductRequest $request)
     {
         // Attempt to find the product by its ID
-         $product = Product::find($request->input('product_id'));
-         $product->update(['status' => $request->input('status'), 'step' => 0]);
+        $product = Product::find($request->input('product_id'));
+        $product->update(['status' => $request->input('status'), 'step' => 0]);
 
         return redirect()->route('product_list');
     }

@@ -20,6 +20,8 @@ class CreateVariationAttributeValuesTable extends Migration
             $table->uuid('attribute_value_id');
             $table->text('group_number');
             $table->integer('stock');
+            $table->string('sku', 100)->nullable();
+            $table->boolean('status')->default(true);
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();

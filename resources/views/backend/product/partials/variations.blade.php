@@ -47,12 +47,24 @@
                                                 </div>
                                             @endforeach
 
-                                            <div class="form-group mb-0 col-md-3">
+                                            <div class="form-group mb-0 col-md-1">
                                                 <input type="number" name="variations[{{ $variationKey }}][attribute_values][{{ $groupNumber }}][stock]"
                                                     id="stock_{{ $variationKey }}" value="{{ $attributeValues->first()->stock }}"
                                                     class="form-control form-control-sm" placeholder="Stock Quantity" required>
                                             </div>
 
+                                            <div class="form-group mb-0 col-md-1">
+                                                <input type="text" name="variations[{{ $variationKey }}][attribute_values][{{ $groupNumber }}][sku]"
+                                                    id="sku_{{ $variationKey }}" value="{{ $attributeValues->first()->sku }}"
+                                                    class="form-control form-control-sm" placeholder="SKU" required>
+                                            </div>
+
+                                            <div class="form-group mb-0 col-md-1">
+                                                <div class="custom-control custom-switch custom-switch-md mb-3" dir="ltr">
+                                                    <input type="checkbox" name="variations[{{ $variationKey }}][attribute_values][{{ $groupNumber }}][status]" class="custom-control-input" id="status_{{ $variationKey }}" @if($attributeValues->first()->status == 1) checked @endif>
+                                                    <label class="custom-control-label" for="status_{{ $variationKey }}"></label>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -81,10 +93,24 @@
                                             </select>
                                         </div>
                                     @endforeach
-                                    <div class="form-group col-md-3">
+                                    <div class="form-group col-md-1">
                                         <input type="number" name="variations[0][attribute_values][0_0][stock]" id="stock_0_0"
                                             class="form-control form-control-sm" placeholder="Stock Quantity" required>
                                     </div>
+
+                                    <div class="form-group mb-0 col-md-1">
+                                        <input type="text" name="variations[0][attribute_values][0_0][sku]"
+                                            id="sku_0_0"
+                                            class="form-control form-control-sm" placeholder="SKU" required>
+                                    </div>
+
+                                    <div class="form-group mb-0 col-md-1">
+                                        <div class="custom-control custom-switch custom-switch-md mb-3" dir="ltr">
+                                            <input type="checkbox" name="variations[0][attribute_values][0_0][status]" class="custom-control-input" id="status_0_0">
+                                            <label class="custom-control-label" for="status_0_0"></label>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <button type="button" class="btn btn-sm btn-secondary add-multiple-variation">Add</button>

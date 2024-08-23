@@ -17,7 +17,9 @@ class VariationAttributeValue extends Model
         'product_variation_id',
         'attribute_value_id',
         'group_number',
-        'stock'
+        'stock',
+        'sku',
+        'status'
     ];
 
     public function attributeValue(): BelongsTo

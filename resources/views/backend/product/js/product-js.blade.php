@@ -1,64 +1,64 @@
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
-    const wizardNav = document.querySelectorAll('.twitter-bs-wizard-nav .nav-link');
-    const progressBar = document.getElementById('progress-bar');
-    let currentStep = 0;
+        const wizardNav = document.querySelectorAll('.twitter-bs-wizard-nav .nav-link');
+        const progressBar = document.getElementById('progress-bar');
+        let currentStep = 0;
 
-    function updateProgressBar() {
-        const percentage = ((currentStep + 1) / wizardNav.length) * 100;
-        progressBar.style.width = `${percentage}%`;
-    }
-
-    function showStep(index) {
-        wizardNav[currentStep].classList.remove('active');
-        wizardNav[index].classList.add('active');
-
-        const tabs = document.querySelectorAll('.tab-pane');
-        tabs[currentStep].classList.remove('active');
-        tabs[index].classList.add('active');
-
-        currentStep = index;
-        updateProgressBar();
-    }
-
-    function validateCurrentStep() {
-        const currentForm = document.querySelector('.tab-pane.active form');
-        if (currentForm) {
-            return currentForm.checkValidity();
+        function updateProgressBar() {
+            const percentage = ((currentStep + 1) / wizardNav.length) * 100;
+            progressBar.style.width = `${percentage}%`;
         }
-        return false;
-    }
 
-    function handleNext() {
-        if (validateCurrentStep()) {
-            if (currentStep < wizardNav.length - 1) {
-                showStep(currentStep + 1);
-            }
-        } else {
+        function showStep(index) {
+            wizardNav[currentStep].classList.remove('active');
+            wizardNav[index].classList.add('active');
+
+            const tabs = document.querySelectorAll('.tab-pane');
+            tabs[currentStep].classList.remove('active');
+            tabs[index].classList.add('active');
+
+            currentStep = index;
+            updateProgressBar();
+        }
+
+        function validateCurrentStep() {
             const currentForm = document.querySelector('.tab-pane.active form');
             if (currentForm) {
-                currentForm.reportValidity();
+                return currentForm.checkValidity();
+            }
+            return false;
+        }
+
+        function handleNext() {
+            if (validateCurrentStep()) {
+                if (currentStep < wizardNav.length - 1) {
+                    showStep(currentStep + 1);
+                }
+            } else {
+                const currentForm = document.querySelector('.tab-pane.active form');
+                if (currentForm) {
+                    currentForm.reportValidity();
+                }
             }
         }
-    }
 
-    function handlePrev() {
-        if (currentStep > 0) {
-            showStep(currentStep - 1);
+        function handlePrev() {
+            if (currentStep > 0) {
+                showStep(currentStep - 1);
+            }
         }
-    }
 
-    document.querySelectorAll('.next-btn').forEach(btn => {
-        btn.addEventListener('click', handleNext);
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', handleNext);
+        });
+
+        document.querySelectorAll('.prev-btn').forEach(btn => {
+            btn.addEventListener('click', handlePrev);
+        });
+
+        // Initialize first step as active and progress bar
+        showStep(0);
     });
-
-    document.querySelectorAll('.prev-btn').forEach(btn => {
-        btn.addEventListener('click', handlePrev);
-    });
-
-    // Initialize first step as active and progress bar
-    showStep(0);
-});
 
     // End Product Validation According to wizard
     function getKeywords() {
@@ -254,24 +254,24 @@
             contentType: false,
             success: function(data) {
                 Command: toastr["success"]("Product Keyword Saved Successfully",
-                        "Success")
-                    toastr.options = {
-                        "closeButton": true,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": true,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "300",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    }
+                    "Success")
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
             },
         });
     });
@@ -928,8 +928,17 @@
                             </select>
                         </div>
                     @endforeach
-                    <div class="form-group mb-0 col-md-3">
+                    <div class="form-group mb-0 col-md-1">
                         <input type="number" name="variations[${variationCount}][attribute_values][${variationCount}_0][stock]" id="stock_${variationCount}_0" class="form-control form-control-sm" placeholder="Stock Quantity" required>
+                    </div>
+                    <div class="form-group mb-0 col-md-1">
+                        <input type="number" name="variations[${variationCount}][attribute_values][${variationCount}_0][sku]" id="sku_${variationCount}_0" class="form-control form-control-sm" placeholder="SKU" required>
+                    </div>
+                    <div class="form-group mb-0 col-md-1">
+                        <div class="custom-control custom-switch custom-switch-md mb-3" dir="ltr">
+                            <input type="checkbox" name="variations[${variationCount}][attribute_values][${variationCount}_0][status]" class="custom-control-input" id="status_${variationCount}_0" checked>
+                            <label class="custom-control-label" for="status_${variationCount}_0"></label>
+                        </div>
                     </div>
                     </div>
             </div>
@@ -957,9 +966,18 @@
                         </select>
                     </div>
                 @endforeach
-                <div class="form-group mb-0 col-md-3">
+                <div class="form-group mb-0 col-md-1">
                         <input type="number" name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][stock]" id="stock_${variationCount}_0" class="form-control form-control-sm" placeholder="Stock Quantity" required>
                 </div>
+                <div class="form-group mb-0 col-md-1">
+                        <input type="number" name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][sku]" id="sku_${variationCount}_0" class="form-control form-control-sm" placeholder="SKU" required>
+                    </div>
+                    <div class="form-group mb-0 col-md-1">
+                        <div class="custom-control custom-switch custom-switch-md mb-3" dir="ltr">
+                            <input type="checkbox" name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][status]" class="custom-control-input" id="status_${variationCount}_0" checked>
+                            <label class="custom-control-label" for="status_${variationCount}_0"></label>
+                        </div>
+                    </div>
             `;
                 currentVariationForm.querySelector('.price-stock-container').appendChild(
                     priceStockForm);
