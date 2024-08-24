@@ -330,7 +330,7 @@
                                             <span class="attribute">
                                                 @foreach ($attributeValues as $attributeValue)
                                                     <span
-                                                        class="attribute-value">{{ $attributeValue->attributeValue->value }}</span>
+                                                        class="attribute-value">{{ $attributeValue?->attributeValue?->value }}</span>
                                                 @endforeach
                                             </span>
                                         </span>
