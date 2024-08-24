@@ -586,7 +586,7 @@
         <input type="hidden" name="category" id="get_category_id" value="{{ $productInfo->category_id }}">
         <input type="hidden" name="variation" id="variation" value="{{ $productInfo->variation }}">
         @foreach ($productInfo->ProductImage as $product_info_image)
-            <input type="text" name="product_info_image[]"
+            <input type="hidden" name="product_info_image[]"
                 id="product_info_image_{{ $product_info_image->serial }}" data-id="{{ $product_info_image->id }}" value="{{ $product_info_image->image }}">
         @endforeach
         <script>
