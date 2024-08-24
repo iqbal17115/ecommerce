@@ -27,68 +27,100 @@
                               <div class="col-md-6">
                                   <div class="form-group category_load">
                                       <label for="id">Select Category</label>
-                                      <select name="id" id="id" class="form-control category_id" style="width: 100%;">
+                                      <select name="id" id="id" class="form-control category_id"
+                                          style="width: 100%;">
                                           <option value="">Select Option</option>
-                                          @foreach($parent_categories as $category)
-                                          <option value="{{$category->id}}">
-                                              {{$category->name}}
-                                          </option>
-                                          <!-- Start Sub-Category -->
-                                          @if($category->SubCategory)
-                                          @foreach($category->SubCategory as $subCategory)
-                                          <option value="{{$subCategory->id}}">
-                                              --{{$subCategory->name}}
-                                          </option>
-                                          <!-- Start sub-Sub-Category -->
-                                          @if($subCategory->SubCategory)
-                                          @foreach($subCategory->SubCategory as $subSubCategory)
-                                          <option value="{{$subSubCategory->id}}">
-                                              ----{{$subSubCategory->name}}
-                                          </option>
-                                          <!-- Start sub-Sub-Sub-Category -->
-                                          @if($subSubCategory->SubCategory)
-                                          @foreach($subSubCategory->SubCategory as $subSubSubCategory)
-                                          <option value="{{$subSubSubCategory->id}}">
-                                              ------{{$subSubSubCategory->name}}
-                                          </option>
-                                          <!-- Start sub-Sub-Sub-Sub-Category -->
-                                          @if($subSubSubCategory->SubCategory)
-                                          @foreach($subSubSubCategory->SubCategory as $subSubSubSubCategory)
-                                          <option value="{{$subSubSubSubCategory->id}}">
-                                              --------{{$subSubSubSubCategory->name}}
-                                          </option>
-                                          <!-- Start sub-Sub-Sub-Sub-Sub-Category -->
-                                          @if($subSubSubSubCategory->SubCategory)
-                                          @foreach($subSubSubSubCategory->SubCategory as
-                                          $subSubSubSubSubCategory)
-                                          <option value="{{$subSubSubSubSubCategory->id}}">
-                                              ----------{{$subSubSubSubSubCategory->name}}
-                                          </option>
-                                          <!-- Start sub-Sub-Sub-Sub-Sub-Sub-Category -->
-                                          @if($subSubSubSubSubCategory->SubCategory)
-                                          @foreach($subSubSubSubSubCategory->SubCategory as
-                                          $subSubSubSubSubSubCategory)
-                                          <option value="{{$subSubSubSubSubSubCategory->id}}">
-                                              ----------{{$subSubSubSubSubSubCategory->name}}
-                                          </option>
-                                          @endforeach
-                                          @endif
-                                          <!-- End sub-Sub-Sub-Sub-Sub-Sub-Category -->
-                                          @endforeach
-                                          @endif
-                                          <!-- End sub-Sub-Sub-Sub-Sub-Category -->
-                                          @endforeach
-                                          @endif
-                                          <!-- End sub-Sub-Sub-Sub-Category -->
-                                          @endforeach
-                                          @endif
-                                          <!-- End sub-Sub-Sub-Category -->
-                                          @endforeach
-                                          @endif
-                                          <!-- End sub-Sub-Category -->
-                                          @endforeach
-                                          @endif
-                                          <!-- End Sub Category -->
+
+                                          <!-- Loop through parent categories -->
+                                          @foreach ($parent_categories as $category)
+                                              <option value="{{ $category->id }}">
+                                                  {{ $category->name }}
+                                              </option>
+
+                                              <!-- Loop through subcategories of the first level -->
+                                              @if ($category->SubCategory)
+                                                  @foreach ($category->SubCategory as $subCategory)
+                                                      <option value="{{ $subCategory->id }}">
+                                                          {{ $category->name }} > {{ $subCategory->name }}
+                                                      </option>
+
+                                                      <!-- Loop through subcategories of the second level -->
+                                                      @if ($subCategory->SubCategory)
+                                                          @foreach ($subCategory->SubCategory as $subSubCategory)
+                                                              <option value="{{ $subSubCategory->id }}">
+                                                                  {{ $category->name }} > {{ $subCategory->name }} >
+                                                                  {{ $subSubCategory->name }}
+                                                              </option>
+
+                                                              <!-- Loop through subcategories of the third level -->
+                                                              @if ($subSubCategory->SubCategory)
+                                                                  @foreach ($subSubCategory->SubCategory as $subSubSubCategory)
+                                                                      <option value="{{ $subSubSubCategory->id }}">
+                                                                          {{ $category->name }} >
+                                                                          {{ $subCategory->name }} >
+                                                                          {{ $subSubCategory->name }} >
+                                                                          {{ $subSubSubCategory->name }}
+                                                                      </option>
+
+                                                                      <!-- Loop through subcategories of the fourth level -->
+                                                                      @if ($subSubSubCategory->SubCategory)
+                                                                          @foreach ($subSubSubCategory->SubCategory as $subSubSubSubCategory)
+                                                                              <option
+                                                                                  value="{{ $subSubSubSubCategory->id }}">
+                                                                                  {{ $category->name }} >
+                                                                                  {{ $subCategory->name }} >
+                                                                                  {{ $subSubCategory->name }} >
+                                                                                  {{ $subSubSubCategory->name }} >
+                                                                                  {{ $subSubSubSubCategory->name }}
+                                                                              </option>
+
+                                                                              <!-- Loop through subcategories of the fifth level -->
+                                                                              @if ($subSubSubSubCategory->SubCategory)
+                                                                                  @foreach ($subSubSubSubCategory->SubCategory as $subSubSubSubSubCategory)
+                                                                                      <option
+                                                                                          value="{{ $subSubSubSubSubCategory->id }}">
+                                                                                          {{ $category->name }} >
+                                                                                          {{ $subCategory->name }} >
+                                                                                          {{ $subSubCategory->name }}
+                                                                                          >
+                                                                                          {{ $subSubSubCategory->name }}
+                                                                                          >
+                                                                                          {{ $subSubSubSubCategory->name }}
+                                                                                          >
+                                                                                          {{ $subSubSubSubSubCategory->name }}
+                                                                                      </option>
+
+                                                                                      <!-- Loop through subcategories of the sixth level -->
+                                                                                      @if ($subSubSubSubSubCategory->SubCategory)
+                                                                                          @foreach ($subSubSubSubSubCategory->SubCategory as $subSubSubSubSubSubCategory)
+                                                                                              <option
+                                                                                                  value="{{ $subSubSubSubSubSubCategory->id }}">
+                                                                                                  {{ $category->name }}
+                                                                                                  ->
+                                                                                                  {{ $subCategory->name }}
+                                                                                                  ->
+                                                                                                  {{ $subSubCategory->name }}
+                                                                                                  ->
+                                                                                                  {{ $subSubSubCategory->name }}
+                                                                                                  ->
+                                                                                                  {{ $subSubSubSubCategory->name }}
+                                                                                                  ->
+                                                                                                  {{ $subSubSubSubSubCategory->name }}
+                                                                                                  ->
+                                                                                                  {{ $subSubSubSubSubSubCategory->name }}
+                                                                                              </option>
+                                                                                          @endforeach
+                                                                                      @endif
+                                                                                  @endforeach
+                                                                              @endif
+                                                                          @endforeach
+                                                                      @endif
+                                                                  @endforeach
+                                                              @endif
+                                                          @endforeach
+                                                      @endif
+                                                  @endforeach
+                                              @endif
                                           @endforeach
                                       </select>
                                   </div>
@@ -100,11 +132,11 @@
                                       <select name="product_feature_id" id="product_feature_id"
                                           class="form-control product_feature_id" style="width: 100%;">
                                           <option value="">Select Option</option>
-                                          @foreach($product_features as $product_feature)
-                                          <option value="{{$product_feature->id}}">
-                                              {{$product_feature->name}}
-                                          </option>
-                                          <!-- End Sub Category -->
+                                          @foreach ($product_features as $product_feature)
+                                              <option value="{{ $product_feature->id }}">
+                                                  {{ $product_feature->name }}
+                                              </option>
+                                              <!-- End Sub Category -->
                                           @endforeach
                                       </select>
                                   </div>
@@ -217,7 +249,8 @@
                                   style="width: 30px; height: 30px;" />
                           </center>
                           <center>
-                              <img id="imgPreview" class="rounded" src="#" alt="" style="width: 30px; height: 30px;" />
+                              <img id="imgPreview" class="rounded" src="#" alt=""
+                                  style="width: 30px; height: 30px;" />
                           </center>
                           <span style="width: 200px;"></span>
                           <button type="button" class="btn btn-secondary waves-effect"
