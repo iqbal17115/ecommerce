@@ -65,7 +65,7 @@
                                             <span class="attribute">
                                                 @foreach ($attributeValues as $attributeValue)
                                                     <span
-                                                        class="attribute-value">{{ $attributeValue->attributeValue->value }}</span>
+                                                        class="attribute-value">{{ $attributeValue?->attributeValue?->value }}</span>
                                                 @endforeach
                                                 <span
                                                         class="attribute-value"> |Price:{{ $variation->price }} Stock:{{ $attributeValues->first()->stock }}</span>

@@ -212,14 +212,14 @@
                             <div id="progrss-wizard" class="twitter-bs-wizard">
                                 <ul class="twitter-bs-wizard-nav nav-justified">
                                     <li class="nav-item">
-                                        <a href="#addProductIdentity" class="nav-link {{ $activeStep == 0 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#addProductIdentity" class="nav-link {{ $activeStep == 0 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">1</span>
                                             Identity
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#addVitalInfo" class="nav-link {{ $activeStep == 1 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#addVitalInfo" class="nav-link {{ $activeStep == 1 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">2</span>
                                             Vital Info
@@ -227,56 +227,56 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="#variations" class="nav-link {{ $activeStep == 2 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#variations" class="nav-link {{ $activeStep == 2 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">3</span>
                                             Variation
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#offer" class="nav-link {{ $activeStep == 3 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#offer" class="nav-link {{ $activeStep == 3 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">4</span>
                                             Offer
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#compliance" class="nav-link {{ $activeStep == 4 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#compliance" class="nav-link {{ $activeStep == 4 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">5</span>
                                             Compliance
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#images" class="nav-link {{ $activeStep == 5 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#images" class="nav-link {{ $activeStep == 5 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">6</span>
                                             Images
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#description" class="nav-link {{ $activeStep == 6 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#description" class="nav-link {{ $activeStep == 6 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">7</span>
                                             Description
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#keywords" class="nav-link {{ $activeStep == 7 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#keywords" class="nav-link {{ $activeStep == 7 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">8</span>
                                             Keywords
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#more_details" class="nav-link {{ $activeStep == 8 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#more_details" class="nav-link {{ $activeStep == 8 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">9</span>
                                             More Details
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#progress-confirm-detail" class="nav-link {{ $activeStep == 9 ? 'active' : '' }}" data-toggle="tab">
+                                        <a href="#progress-confirm-detail" class="nav-link {{ $activeStep == 9 ? 'active' : '' }} disabled" data-toggle="tab">
                                             <span class="step-number mr-1"
                                                 style="width: 23px; height: 23px; line-height: 18px;">10</span>
                                             Confirm

@@ -53,51 +53,49 @@
                         <span class="text-danger float-md-right">*</span>
                     </div>
                     <div class="col-md-8 mt-md-3">
-                        <select class="form-select" id="category_id" name="category_id" onchange="variantByCategory(this)" required>
+                        <select class="form-select" id="category_id" name="category_id" required>
                             <option value="">Select Option</option>
-                            
+                        
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">
+                                <option value="{{ $category->id }}"
+                                    @if($productInfo && $productInfo->category_id == $category->id) selected @endif>
                                     {{ $category->name }}
                                 </option>
                         
                                 @if ($category->SubCategory)
                                     @foreach ($category->SubCategory as $subCategory)
-                                        <option value="{{ $subCategory->id }}">
+                                        <option value="{{ $subCategory->id }}"
+                                            @if($productInfo && $productInfo->category_id == $subCategory->id) selected @endif>
                                             {{ $category->name }} > {{ $subCategory->name }}
                                         </option>
                         
                                         @if ($subCategory->SubCategory)
                                             @foreach ($subCategory->SubCategory as $subSubCategory)
-                                                <option value="{{ $subSubCategory->id }}">
+                                                <option value="{{ $subSubCategory->id }}"
+                                                    @if($productInfo && $productInfo->category_id == $subSubCategory->id) selected @endif>
                                                     {{ $category->name }} > {{ $subCategory->name }} > {{ $subSubCategory->name }}
                                                 </option>
                         
                                                 @if ($subSubCategory->SubCategory)
                                                     @foreach ($subSubCategory->SubCategory as $subSubSubCategory)
-                                                        <option value="{{ $subSubSubCategory->id }}">
+                                                        <option value="{{ $subSubSubCategory->id }}"
+                                                            @if($productInfo && $productInfo->category_id == $subSubSubCategory->id) selected @endif>
                                                             {{ $category->name }} > {{ $subCategory->name }} > {{ $subSubCategory->name }} > {{ $subSubSubCategory->name }}
                                                         </option>
                         
                                                         @if ($subSubSubCategory->SubCategory)
                                                             @foreach ($subSubSubCategory->SubCategory as $subSubSubSubCategory)
-                                                                <option value="{{ $subSubSubSubCategory->id }}">
+                                                                <option value="{{ $subSubSubSubCategory->id }}"
+                                                                    @if($productInfo && $productInfo->category_id == $subSubSubSubCategory->id) selected @endif>
                                                                     {{ $category->name }} > {{ $subCategory->name }} > {{ $subSubCategory->name }} > {{ $subSubSubCategory->name }} > {{ $subSubSubSubCategory->name }}
                                                                 </option>
                         
                                                                 @if ($subSubSubSubCategory->SubCategory)
                                                                     @foreach ($subSubSubSubCategory->SubCategory as $subSubSubSubSubCategory)
-                                                                        <option value="{{ $subSubSubSubSubCategory->id }}">
+                                                                        <option value="{{ $subSubSubSubSubCategory->id }}"
+                                                                            @if($productInfo && $productInfo->category_id == $subSubSubSubSubCategory->id) selected @endif>
                                                                             {{ $category->name }} > {{ $subCategory->name }} > {{ $subSubCategory->name }} > {{ $subSubSubCategory->name }} > {{ $subSubSubSubCategory->name }} > {{ $subSubSubSubSubCategory->name }}
                                                                         </option>
-                        
-                                                                        @if ($subSubSubSubSubCategory->SubCategory)
-                                                                            @foreach ($subSubSubSubSubCategory->SubCategory as $subSubSubSubSubSubCategory)
-                                                                                <option value="{{ $subSubSubSubSubSubCategory->id }}">
-                                                                                    {{ $category->name }} > {{ $subCategory->name }} > {{ $subSubCategory->name }} > {{ $subSubSubCategory->name }} > {{ $subSubSubSubCategory->name }} > {{ $subSubSubSubSubCategory->name }} > {{ $subSubSubSubSubSubCategory->name }}
-                                                                                </option>
-                                                                            @endforeach
-                                                                        @endif
                                                                     @endforeach
                                                                 @endif
                                                             @endforeach
@@ -110,7 +108,7 @@
                                 @endif
                             @endforeach
                         </select>
-                        
+                            
                     </div>
                     <!-- End -->
                     <div class="col-md-4 mt-md-3">
