@@ -37,6 +37,7 @@ class ShopController extends Controller
             return $this->handleException($ex);
         }
     }
+
     public function shopSearch(Request $request)
     {
         $products = Product::where('name', 'like', '%' . $request->q . '%')->orderBy('id', 'desc')->paginate(12);
@@ -124,33 +125,14 @@ class ShopController extends Controller
     public function shop(ShopPageRequest $shopPageRequest)
     {
         $searchCriteria = $shopPageRequest->input('search', '');
-        $categoryName = $shopPageRequest->category_name;
-        // $query = Product::query();
-        // Add additional filters based on the request
-        // if ($searchCriteria) {
-        //     $query->where(function ($query) use ($searchCriteria) {
-        //         $query->where('name', 'like', '%' . urldecode($searchCriteria) . '%');
-        //     });
-        // }
-
-        // // Handle category_name-based filtering
-        // if ($categoryName) {
-        //     $query->whereHas('category', function ($query) use ($categoryName) {
-        //         $query->where('name', urldecode($categoryName));
-        //     });
-        // }
-
-        // Add more filters as needed
-        $products = $this->getAllLists(Product::query(), [$shopPageRequest->validated()], ShopProductDetailResource::class);
-
+        $categoryName = urldecode($shopPageRequest->category_name);
         $brands = Brand::get();
-
         $user_id = auth()->user()->id ?? null;
         // Load categories with one level of subcategories initially
         $categories = Category::with(['SubCategory'])->where('parent_category_id', null)->get();
 
         $category = null;
         // Pass the search criteria, category, and categories to the view
-        return view('ecommerce.shop', compact(['products', 'brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category']));
+        return view('ecommerce.shop', compact(['brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category']));
     }
 }

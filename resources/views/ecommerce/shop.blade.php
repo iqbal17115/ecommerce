@@ -456,7 +456,9 @@
 
             // Re-observe the newly added images
             document.querySelectorAll('.lazy-load').forEach(img => {
-                observer.observe(img);
+                if (typeof observer !== 'undefined' && observer !== null) {
+                  observer.observe(img);
+                }
             });
         }
 
@@ -479,13 +481,13 @@
                 sort_order: sort_order,
                 sort_by: 'your_price',
                 search: searchCriteria,
-                categoryName: categoryName,
                 min_price: $("#min_price").val(),
                 max_price: $("#max_price").val(),
             });
 
             // Manually add filters[brand_ids]
             queryParams.append('filters[brand_ids]', selectedBrandIds);
+            queryParams.append('filters[category_names]', categoryName);
             const url = `/product-search?${queryParams.toString()}`;
 
             getDetails(url,
