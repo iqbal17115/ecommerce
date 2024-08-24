@@ -538,13 +538,5 @@
             });
             // }
         });
-
-
-        // $(document).on('click', '.go-button', () => {
-        //     const newPage = $('.page-input').val();
-        //     if (!isNaN(newPage) && newPage >= 1) {
-        //         fetchData(newPage);
-        //     }
-        // });
     </script>
 @endpush
