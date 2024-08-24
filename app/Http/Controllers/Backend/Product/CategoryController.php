@@ -100,6 +100,8 @@ class CategoryController extends Controller
             'status' => 'success'
         ]);
     }
+
+    
     public function index() {
         $categories = Category::latest()->paginate(10);
         $parent_categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
