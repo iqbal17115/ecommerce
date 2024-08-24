@@ -198,7 +198,28 @@
                     <!-- End .product-single-gallery -->
 
                     <div class="col-lg-7 col-md-6 product-single-details">
-                        <h1 class="product-title">{{ $product_detail?->name }}</h1>
+                        <h1 class="product-title">
+                            {{ $product_detail?->name }}
+                            @foreach ($product_detail->productVariations as $variation)
+                                    @php
+                                        $groupedAttributes = $variation->variationAttributeValues->groupBy(
+                                            'group_number',
+                                        );
+                                    @endphp
+                                    @foreach ($groupedAttributes as $groupNumber => $attributeValues)
+                                        <span class=""
+                                            data-price="{{ $variation->price }}" data-stock="{{ $attributeValues->first()->stock }}">
+                                            <span class="">
+                                                @foreach ($attributeValues as $attributeValue)
+                                                    <span
+                                                        class="">{{ $attributeValue?->attributeValue?->value }}, </span>
+                                                @endforeach
+                                            </span>
+                                        </span>
+                                    @endforeach
+                                @endforeach
+
+                        </h1>
                         <div class="row g-3 align-items-center">
                             <div class="col-md-12">
                                 <h5 class="fw-bold m-0 p-0">
