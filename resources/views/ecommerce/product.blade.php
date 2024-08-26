@@ -134,6 +134,7 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
+        
     </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -290,7 +291,8 @@
                                 <span class="product-price brand_text_design">{{ $currency?->icon }}
                                     {{ number_format($product_detail->sale_price, 2) }}</span>
                             @else
-                            <span class="brand_text_design">{{ $currency?->icon }}</span> <span class="product-price brand_text_design">
+                                <span class="brand_text_design">{{ $currency?->icon }}</span> <span
+                                    class="product-price brand_text_design">
                                     {{ number_format($product_detail->your_price, 2) }}</span>
                             @endif
                         </div>
@@ -329,7 +331,8 @@
                                     @endphp
                                     @foreach ($groupedAttributes as $groupNumber => $attributeValues)
                                         <span class="select-variation badge badge-secondary mx-1 mb-2 brand_color"
-                                            data-price="{{ $variation->price }}" data-stock="{{ $attributeValues->first()->stock }}">
+                                            data-price="{{ $variation->price }}"
+                                            data-stock="{{ $attributeValues->first()->stock }}">
                                             <span class="attribute">
                                                 @foreach ($attributeValues as $attributeValue)
                                                     <span

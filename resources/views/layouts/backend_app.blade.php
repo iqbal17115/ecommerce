@@ -11,6 +11,9 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico') }}">
 
+    <!-- Plugins css -->
+    <link href="{{ URL::asset('assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+
     <!-- twitter-bootstrap-wizard css -->
     <link rel="stylesheet" href="{{ URL::asset('assets/libs/twitter-bootstrap-wizard/prettify.css') }}">
 
@@ -102,6 +105,10 @@
     <script src="{{ URL::asset('assets/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
 
     <script src="{{ URL::asset('assets/js/pages/form-repeater.int.js') }}"></script>
+
+    <!-- Plugins js -->
+    <script src="{{ URL::asset('assets/libs/dropzone/min/dropzone.min.js') }}"></script>
+
     <!-- App js -->
     <script src="{{ URL::asset('assets/js/app.js') }}"></script>
 

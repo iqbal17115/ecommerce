@@ -902,88 +902,117 @@
 
 
     // Start Variation JS
-    document.addEventListener('DOMContentLoaded', function() {
-        let variationCount = $('#variations-container .variation-form').length;
-
-        document.getElementById('add-variation').addEventListener('click', function() {
-            const container = document.getElementById('variations-container');
-            const newVariationForm = document.createElement('div');
-            newVariationForm.classList.add('variation-form');
-            newVariationForm.innerHTML = `
-            <div class="price-stock-container">
-                <div class="row">
-                    <div class="form-group mb-0 col-md-6">
-                        <label for="price_${variationCount}_0">Price</label>
-                        <input type="number" name="variations[${variationCount}][price]" id="price_${variationCount}_0" class="form-control form-control-sm" required>
-                    </div>
-                </div>
-                <div class="row attribute-set">
-                    @foreach ($attributes as $attribute)
-                        <div class="form-group mb-0 col-md-3">
-                            <select name="variations[${variationCount}][attribute_values][${variationCount}_0][]" id="attribute_{{ $attribute->id }}_${variationCount}_0" class="form-control form-control-sm">
-                                <option value="">--{{ $attribute->name }}--</option>
-                                @foreach ($attribute->values as $value)
-                                    <option value="{{ $value->id }}">{{ $value->value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @endforeach
-                    <div class="form-group mb-0 col-md-1">
-                        <input type="number" name="variations[${variationCount}][attribute_values][${variationCount}_0][stock]" id="stock_${variationCount}_0" class="form-control form-control-sm" placeholder="Stock Quantity" required>
-                    </div>
-                    <div class="form-group mb-0 col-md-1">
-                        <input type="number" name="variations[${variationCount}][attribute_values][${variationCount}_0][sku]" id="sku_${variationCount}_0" class="form-control form-control-sm" placeholder="SKU" required>
-                    </div>
-                    <div class="form-group mb-0 col-md-1">
-                        <div class="custom-control custom-switch custom-switch-md mb-3" dir="ltr">
-                            <input type="checkbox" name="variations[${variationCount}][attribute_values][${variationCount}_0][status]" class="custom-control-input" id="status_${variationCount}_0" checked>
-                            <label class="custom-control-label" for="status_${variationCount}_0"></label>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            <button type="button" class="btn btn-secondary add-multiple-variation btn-sm">Add</button>
-        `;
-            container.appendChild(newVariationForm);
-            variationCount++;
+    $(document).ready(function() {
+        // Initialize Select2
+        $("#sizeSelect").select2({
+            dropdownParent: $(".parent"),
+            placeholder: 'Select An Option'
         });
 
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.classList.contains('add-multiple-variation')) {
-                const currentVariationForm = e.target.closest('.variation-form');
-                const currentVariationIndex = currentVariationForm.querySelectorAll('.attribute-set')
-                    .length;
-                const priceStockForm = document.createElement('div');
-                priceStockForm.classList.add('row', 'attribute-set');
-                priceStockForm.innerHTML = `
-                @foreach ($attributes as $attribute)
-                    <div class="form-group mb-0 col-md-3">
-                        <select name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][]" id="attribute_{{ $attribute->id }}_${variationCount - 1}_${currentVariationIndex}" class="form-control form-control-sm">
-                            <option value="">--{{ $attribute->name }}--</option>
-                            @foreach ($attribute->values as $value)
-                                <option value="{{ $value->id }}">{{ $value->value }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endforeach
-                <div class="form-group mb-0 col-md-1">
-                        <input type="number" name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][stock]" id="stock_${variationCount}_0" class="form-control form-control-sm" placeholder="Stock Quantity" required>
-                </div>
-                <div class="form-group mb-0 col-md-1">
-                        <input type="number" name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][sku]" id="sku_${variationCount}_0" class="form-control form-control-sm" placeholder="SKU" required>
-                    </div>
-                    <div class="form-group mb-0 col-md-1">
-                        <div class="custom-control custom-switch custom-switch-md mb-3" dir="ltr">
-                            <input type="checkbox" name="variations[${variationCount - 1}][attribute_values][${variationCount - 1}_${currentVariationIndex}][status]" class="custom-control-input" id="status_${variationCount}_0" checked>
-                            <label class="custom-control-label" for="status_${variationCount}_0"></label>
-                        </div>
-                    </div>
-            `;
-                currentVariationForm.querySelector('.price-stock-container').appendChild(
-                    priceStockForm);
+        const colorSizeMap = {}; // To track selected sizes for each color
+        let selectedSizes = []; // To store selected sizes
+
+        // Add Color Row
+        $('#addColorBtn').on('click', function() {
+            const color = $('#colorSelect').val();
+            if (color && !colorSizeMap[color]) { // Prevent adding the same color twice
+                colorSizeMap[color] = [];
+                addColorRow(color);
+            } else {
+                alert("Color already added or not selected.");
             }
         });
-    });
 
+        // Function to add a new color row with an image input
+        function addColorRow(color) {
+            const colorRow = `
+            <tr id="colorRow-${color}">
+                <td>${capitalize(color)}</td>
+                <td>
+                    <input type="file" name="color_img_${color}" accept="image/*" class="form-control form-control-sm img-input">
+                </td>
+                <td>
+                    <span class="delete-icon" onclick="removeColor('${color}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>
+                </td>
+            </tr>`;
+            $('#colorTable tbody').append(colorRow);
+        }
+
+        // Apply Sizes to All Colors
+        $('#addSizeBtn').on('click', function() {
+            selectedSizes = $('#sizeSelect').val();
+            if (selectedSizes && selectedSizes.length > 0) {
+                updateSizeTable();
+            } else {
+                alert("Please select at least one size.");
+            }
+        });
+
+        // Function to update the size table based on selected colors and sizes
+        function updateSizeTable() {
+            $('#sizeTable tbody').empty(); // Clear existing rows
+            Object.keys(colorSizeMap).forEach(color => {
+                if (selectedSizes.length > 0) {
+                    colorSizeMap[color] = selectedSizes;
+                    addSizeRows(color, selectedSizes);
+                }
+            });
+        }
+
+        // Function to add rows for sizes under each color
+        function addSizeRows(color, sizes) {
+            sizes.forEach((size, index) => {
+                const sizeRow = `
+                <tr id="${color}-${size}">
+                    ${index === 0 ? `<td rowspan="${sizes.length}" class="color-cell">${capitalize(color)}</td>` : ''}
+                    <td>${size}</td>
+                    <td>
+                        <input type="number" name="price_${color}_${size}" placeholder="Price" class="form-control form-control-sm">
+                    </td>
+                    <td>
+                        <input type="text" name="sku_${color}_${size}" placeholder="Seller SKU" class="form-control form-control-sm">
+                    </td>
+                    <td>
+                        <input type="number" name="stock_${color}_${size}" placeholder="Stock" class="form-control form-control-sm">
+                    </td>
+                    <td>
+                        <span class="delete-icon" onclick="removeSize('${color}', '${size}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>
+                    </td>
+                </tr>`;
+                $('#sizeTable tbody').append(sizeRow);
+            });
+        }
+
+        // Function to remove an entire color row
+        window.removeColor = function(color) {
+            $(`#colorRow-${color}`).remove();
+            delete colorSizeMap[color]; // Remove color from map
+            $(`#sizeTable tbody tr[id^="${color}-"]`).remove(); // Remove all related size rows
+        };
+
+        // Function to remove a single size row
+        window.removeSize = function(color, size) {
+            const sizeRow = $(`#${color}-${size}`);
+            sizeRow.remove(); // Remove the specific size row
+            colorSizeMap[color] = colorSizeMap[color].filter(s => s !== size); // Remove size from the map
+
+            // Update rowspan for the color cell
+            const colorRows = $(`#sizeTable tbody tr[id^="${color}-"]`);
+            const remainingSizes = colorSizeMap[color].length;
+
+            if (remainingSizes > 0) {
+                // Update rowspan
+                colorRows.first().find('.color-cell').attr('rowspan', remainingSizes);
+            } else {
+                // Remove the entire color row if no sizes are left
+                removeColor(color);
+            }
+        };
+
+        // Function to capitalize the first letter
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+    });
     // End Variation JS
 </script>
