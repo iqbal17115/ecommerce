@@ -2,27 +2,24 @@
     {{-- <form method="post" id="add_variation">
         @csrf --}}
     <div class="row">
-        <div class="col-md-12">
-            <!-- Variant 1: Color Selection -->
-            <div class="mb-3">
-                <label for="colorSelect" class="form-label">Select Color:</label>
-                <div class="input-group">
-                    <select id="colorSelect" class="form-select form-select-sm">
-                        <option value="" disabled selected>Select Color</option>
-                        <option value="red">Red</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                        <!-- Add more colors as needed -->
-                    </select>
-                    <button id="addColorBtn" class="btn btn-sm btn-primary">Add Color</button>
+        <div class="col-md-4">
+            <div class="input-group">
+                <select id="colorSelect" class="form-control form-control-sm">
+                    <option value="" disabled selected>Select Color</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                </select>
+                <div class="input-group-append mt-0 pt-0">
+                    <button id="addColorBtn" class="btn btn-sm btn-primary mt-0 pt-0">Add Color</button>
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-8">
             <!-- Color Table -->
-            <div id="colorTableContainer" class="mb-4">
+            <div id="colorTableContainer">
                 <table id="colorTable" class="table table-bordered">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
                             <th>Color</th>
                             <th>Image</th>
@@ -30,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Color rows will be dynamically added here -->
+
                     </tbody>
                 </table>
             </div>

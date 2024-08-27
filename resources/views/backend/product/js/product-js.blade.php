@@ -929,10 +929,10 @@
             <tr id="colorRow-${color}">
                 <td>${capitalize(color)}</td>
                 <td>
-                    <input type="file" name="color_img_${color}" accept="image/*" class="form-control form-control-sm img-input">
+                    <input type="file" name="color_img_${color}" accept="image/*" class="form-control form-control-sm">
                 </td>
                 <td>
-                    <span class="delete-icon" onclick="removeColor('${color}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>
+                    <span class="delete-icon" onclick="removeColor('${color}')"><i class="mdi mdi-trash-can font-size-16"></i></span>
                 </td>
             </tr>`;
             $('#colorTable tbody').append(colorRow);
