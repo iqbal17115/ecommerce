@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVariationAttributeValuesTable extends Migration
+class CreateProductVariationAttributesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,10 @@ class CreateVariationAttributeValuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('variation_attribute_values', function (Blueprint $table) {
+        Schema::create('product_variation_attributes', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('product_variation_id');
             $table->uuid('attribute_value_id');
-            $table->text('group_number');
-            $table->integer('stock');
-            $table->string('sku', 100)->nullable();
-            $table->boolean('status')->default(true);
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();
@@ -37,6 +33,6 @@ class CreateVariationAttributeValuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variation_attribute_values');
+        Schema::dropIfExists('product_variation_attributes');
     }
 }

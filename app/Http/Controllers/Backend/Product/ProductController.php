@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\Product\ConfirmProductRequest;
 use App\Models\Attribute;
+use App\Models\AttributeValue;
 use App\Models\Backend\Product\ProductFeature;
 use App\Services\UnitConversionService;
 use Illuminate\Http\Request;
@@ -329,11 +330,18 @@ class ProductController extends Controller
             $productInfo = $this->prepareProductInfo($productInfo);
         }
         $unitConversionService = $this->unitConversionService;
-        $attributes = Attribute::orderBy('id', 'DESC')->get();
+
+        $colors = AttributeValue::whereHas('attribute', function ($attribute) {
+            $attribute->where('name', 'Color');
+        })->orderBy('id', 'DESC')->get();
+
+        $sizes = AttributeValue::whereHas('attribute', function ($attribute) {
+            $attribute->where('name', 'Size');
+        })->orderBy('id', 'DESC')->get();
 
         $product_statuses = ProductStatusEnums::getValues();
 
-        return view('backend.product.product', compact('attributes', 'categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService', 'product_statuses'));
+        return view('backend.product.product', compact('colors', 'sizes', 'categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService', 'product_statuses'));
     }
 
     private function prepareProductInfo($product)
