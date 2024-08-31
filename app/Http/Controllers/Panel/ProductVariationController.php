@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
-use App\Models\Backend\Product\Product;
 use App\Services\ProductVariationService;
 use Illuminate\Http\Request;
 

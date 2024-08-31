@@ -929,13 +929,13 @@
                 ${index === 0 ? `<td rowspan="${sizes.length}" class="color-cell">${$(`#colorSelect option[value="${colorId}"]`).text()}</td>` : ''}
                 <td>${sizeText}</td>
                 <td>
-                    <input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm">
+                    <input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required>
                 </td>
                 <td>
-                    <input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm">
+                    <input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required>
                 </td>
                 <td>
-                    <input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm">
+                    <input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required>
                 </td>
                 <td>
                     <span class="delete-icon" onclick="removeSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>

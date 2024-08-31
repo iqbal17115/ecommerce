@@ -26,16 +26,17 @@ class ProductVariationService
                     'stock' => $variation['stock']
                 ]);
 
-                // Handle image upload
                 // $this->handleImageUpload($variation['color_id'], $productVariation);
 
-                // Store the variation attributes (color and size)
-                foreach ($variation['attributes'] as $attributeValueId) {
-                    ProductVariationAttribute::create([
-                        'product_variation_id' => $productVariation->id,
-                        'attribute_value_id' => $attributeValueId,
-                    ]);
-                }
+                ProductVariationAttribute::create([
+                    'product_variation_id' => $productVariation->id,
+                    'attribute_value_id' => $variation['color_id'],
+                ]);
+
+                ProductVariationAttribute::create([
+                    'product_variation_id' => $productVariation->id,
+                    'attribute_value_id' => $variation['size_id'],
+                ]);
             }
         });
     }

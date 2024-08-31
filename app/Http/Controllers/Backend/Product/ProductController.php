@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\Product\ConfirmProductRequest;
-use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Backend\Product\ProductFeature;
 use App\Services\UnitConversionService;
@@ -324,11 +323,12 @@ class ProductController extends Controller
         $product_features = ProductFeature::orderBy('id', 'DESC')->whereIsActive(1)->get();
         $productInfo = null;
         $id = $request->id;
+
         if ($id) {
             $id = $id;
-            $productInfo = Product::with('productVariations', 'productVariations.product', 'productVariations.variationAttributeValues', 'productVariations.variationAttributeValues.attributeValue', 'productVariations.variationAttributeValues.attributeValue.attribute')->whereId($id)->first();
-            $productInfo = $this->prepareProductInfo($productInfo);
+            $productInfo = Product::with('productVariations', 'productVariations.product', 'productVariations.productVariationAttributes', 'productVariations.productVariationAttributes.attributeValue', 'productVariations.productVariationAttributes.attributeValue.attribute')->whereId($id)->first();
         }
+
         $unitConversionService = $this->unitConversionService;
 
         $colors = AttributeValue::whereHas('attribute', function ($attribute) {
@@ -342,19 +342,6 @@ class ProductController extends Controller
         $product_statuses = ProductStatusEnums::getValues();
 
         return view('backend.product.product', compact('colors', 'sizes', 'categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService', 'product_statuses'));
-    }
-
-    private function prepareProductInfo($product)
-    {
-        foreach ($product->productVariations as $variation) {
-            $variation->groupedAttributeValues = $variation->variationAttributeValues->groupBy('group_number');
-            foreach ($variation->groupedAttributeValues as $groupNumber => $attributeValues) {
-                foreach ($attributeValues as $attributeValue) {
-                    $attributeValue->attribute = $attributeValue?->attributeValue?->attribute;
-                }
-            }
-        }
-        return $product;
     }
 
     public function saveProduct(ConfirmProductRequest $request)
