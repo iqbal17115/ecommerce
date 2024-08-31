@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Dynamically added color rows will go here -->
+
                         </tbody>
                     </table>
                 </div>
@@ -66,8 +66,77 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Dynamically added size rows will go here -->
+                            @php
+                                // Group variations by the color attribute specifically
+                                $variationsGroupedByColor = $productInfo->productVariations->groupBy(function (
+                                    $variation,
+                                ) {
+                                    // Find the color attribute for each variation
+                                    $colorAttribute = $variation->productVariationAttributes->first(function ($attr) {
+                                        return $attr->attributeValue->attribute->name === 'Color';
+                                    });
+
+                                    // Return the color attribute value ID for grouping
+                                    return $colorAttribute ? $colorAttribute->attributeValue->id : null;
+                                });
+                            @endphp
+
+                            @foreach ($variationsGroupedByColor as $colorId => $variations)
+                                @foreach ($variations as $variation)
+                                    @php
+                                        // Get the color and size attributes for the current variation
+                                        $colorAttribute = $variation->productVariationAttributes->first(function (
+                                            $attr,
+                                        ) {
+                                            return $attr->attributeValue->attribute->name === 'Color';
+                                        });
+
+                                        $sizeAttribute = $variation->productVariationAttributes->first(function (
+                                            $attr,
+                                        ) {
+                                            return $attr->attributeValue->attribute->name === 'Size';
+                                        });
+
+                                        // Extract necessary values
+                                        $colorText = $colorAttribute ? $colorAttribute->attributeValue->value : 'N/A';
+                                        $sizeText = $sizeAttribute ? $sizeAttribute->attributeValue->value : 'N/A';
+                                        $sizeId = $sizeAttribute ? $sizeAttribute->attributeValue->id : null;
+                                    @endphp
+
+                                    <tr id="{{ $colorId }}-{{ $sizeId }}">
+                                        @if ($loop->first)
+                                            <!-- Display the color name once per group -->
+                                            <td rowspan="{{ $variations->count() }}" class="color-cell">
+                                                {{ $colorText }}</td>
+                                        @endif
+                                        <td>{{ $sizeText }}</td>
+                                        <td>
+                                            <input type="number" name="price_{{ $colorId }}_{{ $sizeId }}"
+                                                placeholder="Price" class="form-control form-control-sm"
+                                                value="{{ $variation->price }}" required>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="sku_{{ $colorId }}_{{ $sizeId }}"
+                                                placeholder="Seller SKU" class="form-control form-control-sm"
+                                                value="{{ $variation->sku }}" required>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="stock_{{ $colorId }}_{{ $sizeId }}"
+                                                placeholder="Stock" class="form-control form-control-sm"
+                                                value="{{ $variation->stock }}" required>
+                                        </td>
+                                        <td>
+                                            <span class="delete-icon"
+                                                onclick="removeSize('{{ $colorId }}', '{{ $sizeId }}')">
+                                                <i class="mdi mdi-trash-can d-block font-size-16"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+
                         </tbody>
+
                     </table>
                 </div>
             </div>

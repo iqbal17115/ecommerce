@@ -18,7 +18,7 @@ class CreateProductVariationsTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('product_id');
             $table->decimal('price', 10, 2);
-            $table->string('sku')->unique()->nullable();
+            $table->string('sku')->nullable();
             $table->integer('stock')->default(0);
             $table->boolean('status')->default(true);
             $table->uuid('created_by')->nullable()->index();

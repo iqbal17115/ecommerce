@@ -17,7 +17,7 @@ class ProductVariationController extends Controller
 
     public function storeVariations(Request $request)
     {
-        $this->productVariationService->storeVariations($request->all());
+        $this->productVariationService->storeOrUpdateVariations($request->all());
 
         return response()->json([
             'status' => 201

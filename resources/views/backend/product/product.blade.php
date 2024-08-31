@@ -431,6 +431,7 @@
             }
             updateKeywordsDisplay();
         });
+        
     </script>
     @include('backend.product.js.product-js')
     {!! Toastr::message() !!}

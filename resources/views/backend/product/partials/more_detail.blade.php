@@ -615,8 +615,6 @@
                     });
                 }
                 }
-                updateVariantByCategory(get_category_id);
-                // updateVariationType(variation);
             });
         </script>
     @endif

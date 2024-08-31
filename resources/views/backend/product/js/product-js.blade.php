@@ -871,6 +871,24 @@
 
         const colorSizeMap = {}; // To track selected sizes for each color
 
+        // Initialize colorSizeMap from Blade if needed
+        @foreach ($productInfo->productVariations->groupBy('product_variation_attributes.attribute_value_id') as $colorId => $variations)
+            @foreach ($variations as $variation)
+                @php
+                    $colorAttribute = $variation->productVariationAttributes->first(function ($attr) {
+                        return $attr->attributeValue->attribute->name === 'Color';
+                    });
+                    $sizeAttribute = $variation->productVariationAttributes->first(function ($attr) {
+                        return $attr->attributeValue->attribute->name === 'Size';
+                    });
+                    $colorId = $colorAttribute->attributeValue->id;
+                    $sizeId = $sizeAttribute->attributeValue->id;
+                @endphp
+                colorSizeMap['{{ $colorId }}'] = colorSizeMap['{{ $colorId }}'] || [];
+                colorSizeMap['{{ $colorId }}'].push('{{ $sizeId }}');
+            @endforeach
+        @endforeach
+
         // Add Color Row
         $('#addColorBtn').on('click', function() {
             const colorId = $('#colorSelect').val();
@@ -887,15 +905,15 @@
         // Function to add a new color row with an image input
         function addColorRow(colorId, colorText) {
             const colorRow = `
-        <tr id="colorRow-${colorId}">
-            <td>${colorText}</td>
-            <td>
-                <input type="file" name="color_img_${colorId}" accept="image/*" class="form-control form-control-sm">
-            </td>
-            <td>
-                <span class="delete-icon" onclick="removeColor('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span>
-            </td>
-        </tr>`;
+            <tr id="colorRow-${colorId}">
+                <td>${colorText}</td>
+                <td>
+                    <input type="file" name="color_img_${colorId}" accept="image/*" class="form-control form-control-sm">
+                </td>
+                <td>
+                    <span class="delete-icon" onclick="removeColor('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span>
+                </td>
+            </tr>`;
             $('#colorTable tbody').append(colorRow);
         }
 
@@ -925,22 +943,22 @@
             sizes.forEach((sizeId, index) => {
                 const sizeText = $(`#sizeSelect option[value="${sizeId}"]`).text();
                 const sizeRow = `
-            <tr id="${colorId}-${sizeId}">
-                ${index === 0 ? `<td rowspan="${sizes.length}" class="color-cell">${$(`#colorSelect option[value="${colorId}"]`).text()}</td>` : ''}
-                <td>${sizeText}</td>
-                <td>
-                    <input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required>
-                </td>
-                <td>
-                    <input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required>
-                </td>
-                <td>
-                    <input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required>
-                </td>
-                <td>
-                    <span class="delete-icon" onclick="removeSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>
-                </td>
-            </tr>`;
+                <tr id="${colorId}-${sizeId}">
+                    ${index === 0 ? `<td rowspan="${sizes.length}" class="color-cell">${$(`#colorSelect option[value="${colorId}"]`).text()}</td>` : ''}
+                    <td>${sizeText}</td>
+                    <td>
+                        <input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required>
+                    </td>
+                    <td>
+                        <input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required>
+                    </td>
+                    <td>
+                        <input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required>
+                    </td>
+                    <td>
+                        <span class="delete-icon" onclick="removeSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>
+                    </td>
+                </tr>`;
                 $('#sizeTable tbody').append(sizeRow);
             });
         }
@@ -957,7 +975,7 @@
             const sizeRow = $(`#${colorId}-${sizeId}`);
             sizeRow.remove(); // Remove the specific size row
             colorSizeMap[colorId] = colorSizeMap[colorId].filter(s => s !==
-            sizeId); // Remove size from the map
+                sizeId); // Remove size from the map
 
             // Update rowspan for the color cell
             const colorRows = $(`#sizeTable tbody tr[id^="${colorId}-"]`);
@@ -977,23 +995,40 @@
             e.preventDefault(); // Prevent the default form submission
 
             const formData = new FormData(this);
+            // Initialize an object to group variations by color
+            const groupedVariations = {};
 
-            // Append color and size data to the FormData object
+            // Group variations by color
             Object.keys(colorSizeMap).forEach(colorId => {
                 colorSizeMap[colorId].forEach(sizeId => {
-                    formData.append('variations[]', JSON.stringify({
-                        color_id: colorId,
+                    // Initialize the group for the color if not already done
+                    if (!groupedVariations[colorId]) {
+                        groupedVariations[colorId] = {
+                            color_id: colorId,
+                            variations: []
+                        };
+                    }
+
+                    // Push the size and related attributes to the color group
+                    groupedVariations[colorId].variations.push({
                         size_id: sizeId,
-                        price: $(`input[name="price_${colorId}_${sizeId}"]`)
+                        price: $(
+                                `body input[name="price_${colorId}_${sizeId}"]`)
                             .val(),
-                        sku: $(`input[name="sku_${colorId}_${sizeId}"]`)
+                        sku: $(`body input[name="sku_${colorId}_${sizeId}"]`)
                             .val(),
-                        stock: $(`input[name="stock_${colorId}_${sizeId}"]`)
+                        stock: $(
+                                `body input[name="stock_${colorId}_${sizeId}"]`)
                             .val(),
-                        image: $(`input[name="color_img_${colorId}"]`)[0]
-                            .files[0] // Append the file if available
-                    }));
+                        // Append image if available
+                        // image: $(`input[name="color_img_${colorId}"]`)[0]?.files[0]
+                    });
                 });
+            });
+
+            // Append the grouped data to formData
+            Object.values(groupedVariations).forEach(group => {
+                formData.append('variations[]', JSON.stringify(group));
             });
 
             // Send AJAX request

@@ -8,81 +8,100 @@ use Illuminate\Support\Facades\DB;
 
 class ProductVariationService
 {
-    public function storeVariations(array $data)
+    public function storeOrUpdateVariations(array $data)
     {
-        // Validate the input data
-        // $this->validateVariations($data);
-
         DB::transaction(function () use ($data) {
             $productId = $data['product_id'];
 
-            foreach ($data['variations'] as $variation) {
-                $variation = json_decode($variation, true);
-                // Store the product variation
-                $productVariation = ProductVariation::create([
-                    'product_id' => $productId,
-                    'price' => $variation['price'],
-                    'sku' => $variation['sku'] ?? null,
-                    'stock' => $variation['stock']
-                ]);
+            // Fetch existing variations for the product to manage updates and deletions
+            $existingVariations = ProductVariation::where('product_id', $productId)->get();
 
-                // $this->handleImageUpload($variation['color_id'], $productVariation);
+            // Track existing variations by color and size combinations for efficient lookups
+            $existingMap = $existingVariations->mapWithKeys(function ($variation) {
+                return [$variation->color_id . '_' . $variation->size_id => $variation];
+            });
 
-                ProductVariationAttribute::create([
-                    'product_variation_id' => $productVariation->id,
-                    'attribute_value_id' => $variation['color_id'],
-                ]);
+            // Collect IDs of variations to keep for deletion tracking
+            $variationsToKeep = [];
 
-                ProductVariationAttribute::create([
-                    'product_variation_id' => $productVariation->id,
-                    'attribute_value_id' => $variation['size_id'],
-                ]);
+            // Iterate over each color group
+            foreach ($data['variations'] as $group) {
+                $group = json_decode($group, true);
+                $colorId = $group['color_id'];
+
+                // Iterate over variations within the color group
+                foreach ($group['variations'] as $variation) {
+                    $sizeId = $variation['size_id'];
+                    $key = $colorId . '_' . $sizeId;
+
+                    if (isset($existingMap[$key])) {
+                        // Update existing variation
+                        $existingVariation = $existingMap[$key];
+                        $existingVariation->update([
+                            'price' => $variation['price'],
+                            'sku' => $variation['sku'] ?? null,
+                            'stock' => $variation['stock']
+                        ]);
+
+                        // Update attributes (ensure color and size are up-to-date)
+                        $this->updateVariationAttributes($existingVariation->id, $colorId, $sizeId);
+
+                        // Keep track of this variation to avoid deletion
+                        $variationsToKeep[] = $existingVariation->id;
+                    } else {
+                        // Store new variation
+                        $newVariation = ProductVariation::create([
+                            'product_id' => $productId,
+                            'price' => $variation['price'],
+                            'sku' => $variation['sku'] ?? null,
+                            'stock' => $variation['stock'],
+                            'color_id' => $colorId,
+                            'size_id' => $sizeId
+                        ]);
+
+                        // Store attributes
+                        $this->storeVariationAttributes($newVariation->id, $colorId, $sizeId);
+
+                        // Keep track of this variation to avoid deletion
+                        $variationsToKeep[] = $newVariation->id;
+                    }
+                }
             }
+
+            // Delete variations that are no longer present in the request
+            ProductVariation::where('product_id', $productId)
+                ->whereNotIn('id', $variationsToKeep)
+                ->delete();
         });
     }
 
-    /**
-     * Validate the variations data.
-     *
-     * @param array $data
-     * @throws ValidationException
-     */
-    protected function validateVariations(array $data)
+    private function storeVariationAttributes($variationId, $colorId, $sizeId)
     {
-        $validator = \Validator::make($data, [
-            'product_id' => 'required|exists:products,id',
-            'variations.*.price' => 'required|numeric|min:0',
-            'variations.*.sku' => 'nullable|string|max:255',
-            'variations.*.stock' => 'required|integer|min:0',
-            'variations.*.status' => 'nullable|boolean',
-            'variations.*.attributes' => 'required|array',
-            'variations.*.attributes.*' => 'exists:attribute_values,id',
-            'variations.*.color_id' => 'nullable|exists:colors,id',
-            // Add other rules as needed
+        // Store color attribute
+        ProductVariationAttribute::create([
+            'product_variation_id' => $variationId,
+            'attribute_value_id' => $colorId,
         ]);
 
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
+        // Store size attribute
+        ProductVariationAttribute::create([
+            'product_variation_id' => $variationId,
+            'attribute_value_id' => $sizeId,
+        ]);
     }
 
-    /**
-     * Handle image upload for product variation.
-     *
-     * @param int $colorId
-     * @param ProductVariation $productVariation
-     */
-    protected function handleImageUpload($colorId, ProductVariation $productVariation)
+    private function updateVariationAttributes($variationId, $colorId, $sizeId)
     {
-        $imageInputName = "color_img_$colorId";
-        if (request()->hasFile($imageInputName)) {
-            $file = request()->file($imageInputName);
-            $filePath = $file->store('product-variations', 'public');
+        // Update or re-create color attribute
+        ProductVariationAttribute::updateOrCreate(
+            ['product_variation_id' => $variationId, 'attribute_value_id' => $colorId],
+            ['attribute_value_id' => $colorId]
+        );
 
-            // Optionally, you can store the file path in the product variation model
-            $productVariation->update([
-                'image_path' => $filePath
-            ]);
-        }
+        // Update or re-create size attribute
+        ProductVariationAttribute::updateOrCreate(
+            ['product_variation_id' => $variationId, 'attribute_value_id' => $sizeId],
+            ['attribute_value_id' => $sizeId]
+        );
     }
 }
