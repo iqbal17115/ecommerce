@@ -905,15 +905,15 @@
         // Function to add a new color row with an image input
         function addColorRow(colorId, colorText) {
             const colorRow = `
-            <tr id="colorRow-${colorId}">
-                <td>${colorText}</td>
-                <td>
-                    <input type="file" name="color_img_${colorId}" accept="image/*" class="form-control form-control-sm">
-                </td>
-                <td>
-                    <span class="delete-icon" onclick="removeColor('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span>
-                </td>
-            </tr>`;
+                    <tr id="colorRow-${colorId}">
+                        <td>${colorText}</td>
+                        <td>
+                            <input type="file" name="color_img_${colorId}" accept="image/*" multiple class="form-control form-control-sm">
+                        </td>
+                        <td>
+                            <span class="delete-icon" onclick="removeColor('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span>
+                        </td>
+                    </tr>`;
             $('#colorTable tbody').append(colorRow);
         }
 
@@ -1019,9 +1019,7 @@
                             .val(),
                         stock: $(
                                 `body input[name="stock_${colorId}_${sizeId}"]`)
-                            .val(),
-                        // Append image if available
-                        // image: $(`input[name="color_img_${colorId}"]`)[0]?.files[0]
+                            .val()
                     });
                 });
             });
@@ -1029,6 +1027,14 @@
             // Append the grouped data to formData
             Object.values(groupedVariations).forEach(group => {
                 formData.append('variations[]', JSON.stringify(group));
+            });
+
+            // Append images for each color to formData
+            Object.keys(colorSizeMap).forEach(colorId => {
+                const files = $(`input[name="color_img_${colorId}"]`)[0].files;
+                Array.from(files).forEach(file => {
+                    formData.append(`color_images_${colorId}[]`, file);
+                });
             });
 
             // Send AJAX request

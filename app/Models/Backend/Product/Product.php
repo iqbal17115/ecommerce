@@ -11,6 +11,7 @@ use App\Models\Backend\Product\ProductCompliance;
 use App\Models\Backend\Product\ProductImage;
 use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Review;
+use App\Models\ProductColor;
 use App\Models\ProductVariation;
 use App\Models\User;
 use App\Traits\BaseModel;
@@ -161,6 +162,11 @@ class Product extends Model
     public function productVariations(): HasMany
     {
         return $this->hasMany(ProductVariation::class);
+    }
+
+    public function productColors(): HasMany
+    {
+        return $this->hasMany(ProductColor::class);
     }
 
     public function filterByBrands($query, $value): mixed

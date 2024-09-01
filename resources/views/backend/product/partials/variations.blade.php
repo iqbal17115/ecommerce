@@ -1,5 +1,5 @@
 <div class="tab-pane add_variant" id="variations" role="tabpanel">
-    <form method="post" id="add_product_variation">
+    <form method="post" id="add_product_variation" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="product_id"
             @if ($productInfo) value="{{ $productInfo->id }}" @else value="-1" @endif />
@@ -29,7 +29,30 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($productInfo)
+                                @foreach ($productInfo->productColors as $productColor)
+                                    @php
+                                        // Fetch the color attribute value and media associated with this color
+                                        $colorText = $productColor->attributeValue->value;
+                                        $mediaFiles = $productColor->media;
+                                        $colorId = $productColor->id;
+                                    @endphp
 
+                                    <tr id="colorRow-{{ $colorId }}">
+                                        <td>{{ $colorText }}</td>
+                                        <td>
+                                            <input type="file" name="color_img_{{ $colorId }}[]"
+                                                accept="image/*" multiple class="form-control form-control-sm">
+                                        </td>
+                                        <td>
+                                            <span class="delete-icon">
+                                                <i class="mdi mdi-trash-can font-size-16"
+                                                    onclick="removeColor('{{ $colorId }}')"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -40,9 +63,24 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="parent">
+                            @php
+                                // Collect all selected size IDs
+                                $selectedSizeIds = $productInfo->productVariations
+                                    ->flatMap(function ($variation) {
+                                        return $variation->productVariationAttributes->pluck('attribute_value_id');
+                                    })
+                                    ->unique()
+                                    ->toArray();
+                            @endphp
                             <select id="sizeSelect" class="form-select form-select-sm" multiple style="width: 100%;">
                                 @foreach ($sizes as $size)
-                                    <option value="{{ $size->id }}">{{ $size->value }}</option>
+                                    @php
+                                        // Check if the current size ID is in the list of selected size IDs
+                                        $isSelected = in_array($size->id, $selectedSizeIds);
+                                    @endphp
+                                    <option value="{{ $size->id }}" {{ $isSelected ? 'selected' : '' }}>
+                                        {{ $size->value }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Enums\MediaTypeEnums;
+use App\Models\Media;
+use App\Models\ProductColor;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationAttribute;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +31,17 @@ class ProductVariationService
             foreach ($data['variations'] as $group) {
                 $group = json_decode($group, true);
                 $colorId = $group['color_id'];
+
+                // Manage color record in product_colors table
+                $productColor = ProductColor::firstOrCreate([
+                    'product_id' => $productId,
+                    'attribute_value_id' => $colorId,
+                ]);
+
+                // Handle image uploads
+                if (isset($data["color_images_{$colorId}"])) {
+                    $this->storeOrUpdateColorImages($productColor, $data["color_images_{$colorId}"]);
+                }
 
                 // Iterate over variations within the color group
                 foreach ($group['variations'] as $variation) {
@@ -103,5 +117,21 @@ class ProductVariationService
             ['product_variation_id' => $variationId, 'attribute_value_id' => $sizeId],
             ['attribute_value_id' => $sizeId]
         );
+    }
+
+    private function storeOrUpdateColorImages($productColor, $files)
+    {
+        foreach ($files as $file) {
+            $path = $file->store('color_images', 'public');
+            Media::create([
+                'mediable_id' => $productColor->id,
+                'mediable_type' => ProductColor::class,
+                'file_path' => $path,
+                'mime_type' => $file->getClientMimeType(),
+                'file_size' => $file->getSize(),
+                'type' => MediaTypeEnums::PHOTO,
+                'created_by' => auth()->id(),
+            ]);
+        }
     }
 }

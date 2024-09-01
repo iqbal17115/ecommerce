@@ -53,26 +53,7 @@
                                 @endif
                             </td>
                             <td>
-                                @foreach ($product->productVariations as $variation)
-                                    @php
-                                        $groupedAttributes = $variation->variationAttributeValues->groupBy(
-                                            'group_number',
-                                        );
-                                    @endphp
-                                    @foreach ($groupedAttributes as $groupNumber => $attributeValues)
-                                        <span class="select-variation badge badge-secondary mx-1 mb-2 brand_color"
-                                            data-price="{{ $variation->price }}" data-stock="{{ $attributeValues->first()->stock }}">
-                                            <span class="attribute">
-                                                @foreach ($attributeValues as $attributeValue)
-                                                    <span
-                                                        class="attribute-value">{{ $attributeValue?->attributeValue?->value }}</span>
-                                                @endforeach
-                                                <span
-                                                        class="attribute-value"> |Price:{{ $variation->price }} Stock:{{ $attributeValues->first()->stock }}</span>
-                                            </span>
-                                        </span>
-                                    @endforeach
-                                @endforeach
+
                             </td>
                             <td style="width: 100px;">
                                 <button type="button" class="btn btn-danger text-light btn-sm delete_product"
