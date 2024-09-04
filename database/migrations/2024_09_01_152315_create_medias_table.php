@@ -25,9 +25,7 @@ class CreateMediasTable extends Migration
             $table->enum('type', MediaTypeEnums::getValues())->default(MediaTypeEnums::PHOTO);
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
-            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps(6);
-            $table->softDeletes('deleted_at', 6);
 
             $table->index(['mediable_id', 'mediable_type']);
         });

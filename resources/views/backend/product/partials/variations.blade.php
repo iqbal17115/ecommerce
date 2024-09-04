@@ -24,7 +24,8 @@
                         <thead>
                             <tr>
                                 <th>Color</th>
-                                <th>Image</th>
+                                <th style="width: 180px;">Image</th>
+                                <th>Preview Images</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -44,6 +45,11 @@
                                             <input type="file" name="color_img_{{ $colorId }}[]"
                                                 accept="image/*" multiple class="form-control form-control-sm">
                                         </td>
+                                        <td>
+                                            @foreach ($productColor->media as $media)
+                                                <img src="{{ asset('storage/' . $media->file_path) }}" alt="Image" class="rounded" style="width: 30px; height: 30px; margin: 2px;">
+                                            @endforeach
+                                        </td>                                        
                                         <td>
                                             <span class="delete-icon">
                                                 <i class="mdi mdi-trash-can font-size-16"

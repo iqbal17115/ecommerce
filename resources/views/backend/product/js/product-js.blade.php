@@ -1031,10 +1031,19 @@
 
             // Append images for each color to formData
             Object.keys(colorSizeMap).forEach(colorId => {
-                const files = $(`input[name="color_img_${colorId}"]`)[0].files;
-                Array.from(files).forEach(file => {
-                    formData.append(`color_images_${colorId}[]`, file);
-                });
+                // Find the input element by name attribute
+                const inputElement = $(`input[name="color_img_${colorId}"]`)[0];
+
+                // Check if the input element exists and has files
+                if (inputElement && inputElement.files.length > 0) {
+                    // If files exist, add them to formData
+                    Array.from(inputElement.files).forEach(file => {
+                        formData.append(`color_images_${colorId}[]`, file);
+                    });
+                } else {
+                    // Handle the case where no files exist
+                    console.log(`No files found for color ${colorId}`);
+                }
             });
 
             // Send AJAX request

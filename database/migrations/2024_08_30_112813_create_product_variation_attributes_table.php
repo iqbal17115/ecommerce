@@ -20,9 +20,7 @@ class CreateProductVariationAttributesTable extends Migration
             $table->uuid('attribute_value_id');
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
-            $table->uuid('deleted_by')->nullable()->index();
             $table->timestamps(6);
-            $table->softDeletes('deleted_at', 6);
         });
     }
 
