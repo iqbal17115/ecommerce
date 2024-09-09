@@ -910,6 +910,7 @@
                         <td>
                             <input type="file" name="color_img_${colorId}" accept="image/*" multiple class="form-control form-control-sm">
                         </td>
+                        <td></td>
                         <td>
                             <span class="delete-icon" onclick="removeColor('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span>
                         </td>
@@ -929,11 +930,17 @@
 
         // Function to update the size table based on selected colors and sizes
         function updateSizeTable(selectedSizes) {
-            $('#sizeTable tbody').empty(); // Clear existing rows
             Object.keys(colorSizeMap).forEach(colorId => {
-                if (selectedSizes.length > 0) {
-                    colorSizeMap[colorId] = selectedSizes;
-                    addSizeRows(colorId, selectedSizes);
+                // Check if the color row exists; if not, create it
+                if (!$(`#colorRow-${colorId}`).length) {
+                    const colorText = $(`#colorSelect option[value="${colorId}"]`).text();
+                    addColorRow(colorId, colorText);
+                }
+
+                // If sizes are selected, update the size rows
+                if (selectedSizes && selectedSizes.length > 0) {
+                    colorSizeMap[colorId] = selectedSizes; // Update colorSizeMap
+                    addSizeRows(colorId, selectedSizes); // Add or update size rows
                 }
             });
         }
@@ -942,23 +949,28 @@
         function addSizeRows(colorId, sizes) {
             sizes.forEach((sizeId, index) => {
                 const sizeText = $(`#sizeSelect option[value="${sizeId}"]`).text();
+                const existingRow = $(`#${colorId}-${sizeId}`);
+                if (existingRow.length > 0) {
+                    // If the row already exists, skip creating a new one
+                    return;
+                }
                 const sizeRow = `
-                <tr id="${colorId}-${sizeId}">
-                    ${index === 0 ? `<td rowspan="${sizes.length}" class="color-cell">${$(`#colorSelect option[value="${colorId}"]`).text()}</td>` : ''}
-                    <td>${sizeText}</td>
-                    <td>
-                        <input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required>
-                    </td>
-                    <td>
-                        <input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required>
-                    </td>
-                    <td>
-                        <input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required>
-                    </td>
-                    <td>
-                        <span class="delete-icon" onclick="removeSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>
-                    </td>
-                </tr>`;
+        <tr id="${colorId}-${sizeId}">
+            ${index === 0 ? `<td rowspan="${sizes.length}" class="color-cell">${$(`#colorSelect option[value="${colorId}"]`).text()}</td>` : ''}
+            <td>${sizeText}</td>
+            <td>
+                <input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required>
+            </td>
+            <td>
+                <input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required>
+            </td>
+            <td>
+                <input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required>
+            </td>
+            <td>
+                <span class="delete-icon" onclick="removeSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>
+            </td>
+        </tr>`;
                 $('#sizeTable tbody').append(sizeRow);
             });
         }
