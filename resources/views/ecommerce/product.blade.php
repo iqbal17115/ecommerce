@@ -134,7 +134,7 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
-        
+
     </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -323,25 +323,7 @@
                         {{-- Show Product Variations --}}
                         <div class="product-desc">
                             <div class="variation-select">
-                                @foreach ($product_detail->productVariations as $variation)
-                                    @php
-                                        $groupedAttributes = $variation->variationAttributeValues->groupBy(
-                                            'group_number',
-                                        );
-                                    @endphp
-                                    @foreach ($groupedAttributes as $groupNumber => $attributeValues)
-                                        <span class="select-variation badge badge-secondary mx-1 mb-2 brand_color"
-                                            data-price="{{ $variation->price }}"
-                                            data-stock="{{ $attributeValues->first()->stock }}">
-                                            <span class="attribute">
-                                                @foreach ($attributeValues as $attributeValue)
-                                                    <span
-                                                        class="attribute-value">{{ $attributeValue?->attributeValue?->value }}</span>
-                                                @endforeach
-                                            </span>
-                                        </span>
-                                    @endforeach
-                                @endforeach
+
                             </div>
                         </div>
 
