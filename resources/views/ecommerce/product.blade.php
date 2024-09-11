@@ -134,7 +134,6 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
-
     </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -172,13 +171,15 @@
                         <div class="product-slider-container">
 
                             <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
-                                @foreach ($product_detail->ProductImage as $product_details)
-                                    <div class="product-item">
-                                        <img class="product-single-image"
-                                            src="{{ asset('storage/product_photo/' . $product_details->image) }}"
-                                            data-zoom-image="{{ asset('storage/product_photo/' . $product_details->image) }}"
-                                            width="468" height="468" alt="product" />
-                                    </div>
+                                @foreach ($product_detail->productColors as $productColor)
+                                    @foreach ($productColor->media as $media)
+                                        <div class="product-item">
+                                            <img class="product-single-image"
+                                                src="{{ asset('storage/' . $media->file_path) }}"
+                                                data-zoom-image="{{ asset('storage/' . $media->file_path) }}" width="468"
+                                                height="468" />
+                                        </div>
+                                    @endforeach
                                 @endforeach
                             </div>
                             <!-- End .product-single-carousel -->
@@ -187,14 +188,14 @@
                             </span>
                         </div>
 
-                        <div class="prod-thumbnail owl-dots">
+                        {{-- <div class="prod-thumbnail owl-dots">
                             @foreach ($product_detail->ProductImage as $product_image)
                                 <div class="owl-dot">
                                     <img src="{{ asset('storage/product_photo/' . $product_image->image) }}" width="110"
                                         height="110" style="width: 110px; height: 110px;" alt="product-thumbnail" />
                                 </div>
                             @endforeach
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- End .product-single-gallery -->
 
@@ -308,10 +309,39 @@
                         <!-- End .product-desc -->
                         <div class="product-desc">
                             <p class="text-dark">
-                                {{ $product_detail?->ProductDetail?->Condition?->title ? 'Condition: ' : '' }} <span
-                                    class="">{{ $product_detail?->ProductDetail?->Condition?->title }} </span>
+                                {{ $product_detail?->ProductDetail?->Condition?->title ? 'Condition: ' : '' }}
+                                <span class="">{{ $product_detail?->ProductDetail?->Condition?->title }}</span>
                             </p>
                         </div>
+
+                        {{-- Start Product Images --}}
+                        <div class="product-desc">
+                            <div class="prod-thumbnail owl-dots">
+                                @foreach ($product_detail->productColors as $productColor)
+                                    @foreach ($productColor->media as $media)
+                                        <div class="owl-dot">
+                                            <img src="{{ asset('storage/' . $media->file_path) }}" width="110"
+                                                height="110" style="width: 110px; height: 110px;"
+                                                alt="product-thumbnail" />
+                                        </div>
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </div>
+                        {{-- End Product Images --}}
+
+                        {{-- Start Product Varations --}}
+                        <div class="product-desc">
+                            @foreach ($product_detail->productVariations as $productVariation)
+                                <span class="badge badge-danger">
+                                    @foreach ($productVariation->productVariationAttributes as $productVariationAttribute)
+                                            {{ $productVariationAttribute->attributeValue->value }}
+                                    @endforeach
+                                </span>
+                            @endforeach
+                        </div>
+                        {{-- End Product Varations --}}
+
                         <!-- End .product-desc -->
                         <div class="product-desc">
                             <p class="text-dark">{{ $product_detail?->ProductMoreDetail?->warranty ? 'Warranty: ' : '' }}
