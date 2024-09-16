@@ -73,7 +73,7 @@ class ProductController extends Controller
     }
     public function productList()
     {
-        $products = Product::latest()->paginate(20);
+        $products = Product::with( 'ProductDetail', 'ProductKeyword', 'ProductCompliance', 'ProductMoreDetail', 'productColors', 'productVariations', 'productVariations.productVariationAttributes', 'productVariations.productVariationAttributes.attributeValue')->latest()->paginate(20);
         return view('backend.product.product_list', compact('products'));
     }
     public function addProductVariantInfo(Request $request)

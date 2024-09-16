@@ -134,6 +134,40 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
+
+        ul.config-size-list li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        ul.config-size-list img {
+            width: 34px;
+            height: 34px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            /* Default border */
+        }
+
+        ul.config-size-list img:hover {
+            border-color: #ddd;
+            /* Border color on hover */
+        }
+
+        ul.config-size-list img.active-thumbnail {
+            border-color: #f00;
+            /* Red border for active image */
+        }
+
+        .product-single-image {
+            width: 468px;
+            height: 468px;
+            object-fit: cover;
+        }
+
+        .product-single-carousel .product-item {
+            text-align: center;
+        }
     </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -171,13 +205,18 @@
                         <div class="product-slider-container">
 
                             <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
+                                @foreach ($product_detail->ProductImage as $product_image)
+                                    <div class="product-item">
+                                        <img class="product-single-image"
+                                            src="{{ asset('storage/product_photo/' . $product_image->image) }}"
+                                            width="468" height="468" />
+                                    </div>
+                                @endforeach
                                 @foreach ($product_detail->productColors as $productColor)
                                     @foreach ($productColor->media as $media)
                                         <div class="product-item">
                                             <img class="product-single-image"
-                                                src="{{ asset('storage/' . $media->file_path) }}"
-                                                data-zoom-image="{{ asset('storage/' . $media->file_path) }}" width="468"
-                                                height="468" />
+                                                src="{{ asset('storage/' . $media->file_path) }}" height="468" />
                                         </div>
                                     @endforeach
                                 @endforeach
@@ -188,14 +227,22 @@
                             </span>
                         </div>
 
-                        {{-- <div class="prod-thumbnail owl-dots">
+                        <div class="prod-thumbnail owl-dots">
                             @foreach ($product_detail->ProductImage as $product_image)
                                 <div class="owl-dot">
                                     <img src="{{ asset('storage/product_photo/' . $product_image->image) }}" width="110"
                                         height="110" style="width: 110px; height: 110px;" alt="product-thumbnail" />
                                 </div>
                             @endforeach
-                        </div> --}}
+                            @foreach ($product_detail->productColors as $productColor)
+                                @foreach ($productColor->media as $media)
+                                    <div class="owl-dot">
+                                        <img src="{{ asset('storage/' . $media->file_path) }}" width="110" height="110"
+                                            style="width: 110px; height: 110px;" alt="product-thumbnail" />
+                                    </div>
+                                @endforeach
+                            @endforeach
+                        </div>
                     </div>
                     <!-- End .product-single-gallery -->
 
@@ -316,35 +363,30 @@
 
                         {{-- Start Product Varations --}}
                         <div class="product-filters-container">
-                            <div class="product-single-filter"><label>Color:</label>
+                            <div class="product-single-filter">
+                                <label>Color:</label>
                                 <ul class="config-size-list config-color-list config-filter-list">
-                                    <div class="prod-thumbnail owl-dots">
-                                    @foreach ($product_detail->productColors as $productColor)
+                                    @foreach ($product_detail->productColors as $index => $productColor)
                                         @foreach ($productColor->media as $media)
                                             <li>
-                                                <a href="javascript:;" class="filter-color border-0"
-                                                    style="background-color: rgb(255, 255, 255);">
-                                                    {{-- <div class="owl-dot"> --}}
-                                                    <img src="{{ asset('storage/' . $media->file_path) }}" class=""
-                                                        style="width: 32px; height: 26px;" />
-                                                    {{-- </div> --}}
-                                                </a>
+                                                <img src="{{ asset('storage/' . $media->file_path) }}" alt="Product Color"
+                                                    class="thumbnail-image" data-index="{{ $index }}"
+                                                    data-large-src="{{ asset('storage/' . $media->file_path) }}">
                                             </li>
                                         @endforeach
                                     @endforeach
-                                    </div>
                                 </ul>
                             </div>
 
                             <div class="product-single-filter">
                                 <label>Size:</label>
                                 <ul class="config-size-list">
-                                        @foreach ($uniqueSizes as $size)
-                                            <li>
-                                                <a href="javascript:;"
-                                                    class="d-flex align-items-center justify-content-center">{{ $size->value }}</a>
-                                            </li>
-                                        @endforeach
+                                    @foreach ($uniqueSizes as $size)
+                                        <li>
+                                            <a href="javascript:;"
+                                                class="d-flex align-items-center justify-content-center">{{ $size->value }}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
 
@@ -389,7 +431,8 @@
                             </div>
                             <!-- End .product-single-qty -->
 
-                            <a href="javascript:void(0);" title="Add To Cart" data-product_id="{{ $product_detail->id }}"
+                            <a href="javascript:void(0);" title="Add To Cart"
+                                data-product_id="{{ $product_detail->id }}"
                                 @if ($product_detail->ProductMainImage) data-image="{{ $product_detail->ProductMainImage->image }}" @endif
                                 class="btn btn-dark {{ $product_detail->stock_qty == 0 ? 'non-clickable' : '' }}
                                 add_cart_item_quantity add-cart @if ($product_detail->cartItem) added-to-cart @endif mr-2"
@@ -763,6 +806,46 @@
                     block: 'start'
                 });
             }, 500); // You can adjust the delay as needed
+        });
+
+        $(document).ready(function() {
+            // Handle hover effect
+            $('.thumbnail-image').hover(function() {
+                // Update the main image in the active slider item with the hovered thumbnail image
+                var newSrc = $(this).attr('data-large-src');
+                // Target the image inside the active .owl-item
+                $('.owl-item.active .product-single-image').attr('src', newSrc);
+            });
+
+            // Handle click effect
+            $('.thumbnail-image').click(function() {
+                // Remove 'active-thumbnail' class from any previously active thumbnail
+                $('.thumbnail-image').removeClass('active-thumbnail');
+
+                // Add 'active-thumbnail' class to the clicked thumbnail and update the border
+                $(this).addClass('active-thumbnail');
+
+                // Update the main image in the active owl-item with the clicked image
+                var newSrc = $(this).attr('data-large-src');
+
+                // Target the image inside the active .owl-item
+                var $activeImage = $('.owl-item.active .product-single-image');
+                $activeImage.attr('src', newSrc);
+                $activeImage.attr('data-zoom-image', newSrc);
+
+                // Destroy and reinitialize the zoom plugin to apply the new zoom image
+                $activeImage.elevateZoom(); // Reinitialize zoom (for ElevateZoom plugin)
+            });
+
+            // Reset the main image to the clicked active thumbnail when hover is removed
+            $('.thumbnail-image').mouseleave(function() {
+                var activeThumbnailSrc = $('.thumbnail-image.active-thumbnail').attr('data-large-src');
+                console.log(activeThumbnailSrc);
+                if (activeThumbnailSrc) {
+                    // Reset the image in the active .owl-item to the active thumbnail image
+                    $('.owl-item.active .product-single-image').attr('src', activeThumbnailSrc);
+                }
+            });
         });
     </script>
 @endpush
