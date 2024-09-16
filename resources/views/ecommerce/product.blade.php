@@ -314,31 +314,45 @@
                             </p>
                         </div>
 
-                        {{-- Start Product Images --}}
-                        <div class="product-desc">
-                            <div class="prod-thumbnail owl-dots">
-                                @foreach ($product_detail->productColors as $productColor)
-                                    @foreach ($productColor->media as $media)
-                                        <div class="owl-dot">
-                                            <img src="{{ asset('storage/' . $media->file_path) }}" width="110"
-                                                height="110" style="width: 110px; height: 110px;"
-                                                alt="product-thumbnail" />
-                                        </div>
-                                    @endforeach
-                                @endforeach
-                            </div>
-                        </div>
-                        {{-- End Product Images --}}
-
                         {{-- Start Product Varations --}}
-                        <div class="product-desc">
-                            @foreach ($product_detail->productVariations as $productVariation)
-                                <span class="badge badge-danger">
-                                    @foreach ($productVariation->productVariationAttributes as $productVariationAttribute)
-                                            {{ $productVariationAttribute->attributeValue->value }}
+                        <div class="product-filters-container">
+                            <div class="product-single-filter"><label>Color:</label>
+                                <ul class="config-size-list config-color-list config-filter-list">
+                                    <div class="prod-thumbnail owl-dots">
+                                    @foreach ($product_detail->productColors as $productColor)
+                                        @foreach ($productColor->media as $media)
+                                            <li>
+                                                <a href="javascript:;" class="filter-color border-0"
+                                                    style="background-color: rgb(255, 255, 255);">
+                                                    {{-- <div class="owl-dot"> --}}
+                                                    <img src="{{ asset('storage/' . $media->file_path) }}" class=""
+                                                        style="width: 32px; height: 26px;" />
+                                                    {{-- </div> --}}
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     @endforeach
-                                </span>
-                            @endforeach
+                                    </div>
+                                </ul>
+                            </div>
+
+                            <div class="product-single-filter">
+                                <label>Size:</label>
+                                <ul class="config-size-list">
+                                        @foreach ($uniqueSizes as $size)
+                                            <li>
+                                                <a href="javascript:;"
+                                                    class="d-flex align-items-center justify-content-center">{{ $size->value }}</a>
+                                            </li>
+                                        @endforeach
+                                </ul>
+                            </div>
+
+                            <div class="product-single-filter">
+                                <label></label>
+                                <a class="font1 text-uppercase clear-btn" href="#">Clear</a>
+                            </div>
+                            <!---->
                         </div>
                         {{-- End Product Varations --}}
 
