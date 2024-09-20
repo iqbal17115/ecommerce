@@ -864,217 +864,106 @@
 
     // Start Variation JS
     $(document).ready(function() {
-        // Initialize Select2 for size selection
-        $("#sizeSelect").select2({
-            dropdownParent: $(".parent"),
-        });
+    // Color-Size Map to track selected combinations
+    const colorSizeMap = {};
 
-        const colorSizeMap = {}; // To track selected sizes for each color
+    // Add Color Event
+    $('#addColorBtn').on('click', function() {
+        const colorId = $('#colorSelect').val();
+        const colorText = $('#colorSelect option:selected').text();
 
-        // Initialize colorSizeMap from Blade if needed
-        @foreach ($productInfo->productVariations->groupBy('product_variation_attributes.attribute_value_id') as $colorId => $variations)
-            @foreach ($variations as $variation)
-                @php
-                    $colorAttribute = $variation->productVariationAttributes->first(function ($attr) {
-                        return $attr->attributeValue->attribute->name === 'Color';
-                    });
-                    $sizeAttribute = $variation->productVariationAttributes->first(function ($attr) {
-                        return $attr->attributeValue->attribute->name === 'Size';
-                    });
-                    $colorId = $colorAttribute->attributeValue->id;
-                    $sizeId = $sizeAttribute->attributeValue->id;
-                @endphp
-                colorSizeMap['{{ $colorId }}'] = colorSizeMap['{{ $colorId }}'] || [];
-                colorSizeMap['{{ $colorId }}'].push('{{ $sizeId }}');
-            @endforeach
-        @endforeach
-
-        // Add Color Row
-        $('#addColorBtn').on('click', function() {
-            const colorId = $('#colorSelect').val();
-            const colorText = $('#colorSelect option:selected').text();
-
-            if (colorId && !colorSizeMap[colorId]) { // Prevent adding the same color twice
-                colorSizeMap[colorId] = [];
-                addColorRow(colorId, colorText);
-            } else {
-                alert("Color already added or not selected.");
-            }
-        });
-
-        // Function to add a new color row with an image input
-        function addColorRow(colorId, colorText) {
-            const colorRow = `
-                    <tr id="colorRow-${colorId}">
-                        <td>${colorText}</td>
-                        <td>
-                            <input type="file" name="color_img_${colorId}" accept="image/*" multiple class="form-control form-control-sm">
-                        </td>
-                        <td></td>
-                        <td>
-                            <span class="delete-icon" onclick="removeColor('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span>
-                        </td>
-                    </tr>`;
-            $('#colorTable tbody').append(colorRow);
+        if (colorId && !colorSizeMap[colorId]) {
+            colorSizeMap[colorId] = [];
+            addColorRow(colorId, colorText);
+        } else {
+            alert("Color already added or not selected.");
         }
-
-        // Apply Sizes to All Colors
-        $('#addSizeBtn').on('click', function() {
-            const selectedSizes = $('#sizeSelect').val();
-            if (selectedSizes && selectedSizes.length > 0) {
-                updateSizeTable(selectedSizes);
-            } else {
-                alert("Please select at least one size.");
-            }
-        });
-
-        // Function to update the size table based on selected colors and sizes
-        function updateSizeTable(selectedSizes) {
-            Object.keys(colorSizeMap).forEach(colorId => {
-                // Check if the color row exists; if not, create it
-                if (!$(`#colorRow-${colorId}`).length) {
-                    const colorText = $(`#colorSelect option[value="${colorId}"]`).text();
-                    addColorRow(colorId, colorText);
-                }
-
-                // If sizes are selected, update the size rows
-                if (selectedSizes && selectedSizes.length > 0) {
-                    colorSizeMap[colorId] = selectedSizes; // Update colorSizeMap
-                    addSizeRows(colorId, selectedSizes); // Add or update size rows
-                }
-            });
-        }
-
-        // Function to add rows for sizes under each color
-        function addSizeRows(colorId, sizes) {
-            sizes.forEach((sizeId, index) => {
-                const sizeText = $(`#sizeSelect option[value="${sizeId}"]`).text();
-                const existingRow = $(`#${colorId}-${sizeId}`);
-                if (existingRow.length > 0) {
-                    // If the row already exists, skip creating a new one
-                    return;
-                }
-                const sizeRow = `
-        <tr id="${colorId}-${sizeId}">
-            ${index === 0 ? `<td rowspan="${sizes.length}" class="color-cell">${$(`#colorSelect option[value="${colorId}"]`).text()}</td>` : ''}
-            <td>${sizeText}</td>
-            <td>
-                <input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required>
-            </td>
-            <td>
-                <input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required>
-            </td>
-            <td>
-                <input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required>
-            </td>
-            <td>
-                <span class="delete-icon" onclick="removeSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can d-block font-size-16"></i></span>
-            </td>
-        </tr>`;
-                $('#sizeTable tbody').append(sizeRow);
-            });
-        }
-
-        // Function to remove an entire color row
-        window.removeColor = function(colorId) {
-            $(`#colorRow-${colorId}`).remove();
-            delete colorSizeMap[colorId]; // Remove color from map
-            $(`#sizeTable tbody tr[id^="${colorId}-"]`).remove(); // Remove all related size rows
-        };
-
-        // Function to remove a single size row
-        window.removeSize = function(colorId, sizeId) {
-            const sizeRow = $(`#${colorId}-${sizeId}`);
-            sizeRow.remove(); // Remove the specific size row
-            colorSizeMap[colorId] = colorSizeMap[colorId].filter(s => s !==
-                sizeId); // Remove size from the map
-
-            // Update rowspan for the color cell
-            const colorRows = $(`#sizeTable tbody tr[id^="${colorId}-"]`);
-            const remainingSizes = colorSizeMap[colorId].length;
-
-            if (remainingSizes > 0) {
-                // Update rowspan
-                colorRows.first().find('.color-cell').attr('rowspan', remainingSizes);
-            } else {
-                // Remove the entire color row if no sizes are left
-                removeColor(colorId);
-            }
-        };
-
-        // Handle form submission with AJAX
-        $('#add_product_variation').on('submit', function(e) {
-            e.preventDefault(); // Prevent the default form submission
-
-            const formData = new FormData(this);
-            // Initialize an object to group variations by color
-            const groupedVariations = {};
-
-            // Group variations by color
-            Object.keys(colorSizeMap).forEach(colorId => {
-                colorSizeMap[colorId].forEach(sizeId => {
-                    // Initialize the group for the color if not already done
-                    if (!groupedVariations[colorId]) {
-                        groupedVariations[colorId] = {
-                            color_id: colorId,
-                            variations: []
-                        };
-                    }
-
-                    // Push the size and related attributes to the color group
-                    groupedVariations[colorId].variations.push({
-                        size_id: sizeId,
-                        price: $(
-                                `body input[name="price_${colorId}_${sizeId}"]`)
-                            .val(),
-                        sku: $(`body input[name="sku_${colorId}_${sizeId}"]`)
-                            .val(),
-                        stock: $(
-                                `body input[name="stock_${colorId}_${sizeId}"]`)
-                            .val()
-                    });
-                });
-            });
-
-            // Append the grouped data to formData
-            Object.values(groupedVariations).forEach(group => {
-                formData.append('variations[]', JSON.stringify(group));
-            });
-
-            // Append images for each color to formData
-            Object.keys(colorSizeMap).forEach(colorId => {
-                // Find the input element by name attribute
-                const inputElement = $(`input[name="color_img_${colorId}"]`)[0];
-
-                // Check if the input element exists and has files
-                if (inputElement && inputElement.files.length > 0) {
-                    // If files exist, add them to formData
-                    Array.from(inputElement.files).forEach(file => {
-                        formData.append(`color_images_${colorId}[]`, file);
-                    });
-                } else {
-                    // Handle the case where no files exist
-                    console.log(`No files found for color ${colorId}`);
-                }
-            });
-
-            // Send AJAX request
-            $.ajax({
-                url: '{{ route('products.store-variations') }}', // Replace with your route name
-                method: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    alert('Product variations saved successfully!');
-                    // Handle success response here
-                },
-                error: function(xhr, status, error) {
-                    alert('An error occurred: ' + error);
-                    // Handle error response here
-                }
-            });
-        });
     });
+
+    // Add Sizes Event
+    $('#addSizeBtn').on('click', function() {
+        const selectedSizes = $('#sizeSelect').val();
+        if (selectedSizes && selectedSizes.length > 0) {
+            updateSizeTable(selectedSizes);
+        } else {
+            alert("Please select at least one size.");
+        }
+    });
+
+    // Add color row without size (for color-only variations)
+    function addColorRow(colorId, colorText) {
+        const row = `
+            <tr id="colorRow-${colorId}">
+                <td>${colorText}</td>
+                <td>N/A</td>
+                <td><input type="number" name="price_${colorId}" placeholder="Price" class="form-control form-control-sm" required></td>
+                <td><input type="text" name="sku_${colorId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
+                <td><input type="number" name="stock_${colorId}" placeholder="Stock" class="form-control form-control-sm" required></td>
+                <td><span class="delete-icon" onclick="removeColor('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
+            </tr>`;
+        $('#colorSizeTable tbody').append(row);
+    }
+
+    // Add or update rows for sizes under each color
+    function updateSizeTable(selectedSizes) {
+        const colorId = $('#colorSelect').val();
+        const colorText = $('#colorSelect option:selected').text();
+
+        if (!colorId) {
+            // Handle size-only variations
+            selectedSizes.forEach(sizeId => {
+                const sizeText = $('#sizeSelect option[value="' + sizeId + '"]').text();
+                const rowId = `sizeRow-${sizeId}`;
+                if (!$(`#${rowId}`).length) {
+                    const row = `
+                        <tr id="${rowId}">
+                            <td>N/A</td>
+                            <td>${sizeText}</td>
+                            <td><input type="number" name="price_size_${sizeId}" placeholder="Price" class="form-control form-control-sm" required></td>
+                            <td><input type="text" name="sku_size_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
+                            <td><input type="number" name="stock_size_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required></td>
+                            <td><span class="delete-icon" onclick="removeSize('${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
+                        </tr>`;
+                    $('#colorSizeTable tbody').append(row);
+                }
+            });
+        } else {
+            // Handle color and size combinations
+            selectedSizes.forEach(sizeId => {
+                const sizeText = $('#sizeSelect option[value="' + sizeId + '"]').text();
+                const rowId = `colorSizeRow-${colorId}-${sizeId}`;
+                if (!$(`#${rowId}`).length) {
+                    const row = `
+                        <tr id="${rowId}">
+                            <td>${colorText}</td>
+                            <td>${sizeText}</td>
+                            <td><input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required></td>
+                            <td><input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
+                            <td><input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required></td>
+                            <td><span class="delete-icon" onclick="removeColorSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
+                        </tr>`;
+                    $('#colorSizeTable tbody').append(row);
+                }
+            });
+        }
+    }
+
+    // Remove color and its variations
+    function removeColor(colorId) {
+        delete colorSizeMap[colorId];
+        $('#colorRow-' + colorId).remove();
+        $(`[id^=colorSizeRow-${colorId}-]`).remove(); // Remove size rows for this color
+    }
+
+    // Remove size-only variations
+    function removeSize(sizeId) {
+        $('#sizeRow-' + sizeId).remove();
+    }
+
+    // Remove color-size combination row
+    function removeColorSize(colorId, sizeId) {
+        $('#colorSizeRow-' + colorId + '-' + sizeId).remove();
+    }
+});
     // End Variation JS
 </script>
