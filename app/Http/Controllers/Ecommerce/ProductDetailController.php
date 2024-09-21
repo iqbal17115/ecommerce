@@ -10,10 +10,23 @@ class ProductDetailController extends Controller
 {
     public function productDetail($name)
     {
-        // Url decode
         $user_id = auth()?->user()->id ?? null;
-        $product_detail = Product::with('productColors', 'productVariations', 'productVariations.productVariationAttributes')->whereName($name)->first();
 
-        return view('ecommerce.product', compact(['product_detail', 'user_id']));
+        // Eager load relations: productColors, productVariations and productVariationAttributes
+        $product_detail = Product::with([
+            'productColors',
+            'productVariations.productVariationAttributes.attributeValue'
+        ])->whereName($name)->first();
+
+        // Group variations by color and size
+        $colorToSizesMap = $product_detail->productColors->mapWithKeys(function ($color) {
+            return [
+                $color->id => $color->productVariations->flatMap(function ($variation) {
+                    return $variation->productVariationAttributes->where('attributeValue.attribute.name', 'Size')->pluck('attribute_value_id');
+                }),
+            ];
+        });
+
+        return view('ecommerce.product', compact('product_detail', 'user_id', 'colorToSizesMap'));
     }
 }

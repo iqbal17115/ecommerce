@@ -168,6 +168,11 @@
         .product-single-carousel .product-item {
             text-align: center;
         }
+
+        .size-link.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
     </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -216,7 +221,7 @@
                                     @foreach ($productColor->media as $media)
                                         <div class="product-item">
                                             <img class="product-single-image"
-                                                src="{{ asset('storage/' . $media->file_path) }}"/>
+                                                src="{{ asset('storage/' . $media->file_path) }}" />
                                         </div>
                                     @endforeach
                                 @endforeach
@@ -245,7 +250,6 @@
                         </div>
                     </div>
                     <!-- End .product-single-gallery -->
-
                     <div class="col-lg-7 col-md-6 product-single-details">
                         <h1 class="product-title">
                             {{ $product_detail?->name }}
@@ -363,36 +367,59 @@
 
                         {{-- Start Product Varations --}}
                         <div class="product-filters-container">
+                            <!-- Color Filter -->
                             <div class="product-single-filter">
                                 <label>Color:</label>
-                                <ul class="config-size-list config-color-list config-filter-list">
+                                <ul class="config-color-list">
                                     @foreach ($product_detail->productColors as $index => $productColor)
-                                        @foreach ($productColor->media as $media)
-                                            <li>
-                                                <img src="{{ asset('storage/' . $media->file_path) }}" alt="Product Color"
-                                                    class="thumbnail-image" data-index="{{ $index }}"
-                                                    data-large-src="{{ asset('storage/' . $media->file_path) }}">
-                                            </li>
-                                        @endforeach
+                                        <li>
+                                            <img src="{{ asset('storage/' . $productColor->media->first()->file_path) }}"
+                                                alt="Product Color" class="thumbnail-image"
+                                                data-color-id="{{ $productColor->id }}" style="width: 45px; height: 45px;"
+                                                onclick="handleColorClick('{{ $productColor->id }}')">
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
 
-                            <div class="product-single-filter">
-                                <label>Size:</label>
-                                <ul class="config-size-list">
-                                        <li>
-                                            <a href="javascript:;"
-                                                class="d-flex align-items-center justify-content-center">Size</a>
-                                        </li>
-                                </ul>
-                            </div>
+                            <!-- Size Filter -->
+                            <ul class="config-size-list" id="sizeList">
+                                @php
+                                    $uniqueSizes = collect(); // Collect to store unique sizes
+                                @endphp
+
+                                @foreach ($product_detail->productVariations as $variation)
+                                    @php
+                                        // Find the size attribute from the productVariationAttributes
+                                        $sizeAttribute = $variation->productVariationAttributes
+                                            ->where('attributeValue.attribute.name', 'Size')
+                                            ->first();
+                                        $sizeId = $sizeAttribute?->attribute_value_id ?? null;
+                                        $sizeName = $sizeAttribute?->attributeValue->value ?? '';
+
+                                        // Avoid showing the same size multiple times
+                                        if ($sizeId && !$uniqueSizes->has($sizeId)) {
+                                            $uniqueSizes->put($sizeId, $sizeName);
+                                        }
+                                    @endphp
+                                @endforeach
+
+                                <!-- Display unique sizes -->
+                                @foreach ($uniqueSizes as $sizeId => $sizeName)
+                                    <li id="size-{{ $sizeId }}">
+                                        <a href="javascript:;"
+                                            class="d-flex align-items-center justify-content-center size-link disabled"
+                                            data-size-id="{{ $sizeId }}">
+                                            {{ $sizeName }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
 
                             <div class="product-single-filter">
-                                <label></label>
-                                <a class="font1 text-uppercase clear-btn" href="#">Clear</a>
+                                <a class="font1 text-uppercase clear-btn" href="javascript:;"
+                                    onclick="clearSelections()">Clear</a>
                             </div>
-                            <!---->
                         </div>
                         {{-- End Product Varations --}}
 
@@ -845,5 +872,38 @@
                 }
             });
         });
+
+        // Object to store color-to-size mapping
+        const colorToSizesMap = @json($colorToSizesMap);
+
+        // Handle color click event
+        function handleColorClick(colorId) {
+            // Disable all sizes initially
+            document.querySelectorAll('.size-link').forEach(function(sizeLink) {
+                sizeLink.classList.add('disabled');
+                sizeLink.setAttribute('aria-disabled', 'true'); // Optional: for accessibility
+            });
+
+            // Get the available sizes for the selected color
+            const availableSizes = colorToSizesMap[colorId] || [];
+
+            // Enable the sizes for the selected color
+            availableSizes.forEach(function(sizeId) {
+                const sizeElement = document.getElementById('size-' + sizeId);
+                if (sizeElement) {
+                    sizeElement.querySelector('.size-link').classList.remove('disabled');
+                    sizeElement.querySelector('.size-link').removeAttribute(
+                    'aria-disabled'); // Optional: for accessibility
+                }
+            });
+        }
+
+        // Clear selections
+        function clearSelections() {
+            document.querySelectorAll('.size-link').forEach(function(sizeLink) {
+                sizeLink.classList.add('disabled');
+            });
+            console.log('Selections cleared');
+        }
     </script>
 @endpush
