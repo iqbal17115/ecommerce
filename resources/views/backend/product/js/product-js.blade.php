@@ -418,6 +418,7 @@
                     if (!tab_menu.includes(3)) {
                         tab_menu.push(3);
                     }
+
                     $("#product_identity_id").val(data.product_id);
                     $("#vital_info_id").val(data.product_id);
                     $("#product_offer_id").val(data.product_id);
@@ -1019,7 +1020,25 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    alert('Product variations saved successfully!');
+                    Command: toastr["success"]("Product Variation Saved Successfully",
+                        "Success")
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
                 },
                 error: function(xhr, status, error) {
                     alert('An error occurred: ' + error);
