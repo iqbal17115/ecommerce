@@ -216,7 +216,7 @@
                                     @foreach ($productColor->media as $media)
                                         <div class="product-item">
                                             <img class="product-single-image"
-                                                src="{{ asset('storage/' . $media->file_path) }}" height="468" />
+                                                src="{{ asset('storage/' . $media->file_path) }}"/>
                                         </div>
                                     @endforeach
                                 @endforeach
@@ -381,12 +381,10 @@
                             <div class="product-single-filter">
                                 <label>Size:</label>
                                 <ul class="config-size-list">
-                                    @foreach ($uniqueSizes as $size)
                                         <li>
                                             <a href="javascript:;"
-                                                class="d-flex align-items-center justify-content-center">{{ $size->value }}</a>
+                                                class="d-flex align-items-center justify-content-center">Size</a>
                                         </li>
-                                    @endforeach
                                 </ul>
                             </div>
 

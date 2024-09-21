@@ -38,7 +38,7 @@ class ProductVariationService
                     'attribute_value_id' => $colorId,
                 ]);
 
-                // Handle image uploads
+                // Handle image uploads for the color
                 if (isset($data["color_images_{$colorId}"])) {
                     $this->storeOrUpdateColorImages($productColor, $data["color_images_{$colorId}"]);
                 }
