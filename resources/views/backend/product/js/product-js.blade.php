@@ -864,137 +864,106 @@
 
     // Start Variation JS
     $(document).ready(function() {
-        const colorMap = {};
+    // Color-Size Map to track selected combinations
+    const colorSizeMap = {};
 
-        // Add Color Button Click Event
-        $('#addColorBtn').on('click', function() {
-            const colorId = $('#colorSelect').val();
-            const colorName = $('#colorSelect option:selected').text();
+    // Add Color Event
+    $('#addColorBtn').on('click', function() {
+        const colorId = $('#colorSelect').val();
+        const colorText = $('#colorSelect option:selected').text();
 
-            if (colorId && !colorMap[colorId]) {
-                colorMap[colorId] = true; // Mark the color as added
-
-                // Add color-only row
-                addColorOnlyRow(colorId, colorName);
-                addColorImageRow(colorId, colorName); // Add row for image upload
-            } else {
-                alert("Color already added or not selected.");
-            }
-        });
-
-        // Add Sizes Button Click Event
-        $('#addSizeBtn').on('click', function() {
-            const selectedSizes = $('#sizeSelect').val();
-            const selectedColorId = $('#colorSelect').val(); // Get the currently selected color
-
-            if (selectedSizes && selectedSizes.length > 0) {
-                if (selectedColorId) {
-                    // If a color is selected, apply sizes to that color
-                    const colorName = $('#colorSelect option[value="' + selectedColorId + '"]').text();
-                    updateSizeTable(selectedSizes, selectedColorId, colorName);
-                } else {
-                    // If no color is selected, just add size entries
-                    selectedSizes.forEach(sizeId => {
-                        const sizeText = $('#sizeSelect option[value="' + sizeId + '"]').text();
-                        addSizeOnlyRow(sizeId, sizeText);
-                    });
-                }
-            } else {
-                alert("Please select at least one size.");
-            }
-        });
-
-        // Function to add a color-only row in the colorSizeTable
-        function addColorOnlyRow(colorId, colorName) {
-            const rowId = `colorOnlyRow-${colorId}`;
-            if (!$(`#${rowId}`).length) {
-                const row = `
-            <tr id="${rowId}">
-                <td>${colorName}</td>
-                <td>N/A</td>
-                <td><input type="number" name="price_color_${colorId}" placeholder="Price" class="form-control form-control-sm" required></td>
-                <td><input type="text" name="sku_color_${colorId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
-                <td><input type="number" name="stock_color_${colorId}" placeholder="Stock" class="form-control form-control-sm" required></td>
-                <td><span class="delete-icon" onclick="removeColorOnlyRow('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
-            </tr>`;
-                $('#colorSizeTable tbody').append(row);
-            }
+        if (colorId && !colorSizeMap[colorId]) {
+            colorSizeMap[colorId] = [];
+            addColorRow(colorId, colorText);
+        } else {
+            alert("Color already added or not selected.");
         }
+    });
 
-        // Function to update the size table with color-size combinations
-        function updateSizeTable(selectedSizes, colorId, colorName) {
+    // Add Sizes Event
+    $('#addSizeBtn').on('click', function() {
+        const selectedSizes = $('#sizeSelect').val();
+        if (selectedSizes && selectedSizes.length > 0) {
+            updateSizeTable(selectedSizes);
+        } else {
+            alert("Please select at least one size.");
+        }
+    });
+
+    // Add color row without size (for color-only variations)
+    function addColorRow(colorId, colorText) {
+        const row = `
+            <tr id="colorRow-${colorId}">
+                <td>${colorText}</td>
+                <td>N/A</td>
+                <td><input type="number" name="price_${colorId}" placeholder="Price" class="form-control form-control-sm" required></td>
+                <td><input type="text" name="sku_${colorId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
+                <td><input type="number" name="stock_${colorId}" placeholder="Stock" class="form-control form-control-sm" required></td>
+                <td><span class="delete-icon" onclick="removeColor('${colorId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
+            </tr>`;
+        $('#colorSizeTable tbody').append(row);
+    }
+
+    // Add or update rows for sizes under each color
+    function updateSizeTable(selectedSizes) {
+        const colorId = $('#colorSelect').val();
+        const colorText = $('#colorSelect option:selected').text();
+
+        if (!colorId) {
+            // Handle size-only variations
+            selectedSizes.forEach(sizeId => {
+                const sizeText = $('#sizeSelect option[value="' + sizeId + '"]').text();
+                const rowId = `sizeRow-${sizeId}`;
+                if (!$(`#${rowId}`).length) {
+                    const row = `
+                        <tr id="${rowId}">
+                            <td>N/A</td>
+                            <td>${sizeText}</td>
+                            <td><input type="number" name="price_size_${sizeId}" placeholder="Price" class="form-control form-control-sm" required></td>
+                            <td><input type="text" name="sku_size_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
+                            <td><input type="number" name="stock_size_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required></td>
+                            <td><span class="delete-icon" onclick="removeSize('${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
+                        </tr>`;
+                    $('#colorSizeTable tbody').append(row);
+                }
+            });
+        } else {
+            // Handle color and size combinations
             selectedSizes.forEach(sizeId => {
                 const sizeText = $('#sizeSelect option[value="' + sizeId + '"]').text();
                 const rowId = `colorSizeRow-${colorId}-${sizeId}`;
-
                 if (!$(`#${rowId}`).length) {
                     const row = `
-                    <tr id="${rowId}">
-                        <td>${colorName}</td>
-                        <td>${sizeText}</td>
-                        <td><input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required></td>
-                        <td><input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
-                        <td><input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required></td>
-                        <td><span class="delete-icon" onclick="removeSizeRow('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
-                    </tr>`;
+                        <tr id="${rowId}">
+                            <td>${colorText}</td>
+                            <td>${sizeText}</td>
+                            <td><input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm" required></td>
+                            <td><input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
+                            <td><input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required></td>
+                            <td><span class="delete-icon" onclick="removeColorSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
+                        </tr>`;
                     $('#colorSizeTable tbody').append(row);
                 }
             });
         }
+    }
 
-        // Function to add a size-only row in the colorSizeTable
-        function addSizeOnlyRow(sizeId, sizeText) {
-            const rowId = `sizeRow-${sizeId}`;
-            if (!$(`#${rowId}`).length) {
-                const row = `
-            <tr id="${rowId}">
-                <td>N/A</td>
-                <td>${sizeText}</td>
-                <td><input type="number" name="price_size_${sizeId}" placeholder="Price" class="form-control form-control-sm" required></td>
-                <td><input type="text" name="sku_size_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm" required></td>
-                <td><input type="number" name="stock_size_${sizeId}" placeholder="Stock" class="form-control form-control-sm" required></td>
-                <td><span class="delete-icon" onclick="removeSizeRow(null, '${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
-            </tr>`;
-                $('#colorSizeTable tbody').append(row);
-            }
-        }
+    // Remove color and its variations
+    function removeColor(colorId) {
+        delete colorSizeMap[colorId];
+        $('#colorRow-' + colorId).remove();
+        $(`[id^=colorSizeRow-${colorId}-]`).remove(); // Remove size rows for this color
+    }
 
-        // Function to add a new row for color-wise image upload
-        function addColorImageRow(colorId, colorName) {
-            const row = `
-        <tr id="colorRow-${colorId}">
-            <td>${colorName}</td>
-            <td>
-                <input type="file" name="color_image_${colorId}" class="form-control form-control-sm" accept="image/*" required>
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger btn-sm" onclick="removeColorRow('${colorId}')">
-                    <i class="mdi mdi-trash-can"></i>
-                </button>
-            </td>
-        </tr>`;
-            $('#colorImageTable tbody').append(row);
-        }
+    // Remove size-only variations
+    function removeSize(sizeId) {
+        $('#sizeRow-' + sizeId).remove();
+    }
 
-        // Function to remove color-only row
-        window.removeColorOnlyRow = function(colorId) {
-            delete colorMap[colorId];
-            $(`#colorOnlyRow-${colorId}`).remove();
-        };
-
-        // Function to remove size row
-        window.removeSizeRow = function(colorId, sizeId) {
-            if (colorId) {
-                $(`#colorSizeRow-${colorId}-${sizeId}`).remove();
-            } else {
-                $(`#sizeRow-${sizeId}`).remove();
-            }
-        };
-
-        // Function to remove color image row
-        window.removeColorRow = function(colorId) {
-            $(`#colorRow-${colorId}`).remove();
-        };
-    });
+    // Remove color-size combination row
+    function removeColorSize(colorId, sizeId) {
+        $('#colorSizeRow-' + colorId + '-' + sizeId).remove();
+    }
+});
     // End Variation JS
 </script>
