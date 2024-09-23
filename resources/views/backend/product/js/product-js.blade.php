@@ -380,6 +380,7 @@
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut"
                     }
+
                     $("#product_identity_id").val(data.product_id);
                     $("#vital_info_id").val(data.product_id);
                     $("#product_offer_id").val(data.product_id);
@@ -951,14 +952,14 @@
                 const rowId = `colorSizeRow-${colorId}-${sizeId}`;
                 if (!$('#' + rowId).length) {
                     const row = `
-                <tr id="${rowId}" class="variation-row" data-color-id="${colorId}" data-size-id="${sizeId}">
-                    <td>${colorText}</td>
-                    <td>${sizeText}</td>
-                    <td><input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm price-input" required></td>
-                    <td><input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm sku-input" required></td>
-                    <td><input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm stock-input" required></td>
-                    <td><span class="delete-icon" onclick="removeColorSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
-                </tr>`;
+        <tr id="${rowId}" class="variation-row" data-color-id="${colorId}" data-size-id="${sizeId}">
+            <td>${colorText}</td>
+            <td>${sizeText}</td>
+            <td><input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm price-input" required></td>
+            <td><input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm sku-input" required></td>
+            <td><input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm stock-input" required></td>
+            <td><span class="delete-icon" onclick="removeColorSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
+        </tr>`;
                     $('#colorSizeTable tbody').append(row);
                 }
             });
@@ -1047,28 +1048,33 @@
         });
     });
 
+    // Remove color-size variation
+    function removeColorSize(colorId, sizeId) {
+        $('#colorSizeRow-' + colorId + '-' + sizeId).remove();
+    }
+
     function previewImages(event, colorId) {
-            const imagePreviewDiv = document.getElementById('imagePreview-' + colorId);
-            imagePreviewDiv.innerHTML = ''; // Clear previous previews
+        const imagePreviewDiv = document.getElementById('imagePreview-' + colorId);
+        imagePreviewDiv.innerHTML = ''; // Clear previous previews
 
-            const files = event.target.files; // Get selected files
+        const files = event.target.files; // Get selected files
 
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const reader = new FileReader();
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
 
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'rounded';
-                    img.style.width = '30px';
-                    img.style.height = '30px';
-                    img.style.margin = '2px';
-                    imagePreviewDiv.appendChild(img); // Append the image to the preview div
-                }
-
-                reader.readAsDataURL(file); // Read the file as a data URL
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'rounded';
+                img.style.width = '30px';
+                img.style.height = '30px';
+                img.style.margin = '2px';
+                imagePreviewDiv.appendChild(img); // Append the image to the preview div
             }
+
+            reader.readAsDataURL(file); // Read the file as a data URL
         }
+    }
     // End Variation JS
 </script>

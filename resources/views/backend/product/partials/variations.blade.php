@@ -124,7 +124,7 @@
 
             <!-- Submit Buttons -->
             <div class="col-md-12 mt-3 text-right">
-                <button type="submit" class="btn btn-success">Save Variations</button>
+                <button type="submit" class="btn btn-success next-btn">Save Variations</button>
             </div>
         </div>
     </form>

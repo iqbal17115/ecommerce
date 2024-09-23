@@ -59,7 +59,7 @@
                                         @foreach ($product->productVariations as $productVariation)
                                             <span class="badge badge-danger">
                                                 @foreach ($productVariation->productVariationAttributes as $productVariationAttribute)
-                                                    {{ $productVariationAttribute->attributeValue->value }}
+                                                    {{ $productVariationAttribute?->attributeValue?->value }}
                                                 @endforeach
                                             </span>
                                         @endforeach
