@@ -37,7 +37,19 @@ function showCartTableData(data) {
         } else {
             cheked_all_check_box = false;
         }
-        console.log(coupon_discount);
+        
+     variationInfo = '';
+    // Loop through item.variations using forEach
+    item.variations.forEach(function(variation, index) {
+        // Append each variation's name and value
+        variationInfo += `${variation.attribute_name}: ${variation.attribute_value}`;
+        
+        // Add a comma separator except for the last item
+        if (index < item.variations.length - 1) {
+            variationInfo += ', ';
+        }
+    });
+
         htmlContent += `
     <tr class="product-row product_row shadow product cart_${item.id}" data-id="${item.id}">
       <td class="checkbox-col">
@@ -56,6 +68,7 @@ function showCartTableData(data) {
       <td class="product-col">
         <h5 class="product-title">
           <a style="text-decoration: none;" class="font_size_14">${item.product_info.name}</a>
+          <span class="text-muted">${variationInfo}</span>
         </h5>
       </td>
       <td class="mx-2 brand_text_design" style="width: 90px;">${item?.active_currency.icon || ''} ${item.product_info.product_price}</td>

@@ -68,7 +68,7 @@ class CartController extends Controller
     public function addToCartWithQuantity(AddToCartRequest $addToCartRequest)
     {
         try {
-            $cartItem = $this->cartService->addToCartWithQuantity($addToCartRequest->user_id, $addToCartRequest->product_id, $addToCartRequest->quantity);
+            $cartItem = $this->cartService->addToCartWithQuantity($addToCartRequest->user_id, $addToCartRequest->product_id, $addToCartRequest->quantity, $addToCartRequest->product_variation_id);
 
             return Message::success(__("messages.success_add"), new CartItemDetailResource($cartItem));
         } catch (Exception $e) {
@@ -91,7 +91,7 @@ class CartController extends Controller
 
     public function getCart(Request $request)
     {
-        $cart = $this->getLists(CartItem::where("user_id", $request->user_id), $request->all(), CartItemListResource::class);
+        $cart = $this->getLists(CartItem::with('productVariation', 'productVariation.productVariationAttributes', 'productVariation.productVariationAttributes.attributeValue')->where("user_id", $request->user_id), $request->all(), CartItemListResource::class);
 
         return Message::success(null, $cart);
     }

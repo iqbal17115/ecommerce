@@ -173,6 +173,39 @@
             pointer-events: none;
             opacity: 0.5;
         }
+
+        .config-color-list {
+            list-style: none;
+            /* Remove bullet points */
+            padding: 0;
+            margin: 0;
+        }
+
+        .config-color-list li {
+            display: inline-block;
+            /* Display list items inline */
+            margin-right: 10px;
+            /* Space between images */
+        }
+
+        .thumbnail-image {
+            cursor: pointer;
+            /* Add pointer cursor for better UX */
+        }
+
+        .thumbnail-image {
+            cursor: pointer;
+            /* Add pointer cursor for better UX */
+            transition: border 0.3s ease;
+            /* Smooth transition for border */
+        }
+
+        .thumbnail-image.active {
+            border: 2px solid blue;
+            /* Highlight the active image with a blue border */
+            opacity: 0.8;
+            /* Optional: change opacity to indicate active state */
+        }
     </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -367,16 +400,21 @@
 
                         {{-- Start Product Varations --}}
                         <div class="product-filters-container">
+                            <div class="selected-attributes pb-2" style="font-size: 16px; color: #333;">
+                                <span class="attribute-item"></span> <!-- For color -->
+                                <span class="attribute-item"></span> <!-- For size -->
+                            </div>
                             <!-- Color Filter -->
                             <div class="product-single-filter">
-                                <label>Color:</label>
                                 <ul class="config-color-list">
                                     @foreach ($product_detail->productColors as $index => $productColor)
                                         <li>
                                             <img src="{{ asset('storage/' . $productColor?->media?->first()?->file_path) }}"
-                                                alt="Product Color" class="thumbnail-image"
-                                                data-color-id="{{ $productColor->id }}" style="width: 45px; height: 45px;"
-                                                onclick="handleColorClick('{{ $productColor->id }}')">
+                                                class="thumbnail-image" data-color-id="{{ $productColor->id }}"
+                                                style="width: 45px; height: 45px;"
+                                                data-product-color-variation-id="{{ $productColor?->productVariations?->first()?->id }}"
+                                                data-color-value="{{ $productColor?->attributeValue?->value }}"
+                                                onclick="handleColorClick('{{ $productColor->id }}', this)">
                                         </li>
                                     @endforeach
                                 </ul>
@@ -396,21 +434,27 @@
                                             ->first();
                                         $sizeId = $sizeAttribute?->attribute_value_id ?? null;
                                         $sizeName = $sizeAttribute?->attributeValue->value ?? '';
+                                        $productVariationId = $variation?->id ?? '';
 
                                         // Avoid showing the same size multiple times
                                         if ($sizeId && !$uniqueSizes->has($sizeId)) {
-                                            $uniqueSizes->put($sizeId, $sizeName);
+                                            $uniqueSizes->put($sizeId, [
+                                                'name' => $sizeName,
+                                                'product_variation_id' => $productVariationId, // Add product variation ID
+                                            ]);
                                         }
                                     @endphp
                                 @endforeach
 
                                 <!-- Display unique sizes -->
-                                @foreach ($uniqueSizes as $sizeId => $sizeName)
+                                @foreach ($uniqueSizes as $sizeId => $sizeData)
                                     <li id="size-{{ $sizeId }}">
                                         <a href="javascript:;"
                                             class="d-flex align-items-center justify-content-center size-link disabled"
-                                            data-size-id="{{ $sizeId }}">
-                                            {{ $sizeName }}
+                                            data-size-id="{{ $sizeId }}" data-size-name="{{ $sizeData['name'] }}"
+                                            data-product-variation-id="{{ $sizeData['product_variation_id'] }}"
+                                            onclick="handleSizeClick('{{ $sizeId }}')">
+                                            {{ $sizeData['name'] }}
                                         </a>
                                     </li>
                                 @endforeach
@@ -877,33 +921,105 @@
         const colorToSizesMap = @json($colorToSizesMap);
 
         // Handle color click event
-        function handleColorClick(colorId) {
-            // Disable all sizes initially
+        function handleColorClick(colorId, clickedImage) {
+            // Disable all size links initially
             document.querySelectorAll('.size-link').forEach(function(sizeLink) {
                 sizeLink.classList.add('disabled');
                 sizeLink.setAttribute('aria-disabled', 'true'); // Optional: for accessibility
             });
 
-            // Get the available sizes for the selected color
+            // Get the available sizes for the selected color from the colorToSizesMap
             const availableSizes = colorToSizesMap[colorId] || [];
 
             // Enable the sizes for the selected color
             availableSizes.forEach(function(sizeId) {
                 const sizeElement = document.getElementById('size-' + sizeId);
                 if (sizeElement) {
-                    sizeElement.querySelector('.size-link').classList.remove('disabled');
-                    sizeElement.querySelector('.size-link').removeAttribute(
-                    'aria-disabled'); // Optional: for accessibility
+                    const sizeLink = sizeElement.querySelector('.size-link');
+                    if (sizeLink) {
+                        sizeLink.classList.remove('disabled');
+                        sizeLink.removeAttribute('aria-disabled'); // Optional: for accessibility
+                    }
                 }
             });
+
+            // Remove 'active' class from all color images
+            document.querySelectorAll('.thumbnail-image').forEach(function(img) {
+                img.classList.remove('active'); // Remove active class from all images
+            });
+
+            // Add 'active' class to the clicked image
+            clickedImage.classList.add('active'); // Add active class to the clicked image
+
+            updateSelectedAttributes();
+        }
+
+
+        function handleSizeClick(sizeId) {
+            // Remove active class from all size links
+            document.querySelectorAll('.size-link').forEach((link) => {
+                link.classList.remove('active'); // Remove active class from all links
+                link.classList.remove('disabled'); // Remove disabled class if you want to enable all links
+            });
+
+            // Add active class to the clicked size link
+            const selectedLink = document.querySelector(`a[data-size-id="${sizeId}"]`);
+            if (selectedLink) {
+                selectedLink.classList.add('active'); // Add active class to the selected link
+                selectedLink.classList.remove('disabled'); // Optionally remove disabled class
+            }
+
+            updateSelectedAttributes();
         }
 
         // Clear selections
         function clearSelections() {
-            document.querySelectorAll('.size-link').forEach(function(sizeLink) {
-                sizeLink.classList.add('disabled');
-            });
-            console.log('Selections cleared');
+            // Clear active class for color images
+            $('.thumbnail-image').removeClass('active');
+
+            // Clear active class for size links
+            $('.size-link').removeClass('active disabled');
+
+            // Optionally, disable size links if you want to reset their state
+            $('.size-link').addClass('disabled');
+
+            // Update the display for selected attributes
+            updateSelectedAttributes(); // Call the function to refresh the display
+        }
+
+
+        function updateSelectedAttributes() {
+            // Get the active color image
+            const activeColorImage = $('.thumbnail-image.active');
+            const activeSizeLink = $('.size-link.active');
+
+            // Initialize variables
+            let colorValue = '';
+            let sizeName = '';
+
+            // Check if active color image exists
+            if (activeColorImage.length) {
+                colorValue = activeColorImage.data('color-value') || ''; // Get the data-color-value
+            }
+
+            // Check if active size link exists
+            if (activeSizeLink.length) {
+                sizeName = activeSizeLink.data('size-name') || ''; // Get the data-size-name
+            }
+
+            // Update the target div with the values
+            const resultDiv = $('.selected-attributes'); // Change this to your target div's class
+            resultDiv.empty(); // Clear previous values
+
+            // Append the color value if it exists
+            if (colorValue) {
+                resultDiv.append(`<span class="attribute-item me-3">Color: <strong>${colorValue}</strong></span>`);
+            }
+
+            // Append the size value if it exists
+            if (sizeName) {
+                resultDiv.append(` <span class="attribute-item">Size: <strong>${sizeName}</strong></span>`);
+            }
         }
     </script>
 @endpush

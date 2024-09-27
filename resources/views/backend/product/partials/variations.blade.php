@@ -110,7 +110,7 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            <span class="delete-icon" onclick="removeColorImage('{{ $productColor->id }}')">
+                                            <span class="delete-icon product-color-delete" style="cursor: pointer;" data-product_color_id="{{ $productColor->id }}">
                                                 <i class="mdi mdi-trash-can d-block font-size-16"></i>
                                             </span>
                                         </td>

@@ -937,6 +937,9 @@
             $('#colorImageRow-' + colorId).remove();
         }
 
+        $('.product-color-delete').on('click', function() {
+alert(1);
+        });
         // Remove variation
         window.removeVariation = function(variationId) {
             $('#variation-' + variationId).remove();

@@ -4,6 +4,7 @@ namespace App\Models\Cart;
 
 use App\Models\Backend\Product\Product;
 use App\Models\CartItemCoupon;
+use App\Models\ProductVariation;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,11 @@ class CartItem extends Model
 
     public function product() {
         return $this->belongsTo(Product::class);
+    }
+
+    public function productVariation(): HasOne
+    {
+        return $this->hasOne(ProductVariation::class, 'id', 'product_variation_id');
     }
 
     public function cart_item_coupon(): HasOne

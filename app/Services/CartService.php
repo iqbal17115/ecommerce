@@ -30,7 +30,7 @@ class CartService
         return $cartItem;
     }
 
-    public function addToCartWithQuantity($user_id, $productId, $quantity)
+    public function addToCartWithQuantity($user_id, $productId, $quantity, $productVariationId = null)
     {
         $cartItem = CartItem::where('user_id', $user_id)
             ->where('product_id', $productId)
@@ -38,11 +38,13 @@ class CartService
 
         if ($cartItem) {
             $cartItem->quantity = $quantity;
+            $cartItem->product_variation_id = $productVariationId;
             $cartItem->save();
         } else {
             $cartItem = new CartItem([
                 'user_id' => $user_id,
                 'product_id' => $productId,
+                'product_variation_id' => $productVariationId,
                 'quantity' => $quantity,
             ]);
             $cartItem->save();
