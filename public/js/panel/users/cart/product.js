@@ -169,36 +169,30 @@ $(document).ready(function () {
         const product_id = $(this).data('product_id');
         const user_id = $("#temp_user_id").data('user_id');
 
+        const allColorImages = $('.thumbnail-image'); // Get all color images
         const activeColorImage = $('.thumbnail-image.active'); // Get active color image
-        const selectedSize = $('.size-link.active'); // Get active size
 
-    // If only color is selected and size is not, show an alert for size selection
-    if (activeColorImage.length && !selectedSize.length) {
-        const productColorVariationId = activeColorImage.data('product-color-variation-id');
-        toastrErrorMessage('Please select a size. Product Color');
+        const allSizeLinks = $('.size-link'); // Get all size links
+        const activeSizeLink = $('.size-link.active'); // Get active size link
 
+    // Check if there are any color options but none are active
+    if (allColorImages.length && !activeColorImage.length) {
+        toastrErrorMessage('Please select a color.');
         return false; // Prevent form submission or further actions
     }
 
-    // If no color is selected, show an alert
-    if (!activeColorImage.length) {
-        toastrErrorMessage('Please select a color before submitting.');
-        return false; // Prevent form submission or further actions
-    }
-
-    // If a color is selected but no size is available, show an error
-    if (activeColorImage.length && !selectedSize.length) {
-        const productColorVariationId = activeColorImage.data('product-color-variation-id');
+    // Check if there are any size options but none are active
+    if (allSizeLinks.length && !activeSizeLink.length) {
         toastrErrorMessage('Please select a size.');
         return false; // Prevent form submission or further actions
     }
 
 // Get the product color variation ID
 const productColorVariationId = activeColorImage.data('product-color-variation-id');
-const productVariationId = selectedSize.data('product-variation-id');
+const productVariationId = activeSizeLink.data('product-variation-id');
 
 // Assign productColorVariationId to productVariationId if it exists
-if (!productVariationId && $productColorVariationId) {
+if (!productVariationId && productColorVariationId) {
     productVariationId = productColorVariationId;
 }
 
