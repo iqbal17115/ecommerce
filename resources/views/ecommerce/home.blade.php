@@ -270,7 +270,7 @@
                                                 </div>
                                             @endif
                                             <div class="btn-icon-group">
-                                                @if ($product->stock_qty > 0)
+                                                @if (($product->stock_qty > 0) && count($product->productVariations) == 0)
                                                     <a href="javascript:void(0);" title="Add To Cart"
                                                         data-product_id="{{ $product->id }}"
                                                         @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif

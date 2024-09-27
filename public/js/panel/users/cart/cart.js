@@ -125,6 +125,7 @@ $(document).ready(function () {
     $('.add_cart_item').click(function () {
         const product_id = $(this).data('product_id');
         const user_id = $("#temp_user_id").data('user_id');
+
         const formData = {
             user_id: user_id,
             product_id: product_id,

@@ -373,7 +373,7 @@
                                 <ul class="config-color-list">
                                     @foreach ($product_detail->productColors as $index => $productColor)
                                         <li>
-                                            <img src="{{ asset('storage/' . $productColor->media->first()->file_path) }}"
+                                            <img src="{{ asset('storage/' . $productColor?->media?->first()?->file_path) }}"
                                                 alt="Product Color" class="thumbnail-image"
                                                 data-color-id="{{ $productColor->id }}" style="width: 45px; height: 45px;"
                                                 onclick="handleColorClick('{{ $productColor->id }}')">

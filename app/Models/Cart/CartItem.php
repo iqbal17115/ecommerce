@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class CartItem extends Model
 {
     use HasFactory, BaseModel;
-    protected $fillable = ['user_id', 'product_id', 'quantity', 'is_active'];
+    protected $fillable = ['user_id', 'product_id', 'product_variation_id', 'quantity', 'is_active'];
 
     public function product() {
         return $this->belongsTo(Product::class);
