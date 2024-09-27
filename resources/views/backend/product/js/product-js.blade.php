@@ -938,7 +938,7 @@
         }
 
         $('.product-color-delete').on('click', function() {
-alert(1);
+            alert(1);
         });
         // Remove variation
         window.removeVariation = function(variationId) {
@@ -949,6 +949,11 @@ alert(1);
         function updateSizeTable(selectedSizes) {
             const colorId = $('#colorSelect').val();
             const colorText = $('#colorSelect option:selected').text();
+
+            // Check if colorImageRow for the selected colorId exists in the colorImageTable
+            if (colorId && !$('#colorImageRow-' + colorId).length) {
+                addColorImageRow(colorId, colorText); // Call the function to add the image row if it doesn't exist
+            }
 
             selectedSizes.forEach(sizeId => {
                 const sizeText = $('#sizeSelect option[value="' + sizeId + '"]').text();
