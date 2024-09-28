@@ -413,6 +413,8 @@
                                                 class="thumbnail-image" data-color-id="{{ $productColor->id }}"
                                                 style="width: 45px; height: 45px;"
                                                 data-product-color-variation-id="{{ $productColor?->productVariations?->first()?->id }}"
+                                                data-product_sale_price="{{ number_format($product_detail->sale_price, 2) }}"
+                                                data-price="{{ $productColor?->productVariations?->first()?->price }}"
                                                 data-color-value="{{ $productColor?->attributeValue?->value }}"
                                                 onclick="handleColorClick('{{ $productColor->id }}', this)">
                                         </li>
@@ -435,12 +437,14 @@
                                         $sizeId = $sizeAttribute?->attribute_value_id ?? null;
                                         $sizeName = $sizeAttribute?->attributeValue->value ?? '';
                                         $productVariationId = $variation?->id ?? '';
+                                        $productVariationPrice = $variation?->price;
 
                                         // Avoid showing the same size multiple times
                                         if ($sizeId && !$uniqueSizes->has($sizeId)) {
                                             $uniqueSizes->put($sizeId, [
                                                 'name' => $sizeName,
-                                                'product_variation_id' => $productVariationId, // Add product variation ID
+                                                'product_variation_id' => $productVariationId,
+                                                'price' => $productVariationPrice,
                                             ]);
                                         }
                                     @endphp
@@ -453,6 +457,8 @@
                                             class="d-flex align-items-center justify-content-center size-link disabled"
                                             data-size-id="{{ $sizeId }}" data-size-name="{{ $sizeData['name'] }}"
                                             data-product-variation-id="{{ $sizeData['product_variation_id'] }}"
+                                            data-product_sale_price="{{ number_format($product_detail->sale_price, 2) }}"
+                                            data-price="{{ $sizeData['price'] }}"
                                             onclick="handleSizeClick('{{ $sizeId }}')">
                                             {{ $sizeData['name'] }}
                                         </a>
@@ -996,15 +1002,25 @@
             // Initialize variables
             let colorValue = '';
             let sizeName = '';
+            let price = null;
+            let salePrice = null;
 
             // Check if active color image exists
             if (activeColorImage.length) {
                 colorValue = activeColorImage.data('color-value') || ''; // Get the data-color-value
+                price = activeColorImage.data('price') || ''; // Get the data-price
+                salePrice = $('.thumbnail-image').data('product_sale_price');
             }
 
             // Check if active size link exists
             if (activeSizeLink.length) {
                 sizeName = activeSizeLink.data('size-name') || ''; // Get the data-size-name
+                price = activeSizeLink.data('price') || ''; // Get the data-price
+                salePrice = $('.size-link').data('product_sale_price');
+            }
+
+            if(price) {
+                $('.product-price').text(price);
             }
 
             // Update the target div with the values
