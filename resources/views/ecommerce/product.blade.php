@@ -380,6 +380,8 @@
                                     class="product-price brand_text_design">
                                     {{ number_format($product_detail->your_price, 2) }}</span>
                             @endif
+
+
                         </div>
                         <!-- End .price-box -->
 
