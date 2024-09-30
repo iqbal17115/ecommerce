@@ -55,12 +55,12 @@
                                         return $attr->attributeValue?->attribute?->name == 'Color';
                                     });
                                     $sizeAttribute = $variation->productVariationAttributes->first(function ($attr) {
-                                        return $attr->attributeValue?->attribute?->name == 'Size';
+                                        return $attr?->attributeValue?->attribute?->name == 'Size';
                                     });
                                 @endphp
                                 <tr id="variation-{{ $variation->id }}" class="variation-row" data-color-id="{{ $colorAttribute->attributeValue->id ?? 0 }}" data-size-id="{{ $sizeAttribute->attributeValue->id ?? 0 }}">
-                                    <td>{{ $colorAttribute->attributeValue->value ?? 'N/A' }}</td>
-                                    <td>{{ $sizeAttribute->attributeValue->value ?? 'N/A' }}</td>
+                                    <td>{{ $colorAttribute?->attributeValue?->value ?? 'N/A' }}</td>
+                                    <td>{{ $sizeAttribute?->attributeValue?->value ?? 'N/A' }}</td>
                                     <td>
                                         <input type="number" name="price_{{ $variation->id }}" placeholder="Price" class="form-control form-control-sm price-input" value="{{ $variation->price }}" required>
                                     </td>
@@ -99,12 +99,12 @@
                             @if ($productInfo)
                                 @foreach ($productInfo->productColors as $productColor)
                                     <tr id="colorImageRow-{{ $productColor->id }}">
-                                        <td>{{ $productColor->attributeValue->value }}</td>
+                                        <td>{{ $productColor?->attributeValue?->value }}</td>
                                         <td style="width: 300px;">
-                                            <input type="file" name="color_image_{{ $productColor->attribute_value_id }}[]" data-color-id="{{ $productColor->attribute_value_id }}" accept="image/*" multiple class="form-control form-control-sm color-image-input" onchange="previewImages(event, '{{ $productColor->attribute_value_id }}')">
+                                            <input type="file" name="color_image_{{ $productColor?->attribute_value_id }}[]" data-color-id="{{ $productColor->attribute_value_id }}" accept="image/*" multiple class="form-control form-control-sm color-image-input" onchange="previewImages(event, '{{ $productColor->attribute_value_id }}')">
                                         </td>
                                         <td>
-                                            <div id="imagePreview-{{ $productColor->attribute_value_id }}"></div>
+                                            <div id="imagePreview-{{ $productColor?->attribute_value_id }}"></div>
                                             @foreach ($productColor->media as $media)
                                                 <img src="{{ asset('storage/' . $media->file_path) }}" alt="Image" class="rounded" style="width: 30px; height: 30px; margin: 2px;">
                                             @endforeach
