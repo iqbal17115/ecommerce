@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductFeature extends Model
 {
     use HasFactory, BaseModel, DisplayNameTrait;
+    
     public function TopFeatureSetting()
     {
         return $this->hasOne(FeatureSetting::class, 'product_feature_id');

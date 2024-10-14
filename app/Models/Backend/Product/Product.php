@@ -68,6 +68,7 @@ class Product extends Model
         'code',
         'brand.name',
         'category.name',
+        'productFeatures.name',
         'purchase_price',
         'your_price',
         'sale_price',
@@ -167,6 +168,11 @@ class Product extends Model
     public function productColors(): HasMany
     {
         return $this->hasMany(ProductColor::class);
+    }
+
+    public function productFeatures(): BelongsTo
+    {
+        return $this->belongsTo(ProductFeature::class, 'product_feature_id');
     }
 
     public function filterByBrands($query, $value): mixed
