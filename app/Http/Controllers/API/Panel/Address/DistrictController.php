@@ -24,7 +24,8 @@ class DistrictController extends Controller
     public function lists(Request $request): JsonResponse|bool|string
     {
         try {
-            $list = District::getLists(District::where('division_id', $request->division_id), $request->all(), DistrictListResource::class);
+            $request['limit'] = 300;
+            $list = District::getLists(District::where('division_id', $request->division_id)->orderBy('name', 'asc'), $request->all(), DistrictListResource::class);
 
             return Message::success(null, $list);
         } catch (Exception $ex) {
