@@ -216,7 +216,7 @@
                             data-animation-delay="100">
                             <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
                                 <h4 class="section-title text-transform-none mb-0 mr-0">{{ $product_feature->name }}</h4>
-                                <a class="view-all ml-auto" href="{{ route('catalog.show', ['category_name' => rawurlencode($product_feature->name)]) }}">View
+                                <a class="view-all ml-auto" href="{{ route('catalog.show', ['search' => rawurlencode($product_feature->name)]) }}">View
                                     All<i class="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                             <div class="products-slider owl-carousel owl-theme carousel-with-bg nav-circle pb-0"

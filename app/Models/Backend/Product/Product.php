@@ -68,7 +68,7 @@ class Product extends Model
         'code',
         'brand.name',
         'category.name',
-        'productFeatures.name',
+        'productFeature.name',
         'purchase_price',
         'your_price',
         'sale_price',
@@ -170,7 +170,7 @@ class Product extends Model
         return $this->hasMany(ProductColor::class);
     }
 
-    public function productFeatures(): BelongsTo
+    public function productFeature(): BelongsTo
     {
         return $this->belongsTo(ProductFeature::class, 'product_feature_id');
     }

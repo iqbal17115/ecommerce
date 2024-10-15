@@ -125,7 +125,9 @@ class ShopController extends Controller
     public function shop(ShopPageRequest $shopPageRequest)
     {
         $searchCriteria = $shopPageRequest->input('search', '');
-        $searchCriteria = urldecode($shopPageRequest->category_name);
+        if ($searchCriteria) {
+            $searchCriteria = urldecode($shopPageRequest['search']);
+        }
         $categoryName = urldecode($shopPageRequest->category_name);
         $brands = Brand::get();
         $user_id = auth()->user()->id ?? null;
