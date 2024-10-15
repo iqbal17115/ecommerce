@@ -133,11 +133,11 @@
 
                         @php
                             $statusMessages = [
-                                'pending' => 'Thank you for shopping at Aladdinne.ae ! Your order Is being verified. ',
+                                'pending' => 'Thank you for shopping at Aladdinne.com ! Your order Is being verified. ',
                                 'processing' => 'Your order is now being processed and prepared for shipment.',
                                 'shipped' => 'Your Package has been packed and its being handed over to logistic partner',
                                 'out_for_delivery' => 'Your order is out for delivery and will be at your doorstep soon. Please ensure someone is available to receive it.',
-                                'delivered' => 'Your order has been successfully delivered., Thank you for Shopping at Aladdinne.ae!',
+                                'delivered' => 'Your order has been successfully delivered., Thank you for Shopping at Aladdinne.com!',
                             ];
                         @endphp
                         @foreach ($trackingData as $index => $item)

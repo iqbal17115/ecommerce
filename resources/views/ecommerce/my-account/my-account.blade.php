@@ -108,7 +108,7 @@
                             orderHtml += '<div class="col-md-4">';
                             orderHtml += '<h5 class="card-title p-0 m-0">Order ID# ' + order.code +
                                 '</h5>';
-                            orderHtml += '<p class="card-text">Ordered On: <a href="https://www.aladdinne.ae/">aladdinne.ae</a> </p>';
+                            orderHtml += '<p class="card-text">Ordered On: <a href="https://www.aladdinne.com/">aladdinne.com</a> </p>';
                             orderHtml += '</div>';
                             orderHtml +=
                                 '<div class="col-md-4 d-flex justify-content-center align-items-center">';

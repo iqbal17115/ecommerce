@@ -118,7 +118,7 @@
                                                     <p class="mb-0 text-dark">Standard Delivery Date:
                                                         {{ \Carbon\Carbon::now()->addDays(1)->format('d M Y') }}</p>
                                                     <p class="mb-0 text-dark">Items shipped from
-                                                        <strong>Aladdinne.ae</strong>
+                                                        <strong>Aladdinne.com</strong>
                                                     </p>
                                                 </div>
                                             </div>
