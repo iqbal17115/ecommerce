@@ -488,6 +488,7 @@ Route::group(['middleware' => 'web'], function () {
             function () {
                 Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
                 Route::get('get-category/{id}', [ProductController::class, 'getCategory'])->name('get-category');
+                Route::post('/generate-sku', [ProductController::class, 'generateSku'])->name('generate.sku');
                 Route::post('add-product_identity', [ProductController::class, 'addProductIdentity'])->name('add.product_identity');
                 Route::post('add-vital_info', [ProductController::class, 'addVitalInfo'])->name('add.vital_info');
                 Route::post('add-add_product_detail_info', [ProductController::class, 'addProductDetailInfo'])->name('add.add_product_detail_info');

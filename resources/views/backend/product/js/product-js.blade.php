@@ -945,6 +945,35 @@
             $('#variation-' + variationId).remove();
         };
 
+        function generateSku(category, productName, attributes = []) {
+            // Sanitize and standardize inputs
+            let categoryCode = category.substring(0, 4).toUpperCase(); // Limit category to 4 characters
+            let productCode = productName.replace(/\s+/g, '-').substring(0, 3)
+        .toUpperCase(); // Use first 3 letters of product name and replace spaces with hyphen
+
+            // Process attributes (ensure uppercase and limit length)
+            let attributeCode = '';
+            if (attributes.length > 0) {
+                attributeCode = attributes.map(attr => {
+                    return attr.replace(/\s+/g, '-')
+                .toUpperCase(); // Replace spaces with hyphen and convert to uppercase
+                }).join('-'); // Join multiple attributes with '-'
+            }
+
+            // Generate a short, unique identifier based on the timestamp
+            let uniqueId = Math.random().toString(36).substring(2, 8)
+        .toUpperCase(); // 6-character random string
+
+            // Construct the SKU
+            let skuParts = [categoryCode, productCode];
+            if (attributeCode) {
+                skuParts.push(attributeCode);
+            }
+            skuParts.push(uniqueId); // Append unique ID
+
+            return skuParts.join('-');
+        }
+
         // Add or update size table for colors
         function updateSizeTable(selectedSizes) {
             const colorId = $('#colorSelect').val();
@@ -952,19 +981,26 @@
 
             // Check if colorImageRow for the selected colorId exists in the colorImageTable
             if (colorId && !$('#colorImageRow-' + colorId).length) {
-                addColorImageRow(colorId, colorText); // Call the function to add the image row if it doesn't exist
+                addColorImageRow(colorId,
+                    colorText); // Call the function to add the image row if it doesn't exist
             }
 
             selectedSizes.forEach(sizeId => {
                 const sizeText = $('#sizeSelect option[value="' + sizeId + '"]').text();
                 const rowId = `colorSizeRow-${colorId}-${sizeId}`;
+                let productName = $('#name').val();
+                const categoryId = $('#category_id').val(); // Get the selected category ID
+                const categoryText = $('#category_id option:selected').text(); // Get the selected category name
+                let sku = generateSku(categoryText, productName, [colorText, sizeText]);
+
+                // Check if row already exists
                 if (!$('#' + rowId).length) {
                     const row = `
         <tr id="${rowId}" class="variation-row" data-color-id="${colorId}" data-size-id="${sizeId}">
             <td>${colorText}</td>
             <td>${sizeText}</td>
             <td><input type="number" name="price_${colorId}_${sizeId}" placeholder="Price" class="form-control form-control-sm price-input" required></td>
-            <td><input type="text" name="sku_${colorId}_${sizeId}" placeholder="Seller SKU" class="form-control form-control-sm sku-input" required></td>
+            <td><input type="text" name="sku_${colorId}_${sizeId}" value="${sku}" placeholder="Seller SKU" class="form-control form-control-sm sku-input" required></td>
             <td><input type="number" name="stock_${colorId}_${sizeId}" placeholder="Stock" class="form-control form-control-sm stock-input" required></td>
             <td><span class="delete-icon" onclick="removeColorSize('${colorId}', '${sizeId}')"><i class="mdi mdi-trash-can font-size-16"></i></span></td>
         </tr>`;

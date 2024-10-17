@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-8 mt-md-3">
                         <input name="seller_sku" id="seller_sku" @if($productInfo)
-                            value="{{$productInfo->seller_sku}}" @endif class="form-control"
+                            value="{{ App\Helpers\Utils::generateSku($productInfo->name, $productInfo->Category->name) }}" @endif class="form-control"
                             placeholder="Enter Seller SKU" required />
                     </div>
                     <!-- End -->

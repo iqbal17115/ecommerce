@@ -5,9 +5,45 @@ namespace App\Helpers;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class Utils
 {
+    /**
+     * Generate a SKU number based on category, product name, and attributes.
+     *
+     * @param string $category The category code (e.g., 'ELEC' for electronics)
+     * @param string $productName The product name (e.g., 'Laptop')
+     * @param array $attributes Additional attributes like color, size, etc.
+     * @return string The generated SKU number.
+     */
+    public static function generateSku($category, $productName, $attributes = [])
+    {
+        // Sanitize and standardize inputs
+        $categoryCode = strtoupper(substr($category, 0, 4)); // Limit category to 4 characters
+        $productCode = strtoupper(substr(Str::slug($productName), 0, 3)); // Use first 3 letters of product name
+
+        // Process attributes (ensure uppercase and limit length)
+        $attributeCode = '';
+        if (!empty($attributes)) {
+            $attributeCode = strtoupper(implode('-', array_map(function ($attr) {
+                return Str::slug($attr); // Ensure attribute is URL-friendly
+            }, $attributes)));
+        }
+
+        // Generate a short, unique identifier based on the timestamp
+        $uniqueId = strtoupper(substr(md5(Carbon::now()->timestamp), 0, 6)); // 6-character hash
+
+        // Construct the SKU
+        $skuParts = [$categoryCode, $productCode];
+        if ($attributeCode) {
+            $skuParts[] = $attributeCode;
+        }
+        $skuParts[] = $uniqueId; // Append unique ID
+
+        return implode('-', $skuParts);
+    }
+
     /**
      * Converts string to title case.
      *
@@ -138,7 +174,7 @@ class Utils
         return filter_var($boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
     }
 
-     /**
+    /**
      * Generate Invoice Number
      *
      * @param $lastOrderId
@@ -160,7 +196,7 @@ class Utils
         return sprintf("%s%07d", $addOrRemovePrefix, $incrementedValue);
     }
 
-     /**
+    /**
      * Generate Invoice Number
      *
      * @param $lastOrderId
