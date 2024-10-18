@@ -235,10 +235,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                                                                                <div class="label-group">
-                                                                                                                    <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                </div>
-                                                                                                            ` : ''}
+                                                                                                                                    <div class="label-group">
+                                                                                                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                                                                                                                    </div>
+                                                                                                                                ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -262,8 +262,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                    <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                ` : ''}
+                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                    ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -333,6 +333,7 @@
             document.querySelectorAll('input[name="brand"]:checked').forEach((input) => {
                 selectedBrands.push(input.value);
             });
+
             if (selectedBrands.length > 0) {
                 filters['filters[brand_names]'] = selectedBrands.join(','); // Add brands as a comma-separated string
             }
@@ -341,7 +342,7 @@
             let activeCategory = document.querySelector('.category-filter.active');
             if (activeCategory) {
                 let selectedCategory = activeCategory.getAttribute('data-category');
-                filters['filters[category_names]'] = encodeURIComponent(selectedCategory); // Add the selected category
+                filters['filters[category_names]'] = selectedCategory; // Add the selected category without encoding
             }
 
             // Get selected colors and add them as a comma-separated value
@@ -414,22 +415,59 @@
             });
         }
 
+        // Event listener for loading subcategories
+        // Event listener for loading subcategories
         $(document).on('click', '.load-subcategories', function() {
-            var categoryId = $(this).data('id');
-            var sublist = $('#sublist-' + categoryId);
+            const categoryId = $(this).data('id');
+            const sublist = $('#sublist-' + categoryId);
+            const selectedCategory = $(this).data('category'); // Get the category name from data attribute
 
-            // if (sublist.is(':empty')) {
+            // Load subcategories via AJAX
             $.ajax({
                 url: '/categories/' + categoryId + '/subcategories',
                 method: 'GET',
                 success: function(data) {
+                    // Populate the sublist with the received data
                     sublist.html(data);
-                },
+
+                    // Remove active class from all category links
+                    document.querySelectorAll('.load-subcategories').forEach((link) => {
+                        $(link).removeClass('active'); // Use jQuery for consistency
+                    });
+
+                    // Add active class to the clicked category
+                    $(this).addClass('active');
+
+                    // Update URL with the selected category
+                    updateURLAndApplyFilters(selectedCategory);
+                }.bind(this), // Maintain context to use 'this' inside the success callback
                 error: function() {
                     alert('Failed to load subcategories.');
                 }
             });
-            // }
         });
+
+        // Function to update URL and apply filters
+        function updateURLAndApplyFilters(selectedCategory) {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (selectedCategory) {
+                urlParams.set('filters[category_names]', encodeURIComponent(selectedCategory));
+            } else {
+                urlParams.delete('filters[category_names]'); // Remove category if none selected
+            }
+
+            const searchParam = urlParams.get('search');
+            if (searchParam) {
+                urlParams.set('search', encodeURIComponent(searchParam)); // Keep search parameter
+            }
+
+            // Create the new URL and update the browser's address bar
+            const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+            window.history.pushState({}, '', newUrl);
+
+            // Call the applyFilters function to fetch and display filtered products
+            applyFilters();
+        }
     </script>
 @endpush

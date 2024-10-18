@@ -3,10 +3,11 @@
         <a href="#widget-category-{{ $category->id }}" class="collapsed load-subcategories"
            data-toggle="collapse"
            data-id="{{ $category->id }}"
+           data-category="{{ $category->name }}"
            role="button"
            aria-expanded="false"
            aria-controls="widget-category-{{ $category->id }}">
-            {{ $category->name }}<span class="toggle"></span>
+            {{ $category->name }}
         </a>
         <div class="collapse" id="widget-category-{{ $category->id }}">
             <ul class="cat-sublist" id="sublist-{{ $category->id }}">
