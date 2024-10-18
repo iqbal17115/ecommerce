@@ -11,5 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ProductMoreDetail extends Model
 {
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
+
     protected $dates = ['deleted_at'];
 }

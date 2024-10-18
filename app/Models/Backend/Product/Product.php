@@ -27,6 +27,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
 
+    protected $table = 'products';
+
     protected $fillable = [
         'code',
         'name',
@@ -78,7 +80,7 @@ class Product extends Model
     ];
 
     protected array $filterable = [
-        'brand_ids' => 'filterByBrands',
+        'brand_names' => 'filterByBrands',
         'category_names' => 'filterByCategories',
     ];
 
@@ -178,7 +180,7 @@ class Product extends Model
     public function filterByBrands($query, $value): mixed
     {
         return $query->whereHas('Brand', function ($query) use ($value) {
-            $query->whereIn('brand_id', explode(",", $value));
+            $query->whereIn('name', explode(",", $value));
         });
     }
 

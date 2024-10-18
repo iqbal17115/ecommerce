@@ -93,10 +93,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/catalog/{categoryname?}', [ShopController::class, 'shop'])->name('catalog.show');
     Route::get('/get-main-content', [HomeController::class, 'getMainContent'])->name('get-main-content');
     Route::get('/search/{q?}', [ShopController::class, 'shopSearch'])->name('search');
-    Route::get('pagination/shop-pagination-data', [ShopController::class, 'shopPagination']);
-    Route::get('pagination/shop-pagination-total-data', [ShopController::class, 'shopPaginationTotal']);
-    Route::get('pagination/shop-order-total-data', [ShopController::class, 'productOrderBy']);
-    Route::get('shop/products/{name?}/{p_id?}', [ProductDetailController::class, 'productDetail'])->name('products.show');
+    Route::get('shop/products', [ShopController::class, 'list'])->name('products.show');
+    // Route::get('shop/products/{name?}/{p_id?}', [ProductDetailController::class, 'productDetail'])->name('products.show');
     Route::get('/categories/{category}/subcategories', [ShopController::class, 'getSubcategories']);
 
     Route::get('cart', [CartController::class, 'index'])->name('cart');

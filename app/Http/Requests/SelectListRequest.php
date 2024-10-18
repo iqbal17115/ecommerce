@@ -18,11 +18,16 @@ class SelectListRequest extends FormRequest
     public function rules(): array
     {
         return  [
+            'is_new' => ['nullable'], //will remove later
             'search' => ['nullable'],
+            'filters' => ['nullable'],
             'page' => ['nullable'],
             'limit' => ['nullable'],
             'sort_by' => ['nullable'],
-            'sort_order' => ['nullable']
+            'sort_order' => ['nullable'],
+            'type' => ['nullable'],
+            'account_head' => ['nullable'],
+            'account_category' => ['nullable']
         ];
     }
 }
