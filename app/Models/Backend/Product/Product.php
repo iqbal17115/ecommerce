@@ -184,10 +184,46 @@ class Product extends Model
         });
     }
 
-    public function filterByCategories($query, $value): mixed
+    public function filterByCategories($query, string $value): mixed
     {
-        return $query->whereHas('Category', function ($query) use ($value) {
-            $query->whereIn('name', explode(",", $value));
+        // Decode the URL-encoded category names
+        $decodedValue = urldecode($value);
+
+        // Convert the category names into an array
+        $categoryNames = explode(",", $decodedValue);
+
+        // Fetch all categories by names
+        $categories = Category::whereIn('name', $categoryNames)->get();
+
+        // Collect all category IDs including all descendants
+        $categoryIds = [];
+
+        // Loop through each category to get its ID and all child categories recursively
+        foreach ($categories as $category) {
+            // Add the parent category ID
+            $categoryIds[] = $category->id;
+
+            // Recursively collect child category IDs
+            $this->collectChildCategoryIds($category, $categoryIds);
+        }
+
+        // Filter products by the collected category IDs
+        return $query->whereHas('category', function ($query) use ($categoryIds) {
+            $query->whereIn('id', $categoryIds);
         });
+    }
+
+    protected function collectChildCategoryIds(Category $category, array &$categoryIds): void
+    {
+        // Get all direct children of the current category
+        $children = $category->subcategories; // Ensure this relationship is defined in the Category model
+
+        foreach ($children as $child) {
+            // Add the child category ID
+            $categoryIds[] = $child->id;
+
+            // Call the method recursively to collect IDs of children of the current child
+            $this->collectChildCategoryIds($child, $categoryIds);
+        }
     }
 }

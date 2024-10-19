@@ -235,10 +235,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                                                                                                    <div class="label-group">
-                                                                                                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                                    </div>
-                                                                                                                                ` : ''}
+                                                                                                                                                    <div class="label-group">
+                                                                                                                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                                                                                                                                    </div>
+                                                                                                                                                ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -262,8 +262,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                    ` : ''}
+                                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                    ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -301,7 +301,6 @@
             applyFilters();
         }
 
-        // Function to apply filters
         function applyFilters() {
             // Base URL for the products page
             const baseUrl = `${window.location.pathname}`;
@@ -342,7 +341,8 @@
             let activeCategory = document.querySelector('.category-filter.active');
             if (activeCategory) {
                 let selectedCategory = activeCategory.getAttribute('data-category');
-                filters['filters[category_names]'] = selectedCategory; // Add the selected category without encoding
+                // Replace spaces with '+' and handle the encoding of special characters properly
+                filters['filters[category_names]'] = selectedCategory.replace(/\s+/g, '+').replace(/%2B/g, '+');
             }
 
             // Get selected colors and add them as a comma-separated value
@@ -364,7 +364,7 @@
             }
 
             // Build the query string
-            const queryString = new URLSearchParams(filters).toString() + `&sort_order=${sort_order}`;
+            const queryString = new URLSearchParams(filters).toString().replace(/%2B/g, '+') + `&sort_order=${sort_order}`;
 
             // Update the browser's URL without reloading the page
             const newUrl = `${baseUrl}?${queryString}`;
@@ -447,26 +447,31 @@
             });
         });
 
-        // Function to update URL and apply filters
         function updateURLAndApplyFilters(selectedCategory) {
+            // Parse existing URL parameters
             const urlParams = new URLSearchParams(window.location.search);
 
+            // Update or delete the category name based on whether one is selected
             if (selectedCategory) {
-                urlParams.set('filters[category_names]', encodeURIComponent(selectedCategory));
+                // Manually replace spaces with '+' without URL encoding
+                const formattedCategory = selectedCategory.replace(/\s+/g, '+');
+                urlParams.set('filters[category_names]', formattedCategory);
             } else {
                 urlParams.delete('filters[category_names]'); // Remove category if none selected
             }
 
+            // Preserve the 'search' parameter if it exists
             const searchParam = urlParams.get('search');
             if (searchParam) {
-                urlParams.set('search', encodeURIComponent(searchParam)); // Keep search parameter
+                urlParams.set('search', searchParam); // Keep search parameter intact
             }
 
-            // Create the new URL and update the browser's address bar
-            const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+            // Construct the new URL with custom parameters and update the browser's address bar
+            const queryString = urlParams.toString().replace(/%2B/g, '+'); // Replace '%2B' with '+'
+            const newUrl = `${window.location.pathname}?${queryString}`;
             window.history.pushState({}, '', newUrl);
 
-            // Call the applyFilters function to fetch and display filtered products
+            // Call applyFilters to apply the filtering logic
             applyFilters();
         }
     </script>

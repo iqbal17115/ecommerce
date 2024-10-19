@@ -7,7 +7,7 @@
            role="button"
            aria-expanded="false"
            aria-controls="widget-category-{{ $category->id }}">
-            {{ $category->name }}
+            {{ $category->name }} <span class="toggle"></span>
         </a>
         <div class="collapse" id="widget-category-{{ $category->id }}">
             <ul class="cat-sublist" id="sublist-{{ $category->id }}">

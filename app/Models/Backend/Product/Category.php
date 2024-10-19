@@ -16,6 +16,7 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+    
     public function SubCategory() {
         return $this->hasMany(self::class, 'parent_category_id')->orderBy('position', 'ASC');
     }

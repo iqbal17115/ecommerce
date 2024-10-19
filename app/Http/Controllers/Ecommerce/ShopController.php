@@ -30,7 +30,6 @@ class ShopController extends Controller
             // Return a success message with the data
             return Message::success(null, $lists);
         } catch (Exception $ex) {
-            dd($ex);
             // Return an error message containing the exception
             return $this->handleException($ex);
         }
