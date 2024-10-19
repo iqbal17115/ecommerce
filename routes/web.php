@@ -94,7 +94,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/get-main-content', [HomeController::class, 'getMainContent'])->name('get-main-content');
     Route::get('/search/{q?}', [ShopController::class, 'shopSearch'])->name('search');
     Route::get('shop/products', [ShopController::class, 'list'])->name('products.show');
-    // Route::get('shop/products/{name?}/{p_id?}', [ProductDetailController::class, 'productDetail'])->name('products.show');
+    Route::get('product-details/{name?}/{p_id?}', [ProductDetailController::class, 'productDetail'])->name('products.details');
     Route::get('/categories/{category}/subcategories', [ShopController::class, 'getSubcategories']);
 
     Route::get('cart', [CartController::class, 'index'])->name('cart');
