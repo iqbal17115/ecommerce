@@ -66,7 +66,7 @@
     @include('ecommerce.footer')
     <!-- footer-area-end -->
     @php
-        $baseRoute = route('products.show', ['name' => '']);
+        $baseRoute = route('products.details', ['name' => '']);
     @endphp
 @endsection
 @push('scripts')
