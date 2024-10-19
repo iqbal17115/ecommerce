@@ -10,6 +10,7 @@ use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\Product;
 use App\Http\Resources\User\Shop\ShopProductDetailResource;
 use App\Models\Backend\Product\Brand;
+use App\Models\AttributeValue;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -73,7 +74,12 @@ class ShopController extends Controller
         $categories = Category::with(['SubCategory'])->where('parent_category_id', null)->get();
 
         $category = null;
+
+        $productColors = AttributeValue::with('attribute')->whereHas('attribute', function ($query){
+            $query->where('name', 'Color');
+        })->get();
+
         // Pass the search criteria, category, and categories to the view
-        return view('ecommerce.shop.index', compact(['brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category']));
+        return view('ecommerce.shop.index', compact(['brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category', 'productColors']));
     }
 }

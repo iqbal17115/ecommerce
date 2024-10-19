@@ -6,22 +6,14 @@
 
     <div class="collapse show" id="widget-body-4">
         <div class="widget-body pb-0">
-            <ul class="config-swatch-list">
-                <li class="active">
-                    <a href="#" style="background-color: #000;"></a>
-                </li>
-                <li>
-                    <a href="#" style="background-color: #0188cc;"></a>
-                </li>
-                <li>
-                    <a href="#" style="background-color: #81d742;"></a>
-                </li>
-                <li>
-                    <a href="#" style="background-color: #6085a5;"></a>
-                </li>
-                <li>
-                    <a href="#" style="background-color: #ab6e6e;"></a>
-                </li>
+            <ul>
+                @foreach ($productColors as $color)
+                    <li>
+                        <input type="checkbox" class="select_color" name="color"
+                            value="{{ $color->value }}" onchange="applyFilters()">
+                        <a>{{ $color->value }}</a>
+                    </li>
+                @endforeach
             </ul>
         </div>
         <!-- End .widget-body -->

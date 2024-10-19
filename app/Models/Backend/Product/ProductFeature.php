@@ -18,18 +18,22 @@ class ProductFeature extends Model
     {
         return $this->hasOne(FeatureSetting::class, 'product_feature_id');
     }
+
     public function FeatureSetting()
     {
         return $this->hasMany(FeatureSetting::class, 'parent_product_feature_id');
     }
+
     public function Category()
     {
         return $this->hasMany(Category::class);
     }
+
     public function Advertisement()
     {
         return $this->hasMany(Advertisement::class);
     }
+
     public function Product()
     {
         // $today = now();
@@ -39,5 +43,4 @@ class ProductFeature extends Model
         // })
         ->take(40);
     }
-
 }
