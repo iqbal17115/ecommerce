@@ -32,12 +32,12 @@ class ProductFeature extends Model
     }
     public function Product()
     {
-        $today = now();
+        // $today = now();
         return $this->hasMany(Product::class)
-        ->where(function ($query) use ($today) {
-            $query->whereDate('start_selling_date', '<=', $today);
-        })
-        ->take(20);
+        // ->where(function ($query) use ($today) {
+        //     $query->whereDate('start_selling_date', '<=', $today);
+        // })
+        ->take(40);
     }
 
 }

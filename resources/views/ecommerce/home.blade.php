@@ -427,7 +427,6 @@
     @include('ecommerce.footer')
     <!-- footer-area-end -->
 
-
 @endsection
 @push('scripts')
     <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
