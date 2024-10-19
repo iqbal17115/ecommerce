@@ -31,6 +31,9 @@
                         @include('ecommerce.shop.partials.price_widget')
                         <!-- End .widget -->
 
+                        @include('ecommerce.shop.partials.size_widget')
+                        <!-- End .widget -->
+
                         @include('ecommerce.shop.partials.color_widget')
                         <!-- End .widget -->
 
@@ -119,10 +122,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                                                                                                                    <div class="label-group">
-                                                                                                                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                                                    </div>
-                                                                                                                                                ` : ''}
+                                                                                                                                                            <div class="label-group">
+                                                                                                                                                                <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                                                                                                                                            </div>
+                                                                                                                                                        ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -146,8 +149,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                                    ` : ''}
+                                                                                                                                                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                            ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -218,15 +221,18 @@
             });
 
             if (selectedBrands.length > 0) {
-                filters['filters[brand_names]'] = selectedBrands.join(','); // Add brands as a comma-separated string
+                filters['filters[brand_names]'] = selectedBrands.join(','); // Comma-separated string
+            } else {
+                delete filters['filters[brand_names]']; // Remove if no colors selected
             }
 
-            // Get the selected category by retrieving the active category link
-            let activeCategory = document.querySelector('.category-filter.active');
-            if (activeCategory) {
-                let selectedCategory = activeCategory.getAttribute('data-category');
-                // Replace spaces with '+' and handle the encoding of special characters properly
-                filters['filters[category_names]'] = selectedCategory.replace(/\s+/g, '+').replace(/%2B/g, '+');
+            // Get selected categories
+            let selectedCategories = [];
+            document.querySelectorAll('.category-filter.active').forEach((activeCategory) => {
+                selectedCategories.push(activeCategory.getAttribute('data-category'));
+            });
+            if (selectedCategories.length > 0) {
+                filters['filters[category_names]'] = selectedCategories.join(','); // Comma-separated string
             }
 
             // Get selected colors and add them as a comma-separated value
@@ -234,8 +240,11 @@
             document.querySelectorAll('input[name="color"]:checked').forEach((input) => {
                 selectedColors.push(input.value);
             });
+
             if (selectedColors.length > 0) {
-                filters['filters[color_names]'] = selectedColors.join(','); // Add colors as a comma-separated string
+                filters['filters[color_names]'] = selectedColors.join(','); // Keep as a comma-separated string
+            } else {
+                delete filters['filters[color_names]']; // Remove if no colors selected
             }
 
             // Get selected sizes and add them as a comma-separated value
@@ -244,19 +253,25 @@
                 selectedSizes.push(input.value);
             });
             if (selectedSizes.length > 0) {
-                filters['filters[size_names]'] = selectedSizes.join(','); // Add sizes as a comma-separated string
+                filters['filters[size_names]'] = selectedSizes.join(','); // Comma-separated string
+            } else {
+                delete filters['filters[size_names]']; // Remove if no sizes selected
             }
 
             // Build the query string
-            const queryString = new URLSearchParams(filters).toString().replace(/%2B/g, '+') + `&sort_order=${sort_order}`;
+            const queryString = new URLSearchParams(filters).toString();
+
+            // Replace any specific encodings that may have occurred
+            const cleanedQueryString = queryString.replace(/%2C/g, ','); // Replace %2C with comma
 
             // Update the browser's URL without reloading the page
-            const newUrl = `${baseUrl}?${queryString}`;
+            const newUrl = `${baseUrl}?${cleanedQueryString}&sort_order=${sort_order}`;
             window.history.pushState({}, '', newUrl);
 
             // Fetch data with the updated URL
             fetchData();
         }
+
 
         // Call applyFilters on document ready to initialize the filters based on URL parameters
         document.addEventListener('DOMContentLoaded', (event) => {

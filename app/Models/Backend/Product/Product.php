@@ -82,6 +82,8 @@ class Product extends Model
     protected array $filterable = [
         'brand_names' => 'filterByBrands',
         'category_names' => 'filterByCategories',
+        'color_names' => 'filterByColorValues',
+        'size_names' => 'filterBySizeValues',
     ];
 
     protected array $sortable = [
@@ -225,5 +227,19 @@ class Product extends Model
             // Call the method recursively to collect IDs of children of the current child
             $this->collectChildCategoryIds($child, $categoryIds);
         }
+    }
+
+    public function filterByColorValues($query, string $value): mixed
+    {
+        return $query->whereHas('productVariations.productVariationAttributes.attributeValue', function ($query) use ($value) {
+            $query->whereIn('value', explode(",", $value));
+        });
+    }
+
+    public function filterBySizeValues($query, string $value): mixed
+    {
+        return $query->whereHas('productVariations.productVariationAttributes.attributeValue', function ($query) use ($value) {
+            $query->whereIn('value', explode(",", $value));
+        });
     }
 }

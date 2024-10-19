@@ -79,7 +79,11 @@ class ShopController extends Controller
             $query->where('name', 'Color');
         })->get();
 
+        $productSizes = AttributeValue::with('attribute')->whereHas('attribute', function ($query){
+            $query->where('name', 'Size');
+        })->get();
+
         // Pass the search criteria, category, and categories to the view
-        return view('ecommerce.shop.index', compact(['brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category', 'productColors']));
+        return view('ecommerce.shop.index', compact(['brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category', 'productColors', 'productSizes']));
     }
 }
