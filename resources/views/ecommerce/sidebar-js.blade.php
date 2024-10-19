@@ -94,18 +94,18 @@
                         arrow_signal = check_sub_category == 1 ?
                             '<i class="arrow right float-right"></i>' : '';
 
-                        var url = '{{ route('catalog.show', ':name') }}';
-                        url = check_sub_category == 0 ?
-                            url.replace(':name', data['sub_categories'][i]['name']) :
+                        var url = '{{ route('catalog.show') }}';
+                        url = check_sub_category == 0 ? '' :
                             'javascript:void(0)';
                         //  url = url.replace(':id', data['sub_categories'][i]['id']);
                         sub_category_list +=
                             "<li style='list-style: none;padding-bottom: 2px;' class='list-group-item'><a style='font-family: inherit;' href='" +
-                            url + "' class='" +
-                            parent_category + "' data-id='" + data['sub_categories'][i][
-                                'id'] +
-                            "'>" + data['sub_categories'][i]['name'] + arrow_signal +
-                            "</a></li>";
+                            url + "?filters[category_names]=" + encodeURIComponent(data[
+                                'sub_categories'][i]['name']).replace(/%20/g, '+') +
+                            "' class='" + parent_category + "' data-id='" + data[
+                                'sub_categories'][i]['id'] + "'>" +
+                            data['sub_categories'][i]['name'] + arrow_signal + "</a></li>";
+
                         parent_category_id.push(data['sub_categories'][i]['id']);
                     }
                     $('#category_content').nextAll('li').remove();
