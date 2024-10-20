@@ -31,14 +31,18 @@
                         @include('ecommerce.shop.partials.price_widget')
                         <!-- End .widget -->
 
-                        @include('ecommerce.shop.partials.size_widget')
-                        <!-- End .widget -->
+                        {{-- Size Filter --}}
+                        <x-product-filter :items="$productSizes" filterType="size" filterId="4" viewLimit="5"
+                            valueField="value" />
 
-                        @include('ecommerce.shop.partials.color_widget')
-                        <!-- End .widget -->
+                        {{-- Color Filter --}}
+                        <x-product-filter :items="$productColors" filterType="color" filterId="5" viewLimit="5"
+                            valueField="value" />
 
-                        @include('ecommerce.shop.partials.brand_widget')
-                        <!-- End .widget -->
+                        {{-- Brand Filter --}}
+                        <x-product-filter :items="$brands" filterType="brand" filterId="7" viewLimit="5"
+                            valueField="name" />
+
 
                         <!-- Start Ads -->
                         @if (isset($all_active_advertisements['Category']['2']['ads']))
@@ -122,10 +126,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                                                                                                                            <div class="label-group">
-                                                                                                                                                                <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                                                            </div>
-                                                                                                                                                        ` : ''}
+                                                                                                                                                                    <div class="label-group">
+                                                                                                                                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -149,8 +153,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                                            ` : ''}
+                                                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                                    ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -372,6 +376,24 @@
 
             // Call applyFilters to apply the filtering logic
             applyFilters();
+        }
+
+        function toggleViewMore(element) {
+            let container = element.closest('.widget-body');
+            container.querySelectorAll('.more-items').forEach(item => {
+                item.classList.remove('d-none');
+            });
+            container.querySelector('.view-less').classList.remove('d-none');
+            element.classList.add('d-none');
+        }
+
+        function toggleViewLess(element) {
+            let container = element.closest('.widget-body');
+            container.querySelectorAll('.more-items').forEach(item => {
+                item.classList.add('d-none');
+            });
+            container.querySelector('.view-more').classList.remove('d-none');
+            element.classList.add('d-none');
         }
     </script>
 @endpush
