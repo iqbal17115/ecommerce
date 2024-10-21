@@ -84,6 +84,7 @@ class Product extends Model
         'category_names' => 'filterByCategories',
         'color_names' => 'filterByColorValues',
         'size_names' => 'filterBySizeValues',
+        'feature_names' => 'filterByFeatureNames',
     ];
 
     protected array $sortable = [
@@ -182,6 +183,13 @@ class Product extends Model
     public function filterByBrands($query, $value): mixed
     {
         return $query->whereHas('Brand', function ($query) use ($value) {
+            $query->whereIn('name', explode(",", $value));
+        });
+    }
+
+    public function filterByFeatureNames($query, $value): mixed
+    {
+        return $query->whereHas('productFeature', function ($query) use ($value) {
             $query->whereIn('name', explode(",", $value));
         });
     }

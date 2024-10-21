@@ -211,6 +211,11 @@
                 filters['search'] = encodeURIComponent(searchParam);
             }
 
+            let feature_names = urlParams.get('feature_names');
+            if (feature_names) {
+                filters['feature_names'] = feature_names;
+            }
+console.log(feature_names);
             // Preserve the existing filters if present
             for (const [key, value] of urlParams.entries()) {
                 if (key.startsWith('filters[')) {
@@ -264,7 +269,7 @@
 
             // Build the query string
             const queryString = new URLSearchParams(filters).toString();
-
+            console.log(queryString);
             // Replace any specific encodings that may have occurred
             const cleanedQueryString = queryString.replace(/%2C/g, ','); // Replace %2C with comma
 
@@ -304,7 +309,7 @@
         function fetchData(page = 1) {
             // Retrieve all current URL parameters
             const urlParams = new URLSearchParams(window.location.search);
-
+console.log(urlParams);
             // Ensure the 'page' parameter is set (for pagination)
             urlParams.set('page', page);
 
