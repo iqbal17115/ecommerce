@@ -250,14 +250,14 @@
                                             width="468" height="468" />
                                     </div>
                                 @endforeach
-                                {{-- @foreach ($product_detail->productColors as $productColor)
+                                @foreach ($product_detail->productColors as $productColor)
                                     @foreach ($productColor->media as $media)
                                         <div class="product-item">
                                             <img class="product-single-image"
                                                 src="{{ asset('storage/' . $media->file_path) }}" />
                                         </div>
                                     @endforeach
-                                @endforeach --}}
+                                @endforeach
                             </div>
                             <!-- End .product-single-carousel -->
                             <span class="prod-full-screen">
@@ -272,14 +272,14 @@
                                         height="110" style="width: 110px; height: 110px;" alt="product-thumbnail" />
                                 </div>
                             @endforeach
-                            {{-- @foreach ($product_detail->productColors as $productColor)
+                            @foreach ($product_detail->productColors as $productColor)
                                 @foreach ($productColor->media as $media)
                                     <div class="owl-dot">
                                         <img src="{{ asset('storage/' . $media->file_path) }}" width="110" height="110"
                                             style="width: 110px; height: 110px;" alt="product-thumbnail" />
                                     </div>
                                 @endforeach
-                            @endforeach --}}
+                            @endforeach
                         </div>
                     </div>
                     <!-- End .product-single-gallery -->
