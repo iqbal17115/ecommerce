@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ProductDetailController extends Controller
 {
-    public function productDetail($name, $sellerSku =null)
+    public function productDetail($name, $sellerSku = null)
     {
         $user_id = auth()?->user()->id ?? null;
 
@@ -17,10 +17,10 @@ class ProductDetailController extends Controller
             'productColors',
             'productVariations.productVariationAttributes.attributeValue'
         ])->whereName($name)
-        ->when(!empty($sellerSku), function ($query, $sellerSku) {
-            return $query->where('seller_sku', $sellerSku);
-        })
-        ->first();
+            ->when(!is_null($sellerSku), function ($query) use ($sellerSku) {
+                return $query->where('seller_sku', $sellerSku);
+            })
+            ->first();
 
         // Group variations by color and size
         $colorToSizesMap = $product_detail->productColors->mapWithKeys(function ($color) {
