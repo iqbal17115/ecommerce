@@ -126,10 +126,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                                                                                                                                    <div class="label-group">
-                                                                                                                                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                                                                    </div>
-                                                                                                                                                                ` : ''}
+                                                                                                                                                                                    <div class="label-group">
+                                                                                                                                                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -153,8 +153,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                                                    ` : ''}
+                                                                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                                                    ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
             if (feature_names) {
                 filters['feature_names'] = feature_names;
             }
-console.log(feature_names);
+
             // Preserve the existing filters if present
             for (const [key, value] of urlParams.entries()) {
                 if (key.startsWith('filters[')) {
@@ -267,9 +267,18 @@ console.log(feature_names);
                 delete filters['filters[size_names]']; // Remove if no sizes selected
             }
 
+            // Get min and max price and create a 'price' range in the format price=min-max
+            let minPrice = document.getElementById('min_price').value;
+            let maxPrice = document.getElementById('max_price').value;
+            if (minPrice && maxPrice) {
+                filters['filters[price]'] = `${minPrice}-${maxPrice}`; // Combine min and max price
+            } else {
+                delete filters['price']; // Remove if no price range selected
+            }
+
             // Build the query string
             const queryString = new URLSearchParams(filters).toString();
-            console.log(queryString);
+
             // Replace any specific encodings that may have occurred
             const cleanedQueryString = queryString.replace(/%2C/g, ','); // Replace %2C with comma
 
@@ -281,6 +290,35 @@ console.log(feature_names);
             fetchData();
         }
 
+        function sendPriceFilters() {
+            // Get min and max price values
+            const minPrice = document.getElementById('min_price').value;
+            const maxPrice = document.getElementById('max_price').value;
+
+            // Base URL for the products page
+            const baseUrl = `${window.location.pathname}`;
+
+            // Initialize an object to hold filter parameters
+            const filters = {};
+
+            // Preserve existing URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Add price filters to the filters object
+            if (minPrice && maxPrice) {
+                filters['filters[price]'] = `${minPrice}-${maxPrice}`;
+            }
+
+            // Build the query string
+            const queryString = new URLSearchParams(filters).toString();
+
+            // Update the browser's URL without reloading the page
+            const newUrl = `${baseUrl}?${queryString}`;
+            window.history.pushState({}, '', newUrl);
+
+            // Call the applyFilters function to refresh data with new filters
+            applyFilters();
+        }
 
         // Call applyFilters on document ready to initialize the filters based on URL parameters
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -309,7 +347,7 @@ console.log(feature_names);
         function fetchData(page = 1) {
             // Retrieve all current URL parameters
             const urlParams = new URLSearchParams(window.location.search);
-console.log(urlParams);
+
             // Ensure the 'page' parameter is set (for pagination)
             urlParams.set('page', page);
 

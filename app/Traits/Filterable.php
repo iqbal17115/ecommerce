@@ -19,19 +19,32 @@ trait Filterable
         foreach ($filters as $key => $value) {
             //If Key and Value not empty
             if (!empty($key) && !empty($value)) {
+                // Handle price filter separately
+                if ($key === 'price') {
+                    // Expecting 'min-max' format
+                    list($minPrice, $maxPrice) = explode('-', $value);
 
-                //Get Filterable Method from filterable
-                $method = $this->filterable[$key] ?? null;
-
-                // Check if the model has a custom method for the sorting
-                if (method_exists($this, $method)) {
-                    // Call the custom method to handle the filter
-                    $this->{$method}($builder, $value);
+                    // Apply the price range filter
+                    if (!empty($minPrice)) {
+                        $builder->where('your_price', '>=', (float)$minPrice);
+                    }
+                    if (!empty($maxPrice)) {
+                        $builder->where('your_price', '<=', (float)$maxPrice);
+                    }
                 } else {
-                    // Check if the column exists in the table
-                    if (Schema::hasColumn($builder->getModel()->getTable(), $key)) {
-                        // If the column exists, use whereIn to filter by multiple values
-                        $builder->whereIn($key, explode(",", $value));
+                    //Get Filterable Method from filterable
+                    $method = $this->filterable[$key] ?? null;
+
+                    // Check if the model has a custom method for the sorting
+                    if (method_exists($this, $method)) {
+                        // Call the custom method to handle the filter
+                        $this->{$method}($builder, $value);
+                    } else {
+                        // Check if the column exists in the table
+                        if (Schema::hasColumn($builder->getModel()->getTable(), $key)) {
+                            // If the column exists, use whereIn to filter by multiple values
+                            $builder->whereIn($key, explode(",", $value));
+                        }
                     }
                 }
             }

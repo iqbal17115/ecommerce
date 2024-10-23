@@ -27,7 +27,7 @@ class SelectListRequest extends FormRequest
             'sort_order' => ['nullable'],
             'type' => ['nullable'],
             'account_head' => ['nullable'],
-            'account_category' => ['nullable']
+            'account_category' => ['nullable'],
         ];
     }
 }
