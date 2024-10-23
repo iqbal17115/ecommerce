@@ -281,7 +281,7 @@
                                         </figure>
                                         <div class="product-details">
                                             <h3 class="product-title">
-                                                <a href="{{ route('products.details', ['name' => rawurlencode($product->name)]) }}"
+                                                <a href="{{ route('products.details', ['name' => rawurlencode($product->name), 'seller_sku' => $product->seller_sku]) }}"
                                                     class="product-name" id="product-name">{{ $product->name }}</a>
                                             </h3>
                                             <div class="category-wrap">
