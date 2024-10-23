@@ -70,7 +70,7 @@
     @include('ecommerce.footer')
     <!-- footer-area-end -->
     @php
-        $baseRoute = route('products.details', ['name' => '']);
+        $baseRoute = route('products.details', ['name' => '', 'seller_sku' => '']);
     @endphp
 @endsection
 @push('scripts')
@@ -122,7 +122,7 @@
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
-                        <a href="${baseRoute}/${encodeURIComponent(product.product_name)}">
+                        <a href="${baseRoute}/${encodeURIComponent(product.product_name)}/${encodeURIComponent(product.seller_sku)}">
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
@@ -143,7 +143,7 @@
                             </a>
                         </div>
                         <h3 class="product-title">
-                            <a href="${baseRoute}/${encodeURIComponent(product.product_name)}">${product.product_name}</a>
+                            <a href="${baseRoute}/${encodeURIComponent(product.product_name)}/${encodeURIComponent(product.seller_sku)}">${product.product_name}</a>
                         </h3>
                         <div class="ratings-container">
                             <div class="product-ratings">

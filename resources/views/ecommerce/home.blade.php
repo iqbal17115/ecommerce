@@ -253,7 +253,7 @@
                                     <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                                         <figure>
                                             <a
-                                                href="{{ route('products.details', ['name' => rawurlencode($product->name)]) }}">
+                                                href="{{ route('products.details', ['name' => rawurlencode($product->name), 'seller_sku' => $product->seller_sku]) }}">
                                                 <img class="lazy-load"
                                                     @if ($product->ProductMainImage) data-src="{{ asset('storage/product_photo/' . $product->ProductMainImage->image) }}" @endif
                                                     style="width: 239px; height: 239px; filter: brightness(0.9)

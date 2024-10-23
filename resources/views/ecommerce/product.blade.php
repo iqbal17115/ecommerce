@@ -678,7 +678,7 @@
                                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                                     <figure>
                                         <a
-                                            href="{{ route('products.details', ['name' => rawurlencode($product_category_product->name)]) }}">
+                                            href="{{ route('products.details', ['name' => rawurlencode($product_category_product->name), 'seller_sku' => $product_category_product->seller_sku]) }}">
                                             <img @if ($product_category_product->ProductMainImage) src="{{ asset('storage/product_photo/' . $product_category_product->ProductMainImage->image) }}" @endif
                                                 width="239" height="239" style="width: 239px; height: 239px;"
                                                 alt="product">
@@ -697,7 +697,7 @@
                                     <div class="product-details">
                                         <h3 class="product-title">
                                             <a
-                                                href="{{ route('products.details', ['name' => $product_category_product->name]) }}">{{ $product_category_product->name }}</a>
+                                                href="{{ route('products.details', ['name' => $product_category_product->name, 'seller_sku' => $product_category_product->seller_sku]) }}">{{ $product_category_product->name }}</a>
                                             {{-- rating add html code --}}
                                             <span class="five-star-rating">
                                                 @if ($product_category_product->reviews()->avg('rating') >= 1)
