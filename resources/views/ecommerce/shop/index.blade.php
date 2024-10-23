@@ -291,34 +291,33 @@
         }
 
         function sendPriceFilters() {
-            // Get min and max price values
-            const minPrice = document.getElementById('min_price').value;
-            const maxPrice = document.getElementById('max_price').value;
+    // Get min and max price values
+    const minPrice = document.getElementById('min_price').value;
+    const maxPrice = document.getElementById('max_price').value;
 
-            // Base URL for the products page
-            const baseUrl = `${window.location.pathname}`;
+    // Base URL for the products page
+    const baseUrl = `${window.location.pathname}`;
 
-            // Initialize an object to hold filter parameters
-            const filters = {};
+    // Preserve existing URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
 
-            // Preserve existing URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
+    // Add or update the price filter in the format price=min-max
+    if (minPrice && maxPrice) {
+        urlParams.set('price', `${minPrice}-${maxPrice}`);
+    } else {
+        urlParams.delete('price'); // Remove the price filter if either is empty
+    }
 
-            // Add price filters to the filters object
-            if (minPrice && maxPrice) {
-                filters['filters[price]'] = `${minPrice}-${maxPrice}`;
-            }
+    // Build the query string
+    const queryString = urlParams.toString();
 
-            // Build the query string
-            const queryString = new URLSearchParams(filters).toString();
+    // Update the browser's URL without reloading the page
+    const newUrl = `${baseUrl}?${queryString}`;
+    window.history.pushState({}, '', newUrl);
 
-            // Update the browser's URL without reloading the page
-            const newUrl = `${baseUrl}?${queryString}`;
-            window.history.pushState({}, '', newUrl);
-
-            // Call the applyFilters function to refresh data with new filters
-            applyFilters();
-        }
+    // Call the applyFilters function to refresh data with new filters
+    applyFilters();
+}
 
         // Call applyFilters on document ready to initialize the filters based on URL parameters
         document.addEventListener('DOMContentLoaded', (event) => {
