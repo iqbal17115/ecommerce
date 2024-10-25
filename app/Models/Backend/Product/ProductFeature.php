@@ -13,7 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProductFeature extends Model
 {
     use HasFactory, BaseModel, DisplayNameTrait;
-    
+
+
     public function TopFeatureSetting()
     {
         return $this->hasOne(FeatureSetting::class, 'product_feature_id');
@@ -37,10 +38,6 @@ class ProductFeature extends Model
     public function Product()
     {
         // $today = now();
-        return $this->hasMany(Product::class)
-        // ->where(function ($query) use ($today) {
-        //     $query->whereDate('start_selling_date', '<=', $today);
-        // })
-        ->take(40);
+        return $this->hasMany(Product::class, 'product_feature_id');
     }
 }
