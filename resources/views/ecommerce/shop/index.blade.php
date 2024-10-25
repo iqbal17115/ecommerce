@@ -59,6 +59,10 @@
                 <!-- End .col-lg-3 -->
             </div>
             <!-- End .row -->
+
+            {{-- Start Pagination --}}
+            <div id="paginationControls" class="pagination-controls"></div>
+            {{-- End Pagination --}}
         </div>
         <!-- End .container -->
 
@@ -110,7 +114,7 @@
         };
 
 
-        function setProduct(data) {
+        function renderProductList(data) {
             $('#search_product_list').html('');
             let productHTML = ""
             var baseRoute = "{!! $baseRoute !!}";
@@ -119,7 +123,7 @@
             data.forEach(product => {
                 const productName = encodeURIComponent(product.product_name);
                 const sellerSku = product?.seller_sku ? encodeURIComponent(product.seller_sku) :
-                ''; // Default to an empty string if undefined
+                    ''; // Default to an empty string if undefined
 
                 const productUrl = `${baseRoute}/${productName}/${sellerSku}`;
 
@@ -132,10 +136,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                                                                                                                                                        <div class="label-group">
-                                                                                                                                                                                            <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                                                                                        </div>
-                                                                                                                                                                                    ` : ''}
+                                                                                                                                                                                                                                                        <div class="label-group">
+                                                                                                                                                                                                                                                            <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                    ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -159,8 +163,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                                                            <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                                                                        ` : ''}
+                                                                                                                                                                                                                                                            <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                                                                                                                        ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -201,6 +205,7 @@
         function applyFilters() {
             // Base URL for the products page
             const baseUrl = `${window.location.pathname}`;
+            //  page = urlParams.get('page') || 1;
 
             // Sorting order
             var sort_order = $("#order_of_product").val() || 'asc';
@@ -209,12 +214,24 @@
             const filters = {};
 
             // Extract the current URL parameters
+            const pageUrlParams = new URLSearchParams(window.location.page);
+
+            // Preserve the 'search' parameter, if present
+            let pageParam = pageUrlParams.get('page') || 1;
+
+            // Extract the current URL parameters
             const urlParams = new URLSearchParams(window.location.search);
 
             // Preserve the 'search' parameter, if present
             let searchParam = urlParams.get('search');
             if (searchParam) {
                 filters['search'] = encodeURIComponent(searchParam);
+            }
+
+            // Preserve the 'search' parameter, if present
+            let page = urlParams.get('page');
+            if (page) {
+                filters['page'] = encodeURIComponent(page);
             }
 
             let feature_names = urlParams.get('feature_names');
@@ -348,25 +365,86 @@
             }
         });
 
+        // Function to update URL page parameter and call applyFilters
+        function updatePage(page) {
+            const pageUrlParams = new URLSearchParams(window.location.search);
+            pageUrlParams.set('page', page);
+
+            // Update the URL without reloading the page
+            history.pushState(null, '', `${window.location.pathname}?${pageUrlParams.toString()}`);
+
+            // Call applyFilters to fetch data for the selected page
+            applyFilters();
+        }
+
+        function renderPagination(pagination) {
+            const paginationContainer = $('#paginationControls');
+            paginationContainer.html(''); // Clear existing pagination
+
+            if (pagination.total > pagination.per_page) {
+                let paginationHTML = `
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">`;
+
+                // Loop through links
+                pagination.links.forEach(link => {
+                    const page = link.url ? new URL(link.url).searchParams.get('page') : null;
+
+                    if (link.label.includes('Previous')) {
+                        // Previous button
+                        paginationHTML += `
+                <li class="page-item ${link.url ? '' : 'disabled'}">
+                    <a class="page-link" href="javascript:void(0);"
+                       ${link.url ? `onclick="updatePage(${page})"` : 'aria-disabled="true"'}
+                       aria-label="Previous">
+                        &laquo;
+                    </a>
+                </li>`;
+                    } else if (link.label.includes('Next')) {
+                        // Next button
+                        paginationHTML += `
+                <li class="page-item ${link.url ? '' : 'disabled'}">
+                    <a class="page-link" href="javascript:void(0);"
+                       ${link.url ? `onclick="updatePage(${page})"` : 'aria-disabled="true"'}
+                       aria-label="Next">
+                        &raquo;
+                    </a>
+                </li>`;
+                    } else if (!isNaN(link.label)) {
+                        // Numeric page links
+                        paginationHTML += `
+                <li class="page-item ${link.active ? 'active' : ''}">
+                    <a class="page-link" href="javascript:void(0);" onclick="updatePage(${page})">
+                        ${link.label}
+                    </a>
+                </li>`;
+                    }
+                });
+
+                paginationHTML += `
+            </ul>
+        </nav>`;
+
+                paginationContainer.html(paginationHTML);
+            }
+        }
+
         // Function to handle fetching data
         function fetchData(page = 1) {
             // Retrieve all current URL parameters
             const urlParams = new URLSearchParams(window.location.search);
-
-            // Ensure the 'page' parameter is set (for pagination)
-            urlParams.set('page', page);
 
             // Build the final URL with the current parameters
             const url = `/shop/products?${urlParams.toString()}`;
 
             // Fetch product data based on the updated URL
             getDetails(url, (data) => {
-                setProduct(data.results); // Update the product list dynamically
-                console.log(data.results);
+                console.log(data);
+                renderProductList(data.results.data);
+                renderPagination(data.results); // Render pagination
             });
         }
 
-        // Event listener for loading subcategories
         // Event listener for loading subcategories
         $(document).on('click', '.load-subcategories', function() {
             const categoryId = $(this).data('id');
@@ -415,6 +493,12 @@
             const searchParam = urlParams.get('search');
             if (searchParam) {
                 urlParams.set('search', searchParam); // Keep search parameter intact
+            }
+
+            // Preserve the 'search' parameter if it exists
+            page = urlParams.get('page');
+            if (searchParam) {
+                urlParams.set('page', page); // Keep search parameter intact
             }
 
             // Construct the new URL with custom parameters and update the browser's address bar

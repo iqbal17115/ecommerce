@@ -44,9 +44,9 @@ trait BaseModel
     {
         // Apply the search, ordering, and pagination scopes to the query
         return $query
-            ->when(isset($request['search']), fn ($query) => $query->ofSearch($request['search']))
-            ->when(isset($request['filters']), fn ($query) => $query->ofFilter($request['filters']))
-            ->when(isset($request['start_date']), fn ($query) => $query->ofDateChange($request['start_date'], $request['end_date']))
+            ->when(isset($request['search']), fn($query) => $query->ofSearch($request['search']))
+            ->when(isset($request['filters']), fn($query) => $query->ofFilter($request['filters']))
+            ->when(isset($request['start_date']), fn($query) => $query->ofDateChange($request['start_date'], $request['end_date']))
             ->ofOrderBy($request['sort_by'] ?? null, $request['sort_order'] ?? null);
     }
 
@@ -60,11 +60,15 @@ trait BaseModel
      */
     public static function getLists($query, array $validatedData, string $resourceClass): mixed
     {
-        // Get all lists
-        $lists = $query->list($validatedData)->paginate($validatedData['limit'] ?? 8);
+        try {
+            // Paginate the results
+            $lists = $query->paginate($validatedData['limit'] ?? 10);
 
-        // Set collection
-        return $lists->setCollection(collect($resourceClass::collection($lists->items())));
+            // Set collection
+            return $lists->setCollection(collect($resourceClass::collection($lists->items())));
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
 
     /**
