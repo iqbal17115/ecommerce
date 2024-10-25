@@ -61,6 +61,9 @@ trait BaseModel
     public static function getLists($query, array $validatedData, string $resourceClass): mixed
     {
         try {
+            // Apply the list scope to the query
+            $query->list($validatedData);
+
             // Paginate the results
             $lists = $query->paginate($validatedData['limit'] ?? 10);
 
