@@ -211,7 +211,7 @@
         <div class="bg-gray">
             <div class="container">
                 @foreach ($product_features as $product_feature)
-                    @if (1)
+                    @if ($product_feature->card_feature != 1 && count($product_feature->Product) > 0)
                         <div class="recent-products-section appear-animate" data-animation-name="fadeIn"
                             data-animation-delay="100">
                             <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
