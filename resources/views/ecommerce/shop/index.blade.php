@@ -117,6 +117,12 @@
 
             // Iterate through each product in the data
             data.forEach(product => {
+                const productName = encodeURIComponent(product.product_name);
+                const sellerSku = product?.seller_sku ? encodeURIComponent(product.seller_sku) :
+                ''; // Default to an empty string if undefined
+
+                const productUrl = `${baseRoute}/${productName}/${sellerSku}`;
+
                 // Construct the HTML for each product
                 productHTML += `
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
@@ -126,10 +132,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                                                                                                                                                    <div class="label-group">
-                                                                                                                                                                                        <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                                                                                    </div>
-                                                                                                                                                                                ` : ''}
+                                                                                                                                                                                        <div class="label-group">
+                                                                                                                                                                                            <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                    ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -143,7 +149,7 @@
                             </a>
                         </div>
                         <h3 class="product-title">
-                            <a href="${baseRoute}/${encodeURIComponent(product.product_name)}/${encodeURIComponent(product.seller_sku)}">${product.product_name}</a>
+                            <a href="${productUrl}">${product.product_name}</a>
                         </h3>
                         <div class="ratings-container">
                             <div class="product-ratings">
@@ -153,8 +159,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                                                                    ` : ''}
+                                                                                                                                                                                            <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                                                        ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -291,33 +297,33 @@
         }
 
         function sendPriceFilters() {
-    // Get min and max price values
-    const minPrice = document.getElementById('min_price').value;
-    const maxPrice = document.getElementById('max_price').value;
+            // Get min and max price values
+            const minPrice = document.getElementById('min_price').value;
+            const maxPrice = document.getElementById('max_price').value;
 
-    // Base URL for the products page
-    const baseUrl = `${window.location.pathname}`;
+            // Base URL for the products page
+            const baseUrl = `${window.location.pathname}`;
 
-    // Preserve existing URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
+            // Preserve existing URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
 
-    // Add or update the price filter in the format price=min-max
-    if (minPrice && maxPrice) {
-        urlParams.set('price', `${minPrice}-${maxPrice}`);
-    } else {
-        urlParams.delete('price'); // Remove the price filter if either is empty
-    }
+            // Add or update the price filter in the format price=min-max
+            if (minPrice && maxPrice) {
+                urlParams.set('price', `${minPrice}-${maxPrice}`);
+            } else {
+                urlParams.delete('price'); // Remove the price filter if either is empty
+            }
 
-    // Build the query string
-    const queryString = urlParams.toString();
+            // Build the query string
+            const queryString = urlParams.toString();
 
-    // Update the browser's URL without reloading the page
-    const newUrl = `${baseUrl}?${queryString}`;
-    window.history.pushState({}, '', newUrl);
+            // Update the browser's URL without reloading the page
+            const newUrl = `${baseUrl}?${queryString}`;
+            window.history.pushState({}, '', newUrl);
 
-    // Call the applyFilters function to refresh data with new filters
-    applyFilters();
-}
+            // Call the applyFilters function to refresh data with new filters
+            applyFilters();
+        }
 
         // Call applyFilters on document ready to initialize the filters based on URL parameters
         document.addEventListener('DOMContentLoaded', (event) => {

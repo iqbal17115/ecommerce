@@ -23,10 +23,10 @@ class ProductDetailController extends Controller
             ->first();
 
         // Group variations by color and size
-        $colorToSizesMap = $product_detail->productColors->mapWithKeys(function ($color) {
+        $colorToSizesMap = $product_detail?->productColors->mapWithKeys(function ($color) {
             return [
-                $color->id => $color->productVariations->flatMap(function ($variation) {
-                    return $variation->productVariationAttributes->where('attributeValue.attribute.name', 'Size')->pluck('attribute_value_id');
+                $color->id => $color?->productVariations->flatMap(function ($variation) {
+                    return $variation?->productVariationAttributes->where('attributeValue.attribute.name', 'Size')->pluck('attribute_value_id');
                 }),
             ];
         });
