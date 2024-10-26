@@ -159,8 +159,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                                                                                                                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                                                                                                                                            ` : ''}
+                                                                                                                                                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                                                                                                                                    ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -196,6 +196,24 @@
 
             // Apply filters after toggling the category
             applyFilters();
+        }
+
+        // Initialize filters from URL parameters on page load
+        function initializeFiltersFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Loop through filters and set checkboxes based on URL params
+            document.querySelectorAll('input[name="brand"]').forEach((input) => {
+                input.checked = urlParams.get('filters[brand_names]')?.split(',').includes(input.value) || false;
+            });
+
+            document.querySelectorAll('input[name="color"]').forEach((input) => {
+                input.checked = urlParams.get('filters[color_names]')?.split(',').includes(input.value) || false;
+            });
+
+            document.querySelectorAll('input[name="size"]').forEach((input) => {
+                input.checked = urlParams.get('filters[size_names]')?.split(',').includes(input.value) || false;
+            });
         }
 
         function applyFilters() {
@@ -311,6 +329,9 @@
             // Fetch data with the updated URL
             fetchData();
         }
+
+        // Call initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeFiltersFromURL);
 
         function sendPriceFilters() {
             // Get min and max price values
