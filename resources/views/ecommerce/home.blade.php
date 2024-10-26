@@ -214,10 +214,16 @@
                     @if ($product_feature->card_feature != 1 && count($product_feature->Product) > 0)
                         <div class="recent-products-section appear-animate" data-animation-name="fadeIn"
                             data-animation-delay="100">
-                            <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
+                            {{-- <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
                                 <h4 class="section-title text-transform-none mb-0 mr-0">{{ $product_feature->name }}</h4>
                                 <a class="view-all ml-auto" href="{{ route('catalog.show') }}?filters[feature_names]={{ urlencode($product_feature->name) }}">View
                                     All<i class="fas fa-long-arrow-alt-right"></i></a>
+                            </div> --}}
+                            <div class="d-flex align-items-center">
+                                <h4 class="section-title text-transform-none mb-0">{{ $product_feature->name }}</h4>
+                                <a class="view-all ml-auto" href="{{ route('catalog.show') }}?filters[feature_names]={{ urlencode($product_feature->name) }}">
+                                    View
+                                </a>
                             </div>
                             <div class="products-slider owl-carousel owl-theme carousel-with-bg nav-circle pb-0"
                                 data-owl-options="{
