@@ -221,8 +221,10 @@
                             </div> --}}
                             <div class="d-flex align-items-center">
                                 <h4 class="section-title text-transform-none mb-0">{{ $product_feature->name }}</h4>
-                                <a class="view-all ml-auto" href="{{ route('catalog.show') }}?filters[feature_names]={{ urlencode($product_feature->name) }}">
-                                    View All
+                                <a class="view-all ml-auto"
+                                    href="{{ route('catalog.show') }}?filters[feature_names]={{ urlencode($product_feature->name) }}"
+                                    style="white-space: nowrap;">
+                                    View All <i class="fas fa-long-arrow-alt-right"></i>
                                 </a>
                             </div>
                             <div class="products-slider owl-carousel owl-theme carousel-with-bg nav-circle pb-0"
@@ -276,7 +278,7 @@
                                                 </div>
                                             @endif
                                             <div class="btn-icon-group">
-                                                @if (($product->stock_qty > 0) && count($product->productVariations) == 0)
+                                                @if ($product->stock_qty > 0 && count($product->productVariations) == 0)
                                                     <a href="javascript:void(0);" title="Add To Cart"
                                                         data-product_id="{{ $product->id }}"
                                                         @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
