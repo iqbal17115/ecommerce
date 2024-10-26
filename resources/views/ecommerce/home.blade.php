@@ -222,7 +222,7 @@
                             <div class="d-flex align-items-center">
                                 <h4 class="section-title text-transform-none mb-0">{{ $product_feature->name }}</h4>
                                 <a class="view-all ml-auto" href="{{ route('catalog.show') }}?filters[feature_names]={{ urlencode($product_feature->name) }}">
-                                    View
+                                    View All
                                 </a>
                             </div>
                             <div class="products-slider owl-carousel owl-theme carousel-with-bg nav-circle pb-0"
