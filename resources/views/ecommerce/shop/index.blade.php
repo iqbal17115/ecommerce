@@ -61,7 +61,7 @@
             <!-- End .row -->
 
             {{-- Start Pagination --}}
-            <div id="paginationControls" class="pagination-controls"></div>
+            <div id="paginationControls" class="pagination-controls mt-3"></div>
             {{-- End Pagination --}}
         </div>
         <!-- End .container -->
