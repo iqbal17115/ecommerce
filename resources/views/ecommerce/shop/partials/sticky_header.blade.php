@@ -40,7 +40,7 @@
             <label>Show:</label>
 
             <div class="select-custom">
-                <select name="count_paginate" id="count_paginate" class="form-control count_paginate">
+                <select name="data_limit" id="data_limit" class="form-control data_limit">
                     <option value="12">12</option>
                     <option value="24">24</option>
                     <option value="36">36</option>

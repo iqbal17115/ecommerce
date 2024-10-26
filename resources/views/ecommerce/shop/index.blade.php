@@ -6,8 +6,8 @@
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
             <div class="container">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="demo36.html"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Shop</a></li>
                 </ol>
             </div>
         </nav>
@@ -136,10 +136,10 @@
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `
-                                                                                                                                                                                                                                                        <div class="label-group">
-                                                                                                                                                                                                                                                            <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                    ` : ''}
+                                                                                                                                                                                                                                                            <div class="label-group">
+                                                                                                                                                                                                                                                                <div class="product-label label-sale">-${product.offer_percentage}%</div>
+                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                        ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
@@ -163,8 +163,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                                                                                                                            <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                                                                                                                                        ` : ''}
+                                                                                                                                                                                                                                                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                                                                                                                            ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -209,6 +209,9 @@
 
             // Sorting order
             var sort_order = $("#order_of_product").val() || 'asc';
+
+            // Sorting order
+            var limit = $("#data_limit").val() || 12;
 
             // Initialize an object to hold filter parameters
             const filters = {};
@@ -306,7 +309,7 @@
             const cleanedQueryString = queryString.replace(/%2C/g, ','); // Replace %2C with comma
 
             // Update the browser's URL without reloading the page
-            const newUrl = `${baseUrl}?${cleanedQueryString}&sort_order=${sort_order}`;
+            const newUrl = `${baseUrl}?${cleanedQueryString}&sort_order=${sort_order}&limit=${limit}`;
             window.history.pushState({}, '', newUrl);
 
             // Fetch data with the updated URL
@@ -376,6 +379,21 @@
             // Call applyFilters to fetch data for the selected page
             applyFilters();
         }
+
+        // Function to update data limit in the URL and call applyFilters
+        $('#data_limit').on('change', function() {
+            const selectedLimit = $(this).val();
+            const pageUrlParams = new URLSearchParams(window.location.search);
+
+            // Set or update the data_limit parameter in the URL
+            pageUrlParams.set('data_limit', selectedLimit);
+
+            // Update the URL without reloading the page
+            history.pushState(null, '', `${window.location.pathname}?${pageUrlParams.toString()}`);
+
+            // Call applyFilters to fetch data with the new limit
+            applyFilters();
+        });
 
         function renderPagination(pagination) {
             const paginationContainer = $('#paginationControls');
