@@ -113,3 +113,116 @@
     -webkit-transform: scale(0.7);
     border: 2px rgba(255, 255, 255, 0.7) dashed;
 }
+
+/* Widget Container */
+.widget.categories-widget {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    background-color: #f4f4f4;
+}
+
+.widget-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: #333;
+}
+
+.widget-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.widget-icon {
+    font-size: 1rem;
+    transition: transform 0.3s;
+}
+
+.widget-title a[aria-expanded="true"] .widget-icon {
+    transform: rotate(180deg);
+}
+
+/* Category List */
+.cat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-item {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.category-item:hover {
+    background-color: #f1f5f9;
+}
+
+.category-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.category-link:hover {
+    color: #111;
+}
+
+.toggle-icon {
+    font-size: 0.9rem;
+    transition: transform 0.3s;
+}
+
+.category-link[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Subcategory List */
+.cat-sublist {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    border-left: 2px solid #ddd;
+}
+
+.cat-sublist li {
+    padding: 8px 15px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    background-color: #fafafa;
+    transition: background-color 0.3s;
+}
+
+.cat-sublist li:hover {
+    background-color: #e9ecef;
+}
+
+.cat-sublist .category-link {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #555;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.cat-sublist .category-link:hover {
+    color: #333;
+    background-color: #e2e8f0;
+}
