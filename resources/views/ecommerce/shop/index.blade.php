@@ -159,8 +159,8 @@
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                                                                                                                                        <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
-                                                                                                                                                                                                                                                                    ` : ''}
+                                                                                                                                                                                                                                                                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                                                                                                                                            ` : ''}
                             <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
@@ -242,7 +242,10 @@
             // Preserve the 'search' parameter, if present
             let searchParam = urlParams.get('search');
             if (searchParam) {
+                // Manually replace spaces with '+' without URL encoding
                 filters['search'] = encodeURIComponent(searchParam);
+                // Keep search parameter intact
+                $("#search").val(searchParam);
             }
 
             // Preserve the 'search' parameter, if present
@@ -487,10 +490,9 @@
             const selectedCategory = $(this).data('category'); // Get the category name from data attribute
 
             // Load subcategories via AJAX
-            $.ajax({
-                url: '/categories/' + categoryId + '/subcategories',
-                method: 'GET',
-                success: function(data) {
+            getDetails(
+                '/categories/' + categoryId + '/subcategories',
+                (data) => {
                     // Populate the sublist with the received data
                     sublist.html(data);
 
@@ -504,11 +506,11 @@
 
                     // Update URL with the selected category
                     updateURLAndApplyFilters(selectedCategory);
-                }.bind(this), // Maintain context to use 'this' inside the success callback
-                error: function() {
-                    alert('Failed to load subcategories.');
+                },
+                (error) => {
+
                 }
-            });
+            );
         });
 
         function updateURLAndApplyFilters(selectedCategory) {
