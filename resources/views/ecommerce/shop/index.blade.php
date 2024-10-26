@@ -135,11 +135,7 @@
                         <a href="${baseRoute}/${encodeURIComponent(product.product_name)}/${encodeURIComponent(product.seller_sku)}">
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
-                        ${product.is_offer_active ? `
-                                                                                                                                                                                                                                                            <div class="label-group">
-                                                                                                                                                                                                                                                                <div class="product-label label-sale">-${product.offer_percentage}%</div>
-                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                        ` : ''}
+                        ${product.is_offer_active ? `                                                                                                                                                                                                                       ` : ''}
                         <div class="btn-icon-group">
                             <a href="javascript:void(0);" data-product_id="${product.id}" class="btn-icon add_cart_item product-type-simple">
                                 <i class="icon-shopping-cart"></i>
