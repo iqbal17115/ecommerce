@@ -132,7 +132,7 @@
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
-                        <a href="${baseRoute}/${encodeURIComponent(product.product_name)}/${encodeURIComponent(product.seller_sku)}">
+                        <a href="${productUrl}">
                             <img class="lazy-load" data-src="${product.image_url}" width="239" height="239" alt="product">
                         </a>
                         ${product.is_offer_active ? `                                                                                                                                                                                                                       ` : ''}
