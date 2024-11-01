@@ -363,7 +363,7 @@
                         </div>
 
                         <!-- Start Card Feature -->
-                        @if ($product_feature->FeatureSetting)
+                        {{-- @if ($product_feature->FeatureSetting)
                             <div class="row" style="margin-top: 18px;">
                                 <!-- Start Product Part -->
                                 @foreach ($product_feature->FeatureSetting as $feature_setting)
@@ -423,7 +423,7 @@
                                     <!-- End Ads -->
                                 @endforeach
                             </div>
-                        @endif
+                        @endif --}}
                         <!-- End Card Feature -->
                     @endif
                 @endforeach
