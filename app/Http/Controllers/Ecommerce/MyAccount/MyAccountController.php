@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Address\Country;
 use App\Models\Address\District;
 use App\Models\Address\Division;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +22,7 @@ class MyAccountController extends Controller
         $wishlist_status = "active";
         return view('ecommerce.my-account.my-account', compact('user_id', 'user', 'countries', 'divisions', 'districts', 'day_of_weeks', 'wishlist_status'));
     }
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $countries =  Country::get();
@@ -31,6 +30,7 @@ class MyAccountController extends Controller
         $districts =  District::get();
         $day_of_weeks = DayOfWeekEnum::getDaysOfWeek();
         $user_id = auth()?->user()->id ?? null;
-        return view('ecommerce.my-account.my-account', compact('user_id', 'user', 'countries', 'divisions', 'districts', 'day_of_weeks'));
+        $type = $request->type ?? null;
+        return view('ecommerce.my-account.my-account', compact('user_id', 'user', 'countries', 'divisions', 'districts', 'day_of_weeks', 'type'));
     }
 }

@@ -1,4 +1,4 @@
-<div class="tab-pane fade @if (!isset($wishlist_status)) show active @endif" id="dashboard">
+<div class="tab-pane fade @if ($type != 'wishlist') show active @endif" id="dashboard">
     <div class="grey-bg container-fluid">
         <section id="minimal-statistics">
             <div class="row">

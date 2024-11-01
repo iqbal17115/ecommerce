@@ -1,7 +1,7 @@
 <nav class="side-menu">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link @if (!isset($wishlist_status)) active @endif" href="#dashboard" data-toggle="tab">
+            <a class="nav-link @if ($type == 'dashboard') active @endif" href="#dashboard" data-toggle="tab">
                 <i class="fas fa-shopping-cart"></i>
                 Dashboard
             </a>
@@ -37,7 +37,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link @if (isset($wishlist_status)) active @endif" href="#wishlist" data-toggle="tab">
+            <a class="nav-link @if ($type == 'wishlist') active @endif" href="#wishlist" data-toggle="tab">
                 <i class="fas fa-heart"></i>
                 Wishlist
             </a>

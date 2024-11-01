@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="sticky-info">
-        <a href="javascript::void();" class="">
+        <a href="{{ route('my.account', ['type' => 'wishlist']) }}" class="">
             <i class="icon-wishlist-2"></i>Wishlist
         </a>
     </div>
