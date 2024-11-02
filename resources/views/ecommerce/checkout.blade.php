@@ -6,20 +6,18 @@
             <input name="user_id" id="user_id_val" value="{{ $user->id }}" hidden />
             <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
             <div class="row">
-
                 <div class="col-lg-7">
                     <div id="collapseFour"
                         class="collapse card_design shadow p-3 @if (Auth::user()) show @endif">
                         <div class="shipping-info">
-
                             <!-- Shipping Address -->
                             @if (Auth::user())
                                 <div class="shipping-address-card">
                                     <div class="">
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h6 class="mb-0">Deliver to:</h6>
-                                            <button type="button" class="btn btn-link btn-sm" class="btn btn-primary"
-                                                data-toggle="modal" data-target="#myAddressModal" id="addressModalButton">
+                                            <button type="button" class="btn btn-link btn-sm address-menu-toggle"
+                                                class="btn btn-primary" onclick="toggleSidebar()">
                                                 <i class="fas fa-plus-circle"></i> Shipping Address
                                             </button>
                                         </div>
@@ -80,7 +78,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="cart-table-container">
-                                        <form class="pb-0 mb-0" action="{{ route('confirm_order') }}" method="POST" id="checkout-form">
+                                        <form class="pb-0 mb-0" action="{{ route('confirm_order') }}" method="POST"
+                                            id="checkout-form">
                                             @csrf
                                             <!-- Other form fields -->
                                             <div class="payment-methods">
@@ -90,8 +89,10 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group form-group-custom-control mb-0">
                                                                 <div class="custom-control custom-radio mb-0">
-                                                                    <input type="radio" id="cod" name="radio" value="cod" class="custom-control-input" checked>
-                                                                    <label class="custom-control-label" for="cod">Cash On Delivery</label>
+                                                                    <input type="radio" id="cod" name="radio"
+                                                                        value="cod" class="custom-control-input" checked>
+                                                                    <label class="custom-control-label" for="cod">Cash
+                                                                        On Delivery</label>
                                                                 </div><!-- End .custom-checkbox -->
                                                             </div><!-- End .form-group -->
                                                         </div>
@@ -184,22 +185,12 @@
     <script>
         var user = <?php echo json_encode($user); ?>;
 
-        $(document).on('click', '#add_another_address', function() {
-            addressForm(user);
-        });
-
-        function loadAddressForm() {
-            addressForm(user);
+        // Start Address
+        function toggleSidebar() {
+            document.getElementById('address-wrapper').classList.toggle('show');
         }
 
-        function userAddress() {
-            loadUserAddress(@json($user->id ?? null));
-        }
-
-        $(document).ready(function() {
-            userAddress();
-        });
-
+        // End Address
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-load');
             lazyImages.forEach(img => {
