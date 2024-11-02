@@ -127,41 +127,4 @@
     background-color: #f0f8ff;
 }
 
-/* Start Address */
-/* Wrapper styles to hide initially */
-#address-wrapper {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 100%;
-    display: none; /* Initially hidden */
-    z-index: 10;
-}
 
-/* Sidebar styles */
-#address-right-sidebar-wrapper {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Start hidden off-screen */
-    width: 300px; /* Adjust width as needed */
-    height: 100vh;
-    overflow-y: auto;
-    background: #fff;
-    transition: all 0.5s ease;
-    z-index: 11;
-}
-
-/* Show sidebar */
-#address-wrapper.show {
-    display: block; /* Show overlay when class is added */
-}
-
-#address-wrapper.show #address-right-sidebar-wrapper {
-    right: 0; /* Slide in from right */
-}
-
-.choose-address-wrapper {
-    height: 98%;
-}
-/* End Address */
