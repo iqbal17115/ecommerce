@@ -1,12 +1,12 @@
 {{-- Start Checkout Address --}}
 <!-- Address Sidebar Wrapper -->
-<div id="address-wrapper" onclick="toggleSidebar()"> <!-- clicking outside will close sidebar -->
-    <div id="address-right-sidebar-wrapper" onclick="event.stopPropagation()"> <!-- Prevent close on content click -->
+<div id="address-wrapper"> <!-- clicking outside will close sidebar -->
+    <div id="address-right-sidebar-wrapper"> <!-- Prevent close on content click -->
         <div class="choose-address-wrapper bg-white p-4 rounded shadow-lg">
             <!-- Header with Title and Add New Address Link -->
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="font-weight-bold mb-0">Shipping Address</h5>
-                <a href="javascript:;" class="text-primary font-weight-bold">Add new address</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add new address</a>
             </div>
 
             <!-- Address 1 -->

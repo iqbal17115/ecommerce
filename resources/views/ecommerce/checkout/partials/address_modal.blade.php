@@ -1,1 +1,116 @@
 
+<!-- Add New Shipping Address Modal -->
+<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title font-weight-bold" id="addressModalLabel">Add New Address</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    @csrf
+                    <!-- Address Form Fields -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" style="width: 100% !important;" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="instruction">Special Instructions</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Optional" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" class="form-control" id="mobile" name="mobile" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="optional_mobile">Optional Mobile</label>
+                            <input type="text" class="form-control" id="optional_mobile" name="optional_mobile">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="street_address">Street Address</label>
+                            <input type="text" class="form-control" id="street_address" name="street_address">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="building_name">Building Name</label>
+                            <input type="text" class="form-control" id="building_name" name="building_name">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nearest_landmark">Nearest Landmark</label>
+                            <input type="text" class="form-control" id="nearest_landmark" name="nearest_landmark">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="type">Address Type</label>
+                            <select class="form-control" id="type" name="type" required>
+                                <option value="home">Home</option>
+                                <option value="office">Office</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Address Hierarchy Fields -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="country_name">Country</label>
+                            <select class="form-control" id="country_name" name="country_name">
+                                <option value="">Select Country</option>
+                                <option value="country1">Country 1</option>
+                                <option value="country2">Country 2</option>
+                                <option value="country3">Country 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="division_name">Division</label>
+                            <select class="form-control" id="division_name" name="division_name">
+                                <option value="">Select Division</option>
+                                <option value="division1">Division 1</option>
+                                <option value="division2">Division 2</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="district_name">District</label>
+                            <select class="form-control" id="district_name" name="district_name">
+                                <option value="">Select District</option>
+                                <option value="district1">District 1</option>
+                                <option value="district2">District 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="upazila_name">Upazila</label>
+                            <select class="form-control" id="upazila_name" name="upazila_name">
+                                <option value="">Select Upazila</option>
+                                <option value="upazila1">Upazila 1</option>
+                                <option value="upazila2">Upazila 2</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Submit and Cancel Buttons -->
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="button" class="btn btn-outline-secondary mr-2" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Address</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Add New Shipping Address Modal -->

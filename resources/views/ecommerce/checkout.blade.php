@@ -167,15 +167,14 @@
             <!-- End .row -->
         </div>
         <!-- End .container -->
-        <!-- Shipping Address Modal -->
-        @include('ecommerce.checkout.partials.address_modal')
-        <!-- End Shipping Address Modal -->
     </main>
     <!-- End .main -->
-
     <!-- footer-area -->
     @include('ecommerce.footer')
     <!-- footer-area-end -->
+    <!-- Shipping Address Modal -->
+@include('ecommerce.checkout.partials.address_modal')
+<!-- End Shipping Address Modal -->
 @endsection
 @push('scripts')
     <script src="{{ asset('js/panel/users/checkout/address.js') }}"></script>
@@ -189,6 +188,12 @@
         function toggleSidebar() {
             document.getElementById('address-wrapper').classList.toggle('show');
         }
+
+        $(document).ready(function() {
+        $('.add-address-link').on('click', function() {
+            $('#addressModal').modal('show');
+        });
+    });
 
         // End Address
         function lazyLoad() {
