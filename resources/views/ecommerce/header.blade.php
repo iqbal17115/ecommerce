@@ -10,7 +10,7 @@
             </div>
 
             <!-- Address 1 -->
-            <div class="card border-light mb-1">
+            <div class="card border mb-0">
                 <div class="card-body d-flex">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="address1" checked>
@@ -28,7 +28,7 @@
             </div>
 
             <!-- Address 2 -->
-            <div class="card border-light mb-1">
+            <div class="card border mb-0">
                 <div class="card-body d-flex">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="address2">
@@ -46,7 +46,7 @@
             </div>
 
             <!-- Address 3 -->
-            <div class="card border-light mb-1">
+            <div class="card border mb-0">
                 <div class="card-body d-flex">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="address3">
