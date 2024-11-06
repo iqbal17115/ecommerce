@@ -15,17 +15,20 @@
                     <!-- Address Form Fields -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
+                            <label for="country_name">Country</label>
+                            <select class="form-control" id="country_name" name="country_name">
+                                <option value="">Select Country</option>
+                                <option value="country1">Country 1</option>
+                                <option value="country2">Country 2</option>
+                                <option value="country3">Country 3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" style="width: 100% !important;" required>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="instruction">Special Instructions</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Optional" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="mobile">Mobile</label>
                             <input type="text" class="form-control" id="mobile" name="mobile" required>
@@ -33,6 +36,37 @@
                         <div class="form-group col-md-6">
                             <label for="optional_mobile">Optional Mobile</label>
                             <input type="text" class="form-control" id="optional_mobile" name="optional_mobile">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="division_name">Division</label>
+                            <select class="form-control" id="division_name" name="division_name">
+                                <option value="">Select Division</option>
+                                <option value="division1">Division 1</option>
+                                <option value="division2">Division 2</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="district_name">District</label>
+                            <select class="form-control" id="district_name" name="district_name">
+                                <option value="">Select District</option>
+                                <option value="district1">District 1</option>
+                                <option value="district2">District 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="upazila_name">Upazila</label>
+                            <select class="form-control" id="upazila_name" name="upazila_name">
+                                <option value="">Select Upazila</option>
+                                <option value="upazila1">Upazila 1</option>
+                                <option value="upazila2">Upazila 2</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="instruction">Special Instructions</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Optional" required>
                         </div>
                     </div>
 
@@ -59,46 +93,6 @@
                             <select class="form-control" id="type" name="type" required>
                                 <option value="home">Home</option>
                                 <option value="office">Office</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Address Hierarchy Fields -->
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="country_name">Country</label>
-                            <select class="form-control" id="country_name" name="country_name">
-                                <option value="">Select Country</option>
-                                <option value="country1">Country 1</option>
-                                <option value="country2">Country 2</option>
-                                <option value="country3">Country 3</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="division_name">Division</label>
-                            <select class="form-control" id="division_name" name="division_name">
-                                <option value="">Select Division</option>
-                                <option value="division1">Division 1</option>
-                                <option value="division2">Division 2</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="district_name">District</label>
-                            <select class="form-control" id="district_name" name="district_name">
-                                <option value="">Select District</option>
-                                <option value="district1">District 1</option>
-                                <option value="district2">District 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="upazila_name">Upazila</label>
-                            <select class="form-control" id="upazila_name" name="upazila_name">
-                                <option value="">Select Upazila</option>
-                                <option value="upazila1">Upazila 1</option>
-                                <option value="upazila2">Upazila 2</option>
                             </select>
                         </div>
                     </div>
