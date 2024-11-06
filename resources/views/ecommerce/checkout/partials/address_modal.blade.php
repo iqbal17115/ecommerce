@@ -16,11 +16,10 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="country_name">Country</label>
-                            <select class="form-control" id="country_name" name="country_name">
+                            <select class="form-control" id="country_name" name="country_name" onchange="loadDivisions(this.value)">
                                 <option value="">Select Country</option>
-                                <option value="country1">Country 1</option>
-                                <option value="country2">Country 2</option>
-                                <option value="country3">Country 3</option>
+                                <option value="9c617d63-544b-49f8-991f-63e9158b4b8d">Bangladesh</option>
+                                <option value="9a7a722d-34f2-4bf7-924b-27ef2e67e933">United Arab Emirates</option>
                             </select>
                         </div>
 
@@ -40,27 +39,21 @@
 
                         <div class="form-group col-md-6">
                             <label for="division_name">Division</label>
-                            <select class="form-control" id="division_name" name="division_name">
+                            <select class="form-control" id="division_name" name="division_name" onchange="loadDistricts(this.value)">
                                 <option value="">Select Division</option>
-                                <option value="division1">Division 1</option>
-                                <option value="division2">Division 2</option>
                             </select>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="district_name">District</label>
-                            <select class="form-control" id="district_name" name="district_name">
+                            <select class="form-control" id="district_name" name="district_name" onchange="loadUpazilas(this.value)">
                                 <option value="">Select District</option>
-                                <option value="district1">District 1</option>
-                                <option value="district2">District 2</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="upazila_name">Upazila</label>
                             <select class="form-control" id="upazila_name" name="upazila_name">
                                 <option value="">Select Upazila</option>
-                                <option value="upazila1">Upazila 1</option>
-                                <option value="upazila2">Upazila 2</option>
                             </select>
                         </div>
 
