@@ -24,19 +24,19 @@ class AddressCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'country_id' => 'required',
-            'name' => 'required',
-            'instruction' => 'nullable',
-            'mobile' => 'required',
-            'optional_mobile' => 'nullable',
-            'division_id' => 'required',
-            'district_id' => 'required',
-            'street_address' => 'required',
-            'building_name' => 'required',
-            'nearest_landmark' => 'required',
-            'type' => 'required',
-            'is_default' => 'required',
+            'user_id' => 'nullable',
+            'country_id' => 'nullable',
+            // 'name' => 'nullable',
+            // 'instruction' => 'nullable',
+            // 'mobile' => 'nullable',
+            // 'optional_mobile' => 'nullable',
+            // 'division_id' => 'nullable',
+            // 'district_id' => 'nullable',
+            // 'street_address' => 'nullable',
+            // 'building_name' => 'nullable',
+            // 'nearest_landmark' => 'nullable',
+            // 'type' => 'nullable',
+            // 'is_default' => 'nullable',
         ];
     }
 }

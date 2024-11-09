@@ -35,6 +35,7 @@ use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
 use App\Http\Controllers\Backend\WebSetting\FeatureSettingController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
+use App\Http\Controllers\Ecommerce\AddressController;
 use App\Http\Controllers\Ecommerce\AuthController;
 use App\Http\Controllers\Ecommerce\ShopController;
 use App\Http\Controllers\Ecommerce\CartController;
@@ -80,6 +81,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/', function () {
         return view('auth.login');
     });
+
     // Language
     Route::get('lang/{lang}', [LanguageController::class, 'switchLang'])->name('lang.switch');
 
