@@ -3,7 +3,7 @@
 <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header border-0">
+            <div class="modal-header border-0 brand_color">
                 <h5 class="modal-title font-weight-bold" id="addressModalLabel">Add New Address</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -92,8 +92,8 @@
 
                     <!-- Submit and Cancel Buttons -->
                     <div class="d-flex justify-content-end mt-4">
-                        <button type="button" class="btn btn-outline-secondary mr-2" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save Address</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary mr-2" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Save</button>
                     </div>
                 </form>
             </div>

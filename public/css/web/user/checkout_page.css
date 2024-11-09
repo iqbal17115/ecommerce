@@ -135,10 +135,10 @@
 }
 
 #addressModal .modal-header {
-    background-color: #007bff; /* Bootstrap primary color */
     color: white;
     border-bottom: none; /* Remove bottom border */
-    padding: 15px; /* Padding for header */
+    padding: 5px; /* Padding for header */
+    height: 40px;
 }
 
 #addressModal .modal-title {

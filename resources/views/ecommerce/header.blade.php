@@ -1,26 +1,22 @@
-{{-- Start Checkout Address --}}
 <!-- Address Sidebar Wrapper -->
-<div id="address-wrapper"> <!-- clicking outside will close sidebar -->
-    <div id="address-right-sidebar-wrapper"> <!-- Prevent close on content click -->
-        <div class="choose-address-wrapper bg-white p-4 rounded shadow-lg">
+<div id="address-wrapper">
+    <div id="address-right-sidebar-wrapper">
+        <div class="choose-address-wrapper">
             <!-- Header with Title and Add New Address Link -->
-            <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="header">
                 <h5 class="font-weight-bold mb-0">Shipping Address</h5>
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add new address</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add New Address</a>
             </div>
 
             <!-- Address 1 -->
-            <div class="card border mb-0">
-                <div class="card-body d-flex">
+            <div class="address-card">
+                <div class="card-header">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="address1" checked>
                     </div>
-                    <div class="ml-3">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title mb-1">Iqbal <span class="text-muted small">1654323454</span></h6>
-                        </div>
-                        <span class="badge badge-secondary text-white mb-1">HOME</span>
-                        <span class="mb-1">Address Info</span>
+                    <div>
+                        <h6 class="mb-1">Iqbal <span class="text-muted small">1654323454</span></h6>
+                        <span class="badge badge-secondary">HOME</span>
                         <p class="text-muted small mb-1">Region: Dhaka - Faridpur - Alipur</p>
                         <span class="badge badge-info">Default Shipping Address</span>
                     </div>
@@ -28,48 +24,42 @@
             </div>
 
             <!-- Address 2 -->
-            <div class="card border mb-0">
-                <div class="card-body d-flex">
+            <div class="address-card">
+                <div class="card-header">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="address2">
                     </div>
-                    <div class="ml-3">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title mb-1">Sadek <span class="text-muted small">1456767564</span></h6>
-                        </div>
-                        <span class="badge badge-secondary text-white mb-1">HOME</span>
-                        <span class="mb-1">Address Info</span>
-                        <p class="text-muted small mb-1">Region: Chattogram - Brahmanbaria - Kasba - Kasba Gopinathpur
-                        </p>
+                    <div>
+                        <h6 class="mb-1">Sadek <span class="text-muted small">1456767564</span></h6>
+                        <span class="badge badge-secondary">HOME</span>
+                        <p class="text-muted small mb-1">Region: Chattogram - Brahmanbaria - Kasba - Kasba Gopinathpur</p>
                     </div>
                 </div>
             </div>
 
             <!-- Address 3 -->
-            <div class="card border mb-0">
-                <div class="card-body d-flex">
+            <div class="address-card">
+                <div class="card-header">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="address3">
                     </div>
-                    <div class="ml-3">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title mb-1">Rahim <span class="text-muted small">1408976543</span></h6>
-                        </div>
-                        <span class="badge badge-secondary text-white mb-1">HOME</span>
-                        <span class="mb-1">Address Info</span>
+                    <div>
+                        <h6 class="mb-1">Rahim <span class="text-muted small">1408976543</span></h6>
+                        <span class="badge badge-secondary">HOME</span>
                         <p class="text-muted small mb-1">Region: Dhaka - Dhaka - North - Aftab nagar</p>
                     </div>
                 </div>
             </div>
 
             <!-- Action Buttons -->
-            <div class="d-flex justify-content-end mt-3">
-                <button type="button" class="btn btn-outline-secondary btn-sm mr-2 px-3">Cancel</button>
-                <button type="button" class="btn btn-primary btn-sm px-3">Save</button>
+            <div class="action-buttons">
+                <button type="button" class="btn btn-outline-secondary btn-sm">Cancel</button>
+                <button type="button" class="btn btn-primary btn-sm">Save</button>
             </div>
         </div>
     </div>
 </div>
+
 {{-- End Checkout Address --}}
 <!-- Start Sidebar -->
 <div id="wrapper">
