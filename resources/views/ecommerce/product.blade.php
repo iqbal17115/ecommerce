@@ -247,6 +247,7 @@
                                     <div class="product-item">
                                         <img class="product-single-image"
                                             src="{{ asset('storage/product_photo/' . $product_image->image) }}"
+                                            data-zoom-image="{{ asset('storage/product_photo/' . $product_image->image) }}"
                                             width="468" height="468" />
                                     </div>
                                 @endforeach
@@ -254,7 +255,8 @@
                                     @foreach ($productColor->media as $media)
                                         <div class="product-item">
                                             <img class="product-single-image"
-                                                src="{{ asset('storage/' . $media->file_path) }}" />
+                                                src="{{ asset('storage/' . $media->file_path) }}"
+                                                data-zoom-image="{{ asset('storage/' . $media->file_path) }}" />
                                         </div>
                                     @endforeach
                                 @endforeach
