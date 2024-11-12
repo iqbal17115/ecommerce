@@ -7,7 +7,7 @@
     </div>
     <div class="sticky-info">
         <a href="javascript::void();">
-            <i class="icon-bars"></i>Categories
+            <i class="fas fa-bell pt-2"></i> 
         </a>
     </div>
     <div class="sticky-info">

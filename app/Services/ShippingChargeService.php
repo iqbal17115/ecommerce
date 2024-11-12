@@ -96,8 +96,10 @@ class ShippingChargeService
 
         return $product->your_price;
     }
+
     public function calculateShippingCharges(Product $product, $quantity)
     {
+        // dd(count($product));
         $totalShippingCharge = 0;
         $freeShippingMethod = $this->getShippingMethodByName('Free');
         $cashOnDelivery = $this->getShippingMethodByName('Cash On Delivery');
