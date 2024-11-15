@@ -1,50 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="{{ asset('css/web/sign_in.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Form</title>
+  <link rel="stylesheet" href="{{ asset('css/web/sign_in.css') }}">
 </head>
 
 <body>
-
-    <div class="wrapper">
-        <div class="container">
-          <div class="col-left">
-            <div class="login-form">
-              <h2>Login</h2>
-              <form method="POST" action="{{ route('login') }}" id="login-form">
-                @csrf
-                <p>
-                  <input type="text" name="mobile" placeholder="Email or Mobile" required>
-                </p>
-                <p>
-                  <input type="password" name="password" placeholder="Password" required>
-                </p>
-                <p>
-                  <input class="btn" type="submit" value="Sing In" />
-                </p>
-                <p>
-                  <a href="">Forget Password?</a>
-                </p>
-                <p>
-                    <a href="{{ route('sign-up') }}">Sign Up</a>
-                  </p>
-              </form>
-            </div>
-          </div>
-          <div class="col-right">
-            <div class="login-social">
-              <h2>Login with</h2>
-              <a class="btn btn-go" href="">Google</a>
-              <a class="btn btn-fb" href="">Facebook</a>
-              <a class="btn btn-tw" href="">Twitter</a>
-            </div>
-          </div>
+  <div class="login-form">
+    <form style="margin-top: 20px;" method="POST" action="{{ route('login') }}" id="login-form">
+        @csrf
+        <label for="mobile"> Number</label>
+        <input type="text" name="mobile" placeholder="Enter Mobile Number"  autocomplete="name" />
+        <label for="psw">Password</label>
+        <input type="password" name="password" placeholder="Enter Password" autocomplete="password" />
+        <button class="btn" type="submit" type="submit">Login Now</button>
+        <div class="social">
+          <div class="gg"><i class="bi bi-google"></i> Google</div>
+          <div class="fb"><i class="bi bi-facebook"></i> Facebook</div>
         </div>
-        <div class="credit">
-        </div>
-      </div>
+      </form>
+  </div>
 </body>
 
 </html>
+
