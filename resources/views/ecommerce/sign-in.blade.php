@@ -5,7 +5,144 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Form</title>
-  <link rel="stylesheet" href="{{ asset('css/web/sign_in.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('css/web/sign_in.css') }}"> --}}
+  <style>
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+body {
+  height: 100vh;
+  background-color: #f4631b;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.login-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 460px;
+  width: 100%;
+  background:  #fff;
+}
+
+.login-form h3 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 10px 0px;
+  font-size: 2rem;
+  text-align: center;
+}
+.login-form label {
+  display: block;
+  padding: 20px 0px 10px 0px;
+  font-size: 1.2rem;
+  color: dark;
+}
+
+.login-form form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 460px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px 50px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Default width for the form */
+.login-form form {
+    width: 100%; 
+    max-width: 340px; 
+    margin: 0 auto; 
+  }
+  
+  /* For devices with screens wider than 768px (tablets and larger) */
+  @media (min-width: 768px) {
+    .login-form form {
+      width: 80%; /* Adjust width to 80% for medium screens */
+    }
+  }
+  
+  /* For devices with screens wider than 1024px (desktops and larger) */
+  @media (min-width: 1024px) {
+    .login-form form {
+      width: 50%; /* Adjust width to 50% for larger screens */
+    }
+  }
+  
+.login-form input[type="text"],
+input[type="password"] {
+  display: block;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  cursor: pointer;
+  transition: all 450ms;
+  border-radius: 20px; /* Adjust the value as needed */
+  padding: 10px; /* Optional: for better spacing inside the input */
+  border: 1px solid #ccc; /* Optional: adds a border */
+}
+
+.login-form input::placeholder {
+  font-size: 14px;
+}
+
+
+
+.login-form button {
+  height: 40px;
+  width: 100%;
+  margin: 40px 0px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+  color: #000000c3;
+  cursor: pointer;
+  transition: all 450ms;
+  background: #f4631b;
+}
+.login-form button:hover {
+  background-color: #ffffffc2;
+}
+.login-form .social {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+}
+.social .gg,
+.fb {
+  width: 140px;
+  padding: 5px;
+  background-color: #00000023;
+  /* color: #ffffff; */
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 450ms;
+}
+.social .gg:hover,
+.fb:hover {
+  background-color: #00000036;
+}
+    </style>
 </head>
 
 <body>
