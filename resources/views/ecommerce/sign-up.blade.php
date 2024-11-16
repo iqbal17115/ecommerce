@@ -58,10 +58,6 @@
       transition: all 450ms;
     }
 
-    .form1 select {
-      text-align: center;
-    }
-
     .form1 input[type="radio"] {
       font-size: 14px;
       size: 10px;
