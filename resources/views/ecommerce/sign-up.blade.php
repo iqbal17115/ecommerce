@@ -81,6 +81,24 @@
     .form1 button:hover {
       background-color: #d85316;
     }
+
+    /* Style for the sign-in link */
+    .signin-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    .signin-link a {
+      color: #f4631b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .signin-link a:hover {
+      color: #d85316;
+    }
   </style>
 </head>
 
@@ -100,23 +118,23 @@
         <input type="text" name="mobile" id="mobile" placeholder="Enter Mobile Number" required>
 
         <label for="email">
-          Email
+          Email(Optional)
         </label>
         <input type="email" name="email" id="email" placeholder="Enter Email Address">
 
         <label for="gender">
-          Gender
+          Gender <span class="required">*</span>
         </label>
-        <select id="gender" name="gender">
+        <select id="gender" name="gender" required>
           <option value="" disabled selected>Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
 
         <label for="bday">
-          Date Of Birth
+          Date Of Birth <span class="required">*</span>
         </label>
-        <input type="date" name="bday" id="bday">
+        <input type="date" name="bday" id="bday" required>
 
         <label for="password">
           Password <span class="required">*</span>
@@ -124,6 +142,12 @@
         <input type="password" name="password" id="password" placeholder="Password" required>
 
         <button class="btn" type="submit">Register</button>
+
+        <!-- Sign-in option link below the register button -->
+        <div class="signin-link">
+          <span>Already have an account? </span>
+          <a href="{{ route('customer-sign-in') }}">Sign In</a>
+        </div>
       </form>
     </div>
   </div>
