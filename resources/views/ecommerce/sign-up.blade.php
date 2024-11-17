@@ -21,7 +21,7 @@
 
     .form1 form {
       position: absolute;
-      top: 40%;
+      top: 45%;
       left: 50%;
       transform: translate(-50%, -50%);
       box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
@@ -45,11 +45,22 @@
       margin-left: 2px;
     }
 
-    .form1 input,
-    .form1 select {
+    .form1 input {
       display: block;
       width: 95%;
       height: 30px;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 1rem;
+      transition: all 450ms;
+    }
+
+.form1 select {
+      display: block;
+      width: 98%;
+      height: 50px;
       padding: 10px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
