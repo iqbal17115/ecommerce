@@ -24,6 +24,7 @@ class UpazilaController extends Controller
     public function lists(Request $request): JsonResponse|bool|string
     {
         try {
+            $request['limit'] = 1000;
             $list = Upazila::getLists(Upazila::where('district_id', $request->district_id), $request->all(), ShopSettingUpazilaListResource::class);
 
             return Message::success(null, $list);
