@@ -104,8 +104,6 @@ input[type="password"] {
   font-size: 14px;
 }
 
-
-
 .login-form button {
   height: 35px;
   width: 100%;
