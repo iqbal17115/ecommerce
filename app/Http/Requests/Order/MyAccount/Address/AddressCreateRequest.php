@@ -26,17 +26,17 @@ class AddressCreateRequest extends FormRequest
         return [
             'user_id' => 'nullable',
             'country_id' => 'nullable',
-            // 'name' => 'nullable',
-            // 'instruction' => 'nullable',
-            // 'mobile' => 'nullable',
-            // 'optional_mobile' => 'nullable',
-            // 'division_id' => 'nullable',
-            // 'district_id' => 'nullable',
-            // 'street_address' => 'nullable',
-            // 'building_name' => 'nullable',
-            // 'nearest_landmark' => 'nullable',
-            // 'type' => 'nullable',
-            // 'is_default' => 'nullable',
+            'name' => 'nullable',
+            'instruction' => 'nullable',
+            'mobile' => 'nullable',
+            'optional_mobile' => 'nullable',
+            'division_id' => 'nullable',
+            'district_id' => 'nullable',
+            'street_address' => 'nullable',
+            'building_name' => 'nullable',
+            'nearest_landmark' => 'nullable',
+            'type' => 'nullable',
+            'is_default' => 'nullable',
         ];
     }
 }

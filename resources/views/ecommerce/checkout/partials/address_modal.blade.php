@@ -13,6 +13,7 @@
                 <form id="addressForm" method="POST">
                     @csrf
                     <input type="hidden" name="address_id" id="address_id" value="">
+                    <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
                     <!-- Address Form Fields -->
                     <div class="form-row">
                         <div class="form-group col-md-6">

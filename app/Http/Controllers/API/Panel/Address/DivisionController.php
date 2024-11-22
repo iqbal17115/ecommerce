@@ -23,7 +23,6 @@ class DivisionController extends Controller
      */
     public function lists(Request $request): JsonResponse|bool|string
     {
-        dd($request->all());
         try {
             $list = Division::getLists(Division::where('country_id', $request->country_id), $request->all(), DivisionListResource::class);
 

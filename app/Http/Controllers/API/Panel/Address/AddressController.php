@@ -195,6 +195,7 @@ class AddressController extends Controller
     {
         try {
             $validatedData = $addressCreateRequest->validated();
+
             if ((new Address())->userAddressesCount($validatedData['user_id']) == 0) {
                 $validatedData['is_default'] = 1;
             }
