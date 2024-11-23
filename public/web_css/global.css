@@ -431,7 +431,6 @@ font-size: 1.2em;
     position: absolute;
     top: 0;
     right: -100%; /* Hidden off-screen initially */
-    /* width: 400px;  */
     height: 100vh;
     overflow-y: auto;
     background: #ffffff;
