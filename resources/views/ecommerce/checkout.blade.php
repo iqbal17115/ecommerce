@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/checkout_page.css') }}">
     <main class="main main-test bg-gray py-3">
         <div class="container checkout-container">
-            <input name="user_id" id="user_id_val" value="{{ $user->id }}" hidden />
+            <input name="user_id" id="user_id_val" value="{{ $user?->id }}" hidden />
             <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
             <div class="row">
                 <div class="col-lg-7">

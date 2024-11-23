@@ -36,7 +36,7 @@
                             <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter Mobile Number" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="optional_mobile">Optional Mobile</label>
+                            <label for="optional_mobile">Optional Mobile(Optional)</label>
                             <input type="text" class="form-control" id="optional_mobile" name="optional_mobile" placeholder="Enter Optional Mobile Number">
                         </div>
 
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="instruction">Special Instructions</label>
+                            <label for="instruction">Special Instructions (Optional)</label>
                             <input type="text" class="form-control" id="instruction" name="instruction"
                                 placeholder="Optional" placeholder="Enter Special Instructions">
                         </div>
@@ -71,19 +71,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="street_address">Street Address</label>
+                            <label for="street_address">Street Address (Optional)</label>
                             <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Enter Street Address">
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="building_name">Building Name</label>
+                            <label for="building_name">Building Name (Optional)</label>
                             <input type="text" class="form-control" id="building_name" name="building_name" placeholder="Enter Building Number">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="nearest_landmark">Nearest Landmark</label>
+                            <label for="nearest_landmark">Nearest Landmark (Optional)</label>
                             <input type="text" class="form-control" id="nearest_landmark" name="nearest_landmark" placeholder="Enter Nearest Landmark">
                         </div>
 
