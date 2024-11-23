@@ -61,7 +61,7 @@ function loadUpazilas(districtId) {
     }
 }
 
-function saveAddress(event) {
+function saveAddress(event, selectedId = "") {
     // Prevent form submission
     event.preventDefault();
 
@@ -71,7 +71,7 @@ function saveAddress(event) {
     // Create an object to hold the data
     const data = {
         address_id: form.querySelector('input[name="address_id"]')?.value || null,
-        user_id: form.querySelector('input[name="user_id"]')?.value || null,
+        user_id: $('#user_id_val').val() || null,
         country_id: form.querySelector('select[name="country_id"]')?.value || null,
         name: form.querySelector('input[name="name"]')?.value || null,
         mobile: form.querySelector('input[name="mobile"]')?.value || null,
@@ -89,12 +89,14 @@ function saveAddress(event) {
     };
 
     saveAction(
-        "store",
-        `/api/user-address`, // dynamically determines store or update endpoint
+        selectedId.trim() !== "" ? "update" : "store",
+        "/api/user-address",
         data,
-        null,
+        selectedId,
         (data) => {
             toastr.success(data.message);
+            // Optionally reset the form
+            $('#addressForm')[0].reset();
         },
         (error) => {
         }
@@ -126,6 +128,11 @@ function setAddressData(addresses) {
         const isDefault = address.is_default === 1 ? 'checked' : '';
         const defaultBadge = address.is_default === 1 ? `<span class="badge badge-info">Default Shipping Address</span>` : '';
 
+        // Only add delete button for non-default addresses
+        const deleteButton = address.is_default !== 1
+            ? `<button class="btn btn-sm btn-outline-danger delete-address" data-id="${address.id}">Delete</button>`
+            : '';
+
         const cardHTML = `
             <div class="address-card">
                 <div class="card-header">
@@ -139,8 +146,8 @@ function setAddressData(addresses) {
                         ${defaultBadge}
                     </div>
                     <div class="address-actions mt-2">
-                        <button class="btn btn-sm btn-outline-primary edit-address" data-id="${address.id}" data-toggle="modal" data-target="#addressModal">Edit</button>
-                        <button class="btn btn-sm btn-outline-danger delete-address" data-id="${address.id}">Delete</button>
+                        <button class="btn btn-sm btn-outline-primary edit-address" data-address_id="${address.id}" data-toggle="modal" data-target="#addressModal">Edit</button>
+                        ${deleteButton}
                     </div>
                 </div>
             </div>`;
@@ -159,19 +166,19 @@ function setAddressData(addresses) {
     const editButtons = document.querySelectorAll('.edit-address');
     const deleteButtons = document.querySelectorAll('.delete-address');
 
-    editButtons.forEach((button) => {
-        button.addEventListener('click', (event) => {
-            const addressId = event.target.dataset.id;
-            editAddress(addressId);
-        });
-    });
+    // editButtons.forEach((button) => {
+    //     button.addEventListener('click', (event) => {
+    //         const addressId = event.target.dataset.id;
+    //         editAddress(addressId);
+    //     });
+    // });
 
-    deleteButtons.forEach((button) => {
-        button.addEventListener('click', (event) => {
-            const addressId = event.target.dataset.id;
-            deleteAddress(addressId);
-        });
-    });
+    // deleteButtons.forEach((button) => {
+    //     button.addEventListener('click', (event) => {
+    //         const addressId = event.target.dataset.id;
+    //         deleteAddress(addressId);
+    //     });
+    // });
 }
 
 function loadUserAddress(user_id) {
@@ -186,11 +193,78 @@ function loadUserAddress(user_id) {
     );
 }
 
+$(document).on("click", ".delete-address", function (event) {
+    event.preventDefault(); // Prevent default behavior if necessary
+    
+    const address_id = $(this).data('id'); // Get the address ID from the button
+
+    // Call deleteAction to perform the delete operation
+    deleteAction(
+        '/api/user-address/' + address_id,
+        (data) => {
+            const user_id = $('#user_id_val').val(); // Fetch the user ID
+            loadUserAddress(user_id); // Reload the user address list
+            toastr.success(data.message);
+        },
+        (error) => {
+            // Handle error
+            toastrErrorMessage(error.responseJSON.message); // Show error message using toastr
+        }
+    );
+});
+
+$(document).on("click", ".edit-address", function (event) {
+    const address_id = $(this).data('address_id');
+
+    // Get details
+    getDetails(
+        "/api/user-address/" + address_id,
+        (data) => {
+            const address = data.results;
+
+            // Populate the modal fields with the retrieved address data
+            $("#address_id").val(address.id);
+            $("#name").val(address.name);
+            $("#instruction").val(address.instruction);
+            $("#mobile").val(address.mobile);
+            $("#optional_mobile").val(address.optional_mobile);
+            $("#street_address").val(address.street_address);
+            $("#building_name").val(address.building_name);
+            $("#nearest_landmark").val(address.nearest_landmark);
+            $("#type").val(address.type);
+            $("#country_id").val(address.country_id).change();
+
+            // Load divisions, districts, and upazilas dynamically if available
+            if (address.division_id) {
+                loadDivisions(address.country_id); // Ensure divisions are loaded
+                setTimeout(() => $("#division_id").val(address.division_id).change(), 500);
+            }
+
+            if (address.district_id) {
+                loadDistricts(address.division_id); // Ensure districts are loaded
+                setTimeout(() => $("#district_id").val(address.district_id).change(), 1000);
+            }
+
+            if (address.upazila_id) {
+                loadUpazilas(address.district_id); // Ensure upazilas are loaded
+                setTimeout(() => $("#upazila_id").val(address.upazila_id), 1500);
+            }
+        },
+        (error) => {
+            // Handle the error here
+        }
+    );
+});
+
+
 $(document).ready(function() {
-    user_id = $('#user_id').val();
+    user_id = $('#user_id_val').val();
+    
 
     $('#addressForm').on('submit', function(event) {
-        saveAddress(event);  // Call saveAddress when the form is submitted
+        address_id = $('#address_id').val();
+
+        saveAddress(event, address_id);  // Call saveAddress when the form is submitted
         loadUserAddress(user_id);
     });
 

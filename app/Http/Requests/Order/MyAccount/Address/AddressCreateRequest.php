@@ -32,6 +32,8 @@ class AddressCreateRequest extends FormRequest
             'optional_mobile' => 'nullable',
             'division_id' => 'nullable',
             'district_id' => 'nullable',
+            'upazila_id' => 'nullable',
+            'instruction' => 'nullable',
             'street_address' => 'nullable',
             'building_name' => 'nullable',
             'nearest_landmark' => 'nullable',

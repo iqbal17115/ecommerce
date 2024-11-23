@@ -84,6 +84,7 @@ $(document).on("click", "#set_as_default_address", function (event) {
     });
 
 });
+
 $(document).on("click", "#remove_address", function (event) {
     const address_id = $(this).data('address_id');
     //Delete
@@ -229,6 +230,7 @@ $(document).on("click", ".edit_address", function (event) {
         }
     );
 });
+
 function setAddressData(data) {
     // Initialize an empty variable to store the card HTML
     let cardHTML = '';

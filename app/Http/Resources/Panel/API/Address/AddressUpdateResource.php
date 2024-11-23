@@ -22,6 +22,7 @@ class AddressUpdateResource extends JsonResource
             'street_address' => $this->street_address,
             'building_name' => $this->building_name,
             'nearest_landmark' => $this->nearest_landmark,
+            'instruction' => $this->instruction,
             'type' => $this->type,
             'is_default' => $this->is_default,
             'country_id' => $this->country_id,

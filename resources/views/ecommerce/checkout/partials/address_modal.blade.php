@@ -10,10 +10,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addressForm" method="POST">
+                <form id="addressForm">
                     @csrf
                     <input type="hidden" name="address_id" id="address_id" value="">
-                    <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
                     <!-- Address Form Fields -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -29,16 +28,16 @@
                         <div class="form-group col-md-6">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                style="width: 100% !important;" required>
+                                style="width: 100% !important;" placeholder="Enter Name" required>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="mobile">Mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" required>
+                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter Mobile Number" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="optional_mobile">Optional Mobile</label>
-                            <input type="text" class="form-control" id="optional_mobile" name="optional_mobile">
+                            <input type="text" class="form-control" id="optional_mobile" name="optional_mobile" placeholder="Enter Optional Mobile Number">
                         </div>
 
                         <div class="form-group col-md-6">
@@ -65,27 +64,27 @@
 
                         <div class="form-group col-md-6">
                             <label for="instruction">Special Instructions</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Optional" required>
+                            <input type="text" class="form-control" id="instruction" name="instruction"
+                                placeholder="Optional" placeholder="Enter Special Instructions" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="street_address">Street Address</label>
-                            <input type="text" class="form-control" id="street_address" name="street_address">
+                            <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Enter Street Address">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="building_name">Building Name</label>
-                            <input type="text" class="form-control" id="building_name" name="building_name">
+                            <input type="text" class="form-control" id="building_name" name="building_name" placeholder="Enter Building Number">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nearest_landmark">Nearest Landmark</label>
-                            <input type="text" class="form-control" id="nearest_landmark" name="nearest_landmark">
+                            <input type="text" class="form-control" id="nearest_landmark" name="nearest_landmark" placeholder="Enter Nearest Landmark">
                         </div>
 
                         <div class="form-group col-md-6">
