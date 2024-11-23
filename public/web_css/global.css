@@ -431,7 +431,7 @@ font-size: 1.2em;
     position: absolute;
     top: 0;
     right: -100%; /* Hidden off-screen initially */
-    width: 400px; /* Wider for a more spacious look */
+    /* width: 400px;  */
     height: 100vh;
     overflow-y: auto;
     background: #ffffff;
@@ -440,6 +440,30 @@ font-size: 1.2em;
     z-index: 11;
     border-radius: 8px 0 0 8px;
     padding: 20px;
+}
+
+@media (max-width: 1200px) {
+    #address-right-sidebar-wrapper {
+        width: 70%; /* Slightly smaller on medium screens */
+    }
+}
+
+@media (max-width: 992px) {
+    #address-right-sidebar-wrapper {
+        width: 60%; /* Adjusted for tablet devices */
+    }
+}
+
+@media (max-width: 768px) {
+    #address-right-sidebar-wrapper {
+        width: 90%; /* Wider on mobile screens */
+    }
+}
+
+@media (max-width: 576px) {
+    #address-right-sidebar-wrapper {
+        width: 100%; /* Full width on small mobile screens */
+    }
 }
 
 /* Show sidebar */
@@ -538,3 +562,9 @@ font-size: 1.2em;
     background-color: #e2e6ea;
 }
 /* End Address */
+
+span.required {
+    color: red;
+    font-size: 1.2em;
+    margin-left: 2px;
+  }

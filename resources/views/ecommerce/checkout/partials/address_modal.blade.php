@@ -16,7 +16,7 @@
                     <!-- Address Form Fields -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="country_id">Country</label>
+                            <label for="country_id">Country <span class="required">*</span></label>
                             <select class="form-control" id="country_id" name="country_id"
                                 onchange="loadDivisions(this.value)">
                                 <option value="">Select Country</option>
@@ -26,13 +26,13 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="name">Name</label>
+                            <label for="name">Name <span class="required">*</span></label>
                             <input type="text" class="form-control" id="name" name="name"
                                 style="width: 100% !important;" placeholder="Enter Name" required>
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="mobile">Mobile</label>
+                            <label for="mobile">Mobile <span class="required">*</span></label>
                             <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter Mobile Number" required>
                         </div>
                         <div class="form-group col-md-6">
@@ -41,23 +41,23 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="division_id">Division</label>
+                            <label for="division_id">Division <span class="required">*</span></label>
                             <select class="form-control" id="division_id" name="division_id"
-                                onchange="loadDistricts(this.value)">
+                                onchange="loadDistricts(this.value)" required>
                                 <option value="">Select Division</option>
                             </select>
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="district_id">District</label>
+                            <label for="district_id">District <span class="required">*</span></label>
                             <select class="form-control" id="district_id" name="district_id"
-                                onchange="loadUpazilas(this.value)">
+                                onchange="loadUpazilas(this.value)" required>
                                 <option value="">Select District</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="upazila_id">Upazila</label>
-                            <select class="form-control" id="upazila_id" name="upazila_id">
+                            <label for="upazila_id">Upazila <span class="required">*</span></label>
+                            <select class="form-control" id="upazila_id" name="upazila_id" required>
                                 <option value="">Select Upazila</option>
                             </select>
                         </div>
@@ -65,7 +65,7 @@
                         <div class="form-group col-md-6">
                             <label for="instruction">Special Instructions</label>
                             <input type="text" class="form-control" id="instruction" name="instruction"
-                                placeholder="Optional" placeholder="Enter Special Instructions" required>
+                                placeholder="Optional" placeholder="Enter Special Instructions">
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="type">Address Type</label>
+                            <label for="type">Address Type <span class="required">*</span></label>
                             <select class="form-control" id="type" name="type" required>
                                 <option value="home">Home</option>
                                 <option value="office">Office</option>
