@@ -1,11 +1,13 @@
 function showCartTableData(data) {
     let htmlContent = '';
     let total = 0;
+    let total_item_qty = 0;
     let total_shipping_charge = 0;
     let cheked_all_check_box = true;
 
     data.forEach((item) => {
         total += item.product_info.product_price * item.quantity;
+        total_item_qty += item.quantity;
         total_shipping_charge += parseFloat(item.shipping_charge);
 
         htmlContent += `
@@ -46,11 +48,15 @@ function showCartTableData(data) {
     if (cheked_all_check_box == true) {
         $("#select_all_products").prop("checked", true);
     }
+    
     $('#table_body').html(htmlContent);
     $('.cart_total_price').text(total);
     $('.shipping_charge_amount').text(total_shipping_charge);
     $('.grand_total').text(total + total_shipping_charge);
 
+    // Update the Subtotal text with the correct number of items and the total
+    var itemText = total_item_qty <= 1 ? 'Item' : 'Items';  // Singular or plural based on count
+    $('.cart-total-text').text('Subtotal(' + total_item_qty + ' ' + itemText + ')');
 }
 
 function updateCart(item) {

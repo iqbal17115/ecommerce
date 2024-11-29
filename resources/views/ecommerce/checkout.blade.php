@@ -40,7 +40,7 @@
                         <table class="table table-mini-cart">
                             <tfoot>
                                 <tr class="cart-subtotal">
-                                    <td>Subtotal({{ count($products) }} Item{{ count($products) > 1 ? 's' : '' }})</td>
+                                    <td class="cart-total-text">Subtotal({{ count($products) }} Item{{ count($products) > 1 ? 's' : '' }})</td>
                                     <td class="price-col">{{ $currency?->icon }} <span class="cart_total_price">0</span>
                                     </td>
                                 </tr>
