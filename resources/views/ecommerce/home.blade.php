@@ -68,6 +68,18 @@
             border: 2px rgba(255, 255, 255, 0.7) dashed;
         }
 
+        .slider_image {
+            width: 100%; /* Ensure the image spans the full width of the container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover; /* Ensure the image covers the container */
+        }
+
+        @media (max-width: 768px) {
+            .home-slide {
+                min-height: 150px; /* Adjust minimum height for smaller screens */
+            }
+        }
+
         /* two line name show css code */
     </style>
     <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -75,26 +87,17 @@
         <div class="bg-gray pb-5">
             <div class="container pb-2">
                 <div class="slide-animate slider-image-header owl-carousel owl-theme nav-circle mb-2"
-                data-owl-options="{
-                    'loop': true,
-                    'autoplay': true,
-                    'autoplayTimeout': 5000,
-                    'responsive': {
-                        '0': {
-                            'items': 1
-                        },
-                        '768': {
-                            'items': 1
-                        },
-                        '1200': {
-                            'items': 1
-                        }
-                    }
-                }">
+                    data-owl-options="{
+				'loop': true,
+                'autoplay':true,
+                'autoplayTimeout':5000
+			}">
                     @foreach ($sliders as $slider)
                         <div class="home-slide home-slide1 banner">
-                            <img class="slider_image slide-bg lazy-load" data-src="{{ asset('storage/' . $slider->image) }}"
-                                alt="slider image" style="min-height: 208px;">
+                            {{-- <img class="slider_image slide-bg lazy-load" data-src="{{ asset('storage/' . $slider->image) }}"
+                                alt="slider image" style="min-height: 208px;"> --}}
+                                <img class="slider_image slide-bg lazy-load img-fluid" data-src="{{ asset('storage/' . $slider->image) }}" alt="slider image">
+
                             <div
                                 class="container d-flex align-items-sm-center justify-content-sm-between justify-content-center flex-column flex-sm-row">
                                 <div class="banner-content content-left text-sm-right mb-sm-0 mb-2"></div>
