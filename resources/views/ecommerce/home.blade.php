@@ -68,13 +68,6 @@
             border: 2px rgba(255, 255, 255, 0.7) dashed;
         }
 
-        .slider_image {
-            width: 100% !important;            /* Make the image span the full width of its container */
-            height: 208px !important;          /* Set a fixed height for the slider */
-            object-fit: cover !important;      /* Ensure the image covers the entire container without distortion */
-            object-position: center !important; /* Center the image within the container */
-        }
-
         /* two line name show css code */
     </style>
     <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
