@@ -1,5 +1,5 @@
 <!-- Address Sidebar Wrapper -->
-<div id="address-wrapper"></div>
+<div id="address-wrapper" class="overlay"></div>
 
 {{-- End Checkout Address --}}
 <!-- Start Sidebar -->

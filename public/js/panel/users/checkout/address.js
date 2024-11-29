@@ -111,14 +111,14 @@ function setAddressData(addresses) {
 
     // Add header
     const headerHTML = `
-        <div id="address-right-sidebar-wrapper">
-            <div class="choose-address-wrapper">
-                <div class="header">
-                    <h5 class="font-weight-bold mb-0">Shipping Address</h5>
-                    <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add New Address</a>
-                </div>
-            </div>
-        </div>`;
+                    <div id="address-right-sidebar-wrapper">
+                        <div class="choose-address-wrapper">
+                            <div class="header">
+                                <button id="close-sidebar" class="btn btn-sm" onclick="toggleSidebar()">×</button>
+                                <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add New</a>
+                            </div>
+                        </div>
+                    </div>`;
     addressWrapper.innerHTML = headerHTML;
 
     const chooseAddressWrapper = addressWrapper.querySelector('.choose-address-wrapper');
@@ -154,14 +154,6 @@ function setAddressData(addresses) {
         chooseAddressWrapper.insertAdjacentHTML('beforeend', cardHTML);
     });
 
-    // Add action buttons
-    const actionButtonsHTML = `
-        <div class="action-buttons">
-            <button type="button" class="btn btn-outline-secondary btn-sm">Cancel</button>
-            <button type="button" class="btn btn-primary btn-sm">Save</button>
-        </div>`;
-    chooseAddressWrapper.insertAdjacentHTML('beforeend', actionButtonsHTML);
-
     // Add event listeners for Edit and Delete buttons
     const editButtons = document.querySelectorAll('.edit-address');
     const deleteButtons = document.querySelectorAll('.delete-address');
@@ -180,6 +172,7 @@ function setAddressData(addresses) {
     //     });
     // });
 }
+
 
 function loadUserAddress(user_id) {
     getDetails(

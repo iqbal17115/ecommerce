@@ -418,7 +418,7 @@ font-size: 1.2em;
     position: fixed;
     top: 0;
     right: 0;
-    width: 100%;
+    width: 262px;
     height: 100vh;
     background: rgba(0, 0, 0, 0.6); /* Darkened backdrop */
     display: none;
@@ -560,6 +560,7 @@ font-size: 1.2em;
 .action-buttons .btn-outline-secondary:hover {
     background-color: #e2e6ea;
 }
+
 /* End Address */
 
 span.required {
