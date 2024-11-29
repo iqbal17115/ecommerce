@@ -58,6 +58,7 @@ class AuthController extends Controller
         Auth::logout();
         return redirect(route('home'));
     }
+
     public function create(array $data)
     {
         return tap(User::create([
@@ -80,6 +81,7 @@ class AuthController extends Controller
             $contact->save();
         });
     }
+    
     public function customRegistration(Request $request)
     {
 
