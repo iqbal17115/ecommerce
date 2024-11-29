@@ -69,15 +69,10 @@
         }
 
         .slider_image {
-            width: 100%; /* Ensure the image spans the full width of the container */
-            height: auto; /* Maintain aspect ratio */
-            object-fit: cover; /* Ensure the image covers the container */
-        }
-
-        @media (max-width: 768px) {
-            .home-slide {
-                min-height: 150px; /* Adjust minimum height for smaller screens */
-            }
+            width: 100%;            /* Make the image span the full width of its container */
+            height: 208px;          /* Set a fixed height for the slider */
+            object-fit: cover;      /* Ensure the image covers the entire container without distortion */
+            object-position: center; /* Center the image within the container */
         }
 
         /* two line name show css code */
@@ -94,10 +89,8 @@
 			}">
                     @foreach ($sliders as $slider)
                         <div class="home-slide home-slide1 banner">
-                            {{-- <img class="slider_image slide-bg lazy-load" data-src="{{ asset('storage/' . $slider->image) }}"
-                                alt="slider image" style="min-height: 208px;"> --}}
-                                <img class="slider_image slide-bg lazy-load img-fluid" data-src="{{ asset('storage/' . $slider->image) }}" alt="slider image">
-
+                            <img class="slider_image slide-bg lazy-load" data-src="{{ asset('storage/' . $slider->image) }}"
+                                alt="slider image" style="min-height: 208px;">
                             <div
                                 class="container d-flex align-items-sm-center justify-content-sm-between justify-content-center flex-column flex-sm-row">
                                 <div class="banner-content content-left text-sm-right mb-sm-0 mb-2"></div>
