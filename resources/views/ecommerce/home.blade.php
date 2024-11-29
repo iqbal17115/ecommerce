@@ -69,10 +69,10 @@
         }
 
         .slider_image {
-            width: 100%;            /* Make the image span the full width of its container */
-            height: 208px;          /* Set a fixed height for the slider */
-            object-fit: cover;      /* Ensure the image covers the entire container without distortion */
-            object-position: center; /* Center the image within the container */
+            width: 100% !important;            /* Make the image span the full width of its container */
+            height: 208px !important;          /* Set a fixed height for the slider */
+            object-fit: cover !important;      /* Ensure the image covers the entire container without distortion */
+            object-position: center !important; /* Center the image within the container */
         }
 
         /* two line name show css code */
