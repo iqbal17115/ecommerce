@@ -75,11 +75,22 @@
         <div class="bg-gray pb-5">
             <div class="container pb-2">
                 <div class="slide-animate slider-image-header owl-carousel owl-theme nav-circle mb-2"
-                    data-owl-options="{
-				'loop': true,
-                'autoplay':true,
-                'autoplayTimeout':5000
-			}">
+                data-owl-options="{
+                    'loop': true,
+                    'autoplay': true,
+                    'autoplayTimeout': 5000,
+                    'responsive': {
+                        '0': {
+                            'items': 1
+                        },
+                        '768': {
+                            'items': 1
+                        },
+                        '1200': {
+                            'items': 1
+                        }
+                    }
+                }">
                     @foreach ($sliders as $slider)
                         <div class="home-slide home-slide1 banner">
                             <img class="slider_image slide-bg lazy-load" data-src="{{ asset('storage/' . $slider->image) }}"
