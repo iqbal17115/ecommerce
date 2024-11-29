@@ -10,7 +10,7 @@
                     <div id="collapseFour"
                         class="collapse card_design shadow p-3 @if (Auth::user()) show @endif">
                         <div class="shipping-info">
-                            <!-- Shipping Address -->
+                            <!-- Shipping Address 1-->
                             @if (Auth::user())
                                 <div class="shipping-address-card">
                                     <div class="">
