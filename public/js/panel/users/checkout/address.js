@@ -61,16 +61,19 @@ function loadUpazilas(districtId) {
     }
 }
 
-function saveAddress(event, selectedId = "") {
+function saveAddress(event) {
     // Prevent form submission
     event.preventDefault();
 
     // Access the form element from the event object
     const form = event.target;  // `event.target` gives you the element that triggered the event (the form)
 
+    // address_id
+    const selectedId = form.querySelector('input[name="address_id"]')?.value || null;
+
     // Create an object to hold the data
     const data = {
-        address_id: form.querySelector('input[name="address_id"]')?.value || null,
+        address_id: selectedId,
         user_id: $('#user_id_val').val() || null,
         country_id: form.querySelector('select[name="country_id"]')?.value || null,
         name: form.querySelector('input[name="name"]')?.value || null,
@@ -88,19 +91,37 @@ function saveAddress(event, selectedId = "") {
         // is_default: form.querySelector('input[name="is_default"]')?.checked ? 1 : 0,
     };
 
-    saveAction(
-        selectedId.trim() !== "" ? "update" : "store",
-        "/api/user-address",
-        data,
-        selectedId,
-        (data) => {
-            toastr.success(data.message);
-            // Optionally reset the form
-            $('#addressForm')[0].reset();
-        },
-        (error) => {
-        }
-    );
+    if(selectedId == null) {
+        saveAction(
+            "store",
+            "/api/user-address",
+            data,
+            selectedId,
+            (data) => {
+                toastr.success(data.message);
+                // Optionally reset the form
+                $('#addressForm')[0].reset();
+                document.getElementById('addressModal').classList.toggle('show');
+            },
+            (error) => {
+            }
+        );
+    } else {
+        saveAction(
+            "store",
+            "/api/update-user-address",
+            data,
+            selectedId,
+            (data) => {
+                toastr.success(data.message);
+                // Optionally reset the form
+                $('#addressForm')[0].reset();
+                document.getElementById('addressModal').classList.toggle('show');
+            },
+            (error) => {
+            }
+        );
+    }
 }
 
 function setAddressData(addresses) {
@@ -257,7 +278,7 @@ $(document).ready(function() {
     $('#addressForm').on('submit', function(event) {
         address_id = $('#address_id').val();
 
-        saveAddress(event, address_id);  // Call saveAddress when the form is submitted
+        saveAddress(event);  // Call saveAddress when the form is submitted
         loadUserAddress(user_id);
     });
 

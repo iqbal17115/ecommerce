@@ -89,10 +89,11 @@ class AddressController extends Controller
      * @param Address $address
      * @return JsonResponse
      */
-    public function update(AddressUpdateRequest $addressUpdateRequest, Address $address): JsonResponse
+    public function update(AddressUpdateRequest $addressUpdateRequest): JsonResponse
     {
-
         try {
+            $address = Address::find($addressUpdateRequest['address_id']);
+            
             $address->update($addressUpdateRequest->validated());
 
             //Success Response

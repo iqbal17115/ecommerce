@@ -170,7 +170,7 @@ Route::controller(AddressController::class)->group(function () {
     Route::post('user-address', 'store')->name('user_address.store');
     Route::post('/user-address-instruction', 'storeInstruction')->name('user_address_instruction.store');
     Route::post('user-address/default', 'setAsDefault')->name('user_address_default.store');
-    Route::put('user-address/{address}', 'update')->name('user_address.update');
+    Route::post('update-user-address', 'update')->name('update_user_address.update');
     Route::delete('/user-address/{address}', 'destroy')->name('user_address.delete');
 });
 
