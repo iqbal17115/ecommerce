@@ -136,7 +136,7 @@ function setAddressData(addresses) {
                         <div class="choose-address-wrapper">
                             <div class="header">
                                 <button id="close-sidebar" class="btn btn-sm" onclick="toggleSidebar()">×</button>
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add New</a>
+                                <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add New Address</a>
                             </div>
                         </div>
                     </div>`;
