@@ -126,20 +126,22 @@ function saveAddress(event) {
 
 function setAddressData(addresses) {
     const addressWrapper = document.getElementById('address-wrapper');
+    const defaultAddressContent = document.getElementById('default_address_content');
 
     // Clear existing address content
     addressWrapper.innerHTML = '';
+    defaultAddressContent.innerHTML = '';
 
     // Add header
     const headerHTML = `
-                    <div id="address-right-sidebar-wrapper">
-                        <div class="choose-address-wrapper">
-                            <div class="header">
-                                <button id="close-sidebar" class="btn btn-sm" onclick="toggleSidebar()">×</button>
-                                <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add New Address</a>
-                            </div>
-                        </div>
-                    </div>`;
+        <div id="address-right-sidebar-wrapper">
+            <div class="choose-address-wrapper">
+                <div class="header">
+                    <button id="close-sidebar" class="btn btn-sm" onclick="toggleSidebar()">×</button>
+                    <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add New Address</a>
+                </div>
+            </div>
+        </div>`;
     addressWrapper.innerHTML = headerHTML;
 
     const chooseAddressWrapper = addressWrapper.querySelector('.choose-address-wrapper');
@@ -172,28 +174,46 @@ function setAddressData(addresses) {
                     </div>
                 </div>
             </div>`;
+
+        // Add all addresses to the sidebar
         chooseAddressWrapper.insertAdjacentHTML('beforeend', cardHTML);
+
+        // Add the default address to the separate section with a unique design
+        if (address.is_default === 1) {
+            const defaultCardHTML = `
+                <div class="col-md-12">
+                    <div class="default-address-card p-3 border rounded bg-light">
+                        <h6 class="font-weight-bold">${address.name}</h6>
+                        <p class="mb-1 text-muted">Mobile: ${address.mobile}</p>
+                        <p class="mb-1">Address: ${address.division}, ${address.district}, ${address.upazila || 'N/A'}</p>
+                        <p class="mb-1 text-info">Default Shipping Address</p>
+                        <div class="actions">
+                            <button class="btn btn-sm btn-outline-primary edit-address" data-address_id="${address.id}" data-toggle="modal" data-target="#addressModal">Edit</button>
+                        </div>
+                    </div>
+                </div>`;
+            defaultAddressContent.innerHTML = defaultCardHTML;
+        }
     });
 
     // Add event listeners for Edit and Delete buttons
     const editButtons = document.querySelectorAll('.edit-address');
     const deleteButtons = document.querySelectorAll('.delete-address');
 
-    // editButtons.forEach((button) => {
-    //     button.addEventListener('click', (event) => {
-    //         const addressId = event.target.dataset.id;
-    //         editAddress(addressId);
-    //     });
-    // });
+    editButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const addressId = event.target.dataset.address_id;
+            editAddress(addressId);
+        });
+    });
 
-    // deleteButtons.forEach((button) => {
-    //     button.addEventListener('click', (event) => {
-    //         const addressId = event.target.dataset.id;
-    //         deleteAddress(addressId);
-    //     });
-    // });
+    deleteButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            const addressId = event.target.dataset.id;
+            deleteAddress(addressId);
+        });
+    });
 }
-
 
 function loadUserAddress(user_id) {
     getDetails(
