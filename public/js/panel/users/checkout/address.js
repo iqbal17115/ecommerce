@@ -188,7 +188,7 @@ function setAddressData(addresses) {
                         <p class="mb-1">Address: ${address.division}, ${address.district}, ${address.upazila || 'N/A'}</p>
                         <p class="mb-1 text-info">Default Shipping Address</p>
                         <div class="actions">
-                            <button class="btn btn-sm btn-outline-primary edit-address" data-address_id="${address.id}" data-toggle="modal" data-target="#addressModal">Edit</button>
+                            <button class="btn btn-sm btn-outline-primary edit-address" id="default_address" data-address_id="${address.id}" data-toggle="modal" data-target="#addressModal">Edit</button>
                         </div>
                     </div>
                 </div>`;
