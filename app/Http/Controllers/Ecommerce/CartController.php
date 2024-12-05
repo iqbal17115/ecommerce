@@ -83,6 +83,7 @@ class CartController extends Controller
     public function index()
     {
         $user_id = auth()?->user()->id ?? null;
+
         $cart_products = session('cart');
         $estimatedDeliveryDate = Carbon::today()->addDay()->format('d F');
         return view('ecommerce.cart', compact('cart_products', 'estimatedDeliveryDate', 'user_id'));
