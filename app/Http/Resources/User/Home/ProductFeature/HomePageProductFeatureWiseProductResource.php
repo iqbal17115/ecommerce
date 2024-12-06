@@ -24,6 +24,7 @@ class HomePageProductFeatureWiseProductResource extends JsonResource
             'your_price' => $priceDetails['your_price'],
             'sale_price' => $priceDetails['sale_price'],
             'is_on_sale' => $priceDetails['is_on_sale'],
+            'offer_percentage' => $priceDetails['offer_percentage'],
             'currency' => $priceDetails['currency'],
             'rating' => $this->reviews()->sum('rating') ?? 0,
             'image_path' => $this->getImagePath()
