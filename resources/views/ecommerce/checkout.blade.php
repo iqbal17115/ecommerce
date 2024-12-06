@@ -177,9 +177,10 @@
     <!-- End Shipping Address Modal -->
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/panel/users/checkout/address.js') }}"></script>
-    <script src="{{ asset('js/panel/users/cart/checkout_page_cart.js') }}"></script>
-    <script src="{{ asset('js/panel/users/common.js') }}"></script>
+    <script src="{{ asset('js/panel/users/checkout/address.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/cart/checkout_page_cart.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
+
 
     <script>
         var user = <?php echo json_encode($user); ?>;
