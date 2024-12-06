@@ -32,7 +32,7 @@ class ShippingChargeService
         return $query->paginate($per_page);
     }
 
-    private function calculateDimensionalWeight(float $length, float $width, float $height, $dimensionalWeightFactor): float
+    private function calculateDimensionalWeight(float $length = 0, float $width = 0, float $height = 0, $dimensionalWeightFactor): float
     {
         $dimensionalWeight = ($this->convertLengthTo($length, 'm', 'cm') * $this->convertLengthTo($width, 'm', 'cm') * $this->convertLengthTo($height, 'm', 'cm')) / 5000;
         $dimensionalWeight = $this->convertWeightTo($dimensionalWeight, 'kg', 'gm');
@@ -105,10 +105,10 @@ class ShippingChargeService
         $cashOnDelivery = $this->getShippingMethodByName('Cash On Delivery');
         $product_price = $this->getPrice($product);
         // Calculate total area based on package dimensions
-        $packageHeight = $product->ProductMoreDetail->package_height;
-        $packageLength = $product->ProductMoreDetail->package_length;
-        $packageWidth = $product->ProductMoreDetail->package_width;
-        $totalWeight = $product->ProductMoreDetail->package_weight; // Package weight
+        $packageHeight = $product->ProductMoreDetail->package_height ?? 0;
+        $packageLength = $product->ProductMoreDetail->package_length ?? 0;
+        $packageWidth = $product->ProductMoreDetail->package_width ?? 0;
+        $totalWeight = $product->ProductMoreDetail->package_weight ?? 0; // Package weight
 
         // Calculate the dimensional weight
         $dimensionalWeight = $this->calculateDimensionalWeight($packageLength, $packageWidth, $packageHeight, $totalWeight);
