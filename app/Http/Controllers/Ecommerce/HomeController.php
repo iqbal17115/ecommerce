@@ -4,17 +4,18 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User\Home\HomeSliderResource;
+use App\Http\Resources\User\Home\ProductFeature\HomePageProductFeatureResource;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\ProductFeature;
 use App\Models\Backend\WebSetting\Slider;
-use App\Traits\BaseModel;
+use App\Services\HomePageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
-    use BaseModel;
+    public function __construct(private readonly HomePageService $homePageService) {}
 
     public function getMainContent()
     {
@@ -85,7 +86,7 @@ class HomeController extends Controller
         $user_id = auth()?->user()->id ?? null;
         $sliders = HomeSliderResource::collection(Slider::whereIsActive(1)->get());
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
-        $product_features = ProductFeature::with('Product', 'Product.ProductMainImage')->whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        $product_features = ProductFeature::getAllLists($this->homePageService->getProductFeatures(), [], HomePageProductFeatureResource::class);
         $top_features = ProductFeature::with('TopFeatureSetting', 'TopFeatureSetting.FeatureSettingDetail', 'TopFeatureSetting.FeatureSettingDetail.Category', 'TopFeatureSetting.ProductFeature', 'TopFeatureSetting.ProductFeature.Advertisement')->whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features', 'top_features', 'user_id']));
     }

@@ -77,6 +77,7 @@ class ApplyCouponProductService
             // Update coupon usage count
             $coupon->increment('usage_count');
             $is_apply = false;
+            
             // Create records in cart_item_coupons
             foreach ($cartItems as $cartItem) {
                 // Check if a CartItemCoupon entry already exists for this cart item and coupon

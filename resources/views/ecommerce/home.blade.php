@@ -211,7 +211,6 @@
         <div class="bg-gray">
             <div class="container">
                 @foreach ($product_features as $product_feature)
-                    @if ($product_feature->card_feature != 1 && count($product_feature->Product) > 0)
                         <div class="recent-products-section appear-animate" data-animation-name="fadeIn"
                             data-animation-delay="100">
                             {{-- <div class="heading shop-list d-flex align-items-center flex-wrap bg-gray mb-0 pl-0 pr-0 pt-0">
@@ -220,9 +219,9 @@
                                     All<i class="fas fa-long-arrow-alt-right"></i></a>
                             </div> --}}
                             <div class="d-flex align-items-center">
-                                <h4 class="section-title text-transform-none mb-0">{{ $product_feature->name }}</h4>
+                                <h4 class="section-title text-transform-none mb-0">{{ $product_feature['name'] }}</h4>
                                 <a class="view-all ml-auto"
-                                    href="{{ route('catalog.show') }}?filters[feature_names]={{ urlencode($product_feature->name) }}"
+                                    href="{{ route('catalog.show') }}?filters[feature_names]={{ urlencode($product_feature['name']) }}"
                                     style="white-space: nowrap;">
                                     View All <i class="fas fa-long-arrow-alt-right"></i>
                                 </a>
@@ -257,31 +256,29 @@
                                 }
                             }
                         }">
-                                @foreach ($product_feature->Product as $product)
+                                @foreach ($product_feature['products'] as $product)
                                     <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                                         <figure>
                                             <a
-                                                href="{{ route('products.details', ['name' => rawurlencode($product->name), 'seller_sku' => $product->seller_sku]) }}">
+                                                href="{{ route('products.details', ['name' => rawurlencode($product['name']), 'seller_sku' => $product['seller_sku']]) }}">
                                                 <img class="lazy-load"
-                                                    @if ($product->ProductMainImage) data-src="{{ asset('storage/product_photo/' . $product->ProductMainImage->image) }}" @endif
+                                                    data-src="{{ $product['image_path'] }}"
                                                     style="width: 239px; height: 239px; filter: brightness(0.9)
                                 contrast(1.2) saturate(1.1);"
                                                     width="239" height="239" alt="product">
                                             </a>
                                             <!-- Check if your_price is not null -->
-                                            @if ($product->sale_price)
-                                                <?php
-                                                $offerPercentage = round((($product->sale_price - $product->your_price) / $product->sale_price) * 100, 0); // Calculate the offer percentage
-                                                ?>
+                                            @if ($product['is_on_sale'])
                                                 <div class="label-group">
-                                                    <div class="product-label label-sale">-{{ $offerPercentage }}%</div>
+                                                    <div class="product-label label-sale">-{{ $product['offer_percentage'] }}%</div>
                                                 </div>
                                             @endif
+
                                             <div class="btn-icon-group">
-                                                @if ($product->stock_qty > 0 && count($product->productVariations) == 0)
+                                                @if ($product['stock_qty'] > 0 )
                                                     <a href="javascript:void(0);" title="Add To Cart"
-                                                        data-product_id="{{ $product->id }}"
-                                                        @if ($product->ProductMainImage) data-image="{{ $product->ProductMainImage->image }}" @endif
+                                                        data-product_id="{{ $product['id'] }}"
+                                                        data-image="{{ $product['image_path'] }}" 
                                                         class="btn-icon add_cart_item product-type-simple"><i
                                                             class="icon-shopping-cart"></i></a>
                                                 @endif
@@ -289,71 +286,63 @@
                                         </figure>
                                         <div class="product-details">
                                             <h3 class="product-title">
-                                                <a href="{{ route('products.details', ['name' => rawurlencode($product->name), 'seller_sku' => $product->seller_sku]) }}"
-                                                    class="product-name" id="product-name">{{ $product->name }}</a>
+                                                <a href="{{ route('products.details', ['name' => rawurlencode($product['name']), 'seller_sku' => $product['seller_sku']]) }}"
+                                                    class="product-name" id="product-name">{{ $product['name'] }}</a>
                                             </h3>
                                             <div class="category-wrap">
                                                 <span class="five-star-rating ml-0 mb-1">
-                                                    @if ($product->reviews()->avg('rating') >= 1)
+                                                    @if ($product['rating'] >= 1)
                                                         <i class="fas fa-star"></i>
                                                     @else
                                                         <i class="far fa-star"></i>
                                                     @endif
 
-                                                    @if ($product->reviews()->avg('rating') >= 2)
+                                                    @if ($product['rating'] >= 2)
                                                         <i class="fas fa-star"></i>
                                                     @else
                                                         <i class="far fa-star"></i>
                                                     @endif
 
-                                                    @if ($product->reviews()->avg('rating') >= 3)
+                                                    @if ($product['rating'] >= 3)
                                                         <i class="fas fa-star"></i>
                                                     @else
                                                         <i class="far fa-star"></i>
                                                     @endif
 
-                                                    @if ($product->reviews()->avg('rating') >= 4)
+                                                    @if ($product['rating'] >= 4)
                                                         <i class="fas fa-star"></i>
                                                     @else
                                                         <i class="far fa-star"></i>
                                                     @endif
 
-                                                    @if ($product->reviews()->avg('rating') >= 5)
+                                                    @if ($product['rating'] >= 5)
                                                         <i class="fas fa-star"></i>
                                                     @else
                                                         <i class="far fa-star"></i>
                                                     @endif
                                                     <span class="rating-number">-</span>
                                                     <span class="rating-number"
-                                                        style="font-size: 11px;">{{ $product->reviews()->sum('rating') }}</span>
+                                                        style="font-size: 11px;">{{ $product['rating'] }}</span>
                                                 </span>
 
                                                 {{-- Add to wishlist --}}
                                                 <a href="javascript:void(0);" class="btn-icon-wish"
-                                                    data-product_id="{{ $product->id }}" title="Add To Wishlist"><i
+                                                    data-product_id="{{ $product['id'] }}" title="Add To Wishlist"><i
                                                         class="icon-heart"></i></a>
                                             </div>
                                             <!-- End .product-container -->
                                             <div class="price-box">
-                                                @if (
-                                                    $product->sale_price &&
-                                                        $product->sale_start_date &&
-                                                        $product->sale_end_date &&
-                                                        $product->sale_start_date <= now() &&
-                                                        $product->sale_end_date >= now())
-                                                    <del class="old-price">{{ $currency?->icon }}
-                                                        {{ number_format($product->your_price, 2) }}</del>
-                                                    <span class="product-price brand_text_design">{{ $currency?->icon }}
-                                                        {{ number_format($product->sale_price, 2) }}</span>
+                                                @if ($product['is_on_sale'])
+                                                    <del class="old-price">{{ $product['currency'] }} {{ $product['your_price'] }}</del>
+                                                    <span class="product-price brand_text_design">{{ $product['currency'] }} {{ $product['sale_price'] }}</span>
                                                 @else
-                                                    <span class="product-price brand_text_design">{{ $currency?->icon }}
-                                                        {{ number_format($product->your_price, 2) }}</span>
+                                                    <span class="product-price brand_text_design">{{ $product['currency'] }} {{ $product['your_price'] }}</span>
                                                 @endif
-                                            </div>
+                                            </div>                                            
                                             <!-- End .price-box -->
                                         </div>
                                         <!-- End .product-details -->
-                                        @if ($product->stock_qty <= 0)
+                                        @if ($product['stock_qty'] <= 0)
                                             <a class="sold_out" style="color: #fff;">Sold out</a>
                                         @endif
                                     </div>
@@ -361,71 +350,6 @@
                             </div>
                             <!-- End .products-slider -->
                         </div>
-
-                        <!-- Start Card Feature -->
-                        {{-- @if ($product_feature->FeatureSetting)
-                            <div class="row" style="margin-top: 18px;">
-                                <!-- Start Product Part -->
-                                @foreach ($product_feature->FeatureSetting as $feature_setting)
-                                    @if ($feature_setting->ProductFeature->card_feature == 1 && count($feature_setting->FeatureSettingDetail) >= 2)
-                                        <div class="col-md-3 card">
-                                            <div class="card-body">
-                                                <div class="a-cardui-header">
-                                                    <h2 class="a-color-base headline truncate-2line">
-                                                        @if ($feature_setting->ProductFeature)
-                                                            {{ $feature_setting->ProductFeature->name }}
-                                                        @endif
-                                                    </h2>
-                                                </div>
-                                                <div class="row">
-                                                    @if ($feature_setting->FeatureSettingDetail)
-                                                        @foreach ($feature_setting->FeatureSettingDetail as $feature_setting_detail)
-                                                            <div class="col-6 p-0">
-                                                                <a
-                                                                    href="{{ route('catalog', ['id' => $feature_setting_detail->category_id]) }}">
-                                                                    <div class="card mb-0">
-                                                                        <img class="card-img-top lazy-load"
-                                                                            data-src="{{ asset('storage/' . $feature_setting_detail->Category->image) }}"
-                                                                            style="height: 150px;">
-                                                                        <div class="text-center text-dark">
-                                                                            <span>{{ $feature_setting_detail->Category->name }}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <!-- End Product -->
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                                <!-- End Feature -->
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <!-- Start Ads -->
-                                    @if ($feature_setting->ProductFeature->Advertisement)
-                                        <div class="col-md-3 card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    @foreach ($feature_setting->ProductFeature->Advertisement as $advertisement)
-                                                        <div class="col-12 p-0">
-                                                            <div class="card mb-0">
-                                                                <img class="card-img-top lazy-load"
-                                                                    data-src="{{ asset('storage/' . $advertisement->ads) }}">
-                                                            </div>
-                                                            <!-- End Product -->
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                                <!-- End Feature -->
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <!-- End Ads -->
-                                @endforeach
-                            </div>
-                        @endif --}}
-                        <!-- End Card Feature -->
-                    @endif
                 @endforeach
             </div>
         </div>
