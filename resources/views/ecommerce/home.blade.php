@@ -437,8 +437,8 @@
 
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
-    <script src="{{ asset('js/panel/users/common.js') }}"></script>
+    <script src="{{ asset('js/panel/users/cart/cart.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
     <script>
         window.onload = function() {
             // Code to be executed after rendering the full layout

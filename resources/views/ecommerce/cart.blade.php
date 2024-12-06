@@ -98,7 +98,7 @@
     <!-- footer-area-end -->
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/panel/users/cart/cart_page.js') }}"></script>
+    <script src="{{ asset('js/panel/users/cart/cart_page.js') }}?v={{ time() }}"></script>
     <script>
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-load');
