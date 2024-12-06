@@ -183,7 +183,7 @@ function setAddressData(addresses) {
             const defaultCardHTML = `
                 <div class="col-md-12">
                     <div class="default-address-card p-3 border rounded bg-light">
-                        <h6 class="font-weight-bold">${address.name}1</h6>
+                        <h6 class="font-weight-bold">${address.name}</h6>
                         <p class="mb-1 text-muted">Mobile: ${address.mobile}</p>
                         <p class="mb-1">Address: ${address.division}, ${address.district}, ${address.upazila || 'N/A'}</p>
                         <p class="mb-1 text-info">Default Shipping Address</p>
