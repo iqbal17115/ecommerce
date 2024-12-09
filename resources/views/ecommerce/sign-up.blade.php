@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <style>
+    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
     body {
       background-color: #f4631b;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -147,10 +148,11 @@
         </label>
         <input type="date" name="bday" id="bday" required>
 
-        <label for="password">
-          Password <span class="required">*</span>
-        </label>
-        <input type="password" name="password" id="password" placeholder="Password" required>
+        <label for="psw">Password</label>
+        <div style="position: relative;">
+          <input type="password" name="password" id="password" placeholder="Enter Password" autocomplete="password" required />
+          <i class="bi bi-eye-slash" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+        </div>
 
         <button class="btn" type="submit">Register</button>
 
@@ -162,6 +164,18 @@
       </form>
     </div>
   </div>
+
+  <script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordField = document.querySelector("#password");
+
+    togglePassword.addEventListener("click", function () {
+      const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+      passwordField.setAttribute("type", type);
+      this.classList.toggle("bi-eye");
+      this.classList.toggle("bi-eye-slash");
+    });
+  </script> 
 </body>
 
 </html>
