@@ -83,6 +83,10 @@
 
     @include('ecommerce.mobile-menu-container')
 
+    <a id="whatsapp-contact" href="https://wa.me/8801928345226?text=Hi%20there!" target="_blank" title="Contact on WhatsApp" role="button">
+      <i class="fab fa-whatsapp"></i>
+  </a>
+  
     <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
 
     @include('layouts.parts.js-links')
