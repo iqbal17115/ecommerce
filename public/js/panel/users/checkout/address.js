@@ -130,7 +130,7 @@ function setAddressData(addresses) {
 
     // Clear existing address content
     addressWrapper.innerHTML = '';
-    defaultAddressContent.innerHTML = '';
+    // defaultAddressContent.innerHTML = '';
 
     // Add header
     const headerHTML = `
@@ -138,7 +138,6 @@ function setAddressData(addresses) {
             <div class="choose-address-wrapper">
                 <div class="header">
                     <button id="close-sidebar" class="btn btn-sm" onclick="toggleSidebar()">×</button>
-                    <a href="javascript:void(0);" data-toggle="modal" data-target="#addressModal" class="text-primary font-weight-bold">Add New Address</a>
                 </div>
             </div>
         </div>`;
@@ -181,7 +180,7 @@ function setAddressData(addresses) {
         // Add the default address to the separate section with a unique design
         if (address.is_default === 1) {
             const defaultCardHTML = `
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="default-address-card p-3 border rounded bg-light">
                         <h6 class="font-weight-bold">${address.name}</h6>
                         <p class="mb-1 text-muted">Mobile: ${address.mobile}</p>
@@ -192,7 +191,8 @@ function setAddressData(addresses) {
                         </div>
                     </div>
                 </div>`;
-            defaultAddressContent.innerHTML = defaultCardHTML;
+            // Append the new HTML instead of replacing
+    defaultAddressContent.insertAdjacentHTML('beforeend', defaultCardHTML);
         }
     });
 
