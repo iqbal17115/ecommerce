@@ -38,48 +38,31 @@
 <!-- End Sidebar -->
 
 <header class="header">
-    <div class="header-top">
-        <div class="container">
-            <div class="header-left d-none d-sm-block">
-                <div class="info-box info-box-icon-left text-primary justify-content-start p-0">
-                    <i class="icon-shipping"></i>
-                    <div class="info-box-content">
-                        <h4 class="text-transform-none">FREE Express Shipping On Orders 499+ TK</h4>
-                    </div>
-                    <!-- End .info-box-content -->
-                </div>
+    <div class="header-top" style="background-color: #f1f1f1; padding: 10px 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <!-- Left Content: Free Shipping Text -->
+            <div class="header-left d-flex align-items-center">
+                <i class="icon-shipping text-primary mr-2" style="font-size: 1.4rem;"></i>
+                <span class="text-dark" style="font-size: 1.1rem; font-weight: bold;">
+                    FREE Express Shipping On Orders 499+ TK
+                </span>
             </div>
-            <!-- End .header-left -->
-
-            <div class="header-right header-dropdowns ml-0 ml-sm-auto w-sm-100">
-                <div class="header-dropdown">
-                    {{-- <a href="#">USD</a>
-                    <div class="header-menu">
-                        <ul>
-                            <li><a href="#">EUR</a></li>
-                            <li><a href="#">USD</a></li>
-                        </ul>
-                    </div> --}}
-                    <!-- End .header-menu -->
-                </div>
-                <!-- End .header-dropown -->
-
-                <div class="mr-auto mr-sm-3 mr-md-0 top_header_mobile_menu">
-                    <div class="header-menu d-flex justify-content-end">
-                        <ul class="mb-0">
-                            @if (!Auth::user())
-                                <li><a href="{{ route('customer-sign-in') }}">Log In</a></li>
-                            @endif
-                        </ul>
-                    </div>
-                    <!-- End .header-menu -->
-                </div>
-                <!-- End .header-dropown -->
+    
+            <!-- Right Content: Log In (Visible only on mobile devices) -->
+            <div class="header-right d-flex align-items-center d-md-none">
+                @if (!Auth::user())
+                    <a href="{{ route('customer-sign-in') }}" 
+                       class="btn btn-outline-primary py-1 px-4 position-relative" 
+                       style="font-size: 1rem; font-weight: bold; border-radius: 25px; text-transform: uppercase; transition: all 0.3s;">
+                        <span style="z-index: 2; position: relative;">Log In</span>
+                        <div class="btn-highlight" 
+                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #007bff, #0056b3); z-index: 1; border-radius: 25px; opacity: 0; transition: opacity 0.3s;">
+                        </div>
+                    </a>
+                @endif
             </div>
-            <!-- End .header-right -->
         </div>
-        <!-- End .container -->
-    </div>
+    </div>    
     <!-- End .header-top -->
 
     <div class="header-middle sticky-header" data-sticky-options="{'mobile': true}">
