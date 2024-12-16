@@ -134,13 +134,32 @@ function setAddressData(addresses) {
 
     // Add header
     const headerHTML = `
-        <div id="address-right-sidebar-wrapper">
-            <div class="choose-address-wrapper">
-                <div class="header">
-                    <button id="close-sidebar" class="btn btn-sm" onclick="toggleSidebar()">×</button>
-                </div>
+    <div id="address-right-sidebar-wrapper">
+        <div class="choose-address-wrapper">
+            <div class="header">
+                <span style="
+                    font-size: 30px;
+                    font-weight: bold;
+                    color: #333;
+                    display: inline-block;
+                    height: 30px;
+                    width: 30px;
+                    text-align: center;
+                    line-height: 30px;
+                    border-radius: 50%;
+                    background-color: #f1f1f1;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                " 
+                onclick="toggleSidebar()"
+                onmouseover="this.style.backgroundColor='#ddd'; this.style.transform='scale(1.1)';"
+                onmouseout="this.style.backgroundColor='#f1f1f1'; this.style.transform='scale(1)';">
+                    &times;
+                </span>
             </div>
-        </div>`;
+        </div>
+    </div>`;
+
     addressWrapper.innerHTML = headerHTML;
 
     const chooseAddressWrapper = addressWrapper.querySelector('.choose-address-wrapper');
