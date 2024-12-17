@@ -78,7 +78,7 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->roles->where('is_admin', 1)->isNotEmpty()) {
             return view('backend.dashboard');
         } else {
-            return redirect()->route('my.account');
+            return redirect()->route('home');
         }
     }
     public function index()

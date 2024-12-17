@@ -33,7 +33,7 @@ class AuthController extends Controller
                 // Create Personal Access Token for logged-in user
                 $token = AuthHelper::createPersonalAccessToken($user, 'Personal Access Token');
 
-                return redirect('/my-account');
+                return redirect('/home');
 
                 // Pass necessary data to the success method
                 // return Message::success(__("messages.success_login"), [
