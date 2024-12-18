@@ -81,38 +81,42 @@ class AuthController extends Controller
             $contact->save();
         });
     }
-    
+
     public function customRegistration(Request $request)
     {
-
-        $request->validate([
+        // Validate the request data
+        $validatedData = $request->validate([
             'name' => 'required|max:70',
-            'mobile' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'min:2'],
+            'mobile' => ['required', 'string', 'max:255', 'unique:users,mobile'],
+            'password' => ['required', 'min:6'], // Updated minimum password length
+        ], [
+            'name.required' => 'Name is required.',
+            'name.max' => 'Name must not exceed 70 characters.',
+            'mobile.required' => 'Mobile number is required.',
+            'mobile.unique' => 'This mobile number is already registered.',
+            'password.required' => 'Password is required.',
+            'password.min' => 'Password must be at least 6 characters.',
         ]);
 
-
-        $data = $request->all();
-        $user = User::where('mobile', $data['mobile'])->first();
-
-        if ($user) {
-            return redirect()->back()->with('message', 'Already exist');
-        }
-        // $data['password'] = $data['password'];
-        $check = $this->create($data);
-        $role = Role::where("name", 'User')->first();
-        $check->roles()->sync($role->id);
-
-        if ($check) {
-            $credentials = $request->validate([
-                'mobile' => 'required',
-                'password' => 'required',
+        try {
+            // Create user if validation passes
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'mobile' => $validatedData['mobile'],
+                'password' => bcrypt($validatedData['password']),
             ]);
 
-            if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-                return redirect('/admin');
-            }
+            // Assign "User" role
+            $role = Role::where('name', 'User')->first();
+            $user->roles()->sync($role->id);
+
+            // Automatically log in the user
+            Auth::login($user);
+            $request->session()->regenerate();
+
+            return redirect('/admin')->with('success', 'Registration successful.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred during registration. Please try again.');
         }
     }
 }

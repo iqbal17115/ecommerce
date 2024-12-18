@@ -25,9 +25,6 @@
       top: 45%;
       left: 50%;
       transform: translate(-50%, -50%);
-      box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
       border-radius: 15px;
       padding: 20px;
       width: 340px;
@@ -46,34 +43,29 @@
       margin-left: 2px;
     }
 
-    .form1 input {
-      display: block;
-      width: 95%;
-      height: 30px;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      font-size: 1rem;
-      transition: all 450ms;
-    }
-
-.form1 select {
+    .form1 input,
+    .form1 select {
       display: block;
       width: 98%;
-      height: 50px;
+      height: 40px;
       padding: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 5px;
       border: 1px solid #ccc;
       border-radius: 20px;
       font-size: 1rem;
       transition: all 450ms;
     }
 
-    .form1 input[type="radio"] {
-      font-size: 14px;
-      size: 10px;
-      height: 12px;
+    .form1 input.is-invalid,
+    .form1 select.is-invalid {
+      border: 1px solid red;
+    }
+
+    .form1 .error-message {
+      color: red;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      display: block;
     }
 
     .form1 button {
@@ -94,7 +86,6 @@
       background-color: #d85316;
     }
 
-    /* Style for the sign-in link */
     .signin-link {
       display: block;
       text-align: center;
@@ -111,6 +102,16 @@
     .signin-link a:hover {
       color: #d85316;
     }
+
+    .form-summary {
+      background-color: #ffe6e6;
+      color: #b00;
+      padding: 10px;
+      border: 1px solid #b00;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 
@@ -122,37 +123,55 @@
         <label for="name">
           Name <span class="required">*</span>
         </label>
-        <input type="text" name="name" id="name" placeholder="Enter Full Name" required>
+        <input type="text" name="name" id="name" placeholder="Enter Full Name" class="{{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ old('name') }}">
+        @error('name')
+        <span class="error-message">{{ $message }}</span>
+        @enderror
 
         <label for="mobile">
           Number <span class="required">*</span>
         </label>
-        <input type="text" name="mobile" id="mobile" placeholder="Enter Mobile Number" required>
+        <input type="text" name="mobile" id="mobile" placeholder="Enter Mobile Number" class="{{ $errors->has('mobile') ? 'is-invalid' : '' }}" value="{{ old('mobile') }}">
+        @error('mobile')
+        <span class="error-message">{{ $message }}</span>
+        @enderror
 
         <label for="email">
           Email(Optional)
         </label>
-        <input type="email" name="email" id="email" placeholder="Enter Email Address">
+        <input type="email" name="email" id="email" placeholder="Enter Email Address" value="{{ old('email') }}">
+        @error('email')
+        <span class="error-message">{{ $message }}</span>
+        @enderror
 
         <label for="gender">
           Gender <span class="required">*</span>
         </label>
-        <select id="gender" name="gender" required>
-          <option value="" disabled selected>Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
+        <select id="gender" name="gender" class="{{ $errors->has('gender') ? 'is-invalid' : '' }}">
+          <option value="" disabled {{ old('gender') ? '' : 'selected' }}>Select Gender</option>
+          <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+          <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
         </select>
+        @error('gender')
+        <span class="error-message">{{ $message }}</span>
+        @enderror
 
         <label for="bday">
           Date Of Birth <span class="required">*</span>
         </label>
-        <input type="date" name="bday" id="bday" required>
+        <input type="date" name="bday" id="bday" class="{{ $errors->has('bday') ? 'is-invalid' : '' }}" value="{{ old('bday') }}">
+        @error('bday')
+        <span class="error-message">{{ $message }}</span>
+        @enderror
 
-        <label for="psw">Password</label>
+        <label for="password">Password</label>
         <div style="position: relative;">
-          <input type="password" name="password" id="password" placeholder="Enter Password" autocomplete="password" required />
+          <input type="password" name="password" id="password" class="{{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Enter Password" autocomplete="password" />
           <i class="bi bi-eye-slash" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
+        @error('password')
+        <span class="error-message">{{ $message }}</span>
+        @enderror
 
         <button class="btn" type="submit">Register</button>
 
@@ -175,7 +194,7 @@
       this.classList.toggle("bi-eye");
       this.classList.toggle("bi-eye-slash");
     });
-  </script> 
+  </script>
 </body>
 
 </html>
