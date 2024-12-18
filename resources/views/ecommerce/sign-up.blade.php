@@ -46,7 +46,7 @@
     .form1 input,
     .form1 select {
       display: block;
-      width: 98%;
+      width: 95%;
       height: 40px;
       padding: 10px;
       margin-bottom: 5px;
