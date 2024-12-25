@@ -26,6 +26,7 @@ class OrderController extends Controller
     {
         $this->orderService = $orderService;
     }
+    
     public function generateBarcodes(Request $request)
     {
         // Get the barcode content array from the request

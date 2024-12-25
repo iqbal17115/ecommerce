@@ -316,6 +316,7 @@ class AllOrderController extends Controller
         $paymentStatuses = PaymentStatusEnum::getValues();
         $paymentTypes = PaymentTypeEnum::getPaymentTypes();
         $paymentMethods = PaymentMethodEnum::getValues();
+        
         return view('backend.order.advance-edit', compact('order', 'lengthUnits', 'weightUnits', 'cancel_reasons', 'orderStatuses', 'paymentStatuses', 'paymentTypes', 'paymentMethods'));
     }
 

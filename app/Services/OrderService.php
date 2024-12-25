@@ -69,6 +69,7 @@ class OrderService
                     $orderDetails = new OrderDetail();
                     $orderDetails->order_id = $order->id;
                     $orderDetails->product_id = $cartItem['product_info']['id'];
+                    $orderDetails->product_variation_id = $cartItem['product_variation_id'];
                     $orderDetails->unit_price = collect($cartItem['product_info'])['product_price'];
                     $orderDetails->quantity = $cartItem['quantity'];
                     $orderDetails->save();
