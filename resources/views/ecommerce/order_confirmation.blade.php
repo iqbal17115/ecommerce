@@ -67,7 +67,7 @@
                     @if ($order)
                         <div class="row mb-1">
                             <div class="col-md-6 text-left">
-                                <p class="order-number">{{ $order->code }}</p>
+                                <p style="font-size: 18px; font-weight: bold; margin: 0;">Order ID: <span class="order-number">{{ $order->code }}</span></p>
                             </div>
                             <div class="col-md-6 text-right">
                                 <p class="order-status">{{ $order->status }}</p>
