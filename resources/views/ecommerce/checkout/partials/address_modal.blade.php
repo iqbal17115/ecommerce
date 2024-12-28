@@ -71,8 +71,8 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="street_address">Street Address (Optional)</label>
-                            <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Enter Street Address">
+                            <label for="street_address">Street Address</label>
+                            <input type="text" class="form-control" id="street_address" name="street_address" placeholder="Enter Street Address" required>
                         </div>
 
                         <div class="form-group col-md-6">
