@@ -116,7 +116,7 @@
                         <strong>{{ $company_info?->address }}</strong><br>
                         <div class="address-section" style="margin-top: 10px;">
                             <strong>Ship To:</strong><br>
-                            <strong>{{ $order->Contact->first_name }}</strong><br>
+                            <strong>{{ $order?->Contact?->first_name }}</strong><br>
                             <strong>{{ $order?->Contact?->address }}</strong>
                         </div>
                     </div>

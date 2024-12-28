@@ -69,7 +69,7 @@
                         <div class="col-md-6">
                             <h6 class="mb-3">Shipping To:</h6>
                             <div class="address">
-                                <p class="mb-2">{{ $order->Contact->first_name }}</p>
+                                <p class="mb-2">{{ $order?->Contact?->first_name }}</p>
                                 <p class="mb-2">{{ $order?->Contact?->District?->name }},
                                     {{ $order?->Contact?->Division?->name }}</p>
                                 <p class="mb-2">{{ $order?->Contact?->Union?->name }},

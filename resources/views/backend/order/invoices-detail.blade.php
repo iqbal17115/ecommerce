@@ -36,7 +36,7 @@
                     <div class="col-sm-6">
                         <address>
                             <strong>Billed To:</strong><br>
-                            {{ $order->Contact->first_name }}<br>
+                            {{ $order?->Contact?->first_name }}<br>
                             {{ $order?->Contact?->address }}<br>
                         </address>
                     </div>
