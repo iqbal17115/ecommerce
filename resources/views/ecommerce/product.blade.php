@@ -410,20 +410,22 @@
                             </div>
                             <!-- Color Filter -->
                             <div class="product-single-filter">
-                                <ul class="config-color-list">
+                                <ul class="config-color-list d-flex flex-wrap gap-2 p-0" style="list-style: none;">
                                     @foreach ($product_detail->productColors as $index => $productColor)
-                                        <li>
+                                        <li class="color-item border rounded-circle shadow-sm" 
+                                            style="width: 55px; height: 55px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;">
                                             <img src="{{ asset('storage/' . $productColor?->media?->first()?->file_path) }}"
-                                                class="thumbnail-image" data-color-id="{{ $productColor->id }}"
-                                                style="width: 45px; height: 45px;"
+                                                class="thumbnail-image w-100 h-100" 
+                                                data-color-id="{{ $productColor->id }}"
                                                 data-product-color-variation-id="{{ $productColor?->productVariations?->first()?->id }}"
                                                 data-product_sale_price="{{ number_format($product_detail->sale_price, 2) }}"
                                                 data-price="{{ $productColor?->productVariations?->first()?->price }}"
                                                 data-color-value="{{ $productColor?->attributeValue?->value }}"
-                                                onclick="handleColorClick('{{ $productColor->id }}', this)">
+                                                onclick="handleColorClick('{{ $productColor->id }}', this)"
+                                                style="object-fit: cover; border-radius: 50%;">
                                         </li>
                                     @endforeach
-                                </ul>
+                                </ul>                                
                             </div>
 
                             <!-- Size Filter -->
@@ -456,17 +458,21 @@
 
                                 <!-- Display unique sizes -->
                                 @foreach ($uniqueSizes as $sizeId => $sizeData)
-                                    <li id="size-{{ $sizeId }}">
-                                        <a href="javascript:;"
-                                            class="d-flex align-items-center justify-content-center size-link disabled"
-                                            data-size-id="{{ $sizeId }}" data-size-name="{{ $sizeData['name'] }}"
-                                            data-product-variation-id="{{ $sizeData['product_variation_id'] }}"
-                                            data-product_sale_price="{{ number_format($product_detail->sale_price, 2) }}"
-                                            data-price="{{ $sizeData['price'] }}"
-                                            onclick="handleSizeClick('{{ $sizeId }}')">
-                                            {{ $sizeData['name'] }}
-                                        </a>
-                                    </li>
+                                <li id="size-{{ $sizeId }}" 
+                                class="size-item m-2 border rounded-pill shadow-sm" 
+                                style="list-style: none; transition: transform 0.3s, box-shadow 0.3s;">
+                                <a href="javascript:;"
+                                    class="d-flex align-items-center justify-content-center size-link disabled p-2 text-decoration-none fw-bold text-dark"
+                                    data-size-id="{{ $sizeId }}" 
+                                    data-size-name="{{ $sizeData['name'] }}"
+                                    data-product-variation-id="{{ $sizeData['product_variation_id'] }}"
+                                    data-product_sale_price="{{ number_format($product_detail->sale_price, 2) }}"
+                                    data-price="{{ $sizeData['price'] }}"
+                                    onclick="handleSizeClick('{{ $sizeId }}')"
+                                    style="border-radius: 50px; background-color: #f8f9fa;">
+                                    {{ $sizeData['name'] }}
+                                </a>
+                            </li>                            
                                 @endforeach
                             </ul>
 
