@@ -217,15 +217,15 @@
                                                 <span class="badge badge-danger font-size-14">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
                                             </td>
                                             <td>
-                                                <a href="/confirm-order/${order.id}"
+                                                <a href="/confirm-order?id=${order.id}"
                                                     class="btn btn-success waves-effect waves-light text-light btn-block btn-sm">
                                                     <i class="bx bx-check-double font-size-16 align-middle"></i> Confirm
                                                 </a><br>
-                                                <a href="/invoices-detail/${order.id}"
+                                                <a href="/invoices-detail?id=${order.id}"
                                                     class="btn btn-info waves-effect waves-light text-light btn-block btn-sm">
                                                     <i class="dripicons-print"></i> Print Details
                                                 </a><br>
-                                                <a href="/cancel-order/${order.id}"
+                                                <a href="/cancel-order?id=${order.id}"
                                                     class="btn btn-danger waves-effect waves-light text-light btn-block btn-sm">
                                                     <i class="bx bx-block font-size-16 align-middle"></i> Cancel
                                                 </a>

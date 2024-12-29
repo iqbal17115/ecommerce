@@ -189,9 +189,11 @@
                             <div class="col-md-5">
                                 <h6 class="mb-3">
                                     {{ $orderDetail->Product->name }}
-                                    @foreach ($orderDetail->productVariation->productVariationAttributes as $variantionAttribute)
-                                        <br> {{ $variantionAttribute->attributeValue->attribute->name }}: {{ $variantionAttribute->attributeValue->value }}
-                                    @endforeach
+                                    @if ($orderDetail?->productVariation?->productVariationAttributes)
+                                        @foreach ($orderDetail->productVariation->productVariationAttributes as $variantionAttribute)
+                                            <br> {{ $variantionAttribute?->attributeValue?->attribute->name }}: {{ $variantionAttribute?->attributeValue?->value }}
+                                        @endforeach
+                                    @endif
                                 </h6>
                                 <p class="mb-2">SKU: {{ $orderDetail->Product->seller_sku }}</p>
                                 <p class="mb-0">Price: (Inclusive Tax)</p>

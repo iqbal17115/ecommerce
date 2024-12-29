@@ -333,9 +333,9 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('order_data', 'orderData')->name('order_data');
             Route::get('order-detail', 'orderDetail')->name('order-detail');
             Route::get('/orders/{order}', 'destroy')->name('orders.destroy');
-            Route::get('/invoices-detail/{order}', 'invoicesDetail')->name('invoices-detail');
-            Route::get('confirm-order/{order}', 'confirmOrderShow')->name('confirm-order');
-            Route::get('cancel-order/{order}', 'cancelOrderShow')->name('cancel-order');
+            Route::get('/invoices-detail', 'invoicesDetail')->name('invoices-detail');
+            Route::get('confirm-order', 'confirmOrderShow')->name('confirm-order');
+            Route::get('cancel-order', 'cancelOrderShow')->name('cancel-order');
             Route::get('/generate-barcodes', 'generateBarcodes')->name('generate.barcodes');
         });
 

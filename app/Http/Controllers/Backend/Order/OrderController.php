@@ -74,8 +74,11 @@ class OrderController extends Controller
      * @param Order $order
      * @return View|
      */
-    public function cancelOrderShow(Order $order): View
+    public function cancelOrderShow(Request $request): View
     {
+        // Get the order
+        $order = Order::find($request->id);
+        
         return view('backend.order.cancel-order', compact('order'));
     }
 
@@ -85,8 +88,11 @@ class OrderController extends Controller
      * @param Order $order
      * @return View|
      */
-    public function confirmOrderShow(Order $order): View
+    public function confirmOrderShow(Request $request): View
     {
+        // Get the order
+        $order = Order::find($request->id);
+
         $lengthUnits = LengthUnitEnum::getOptions();
         return view('backend.order.confirm-order', compact('order', 'lengthUnits'));
     }
@@ -96,8 +102,10 @@ class OrderController extends Controller
      * @param Order $order
      * @return View|\Illuminate\Foundation\Application|Factory|Application
      */
-    public function invoicesDetail(Order $order): View|\Illuminate\Foundation\Application|Factory|Application
+    public function invoicesDetail(Request $request): View|\Illuminate\Foundation\Application|Factory|Application
     {
+        $order = Order::find($request->id);
+
         return view('backend.order.invoices-detail', compact('order'));
     }
     public function destroy(Order $order)
