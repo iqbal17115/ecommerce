@@ -21,7 +21,7 @@
                                                 <i class="fas fa-plus-circle"></i> Shipping Address
                                             </button>
                                         </div>
-                                        <div class="row"id="default_address_content">
+                                        <div class="row">
                                         <!-- Add New Address Card -->
                                         <div class="col-md-4 mb-3" style="height: 100%;">
                                             <div class="card text-center dashed-border-card address_modal"  data-toggle="modal" 
@@ -34,6 +34,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    <div class="col-md-8" id="default_address_content">
+
+                                    </div>
                                         </div>
 
                                     </div>
