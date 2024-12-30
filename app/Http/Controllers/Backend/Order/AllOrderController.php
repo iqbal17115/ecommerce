@@ -73,6 +73,7 @@ class AllOrderController extends Controller
         // Set the appropriate response headers for the images
         return response()->view('backend.order.pachage_barcodes', ['barcodesData' => $barcodesData, 'order' => $order, 'barcodeOrderImage' => $barcodeOrderImage]);
     }
+    
     public function orderPackageSave(OrderPackageRequest $orderPackageRequest, Order $order)
     {
         $order->status = 'processing';

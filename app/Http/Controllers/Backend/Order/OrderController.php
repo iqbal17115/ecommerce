@@ -51,7 +51,7 @@ class OrderController extends Controller
     }
     public function orderData(Request $request)
     {
-        $query = Order::query();
+        $query = Order::with('user');
 
         if ($request->status) {
             $query->where('status', $request->status);
@@ -116,7 +116,7 @@ class OrderController extends Controller
     }
     public function orderDetail(Request $request)
     {
-        $order = Order::with('Contact')->find($request->order_id);
+        $order = Order::with('user')->find($request->order_id);
         $order_detail = OrderDetail::with('ProductMainImage')->with('Product')->whereOrderId($request->order_id)->get();
         return response()->json(['order' => $order, 'order_detail' => $order_detail]);
     }

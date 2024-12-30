@@ -199,7 +199,7 @@
                                             <td>
                                                 ${order.code}
                                             </td>
-                                            <td>${order.contact ? order.contact.first_name : ''}</td>
+                                            <td>${order.user ? order.user.name : ''}</td>
                                             <td>${order.total_amount}</td>
                                             <td></td>
                                             <td><span class="badge badge-pill badge-soft-success font-size-12">Paid</span></td>
@@ -248,7 +248,7 @@
                             '<p class="mb-2">Order Id: <span class="text-primary">' +
                             data['order']['code'] +
                             '</span></p><p class="mb-4">Billing Name: <span class="text-primary">' +
-                            data['order']['contact']['first_name'] + '</span></p>';
+                            data['order']?.['user']?.['name'] + '</span></p>';
                         modal_content +=
                             '<div class="table-responsive"><table class="table table-centered table-nowrap">';
                         modal_content +=
