@@ -105,7 +105,7 @@ class OrderController extends Controller
     public function invoicesDetail(Request $request): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $order = Order::find($request->id);
-
+        $order->load('orderAddress');
         return view('backend.order.invoices-detail', compact('order'));
     }
     public function destroy(Order $order)

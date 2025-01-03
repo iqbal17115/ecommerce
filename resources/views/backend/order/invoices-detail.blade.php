@@ -36,16 +36,17 @@
                     <div class="col-sm-6">
                         <address>
                             <strong>Billed To:</strong><br>
-                            {{ $order?->Contact?->first_name }}<br>
-                            {{ $order?->Contact?->address }}<br>
+                            Aladdinne.com<br>
+                            House No#65/1,choyhisa ,pirojpur,Sonargaon,Narayangonj,Dhaka,Bangladesh<br>
                         </address>
                     </div>
                     <div class="col-sm-6 text-sm-right">
                         <address class="mt-2 mt-sm-0">
                             <strong>Shipped To:</strong><br>
-                            {{ $order?->Contact?->District?->name }}, {{ $order?->Contact?->Division?->name }}<br>
-                            {{ $order?->Contact?->Union?->name }}, {{ $order?->Contact?->Union?->name }}<br>
-                            {{ $order?->Contact?->shipping_address }}<br>
+                            {{ $order?->orderAddress?->name }}<br>
+                            {{ $order?->orderAddress?->street_address }}<br>
+                            {{ $order?->orderAddress?->division_name }}, {{ $order?->orderAddress?->district_name }}, {{ $order?->orderAddress?->upazila_name }}<br>
+                            {{ $order?->orderAddress?->shipping_address }}<br>
                         </address>
                     </div>
                 </div>
@@ -93,19 +94,19 @@
                             </tr>
                             @endforeach
                             <tr>
-                                <td colspan="2" class="text-right">Sub Total</td>
+                                <td colspan="4" class="text-right">Sub Total</td>
                                 <td class="text-right">
                                     {{ $order->OrderDetail->sum('unit_price') }}
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="border-0 text-right">
+                                <td colspan="4" class="border-0 text-right">
                                     <strong>Shipping</strong>
                                 </td>
                                 <td class="border-0 text-right">0.00</td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="border-0 text-right">
+                                <td colspan="4" class="border-0 text-right">
                                     <strong>Total</strong>
                                 </td>
                                 <td class="border-0 text-right">
