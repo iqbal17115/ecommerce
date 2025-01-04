@@ -96,14 +96,14 @@
                             <tr>
                                 <td colspan="4" class="text-right">Sub Total</td>
                                 <td class="text-right">
-                                    {{ $order->OrderDetail->sum('unit_price') }}
+                                    ৳{{ $order->OrderDetail->sum('unit_price') }}
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="border-0 text-right">
                                     <strong>Shipping</strong>
                                 </td>
-                                <td class="border-0 text-right">0.00</td>
+                                <td class="border-0 text-right">৳0.00</td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="border-0 text-right">
@@ -111,7 +111,7 @@
                                 </td>
                                 <td class="border-0 text-right">
                                     <h4 class="m-0">
-                                        {{
+                                        ৳{{
                                             $order->OrderDetail->sum(function ($orderDetail) {
                                                return $orderDetail->quantity * $orderDetail->unit_price;
                                            })
