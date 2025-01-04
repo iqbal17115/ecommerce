@@ -154,6 +154,7 @@
             const endDate = $('input[name="end"]').val(); // Get the end date value
             const itemsPerPage = $("#itemsPerPageSelect").val(); // Item per page
 
+            
             $.ajax({
                 url: '/order_data',
                 type: "get",
