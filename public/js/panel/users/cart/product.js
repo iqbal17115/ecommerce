@@ -126,6 +126,7 @@ $(document).ready(function () {
     $('.buy_now_with_quantity').click(function () {
         const product_id = $(this).data('product_id');
         const user_id = $("#temp_user_id").data('user_id');
+        
         const formData = {
             user_id: user_id,
             product_id: product_id,
@@ -133,6 +134,24 @@ $(document).ready(function () {
         };
 
         if (user_id.trim() !== "") {
+            const allColorImages = $('.thumbnail-image'); // Get all color images
+            const activeColorImage = $('.thumbnail-image.active'); // Get active color image
+    
+            const allSizeLinks = $('.size-link'); // Get all size links
+            const activeSizeLink = $('.size-link.active'); // Get active size link
+    
+            // Check if there are any color options but none are active
+            if (allColorImages.length && !activeColorImage.length) {
+                toastrErrorMessage('Please select a color.');
+                return false; // Prevent form submission or further actions
+            }
+    
+            // Check if there are any size options but none are active
+            if (allSizeLinks.length && !activeSizeLink.length) {
+                toastrErrorMessage('Please select a size.');
+                return false; // Prevent form submission or further actions
+            }
+    
             // user_id is not an empty string
             submitByNowWithQuantity(formData, "");
         } else {
@@ -175,26 +194,26 @@ $(document).ready(function () {
         const allSizeLinks = $('.size-link'); // Get all size links
         const activeSizeLink = $('.size-link.active'); // Get active size link
 
-    // Check if there are any color options but none are active
-    if (allColorImages.length && !activeColorImage.length) {
-        toastrErrorMessage('Please select a color.');
-        return false; // Prevent form submission or further actions
-    }
+        // Check if there are any color options but none are active
+        if (allColorImages.length && !activeColorImage.length) {
+            toastrErrorMessage('Please select a color.');
+            return false; // Prevent form submission or further actions
+        }
 
-    // Check if there are any size options but none are active
-    if (allSizeLinks.length && !activeSizeLink.length) {
-        toastrErrorMessage('Please select a size.');
-        return false; // Prevent form submission or further actions
-    }
+        // Check if there are any size options but none are active
+        if (allSizeLinks.length && !activeSizeLink.length) {
+            toastrErrorMessage('Please select a size.');
+            return false; // Prevent form submission or further actions
+        }
 
-// Get the product color variation ID
-const productColorVariationId = activeColorImage.data('product-color-variation-id');
-const productVariationId = activeSizeLink.data('product-variation-id');
+        // Get the product color variation ID
+        const productColorVariationId = activeColorImage.data('product-color-variation-id');
+        const productVariationId = activeSizeLink.data('product-variation-id');
 
-// Assign productColorVariationId to productVariationId if it exists
-if (!productVariationId && productColorVariationId) {
-    productVariationId = productColorVariationId;
-}
+        // Assign productColorVariationId to productVariationId if it exists
+        if (!productVariationId && productColorVariationId) {
+            productVariationId = productColorVariationId;
+        }
 
         const formData = {
             user_id: user_id,

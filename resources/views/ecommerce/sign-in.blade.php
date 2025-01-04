@@ -202,7 +202,7 @@ input[type="password"] {
 
 <body>
   <div class="login-form">
-    <form style="margin-top: 20px;" method="POST" action="{{ route('login') }}" id="login-form">
+    <form style="margin-top: 20px;" method="POST" action="{{ route('customer-sign-in') }}" id="login-form">
         @csrf
         <label for="mobile"> Number</label>
         <input type="text" name="mobile" placeholder="Enter Mobile Number"  autocomplete="name" required/>

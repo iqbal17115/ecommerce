@@ -14,6 +14,7 @@ class AuthenticateCustomer
         if (auth()->check()) {
             return $next($request);
         }
+        
         return response()->json(['error' => 'Unauthenticated', 'redirect' => route('customer-sign-in')], 401);
     }
 }

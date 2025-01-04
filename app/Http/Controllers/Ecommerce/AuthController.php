@@ -25,22 +25,15 @@ class AuthController extends Controller
     {
         try {
             if (Auth::attempt($loginRequest->validated())) {
-                // Get the authenticated user.
                 $user = AuthHelper::getAuthenticatedUser();
-                // Check if the user's email has been verified.
-                // AuthHelper::isNotVerifiedUser($user);
 
-                // Create Personal Access Token for logged-in user
-                $token = AuthHelper::createPersonalAccessToken($user, 'Personal Access Token');
+                // Redirect admin users to the backend dashboard.
+                if ($user->roles->where('is_admin', 1)->isNotEmpty()) {
+                    return redirect()->route('dashboard');
+                }
 
-                return redirect('/home');
-
-                // Pass necessary data to the success method
-                // return Message::success(__("messages.success_login"), [
-                //     'access_token' => $token,
-                //     'token_type' => 'bearer',
-                //     'user' => LoginResource::make($user)
-                // ]);
+                // Redirect non-admin users to their intended URL or a default fallback
+                return redirect()->intended('/home');
             }
 
             return Message::error(__("messages.invalid_username_password"));
