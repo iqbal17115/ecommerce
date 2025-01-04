@@ -312,7 +312,7 @@ Route::group(['middleware' => 'web'], function () {
         // Order Start
         Route::controller(OrderController::class)->group(function () {
             Route::get('pending-order', 'pendingOrderPage')->name('pending-order');
-            Route::get('new-order', 'newOrderPage')->name('new-order');
+            Route::get('processing-order', 'processingOrderPage')->name('processing-order');
             Route::get('shipped-order', 'shippedOrderPage')->name('shipped-order');
             Route::get('in_transit-order', 'inTransitOrderPage')->name('in_transit-order');
             Route::get('arrival_at_distribution_center-order', 'arrivalAtDistributionCenterOrderPage')->name('arrival_at_distribution_center-order');

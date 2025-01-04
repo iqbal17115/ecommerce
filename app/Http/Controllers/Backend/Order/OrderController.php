@@ -206,9 +206,9 @@ class OrderController extends Controller
         return view('backend.order.shipped-order');
     }
 
-    public function newOrderPage()
+    public function processingOrderPage()
     {
-        return view('backend.order.new-order');
+        return view('backend.order.processing-order');
     }
 
     public function pendingOrderPage()

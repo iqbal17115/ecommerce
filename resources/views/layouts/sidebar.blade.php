@@ -125,7 +125,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('all-order') }}">All Order</a></li>
                         <li><a href="{{ route('pending-order') }}">Pending</a></li>
-                        <li><a href="{{ route('new-order') }}">Processing</a></li>
+                        <li><a href="{{ route('processing-order') }}">Processing</a></li>
                         <li><a href="{{ route('shipped-order') }}">Shipped</a></li>
                         <li><a href="{{ route('in_transit-order') }}">In Transit</a></li>
                         <li><a href="{{ route('arrival_at_distribution_center-order') }}">Arrival At Distribution

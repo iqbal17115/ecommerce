@@ -53,16 +53,19 @@
                 <table class="table table-centered nowrap" id="datatable-buttons">
                     <thead class="thead-light">
                         <tr>
-                                    <th>#</th>
-                                    <th>Date</th>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Total</th>
-                                    <th>Seller</th>
-                                    <th>Payment Status</th>
-                                    <th>Delivery Type</th>
-                                    <th>Fullfilment Status</th>
-                                    <th>View Details</th>
+                            <th>#</th>
+                            <th style="width: 20px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>Order Date</th>
+                            <th>Order Details</th>
+                            <th>Product</th>
+                            <th>View Details</th>
+                            <th>status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="order_container"></tbody>
@@ -148,6 +151,7 @@
             return paginationHtml;
         }
 
+
         function getData(page) {
             const searchQuery = $('#search_input').val();
             const startDate = $('input[name="start"]').val(); // Get the start date value
@@ -180,18 +184,27 @@
                                                 ${index+1}<br>
                                             </td>
                                             <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                    <label class="custom-control-label" for="customCheck2">&nbsp;</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                ${new Date(order.order_date).toLocaleDateString('en-US', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }<br>
                                                 ${new Date(order.order_date).toLocaleDateString('en-US', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }
                                             </td>
                                             <td>
-                                                ${order.code}
+                                                ${order.code}<br>
                                             </td>
-                                            <td>${order.contact ? order.contact.first_name : ''}</td>
-                                            <td>${order.total_amount}</td>
-                                            <td></td>
-                                            <td><span class="badge badge-pill badge-soft-success font-size-12">Paid</span></td>
-                                            <td><i class="fab fa-cc-mastercard mr-1"></i> Mastercard</td>
-                                            <td>
-                                                <span class="badge badge-danger font-size-14">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
+                                            <td style="word-wrap: break-word; white-space: pre-line;">
+                                                ${order.order_details.map(detail => {
+                                                    console.log(detail.product);
+                                                    if (detail.product) {
+                                                        return `${detail.product.name}<br>Quantity: ${detail.quantity}<br>Item subtotal: ${detail.quantity * detail.unit_price}<br>Condition: <hr style="padding: 0px; margin: 0px; width: 100px;">`;
+                                                    } else {
+                                                        return ''; // Handle the case when the property chain is not complete
+                                                    }
+                                                }).join('')}
                                             </td>
                                             <td>
                                                 <button type="button" data-order_id="${order.id}"
@@ -199,6 +212,23 @@
                                                     data-target=".exampleModal">
                                                     View
                                                 </button>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-danger font-size-14">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
+                                            </td>
+                                            <td>
+                                                <a href="/confirm-order?id=${order.id}"
+                                                    class="btn btn-success waves-effect waves-light text-light btn-block btn-sm">
+                                                    <i class="bx bx-check-double font-size-16 align-middle"></i> Confirm
+                                                </a><br>
+                                                <a href="/invoices-detail?id=${order.id}"
+                                                    class="btn btn-info waves-effect waves-light text-light btn-block btn-sm">
+                                                    <i class="dripicons-print"></i> Print Details
+                                                </a><br>
+                                                <a href="/cancel-order?id=${order.id}"
+                                                    class="btn btn-danger waves-effect waves-light text-light btn-block btn-sm">
+                                                    <i class="bx bx-block font-size-16 align-middle"></i> Cancel
+                                                </a>
                                             </td>
                                         </tr>
                                       `;
