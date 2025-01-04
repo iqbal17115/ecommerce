@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\InvoiceNumberSettingEnum;
+use App\Enums\OrderStatusEnum;
 use App\Helpers\Utils;
 use App\Models\Address\Address;
 use App\Models\Backend\Product\Product;
@@ -56,7 +57,7 @@ class OrderService
             $order->vat = 0;
             $order->payable_amount = ($totalAmount + $shippingChargeSum - $couponDiscount);
             $order->note = 'Order';
-            $order->status = 'pending';
+            $order->status = OrderStatusEnum::PENDING;
             $order->is_active = 1;
             $order->save();
 

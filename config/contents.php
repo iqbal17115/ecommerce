@@ -130,7 +130,7 @@ return [
         ["name" => "Lists", "route" => "all-order", "type" => "All Order", "feature" => "web"],
         ["name" => "Update", "route" => "advance-edit", "type" => "Advance Edit", "feature" => "web"],
         ["name" => "Lists", "route" => "pending-order", "type" => "Pending Order", "feature" => "web"],
-        ["name" => "Lists", "route" => "new-order", "type" => "New Order", "feature" => "web"],
+        ["name" => "Lists", "route" => "processing-order", "type" => "Processing Order", "feature" => "web"],
         ["name" => "Lists", "route" => "shipped-order", "type" => "Shipped Order", "feature" => "web"],
         ["name" => "Lists", "route" => "in_transit-order", "type" => "In Transit Order", "feature" => "web"],
         ["name" => "Lists", "route" => "arrival_at_distribution_center-order", "type" => "Arrival At Distribution Center Order", "feature" => "web"],
