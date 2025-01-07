@@ -280,3 +280,33 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).on('submit', '#shippingAddressForm', function (e) {
+    e.preventDefault();
+
+    const formData = $(this).serialize();
+    const url = '/update-order-address'; // Replace with your actual URL
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: formData,
+        success: function (response) {
+            // Assuming `response` contains the updated address
+            const address = response.orderAddress;
+
+            // Update the DOM dynamically
+            $('#country_name_display').text(address.country_name);
+            $('#division_district_display').text(`${address.district_name}, ${address.division_name}`);
+            $('#upazila_name_display').text(address.upazila_name);
+            $('#street_address_display').text(address.street_address);
+
+            // Close the modal
+            $('#shippingModal').modal('hide');
+        },
+        error: function (xhr) {
+            console.error('Failed to update address:', xhr.responseText);
+        }
+    });
+});
+

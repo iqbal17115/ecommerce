@@ -306,6 +306,7 @@ Route::group(['middleware' => 'web'], function () {
             Route::post('/order-fulfilment-note-submit/{order}', 'orderFulfilmentNotetSave')->name('order_fulfilment_note.submit');
             Route::post('/order-package-submit/{order}', 'orderPackageSave')->name('order_package.submit');
             Route::get('/generate-package_barcodes/{order}', 'generatePackageBarcodes')->name('package_barcodes.barcodes');
+            Route::post('/update-order-address', 'updateOrderAddress')->name('.submit');
         });
         // End All Order
 
