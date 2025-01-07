@@ -24,6 +24,7 @@ use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\FrontEnd\Order;
+use App\Models\OrderAddress;
 use App\Services\AdvanceEditOrderService;
 use App\Traits\Barcode;
 use Illuminate\Http\Request;
@@ -73,7 +74,7 @@ class AllOrderController extends Controller
         // Set the appropriate response headers for the images
         return response()->view('backend.order.pachage_barcodes', ['barcodesData' => $barcodesData, 'order' => $order, 'barcodeOrderImage' => $barcodeOrderImage]);
     }
-    
+
     public function orderPackageSave(OrderPackageRequest $orderPackageRequest, Order $order)
     {
         $order->status = 'processing';
@@ -317,9 +318,30 @@ class AllOrderController extends Controller
         $paymentStatuses = PaymentStatusEnum::getValues();
         $paymentTypes = PaymentTypeEnum::getPaymentTypes();
         $paymentMethods = PaymentMethodEnum::getValues();
-        
+
         return view('backend.order.advance-edit', compact('order', 'lengthUnits', 'weightUnits', 'cancel_reasons', 'orderStatuses', 'paymentStatuses', 'paymentTypes', 'paymentMethods'));
     }
+
+    public function updateOrderAddress(Request $request)
+    {
+        $validated = $request->validate([
+            'address_id' => 'required|uuid|exists:order_addresses,id',
+            'name' => 'required|string|max:50',
+            'mobile' => 'required|string',
+            'street_address' => 'required|string',
+            'country_name' => 'required|string',
+            'division_name' => 'required|string',
+            'district_name' => 'required|string',
+            'upazila_name' => 'required|string',
+            'type' => 'required|in:home,office',
+        ]);
+
+        $address = OrderAddress::find($request->address_id);
+        $address->update($validated);
+
+        return response()->json(['orderAddress' => $address]);
+    }
+
 
     public function index()
     {
