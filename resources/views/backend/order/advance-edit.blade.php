@@ -1002,7 +1002,6 @@
             return html;
         }
 
-
         $(document).ready(function() {
             var boxCounter = 1; // To keep track of box numbers
             var order_id = <?php echo $order->id; ?>;
