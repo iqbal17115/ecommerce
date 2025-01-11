@@ -6,6 +6,7 @@ use App\Enums\InvoiceNumberSettingEnum;
 use App\Enums\OrderStatusEnum;
 use App\Helpers\Utils;
 use App\Models\Address\Address;
+use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\Product\Product;
 use App\Models\Cart\CartItem;
 use App\Models\FrontEnd\Order;
@@ -14,6 +15,7 @@ use App\Models\InvoiceNumberSetting;
 use App\Models\OrderAddress;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderService
@@ -60,6 +62,15 @@ class OrderService
             $order->status = OrderStatusEnum::PENDING;
             $order->is_active = 1;
             $order->save();
+
+            // Order Tracking
+            OrderTracking::create(
+                [
+                    'order_id' => $order->id,
+                    'status' => OrderStatusEnum::PENDING,
+                    'created_by' => Auth::user()->id
+                ],
+            );
 
             if (isset($cartCollection['data'])) {
                 foreach ($cartCollection['data'] as $cartItem) {

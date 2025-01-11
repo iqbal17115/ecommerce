@@ -92,7 +92,7 @@
                 var items_per_page_select = $("#items_per_page_select").val();
 
                 getDetails(
-            "/api/user-orders/lists?user_id=" + user_id + "&code="+code+ "&start_date="+start_date+ "&end_date="+end_date,
+            "user-orders/lists?user_id=" + user_id + "&code="+code+ "&start_date="+start_date+ "&end_date="+end_date,
                 (data) => {
                     console.log(data);
                         var orders = data.orders;
