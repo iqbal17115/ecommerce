@@ -409,57 +409,60 @@
         $(document).ready(function () {
     const orderTrackingStatuses = ['pending', 'processing', 'shipped', 'out_for_delivery', 'delivered'];
 
-    $('.view-tracking').on('click', function () {
+    $(document).on('click', '.view-tracking', function () {
         const orderId = $(this).data('order-id');
         const modalBody = $('#trackingDetails');
+
+        // Clear the modal content and show loading initially
         modalBody.html('<p>Loading...</p>');
+        $('#trackingModal').modal('show'); // Optionally show the modal first to avoid delays in modal rendering
 
         $.ajax({
             url: `/orders/${orderId}/track`,
             method: 'GET',
             success: function (response) {
-                    const { code, order_date, status, tracking_details } = response.results;
+                const { code, order_date, status, tracking_details } = response.results;
 
-                    let html = `
-                        <p><strong>Order Code:</strong> ${code}</p>
-                        <p><strong>Order Date:</strong> ${order_date}</p>
-                        <p><strong>Current Status:</strong> <span class="badge bg-primary">${status.toUpperCase()}</span></p>
-                        <h6 class="mt-4">Tracking Timeline:</h6>
-                        <div class="tracking-timeline">
-                    `;
+                let html = `
+                    <p><strong>Order Code:</strong> ${code}</p>
+                    <p><strong>Order Date:</strong> ${order_date}</p>
+                    <p><strong>Current Status:</strong> <span class="badge bg-primary">${status.toUpperCase()}</span></p>
+                    <h6 class="mt-4">Tracking Timeline:</h6>
+                    <div class="tracking-timeline">
+                `;
 
-                    const sortedDetails = tracking_details.sort((a, b) =>
-                        new Date(a.created_at) - new Date(b.created_at)
-                    );
+                const sortedDetails = tracking_details.sort((a, b) =>
+                    new Date(a.created_at) - new Date(b.created_at)
+                );
 
-                    orderTrackingStatuses.forEach(trackingStatus => {
-                        const detail = sortedDetails.find(d => d.status === trackingStatus);
-                        const isCompleted = orderTrackingStatuses.indexOf(trackingStatus) < orderTrackingStatuses.indexOf(status) ? 'completed' : '';
-                        const isActive = trackingStatus === status ? 'active' : '';
-                        const timelineClass = isCompleted || isActive ? `${isCompleted} ${isActive}` : 'pending';
-                        const timestamp = detail ? detail['created_at'] : '';
+                orderTrackingStatuses.forEach(trackingStatus => {
+                    const detail = sortedDetails.find(d => d.status === trackingStatus);
+                    const isCompleted = orderTrackingStatuses.indexOf(trackingStatus) < orderTrackingStatuses.indexOf(status) ? 'completed' : '';
+                    const isActive = trackingStatus === status ? 'active' : '';
+                    const timelineClass = isCompleted || isActive ? `${isCompleted} ${isActive}` : 'pending';
+                    const timestamp = detail ? detail['created_at'] : '';
 
-                        html += `
-                            <div class="timeline-item ${timelineClass}">
-                                <div class="timeline-line"></div>
-                                <span class="timeline-icon">${trackingStatus.charAt(0).toUpperCase()}</span>
-                                <div class="timeline-content">
-                                    <h6>${trackingStatus.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</h6>
-                                    <p class="timestamp">${timestamp}</p>
-                                </div>
+                    html += `
+                        <div class="timeline-item ${timelineClass}">
+                            <div class="timeline-line"></div>
+                            <span class="timeline-icon">${trackingStatus.charAt(0).toUpperCase()}</span>
+                            <div class="timeline-content">
+                                <h6>${trackingStatus.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</h6>
+                                <p class="timestamp">${timestamp}</p>
                             </div>
-                        `;
-                    });
+                        </div>
+                    `;
+                });
 
-                    html += '</div>';
-                    modalBody.html(html);
-                    // Show the modal only after content is updated
-         $('#trackingModal').modal('show');
+                html += '</div>';
+                modalBody.html(html);
+
+                // Ensure modal is visible after content is fully loaded
+                setTimeout(function() {
+                    $('#trackingModal').modal('show');
+                }, 100); // A small timeout can help with any asynchronous rendering issues
             }
         });
-
-         
-         
     });
 });
     </script>
