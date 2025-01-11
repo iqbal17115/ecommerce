@@ -1,6 +1,94 @@
 @extends('layouts.backend_app')
 
 @section('content')
+<style>
+.tracking-timeline {
+    margin-top: 20px;
+    border-left: 3px solid #d6d6d6;
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 40px;
+}
+
+.timeline-item.completed .timeline-icon {
+    background: linear-gradient(145deg, #4caf50, #81c784);
+    border-color: transparent;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+.timeline-item.active .timeline-icon {
+    background-color: #03a9f4;
+    border-color: #03a9f4;
+    box-shadow: 0 0 12px rgba(3, 169, 244, 0.7);
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+}
+
+.timeline-item.pending .timeline-icon {
+    background-color: #fbc02d;
+    border-color: #fbc02d;
+    box-shadow: none;
+}
+
+.timeline-item .timeline-icon {
+    position: absolute;
+    left: -25px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.timeline-item .timeline-line {
+    position: absolute;
+    top: 30px;
+    left: -10px;
+    width: 3px;
+    height: 100%;
+    background: #d6d6d6;
+}
+
+.timeline-item.completed .timeline-line {
+    background: #4caf50;
+}
+
+.timeline-content {
+    margin-left: 20px;
+    padding: 10px 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.timeline-content h6 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.timeline-content .timestamp {
+    font-size: 12px;
+    color: #999;
+}
+    </style>
     <div class="card">
         <div class="card-body">
             <div class="row mb-1">
@@ -77,8 +165,11 @@
                 </table>
             </div>
             <div id="pagination_container" class="mt-3"></div>
+            {{-- Order Tracking Modal --}}
+        @include('backend.order.order-modal.order-tracking-modal')
         </div>
     </div>
+
     <!-- Modal -->
     <div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -216,6 +307,14 @@
                                             </td>
                                             <td>
                                                 <a href="${url}" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="Advance Edit" data-original-title="Advance Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                <button 
+                                                    type="button" 
+                                                    class="btn btn-sm btn-primary view-tracking" 
+                                                    data-order-id="${order.id}" 
+                                                    data-toggle="modal" 
+                                                    data-target="#orderTrackingModal">
+                                                     Tracking
+                                                </button>
                                             </td>
                                         </tr>
                                       `;
@@ -306,5 +405,62 @@
                 });
             });
         });
+
+        $(document).ready(function () {
+    const orderTrackingStatuses = ['pending', 'processing', 'shipped', 'out_for_delivery', 'delivered'];
+
+    $('.view-tracking').on('click', function () {
+        const orderId = $(this).data('order-id');
+        const modalBody = $('#trackingDetails');
+        modalBody.html('<p>Loading...</p>');
+
+        $.ajax({
+            url: `/orders/${orderId}/track`,
+            method: 'GET',
+            success: function (response) {
+                    const { code, order_date, status, tracking_details } = response.results;
+
+                    let html = `
+                        <p><strong>Order Code:</strong> ${code}</p>
+                        <p><strong>Order Date:</strong> ${order_date}</p>
+                        <p><strong>Current Status:</strong> <span class="badge bg-primary">${status.toUpperCase()}</span></p>
+                        <h6 class="mt-4">Tracking Timeline:</h6>
+                        <div class="tracking-timeline">
+                    `;
+
+                    const sortedDetails = tracking_details.sort((a, b) =>
+                        new Date(a.created_at) - new Date(b.created_at)
+                    );
+
+                    orderTrackingStatuses.forEach(trackingStatus => {
+                        const detail = sortedDetails.find(d => d.status === trackingStatus);
+                        const isCompleted = orderTrackingStatuses.indexOf(trackingStatus) < orderTrackingStatuses.indexOf(status) ? 'completed' : '';
+                        const isActive = trackingStatus === status ? 'active' : '';
+                        const timelineClass = isCompleted || isActive ? `${isCompleted} ${isActive}` : 'pending';
+                        const timestamp = detail ? detail['created_at'] : '';
+
+                        html += `
+                            <div class="timeline-item ${timelineClass}">
+                                <div class="timeline-line"></div>
+                                <span class="timeline-icon">${trackingStatus.charAt(0).toUpperCase()}</span>
+                                <div class="timeline-content">
+                                    <h6>${trackingStatus.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</h6>
+                                    <p class="timestamp">${timestamp}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    html += '</div>';
+                    modalBody.html(html);
+                    // Show the modal only after content is updated
+         $('#trackingModal').modal('show');
+            }
+        });
+
+         
+         
+    });
+});
     </script>
 @endpush

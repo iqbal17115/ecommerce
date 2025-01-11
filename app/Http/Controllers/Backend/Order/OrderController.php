@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend\Order;
 
 use App\Enums\LengthUnitEnum;
+use App\Helpers\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AdminPanel\OrderTracking\OrderTrackingOrderResource;
 use App\Http\Resources\OrderResource;
 use App\Models\FrontEnd\Order;
 use App\Models\FrontEnd\OrderDetail;
@@ -12,6 +14,7 @@ use App\Traits\Barcode;
 use App\Traits\BaseModel;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -26,7 +29,7 @@ class OrderController extends Controller
     {
         $this->orderService = $orderService;
     }
-    
+
     public function generateBarcodes(Request $request)
     {
         // Get the barcode content array from the request
@@ -78,7 +81,7 @@ class OrderController extends Controller
     {
         // Get the order
         $order = Order::find($request->id);
-        
+
         return view('backend.order.cancel-order', compact('order'));
     }
 
@@ -119,6 +122,18 @@ class OrderController extends Controller
         $order = Order::with('user')->find($request->order_id);
         $order_detail = OrderDetail::with('ProductMainImage')->with('Product')->whereOrderId($request->order_id)->get();
         return response()->json(['order' => $order, 'order_detail' => $order_detail]);
+    }
+
+    public function getOrderWithTracking($orderId)
+    {
+        try {
+            $order = Order::with('orderTracking')->find($orderId);
+            // Return a success response with the data
+            return Message::success(null, OrderTrackingOrderResource::make($order));
+        } catch (Exception $ex) {
+            // Return an error message containing the exception
+            return $this->handleException($ex);
+        }
     }
 
     public function partiallyShippedOrderPage()

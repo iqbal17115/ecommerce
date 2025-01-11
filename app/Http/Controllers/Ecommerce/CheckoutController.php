@@ -76,7 +76,7 @@ class CheckoutController extends Controller
                 $order = OrderTracking::updateOrCreate(
                     ['order_id' => $Order->id],
                     [
-                        'status' => OrderStatusEnum::PROCESSING,
+                        'status' => OrderStatusEnum::PENDING,
                         'created_by' => Auth::user()->id
                     ],
                 );

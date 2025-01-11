@@ -338,6 +338,7 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('confirm-order', 'confirmOrderShow')->name('confirm-order');
             Route::get('cancel-order', 'cancelOrderShow')->name('cancel-order');
             Route::get('/generate-barcodes', 'generateBarcodes')->name('generate.barcodes');
+            Route::get('/orders/{order}/track', 'getOrderWithTracking')->name('orders.track');
         });
 
         // Start Manage Company
