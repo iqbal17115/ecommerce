@@ -406,6 +406,7 @@
             });
         });
 
+        
         $(document).ready(function () {
     const orderTrackingStatuses = ['pending', 'processing', 'shipped', 'out_for_delivery', 'delivered'];
 
