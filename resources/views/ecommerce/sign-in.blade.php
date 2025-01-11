@@ -210,11 +210,15 @@ input[type="password"] {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <div style="position: relative;">
           <input type="password" name="password" id="password" placeholder="Enter Password" autocomplete="password" required />
           <i class="bi bi-eye-slash" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
 
+=======
+        <input type="password" name="password" placeholder="Enter Password" autocomplete="password" required/>
+>>>>>>> Stashed changes
 =======
         <input type="password" name="password" placeholder="Enter Password" autocomplete="password" required/>
 >>>>>>> Stashed changes
