@@ -19,7 +19,7 @@ class AuthController extends Controller
 {
     public function index()
     {
-        return view('ecommerce.sign-in');
+        return view('ecommerce.sign_in');
     }
     public function authenticate(LoginRequest $loginRequest)
     {
