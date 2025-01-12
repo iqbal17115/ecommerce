@@ -212,6 +212,7 @@ input[type="password"] {
           <i class="bi bi-eye-slash" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
 
+        
 
         <!-- Remember Me and Forgot Password on the same line -->
     <div class="remember-forgot">
