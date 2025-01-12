@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index() {
-        return view('ecommerce.sign-in');
+        return view('ecommerce.sign_in');
     }
     public function authenticate(Request $request)
     {
