@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources\AdminPanel\OrderTracking;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderTrackingDetailResource extends JsonResource
+class UserDetailsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +16,8 @@ class OrderTrackingDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'status' => ucfirst($this->status),
-            'created_at' => Carbon::parse($this->created_at)->format('d F Y h:i A'),
+            'name' => $this->name,
+            'email' => $this->email,
         ];
     }
 }

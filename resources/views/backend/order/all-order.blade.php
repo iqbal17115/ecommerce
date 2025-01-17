@@ -422,36 +422,60 @@
             url: `/orders/${orderId}/track`,
             method: 'GET',
             success: function (response) {
-                const { code, order_date, status, tracking_details } = response.results;
+                const { code, order_date, status, user, order_address, tracking_details } = response.results;
 
                 let html = `
-                    <p><strong>Order Code:</strong> ${code}</p>
-                    <p><strong>Order Date:</strong> ${order_date}</p>
-                    <p><strong>Current Status:</strong> <span class="badge bg-primary">${status.toUpperCase()}</span></p>
-                    <h6 class="mt-4">Tracking Timeline:</h6>
-                    <div class="tracking-timeline">
-                `;
+                            <div style="border: 2px solid #e74c3c; border-radius: 10px; overflow: hidden; width: 100%; margin: 10px auto; font-family: Arial, sans-serif; color: #333; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <!-- Header -->
+                                <div style="background-color: #e74c3c; color: white; text-align: center; padding: 5px;">
+                                    <p style="margin: 0; font-size: 14px;">SHIPPED FROM <strong>Aladdinne.com</strong></p>
+                                </div>
+                                
+                                <!-- Estimate Delivery -->
+                                <div style="background-color: #ffebe6; text-align: center; padding: 20px;">
+                                    <p style="margin: 0; font-size: 16px; font-weight: bold; color: #e74c3c;">ESTIMATE DELIVERY DATE IS</p>
+                                    <h1 style="margin: 10px 0; font-size: 22px; font-weight: bold; color: #333;">MON 18 DEC - FRI 29 DEC</h1>
+                                </div>
+                                
+                                <!-- Order Info -->
+                                <div style="padding: 5px; border-top: 2px solid #e74c3c;">
+                                    <span style="margin: 0; font-size: 14px;"><strong>Order ID:</strong> #${code}</span>
+                                    <span style="margin: 5px 0; font-size: 12px; color: #555; float: right;">${order_date}</span>
+                                </div>
+                                
+                                <!-- Receiver Info -->
+                                <div style="background-color: #f9f9f9; padding: 5px; border-top: 1px solid #ddd;">
+                                    <p style="margin: 0; font-size: 14px;"><i class="fa fa-user" style="margin-right: 8px; color: #333;"></i> <strong>RECEIVER:</strong> ${user.name}</p>
+                                    <p style="margin: 5px 0 0; font-size: 12px; color: #555;"><i class="fa fa-map-marker-alt" style="margin-right: 8px; color: #e74c3c;"></i> ${order_address.address}</p>
+                                </div>
+                            </div>
+                          <div class="tracking-timeline">
+                        `;
 
+                // Sort the tracking details by created_at
                 const sortedDetails = tracking_details.sort((a, b) =>
                     new Date(a.created_at) - new Date(b.created_at)
                 );
 
+                // Generate timeline for each status
                 orderTrackingStatuses.forEach(trackingStatus => {
-                    const detail = sortedDetails.find(d => d.status === trackingStatus);
+                    const detail = sortedDetails.find(d => d.status.toLowerCase() === trackingStatus.toLowerCase());
+                    console.log(detail);
                     const isCompleted = orderTrackingStatuses.indexOf(trackingStatus) < orderTrackingStatuses.indexOf(status) ? 'completed' : '';
                     const isActive = trackingStatus === status ? 'active' : '';
                     const timelineClass = isCompleted || isActive ? `${isCompleted} ${isActive}` : 'pending';
-                    const timestamp = detail ? detail['created_at'] : '';
+                    const timestamp = detail ? detail['created_at'] : null;
 
                     html += `
-                        <div class="timeline-item ${timelineClass}">
-                            <div class="timeline-line"></div>
-                            <span class="timeline-icon">${trackingStatus.charAt(0).toUpperCase()}</span>
-                            <div class="timeline-content">
-                                <h6>${trackingStatus.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</h6>
-                                <p class="timestamp">${timestamp}</p>
-                            </div>
-                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background-color: ${timelineClass.includes('completed') ? '#28a745' : '#ffc107'}; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; margin-right: 15px;">
+            ${trackingStatus.charAt(0).toUpperCase()}
+        </div>
+        <div style="flex: 1; border-left: 2px solid ${timelineClass.includes('completed') ? '#28a745' : '#ffc107'}; padding-left: 15px; position: relative;">
+            <h6 style="margin: 0; font-size: 16px; color: #333;">${trackingStatus.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}</h6>
+            ${timestamp ? `<p style="margin: 5px 0 0; font-size: 14px; color: #666;">${timestamp}</p>` : '<p style="margin: 5px 0 0; font-size: 14px; color: #666;">Not Available</p>'}
+        </div>
+    </div>
                     `;
                 });
 
@@ -459,12 +483,13 @@
                 modalBody.html(html);
 
                 // Ensure modal is visible after content is fully loaded
-                setTimeout(function() {
+                setTimeout(function () {
                     $('#trackingModal').modal('show');
                 }, 100); // A small timeout can help with any asynchronous rendering issues
             }
         });
     });
 });
+
     </script>
 @endpush
