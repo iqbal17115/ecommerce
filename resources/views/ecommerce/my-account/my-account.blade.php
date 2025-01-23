@@ -4,9 +4,129 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/my_account.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/custom_modal.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account.css') }}">
 @endpush
 @section('content')
+<style>
+.order-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .order-header {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .order-details {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .order-cancel {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            float: right;
+        }
+        .btn-red {
+            background-color: #ff4d4d;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 10px 15px;
+            border: none;
+        }
+        .btn-red:hover {
+            background-color: #e60000;
+        }
+        .speech-bubble {
+            position: relative;
+            background: #ff4d4d;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-top-color: #ff4d4d;
+            border-bottom: 0;
+            margin-left: -15px;
+            margin-bottom: -15px;
+        }
+        .invoice {
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .invoice-header {
+        padding: 15px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .invoice-header h4 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .invoice-details {
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .invoice-details p {
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .invoice-table th {
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .invoice-table td {
+        text-align: center;
+    }
+
+    .invoice-footer {
+        padding: 20px;
+        background-color: #f1f1f1;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .invoice-footer h5 {
+        margin: 0;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .invoice-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+    .invoice-details p {
+        margin: 0;
+    }
+    </style>
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="bg-gray pt-2 pb-5">
