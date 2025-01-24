@@ -204,8 +204,9 @@ input[type="password"] {
   <div class="login-form">
     <form style="margin-top: 20px;" method="POST" action="{{ route('customer-sign-in') }}" id="login-form">
         @csrf
-        <label for="mobile"> Number</label>
-        <input type="text" name="mobile" placeholder="Enter Mobile Number"  autocomplete="name" required/>
+        <label for="mobile">Email or Mobile Number</label>
+        <input type="text" name="mobile" placeholder="Enter Email or Mobile Number" autocomplete="username" required />
+    
         <label for="psw">Password</label>
         <div style="position: relative;">
           <input type="password" name="password" id="password" placeholder="Enter Password" autocomplete="password" required />
