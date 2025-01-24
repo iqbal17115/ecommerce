@@ -128,19 +128,9 @@
         <span class="error-message">{{ $message }}</span>
         @enderror
 
-        <label for="mobile">
-          Number <span class="required">*</span>
-        </label>
-        <input type="text" name="mobile" id="mobile" placeholder="Enter Mobile Number" class="{{ $errors->has('mobile') ? 'is-invalid' : '' }}" value="{{ old('mobile') }}">
-        @error('mobile')
-        <span class="error-message">{{ $message }}</span>
-        @enderror
-
-        <label for="email">
-          Email(Optional)
-        </label>
-        <input type="email" name="email" id="email" placeholder="Enter Email Address" value="{{ old('email') }}">
-        @error('email')
+        <label for="mobile_or_email">Mobile or Email <span class="required">*</span></label>
+        <input type="text" name="mobile_or_email" id="mobile_or_email" placeholder="Enter Mobile or Email" class="{{ $errors->has('mobile_or_email') ? 'is-invalid' : '' }}" value="{{ old('mobile_or_email') }}">
+        @error('mobile_or_email')
         <span class="error-message">{{ $message }}</span>
         @enderror
 
