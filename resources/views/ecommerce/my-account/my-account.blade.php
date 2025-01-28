@@ -1,12 +1,14 @@
 @extends('layouts.ecommerce')
 @push('css')
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/my_account.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/custom_modal.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account.css') }}">
 @endpush
 @section('content')
+
     <main class="main">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="bg-gray pt-2 pb-5">
@@ -95,67 +97,66 @@
             "user-orders/lists?user_id=" + user_id + "&code="+code+ "&start_date="+start_date+ "&end_date="+end_date,
                 (data) => {
 
-                        var orders = data.orders;
-                        var container = $('#orders-container');
-container.empty();
-
-// Loop through the orders and append them to the container
-$.each(data.results.data, function (index, order) {
-    var orderHtml = `
-        <div class="card mb-4 shadow-lg border-0">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h5 class="m-0">Order ID# ${order.code}</h5>
-                <a href="https://www.aladdinne.com/" target="_blank" class="text-light text-decoration-none">
-                    Ordered On: aladdinne.com
-                </a>
-            </div>
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-md-4">
-                        <h6 class="text-muted">Estimated Delivery</h6>
-                        <p class="fw-bold text-dark">By TBD</p>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <h6 class="text-muted">Order Total</h6>
-                        <p class="fs-5 fw-bold text-success">৳ ${order.payable_amount}</p>
-                    </div>
-                    <div class="col-md-4 text-end">
-                        <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2">Track Package</a>
-                        <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2">Cancel Order</a>
-                        <button class="btn btn-outline-success btn-sm">Print Invoice</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer bg-light">
-                <h6 class="text-muted">Order Details</h6>
-                ${Array.isArray(order.order_detail) && order.order_detail.length > 0 ? order.order_detail.map(orderDetail => `
-                    <div class="row py-3 border-bottom">
-                        <div class="col-md-1 text-center">
-                            ${orderDetail.product
-                                ? `<img src="${orderDetail.product.image}" class="img-fluid rounded" style="max-width: 60px;" alt="Product">`
-                                : '<span class="text-muted">No Image</span>'
-                            }
+                    var orders = data.orders;
+                    var container = $('#orders-container');
+                    container.empty();
+console.log(data.results.data);
+                // Loop through the orders and append them to the container
+                $.each(data.results.data, function (index, order) {
+                var orderHtml = `
+                    <div class="card mb-4 shadow-lg border-0">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="m-0">Order ID# ${order.code}</h5>
+                            <a href="https://www.aladdinne.com/" target="_blank" class="text-light text-decoration-none">
+                                Ordered On: aladdinne.com
+                            </a>
                         </div>
-                        <div class="col-md-5">
-                            <h6 class="mb-1">${orderDetail.product ? orderDetail.product.name : 'Product not available'}</h6>
-                            <small class="text-muted">${orderDetail.product ? orderDetail.product.description : ''}</small>
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <h6 class="text-muted">Estimated Delivery</h6>
+                                    <p class="fw-bold text-dark">By TBD</p>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <h6 class="text-muted">Order Total</h6>
+                                    <p class="fs-5 fw-bold text-success">৳ ${order.payable_amount}</p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2">Track Package</a>
+                                    <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2">Cancel Order</a>
+                                    <button class="btn btn-outline-success btn-sm">Print Invoice</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-2 text-center">
-                            <span class="badge bg-danger">${order.status}</span>
+                        <div class="card-footer bg-light">
+                            <h6 class="text-muted">Order Details</h6>
+                            ${Array.isArray(order.order_detail) && order.order_detail.length > 0 ? order.order_detail.map(orderDetail => `
+                                <div class="row py-3 border-bottom">
+                                    <div class="col-md-1 text-center">
+                                        ${orderDetail.product
+                                            ? `<img src="${orderDetail.product.image}" class="img-fluid rounded" style="max-width: 60px;" alt="Product">`
+                                            : '<span class="text-muted">No Image</span>'
+                                        }
+                                    </div>
+                                    <div class="col-md-5">
+                                        <h6 class="mb-1">${orderDetail.product ? orderDetail.product.name : 'Product not available'}</h6>
+                                        <small class="text-muted">${orderDetail.product ? orderDetail.product.description : ''}</small>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <span class="badge bg-danger">${order.status}</span>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <span class="text-muted">Standard Delivery</span>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            `).join('') : '<p class="text-muted">No order details available.</p>'}
                         </div>
-                        <div class="col-md-2 text-center">
-                            <span class="text-muted">Standard Delivery</span>
-                        </div>
-                        <div class="col-md-2"></div>
                     </div>
-                `).join('') : '<p class="text-muted">No order details available.</p>'}
-            </div>
-        </div>
-    `;
-    // Append the orderHtml to the container
-    container.append(orderHtml);
-});
-
+                `;
+                    // Append the orderHtml to the container
+                    container.append(orderHtml);
+                });
                 },
                 (error) => {
 
@@ -176,5 +177,22 @@ $.each(data.results.data, function (index, order) {
 
             loadUserOrder(@json($user->id ?? null));
         });
+
+        document.getElementById('toggle-filters').addEventListener('click', function () {
+            const filterSection = document.getElementById('filter-section');
+            const toggleIcon = document.getElementById('toggle-icon');
+            const toggleText = document.getElementById('toggle-text');
+
+            if (filterSection.style.display === 'none' || !filterSection.style.display) {
+                filterSection.style.display = 'block';
+                toggleIcon.style.transform = 'rotate(180deg)';
+                toggleText.textContent = 'Hide Filters';
+            } else {
+                filterSection.style.display = 'none';
+                toggleIcon.style.transform = 'rotate(0deg)';
+                toggleText.textContent = 'Show Filters';
+            }
+        });
     </script>
+
 @endpush
