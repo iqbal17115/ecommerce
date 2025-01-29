@@ -29,7 +29,7 @@ class OrderController extends Controller
     {
             // Get list data
             $lists = Order::getLists(Order::where('user_id', $orderListRequest->user_id)->when($orderListRequest->code, function ($query) use ($orderListRequest) {
-                return $query->where('code', $orderListRequest->code);
+                return $query->where('code', 'like', '%' . $orderListRequest->code . '%');
             }), $orderListRequest->validated(), OrderListResource::class);
 
             // Return a success message with the data

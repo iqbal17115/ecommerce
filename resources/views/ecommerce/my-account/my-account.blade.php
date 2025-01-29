@@ -97,6 +97,7 @@
     const params = new URLSearchParams({
         user_id: user_id,
         code: searchValue,
+        limit: itemsPerPage,
         start_date: startDate,
         end_date: endDate
     }).toString();
@@ -209,7 +210,7 @@ function generateOrderDetails(orderDetails) {
                 loadUserOrder(@json($user->id ?? null));
             });
 
-            $(document).on('keyup', '.search_parameter', function() {
+            $(document).on('input', '.search_parameter', function() {
                 loadUserOrder(@json($user->id ?? null));
             });
 

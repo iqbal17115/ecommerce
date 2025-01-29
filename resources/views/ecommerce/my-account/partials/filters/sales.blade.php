@@ -13,7 +13,7 @@
             <div style="display: flex; flex-wrap: wrap; gap: 15px;">
                 <!-- Search Box -->
                 <div style="flex: 1; min-width: 250px;">
-                    <input type="text" id="search_value" placeholder="Search orders..." 
+                    <input type="text" id="search_value" placeholder="Search orders..." class="search_parameter"
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
@@ -30,9 +30,6 @@
                         <option value="10" selected>10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="500">500</option>
-                        <option value="1000">1000</option>
                     </select>
                 </div>
             </div>
