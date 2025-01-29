@@ -319,9 +319,60 @@ function generateOrderDetailsCard(orderDetails) {
                 return;
             }
 
+            // Append the generated order tracking UI
+            container.append(generateOrderTrackingUI(data.results.order_statuses, data.results.order_tracking, data.results.status_messages));
+
             container.append(generateOrderDetailCard(data.results));
         });
     });
+
+    // Function to generate order tracking UI with status messages
+function generateOrderTrackingUI(orderStatuses, trackingData, statusMessages) {
+    const trackingContainer = $('<div class="row justify-content-between mb-3"></div>');
+    const messageContainer = $('<div class="status-message-container"></div>');
+
+    orderStatuses.forEach(orderStatus => {
+        let matchingItem = trackingData.find(item => item.status === orderStatus);
+        let completed = matchingItem !== undefined;
+        let desiredCreatedAt = completed ? matchingItem.created_at : null;
+        let statusMessage = statusMessages[orderStatus] || ''; // Get message or empty string
+
+        let trackingHTML = `
+            <div class="order-tracking ${completed ? 'completed' : ''}">
+                <span class="is-complete"></span>
+                <p>${orderStatus.charAt(0).toUpperCase() + orderStatus.slice(1)}
+                    <br><span>${desiredCreatedAt ? formatDate(desiredCreatedAt) : ''}</span>
+                </p>
+            </div>
+        `;
+        trackingContainer.append(trackingHTML);
+
+        if (completed && statusMessage) {
+            let messageHTML = `
+                <div class="d-flex p-3" style="font-size: 16px;">
+                    <span class="badge badge-primary badge-pill mr-5">${formatDateTime(desiredCreatedAt)}</span>
+                    ${statusMessage}
+                </div>
+            `;
+            messageContainer.append(messageHTML);
+        }
+    });
+
+    return $('<div></div>').append(trackingContainer).append(messageContainer);
+}
+
+// Function to format date
+function formatDate(dateStr) {
+    let date = new Date(dateStr);
+    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+// Function to format date and time
+function formatDateTime(dateStr) {
+    let date = new Date(dateStr);
+    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) +
+           ' ' + date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+}
     </script>
 
 @endpush
