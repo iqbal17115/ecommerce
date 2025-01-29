@@ -30,7 +30,7 @@ class OrderDetailsResource extends JsonResource
     private function getProductImageUrl()
     {
         return $this?->Product?->ProductMainImage?->image
-            ? asset('storage/' . $this->Product->ProductMainImage->image)
+            ? asset('storage/product_photo/' . $this->Product->ProductMainImage->image)
             : null;
     }
 }
