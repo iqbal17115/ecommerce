@@ -25,7 +25,6 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-
     public function lists(OrderListRequest $orderListRequest): JsonResponse
     {
             // Get list data
