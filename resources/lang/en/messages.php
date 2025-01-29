@@ -13,5 +13,5 @@ return [
     'success_delete' => 'Record deleted successfully.',
     'profile_fetched' => 'Profile data fetched successfully.',
     'cancelled' => 'Request cancelled successfully.',
-    'change_status' => 'Status changed successfully.'
+    'change_status' => 'Status changed successfully.',
 ];

@@ -221,6 +221,107 @@ function generateOrderDetails(orderDetails) {
         var section = document.getElementById("filterSection");
         section.style.display = section.style.display === "none" ? "block" : "none";
     }
+
+    // Function to generate order card HTML
+function generateOrderDetailCard(order) {
+    return `
+        <div class="card mb-4 shadow-lg border-0">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="m-0">Order ID# ${order.code}</h5>
+                <a href="https://www.aladdinne.com/" target="_blank" class="text-light text-decoration-none">
+                    Ordered On: aladdinne.com
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <h6 class="text-muted">Estimated Delivery</h6>
+                        <p class="fw-bold text-dark">By TBD</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h6 class="text-muted">Order Total</h6>
+                        <p class="fs-5 fw-bold text-success">${formatDetailPrice(order.payable_amount)}</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2">Track Package</a>
+                        <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2">Cancel Order</a>
+                        <button class="btn btn-outline-success btn-sm">Print Invoice</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <h6 class="text-muted">Order Details</h6>
+                <table class="table table-bordered">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Product</th>
+                            <th class="text-center">Unit Price</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${generateOrderDetailsCard(order.order_details)}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+// Function to format price (adds currency symbol and comma separators)
+function formatDetailPrice(amount) {
+    return new Intl.NumberFormat('en-BD', { 
+        style: 'currency', 
+        currency: 'BDT', 
+        minimumFractionDigits: 2 
+    }).format(amount);
+}
+
+// Function to format quantity (removes decimals if unnecessary)
+function formatDetailQuantity(quantity) {
+    return quantity % 1 === 0 ? quantity : quantity.toFixed(2);
+}
+
+// Function to generate order details HTML
+function generateOrderDetailsCard(orderDetails) {
+    if (!Array.isArray(orderDetails) || orderDetails.length === 0) {
+        return '<tr><td colspan="4" class="text-muted text-center">No order details available.</td></tr>';
+    }
+
+    return orderDetails.map(orderDetail => `
+        <tr>
+            <td>
+                <div class="d-flex align-items-center">
+                    ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px;" alt=""> `}
+                    <span class="ml-1">${orderDetail.product_name || 'Product not available'}</span>
+                </div>
+            </td>
+            <td class="text-center">${formatDetailPrice(orderDetail.unit_price)}</td>
+            <td class="text-center">${formatDetailQuantity(orderDetail.quantity)} pcs</td>
+            <td class="text-center">${formatDetailPrice(orderDetail.total_amount)}</td>
+        </tr>
+    `).join('');
+}
+
+    $(document).on('submit', '#orderSearchForm', function(e) {
+        e.preventDefault(); // Prevent default form submission
+        
+        let orderCode = $('#order_code').val().trim(); // Get input value
+        
+        let params = new URLSearchParams({ order_code: orderCode }).toString();
+        getDetails(`user-orders/order-details?${params}`, (data) => {
+            const container = $('#order-detail-container');
+            container.empty();
+
+            if (!data.results) {
+                // container.append('<p class="text-muted text-center">No orders found.</p>');
+                return;
+            }
+
+            container.append(generateOrderDetailCard(data.results));
+        });
+    });
     </script>
 
 @endpush
