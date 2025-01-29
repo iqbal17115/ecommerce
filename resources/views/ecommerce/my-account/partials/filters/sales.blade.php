@@ -1,42 +1,32 @@
-<div class="col-md-12" style="margin-top: 20px;">
-    <div class="card shadow-lg p-3 border-0" style="border-radius: 10px; background-color: #f9f9f9;">
+<div class="col-md-12" style="width: 100%;">
+    <div style="background: #ffffff; border-radius: 12px; padding: 5px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); border: 1px solid #ddd;">
         <!-- Header with Show/Hide Button -->
-        <div class="d-flex justify-content-between align-items-center" style="border-bottom: 2px solid #e0e0e0; padding-bottom: 10px;">
-            <button id="toggle-filters" class="btn btn-sm" style="font-size: 10px;">
-                <span id="toggle-icon" class="fas fa-chevron-down" style="margin-right: 5px;"></span> Apply Filters
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h5 style="color: #333; font-weight: bold; margin: 0;">Filters</h5>
+            <button onclick="toggleFilter()" style="background: #007bff; color: #fff; border: none; padding: 5px 10px; font-size: 7px; border-radius: 4px; cursor: pointer;">
+                <i class="fas fa-sliders-h" style="margin-right: 5px;"></i> Toggle Filters
             </button>
         </div>
 
         <!-- Collapsible Filter Section -->
-        <div id="filter-section" class="mt-3">
-            <div class="row gy-4 align-items-center">
+        <div id="filterSection" style="display: block;">
+            <div style="display: flex; flex-wrap: wrap; gap: 15px;">
                 <!-- Search Box -->
-                <div class="col-md-4">
-                    <div class="input-group shadow-sm">
-                        <span class="input-group-text" style="background-color: #007bff; color: #fff; border-radius: 5px 0 0 5px;">
-                            <i class="fas fa-search"></i>
-                        </span>
-                        <input type="text" class="form-control search_parameter" id="search_value" placeholder="Type order details..." 
-                            style="border-radius: 0 5px 5px 0; border: 1px solid #dee2e6;">
-                    </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <input type="text" id="search_value" placeholder="Search orders..." 
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                 <!-- Date Range Picker -->
-                <div class="col-md-5">
-                    <div class="input-group shadow-sm">
-                        <span class="input-group-text" style="background-color: #007bff; color: #fff; border-radius: 5px 0 0 5px;">
-                            <i class="fas fa-calendar-alt"></i>
-                        </span>
-                        <input type="text" class="form-control date-range-picker" id="date_range" 
-                            placeholder="MM/DD/YYYY - MM/DD/YYYY" 
-                            style="border-radius: 0 5px 5px 0; border: 1px solid #dee2e6;">
-                    </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <input type="text" id="date_range" placeholder="MM/DD/YYYY - MM/DD/YYYY"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                 <!-- Items Per Page -->
-                <div class="col-md-3">
-                    <select class="form-select form-select-sm shadow-sm" id="items_per_page_select" 
-                        style="border-radius: 5px; border: 1px solid #dee2e6;">
+                <div style="flex: 1; min-width: 150px;">
+                    <select id="items_per_page_select" 
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                         <option value="10" selected>10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
