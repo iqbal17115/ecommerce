@@ -29,6 +29,7 @@ class OrderListRequest extends FormRequest
             'code' => 'nullable',
             'start_date' => 'nullable',
             'end_date' => 'nullable',
+            'limit' => ['nullable'],
         ];
     }
 }
