@@ -1,6 +1,4 @@
 <div class="tab-pane fade" id="orders">
-    <h2 class="tab-title">Your Orders</h2>
-
     <div class="row">
         @include('ecommerce.my-account.partials.filters.sales')
         <input type="date" id="from_date" class="form-control search_parameter" style="display: none;">

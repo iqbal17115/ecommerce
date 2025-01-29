@@ -27,6 +27,7 @@ class OrderListResource extends JsonResource
             "note" => $this->note,
             "status" => $this->status,
             "order_address" => new OrderAddressResource($this->orderAddress),
+            "order_details" => OrderDetailsResource::collection($this->OrderDetail),
         ];
     }
 }
