@@ -6,7 +6,6 @@
     </div>
 
     <div class="card shadow">
-        <h5 class="card-title mb-4">Order Details</h5>
         <div class="card-body" id="orders-container"></div>
     </div>
 </div>

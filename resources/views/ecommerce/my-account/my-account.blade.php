@@ -216,21 +216,10 @@ function generateOrderDetails(orderDetails) {
             loadUserOrder(@json($user->id ?? null));
         });
 
-        document.getElementById('toggle-filters').addEventListener('click', function () {
-            const filterSection = document.getElementById('filter-section');
-            const toggleIcon = document.getElementById('toggle-icon');
-            const toggleText = document.getElementById('toggle-text');
-
-            if (filterSection.style.display === 'none' || !filterSection.style.display) {
-                filterSection.style.display = 'block';
-                toggleIcon.style.transform = 'rotate(180deg)';
-                toggleText.textContent = 'Hide Filters';
-            } else {
-                filterSection.style.display = 'none';
-                toggleIcon.style.transform = 'rotate(0deg)';
-                toggleText.textContent = 'Show Filters';
-            }
-        });
+        function toggleFilter() {
+        var section = document.getElementById("filterSection");
+        section.style.display = section.style.display === "none" ? "block" : "none";
+    }
     </script>
 
 @endpush
