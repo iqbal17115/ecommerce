@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/global.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/my_account.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/custom_modal.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account.css') }}?v={{ time() }}">
 @endpush
 @section('content')
 
