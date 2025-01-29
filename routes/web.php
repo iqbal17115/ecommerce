@@ -136,6 +136,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::controller(PlaceOrderOrderController::class)->group(function () {
             Route::post('order-place', 'store')->name("order_place");
             Route::get('/user-orders/lists', 'lists')->name('user_orders.lists');
+            Route::get('/user-orders/order-details', 'orderDetails')->name('user_orders.order_details');
         });
 
         // Order Notification
