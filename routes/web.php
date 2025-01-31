@@ -45,6 +45,7 @@ use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
 use App\Http\Controllers\Frontend\OrderTracking\OrderTrackingController;
 use App\Http\Controllers\FrontEnd\ReplyController;
 use App\Http\Controllers\FrontEnd\ReviewController;
+use App\Http\Controllers\Invoice\MyAccountInvoiceController;
 use App\Http\Controllers\Language\LanguageController;
 use App\Http\Controllers\Panel\AttributeController;
 use App\Http\Controllers\Panel\AttributeValueController;
@@ -577,5 +578,10 @@ Route::group(['middleware' => 'web'], function () {
         );
         // End Currency
 
+    });
+
+    // Review
+    Route::controller(MyAccountInvoiceController::class)->group(function () {
+        Route::get('/my-orders/invoice/{order}', 'orderInvoice')->name('my_order.invoice');
     });
 });

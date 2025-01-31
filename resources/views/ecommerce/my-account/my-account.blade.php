@@ -156,7 +156,7 @@ function generateOrderCard(order) {
                     <div class="col-md-4 text-end">
                         <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2">Track Package</a>
                         <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2">Cancel Order</a>
-                        <button class="btn btn-outline-success btn-sm">Print Invoice</button>
+                        <button class="btn btn-outline-success btn-sm" onclick="printInvoice('${order.id}')">Print Invoice</button>
                     </div>
                 </div>
             </div>
@@ -222,157 +222,164 @@ function generateOrderDetails(orderDetails) {
         section.style.display = section.style.display === "none" ? "block" : "none";
     }
 
-    // Function to generate order card HTML
-function generateOrderDetailCard(order) {
-    return `
-        <div class="card mb-4 shadow-lg border-0">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <h5 class="m-0">Order ID# ${order.code}</h5>
-                <a href="https://www.aladdinne.com/" target="_blank" class="text-light text-decoration-none">
-                    Ordered On: aladdinne.com
-                </a>
-            </div>
-            <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-md-4">
-                        <h6 class="text-muted">Estimated Delivery</h6>
-                        <p class="fw-bold text-dark">By TBD</p>
+        // Function to generate order card HTML
+        function generateOrderDetailCard(order) {
+            return `
+                <div class="card mb-4 shadow-lg border-0">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="m-0">Order ID# ${order.code}</h5>
+                        <a href="https://www.aladdinne.com/" target="_blank" class="text-light text-decoration-none">
+                            Ordered On: aladdinne.com
+                        </a>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <h6 class="text-muted">Order Total</h6>
-                        <p class="fs-5 fw-bold text-success">${formatDetailPrice(order.payable_amount)}</p>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <h6 class="text-muted">Estimated Delivery</h6>
+                                <p class="fw-bold text-dark">By TBD</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <h6 class="text-muted">Order Total</h6>
+                                <p class="fs-5 fw-bold text-success">${formatDetailPrice(order.payable_amount)}</p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2">Track Package</a>
+                                <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2">Cancel Order</a>
+                                <button class="btn btn-outline-success btn-sm">Print Invoice</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4 text-end">
-                        <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2">Track Package</a>
-                        <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2">Cancel Order</a>
-                        <button class="btn btn-outline-success btn-sm">Print Invoice</button>
+                    <div class="card-footer bg-light">
+                        <h6 class="text-muted">Order Details</h6>
+                        <table class="table table-bordered">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th class="text-center">Unit Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${generateOrderDetailsCard(order.order_details)}
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-            </div>
-            <div class="card-footer bg-light">
-                <h6 class="text-muted">Order Details</h6>
-                <table class="table table-bordered">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Product</th>
-                            <th class="text-center">Unit Price</th>
-                            <th class="text-center">Quantity</th>
-                            <th class="text-center">Total Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${generateOrderDetailsCard(order.order_details)}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    `;
-}
-
-// Function to format price (adds currency symbol and comma separators)
-function formatDetailPrice(amount) {
-    return new Intl.NumberFormat('en-BD', { 
-        style: 'currency', 
-        currency: 'BDT', 
-        minimumFractionDigits: 2 
-    }).format(amount);
-}
-
-// Function to format quantity (removes decimals if unnecessary)
-function formatDetailQuantity(quantity) {
-    return quantity % 1 === 0 ? quantity : quantity.toFixed(2);
-}
-
-// Function to generate order details HTML
-function generateOrderDetailsCard(orderDetails) {
-    if (!Array.isArray(orderDetails) || orderDetails.length === 0) {
-        return '<tr><td colspan="4" class="text-muted text-center">No order details available.</td></tr>';
-    }
-
-    return orderDetails.map(orderDetail => `
-        <tr>
-            <td>
-                <div class="d-flex align-items-center">
-                    ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px;" alt=""> `}
-                    <span class="ml-1">${orderDetail.product_name || 'Product not available'}</span>
-                </div>
-            </td>
-            <td class="text-center">${formatDetailPrice(orderDetail.unit_price)}</td>
-            <td class="text-center">${formatDetailQuantity(orderDetail.quantity)} pcs</td>
-            <td class="text-center">${formatDetailPrice(orderDetail.total_amount)}</td>
-        </tr>
-    `).join('');
-}
-
-    $(document).on('submit', '#orderSearchForm', function(e) {
-        e.preventDefault(); // Prevent default form submission
-        
-        let orderCode = $('#order_code').val().trim(); // Get input value
-        
-        let params = new URLSearchParams({ order_code: orderCode }).toString();
-        getDetails(`user-orders/order-details?${params}`, (data) => {
-            const container = $('#order-detail-container');
-            container.empty();
-
-            if (!data.results) {
-                // container.append('<p class="text-muted text-center">No orders found.</p>');
-                return;
-            }
-
-            // Append the generated order tracking UI
-            container.append(generateOrderTrackingUI(data.results.order_statuses, data.results.order_tracking, data.results.status_messages));
-
-            container.append(generateOrderDetailCard(data.results));
-        });
-    });
-
-    // Function to generate order tracking UI with status messages
-function generateOrderTrackingUI(orderStatuses, trackingData, statusMessages) {
-    const trackingContainer = $('<div class="row justify-content-between mb-3"></div>');
-    const messageContainer = $('<div class="status-message-container"></div>');
-
-    orderStatuses.forEach(orderStatus => {
-        let matchingItem = trackingData.find(item => item.status === orderStatus);
-        let completed = matchingItem !== undefined;
-        let desiredCreatedAt = completed ? matchingItem.created_at : null;
-        let statusMessage = statusMessages[orderStatus] || ''; // Get message or empty string
-
-        let trackingHTML = `
-            <div class="order-tracking ${completed ? 'completed' : ''}">
-                <span class="is-complete"></span>
-                <p>${orderStatus.charAt(0).toUpperCase() + orderStatus.slice(1)}
-                    <br><span>${desiredCreatedAt ? formatDate(desiredCreatedAt) : ''}</span>
-                </p>
-            </div>
-        `;
-        trackingContainer.append(trackingHTML);
-
-        if (completed && statusMessage) {
-            let messageHTML = `
-                <div class="d-flex p-3" style="font-size: 16px;">
-                    <span class="badge badge-primary badge-pill mr-5">${formatDateTime(desiredCreatedAt)}</span>
-                    ${statusMessage}
                 </div>
             `;
-            messageContainer.append(messageHTML);
         }
-    });
 
-    return $('<div></div>').append(trackingContainer).append(messageContainer);
-}
+        // Function to format price (adds currency symbol and comma separators)
+        function formatDetailPrice(amount) {
+            return new Intl.NumberFormat('en-BD', { 
+                style: 'currency', 
+                currency: 'BDT', 
+                minimumFractionDigits: 2 
+            }).format(amount);
+        }
 
-// Function to format date
-function formatDate(dateStr) {
-    let date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-}
+        // Function to format quantity (removes decimals if unnecessary)
+        function formatDetailQuantity(quantity) {
+            return quantity % 1 === 0 ? quantity : quantity.toFixed(2);
+        }
 
-// Function to format date and time
-function formatDateTime(dateStr) {
-    let date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) +
-           ' ' + date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-}
+        // Function to generate order details HTML
+        function generateOrderDetailsCard(orderDetails) {
+            if (!Array.isArray(orderDetails) || orderDetails.length === 0) {
+                return '<tr><td colspan="4" class="text-muted text-center">No order details available.</td></tr>';
+            }
+
+            return orderDetails.map(orderDetail => `
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px;" alt=""> `}
+                            <span class="ml-1">${orderDetail.product_name || 'Product not available'}</span>
+                        </div>
+                    </td>
+                    <td class="text-center">${formatDetailPrice(orderDetail.unit_price)}</td>
+                    <td class="text-center">${formatDetailQuantity(orderDetail.quantity)} pcs</td>
+                    <td class="text-center">${formatDetailPrice(orderDetail.total_amount)}</td>
+                </tr>
+            `).join('');
+        }
+
+        $(document).on('submit', '#orderSearchForm', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            
+            let orderCode = $('#order_code').val().trim(); // Get input value
+            
+            let params = new URLSearchParams({ order_code: orderCode }).toString();
+            getDetails(`user-orders/order-details?${params}`, (data) => {
+                const container = $('#order-detail-container');
+                container.empty();
+
+                if (!data.results) {
+                    // container.append('<p class="text-muted text-center">No orders found.</p>');
+                    return;
+                }
+
+                // Append the generated order tracking UI
+                container.append(generateOrderTrackingUI(data.results.order_statuses, data.results.order_tracking, data.results.status_messages));
+
+                container.append(generateOrderDetailCard(data.results));
+            });
+        });
+
+        // Function to generate order tracking UI with status messages
+        function generateOrderTrackingUI(orderStatuses, trackingData, statusMessages) {
+            const trackingContainer = $('<div class="row justify-content-between mb-3"></div>');
+            const messageContainer = $('<div class="status-message-container"></div>');
+
+            orderStatuses.forEach(orderStatus => {
+                let matchingItem = trackingData.find(item => item.status === orderStatus);
+                let completed = matchingItem !== undefined;
+                let desiredCreatedAt = completed ? matchingItem.created_at : null;
+                let statusMessage = statusMessages[orderStatus] || ''; // Get message or empty string
+
+                let trackingHTML = `
+                    <div class="order-tracking ${completed ? 'completed' : ''}">
+                        <span class="is-complete"></span>
+                        <p>${orderStatus.charAt(0).toUpperCase() + orderStatus.slice(1)}
+                            <br><span>${desiredCreatedAt ? formatDate(desiredCreatedAt) : ''}</span>
+                        </p>
+                    </div>
+                `;
+                trackingContainer.append(trackingHTML);
+
+                if (completed && statusMessage) {
+                    let messageHTML = `
+                        <div class="d-flex p-3" style="font-size: 16px;">
+                            <span class="badge badge-primary badge-pill mr-5">${formatDateTime(desiredCreatedAt)}</span>
+                            ${statusMessage}
+                        </div>
+                    `;
+                    messageContainer.append(messageHTML);
+                }
+            });
+
+            return $('<div></div>').append(trackingContainer).append(messageContainer);
+        }
+
+        // Function to format date
+        function formatDate(dateStr) {
+            let date = new Date(dateStr);
+            return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+
+        // Function to format date and time
+        function formatDateTime(dateStr) {
+            let date = new Date(dateStr);
+            return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) +
+                ' ' + date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function printInvoice(orderId) {
+            const printWindow = window.open(`/my-orders/invoice/${orderId}`, '_blank');
+            printWindow.onload = function() {
+                printWindow.print();
+            };
+        }
     </script>
 
 @endpush

@@ -86,6 +86,7 @@ class Order extends Model
     {
         return $this->hasOne(SaleInvoice::class);
     }
+    
     public function Contact()
     {
         return $this->belongsTo(Contact::class);
