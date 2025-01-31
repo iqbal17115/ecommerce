@@ -154,8 +154,8 @@ function generateOrderCard(order) {
                         <p class="fs-5 fw-bold text-success">${formatPrice(order.payable_amount)}</p>
                     </div>
                     <div class="col-md-4 text-end">
-                        <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2">Track Package</a>
-                        <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2">Cancel Order</a>
+                        <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2" style="text-decoration: none;">Track Package</a>
+                        <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2" style="text-decoration: none;">Cancel Order</a>
                         <button class="btn btn-outline-success btn-sm" onclick="printInvoice('${order.id}')">Print Invoice</button>
                     </div>
                 </div>
@@ -243,9 +243,9 @@ function generateOrderDetails(orderDetails) {
                                 <p class="fs-5 fw-bold text-success">${formatDetailPrice(order.payable_amount)}</p>
                             </div>
                             <div class="col-md-4 text-end">
-                                <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2">Track Package</a>
-                                <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2">Cancel Order</a>
-                                <button class="btn btn-outline-success btn-sm">Print Invoice</button>
+                                <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2" style="text-decoration: none;">Track Package</a>
+                                <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2" style="text-decoration: none;">Cancel Order</a>
+                                <button class="btn btn-outline-success btn-sm" onclick="printInvoice('${order.id}')">Print Invoice</button>
                             </div>
                         </div>
                     </div>
