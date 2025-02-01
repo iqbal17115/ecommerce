@@ -7,72 +7,83 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: #f8f9fa;
+            background-color: #f1f3f4;
             margin: 0;
             padding: 0;
+            overflow-x: auto; /* Prevent overflow */
         }
         .invoice-container {
             background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
-            width: 210mm; /* A4 width */
-            min-height: 297mm; /* A4 height */
-            margin: auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            width: 93%;
+            max-width: 850px; /* Adjust this as needed */
+            margin: 50px auto;
+            overflow-x: auto; /* Prevent overflow */
         }
         .invoice-header {
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
         }
         .company-logo {
-            max-height: 70px;
+            max-height: 80px;
         }
         .invoice-title {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
             color: #007bff;
             text-align: center;
-            margin-bottom: 20px;
+            margin-top: 0;
+        }
+        .invoice-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #6c757d;
+            margin: 0;
         }
         .invoice-details {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin: 20px 0;
+            font-size: 14px;
         }
         .invoice-details div {
             width: 48%;
         }
-        .address-section {
-            margin: 20px 0;
-            font-size: 14px;
-        }
         .address-section p {
             margin: 5px 0;
+            font-size: 14px;
         }
-        .address-section .address-line {
-            display: inline-block;
-            margin-right: 10px;
-            width: 48%;
+        .address-section strong {
+            font-weight: bold;
+            color: #333;
         }
-        /* Table Styles */
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 30px;
         }
         .table th, .table td {
-            border: 1px solid #000;
-            padding: 10px;
+            border: 2px solid #dee2e6;
+            padding: 12px;
             text-align: center;
+            font-size: 14px;
         }
         .table th {
-            background: #007bff;
-            color: #fff;
+            background-color: #007bff;
+            color: white;
             font-weight: bold;
+        }
+        .table td {
+            background-color: #f8f9fa;
+        }
+        .table tfoot td {
+            font-weight: bold;
+            background-color: #e9ecef;
         }
         .total-section {
             text-align: right;
@@ -82,45 +93,25 @@
             margin-top: 20px;
         }
         .footer-text {
-            font-size: 14px;
+            font-size: 12px;
             color: #6c757d;
             text-align: center;
             margin-top: 30px;
         }
-        .invoice-summary {
-            margin-top: 20px;
-            font-size: 14px;
+        .footer-text a {
+            color: #007bff;
+            text-decoration: none;
         }
-        .invoice-summary div {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-        }
-
         /* Print-specific styles */
         @media print {
             body {
                 font-family: 'Arial', sans-serif;
             }
             .invoice-container {
-                padding: 30px;
-                margin: auto;
+                padding: 40px;
             }
             .invoice-header {
-                border-bottom: 2px solid #007bff;
-            }
-            .table {
-                border-collapse: collapse;
-                margin-top: 10px;
-            }
-            .table th, .table td {
-                border: 1px solid #000;
-                padding: 10px;
-                text-align: center;
-            }
-            .table th {
-                background: #007bff;
-                color: #fff;
+                border-bottom: 3px solid #007bff;
             }
         }
     </style>
@@ -136,7 +127,8 @@
             <img src="{{ asset('logo.jpg') }}" alt="Company Logo" class="company-logo">
         </div>
         <h2 class="invoice-title">Invoice</h2>
-        
+        <p class="invoice-subtitle">Thank you for your purchase!</p>
+
         <div class="invoice-details">
             <div>
                 <p><strong>Order ID:</strong> #{{ $order->code }}</p>
@@ -157,12 +149,12 @@
                <strong>Building:</strong> {{ $order->orderAddress->building_name ?? 'N/A' }}</p>
             <p><strong>Landmark:</strong> {{ $order->orderAddress->nearest_landmark ?? 'N/A' }}, 
                <strong>Type:</strong> {{ $order->orderAddress->type ?? 'N/A' }}</p>
-            <p><strong></strong> {{ $order->orderAddress->country_name ?? 'N/A' }}, 
-               <strong></strong> {{ $order->orderAddress->division_name ?? 'N/A' }}, 
-               <strong></strong> {{ $order->orderAddress->district_name ?? 'N/A' }}, 
-               <strong></strong> {{ $order->orderAddress->upazila_name ?? 'N/A' }}</p>
+            <p><strong>Country:</strong> {{ $order->orderAddress->country_name ?? 'N/A' }}, 
+               <strong>Division:</strong> {{ $order->orderAddress->division_name ?? 'N/A' }},
+               <strong>District:</strong> {{ $order->orderAddress->district_name ?? 'N/A' }},
+               <strong>Upazila:</strong> {{ $order->orderAddress->upazila_name ?? 'N/A' }}</p>
         </div>
-        
+
         <table class="table">
             <thead>
                 <tr>
@@ -184,21 +176,21 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2" style="text-align: right;"><strong>Discount:</strong></td>
+                    <td colspan="2" style="text-align: right;">Discount:</td>
                     <td colspan="2">{{ number_format($order->discount, 2) }} ৳</td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: right;"><strong>Shipping Charge:</strong></td>
+                    <td colspan="2" style="text-align: right;">Shipping Charge:</td>
                     <td colspan="2">{{ number_format($order->shipping_charge, 2) }} ৳</td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: right;"><strong> Payable:</strong></td>
-                    <td colspan="2"><strong>{{ number_format($order->payable_amount, 2) }} ৳</strong></td>
+                    <td colspan="2" style="text-align: right; font-weight: bold;">Payable:</td>
+                    <td colspan="2" style="font-weight: bold;">{{ number_format($order->payable_amount, 2) }} ৳</td>
                 </tr>
             </tfoot>
-        </table>  
-        
-        <p class="footer-text">Thank you for your purchase! If you have any questions, contact us at support@aladdinne.com</p>
+        </table>
+
+        <p class="footer-text">If you have any questions, contact us at <a href="mailto:support@aladdinne.com">support@aladdinne.com</a></p>
     </div>
 
     <script>
