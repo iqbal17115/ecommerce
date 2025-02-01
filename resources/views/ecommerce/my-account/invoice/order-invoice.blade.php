@@ -126,9 +126,6 @@
             </div>
             <img src="{{ asset('logo.jpg') }}" alt="Company Logo" class="company-logo">
         </div>
-        <h2 class="invoice-title">Invoice</h2>
-        <p class="invoice-subtitle">Thank you for your purchase!</p>
-
         <div class="invoice-details">
             <div>
                 <p><strong>Order ID:</strong> #{{ $order->code }}</p>
