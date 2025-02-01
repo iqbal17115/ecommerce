@@ -307,6 +307,7 @@
                                             </td>
                                             <td>
                                                 <a href="${url}" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="Advance Edit" data-original-title="Advance Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                <button class="btn btn-outline-success btn-sm" onclick="printInvoice('${order.id}')">Print Invoice</button>
                                                 <button 
                                                     type="button" 
                                                     class="btn btn-sm btn-primary view-tracking" 
@@ -491,5 +492,11 @@
     });
 });
 
+function printInvoice(orderId) {
+            const printWindow = window.open(`/my-orders/invoice/${orderId}`, '_blank');
+            printWindow.onload = function() {
+                printWindow.print();
+            };
+        }
     </script>
 @endpush
