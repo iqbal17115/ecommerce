@@ -125,7 +125,7 @@ function formatPrice(amount) {
         style: 'currency', 
         currency: 'BDT', 
         minimumFractionDigits: 2 
-    }).format(amount);
+    }).format(amount).replace('BDT', '৳');
 }
 
 // Function to format quantity (removes decimals if unnecessary)
@@ -281,7 +281,7 @@ function generateOrderDetails(orderDetails) {
                 style: 'currency', 
                 currency: 'BDT', 
                 minimumFractionDigits: 2 
-            }).format(amount);
+            }).format(amount).replace('BDT', '৳');
         }
 
         // Function to format quantity (removes decimals if unnecessary)
