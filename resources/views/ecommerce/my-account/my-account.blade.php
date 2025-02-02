@@ -137,7 +137,7 @@ function formatQuantity(quantity) {
 function generateOrderCard(order) {
     return `
         <div class="card mb-4 shadow-lg border-0">
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color: #f4631b;">
                 <h5 class="m-0">Order ID# ${order.code}</h5>
                 <a href="https://www.aladdinne.com/" target="_blank" class="text-light text-decoration-none">
                     Ordered On: aladdinne.com
@@ -147,7 +147,7 @@ function generateOrderCard(order) {
                 <div class="row align-items-center">
                     <div class="col-md-4">
                         <h6 class="text-muted">Estimated Delivery</h6>
-                        <p class="fw-bold text-dark">By TBD</p>
+                        <p class="fw-bold text-dark">Sold By TBD</p>
                     </div>
                     <div class="col-md-4 text-center">
                         <h6 class="text-muted">Order Total</h6>
@@ -231,7 +231,7 @@ function generateOrderDetails(orderDetails) {
         function generateOrderDetailCard(order) {
             return `
                 <div class="card mb-4 shadow-lg border-0">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center" style="background-color: #f4631b;">
                         <h5 class="m-0">Order ID# ${order.code}</h5>
                         <a href="https://www.aladdinne.com/" target="_blank" class="text-light text-decoration-none">
                             Ordered On: aladdinne.com
