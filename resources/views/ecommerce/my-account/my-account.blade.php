@@ -123,7 +123,7 @@
 function formatPrice(amount) {
     return new Intl.NumberFormat('en-BD', { 
         style: 'currency', 
-        currency: '৳', 
+        currency: 'BDT', 
         minimumFractionDigits: 2 
     }).format(amount);
 }
@@ -279,7 +279,7 @@ function generateOrderDetails(orderDetails) {
         function formatDetailPrice(amount) {
             return new Intl.NumberFormat('en-BD', { 
                 style: 'currency', 
-                currency: '৳', 
+                currency: 'BDT', 
                 minimumFractionDigits: 2 
             }).format(amount);
         }
