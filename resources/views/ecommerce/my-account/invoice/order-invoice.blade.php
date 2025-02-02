@@ -26,7 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid #007bff;
+            border-bottom: 3px solid #f4631b;
             padding-bottom: 20px;
         }
         .company-logo {
@@ -35,7 +35,7 @@
         .invoice-title {
             font-size: 28px;
             font-weight: bold;
-            color: #007bff;
+            color: #f4631b;
             text-align: center;
             margin-top: 0;
         }
@@ -74,7 +74,7 @@
             font-size: 14px;
         }
         .table th {
-            background-color: #007bff;
+            background-color: #f4631b;
             color: white;
             font-weight: bold;
         }
@@ -89,7 +89,7 @@
             text-align: right;
             font-size: 18px;
             font-weight: bold;
-            color: #007bff;
+            color: #f4631b;
             margin-top: 20px;
         }
         .footer-text {
@@ -99,7 +99,7 @@
             margin-top: 30px;
         }
         .footer-text a {
-            color: #007bff;
+            color: #f4631b;
             text-decoration: none;
         }
         /* Print-specific styles */
@@ -111,7 +111,7 @@
                 padding: 40px;
             }
             .invoice-header {
-                border-bottom: 3px solid #007bff;
+                border-bottom: 3px solid #f4631b;
             }
         }
     </style>
@@ -120,7 +120,7 @@
     <div class="invoice-container">
         <div class="invoice-header">
             <div>
-                <h4 style="color: #007bff; margin: 0;">Aladdinne</h4>
+                <h4 style="color: #f4631b; margin: 0;">Aladdinne</h4>
                 <p style="margin: 5px 0; color: #6c757d;">123 Street, Dhaka, Bangladesh</p>
                 <p style="margin: 5px 0; color: #6c757d;">Email: info@aladdinne.com | Phone: +880123456789</p>
             </div>
