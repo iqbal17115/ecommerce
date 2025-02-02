@@ -165,6 +165,7 @@ function generateOrderCard(order) {
                 <table class="table table-bordered">
                     <thead class="bg-light">
                         <tr>
+                            <th>Image</th>
                             <th>Product</th>
                             <th class="text-center">Unit Price</th>
                             <th class="text-center">Quantity</th>
@@ -191,6 +192,10 @@ function generateOrderDetails(orderDetails) {
             <td>
                 <div class="d-flex align-items-center">
                     ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px;" alt=""> `}
+                </div>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
                     <span class="ml-1">${orderDetail.product_name || 'Product not available'}</span>
                 </div>
             </td>
@@ -254,6 +259,7 @@ function generateOrderDetails(orderDetails) {
                         <table class="table table-bordered">
                             <thead class="bg-light">
                                 <tr>
+                                    <th>Image</th>
                                     <th>Product</th>
                                     <th class="text-center">Unit Price</th>
                                     <th class="text-center">Quantity</th>
@@ -294,6 +300,10 @@ function generateOrderDetails(orderDetails) {
                     <td>
                         <div class="d-flex align-items-center">
                             ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px;" alt=""> `}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
                             <span class="ml-1">${orderDetail.product_name || 'Product not available'}</span>
                         </div>
                     </td>
