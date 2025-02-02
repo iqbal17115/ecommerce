@@ -123,7 +123,7 @@
 function formatPrice(amount) {
     return new Intl.NumberFormat('en-BD', { 
         style: 'currency', 
-        currency: 'BDT', 
+        currency: '৳', 
         minimumFractionDigits: 2 
     }).format(amount);
 }
@@ -168,8 +168,8 @@ function generateOrderCard(order) {
                             <th>Image</th>
                             <th>Product</th>
                             <th class="text-center">Unit Price</th>
-                            <th class="text-center">Quantity</th>
-                            <th class="text-center">Total Price</th>
+                            <th class="text-center">Qty</th>
+                            <th class="text-center">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -262,8 +262,8 @@ function generateOrderDetails(orderDetails) {
                                     <th>Image</th>
                                     <th>Product</th>
                                     <th class="text-center">Unit Price</th>
-                                    <th class="text-center">Quantity</th>
-                                    <th class="text-center">Total Price</th>
+                                    <th class="text-center">Qty</th>
+                                    <th class="text-center">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -279,7 +279,7 @@ function generateOrderDetails(orderDetails) {
         function formatDetailPrice(amount) {
             return new Intl.NumberFormat('en-BD', { 
                 style: 'currency', 
-                currency: 'BDT', 
+                currency: '৳', 
                 minimumFractionDigits: 2 
             }).format(amount);
         }
