@@ -61,6 +61,7 @@ class ConvertToSaleService extends TransactionService
             if($order->sale) {
                 return $order->sale;
             }
+
             $sale = Sale::create([
                 'invoice_no' => $this->getLatestPurchaseInvoiceNumber(),
                 'order_id' => $order->id,
@@ -116,9 +117,10 @@ class ConvertToSaleService extends TransactionService
     protected function getLatestPurchaseInvoiceNumber(): string
     {
         //Get Latest Purchase Data
-        $result = Sale::latest();
+        $result = Sale::orderBy('invoice_no', 'desc');
+
         //Get Invoice Number Prefix
-        $invoiceNumberPrefix = InvoiceNumberSetting::getPrefixByType(InvoiceNumberSettingEnum::PURCHASE);
+        $invoiceNumberPrefix = InvoiceNumberSetting::getPrefixByType(InvoiceNumberSettingEnum::SALE);
         //Generate Order No
         return Utils::generateInvoiceNumber($result->first()->invoice_no ?? 'Invoice', $invoiceNumberPrefix);
     }

@@ -56,7 +56,7 @@ class CartController extends Controller
     public function addToCartBuyNowWithQuantity(AddToCartRequest $addToCartRequest)
     {
         try {
-            $cartItem = $this->cartService->byNowWithQuantity($addToCartRequest->user_id, $addToCartRequest->product_id, $addToCartRequest->quantity);
+            $cartItem = $this->cartService->byNowWithQuantity($addToCartRequest->user_id, $addToCartRequest->product_id, $addToCartRequest->quantity, $addToCartRequest->product_variation_id);
 
             return Message::success(__("messages.success_add"), new CartItemDetailResource($cartItem));
         } catch (Exception $e) {
