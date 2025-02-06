@@ -181,7 +181,7 @@
                                     $product_codes = [];
                                 @endphp
                                 @for ($i = 1; $i <= $orderDetail->quantity; $i++)
-                                    <p>{{ $order?->code }}{{ $orderDetail->id }}{{ $i }}</p>
+                                    <p>{{ $order?->code }}-{{ $i }}</p>
                                     @php
                                         $product_codes[] = $order->code . $orderDetail->id . $i;
                                     @endphp
