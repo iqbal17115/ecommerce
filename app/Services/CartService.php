@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class CartService
 {
-    public function byNowWithQuantity($user_id, $productId, $quantity)
+    public function byNowWithQuantity($user_id, $productId, $quantity, $productVariationId = null)
     {
         $cartItem = CartItem::where('user_id', $user_id)
             ->where('product_id', $productId)
@@ -18,12 +18,14 @@ class CartService
 
         if ($cartItem) {
             $cartItem->quantity = $quantity;
+            $cartItem->product_variation_id = $productVariationId;
             $cartItem->is_active = 1;
             $cartItem->save();
         } else {
             $cartItem = new CartItem([
                 'user_id' => $user_id,
                 'product_id' => $productId,
+                'product_variation_id' => $productVariationId,
                 'quantity' => $quantity,
                 'is_active' => 1,
             ]);
