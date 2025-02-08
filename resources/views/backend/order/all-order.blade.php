@@ -149,6 +149,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
+                            <th>Action</th>
                             <th>Date</th>
                             <th>Order ID</th>
                             <th>Customer</th>
@@ -158,7 +159,6 @@
                             <th>Delivery Type</th>
                             <th>Fullfilment Status</th>
                             <th>View</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="order_container"></tbody>
@@ -294,6 +294,29 @@
                                             <td style="font-weight: bold; font-size: 15px;">
                                                 ${index+1}<br>
                                             </td>
+                                           <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                                Actions
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item text-primary" href="${url}"><i class="mdi mdi-pencil"></i> Edit</a>
+                                                <button class="dropdown-item text-success" onclick="printInvoice('${order.id}')">
+                                                    <i class="mdi mdi-printer"></i> Print
+                                                </button>
+                                                <button class="dropdown-item text-primary view-tracking" data-order-id="${order.id}" data-toggle="modal" data-target="#orderTrackingModal">
+                                                    <i class="mdi mdi-map-marker"></i> Track
+                                                </button>
+                                                <button class="dropdown-item text-info make-payment" data-order-id="${order.id}" data-toggle="modal" data-target="#makePaymentModal">
+                                                    <i class="mdi mdi-credit-card"></i> Pay
+                                                </button>
+                                                <button class="dropdown-item text-danger view-payment" data-order-id="${order.id}" data-toggle="modal" data-target="#viewPaymentModal">
+                                                    <i class="mdi mdi-eye"></i> View
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+
                                             <td>
                                                 ${new Date(order.order_date).toLocaleDateString('en-US', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }
                                             </td>
@@ -317,34 +340,6 @@
                                                     class="btn btn-primary btn-sm btn-rounded order_detail_modal" data-toggle="modal"
                                                     data-target=".exampleModal">
                                                     View
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <a href="${url}" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="Advance Edit" data-original-title="Advance Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                <button class="btn btn-outline-success btn-sm" onclick="printInvoice('${order.id}')">Print Invoice</button>
-                                                <button 
-                                                    type="button" 
-                                                    class="btn btn-sm btn-primary view-tracking" 
-                                                    data-order-id="${order.id}" 
-                                                    data-toggle="modal" 
-                                                    data-target="#orderTrackingModal">
-                                                     Tracking
-                                                </button>
-                                                <button 
-                                                    type="button" 
-                                                    class="btn btn-sm btn-info make-payment" 
-                                                    data-order-id="${order.id}" 
-                                                    data-toggle="modal" 
-                                                    data-target="#makePaymentModal">
-                                                     Payment
-                                                </button>
-                                                <button 
-                                                    type="button" 
-                                                    class="btn btn-sm btn-danger view-payment" 
-                                                    data-order-id="${order.id}" 
-                                                    data-toggle="modal" 
-                                                    data-target="#viewPaymentModal">
-                                                     View Payment
                                                 </button>
                                             </td>
                                         </tr>
