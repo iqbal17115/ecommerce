@@ -300,7 +300,7 @@
                                                         Actions
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item text-primary" href="${url}"><i class="mdi mdi-pencil"></i> Edit</a>
+                                                        <a class="dropdown-item text-primary" href="${url}"><i class="mdi mdi-pencil"></i> Advance Edit</a>
                                                         <button class="dropdown-item text-success" onclick="printInvoice('${order.id}')">
                                                             <i class="mdi mdi-printer"></i> Print
                                                         </button>

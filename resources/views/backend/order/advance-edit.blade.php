@@ -74,9 +74,9 @@
                                     <button id="cancelOrderBtn"
                                         class="btn btn-danger waves-effect waves-light btn-sm {{ $order->status == 'cancelled' ? 'disabled' : '' }}"
                                         data-toggle="modal" data-target=".cancel-order">Cancel</button>
-                                    <button id="printInvoiceBtn" class="btn btn-success btn-sm"
-                                        style="display: {{ $order->status == 'processing' ? 'inline' : 'none' }};">Print
-                                        Invoice</button>
+                                        <a href="{{ route('my_order.invoice', ['order' => $order->id]) }}" target="_blank" class="btn btn-sm btn-outline-success">
+                                            <i class="mdi mdi-printer"></i> Print Invoice
+                                        </a>                                        
                                 </div>
                             </div>
                         </div>
