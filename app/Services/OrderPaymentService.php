@@ -129,7 +129,7 @@ class OrderPaymentService
         }
 
         // If status is "paid" and there's a due amount, process payment
-        if ($paymentStatus === PaymentStatusEnum::PAID && $paymentStatus === PaymentStatusEnum::COMPLETE && $orderPayment->due_amount > 0) {
+        if (($paymentStatus === strtolower(PaymentStatusEnum::PAID) || $paymentStatus === strtolower(PaymentStatusEnum::COMPLETE)) && $orderPayment->due_amount > 0) {
             $this->makePayment([
                 'order_id' => $order->id,
                 'payment_type' => 'cash', // Default to cash
