@@ -279,6 +279,16 @@
 
                 data['data'].forEach(function(order, index) {
                     var url = `/advance-edit?id=${order.id}`;
+                    // Determine badge color based on payment status
+                    let paymentBadgeClass = '';
+                    if (order.payment_status === 'Paid') {
+                        paymentBadgeClass = 'badge-success'; // Green for paid
+                    } else if (order.payment_status === 'Partially Paid') {
+                        paymentBadgeClass = 'badge-warning'; // Yellow for partially paid
+                    } else {
+                        paymentBadgeClass = 'badge-danger'; // Red for pending
+                    }
+
                     const orderHtml = `
                                         <tr class="shadow-sm" id="order-row-${order.id}">
                                             <td style="font-weight: bold; font-size: 15px;">
@@ -293,7 +303,11 @@
                                             <td>${order.user ? order.user.name : ''}</td>
                                             <td>${order.total_amount}</td>
                                             <td></td>
-                                            <td><span class="badge badge-pill badge-soft-success font-size-12">Paid</span></td>
+                                            <td>
+                                                <span class="badge badge-pill ${paymentBadgeClass} font-size-12">
+                                                    ${order.payment_status.charAt(0).toUpperCase() + order.payment_status.slice(1).replace('_', ' ')}
+                                                </span>
+                                            </td>
                                             <td><i class="fab fa-cc-mastercard mr-1"></i> Mastercard</td>
                                             <td>
                                                 <span class="badge badge-danger font-size-14">${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</span>
@@ -315,6 +329,22 @@
                                                     data-toggle="modal" 
                                                     data-target="#orderTrackingModal">
                                                      Tracking
+                                                </button>
+                                                <button 
+                                                    type="button" 
+                                                    class="btn btn-sm btn-info make-payment" 
+                                                    data-order-id="${order.id}" 
+                                                    data-toggle="modal" 
+                                                    data-target="#makePaymentModal">
+                                                     Payment
+                                                </button>
+                                                <button 
+                                                    type="button" 
+                                                    class="btn btn-sm btn-danger view-payment" 
+                                                    data-order-id="${order.id}" 
+                                                    data-toggle="modal" 
+                                                    data-target="#viewPaymentModal">
+                                                     View Payment
                                                 </button>
                                             </td>
                                         </tr>
@@ -492,11 +522,13 @@
     });
 });
 
-function printInvoice(orderId) {
-            const printWindow = window.open(`/my-orders/invoice/${orderId}`, '_blank');
-            printWindow.onload = function() {
-                printWindow.print();
-            };
-        }
+    function printInvoice(orderId) {
+                const printWindow = window.open(`/my-orders/invoice/${orderId}`, '_blank');
+                printWindow.onload = function() {
+                    printWindow.print();
+                };
+    }
     </script>
+
+    <script src="{{ asset('js/admin_panel/payment/payment.js') }}?v={{ time() }}"></script>
 @endpush

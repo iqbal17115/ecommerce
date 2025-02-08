@@ -49,6 +49,7 @@ class OrderController extends Controller
     {
         try {
             $cart = $this->getLists(CartItem::where('is_active', 1)->where("user_id", $orderPlaceRequest->user_id), $orderPlaceRequest->all(), CartCartItemListResource::class);
+            
             // Validate the request data and store the data
             $order = $this->orderService->store($orderPlaceRequest->validated(), $cart);
 

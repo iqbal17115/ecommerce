@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\InvoiceNumberSettingEnum;
 use App\Enums\OrderStatusEnum;
+use App\Enums\PaymentStatusEnum;
 use App\Helpers\Utils;
 use App\Models\Address\Address;
 use App\Models\Backend\Order\OrderTracking;
@@ -13,6 +14,7 @@ use App\Models\FrontEnd\Order;
 use App\Models\FrontEnd\OrderDetail;
 use App\Models\InvoiceNumberSetting;
 use App\Models\OrderAddress;
+use App\Models\OrderPayment;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -87,6 +89,20 @@ class OrderService
                     $orderDetails->save();
                 }
             }
+
+            // Order Payment
+            OrderPayment::create(
+                [
+                    'order_id' => $order->id,
+                    'total_order_price' => $totalAmount,
+                    'total_shipping_charge_amount' => $shippingChargeSum,
+                    'total_amount' => $order->payable_amount,
+                    'amount_paid' => 0,
+                    'due_amount' => $order->payable_amount,
+                    'total_receive_amount' => 0,
+                    'payment_status' => PaymentStatusEnum::PENDING
+                ],
+            );
 
             $address = Address::find($validatedData['address_id']);
 

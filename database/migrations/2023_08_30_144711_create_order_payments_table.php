@@ -19,10 +19,14 @@ class CreateOrderPaymentsTable extends Migration
         Schema::create('order_payments', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->uuid('order_id')->nullable()->index();
-            $table->enum('payment_type', array_keys(PaymentTypeEnum::getPaymentTypes()));
-            $table->enum('payment_method', array_keys(PaymentMethodEnum::getValues()));
-            $table->string('payment_id');
-            $table->dateTime('payment_date');
+            $table->decimal('total_order_price');
+            $table->decimal('total_discount_amount')->default(0);
+            $table->decimal('total_shipping_charge_amount')->default(0);
+            $table->decimal('total_amount')->default(0);
+            $table->decimal('amount_paid');
+            $table->decimal('due_amount');
+            $table->decimal('total_receive_amount')->default(0);
+            $table->string('payment_status');
             $table->uuid('created_by')->nullable()->index();
             $table->uuid('updated_by')->nullable()->index();
             $table->uuid('deleted_by')->nullable()->index();

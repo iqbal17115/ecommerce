@@ -2,9 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\PaymentStatusEnum;
+use App\Helpers\TextFormatHelper;
 use App\Http\Resources\OrderDetailResource;
 use App\Http\Resources\ContactResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use PHPUnit\Framework\Test;
 
 class OrderResource extends JsonResource
 {
@@ -27,6 +30,7 @@ class OrderResource extends JsonResource
             'vat' => $this->vat,
             'payable_amount' => $this->payable_amount,
             'note' => $this->note,
+            'payment_status' => TextFormatHelper::formatText($this?->orderPayment?->payment_status ?? PaymentStatusEnum::PENDING),
             'status' => $this->status,
             'order_details' => OrderDetailResource::collection($this->OrderDetail),
             'contact' => new ContactResource($this->Contact)

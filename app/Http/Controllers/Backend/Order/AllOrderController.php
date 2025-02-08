@@ -21,11 +21,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Order\OrderStatusRequest;
 use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
-use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\FrontEnd\Order;
 use App\Models\OrderAddress;
+use App\Models\OrderPayment;
 use App\Services\AdvanceEditOrderService;
+use App\Services\OrderPaymentService;
 use App\Traits\Barcode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class AllOrderController extends Controller
 
     private $advanceEditOrderService;
 
-    public function __construct(AdvanceEditOrderService $advanceEditOrderService)
+    public function __construct(AdvanceEditOrderService $advanceEditOrderService, private readonly OrderPaymentService $orderPaymentService)
     {
         $this->advanceEditOrderService = $advanceEditOrderService;
     }
@@ -176,10 +177,12 @@ class AllOrderController extends Controller
 
     public function orderPaymentStatus(OrderPaymentStatusRequest $orderPaymentStatusRequest, Order $order)
     {
-
         $orderNote = OrderNoteStatus::firstOrNew(['order_id' => $order->id]);
         $orderNote->payment_status = $orderPaymentStatusRequest->validated()['payment_status'];
         $orderNote->save();
+
+        // Call the handleOrderPaymentStatus method
+        $this->orderPaymentService->handleOrderPaymentStatus($order, $orderPaymentStatusRequest->input('payment_status'));
 
         return response()->json(
             [

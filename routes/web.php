@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\Order\AllOrderController;
 use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\API\Panel\User\OrderController as PlaceOrderOrderController;
 use App\Http\Controllers\Backend\OrderNotificationController;
+use App\Http\Controllers\Backend\OrderPaymentController;
 use App\Http\Controllers\Backend\OrderProduct\OrderProductCancellationController;
 use App\Http\Controllers\Backend\OrderProduct\OrderProductReturnController;
 use App\Http\Controllers\Backend\SupplierController;
@@ -583,5 +584,11 @@ Route::group(['middleware' => 'web'], function () {
     // Review
     Route::controller(MyAccountInvoiceController::class)->group(function () {
         Route::get('/my-orders/invoice/{order}', 'orderInvoice')->name('my_order.invoice');
+    });
+
+    // Order Payment
+    Route::controller(OrderPaymentController::class)->group(function () {
+        Route::get('order-payments/{order}', 'show')->name("order_payments.show");
+        Route::post('order-payments', 'store')->name("order_payments.store");
     });
 });

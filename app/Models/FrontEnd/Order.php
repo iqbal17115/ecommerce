@@ -9,9 +9,9 @@ use App\Models\FrontEnd\OrderDetail;
 use App\Models\Backend\Inventory\SaleInvoice;
 use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
-use App\Models\Backend\OrderProduct\OrderPayment;
 use App\Models\Backend\OrderProduct\OrderProductBox;
 use App\Models\OrderAddress;
+use App\Models\OrderPayment;
 use App\Models\User;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
@@ -95,6 +95,7 @@ class Order extends Model
     {
         return $this->belongsTo(District::class);
     }
+    
     public function OrderDetail()
     {
         return $this->hasMany(OrderDetail::class);
