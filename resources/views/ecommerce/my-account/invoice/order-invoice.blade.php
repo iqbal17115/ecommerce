@@ -10,7 +10,7 @@
             background-color: #f1f3f4;
             margin: 0;
             padding: 0;
-            overflow-x: auto; /* Prevent overflow */
+            overflow-x: auto;
         }
         .invoice-container {
             background: #fff;
@@ -18,9 +18,9 @@
             border-radius: 10px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             width: 93%;
-            max-width: 850px; /* Adjust this as needed */
+            max-width: 850px;
             margin: 50px auto;
-            overflow-x: auto; /* Prevent overflow */
+            overflow-x: auto;
         }
         .invoice-header {
             display: flex;
@@ -58,10 +58,6 @@
             margin: 5px 0;
             font-size: 14px;
         }
-        .address-section strong {
-            font-weight: bold;
-            color: #333;
-        }
         .table {
             width: 100%;
             border-collapse: collapse;
@@ -77,9 +73,6 @@
             background-color: #f4631b;
             color: white;
             font-weight: bold;
-        }
-        .table td {
-            background-color: #f8f9fa;
         }
         .table tfoot td {
             font-weight: bold;
@@ -102,7 +95,6 @@
             color: #f4631b;
             text-decoration: none;
         }
-        /* Print-specific styles */
         @media print {
             body {
                 font-family: 'Arial', sans-serif;
@@ -144,12 +136,6 @@
                <strong>Mobile:</strong> {{ $order->orderAddress->mobile ?? 'N/A' }}</p>
             <p><strong>Street:</strong> {{ $order->orderAddress->street_address ?? 'N/A' }}, 
                <strong>Building:</strong> {{ $order->orderAddress->building_name ?? 'N/A' }}</p>
-            <p><strong>Landmark:</strong> {{ $order->orderAddress->nearest_landmark ?? 'N/A' }}, 
-               <strong>Type:</strong> {{ $order->orderAddress->type ?? 'N/A' }}</p>
-            <p><strong>Country:</strong> {{ $order->orderAddress->country_name ?? 'N/A' }}, 
-               <strong>Division:</strong> {{ $order->orderAddress->division_name ?? 'N/A' }},
-               <strong>District:</strong> {{ $order->orderAddress->district_name ?? 'N/A' }},
-               <strong>Upazila:</strong> {{ $order->orderAddress->upazila_name ?? 'N/A' }}</p>
         </div>
 
         <table class="table">
@@ -185,6 +171,25 @@
                     <td colspan="2" style="font-weight: bold;">{{ number_format($order->payable_amount, 2) }} ৳</td>
                 </tr>
             </tfoot>
+        </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Payment Date</th>
+                    <th>Method</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($order?->orderPayment?->orderPaymentDetails as $payment)
+                <tr>
+                    <td>{{ $payment->created_at->format('d M, Y') }}</td>
+                    <td>{{ $payment->payment_method ?? 'N/A' }}</td>
+                    <td>{{ number_format($payment->amount, 2) }} ৳</td>
+                </tr>
+                @endforeach
+            </tbody>
         </table>
 
         <p class="footer-text">If you have any questions, contact us at <a href="mailto:support@aladdinne.com">support@aladdinne.com</a></p>
