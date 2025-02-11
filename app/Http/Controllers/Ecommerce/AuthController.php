@@ -94,35 +94,31 @@ class AuthController extends Controller
 
     public function customRegistration(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:70',
-            'mobile_or_email' => ['required', 'string', 'max:255', function ($attribute, $value, $fail) {
-                // Check if the input is a valid email or mobile number
-                if (!filter_var($value, FILTER_VALIDATE_EMAIL) && !preg_match('/^\+?[1-9]\d{1,14}$/', $value)) {
-                    $fail('The input must be a valid email address or mobile number.');
-                }
-
-                // Check for uniqueness in both `email` and `mobile` columns
-                $exists = User::where('email', $value)->orWhere('mobile', $value)->exists();
-                if ($exists) {
-                    $fail('This email or mobile number is already registered.');
-                }
-            }],
-            'password' => ['required', 'min:6'],
-        ], [
-            'name.required' => 'Name is required.',
-            'name.max' => 'Name must not exceed 70 characters.',
-            'mobile_or_email.required' => 'This field is required.',
-            'password.required' => 'Password is required.',
-            'password.min' => 'Password must be at least 6 characters.',
-        ]);
-
-        // Check if the input is an email or a mobile number
-        $isEmail = filter_var($validatedData['mobile_or_email'], FILTER_VALIDATE_EMAIL);
-        $isMobile = preg_match('/^\+?[1-9]\d{1,14}$/', $validatedData['mobile_or_email']);
-
         DB::beginTransaction();
         try {
+        $validatedData = $request->validate([
+            'name' => 'required|max:70',
+            'mobile_or_email' => [
+                'required',
+                'string',
+                'max:255',
+                function ($attribute, $value, $fail) {
+                    if (!filter_var($value, FILTER_VALIDATE_EMAIL) && !preg_match('/^(?:\+88)?01[3-9]\d{8}$/', $value)) {
+                        $fail('The input must be a valid email address or Bangladeshi mobile number.');
+                    }
+
+                    if (User::where('email', $value)->orWhere('mobile', $value)->exists()) {
+                        $fail('This email or mobile number is already registered.');
+                    }
+                }
+            ],
+            'password' => ['required', 'min:6'],
+        ]);
+
+        $isEmail = filter_var($validatedData['mobile_or_email'], FILTER_VALIDATE_EMAIL);
+        $isMobile = preg_match('/^(?:\+88)?01[3-9]\d{8}$/', $validatedData['mobile_or_email']);
+
+
             $user = User::create([
                 'name' => $validatedData['name'],
                 'email' => $isEmail ? $validatedData['mobile_or_email'] : null,
@@ -130,19 +126,25 @@ class AuthController extends Controller
                 'password' => bcrypt($validatedData['password']),
             ]);
 
-            // Assign "User" role
             $role = Role::where('name', 'User')->first();
-            $user->roles()->sync($role->id);
+            if ($role) {
+                $user->roles()->sync($role->id);
+            }
 
-            // Automatically log in the user
+            // **Ensure User is Logged in Properly**
             Auth::login($user);
-            $request->session()->regenerate();
-            // Commit the transaction
+            $request->session()->regenerate(); // 🔥 Important fix
+
+            // **Verify if Authenticated**
+            if (!Auth::check()) {
+                throw new \Exception('Authentication failed.');
+            }
+
             DB::commit();
             return redirect('/admin')->with('success', 'Registration successful.');
         } catch (\Exception $e) {
-            // Rollback the transaction on exception
             DB::rollBack();
+            return back()->with('error', 'Registration failed. Please try again.');
         }
     }
 }
