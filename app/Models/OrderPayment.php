@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\FrontEnd\Order;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,5 +28,10 @@ class OrderPayment extends Model
     public function orderPaymentDetails()
     {
         return $this->hasMany(OrderPaymentDetail::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }
