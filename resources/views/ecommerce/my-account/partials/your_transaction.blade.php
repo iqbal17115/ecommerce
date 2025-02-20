@@ -1,5 +1,5 @@
 <div class="tab-pane fade show" id="your_transactions">
-<h2 class="tab-title">Your Transaction</h2>
+    <h2 class="tab-title">Your Transaction</h2>
 
     <div class="row">
         @forelse ($orderPayments as $payment)
@@ -40,6 +40,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $totalAmount = 0; // Variable to calculate total amount for the order
+                                @endphp
                                 @foreach ($payment->orderPaymentDetails as $detail)
                                 <tr>
                                     <td>{{ $detail->date }}</td>
@@ -52,8 +55,18 @@
                                         </span>
                                     </td>
                                 </tr>
+                                @php
+                                    $totalAmount += $detail->amount; // Add detail amount to total
+                                @endphp
                                 @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                                    <td class="fw-bold text-primary">৳{{ number_format($totalAmount, 2) }}</td>
+                                    <td></td> <!-- Empty cell for consistency -->
+                                </tr>
+                            </tfoot>
                         </table>
                     </div> <!-- End Table Wrapper -->
                 </div>
