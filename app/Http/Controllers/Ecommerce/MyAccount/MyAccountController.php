@@ -80,6 +80,13 @@ class MyAccountController extends Controller
         // Fetch total order count
         $totalOrders = Order::where('user_id', $user->id)->count();
 
+        $userId = Auth::id();
+
+        $orderPayments = OrderPayment::whereHas('order', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })
+        ->whereHas('orderPaymentDetails')->with(['order', 'orderPaymentDetails'])->latest()->get();
+
         return view('ecommerce.my-account.my-account', compact(
             'user_id',
             'user',
@@ -96,7 +103,8 @@ class MyAccountController extends Controller
             'totalDiscounts',
             'totalShippingCharges',
             'totalDueAmount',
-            'totalOrders'
+            'totalOrders',
+            'orderPayments'
         ));
     }
 }
