@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +13,18 @@
             padding: 0;
             overflow-x: auto;
         }
+
         .invoice-container {
             background: #fff;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             width: 93%;
             max-width: 850px;
             margin: 50px auto;
             overflow-x: auto;
         }
+
         .invoice-header {
             display: flex;
             justify-content: space-between;
@@ -29,9 +32,11 @@
             border-bottom: 3px solid #f4631b;
             padding-bottom: 20px;
         }
+
         .company-logo {
             max-height: 80px;
         }
+
         .invoice-title {
             font-size: 28px;
             font-weight: bold;
@@ -39,45 +44,55 @@
             text-align: center;
             margin-top: 0;
         }
+
         .invoice-subtitle {
             text-align: center;
             font-size: 18px;
             color: #6c757d;
             margin: 0;
         }
+
         .invoice-details {
             display: flex;
             justify-content: space-between;
             margin: 20px 0;
             font-size: 14px;
         }
+
         .invoice-details div {
             width: 48%;
         }
+
         .address-section p {
             margin: 5px 0;
             font-size: 14px;
         }
+
         .table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 30px;
         }
-        .table th, .table td {
+
+        .table th,
+        .table td {
             border: 2px solid #dee2e6;
             padding: 12px;
             text-align: center;
             font-size: 14px;
         }
+
         .table th {
             background-color: #f4631b;
             color: white;
             font-weight: bold;
         }
+
         .table tfoot td {
             font-weight: bold;
             background-color: #e9ecef;
         }
+
         .total-section {
             text-align: right;
             font-size: 18px;
@@ -85,29 +100,35 @@
             color: #f4631b;
             margin-top: 20px;
         }
+
         .footer-text {
             font-size: 12px;
             color: #6c757d;
             text-align: center;
             margin-top: 30px;
         }
+
         .footer-text a {
             color: #f4631b;
             text-decoration: none;
         }
+
         @media print {
             body {
                 font-family: 'Arial', sans-serif;
             }
+
             .invoice-container {
                 padding: 40px;
             }
+
             .invoice-header {
                 border-bottom: 3px solid #f4631b;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="invoice-container">
         <div class="invoice-header">
@@ -121,7 +142,7 @@
         <div class="invoice-details">
             <div>
                 <p><strong>Order ID:</strong> #{{ $order->code }}</p>
-                <p><strong>Order Date:</strong> {{ $order->created_at->format('d M, Y') }}</p>
+                <p><strong>Order Date:</strong> {{ $order->created_at }}</p>
             </div>
             <div style="text-align: right;">
                 <p><strong>Customer Name:</strong> {{ $order->user->name ?? 'N/A' }}</p>
@@ -132,11 +153,21 @@
 
         <div class="address-section">
             <p><strong>Shipping Address:</strong></p>
-            <p><strong>Name:</strong> {{ $order->orderAddress->name ?? 'N/A' }}, 
-               <strong>Mobile:</strong> {{ $order->orderAddress->mobile ?? 'N/A' }}</p>
-            <p><strong>Street:</strong> {{ $order->orderAddress->street_address ?? 'N/A' }}, 
-               <strong>Building:</strong> {{ $order->orderAddress->building_name ?? 'N/A' }}</p>
+            <p><strong>Name:</strong> {{ $order->orderAddress->name ?? 'N/A' }},
+                <strong>Mobile:</strong> {{ $order->orderAddress->mobile ?? 'N/A' }}
+            </p>
+            <p><strong>Street:</strong> {{ $order->orderAddress->street_address ?? 'N/A' }},
+                <strong>Building:</strong> {{ $order->orderAddress->building_name ?? 'N/A' }}
+            </p>
         </div>
+
+        <!-- Added Estimated Delivery Date or Delivered Date Section -->
+        @if($order->status == 'completed')
+        <p><strong>Delivered Date:</strong> {{ \Carbon\Carbon::parse($order->updated_at)->format('d M, Y') }}</p>
+        @else
+        <p><strong>Estimated Delivery Date:</strong> {{ \Carbon\Carbon::parse($order->estimate_delivery_date)->format('d M, Y') }}</p>
+        @endif
+
 
         <table class="table">
             <thead>
@@ -201,4 +232,5 @@
         };
     </script>
 </body>
+
 </html>
