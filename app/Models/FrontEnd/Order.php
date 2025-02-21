@@ -31,6 +31,7 @@ class Order extends Model
         'payment_method',
         'user_id',
         'order_date',
+        'estimate_delivery_date',
         'total_amount',
         'other_amount',
         'discount',

@@ -54,6 +54,7 @@ class OrderService
             $order->payment_method = $validatedData['payment_method'];
             $order->user_id = auth()->id();
             $order->order_date = now();
+            $order->estimate_delivery_date = now()->addDay(); 
             $order->total_amount = $totalAmount;
             $order->other_amount = 0;
             $order->discount = $couponDiscount;

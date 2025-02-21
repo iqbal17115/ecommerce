@@ -135,6 +135,10 @@ function formatQuantity(quantity) {
 
 // Function to generate order card HTML
 function generateOrderCard(order) {
+    // Use the dates directly from the backend API response
+    let orderDate = formatDate(order.order_date);
+    let estimatedDeliveryDate = order.estimate_delivery_date;
+
     return `
         <div class="card mb-4 shadow-lg border-0">
             <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color: #f4631b;">
@@ -146,12 +150,12 @@ function generateOrderCard(order) {
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-4">
-                        <h6 class="text-muted">Estimated Delivery</h6>
-                        <p class="fw-bold text-dark">Sold By TBD</p>
+                        <h6 class="text-muted">Order Date</h6>
+                        <p class="fw-bold text-dark">${orderDate}</p>
                     </div>
                     <div class="col-md-4 text-center">
-                        <h6 class="text-muted">Order Total</h6>
-                        <p class="fs-5 fw-bold text-success">${formatPrice(order.payable_amount)}</p>
+                        <h6 class="text-muted">Estimated Delivery</h6>
+                        <p class="fw-bold text-dark">${estimatedDeliveryDate}</p>
                     </div>
                     <div class="col-md-4 text-end">
                         <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2" style="text-decoration: none;">Track Package</a>
@@ -179,6 +183,12 @@ function generateOrderCard(order) {
             </div>
         </div>
     `;
+}
+
+// Function to format order date
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString('en-US', options);
 }
 
 // Function to generate order details HTML

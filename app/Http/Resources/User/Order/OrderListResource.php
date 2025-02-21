@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User\Order;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderListResource extends JsonResource
@@ -18,6 +19,7 @@ class OrderListResource extends JsonResource
             "id" => $this->id,
             "code" => $this->code,
             "order_date" => $this->order_date,
+            "estimate_delivery_date" => Carbon::parse($this->estimate_delivery_date)->format('d F Y'),
             "total_amount" => $this->total_amount,
             "other_amount" => $this->other_amount,
             "discount" => $this->discount,
