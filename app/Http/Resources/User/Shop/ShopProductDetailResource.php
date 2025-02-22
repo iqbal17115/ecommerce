@@ -21,6 +21,7 @@ class ShopProductDetailResource extends JsonResource
         return [
             "id" => $this->id,
             "product_name" => $this->name,
+            "seller_sku" => $this->seller_sku,
             "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/'.$this->getFirstProductImage()) : '',
             "your_price" => (float)$this->your_price,
             "sale_price" => (float)$this->sale_price,
