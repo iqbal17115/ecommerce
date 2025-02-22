@@ -153,13 +153,26 @@
                         <div class="col-md-5">
                             <h6 class="mb-3">Shipping To:</h6>
                             <div class="address">
+                                <!-- Displaying Country Name -->
                                 <p class="mb-2" id="country_name_display">{{ $order?->orderAddress?->country_name }}</p>
+
+                                <!-- Displaying District and Division -->
                                 <p class="mb-2" id="division_district_display">
                                     {{ $order?->orderAddress?->district_name }}, {{ $order?->orderAddress?->division_name }}
                                 </p>
+
+                                <!-- Displaying Upazila -->
                                 <p class="mb-2" id="upazila_name_display">{{ $order?->orderAddress?->upazila_name }}</p>
+
+                                <!-- Displaying Street Address -->
                                 <p class="mb-2" id="street_address_display">{{ $order?->orderAddress?->street_address }}</p>
+
+                                <!-- Displaying User Information -->
+                                <div class="user-info text-info">
+                                    <p class="mb-2" id="user_name_display">{{ $order?->user?->name }}, {{ $order?->user?->mobile }}</p>
+                                </div>
                             </div>
+
                         </div>                        
                         <div class="col-md-2 text-info" data-toggle="modal" data-target="#shippingModal" style="cursor: pointer;">
                             <i class="fas fa-plus-circle"></i> Shipping Address
