@@ -102,7 +102,9 @@
                         <div class="card-footer bg-transparent border-top">
                             <div class="contact-links d-flex font-size-20">
                                 <div class="flex-fill">
-                                    <span class="badge badge-pill badge-success font-size-12">Paid</span>
+                                    <span class="badge badge-pill {{ \App\Helpers\OrderHelper::getOrderStatusBadge($order->orderPayment->payment_status) }} font-size-12">
+                                        {{ \App\Helpers\OrderHelper::getOrderStatusName($order->orderPayment->payment_status) }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +118,7 @@
                         <div class="card-body d-flex justify-content-center">
                             <h5 class="font-size-15 d-flex align-items-center">
                                 <i class="bx bx-car text-success bx-md me-2"></i>
-                                <a href="#" class="text-dark">Fullfilment Status</a>
+                                <a href="#" class="text-dark">Order Status</a>
                             </h5>
                         </div>
 
