@@ -146,21 +146,23 @@
                 </div>
 
                 <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="fas fa-exchange-alt font-large-2 float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Transaction</h3>
-                                        <span class="text-dark">View your Transactions.</span>
+                    <a class="nav-link custom_link" href="#your_transactions" data-toggle="tab">
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-exchange-alt font-large-2 float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Transaction</h3>
+                                            <span class="text-dark">View your Transactions.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4 mb-4 under_development">
