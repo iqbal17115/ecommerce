@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function displayPaymentInfo(data) {
         let currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
-    
+
         let paymentHtml = `
             <div class="card shadow-sm p-3 mb-3">
                 <div class="card-header bg-info text-white">
@@ -115,10 +115,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </div>
         `;
-    
+
         $("#orderDetails").html(paymentHtml);
     }
-    
+
     $(document).on("click", ".view-payment", function () {
         let orderId = $(this).data("order-id");
         fetchViewPaymentInfo(orderId);
@@ -240,10 +240,52 @@ document.addEventListener("DOMContentLoaded", function () {
             success: function (response) {
                 alert("Payment successfully processed.");
                 $("#makePaymentModal").modal("hide");
+
+                // Update payment status using a separate function
+                updatePaymentStatus(response.results.order_id, response.results.payment_status);
             },
             error: function () {
                 alert("Failed to process payment.");
             }
         });
     });
+
+    /**
+     * Updates the payment status in the corresponding table cell.
+     *
+     * @param {string} orderId - The order ID to identify the correct row.
+     * @param {string} paymentStatus - The updated payment status text.
+     */
+    function updatePaymentStatus(orderId, paymentStatus) {
+        // Determine badge class based on payment status
+        let paymentBadgeClass = getPaymentBadgeClass(paymentStatus);
+
+        // Locate the payment status cell using a unique class based on orderId
+        let paymentStatusTd = $(`.payment-status-${orderId}`);
+
+        // Update the payment status badge
+        paymentStatusTd
+            .removeClass()
+            .addClass(`badge badge-pill payment-status-${orderId} ${paymentBadgeClass} font-size-12`)
+            .text(paymentStatus);
+    }
+
+    /**
+     * Returns the corresponding badge class based on the payment status.
+     *
+     * @param {string} paymentStatus - The payment status text (e.g., "Paid", "Partially Paid", "Pending").
+     * @returns {string} - The appropriate Bootstrap badge class.
+     */
+    function getPaymentBadgeClass(paymentStatus) {
+        switch (paymentStatus.toLowerCase()) {
+            case 'paid':
+                return 'badge-success'; // Green for paid
+            case 'partially paid':
+                return 'badge-warning'; // Yellow for partially paid
+            case 'pending':
+                return 'badge-danger'; // Red for pending
+            default:
+                return 'badge-secondary'; // Default grey for unknown statuses
+        }
+    }
 });

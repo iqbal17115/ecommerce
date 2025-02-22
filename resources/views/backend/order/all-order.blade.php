@@ -327,7 +327,7 @@
                                             <td>${order.total_amount}</td>
                                             <td></td>
                                             <td>
-                                                <span class="badge badge-pill ${paymentBadgeClass} font-size-12">
+                                                <span class="badge badge-pill payment-status-${order.id} ${paymentBadgeClass} font-size-12" >
                                                     ${order.payment_status.charAt(0).toUpperCase() + order.payment_status.slice(1).replace('_', ' ')}
                                                 </span>
                                             </td>

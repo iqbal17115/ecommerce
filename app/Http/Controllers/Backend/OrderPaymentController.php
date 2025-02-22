@@ -35,9 +35,9 @@ class OrderPaymentController extends Controller
     public function store(MakePaymentStoreRequest $makePaymentStoreRequest): JsonResponse
     {
         // Make payment
-        $this->orderPaymentService->makePayment($makePaymentStoreRequest->validated());
+        $orderPayment = $this->orderPaymentService->makePayment($makePaymentStoreRequest->validated());
 
         // Return a success message
-        return Message::success(__("message.save"));
+        return Message::success(__("message.save"), MakePaymentViewResource::make($orderPayment));
     }
 }
