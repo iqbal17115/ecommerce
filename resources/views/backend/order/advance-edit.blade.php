@@ -103,7 +103,7 @@
                             <div class="contact-links d-flex font-size-20">
                                 <div class="flex-fill">
                                     <span class="badge badge-pill {{ \App\Helpers\OrderHelper::getOrderStatusBadge($order->orderPayment->payment_status) }} font-size-12">
-                                        {{ \App\Helpers\OrderHelper::getOrderStatusName($order->orderPayment->payment_status) }}
+                                        {{ \App\Helpers\OrderHelper::getOrderStatusName($order?->orderPayment?->payment_status) ?? 'N/A' }}
                                     </span>
                                 </div>
                             </div>
