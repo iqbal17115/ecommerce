@@ -36,7 +36,7 @@
                                     <li class="name">{{ $user->name }}
                                         {{-- <label class="label label-info">UX Designer</label> --}}
                                     </li>
-                                    <li class="email"><a href="#">{{ Auth::user()->mobile }}</a></li>
+                                    <li class="email"><a href="#">{{ Auth::user()->mobile ?? Auth::user()->email }}</a></li>
                                 </ul>
                             </div>
                             @include('ecommerce.my-account.partials.side_menu')

@@ -169,7 +169,7 @@
 
                                 <!-- Displaying User Information -->
                                 <div class="user-info text-info">
-                                    <p class="mb-2" id="user_name_display">{{ $order?->user?->name }}, {{ $order?->user?->mobile }}</p>
+                                    <p class="mb-2" id="user_name_display">{{ $order?->user?->name }}, {{ $order?->user?->mobile ?? $order?->user?->email }}</p>
                                 </div>
                             </div>
 
