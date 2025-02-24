@@ -169,8 +169,13 @@
 
                                 <!-- Displaying User Information -->
                                 <div class="user-info text-info">
-                                    <p class="mb-2" id="user_name_display">{{ $order?->user?->name }}, {{ $order?->user?->mobile ?? $order?->user?->email }}</p>
+                                    <p class="mb-2" id="user_name_display">
+                                        {{ $order?->orderAddress?->name }}
+                                        @if($order?->orderAddress?->mobile), {{ $order?->orderAddress?->mobile }}@endif
+                                        @if($order?->orderAddress?->optional_mobile), {{ $order?->orderAddress?->optional_mobile }}@endif
+                                    </p>
                                 </div>
+
                             </div>
 
                         </div>                        
