@@ -11,29 +11,19 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Enforce "www" prefix (HTTPS version recommended)
+    # Enforce "www" prefix
     RewriteCond %{HTTP_HOST} !^www\. [NC]
     RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
-    # Ensure Static Files (CSS, JS, Images) are Served Correctly
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^(.*\.(css|js|png|jpg|jpeg|gif|ico|woff|woff2|ttf))$ $1 [L,NC]
-
     # Handle Front Controller...
+    RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.ico|\.woff|\.woff2|\.ttf|\.jpg|\.gif|robots\.txt)$ [NC]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    # Redirect Everything Else to /public Folder (Laravel Specific)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^(.*)$ public/$1 [L]
-</IfModule>
-
-# Force Disable Cache for Development (Optional)
-<IfModule mod_headers.c>
-    <FilesMatch "\.(js|css|png|jpg|jpeg|gif|ico|woff|woff2|ttf)$">
-        Header set Cache-Control "no-cache, no-store, must-revalidate"
-        Header set Pragma "no-cache"
-        Header set Expires 0
-    </FilesMatch>
 </IfModule>
