@@ -220,7 +220,7 @@ function setAddressData(addresses) {
     editButtons.forEach((button) => {
         button.addEventListener('click', (event) => {
             const addressId = event.target.dataset.address_id;
-            editAddress(addressId);
+            // editAddress(addressId);
         });
     });
 
