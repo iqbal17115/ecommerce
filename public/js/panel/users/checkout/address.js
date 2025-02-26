@@ -163,7 +163,7 @@ function setAddressData(addresses) {
     addressWrapper.innerHTML = headerHTML;
 
     const chooseAddressWrapper = addressWrapper.querySelector('.choose-address-wrapper');
-
+alert(1);
     // Loop through addresses to create cards
     addresses.forEach((address, index) => {
         const isDefault = address.is_default === 1 ? 'checked' : '';
