@@ -191,9 +191,9 @@
     <!-- End Shipping Address Modal -->
 @endsection
 @push('scripts')
-<script src="{{ mix('js/panel/users/checkout/address.js') }}"></script>
-<script src="{{ mix('js/panel/users/cart/checkout_page_cart.js') }}"></script>
-<script src="{{ mix('js/panel/users/common.js') }}"></script>
+    <script src="{{ mix('js/panel/users/checkout/address.js') }}?v={{ filemtime(public_path('js/panel/users/checkout/address.js')) }}"></script>
+    <script src="{{ mix('js/panel/users/cart/checkout_page_cart.js') }}?v={{ filemtime(public_path('js/panel/users/cart/checkout_page_cart.js')) }}"></script>
+    <script src="{{ mix('js/panel/users/common.js') }}?v={{ filemtime(public_path('js/panel/users/common.js')) }}"></script>
 
 
     <script>
