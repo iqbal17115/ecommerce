@@ -15,15 +15,22 @@
     RewriteCond %{HTTP_HOST} !^www\. [NC]
     RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
+    # Disable caching for JS & CSS files
+    <FilesMatch "\.(js|css)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
+
     # Handle Front Controller...
     RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.ico|\.woff|\.woff2|\.ttf|\.jpg|\.gif|robots\.txt)$ [NC]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
+    # Redirect to public folder
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
