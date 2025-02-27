@@ -1,4 +1,7 @@
-111<?php
+<?php
+if (function_exists('opcache_reset')) {
+    opcache_reset();
+}
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
