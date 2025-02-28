@@ -263,7 +263,22 @@ $(document).ready(function () {
             }
         );
     }
+
     getCartItem();
+
+    // Detect if the page is loaded from the cache using the 'pageshow' event
+    window.addEventListener('pageshow', function(event) {
+        alert('Page is shown!');
+        
+        // Check if the page was loaded from cache (e.g., after back/forward navigation)
+        if (event.persisted) {
+            console.log('Page is loaded from cache!');
+            
+            // Fetch the latest cart data again if it's loaded from cache
+            getCartItem();
+        }
+    });
+
     $(document).on('click', '.change_qty_cart_item', function () {
         const cart_item_id = $(this).data('cart_item_id');
         const inputQty = $(this).siblings('.input-qty');

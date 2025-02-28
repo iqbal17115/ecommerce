@@ -124,6 +124,19 @@ $(document).ready(function () {
 
     getCartItem();
 
+    // Detect if the page is loaded from the cache using the 'pageshow' event
+    window.addEventListener('pageshow', function(event) {
+        alert('Page is shown!');
+        
+        // Check if the page was loaded from cache (e.g., after back/forward navigation)
+        if (event.persisted) {
+            console.log('Page is loaded from cache!');
+            
+            // Fetch the latest cart data again if it's loaded from cache
+            getCartItem();
+        }
+    });
+
     $(document).on('click', '.add_cart_item', function () {
         const product_id = $(this).data('product_id');
         const user_id = $("#temp_user_id").data('user_id');
