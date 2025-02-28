@@ -126,7 +126,7 @@ $(document).ready(function () {
 
     // Detect if the page is loaded from the cache using the 'pageshow' event
     window.addEventListener('pageshow', function(event) {
-        alert('Page is shown!');
+        console.log('Page is shown!');
         
         // Check if the page was loaded from cache (e.g., after back/forward navigation)
         if (event.persisted) {
