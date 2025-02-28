@@ -317,8 +317,7 @@ $(document).ready(function() {
 
         try {
             await saveAddress(event);  // Wait for saveAddress to complete
-            alert("Address saved. Now loading user address...");
-            loadUserAddress(user_id); // Load user address only after saving is complete
+            await loadUserAddress(user_id); // Load after save completes
         } catch (error) {
             console.error("Error during save:", error);
         }
