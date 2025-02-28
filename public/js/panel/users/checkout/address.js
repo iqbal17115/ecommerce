@@ -208,8 +208,9 @@ function setAddressData(addresses) {
                             <button class="btn btn-sm btn-outline-primary edit-address" id="default_address" data-address_id="${address.id}" data-toggle="modal" data-target="#addressModal">Edit</button>
                         </div>
                     </div>`;
+
             // Append the new HTML instead of replacing
-    defaultAddressContent.insertAdjacentHTML('beforeend', defaultCardHTML);
+            defaultAddressContent.insertAdjacentHTML('beforeend', defaultCardHTML);
         }
     });
 
@@ -307,18 +308,20 @@ $(document).on("click", ".edit-address", function (event) {
     );
 });
 
-
 $(document).ready(function() {
-    user_id = $('#user_id_val').val();
-    
+    const user_id = $('#user_id_val').val();
 
-    $('#addressForm').on('submit', function(event) {
-        address_id = $('#address_id').val();
+    $('#addressForm').on('submit', async function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-        saveAddress(event);  // Call saveAddress when the form is submitted
-        loadUserAddress(user_id);
+        try {
+            await saveAddress(event);  // Wait for saveAddress to complete
+            loadUserAddress(user_id); // Load user address only after saving is complete
+        } catch (error) {
+            console.error("Error during save:", error);
+        }
     });
 
-    loadUserAddress(user_id);
+    loadUserAddress(user_id); // Initial load of addresses
 });
 
