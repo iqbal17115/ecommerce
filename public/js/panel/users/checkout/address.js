@@ -237,6 +237,7 @@ function loadUserAddress(user_id) {
     getDetails(
         "/api/user-address/lists?user_id=" + user_id,
         (data) => {
+            console.log(data.results.data);
             setAddressData(data.results.data);
         },
         (error) => {
