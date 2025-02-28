@@ -316,12 +316,10 @@ $(document).ready(function() {
         event.preventDefault(); // Prevent default form submission
 
         try {
-            console.log('Saving address...');
-            
             // Wait for the address to be saved
             await saveAddress(event);  
-            console.log('Address saved!');
-
+            // Pause for 1 second (1000 ms)
+            await delay(1000);
             // Wait for the updated address list to load
             await loadUserAddress(user_id);  
             console.log('User addresses loaded!');
