@@ -316,8 +316,15 @@ $(document).ready(function() {
         event.preventDefault(); // Prevent default form submission
 
         try {
-            await saveAddress(event);  // Wait for saveAddress to complete
-            await loadUserAddress(user_id); // Load after save completes
+            console.log('Saving address...');
+            
+            // Wait for the address to be saved
+            await saveAddress();  
+            console.log('Address saved!');
+
+            // Wait for the updated address list to load
+            await loadUserAddress(user_id);  
+            console.log('User addresses loaded!');
         } catch (error) {
             console.error("Error during save:", error);
         }
