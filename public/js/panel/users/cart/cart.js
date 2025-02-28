@@ -122,6 +122,8 @@ $(document).ready(function () {
         );
     }
 
+    getCartItem();
+
     // Detect if the page is loaded from the cache using the 'pageshow' event
     window.addEventListener('pageshow', function(event) {
         // Check if the page was loaded from cache (e.g., after back/forward navigation)
