@@ -51,6 +51,7 @@
                                 @include('ecommerce.my-account.partials.mobile_app')
                                 @include('ecommerce.my-account.partials.your_payment')
                                 @include('ecommerce.my-account.partials.your_transaction')
+                                @include('ecommerce.my-account.partials.return_exchange')
                                 @include('ecommerce.my-account.partials.wishlist')
                                 @include('ecommerce.my-account.partials.review_feedback')
                                 @include('ecommerce.my-account.partials.cartlist')
@@ -72,6 +73,7 @@
     <script src="{{ asset('js/panel/users/my_account/my_account.js') }}"></script>
     <script src="{{ asset('js/panel/address/address.js') }}"></script>
     <script src="{{ asset('js/panel/users/my_account/my_transaction.js') }}"></script>
+    <script src="{{ asset('js/panel/users/my_account/return_exchange.js') }}"></script>
 
     <!-- My Account JS File -->
     <script>
@@ -161,7 +163,6 @@ function generateOrderCard(order) {
                         <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2" style="text-decoration: none;">Track Package1</a>
                         <a href="user-cancel-order/${order.id}" class="btn btn-outline-danger btn-sm me-2" style="text-decoration: none;">Cancel Order</a>
                         <button class="btn btn-outline-success btn-sm" onclick="printInvoice('${order.id}')">Print Invoice</button>
-                        ${generateReturnExchangeButton(order)}
                     </div>
                 </div>
             </div>
@@ -285,153 +286,6 @@ function generateOrderDetails(orderDetails) {
                 </div>
             `;
         }
-
-        // Function to generate Return & Exchange Button
-        function generateReturnExchangeButton(order) {
-            // if (!order.is_returnable) return '';
-            return `
-                <button class="btn btn-outline-warning btn-sm" onclick="openReturnModal('${order.id}')">Return & Exchange</button>
-            `;
-        }
-
-        // Function to open the return & exchange modal
-function openReturnModal(orderId) {
-    const returnModalHtml = `
-        <div class="modal fade" id="returnModal" tabindex="-1" aria-labelledby="returnModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content" style="border-radius: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); font-family: 'Inter', sans-serif; font-size: 1.2rem;">
-                    <div class="modal-header" style="background-color: #007bff; color: white;">
-                        <h5 class="modal-title fw-bold" id="returnModalLabel">Return & Exchange</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" style="padding: 2rem;">
-
-                        <!-- Return Options -->
-                        <div class="mb-4">
-                            <label class="form-label fw-bold" style="font-size: 1.3rem;">Request Type:</label>
-                            <select id="returnType" class="form-select" style="border-radius: 12px; padding: 0.75rem;" onchange="toggleReturnType()">
-                                <option value="product">Return Specific Products</option>
-                                <option value="order">Return Entire Order</option>
-                                <option value="exchange">Exchange Product</option>
-                            </select>
-                        </div>
-
-                        <!-- Products Return Section -->
-                        <div id="returnItemsSection">
-                            <p class="fw-semibold" style="font-size: 1.3rem;">Select the products and quantity you wish to return:</p>
-                            <div id="returnItemsContainer" style="max-height: 300px; overflow-y: auto;">
-                                <div class="text-muted">Loading products...</div>
-                            </div>
-                        </div>
-
-                        <!-- Exchange Product Section -->
-                        <div id="exchangeSection" class="mt-4" style="display: none;">
-                            <label for="exchangeProduct" class="form-label fw-bold" style="font-size: 1.3rem;">Select Replacement Product:</label>
-                            <div id="exchangeCarousel" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner" id="carouselItems">
-                                    <div class="text-muted">Loading exchange options...</div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#exchangeCarousel" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#exchangeCarousel" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Reason for Return -->
-                        <div class="mt-4">
-                            <label for="returnReason" class="form-label fw-bold" style="font-size: 1.3rem;">Reason for Return/Exchange:</label>
-                            <textarea id="returnReason" class="form-control" rows="4" style="border-radius: 12px; padding: 1rem;" placeholder="Describe your reason (optional)"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Modal Footer -->
-                    <div class="modal-footer" style="padding: 1.5rem;">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 12px; padding: 0.75rem 1.5rem;">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="submitReturn('${orderId}')" style="border-radius: 12px; padding: 0.75rem 1.5rem; background-color: #0056b3;">Submit Request</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-    $('body').append(returnModalHtml);
-
-    // Show the modal
-    const returnModal = new bootstrap.Modal(document.getElementById('returnModal'));
-    returnModal.show();
-
-    // Cleanup when closed
-    $('#returnModal').on('hidden.bs.modal', function () {
-        $('#returnModal').remove();
-    });
-
-    // Mock loading product data
-    loadReturnProducts();
-    loadExchangeProducts();
-}
-
-// Function to toggle return type
-function toggleReturnType() {
-    const returnType = $('#returnType').val();
-    $('#returnItemsSection').toggle(returnType === 'product');
-    $('#exchangeSection').toggle(returnType === 'exchange');
-}
-
-// Mock function to load products
-function loadReturnProducts() {
-    const sampleProducts = [
-        { id: 101, name: 'Smartphone X', image: 'https://via.placeholder.com/50', quantity: 2, unit_price: '$499' },
-        { id: 102, name: 'Wireless Headphones', image: 'https://via.placeholder.com/50', quantity: 1, unit_price: '$99' }
-    ];
-
-    const productHtml = sampleProducts.map(product => `
-        <div class="row mb-4 align-items-center" style="border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-            <div class="col-2"><img src="${product.image}" alt="${product.name}" class="img-fluid" style="border-radius: 12px;"></div>
-            <div class="col-4" style="font-weight: 600;">${product.name}<br><span class="text-muted">${product.unit_price}</span></div>
-            <div class="col-3">Available: ${product.quantity}</div>
-            <div class="col-3">
-                <input type="number" id="returnQty_${product.id}" class="form-control" style="border-radius: 12px; padding: 0.75rem;" min="0" max="${product.quantity}" value="0">
-            </div>
-        </div>
-    `).join('');
-
-    $('#returnItemsContainer').html(productHtml);
-}
-
-// Mock function to load exchange products
-let selectedExchangeProduct = null;
-
-function loadExchangeProducts() {
-    const exchangeProducts = [
-        { id: 201, name: 'Tablet Pro', image: 'https://via.placeholder.com/150', price: '$399' },
-        { id: 202, name: 'Smartwatch Z', image: 'https://via.placeholder.com/150', price: '$199' }
-    ];
-
-    const carouselHtml = exchangeProducts.map((product, index) => `
-        <div class="carousel-item ${index === 0 ? 'active' : ''}" onclick="selectExchangeProduct('${product.name}', this)">
-            <img src="${product.image}" class="d-block w-100" alt="${product.name}">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>${product.name}</h5>
-                <p>${product.price}</p>
-            </div>
-        </div>
-    `).join('');
-
-    $('#carouselItems').html(carouselHtml);
-}
-
-// Function to select exchange product
-function selectExchangeProduct(productName, element) {
-    selectedExchangeProduct = productName;
-    $('.carousel-item').removeClass('selected');
-    $(element).addClass('selected');
-    alert(`Selected Exchange Product: ${productName}`);
-}
 
         // Function to format price (adds currency symbol and comma separators)
         function formatDetailPrice(amount) {

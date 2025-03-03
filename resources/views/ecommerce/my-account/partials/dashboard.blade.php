@@ -165,7 +165,7 @@
                     </a>
                 </div>
 
-                <div class="col-md-4 mb-4 under_development">
+                <div class="col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <div class="card-content">
                             <div class="card-body p-4">
@@ -184,23 +184,25 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-4 under_development">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="fas fa-arrow-left float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Return & Exchange</h3>
-                                        <span class="text-dark">View and manage Your Raturn
-                                            Orders</span>
+                <div class="col-md-4 mb-4">
+                    <a class="nav-link custom_link" href="#return_exchange" data-toggle="tab">
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-arrow-left float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Return & Exchange</h3>
+                                            <span class="text-dark">View and manage Your Raturn
+                                                Orders</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4 mb-4 under_development">

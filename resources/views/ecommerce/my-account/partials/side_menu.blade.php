@@ -67,7 +67,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#return-exchange" data-toggle="tab">
+            <a class="nav-link" href="#return_exchange" data-toggle="tab">
                 <i class="fas fa-exchange-alt"></i>
                 Return & Exchange
             </a>
