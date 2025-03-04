@@ -1,29 +1,90 @@
+<style>
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .table th, .table td {
+            padding: 12px 8px; /* Reduce padding */
+            font-size: 14px; /* Adjust font size */
+        }
+
+        .table th {
+            white-space: nowrap; /* Prevent header wrap */
+        }
+
+        .table td {
+            white-space: nowrap; /* Prevent content wrap */
+        }
+
+        /* Make table scrollable */
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+    }
+</style>
 <div class="tab-pane fade" id="return_exchange">
     <h2 class="tab-title">Return & Exchange</h2>
 
     <!-- Order List Table -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Ordered On</th>
-                <th>Delivered On</th>
-                <th>Order Total</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>#OC692633382</td>
-                <td>29 Aug 2023 12:10 PM</td>
-                <td>01 Sep 2023 11:29 AM</td>
-                <td>Taka 13844</td>
-                <td>
-                    <button class="btn btn-primary" id="openReturnModal">Exchange & Return</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive" style="max-width: 100%; overflow-x: auto;">
+        <table class="table table-bordered" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 16px;">
+            <thead style="background-color: #f8f9fa;">
+                <tr>
+                    <th style="padding: 16px; text-align: left;">Order ID</th>
+                    <th style="padding: 16px; text-align: left;">Ordered On</th>
+                    <th style="padding: 16px; text-align: left;">Delivered On</th>
+                    <th style="padding: 16px; text-align: left;">Order Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Order Information -->
+                <tr style="background-color: #ffffff;">
+                    <td style="padding: 16px; font-weight: bold;">#OC692633382</td>
+                    <td style="padding: 16px;">29 Aug 2023 12:10 PM</td>
+                    <td style="padding: 16px;">01 Sep 2023 11:29 AM</td>
+                    <td style="padding: 16px; color: #28a745; font-weight: bold;">Taka 13844</td>
+                </tr>
+
+                <!-- Order Details -->
+                <tr>
+                    <td colspan="4" style="padding: 0;">
+                        <div style="padding: 16px; background-color: #f8f9fa;">
+                            <!-- Product 1 -->
+                            <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px; border-bottom: 1px solid #ddd; padding-bottom: 16px;">
+                                <img src="/images/product1.jpg" alt="Product Image 1" width="80" style="border-radius: 8px;">
+                                <div>
+                                    <p style="margin: 0; font-weight: bold; font-size: 16px;">Product Name 1</p>
+                                    <p style="margin: 4px 0;">Quantity: <strong>2</strong></p>
+                                    <p style="margin: 4px 0; color: #28a745;">Subtotal: Taka 5000</p>
+                                    <p style="margin: 4px 0; color: #6c757d;">Return & Exchange Items: Eligible through 08 Sep 2023</p>
+                                </div>
+                            </div>
+
+                            <!-- Product 2 -->
+                            <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
+                                <img src="/images/product2.jpg" alt="Product Image 2" width="80" style="border-radius: 8px;">
+                                <div>
+                                    <p style="margin: 0; font-weight: bold; font-size: 16px;">Product Name 2</p>
+                                    <p style="margin: 4px 0;">Quantity: <strong>1</strong></p>
+                                    <p style="margin: 4px 0; color: #28a745;">Subtotal: Taka 3844</p>
+                                    <p style="margin: 4px 0; color: #6c757d;">Return & Exchange Items: Eligible through 08 Sep 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Action Buttons -->
+                <tr>
+                    <td colspan="4" style="padding: 16px; text-align: center;">
+                        <button class="btn btn-primary" id="openReturnModal" style="background-color: #007bff; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 8px; cursor: pointer;">Exchange & Return</button>
+                        <button class="btn btn-secondary" id="trackPackage" style="background-color: #6c757d; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 8px; cursor: pointer;">Track Package</button>
+                        <button class="btn btn-success" id="viewInvoice" style="background-color: #28a745; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 8px; cursor: pointer;">View Invoice</button>
+                        <button class="btn btn-info" id="writeReview" style="background-color: #17a2b8; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 8px; cursor: pointer;">Write a Product Review</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Modal to open the return exchange form -->
