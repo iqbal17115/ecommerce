@@ -65,7 +65,8 @@
             <thead style="background-color: #f8f9fa;">
                 <tr>
                     <th style="padding: 12px; text-align: left;">Order ID</th>
-                    <th style="padding: 12px; text-align: left;">Date</th>
+                    <th style="padding: 12px; text-align: left;">Ordered On</th>
+                    <th style="padding: 12px; text-align: left;">Delivered On</th>
                     <th style="padding: 12px; text-align: left;">Order Total</th>
                 </tr>
             </thead>
@@ -73,10 +74,8 @@
                 <!-- Order Information -->
                 <tr>
                     <td style="padding: 12px; font-weight: bold;">#OC692633</td>
-                    <td style="padding: 12px;">
-                        Order On 29 Aug 2023 <br>
-                        Delivered On01 Sep 2023
-                    </td>
+                    <td style="padding: 12px;">29 Aug 2023</td>
+                    <td style="padding: 12px;">01 Sep 2023</td>
                     <td style="padding: 12px; color: #28a745; font-weight: bold;">৳ 13844</td>
                 </tr>
 
