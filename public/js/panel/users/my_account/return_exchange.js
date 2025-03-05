@@ -45,11 +45,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const row = document.createElement('tr');
         row.setAttribute('id', `product-${productId}`);
         row.innerHTML = `
-            <td><img src="${product.image}" alt="${product.name}" width="100"></td>
+            <td><img src="${product.image}" alt="Image"></td>
             <td>${product.name}</td>
-            <td>$${product.price.toFixed(2)}</td>
-            <td><input type="number" id="quantity-${productId}" class="form-control" value="1" min="1" onchange="updateSubtotal(${productId})"></td>
-            <td>$<span id="subtotal-${productId}">${product.price.toFixed(2)}</span></td>
+            <td>$${product.price}</td>
+            <td>
+                <input type="number" id="quantity-${productId}" 
+                    class="form-control" 
+                    value="1" 
+                    min="1" 
+                    onchange="updateSubtotal(${productId})" 
+                    style="appearance: textfield; -webkit-appearance: none; -moz-appearance: textfield;" 
+                    inputmode="numeric">
+            </td>
+            <td>$<span id="subtotal-${productId}">${product.price}</span></td>
             <td><button type="button" class="btn btn-sm btn-danger" onclick="removeProduct('${productId}')">Remove</button></td>
         `;
         tableBody.appendChild(row);
@@ -62,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const quantity = document.getElementById(`quantity-${productId}`).value;
         const subtotal = product.price * quantity;
         selectedProducts[productId].quantity = quantity;
-        document.getElementById(`subtotal-${productId}`).textContent = subtotal.toFixed(2);
+        document.getElementById(`subtotal-${productId}`).textContent = subtotal;
     }
 
     // Handle product removal
@@ -113,26 +121,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Step 2: Continue to Step 3
     document.getElementById('step2Continue').addEventListener('click', function () {
+        // Check if selectedProducts exists and is an array or object
+        if (!selectedProducts || Object.keys(selectedProducts).length === 0) {
+            console.error("No products selected.");
+            return;
+        }
+    
         const refundMethod = [];
         if (document.getElementById('refundToAladdin').checked) refundMethod.push('Aladdin Account Balance');
         if (document.getElementById('refundToCard').checked) refundMethod.push('Card ending 3323');
         if (document.getElementById('refundToBank').checked) refundMethod.push('Bank');
-
+    
+        // Calculate refund amount based on selected products
         const refundAmount = Object.values(selectedProducts).reduce((sum, product) => {
-            const quantity = product.quantity;
-            const price = product.price;
+            const quantity = product.quantity || 0;
+            const price = product.price || 0;
             return sum + (quantity * price);
         }, 0).toFixed(2);
-
-        // Show the final step summary
-        // document.getElementById('finalReturnReason').textContent = document.getElementById('selectedReturnReason').textContent || 'N/A';
-        // document.getElementById('finalRefundMethod').textContent = refundMethod.join(', ');
-        // document.getElementById('finalRefundAmount').textContent = refundAmount;
-
+    
+        // Function to create a list item for summary
+        function createSummaryItem(label, value) {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${label} ${value}`;
+            return listItem;
+        }
+    
+        // Clear previous summary items before appending new ones
+        const returnSummary = document.getElementById('returnSummary');
+        returnSummary.innerHTML = ''; // Clear any previous summary items
+    
+        // Get selected return reason
+        const returnReason = document.getElementById('selectedReturnReason').textContent || 'N/A';
+        returnSummary.appendChild(createSummaryItem('Final Return Reason:', returnReason));
+    
+        // Get selected refund methods
+        const refundMethodText = refundMethod.length > 0 ? refundMethod.join(', ') : 'None selected';
+        returnSummary.appendChild(createSummaryItem('Final Refund Method:', refundMethodText));
+    
+        // Get refund amount
+        returnSummary.appendChild(createSummaryItem('Final Refund Amount:', `$${refundAmount}`));
+    
         // Hide Step 2 and Show Step 3
         document.getElementById('step2').style.display = 'none';
         document.getElementById('step3').style.display = 'block';
     });
+    
 
     // Step 3: Finish the process
     document.getElementById('submitReturn').addEventListener('click', function () {
