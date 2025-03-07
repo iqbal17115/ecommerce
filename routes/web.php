@@ -42,6 +42,7 @@ use App\Http\Controllers\Ecommerce\ShopController;
 use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountController;
+use App\Http\Controllers\Ecommerce\MyAccount\MyAccountReturnProductController;
 use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
 use App\Http\Controllers\Frontend\OrderTracking\OrderTrackingController;
 use App\Http\Controllers\FrontEnd\ReplyController;
@@ -185,12 +186,19 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('my-account', 'index')->name('my.account');
             Route::get('my-account-wishlist', 'wishlist')->name('my_account_wishlist');
         });
+
         // Wishlist
         Route::controller(WishlistController::class)->group(function () {
             Route::post('wishlist/add', 'addToWishlist');
             Route::post('wishlist/remove', 'removeFromWishlist');
             Route::get('wishlist', 'getWishlist');
             Route::get('/wishlist/count', 'getWishlistCount');
+        });
+
+        // My account
+        Route::controller(MyAccountReturnProductController::class)->group(function () {
+            Route::get('my-account/order-list', 'index')->name('my_account.order_list');
+            Route::get('my-account/order-details/{order}', 'orderDetails')->name('my_account.order_details');
         });
     });
 

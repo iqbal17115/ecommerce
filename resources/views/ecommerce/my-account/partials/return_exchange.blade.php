@@ -141,30 +141,9 @@
                         <!-- Left Side: Product Selection Info -->
                         <div class="col-md-8">
                             <div class="mb-3">
-                                <label for="productSelect" class="form-label" style="font-weight: bold; font-size: 16px; color: #333;">Choose a product:</label>
-                                <select id="productSelect" class="form-select" style="padding: 10px; font-size: 14px; border-radius: 5px; border: 1px solid #ddd; width: 100%;">
-                                    <option value="" selected disabled>Select a product</option>
-                                    <option value="1" data-name="Product 1" data-image="product1.jpg" data-price="100" data-seller="Seller 1">Product 1</option>
-                                    <option value="2" data-name="Product 2" data-image="product2.jpg" data-price="150" data-seller="Seller 2">Product 2</option>
-                                    <option value="3" data-name="Product 3" data-image="product3.jpg" data-price="200" data-seller="Seller 3">Product 3</option>
-                                </select>
-                            </div>
-                            <div class="table-responsive">
-                                <table id="selectedProductsTable" class="table table-bordered" style="margin-top: 20px;">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Product</th>
-                                            <th>Price</th>
-                                            <th>Qty</th>
-                                            <th>Subtotal</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="productTableBody">
-                                        <!-- Products will be added dynamically here -->
-                                    </tbody>
-                                </table>
+                                <label style="font-weight: 600; font-size: 1.1rem; color: #282828; display: block; margin-bottom: 0.5rem;">Select Products for Return:</label>
+                                <div id="allProductsContainer" style="max-height: 300px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; background-color: #f9f9f9;">
+                                </div>
                             </div>
                         </div>
 
