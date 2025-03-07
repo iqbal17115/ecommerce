@@ -73,7 +73,7 @@
     <script src="{{ asset('js/panel/users/my_account/my_account.js') }}"></script>
     <script src="{{ asset('js/panel/address/address.js') }}"></script>
     <script src="{{ asset('js/panel/users/my_account/my_transaction.js') }}"></script>
-    <script src="{{ asset('js/panel/users/my_account/return_exchange.js') }}"></script>
+    <script src="{{ asset('js/panel/users/my_account/return_exchange.js') }}?v={{ time() }}"></script>
 
     <!-- My Account JS File -->
     <script>
