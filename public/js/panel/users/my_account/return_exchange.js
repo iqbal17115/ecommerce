@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div style="padding: 12px;">
                         ${order.order_items.map(item => `
                             <div style="display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid #ddd;">
-                                <img src="${item.product.image_url}" alt="Image" width="80" style="border-radius: 8px;">
+                                <img src="${item.product.image}" alt="Image" width="80" style="border-radius: 8px;">
                                 <div>
                                     <p style="margin: 0; font-weight: bold; font-size: 16px;">${item.product.name}</p>
                                     <p style="margin: 4px 0;">Quantity: <strong>${item.quantity}</strong></p>
