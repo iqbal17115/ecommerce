@@ -29,4 +29,9 @@ class MyAccountReturnProductOrderDetailResource extends JsonResource
             'return_eligible_date' => Carbon::parse($this->order->created_at)->addDays(1)->format('d M Y'), 
         ];
     }
+
+    protected function getFirstProductImage()
+    {
+        return $this->ProductImage?->first()?->image;
+    }
 }

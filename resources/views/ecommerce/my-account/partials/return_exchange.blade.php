@@ -71,52 +71,6 @@
                 </tr>
             </thead>
             <tbody style="background-color: #ffffff;">
-                <!-- Order Information -->
-                <tr>
-                    <td style="padding: 12px; font-weight: bold;">#OC692633</td>
-                    <td style="padding: 12px;">29 Aug 2023</td>
-                    <td style="padding: 12px;">01 Sep 2023</td>
-                    <td style="padding: 12px; color: #28a745; font-weight: bold;">৳ 13844</td>
-                </tr>
-
-                <!-- Order Details -->
-                <tr>
-                    <td colspan="4" style="padding: 0;">
-                        <div style="padding: 12px;">
-                            <!-- Product 1 -->
-                            <div style="display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid #ddd;">
-                                <img src="/images/product1.jpg" alt="Product Image 1" width="80" style="border-radius: 8px;">
-                                <div>
-                                    <p style="margin: 0; font-weight: bold; font-size: 16px;">Product Name 1</p>
-                                    <p style="margin: 4px 0;">Quantity: <strong>2</strong></p>
-                                    <p style="margin: 4px 0; color: #28a745;">Subtotal: ৳ 5000</p>
-                                    <p style="margin: 4px 0; color: #6c757d;">Return & Exchange: Eligible through 08 Sep 2023</p>
-                                </div>
-                            </div>
-
-                            <!-- Product 2 -->
-                            <div style="display: flex; align-items: center; gap: 16px; padding: 12px 0;">
-                                <img src="/images/product2.jpg" alt="Product Image 2" width="80" style="border-radius: 8px;">
-                                <div>
-                                    <p style="margin: 0; font-weight: bold; font-size: 16px;">Product Name 2</p>
-                                    <p style="margin: 4px 0;">Quantity: <strong>1</strong></p>
-                                    <p style="margin: 4px 0; color: #28a745;">Subtotal: ৳ 3844</p>
-                                    <p style="margin: 4px 0; color: #6c757d;">Return & Exchange: Eligible through 08 Sep 2023</p>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-
-                <!-- Action Buttons -->
-                <tr>
-                    <td colspan="4" style="text-align: center; padding-bottom: 26px;">
-                        <button id="openReturnModal" style="background-color: #007bff; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Exchange & Return</button>
-                        <button style="background-color: #6c757d; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Track Package</button>
-                        <button style="background-color: #28a745; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">View Invoice</button>
-                        <button style="background-color: #17a2b8; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Write a Product Review</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
