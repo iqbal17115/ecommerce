@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const actionsRow = document.createElement("tr");
             actionsRow.innerHTML = `
                 <td colspan="4" style="text-align: center; padding-bottom: 26px;">
-                    <button id="openReturnModal" style="background-color: #007bff; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Exchange & Return</button>
+                    <button id="openReturnModal" data-order-id="${order.id}" style="background-color: #007bff; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Exchange & Return</button>
                     <button style="background-color: #6c757d; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Track Package</button>
                     <button style="background-color: #28a745; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">View Invoice</button>
                     <button style="background-color: #17a2b8; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Write a Product Review</button>
@@ -68,97 +68,125 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const returnModal = new bootstrap.Modal(document.getElementById('returnExchangeModal'));
 
-    let selectedProducts = {
-        "OC692633": {
-            name: 'Product Name 1',
-            image: '/images/product1.jpg',
-            price: 5000,
-            quantity: 2,
-        },
-        "OC692634": {
-            name: 'Product Name 2',
-            image: '/images/product2.jpg',
-            price: 3844,
-            quantity: 1,
-        },
-    };
+    let selectedProducts = {};
+    let productsToReturn = {};
 
-    let productsToReturn = {}; // Store products selected for return
+    function populateProductCheckboxes(orderId) {
+        
+        getDetails(`my-account/order-details/${orderId}`, (data) => {
 
-    function populateProductCheckboxes() {
-        const allProductsContainer = document.getElementById('allProductsContainer');
-        allProductsContainer.innerHTML = '';
-        for (const productId in selectedProducts) {
-            const product = selectedProducts[productId];
-            const label = document.createElement('label');
-            label.style.display = 'flex';
-            label.style.alignItems = 'center';
-            label.style.marginBottom = '12px';
-            label.style.borderBottom = '1px solid #f0f0f0';
-            label.style.paddingBottom = '10px';
-            const checkboxContainer = document.createElement('div');
-            checkboxContainer.style.display = 'flex';
-            checkboxContainer.style.alignItems = 'center';
-            checkboxContainer.style.marginRight = '10px';
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.value = productId;
-            checkbox.dataset.productId = productId;
-            checkbox.style.marginRight = '5px';
-            checkbox.style.width = '18px';
-            checkbox.style.height = '18px';
-            checkbox.style.cursor = 'pointer';
-            checkbox.addEventListener('change', function () {
-                if (this.checked) {
-                    productsToReturn[productId] = selectedProducts[productId];
-                } else {
-                    delete productsToReturn[productId];
-                }
+            selectedProducts = {};
+            const orderItems = data.results.order_items;
+
+            orderItems.forEach(item => {
+                selectedProducts[item.id] = {
+                    name: item.product.name,
+                    image: item.product.image,
+                    price: item.unit_price,
+                    quantity: item.quantity,
+                };
             });
-            const image = document.createElement('img');
-            image.src = product.image;
-            image.style.width = '25px';
-            image.style.height = '25px';
-            image.style.marginRight = '10px';
-            image.style.objectFit = 'cover';
-            const quantityInput = document.createElement('input');
-            quantityInput.type = 'number';
-            quantityInput.value = 1;
-            quantityInput.min = 1;
-            quantityInput.style.marginLeft = 'auto';
-            quantityInput.style.width = '60px';
-            quantityInput.style.padding = '6px 10px';
-            quantityInput.style.border = '1px solid #ccc';
-            quantityInput.style.borderRadius = '4px';
-            quantityInput.style.fontSize = '0.9rem';
-            quantityInput.addEventListener('focus', function () {
-                this.style.outline = 'none';
-                this.style.borderColor = '#007bff';
-                this.style.boxShadow = '0 0 0 0.2rem rgba(0, 123, 255, 0.25)';
+
+            const allProductsContainer = document.getElementById('allProductsContainer');
+            allProductsContainer.innerHTML = '';
+
+            Object.keys(selectedProducts).forEach(productId => {
+                const product = selectedProducts[productId];
+                const label = createProductLabel(productId, product);
+                allProductsContainer.appendChild(label);
             });
-            quantityInput.addEventListener('blur', function () {
-                this.style.outline = '';
-                this.style.borderColor = '#ccc';
-                this.style.boxShadow = '';
-            });
-            const productNameText = document.createTextNode(product.name + ' - ৳' + product.price);
-            checkboxContainer.appendChild(checkbox);
-            label.appendChild(checkboxContainer);
-            label.appendChild(image);
-            label.appendChild(productNameText);
-            label.appendChild(quantityInput);
-            allProductsContainer.appendChild(label);
-        }
-        if (allProductsContainer.lastChild) {
-            allProductsContainer.lastChild.style.borderBottom = 'none';
-            allProductsContainer.lastChild.style.paddingBottom = '0';
-        }
+
+            if (allProductsContainer.lastChild) {
+                allProductsContainer.lastChild.style.borderBottom = 'none';
+                allProductsContainer.lastChild.style.paddingBottom = '0';
+            }
+        }, (error) => {
+            console.error("Error fetching order details:", error);
+        });
+    }
+
+    function createProductLabel(productId, product) {
+        const label = document.createElement('label');
+        label.className = 'product-label'; // Added for potential CSS styling
+        label.style.display = 'flex';
+        label.style.alignItems = 'center';
+        label.style.marginBottom = '12px';
+        label.style.borderBottom = '1px solid #f0f0f0';
+        label.style.paddingBottom = '10px';
+
+        const checkboxContainer = document.createElement('div');
+        checkboxContainer.className = 'checkbox-container';
+        checkboxContainer.style.display = 'flex';
+        checkboxContainer.style.alignItems = 'center';
+        checkboxContainer.style.marginRight = '10px';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = productId;
+        checkbox.dataset.productId = productId;
+        checkbox.className = 'return-product-checkbox';
+        checkbox.style.marginRight = '5px';
+        checkbox.style.width = '18px';
+        checkbox.style.height = '18px';
+        checkbox.style.cursor = 'pointer';
+
+        checkbox.addEventListener('change', function () {
+            if (this.checked) {
+                productsToReturn[productId] = selectedProducts[productId];
+            } else {
+                delete productsToReturn[productId];
+            }
+        });
+
+        const image = document.createElement('img');
+        image.src = product.image;
+        image.className = 'product-image';
+        image.style.width = '25px';
+        image.style.height = '25px';
+        image.style.marginRight = '10px';
+        image.style.objectFit = 'cover';
+
+        const quantityInput = document.createElement('input');
+        quantityInput.type = 'number';
+        quantityInput.value = 1;
+        quantityInput.min = 1;
+        quantityInput.className = 'product-quantity';
+        quantityInput.style.marginLeft = 'auto';
+        quantityInput.style.width = '60px';
+        quantityInput.style.padding = '6px 10px';
+        quantityInput.style.border = '1px solid #ccc';
+        quantityInput.style.borderRadius = '4px';
+        quantityInput.style.fontSize = '0.9rem';
+
+        quantityInput.addEventListener('focus', function () {
+            this.style.outline = 'none';
+            this.style.borderColor = '#007bff';
+            this.style.boxShadow = '0 0 0 0.2rem rgba(0, 123, 255, 0.25)';
+        });
+
+        quantityInput.addEventListener('blur', function () {
+            this.style.outline = '';
+            this.style.borderColor = '#ccc';
+            this.style.boxShadow = '';
+        });
+
+        const productNameText = document.createTextNode(product.name + ' - ৳' + product.price);
+
+        checkboxContainer.appendChild(checkbox);
+        label.appendChild(checkboxContainer);
+        label.appendChild(image);
+        label.appendChild(productNameText);
+        label.appendChild(quantityInput);
+
+        return label;
     }
 
     // Attach event listener to the table (or a parent container)
     document.querySelector("#return_exchange table").addEventListener('click', function (event) {
         if (event.target && event.target.id === 'openReturnModal') {
-            populateProductCheckboxes();
+            const orderId = event.target.dataset.orderId; // Get order ID from data attribute
+            console.log(orderId);
+            populateProductCheckboxes(orderId);
             returnModal.show();
         }
     });
