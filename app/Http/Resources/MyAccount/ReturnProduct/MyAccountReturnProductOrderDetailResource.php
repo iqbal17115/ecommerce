@@ -21,7 +21,7 @@ class MyAccountReturnProductOrderDetailResource extends JsonResource
             'product' => [
                 'id' => $this->Product->id,
                 'name' => $this->Product->name,
-                'image' => '', 
+                'image' => $this->getFirstProductImage() ? asset('storage/product_photo/'.$this->getFirstProductImage()) : '', 
             ],
             'unit_price' => $this->unit_price,
             'quantity' => $this->quantity,
