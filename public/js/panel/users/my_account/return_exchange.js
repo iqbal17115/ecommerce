@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let productsToReturn = {};
 
     function populateProductCheckboxes(orderId) {
-        
+
         getDetails(`my-account/order-details/${orderId}`, (data) => {
 
             selectedProducts = {};
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
         quantityInput.type = 'number';
         quantityInput.value = 1;
         quantityInput.min = 1;
-        quantityInput.className = `product-quantity product-quantity-${productId}`; 
+        quantityInput.className = `product-quantity product-quantity-${productId}`;
         quantityInput.style.marginLeft = 'auto';
         quantityInput.style.width = '60px';
         quantityInput.style.padding = '6px 10px';
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Calculate refund amount based on selected products
         const refundAmount = Object.entries(selectedProducts).reduce((sum, [productId, product]) => {
             const quantityInput = document.querySelector(`.product-quantity-${productId}`);
-            const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 0; 
+            const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 0;
             const price = product.price || 0;
             return sum + (quantity * price);
         }, 0).toFixed(2);
@@ -295,8 +295,63 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Step 3: Finish the process
+    // Step 3: Finish the process
     document.getElementById('submitReturn').addEventListener('click', function () {
-        alert('Your return request has been completed!');
-        returnModal.hide();
+        const returnReason = document.getElementById('selectedReturnReason').textContent;
+
+        const refundMethod = [];
+        if (document.getElementById('refundToAladdin').checked) refundMethod.push('Aladdin Account Balance');
+        if (document.getElementById('refundToCard').checked) refundMethod.push('Card ending 3323');
+        if (document.getElementById('refundToBank').checked) refundMethod.push('Bank');
+        if (document.getElementById('refundToBkash').checked) refundMethod.push('bKash');
+        if (document.getElementById('refundToNagad').checked) refundMethod.push('Nagad');
+        if (document.getElementById('refundToRocket').checked) refundMethod.push('Rocket');
+        if (document.getElementById('refundToUpay').checked) refundMethod.push('Upay');
+        if (document.getElementById('refundToCash').checked) refundMethod.push('Cash');
+
+        const refundAmount = Object.entries(selectedProducts).reduce((sum, [productId, product]) => {
+            const quantityInput = document.querySelector(`.product-quantity-${productId}`);
+            const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 0;
+            const price = product.price || 0;
+            return sum + (quantity * price);
+        }, 0).toFixed(2);
+
+        const productsToSubmit = Object.entries(selectedProducts).map(([productId, product]) => {
+            const quantityInput = document.querySelector(`.product-quantity-${productId}`);
+            const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 0;
+            return {
+                product_id: product.id,
+                quantity: quantity,
+                unit_price: product.price,
+                subtotal: (quantity * product.price).toFixed(2)
+            };
+        });
+
+        const formData = {
+            return_reason: returnReason,
+            refund_method: refundMethod.join(', '),
+            refund_amount: refundAmount,
+            products: productsToSubmit
+        };
+console.log(formData);
+        // Assuming saveAction function is defined elsewhere
+        saveAction(
+            "store",
+            "end_point", // Replace with your actual endpoint
+            formData,
+            null, // Replace with selectedId if needed
+            (data) => {
+                alert('Your return request has been completed!');
+                returnModal.hide();
+                console.log("Return request successful:", data);
+                // Optionally refresh order list or update UI
+                getUserOrderList();
+            },
+            (error) => {
+                console.error("Error submitting return request:", error);
+                alert('An error occurred while submitting your return request.');
+            }
+        );
     });
+
 });
