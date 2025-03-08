@@ -253,6 +253,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (document.getElementById('refundToAladdin').checked) refundMethod.push('Aladdin Account Balance');
         if (document.getElementById('refundToCard').checked) refundMethod.push('Card ending 3323');
         if (document.getElementById('refundToBank').checked) refundMethod.push('Bank');
+        if (document.getElementById('refundToBkash').checked) refundMethod.push('bKash');
+        if (document.getElementById('refundToNagad').checked) refundMethod.push('Nagad');
+        if (document.getElementById('refundToRocket').checked) refundMethod.push('Rocket');
+        if (document.getElementById('refundToUpay').checked) refundMethod.push('Upay');
+        if (document.getElementById('refundToCash').checked) refundMethod.push('Cash');
 
         // Calculate refund amount based on selected products
         const refundAmount = Object.values(selectedProducts).reduce((sum, product) => {
