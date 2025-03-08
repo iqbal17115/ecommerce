@@ -86,7 +86,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #f8f9fa; padding: 15px 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                 <h5 class="modal-title" style="font-size: 24px; font-weight: 600;">Return Product</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
             </div>
             <div class="modal-body" style="font-family: Arial, sans-serif; font-size: 14px;">
                 <!-- Step 1 -->
