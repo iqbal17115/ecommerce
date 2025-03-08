@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
         getDetails(
             "my-account/order-list", // Your API endpoint
             (data) => {
-                console.log(111);
-                console.log(data.results.data);
                 displayOrderList(data.results.data);
 
             },
@@ -80,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             orderItems.forEach(item => {
                 selectedProducts[item.id] = {
+                    id: item.product.id,
                     name: item.product.name,
                     image: item.product.image,
                     price: item.unit_price,
@@ -150,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
         quantityInput.type = 'number';
         quantityInput.value = 1;
         quantityInput.min = 1;
-        quantityInput.className = 'product-quantity';
+        quantityInput.className = `product-quantity product-quantity-${productId}`; 
         quantityInput.style.marginLeft = 'auto';
         quantityInput.style.width = '60px';
         quantityInput.style.padding = '6px 10px';
@@ -185,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector("#return_exchange table").addEventListener('click', function (event) {
         if (event.target && event.target.id === 'openReturnModal') {
             const orderId = event.target.dataset.orderId; // Get order ID from data attribute
-            console.log(orderId);
             populateProductCheckboxes(orderId);
             returnModal.show();
         }
@@ -219,6 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please select a product, return reason, and provide a comment.');
             return;
         }
+
         selectedProducts = productsToReturn; // Update selectedProducts to only those being returned
         // Hide Step 1 and Show Step 2
         document.getElementById('step1').style.display = 'none';
@@ -260,8 +259,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (document.getElementById('refundToCash').checked) refundMethod.push('Cash');
 
         // Calculate refund amount based on selected products
-        const refundAmount = Object.values(selectedProducts).reduce((sum, product) => {
-            const quantity = product.quantity || 0;
+        const refundAmount = Object.entries(selectedProducts).reduce((sum, [productId, product]) => {
+            const quantityInput = document.querySelector(`.product-quantity-${productId}`);
+            const quantity = quantityInput ? parseInt(quantityInput.value, 10) : 0; 
             const price = product.price || 0;
             return sum + (quantity * price);
         }, 0).toFixed(2);
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
         returnSummary.appendChild(createSummaryItem('Final Refund Method:', refundMethodText));
 
         // Get refund amount
-        returnSummary.appendChild(createSummaryItem('Final Refund Amount:', `$${refundAmount}`));
+        returnSummary.appendChild(createSummaryItem('Final Refund Amount:', `৳${refundAmount}`));
 
         // Hide Step 2 and Show Step 3
         document.getElementById('step2').style.display = 'none';
