@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ecommerce\MyAccount;
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MyAccount\ReturnProduct\MyAccountReturnProductOrderListRequest;
+use App\Http\Requests\MyAccount\ReturnProduct\MyAccountReturnProductStoreRequest;
 use App\Http\Resources\MyAccount\ReturnProduct\MyAccountReturnProductOrderListResource;
 use App\Http\Resources\MyAccount\ReturnProduct\OrderDetail\MyAccountOrderResource;
 use App\Models\FrontEnd\Order;
@@ -33,6 +34,17 @@ class MyAccountReturnProductController extends Controller
         try {
             // Return a success message with the data
             return Message::success(null, MyAccountOrderResource::make($order));
+        } catch (\Throwable $th) {
+            // Return a error message
+            return Message::error($th->getMessage());
+        }
+    }
+
+    public function store(MyAccountReturnProductStoreRequest $request)
+    {
+        try {
+            // Return a success message with the data
+            return Message::success(__("messages.success_delete"));
         } catch (\Throwable $th) {
             // Return a error message
             return Message::error($th->getMessage());

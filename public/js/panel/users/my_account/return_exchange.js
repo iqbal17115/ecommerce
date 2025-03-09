@@ -293,8 +293,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('step3').style.display = 'block';
     });
 
-
-    // Step 3: Finish the process
     // Step 3: Finish the process
     document.getElementById('submitReturn').addEventListener('click', function () {
         const returnReason = document.getElementById('selectedReturnReason').textContent;
@@ -333,18 +331,16 @@ document.addEventListener('DOMContentLoaded', function () {
             refund_amount: refundAmount,
             products: productsToSubmit
         };
-console.log(formData);
+
         // Assuming saveAction function is defined elsewhere
         saveAction(
             "store",
-            "end_point", // Replace with your actual endpoint
+            "my-account/return-product", // Replace with your actual endpoint
             formData,
             null, // Replace with selectedId if needed
             (data) => {
                 alert('Your return request has been completed!');
                 returnModal.hide();
-                console.log("Return request successful:", data);
-                // Optionally refresh order list or update UI
                 getUserOrderList();
             },
             (error) => {
@@ -353,5 +349,4 @@ console.log(formData);
             }
         );
     });
-
 });

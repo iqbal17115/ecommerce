@@ -199,6 +199,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::controller(MyAccountReturnProductController::class)->group(function () {
             Route::get('my-account/order-list', 'index')->name('my_account.order_list');
             Route::get('my-account/order-details/{order}', 'orderDetails')->name('my_account.order_details');
+            Route::post('my-account/return-product', 'store')->name('my_account.return_product.store');
         });
     });
 
