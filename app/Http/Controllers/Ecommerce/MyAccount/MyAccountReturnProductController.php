@@ -9,11 +9,14 @@ use App\Http\Requests\MyAccount\ReturnProduct\MyAccountReturnProductStoreRequest
 use App\Http\Resources\MyAccount\ReturnProduct\MyAccountReturnProductOrderListResource;
 use App\Http\Resources\MyAccount\ReturnProduct\OrderDetail\MyAccountOrderResource;
 use App\Models\FrontEnd\Order;
+use App\Services\MyAccount\MyAccountOrderReturnProductService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class MyAccountReturnProductController extends Controller
 {
+    public function __construct(private readonly MyAccountOrderReturnProductService $myAccountOrderReturnProductService) {}
+
     /**
      * index
      *
@@ -43,6 +46,9 @@ class MyAccountReturnProductController extends Controller
     public function store(MyAccountReturnProductStoreRequest $request)
     {
         try {
+            // Create return request
+            $this->myAccountOrderReturnProductService->createReturnRequest($request->validated());
+
             // Return a success message with the data
             return Message::success(__("messages.success_delete"));
         } catch (\Throwable $th) {

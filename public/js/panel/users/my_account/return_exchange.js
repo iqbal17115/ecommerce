@@ -183,7 +183,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Attach event listener to the table (or a parent container)
     document.querySelector("#return_exchange table").addEventListener('click', function (event) {
         if (event.target && event.target.id === 'openReturnModal') {
-            const orderId = event.target.dataset.orderId; // Get order ID from data attribute
+            const orderId = event.target.dataset.orderId;
+            document.getElementById('returnExchangeModal').dataset.orderId = orderId; 
             populateProductCheckboxes(orderId);
             returnModal.show();
         }
@@ -321,15 +322,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 product_id: product.id,
                 quantity: quantity,
                 unit_price: product.price,
-                subtotal: (quantity * product.price).toFixed(2)
+                subtotal: (quantity * product.price).toFixed(2),
+                order_detail_id: productId, // Assuming productId is order_detail_id
             };
         });
+    
+        const orderId = document.getElementById('returnExchangeModal').dataset.orderId; // Get order ID from data attribute of modal.
 
         const formData = {
+            order_id: orderId,
             return_reason: returnReason,
             refund_method: refundMethod.join(', '),
             refund_amount: refundAmount,
-            products: productsToSubmit
+            products: productsToSubmit,
         };
 
         // Assuming saveAction function is defined elsewhere

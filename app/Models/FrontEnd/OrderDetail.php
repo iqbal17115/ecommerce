@@ -25,6 +25,9 @@ class OrderDetail extends Model
         'product_variation_id',
         'unit_price',
         'quantity',
+        'return_quantity',
+        'return_reason',
+        'return_status',
         'is_active'
     ];
 
