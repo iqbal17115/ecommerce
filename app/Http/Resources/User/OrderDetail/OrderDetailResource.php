@@ -19,6 +19,7 @@ class OrderDetailResource extends JsonResource
             "product_name" => $this?->Product?->name,
             "unit_price" => $this->unit_price,
             "quantity" => $this->quantity,
+            "return_quantity" => $this->return_quantity ?? 0,
             "total_amount" => $this->unit_price * $this->quantity,
             "image" => $this->getProductImageUrl()
         ];

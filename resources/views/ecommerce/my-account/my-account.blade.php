@@ -175,6 +175,7 @@ function generateOrderCard(order) {
                             <th>Product</th>
                             <th class="text-center">Unit Price</th>
                             <th class="text-center">Qty</th>
+                            <th class="text-center">Return</th>
                             <th class="text-center">Total</th>
                         </tr>
                     </thead>
@@ -213,6 +214,7 @@ function generateOrderDetails(orderDetails) {
             </td>
             <td class="text-center">${formatPrice(orderDetail.unit_price)}</td>
             <td class="text-center">${formatQuantity(orderDetail.quantity)} pcs</td>
+            <td class="text-center">${formatQuantity(orderDetail.return_quantity)} pcs</td>
             <td class="text-center">${formatPrice(orderDetail.total_amount)}</td>
         </tr>
     `).join('');
