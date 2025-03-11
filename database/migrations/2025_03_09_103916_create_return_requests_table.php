@@ -19,7 +19,7 @@ class CreateReturnRequestsTable extends Migration
             $table->foreignUuid('order_id')->index();
             $table->foreignUuid('user_id')->index();
             $table->string('return_reason');
-            $table->enum('refund_method', ['aladdin', 'card', 'bank', 'bkash', 'nagad', 'rocket', 'upay', 'cash']);
+            $table->string('refund_method');
             $table->decimal('refund_amount', 10, 2);
             $table->enum('status', ['pending', 'approved', 'rejected', 'completed'])->default('pending');
             $table->text('comment')->nullable();
