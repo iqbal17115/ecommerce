@@ -19,8 +19,8 @@ class MyAccountReturnProductOrderDetailResource extends JsonResource
             'id' => $this->id,
             'vendor_id' => $this->vendor_id,
             'product' => [
-                'id' => $this->Product->id,
-                'name' => $this->Product->name,
+                'id' => $this?->Product?->id,
+                'name' => $this?->Product?->name,
                 'image' => $this->getFirstProductImage() ? asset('storage/product_photo/'.$this->getFirstProductImage()) : '', 
             ],
             'unit_price' => $this->unit_price,
@@ -33,6 +33,6 @@ class MyAccountReturnProductOrderDetailResource extends JsonResource
 
     protected function getFirstProductImage()
     {
-        return $this->Product->ProductImage?->first()?->image;
+        return $this?->Product?->ProductImage?->first()?->image;
     }
 }
