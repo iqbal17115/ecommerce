@@ -129,7 +129,6 @@ Route::group(['middleware' => 'web'], function () {
         });
     });
 
-
     // Define the route for the calculateShippingCharge method
     Route::post('/calculate-shipping-charge', [ShippingChargeController::class, 'calculateShippingCharge'])->name('calculateShippingCharge');
 

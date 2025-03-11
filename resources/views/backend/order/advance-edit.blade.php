@@ -222,7 +222,8 @@
                             <div class="col-md-2">
                                 <div class="price-info">
                                     <p class="mb-2">{{ $orderDetail->quantity * $orderDetail->unit_price }} Taka</p>
-                                    <p class="mb-0">Quantity: {{ $orderDetail->quantity }}</p>
+                                    <p class="mb-0">Qty: {{ $orderDetail->quantity }}</p>
+                                    <p class="mb-0">Return Qty: {{ $orderDetail->return_quantity }}</p>
                                 </div>
                             </div>
                             <div class="col-md-2">

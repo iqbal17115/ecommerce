@@ -200,7 +200,7 @@
                                                 ${order.order_details.map(detail => {
                                                     console.log(detail.product);
                                                     if (detail.product) {
-                                                        return `${detail.product.name}<br>Quantity: ${detail.quantity}<br>Item subtotal: ${detail.quantity * detail.unit_price}<br>Condition: <hr style="padding: 0px; margin: 0px; width: 100px;">`;
+                                                        return `${detail.product.name}<br>Quantity: ${detail.quantity}<br>Return Qty: ${detail.return_quantity}<br>Item subtotal: ${detail.quantity * detail.unit_price}<br>Condition: <hr style="padding: 0px; margin: 0px; width: 100px;">`;
                                                     } else {
                                                         return ''; // Handle the case when the property chain is not complete
                                                     }
