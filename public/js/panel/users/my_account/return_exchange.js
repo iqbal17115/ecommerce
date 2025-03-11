@@ -185,9 +185,13 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector("#return_exchange table").addEventListener('click', function (event) {
         if (event.target && event.target.id === 'openReturnModal') {
             const orderId = event.target.dataset.orderId;
-            document.getElementById('returnExchangeModal').dataset.orderId = orderId; 
+            document.getElementById('returnExchangeModal').dataset.orderId = orderId;
             populateProductCheckboxes(orderId);
             returnModal.show();
+            // Hide Step 1 and Show Step 2
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'none';
+            document.getElementById('step1').style.display = 'block';
         }
     });
 
@@ -327,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 order_detail_id: productId, // Assuming productId is order_detail_id
             };
         });
-    
+
         const orderId = document.getElementById('returnExchangeModal').dataset.orderId; // Get order ID from data attribute of modal.
 
         const formData = {
