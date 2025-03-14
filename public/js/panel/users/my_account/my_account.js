@@ -384,7 +384,7 @@ $(document).ready(function () {
         getDetails(
             "/api/cart/lists?user_id=" + user_id,
             (data) => {
-                showCartTableData(data.results.data);
+                // showCartTableData(data.results.data);
                 showHeaderCartData(data.results.data);
             },
             (error) => {
@@ -392,6 +392,7 @@ $(document).ready(function () {
             }
         );
     }
+    
     getCartItem();
     $(document).on('click', '.change_qty_cart_item', function () {
         const cart_item_id = $(this).data('cart_item_id');

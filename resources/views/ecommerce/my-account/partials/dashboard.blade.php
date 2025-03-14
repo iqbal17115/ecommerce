@@ -65,7 +65,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <a class="nav-link custom_link" href="#cartlist" data-toggle="tab">
+                    <a class="nav-link custom_link cart-item-tab">
                         <div class="card shadow-sm">
                             <div class="card-content">
                                 <div class="card-body p-4">

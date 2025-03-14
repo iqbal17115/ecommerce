@@ -43,6 +43,7 @@ use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\CheckoutController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountReturnProductController;
+use App\Http\Controllers\Ecommerce\MyAccount\MyAccountCartController;
 use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
 use App\Http\Controllers\Frontend\OrderTracking\OrderTrackingController;
 use App\Http\Controllers\FrontEnd\ReplyController;
@@ -199,6 +200,11 @@ Route::group(['middleware' => 'web'], function () {
             Route::get('my-account/order-list', 'index')->name('my_account.order_list');
             Route::get('my-account/order-details/{order}', 'orderDetails')->name('my_account.order_details');
             Route::post('my-account/return-product', 'store')->name('my_account.return_product.store');
+        });
+
+        // My Account Cart
+        Route::controller(MyAccountCartController::class)->group(function () {
+            Route::get('my-account/cart', 'index')->name('my_account.cart');
         });
     });
 
