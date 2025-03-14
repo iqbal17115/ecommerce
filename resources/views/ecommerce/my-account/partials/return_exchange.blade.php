@@ -138,7 +138,7 @@
                     </div>
 
                     <!-- Continue Button -->
-                    <button id="step1Continue" class="btn btn-primary" style="padding: 10px 20px; font-size: 16px; border-radius: 5px;">Continue</button>
+                    <button id="step1Continue" class="btn btn-primary" style="padding: 5px 10px; font-size: 10px; border-radius: 5px; margin-top: 5px;">Continue</button>
                 </div>
 
                 <!-- Step 2 -->
@@ -156,8 +156,8 @@
                                     <!-- Custom Radio Button 1 -->
                                     <div style="margin-bottom: 15px;">
                                         <input type="radio" id="refundToAladdin" name="refundMethod" value="aladdin"
-                                            style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
-                                        <label for="refundToAladdin" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
+                                            style="width: 15px; height: 15px; margin-right: 5px; accent-color: #007bff;" />
+                                        <label for="refundToAladdin" style="font-size: 11px; font-weight: 200; cursor: pointer; padding-left: 5px;">
                                             Refund to Aladdinne Account Balance
                                         </label>
                                     </div>
@@ -165,8 +165,8 @@
                                     <!-- Custom Radio Button 2 -->
                                     <div style="margin-bottom: 15px;">
                                         <input type="radio" id="refundToCard" name="refundMethod" value="card"
-                                            style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
-                                        <label for="refundToCard" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
+                                            style="width: 15px; height: 15px; margin-right: 5px; accent-color: #007bff;" />
+                                        <label for="refundToCard" style="font-size: 11px; font-weight: 200; cursor: pointer; padding-left: 5px;">
                                             Refund to your Card
                                         </label>
                                     </div>
@@ -174,8 +174,8 @@
                                     <!-- Custom Radio Button 3 -->
                                     <div style="margin-bottom: 15px;">
                                         <input type="radio" id="refundToBank" name="refundMethod" value="bank"
-                                            style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
-                                        <label for="refundToBank" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
+                                            style="width: 15px; height: 15px; margin-right: 5px; accent-color: #007bff;" />
+                                        <label for="refundToBank" style="font-size: 11px; font-weight: 200; cursor: pointer; padding-left: 5px;">
                                             Refund to your Bank
                                         </label>
                                     </div>
@@ -183,8 +183,8 @@
                                     <!-- Custom Radio Button 4 -->
                                     <div style="margin-bottom: 15px;">
                                         <input type="radio" id="refundToBkash" name="refundMethod" value="bKash"
-                                            style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
-                                        <label for="refundToBkash" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
+                                            style="width: 15px; height: 15px; margin-right: 5px; accent-color: #007bff;" />
+                                        <label for="refundToBkash" style="font-size: 11px; font-weight: 200; cursor: pointer; padding-left: 5px;">
                                             Refund to your Bkash
                                         </label>
                                     </div>
@@ -192,8 +192,8 @@
                                     <!-- Custom Radio Button 5 -->
                                     <div style="margin-bottom: 15px;">
                                         <input type="radio" id="refundToNagad" name="refundMethod" value="nagad"
-                                            style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
-                                        <label for="refundToBkash" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
+                                            style="width: 15px; height: 15px; margin-right: 5px; accent-color: #007bff;" />
+                                        <label for="refundToBkash" style="font-size: 11px; font-weight: 200; cursor: pointer; padding-left: 5px;">
                                             Refund to your Nagad
                                         </label>
                                     </div>
@@ -201,8 +201,8 @@
                                     <!-- Custom Radio Button 6 -->
                                     <div style="margin-bottom: 15px;">
                                         <input type="radio" id="refundToRocket" name="refundMethod" value="rocket"
-                                            style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
-                                        <label for="refundToRocket" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
+                                            style="width: 15px; height: 15px; margin-right: 5px; accent-color: #007bff;" />
+                                        <label for="refundToRocket" style="font-size: 11px; font-weight: 200; cursor: pointer; padding-left: 5px;">
                                             Refund to your Rocket
                                         </label>
                                     </div>
@@ -210,8 +210,8 @@
                                     <!-- Custom Radio Button 7 -->
                                     <div style="margin-bottom: 15px;">
                                         <input type="radio" id="refundToUpay" name="refundMethod" value="upay"
-                                            style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
-                                        <label for="refundToUpay" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
+                                            style="width: 15px; height: 15px; margin-right: 5px; accent-color: #007bff;" />
+                                        <label for="refundToUpay" style="font-size: 11px; font-weight: 200; cursor: pointer; padding-left: 5px;">
                                             Refund to your Upay
                                         </label>
                                     </div>
@@ -219,8 +219,8 @@
                                     <!-- Custom Radio Button 8 -->
                                     <div style="margin-bottom: 15px;">
                                         <input type="radio" id="refundToCash" name="refundMethod" value="cash"
-                                            style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
-                                        <label for="refundToUpay" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
+                                            style="width: 15px; height: 15px; margin-right: 5px; accent-color: #007bff;" />
+                                        <label for="refundToUpay" style="font-size: 11px; font-weight: 200; cursor: pointer; padding-left: 5px;">
                                             Refund to your Cash
                                         </label>
                                     </div>
@@ -241,7 +241,7 @@
                     </div>
 
                     <!-- Continue Button -->
-                    <button id="step2Continue" class="btn btn-primary" style="padding: 10px 20px; font-size: 16px; border-radius: 5px;">Continue</button>
+                    <button id="step2Continue" class="btn btn-primary" style="padding: 5px 10px; font-size: 10px; border-radius: 5px; margin-top: 5px;">Continue</button>
                 </div>
 
                 <!-- Step 3 -->
@@ -249,7 +249,7 @@
                     <!-- Left Side: Return Summary -->
                     <div class="row">
                         <div class="col-md-8">
-                            <p style="font-weight: bold; font-size: 16px;">Return Summary</p>
+                            <p style="font-weight: bold; font-size: 8px;">Return Summary</p>
                             <ul id="returnSummary" class="list-group" style="font-size: 14px;">
                                 <!-- Summary will be dynamically populated here -->
                             </ul>

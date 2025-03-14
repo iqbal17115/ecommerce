@@ -37,11 +37,11 @@ $(document).ready(function () {
                     '</div>' +
                     '</div>' +
                     '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">' +
-                    '<span>Price: '+ item.currency +'' + item.product.product_price.toFixed(2) + '</span>' +
+                    '<span>Price: '+ item.currency + ' ' + item.product.product_price.toFixed(2) + '</span>' +
                     '<span>Quantity: ' + item.quantity + '</span>' +
                     '</div>' +
                     '<div style="display: flex; justify-content: space-between;">' +
-                    '<span>Discount: ' + item.currency + item.coupon_discount.toFixed(2) + '</span>' +
+                    '<span>Discount: ' + item.currency + ' ' + item.coupon_discount.toFixed(2) + '</span>' +
                     '</div>' +
                     '</div>';
             });
