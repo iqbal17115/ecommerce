@@ -32,16 +32,16 @@ $(document).ready(function () {
                     '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
                     '<img src="' + item.product.image_url + '" alt="" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">' +
                     '<div>' +
-                    '<h3 style="margin: 0;">' + item.product.name + '</h3>' +
+                    '<h3 style="margin: 0;">'+ item.currency +''+ item.product.name + '</h3>' +
                     '<span style="font-size: 0.9em; color: ' + (item.is_active ? 'green' : 'red') + ';">' + (item.is_active ? 'Active' : 'Inactive') + '</span>' +
                     '</div>' +
                     '</div>' +
                     '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">' +
-                    '<span>Price: $' + item.product.product_price.toFixed(2) + '</span>' +
+                    '<span>Price: ' + item.product.product_price.toFixed(2) + '</span>' +
                     '<span>Quantity: ' + item.quantity + '</span>' +
                     '</div>' +
                     '<div style="display: flex; justify-content: space-between;">' +
-                    '<span>Discount: $' + item.coupon_discount.toFixed(2) + '</span>' +
+                    '<span>Discount: ' + item.currency + item.coupon_discount.toFixed(2) + '</span>' +
                     '</div>' +
                     '</div>';
             });

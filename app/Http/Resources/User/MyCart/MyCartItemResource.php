@@ -19,6 +19,7 @@ class MyCartItemResource extends JsonResource
             "product" => MyCartProductResource::make($this->product),
             "quantity" => $this->quantity,
             "coupon_discount" => (float)$this?->cart_item_coupon?->value ?? 0,
+            "currency" => "৳",
             "is_active" => $this->is_active
         ];
     }
