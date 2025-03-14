@@ -31,7 +31,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#cartlist" data-toggle="tab">
+            <a class="nav-link cart-item-tab">
                 <i class="fa fa-shopping-cart"></i>
                 Cart
             </a>
