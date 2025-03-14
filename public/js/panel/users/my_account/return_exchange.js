@@ -54,9 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
             actionsRow.innerHTML = `
                 <td colspan="4" style="text-align: center; padding-bottom: 26px;">
                     <button id="openReturnModal" data-order-id="${order.id}" style="background-color: #007bff; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Exchange & Return</button>
-                    <button style="background-color: #6c757d; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Track Package</button>
-                    <button style="background-color: #28a745; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">View Invoice</button>
-                    <button style="background-color: #17a2b8; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Write a Product Review</button>
+                    <a href="orders-tracking/${order.id}" style="background-color: #6c757d; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">Track Package</a>
+                    <button onclick="printInvoice('${order.id}')" style="background-color: #28a745; color: #fff; border: none; border-radius: 8px; padding: 4px 8px; margin: 4px; cursor: pointer;">View Invoice</button>
                 </td>
             `;
             tableBody.appendChild(actionsRow);
