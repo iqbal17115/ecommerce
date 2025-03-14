@@ -30,7 +30,7 @@ $(document).ready(function () {
             items.forEach(function (item) {
                 cartListHtml += '<div style="border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; padding: 15px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: white;">' +
                     '<div style="display: flex; align-items: center; margin-bottom: 10px;">' +
-                    '<img src="" alt="' + item.product.name + '" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">' +
+                    '<img src="' + item.product.image_url + '" alt="" style="width: 80px; height: 80px; object-fit: cover; margin-right: 15px; border-radius: 4px;">' +
                     '<div>' +
                     '<h3 style="margin: 0;">' + item.product.name + '</h3>' +
                     '<span style="font-size: 0.9em; color: ' + (item.is_active ? 'green' : 'red') + ';">' + (item.is_active ? 'Active' : 'Inactive') + '</span>' +
