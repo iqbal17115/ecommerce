@@ -130,8 +130,10 @@
                     <!-- Terms & Conditions Agreement -->
                     <div class="mb-3 p-3 shadow-sm bg-white rounded d-flex justify-content-center align-items-center">
                         <label class="form-check-label d-flex align-items-center" style="font-weight: bold; font-size: 16px; color: #333;">
-                            <input type="radio" name="returnAgreement" id="returnAgreement" class="form-check-input me-3" required>
-                            I agree to return all items in original condition, with price tags or stickers intact, user manual, warranty cards, and original accessories in manufacturer's packaging.
+                            <input type="radio" name="returnAgreement" id="returnAgreement" class="form-check-input" required>
+                            <span style="margin-left: 10px;">
+                                I agree to return all items in original condition, with price tags or stickers intact, user manual, warranty cards, and original accessories in manufacturer's packaging.
+                            </span>
                         </label>
                     </div>
 
@@ -156,7 +158,7 @@
                                         <input type="radio" id="refundToAladdin" name="refundMethod" value="aladdin"
                                             style="width: 18px; height: 18px; margin-right: 10px; accent-color: #007bff;" />
                                         <label for="refundToAladdin" style="font-size: 14px; font-weight: 500; cursor: pointer; padding-left: 5px;">
-                                            Refund to Aladdin Account Balance
+                                            Refund to Aladdinne Account Balance
                                         </label>
                                     </div>
 
