@@ -19,7 +19,7 @@ class MyCartProductResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/'.$this->getFirstProductImage()) : '',
+            "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/' . $this->getFirstProductImage()) : '',
             "product_price" => (float)$productPrice,
         ];
     }

@@ -255,10 +255,12 @@
                             </ul>
 
                         </div>
+                        <div class="col-md-12">
+                             <!-- Submit Button -->
+                             <button id="submitReturn" class="btn btn-success" style="padding: 5px 10px; font-size: 10px; border-radius: 5px; margin-top: 10px; float: right;">Submit Return</button>
+                        </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <button id="submitReturn" class="btn btn-success" style="padding: 10px 20px; font-size: 16px; border-radius: 5px;">Submit Return</button>
                 </div>
             </div>
         </div>
