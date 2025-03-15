@@ -796,7 +796,7 @@
 
 @endsection
 @push('scripts')
-    <script src="{{ mix('js/panel/users/cart/product.js') }}"></script>
+    <script src="{{ asset('js/panel/users/cart/product.js') }}?v={{ filemtime(public_path('js/panel/users/cart/product.js')) }}"></script>
     <script src="{{ asset('js/panel/users/common.js') }}?v={{ filemtime(public_path('js/panel/users/common.js')) }}"></script>
     <script src="{{ asset('js/panel/users/product_details/common.js') }}?v={{ filemtime(public_path('js/panel/users/product_details/common.js')) }}"></script>
 

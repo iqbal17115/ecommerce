@@ -545,7 +545,8 @@ $(document).ready(function () {
             }
         );
     }
-    getWishlist();
+
+    // getWishlist();
 
     // Handle individual product checkbox change event
     $(document).on("change", ".product-checkbox", function () {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountPaymentController;
 use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountTransactionController;
+use App\Http\Controllers\Ecommerce\MyAccount\MyAccountWishlistController;
 use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Backend\Customer\CustomerController;
 use App\Http\Controllers\Backend\Order\AllOrderController;
@@ -205,6 +206,11 @@ Route::group(['middleware' => 'web'], function () {
         // My Account Cart
         Route::controller(MyAccountCartController::class)->group(function () {
             Route::get('my-account/cart', 'index')->name('my_account.cart');
+        });
+
+        // My Account Cart
+        Route::controller(MyAccountWishlistController::class)->group(function () {
+            Route::get('my-account/wishlist', 'index')->name('my_account.wishlist');
         });
     });
 

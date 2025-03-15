@@ -85,7 +85,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <a class="nav-link custom_link" href="#wishlist" data-toggle="tab">
+                    <a class="nav-link custom_link wishlist-item-tab">
                         <div class="card shadow-sm">
                             <div class="card-content">
                                 <div class="card-body p-4">

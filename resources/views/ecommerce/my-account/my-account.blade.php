@@ -75,6 +75,7 @@
     <script src="{{ asset('js/panel/users/my_account/my_transaction.js') }}"></script>
     <script src="{{ asset('js/panel/users/my_account/return_exchange.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/my_account/cart.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/my_account/wishlist.js') }}?v={{ time() }}"></script>
 
     <!-- My Account JS File -->
     <script>

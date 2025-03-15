@@ -37,7 +37,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link @if ($type == 'wishlist') active @endif" href="#wishlist" data-toggle="tab">
+            <a class="nav-link @if ($type == 'wishlist') active @endif wishlist-item-tab">
                 <i class="fas fa-heart"></i>
                 Wishlist
             </a>
