@@ -437,29 +437,6 @@ $(document).ready(function () {
         // Send an AJAX PUT request to the cart API
     });
 
-    $(document).on('click', '.remove-from-cart', function () {
-        const row_id = $(this).data('id');
-
-        // Delete the company
-        deleteAction(
-            '/api/cart-remove/' + row_id,
-            (data) => {
-                $('.product.cart_' + row_id).remove();
-                let cartCountElement = document.querySelector('.cart-count');
-                let currentCount = parseInt(cartCountElement.textContent, 10);
-                currentCount -= 1;
-                cartCountElement.textContent = currentCount;
-                getWishlist();
-                calculateCartTotal();
-                toastrSuccessMessage(data.message);
-            },
-            (error) => {
-                // Error callback
-                toastrErrorMessage(error.responseJSON.message);
-            }
-        );
-    });
-
     function submitAllCartItemStatus(formData, selectedId = "") {
         saveAction(
             "store",

@@ -29,11 +29,11 @@ $(document).ready(function () {
 
     function displayWishlist(wishlists) {
         let wishListHtml = '';
-    
+
         if (wishlists.length > 0) {
             wishlists.forEach(function (wishlist) {
                 let product = wishlist.product;
-    
+
                 wishListHtml += `
                     <div style="border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; padding: 15px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: white;" class="product-row wishlist_row_${wishlist.id}">
                         
@@ -55,14 +55,15 @@ $(document).ready(function () {
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
                             <span style="font-size: 1em; font-weight: 500;">Price: ${product.currency}${product.product_price.toFixed(2)}</span>
                             <span>
-                                ${product.already_added 
-                                    ? '<span style="color: white; padding: 6px 12px; border-radius: 4px; font-size: 1.2em;" class="brand_color">Already in cart</span>' 
-                                    : `<button class="add-to-cart btn-add-cart add_wishlist_to_cart_item brand_color" 
+                                ${product.already_added
+                        ? '<span style="color: white; padding: 6px 12px; border-radius: 4px; font-size: 1.2em;" class="brand_color">Already in cart</span>'
+                        : `<button class="add-to-cart btn-add-cart add_wishlist_to_cart_item brand_color" 
                                         data-product_id="${product.id}" data-wishlist_id="${wishlist.id}" 
-                                        style="color: white; white: none; padding: 6px 15px; border-radius: 6px; cursor: pointer; font-size: 1.2em; font-weight: 500;">
+                                        style="color: white; border: none; padding: 4px 8px; 
+                                               border-radius: 20px; cursor: pointer; font-size: 10px; font-weight: bold;">
                                         Add to Cart
                                     </button>`
-                                }
+                    }
                             </span>
                         </div>
                         
@@ -72,10 +73,10 @@ $(document).ready(function () {
         } else {
             wishListHtml = '<p style="padding: 20px; text-align: center; color: #888;">Your wishlist is empty.</p>';
         }
-    
+
         $('#my-account-wishlist').html(wishListHtml);
-    }    
-      
+    }
+
     function submitWishlistToCart(formData, selectedId = "", action) {
         saveAction(
             "update",
