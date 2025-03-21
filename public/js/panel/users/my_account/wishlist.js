@@ -43,7 +43,7 @@ $(document).ready(function () {
                                     style="width: 70px; height: 70px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
                                 <div>
                                     <h3 style="margin: 0; font-size: 1.2em; font-weight: 600;">${product.name}</h3>
-                                    <span style="font-size: 1em; color: #a62573;">Added: ${product.item_added_at}</span>
+                                    <span style="font-size: 1em; color: #a62573;">Added: ${wishlist.item_added_at}</span>
                                 </div>
                             </div>
                             <button class="delete-wishlist-item" data-wishlist_id="${wishlist.id}" 

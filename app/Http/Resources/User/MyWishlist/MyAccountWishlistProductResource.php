@@ -22,7 +22,6 @@ class MyAccountWishlistProductResource extends JsonResource
             "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/' . $this->getFirstProductImage()) : '',
             "currency" => "৳",
             "product_price" => (float) $this->calculateProductPrice() ?? 0,
-            "item_added_at" => $this->created_at->diffForHumans(),
             "already_added" => CartItem::whereUserId(Auth::user()->id)->where("product_id", $this->id)->first() ? true : false,
         ];
     }

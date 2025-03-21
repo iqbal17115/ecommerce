@@ -16,7 +16,8 @@ class MyAccountWishlistResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'product' =>  MyAccountWishlistProductResource::make($this->product)
+            'product' =>  MyAccountWishlistProductResource::make($this->product),
+            'item_added_at' => $this->created_at->diffForHumans(),
         ];
     }
 }
