@@ -10,6 +10,9 @@ $(document).ready(function () {
         $('.tab-pane').not('#my-account-wishlist').removeClass('show active');
     });
 
+    if ($('#my-account-wishlist').hasClass('show') && $('#my-account-wishlist').hasClass('active')) {
+        loadWishlistData();
+    }
 
     function loadWishlistData() {
         getDetails(
