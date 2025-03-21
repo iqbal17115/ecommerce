@@ -25,6 +25,7 @@ class MyAccountOrderDetailResource extends JsonResource
             ],
             'unit_price' => $this->unit_price,
             'quantity' => $this->quantity,
+            'return_quantity' => $this->return_quantity ?? 0,
             'subtotal' => $this->unit_price * $this->quantity,
             'return_eligible_date' => Carbon::parse($this->order->created_at)->addDays(1)->format('d M Y')
         ];

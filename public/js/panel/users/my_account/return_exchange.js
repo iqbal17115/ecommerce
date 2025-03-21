@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
             "my-account/order-list", // Your API endpoint
             (data) => {
                 displayOrderList(data.results.data);
-
             },
             (error) => {
                 console.error("Error fetching order list:", error);
@@ -70,12 +69,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let productsToReturn = {};
 
     function populateProductCheckboxes(orderId) {
-
         getDetails(`my-account/order-details/${orderId}`, (data) => {
-
             selectedProducts = {};
             const orderItems = data.results.order_items;
-
+    
             orderItems.forEach(item => {
                 selectedProducts[item.id] = {
                     id: item.product.id,
@@ -83,18 +80,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     image: item.product.image,
                     price: item.unit_price,
                     quantity: item.quantity,
+                    return_quantity: item.return_quantity, // Store already returned quantity
                 };
             });
-
+    
             const allProductsContainer = document.getElementById('allProductsContainer');
             allProductsContainer.innerHTML = '';
-
+    
             Object.keys(selectedProducts).forEach(productId => {
                 const product = selectedProducts[productId];
                 const label = createProductLabel(productId, product);
                 allProductsContainer.appendChild(label);
             });
-
+    
             if (allProductsContainer.lastChild) {
                 allProductsContainer.lastChild.style.borderBottom = 'none';
                 allProductsContainer.lastChild.style.paddingBottom = '0';
@@ -103,22 +101,22 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error("Error fetching order details:", error);
         });
     }
-
+    
     function createProductLabel(productId, product) {
         const label = document.createElement('label');
-        label.className = 'product-label'; // Added for potential CSS styling
+        label.className = 'product-label';
         label.style.display = 'flex';
         label.style.alignItems = 'center';
         label.style.marginBottom = '12px';
         label.style.borderBottom = '1px solid #f0f0f0';
         label.style.paddingBottom = '10px';
-
+    
         const checkboxContainer = document.createElement('div');
         checkboxContainer.className = 'checkbox-container';
         checkboxContainer.style.display = 'flex';
         checkboxContainer.style.alignItems = 'center';
         checkboxContainer.style.marginRight = '10px';
-
+    
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.value = productId;
@@ -128,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
         checkbox.style.width = '18px';
         checkbox.style.height = '18px';
         checkbox.style.cursor = 'pointer';
-
+    
         checkbox.addEventListener('change', function () {
             if (this.checked) {
                 productsToReturn[productId] = selectedProducts[productId];
@@ -136,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 delete productsToReturn[productId];
             }
         });
-
+    
         const image = document.createElement('img');
         image.src = product.image;
         image.className = 'product-image';
@@ -144,11 +142,14 @@ document.addEventListener('DOMContentLoaded', function () {
         image.style.height = '25px';
         image.style.marginRight = '10px';
         image.style.objectFit = 'cover';
-
+    
+        const maxReturnable = product.quantity - product.return_quantity;
+    
         const quantityInput = document.createElement('input');
         quantityInput.type = 'number';
-        quantityInput.value = 1;
+        quantityInput.value = maxReturnable;
         quantityInput.min = 1;
+        quantityInput.max = maxReturnable;
         quantityInput.className = `product-quantity product-quantity-${productId}`;
         quantityInput.style.marginLeft = 'auto';
         quantityInput.style.width = '60px';
@@ -156,29 +157,46 @@ document.addEventListener('DOMContentLoaded', function () {
         quantityInput.style.border = '1px solid #ccc';
         quantityInput.style.borderRadius = '4px';
         quantityInput.style.fontSize = '0.9rem';
-
+    
+        const errorText = document.createElement('span');
+        errorText.className = 'error-message';
+        errorText.style.color = 'red';
+        errorText.style.fontSize = '12px';
+        errorText.style.display = 'none';
+        errorText.textContent = 'Exceeds returnable quantity!';
+    
+        quantityInput.addEventListener('input', function () {
+            if (parseInt(this.value) > maxReturnable) {
+                this.value = maxReturnable; // Restrict to max returnable qty
+                errorText.style.display = 'inline';
+            } else {
+                errorText.style.display = 'none';
+            }
+        });
+    
         quantityInput.addEventListener('focus', function () {
             this.style.outline = 'none';
             this.style.borderColor = '#007bff';
             this.style.boxShadow = '0 0 0 0.2rem rgba(0, 123, 255, 0.25)';
         });
-
+    
         quantityInput.addEventListener('blur', function () {
             this.style.outline = '';
             this.style.borderColor = '#ccc';
             this.style.boxShadow = '';
         });
-
+    
         const productNameText = document.createTextNode(product.name + ' - ৳' + product.price);
-
+    
         checkboxContainer.appendChild(checkbox);
         label.appendChild(checkboxContainer);
         label.appendChild(image);
         label.appendChild(productNameText);
         label.appendChild(quantityInput);
-
+        label.appendChild(errorText);
+    
         return label;
-    }
+    }    
 
     // Attach event listener to the table (or a parent container)
     document.querySelector("#return_exchange table").addEventListener('click', function (event) {
@@ -212,7 +230,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const productSelect = document.getElementById('productSelect');
         const option = productSelect.querySelector(`option[value='${productId}']`);
         if (option) option.disabled = false;
-    };
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Creates a product label element with a checkbox, product image, and input for return quantity.
+ * 
+ * @param {string} productId - The unique identifier for the product.
+ * @param {Object} product - The product details including name, image, price, quantity, and return quantity.
+ * @returns {HTMLElement} The constructed label element containing product information and controls.
+ */
+
+/******  6f7de556-1266-421a-ab09-a20ca6ef9e6d  *******/    };
 
     // Step 1: Continue to Step 2
     document.getElementById('step1Continue').addEventListener('click', function () {
