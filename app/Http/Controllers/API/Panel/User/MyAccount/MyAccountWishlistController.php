@@ -31,7 +31,7 @@ class MyAccountWishlistController extends Controller
     {
         try {
             $cartItem = $this->cartService->addToCart($wishlist->user_id, $wishlist->product_id, 1);
-            $wishlist->delete();
+            // $wishlist->delete();
             // Return a success message with the updated data
             return Message::success(__("message.update"));
         } catch (Exception $ex) {

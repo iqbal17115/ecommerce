@@ -502,36 +502,6 @@ $(document).ready(function () {
             }
         );
     }
-    function submitWishlistToCart(formData, selectedId = "", action) {
-        saveAction(
-            "update",
-            "/api/wishlist-to-cart",
-            formData,
-            selectedId,
-            (data) => {
-                toastrSuccessMessage(data.message);
-                $(action).closest('.product-row').remove();
-                getCartItem();
-            },
-            (error) => {
-                toastrErrorMessage(error.responseJSON.message);
-            }
-        );
-    }
-
-    $(document).on('click', '.add_wishlist_to_cart_item', function () {
-        const wishlist_id = $(this).data('wishlist_id');
-        const product_id = $(this).data('product_id');
-        const user_id = $("#temp_user_id").data('user_id');
-        const formData = {
-            user_id: user_id,
-            wishlist_id: wishlist_id,
-            product_id: product_id,
-            quantity: 1,
-        };
-
-        submitWishlistToCart(formData, wishlist_id, this);
-    });
 
     function getWishlist() {
         const user_id = $("#temp_user_id").data('user_id');
@@ -579,22 +549,5 @@ $("body").on("click", ".qty-btn-minus", function () {
     if (amount > 1) {
         $n.val(amount - 1);
     }
-});
-
-$(document).on('click', '.remove-from-wishlist', function () {
-    const row_id = $(this).data('id');
-
-    // Delete the company
-    deleteAction(
-        '/api/wishlist-remove/' + row_id,
-        (data) => {
-            $('.wishlist_row_' + row_id).remove();
-            toastrSuccessMessage(data.message);
-        },
-        (error) => {
-            // Error callback
-            toastrErrorMessage(error.responseJSON.message);
-        }
-    );
 });
 
