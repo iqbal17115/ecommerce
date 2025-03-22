@@ -109,7 +109,6 @@
     getDetails(`user-orders/lists?${params}`, (data) => {
         const container = $('#orders-container');
         container.empty();
-
         if (!data.results.data.length) {
             container.append('<p class="text-muted text-center">No orders found.</p>');
             return;
@@ -182,9 +181,32 @@ function generateOrderCard(order) {
                         </tr>
                     </thead>
                     <tbody>
-                        ${generateOrderDetails(order.order_details)}
+                        ${generateOrderDetails(order, order.order_details)}
                     </tbody>
                 </table>
+
+                 <!-- Order Summary Section -->
+                <div class="order-summary mt-4 p-3 border rounded bg-white">
+                    <h5 class="text-center text-primary">Order Summary</h5>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><strong>Subtotal:</strong></td>
+                            <td class="text-end">${formatPrice(order.total_amount)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Discount:</strong></td>
+                            <td class="text-end text-danger">- ${formatPrice(order.discount)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shipping Charge:</strong></td>
+                            <td class="text-end">${formatPrice(order.shipping_charge)}</td>
+                        </tr>
+                        <tr class="border-top">
+                            <td><h5 class="fw-bold">Grand Total:</h5></td>
+                            <td class="text-end"><h5 class="fw-bold text-success">${formatPrice(order.total_amount - order.discount + order.shipping_charge)}</h5></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     `;
@@ -197,7 +219,7 @@ function formatDate(date) {
 }
 
 // Function to generate order details HTML
-function generateOrderDetails(orderDetails) {
+function generateOrderDetails(order, orderDetails) {
     if (!Array.isArray(orderDetails) || orderDetails.length === 0) {
         return '<tr><td colspan="4" class="text-muted text-center">No order details available.</td></tr>';
     }

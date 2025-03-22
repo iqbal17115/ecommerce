@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <p style="margin: 0; font-weight: bold; font-size: 16px;">${item.product.name}</p>
                                     <p style="margin: 4px 0;">Quantity: <strong>${item.quantity}</strong></p>
                                     <p style="margin: 4px 0;">Return Qty: <strong>${item.return_quantity}</strong></p>
-                                    <p style="margin: 4px 0; color: #28a745;">Subtotal: ৳ ${item.subtotal}</p>
+                                    <p style="margin: 4px 0; color: #28a745;">Subtotal: ৳ ${order.total_amount}</p>
                                     <p style="margin: 4px 0; color: #6c757d;">Return & Exchange: Eligible through ${item.return_eligible_date || 'N/A'}</p>
                                 </div>
                             </div>
