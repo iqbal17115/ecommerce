@@ -49,6 +49,7 @@ class CartController extends Controller
         }
         return response()->json(['cart' => $cart]);
     }
+    
     public function addToCart(Request $request)
     {
         $cart = session()->get('cart', []);

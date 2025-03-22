@@ -12,7 +12,9 @@
     </div>
     <div class="sticky-info">
         <a href="{{ route('my.account', ['type' => 'wishlist']) }}" class="">
-            <i class="icon-wishlist-2"></i>Wishlist
+            <i class="icon-wishlist-2 position-relative">
+                <span class="wishlist-count badge-circle">{{ count((array) session('wishlist')) }}</span>
+            </i>Wishlist
         </a>
     </div>
     <div class="sticky-info">
