@@ -230,7 +230,7 @@ function generateOrderDetails(order, orderDetails) {
         <tr>
             <td>
                 <div class="d-flex align-items-center">
-                    ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px;" alt=""> `}
+                    ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px; margin-right: 10px;" alt=""> `}
                 </div>
             </td>
             <td>
