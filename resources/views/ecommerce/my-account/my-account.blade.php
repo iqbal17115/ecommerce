@@ -169,44 +169,46 @@ function generateOrderCard(order) {
             </div>
             <div class="card-footer bg-light">
                 <h6 class="text-muted">Order Details</h6>
-                <table class="table table-bordered">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Image</th>
-                            <th>Product</th>
-                            <th class="text-center">Unit Price</th>
-                            <th class="text-center">Qty</th>
-                            <th class="text-center">Return</th>
-                            <th class="text-center">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${generateOrderDetails(order, order.order_details)}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+    <table class="table table-bordered d-none d-md-table">
+        <thead class="bg-light">
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th class="text-center">Unit Price</th>
+                <th class="text-center">Qty</th>
+                <th class="text-center">Return</th>
+                <th class="text-center">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${generateOrderDetails(order, order.order_details)}
+        </tbody>
+    </table>
 
-                 <!-- Order Summary Section -->
-                <div class="order-summary mt-4 p-3 border rounded bg-white">
-                    <h5 class="text-center text-primary">Order Summary</h5>
-                    <table class="table table-borderless">
-                        <tr>
-                            <td><strong>Subtotal:</strong></td>
-                            <td class="text-end">${formatPrice(order.total_amount)}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Discount:</strong></td>
-                            <td class="text-end text-danger">- ${formatPrice(order.discount)}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Shipping Charge:</strong></td>
-                            <td class="text-end">${formatPrice(order.shipping_charge)}</td>
-                        </tr>
-                        <tr class="border-top">
-                            <td><h5 class="fw-bold">Grand Total:</h5></td>
-                            <td class="text-end"><h5 class="fw-bold text-success">${formatPrice(order.total_amount - order.discount + order.shipping_charge)}</h5></td>
-                        </tr>
-                    </table>
+    <!-- Mobile View (Flexbox-Based Cards) -->
+    <div class="d-md-none">
+        ${order.order_details.map(orderDetail => `
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="${orderDetail.image}" class="img-fluid rounded me-3" style="width: 50px; height: 50px;" alt="Product Image">
+                        <div>
+                            <h6 class="mb-0">${orderDetail.product_name || 'Product not available'}</h6>
+                            <small class="text-muted">Unit Price: ${formatPrice(orderDetail.unit_price)}</small>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>Qty: ${formatQuantity(orderDetail.quantity)} pcs</div>
+                        <div>Return: ${formatQuantity(orderDetail.return_quantity)} pcs</div>
+                        <div>Total: ${formatPrice(orderDetail.total_amount)}</div>
+                    </div>
                 </div>
+            </div>
+        `).join('')}
+    </div>
+</div>
+
             </div>
         </div>
     `;
