@@ -194,8 +194,8 @@ function generateOrderCard(order) {
                     <div class="d-flex align-items-center mb-3">
                         <img src="${orderDetail.image}" class="img-fluid rounded me-3" style="width: 50px; height: 50px;" alt="Product Image">
                         <div>
-                            <h6 class="mb-0">${orderDetail.product_name || 'Product not available'}</h6>
-                            <small class="text-muted">Unit Price: ${formatPrice(orderDetail.unit_price)}</small>
+                            <h6 class="mb-0" style="padding-left: 5px;">${orderDetail.product_name || 'Product not available'}</h6>
+                            <small class="text-muted" style="padding-left: 5px;">Unit Price: ${formatPrice(orderDetail.unit_price)}</small>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -230,12 +230,12 @@ function generateOrderDetails(order, orderDetails) {
         <tr>
             <td>
                 <div class="d-flex align-items-center">
-                    ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px; margin-right: 10px;" alt=""> `}
+                    ${`<img src="${orderDetail.image}" class="img-fluid rounded me-2" style="width: 50px; height: 50px;" alt=""> `}
                 </div>
             </td>
             <td>
                 <div class="d-flex align-items-center">
-                    <span class="ml-1">${orderDetail.product_name || 'Product not available'}</span>
+                    <span class="ml-3">${orderDetail.product_name || 'Product not available'}</span>
                 </div>
             </td>
             <td class="text-center">${formatPrice(orderDetail.unit_price)}</td>
