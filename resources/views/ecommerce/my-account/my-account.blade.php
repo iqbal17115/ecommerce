@@ -169,7 +169,7 @@ function generateOrderCard(order) {
             </div>
             <div class="card-footer bg-light">
                 <h6 class="text-muted">Order Details</h6>
-                <div class="table-responsive">
+               <div class="table-responsive">
     <table class="table table-bordered d-none d-md-table">
         <thead class="bg-light">
             <tr>
@@ -209,6 +209,29 @@ function generateOrderCard(order) {
     </div>
 </div>
 
+
+                 <!-- Order Summary Section -->
+                <div class="order-summary mt-4 p-3 border rounded bg-white">
+                    <h5 class="text-center text-primary">Order Summary</h5>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><strong>Subtotal:</strong></td>
+                            <td class="text-end">${formatPrice(order.total_amount)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Discount:</strong></td>
+                            <td class="text-end text-danger">- ${formatPrice(order.discount)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shipping Charge:</strong></td>
+                            <td class="text-end">${formatPrice(order.shipping_charge)}</td>
+                        </tr>
+                        <tr class="border-top">
+                            <td><h5 class="fw-bold">Grand Total:</h5></td>
+                            <td class="text-end"><h5 class="fw-bold text-success">${formatPrice(order.total_amount - order.discount + order.shipping_charge)}</h5></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     `;
@@ -235,7 +258,7 @@ function generateOrderDetails(order, orderDetails) {
             </td>
             <td>
                 <div class="d-flex align-items-center">
-                    <span class="ml-3">${orderDetail.product_name || 'Product not available'}</span>
+                    <span class="ml-1">${orderDetail.product_name || 'Product not available'}</span>
                 </div>
             </td>
             <td class="text-center">${formatPrice(orderDetail.unit_price)}</td>
