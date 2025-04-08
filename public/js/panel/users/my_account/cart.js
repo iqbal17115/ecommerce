@@ -66,6 +66,34 @@ $(document).ready(function () {
                                                border-radius: 20px; cursor: pointer; font-size: 10px; font-weight: bold;">
                                     Buy Now
                                 </button>
+
+                                <!-- Share Toggle Button -->
+                                <button class="toggle-share" 
+                                        data-url="https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}"
+                                        style="background: #007bff; color: white; border: none; padding: 4px 8px; 
+                                            border-radius: 20px; cursor: pointer; font-size: 10px; font-weight: bold;">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+
+                                <!-- Social Share Links -->
+                                <div class="share-options" style="display: none; gap: 10px;">
+                                    <a href="https://wa.me/?text=https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}" 
+                                    target="_blank" title="Share on WhatsApp">
+                                        <i class="fab fa-whatsapp" style="color: #25d366; font-size: 1.3em;"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}" 
+                                    target="_blank" title="Share on Facebook">
+                                        <i class="fab fa-facebook" style="color: #1877f2; font-size: 1.3em;"></i>
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?url=https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}" 
+                                    target="_blank" title="Share on Twitter">
+                                        <i class="fab fa-twitter" style="color: #1da1f2; font-size: 1.3em;"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/dialog/send?app_id=YOUR_APP_ID&link=https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}&redirect_uri=https://www.aladdinne.com"
+                                    target="_blank" title="Share on Messenger">
+                                        <i class="fab fa-facebook-messenger" style="color: #0084ff; font-size: 1.3em;"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -93,5 +121,12 @@ $(document).ready(function () {
                 toastrErrorMessage(error.responseJSON.message);
             }
         );
+    });
+
+    // Toggle share options
+    $(document).on('click', '.toggle-share', function () {
+        const shareContainer = $(this).siblings('.share-options');
+        $('.share-options').not(shareContainer).slideUp(); // Hide other open ones
+        shareContainer.slideToggle();
     });
 });
