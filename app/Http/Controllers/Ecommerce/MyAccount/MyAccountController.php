@@ -8,9 +8,11 @@ use App\Models\Address\Country;
 use App\Models\Address\District;
 use App\Models\Address\Division;
 use App\Models\FrontEnd\Order;
+use App\Models\FrontEnd\OrderDetail;
 use App\Models\OrderPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MyAccountController extends Controller
 {
@@ -44,9 +46,14 @@ class MyAccountController extends Controller
             ->sum('total_amount');
 
         // Fetch user's total returns (Assuming returned orders have a specific status)
-        $totalReturns = Order::where('user_id', $user->id)
-            ->where('status', 'returned') // Adjust according to your enum
-            ->sum('total_amount');
+        // $totalReturns = Order::where('user_id', $user->id)
+        //     ->where('status', 'returned') // Adjust according to your enum
+        //     ->sum('total_amount');
+        $totalReturns = OrderDetail::whereHas('order', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })
+        ->where('return_quantity', '>', 0) // Adjust according to your enum
+        ->sum(DB::raw('return_quantity * unit_price'));;
 
         // Fetch user's total refunds
         $totalRefunds = OrderPayment::whereHas('order', function ($query) use ($user) {
