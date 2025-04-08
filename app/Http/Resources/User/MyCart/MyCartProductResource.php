@@ -21,6 +21,7 @@ class MyCartProductResource extends JsonResource
             "name" => $this->name,
             "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/' . $this->getFirstProductImage()) : '',
             "product_price" => (float)$productPrice,
+            "seller_sku" => $this->seller_sku
         ];
     }
 

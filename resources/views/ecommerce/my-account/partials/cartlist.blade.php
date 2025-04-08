@@ -6,14 +6,49 @@
     </div>
 
     <!-- Share Modal -->
-    <div id="shareModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
-        background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
-        <div style="background:#fff; padding:20px 30px; border-radius:10px; position:relative; max-width:400px; text-align:center;">
-            <span id="closeShareModal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">&times;</span>
-            <h4 style="margin-bottom:15px;">Share this product</h4>
-            <div id="shareLinks" style="display:flex; justify-content:center; gap:20px;">
-                <!-- Dynamically generated share icons -->
+    <div id="shareModal" style="
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+">
+        <div style="
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 12px;
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    ">
+            <!-- Close Button -->
+            <span id="closeShareModal" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            color: #555;
+        ">&times;</span>
+
+            <h4 style="margin-bottom: 20px; font-size: 1.25em;">Share this product</h4>
+
+            <!-- Share Links -->
+            <div id="shareLinks" style="
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        ">
+                <!-- Dynamically injected icons here -->
             </div>
         </div>
     </div>
+
 </div>

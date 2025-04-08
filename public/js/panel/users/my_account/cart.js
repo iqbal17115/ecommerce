@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    const productBaseUrl = 'https://www.aladdinne.com/product-details';
+
     $('.cart-item-tab').on('click', function (e) {
         loadCartData();
 
@@ -26,8 +28,11 @@ $(document).ready(function () {
     function displayCartItems(items) {
         let cartListHtml = '';
     
+
         if (items.length > 0) {
             items.forEach(function (item, index) {
+                const shareUrl = generateProductShareUrl(item.product.name, item.product.seller_sku);
+
                 cartListHtml += `
                     <div style="border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; padding: 15px; 
                                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color: white; position: relative;" class="product cart_${item.id}" data-id="${item.id}">
@@ -67,12 +72,12 @@ $(document).ready(function () {
                                     Buy Now
                                 </button>
 
-                                <button class="open-share-modal" 
-                                        data-url="https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}" 
-                                        style="background: #007bff; color: white; border: none; padding: 4px 8px; 
-                                            border-radius: 20px; cursor: pointer; font-size: 10px; font-weight: bold;">
-                                    <i class="fas fa-share-alt"></i> Share
-                                </button>
+                                 <button class="open-share-modal" 
+                                    data-url="${shareUrl}" 
+                                    style="background: #007bff; color: white; border: none; padding: 4px 8px; 
+                                        border-radius: 20px; cursor: pointer; font-size: 10px; font-weight: bold;">
+                                <i class="fas fa-share-alt"></i> Share
+                            </button>
                             </div>
                         </div>
                     </div>
@@ -127,12 +132,44 @@ $(document).ready(function () {
         $('#shareModal').fadeIn();
     });
     
+      // Handle share modal opening
+      $(document).on('click', '.open-share-modal', function () {
+        const shareUrl = $(this).data('url');
+
+        $('#shareLinks').html(`
+            <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}" target="_blank">
+                <i class="fab fa-facebook fa-2x" style="color:#3b5998;"></i>
+            </a>
+            <a href="https://wa.me/?text=${encodeURIComponent(shareUrl)}" target="_blank">
+                <i class="fab fa-whatsapp fa-2x" style="color:#25D366;"></i>
+            </a>
+            <a href="https://www.messenger.com/share?link=${encodeURIComponent(shareUrl)}" target="_blank">
+                <i class="fab fa-facebook-messenger fa-2x" style="color:#0084FF;"></i>
+            </a>
+            <a href="mailto:?subject=Check this product&body=${encodeURIComponent(shareUrl)}">
+                <i class="fas fa-envelope fa-2x" style="color:#6c757d;"></i>
+            </a>
+        `);
+
+        $('#shareModal').fadeIn();
+        $('body').addClass('modal-open');
+    });
+
+    // Close share modal
     $('#closeShareModal').click(function () {
         $('#shareModal').fadeOut();
+        $('body').removeClass('modal-open');
     });
-    
-    // Optional: click outside to close
+
     $('#shareModal').click(function (e) {
-        if (e.target === this) $(this).fadeOut();
-    });    
+        if (e.target === this) {
+            $(this).fadeOut();
+            $('body').removeClass('modal-open');
+        }
+    });
+
+function generateProductShareUrl(name, sku) {
+    const encodedName = encodeURIComponent(name);
+    return `${productBaseUrl}/${encodedName}/${sku}`;
+}
 });
