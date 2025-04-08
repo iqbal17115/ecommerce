@@ -67,33 +67,12 @@ $(document).ready(function () {
                                     Buy Now
                                 </button>
 
-                                <!-- Share Toggle Button -->
-                                <button class="toggle-share" 
-                                        data-url="https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}"
+                                <button class="open-share-modal" 
+                                        data-url="https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}" 
                                         style="background: #007bff; color: white; border: none; padding: 4px 8px; 
                                             border-radius: 20px; cursor: pointer; font-size: 10px; font-weight: bold;">
                                     <i class="fas fa-share-alt"></i> Share
                                 </button>
-
-                                <!-- Social Share Links -->
-                                <div class="share-options" style="display: none; gap: 10px;">
-                                    <a href="https://wa.me/?text=https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}" 
-                                    target="_blank" title="Share on WhatsApp">
-                                        <i class="fab fa-whatsapp" style="color: #25d366; font-size: 1.3em;"></i>
-                                    </a>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}" 
-                                    target="_blank" title="Share on Facebook">
-                                        <i class="fab fa-facebook" style="color: #1877f2; font-size: 1.3em;"></i>
-                                    </a>
-                                    <a href="https://twitter.com/intent/tweet?url=https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}" 
-                                    target="_blank" title="Share on Twitter">
-                                        <i class="fab fa-twitter" style="color: #1da1f2; font-size: 1.3em;"></i>
-                                    </a>
-                                    <a href="https://www.facebook.com/dialog/send?app_id=YOUR_APP_ID&link=https://www.aladdinne.com/product-details/${encodeURIComponent(item.product.name)}/${item.product.id}&redirect_uri=https://www.aladdinne.com"
-                                    target="_blank" title="Share on Messenger">
-                                        <i class="fab fa-facebook-messenger" style="color: #0084ff; font-size: 1.3em;"></i>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,10 +102,37 @@ $(document).ready(function () {
         );
     });
 
-    // Toggle share options
-    $(document).on('click', '.toggle-share', function () {
-        const shareContainer = $(this).siblings('.share-options');
-        $('.share-options').not(shareContainer).slideUp(); // Hide other open ones
-        shareContainer.slideToggle();
+    $(document).on('click', '.open-share-modal', function () {
+        const productUrl = $(this).data('url');
+    
+        const fbAppId = 'YOUR_APP_ID'; // Replace with your real Facebook App ID
+    
+        const shareHtml = `
+            <a href="https://wa.me/?text=${encodeURIComponent(productUrl)}" target="_blank" title="WhatsApp">
+                <i class="fab fa-whatsapp" style="font-size: 1.8em; color: #25d366;"></i>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}" target="_blank" title="Facebook">
+                <i class="fab fa-facebook" style="font-size: 1.8em; color: #1877f2;"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(productUrl)}" target="_blank" title="Twitter">
+                <i class="fab fa-twitter" style="font-size: 1.8em; color: #1da1f2;"></i>
+            </a>
+            <a href="https://www.facebook.com/dialog/send?app_id=${fbAppId}&link=${encodeURIComponent(productUrl)}&redirect_uri=${encodeURIComponent(window.location.origin)}"
+               target="_blank" title="Messenger">
+                <i class="fab fa-facebook-messenger" style="font-size: 1.8em; color: #0084ff;"></i>
+            </a>
+        `;
+    
+        $('#shareLinks').html(shareHtml);
+        $('#shareModal').fadeIn();
     });
+    
+    $('#closeShareModal').click(function () {
+        $('#shareModal').fadeOut();
+    });
+    
+    // Optional: click outside to close
+    $('#shareModal').click(function (e) {
+        if (e.target === this) $(this).fadeOut();
+    });    
 });
