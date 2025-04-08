@@ -12,9 +12,7 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1050;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow-y: auto;
     padding: 20px;
 ">
         <div style="
@@ -24,6 +22,7 @@
         position: relative;
         width: 100%;
         max-width: 400px;
+        margin: 60px auto; /* Ensure it's not stuck to top */
         text-align: center;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     ">
@@ -50,5 +49,4 @@
             </div>
         </div>
     </div>
-
 </div>
