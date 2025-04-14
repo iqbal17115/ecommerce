@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const tfoot = `
             <tfoot style="background-color: #f1f1f1; font-weight: bold;">
                 <tr>
-                    <td colspan="4" style="text-align: right;">Total:</td>
+                    <td colspan="3" style="text-align: right;">Total:</td>
                     <td>৳ ${totalAmount.toFixed(2)}</td>
                 </tr>
             </tfoot>
