@@ -24,10 +24,10 @@
                 appearance: auto;
                 cursor: pointer;
             ">
-                <option value="5">5</option>
                 <option value="10" selected>10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
+                <option value="100">100</option>
             </select>
 
             <span style="font-weight: 600; font-size: 0.95rem;">entries</span>
