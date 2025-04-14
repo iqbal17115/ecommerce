@@ -295,7 +295,7 @@
                                 <h5 class="fw-bold m-0 p-0">
                                     {{ $product_detail->code ? 'Item #:' : '' }}
                                     <span class="m-0 p-0" style="font-weight: bold; color: #f4631b;">
-                                        {{ $product_detail->code ? $product_detail->code : '' }}{{ $product_detail->stock_qty }}
+                                        {{ $product_detail->code ? $product_detail->code : '' }}
                                     </span>
                                 </h5>
                             </div>
