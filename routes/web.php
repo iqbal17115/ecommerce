@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountPaymentController;
-use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountTransactionController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountWishlistController;
 use App\Http\Controllers\Backend\Currency\CurrencyController;
 use App\Http\Controllers\Backend\Customer\CustomerController;
@@ -45,6 +44,7 @@ use App\Http\Controllers\Ecommerce\CheckoutController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountReturnProductController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountCartController;
+use App\Http\Controllers\Ecommerce\MyAccount\MyAccountTransactionController;
 use App\Http\Controllers\Ecommerce\Wishlist\WishlistController;
 use App\Http\Controllers\Frontend\OrderTracking\OrderTrackingController;
 use App\Http\Controllers\FrontEnd\ReplyController;

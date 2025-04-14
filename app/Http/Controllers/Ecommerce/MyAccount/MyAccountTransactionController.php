@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API\Panel\User\MyAccount;
+namespace App\Http\Controllers\Ecommerce\MyAccount;
 
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\MyAccount\MyTransactionListResource;
+use App\Http\Requests\MyAccount\Transaction\MyAccountTransactionListRequest;
+use App\Http\Resources\MyAccount\Transaction\MyAccountTransactionListResource;
 use App\Models\OrderPayment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,17 +14,16 @@ use Illuminate\Support\Facades\Auth;
 class MyAccountTransactionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * List
      *
-     * @param Request $request
+     * @param MyAccountTransactionListRequest $request
      * @return JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(MyAccountTransactionListRequest $request): JsonResponse
     {
-        dd(11);
         $list = OrderPayment::getLists(OrderPayment::whereHas('order', function ($query) {
             $query->where('user_id', Auth::user()->id);
-        }), $request->all(), MyTransactionListResource::class);
+        }), $request->all(), MyAccountTransactionListResource::class);
 
         return Message::success(null, $list);
     }

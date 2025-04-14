@@ -1,49 +1,123 @@
-function showMyTransactionlistData(data) {
-    let htmlWishlistContent = '';
+document.addEventListener("DOMContentLoaded", function () {
+    let currentPage = 1;
+    let limit = parseInt(document.getElementById("perPageSelect").value);
 
-    data.forEach((item) => {
-        let paymentStatus = (item.status === 'completed') ? 'Order Payment' : 'Refunded';
-        let paymentMethod = (item.status === 'completed') ? `${item.order.payment_method}` : '-';
-        htmlWishlistContent += `
-        <tr class="product-row wishlist_row_${item.id}">
-            <td>
-                <h5 class="product-title">
-                    <a>${item.order.order_date}</a>
-                </h5>
-            </td>
-            <td>
-                <h5 class="product-title">
-                    <a>${item.order.code}</a>
-                </h5>
-            </td>
-            <td class="price-box">${paymentStatus}</td>
-            <td class="price-box">${paymentMethod}</td>
-            <td class="price-box">${item.order.total_amount}</td>
-        </tr>`;
-    });
+    const transactionList = document.getElementById("transaction-list");
+    const paginationContainer = document.getElementById("pagination");
+    const totalItemsDisplay = document.getElementById("totalItems");
 
-    $('#my_transaction_data table tbody').html(htmlWishlistContent);
-}
+    function loadTransactions(page = 1) {
+        currentPage = page;
+        limit = parseInt(document.getElementById("perPageSelect").value);
 
+        const url = `/my-trasaction?page=${page}&limit=${limit}`;
 
-
-$(document).ready(function () {
-
-    function getMyTransactionlist() {
         getDetails(
-            "/my-trasaction",
-            (data) => {
-                console.log(data);
-                console.log(data);
-                console.log(data);
-                console.log(data);
-                showMyTransactionlistData(data.results.data);
+            url,
+            (response) => {
+                const data = response.results;
+                renderTransactions(data.data);
+                renderPagination(data);
+                totalItemsDisplay.innerText = `Showing ${data.from} to ${data.to} of ${data.total} entries`;
             },
             (error) => {
-
+                transactionList.innerHTML = `<p style="color: #dc3545; text-align: center; margin: 1rem 0;">Failed to load transactions.</p>`;
+                console.error("Transaction load error:", error);
             }
         );
     }
 
-    getMyTransactionlist();
+    function renderTransactions(transactions) {
+        transactionList.innerHTML = "";
+
+        if (!transactions || transactions.length === 0) {
+            transactionList.innerHTML = "<p style='text-align:center; margin:1rem 0; color:#6c757d;'>No transactions found.</p>";
+            return;
+        }
+
+        const table = document.createElement("table");
+        table.setAttribute("class", "table table-bordered table-striped table-hover");
+        table.style.marginBottom = "0";
+        table.style.textAlign = "center";
+
+        const thead = `
+            <thead style="background-color: #f8f9fa;">
+                <tr>
+                    <th style="vertical-align: middle;">Order Code</th>
+                    <th style="vertical-align: middle;">Total Price</th>
+                    <th style="vertical-align: middle;">Shipping</th>
+                    <th style="vertical-align: middle;">Total</th>
+                    <th style="vertical-align: middle;">Paid</th>
+                    <th style="vertical-align: middle;">Due</th>
+                </tr>
+            </thead>
+        `;
+
+        let tbody = "<tbody>";
+        transactions.forEach(tx => {
+            tbody += `
+                <tr>
+                    <td>${tx.order_code}</td>
+                    <td>${tx.total_order_price}</td>
+                    <td>${tx.total_shipping_charge_amount}</td>
+                    <td>${tx.total_amount}</td>
+                    <td>${tx.amount_paid}</td>
+                    <td>${tx.due_amount}</td>
+                </tr>
+            `;
+        });
+        tbody += "</tbody>";
+
+        table.innerHTML = thead + tbody;
+        transactionList.appendChild(table);
+    }
+
+    function renderPagination(data) {
+        paginationContainer.innerHTML = "";
+
+        data.links.forEach(link => {
+            const li = document.createElement("li");
+            li.classList.add("page-item");
+            if (link.active) li.classList.add("active");
+            if (link.url === null) li.classList.add("disabled");
+
+            const a = document.createElement("a");
+            a.classList.add("page-link");
+            a.innerHTML = link.label.replace("Previous", "&laquo;").replace("Next", "&raquo;");
+            a.style.borderRadius = "0.375rem";
+            a.style.padding = "0.35rem 0.75rem";
+            a.style.fontSize = "0.875rem";
+            a.style.color = link.active ? "#fff" : "#0d6efd";
+            a.style.backgroundColor = link.active ? "#0d6efd" : "#fff";
+            a.style.border = "1px solid #dee2e6";
+            a.style.transition = "all 0.3s";
+
+            if (link.url !== null) {
+                a.href = "#";
+                a.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const page = getPageFromUrl(link.url);
+                    if (page) loadTransactions(page);
+                });
+            }
+
+            li.appendChild(a);
+            paginationContainer.appendChild(li);
+        });
+    }
+
+    function getPageFromUrl(url) {
+        try {
+            const urlObj = new URL(url, window.location.origin);
+            return urlObj.searchParams.get("page");
+        } catch {
+            return null;
+        }
+    }
+
+    document.getElementById("perPageSelect").addEventListener("change", () => {
+        loadTransactions(1);
+    });
+
+    loadTransactions();
 });

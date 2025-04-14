@@ -25,4 +25,9 @@ class OrderPaymentDetail extends Model
         'note',
         'is_successful'
     ];
+
+    public function orderPayment()
+    {
+        return $this->belongsTo(OrderPayment::class);
+    }
 }
