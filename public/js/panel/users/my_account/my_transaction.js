@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <tr>
                     <th style="vertical-align: middle;">Date</th>
                     <th style="vertical-align: middle;">Order Code</th>
-                    <th style="vertical-align: middle;">Payment Type</th>
                     <th style="vertical-align: middle;">Payment Method</th>
                     <th style="vertical-align: middle;">Amount</th>
                 </tr>
@@ -63,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <tr>
                     <td>${tx.date}</td>
                     <td>${tx.order_code}</td>
-                    <td>${tx.payment_type}</td>
                     <td>${tx.payment_method}</td>
                     <td>৳ ${amount.toFixed(2)}</td>
                 </tr>
