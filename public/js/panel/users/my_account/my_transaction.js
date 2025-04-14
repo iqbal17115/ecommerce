@@ -29,48 +29,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderTransactions(transactions) {
         transactionList.innerHTML = "";
-
+    
         if (!transactions || transactions.length === 0) {
             transactionList.innerHTML = "<p style='text-align:center; margin:1rem 0; color:#6c757d;'>No transactions found.</p>";
             return;
         }
-
+    
         const table = document.createElement("table");
         table.setAttribute("class", "table table-bordered table-striped table-hover");
         table.style.marginBottom = "0";
         table.style.textAlign = "center";
-
+    
         const thead = `
             <thead style="background-color: #f8f9fa;">
                 <tr>
+                    <th style="vertical-align: middle;">Date</th>
                     <th style="vertical-align: middle;">Order Code</th>
-                    <th style="vertical-align: middle;">Total Price</th>
-                    <th style="vertical-align: middle;">Shipping</th>
-                    <th style="vertical-align: middle;">Total</th>
-                    <th style="vertical-align: middle;">Paid</th>
-                    <th style="vertical-align: middle;">Due</th>
+                    <th style="vertical-align: middle;">Payment Type</th>
+                    <th style="vertical-align: middle;">Payment Method</th>
+                    <th style="vertical-align: middle;">Amount</th>
                 </tr>
             </thead>
         `;
-
+    
         let tbody = "<tbody>";
+        let totalAmount = 0;
+    
         transactions.forEach(tx => {
+            const amount = parseFloat(tx.amount);
+            totalAmount += amount;
+    
             tbody += `
                 <tr>
+                    <td>${tx.date}</td>
                     <td>${tx.order_code}</td>
-                    <td>${tx.total_order_price}</td>
-                    <td>${tx.total_shipping_charge_amount}</td>
-                    <td>${tx.total_amount}</td>
-                    <td>${tx.amount_paid}</td>
-                    <td>${tx.due_amount}</td>
+                    <td>${tx.payment_type}</td>
+                    <td>${tx.payment_method}</td>
+                    <td>৳ ${amount.toFixed(2)}</td>
                 </tr>
             `;
         });
         tbody += "</tbody>";
-
-        table.innerHTML = thead + tbody;
+    
+        const tfoot = `
+            <tfoot style="background-color: #f1f1f1; font-weight: bold;">
+                <tr>
+                    <td colspan="4" style="text-align: right;">Total:</td>
+                    <td>৳ ${totalAmount.toFixed(2)}</td>
+                </tr>
+            </tfoot>
+        `;
+    
+        table.innerHTML = thead + tbody + tfoot;
         transactionList.appendChild(table);
-    }
+    }     
 
     function renderPagination(data) {
         paginationContainer.innerHTML = "";

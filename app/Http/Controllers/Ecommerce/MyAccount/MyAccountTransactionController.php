@@ -6,9 +6,8 @@ use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MyAccount\Transaction\MyAccountTransactionListRequest;
 use App\Http\Resources\MyAccount\Transaction\MyAccountTransactionListResource;
-use App\Models\OrderPayment;
+use App\Models\OrderPaymentDetail;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MyAccountTransactionController extends Controller
@@ -21,7 +20,7 @@ class MyAccountTransactionController extends Controller
      */
     public function index(MyAccountTransactionListRequest $request): JsonResponse
     {
-        $list = OrderPayment::getLists(OrderPayment::whereHas('order', function ($query) {
+        $list = OrderPaymentDetail::getLists(OrderPaymentDetail::with(['orderPayment', 'orderPayment.order'])->whereHas('orderPayment.order', function ($query) {
             $query->where('user_id', Auth::user()->id);
         }), $request->all(), MyAccountTransactionListResource::class);
 

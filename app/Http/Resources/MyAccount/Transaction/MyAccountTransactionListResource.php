@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\MyAccount\Transaction;
 
+use App\Helpers\TextFormatHelper;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,13 +18,11 @@ class MyAccountTransactionListResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'order_code' => $this->order?->code,
-            'total_order_price' => $this->total_order_price,
-            'total_discount_amount' => $this->total_discount_amount,
-            'total_shipping_charge_amount' => $this->total_shipping_charge_amount,
-            'total_amount' => $this->total_amount,
-            'amount_paid' => $this->amount_paid,
-            'due_amount' => $this->due_amount
+            'date' => Carbon::parse($this->date)->format('d-m-Y'),
+            'order_code' => $this->orderPayment->order->code,
+            'payment_type' => TextFormatHelper::formatText($this->payment_type),
+            'payment_method' => TextFormatHelper::formatText($this->payment_method),
+            'amount' => $this->amount
         ];
     }
 }
