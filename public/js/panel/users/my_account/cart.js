@@ -137,7 +137,7 @@ $(document).ready(function () {
         const shareUrl = $(this).data('url');
 
         $('#shareLinks').html(`
-            <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}" target="_blank">
+            <a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}', '_blank')" target="_blank">
                 <i class="fab fa-facebook fa-2x" style="color:#3b5998;"></i>
             </a>
             <a href="https://wa.me/?text=${encodeURIComponent(shareUrl)}" target="_blank">
