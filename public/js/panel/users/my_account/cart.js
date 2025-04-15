@@ -48,7 +48,7 @@ $(document).ready(function () {
                             <img src="${item?.product.image_url}" alt="" 
                                  style="width: 70px; height: 70px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
                             <div>
-                                <h3 style="margin: 0; font-size: 1.2em; font-weight: 600;">${item?.product.name}</h3>
+                                <h3 style="margin: 0; font-size: 1.2em; font-weight: 600;">${item?.product?.name}</h3>
                                 <span style="font-size: 1em;">Quantity: ${item?.quantity}</span><br>
                                 <span style="font-size: 1em; color: ${item?.is_active ? 'green' : 'red'};">
                                     ${item?.is_active ? 'Active' : 'Inactive'}
@@ -58,7 +58,7 @@ $(document).ready(function () {
     
                         <!-- Price and Discount -->
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <span style="font-size: 1.1em; font-weight: bold;">Price: ${item?.currency} ${item?.product.product_price.toFixed(2)}</span>
+                            <span style="font-size: 1.1em; font-weight: bold;">Price: ${item?.currency} ${item?.product?.product_price.toFixed(2)}</span>
                         </div>
     
                         <!-- Discount and Action Buttons -->
