@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         if (items.length > 0) {
             items.forEach(function (item, index) {
-                const shareUrl = generateProductShareUrl(item.product.name, item.product.seller_sku);
+                const shareUrl = generateProductShareUrl(item?.product?.name, item?.product?.seller_sku);
 
                 cartListHtml += `
                     <div style="border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; padding: 15px; 
