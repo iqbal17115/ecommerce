@@ -131,29 +131,6 @@ $(document).ready(function () {
         $('#shareLinks').html(shareHtml);
         $('#shareModal').fadeIn();
     });
-    
-      // Handle share modal opening
-      $(document).on('click', '.open-share-modal', function () {
-        const shareUrl = $(this).data('url');
-
-        $('#shareLinks').html(`
-            <a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}', '_blank')" target="_blank">
-                <i class="fab fa-facebook fa-2x" style="color:#3b5998;"></i>
-            </a>
-            <a href="https://wa.me/?text=${encodeURIComponent(shareUrl)}" target="_blank">
-                <i class="fab fa-whatsapp fa-2x" style="color:#25D366;"></i>
-            </a>
-            <a href="https://www.messenger.com/share?link=${encodeURIComponent(shareUrl)}" target="_blank">
-                <i class="fab fa-facebook-messenger fa-2x" style="color:#0084FF;"></i>
-            </a>
-            <a href="mailto:?subject=Check this product&body=${encodeURIComponent(shareUrl)}">
-                <i class="fas fa-envelope fa-2x" style="color:#6c757d;"></i>
-            </a>
-        `);
-
-        $('#shareModal').fadeIn();
-        $('body').addClass('modal-open');
-    });
 
     // Close share modal
     $('#closeShareModal').click(function () {
