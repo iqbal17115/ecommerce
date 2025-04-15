@@ -45,7 +45,7 @@ $(document).ready(function () {
                         
                         <!-- Product Info -->
                         <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                            <img src="${item?.product.image_url}" alt="" 
+                            <img src="${item?.product?.image_url}" alt="" 
                                  style="width: 70px; height: 70px; object-fit: cover; margin-right: 15px; border-radius: 4px;">
                             <div>
                                 <h3 style="margin: 0; font-size: 1.2em; font-weight: 600;">${item?.product?.name}</h3>
