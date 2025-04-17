@@ -264,22 +264,24 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="fa fa-address-book float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Contact Us</h3>
-                                        <span class="text-dark">Massage, Help Article and
-                                            Contact Us.</span>
+                    <a class="nav-link" href="#my-account-contact-us" data-toggle="tab">
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fa fa-address-book float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Contact Us</h3>
+                                            <span class="text-dark">Massage, Help Article and
+                                                Contact Us.</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4 mb-4"></div>
             </div>

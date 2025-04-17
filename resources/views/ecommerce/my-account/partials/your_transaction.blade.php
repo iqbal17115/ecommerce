@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="your_transactions">
+<div class="tab-pane fade" id="your_transactions">
     <h2 style="font-size: 1.5rem; font-weight: 600; color: #343a40; margin-bottom: 1.5rem;">Your Transactions</h2>
 
     <!-- Table container -->

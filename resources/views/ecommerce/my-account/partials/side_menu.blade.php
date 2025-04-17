@@ -79,7 +79,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#contact-us" data-toggle="tab">
+            <a class="nav-link" href="#my-account-contact-us" data-toggle="tab">
                 <i class="fas fa-envelope"></i>
                 Contact Us
             </a>

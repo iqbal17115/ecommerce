@@ -55,6 +55,7 @@
                                 @include('ecommerce.my-account.partials.wishlist')
                                 @include('ecommerce.my-account.partials.review_feedback')
                                 @include('ecommerce.my-account.partials.cartlist')
+                                @include('ecommerce.my-account.partials.contact_us')
                             </div>
                         </div>
                     </div>
