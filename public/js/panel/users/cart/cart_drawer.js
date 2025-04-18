@@ -7,7 +7,7 @@ const CartDrawer = (() => {
         if (isLoaded && !forceReload) return;
 
         getDetails(
-            'cart-drawer/list',
+            '/cart-drawer/list',
             (data) => {
                 renderCart(data.results);
                 isLoaded = true;
