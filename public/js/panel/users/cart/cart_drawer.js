@@ -35,12 +35,12 @@ const CartDrawer = (() => {
 
             productDetailsDiv.innerHTML = `
                 <h4 class="product-title">
-                    <a href="#">${item.product_info.name}</a>
+                    <a href="#">${item?.product_info?.name}</a>
                 </h4>
                 <span class="cart-product-info">
                     <span class="cart-product-qty card_product_qty_${item.id}">${item.quantity}</span> ×  
                     <span class="brand_text_design">${item.active_currency}</span>
-                    <span class="brand_text_design">${item.product_info.product_price}</span>
+                    <span class="brand_text_design">${item?.product_info?.product_price}</span>
                 </span>
             `;
 
@@ -49,7 +49,7 @@ const CartDrawer = (() => {
 
             productImageContainer.innerHTML = `
                 <a href="#" class="product-image">
-                    <img src="${item.product_info.image_url}" alt="product" width="80" height="80">
+                    <img src="${item?.product_info?.image_url}" alt="product" width="80" height="80">
                 </a>
                 <a href="javascript:void(0);" class="btn-remove" title="Remove Product">
                     <span class="remove-from-cart" data-id="${item.id}">×</span>
