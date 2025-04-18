@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Panel\User\Cart\CartDrawerController;
 use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountPaymentController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountWishlistController;
 use App\Http\Controllers\Backend\Currency\CurrencyController;
@@ -36,7 +37,6 @@ use App\Http\Controllers\Backend\WebSetting\BlockController;
 use App\Http\Controllers\Backend\WebSetting\CompanyInfoController;
 use App\Http\Controllers\Backend\WebSetting\FeatureSettingController;
 use App\Http\Controllers\Backend\WebSetting\SliderController;
-use App\Http\Controllers\Ecommerce\AddressController;
 use App\Http\Controllers\Ecommerce\AuthController;
 use App\Http\Controllers\Ecommerce\ShopController;
 use App\Http\Controllers\Ecommerce\CartController;
@@ -610,5 +610,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::controller(OrderPaymentController::class)->group(function () {
         Route::get('order-payments/{order}', 'show')->name("order_payments.show");
         Route::post('order-payments', 'store')->name("order_payments.store");
+    });
+
+    // Cart Drawer
+    Route::controller(CartDrawerController::class)->group(function () {
+        Route::get('cart-drawer/list', 'index')->name('cart-drawer.list');
+        Route::get('cart-drawer/count', 'count')->name('cart-drawer.count'); 
     });
 });

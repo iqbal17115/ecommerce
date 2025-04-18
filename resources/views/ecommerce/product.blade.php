@@ -796,6 +796,20 @@
     <script src="{{ asset('js/panel/users/cart/product.js') }}?v={{ filemtime(public_path('js/panel/users/cart/product.js')) }}"></script>
     <script src="{{ asset('js/panel/users/common.js') }}?v={{ filemtime(public_path('js/panel/users/common.js')) }}"></script>
     <script src="{{ asset('js/panel/users/product_details/common.js') }}?v={{ filemtime(public_path('js/panel/users/product_details/common.js')) }}"></script>
+    <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        CartDrawer.loadCartCount(); // ✅ Now it will work
+
+        const cartToggle = document.getElementById('cartToggle');
+
+        if (cartToggle) {
+            cartToggle.addEventListener('click', () => {
+                CartDrawer.load(); // Load on demand
+            });
+        }
+    });
+    </script>
 
     <script>
         function lazyLoad() {

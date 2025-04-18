@@ -99,6 +99,20 @@
 @endsection
 @push('scripts')
     <script src="{{ asset('js/panel/users/cart/cart_page.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        CartDrawer.loadCartCount(); // ✅ Now it will work
+
+        const cartToggle = document.getElementById('cartToggle');
+
+        if (cartToggle) {
+            cartToggle.addEventListener('click', () => {
+                CartDrawer.load(); // Load on demand
+            });
+        }
+    });
+    </script>
     <script>
         function lazyLoad() {
             const lazyImages = document.querySelectorAll('.lazy-load');

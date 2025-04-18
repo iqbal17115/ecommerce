@@ -130,8 +130,11 @@
                                         <div class="review-section">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p class="mb-0 text-dark">Standard Delivery Date:
-                                                        {{ \Carbon\Carbon::now()->addDays(1)->format('d M Y') }}</p>
+                                                @php
+                                                    $minDate = \Carbon\Carbon::now()->addDays(3)->format('d M Y');
+                                                    $maxDate = \Carbon\Carbon::now()->addDays(4)->format('d M Y');
+                                                @endphp
+                                                <p class="mb-0 text-dark">Standard Delivery Date: {{ $minDate }} – {{ $maxDate }}</p>
                                                     <p class="mb-0 text-dark">Items shipped from
                                                         <strong>Aladdinne.com</strong>
                                                     </p>
@@ -191,10 +194,23 @@
     <!-- End Shipping Address Modal -->
 @endsection
 @push('scripts')
-    <script src="{{ mix('js/panel/users/checkout/address.js') }}?v={{ filemtime(public_path('js/panel/users/checkout/address.js')) }}"></script>
-    <script src="{{ mix('js/panel/users/cart/checkout_page_cart.js') }}?v={{ filemtime(public_path('js/panel/users/cart/checkout_page_cart.js')) }}"></script>
-    <script src="{{ mix('js/panel/users/common.js') }}?v={{ filemtime(public_path('js/panel/users/common.js')) }}"></script>
+    <script src="{{ asset('js/panel/users/checkout/address.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/cart/checkout_page_cart.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        CartDrawer.loadCartCount(); // ✅ Now it will work
 
+        const cartToggle = document.getElementById('cartToggle');
+
+        if (cartToggle) {
+            cartToggle.addEventListener('click', () => {
+                CartDrawer.load(); // Load on demand
+            });
+        }
+    });
+    </script>
 
     <script>
         var user = <?php echo json_encode($user); ?>;

@@ -119,46 +119,19 @@
                 </a>
 
                 <div class="dropdown cart-dropdown">
-                    <a href="#" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle"
-                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        data-display="static">
+                    <a href="#" id="cartToggle" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle"
+   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+   data-display="static">
                         @if ($company_info && $company_info->icon)
                             <img src="{{ asset('storage/' . $company_info->icon) }}"
                                 class="img-fluid icon-cart-thick pb-0 mb-0 cart_icon">
                         @endif
-                        {{-- <span class="cart-count badge-circle">3</span> --}}
                         <span class="cart-count badge-circle" style="top: 5px; left: 27px; background: #111;">0</span>
                     </a>
 
                     <div class="cart-overlay"></div>
 
-                    <div class="dropdown-menu mobile-cart">
-                        <a href="#" title="Close (Esc)" class="btn-close">×</a>
-
-                        <div class="dropdownmenu-wrapper custom-scrollbar">
-                            <div class="dropdown-cart-header">Shopping Cart</div>
-                            <!-- End .dropdown-cart-header -->
-
-                            <div class="dropdown-cart-products" id="cart_container"></div>
-                            <!-- End .cart-product -->
-
-                            <table class="table table-totals">
-                                <tbody>
-
-                                </tbody>
-                            </table>
-
-                            <div class="dropdown-cart-action">
-                                {{-- <a href="{{ route('cart') }}" class="btn btn-gray btn-block view-cart">Shopping
-                                    Cart</a> --}}
-                                <a href="{{ route('cart') }}" class="btn btn-block text-dark brand_color">Shopping
-                                    Cart</a>
-                            </div>
-                            <!-- End .dropdown-cart-total -->
-                        </div>
-                        <!-- End .dropdownmenu-wrapper -->
-                    </div>
-                    <!-- End .dropdown-menu -->
+                    @include('ecommerce.cart_drawer')
                 </div>
                 <!-- End .dropdown -->
             </div>

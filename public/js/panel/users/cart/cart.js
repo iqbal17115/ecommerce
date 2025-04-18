@@ -54,76 +54,7 @@ function updateCart(item) {
     }
 }
 
-function showHeaderCartData(data) {
-    let total = 0;
-    let total_item_qty = 0;
-    const cartContainer = document.getElementById('cart_container');
-    if (data.length > 0) {
-        data.forEach(item => {
-            const totalItemPrice = item.product_info.sale_price * item.quantity;
-            total += totalItemPrice;
-            total_item_qty += parseInt(item.quantity);
-            const productDiv = document.createElement('div');
-            productDiv.className = `product cart_${item.id}`;
-            productDiv.setAttribute('data-id', item.id);
-
-            const productDetailsDiv = document.createElement('div');
-            productDetailsDiv.className = 'product-details';
-
-            const productTitle = document.createElement('h4');
-            productTitle.className = 'product-title';
-            productTitle.innerHTML = `<a href="#">${item.product_info.name}</a>`;
-
-            const cartProductInfo = document.createElement('span');
-            cartProductInfo.className = 'cart-product-info';
-            cartProductInfo.innerHTML = `<span class="cart-product-qty card_product_qty_${item.id}">${item.quantity}</span> ×  <span class="brand_text_design">${item?.active_currency.icon || ''}</span>
-            <span class="brand_text_design">${item.product_info.product_price}</span>`;
-
-            productDetailsDiv.appendChild(productTitle);
-            productDetailsDiv.appendChild(cartProductInfo);
-
-            const productImageContainer = document.createElement('figure');
-            productImageContainer.className = 'product-image-container';
-
-            const productImage = document.createElement('a');
-            productImage.className = 'product-image lazy-load';
-            productImage.href = '';
-            productImage.innerHTML = `<img src="${item.product_info.image_url}" alt="product" width="80" height="80">`;
-
-            const removeButton = document.createElement('a');
-            removeButton.className = 'btn-remove';
-            removeButton.href = 'javascript:void(0);';
-            removeButton.title = 'Remove Product';
-            removeButton.innerHTML = `<span class="remove-from-cart" data-id="${item.id}">×</span>`;
-            productImageContainer.appendChild(productImage);
-            productImageContainer.appendChild(removeButton);
-
-            productDiv.appendChild(productDetailsDiv);
-            productDiv.appendChild(productImageContainer);
-
-            cartContainer.appendChild(productDiv);
-        });
-    }
-
-    $('.cart-count').text(total_item_qty);
-}
-
 $(document).ready(function () {
-    function getCartItem() {
-        const user_id = $("#temp_user_id").data('user_id');
-        getDetails(
-            "/api/cart/lists?user_id=" + user_id,
-            (data) => {
-                showHeaderCartData(data.results.data);
-            },
-            (error) => {
-
-            }
-        );
-    }
-
-    getCartItem();
-
     // Detect if the page is loaded from the cache using the 'pageshow' event
     window.addEventListener('pageshow', function(event) {
         // Check if the page was loaded from cache (e.g., after back/forward navigation)

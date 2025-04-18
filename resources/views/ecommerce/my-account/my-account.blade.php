@@ -77,7 +77,20 @@
     <script src="{{ asset('js/panel/users/my_account/return_exchange.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/my_account/cart.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/my_account/wishlist.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        CartDrawer.loadCartCount(); // ✅ Now it will work
 
+        const cartToggle = document.getElementById('cartToggle');
+
+        if (cartToggle) {
+            cartToggle.addEventListener('click', () => {
+                CartDrawer.load(); // Load on demand
+            });
+        }
+    });
+    </script>
     <!-- My Account JS File -->
     <script>
         function userAddress() {
