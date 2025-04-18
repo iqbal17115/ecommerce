@@ -17,7 +17,6 @@ function showCartTableData(data) {
           <a href="javascript:void(0);" class="product-image">
             <img src="${item.product_info.image_url}" style="width: 80px; height: 80px; object-fit: contain; border-radius: 5px;" alt="product">
           </a>
-          <!-- Remove button positioned at the top-right corner -->
           <a href="javascript:void(0);" class="btn-remove remove-from-cart icon-cancel" data-id="${item.id}" title="Remove Product" style="position: absolute; top: 5px; right: 5px;"></a>
         </figure>
       </td>
@@ -26,21 +25,20 @@ function showCartTableData(data) {
           <a style="text-decoration: none; color: #333;" href="javascript:void(0);">${item.product_info.name}</a>
         </h5>
       </td>
-      <td style="padding: 8px; text-align: center; vertical-align: middle;">
-        <div class="mb-3">
-          <div class="qty-container" style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
-            <button class="qty-btn-minus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button" style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer;">
-              <i class="fa fa-minus" style="font-size: 14px;"></i>
-            </button>
-            <input type="text" name="qty" value="${item.quantity}" class="input-qty" style="width: 40px; text-align: center; border: 1px solid #ccc; padding: 5px; margin: 0 5px;">
-            <button class="qty-btn-plus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button" style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer;">
-              <i class="fa fa-plus" style="font-size: 14px;"></i>
-            </button>
-          </div>
+
+      <!-- New wrapper for both qty and subtotal -->
+      <td colspan="2" style="padding: 8px; text-align: center; vertical-align: middle; display: flex; justify-content: space-between;">
+        <div class="qty-container" style="display: flex; align-items: center; flex-direction: row; margin-right: 10px;">
+          <button class="qty-btn-minus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button" style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer; height: 31px;">
+            <i class="fa fa-minus" style="font-size: 14px;"></i>
+          </button>
+          <input type="text" name="qty" value="${item.quantity}" class="input-qty" style="width: 40px; text-align: center; border: 1px solid #ccc; padding: 5px; margin: 0 5px;">
+          <button class="qty-btn-plus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button" style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer; height: 31px;">
+            <i class="fa fa-plus" style="font-size: 14px;"></i>
+          </button>
         </div>
-      </td>
-      <td class="text-right" style="padding: 8px; text-align: center; font-size: 16px;">
-        <span class="subtotal-price subtotal_price_${item.id}">
+
+        <span class="subtotal-price subtotal_price_${item.id}" style="font-size: 16px;">
           <span>${item?.active_currency.icon || ''}</span>
           <span>${item.quantity * item.product_info.product_price}</span>
         </span>
@@ -59,7 +57,7 @@ function showCartTableData(data) {
     $('.grand_total').text(total + total_shipping_charge);
 
     // Update the Subtotal text with the correct number of items and the total
-    var itemText = total_item_qty <= 1 ? 'Item' : 'Items';  // Singular or plural based on count
+    var itemText = total_item_qty <= 1 ? 'Item' : 'Items';
     $('.cart-total-text').text('Subtotal(' + total_item_qty + ' ' + itemText + ')');
 
     // Responsive Design Adjustments
@@ -71,6 +69,14 @@ function showCartTableData(data) {
                 width: 100%;
                 text-align: left;
                 padding: 10px;
+            }
+
+            /* Flex row for qty and subtotal */
+            .product-row td[colspan="2"] {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                align-items: center;
             }
 
             .qty-container {
