@@ -12,34 +12,38 @@ function showCartTableData(data) {
 
         htmlContent += `
     <tr class="product-row product_row product cart_${item.id}" data-id="${item.id}" style="box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);">
-      <td>
-        <figure class="product-image-container">
+      <td style="padding: 8px; text-align: center;">
+        <figure class="product-image-container" style="position: relative; display: flex; justify-content: center; align-items: center;">
           <a href="javascript:void(0);" class="product-image">
-            <img src="${item.product_info.image_url}" style="width:100px; height: 40px;" alt="product">
+            <img src="${item.product_info.image_url}" style="width: 80px; height: 80px; object-fit: contain; border-radius: 5px;" alt="product">
           </a>
-          <a href="javascript:void(0);" class="btn-remove remove-from-cart icon-cancel" data-id="${item.id}" title="Remove Product"></a>
+          <!-- Remove button positioned at the top-right corner -->
+          <a href="javascript:void(0);" class="btn-remove remove-from-cart icon-cancel" data-id="${item.id}" title="Remove Product" style="position: absolute; top: 5px; right: 5px;"></a>
         </figure>
       </td>
-      <td class="product-col">
-        <h5 class="product-title">
-          <a style="text-decoration: none;" class="font_size_14">${item.product_info.name}</a>
+      <td class="product-col" style="padding: 8px; display: flex; align-items: center;">
+        <h5 class="product-title" style="font-size: 16px; font-weight: bold; margin-left: 10px;">
+          <a style="text-decoration: none; color: #333;" href="javascript:void(0);">${item.product_info.name}</a>
         </h5>
       </td>
-      <td class="mx-2 brand_text_design" style="width: 90px;">${item?.active_currency.icon || ''} ${item.product_info.product_price}</td>
-      <td>
-      <div class="mb-3">
-      <div class="qty-container">
-          <button class="qty-btn-minus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button"><i class="fa fa-minus"></i></button>
-          <input type="text" name="qty" value="${item.quantity}" class="input-qty"/>
-          <button class="qty-btn-plus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button"><i class="fa fa-plus"></i></button>
-      </div>
-  </div>
+      <td style="padding: 8px; text-align: center; vertical-align: middle;">
+        <div class="mb-3">
+          <div class="qty-container" style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
+            <button class="qty-btn-minus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button" style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer;">
+              <i class="fa fa-minus" style="font-size: 14px;"></i>
+            </button>
+            <input type="text" name="qty" value="${item.quantity}" class="input-qty" style="width: 40px; text-align: center; border: 1px solid #ccc; padding: 5px; margin: 0 5px;">
+            <button class="qty-btn-plus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button" style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer;">
+              <i class="fa fa-plus" style="font-size: 14px;"></i>
+            </button>
+          </div>
+        </div>
       </td>
-      <td class="text-right" style="width: 90px;">
-      <span class="subtotal-price subtotal_price_${item.id}">
-      <span>${item?.active_currency.icon || ''}</span>
-      <span>${item.quantity * item.product_info.product_price}</span>
-  </span>
+      <td class="text-right" style="padding: 8px; text-align: center; font-size: 16px;">
+        <span class="subtotal-price subtotal_price_${item.id}">
+          <span>${item?.active_currency.icon || ''}</span>
+          <span>${item.quantity * item.product_info.product_price}</span>
+        </span>
       </td>
     </tr>
   `;
@@ -57,6 +61,76 @@ function showCartTableData(data) {
     // Update the Subtotal text with the correct number of items and the total
     var itemText = total_item_qty <= 1 ? 'Item' : 'Items';  // Singular or plural based on count
     $('.cart-total-text').text('Subtotal(' + total_item_qty + ' ' + itemText + ')');
+
+    // Responsive Design Adjustments
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @media (max-width: 768px) {
+            .product-row td {
+                display: block;
+                width: 100%;
+                text-align: left;
+                padding: 10px;
+            }
+
+            .qty-container {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+            }
+
+            .qty-btn-minus, .qty-btn-plus {
+                padding: 8px;
+                margin: 0 5px;
+            }
+
+            .product-title {
+                font-size: 16px;
+            }
+
+            .product-image img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .brand_text_design {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-title {
+                font-size: 14px;
+            }
+
+            .product-image img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .qty-container {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .qty-btn-minus, .qty-btn-plus {
+                padding: 8px;
+            }
+
+            .input-qty {
+                width: 40px;
+                text-align: center;
+                padding: 5px;
+            }
+
+            .subtotal-price {
+                font-size: 14px;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 }
 
 function updateCart(item) {

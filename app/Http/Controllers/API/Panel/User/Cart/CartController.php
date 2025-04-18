@@ -23,7 +23,8 @@ class CartController extends Controller
     use BaseModel;
     protected $cartService;
 
-    public function updateCartItemStatus(UpdateCartItemStatusRequest $updateCartItemStatusRequest, CartItem $cartItem) {
+    public function updateCartItemStatus(UpdateCartItemStatusRequest $updateCartItemStatusRequest, CartItem $cartItem)
+    {
         try {
             $cartItem->update(['is_active' => $updateCartItemStatusRequest->is_checked ? 1 : 0]);
             //Success Response
@@ -34,11 +35,12 @@ class CartController extends Controller
         }
     }
 
-    public function updateCartAllItemStatus(UpdateAllCartItemStatusRequest $updateAllCartItemStatusRequest) {
+    public function updateCartAllItemStatus(UpdateAllCartItemStatusRequest $updateAllCartItemStatusRequest)
+    {
         try {
 
             CartItem::where('user_id', $updateAllCartItemStatusRequest->user_id)
-            ->update(['is_active' => $updateAllCartItemStatusRequest->is_checked]);
+                ->update(['is_active' => $updateAllCartItemStatusRequest->is_checked]);
 
             //Success Response
             return Message::success(__("messages.success_update"));
