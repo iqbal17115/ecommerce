@@ -160,9 +160,9 @@ console.log(product);
                         </div>
                         <div class="price-box">
                             ${product.is_offer_active ? `
-                                                                                                                                                                                                                                                                                <span class="old-price">${product.active_currency.icon}${product.your_price}</span>
+                                                                                                                                                                                                                                                                                <span class="old-price">${product.active_currency.icon} ${product.your_price}</span>
                                                                                                                                                                                                                                                                             ` : ''}
-                            <span class="product-price">${product.active_currency.icon}${product.is_offer_active ? product.sale_price : product.your_price}</span>
+                            <span class="product-price">${product.active_currency.icon} ${product.is_offer_active ? product.sale_price : product.your_price}</span>
                         </div>
                     </div>
                     ${product.stock_qty <= 0 ? `<a class="sold_out" style="color: #fff;">Sold out</a>` : ''}
