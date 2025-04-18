@@ -6,7 +6,7 @@
         <p style="font-size: 16px; color: #777; margin-bottom: 35px;">Select the item you need help with below or reach out directly — we’re here for you.</p>
 
         <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
-            <a href="javascript:void(0);" style="padding: 14px 30px; background-color: #0069d9; color: #fff; border-radius: 8px; text-decoration: none; font-size: 17px; font-weight: 500; transition: background-color 0.3s, transform 0.2s;"
+            <a href="https://wa.me/8801727265200?text=Hi%20there!" target="_blank" title="Contact on WhatsApp" style="padding: 14px 30px; background-color: #0069d9; color: #fff; border-radius: 8px; text-decoration: none; font-size: 17px; font-weight: 500; transition: background-color 0.3s, transform 0.2s;"
                 onmouseover="this.style.backgroundColor='#0056b3'; this.style.transform='scale(1.05)';"
                 onmouseout="this.style.backgroundColor='#0069d9'; this.style.transform='scale(1)';">
                 💬 Chat With Us
