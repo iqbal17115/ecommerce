@@ -160,7 +160,7 @@
                                                 value="13eee98c-31ed-11ee-be5c-5811220534bb" checked>
                                             <label class="custom-control-label">Standard Delivery — Estimate
                                                 Delivery Date,
-                                                {{ \Carbon\Carbon::now()->addDay(3)->format('d F') }}</label>
+                                                {{ $minDate }} – {{ $maxDate }}</label>
                                         </div><!-- End .custom-checkbox -->
                                     </div><!-- End .form-group -->
 
