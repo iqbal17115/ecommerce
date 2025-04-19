@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Panel\User\Cart\CartDrawerController;
+use App\Http\Controllers\API\Panel\User\Cart\UserCartItemController;
 use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountPaymentController;
 use App\Http\Controllers\Ecommerce\MyAccount\MyAccountWishlistController;
 use App\Http\Controllers\Backend\Currency\CurrencyController;
@@ -615,6 +616,11 @@ Route::group(['middleware' => 'web'], function () {
     // Cart Drawer
     Route::controller(CartDrawerController::class)->group(function () {
         Route::get('cart-drawer/list', 'index')->name('cart-drawer.list');
-        Route::get('cart-drawer/count', 'count')->name('cart-drawer.count'); 
+        Route::get('cart-drawer/count', 'count')->name('cart-drawer.count');
+    });
+
+    // User Cart Item Controller
+    Route::controller(UserCartItemController::class)->group(function () {
+        Route::post('cart-items/store', 'store')->name('cart-items.store');
     });
 });

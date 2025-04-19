@@ -67,7 +67,7 @@ $(document).ready(function () {
                             
                             <!-- Buy Now Button & Action Icons -->
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                  <button style="background: #f4631b; color: white; border: none; padding: 4px 8px; 
+                                  <button class="buy_now_item" data-product_id="${item?.product?.id}" style="background: #f4631b; color: white; border: none; padding: 4px 8px; 
                                                border-radius: 20px; cursor: pointer; font-size: 10px; font-weight: bold;">
                                     Buy Now
                                 </button>

@@ -356,9 +356,9 @@
 
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/panel/users/cart/cart.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
-    <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}"></script>
+    <script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         CartDrawer.loadCartCount(); // ✅ Now it will work
