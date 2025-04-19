@@ -20,7 +20,8 @@ class MyCartProductResource extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/' . $this->getFirstProductImage()) : '',
-            "product_price" => (float)$productPrice,
+            "product_price" => (float) $productPrice,
+            "discount_amount" => (float) $this->calculateDiscountAmount(),
             "seller_sku" => $this->seller_sku
         ];
     }
@@ -32,6 +33,15 @@ class MyCartProductResource extends JsonResource
         }
 
         return $this->your_price;
+    }
+
+    protected function calculateDiscountAmount()
+    {
+        if ($this->isOnSale()) {
+            return round((float) $this->your_price - (float) $this->sale_price, 2);
+        }
+
+        return 0.00;
     }
 
     protected function isOnSale()

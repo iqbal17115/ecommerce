@@ -32,6 +32,11 @@ $(document).ready(function () {
         if (items.length > 0) {
             items.forEach(function (item, index) {
                 const shareUrl = generateProductShareUrl(item?.product?.name, item?.product?.seller_sku);
+                const discountAmount = item?.product?.discount_amount ?? 0;
+
+                const discountHtml = discountAmount > 0
+                    ? `<span style="font-size: 1em; font-weight: bold;">Discount: ${item?.currency} ${discountAmount.toFixed(2)}</span>`
+                    : '';
 
                 cartListHtml += `
                     <div style="border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; padding: 15px; 
@@ -63,7 +68,7 @@ $(document).ready(function () {
     
                         <!-- Discount and Action Buttons -->
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
-                            <span style="font-size: 1em; font-weight: bold;">Discount: ${item?.currency} ${item?.coupon_discount.toFixed(2)}</span>
+                            ${discountHtml}
                             
                             <!-- Buy Now Button & Action Icons -->
                             <div style="display: flex; align-items: center; gap: 10px;">
