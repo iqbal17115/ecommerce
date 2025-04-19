@@ -27,7 +27,7 @@ class UserCartService
         }
     }
 
-    protected function getOrCreateCart( $userId): Cart
+    protected function getOrCreateCart($userId): Cart
     {
         return Cart::firstOrCreate(
             ['user_id' => $userId, 'is_active' => true],
@@ -76,5 +76,18 @@ class UserCartService
             'quantity' => $quantity,
             'is_active' => $isActive,
         ]);
+    }
+
+    public function removeItem(CartItem $cartItem): void
+    {
+        $cartId = $cartItem->cart_id;
+
+        $cartItem->delete();
+
+        $remainingItems = CartItem::where('cart_id', $cartId)->count();
+
+        if ($remainingItems === 0) {
+            Cart::where('id', $cartId)->delete();
+        }
     }
 }

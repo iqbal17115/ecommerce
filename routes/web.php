@@ -621,6 +621,8 @@ Route::group(['middleware' => 'web'], function () {
 
     // User Cart Item Controller
     Route::controller(UserCartItemController::class)->group(function () {
+        Route::get('cart-items/list', 'list')->name('cart-items.list');
         Route::post('cart-items/store', 'store')->name('cart-items.store');
+        Route::delete('cart-items/{cartItem}', 'destroy')->name('cart_items.destroy');
     });
 });

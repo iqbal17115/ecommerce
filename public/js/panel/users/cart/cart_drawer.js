@@ -1,27 +1,29 @@
 const CartDrawer = (() => {
     const cartContainerId = 'cart_container';
     const cartCountClass = 'cart-count';
-    let isLoaded = false; // To avoid multiple reloads if not necessary
+    let isLoaded = false;
 
     function load(forceReload = false) {
         if (isLoaded && !forceReload) return;
 
-        getDetails(
-            '/cart-drawer/list',
-            (data) => {
-                renderCart(data.results);
-                isLoaded = true;
-            },
-            (error) => {
-                console.error("Error fetching cart drawer:", error);
-            }
-        );
+        getDetails('/cart-drawer/list', (data) => {
+            renderCart(data.results);
+            isLoaded = true;
+        }, (error) => {
+            console.error("Error fetching cart drawer:", error);
+        });
     }
 
     function renderCart(data) {
         let totalQty = 0;
         const cartContainer = document.getElementById(cartContainerId);
         cartContainer.innerHTML = '';
+
+        if (!data.length) {
+            cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+            updateCartCount(0);
+            return;
+        }
 
         data.forEach(item => {
             totalQty += parseInt(item.quantity);
@@ -70,23 +72,42 @@ const CartDrawer = (() => {
         });
     }
 
-    function loadCartCount() {
-        getDetails(
-            '/cart-drawer/count',
+    function removeCartItem(cartItemId) {
+        deleteAction(
+            `/cart-items/${cartItemId}`,
             (data) => {
-                const count = data.results.totalQty ?? 0;
-                document.querySelectorAll('.cart-count').forEach(el => {
-                    el.textContent = count;
-                });
+                toastrSuccessMessage(data.message);
+                load(true); // Reload cart UI
+                loadCartCount(); // Update global cart count
             },
             (error) => {
-                console.error('Error loading cart count:', error);
+                toastrErrorMessage(error.responseJSON.message);
             }
         );
     }
 
+    function loadCartCount() {
+        getDetails('/cart-drawer/count', (data) => {
+            const count = data.results.totalQty ?? 0;
+            updateCartCount(count);
+        }, (error) => {
+            console.error('Error loading cart count:', error);
+        });
+    }
+
+    function initEvents() {
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-from-cart')) {
+                const cartItemId = e.target.dataset.id;
+                    removeCartItem(cartItemId);
+            }
+        });
+    }
+
+    initEvents();
+
     return {
         load,
-        loadCartCount, // ✅ expose it so you can use it outside
+        loadCartCount,
     };
 })();
