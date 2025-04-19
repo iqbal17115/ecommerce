@@ -120,8 +120,8 @@
 
                 <div class="dropdown cart-dropdown">
                     <a href="#" id="cartToggle" title="Cart" class="dropdown-toggle dropdown-arrow cart-toggle"
-   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-   data-display="static">
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        data-display="static">
                         @if ($company_info && $company_info->icon)
                             <img src="{{ asset('storage/' . $company_info->icon) }}"
                                 class="img-fluid icon-cart-thick pb-0 mb-0 cart_icon">

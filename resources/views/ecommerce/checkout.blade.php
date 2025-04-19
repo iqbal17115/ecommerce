@@ -131,8 +131,8 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 @php
-                                                $minDate = \Carbon\Carbon::now()->addDays(3)->format('d M Y');
-                                                $maxDate = \Carbon\Carbon::now()->addDays(4)->format('d M Y');
+                                                    $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
+                                                    $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
                                                 @endphp
                                                 <p class="mb-0 text-dark">Standard Delivery Date: {{ $minDate }} – {{ $maxDate }}</p>
                                                 <p class="mb-0 text-dark">Items shipped from

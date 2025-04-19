@@ -83,10 +83,10 @@ const CartDrawer = (() => {
                 console.error('Error loading cart count:', error);
             }
         );
-    }    
+    }
 
     return {
         load,
         loadCartCount, // ✅ expose it so you can use it outside
-    };    
+    };
 })();

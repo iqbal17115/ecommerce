@@ -260,4 +260,10 @@ return [
             'roles' => ["User"]
         ],
     ],
+
+    // Delivery
+    'delivery' => [
+        'min_days' => 3,
+        'max_days' => 4,
+    ],
 ];
