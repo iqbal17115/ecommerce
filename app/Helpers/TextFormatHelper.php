@@ -10,7 +10,7 @@ class TextFormatHelper
      * @param [type] $amount
      * @return void
      */
-    public static function formatText(string $text): string
+    public static function formatText($text): string
     {
         // Replace underscores with spaces and capitalize each word
         return ucwords(str_replace('_', ' ', strtolower($text)));

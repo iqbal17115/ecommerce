@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User\Order;
 
+use App\Helpers\TextFormatHelper;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -28,6 +29,7 @@ class OrderListResource extends JsonResource
             "payable_amount" => $this->payable_amount,
             "note" => $this->note,
             "status" => $this->status,
+            "payment_status" => TextFormatHelper::formatText($this->orderPayment->payment_status),
             "order_address" => new OrderAddressResource($this->orderAddress),
             "order_details" => OrderDetailsResource::collection($this->OrderDetail),
         ];

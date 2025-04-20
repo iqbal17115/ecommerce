@@ -156,7 +156,7 @@ function generateOrderCard(order) {
     // Use the dates directly from the backend API response
     let orderDate = formatDate(order.order_date);
     let estimatedDeliveryDate = order.estimate_delivery_date;
-
+console.log(order);
     return `
         <div class="card mb-4 shadow-lg border-0">
             <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color: #f4631b;">
@@ -167,10 +167,24 @@ function generateOrderCard(order) {
             </div>
             <div class="card-body">
                 <div class="row align-items-center">
-                    <div class="col-md-4">
-                        <h6 class="text-muted">Order Date</h6>
-                        <p class="fw-bold text-dark">${orderDate}</p>
+                    <div class="col-12 col-md-4 mb-3 mb-md-0">
+                        <div class="d-flex justify-content-between align-items-start flex-wrap">
+                            <!-- Order Date -->
+                            <div>
+                                <h6 class="text-muted mb-1">Order Date</h6>
+                                <p class="fw-bold text-dark mb-0">${orderDate}</p>
+                            </div>
+                            
+                            <!-- Payment Status -->
+                            <div class="text-md-end text-start mt-2 mt-md-0">
+                                <h6 class="text-muted mb-1">Payment Status</h6>
+                                <p class="fw-bold text-${order.payment_status === 'Paid' ? 'success' : 'danger'} mb-0">
+                                    ${order.payment_status}
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="col-md-4 text-center">
                         <h6 class="text-muted">Estimated Delivery</h6>
                         <p class="fw-bold text-dark">${estimatedDeliveryDate}</p>
@@ -184,48 +198,47 @@ function generateOrderCard(order) {
             </div>
             <div class="card-footer bg-light">
                 <h6 class="text-muted">Order Details</h6>
-               <div class="table-responsive">
-    <table class="table table-bordered d-none d-md-table">
-        <thead class="bg-light">
-            <tr>
-                <th>Image</th>
-                <th>Product</th>
-                <th class="text-center">Unit Price</th>
-                <th class="text-center">Qty</th>
-                <th class="text-center">Return</th>
-                <th class="text-center">Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${generateOrderDetails(order, order.order_details)}
-        </tbody>
-    </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered d-none d-md-table">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Image</th>
+                                <th>Product</th>
+                                <th class="text-center">Unit Price</th>
+                                <th class="text-center">Qty</th>
+                                <th class="text-center">Return</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${generateOrderDetails(order, order.order_details)}
+                        </tbody>
+                    </table>
 
-    <!-- Mobile View (Flexbox-Based Cards) -->
-    <div class="d-md-none">
-        ${order.order_details.map(orderDetail => `
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="${orderDetail.image}" class="img-fluid rounded me-3" style="width: 50px; height: 50px;" alt="Product Image">
-                        <div>
-                            <h6 class="mb-0" style="padding-left: 5px;">${orderDetail.product_name || 'Product not available'}</h6>
-                            <small class="text-muted" style="padding-left: 5px;">Unit Price: ${formatPrice(orderDetail.unit_price)}</small>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <div>Qty: ${formatQuantity(orderDetail.quantity)} pcs</div>
-                        <div>Return: ${formatQuantity(orderDetail.return_quantity)} pcs</div>
-                        <div>Total: ${formatPrice(orderDetail.total_amount)}</div>
+                    <!-- Mobile View (Flexbox-Based Cards) -->
+                    <div class="d-md-none">
+                        ${order.order_details.map(orderDetail => `
+                            <div class="card mb-3 shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <img src="${orderDetail.image}" class="img-fluid rounded me-3" style="width: 50px; height: 50px;" alt="Product Image">
+                                        <div>
+                                            <h6 class="mb-0" style="padding-left: 5px;">${orderDetail.product_name || 'Product not available'}</h6>
+                                            <small class="text-muted" style="padding-left: 5px;">Unit Price: ${formatPrice(orderDetail.unit_price)}</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>Qty: ${formatQuantity(orderDetail.quantity)} pcs</div>
+                                        <div>Return: ${formatQuantity(orderDetail.return_quantity)} pcs</div>
+                                        <div>Total: ${formatPrice(orderDetail.total_amount)}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
-            </div>
-        `).join('')}
-    </div>
-</div>
 
-
-                 <!-- Order Summary Section -->
+                <!-- Order Summary Section -->
                 <div class="order-summary mt-4 p-3 border rounded bg-white">
                     <h5 class="text-center text-primary">Order Summary</h5>
                     <table class="table table-borderless">
