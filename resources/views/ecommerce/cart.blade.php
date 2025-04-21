@@ -1,6 +1,6 @@
 @extends('layouts.ecommerce')
 @section('content')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/cart_page.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/cart_page.css') }}?v={{ time() }}">
 <main class="main bg-gray py-3">
     <div class="container">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
