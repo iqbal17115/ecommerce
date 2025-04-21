@@ -6,6 +6,7 @@ class PaymentStatusEnum
     public const PENDING = 'pending';
     public const AUTHORIZED = 'authorized';
     public const PAID = 'paid';
+    public const UNPAID = 'unpaid';
     public const FAILED = 'failed';
     public const REFUNDED = 'refunded';
     public const CHARGEBACK = 'chargeback';
@@ -24,6 +25,7 @@ class PaymentStatusEnum
             self::PENDING => 'pending',
             self::AUTHORIZED => 'authorized',
             self::PAID => 'paid',
+            self::UNPAID => 'unpaid',
             self::FAILED => 'failed',
             self::REFUNDED => 'refunded',
             self::CHARGEBACK => 'chargeback',

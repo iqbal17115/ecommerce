@@ -101,7 +101,7 @@ class OrderService
                     'amount_paid' => 0,
                     'due_amount' => $order->payable_amount,
                     'total_receive_amount' => 0,
-                    'payment_status' => PaymentStatusEnum::PENDING
+                    'payment_status' => PaymentStatusEnum::UNPAID
                 ],
             );
 
