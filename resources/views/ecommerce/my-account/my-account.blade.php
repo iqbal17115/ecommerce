@@ -155,8 +155,8 @@ function formatQuantity(quantity) {
 function generateOrderCard(order) {
     // Use the dates directly from the backend API response
     let orderDate = formatDate(order.order_date);
-    const deliveryMinDays = 3;
-    const deliveryMaxDays = 4;
+    const deliveryMinDays = 2;
+    const deliveryMaxDays = 3;
     // Assuming estimate_delivery_date is a base date (like order date)
     let minDeliveryDate = formatDate(
         new Date(new Date(order.estimate_delivery_date).setDate(new Date(order.estimate_delivery_date).getDate() + parseInt(deliveryMinDays)))
