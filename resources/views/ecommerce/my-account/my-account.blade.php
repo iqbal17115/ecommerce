@@ -158,13 +158,11 @@ function generateOrderCard(order) {
     const deliveryMinDays = 2;
     const deliveryMaxDays = 3;
     // Assuming estimate_delivery_date is a base date (like order date)
-    let minDeliveryDate = formatDate(
-        new Date(new Date(order.estimate_delivery_date).setDate(new Date(order.estimate_delivery_date).getDate() + parseInt(deliveryMinDays)))
-    );
+    let today = new Date();
 
-    let maxDeliveryDate = formatDate(
-        new Date(new Date(order.estimate_delivery_date).setDate(new Date(order.estimate_delivery_date).getDate() + parseInt(deliveryMaxDays)))
-    );
+let minDeliveryDate = formatDate(new Date(today.setDate(today.getDate() + deliveryMinDays)));
+today = new Date(); // reset today to avoid mutation from previous setDate
+let maxDeliveryDate = formatDate(new Date(today.setDate(today.getDate() + deliveryMaxDays)));
 
     let estimatedDeliveryRange = `${minDeliveryDate} – ${maxDeliveryDate}`;
 
