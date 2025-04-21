@@ -173,7 +173,7 @@
                 @if ($item['status'] == 'pending' || $item['status'] == 'processing' || $item['status'] == 'shipped' || $item['status'] == 'out_for_delivery' || $item['status'] == 'delivered')
                 <div class="d-flex p-3" style="font-size: 16px;">
                     <span
-                        class="badge badge-primary badge-pill mr-5">{{ date('d M Y h:i', strtotime($item['created_at'])) }}</span>
+                        class="badge badge-primary badge-pill mr-5">{{ $minDate }} – {{ $maxDate }}</span>
                     {{$statusMessages[$item['status']]}}
                 </div>
                 @endif
