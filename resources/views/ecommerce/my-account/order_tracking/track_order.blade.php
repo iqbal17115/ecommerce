@@ -122,9 +122,13 @@
         <div class="row">
             <div class="col-12 col-md-10 hh-grayBox pt30 pb20">
                 <div class="highlighted-date mb-3">
+                            @php
+                                $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
+                                $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
+                            @endphp
                     <strong>Estimated Delivery Date: </strong>
                     <span>
-                        {{ $order->estimate_delivery_date ? date('d M Y', strtotime($order->estimate_delivery_date)) : 'N/A' }}
+                            {{ $minDate }} – {{ $maxDate }}
                     </span>
                 </div>
 
