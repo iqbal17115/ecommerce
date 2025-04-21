@@ -22,7 +22,6 @@ $("#user_profile_info").html(profileContent);
 }
 
 function showCartTableData(data) {
-    console.log(data);
     let htmlContent = '';
     let total = 0;
     let total_shipping_charge = 0;
@@ -62,7 +61,7 @@ function showCartTableData(data) {
           <a href="javascript:void(0);" class="product-image">
             <img src="${item.product_info.image_url}" style="width:100px; height: 40px;" alt="product">
           </a>
-          <a href="javascript:void(0);" class="btn-remove remove-from-cart icon-cancel" data-id="${item.id}" title="Remove Product"></a>
+          <a href="javascript:void(0);" class="btn-remove remove-from-cart-list icon-cancel" data-id="${item.id}" title="Remove Product"></a>
         </figure>
       </td>
       <td class="product-col">
@@ -264,7 +263,7 @@ $(document).ready(function () {
         // Send an AJAX PUT request to the cart API
     });
 
-    $(document).on('click', '.remove-from-cart', function () {
+    $(document).on('click', '.remove-from-cart-list', function () {
         const row_id = $(this).data('id');
 
         // Delete the company

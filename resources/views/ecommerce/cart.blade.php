@@ -5,31 +5,35 @@
     <div class="container">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="row">
-            <div class="col-lg-8">
-                <div class="cart-table-container table-responsive">
-                    <table class="table table-cart align-middle mb-0">
-                        <thead class="bg-light">
+                <div class="col-lg-8">
+                    <!-- Responsive Table Wrapper -->
+                    <div style="width: 100%;">
+                        <table class="table table-cart align-middle mb-0" style="width: 100%; border-collapse: collapse;">
+                        <thead style="background-color: #f8f9fa;">
                             @php
-                            $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
-                            $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
+                                $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
+                                $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
                             @endphp
                             <tr>
-                                <th class="checkbox-col">
-                                    <input type="checkbox" id="select_all_products">
-                                </th>
-                                <th colspan="6" class="text-end">
-                                    <span class="text-dark">Standard, Estimate Delivery</span>
-                                    <span class="text-warning fw-bold">{{ $minDate }} – {{ $maxDate }}</span>
+                                <th colspan="7" style="padding: 10px;">
+                                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; width: 100%;">
+                                        <div style="flex: 0 0 auto;">
+                                            <input type="checkbox" id="select_all_products">
+                                        </div>
+                                        <div style="flex: 1 1 auto; text-align: right;">
+                                            <span style="color: #212529;">Standard, Estimate Delivery</span><br>
+                                            <span style="color: #ffc107; font-weight: bold;">{{ $minDate }} – {{ $maxDate }}</span>
+                                        </div>
+                                    </div>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="table_body">
-                            {{-- Items will be injected here dynamically --}}
-                        </tbody>
-                    </table>
-                </div>
-            </div><!-- End .col-lg-8 -->
-
+                            <tbody id="table_body" style="font-size: 14px;">
+                                {{-- Items will be injected here dynamically --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- End .col-lg-8 -->
             <div class="col-lg-4">
                 <div class="cart-summary card_design shadow p-2">
                     <div class="summary-section-heading pl-2">Order Summary</div>

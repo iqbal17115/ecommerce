@@ -1,77 +1,84 @@
 /*--------------------------*/
-.qty-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .qty-container .input-qty{
-    text-align: center;
-    padding: 6px 10px;
-    border: 1px solid #d4d4d4;
-    max-width: 80px;
-  }
-  .qty-container .qty-btn-minus,
-  .qty-container .qty-btn-plus{
-    border: 1px solid #d4d4d4;
-    padding: 10px 13px;
-    font-size: 10px;
-    height: 38px;
-    width: 38px;
-    transition: 0.3s;
-  }
-  .qty-container .qty-btn-plus{
-    margin-left: -1px;
-    cursor: pointer;
-  }
-  .qty-container .qty-btn-minus{
-    margin-right: -1px;
-    cursor: pointer;
-  }
+.qty-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qty-container .input-qty {
+  text-align: center;
+  padding: 6px 10px;
+  border: 1px solid #d4d4d4;
+  max-width: 80px;
+}
+
+.qty-container .qty-btn-minus,
+.qty-container .qty-btn-plus {
+  border: 1px solid #d4d4d4;
+  padding: 10px 13px;
+  font-size: 10px;
+  height: 38px;
+  width: 38px;
+  transition: 0.3s;
+}
+
+.qty-container .qty-btn-plus {
+  margin-left: -1px;
+  cursor: pointer;
+}
+
+.qty-container .qty-btn-minus {
+  margin-right: -1px;
+  cursor: pointer;
+}
 
 
-  /*---------------------------*/
-  .btn-cornered,
-  .input-cornered{
-    border-radius: 4px;
-  }
-  .btn-rounded{
-    border-radius: 50%;
-  }
-  .input-rounded{
-    border-radius: 50px;
-  }
+/*---------------------------*/
+.btn-cornered,
+.input-cornered {
+  border-radius: 4px;
+}
 
-  .product-image-container {
-    position: relative;
-  }
+.btn-rounded {
+  border-radius: 50%;
+}
 
-  .product-image a.btn-remove {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: red;
-    color: white;
-    padding: 5px;
-    border-radius: 50%;
-    text-align: center;
-    text-decoration: none;
-    z-index: 1;
-  }
+.input-rounded {
+  border-radius: 50px;
+}
 
-  .table td, .table th {
+.product-image-container {
+  position: relative;
+}
+
+.product-image a.btn-remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.table td,
+.table th {
   vertical-align: top;
   border-top: 0px solid #dee2e6;
-  }
+}
 
-  .product_row {
-    margin-bottom: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-items: center;
-  }
+.product_row {
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
 
-  .font_size_14 {
-    display: block;
+.font_size_14 {
+  display: block;
   width: 100%;
   max-height: 32px;
   overflow: hidden;
@@ -80,19 +87,74 @@
   font-size: 14px;
   color: #212121;
   line-height: 16px;
+}
+
+.summary-section-heading {
+  font-size: 18px;
+  color: #212121;
+  position: relative;
+  font-weight: 500;
+}
+
+.card_design {
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .product-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
   }
 
-  .summary-section-heading {
+  .product-row td {
+    display: block;
+    width: 100% !important;
+    text-align: left !important;
+    padding: 5px 10px;
+    box-sizing: border-box;
+  }
+
+  .product-image-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .product-image img {
+    width: 80px !important;
+    height: auto !important;
+  }
+
+  .qty-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .qty-container input {
+    width: 50px;
+    text-align: center;
+  }
+
+  .checkbox-col {
+    max-width: 100% !important;
+    margin-bottom: 10px;
+  }
+
+  .brand_text_design,
+  .text-right {
+    font-weight: bold;
+  }
+
+  .btn-remove {
+    margin-left: auto;
     font-size: 18px;
-    color: #212121;
-    position: relative;
-    font-weight: 500;
   }
 
-  .card_design {
-    background-color: white;
+  .product-title {
+    margin: 5px 0;
   }
-
-
-
-
+}
