@@ -122,7 +122,7 @@
             // Iterate through each product in the data
             data.forEach(product => {
                 const productName = encodeURIComponent(product.product_name);
-console.log(product);
+
                 const sellerSku = product?.seller_sku ? encodeURIComponent(product.seller_sku) :
                     ''; // Default to an empty string if undefined
 
@@ -478,7 +478,6 @@ console.log(product);
 
             // Fetch product data based on the updated URL
             getDetails(url, (data) => {
-                console.log(data);
                 renderProductList(data.results.data);
                 renderPagination(data.results); // Render pagination
             });

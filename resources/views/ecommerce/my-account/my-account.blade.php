@@ -155,8 +155,19 @@ function formatQuantity(quantity) {
 function generateOrderCard(order) {
     // Use the dates directly from the backend API response
     let orderDate = formatDate(order.order_date);
-    let estimatedDeliveryDate = order.estimate_delivery_date;
-console.log(order);
+    const deliveryMinDays = 3;
+    const deliveryMaxDays = 4;
+    // Assuming estimate_delivery_date is a base date (like order date)
+    let minDeliveryDate = formatDate(
+        new Date(new Date(order.estimate_delivery_date).setDate(new Date(order.estimate_delivery_date).getDate() + parseInt(deliveryMinDays)))
+    );
+
+    let maxDeliveryDate = formatDate(
+        new Date(new Date(order.estimate_delivery_date).setDate(new Date(order.estimate_delivery_date).getDate() + parseInt(deliveryMaxDays)))
+    );
+
+    let estimatedDeliveryRange = `${minDeliveryDate} – ${maxDeliveryDate}`;
+
     return `
         <div class="card mb-4 shadow-lg border-0">
             <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color: #f4631b;">
@@ -187,7 +198,7 @@ console.log(order);
 
                     <div class="col-md-4 text-center">
                         <h6 class="text-muted">Estimated Delivery</h6>
-                        <p class="fw-bold text-dark">${estimatedDeliveryDate}</p>
+                        <p class="text-warning fw-bold">${estimatedDeliveryRange}</p>
                     </div>
                     <div class="col-md-4 text-end">
                         <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2" style="text-decoration: none;">Track Package</a>
