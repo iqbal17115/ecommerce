@@ -12,7 +12,7 @@
                             $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
                             $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
                             @endphp
-                        <div class="d-flex justify-content-between align-items-center pb-3 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center pb-1 border-bottom">
                             <div><input type="checkbox" id="select_all_products"> Select All</div>
                             <div class="text-end">
                                 <div style="color: #212529;">
@@ -23,7 +23,7 @@
                             </div>
                         </div>
 
-                        <div id="table_body" class="mt-3">
+                        <div id="table_body" class="mt-1">
                             <!-- Cart items injected here -->
                         </div>
                     </div>

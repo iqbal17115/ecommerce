@@ -50,7 +50,7 @@ function showCartTableData(data) {
     });
 
     htmlContent += `
-  <div class="cart_${item.id} p-3 mb-2 bg-white rounded shadow-sm" style="border: 1px solid #f1f1f1;">
+  <div class="cart_${item.id} p-3 mb-1 bg-white rounded shadow-sm" style="border: 1px solid #f1f1f1;">
     <div class="row align-items-center">
 
       <!-- Checkbox -->
