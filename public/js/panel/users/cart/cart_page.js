@@ -49,45 +49,42 @@ function showCartTableData(data) {
         }
     });
 
-        htmlContent += `
-    <tr class="product-row product_row shadow product cart_${item.id}" data-id="${item.id}">
-      <td class="checkbox-col">
-        <input type="checkbox" class="product-checkbox"
-          data-cart_item_id="${item.id}"
-          data-product-status="1" ${item.is_active == 1 ? 'checked' : ''}>
-      </td>
-      <td>
-        <figure class="product-image-container">
-          <a href="javascript:void(0);" class="product-image">
-            <img src="${item.product_info.image_url}" style="width:100px; height: 40px;" alt="product">
-          </a>
-          <a href="javascript:void(0);" class="btn-remove remove-from-cart-list icon-cancel" data-id="${item.id}" title="Remove Product"></a>
-        </figure>
-      </td>
-      <td class="product-col">
-        <h5 class="product-title">
-          <a style="text-decoration: none;" class="font_size_14">${item.product_info.name}</a>
-          <span class="text-muted">${variationInfo}</span>
-        </h5>
-      </td>
-      <td class="mx-2 brand_text_design" style="width: 90px;">${item?.active_currency.icon || ''} ${item.product_info.product_price}</td>
-      <td>
-      <div class="mb-3">
-      <div class="qty-container">
-          <button class="qty-btn-minus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button"><i class="fa fa-minus"></i></button>
-          <input type="text" name="qty" value="${item.quantity}" class="input-qty"/>
-          <button class="qty-btn-plus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button"><i class="fa fa-plus"></i></button>
+    htmlContent += `
+  <div class="cart_${item.id} p-3 mb-2 bg-white rounded shadow-sm" style="border: 1px solid #f1f1f1;">
+    <div class="row align-items-center">
+
+      <!-- Checkbox -->
+      <div class="col-1 d-flex align-items-start pt-2">
+        <input type="checkbox" class="item-checkbox" data-cart_item_id="${item.id}">
       </div>
+
+      <!-- Product Info -->
+      <div class="col-10 col-md-7 d-flex">
+        <img src="${item.product_info.image_url}" alt="Product Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
+        <div>
+          <div style="font-weight: 600; font-size: 16px;">${item.product_info.name}</div>
+          <div style="color: #6c757d; font-size: 13px;">${item.brand_name || 'No Brand'}, ${variationInfo}</div>
+          <div style="font-weight: bold; font-size: 16px; margin-top: 5px;">${item?.active_currency.icon || ''} ${item.product_info.product_price}</div>
+        </div>
+      </div>
+
+      <!-- Quantity and Remove -->
+      <div class="col-12 col-md-4 mt-2 mt-md-0">
+        <div class="d-flex align-items-center justify-content-between justify-content-md-end">
+          <div class="d-flex align-items-center">
+            <button class="qty-btn-minus btn btn-light change_qty_cart_item" data-cart_item_id="${item.id}" style="width: 30px; height: 30px; font-size: 16px; padding: 0;">-</button>
+            <input type="text" name="qty" value="${item.quantity}" class="input-qty text-center mx-2" style="width: 40px; height: 30px; border: 1px solid #ddd; border-radius: 5px;">
+            <button class="qty-btn-plus btn btn-light change_qty_cart_item" data-cart_item_id="${item.id}" style="width: 30px; height: 30px; font-size: 16px; padding: 0;">+</button>
+          </div>
+          <button class="btn btn-link text-danger p-0 remove-cart-item ms-2" data-cart_item_id="${item.id}" title="Remove">
+            <i class="fa fa-trash text-danger" style="font-size: 18px;"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
   </div>
-      </td>
-      <td class="text-right" style="width: 90px;">
-        <span class="subtotal-price subtotal_price_${item.id}">
-            <span>${item?.active_currency.icon || ''}</span>
-            <span>${item.quantity * item.product_info.product_price}</span>
-        </span>
-      </td>
-    </tr>
-  `;
+`;
     });
 
     if (data.length > 0 && cheked_all_check_box == true) {

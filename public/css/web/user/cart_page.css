@@ -100,61 +100,11 @@
   background-color: white;
 }
 
+/* Star Cart List */
 @media (max-width: 768px) {
-  .product-row {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .product-row td {
-    display: block;
-    width: 100% !important;
-    text-align: left !important;
-    padding: 5px 10px;
-    box-sizing: border-box;
-  }
-
-  .product-image-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .product-image img {
-    width: 80px !important;
-    height: auto !important;
-  }
-
-  .qty-container {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .qty-container input {
-    width: 50px;
-    text-align: center;
-  }
-
-  .checkbox-col {
-    max-width: 100% !important;
-    margin-bottom: 10px;
-  }
-
-  .brand_text_design,
-  .text-right {
-    font-weight: bold;
-  }
-
-  .btn-remove {
-    margin-left: auto;
-    font-size: 18px;
-  }
-
-  .product-title {
+  .input-qty {
     margin: 5px 0;
   }
 }
+
+/* End Cart List */
