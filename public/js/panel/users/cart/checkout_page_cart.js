@@ -222,6 +222,7 @@ $(document).ready(function () {
         );
     }
 
+    // Call the function to fetch cart data
     getAllCartItem();
 
     // Detect if the page is loaded from the cache using the 'pageshow' event

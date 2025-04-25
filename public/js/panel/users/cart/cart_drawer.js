@@ -42,7 +42,7 @@ const CartDrawer = (() => {
                 <span class="cart-product-info">
                     <span class="cart-product-qty card_product_qty_${item.id}">${item.quantity}</span> ×  
                     <span class="brand_text_design">${item.active_currency}</span>
-                    <span class="brand_text_design">${item?.product_info?.product_price}</span>
+                    <span class="brand_text_design product_price_${item.id}">${item?.product_info?.product_price}</span>
                 </span>
             `;
 
@@ -95,11 +95,46 @@ const CartDrawer = (() => {
         });
     }
 
+    function handleQuantityChange(cartItemId, newQty) {
+        if (newQty <= 0) return;
+    
+        updateAction(
+            `/cart-items/${cartItemId}`,
+            { quantity: newQty },
+            (data) => {
+                toastrSuccessMessage(data.message);
+                load(true); // reload cart drawer
+                loadCartCount(); // update badge
+            },
+            (error) => {
+                toastrErrorMessage(error?.responseJSON?.message ?? 'Update failed');
+            }
+        );
+    }
+
     function initEvents() {
         document.addEventListener('click', function (e) {
             if (e.target.classList.contains('remove-from-cart')) {
                 const cartItemId = e.target.dataset.id;
-                    removeCartItem(cartItemId);
+                removeCartItem(cartItemId);
+            }
+    
+            // Quantity increase/decrease buttons
+            if (e.target.classList.contains('qty-update-btn')) {
+                const cartItemId = e.target.dataset.id;
+                const newQty = parseInt(e.target.dataset.qty);
+                handleQuantityChange(cartItemId, newQty);
+            }
+        });
+    
+        // Manual input (blur event for direct changes)
+        document.addEventListener('change', function (e) {
+            if (e.target.classList.contains('manual-qty-input')) {
+                const cartItemId = e.target.dataset.id;
+                const newQty = parseInt(e.target.value);
+                if (!isNaN(newQty)) {
+                    handleQuantityChange(cartItemId, newQty);
+                }
             }
         });
     }

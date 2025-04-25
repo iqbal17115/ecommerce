@@ -5,9 +5,11 @@ namespace App\Http\Controllers\API\Panel\User\Cart;
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserStoreCartItemRequest;
+use App\Http\Resources\User\Cart\CartItemListResource;
 use App\Models\Cart\CartItem;
 use App\Services\UserCartService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class UserCartItemController extends Controller
 {
@@ -33,6 +35,18 @@ class UserCartItemController extends Controller
 
         return Message::success(__('messages.success_add'), []);
     }
+
+    public function updateQuantity(Request $request, CartItem $cartItem): JsonResponse
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $this->userCartService->updateQuantity($cartItem, $request->quantity);
+
+        return Message::success(__('messages.success_update'), CartItemListResource::collection(CartItem::where('id', $cartItem->id)->get()));
+    }
+
 
     public function destroy(CartItem $cartItem): JsonResponse
     {

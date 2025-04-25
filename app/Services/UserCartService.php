@@ -78,6 +78,12 @@ class UserCartService
         ]);
     }
 
+    public function updateQuantity(CartItem $cartItem, int $quantity): void
+    {
+        $cartItem->update(['quantity' => $quantity]);
+    }
+
+
     public function removeItem(CartItem $cartItem): void
     {
         $cartId = $cartItem->cart_id;
