@@ -73,11 +73,6 @@ const CartActiveItemList = (() => {
                 CartManager.updateQuantity(cartItemId, newQty);
             }
         });
-
-        $(document).on('click', '.remove-cart-item', function () {
-            const cartItemId = $(this).data('cart_item_id');
-            CartManager.removeItem(cartItemId);
-        });
     }
 
     $(document).on('change', '.item-checkbox', function () {
