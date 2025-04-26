@@ -48,6 +48,16 @@ class UserCartItemController extends Controller
     }
 
 
+    public function updateIsActive(Request $request, CartItem $cartItem)
+    {
+        $cartItem->update([
+            'is_active' => !$cartItem->is_active,
+        ]);
+
+        return Message::success(__('messages.success_update'));
+    }
+
+
     public function destroy(CartItem $cartItem): JsonResponse
     {
 

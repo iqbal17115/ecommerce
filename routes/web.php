@@ -624,6 +624,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('cart-items/list', 'list')->name('cart-items.list');
         Route::post('cart-items/store', 'store')->name('cart-items.store');
         Route::put('cart-items/{cartItem}', 'updateQuantity')->name('cart-items.update');
+        Route::put('cart-item-toggle-active/{cartItem}', 'updateIsActive')->name('cart-items.toggle-active');
         Route::delete('cart-items/{cartItem}', 'destroy')->name('cart_items.destroy');
     });
 });
