@@ -25,7 +25,7 @@ const CartManager = (() => {
         }
 
         if (window.hasCartActiveItemList && typeof CartActiveItemList !== 'undefined') {
-            getDetails('/api/checkout/cart/lists', (data) => {
+            getDetails('/checkout/cart/lists', (data) => {
                 cartData = data.results.data;
                 CartActiveItemList.render(cartData);
             }, (error) => {

@@ -61,6 +61,7 @@ use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingCountryController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
+use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -626,5 +627,9 @@ Route::group(['middleware' => 'web'], function () {
         Route::put('cart-items/{cartItem}', 'updateQuantity')->name('cart-items.update');
         Route::put('cart-item-toggle-active/{cartItem}', 'updateIsActive')->name('cart-items.toggle-active');
         Route::delete('cart-items/{cartItem}', 'destroy')->name('cart_items.destroy');
+    });
+
+    Route::controller(APIUserCartController::class)->group(function () {
+        Route::get('checkout/cart/lists', 'getCheckoutCart')->name('checkout_cart_lists');
     });
 });
