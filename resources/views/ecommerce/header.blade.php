@@ -103,7 +103,7 @@
                     <div class="header-user d-lg-block d-none profile-container">
                         <a href="{{ route('customer-sign-in') }}"
                             class="header-icon position-relative mb-0 text-white font-weight-bold mr-0">
-                            Sign In1
+                            Sign In
                         </a>
                         <span class="mx-2 text-white">|</span>
                         <a href="{{ route('sign-up') }}"
