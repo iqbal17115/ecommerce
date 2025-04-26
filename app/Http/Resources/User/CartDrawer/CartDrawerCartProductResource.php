@@ -20,6 +20,7 @@ class CartDrawerCartProductResource extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/' . $this->getFirstProductImage()) : '',
+            "brand_name" => $this?->Brand?->name,
             "product_price" => (float)$productPrice,
         ];
     }

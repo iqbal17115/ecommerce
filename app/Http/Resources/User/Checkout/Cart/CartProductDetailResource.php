@@ -18,6 +18,7 @@ class CartProductDetailResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name,
+            "brand_name" => $this?->Brand?->name,
             "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/' . $this->getFirstProductImage()) : '',
             "product_price" => $this->calculateProductPrice(),
         ];

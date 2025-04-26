@@ -24,7 +24,7 @@ const CartActiveItemList = (() => {
                     <img src="${item.product_info.image_url}" alt="Product Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
                     <div>
                         <div style="font-weight: 600; font-size: 16px;">${item.product_info.name}</div>
-                        <div style="color: #6c757d; font-size: 13px;">${item.brand_name || 'No Brand'}, ${variationInfo}</div>
+                        <div style="color: #6c757d; font-size: 13px;">${item.product_info.brand_name || 'No Brand'}, ${variationInfo}</div>
                         <div style="font-weight: bold; font-size: 16px; margin-top: 5px;">${item?.active_currency?.icon || ''} ${item.product_info.product_price * item.quantity}</div>
                     </div>
                 </div>
