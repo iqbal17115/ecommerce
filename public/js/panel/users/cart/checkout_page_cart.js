@@ -1,142 +1,96 @@
 function showCartTableData(data) {
-    let htmlContent = '';
     let total = 0;
-    let total_item_qty = 0;
     let total_shipping_charge = 0;
-    let cheked_all_check_box = true;
+    let coupon_discount = 0;
+    let checked_all_check_box = true;
 
     data.forEach((item) => {
-        total += item.product_info.product_price * item.quantity;
-        total_item_qty += item.quantity;
-        total_shipping_charge += parseFloat(item.shipping_charge);
+        // Update vendor name (if you show only one vendor name at a time)
+        $("#vendor_name").text(item.vendor_name);
 
-        htmlContent += `
-    <tr class="product-row product_row product cart_${item.id}" data-id="${item.id}" style="box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);">
-      <td style="padding: 8px; text-align: center;">
-        <figure class="product-image-container" style="position: relative; display: flex; justify-content: center; align-items: center;">
-          <a href="javascript:void(0);" class="product-image">
-            <img src="${item.product_info.image_url}" style="width: 80px; height: 80px; object-fit: contain; border-radius: 5px;" alt="product">
-          </a>
-          <a href="javascript:void(0);" class="btn-remove remove-from-cart icon-cancel" data-id="${item.id}" title="Remove Product" style="position: absolute; top: 5px; right: 5px;"></a>
-        </figure>
-      </td>
-      <td class="product-col" style="padding: 8px; display: flex; align-items: center;">
-        <h5 class="product-title" style="font-size: 16px; font-weight: bold; margin-left: 10px;">
-          <a style="text-decoration: none; color: #333;" href="javascript:void(0);">${item.product_info.name}</a>
-        </h5>
-      </td>
+        if (item.is_active == 1) {
+            total += item.product_info.product_price * item.quantity;
+            total_shipping_charge += parseFloat(item.shipping_charge);
+            coupon_discount += item.coupon_discount;
+        } else {
+            checked_all_check_box = false;
+        }
 
-      <!-- New wrapper for both qty and subtotal -->
-      <td colspan="2" style="padding: 8px; text-align: center; vertical-align: middle; display: flex; justify-content: space-between;">
-        <div class="qty-container" style="display: flex; align-items: center; flex-direction: row; margin-right: 10px;">
-          <button class="qty-btn-minus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button" style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer; height: 31px;">
-            <i class="fa fa-minus" style="font-size: 14px;"></i>
-          </button>
-          <input type="text" name="qty" value="${item.quantity}" class="input-qty" style="width: 40px; text-align: center; border: 1px solid #ccc; padding: 5px; margin: 0 5px;">
-          <button class="qty-btn-plus btn-light change_qty_cart_item" data-cart_item_id="${item.id}" type="button" style="background-color: #f1f1f1; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer; height: 31px;">
-            <i class="fa fa-plus" style="font-size: 14px;"></i>
-          </button>
+        // Generate variation info
+        let variationInfo = '';
+        if (item.variations && item.variations.length > 0) {
+            variationInfo = item.variations.map(v => `${v.attribute_name}: ${v.attribute_value}`).join(', ');
+        }
+
+        // Generate cart row HTML
+        const htmlContent = `
+        <div class="cart_list_${item.id} p-3 mb-1 bg-white rounded shadow-sm" style="border: 1px solid #f1f1f1;">
+            <div class="row align-items-center">
+                <div class="col-10 col-md-7 d-flex">
+                    <img src="${item.product_info.image_url}" alt="Product Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
+                    <div>
+                        <div style="font-weight: 600; font-size: 16px;">${item.product_info.name}</div>
+                        <div style="color: #6c757d; font-size: 13px;">${item.brand_name || 'No Brand'}, ${variationInfo}</div>
+                        <div style="font-weight: bold; font-size: 16px; margin-top: 5px;">${item?.active_currency?.icon || ''} ${item.product_info.product_price * item.quantity}</div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mt-2 mt-md-0">
+                    <div class="d-flex align-items-center justify-content-between justify-content-md-end">
+                        <div class="d-flex align-items-center">
+                            <button class="qty-btn-minus btn btn-light change_qty_cart_item" data-cart_item_id="${item.id}" style="width: 30px; height: 30px; font-size: 16px; padding: 0;">-</button>
+                            <input type="text" name="qty" value="${item.quantity}" class="input-qty text-center mx-2" style="width: 40px; height: 30px; border: 1px solid #ddd; border-radius: 5px;">
+                            <button class="qty-btn-plus btn btn-light change_qty_cart_item" data-cart_item_id="${item.id}" style="width: 30px; height: 30px; font-size: 16px; padding: 0;">+</button>
+                        </div>
+                        <button class="btn btn-link text-danger p-0 remove-cart-item ms-2" data-cart_item_id="${item.id}" title="Remove">
+                            <i class="fa fa-trash text-danger" style="font-size: 15px;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+        `;
 
-        <span class="subtotal-price subtotal_price_${item.id}" style="font-size: 16px;">
-          <span>${item?.active_currency.icon || ''}</span>
-          <span>${item.quantity * item.product_info.product_price}</span>
-        </span>
-      </td>
-    </tr>
-  `;
+        // Replace the specific cart item block
+        const $existingRow = $(`.cart_list_${item.id}`);
+        if ($existingRow.length) {
+            $existingRow.replaceWith(htmlContent);
+        } else {
+            $('#table_body').append(htmlContent); // or prepend depending on your design
+        }
+
+        // Update the quantity and price inside cart-product-info span
+        $(`.card_product_qty_${item.id}`).text(item.quantity);
+        $(`.product_price_${item.id}`).text(item.product_info.product_price);
     });
 
-    if (cheked_all_check_box == true) {
+    // Update the drawer totals
+    $('.cart_total_price').text(total.toFixed(2));
+    $('.shipping_charge_amount').text(total_shipping_charge.toFixed(2));
+    $('.coupon_discount').text(coupon_discount.toFixed(2));
+    $('.grand_total').text((total + total_shipping_charge - coupon_discount).toFixed(2));
+
+    // Update the cart count
+    updateCartCount();
+
+    // Handle "select all" checkbox
+    if (data.length > 0 && checked_all_check_box === true) {
         $("#select_all_products").prop("checked", true);
+    } else {
+        $("#select_all_products").prop("checked", false);
+        $('.proceed_to_checkout').addClass('disabled');
     }
-    
-    $('#table_body').html(htmlContent);
-    $('.cart_total_price').text(total);
-    $('.shipping_charge_amount').text(total_shipping_charge);
-    $('.grand_total').text(total + total_shipping_charge);
+}
 
-    // Update the Subtotal text with the correct number of items and the total
-    var itemText = total_item_qty <= 1 ? 'Item' : 'Items';
-    $('.cart-total-text').text('Subtotal(' + total_item_qty + ' ' + itemText + ')');
+function updateCartCount() {
+    let totalQty = 0;
 
-    // Responsive Design Adjustments
-    const style = document.createElement('style');
-    style.innerHTML = `
-        @media (max-width: 768px) {
-            .product-row td {
-                display: block;
-                width: 100%;
-                text-align: left;
-                padding: 10px;
-            }
+    // Loop through all cart items and sum up their quantities
+    $('.input-qty').each(function() {
+        totalQty += parseInt($(this).val()) || 0;
+    });
 
-            /* Flex row for qty and subtotal */
-            .product-row td[colspan="2"] {
-                display: flex;
-                justify-content: space-between;
-                flex-direction: row;
-                align-items: center;
-            }
-
-            .qty-container {
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
-            }
-
-            .qty-btn-minus, .qty-btn-plus {
-                padding: 8px;
-                margin: 0 5px;
-            }
-
-            .product-title {
-                font-size: 16px;
-            }
-
-            .product-image img {
-                width: 80px;
-                height: 80px;
-            }
-
-            .brand_text_design {
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .product-title {
-                font-size: 14px;
-            }
-
-            .product-image img {
-                width: 60px;
-                height: 60px;
-            }
-
-            .qty-container {
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
-                margin-bottom: 10px;
-            }
-
-            .qty-btn-minus, .qty-btn-plus {
-                padding: 8px;
-            }
-
-            .input-qty {
-                width: 40px;
-                text-align: center;
-                padding: 5px;
-            }
-
-            .subtotal-price {
-                font-size: 14px;
-            }
-        }
-    `;
-    document.head.appendChild(style);
+    // Update the cart-count badge
+    $('.cart-count').text(totalQty);
 }
 
 function updateCart(item) {
@@ -296,25 +250,46 @@ $(document).ready(function () {
         );
     });
 
-});
+    $(document).on('click', '.change_qty_cart_item', function () {
+        const cartItemId = $(this).data('cart_item_id');
+        const isPlus = $(this).hasClass('qty-btn-plus');
+        const $qtyInput = $(this).siblings('input.input-qty');
 
-var buttonPlus = $(".qty-btn-plus");
-var buttonMinus = $(".qty-btn-minus");
+        let currentQty = parseInt($qtyInput.val());
+        if (isNaN(currentQty) || currentQty < 1) currentQty = 1;
 
-$("body").on("click", ".qty-btn-plus", function () {
-    var $n = $(this)
-        .parent(".qty-container")
-        .find(".input-qty");
-    $n.val(Number($n.val()) + 1);
-});
+        const newQty = isPlus ? currentQty + 1 : Math.max(1, currentQty - 1);
+        $qtyInput.val(newQty); // Update the UI immediately
 
-$("body").on("click", ".qty-btn-minus", function () {
-    var $n = $(this)
-        .parent(".qty-container")
-        .find(".input-qty");
-    var amount = Number($n.val());
-    if (amount > 1) {
-        $n.val(amount - 1);
+        // Call API with your custom saveAction
+        updateCartQuantity(cartItemId, newQty);
+    });
+
+    function updateCartQuantity(cartItemId, quantity) {
+        const formData = {
+            quantity: quantity
+        };
+
+        saveAction(
+            "update",
+            `/cart-items`,
+            formData,
+            cartItemId,
+            (data) => {
+                // ✅ Successfully updated - Refresh the cart UI
+                toastrSuccessMessage("Quantity updated successfully");
+
+                // ✅ Refresh the cart UI using the returned data
+                if (data?.results) {
+                    showCartTableData(data.results);
+                }
+            },
+            (error) => {
+                toastrErrorMessage(error.responseJSON?.message || "Something went wrong.");
+            }
+        );
     }
 });
+
+
 
