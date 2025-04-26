@@ -1,4 +1,4 @@
-const CartList = (() => {
+const CartActiveItemList = (() => {
     function render(data) {
         const tableBody = document.getElementById('table_body');
         tableBody.innerHTML = '';
@@ -20,9 +20,6 @@ const CartList = (() => {
             tableBody.innerHTML += `
                <div class="cart_list_${item.id} p-3 mb-1 bg-white rounded shadow-sm" style="border: 1px solid #f1f1f1;">
             <div class="row align-items-center">
-                <div class="col-1 d-flex align-items-start pt-2">
-                    <input type="checkbox" class="item-checkbox" data-cart_item_id="${item.id}" ${item.is_active == 1 ? 'checked' : ''}>
-                </div>
                 <div class="col-10 col-md-7 d-flex">
                     <img src="${item.product_info.image_url}" alt="Product Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
                     <div>

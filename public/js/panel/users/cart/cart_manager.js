@@ -24,6 +24,15 @@ const CartManager = (() => {
             CartList.render(cartData);
         }
 
+        if (window.hasCartActiveItemList && typeof CartActiveItemList !== 'undefined') {
+            getDetails('/api/checkout/cart/lists', (data) => {
+                cartData = data.results.data;
+                CartActiveItemList.render(cartData);
+            }, (error) => {
+                console.error("Failed to load cart data:", error);
+            });
+        }
+
         updateCartCount();
     }
 

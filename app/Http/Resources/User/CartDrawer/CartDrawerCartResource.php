@@ -19,6 +19,7 @@ class CartDrawerCartResource extends JsonResource
             "product_info" => CartDrawerCartProductResource::make($this->product),
             'quantity' => $this->quantity,
             'price' => $this->price,
+            'is_active' => $this->is_active,
             "active_currency" => '৳',
         ];
     }

@@ -196,22 +196,23 @@
 <!-- End Shipping Address Modal -->
 @endsection
 @push('scripts')
-<script src="{{ asset('js/panel/users/checkout/address.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('js/panel/users/cart/checkout_page_cart.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}"></script>
+<script src="{{ asset('js/panel/users/checkout/address.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_active_item_list.js') }}?v={{ time() }}"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        CartDrawer.loadCartCount(); // ✅ Now it will work
-
-        const cartToggle = document.getElementById('cartToggle');
-
-        if (cartToggle) {
-            cartToggle.addEventListener('click', () => {
-                CartDrawer.load(); // Load on demand
-            });
-        }
-    });
+        // Set the hasCartList variable
+        window.hasCartList = false;
+        window.hasCartActiveItemList = true;
+        // Add an event listener to the DOMContentLoaded event
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof CartManager !== 'undefined') {
+                CartManager.loadCartData();
+            }
+        });
 </script>
 
 <script>
