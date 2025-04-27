@@ -631,5 +631,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::controller(APIUserCartController::class)->group(function () {
         Route::get('checkout/cart/lists', 'getCheckoutCart')->name('checkout_cart_lists');
+        Route::get('cart/lists', 'getCart');
     });
 });

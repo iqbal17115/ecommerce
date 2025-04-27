@@ -7,8 +7,8 @@ const CartManager = (() => {
             return;
         }
 
-        getDetails('/cart-drawer/list', (data) => {
-            cartData = data.results;
+        getDetails('/cart/lists', (data) => {
+            cartData = data.results.data;
             renderAll();
         }, (error) => {
             console.error("Failed to load cart data:", error);

@@ -8,9 +8,11 @@ const CartList = (() => {
         let coupon_discount = 0;
 
         data.forEach(item => {
+            if(item.is_active == 1) {
             total += item.product_info.product_price * item.quantity;
             total_shipping_charge += parseFloat(item.shipping_charge);
             coupon_discount += item.coupon_discount;
+            }
 
             let variationInfo = '';
             if (item.variations && item.variations.length > 0) {
@@ -99,6 +101,8 @@ const CartList = (() => {
             cartItemId,
             (data) => {
                 toastrSuccessMessage("Status updated successfully");
+
+                CartManager.loadCartData(true);
             },
             (error) => {
                 toastrErrorMessage(error.responseJSON?.message || "Something went wrong.");
