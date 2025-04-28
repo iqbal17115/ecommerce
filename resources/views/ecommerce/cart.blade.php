@@ -5,29 +5,29 @@
     <div class="container">
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="row">
-                <div class="col-lg-8">
-                    <!-- Responsive Table Wrapper -->
-                    <div class="p-3" style="background-color: #f8f9fa;">
+            <div class="col-lg-8">
+                <!-- Responsive Table Wrapper -->
+                <div class="p-3" style="background-color: #f8f9fa;">
                     @php
-                            $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
-                            $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
-                            @endphp
-                        <div class="d-flex justify-content-between align-items-center pb-1 border-bottom">
-                            <div><input type="checkbox" id="select_all_products"> Select All</div>
-                            <div class="text-end">
-                                <div style="color: #212529;">
-                                    Standard, Estimate Delivery
-                                    <br>
-                                    <span style="color: #ffc107; font-weight: bold;">{{ $minDate }} – {{ $maxDate }}</span>
-                                </div>
+                    $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
+                    $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
+                    @endphp
+                    <div class="d-flex justify-content-between align-items-center pb-1 border-bottom">
+                        <div><input type="checkbox" id="select_all_products"> Select All</div>
+                        <div class="text-end">
+                            <div style="color: #212529;">
+                                Standard, Estimate Delivery
+                                <br>
+                                <span style="color: #ffc107; font-weight: bold;">{{ $minDate }} – {{ $maxDate }}</span>
                             </div>
                         </div>
-
-                        <div id="table_body" class="mt-1">
-                            <!-- Cart items injected here -->
-                        </div>
                     </div>
-                </div><!-- End .col-lg-8 -->
+
+                    <div id="table_body" class="mt-1">
+                        <!-- Cart items injected here -->
+                    </div>
+                </div>
+            </div><!-- End .col-lg-8 -->
             <div class="col-lg-4">
                 <div class="cart-summary card_design shadow p-2">
                     <div class="summary-section-heading pl-2">Order Summary</div>
@@ -106,14 +106,21 @@
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
 <script>
-        // Set the hasCartList variable
-        window.hasCartList = true;
-        // Add an event listener to the DOMContentLoaded event
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof CartManager !== 'undefined') {
-                CartManager.loadCartData();
-            }
-        });
+    // Set the hasCartList variable
+    window.hasCartList = true;
+    // Add an event listener to the DOMContentLoaded event
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof CartManager !== 'undefined') {
+            CartManager.loadCartData();
+        }
+    });
+
+    // This handles BACK button cache restore
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            CartManager.loadCartData();
+        }
+    });
 </script>
 <script>
     function lazyLoad() {

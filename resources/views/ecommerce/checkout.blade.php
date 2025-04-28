@@ -131,8 +131,8 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 @php
-                                                    $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
-                                                    $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
+                                                $minDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.min_days'))->format('d M Y');
+                                                $maxDate = \Carbon\Carbon::now()->addDays(config('contents.delivery.max_days'))->format('d M Y');
                                                 @endphp
                                                 <p class="mb-0 text-dark">Standard Delivery Date: {{ $minDate }} – {{ $maxDate }}</p>
                                                 <p class="mb-0 text-dark">Items shipped from
@@ -204,15 +204,22 @@
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_active_item_list.js') }}?v={{ time() }}"></script>
 <script>
-        // Set the hasCartList variable
-        window.hasCartList = false;
-        window.hasCartActiveItemList = true;
-        // Add an event listener to the DOMContentLoaded event
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof CartManager !== 'undefined') {
-                CartManager.loadCartData();
-            }
-        });
+    // Set the hasCartList variable
+    window.hasCartList = false;
+    window.hasCartActiveItemList = true;
+    // Add an event listener to the DOMContentLoaded event
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof CartManager !== 'undefined') {
+            CartManager.loadCartData();
+        }
+    });
+
+    // This handles BACK button cache restore
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            CartManager.loadCartData();
+        }
+    });
 </script>
 
 <script>

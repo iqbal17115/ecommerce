@@ -362,14 +362,21 @@
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
 <script>
-        // Set the hasCartList variable
-        window.hasCartList = false;
-        // Add an event listener to the DOMContentLoaded event
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof CartManager !== 'undefined') {
-                CartManager.loadCartData();
-            }
-        });
+    // Set the hasCartList variable
+    window.hasCartList = false;
+    // Add an event listener to the DOMContentLoaded event
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof CartManager !== 'undefined') {
+            CartManager.loadCartData();
+        }
+    });
+
+    // This handles BACK button cache restore
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            CartManager.loadCartData();
+        }
+    });
 </script>
 
 
