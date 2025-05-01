@@ -83,7 +83,6 @@ class HomeController extends Controller
     }
     public function index()
     {
-        dd(Auth::user()->id);
         $user_id = auth()?->user()->id ?? null;
         $sliders = HomeSliderResource::collection(Slider::whereIsActive(1)->get());
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
