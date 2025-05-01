@@ -78,8 +78,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'web'], function () {
     // Review
     Route::controller(ReviewController::class)->group(function () {
-        Route::get('/reviews', 'getReview')->name('reviews');
-        Route::post('/reviews', 'store')->name('reviews.store');
+        Route::post('reviews/store', 'store')->name('reviews.store');
+        Route::get('reviews/{product}', 'index')->name('reviews.index');
     });
 
     Route::get('cart', [CartController::class, 'index'])->name('cart');

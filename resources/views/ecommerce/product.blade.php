@@ -207,6 +207,8 @@
         /* Optional: change opacity to indicate active state */
     }
 </style>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/review.css') }}?v={{ time() }}">
+
 <main class="main">
     <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
     @if (isset($all_active_advertisements['Details']['1']['ads']))
@@ -610,7 +612,7 @@
                             {{ $product_detail->name }}
                         </h3>
 
-                        <div class="comment-list" id="comment_list"></div>
+                        <div class="review-list" id="review_list"></div>
 
 
                         <div class="divider"></div>
@@ -619,9 +621,9 @@
                             <h3 class="review-title">Add a review</h3>
 
                             <form class="comment-form m-0" id="review_form">
-                                <input name="product_id" id="product_id" value="{{ $product_detail->id }}" hidden />
+                                <input type="hidden" name="product_id" id="product_id" value="{{ $product_detail->id }}">
                                 <div class="rating-form">
-                                    <label for="rating">Your rating <span class="required">*</span></label>
+                                    <label>Your rating <span class="required">*</span></label>
                                     <span class="rating-stars">
                                         <a class="star-1" href="#">1</a>
                                         <a class="star-2" href="#">2</a>
@@ -629,9 +631,7 @@
                                         <a class="star-4" href="#">4</a>
                                         <a class="star-5" href="#">5</a>
                                     </span>
-
-                                    <select name="rating" id="rating" required="" style="display: none;"
-                                        required>
+                                    <select name="rating" id="rating" style="display: none;" required>
                                         <option value="">Rate…</option>
                                         <option value="5">Perfect</option>
                                         <option value="4">Good</option>
@@ -640,15 +640,15 @@
                                         <option value="1">Very poor</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label>Your review <span class="required">*</span></label>
-                                    <textarea cols="5" rows="6" name="comment" id="comment" class="form-control form-control-sm"
-                                        required></textarea>
+                                    <textarea name="comment" id="comment" class="form-control form-control-sm" required></textarea>
                                 </div>
-                                <!-- End .form-group -->
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
+
+                            <div class="review-list mt-4" id="review_list"></div>
+
                         </div>
                         <!-- End .add-product-review -->
                     </div>
@@ -796,6 +796,7 @@
 <script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_manager.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/review/reviews.js') }}?v={{ time() }}"></script>
 <script>
     // Set the hasCartList variable
     window.hasCartList = true;

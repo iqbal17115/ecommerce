@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Enums\ReviewStatusEnum;
+use App\Helpers\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Review\StoreUserReviewRequest;
+use App\Http\Resources\User\Review\UserReviewListResource;
+use App\Models\Backend\Product\Product;
 use App\Models\FrontEnd\Review;
 use App\Services\ReviewService;
 use Illuminate\Http\Request;
@@ -11,69 +15,31 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 
 class ReviewController extends Controller
 {
-    public function statusChange(Request $request)
+    // Get reviews for a specific product
+    public function index(Product $product): JsonResponse
     {
-        // Get the review ID and status from the request
-        $reviewId = $request->input('review_id');
-        $status = $request->input('status');
-        // Change the review status using the ReviewService
-        (new ReviewService())->changeStatus($reviewId, $status);
+        $reviews = $product->reviews()->latest()->get();
 
-        return response()->json(['message' => 'Review status changed successfully']);
+        return Message::success(null, UserReviewListResource::collection($reviews));
     }
-    /**
-     * Get all reviews
-     *
-     * @return View|\Illuminate\Foundation\Application|Factory|Application
-     */
-    public function reviews(): View|\Illuminate\Foundation\Application|Factory|Application
+
+    // Store a review
+    public function store(StoreUserReviewRequest $request): JsonResponse
     {
-        // Get products of type "product"
-        $reviews = (new ReviewService())->getReviewByStatus([ReviewStatusEnum::PENDING->value], 20, true);
-        // Prepare the content array with the required data
-        $content = [
-            "pending_lists" => $reviews['pending'] ?? []
-        ];
-        // Return the view with the content array
-        return view('backend.review-feedback.reviews', compact('content'));
-    }
-    /**
-     * Get review by status
-     *
-     * @return View|\Illuminate\Foundation\Application|Factory|Application
-     */
-    public function getReview(): View|\Illuminate\Foundation\Application|Factory|Application
-    {
-        // Get products of type "product"
-        $reviews = (new ReviewService())->getReviewByStatus([ReviewStatusEnum::PENDING->value]);
-        // Prepare the content array with the required data
-        $content = [
-            "product_lists" => $reviews['deny'] ?? []
-        ];
-        // Return the view with the content array
-        return view('frontend.product', compact('content'));
-    }
-    public function store(Request $request)
-    {
-        // Validate the form data
-        $validatedData = $request->validate([
-            'product_id' => 'required',
-            'rating' => 'required'
+        $data = $request->validated();
+
+        $review = Review::create([
+            'user_id'    => auth()->id(),
+            'product_id' => $data['product_id'],
+            'rating'     => $data['rating'],
+            'comment'    => $data['comment'],
+            'status'     => 'pending',
         ]);
-        // Create a new review
-        $review = Review::whereUserId(Auth::user()->id)->whereProductId($validatedData['product_id'])->firstOrNew();
-        $review->product_id = $validatedData['product_id'];
-        $review->user_id = Auth::user()->id;
-        $review->rating = $request->rating;
-        $review->comment = $request->comment;
-        $review->status = 'pending';
-        // Save the review
-        $review->save();
 
-        // Return a JSON response
-        return response()->json(['message' => 'Review submitted successfully']);
+        return Message::success(null, UserReviewListResource::make($review));
     }
 }

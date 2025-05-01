@@ -1,0 +1,4 @@
+.rating-stars a.selected,
+.rating-stars .star.filled {
+    color: #f5b50a;
+}
