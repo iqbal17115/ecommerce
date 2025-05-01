@@ -45,6 +45,11 @@ const CartManager = (() => {
             (data) => {
                 toastrSuccessMessage(data.message);
                 loadCartData(true);
+
+                // Redirect to checkout if Buy Now
+                if (isBuyNow && data.redirect) {
+                    window.location.href = data.redirect;
+                }
             },
             (error) => {
                 console.error("Add to cart failed", error);
