@@ -614,9 +614,6 @@
 
                         <div class="review-list" id="review_list"></div>
 
-
-                        <div class="divider"></div>
-
                         <div class="add-product-review">
                             <h3 class="review-title">Add a review</h3>
 
