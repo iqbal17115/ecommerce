@@ -17,14 +17,4 @@ class AlterSessionsTablePayloadLongtext extends Migration
             $table->longText('payload')->change();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
-    }
 }
