@@ -28,7 +28,7 @@ class CartItemListResource extends JsonResource
             "coupon_discount" => (float)$this?->cart_item_coupon?->value ?? 0,
             "is_active" => $this->is_active,
             "variations" => $this?->productVariation?->productVariationAttributes ?CartProductVariationResource::collection($this?->productVariation?->productVariationAttributes) : [],
-            "active_currency" => new CurrencyResource($activeCurrency),
+            "active_currency" => CurrencyResource::make($activeCurrency),
             "vendor_name" => $this->product?->user?->name,
         ];
     }
