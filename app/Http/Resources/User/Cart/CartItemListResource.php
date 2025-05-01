@@ -22,7 +22,7 @@ class CartItemListResource extends JsonResource
         
         return [
             "id" => $this->id,
-            "product_info" => new CartProductDetailResource($this->product),
+            "product_info" => CartProductDetailResource::make($this?->product),
             "quantity" => (int)$this->quantity,
             "shipping_charge" => $shippingCharge ?? 0,
             "coupon_discount" => (float)$this?->cart_item_coupon?->value ?? 0,
