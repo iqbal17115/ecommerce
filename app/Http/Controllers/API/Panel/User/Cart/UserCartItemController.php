@@ -63,6 +63,6 @@ class UserCartItemController extends Controller
 
         $this->userCartService->removeItem($cartItem);
 
-        return Message::success(__('messages.success_delete'));
+        return Message::success(__('messages.success_delete'), ['product_id' => $cartItem->product_id]);
     }
 }

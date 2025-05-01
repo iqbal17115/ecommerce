@@ -79,6 +79,14 @@ const CartDrawer = (() => {
                 toastrSuccessMessage(data.message);
                 load(true); // Reload cart UI
                 loadCartCount(); // Update global cart count
+
+                // Remove the 'added-to-cart' class from the corresponding button
+                if (data.results.product_id) {
+                    const button = document.querySelector(`.add_cart_item[data-product_id='${data.results.product_id}']`);
+                    if (button) {
+                        button.classList.remove("added-to-cart");
+                    }
+                }
             },
             (error) => {
                 toastrErrorMessage(error.responseJSON.message);
