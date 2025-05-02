@@ -16,7 +16,8 @@ class HomePageProductFeatureResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'products' => HomePageProductFeatureWiseProductResource::collection($this->Product)->resolve()
+            'products' => HomePageProductFeatureWiseProductResource::collection($this->Product)->resolve(),
+            'has_variation' => $this->productVariations ? true : false
         ];
     }
 }

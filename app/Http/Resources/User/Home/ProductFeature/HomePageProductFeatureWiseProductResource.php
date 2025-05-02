@@ -27,7 +27,8 @@ class HomePageProductFeatureWiseProductResource extends JsonResource
             'offer_percentage' => $priceDetails['offer_percentage'],
             'currency' => $priceDetails['currency'],
             'rating' => $this->reviews()->sum('rating') ?? 0,
-            'image_path' => $this->getImagePath()
+            'image_path' => $this->getImagePath(),
+            'has_variation' => count($this->productVariations) ? true : false
         ];
     }
 

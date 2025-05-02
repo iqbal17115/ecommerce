@@ -36,11 +36,11 @@ const CartManager = (() => {
         updateCartCount();
     }
 
-    function addItem(productId, quantity = 1, isBuyNow = 0) {
+    function addItem(productId, quantity = 1, isBuyNow = 0, productVariationId = null) {
         saveAction(
             "store",
             "/cart-items/store",
-            { product_id: productId, quantity, is_buy_now: isBuyNow },
+            { product_id: productId, quantity, is_buy_now: isBuyNow , product_variation_id: productVariationId },
             "",
             (data) => {
                 toastrSuccessMessage(data.message);

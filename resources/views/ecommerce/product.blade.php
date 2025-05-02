@@ -315,7 +315,7 @@
                             <button type="button" id="clear-variations" class="btn btn-sm btn-outline-secondary">Clear</button>
                         </div>
 
-                        <input type="hidden" name="selected_variation_id" id="selected_variation_id">
+                        <input type="hidden" name="selected_variation_id" id="selected_variation_id" required>
                     </div>
                     @endif
                     {{-- End Product Varations --}}

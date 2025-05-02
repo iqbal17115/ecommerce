@@ -15,10 +15,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function findMatchingVariation() {
         for (const [variationId, attributes] of Object.entries(variationMap)) {
-            const isMatch = Object.entries(attributes).every(([key, val]) => selectedAttributes[key] === val);
+            const isMatch = Object.entries(selectedAttributes).every(
+                ([key, val]) => attributes[key] === val
+            );
             if (isMatch) return variationId;
         }
         return null;
+    }
+
+    function filterOptions() {
+        const allButtons = document.querySelectorAll('.variation-btn');
+
+        allButtons.forEach(button => {
+            const attr = button.dataset.attribute;
+            const val = button.dataset.value;
+            let isValid = false;
+
+            for (const attributes of Object.values(variationMap)) {
+                let match = true;
+                for (const [selectedAttr, selectedVal] of Object.entries(selectedAttributes)) {
+                    if (attr === selectedAttr) continue; // skip current attribute being checked
+                    if (attributes[selectedAttr] !== selectedVal) {
+                        match = false;
+                        break;
+                    }
+                }
+
+                if (match && attributes[attr] === val) {
+                    isValid = true;
+                    break;
+                }
+            }
+
+            button.disabled = !isValid;
+            button.classList.toggle('disabled', !isValid);
+        });
     }
 
     function handleVariationClick(e) {
@@ -28,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         selectedAttributes[attr] = val;
         updateActiveButton(attr, val);
+        filterOptions();
 
         const matchedId = findMatchingVariation();
         if (hiddenInput) hiddenInput.value = matchedId || '';
@@ -35,7 +67,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function clearSelection() {
         Object.keys(selectedAttributes).forEach(attr => delete selectedAttributes[attr]);
-        document.querySelectorAll('.variation-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.variation-btn').forEach(btn => {
+            btn.classList.remove('active');
+            btn.disabled = false;
+            btn.classList.remove('disabled');
+        });
         if (hiddenInput) hiddenInput.value = '';
     }
 

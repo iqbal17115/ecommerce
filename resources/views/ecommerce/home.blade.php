@@ -273,6 +273,8 @@
                                 @if ($product['stock_qty'] > 0 )
                                 <a href="javascript:void(0);" title="Add To Cart"
                                     data-product_id="{{ $product['id'] }}"
+                                    data-has_variation="{{ $product['has_variation'] ? '1' : '0' }}"
+                                    data-details_url="{{ route('products.details', ['name' => rawurlencode($product['name']), 'seller_sku' => $product['seller_sku']]) }}"
                                     data-image="{{ $product['image_path'] }}"
                                     class="btn-icon add_cart_item product-type-simple"><i
                                         class="icon-shopping-cart"></i></a>

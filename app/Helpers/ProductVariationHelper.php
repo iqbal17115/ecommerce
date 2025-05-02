@@ -10,23 +10,20 @@ class ProductVariationHelper
     {
         $variations = ProductVariation::with([
             'productVariationAttributes.attributeValue.attribute'
-        ])
-            ->where('product_id', $productId)
-            ->get();
+        ])->where('product_id', $productId)->get();
 
         $grouped = [];
 
         foreach ($variations as $variation) {
-            $attributeMap = $variation->productVariationAttributes
-                ->filter(fn($va) => $va->attributeValue && $va->attributeValue->attribute)
-                ->mapWithKeys(function ($va) {
-                    return [
-                        $va->attributeValue->attribute->name => $va->attributeValue->value
-                    ];
-                })
-                ->toArray();
-
-            $grouped[$variation->id] = $attributeMap;
+            $attributes = [];
+            foreach ($variation->productVariationAttributes as $va) {
+                if ($va->attributeValue && $va->attributeValue->attribute) {
+                    $attrName = $va->attributeValue->attribute->name;
+                    $attrValue = $va->attributeValue->value;
+                    $attributes[$attrName] = $attrValue;
+                }
+            }
+            $grouped[$variation->id] = $attributes;
         }
 
         return $grouped;
