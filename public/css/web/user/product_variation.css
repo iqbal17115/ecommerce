@@ -1,0 +1,26 @@
+.variation-selector .btn-group-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.variation-selector .variation-btn {
+    border: 1px solid #dee2e6;
+    padding: 0.4rem 1rem;
+    font-size: 0.875rem;
+    background-color: #fff;
+    color: #212529;
+    transition: all 0.2s ease;
+    border-radius: 0.25rem;
+}
+
+.variation-selector .variation-btn.active {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+}
+
+.variation-selector .variation-btn:hover {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}

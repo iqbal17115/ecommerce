@@ -101,113 +101,9 @@
         text-transform: capitalize;
         cursor: pointer;
     }
-
-    .select-variation {
-        cursor: pointer;
-        display: inline-block;
-        padding: 5px 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        transition: background-color 0.3s, border-color 0.3s;
-    }
-
-    .select-variation:hover {
-        background-color: #007bff;
-        border-color: #adb5bd;
-    }
-
-    .select-variation.active {
-        background-color: #007bff;
-        color: #fff;
-        border-color: #007bff;
-    }
-
-    .attribute-value {
-        display: inline-block;
-        margin-right: 5px;
-        font-weight: bold;
-    }
-
-    #variation-info {
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
-
-    ul.config-size-list li {
-        display: inline-block;
-        margin-right: 10px;
-    }
-
-    ul.config-size-list img {
-        width: 34px;
-        height: 34px;
-        object-fit: cover;
-        cursor: pointer;
-        border: 2px solid transparent;
-        /* Default border */
-    }
-
-    ul.config-size-list img:hover {
-        border-color: #ddd;
-        /* Border color on hover */
-    }
-
-    ul.config-size-list img.active-thumbnail {
-        border-color: #f00;
-        /* Red border for active image */
-    }
-
-    .product-single-image {
-        width: 468px;
-        height: 468px;
-        object-fit: cover;
-    }
-
-    .product-single-carousel .product-item {
-        text-align: center;
-    }
-
-    .size-link.disabled {
-        pointer-events: none;
-        opacity: 0.5;
-    }
-
-    .config-color-list {
-        list-style: none;
-        /* Remove bullet points */
-        padding: 0;
-        margin: 0;
-    }
-
-    .config-color-list li {
-        display: inline-block;
-        /* Display list items inline */
-        margin-right: 10px;
-        /* Space between images */
-    }
-
-    .thumbnail-image {
-        cursor: pointer;
-        /* Add pointer cursor for better UX */
-    }
-
-    .thumbnail-image {
-        cursor: pointer;
-        /* Add pointer cursor for better UX */
-        transition: border 0.3s ease;
-        /* Smooth transition for border */
-    }
-
-    .thumbnail-image.active {
-        border: 2px solid blue;
-        /* Highlight the active image with a blue border */
-        opacity: 0.8;
-        /* Optional: change opacity to indicate active state */
-    }
 </style>
 <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/review.css') }}?v={{ time() }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/product_variation.css') }}?v={{ time() }}">
 
 <main class="main">
     <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
@@ -396,6 +292,33 @@
                             @endif
                         </p>
                     </div>
+                    {{-- Start Product Varations --}}
+                    @if(count($attributeOptions) > 0)
+                    <div id="variation-selectors" class="variation-selector">
+                        @foreach($attributeOptions as $attribute => $values)
+                        <div class="attribute-group mb-2">
+                            <div class="attribute-label fw-semibold text-uppercase text-muted mb-1">{{ $attribute }}</div>
+                            <div class="btn-group-wrap" data-attribute="{{ $attribute }}">
+                                @foreach($values as $value)
+                                <button type="button"
+                                    class="btn variation-btn"
+                                    data-attribute="{{ $attribute }}"
+                                    data-value="{{ $value }}">
+                                    {{ $value }}
+                                </button>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endforeach
+
+                        <div class="mt-1">
+                            <button type="button" id="clear-variations" class="btn btn-sm btn-outline-secondary">Clear</button>
+                        </div>
+
+                        <input type="hidden" name="selected_variation_id" id="selected_variation_id">
+                    </div>
+                    @endif
+                    {{-- End Product Varations --}}
                     <!-- End .product-desc -->
                     <div class="product-desc">
                         <p class="text-dark">
@@ -403,87 +326,6 @@
                             <span class="">{{ $product_detail?->ProductDetail?->Condition?->title }}</span>
                         </p>
                     </div>
-
-                    {{-- Start Product Varations --}}
-                    <div class="product-filters-container">
-                        <div class="selected-attributes pb-2" style="font-size: 16px; color: #333;">
-                            <span class="attribute-item"></span> <!-- For color -->
-                            <span class="attribute-item"></span> <!-- For size -->
-                        </div>
-                        <!-- Color Filter -->
-                        <div class="product-single-filter">
-                            <ul class="config-color-list d-flex flex-wrap gap-2 p-0" style="list-style: none;">
-                                @foreach ($product_detail->productColors as $index => $productColor)
-                                <li class="color-item border rounded-circle shadow-sm"
-                                    style="width: 55px; height: 55px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;">
-                                    <img src="{{ asset('storage/' . $productColor?->media?->first()?->file_path) }}"
-                                        class="thumbnail-image w-100 h-100"
-                                        data-color-id="{{ $productColor->id }}"
-                                        data-product-color-variation-id="{{ $productColor?->productVariations?->first()?->id }}"
-                                        data-product_sale_price="{{ number_format($product_detail->sale_price, 2) }}"
-                                        data-price="{{ $productColor?->productVariations?->first()?->price }}"
-                                        data-color-value="{{ $productColor?->attributeValue?->value }}"
-                                        onclick="handleColorClick('{{ $productColor->id }}', this)"
-                                        style="object-fit: cover; border-radius: 50%;">
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <!-- Size Filter -->
-                        <ul class="config-size-list" id="sizeList">
-                            @php
-                            $uniqueSizes = collect(); // Collect to store unique sizes
-                            @endphp
-
-                            @foreach ($product_detail->productVariations as $variation)
-                            @php
-                            // Find the size attribute from the productVariationAttributes
-                            $sizeAttribute = $variation->productVariationAttributes
-                            ->where('attributeValue.attribute.name', 'Size')
-                            ->first();
-                            $sizeId = $sizeAttribute?->attribute_value_id ?? null;
-                            $sizeName = $sizeAttribute?->attributeValue->value ?? '';
-                            $productVariationId = $variation?->id ?? '';
-                            $productVariationPrice = $variation?->price;
-
-                            // Avoid showing the same size multiple times
-                            if ($sizeId && !$uniqueSizes->has($sizeId)) {
-                            $uniqueSizes->put($sizeId, [
-                            'name' => $sizeName,
-                            'product_variation_id' => $productVariationId,
-                            'price' => $productVariationPrice,
-                            ]);
-                            }
-                            @endphp
-                            @endforeach
-
-                            <!-- Display unique sizes -->
-                            @foreach ($uniqueSizes as $sizeId => $sizeData)
-                            <li id="size-{{ $sizeId }}"
-                                class="size-item m-2 border rounded-pill shadow-sm"
-                                style="list-style: none; transition: transform 0.3s, box-shadow 0.3s;">
-                                <a href="javascript:;"
-                                    class="d-flex align-items-center justify-content-center size-link disabled p-2 text-decoration-none fw-bold text-dark"
-                                    data-size-id="{{ $sizeId }}"
-                                    data-size-name="{{ $sizeData['name'] }}"
-                                    data-product-variation-id="{{ $sizeData['product_variation_id'] }}"
-                                    data-product_sale_price="{{ number_format($product_detail->sale_price, 2) }}"
-                                    data-price="{{ $sizeData['price'] }}"
-                                    onclick="handleSizeClick('{{ $sizeId }}')"
-                                    style="border-radius: 50px; background-color: #f8f9fa;">
-                                    {{ $sizeData['name'] }}
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
-
-                        <div class="product-single-filter">
-                            <a class="font1 text-uppercase clear-btn" href="javascript:;"
-                                onclick="clearSelections()">Clear</a>
-                        </div>
-                    </div>
-                    {{-- End Product Varations --}}
 
                     <!-- End .product-desc -->
                     <div class="product-desc">
@@ -790,10 +632,15 @@
 
 @endsection
 @push('scripts')
+<script>
+    window.variationMap = @json($variationMap);
+</script>
+
 <script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_manager.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/review/reviews.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/product_details/product_variation.js') }}?v={{ time() }}"></script>
 <script>
     // Set the hasCartList variable
     window.hasCartList = true;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Helpers\ProductVariationHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\Product;
 use Illuminate\Http\Request;
@@ -12,25 +13,26 @@ class ProductDetailController extends Controller
     {
         $user_id = auth()?->user()->id ?? null;
 
-        // Eager load relations: productColors, productVariations and productVariationAttributes
         $product_detail = Product::with([
             'productColors',
-            'productVariations.productVariationAttributes.attributeValue'
+            'productVariations.productVariationAttributes.attributeValue.attribute'
         ])->whereName($name)
-            ->when(!is_null($sellerSku), function ($query) use ($sellerSku) {
-                return $query->where('seller_sku', $sellerSku);
-            })
-            ->first();
+            ->when(!is_null($sellerSku), fn($q) => $q->where('seller_sku', $sellerSku))
+            ->firstOrFail();
 
-        // Group variations by color and size
-        $colorToSizesMap = $product_detail?->productColors->mapWithKeys(function ($color) {
-            return [
-                $color->id => $color?->productVariations->flatMap(function ($variation) {
-                    return $variation?->productVariationAttributes->where('attributeValue.attribute.name', 'Size')->pluck('attribute_value_id');
-                }),
-            ];
-        });
+        $variationMap = ProductVariationHelper::getProductVariationsGroupedByAttributes($product_detail->id);
 
-        return view('ecommerce.product', compact('product_detail', 'user_id', 'colorToSizesMap'));
+        $attributeOptions = [];
+
+        foreach ($variationMap as $variationId => $attributes) {
+            foreach ($attributes as $attributeName => $value) {
+                $attributeOptions[$attributeName][$value] = true; // use assoc to ensure uniqueness
+            }
+        }
+
+        foreach ($attributeOptions as $attr => &$values) {
+            $values = array_keys($values); // convert back to indexed array
+        }
+        return view('ecommerce.product', compact('product_detail', 'user_id', 'variationMap', 'attributeOptions'));
     }
 }
