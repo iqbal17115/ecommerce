@@ -1,57 +1,50 @@
 @props(['url', 'title'])
 
 @php
-    $encodedUrl = urlencode($url);
-    $encodedTitle = urlencode($title);
+$encodedUrl = urlencode($url);
+$encodedTitle = urlencode($title);
 @endphp
 
 <div class="social-icons d-flex gap-2">
-    {{-- Facebook --}}
-    <a class="social-icon fab fa-facebook" 
-       href="https://www.facebook.com/sharer/sharer.php?u={{ $encodedUrl }}" 
-       target="_blank" 
-       title="Facebook">
-    </a>
+   {{-- Facebook --}}
+   <a class="social-icon fab fa-facebook"
+      href="https://www.facebook.com/sharer/sharer.php?u={{ $encodedUrl }}"
+      target="_blank"
+      title="Facebook">
+   </a>
 
-    {{-- Twitter --}}
-    <a class="social-icon fab fa-twitter" 
-       href="https://twitter.com/intent/tweet?url={{ $encodedUrl }}&text={{ $encodedTitle }}" 
-       target="_blank" 
-       title="Twitter">
-    </a>
+   {{-- WhatsApp --}}
+   <a class="social-icon fab fa-whatsapp"
+      href="https://api.whatsapp.com/send?text={{ $encodedTitle }}%20{{ $encodedUrl }}"
+      target="_blank"
+      title="WhatsApp">
+   </a>
 
-    {{-- LinkedIn --}}
-    <a class="social-icon fab fa-linkedin-in" 
-       href="https://www.linkedin.com/shareArticle?mini=true&url={{ $encodedUrl }}&title={{ $encodedTitle }}" 
-       target="_blank" 
-       title="LinkedIn">
-    </a>
+   {{-- Telegram --}}
+   <a class="social-icon fab fa-telegram-plane"
+      href="https://t.me/share/url?url={{ $encodedUrl }}&text={{ $encodedTitle }}"
+      target="_blank"
+      title="Telegram">
+   </a>
 
-    {{-- WhatsApp --}}
-    <a class="social-icon fab fa-whatsapp" 
-       href="https://api.whatsapp.com/send?text={{ $encodedTitle }}%20{{ $encodedUrl }}" 
-       target="_blank" 
-       title="WhatsApp">
-    </a>
+   {{-- Messenger (fallback web dialog) --}}
+   <!-- HTML for the Share on Messenger Button -->
+   <a href="javascript:void(0);" onclick="shareOnMessenger('{{ $url }}', '{{ $title }}')" class="social-icon fab fa-facebook-messenger">
+      Share on Messenger
+   </a>
 
-    {{-- Telegram --}}
-    <a class="social-icon fab fa-telegram-plane" 
-       href="https://t.me/share/url?url={{ $encodedUrl }}&text={{ $encodedTitle }}" 
-       target="_blank" 
-       title="Telegram">
-    </a>
 
-    {{-- Facebook Messenger --}}
-    <a class="social-icon fab fa-facebook-messenger" 
-       href="https://www.facebook.com/dialog/send?link={{ $encodedUrl }}&app_id=9639422116148689&redirect_uri={{ $encodedUrl }}" 
-       target="_blank" 
-       title="Messenger">
-    </a>
+   {{-- Copy Link --}}
+   <a class="social-icon fas fa-copy"
+      href="#"
+      onclick="copyToClipboard('{{ $url }}'); return false;"
+      title="Copy Link">
+   </a>
 
-    {{-- Copy to Clipboard --}}
-    <a class="social-icon fas fa-copy" 
-       href="#" 
-       onclick="copyToClipboard('{{ $url }}'); return false;" 
-       title="Copy Link">
-    </a>
+   {{-- Universal Share (Mobile Devices) --}}
+   <a class="social-icon fas fa-share-alt"
+      href="#"
+      onclick="shareNow('{{ $title }}', '{{ $url }}'); return false;"
+      title="Share...">
+   </a>
 </div>

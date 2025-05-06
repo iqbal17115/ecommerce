@@ -641,6 +641,7 @@
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/review/reviews.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/product_details/product_variation.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/share.js') }}?v={{ time() }}"></script>
 <script>
     // Set the hasCartList variable
     window.hasCartList = true;
