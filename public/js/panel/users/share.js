@@ -26,17 +26,18 @@ function shareOnMessenger(url, title) {
     var encodedUrl = encodeURIComponent(url);
     var encodedTitle = encodeURIComponent(title);
     
-    // Facebook Messenger deep link URL
-    var messengerLink = "fb-messenger://share?text=" + encodedTitle + "%20" + encodedUrl;
-    
-    // Try opening Messenger app on Android devices
+    // Messenger URL for mobile and desktop
+    var messengerLink = "https://m.me/?link=" + encodedUrl + "&title=" + encodedTitle;
+
+    // Open Messenger link
     window.location.href = messengerLink;
 
-    // Fallback: Open Facebook Messenger web version if Messenger app is not installed (optional)
+    // Fallback: Wait 1 second and check if the app was launched
     setTimeout(function() {
-        if (!window.location.href.includes('fb-messenger://')) {
-            window.location.href = "https://m.me/?link=" + encodedUrl;  // Fallback to Messenger web version
+        if (!window.location.href.includes('m.me')) {
+            window.location.href = "https://www.messenger.com/t/" + encodedUrl;  // Fallback to Messenger Web version if needed
         }
     }, 1000);
 }
+
 
