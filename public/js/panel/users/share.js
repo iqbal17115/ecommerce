@@ -1,7 +1,7 @@
 // Function to copy the URL to clipboard
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text)
-        .then(() => toastrErrorMessage("Link copied to clipboard!"))
+        .then(() => toastrSuccessMessage("Link copied to clipboard!"))
         .catch(err => {
             toastrErrorMessage("Failed to copy link");
         });
