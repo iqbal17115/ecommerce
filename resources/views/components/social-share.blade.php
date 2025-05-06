@@ -9,7 +9,6 @@ $encodedTitle = urlencode($title);
    {{-- Facebook App/Web --}}
    <a href="https://www.facebook.com/sharer/sharer.php?u={{ $encodedUrl }}"
       target="_blank"
-      rel="noopener"
       class="social-icon fab fa-facebook"
       title="Share on Facebook">
    </a>
