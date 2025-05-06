@@ -23,23 +23,33 @@ function shareNow(title, url) {
 
 function shareToFacebookApp(url) {
     const encodedUrl = encodeURIComponent(url);
-
-    // Try to open the Facebook app using deep link
-    const fbAppUrl = `fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-
-    // Fallback to Facebook web share
     const fbWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+    const fbAppUrl = `fb://facewebmodal/f?href=${fbWebUrl}`;
 
-    // Attempt to open Facebook app via hidden iframe
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = fbAppUrl;
-    document.body.appendChild(iframe);
+    const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
-    // If app doesn't open, fallback to web after delay
-    setTimeout(() => {
+    if (isMobile) {
+        // Try to open in Facebook App
+        const timeout = setTimeout(() => {
+            // Fallback to web after 1.5s
+            window.open(fbWebUrl, '_blank');
+        }, 1500);
+
+        // Try opening app
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = fbAppUrl;
+        document.body.appendChild(iframe);
+
+        // Cleanup
+        setTimeout(() => {
+            document.body.removeChild(iframe);
+            clearTimeout(timeout);
+        }, 2000);
+    } else {
+        // On PC or Mac — directly open Facebook Web Share
         window.open(fbWebUrl, '_blank');
-    }, 1500); // 1.5 seconds delay
+    }
 }
 
 

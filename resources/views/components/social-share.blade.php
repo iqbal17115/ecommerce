@@ -10,7 +10,7 @@ $encodedTitle = urlencode($title);
    <a href="javascript:void(0);"
       onclick="shareToFacebookApp('{{ $url }}')"
       class="social-icon fab fa-facebook"
-      title="Share on Facebook App">
+      title="Share on Facebook">
    </a>
 
 
