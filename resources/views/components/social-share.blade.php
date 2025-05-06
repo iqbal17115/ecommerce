@@ -1,17 +1,18 @@
 @props(['url', 'title'])
 
 @php
-    $encodedUrl = urlencode($url);
-    $encodedTitle = urlencode($title);
+$encodedUrl = urlencode($url);
+$encodedTitle = urlencode($title);
 @endphp
 
 <div class="social-icons d-flex gap-2">
-   {{-- Facebook --}}
-   <a class="social-icon fab fa-facebook"
-      href="https://www.facebook.com/sharer/sharer.php?u={{ $encodedUrl }}"
-      target="_blank"
-      title="Share on Facebook">
+   {{-- Facebook App/Web --}}
+   <a href="javascript:void(0);"
+      onclick="shareToFacebookApp('{{ $url }}')"
+      class="social-icon fab fa-facebook"
+      title="Share on Facebook App">
    </a>
+
 
    {{-- WhatsApp --}}
    <a class="social-icon fab fa-whatsapp"
@@ -29,13 +30,13 @@
 
    {{-- Messenger --}}
    <div class="social-icons d-flex gap-2">
-    {{-- Messenger App Only --}}
-    <a href="javascript:void(0);" 
-       onclick="shareViaMessengerAppOnly('{{ $url }}')" 
-       class="social-icon fab fa-facebook-messenger"
-       title="Share on Messenger App Only">
-    </a>
-</div>
+      {{-- Messenger App Only --}}
+      <a href="javascript:void(0);"
+         onclick="shareViaMessengerAppOnly('{{ $url }}')"
+         class="social-icon fab fa-facebook-messenger"
+         title="Share on Messenger App Only">
+      </a>
+   </div>
 
 
    {{-- Copy Link --}}

@@ -21,6 +21,28 @@ function shareNow(title, url) {
     }
 }
 
+function shareToFacebookApp(url) {
+    const encodedUrl = encodeURIComponent(url);
+
+    // Try to open the Facebook app using deep link
+    const fbAppUrl = `fb://facewebmodal/f?href=https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+    // Fallback to Facebook web share
+    const fbWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+    // Attempt to open Facebook app via hidden iframe
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = fbAppUrl;
+    document.body.appendChild(iframe);
+
+    // If app doesn't open, fallback to web after delay
+    setTimeout(() => {
+        window.open(fbWebUrl, '_blank');
+    }, 1500); // 1.5 seconds delay
+}
+
+
 // Messenger Fallback (Web only)
 function shareViaMessengerAppOnly(url) {
     const encodedUrl = encodeURIComponent(url);
