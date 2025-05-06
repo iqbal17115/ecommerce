@@ -1,10 +1,9 @@
 // Function to copy the URL to clipboard
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text)
-        .then(() => alert('Link copied to clipboard!'))
+        .then(() => toastrErrorMessage("Link copied to clipboard!"))
         .catch(err => {
-            alert('Failed to copy link');
-            console.error('Clipboard error:', err);
+            toastrErrorMessage("Failed to copy link");
         });
 }
 
@@ -34,7 +33,7 @@ function shareViaMessengerAppOnly(url) {
 
     // Optional fallback alert after 2 seconds
     setTimeout(() => {
-        alert("If Messenger didn't open, please make sure the Messenger app is installed.");
+        toastrErrorMessage("If Messenger didn't open, please make sure the Messenger app is installed.");
     }, 2000);
 }
 

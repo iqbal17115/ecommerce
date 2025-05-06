@@ -44,11 +44,4 @@
       onclick="copyToClipboard('{{ $url }}'); return false;"
       title="Copy Link">
    </a>
-
-   {{-- Universal Share --}}
-   <a class="social-icon fas fa-share-alt"
-      href="#"
-      onclick="shareNow('{{ $title }}', '{{ $url }}'); return false;"
-      title="Share...">
-   </a>
 </div>
