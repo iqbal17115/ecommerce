@@ -23,10 +23,20 @@ function shareNow(title, url) {
 }
 
 // Messenger Fallback (Web only)
-function shareOnMessenger(url) {
+function shareViaMessengerAppOnly(url) {
     const encodedUrl = encodeURIComponent(url);
-    // Open Messenger (limited support on mobile)
-    window.open("https://m.me/?link=" + encodedUrl, "_blank");
+
+    // Try to open Messenger app directly
+    const messengerLink = `fb-messenger://share?link=${encodedUrl}`;
+
+    // Open it
+    window.location.href = messengerLink;
+
+    // Optional fallback alert after 2 seconds
+    setTimeout(() => {
+        alert("If Messenger didn't open, please make sure the Messenger app is installed.");
+    }, 2000);
 }
+
 
 

@@ -28,11 +28,15 @@
    </a>
 
    {{-- Messenger --}}
-   <a class="social-icon fab fa-facebook-messenger"
-      href="javascript:void(0);"
-      onclick="shareOnMessenger('{{ $url }}')"
-      title="Share on Messenger">
-   </a>
+   <div class="social-icons d-flex gap-2">
+    {{-- Messenger App Only --}}
+    <a href="javascript:void(0);" 
+       onclick="shareViaMessengerAppOnly('{{ $url }}')" 
+       class="social-icon fab fa-facebook-messenger"
+       title="Share on Messenger App Only">
+    </a>
+</div>
+
 
    {{-- Copy Link --}}
    <a class="social-icon fas fa-copy"
