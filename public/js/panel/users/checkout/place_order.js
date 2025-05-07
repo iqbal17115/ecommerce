@@ -1,5 +1,4 @@
 function submitOrder(formData, selectedId = "") {
-    alert(1);
     saveAction(
         "store",
         "/place-order",
