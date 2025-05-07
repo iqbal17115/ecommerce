@@ -203,6 +203,7 @@
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_active_item_list.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/checkout/place_order.js') }}?v={{ time() }}"></script>
 <script>
     // Set the hasCartList variable
     window.hasCartList = false;

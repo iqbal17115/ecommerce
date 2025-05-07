@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class CartItem extends Model
 {
     use HasFactory, BaseModel, DisplayNameTrait;
+    
     protected $fillable = ['cart_id', 'user_id', 'product_id', 'product_variation_id', 'quantity', 'is_active'];
 
     public function cart()

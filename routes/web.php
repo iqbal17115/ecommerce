@@ -62,6 +62,7 @@ use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartController;
+use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -629,8 +630,13 @@ Route::group(['middleware' => 'web'], function () {
         Route::delete('cart-items/{cartItem}', 'destroy')->name('cart_items.destroy');
     });
 
+    // Checkout Cart
     Route::controller(APIUserCartController::class)->group(function () {
         Route::get('checkout/cart/lists', 'getCheckoutCart')->name('checkout_cart_lists');
         Route::get('cart/lists', 'getCart');
+    });
+
+    Route::controller(PlaceOrderController::class)->group(function () {
+        Route::post('place-order', 'placeOrder')->name('place_order');
     });
 });
