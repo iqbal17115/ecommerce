@@ -2,7 +2,7 @@ function setUserData(data) {
     var profileContent = `
     <div class="profile">
         <div class="img-box">
-            <img src="${data.profile_photo}" id="user_profile_img">
+            <img class="lazy-load" data-src="${data.profile_photo}" id="user_profile_img">
         </div>
         <div class="user">
             <div class="text-white p-0 m-0">Hello, ${data.name}</div>
@@ -17,7 +17,7 @@ function setUserData(data) {
     </div>
 `;
 
-$("#user_profile_info").html(profileContent);
+    $("#user_profile_info").html(profileContent);
 }
 
 $(document).ready(function () {
