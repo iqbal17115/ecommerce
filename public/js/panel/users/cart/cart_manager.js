@@ -40,7 +40,7 @@ const CartManager = (() => {
         saveAction(
             "store",
             "/cart-items/store",
-            { product_id: productId, quantity, is_buy_now: isBuyNow , product_variation_id: productVariationId },
+            { product_id: productId, quantity, is_buy_now: isBuyNow, product_variation_id: productVariationId },
             "",
             (data) => {
                 toastrSuccessMessage(data.message);
@@ -52,7 +52,12 @@ const CartManager = (() => {
                 }
             },
             (error) => {
-                console.error("Add to cart failed", error);
+                // Handle 401 Unauthorized response and redirect to login page
+                if (error.status === 401 && error.responseJSON.redirect) {
+                    window.location.href = error.responseJSON.redirect;
+                } else {
+                    console.error("Add to cart failed", error);
+                }
             }
         );
     }

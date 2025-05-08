@@ -10,6 +10,7 @@ use App\Models\Cart\CartItem;
 use App\Services\UserCartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserCartItemController extends Controller
 {
@@ -22,6 +23,14 @@ class UserCartItemController extends Controller
 
     public function store(UserStoreCartItemRequest $request): JsonResponse
     {
+        // Check if the user is authenticated
+        if (!Auth::check()) {
+            return response()->json([
+                'message' => 'You must be logged in to add items to the cart.',
+                'redirect' => route('customer-sign-in') 
+            ], 401);
+        }
+
         $data = $request->validated();
 
         $this->userCartService->addToCart($data);
