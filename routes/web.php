@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\Panel\Address\AddressController;
+use App\Http\Controllers\API\Panel\Address\CountryController;
+use App\Http\Controllers\API\Panel\Address\DistrictController;
+use App\Http\Controllers\API\Panel\Address\DivisionController;
+use App\Http\Controllers\API\Panel\Address\UpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartDrawerController;
 use App\Http\Controllers\API\Panel\User\Cart\UserCartItemController;
 use App\Http\Controllers\Api\Panel\User\MyAccount\MyAccountPaymentController;
@@ -63,6 +68,7 @@ use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
+use App\Http\Controllers\Ecommerce\UserAddressController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -638,5 +644,31 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::controller(PlaceOrderController::class)->group(function () {
         Route::post('place-order', 'placeOrder')->name('place_order');
+    });
+
+    Route::controller(UpazilaController::class)->group(function () {
+        Route::get('areas-select/lists', 'lists')->name('districts.lists');
+    });
+
+    Route::controller(DistrictController::class)->group(function () {
+        Route::get('districts-select/lists', 'lists')->name('districts.lists');
+    });
+
+    Route::controller(DivisionController::class)->group(function () {
+        Route::get('divisions-select/lists', 'lists')->name('divisions.lists');
+    });
+
+    Route::controller(CountryController::class)->group(function () {
+        Route::get('countries-select/lists', 'lists')->name('countries_lists.lists');
+    });
+
+    Route::controller(AddressController::class)->group(function () {
+       
+    });
+
+    Route::controller(UserAddressController::class)->group(function () {
+         Route::get('user-address/lists', 'list')->name('user_address.lists');
+        Route::post('/user-address/store-or-update', 'storeOrUpdate');
+        Route::get('/user-address/{id}', 'show');
     });
 });

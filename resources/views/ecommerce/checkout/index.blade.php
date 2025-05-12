@@ -1,52 +1,29 @@
 @extends('layouts.ecommerce')
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/checkout_page.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/sidebar_address_list.css') }}">
 <main class="main main-test bg-gray py-3">
     <div class="container checkout-container">
         <input name="user_id" id="user_id_val" value="{{ $user?->id }}" hidden />
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="row">
-            <div class="col-lg-7">
-                <div id="collapseFour"
-                    class="collapse card_design shadow p-3 @if (Auth::user()) show @endif">
-                    <div class="shipping-info">
-                        <!-- Shipping Address 1-->
-                        @if (Auth::user())
-                        <div class="shipping-address-card">
-                            <div class="">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h6 class="mb-0">Deliver to:</h6>
-                                    <button type="button" class="btn btn-link btn-sm address-menu-toggle"
-                                        class="btn btn-primary" onclick="toggleSidebar()">
-                                        <i class="fas fa-plus-circle"></i> Shipping Address
-                                    </button>
-                                </div>
-                                <div class="row">
-                                    <!-- Add New Address Card -->
-                                    <div class="col-md-4 mb-3" style="height: 100%;">
-                                        <div class="card text-center dashed-border-card address_modal" data-toggle="modal"
-                                            data-target="#addressModal"
-                                            style="cursor: pointer; border: 2px dashed #007bff; transition: transform 0.3s ease; height: 150px;">
-                                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                                <i class="fas fa-plus-circle plus-icon"
-                                                    style="font-size: 3rem; color: #007bff; transition: color 0.3s ease, transform 0.3s ease;"></i>
-                                                <p class="mt-2 mb-0 text-primary font-weight-bold" style="font-size: 1rem;">Add New Address</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8" id="default_address_content">
+            <div class="col-lg-7 d-flex align-items-start gap-3 flex-wrap">
+                <!-- Add Address Icon -->
+                <div class="add-address-icon" title="Add New Address" onclick="openAddAddressModal()">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
 
-                                    </div>
-                                </div>
+                <!-- Default Address Display -->
+                <div id="defaultAddressBox" class="default-address-box">
+                    <!-- JS will populate this -->
+                </div>
 
-                            </div>
-                        </div>
-                        @endif
-                    </div>
+                <!-- Manage Addresses Icon -->
+                <div class="manage-address-icon" title="Manage Addresses" onclick="openSidebar()">
+                    <i class="fas fa-cog"></i>
                 </div>
             </div>
             <!-- End .col-lg-8 -->
-
             <div class="col-lg-5 py-2 card_design shadow">
                 <div class="order-summary">
                     <div class="summary-section-heading pl-2">Order Summary</div>
@@ -186,18 +163,22 @@
         <!-- End .row -->
     </div>
     <!-- End .container -->
+    <!-- Sidebar or Modal for Address Editing -->
+    @include('ecommerce.checkout.partials.address_sidebar')
+    @include('ecommerce.checkout.partials.address_modal')
 </main>
 <!-- End .main -->
 <!-- footer-area -->
 @include('ecommerce.footer')
 <!-- footer-area-end -->
 <!-- Shipping Address Modal -->
-@include('ecommerce.checkout.partials.address_modal')
+<!-- @include('ecommerce.checkout.partials.address_modal') -->
 <!-- End Shipping Address Modal -->
 @endsection
 @push('scripts')
 <script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('js/panel/users/checkout/address.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/checkout/checkout_address.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/address.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_manager.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>

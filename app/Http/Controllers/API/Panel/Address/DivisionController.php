@@ -13,9 +13,7 @@ use Illuminate\Http\Request;
 
 class DivisionController extends Controller
 {
-    use BaseModel;
-
-    /**
+     /**
      * Division lists
      *
      * @param Request $request
@@ -24,7 +22,7 @@ class DivisionController extends Controller
     public function lists(Request $request): JsonResponse|bool|string
     {
         try {
-            $list = Division::getLists(Division::where('country_id', $request->country_id), $request->all(), DivisionListResource::class);
+            $list = Division::selectLists(Division::where('country_id', $request->country_id), $request->all(), DivisionListResource::class);
 
             return Message::success(null, $list);
         } catch (Exception $ex) {

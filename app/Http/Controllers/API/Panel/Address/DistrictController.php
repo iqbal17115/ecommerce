@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 
 class DistrictController extends Controller
 {
-    use BaseModel;
-
     /**
      * Division lists
      *
@@ -25,7 +23,7 @@ class DistrictController extends Controller
     {
         try {
             $request['limit'] = 300;
-            $list = District::getLists(District::where('division_id', $request->division_id)->orderBy('name', 'asc'), $request->all(), DistrictListResource::class);
+            $list = District::selectLists(District::where('division_id', $request->division_id)->orderBy('name', 'asc'), $request->all(), DistrictListResource::class);
 
             return Message::success(null, $list);
         } catch (Exception $ex) {

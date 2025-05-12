@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
-    use BaseModel;
-
     /**
      * Country lists
      *
@@ -24,7 +22,7 @@ class CountryController extends Controller
     public function lists(Request $request): JsonResponse|bool|string
     {
         try {
-            $list = Country::getLists(Country::query(), $request->all(), CountryListResource::class);
+            $list = Country::selectLists(Country::query(), $request->all(), CountryListResource::class);
 
             return Message::success(null, $list);
         } catch (Exception $ex) {

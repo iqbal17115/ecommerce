@@ -145,7 +145,7 @@ class AddressController extends Controller
     public function myAddressList(Request $request): JsonResponse
     {
         try {
-            $list = $this->getLists(Address::where('user_id', $request->user_id)->orderByDesc('is_default'), $request->all(), AddressListResource::class);
+            $list = $this->getLists(Address::where('user_id', Auth::user()->id)->orderByDesc('is_default'), $request->all(), AddressListResource::class);
             return Message::success(null, $list);
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());

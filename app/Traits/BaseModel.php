@@ -75,6 +75,39 @@ trait BaseModel
     }
 
     /**
+     * Get Lists
+     *
+     * @param $query
+     * @param array $validatedData
+     * @param string $resourceClass
+     * @return mixed
+     */
+    public static function selectLists($query, array $validatedData, string $resourceClass,  $returnCollect = true): mixed
+    {
+        // Apply the list scope to the query
+        $query->list($validatedData, true);
+
+        if (isset($validatedData['is_new']) && $validatedData['is_new'] == 1) {
+            $lists = $query->paginate(50);
+
+            // Set collection
+            $lists = $lists->setCollection(collect($resourceClass::collection($lists->items())));
+        } else {
+            $lists = $query->get();
+
+            // Set collection
+            $lists = $resourceClass::collection($lists);
+
+            if ($returnCollect) {
+                $lists = collect($lists);
+            }
+        }
+
+        return $lists;
+    }
+
+    
+    /**
      * Get All Lists
      *
      * @param $query

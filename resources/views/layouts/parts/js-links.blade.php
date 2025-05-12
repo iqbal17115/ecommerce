@@ -23,10 +23,8 @@ WebFontConfig = {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="{{asset('js/panel/action.js')}}"></script>
 <script src="{{asset('js/panel/common.js')}}"></script>
-<script src="{{ asset('js/select2.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

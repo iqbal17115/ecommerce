@@ -139,6 +139,6 @@ class CheckoutController extends Controller
         }
         $user = Auth::user();
         $user_id = auth()?->user()->id ?? null;
-        return view('ecommerce.checkout', compact('divisions', 'products', 'user', 'user_id'));
+        return view('ecommerce.checkout.index', compact('divisions', 'products', 'user', 'user_id'));
     }
 }

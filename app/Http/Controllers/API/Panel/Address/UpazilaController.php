@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 
 class UpazilaController extends Controller
 {
-    use BaseModel;
-
     /**
      * Division lists
      *
@@ -25,7 +23,7 @@ class UpazilaController extends Controller
     {
         try {
             $request['limit'] = 1000;
-            $list = Upazila::getLists(Upazila::where('district_id', $request->district_id), $request->all(), ShopSettingUpazilaListResource::class);
+            $list = Upazila::selectLists(Upazila::where('district_id', $request->district_id), $request->all(), ShopSettingUpazilaListResource::class);
 
             return Message::success(null, $list);
         } catch (Exception $ex) {
