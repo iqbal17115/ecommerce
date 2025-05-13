@@ -2,25 +2,31 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/checkout_page.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/sidebar_address_list.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_menus.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_modal.css') }}">
 <main class="main main-test bg-gray py-3">
     <div class="container checkout-container">
         <input name="user_id" id="user_id_val" value="{{ $user?->id }}" hidden />
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="row">
             <div class="col-lg-7 d-flex align-items-start gap-3 flex-wrap">
-                <!-- Add Address Icon -->
-                <div class="add-address-icon" title="Add New Address" onclick="openAddAddressModal()">
-                    <i class="fas fa-plus-circle"></i>
-                </div>
+                <div class="checkout-address-container">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                        <!-- Default Address Card -->
+                        <div id="defaultAddressBox" class="default-address-card">
+                            <!-- JS will populate this -->
+                        </div>
 
-                <!-- Default Address Display -->
-                <div id="defaultAddressBox" class="default-address-box">
-                    <!-- JS will populate this -->
-                </div>
-
-                <!-- Manage Addresses Icon -->
-                <div class="manage-address-icon" title="Manage Addresses" onclick="openSidebar()">
-                    <i class="fas fa-cog"></i>
+                        <!-- Action Buttons -->
+                        <div class="address-buttons d-flex gap-2">
+                            <button class="btn btn-primary" onclick="openAddAddressModal()">
+                                <i class="fas fa-plus me-1"></i> Add Address
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="openSidebar()">
+                                <i class="fas fa-cog me-1"></i> Manage
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- End .col-lg-8 -->

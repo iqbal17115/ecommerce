@@ -33,6 +33,7 @@ class StoreOrUpdateUserAddressRequest extends FormRequest
             'country_id' => 'required|exists:countries,id',
             'division_id' => 'required|exists:divisions,id',
             'district_id' => 'required|exists:districts,id',
+            'upazila_id' => 'required|exists:upazilas,id',
         ];
     }
 }

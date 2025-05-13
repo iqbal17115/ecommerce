@@ -20,6 +20,7 @@ class UserAddress extends Model
         'country_id',
         'division_id',
         'district_id',
+        'upazila_id',
         'mobile',
         'optional_mobile',
         'street_address',

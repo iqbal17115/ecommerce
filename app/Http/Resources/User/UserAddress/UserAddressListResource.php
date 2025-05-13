@@ -35,7 +35,7 @@ class UserAddressListResource extends JsonResource
             $this->street_address,
             $this->building_name,
             $this->nearest_landmark,
-            optional($this->area)->name,
+            optional($this->upazila)->name,
             optional($this->district)->name,
             optional($this->division)->name,
             optional($this->country)->name,

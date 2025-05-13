@@ -1,0 +1,147 @@
+/* ===== Modal Container ===== */
+.modal-content {
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #333;
+}
+
+/* ===== Modal Header ===== */
+.modal-header {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 1.25rem;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 600;
+}
+
+/* ===== Modal Body ===== */
+.modal-body {
+    padding: 1rem 1.25rem;
+}
+
+/* ===== Form Labels ===== */
+.modal-body label,
+.form-check-label {
+    font-size: 1rem;
+    /* 15px */
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 0.3rem;
+}
+
+/* ===== Input and Select Fields ===== */
+.form-control,
+.form-select {
+    font-size: 1rem;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    height: auto;
+    /* Fix select height */
+    line-height: 1.5;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+/* ===== Placeholder ===== */
+::placeholder {
+    font-size: 1rem;
+    color: #999;
+}
+
+/* ===== Checkbox ===== */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-check-input {
+    width: 1.1rem;
+    height: 1.1rem;
+    cursor: pointer;
+    margin: 0;
+}
+
+.form-check-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+}
+
+/* ===== Modal Footer ===== */
+.modal-footer {
+    border-top: 1px solid #eee;
+    padding: 1rem 1.25rem;
+}
+
+.modal-footer .btn {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.form-select {
+    width: 100%;
+}
+
+.custom-close-btn {
+  border: none;
+  background: transparent;
+  padding: 6px;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  color: #333;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.custom-close-btn:hover {
+  color: #ff4d4f;
+  transform: scale(1.2);
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 576px) {
+    .modal-content {
+        padding: 0.75rem;
+        font-size: 14px;
+    }
+
+    .modal-title {
+        font-size: 1.1rem;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .modal-footer .btn {
+        font-size: 0.95rem;
+        padding: 0.5rem;
+    }
+}

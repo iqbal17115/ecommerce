@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             district.value = data.district_id;
                             getDetails(`/areas-select/lists?district_id=${data.district_id}`, areas => {
                                 populateDropdown(area, areas, 'Select Area');
-                                area.value = data.area_id || '';
+                                area.value = data.upazila_id || '';
                             });
                         });
                     });

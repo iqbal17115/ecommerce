@@ -330,7 +330,7 @@ $(document).ready(function() {
 
     loadUserAddress(user_id); // Initial load of addresses
 
-    // ✅ Helper function to create a delay
+    // Helper function to create a delay
     function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }

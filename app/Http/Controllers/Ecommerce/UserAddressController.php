@@ -18,7 +18,7 @@ class UserAddressController extends Controller
 {
     public function __construct(private readonly UserAddressService $service) {}
 
-   /**
+    /**
      * My Address Lists
      *
      * @param Request $request
@@ -26,8 +26,8 @@ class UserAddressController extends Controller
      */
     public function list(Request $request): JsonResponse
     {
-            $list = UserAddress::getLists(UserAddress::where('user_id', Auth::user()->id)->orderByDesc('is_default'), $request->all(), UserAddressListResource::class);
-            return Message::success(null, $list);
+        $list = UserAddress::getLists(UserAddress::where('user_id', Auth::user()->id)->orderByDesc('is_default'), $request->all(), UserAddressListResource::class);
+        return Message::success(null, $list);
     }
 
     public function storeOrUpdate(StoreOrUpdateUserAddressRequest $request)
