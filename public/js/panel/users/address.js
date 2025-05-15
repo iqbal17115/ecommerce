@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             (data) => {
                 data = data.data;
                 document.getElementById('addressId').value = data.id;
+                document.getElementById('full_name').value = data.full_name;
                 document.getElementById('street_address').value = data.street_address;
                 document.getElementById('building_name').value = data.building_name;
                 document.getElementById('nearest_landmark').value = data.nearest_landmark;
@@ -69,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 });
 
+                document.getElementById('addressSidebarWrapper').classList.remove('show');
                 modal.show();
             },
             (error) => {
@@ -91,15 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(res => res.json())
             .then(res => {
-                if (res.success) {
-                    modal.hide();
-                    fetchAddresses(); // reload sidebar list
-                    showDefaultAddress([res.data]); // refresh default view
-                } else {
-                    alert('Something went wrong.');
-                }
-            })
-            .catch(() => alert('Error submitting form.'));
+                toastrSuccessMessage("Address saved successfully.");
+                modal.hide();
+                fetchDefaultAddress();
+                fetchAddresses(); // reload sidebar list
+            });
     });
 
     // Add address modal open (global access)

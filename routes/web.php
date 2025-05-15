@@ -662,13 +662,12 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('countries-select/lists', 'lists')->name('countries_lists.lists');
     });
 
-    Route::controller(AddressController::class)->group(function () {
-       
-    });
+    Route::controller(AddressController::class)->group(function () {});
 
     Route::controller(UserAddressController::class)->group(function () {
-         Route::get('user-address/lists', 'list')->name('user_address.lists');
+        Route::get('user-address/lists', 'list')->name('user_address.lists');
         Route::post('/user-address/store-or-update', 'storeOrUpdate');
         Route::get('/user-address/{id}', 'show');
+        Route::get('/user-address-default', 'default');
     });
 });

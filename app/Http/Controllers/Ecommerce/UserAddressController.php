@@ -35,7 +35,7 @@ class UserAddressController extends Controller
         $addressId = $request->input('address_id');
 
         $address = $this->service->storeOrUpdate($request->validated(), $addressId);
-        return Message::success(null, StoreOrUpdateUserAddressResource::make($address));
+        return Message::success(__("messages.success_add"), StoreOrUpdateUserAddressResource::make($address));
     }
 
     public function show($id)
@@ -45,5 +45,14 @@ class UserAddressController extends Controller
             ->firstOrFail();
 
         return new UserAddressResource($address);
+    }
+
+    public function default()
+    {
+        $default = UserAddress::where('user_id', auth()->id())
+            ->where('is_default', true)
+            ->first();
+
+        return Message::success(null, UserAddressListResource::make($default));
     }
 }

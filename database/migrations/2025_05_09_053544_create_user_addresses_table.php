@@ -21,6 +21,7 @@ class CreateUserAddressesTable extends Migration
             $table->foreignUuid('division_id')->nullable()->index();
             $table->foreignUuid('district_id')->nullable()->index();
             $table->foreignUuid('upazila_id')->nullable()->index();
+            $table->string('full_name');
             $table->string('mobile');
             $table->string('optional_mobile')->nullable();
             $table->string('street_address');

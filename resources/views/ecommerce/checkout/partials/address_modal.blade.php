@@ -35,8 +35,22 @@
                             <select id="area" name="upazila_id" class="form-select" required></select>
                         </div>
 
+                        <!-- Name Fields -->
+                        <div class="col-6">
+                            <label for="full_name" class="form-label">Name</label>
+                            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="e.g. John Doe" required>
+                        </div>
+                        <!-- Contact Info -->
+                        <div class="col-md-6">
+                            <label for="mobile" class="form-label">Mobile</label>
+                            <input type="text" id="mobile" name="mobile" class="form-control" placeholder="e.g. 017XXXXXXXX" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="optional_mobile" class="form-label">Mobile(Optional)</label>
+                            <input type="text" id="optional_mobile" name="optional_mobile" class="form-control" placeholder="e.g. 018XXXXXXXX">
+                        </div>
                         <!-- Address Fields -->
-                        <div class="col-12">
+                        <div class="col-6">
                             <label for="street_address" class="form-label">Street Address</label>
                             <input type="text" id="street_address" name="street_address" class="form-control" placeholder="e.g. 123 Main Street" required>
                         </div>
@@ -49,16 +63,6 @@
                             <input type="text" id="nearest_landmark" name="nearest_landmark" class="form-control" placeholder="Optional">
                         </div>
 
-                        <!-- Contact Info -->
-                        <div class="col-md-6">
-                            <label for="mobile" class="form-label">Mobile</label>
-                            <input type="text" id="mobile" name="mobile" class="form-control" placeholder="e.g. 017XXXXXXXX" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="optional_mobile" class="form-label">Optional Mobile</label>
-                            <input type="text" id="optional_mobile" name="optional_mobile" class="form-control" placeholder="e.g. 018XXXXXXXX">
-                        </div>
-
                         <!-- Address Type & Default -->
                         <div class="col-md-6">
                             <select id="type" name="type" class="form-select">
@@ -67,8 +71,9 @@
                             </select>
                         </div>
                         <div class="col-md-6 d-flex align-items-center mt-4">
+                            <input type="hidden" name="is_default" value="0">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="is_default" id="is_default">&nbsp;
+                                <input class="form-check-input" type="checkbox" name="is_default" id="is_default" value="1">
                                 <label class="form-check-label ml-2" for="is_default">Make this my default address</label>
                             </div>
                         </div>

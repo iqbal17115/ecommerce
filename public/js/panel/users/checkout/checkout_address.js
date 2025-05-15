@@ -1,7 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
     fetchAddresses();
-    setupAddressForm();
+    // setupAddressForm();
+    fetchDefaultAddress();
 });
+
+function fetchDefaultAddress() {
+    getDetails('/user-address-default', (data) => {
+        console.log(data);
+        showDefaultAddress(data.results);
+    });
+}
+
+fetchDefaultAddress();
+
+function showDefaultAddress(address) {
+    const container = document.getElementById('defaultAddressBox');
+    if (!container || !address) return;
+
+    container.innerHTML = `
+        <div class="border p-3 rounded bg-light">
+            <strong>${address.name}</strong><br>
+            ${address.address}<br>
+            <small>Phone: ${address.mobile}</small>
+        </div>
+    `;
+}
+
 
 // Fetch all addresses and display in sidebar
 function fetchAddresses() {
@@ -67,7 +91,7 @@ function editAddress(addressId) {
 
         // Fill form fields
         document.getElementById("address_id").value = data.id;
-        document.getElementById("name").value = data.name;
+        document.getElementById("full_name").value = data.full_name;
         document.getElementById("phone").value = data.phone;
         document.getElementById("address").value = data.address;
         document.getElementById("country").value = data.country_id;

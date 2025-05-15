@@ -21,6 +21,7 @@ class UserAddress extends Model
         'division_id',
         'district_id',
         'upazila_id',
+        'full_name',
         'mobile',
         'optional_mobile',
         'street_address',

@@ -16,7 +16,7 @@ class UserAddressListResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->user->name,
+            'name' => $this->full_name,
             'mobile' => $this->mobile,
             'optional_mobile' => $this->optional_mobile,
             'address' => $this->formatAddress(),
