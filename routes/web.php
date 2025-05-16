@@ -666,6 +666,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::controller(UserAddressController::class)->group(function () {
         Route::get('user-address/lists', 'list')->name('user_address.lists');
+        Route::get('/user-address/set-default/{userAddress}', 'setDefault')->name('user_address.set_default');
         Route::post('/user-address/store-or-update', 'storeOrUpdate');
         Route::get('/user-address/{id}', 'show');
         Route::get('/user-address-default', 'default');

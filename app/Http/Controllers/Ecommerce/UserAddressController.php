@@ -55,11 +55,31 @@ class UserAddressController extends Controller
             ->first();
 
         if ($default) {
-        return Message::success(null, UserAddressListResource::make($default));
+            return Message::success(null, UserAddressListResource::make($default));
+        }
+
+        return Message::success('No default address found.', null);
     }
 
-    return Message::success('No default address found.', null);
+    public function setDefault(UserAddress $userAddress): JsonResponse
+    {
+        $user = auth()->user();
+
+        if ($userAddress->user_id !== $user->id) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        // Remove default from all user's addresses
+        UserAddress::where('user_id', $user->id)
+            ->where('id', '!=', $userAddress->id)
+            ->update(['is_default' => false]);
+
+        // Set this one as default
+        $userAddress->update(['is_default' => true]);
+
+        return Message::success(__('messages.success_update'));
     }
+
 
     public function destroy(UserAddress $userAddress): JsonResponse
     {

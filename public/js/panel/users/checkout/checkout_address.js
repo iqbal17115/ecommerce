@@ -43,37 +43,57 @@ function fetchAddresses() {
             container.innerHTML = '<p class="text-muted">No saved addresses found.</p>';
             return;
         }
-
         data.results.data.forEach((address) => {
-            const isDefault = address.is_default ? ' <span class="badge badge-success">Default</span>' : '';
             const div = document.createElement('div');
-            div.className = 'address-card';
+            div.className = 'card mb-3 shadow-sm border rounded';
+
+            const isDefault = address.is_default;
+            const badge = isDefault
+                ? `<span style="margin-left:auto; font-size: 1.2rem;" class="badge bg-success text-white">Default</span>`
+                : '';
+
+            const setDefaultBtn = !isDefault
+                ? `<button class="btn btn-sm btn-outline-primary me-2" onclick="setDefaultAddress('${address.id}')">Set as Default</button>`
+                : '';
+
+            const deleteBtn = !isDefault
+                ? `<button class="btn btn-sm btn-outline-danger" onclick="deleteAddress('${address.id}')" title="Delete">
+                <i class="fas fa-trash-alt"></i> Delete
+            </button>`
+                : ''; // Default address can't be deleted
 
             div.innerHTML = `
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <h6 class="mb-1">${address.name}${isDefault}</h6>
-                                <p class="mb-1">${address.address}</p>
-                                <p class="mb-2 text-muted small">Phone: ${address.mobile}</p>
-                                ${!address.is_default
-                    ? `<button class="btn btn-sm btn-outline-primary mt-1" onclick="makeDefault('${address.id}')">Set Default</button>`
-                    : ''
-                }
-                            </div>
-                            <div class="text-right">
-                                <button class="btn btn-sm text-warning" title="Edit" onclick="editAddress('${address.id}')">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm text-danger" title="Delete" onclick="deleteAddress('${address.id}')">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `;
+        <div class="p-3">
+            <div style="display: flex; align-items: center;" class="mb-1">
+                <h6 style="margin: 0;">${address.name}</h6>
+                ${badge}
+            </div>
+            <p class="mb-1">${address.address}</p>
+            <p class="mb-2 text-muted small">Phone: ${address.mobile}</p>
+            <div class="d-flex justify-content-start mt-2 flex-wrap gap-2">
+                ${setDefaultBtn}
+                <button class="btn btn-sm btn-outline-warning" onclick="editAddress('${address.id}')" title="Edit">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                ${deleteBtn}
+            </div>
+        </div>
+    `;
+
             container.appendChild(div);
         });
+
     }, (error) => {
         console.error("Failed to load cart data:", error);
+    });
+}
+
+function setDefaultAddress(id) {
+    console.log(id);
+    getDetails(`/user-address/set-default/${id}`, function (res) {
+        toastrSuccessMessage("Default address set successfully.");
+        fetchAddresses();
+        fetchDefaultAddress();
     });
 }
 
