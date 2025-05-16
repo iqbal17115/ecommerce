@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function fetchDefaultAddress() {
     getDetails('/user-address-default', (data) => {
-        console.log(data);
         showDefaultAddress(data.results);
     });
 }
@@ -15,8 +14,15 @@ fetchDefaultAddress();
 
 function showDefaultAddress(address) {
     const container = document.getElementById('defaultAddressBox');
-    if (!container || !address) return;
+    if (!container) return;
 
+    // Clear the container first
+    container.innerHTML = '';
+
+    // If no address provided, exit after clearing
+    if (!address) return;
+
+    // Inject the default address content
     container.innerHTML = `
         <div class="border p-3 rounded bg-light">
             <strong>${address.name}</strong><br>
@@ -50,9 +56,9 @@ function fetchAddresses() {
                                 <p class="mb-1">${address.address}</p>
                                 <p class="mb-2 text-muted small">Phone: ${address.mobile}</p>
                                 ${!address.is_default
-                                    ? `<button class="btn btn-sm btn-outline-primary mt-1" onclick="makeDefault('${address.id}')">Set Default</button>`
-                                    : ''
-                                }
+                    ? `<button class="btn btn-sm btn-outline-primary mt-1" onclick="makeDefault('${address.id}')">Set Default</button>`
+                    : ''
+                }
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-sm text-warning" title="Edit" onclick="editAddress('${address.id}')">
@@ -109,17 +115,17 @@ function editAddress(addressId) {
 
 // Delete address
 function deleteAddress(addressId) {
-    if (!confirm("Are you sure you want to delete this address?")) return;
-    fetch(`/user-address/delete/${addressId}`, {
-        method: "DELETE",
-        headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
-    })
-        .then((res) => res.json())
-        .then(() => fetchAddresses())
-        .catch((err) => console.error("Delete failed", err));
+    deleteAction(
+        `/user-address/${addressId}`,
+        (data) => {
+            fetchAddresses();
+            fetchDefaultAddress();
+        },
+        (error) => {
+            toastrErrorMessage(error.responseJSON.message);
+        }
+    );
 }
-
-
 
 // Helper: Open modal
 function showAddressModal() {

@@ -8,6 +8,7 @@ use App\Http\Requests\User\UserAddress\StoreOrUpdateUserAddressRequest;
 use App\Http\Resources\User\UserAddress\StoreOrUpdateUserAddressResource;
 use App\Http\Resources\User\UserAddress\UserAddressListResource;
 use App\Http\Resources\User\UserAddress\UserAddressResource;
+use App\Models\User;
 use App\Models\UserAddress;
 use App\Services\UserAddressService;
 use Illuminate\Http\JsonResponse;
@@ -49,10 +50,23 @@ class UserAddressController extends Controller
 
     public function default()
     {
-        $default = UserAddress::where('user_id', auth()->id())
+        $default = UserAddress::where('user_id', Auth::user()->id)
             ->where('is_default', true)
             ->first();
 
+        if ($default) {
         return Message::success(null, UserAddressListResource::make($default));
+    }
+
+    return Message::success('No default address found.', null);
+    }
+
+    public function destroy(UserAddress $userAddress): JsonResponse
+    {
+        // Call the function delete address
+        $userAddress->delete();
+
+        // Success Response
+        return Message::success(__('messages.success_delete'));
     }
 }

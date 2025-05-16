@@ -669,5 +669,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/user-address/store-or-update', 'storeOrUpdate');
         Route::get('/user-address/{id}', 'show');
         Route::get('/user-address-default', 'default');
+        Route::delete('user-address/{userAddress}', 'destroy')->name('user_address.destroy');
     });
 });
