@@ -10,24 +10,7 @@
         <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
         <div class="row">
             <div class="col-lg-7 d-flex align-items-start gap-3 flex-wrap">
-                <div class="checkout-address-container">
-                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
-                        <!-- Default Address Card -->
-                        <div id="defaultAddressBox" class="default-address-card">
-                            <!-- JS will populate this -->
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="address-buttons d-flex gap-2">
-                            <button class="btn btn-primary" onclick="openAddAddressModal()">
-                                <i class="fas fa-plus me-1"></i> Add Address
-                            </button>
-                            <button class="btn btn-outline-secondary" onclick="openSidebar()">
-                                <i class="fas fa-cog me-1"></i> Manage
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                @include('ecommerce.checkout.partials.default-address')
             </div>
             <!-- End .col-lg-8 -->
             <div class="col-lg-5 py-2 card_design shadow">
