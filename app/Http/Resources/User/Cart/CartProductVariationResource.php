@@ -16,8 +16,8 @@ class CartProductVariationResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "attribute_name" => $this->attributeValue->attribute->name,
-            "attribute_value" => $this->attributeValue->value
+            "attribute_name" => $this->attributeValue?->attribute?->name,
+            "attribute_value" => $this->attributeValue?->value
         ];
     }
 }

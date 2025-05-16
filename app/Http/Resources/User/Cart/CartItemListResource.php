@@ -19,7 +19,7 @@ class CartItemListResource extends JsonResource
     {
         $shippingCharge = $this->calculateShippingCharge();
         $activeCurrency = Currency::where('is_active', 1)->first();
-        
+
         return [
             "id" => $this->id,
             "product_info" => CartProductDetailResource::make($this?->product),
@@ -27,7 +27,7 @@ class CartItemListResource extends JsonResource
             "shipping_charge" => $shippingCharge ?? 0,
             "coupon_discount" => (float)$this?->cart_item_coupon?->value ?? 0,
             "is_active" => $this->is_active,
-            "variations" => $this?->productVariation?->productVariationAttributes ?CartProductVariationResource::collection($this?->productVariation?->productVariationAttributes) : [],
+            "variations" => $this?->productVariation?->productVariationAttributes ? CartProductVariationResource::collection($this?->productVariation?->productVariationAttributes) : [],
             "active_currency" => CurrencyResource::make($activeCurrency),
             "vendor_name" => $this->product?->user?->name,
         ];
@@ -36,6 +36,9 @@ class CartItemListResource extends JsonResource
     private function calculateShippingCharge()
     {
         $shippingService = new ShippingChargeService();
+        if (!$this->product) {
+            return 0;
+        }
         return $shippingService->calculateShippingCharges($this->product, $this->quantity);
     }
 }
