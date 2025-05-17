@@ -16,22 +16,18 @@ function showDefaultAddress(address) {
     const container = document.getElementById('defaultAddressBox');
     if (!container) return;
 
-    // Clear the container first
     container.innerHTML = '';
 
-    // If no address provided, exit after clearing
     if (!address) return;
 
-    // Inject the default address content
     container.innerHTML = `
-        <div class="border p-3 rounded bg-light">
+        <div>
             <strong>${address.name}</strong><br>
             ${address.address}<br>
             <small>Phone: ${address.mobile}</small>
         </div>
     `;
 }
-
 
 // Fetch all addresses and display in sidebar
 function fetchAddresses() {
