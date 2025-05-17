@@ -43,7 +43,7 @@ function fetchAddresses() {
             const div = document.createElement('div');
             div.className = 'card mb-3 shadow-sm border rounded';
 
-            const isDefault = address.is_default;
+            const isDefault = address.is_default == 1;
             const badge = isDefault
                 ? `<span style="margin-left:auto; font-size: 1.2rem;" class="badge bg-success text-white">Default</span>`
                 : '';
