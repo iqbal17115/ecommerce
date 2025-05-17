@@ -1,9 +1,9 @@
 @extends('layouts.ecommerce')
 @section('content')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/checkout_page.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/sidebar_address_list.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_menus.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_modal.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/checkout_page.css') }}?v={{ time() }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/sidebar_address_list.css') }}?v={{ time() }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_menus.css') }}?v={{ time() }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_modal.css') }}?v={{ time() }}">
 <main class="main main-test bg-gray py-3">
     <div class="container checkout-container">
         <input name="user_id" id="user_id_val" value="{{ $user?->id }}" hidden />
