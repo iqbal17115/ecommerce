@@ -74,7 +74,7 @@
                             <input type="hidden" name="is_default" value="0">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="is_default" id="is_default" value="1">
-                                <label class="form-check-label ml-2" for="is_default">Make this my default address</label>
+                                <label class="form-check-label ml-4" for="is_default">Make this my default address</label>
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@
 /* ===== Form Labels ===== */
 .modal-body label,
 .form-check-label {
-    font-size: 1rem;
+    font-size: 1.5rem;
     /* 15px */
     font-weight: 500;
     color: #444;
@@ -38,7 +38,7 @@
 /* ===== Input and Select Fields ===== */
 .form-control,
 .form-select {
-    font-size: 1rem;
+    font-size: 1.5rem;
     border-radius: 6px;
     padding: 0.5rem 0.75rem;
     border: 1px solid #ccc;
@@ -58,7 +58,7 @@
 
 /* ===== Placeholder ===== */
 ::placeholder {
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #999;
 }
 
@@ -77,7 +77,7 @@
 }
 
 .form-check-label {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: #555;
 }
@@ -89,7 +89,7 @@
 }
 
 .modal-footer .btn {
-    font-size: 1rem;
+    font-size: 1.5rem;
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
     font-weight: 600;

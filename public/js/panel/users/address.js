@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = new bootstrap.Modal(document.getElementById('addressModal'));
 
     function populateDropdown(select, items, placeholder = 'Select') {
-        select.innerHTML = `<option value="">${placeholder}</option>`;
+        // select.innerHTML = `<option value="">${placeholder}</option>`;
         items.results.forEach(item => {
             select.innerHTML += `<option value="${item.id}">${item.name}</option>`;
         });
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Add address modal open (global access)
-    window.openAddAddressModal = function () {
+    window.openAddAddressModal = function (selectedCountryId = null) {
         if (!form) return;
         form.reset();
 
@@ -110,11 +110,22 @@ document.addEventListener("DOMContentLoaded", function () {
             addressIdInput.value = '';
         }
 
-        // Reload countries
-        getDetails('/countries-select/lists', data => populateDropdown(country, data, 'Select Country'));
-
         // Reset dependent dropdowns
         resetDependentDropdowns(1);
+
+        // Reload countries and set selected
+        getDetails('/countries-select/lists', data => {
+            populateDropdown(country, data, 'Select Country');
+              selectedCountryId = "9c617d63-544b-49f8-991f-63e9158b4b8d";
+            if (selectedCountryId) {
+                country.value = selectedCountryId;
+
+                // Now load divisions for selected country
+                getDetails(`/divisions-select/lists?country_id=${selectedCountryId}`, divData => {
+                    populateDropdown(division, divData, 'Select Division');
+                });
+            }
+        });
 
         // Show modal
         modal.show();
