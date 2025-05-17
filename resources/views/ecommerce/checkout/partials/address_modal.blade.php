@@ -9,7 +9,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header border-0">
                     <h5 class="modal-title fw-semibold">📍 Add / Update Address</h5>
-                    <button type="button" class="custom-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="custom-close-btn" data-dismiss="modal" aria-label="Close">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                             <line x1="18" y1="6" x2="6" y2="18" />
@@ -36,7 +36,7 @@
                         </div>
 
                         <!-- Name Fields -->
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <label for="full_name" class="form-label">Name</label>
                             <input type="text" id="full_name" name="full_name" class="form-control" placeholder="e.g. John Doe" required>
                         </div>
@@ -50,7 +50,7 @@
                             <input type="text" id="optional_mobile" name="optional_mobile" class="form-control" placeholder="e.g. 018XXXXXXXX">
                         </div>
                         <!-- Address Fields -->
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <label for="street_address" class="form-label">Street Address</label>
                             <input type="text" id="street_address" name="street_address" class="form-control" placeholder="e.g. 123 Main Street" required>
                         </div>
