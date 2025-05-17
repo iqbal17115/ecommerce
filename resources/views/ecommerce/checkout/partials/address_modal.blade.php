@@ -38,21 +38,21 @@
                         <!-- Name Fields -->
                         <div class="col-md-6">
                             <label for="full_name" class="form-label">Name</label>
-                            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="e.g. John Doe" required>
+                            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="John Doe" required>
                         </div>
                         <!-- Contact Info -->
                         <div class="col-md-6">
                             <label for="mobile" class="form-label">Mobile</label>
-                            <input type="text" id="mobile" name="mobile" class="form-control" placeholder="e.g. 017XXXXXXXX" required>
+                            <input type="text" id="mobile" name="mobile" class="form-control" placeholder="01XXXXXXXXX" required>
                         </div>
                         <div class="col-md-6">
                             <label for="optional_mobile" class="form-label">Mobile(Optional)</label>
-                            <input type="text" id="optional_mobile" name="optional_mobile" class="form-control" placeholder="e.g. 018XXXXXXXX">
+                            <input type="text" id="optional_mobile" name="optional_mobile" class="form-control" placeholder="018XXXXXXXX">
                         </div>
                         <!-- Address Fields -->
                         <div class="col-md-6">
                             <label for="street_address" class="form-label">Street Address</label>
-                            <input type="text" id="street_address" name="street_address" class="form-control" placeholder="e.g. 123 Main Street" required>
+                            <input type="text" id="street_address" name="street_address" class="form-control" placeholder="Enter Street Address" required>
                         </div>
                         <div class="col-md-6">
                             <label for="building_name" class="form-label">Building Name</label>
@@ -70,7 +70,7 @@
                                 <option value="office">Office</option>
                             </select>
                         </div>
-                        <div class="col-md-6 d-flex align-items-center mt-4">
+                        <div class="col-md-6 d-flex align-items-center">
                             <input type="hidden" name="is_default" value="0">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="is_default" id="is_default" value="1">
