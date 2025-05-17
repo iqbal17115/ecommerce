@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = new bootstrap.Modal(document.getElementById('addressModal'));
 
     function populateDropdown(select, items, placeholder = 'Select') {
-        // select.innerHTML = `<option value="">${placeholder}</option>`;
+        select.innerHTML = `<option value="">${placeholder}</option>`;
         items.results.forEach(item => {
             select.innerHTML += `<option value="${item.id}">${item.name}</option>`;
         });
