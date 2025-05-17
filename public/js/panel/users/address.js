@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Load countries on page load
-    getDetails('/countries-select/lists', data => populateDropdown(country, data, 'Select Country'));
+    // getDetails('/countries-select/lists', data => populateDropdown(country, data, 'Select Country'));
 
     country.addEventListener('change', function () {
         resetDependentDropdowns(1);
