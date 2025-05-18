@@ -144,6 +144,23 @@
     background-color: #fff !important;
 }
 
+.required-label {
+    position: relative !important;
+    display: inline-block !important;
+    font-weight: 600 !important;
+}
+
+.required-label::after {
+    content: " *" !important;
+    color: #dc3545 !important; /* Bootstrap danger red */
+    font-weight: 700 !important;
+    position: absolute !important;
+    right: -12px !important;
+    top: 0 !important;
+    font-size: 1.2em !important;
+    line-height: 1 !important;
+    user-select: none !important;
+}
 
 /* ===== Responsive Adjustments ===== */
 @media (max-width: 768px) {

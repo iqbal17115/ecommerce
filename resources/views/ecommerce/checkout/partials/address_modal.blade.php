@@ -37,12 +37,12 @@
 
                         <!-- Name Fields -->
                         <div class="col-md-6">
-                            <label for="full_name" class="form-label">Name</label>
+                            <label for="full_name" class="form-label required-label">Name</label>
                             <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Enter Full Name" required>
                         </div>
                         <!-- Contact Info -->
                         <div class="col-md-6">
-                            <label for="mobile" class="form-label">Mobile</label>
+                            <label for="mobile" class="form-label required-label">Mobile</label>
                             <input type="text" id="mobile" name="mobile" class="form-control" placeholder="01XXXXXXXXX" required>
                         </div>
                         <div class="col-md-6">
@@ -51,11 +51,11 @@
                         </div>
                         <!-- Address Fields -->
                         <div class="col-md-6">
-                            <label for="street_address" class="form-label">Street Address</label>
+                            <label for="street_address" class="form-label required-label">Street Address</label>
                             <input type="text" id="street_address" name="street_address" class="form-control" placeholder="Enter Street Address" required>
                         </div>
                         <div class="col-md-12">
-                            <label for="note" class="form-label">Note</label>
+                            <label for="note" class="form-label required-label">Note</label>
                             <!-- <input type="text" id="note" name="note" class="form-control" placeholder="Enter Street Address" required> -->
                             <textarea id="note" name="note" class="form-control" placeholder="Enter Street Address" required></textarea>
                         </div>
