@@ -55,7 +55,7 @@
                             <input type="text" id="street_address" name="street_address" class="form-control" placeholder="Enter Street Address" required>
                         </div>
                         <div class="col-md-12">
-                            <label for="note" class="form-label required-label">Note</label>
+                            <label for="note" class="form-label">Note</label>
                             <!-- <input type="text" id="note" name="note" class="form-control" placeholder="Enter Street Address" required> -->
                             <textarea id="note" name="note" class="form-control" placeholder="Enter Note" required></textarea>
                         </div>

@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function resetDependentDropdowns(fromLevel) {
         if (fromLevel <= 1) division.innerHTML = '<option value="">Select Division</option>';
         if (fromLevel <= 2) district.innerHTML = '<option value="">Select District</option>';
-        if (fromLevel <= 3) area.innerHTML = '<option value="">Select Upazila</option>';
+        if (fromLevel <= 3) area.innerHTML = '<option value="">Select Thana</option>';
     }
 
     // Load countries on page load
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             populateDropdown(district, districts, 'Select District');
                             district.value = data.district_id;
                             getDetails(`/areas-select/lists?district_id=${data.district_id}`, areas => {
-                                populateDropdown(area, areas, 'Select Upazila');
+                                populateDropdown(area, areas, 'Select Thana');
                                 area.value = data.upazila_id || '';
                             });
                         });
