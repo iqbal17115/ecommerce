@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function resetDependentDropdowns(fromLevel) {
         if (fromLevel <= 1) division.innerHTML = '<option value="">Select Division</option>';
         if (fromLevel <= 2) district.innerHTML = '<option value="">Select District</option>';
-        if (fromLevel <= 3) area.innerHTML = '<option value="">Select Area</option>';
+        if (fromLevel <= 3) area.innerHTML = '<option value="">Select Upazila</option>';
     }
 
     // Load countries on page load
