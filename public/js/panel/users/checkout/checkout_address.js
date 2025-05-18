@@ -21,10 +21,17 @@ function showDefaultAddress(address) {
     if (!address) return;
 
     container.innerHTML = `
-        <div>
-            <strong>${address.name}</strong><br>
-            ${address.address}<br>
-            <small>Phone: ${address.mobile}</small>
+        <div class="default-address-card p-3 rounded shadow-sm" style="background-color: #f9f9f9; border: 1px solid #ddd;">
+            <div style="font-weight: 600; font-size: 1.5rem; color: #222; margin-bottom: 6px;">
+                ${address.name}
+            </div>
+            <div style="color: #555; margin-bottom: 8px;">
+                ${address.address.replace(/\n/g, '<br>')}
+            </div>
+            ${address.note ? `<div style="font-style: italic; color: #777; margin-bottom: 8px;">📝 Note: ${address.note}</div>` : ''}
+            <div style="font-size: 1.5rem; color: #666;">
+                📞 Phone: ${address.mobile}
+            </div>
         </div>
     `;
 }

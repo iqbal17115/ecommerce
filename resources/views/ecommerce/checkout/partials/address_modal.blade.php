@@ -38,7 +38,7 @@
                         <!-- Name Fields -->
                         <div class="col-md-6">
                             <label for="full_name" class="form-label">Name</label>
-                            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="John Doe" required>
+                            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Enter Full Name" required>
                         </div>
                         <!-- Contact Info -->
                         <div class="col-md-6">
@@ -47,18 +47,23 @@
                         </div>
                         <div class="col-md-6">
                             <label for="optional_mobile" class="form-label">Mobile(Optional)</label>
-                            <input type="text" id="optional_mobile" name="optional_mobile" class="form-control" placeholder="018XXXXXXXX">
+                            <input type="text" id="optional_mobile" name="optional_mobile" class="form-control" placeholder="01XXXXXXXXX">
                         </div>
                         <!-- Address Fields -->
                         <div class="col-md-6">
                             <label for="street_address" class="form-label">Street Address</label>
                             <input type="text" id="street_address" name="street_address" class="form-control" placeholder="Enter Street Address" required>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <label for="note" class="form-label">Note</label>
+                            <!-- <input type="text" id="note" name="note" class="form-control" placeholder="Enter Street Address" required> -->
+                            <textarea id="note" name="note" class="form-control" placeholder="Enter Street Address" required></textarea>
+                        </div>
+                        <div class="col-md-6" style="display: none;">
                             <label for="building_name" class="form-label">Building Name</label>
                             <input type="text" id="building_name" name="building_name" class="form-control" placeholder="Optional">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="display: none;">
                             <label for="nearest_landmark" class="form-label">Nearest Landmark</label>
                             <input type="text" id="nearest_landmark" name="nearest_landmark" class="form-control" placeholder="Optional">
                         </div>

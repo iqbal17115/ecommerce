@@ -25,7 +25,8 @@ class StoreOrUpdateUserAddressRequest extends FormRequest
     {
         return [
             'full_name' => 'required|string|max:255',
-            'street_address' => 'required|string|max:255',
+            'note' => 'nullable|string|max:255',
+            'street_address' => 'nullable|string|max:255',
             'building_name' => 'nullable|string|max:255',
             'nearest_landmark' => 'nullable|string|max:255',
             'mobile' => 'required|string|max:20',

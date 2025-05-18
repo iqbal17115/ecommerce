@@ -21,6 +21,7 @@ class UserAddressListResource extends JsonResource
             'optional_mobile' => $this->optional_mobile,
             'address' => $this->formatAddress(),
             'type' => $this->type,
+            'note' => $this->note,
             'is_default' => $this->is_default,
             'country' => $this->country?->name,
             'division' => $this->division?->name,

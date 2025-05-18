@@ -24,7 +24,7 @@ class CreateUserAddressesTable extends Migration
             $table->string('full_name');
             $table->string('mobile');
             $table->string('optional_mobile')->nullable();
-            $table->string('street_address');
+            $table->string('street_address')->nullable();
             $table->string('building_name')->nullable();
             $table->string('nearest_landmark')->nullable();
             $table->string('type', 50)->default('home');

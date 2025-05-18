@@ -58,7 +58,7 @@
 
 /* ===== Placeholder ===== */
 ::placeholder {
-    font-size: 0.95rem !important;
+    font-size: 1.5rem !important;
     color: #999 !important;
 }
 
@@ -119,9 +119,35 @@
     transform: scale(1.2) !important;
 }
 
+#note {
+    width: 100% !important;
+    min-height: 80px !important;
+    padding: 12px 15px !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    color: #333 !important;
+    background-color: #fafafa !important;
+    border: 1.8px solid #ccc !important;
+    border-radius: 8px !important;
+    resize: vertical !important;
+    /* allow vertical resize only */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+#note:focus {
+    outline: none !important;
+    border-color: #0d6efd !important;
+    /* bootstrap primary blue */
+    box-shadow: 0 0 6px rgba(13, 110, 253, 0.5) !important;
+    background-color: #fff !important;
+}
+
+
 /* ===== Responsive Adjustments ===== */
 @media (max-width: 768px) {
-    .modal-body .row > div {
+    .modal-body .row>div {
         margin-bottom: 1rem !important;
     }
 

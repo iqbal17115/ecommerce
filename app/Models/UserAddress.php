@@ -27,6 +27,7 @@ class UserAddress extends Model
         'street_address',
         'building_name',
         'nearest_landmark',
+        'note',
         'type',
         'is_default',
         'status'

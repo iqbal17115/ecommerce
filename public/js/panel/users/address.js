@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('street_address').value = data.street_address;
                 document.getElementById('building_name').value = data.building_name;
                 document.getElementById('nearest_landmark').value = data.nearest_landmark;
+                document.getElementById('note').value = data.note;
                 document.getElementById('mobile').value = data.mobile;
                 document.getElementById('optional_mobile').value = data.optional_mobile;
                 document.getElementById('is_default').checked = data.is_default === 1;
