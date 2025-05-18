@@ -31,7 +31,7 @@
                         <div class="col-md-3">
                             <select id="district" name="district_id" class="form-select" required></select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <select id="area" name="upazila_id" class="form-select" required></select>
                         </div>
 

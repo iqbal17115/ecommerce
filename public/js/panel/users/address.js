@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             populateDropdown(district, districts, 'Select District');
                             district.value = data.district_id;
                             getDetails(`/areas-select/lists?district_id=${data.district_id}`, areas => {
-                                populateDropdown(area, areas, 'Select Area');
+                                populateDropdown(area, areas, 'Select Upazila');
                                 area.value = data.upazila_id || '';
                             });
                         });
