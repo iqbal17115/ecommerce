@@ -128,7 +128,7 @@ class ShippingChargeService
             ->first();
 
         if (($shipping_charge && $shipping_charge->free_shipping != 'no') || ($shipping_charge && $shipping_charge->minimum_amount_for_free_shipping && (($product_price * $quantity)>= $shipping_charge->minimum_amount_for_free_shipping))) {
-            return 0;
+            // return 0;
         }
         // dd($shipping_charge);
         return  $shipping_charge->charge_1 ?? 0;
