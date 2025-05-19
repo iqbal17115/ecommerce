@@ -9,7 +9,7 @@
                     <i class="fas fa-plus fa-lg mb-2"></i>
                     <span>Add Address</span>
                 </div>
-
+           
                 <!-- Manage Addresses -->
                 <div class="action-card col-md-6" onclick="openSidebar()">
                     <i class="fas fa-cog fa-lg mb-2"></i>

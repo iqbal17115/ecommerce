@@ -44,7 +44,9 @@ class AuthController extends Controller
 
                 // Redirect admin users to the backend dashboard
                 if ($user->roles->where('is_admin', 1)->isNotEmpty()) {
-                    return redirect()->route('dashboard');
+                    // return redirect()->route('dashboard');
+                    dd(redirect()->intended(route('home')));
+                    return redirect()->intended(route('home'));
                 }
 
                 // Redirect non-admin users to their intended URL or a default fallback
@@ -96,27 +98,27 @@ class AuthController extends Controller
     {
         DB::beginTransaction();
         try {
-        $validatedData = $request->validate([
-            'name' => 'required|max:70',
-            'mobile_or_email' => [
-                'required',
-                'string',
-                'max:255',
-                function ($attribute, $value, $fail) {
-                    if (!filter_var($value, FILTER_VALIDATE_EMAIL) && !preg_match('/^(?:\+88)?01[3-9]\d{8}$/', $value)) {
-                        $fail('The input must be a valid email address or Bangladeshi mobile number.');
-                    }
+            $validatedData = $request->validate([
+                'name' => 'required|max:70',
+                'mobile_or_email' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    function ($attribute, $value, $fail) {
+                        if (!filter_var($value, FILTER_VALIDATE_EMAIL) && !preg_match('/^(?:\+88)?01[3-9]\d{8}$/', $value)) {
+                            $fail('The input must be a valid email address or Bangladeshi mobile number.');
+                        }
 
-                    if (User::where('email', $value)->orWhere('mobile', $value)->exists()) {
-                        $fail('This email or mobile number is already registered.');
+                        if (User::where('email', $value)->orWhere('mobile', $value)->exists()) {
+                            $fail('This email or mobile number is already registered.');
+                        }
                     }
-                }
-            ],
-            'password' => ['required', 'min:6'],
-        ]);
+                ],
+                'password' => ['required', 'min:6'],
+            ]);
 
-        $isEmail = filter_var($validatedData['mobile_or_email'], FILTER_VALIDATE_EMAIL);
-        $isMobile = preg_match('/^(?:\+88)?01[3-9]\d{8}$/', $validatedData['mobile_or_email']);
+            $isEmail = filter_var($validatedData['mobile_or_email'], FILTER_VALIDATE_EMAIL);
+            $isMobile = preg_match('/^(?:\+88)?01[3-9]\d{8}$/', $validatedData['mobile_or_email']);
 
 
             $user = User::create([

@@ -16,8 +16,23 @@ class CapturePreviousUrl
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->is('customer-sign-in', 'logout')) {
-            session(['url.intended' => url()->current()]);
+        // List of routes we don't want to capture as intended
+        $excludedRoutes = [
+            'customer-sign-in',
+            'logout',
+            'cart/*',        // avoid cart
+            'api/*',         // avoid API calls
+            'checkout/*',    // maybe avoid checkout too
+        ];
+
+        if (
+            $request->method() === 'GET' &&
+            !$request->ajax() &&
+            !$request->expectsJson() &&
+            !$request->is(...$excludedRoutes)
+        ) {
+            // Save latest good full URL
+            session(['url.intended' => $request->fullUrl()]);
         }
 
         return $next($request);
