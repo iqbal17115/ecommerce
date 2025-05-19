@@ -57,7 +57,7 @@
                         <div class="col-md-12">
                             <label for="note" class="form-label">Note(Optional)</label>
                             <!-- <input type="text" id="note" name="note" class="form-control" placeholder="Enter Street Address" required> -->
-                            <textarea id="note" name="note" class="form-control" placeholder="Enter Note" required></textarea>
+                            <textarea id="note" name="note" class="form-control" placeholder="Enter Note"></textarea>
                         </div>
                         <div class="col-md-6" style="display: none;">
                             <label for="building_name" class="form-label">Building Name</label>
