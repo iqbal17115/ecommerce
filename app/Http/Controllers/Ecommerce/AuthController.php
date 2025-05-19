@@ -45,7 +45,7 @@ class AuthController extends Controller
                 // Redirect admin users to the backend dashboard
                 if ($user->roles->where('is_admin', 1)->isNotEmpty()) {
                     // return redirect()->route('dashboard');
-                    dd(redirect()->intended(route('home')));
+                    // dd(redirect()->intended(route('home')));
                     return redirect()->intended(route('home'));
                 }
 

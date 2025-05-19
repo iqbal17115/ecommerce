@@ -23,6 +23,8 @@ class CapturePreviousUrl
             'cart/*',        // avoid cart
             'api/*',         // avoid API calls
             'checkout/*',    // maybe avoid checkout too
+            'reviews*',       // avoid admin
+            'shop*',       // avoid admin
         ];
 
         if (
