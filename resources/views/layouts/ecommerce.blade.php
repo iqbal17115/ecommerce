@@ -18,6 +18,8 @@
   <meta name="author" content="SW-THEMES">
 
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  @yield('meta')
+
   <script type='application/ld+json'>
     {
       "@context": "http://www.schema.org",

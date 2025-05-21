@@ -1,4 +1,12 @@
 @extends('layouts.ecommerce')
+@section('meta')
+    <meta property="og:title" content="{{ $product_detail->name }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($product_detail->ProductDetail?->short_deacription), 150) }}">
+    <meta property="og:image" content="{{ asset($product_detail?->ProductMainImage?->image) }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="product">
+@endsection
+
 @section('content')
 <style>
     .rating-container {
