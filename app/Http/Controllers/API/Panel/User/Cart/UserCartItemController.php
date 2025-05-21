@@ -27,22 +27,27 @@ class UserCartItemController extends Controller
         if (!Auth::check()) {
             return response()->json([
                 'message' => 'You must be logged in to add items to the cart.',
-                'redirect' => route('customer-sign-in') 
+                'redirect' => route('customer-sign-in')
             ], 401);
         }
+        try {
+            $data = $request->validated();
 
-        $data = $request->validated();
+            $this->userCartService->addToCart($data);
 
-        $this->userCartService->addToCart($data);
+            if ($data['is_buy_now'] ?? false) {
+                return response()->json([
+                    'message' => __('messages.success_add'),
+                    'redirect' => route('checkout') // you define this route
+                ]);
+            }
 
-        if ($data['is_buy_now'] ?? false) {
+            return Message::success(__('messages.success_add'), []);
+        } catch (\Exception $e) {
             return response()->json([
-                'message' => __('messages.success_add'),
-                'redirect' => route('checkout') // you define this route
-            ]);
+                'message' => $e->getMessage()
+            ], 422); // 422 is common for validation-like errors
         }
-
-        return Message::success(__('messages.success_add'), []);
     }
 
     public function updateQuantity(Request $request, CartItem $cartItem): JsonResponse

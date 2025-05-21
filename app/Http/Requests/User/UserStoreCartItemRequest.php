@@ -28,6 +28,7 @@ class UserStoreCartItemRequest extends FormRequest
             'product_variation_id' => 'nullable|uuid|exists:product_variations,id',
             'quantity' => 'nullable|integer|min:1',
             'is_buy_now' => 'nullable|boolean',
+            'is_total_item_qty' => 'nullable|boolean',
         ];
     }
 }
