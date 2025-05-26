@@ -33,6 +33,7 @@ class CartItemListResource extends JsonResource
             "id" => $this->id,
             "product_info" => new CartProductDetailResource($this->product),
             "product_variation_id" => $this->product_variation_id,
+            "variations" => $this?->productVariation?->productVariationAttributes ? ActiveCartItemProductVariationResource::collection($this?->productVariation?->productVariationAttributes) : [],
             "quantity" => $this->quantity,
             "shipping_charge" => $shippingCharge,
             "coupon_discount" => (float)$this?->cart_item_coupon?->value ?? 0,
