@@ -8,7 +8,8 @@ $encodedTitle = urlencode($title);
 <div class="social-icons d-flex gap-2">
    {{-- Facebook App/Web --}}
    <a href="javascript:void(0);" onclick="setTimeout(() => shareToFacebookApp('{{ $url }}'), 500);">
-
+      <div class="social-icon fab fa-facebook-f"></div>
+   </a>
 
    {{-- WhatsApp --}}
    <a class="social-icon fab fa-whatsapp"
