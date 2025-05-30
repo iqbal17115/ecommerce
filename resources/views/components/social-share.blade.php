@@ -3,13 +3,12 @@
 @php
 $encodedUrl = urlencode($url);
 $encodedTitle = urlencode($title);
-$appId = '9639422116148689';
 @endphp
 
 <div class="social-icons d-flex gap-2">
    {{-- Facebook App/Web --}}
-   <a href="javascript:void(0);"
-      onclick="shareToFacebookApp('{{ $url }}')"
+   <a href="https://www.facebook.com/sharer/sharer.php?u={{ $encodedUrl }}"
+      target="_blank"
       class="social-icon fab fa-facebook"
       title="Share on Facebook">
    </a>

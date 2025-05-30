@@ -21,37 +21,35 @@ function shareNow(title, url) {
     }
 }
 
-// Facebook share logic (app/web)
 function shareToFacebookApp(url) {
-  const encodedUrl = encodeURIComponent(url);
-  const fbWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-  const fbAppUrl = `fb://facewebmodal/f?href=${fbWebUrl}`;
-  const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    const encodedUrl = encodeURIComponent(url);
+    const fbWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+    const fbAppUrl = `fb://facewebmodal/f?href=${fbWebUrl}`;
 
-  if (isMobile) {
-    // Attempt to open Facebook app via iframe
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = fbAppUrl;
-    document.body.appendChild(iframe);
+    const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
-    // Fallback to web after 1.5s
-    const timeout = setTimeout(() => {
-      window.open(fbWebUrl, '_blank');
-    }, 1500);
+    if (isMobile) {
+        // Try to open in Facebook App
+        const timeout = setTimeout(() => {
+            // Fallback to web after 1.5s
+            window.open(fbWebUrl, '_blank');
+        }, 1500);
 
-    // Cleanup iframe after 2s
-    setTimeout(() => {
-      document.body.removeChild(iframe);
-      clearTimeout(timeout);
-    }, 2000);
-  } else {
-    // On desktop: open Facebook dialog share directly
-    window.open(
-      `https://www.facebook.com/dialog/share?app_id=9639422116148689&href=${encodedUrl}&display=popup`,
-      '_blank'
-    );
-  }
+        // Try opening app
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = fbAppUrl;
+        document.body.appendChild(iframe);
+
+        // Cleanup
+        setTimeout(() => {
+            document.body.removeChild(iframe);
+            clearTimeout(timeout);
+        }, 2000);
+    } else {
+        // On PC or Mac — directly open Facebook Web Share
+        window.open(fbWebUrl, '_blank');
+    }
 }
 
 
