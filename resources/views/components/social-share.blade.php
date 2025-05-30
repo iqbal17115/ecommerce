@@ -8,7 +8,6 @@ $encodedTitle = urlencode($title);
 <div class="social-icons d-flex gap-2">
    {{-- Facebook App/Web --}}
    <a href="https://www.facebook.com/sharer/sharer.php?u={{ $encodedUrl }}"
-      target="_blank"
       class="social-icon fab fa-facebook"
       title="Share on Facebook">
    </a>
