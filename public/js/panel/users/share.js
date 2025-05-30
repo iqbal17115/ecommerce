@@ -48,7 +48,7 @@ function shareToFacebookApp(url) {
         }, 2000);
     } else {
         // On PC or Mac — directly open Facebook Web Share
-        window.open(fbWebUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no,status=no,scrollbars=yes');
+        window.open(fbWebUrl, '_blank');
     }
 }
 
