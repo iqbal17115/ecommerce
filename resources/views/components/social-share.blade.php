@@ -7,7 +7,7 @@ $encodedTitle = urlencode($title);
 
 <div class="social-icons d-flex gap-2">
    {{-- Facebook App/Web --}}
-   <a href="https://www.facebook.com/sharer/sharer.php?u={{ $encodedUrl }}"
+   <a href="https://www.facebook.com/dialog/share?app_id=9639422116148689&href={{ $encodedUrl }}&display=popup"
       target="_blank"
       class="social-icon fab fa-facebook"
       title="Share on Facebook">
