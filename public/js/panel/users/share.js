@@ -29,29 +29,24 @@ function shareToFacebookApp(url) {
     const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
     if (isMobile) {
-        // Try to open in Facebook App
         const timeout = setTimeout(() => {
-            // Fallback to web after 1.5s
-            window.open(fbWebUrl, '_blank');
+            window.open(fbWebUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no,status=no,scrollbars=yes');
         }, 1500);
 
-        // Try opening app
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
         iframe.src = fbAppUrl;
         document.body.appendChild(iframe);
 
-        // Cleanup
         setTimeout(() => {
             document.body.removeChild(iframe);
             clearTimeout(timeout);
         }, 2000);
     } else {
-        // On PC or Mac — directly open Facebook Web Share
-        window.open(fbWebUrl, '_blank');
+        // ✅ Directly open the share window — must be inside the click handler
+        window.open(fbWebUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no,status=no,scrollbars=yes');
     }
 }
-
 
 // Messenger Fallback (Web only)
 function shareViaMessengerAppOnly(url) {
