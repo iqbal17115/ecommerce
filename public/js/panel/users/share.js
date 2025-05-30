@@ -21,17 +21,37 @@ function shareNow(title, url) {
     }
 }
 
-document.getElementById('facebook-share-link').addEventListener('click', function () {
-    const url = '{{ $url }}';  // raw URL
+function shareToFacebookApp(url) {
     const encodedUrl = encodeURIComponent(url);
     const fbWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
     const fbAppUrl = `fb://facewebmodal/f?href=${fbWebUrl}`;
+
     const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
+    if (isMobile) {
+        // Try to open in Facebook App
+        const timeout = setTimeout(() => {
+            // Fallback to web after 1.5s
+            window.open(fbWebUrl, '_blank');
+        }, 1500);
 
-    // Desktop open web share in new tab
-    window.open(fbWebUrl, '_blank', 'width=600,height=400');
-});
+        // Try opening app
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = fbAppUrl;
+        document.body.appendChild(iframe);
+
+        // Cleanup
+        setTimeout(() => {
+            document.body.removeChild(iframe);
+            clearTimeout(timeout);
+        }, 2000);
+    } else {
+        // On PC or Mac — directly open Facebook Web Share
+        window.open(fbWebUrl, '_blank');
+    }
+}
+
 
 // Messenger Fallback (Web only)
 function shareViaMessengerAppOnly(url) {
