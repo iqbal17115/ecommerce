@@ -180,6 +180,13 @@ class Product extends Model
         return $this->belongsTo(ProductFeature::class, 'product_feature_id');
     }
 
+    public function reviewSum()
+    {
+        return $this->hasOne(Review::class, 'product_id')
+            ->selectRaw('product_id, SUM(rating) as sum_rating')
+            ->groupBy('product_id');
+    }
+
     public function filterByBrands($query, $value): mixed
     {
         return $query->whereHas('Brand', function ($query) use ($value) {
