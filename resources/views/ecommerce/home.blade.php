@@ -70,7 +70,6 @@
 
     /* two line name show css code */
 </style>
-<div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
 <main class="main">
     <div class="bg-gray pb-5">
         <div class="container pb-2">

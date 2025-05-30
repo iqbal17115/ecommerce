@@ -17,9 +17,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-    }
+    public function register() {}
 
     /**
      * Bootstrap any application services.
@@ -35,16 +33,14 @@ class AppServiceProvider extends ServiceProvider
             $view->with('sidebarMenuCategories', Category::whereSidebarMenu(1)->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')->get());
             $view->with('headerMenuCategories', Category::whereHeaderMenu(1)->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')->limit(6)->get());
             $view->with('all_active_advertisements', Advertisement::orderBy('position')->whereIsActive(1)
-            ->get()
-            ->groupBy('page')
-            ->map(function ($ads, $page) {
-                return collect($ads)->keyBy('position');
-            })
-            ->toArray());
+                ->get()
+                ->groupBy('page')
+                ->map(function ($ads, $page) {
+                    return collect($ads)->keyBy('position');
+                })
+                ->toArray());
             $view->with('company_info', CompanyInfo::first());
             $view->with('currency', Currency::whereIsDefault(1)->first());
         });
-
-
     }
 }

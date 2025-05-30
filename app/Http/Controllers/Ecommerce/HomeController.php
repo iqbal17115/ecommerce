@@ -8,6 +8,7 @@ use App\Http\Resources\User\Home\ProductFeature\HomePageProductFeatureResource;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\ProductFeature;
 use App\Models\Backend\WebSetting\Slider;
+use App\Services\CacheService;
 use App\Services\HomePageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
-    public function __construct(private readonly HomePageService $homePageService) {}
+    public function __construct(private readonly HomePageService $homePageService, private readonly CacheService $cacheService) {}
 
     public function getMainContent()
     {
@@ -84,7 +85,9 @@ class HomeController extends Controller
     public function index()
     {
         $user_id = auth()?->user()->id ?? null;
-        $sliders = HomeSliderResource::collection(Slider::whereIsActive(1)->get());
+        $sliders = $this->cacheService->remember('home_sliders', function () {
+            return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
+        }, 300); // cache 5 mins
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $product_features = ProductFeature::getAllLists($this->homePageService->getProductFeatures(), [], HomePageProductFeatureResource::class);
         $top_features = ProductFeature::with('TopFeatureSetting', 'TopFeatureSetting.FeatureSettingDetail', 'TopFeatureSetting.FeatureSettingDetail.Category', 'TopFeatureSetting.ProductFeature', 'TopFeatureSetting.ProductFeature.Advertisement', 'Product')->whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
