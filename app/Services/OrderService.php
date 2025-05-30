@@ -15,6 +15,8 @@ use App\Models\FrontEnd\OrderDetail;
 use App\Models\InvoiceNumberSetting;
 use App\Models\OrderAddress;
 use App\Models\OrderPayment;
+use App\Models\User;
+use App\Models\UserAddress;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -105,11 +107,11 @@ class OrderService
                 ],
             );
 
-            $address = Address::find($validatedData['address_id']);
+            $address = UserAddress::find($validatedData['address_id']);
 
             $orderAddress = new OrderAddress();
             $orderAddress->order_id = $order->id;
-            $orderAddress->name = $address->name;
+            $orderAddress->name = $address->full_name;
             $orderAddress->instruction = $address->instruction;
             $orderAddress->mobile = $address->mobile;
             $orderAddress->optional_mobile = $address->optional_mobile;

@@ -21,7 +21,7 @@ function showDefaultAddress(address) {
     if (!address) return;
 
     container.innerHTML = `
-        <div class="default-address-card p-3 rounded shadow-sm" style="background-color: #f9f9f9; border: 1px solid #ddd;">
+        <div id="default_address" data-address_id="${address.id}" class="default-address-card p-3 rounded shadow-sm" style="background-color: #f9f9f9; border: 1px solid #ddd;">
             <div style="font-weight: 600; font-size: 1.2rem; color: #222; margin-bottom: 6px;">
                 👤 <strong>${address.name}</strong>
             </div>
