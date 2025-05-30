@@ -67,6 +67,7 @@ use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartController;
+use App\Http\Controllers\API\Panel\User\UserInfoController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
 use Illuminate\Support\Facades\Route;
@@ -671,5 +672,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/user-address/{id}', 'show');
         Route::get('/user-address-default', 'default');
         Route::delete('user-address/{userAddress}', 'destroy')->name('user_address.destroy');
+    });
+
+    Route::controller(UserInfoController::class)->group(function () {
+        Route::get('user-info', 'userInfo')->name("user_info");
+        Route::put('update-profile-photo/{user}', 'update')->name("update_profile_photo");
     });
 });

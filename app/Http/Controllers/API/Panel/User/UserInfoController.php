@@ -13,6 +13,7 @@ use App\Http\Resources\User\UserInfoResource;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserInfoController extends Controller
 {
@@ -25,7 +26,7 @@ class UserInfoController extends Controller
     public function userInfo(Request $request): JsonResponse
     {
         try {
-            $user = User::find($request->user_id);
+            $user = Auth::user();
             // Return success response with the address info
             return Message::success(null, new UserInfoResource($user));
         } catch (Exception $ex) {
