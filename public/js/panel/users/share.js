@@ -24,22 +24,23 @@ function shareNow(title, url) {
 function shareToFacebook(url, title) {
     const encodedUrl = encodeURIComponent(url);
     const fbWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-    const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
-    if (isMobile && navigator.share) {
-        // Use native share dialog (modern)
+    if (navigator.share) {
+        // Mobile: Use native share dialog if available
         navigator.share({
             title: title,
             text: title,
             url: url,
-        })
-        .catch(err => console.error("Share failed:", err));
+        }).catch(err => {
+            console.error('Native share failed:', err);
+            // fallback to Facebook web share
+            window.open(fbWebUrl, '_blank', 'width=600,height=400');
+        });
     } else {
-        // Fallback to Facebook web share
-        window.open(fbWebUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no,status=no,scrollbars=yes');
+        // PC: Open Facebook web share dialog
+        window.open(fbWebUrl, '_blank', 'width=600,height=400');
     }
 }
-
 
 // Messenger Fallback (Web only)
 function shareViaMessengerAppOnly(url) {

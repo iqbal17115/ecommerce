@@ -6,9 +6,11 @@ $encodedTitle = urlencode($title);
 @endphp
 
 <div class="social-icons d-flex gap-2">
-   {{-- Facebook App/Web --}}
-   <a href="javascript:void(0);" onclick="setTimeout(() => shareToFacebookApp('{{ $url }}'), 500);">
-      <div class="social-icon fab fa-facebook-f"></div>
+   {{-- Facebook Share --}}
+   <a href="javascript:void(0);"
+      onclick="shareToFacebook('{{ $url }}', '{{ $title }}')"
+      class="social-icon fab fa-facebook"
+      title="Share on Facebook">
    </a>
 
    {{-- WhatsApp --}}
