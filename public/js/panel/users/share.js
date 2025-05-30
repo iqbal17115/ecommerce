@@ -21,32 +21,25 @@ function shareNow(title, url) {
     }
 }
 
-function shareToFacebookApp(url) {
+function shareToFacebook(url, title) {
     const encodedUrl = encodeURIComponent(url);
     const fbWebUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-    const fbAppUrl = `fb://facewebmodal/f?href=${fbWebUrl}`;
-
     const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
-    if (isMobile) {
-        const timeout = setTimeout(() => {
-            window.open(fbWebUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no,status=no,scrollbars=yes');
-        }, 1500);
-
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = fbAppUrl;
-        document.body.appendChild(iframe);
-
-        setTimeout(() => {
-            document.body.removeChild(iframe);
-            clearTimeout(timeout);
-        }, 2000);
+    if (isMobile && navigator.share) {
+        // Use native share dialog (modern)
+        navigator.share({
+            title: title,
+            text: title,
+            url: url,
+        })
+        .catch(err => console.error("Share failed:", err));
     } else {
-        // ✅ Directly open the share window — must be inside the click handler
+        // Fallback to Facebook web share
         window.open(fbWebUrl, '_blank', 'width=600,height=400,menubar=no,toolbar=no,status=no,scrollbars=yes');
     }
 }
+
 
 // Messenger Fallback (Web only)
 function shareViaMessengerAppOnly(url) {
