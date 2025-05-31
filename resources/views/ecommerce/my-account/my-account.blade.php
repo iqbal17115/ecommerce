@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/my_account.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('web_css/custom_modal.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account.css') }}?v={{ time() }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_menus.css') }}?v={{ time() }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_modal.css') }}?v={{ time() }}">
 @endpush
 @section('content')
 
@@ -63,6 +65,7 @@
             </div>
         </div>
         </div>
+        @include('ecommerce.checkout.partials.address_modal')
     </main><!-- End .main -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -72,13 +75,14 @@
 @push('scripts')
     @include('ecommerce.wishlist-js')
     <script src="{{ asset('js/panel/users/my_account/my_account.js') }}"></script>
-    <script src="{{ asset('js/panel/address/address.js') }}"></script>
     <script src="{{ asset('js/panel/users/my_account/my_transaction.js') }}"></script>
     <script src="{{ asset('js/panel/users/my_account/return_exchange.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/my_account/cart.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/my_account/wishlist.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/cart/buy_now.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/my_account/address.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/address.js') }}?v={{ time() }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         CartDrawer.loadCartCount(); // ✅ Now it will work
@@ -92,19 +96,15 @@
         }
     });
     </script>
+
     <!-- My Account JS File -->
     <script>
-        function userAddress() {
-            loadUserAddress(@json($user->id ?? null));
-        }
 
         $(document).ready(function() {
             $('#saerch_box').val();
             $('#from_date').val('');
             $('#to_date').val('');
             $('#saerch_box').val();
-
-            userAddress();
 
             function loadUserOrder(user_id) {
     const searchValue = $("#search_value").val();

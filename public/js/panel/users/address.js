@@ -71,7 +71,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 });
 
-                document.getElementById('addressSidebarWrapper').classList.remove('show');
+                const sidebarWrapper = document.getElementById('addressSidebarWrapper');
+                if (sidebarWrapper) {
+                    sidebarWrapper.classList.remove('show');
+                }
                 modal.show();
             },
             (error) => {
