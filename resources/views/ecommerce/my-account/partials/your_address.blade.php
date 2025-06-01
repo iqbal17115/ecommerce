@@ -1,7 +1,15 @@
 <div class="tab-pane fade" id="address">
-    <h2 class="tab-title">Your Address</h2>
-    <!-- Address form fields go here -->
-    <div class="row" id="address_content">
+    <section class="address-section">
+        <div class="address-header">
+            <h2>Your Addresses</h2>
+            <button class="btn-primary" onclick="openAddAddressModal()">
+                <i class="fas fa-plus"></i> Add New
+            </button>
+        </div>
 
-    </div>
+        <div class="address-carousel">
+            <!-- Dynamically insert address tiles here -->
+        </div>
+    </section>
+    <br>
 </div>

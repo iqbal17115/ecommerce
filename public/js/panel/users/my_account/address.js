@@ -4,57 +4,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Fetch all addresses and display in sidebar
 function fetchAddresses() {
-    getDetails('/user-address/lists', (data) => {
-        const container = document.getElementById("address_content");
-        container.innerHTML = '';
+  getDetails('/user-address/lists', (data) => {
+    const container = document.querySelector(".address-carousel");
+    container.innerHTML = '';
 
-        if (!data?.results?.data?.length) {
-            container.innerHTML = '<p class="text-muted">No saved addresses found.</p>';
-            return;
-        }
-        data.results.data.forEach((address) => {
-            const div = document.createElement('div');
-            div.className = 'card mb-3 shadow-sm border rounded';
+    if (!data?.results?.data?.length) {
+      container.innerHTML = '<p class="no-address">No saved addresses yet.</p>';
+      return;
+    }
 
-            const isDefault = address.is_default == 1;
-            const badge = isDefault
-                ? `<span style="margin-left:auto; font-size: 1.2rem;" class="badge bg-success text-white">Default</span>`
-                : '';
+    data.results.data.forEach((address) => {
+      const isDefault = address.is_default == 1;
 
-            const setDefaultBtn = !isDefault
-                ? `<button class="btn btn-sm btn-outline-primary me-2" onclick="setDefaultAddress('${address.id}')">Set as Default</button>`
-                : '';
+      const tile = document.createElement('div');
+      tile.className = 'address-tile';
 
-            const deleteBtn = !isDefault
-                ? `<button class="btn btn-sm btn-outline-danger" onclick="deleteAddress('${address.id}')" title="Delete">
-                <i class="fas fa-trash-alt"></i> Delete
-            </button>`
-                : ''; // Default address can't be deleted
-
-            div.innerHTML = `
-        <div class="p-3">
-            <div style="display: flex; align-items: center;" class="mb-1">
-                <h6 style="margin: 0;">${address.name}</h6>
-                ${badge}
-            </div>
-            <p class="mb-1">${address.address}</p>
-            <p class="mb-2 text-muted small">Phone: ${address.mobile}</p>
-            <div class="d-flex justify-content-start mt-2 flex-wrap gap-2">
-                ${setDefaultBtn}
-                <button class="btn btn-sm btn-outline-warning" onclick="editAddress('${address.id}')" title="Edit">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                ${deleteBtn}
-            </div>
+      tile.innerHTML = `
+        <div class="address-info">
+          <h4>${address.name} ${isDefault ? '<i class="fas fa-star address-default-icon"></i>' : ''}</h4>
+          <p>${address.address}</p>
+          <p>Phone: ${address.mobile}</p>
         </div>
-    `;
-
-            container.appendChild(div);
-        });
-
-    }, (error) => {
-        console.error("Failed to load cart data:", error);
+        <div class="address-actions">
+          ${!isDefault ? `<button title="Set Default" onclick="setDefaultAddress('${address.id}')"><i class="fas fa-check"></i>Set As Default</button>` : ''}
+          <button title="Edit" onclick="editAddress('${address.id}')"><i class="fas fa-edit"></i></button>
+          ${!isDefault ? `<button title="Delete" onclick="deleteAddress('${address.id}')"><i class="fas fa-trash"></i></button>` : ''}
+        </div>
+      `;
+      container.appendChild(tile);
     });
+  }, (error) => {
+    console.error("Failed to load addresses:", error);
+  });
 }
 
 function setDefaultAddress(id) {

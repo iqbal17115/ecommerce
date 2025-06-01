@@ -1,0 +1,158 @@
+:root {
+  --primary: #007bff !important;
+  --secondary: #6c757d !important;
+  --danger: #dc3545 !important;
+  --warning: #ffc107 !important;
+  --success: #28a745 !important;
+  --bg-light: #f9f9f9 !important;
+  --text-dark: #222 !important;
+  --text-light: #555 !important;
+  --tile-bg: #fff !important;
+  --tile-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+  --border-radius: 0.8rem !important;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif !important;
+  background: var(--bg-light) !important;
+}
+
+.address-section {
+  padding: 2rem 1rem !important;
+}
+
+.address-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 2rem !important;
+}
+
+.address-header h2 {
+  font-size: 2rem !important;
+  color: var(--text-dark) !important;
+  margin: 0 !important;
+}
+
+.btn-primary {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.8rem 1.2rem !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  transition: background 0.2s !important;
+}
+
+.btn-primary:hover {
+  background: #0056b3 !important;
+}
+
+.address-carousel {
+  display: grid !important;
+  gap: 1rem !important;
+  grid-template-columns: repeat(1, 1fr) !important; /* 1 column on small devices */
+  padding-bottom: 1rem !important;
+}
+
+@media (min-width: 768px) {
+  .address-carousel {
+    grid-template-columns: repeat(3, 1fr) !important; /* 3 columns on medium devices and up */
+  }
+}
+
+.address-tile {
+  background: var(--tile-bg) !important;
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--tile-shadow) !important;
+  padding: 1.2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  transition: transform 0.2s !important;
+}
+
+.address-tile:hover {
+  transform: translateY(-3px) !important;
+}
+
+.address-info {
+  margin-bottom: 1rem !important;
+}
+
+.address-info h4 {
+  margin: 0 0 0.6rem !important;
+  font-size: 2rem !important;
+  color: var(--text-dark) !important;
+}
+
+.address-info p {
+  margin: 0.3rem 0 !important;
+  color: var(--text-light) !important;
+  font-size: 1.5rem !important;
+  line-height: 1.4 !important;
+}
+
+.address-actions {
+  display: flex !important;
+  justify-content: flex-start !important;
+  gap: 0.5rem !important;
+}
+
+.address-actions button {
+  background: none !important;
+  border: 1px solid transparent !important;
+  cursor: pointer !important;
+  font-size: 1.5rem !important;
+  color: var(--text-light) !important;
+  transition: color 0.2s, border-color 0.2s, background 0.2s !important;
+  padding: 0.4rem 0.8rem !important;
+  border-radius: 0.4rem !important;
+}
+
+.address-actions button:hover {
+  color: var(--text-dark) !important;
+  border-color: var(--primary) !important;
+  background: #f0f0f0 !important;
+}
+
+.btn-set-default {
+  color: var(--success) !important;
+  border: 1px solid var(--success) !important;
+}
+
+.btn-set-default:hover {
+  background: var(--success) !important;
+  color: #fff !important;
+}
+
+.btn-edit {
+  color: var(--warning) !important;
+  border: 1px solid var(--warning) !important;
+}
+
+.btn-edit:hover {
+  background: var(--warning) !important;
+  color: #000 !important;
+}
+
+.btn-delete {
+  color: var(--danger) !important;
+  border: 1px solid var(--danger) !important;
+}
+
+.btn-delete:hover {
+  background: var(--danger) !important;
+  color: #fff !important;
+}
+
+.no-address {
+  text-align: center !important;
+  color: var(--text-light) !important;
+  font-size: 3rem !important;
+  margin-top: 1rem !important;
+}

@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account.css') }}?v={{ time() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_menus.css') }}?v={{ time() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_modal.css') }}?v={{ time() }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account_address_list.css') }}?v={{ time() }}">
 @endpush
 @section('content')
 
@@ -81,8 +82,8 @@
     <script src="{{ asset('js/panel/users/my_account/wishlist.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/cart/buy_now.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/my_account/address_crud.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/my_account/address.js') }}?v={{ time() }}"></script>
-    <script src="{{ asset('js/panel/users/address.js') }}?v={{ time() }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         CartDrawer.loadCartCount(); // ✅ Now it will work
