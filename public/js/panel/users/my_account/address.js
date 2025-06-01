@@ -27,8 +27,8 @@ function fetchAddresses() {
         </div>
         <div class="address-actions">
           ${!isDefault ? `<button title="Set Default" onclick="setDefaultAddress('${address.id}')" style="color: green !important;"><i class="fas fa-check"></i>Set As Default</button>` : ''}
-          <button title="Edit" onclick="editAddress('${address.id}')"><i class="fas fa-edit"></i></button>
-          ${!isDefault ? `<button title="Delete" onclick="deleteAddress('${address.id}')"><i class="fas fa-trash"></i></button>` : ''}
+          <button title="Edit" onclick="editAddress('${address.id}')"><i class="fas fa-edit text-warning"></i></button>
+          ${!isDefault ? `<button title="Delete" onclick="deleteAddress('${address.id}')"><i class="fas fa-trash text-danger"></i></button>` : ''}
         </div>
       `;
       container.appendChild(tile);
