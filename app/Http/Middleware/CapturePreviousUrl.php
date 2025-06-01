@@ -25,6 +25,7 @@ class CapturePreviousUrl
             'checkout/*',    // maybe avoid checkout too
             'reviews*',       // avoid admin
             'shop*',       // avoid admin
+            'user-info*',       // avoid admin
         ];
 
         if (
