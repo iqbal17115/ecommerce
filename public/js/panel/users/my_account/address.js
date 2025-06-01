@@ -26,7 +26,7 @@ function fetchAddresses() {
           <p>Phone: ${address.mobile}</p>
         </div>
         <div class="address-actions">
-          ${!isDefault ? `<button title="Set Default" onclick="setDefaultAddress('${address.id}')"><i class="fas fa-check"></i>Set As Default</button>` : ''}
+          ${!isDefault ? `<button title="Set Default" onclick="setDefaultAddress('${address.id}')" style="color: green;"><i class="fas fa-check"></i>Set As Default</button>` : ''}
           <button title="Edit" onclick="editAddress('${address.id}')"><i class="fas fa-edit"></i></button>
           ${!isDefault ? `<button title="Delete" onclick="deleteAddress('${address.id}')"><i class="fas fa-trash"></i></button>` : ''}
         </div>
