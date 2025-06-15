@@ -1,7 +1,6 @@
 @extends('layouts.ecommerce')
 @section('content')
     <link rel="stylesheet" href="{{ asset('vendor/aladdinne/assets/css/shop.css') }}">
-    <div id="temp_user_id" data-user_id="{{ $user_id }}"></div>
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
             <div class="container">
@@ -78,9 +77,28 @@
     @endphp
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/panel/users/cart/cart.js') }}"></script>
-    <script src="{{ asset('js/panel/users/common.js') }}"></script>
-    <script src="{{ asset('js/panel/pagination.js') }}"></script>
+<script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
+<script>
+    // Set the hasCartList variable
+    window.hasCartList = false;
+    // Add an event listener to the DOMContentLoaded event
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof CartManager !== 'undefined') {
+            CartManager.loadCartData();
+        }
+    });
+
+    // This handles BACK button cache restore
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            CartManager.loadCartData();
+        }
+    });
+</script>
 
     <script>
         let observer; // Declare observer globally
@@ -180,23 +198,6 @@
                     observer.observe(img);
                 }
             });
-        }
-
-        let selectedCategories = []; // Global array to hold selected categories
-
-        function toggleCategory(category) {
-            const index = selectedCategories.indexOf(category);
-
-            if (index > -1) {
-                // Category is already selected, remove it
-                selectedCategories.splice(index, 1);
-            } else {
-                // Category is not selected, add it
-                selectedCategories.push(category);
-            }
-
-            // Apply filters after toggling the category
-            applyFilters();
         }
 
         // Initialize filters from URL parameters on page load

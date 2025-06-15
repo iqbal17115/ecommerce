@@ -53,12 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Add to Cart buttons
-    document.querySelectorAll('.add_cart_item').forEach(button => {
-        button.addEventListener('click', () => handleCartAction(button, false));
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.add_cart_item')) {
+            const button = e.target.closest('.add_cart_item');
+            handleCartAction(button, false);
+        }
     });
 
     // Buy Now buttons
-    document.querySelectorAll('.buy_now_with_quantity').forEach(button => {
-        button.addEventListener('click', () => handleCartAction(button, true));
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.buy_now_with_quantity')) {
+            const button = e.target.closest('.buy_now_with_quantity');
+            handleCartAction(button, true);
+        }
     });
 });

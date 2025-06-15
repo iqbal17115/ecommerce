@@ -45,45 +45,23 @@ class ShopController extends Controller
 
     public function shop(ShopPageRequest $shopPageRequest)
     {
-        $searchCriteria = $shopPageRequest->input('search', '');
-        if ($searchCriteria) {
-            $searchCriteria = urldecode($shopPageRequest['search']);
-        }
-
         // Query products based on the search term
         $productsQuery = Product::query();
-
-        $categoryName = urldecode($shopPageRequest->category_name);
-
-        if ($searchCriteria) {
-            $productsQuery->where('name', 'like', '%' . $searchCriteria . '%')
-                ->orWhereHas('ProductDetail', function ($query) use ($searchCriteria) {
-                    $query->where('description', 'like', '%' . $searchCriteria . '%')
-                        ->orWhere('description', 'like', '%' . $searchCriteria . '%');
-                });
-        }
-
         // Get the products that match the search term
         $products = $productsQuery->get();
-
-        // 2. (Optional) Retrieve only the brands that are related to the searched products
-        $filteredBrandIds = $products->pluck('brand_id')->unique();
-        $brands = Brand::whereIn('id', $filteredBrandIds)->get();
-        $user_id = auth()->user()->id ?? null;
+        $brands = Brand::get();
         // Load categories with one level of subcategories initially
         $categories = Category::with(['SubCategory'])->where('parent_category_id', null)->get();
-
-        $category = null;
-
+        // Load categories with one level of subcategories initially
         $productColors = AttributeValue::with('attribute')->whereHas('attribute', function ($query){
             $query->where('name', 'Color');
         })->get();
-
+        // Load categories with one level of subcategories initially
         $productSizes = AttributeValue::with('attribute')->whereHas('attribute', function ($query){
             $query->where('name', 'Size');
         })->get();
 
         // Pass the search criteria, category, and categories to the view
-        return view('ecommerce.shop.index', compact(['brands', 'categories', 'user_id', 'searchCriteria', 'categoryName', 'category', 'productColors', 'productSizes']));
+        return view('ecommerce.shop.index', compact(['brands', 'categories', 'productColors', 'productSizes']));
     }
 }
