@@ -382,4 +382,5 @@
 
 
 @include('ecommerce.wishlist-js')
+<script src="{{ asset('js/panel/users/lazyload.js') }}?v={{ time() }}"></script>
 @endpush
