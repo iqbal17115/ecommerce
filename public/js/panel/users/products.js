@@ -7,8 +7,9 @@ $(document).ready(function () {
         getDetails(
             url,
             (response) => {
+                console.log(response.results);
                 renderProducts(response.results.data);
-                setupPagination(response.results);
+                renderSmartPagination(response.results, loadProducts); // ✅ Call reusable pagination
             },
             (error) => {
                 console.error("Failed to load products", error);
@@ -20,15 +21,15 @@ $(document).ready(function () {
         const container = $('#product-container');
         container.empty();
 
-         if (products.length === 0) {
-        container.html('<p>No products found.</p>');
-        return;
-    }
+        if (products.length === 0) {
+            container.html('<p>No products found.</p>');
+            return;
+        }
 
-    products.forEach(product => {
-        const productUrl = `/product/${product.id}`; // Adjust based on your route
+        products.forEach(product => {
+            const productUrl = `/product/${product.id}`; // Adjust based on your route
 
-        const html = `
+            const html = `
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
@@ -71,11 +72,11 @@ $(document).ready(function () {
             </div>
         `;
 
-        container.append(html);
+            container.append(html);
 
-        // ✅ Call this again to re-register new images
-        initLazyLoad();
-    });
+            // ✅ Call this again to re-register new images
+            initLazyLoad();
+        });
     }
 
     function setupPagination(data) {

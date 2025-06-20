@@ -1,6 +1,8 @@
 @extends('layouts.ecommerce')
 @section('content')
 <main class="main">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/web/pagination.css') }}?v={{ time() }}">
+
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
         <div class="container">
             <ol class="breadcrumb">
@@ -14,9 +16,10 @@
         <div class="row">
             <div class="col-lg-9 main-content">
                 @include('ecommerce.shop.partials.sticky_header')
-                
                 <div id="product-container" class="row"></div>
                 <!-- End .row -->
+                <!-- Pagination container -->
+                <div class="mt-4" id="pagination-container"></div>
             </div>
             <!-- End .col-lg-9 -->
 
@@ -65,6 +68,7 @@ $baseRoute = route('products.details', ['name' => '', 'seller_sku' => '']);
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/lazyload.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/pagination.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/products.js') }}?v={{ time() }}"></script>
 <script>
     // Set the hasCartList variable
