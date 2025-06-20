@@ -43,25 +43,8 @@ class ShopController extends Controller
     }
 
 
-    public function shop(ShopPageRequest $shopPageRequest)
+    public function shop()
     {
-        // Query products based on the search term
-        $productsQuery = Product::query();
-        // Get the products that match the search term
-        $products = $productsQuery->get();
-        $brands = Brand::get();
-        // Load categories with one level of subcategories initially
-        $categories = Category::with(['SubCategory'])->where('parent_category_id', null)->get();
-        // Load categories with one level of subcategories initially
-        $productColors = AttributeValue::with('attribute')->whereHas('attribute', function ($query){
-            $query->where('name', 'Color');
-        })->get();
-        // Load categories with one level of subcategories initially
-        $productSizes = AttributeValue::with('attribute')->whereHas('attribute', function ($query){
-            $query->where('name', 'Size');
-        })->get();
-
-        // Pass the search criteria, category, and categories to the view
-        return view('ecommerce.shop.index', compact(['brands', 'categories', 'productColors', 'productSizes']));
+        return view('ecommerce.shop.index');
     }
 }

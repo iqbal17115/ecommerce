@@ -678,4 +678,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('user-info', 'userInfo')->name("user_info");
         Route::put('update-profile-photo/{user}', 'update')->name("update_profile_photo");
     });
+
+    Route::controller(ProductDetailController::class)->group(function () {
+        Route::get('products', 'index')->name("products.index");
+    });
 });

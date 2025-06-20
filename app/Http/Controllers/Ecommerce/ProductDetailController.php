@@ -2,13 +2,31 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Helpers\Message;
 use App\Helpers\ProductVariationHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Product\ProductListRequest;
+use App\Http\Resources\User\Product\ProductListResource;
 use App\Models\Backend\Product\Product;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class ProductDetailController extends Controller
 {
+    /**
+     * Index
+     *
+     * @param ProductListRequest $request
+     * @return JsonResponse
+     */
+    public function index(ProductListRequest $request): JsonResponse
+    {
+        // Call the Service to get list data
+        $lists = Product::getLists(Product::query(), $request->validated(), ProductListResource::class);
+
+        // Return a success message with the data
+        return Message::success(null, $lists);
+    }
+
     public function productDetail($name, $sellerSku = null)
     {
         $user_id = auth()?->user()->id ?? null;

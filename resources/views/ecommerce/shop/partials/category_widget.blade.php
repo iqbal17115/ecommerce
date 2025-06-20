@@ -8,9 +8,6 @@
     <div class="collapse show" id="widget-body-2">
         <div class="widget-body">
             <ul class="cat-list list-group">
-                @foreach ($categories as $category)
-                    @include('ecommerce.partials.category', ['category' => $category, 'flag' => 1])
-                @endforeach
             </ul>
         </div>
     </div>

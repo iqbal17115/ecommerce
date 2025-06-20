@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User\Home\ProductFeature;
 
+use App\Http\Resources\User\Product\ProductListResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class HomePageProductFeatureResource extends JsonResource
@@ -16,7 +17,7 @@ class HomePageProductFeatureResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'products' => HomePageProductFeatureWiseProductResource::collection($this->Product)->resolve(),
+            'products' => ProductListResource::collection($this->Product)->resolve(),
         ];
     }
 }
