@@ -1,15 +1,43 @@
 $(document).ready(function () {
-    loadProducts();
+    function updateBrowserUrl(page, filters) {
+        const params = new URLSearchParams({ ...filters, page });
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        history.pushState(null, '', newUrl);
+    }
+
+
+    function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        const filters = {};
+
+        for (const [key, value] of params.entries()) {
+            filters[key] = value;
+        }
+
+        return filters;
+    }
+
+    const initialFilters = getQueryParams();
+    const initialPage = initialFilters.page ? parseInt(initialFilters.page) : 1;
+
+    loadProducts(initialPage, initialFilters);
 
     function loadProducts(page = 1, filters = {}) {
-        const url = `/products?page=${page}`;
+        const params = new URLSearchParams({ ...filters, page });
 
+        const url = `/products?${params.toString()}`;
+        console.log(url);
         getDetails(
             url,
             (response) => {
-                console.log(response.results);
                 renderProducts(response.results.data);
-                renderSmartPagination(response.results, loadProducts); // ✅ Call reusable pagination
+                renderSmartPagination(response.results, (page) => {
+                    // Re-call with same filters
+                    loadProducts(page, filters);
+
+                    // Optional: update browser URL (without reload)
+                    updateBrowserUrl(page, filters);
+                });
             },
             (error) => {
                 console.error("Failed to load products", error);
