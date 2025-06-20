@@ -72,6 +72,9 @@ $(document).ready(function () {
         `;
 
         container.append(html);
+
+        // ✅ Call this again to re-register new images
+        initLazyLoad();
     });
     }
 

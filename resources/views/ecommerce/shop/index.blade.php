@@ -64,6 +64,7 @@ $baseRoute = route('products.details', ['name' => '', 'seller_sku' => '']);
 <script src="{{ asset('js/panel/users/cart/cart_manager.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/lazyload.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/panel/users/products.js') }}?v={{ time() }}"></script>
 <script>
     // Set the hasCartList variable
@@ -82,5 +83,4 @@ $baseRoute = route('products.details', ['name' => '', 'seller_sku' => '']);
         }
     });
 </script>
-<script src="{{ asset('js/panel/users/lazyload.js') }}?v={{ time() }}"></script>
 @endpush
