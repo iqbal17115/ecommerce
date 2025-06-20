@@ -1,6 +1,5 @@
 @extends('layouts.ecommerce')
 @section('content')
-<link rel="stylesheet" href="{{ asset('vendor/aladdinne/assets/css/shop.css') }}">
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
         <div class="container">
