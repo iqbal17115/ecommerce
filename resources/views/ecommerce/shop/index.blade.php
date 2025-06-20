@@ -82,23 +82,20 @@ $baseRoute = route('products.details', ['name' => '', 'seller_sku' => '']);
         }
     });
 
-    window.onload = function() {
-        // Code to be executed after rendering the full layout
-        function lazyLoad() {
-            const lazyImages = document.querySelectorAll('.lazy-load');
+    function lazyLoad() {
+        const lazyImages = document.querySelectorAll('.lazy-load');
+        lazyImages.forEach(img => {
+            if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
+                .bottom >= 0 && getComputedStyle(img).display !== 'none') {
+                img.src = img.dataset.src;
+                img.classList.remove('lazyload');
+            }
+        });
+    }
 
-            lazyImages.forEach(img => {
-                if (img.getBoundingClientRect().top <= window.innerHeight && img.getBoundingClientRect()
-                    .bottom >= 0 && getComputedStyle(img).display !== 'none') {
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazyload');
-                }
-            });
-        }
-
-        // Check for visible images on page load
-        document.addEventListener("DOMContentLoaded", lazyLoad);
-
+    // Check for visible images on page load
+    document.addEventListener("DOMContentLoaded", lazyLoad);
+    $(document).ready(function() {
         // Get an array of all the image elements you want to load
         var images = document.getElementsByClassName('lazy-load');
 
@@ -129,6 +126,6 @@ $baseRoute = route('products.details', ['name' => '', 'seller_sku' => '']);
             var image = images[i];
             observer.observe(image);
         }
-    };
+    });
 </script>
 @endpush
