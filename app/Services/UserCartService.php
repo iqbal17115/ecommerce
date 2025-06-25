@@ -74,7 +74,7 @@ class UserCartService
     protected function handleBuyNow(Cart $cart, ?CartItem $existingItem, $productId, $variationId, $quantity, $userId): void
     {
         // Deactivate all other cart items
-        CartItem::where('cart_id', $cart->id)->update(['is_active' => false]);
+        // CartItem::where('cart_id', $cart->id)->update(['is_active' => false]);
 
         if ($existingItem) {
             // Just mark this as active, don't update quantity
