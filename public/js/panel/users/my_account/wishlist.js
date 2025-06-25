@@ -85,6 +85,7 @@ $(document).ready(function () {
             selectedId,
             (data) => {
                 loadWishlistData();
+                 CartDrawer.loadCartCount();
             },
             (error) => {
                 toastrErrorMessage(error.responseJSON.message);
