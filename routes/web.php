@@ -177,7 +177,7 @@ Route::group(['middleware' => 'web'], function () {
 
         // View Route
         Route::controller(CancelOrderController::class)->group(function () {
-            Route::get('user-cancel-order', 'index')->name('user_cancel_order.view');
+            Route::get('user-cancel-order/{code}', 'index')->name('user_cancel_order.view');
             Route::post('user-cancellation-product', 'storeOrUpdate')->name('user_cancellation_product');
         });
 

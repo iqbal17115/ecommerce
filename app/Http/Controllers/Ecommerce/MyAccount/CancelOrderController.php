@@ -105,9 +105,9 @@ class CancelOrderController extends Controller
     /**
      * @throws Exception
      */
-    public function index(Request $request): View|JsonResponse
+    public function index($code)
     {
-        $order = Order::first();
+        $order = Order::where('code', $code)->first();
         $cancel_reasons = ProductCancelReasonEnum::getCancelOptions();
         return view('ecommerce.my-account.cancel_order.cancel_order', compact('order', 'cancel_reasons'));
     }
