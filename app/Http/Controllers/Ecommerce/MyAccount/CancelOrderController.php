@@ -13,6 +13,7 @@ use App\Models\FrontEnd\OrderDetail;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -26,8 +27,8 @@ class CancelOrderController extends Controller
         $previousQuantities = $data['previous_quantities'];
         $newQuantities = $data['new_quantities'];
         DB::transaction(function () use ($orderDetailIds, $previousQuantities, $newQuantities) {
-        $order_detail_id = $orderDetailIds[0]['id'];
-        $flagOrderDetail = OrderDetail::find($order_detail_id);
+            $order_detail_id = $orderDetailIds[0]['id'];
+            $flagOrderDetail = OrderDetail::find($order_detail_id);
 
             $allChecked = count(array_filter($orderDetailIds, function ($checked) {
                 return $checked['checked'] === true;
@@ -104,8 +105,9 @@ class CancelOrderController extends Controller
     /**
      * @throws Exception
      */
-    public function index(Order $order): View|JsonResponse
+    public function index(Request $request): View|JsonResponse
     {
+        $order = Order::where('code', $request->code)->first();
         $cancel_reasons = ProductCancelReasonEnum::getCancelOptions();
         return view('ecommerce.my-account.cancel_order.cancel_order', compact('order', 'cancel_reasons'));
     }
