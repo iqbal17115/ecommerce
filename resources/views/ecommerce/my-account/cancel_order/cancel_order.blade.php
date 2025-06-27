@@ -54,8 +54,8 @@
                                             @endfor
                                         </div>
                                         <div class="col-md-5">
-                                            <h6 class="mb-3">{{ $orderDetail->Product->name }}</h6>
-                                            <p class="mb-2">SKU: {{ $orderDetail->Product->seller_sku }}</p>
+                                            <h6 class="mb-3">{{ $orderDetail?->Product?->name }}</h6>
+                                            <p class="mb-2">SKU: {{ $orderDetail?->Product?->seller_sku }}</p>
                                             <p class="mb-0">Price: (Inclusive Tax)</p>
                                         </div>
                                         <div class="col-md-1">
@@ -69,24 +69,24 @@
                                                 <div class="col-md-4">
                                                     <input type="text" value="{{ $orderDetail->quantity }}"
                                                         name="previous_quantity[]"
-                                                        id="previous_quantity{{ $orderDetail->Product->id }}"
+                                                        id="previous_quantity{{ $orderDetail?->Product?->id }}"
                                                         class="form-control form-control-sm" readonly />
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" data-product_id="{{ $orderDetail->Product->id }}"
-                                                        name="product_return_qty_{{ $orderDetail->Product->id }}"
-                                                        id="product_return_qty_{{ $orderDetail->Product->id }}"
+                                                    <input type="text" data-product_id="{{ $orderDetail?->Product?->id }}"
+                                                        name="product_return_qty_{{ $orderDetail?->Product?->id }}"
+                                                        id="product_return_qty_{{ $orderDetail?->Product?->id }}"
                                                         class="form-control form-control-sm product-return-qty"
                                                         placeholder="Quantity" />
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="text" name="new_quantity[]"
-                                                        id="new_quantity{{ $orderDetail->Product->id }}"
+                                                        id="new_quantity{{ $orderDetail?->Product?->id }}"
                                                         class="form-control form-control-sm" readonly />
                                                 </div>
                                                 <div class="col-md-12 mt-2">
                                                     <select name="change_reason"
-                                                        id="product_return reason_{{ $orderDetail->Product->id }}"
+                                                        id="product_return reason_{{ $orderDetail?->Product?->id }}"
                                                         class="form-control form-control-sm">
                                                         <option value="">Select Product Cancel Reason</option>
                                                         <?php
