@@ -267,7 +267,7 @@ let maxDeliveryDate = formatDate(new Date(today.setDate(today.getDate() + delive
                         </tr>
                         <tr class="border-top">
                             <td><h5 class="fw-bold">Grand Total:</h5></td>
-                            <td class="text-end"><h5 class="fw-bold text-success">${formatPrice((order.total_amount - order.discount) + order.shipping_charge)}</h5></td>
+                            <td class="text-end"><h5 class="fw-bold text-success">${formatPrice(order.total_amount - order.discount)}</h5></td>
                         </tr>
                     </table>
                 </div>
