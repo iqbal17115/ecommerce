@@ -20,13 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    use BaseModel;
-
-    protected $orderService;
-    public function __construct(OrderService $orderService)
-    {
-        $this->orderService = $orderService;
-    }
+    public function __construct(private readonly OrderService $orderService) {}
 
     public function lists(OrderListRequest $orderListRequest): JsonResponse
     {
@@ -49,7 +43,7 @@ class OrderController extends Controller
     {
         try {
             $cart = $this->getLists(CartItem::where('is_active', 1)->where("user_id", $orderPlaceRequest->user_id), $orderPlaceRequest->all(), CartCartItemListResource::class);
-            
+
             // Validate the request data and store the data
             $order = $this->orderService->store($orderPlaceRequest->validated(), $cart);
 
