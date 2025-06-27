@@ -36,7 +36,7 @@ $(document).ready(function () {
 
                 const discountHtml = discountAmount > 0
                     ? `<span style="font-size: 1em; font-weight: bold;">Discount: ${item?.currency} ${discountAmount.toFixed(2)}</span>`
-                    : '';
+                    : `<span style="font-size: 1em; font-weight: bold;"></span>`;
 
                 cartListHtml += `
                     <div style="border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; padding: 15px; 
