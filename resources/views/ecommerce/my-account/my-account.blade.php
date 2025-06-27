@@ -202,7 +202,7 @@ let maxDeliveryDate = formatDate(new Date(today.setDate(today.getDate() + delive
                     </div>
                     <div class="col-md-4 text-end">
                         <a href="orders-tracking/${order.id}" class="btn btn-outline-primary btn-sm me-2" style="text-decoration: none;">Track Package</a>
-                        <a href="user-cancel-order/${order.code}" class="btn btn-outline-danger btn-sm me-2" style="text-decoration: none;">Cancel Order</a>
+                        <a href="user-cancel-order?code=${order.code}" class="btn btn-outline-danger btn-sm me-2" style="text-decoration: none;">Cancel Order</a>
                         <button class="btn btn-outline-success btn-sm" onclick="printInvoice('${order.id}')">Print Invoice</button>
                     </div>
                 </div>
