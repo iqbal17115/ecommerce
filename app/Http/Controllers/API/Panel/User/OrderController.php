@@ -25,7 +25,9 @@ class OrderController extends Controller
     public function lists(OrderListRequest $orderListRequest): JsonResponse
     {
         // Get list data
-        $lists = Order::getLists(Order::where('user_id', $orderListRequest->user_id)->when($orderListRequest->code, function ($query) use ($orderListRequest) {
+        $lists = Order::getLists(Order::with(['OrderDetail', 'OrderDetail.Product' => function ($query) {
+            $query->withTrashed();
+        }])->where('user_id', $orderListRequest->user_id)->when($orderListRequest->code, function ($query) use ($orderListRequest) {
             return $query->where('code', 'like', '%' . $orderListRequest->code . '%');
         }), $orderListRequest->validated(), OrderListResource::class);
 
