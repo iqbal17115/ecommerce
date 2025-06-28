@@ -26,6 +26,7 @@ class CapturePreviousUrl
             'reviews*',       // avoid admin
             'shop*',       // avoid admin
             'user-info*',       // avoid admin
+            'cart-drawer/*',       // avoid admin
         ];
 
         if (

@@ -91,7 +91,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#sign-out" data-toggle="tab">
+            <a  href="/customer-logout" >
                 <i class="fas fa-sign-out-alt"></i>
                 Sign Out
             </a>
