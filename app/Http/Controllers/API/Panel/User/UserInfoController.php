@@ -26,9 +26,9 @@ class UserInfoController extends Controller
     public function userInfo(Request $request): JsonResponse
     {
         try {
-            $user = Auth::user();
+            $user = Auth::user() ?? [];
             // Return success response with the address info
-            return Message::success(null, new UserInfoResource($user));
+            return Message::success(null, UserInfoResource::make($user ?? []));
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
         }

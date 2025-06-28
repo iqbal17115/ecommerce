@@ -18,7 +18,8 @@ class CartDrawerController extends Controller
      */
     public function index(Request $request)
     {
-        $cart = CartItem::getAllLists(CartItem::with('product', 'product.Brand')->where("user_id", Auth::user()->id), $request->all(), CartDrawerCartResource::class);
+        $userId = Auth::id();
+        $cart = CartItem::getAllLists(CartItem::with('product', 'product.Brand')->where("user_id", $userId), $request->all(), CartDrawerCartResource::class);
 
         return Message::success(null, $cart);
     }

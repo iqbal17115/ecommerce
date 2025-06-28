@@ -93,7 +93,8 @@ class CartController extends Controller
 
     public function getCart(Request $request)
     {
-        $cart = $this->getLists(CartItem::with('productVariation', 'productVariation.productVariationAttributes', 'productVariation.productVariationAttributes.attributeValue', 'product', 'product.Brand')->where('user_id', Auth::user()->id), $request->all(), CartItemListResource::class);
+        $userId = Auth::id(); // Get the authenticated user's ID
+        $cart = $this->getLists(CartItem::with('productVariation', 'productVariation.productVariationAttributes', 'productVariation.productVariationAttributes.attributeValue', 'product', 'product.Brand')->where('user_id', $userId), $request->all(), CartItemListResource::class);
         session(['cart_info' => $cart]);
         return Message::success(null, $cart);
     }
