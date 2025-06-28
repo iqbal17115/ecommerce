@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 trait BaseModel
 {
-    use CreatedUpdatedBy, Searchable, Sortable, Filterable, UsesUuid;
+    use CreatedUpdatedBy, Searchable, Sortable, DateChangeable, Filterable, UsesUuid;
 
     /**
      * Generate View

@@ -6,11 +6,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const paginationContainer = document.getElementById("pagination");
     const totalItemsDisplay = document.getElementById("totalItems");
 
-    function loadTransactions(page = 1) {
+    function loadTransactions(page = 1, start_date = "", end_date = "") {
         currentPage = page;
         limit = parseInt(document.getElementById("perPageSelect").value);
 
-        const url = `/my-trasaction?page=${page}&limit=${limit}`;
+        // Build query string
+        const params = new URLSearchParams();
+        params.append("page", page);
+        params.append("limit", limit);
+
+        if (start_date) {
+            params.append("start_date", start_date);
+        }
+        if (end_date) {
+            params.append("end_date", end_date);
+        }
+
+        const url = `/my-trasaction?${params.toString()}`;
 
         getDetails(
             url,
@@ -27,19 +39,21 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
+
     function renderTransactions(transactions) {
+        // unchanged...
         transactionList.innerHTML = "";
-    
+
         if (!transactions || transactions.length === 0) {
             transactionList.innerHTML = "<p style='text-align:center; margin:1rem 0; color:#6c757d;'>No transactions found.</p>";
             return;
         }
-    
+
         const table = document.createElement("table");
         table.setAttribute("class", "table table-bordered table-striped table-hover");
         table.style.marginBottom = "0";
         table.style.textAlign = "center";
-    
+
         const thead = `
             <thead style="background-color: #f8f9fa;">
                 <tr>
@@ -50,14 +64,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 </tr>
             </thead>
         `;
-    
+
         let tbody = "<tbody>";
         let totalAmount = 0;
-    
+
         transactions.forEach(tx => {
             const amount = parseFloat(tx.amount);
             totalAmount += amount;
-    
+
             tbody += `
                 <tr>
                     <td>${tx.date}</td>
@@ -68,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
         });
         tbody += "</tbody>";
-    
+
         const tfoot = `
             <tfoot style="background-color: #f1f1f1; font-weight: bold;">
                 <tr>
@@ -77,10 +91,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 </tr>
             </tfoot>
         `;
-    
+
         table.innerHTML = thead + tbody + tfoot;
         transactionList.appendChild(table);
-    }     
+    }
 
     function renderPagination(data) {
         paginationContainer.innerHTML = "";
@@ -107,7 +121,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 a.addEventListener("click", function (e) {
                     e.preventDefault();
                     const page = getPageFromUrl(link.url);
-                    if (page) loadTransactions(page);
+                    if (page) {
+                        const filters = getCurrentFilters();
+                        loadTransactions(page, filters);
+                    }
                 });
             }
 
@@ -125,9 +142,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function getCurrentFilters() {
+        return {
+            start_date: document.getElementById("startDate").value,
+            end_date: document.getElementById("endDate").value,
+        };
+    }
+
+    // Per page selector
     document.getElementById("perPageSelect").addEventListener("change", () => {
-        loadTransactions(1);
+        const { start_date, end_date } = getCurrentFilters();
+        loadTransactions(1, start_date, end_date);
     });
 
+    // Apply Filters button
+    document.getElementById("applyFilters").addEventListener("click", () => {
+        const { start_date, end_date } = getCurrentFilters();
+        loadTransactions(1, start_date, end_date);
+    });
+
+    // Initial load
     loadTransactions();
 });

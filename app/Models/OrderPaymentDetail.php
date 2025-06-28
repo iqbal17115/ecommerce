@@ -30,4 +30,8 @@ class OrderPaymentDetail extends Model
     {
         return $this->belongsTo(OrderPayment::class);
     }
+
+    protected array $dateRange = [
+        'date'
+    ];
 }

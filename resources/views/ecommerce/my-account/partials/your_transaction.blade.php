@@ -1,5 +1,19 @@
 <div class="tab-pane fade" id="your_transactions">
-    <h2 style="font-size: 1.5rem; font-weight: 600; color: #343a40; margin-bottom: 1.5rem;">Your Transactions</h2>
+    <div id="transaction-filters" class="row g-2 mb-3">
+        <div class="col-md-3">
+            <label for="startDate" class="form-label fw-semibold">Start Date</label>
+            <input type="date" id="startDate" class="form-control form-control-sm" />
+        </div>
+        <div class="col-md-4">
+            <label for="endDate" class="form-label fw-semibold">End Date and Filter</label>
+            <div class="input-group input-group-sm">
+                <input type="date" id="endDate" class="form-control" />
+                <button id="applyFilters" class="btn btn-primary">
+                    <i class="bi bi-funnel-fill me-1"></i> Apply
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Table container -->
     <div id="transaction-list" style="border: 1px solid #dee2e6; border-radius: 0.375rem; padding: 1rem; background-color: #fff; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); overflow-x: auto;"></div>
