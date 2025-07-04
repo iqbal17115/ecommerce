@@ -1,46 +1,48 @@
 <div class="tab-pane fade" id="reward-gift-card">
     <h2 class="tab-title" style="background-color: #fff;">Reward and Gift Card</h2>
     <br>
-    <!-- Reward Points Card -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body d-flex align-items-center">
-            <div class="me-3">
-                <i class="bi bi-star-fill fs-1 text-warning"></i>
-            </div>
-            <div>
-                <h5 class="card-title mb-1">Your Reward Points</h5>
-                <p class="mb-2">
-                    <strong class="text-success fs-4">1,500 Points</strong>
-                </p>
-                <small class="text-muted">Lifetime Earned: 2,000 | Used: 500</small><br>
-                <button
-                    class="btn btn-primary btn-sm mt-2"
-                    data-toggle="modal"
-                    data-target="#usePointsModal">
-                    Use Points
-                </button>
+    <div class="row">
+        <!-- Reward Points Card -->
+        <div class="col-md-6 card mb-4 shadow-sm">
+            <div class="card-body d-flex align-items-center">
+                <div class="me-3">
+                    <i class="bi bi-star-fill fs-1 text-warning"></i>
+                </div>
+                <div>
+                    <h5 class="card-title mb-1">Your Reward Points</h5>
+                    <p class="mb-2">
+                        <strong class="text-success fs-4">1,500 Points</strong>
+                    </p>
+                    <small class="text-muted">Lifetime Earned: 2,000 | Used: 500</small><br>
+                    <button
+                        class="btn btn-primary btn-sm mt-2"
+                        data-toggle="modal"
+                        data-target="#usePointsModal">
+                        Use Points
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Gift Card Card -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body d-flex align-items-center">
-            <div class="me-3">
-                <i class="bi bi-credit-card fs-1 text-primary"></i>
-            </div>
-            <div>
-                <h5 class="card-title mb-1">Your Gift Cards</h5>
-                <p class="mb-2">
-                    <strong class="fs-5">৳150.00</strong>
-                </p>
-                <small class="text-muted">Last Used: June 15, 2025</small><br>
-                <button
-                    class="btn btn-outline-primary btn-sm mt-2"
-                    data-toggle="modal"
-                    data-target="#useGiftCardModal">
-                    Use Gift Card
-                </button>
+        <!-- Gift Card Card -->
+        <div class="col-md-6 card mb-4 shadow-sm">
+            <div class="card-body d-flex align-items-center">
+                <div class="me-3">
+                    <i class="bi bi-credit-card fs-1 text-primary"></i>
+                </div>
+                <div>
+                    <h5 class="card-title mb-1">Your Gift Cards</h5>
+                    <p class="mb-2">
+                        <strong class="fs-5">৳150.00</strong>
+                    </p>
+                    <small class="text-muted">Last Used: June 15, 2025</small><br>
+                    <button
+                        class="btn btn-primary btn-sm mt-2"
+                        data-toggle="modal"
+                        data-target="#useGiftCardModal">
+                        Add Gift Card
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -101,7 +103,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Use Gift Card</h5>
+                    <h5 class="modal-title">Add Gift Card</h5>
                     <button
                         type="button"
                         class="btn-close"
@@ -118,7 +120,7 @@
                                 placeholder="Enter your gift card code" />
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
-                            Use Gift Card
+                            Add Gift Card
                         </button>
                     </form>
                 </div>
