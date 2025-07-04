@@ -106,23 +106,25 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-4 mb-4 under_development">
-                    <div class="card shadow-sm">
-                        <div class="card-content">
-                            <div class="card-body p-4">
-                                <div class="media d-flex">
-                                    <div class="align-self-center">
-                                        <i class="fa fa-gift font-large-2 float-left font_size"></i>
-                                    </div>
-                                    <div class="media-body text-right">
-                                        <h3>Reward & Gift Card</h3>
-                                        <span class="text-dark">View Balance and Purchase a
-                                            new Gift Card</span>
+                <div class="col-md-4 mb-4">
+                    <a class="nav-link custom_link" href="#reward-gift-card" data-toggle="tab">
+                        <div class="card shadow-sm">
+                            <div class="card-content">
+                                <div class="card-body p-4">
+                                    <div class="media d-flex">
+                                        <div class="align-self-center">
+                                            <i class="fa fa-gift font-large-2 float-left font_size"></i>
+                                        </div>
+                                        <div class="media-body text-right">
+                                            <h3>Reward & Gift Card</h3>
+                                            <span class="text-dark">View Balance and Purchase a
+                                                new Gift Card</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-md-4 mb-4">
