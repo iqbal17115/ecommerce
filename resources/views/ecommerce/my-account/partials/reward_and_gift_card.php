@@ -12,12 +12,12 @@
                 <p class="mb-2">
                     <strong class="text-success fs-4">1,500 Points</strong>
                 </p>
-                <small class="text-muted">Lifetime Earned: 2,000 | Redeemed: 500</small><br>
+                <small class="text-muted">Lifetime Earned: 2,000 | Used: 500</small><br>
                 <button
                     class="btn btn-primary btn-sm mt-2"
                     data-toggle="modal"
-                    data-target="#redeemPointsModal">
-                    Redeem Points
+                    data-target="#usePointsModal">
+                    Use Points
                 </button>
             </div>
         </div>
@@ -38,8 +38,8 @@
                 <button
                     class="btn btn-outline-primary btn-sm mt-2"
                     data-toggle="modal"
-                    data-target="#redeemGiftCardModal">
-                    Redeem Gift Card
+                    data-target="#useGiftCardModal">
+                    Use Gift Card
                 </button>
             </div>
         </div>
@@ -72,8 +72,8 @@
                         </tr>
                         <tr>
                             <td>2025-06-15</td>
-                            <td><span class="badge bg-danger">Redeemed</span></td>
-                            <td>Redeemed on Order #1002</td>
+                            <td><span class="badge bg-danger">Used</span></td>
+                            <td>Used on Order #1002</td>
                             <td>-100</td>
                             <td>-</td>
                             <td>1,300</td>
@@ -95,13 +95,13 @@
 
     <div
         class="modal fade"
-        id="redeemGiftCardModal"
+        id="useGiftCardModal"
         tabindex="-1"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Redeem Gift Card</h5>
+                    <h5 class="modal-title">Use Gift Card</h5>
                     <button
                         type="button"
                         class="btn-close"
@@ -118,7 +118,7 @@
                                 placeholder="Enter your gift card code" />
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
-                            Redeem Gift Card
+                            Use Gift Card
                         </button>
                     </form>
                 </div>
@@ -126,11 +126,11 @@
         </div>
     </div>
 
-    <div class="modal fade" id="redeemPointsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="usePointsModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Redeem Reward Points</h5>
+                    <h5 class="modal-title">Use Reward Points</h5>
                     <button
                         type="button"
                         class="btn-close"
@@ -140,7 +140,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label class="form-label">Points to Redeem</label>
+                            <label class="form-label">Points to Use</label>
                             <input
                                 type="number"
                                 class="form-control"
@@ -149,7 +149,7 @@
                                 max="1500" />
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
-                            Redeem Points
+                            Use Points
                         </button>
                     </form>
                 </div>
