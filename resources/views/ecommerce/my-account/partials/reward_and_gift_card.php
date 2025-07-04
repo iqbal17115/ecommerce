@@ -32,7 +32,7 @@
             <div>
                 <h5 class="card-title mb-1">Your Gift Cards</h5>
                 <p class="mb-2">
-                    <strong class="fs-5">$150.00</strong>
+                    <strong class="fs-5">৳150.00</strong>
                 </p>
                 <small class="text-muted">Last Used: June 15, 2025</small><br>
                 <button
@@ -83,8 +83,8 @@
                             <td><span class="badge bg-primary">Gift Card Used</span></td>
                             <td>Gift Card Ending ****1234</td>
                             <td>-</td>
-                            <td>$50.00</td>
-                            <td>$150.00</td>
+                            <td>৳50.00</td>
+                            <td>৳150.00</td>
                         </tr>
                     </tbody>
                 </table>
