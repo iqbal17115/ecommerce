@@ -1,6 +1,4 @@
 <div class="tab-pane fade" id="reward-gift-card">
-    <h2 class="tab-title" style="background-color: #fff;">Reward and Gift Card</h2>
-    <br>
     <div class="row">
         <!-- Reward Points Card -->
         <div class="col-md-6 card mb-4 shadow-sm">
