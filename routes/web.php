@@ -68,6 +68,8 @@ use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartController;
 use App\Http\Controllers\API\Panel\User\UserInfoController;
+use App\Http\Controllers\Backend\GiftCardController;
+use App\Http\Controllers\Backend\RewardPointController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
 use Illuminate\Support\Facades\Route;
@@ -681,5 +683,15 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::controller(ProductDetailController::class)->group(function () {
         Route::get('products', 'index')->name("products.index");
+    });
+
+    // Reward Point
+    Route::controller(RewardPointController::class)->group(function () {
+        Route::get('reward-points', 'view')->name('reward_points.view');
+    });
+
+    // Gift Card
+    Route::controller(GiftCardController::class)->group(function () {
+        Route::get('gift-cards', 'view')->name('gift_cards.view');
     });
 });
