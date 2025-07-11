@@ -69,7 +69,8 @@ use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartController;
 use App\Http\Controllers\API\Panel\User\UserInfoController;
 use App\Http\Controllers\Backend\GiftCardController;
-use App\Http\Controllers\Backend\RewardPointController;
+use App\Http\Controllers\Backend\RewardPointRuleController;
+use App\Http\Controllers\Backend\View\RewardPointRuleViewController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
 use Illuminate\Support\Facades\Route;
@@ -686,8 +687,18 @@ Route::group(['middleware' => 'web'], function () {
     });
 
     // Reward Point
-    Route::controller(RewardPointController::class)->group(function () {
-        Route::get('reward-points', 'view')->name('reward_points.view');
+    Route::controller(RewardPointRuleViewController::class)->group(function () {
+        Route::get('reward-point-rule-view', 'index')->name('reward_point_rules.view');
+    });
+
+    // Reward Point
+    Route::controller(RewardPointRuleController::class)->group(function () {
+        Route::get('reward-point-rules', 'index')->name("reward_point_rules.index");
+        Route::put('reward-point-rules/update-status/{categoryId}', 'updateStatus')->name("reward_point_rules.update_status");
+        Route::get('reward-point-rules/{rewardPointRule}', 'show')->name("reward_point_rules.show");
+        Route::post('reward-point-rules', 'store')->name("reward_point_rules.store");
+        Route::put('reward-point-rules/{rewardPointRule}', 'update')->name("reward_point_rules.update");
+        Route::delete('reward-point-rules/{rewardPointRule}', 'destroy')->name("reward_point_rules.destroy");
     });
 
     // Gift Card

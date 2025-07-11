@@ -68,4 +68,10 @@ return [
         'created_at' => ['title' => 'Created At', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false]
     ],
+    'reward_point_rules' => [
+        'event' => ['title' => 'Event', 'sorting' => true],
+        'points' => ['title' => 'Points', 'sorting' => true],
+        'multiplier' => ['title' => 'Multiplier', 'sorting' => true],
+        'actions' => ['title' => 'Action', 'sorting' => false],
+    ],
 ];

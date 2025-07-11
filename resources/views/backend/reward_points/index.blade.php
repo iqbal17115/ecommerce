@@ -1,97 +1,89 @@
-@extends('layouts.backend_app')
+@include('layouts.admin_partials.datatable_resource')
 
+@extends('layouts.backend_app')
+@section('individual__link')
+@endsection
 @section('content')
 <div class="card">
     <div class="card-body">
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center p-3 rounded" style="background-color: #e4ebea;">
-            <h4 class="mb-0">Reward Point Rules Management</h4>
-            <button
-                class="btn btn-success btn-sm d-flex align-items-center"
-                data-toggle="modal"
-                data-target="#createRewardRuleModal">
-                <i class="fas fa-plus-circle me-1"></i> New
-            </button>
-        </div>
+        <div class="row">
+            <div class="col-md-2 mb-2">
+                @include("components.data-table-search")
+            </div>
+            <div class="col-md-10 mb-2">
+                <a class="btn btn-success text-light btn-sm float-right add-new" data-toggle="modal"
+                    data-target="#rewardPointModal" id="add_new"><i class="fas fa-plus-circle"></i> New</a>
 
-        <!-- Rules Table -->
-        <div class="table-responsive mt-3">
-            <table class="table table-striped table-hover align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>#</th>
-                        <th>Event</th>
-                        <th>Points</th>
-                        <th>Multiplier (Tier)</th>
-                        <th class="text-end">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Example Rows -->
-                    <tr>
-                        <td>1</td>
-                        <td>Registration</td>
-                        <td>100</td>
-                        <td>1x</td>
-                        <td class="text-end">
-                            <button class="btn btn-primary btn-sm">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash-alt"></i> Delete
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Order</td>
-                        <td>1 per ৳1</td>
-                        <td>1.2x</td>
-                        <td class="text-end">
-                            <button class="btn btn-primary btn-sm">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash-alt"></i> Delete
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- Loop your real data here -->
-                </tbody>
-            </table>
+            </div>
+            <div class="col-md-12">
+                @include('components.data-table')
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Create Reward Rule Modal -->
-<div class="modal fade" id="createRewardRuleModal" tabindex="-1" aria-labelledby="createRewardRuleLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
+</div>
+<!-- sample modal content -->
+<div id="rewardPointModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myRewardPointLabel" aria-hidden="true">
+    <form action="" method="post" id="targeted_form">
+        @csrf
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createRewardRuleLabel">Add New Reward Rule</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title mt-0" id="myRewardPointLabel">Reward Point</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="eventName" class="form-label">Event Name</label>
-                        <input type="text" id="eventName" class="form-control" placeholder="e.g., Registration">
-                    </div>
-                    <div class="mb-3">
-                        <label for="points" class="form-label">Points</label>
-                        <input type="text" id="points" class="form-control" placeholder="e.g., 100 or 1 per ৳1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="multiplier" class="form-label">Multiplier (Optional)</label>
-                        <input type="text" id="multiplier" class="form-control" placeholder="e.g., 1.2x">
+                    <input type="hidden" name="row_id" id="row_id" value="" />
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="event">Event</label>
+                                <select name="event" id="event" class="form-control" required>
+                                    <option value="" disabled selected>Select an event</option>
+                                    <option value="1">Registration</option>
+                                    <option value="2">Order</option>
+                                    <option value="3">Review</option>
+                                    <option value="4">Referral</option>
+                                    <option value="5">Birthday</option>
+                                </select>
+                                <span class="text-danger err_event"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="points">Points</label>
+                                <input type="number" name="points" id="points" class="form-control" placeholder="Enter Points" required>
+                                <span class="text-danger err_points"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="multiplier">Multiplier (Optional)</label>
+                                <input type="number" name="multiplier" id="multiplier" step="0.01" class="form-control" placeholder="e.g. 1.2">
+                                <span class="text-danger err_multiplier"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success">Save Rule</button>
+                    <button type="button" class="btn btn-secondary waves-effect" id="close_button" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light" id="show_button">Save</button>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
+    </form>
+</div><!-- /.modal -->
 @endsection
+@push('scripts')
+<script src="{{asset('js/admin_panel/reward_points.js')}}"></script>
+<script>
+    loadDataTable();
+</script>
+@endpush
