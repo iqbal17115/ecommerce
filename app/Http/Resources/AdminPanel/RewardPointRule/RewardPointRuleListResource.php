@@ -18,7 +18,8 @@ class RewardPointRuleListResource extends JsonResource
             'id' => $this->id,
             'event' => $this->event,
             'points' => $this->points,
-            'multiplier' => $this->multiplier
+            'multiplier' => $this->multiplier,
+            'status' => $this->is_active,
         ];
     }
 }

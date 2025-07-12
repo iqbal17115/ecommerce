@@ -72,6 +72,16 @@ return [
         'event' => ['title' => 'Event', 'sorting' => true],
         'points' => ['title' => 'Points', 'sorting' => true],
         'multiplier' => ['title' => 'Multiplier', 'sorting' => true],
+        'status' => ['title' => 'Status', 'sorting' => true],
+        'actions' => ['title' => 'Action', 'sorting' => false],
+    ],
+    'gift_cards' => [
+        'code' => ['title' => 'Code', 'sorting' => true],
+        'amount' => ['title' => 'Amount', 'sorting' => true],
+        'balance' => ['title' => 'Balance', 'sorting' => true],
+        'status' => ['title' => 'Status', 'sorting' => true],
+        'recipient_email' => ['title' => 'Recipient Email', 'sorting' => true],
+        'expiration' => ['title' => 'Expiration', 'sorting' => true],
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
 ];

@@ -7,14 +7,16 @@ use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RewardPointRule extends Model
+class GiftCardTransaction extends Model
 {
     use HasFactory, BaseModel, DisplayNameTrait;
 
     protected $fillable = [
-        'event',
-        'points',
-        'multiplier',
-        'is_active',
+        'gift_card_id',
+        'user_id',
+        'order_id',
+        'used_amount',
+        'balance_after',
+        'note'
     ];
 }

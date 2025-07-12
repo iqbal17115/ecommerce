@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserRewardPointsTable extends Migration
+class CreateGiftCardTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,15 @@ class CreateUserRewardPointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_reward_points', function (Blueprint $table) {
+        Schema::create('gift_card_transactions', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->foreignUuid('user_id')->index();
-            $table->unsignedInteger('total_points')->default(0);
-            $table->unsignedInteger('used_points')->default(0);
+            $table->foreignId('gift_card_id');
+            $table->foreignId('user_id')->index();
+            $table->foreignId('order_id')->nullable();
+            $table->decimal('used_amount', 10, 2);
+            $table->decimal('balance_after', 10, 2);
+            $table->text('note')->nullable();
             $table->timestamps(6);
-            $table->softDeletes('deleted_at', 6);
         });
     }
 
@@ -31,6 +33,6 @@ class CreateUserRewardPointsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_reward_points');
+        Schema::dropIfExists('gift_card_transactions');
     }
 }

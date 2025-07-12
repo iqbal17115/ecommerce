@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\RewardPointRule\RewardPointRuleCreateRequest;
 use App\Http\Requests\AdminPanel\RewardPointRule\RewardPointRuleListRequest;
 use App\Http\Requests\AdminPanel\RewardPointRule\RewardPointRuleUpdateRequest;
+use App\Http\Requests\AdminPanel\RewardPointRule\RewardPointRuleUpdateStatusRequest;
+use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingCountryStatusUpdateRequest;
 use App\Http\Resources\AdminPanel\RewardPointRule\RewardPointRuleListResource;
 use App\Http\Resources\AdminPanel\RewardPointRuleView\RewardPointRuleViewResource;
 use App\Models\RewardPointRule;
 use App\Traits\BaseModel;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 class RewardPointRuleController extends Controller
@@ -89,6 +92,27 @@ class RewardPointRuleController extends Controller
 
         // Return a success response with the data
         return Message::success(__("message.update"));
+    }
+
+      /**
+     * Update Country Location
+     *
+     * @param ShopSettingCountryStatusUpdateRequest $shopSettingCountryStatusUpdateRequest
+     * @param RewardPointRule $rewardPointRule
+     * @return JsonResponse
+     */
+    public function statusUpdate(RewardPointRuleUpdateStatusRequest $shopSettingCountryStatusUpdateRequest, RewardPointRule $rewardPointRule): JsonResponse
+    {
+        try {
+            // Update country location
+            $rewardPointRule->update($shopSettingCountryStatusUpdateRequest->validated());
+
+            //Success Response
+            return Message::success(__("messages.success_update"));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
+        }
     }
 
     /**

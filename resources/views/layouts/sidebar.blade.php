@@ -103,7 +103,7 @@
                            <li><a href="{{ route('upazilas.view') }}">Area</a></li>
                            <li><a href="{{ route('currency') }}">Currency</a></li>
                            <li><a href="javascript:void(0);">Language</a></li>
-                           <li><a href="{{ route('reward_point_rules.view') }}">Reward Points</a></li>
+                           <li><a href="{{ route('reward_point_rules.view') }}">Reward Point Rules</a></li>
                            <li><a href="{{ route('gift_cards.view') }}">Gift Cards</a></li>
                        </ul>
                    </li>

@@ -17,7 +17,7 @@ $(document).on("click", ".update_row", function (event) {
 
     // Get countries details and show them in a modal
     getDetails(
-        "/reward-point-rules/" + row_id,
+        "/gift-cards/" + row_id,
         (data) => {
             console.log(data);
             setCompanySelectedId(data.results);
@@ -42,7 +42,7 @@ $(document).on("click", ".delete_row", function (event) {
 
     // Delete the company
     deleteAction(
-        '/reward-point-rules/' + row_id,
+        '/gift-cards/' + row_id,
         (data) => {
             table.clear().draw();
             // Success callback
@@ -77,7 +77,7 @@ $("#targeted_form").submit(function (event) {
 function submitRewardPointForm(formData, selectedId = "") {
     saveAction(
         selectedId.trim() !== "" ? "update" : "store",
-        "/reward-point-rules",
+        "/gift-cards",
         formData,
         selectedId,
         (data) => {
@@ -94,12 +94,15 @@ function submitRewardPointForm(formData, selectedId = "") {
 // Load the company data table
 function loadDataTable() {
     initializeDataTable(
-        `/reward-point-rules`,
+        `/gift-cards`,
         [
-            generateColumn('event', null, 'event'),
-            generateColumn('points', null, 'points'),
-            generateColumn('multiplier', null, 'multiplier'),
-            generateColumn('change_status', (data, type, row) => changeStatus(row.id, row.status), 'name'),
+            generateColumn('code', null, 'code'),
+            generateColumn('amount', null, 'amount'),
+            generateColumn('balance', null, 'balance'),
+            generateColumn('recipient_email', null, 'recipient_email'),
+            generateColumn('recipient_name', null, 'recipient_name'),
+            generateColumn('expiration_date', null, 'expiration_date'),
+            generateColumn('status', null, 'status'),
             generateColumn('action', (data, type, row) => linkableActions(row.id), 'action'),
         ]
     );
@@ -126,7 +129,7 @@ $(document).on("click", ".change_status", function (event) {
     const status = $(this).data("status");
 
     const form_data = {
-        is_active: status
+        status: status
     };
 
     // Submit the form
@@ -137,7 +140,7 @@ function submitChangeStatus(formData, selectedId = "") {
     confirmAction('Change Status', 'Are you sure want to change status', () => {
         saveAction(
             "update",
-            "/reward-point-rule-status",
+            "countries-status",
             formData,
             selectedId,
             (data) => {

@@ -70,6 +70,7 @@ use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartContro
 use App\Http\Controllers\API\Panel\User\UserInfoController;
 use App\Http\Controllers\Backend\GiftCardController;
 use App\Http\Controllers\Backend\RewardPointRuleController;
+use App\Http\Controllers\Backend\View\GiftCardViewController;
 use App\Http\Controllers\Backend\View\RewardPointRuleViewController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
@@ -698,11 +699,22 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('reward-point-rules/{rewardPointRule}', 'show')->name("reward_point_rules.show");
         Route::post('reward-point-rules', 'store')->name("reward_point_rules.store");
         Route::put('reward-point-rules/{rewardPointRule}', 'update')->name("reward_point_rules.update");
+        Route::put('reward-point-rule-status/{rewardPointRule}', 'statusUpdate')->name('reward_point_rules.update_status');
         Route::delete('reward-point-rules/{rewardPointRule}', 'destroy')->name("reward_point_rules.destroy");
     });
 
     // Gift Card
+    Route::controller(GiftCardViewController::class)->group(function () {
+        Route::get('gift-card-view', 'index')->name('gift_cards.view');
+    });
+
+    // Reward Point
     Route::controller(GiftCardController::class)->group(function () {
-        Route::get('gift-cards', 'view')->name('gift_cards.view');
+        Route::get('gift-cards', 'index')->name("gift_cards.index");
+        Route::put('gift-cards/update-status/{categoryId}', 'updateStatus')->name("gift_cards.update_status");
+        Route::get('gift-cards/{rewardPointRule}', 'show')->name("gift_cards.show");
+        Route::post('gift-cards', 'store')->name("gift_cards.store");
+        Route::put('gift-cards/{rewardPointRule}', 'update')->name("gift_cards.update");
+        Route::delete('gift-cards/{rewardPointRule}', 'destroy')->name("gift_cards.destroy");
     });
 });

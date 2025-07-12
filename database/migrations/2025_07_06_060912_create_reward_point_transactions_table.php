@@ -18,7 +18,7 @@ class CreateRewardPointTransactionsTable extends Migration
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->foreignId('user_id')->index();
             $table->enum('type', ['earn', 'use', 'adjustment']);
-            $table->integer('points');
+            $table->unsignedInteger('points');
             $table->string('description')->nullable();
             $table->timestamps(6);
             $table->softDeletes('deleted_at', 6);
