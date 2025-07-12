@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_menus.css') }}?v={{ time() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/address_modal.css') }}?v={{ time() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/web/user/my_account_address_list.css') }}?v={{ time() }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/my_account_side_menu.css') }}?v={{ time() }}">
 @endpush
 @section('content')
 
