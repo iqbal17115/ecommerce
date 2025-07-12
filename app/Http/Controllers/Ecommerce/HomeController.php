@@ -88,8 +88,9 @@ class HomeController extends Controller
         $sliders = $this->cacheService->remember('home_sliders', function () {
             return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
         }, 300); // cache 5 mins
-
+dd(1);
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        dd(2);
         $product_features = ProductFeature::getAllLists($this->homePageService->getProductFeatures(), [], HomePageProductFeatureResource::class);
         $top_features = ProductFeature::with('TopFeatureSetting', 'TopFeatureSetting.FeatureSettingDetail', 'TopFeatureSetting.FeatureSettingDetail.Category', 'TopFeatureSetting.ProductFeature', 'TopFeatureSetting.ProductFeature.Advertisement', 'Product')->whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features', 'top_features', 'user_id']));
