@@ -36,7 +36,7 @@ class CacheService
         $ttl = $ttl ?? $this->ttl;
 
         // If TTL is zero or false, skip caching completely
-        if (!$ttl) {
+        if ($ttl) {
             return $callback();
         }
 
