@@ -86,7 +86,7 @@ class HomeController extends Controller
     {
         $user_id = auth()?->user()->id ?? null;
         $sliders = HomeSliderResource::collection(Slider::whereIsActive(1)->get()); // cache 5 mins
-
+dd(1);
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $product_features = ProductFeature::getAllLists($this->homePageService->getProductFeatures(), [], HomePageProductFeatureResource::class);
         $top_features = ProductFeature::with('TopFeatureSetting', 'TopFeatureSetting.FeatureSettingDetail', 'TopFeatureSetting.FeatureSettingDetail.Category', 'TopFeatureSetting.ProductFeature', 'TopFeatureSetting.ProductFeature.Advertisement', 'Product')->whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
