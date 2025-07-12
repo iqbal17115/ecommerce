@@ -35,10 +35,11 @@ class CacheService
     {
         $ttl = $ttl ?? $this->ttl;
 
-          if ($ttl === 0) {
-        return $callback();
-    }
-    
+        // If TTL is zero or false, skip caching completely
+        if (!$ttl) {
+            return $callback();
+        }
+
         return Cache::remember($key, $ttl, $callback);
     }
 
