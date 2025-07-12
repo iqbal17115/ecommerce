@@ -82,19 +82,16 @@ class HomeController extends Controller
             return redirect()->route('home');
         }
     }
-
     public function index()
     {
         $user_id = auth()?->user()->id ?? null;
-        $sliders = $this->cacheService->remember('home_sliders', [$this, 'getHomeSliders'], 300);
+        $sliders = $this->cacheService->remember('home_sliders', function () {
+            return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
+        }, 0); // cache 5 mins
+
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $product_features = ProductFeature::getAllLists($this->homePageService->getProductFeatures(), [], HomePageProductFeatureResource::class);
         $top_features = ProductFeature::with('TopFeatureSetting', 'TopFeatureSetting.FeatureSettingDetail', 'TopFeatureSetting.FeatureSettingDetail.Category', 'TopFeatureSetting.ProductFeature', 'TopFeatureSetting.ProductFeature.Advertisement', 'Product')->whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features', 'top_features', 'user_id']));
-    }
-
-    public function getHomeSliders()
-    {
-        return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
     }
 }
