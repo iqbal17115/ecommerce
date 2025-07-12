@@ -34,7 +34,7 @@ class CacheService
     public function remember(string $key, callable $callback, ?int $ttl = null)
     {
         $ttl = $ttl ?? $this->ttl;
-return $callback();
+
         return Cache::remember($key, $ttl, $callback);
     }
 
