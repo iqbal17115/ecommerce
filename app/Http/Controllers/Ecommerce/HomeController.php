@@ -85,7 +85,9 @@ class HomeController extends Controller
     public function index()
     {
         $user_id = auth()?->user()->id ?? null;
-        $sliders = HomeSliderResource::collection(Slider::whereIsActive(1)->get()); // cache 5 mins
+        $sliders = $this->cacheService->remember('home_sliders', function () {
+            return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
+        }, 300); // cache 5 mins
 
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         $product_features = ProductFeature::getAllLists($this->homePageService->getProductFeatures(), [], HomePageProductFeatureResource::class);
