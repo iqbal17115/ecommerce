@@ -84,7 +84,6 @@ class HomeController extends Controller
     }
     public function index()
     {
-        dd(1);
         $user_id = auth()?->user()->id ?? null;
         $sliders = $this->cacheService->remember('home_sliders', function () {
             return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
