@@ -88,7 +88,7 @@ class HomeController extends Controller
 
         $sliders = $this->cacheService->remember('home_sliders', function () {
             return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
-        }, 300); // cache 5 mins
+        }); // cache 5 mins
 dd(1);
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
         dd(2);
