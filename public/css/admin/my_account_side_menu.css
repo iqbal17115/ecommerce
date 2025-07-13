@@ -48,12 +48,12 @@
 /* Optional: center-align links on larger screens */
 @media (min-width: 769px) {
     .view-account .side-bar .side-menu {
-        text-align: center !important;
+        text-align: left !important;
     }
 
     .view-account .side-bar .side-menu .nav-link {
-        justify-content: center;
-        text-align: center;
+        justify-content: left;
+        text-align: left;
     }
 }
 
