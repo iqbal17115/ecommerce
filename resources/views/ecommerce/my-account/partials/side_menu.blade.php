@@ -85,5 +85,6 @@
                 <i class="fa-solid fa-right-left" style="color: #f4631b;"></i> Switch Accounts
             </a>
         </li>
+        <br>
     </ul>
 </nav>
