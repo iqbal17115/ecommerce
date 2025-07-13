@@ -76,6 +76,7 @@
         margin-bottom: 10px !important;
         display: block !important;
         float: none !important;         /* Ensure no float */
+        height: 50px !important;        /* 2 per row */
     }
 
     .side-menu .nav-link {
