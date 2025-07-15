@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany; // Import the default BelongsToMany class
-
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -105,5 +105,10 @@ class User extends Authenticatable
     }
     public function Contact(){
         return $this->hasOne(Contact::class);
+    }
+
+    public function userRewardPoint(): HasOne
+    {
+        return $this->hasOne(UserRewardPoint::class);
     }
 }

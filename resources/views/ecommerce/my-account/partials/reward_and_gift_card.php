@@ -9,9 +9,9 @@
                 <div>
                     <h5 class="card-title mb-1">Your Reward Points</h5>
                     <p class="mb-2">
-                        <strong class="text-success fs-4">1,500 Points</strong>
+                        <strong class="text-success fs-4" id="reward-total-points">0 Points</strong>
                     </p>
-                    <small class="text-muted">Lifetime Earned: 2,000 | Used: 500</small><br>
+                    <small class="text-muted" id="reward-summary">Lifetime Earned: 0 | Used: 0</small><br>
                     <button
                         class="btn btn-primary btn-sm mt-2"
                         data-toggle="modal"
@@ -53,39 +53,13 @@
                 <table class="table table-striped align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Date</th>
                             <th>Type</th>
+                            <th>Point</th>
                             <th>Description</th>
-                            <th>Points</th>
-                            <th>Gift Card</th>
-                            <th>Balance After</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>2025-06-20</td>
-                            <td><span class="badge bg-success">Earned</span></td>
-                            <td>Order #1005</td>
-                            <td>+200</td>
-                            <td>-</td>
-                            <td>1,500</td>
-                        </tr>
-                        <tr>
-                            <td>2025-06-15</td>
-                            <td><span class="badge bg-danger">Used</span></td>
-                            <td>Used on Order #1002</td>
-                            <td>-100</td>
-                            <td>-</td>
-                            <td>1,300</td>
-                        </tr>
-                        <tr>
-                            <td>2025-06-10</td>
-                            <td><span class="badge bg-primary">Gift Card Used</span></td>
-                            <td>Gift Card Ending ****1234</td>
-                            <td>-</td>
-                            <td>৳50.00</td>
-                            <td>৳150.00</td>
-                        </tr>
+                    <tbody id="reward-transaction-body">
+
                     </tbody>
                 </table>
             </div>

@@ -89,6 +89,7 @@
     <script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/my_account/address_crud.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/users/my_account/address.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/users/my_account/reward_points.js') }}?v={{ time() }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         CartDrawer.loadCartCount(); // ✅ Now it will work

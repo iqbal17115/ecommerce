@@ -74,6 +74,7 @@ use App\Http\Controllers\Backend\View\GiftCardViewController;
 use App\Http\Controllers\Backend\View\RewardPointRuleViewController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
+use App\Http\Controllers\Ecommerce\UserRewardPointController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -716,5 +717,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('gift-cards', 'store')->name("gift_cards.store");
         Route::put('gift-cards/{rewardPointRule}', 'update')->name("gift_cards.update");
         Route::delete('gift-cards/{rewardPointRule}', 'destroy')->name("gift_cards.destroy");
+    });
+
+    // Reward Point
+    Route::controller(UserRewardPointController::class)->group(function () {
+        Route::get('user-reward-point', 'userRewardPoint')->name('user_reward_point');
+        Route::get('user-reward-point-summary', 'summary')->name('user_reward_point_summary');
     });
 });
