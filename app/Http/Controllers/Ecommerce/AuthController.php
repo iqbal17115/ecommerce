@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Events\UserRegistered;
 use App\Helpers\AuthHelper;
 use App\Helpers\Message;
 use App\Http\Controllers\Controller;
@@ -141,6 +142,9 @@ class AuthController extends Controller
             if (!Auth::check()) {
                 throw new \Exception('Authentication failed.');
             }
+
+            // **Event**
+            event(new UserRegistered($user));
 
             DB::commit();
             return redirect('/admin')->with('success', 'Registration successful.');
