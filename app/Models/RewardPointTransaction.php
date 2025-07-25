@@ -13,6 +13,7 @@ class RewardPointTransaction extends Model
 
     protected $fillable = [
         'user_id',
+        'reward_point_rule_id',
         'type',
         'points',
         'description',

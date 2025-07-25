@@ -9,5 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserRewardPoint extends Model
 {
-    
+    use HasFactory, BaseModel, DisplayNameTrait;
+
+    protected $fillable = [
+        'user_id',
+        'total_points',
+        'used_points'
+    ];
 }

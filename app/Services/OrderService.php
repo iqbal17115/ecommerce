@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\InvoiceNumberSettingEnum;
 use App\Enums\OrderStatusEnum;
 use App\Enums\PaymentStatusEnum;
+use App\Events\OrderPlaced;
 use App\Helpers\Utils;
 use App\Models\Address\Address;
 use App\Models\Backend\Order\OrderTracking;
@@ -130,6 +131,9 @@ class OrderService
 
             // Remove the cart_info session
             session()->forget('cart_info');
+
+            // Dispatch the OrderPlaced event
+            event(new OrderPlaced($order));
             DB::commit();
 
             return $order;
