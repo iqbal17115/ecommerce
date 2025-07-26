@@ -21,8 +21,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link font-weight-bold" href="#address" data-toggle="tab">
-                <i class="fas fa-map-marker-alt" style="color: #f4631b;"></i> My Address
+            <a class="nav-link font-weight-bold" href="#your_payment" data-toggle="tab">
+                <i class="fas fa-credit-card" style="color: #f4631b;"></i> My Payment
             </a>
         </li>
         <li class="nav-item">
@@ -31,8 +31,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link font-weight-bold" href="#mobile-app" data-toggle="tab">
-                <i class="fas fa-mobile-alt" style="color: #f4631b;"></i> Mobile App
+            <a class="nav-link font-weight-bold" href="#your_transactions" data-toggle="tab">
+                <i class="fas fa-receipt" style="color: #f4631b;"></i> Transactions
             </a>
         </li>
         <li class="nav-item">
@@ -41,23 +41,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link font-weight-bold @if ($type == 'wishlist') active @endif wishlist-item-tab">
-                <i class="fas fa-heart" style="color: #f4631b;"></i> Wishlist
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link font-weight-bold" href="#reward-gift-card" data-toggle="tab">
-                <i class="fas fa-gift" style="color: #f4631b;"></i> Reward & Gift Card
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link font-weight-bold" href="#your_payment" data-toggle="tab">
-                <i class="fas fa-credit-card" style="color: #f4631b;"></i> My Payment
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link font-weight-bold" href="#installation-plan" data-toggle="tab">
                 <i class="fas fa-tools" style="color: #f4631b;"></i> Installation Plan
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold @if ($type == 'wishlist') active @endif wishlist-item-tab">
+                <i class="fas fa-heart" style="color: #f4631b;"></i> Wishlist
             </a>
         </li>
         <li class="nav-item">
@@ -66,8 +56,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link font-weight-bold" href="#your_transactions" data-toggle="tab">
-                <i class="fas fa-receipt" style="color: #f4631b;"></i> Transactions
+            <a class="nav-link font-weight-bold" href="#address" data-toggle="tab">
+                <i class="fas fa-map-marker-alt" style="color: #f4631b;"></i> My Address
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" href="#mobile-app" data-toggle="tab">
+                <i class="fas fa-mobile-alt" style="color: #f4631b;"></i> Mobile App
             </a>
         </li>
         <li class="nav-item">
@@ -78,6 +73,11 @@
         <li class="nav-item">
             <a class="nav-link font-weight-bold" href="#my-account-contact-us" data-toggle="tab">
                 <i class="fas fa-envelope-open-text" style="color: #f4631b;"></i> Contact Us
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" href="#reward-gift-card" data-toggle="tab">
+                <i class="fas fa-gift" style="color: #f4631b;"></i> Reward & Gift Card
             </a>
         </li>
         <li class="nav-item">
