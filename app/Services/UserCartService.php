@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\SessionHelper;
 use App\Models\Backend\Product\Product;
 use App\Models\Cart;
 use App\Models\Cart\CartItem;
@@ -13,7 +14,9 @@ class UserCartService
     public function addToCart(array $data): void
     {
         $userId = Auth::id();
-        $cart = $this->getOrCreateCart($userId);
+        $sessionId = SessionHelper::getSessionId();
+
+        $cart = $this->getOrCreateCart($userId, $sessionId);
 
         $productId = $data['product_id'];
         $variationId = $data['product_variation_id'] ?? null;
@@ -22,42 +25,50 @@ class UserCartService
         $isTotaItemQty = (bool) ($data['is_total_item_qty'] ?? false);
         $product = Product::findOrFail($productId);
 
-        // Get existing item if any (MUST include variation if applicable)
-        $existingItem = $this->getCartItem($cart->id, $productId, $variationId);
+        $existingItem = $this->getCartItem($cart->id, $productId, $variationId, $userId, $sessionId);
         $existingQty = $existingItem?->quantity ?? 0;
 
         if ($isTotaItemQty) {
             $existingQty = 0;
         }
 
-        // ✅ Validate total quantity against max_order_qty
         $this->validateMaxOrderQty($product, $quantity, $existingQty, $isTotaItemQty);
 
         if ($isBuyNow) {
-            $this->handleBuyNow($cart, $existingItem, $productId, $variationId, $quantity, $userId);
+            $this->handleBuyNow($cart, $existingItem, $productId, $variationId, $quantity, $userId, $sessionId);
         } else {
-            $this->handleAddToCart($cart, $existingItem, $productId, $variationId, $quantity, $userId, $isTotaItemQty);
+            $this->handleAddToCart($cart, $existingItem, $productId, $variationId, $quantity, $userId, $sessionId, $isTotaItemQty);
         }
     }
 
-    protected function getOrCreateCart($userId): Cart
+    protected function getOrCreateCart($userId, $sessionId): Cart
     {
         return Cart::firstOrCreate(
-            ['user_id' => $userId, 'is_active' => true],
+            [
+                'user_id' => $userId,
+                'session_id' => $userId ? null : $sessionId,
+                'is_active' => true,
+            ],
             ['subtotal' => 0, 'total' => 0]
         );
     }
 
-    protected function getCartItem($cartId, $productId, $variationId = null): ?CartItem
+    protected function getCartItem($cartId, $productId, $variationId = null, $userId = null, $sessionId = null): ?CartItem
     {
         return CartItem::where('cart_id', $cartId)
-            ->where('user_id', Auth::user()->id)
+            ->where(function ($q) use ($userId, $sessionId) {
+                if ($userId) {
+                    $q->where('user_id', $userId);
+                } else {
+                    $q->where('session_id', $sessionId);
+                }
+            })
             ->where('product_id', $productId)
             ->when($variationId, fn($q) => $q->where('product_variation_id', $variationId))
             ->first();
     }
 
-    protected function handleAddToCart(Cart $cart, ?CartItem $existingItem, $productId, $variationId, $quantity, $userId, $isTotaItemQty = false): void
+    protected function handleAddToCart(Cart $cart, ?CartItem $existingItem, $productId, $variationId, $quantity, $userId, $sessionId, $isTotaItemQty = false): void
     {
         if ($existingItem) {
             if ($isTotaItemQty) {
@@ -67,28 +78,25 @@ class UserCartService
                 $existingItem->increment('quantity', $quantity);
             }
         } else {
-            $this->createCartItem($cart->id, $userId, $productId, $variationId, $quantity, false);
+            $this->createCartItem($cart->id, $userId, $sessionId, $productId, $variationId, $quantity, false);
         }
     }
 
-    protected function handleBuyNow(Cart $cart, ?CartItem $existingItem, $productId, $variationId, $quantity, $userId): void
+    protected function handleBuyNow(Cart $cart, ?CartItem $existingItem, $productId, $variationId, $quantity, $userId, $sessionId): void
     {
-        // Deactivate all other cart items
-        // CartItem::where('cart_id', $cart->id)->update(['is_active' => false]);
-
         if ($existingItem) {
-            // Just mark this as active, don't update quantity
             $existingItem->update(['is_active' => true]);
         } else {
-            $this->createCartItem($cart->id, $userId, $productId, $variationId, $quantity, true);
+            $this->createCartItem($cart->id, $userId, $sessionId, $productId, $variationId, $quantity, true);
         }
     }
 
-    protected function createCartItem($cartId, $userId, $productId, $variationId, $quantity, bool $isActive): void
+    protected function createCartItem($cartId, $userId, $sessionId, $productId, $variationId, $quantity, bool $isActive): void
     {
         CartItem::create([
             'cart_id' => $cartId,
             'user_id' => $userId,
+            'session_id' => $userId ? null : $sessionId,
             'product_id' => $productId,
             'product_variation_id' => $variationId,
             'quantity' => $quantity,

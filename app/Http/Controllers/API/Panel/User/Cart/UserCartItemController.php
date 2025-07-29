@@ -23,13 +23,6 @@ class UserCartItemController extends Controller
 
     public function store(UserStoreCartItemRequest $request): JsonResponse
     {
-        // Check if the user is authenticated
-        if (!Auth::check()) {
-            return response()->json([
-                'message' => 'You must be logged in to add items to the cart.',
-                'redirect' => route('customer-sign-in')
-            ], 401);
-        }
         try {
             $data = $request->validated();
 
@@ -38,7 +31,7 @@ class UserCartItemController extends Controller
             if ($data['is_buy_now'] ?? false) {
                 return response()->json([
                     'message' => __('messages.success_add'),
-                    'redirect' => route('checkout') // you define this route
+                    'redirect' => route('checkout')
                 ]);
             }
 

@@ -13,7 +13,7 @@ class Cart extends Model
     use HasFactory, BaseModel, DisplayNameTrait;
 
     protected $fillable = [
-        'user_id', 'coupon_id', 'coupon_discount', 'subtotal', 'total', 'is_active'
+        'user_id', 'session_id', 'coupon_id', 'coupon_discount', 'subtotal', 'total', 'is_active'
     ];
 
     // Define the relationship to CartItems

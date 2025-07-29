@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Panel\User\Cart;
 
 use App\Helpers\Message;
+use App\Helpers\SessionHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Cart\AddToCartRequest;
 use App\Http\Requests\User\Cart\UpdateAllCartItemStatusRequest;
@@ -93,8 +94,25 @@ class CartController extends Controller
 
     public function getCart(Request $request)
     {
-        $userId = Auth::id(); // Get the authenticated user's ID
-        $cart = $this->getLists(CartItem::with('productVariation', 'productVariation.productVariationAttributes', 'productVariation.productVariationAttributes.attributeValue', 'product', 'product.Brand')->where('user_id', $userId), $request->all(), CartItemListResource::class);
+        $userId = Auth::id();
+        $sessionId = SessionHelper::getSessionId();
+
+        $cartQuery = CartItem::with(
+            'productVariation',
+            'productVariation.productVariationAttributes',
+            'productVariation.productVariationAttributes.attributeValue',
+            'product',
+            'product.Brand'
+        )->where(function ($q) use ($userId, $sessionId) {
+            $q->where('session_id', $sessionId);
+
+            if ($userId) {
+                $q->orWhere('user_id', $userId);
+            }
+        });
+
+        $cart = $this->getLists($cartQuery, $request->all(), CartItemListResource::class);
+
         session(['cart_info' => $cart]);
         return Message::success(null, $cart);
     }
