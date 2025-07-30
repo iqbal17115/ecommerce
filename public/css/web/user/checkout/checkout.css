@@ -37,7 +37,6 @@
     min-height: 100px;
 }
 
-/* Quantity Controls */
 /* Custom Quantity Control */
 .quantity-control {
     display: flex;
@@ -45,7 +44,7 @@
     border: 1px solid #ddd;
     border-radius: 6px;
     overflow: hidden;
-    width: 100px;
+    /* width: 100px; */
     height: 38px;
 }
 
