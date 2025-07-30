@@ -2,7 +2,7 @@
 
 /* Wrapper Box */
 .checkout-box {
-    background-color: #fff;
+    background-color: #f4631b;
     border: 1px solid #e0e0e0;
     border-radius: 12px;
     padding: 30px;
@@ -92,14 +92,14 @@
 #placeOrderBtn {
     font-size: 16px;
     padding: 12px;
-    background-color: #ff9800;
+    background-color: #f4631b;
     border: none;
     border-radius: 6px;
     transition: background-color 0.3s;
 }
 
 #placeOrderBtn:hover {
-    background-color: #fb8c00;
+    background-color: #f4631b;
 }
 
 /* Product Image */
