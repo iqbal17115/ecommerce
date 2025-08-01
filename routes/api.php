@@ -126,17 +126,7 @@ Route::controller(ShopSettingUpazilaController::class)->group(function () {
 
 
 // District
-Route::controller(ShopSettingDistrictController::class)->group(function () {
-    Route::get('shop-setting-districts/lists', 'lists')->name('shop_setting_districts.lists');
-    Route::get('districts/select-lists', 'selectLists')->name('districts.select_lists');
-    Route::get('districts/{district}', 'show')->name('districts.show');
-    Route::post('districts', 'store')->name('districts.store');
-    Route::put('districts/{district}', 'update')->name('districts.update');
-    Route::put('districts-location/{district}', 'locationUpdate')->name('districts_location.update');
-    Route::put('districts-status/{district}', 'statusUpdate')->name('districts_status.update');
-    Route::delete('districts/{district}', 'destroy')->name('districts.delete');
-    Route::get('districts/select-lists', 'select_district')->name('districts.select_lists');
-});
+
 
 // Division
 Route::controller(ShopSettingDivisionController::class)->group(function () {
