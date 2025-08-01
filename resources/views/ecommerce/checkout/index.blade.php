@@ -19,5 +19,28 @@
 
 @push('scripts')
 <script src="{{ asset('js/checkout/checkout.js') }}?v={{ time() }}"></script>
- <script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_active_item_list.js') }}?v={{ time() }}"></script>
+<script>
+    // Set the hasCartList variable
+    window.hasCartList = false;
+    // Set the hasCartActiveItemList variable
+    window.hasCartActiveItemList = true;
+
+    // Add an event listener to the DOMContentLoaded event
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof CartManager !== 'undefined') {
+            CartManager.loadCartData();
+        }
+    });
+
+    // This handles BACK button cache restore
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            CartManager.loadCartData();
+        }
+    });
+</script>
 @endpush

@@ -1,54 +1,39 @@
 const CartActiveItemList = (() => {
+
     function render(data) {
-        const tableBody = document.getElementById('table_body');
-        tableBody.innerHTML = '';
-
-        let total = 0;
-        let total_shipping_charge = 0;
-        let coupon_discount = 0;
-
+        const container = document.getElementById('productBlockList');
+        container.innerHTML = ''; // Clear previous content
+console.log(data);
         data.forEach(item => {
-            total += item.product_info.product_price * item.quantity;
-            total_shipping_charge += parseFloat(item.shipping_charge);
-            coupon_discount += item.coupon_discount;
+            // total += item.product_info.product_price * item.quantity;
+            // total_shipping_charge += parseFloat(item.shipping_charge);
+            // coupon_discount += item.coupon_discount;
 
             let variationInfo = '';
             if (item.variations && item.variations.length > 0) {
                 variationInfo = item.variations.map(v => `${v.attribute_name}: ${v.attribute_value}`).join(', ');
             }
 
-            tableBody.innerHTML += `
-               <div class="cart_list_${item.id} p-3 mb-1 bg-white rounded shadow-sm" style="border: 1px solid #f1f1f1;">
-            <div class="row align-items-center">
-                <div class="col-10 col-md-7 d-flex">
-                    <img src="${item.product_info.image_url}" alt="Product Image" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
-                    <div>
-                        <div style="font-weight: 600; font-size: 16px;">${item.product_info.name}</div>
-                        <div style="color: #6c757d; font-size: 13px;">${item.product_info.brand_name || 'No Brand'}, ${variationInfo}</div>
-                        <div style="font-weight: bold; font-size: 16px; margin-top: 5px;">${item?.active_currency?.icon || ''} ${item.product_info.product_price * item.quantity}</div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mt-2 mt-md-0">
-                    <div class="d-flex align-items-center justify-content-between justify-content-md-end">
-                        <div class="d-flex align-items-center">
-                            <button class="qty-btn-minus btn btn-light change_qty_cart_item" data-cart_item_id="${item.id}" style="width: 30px; height: 30px; font-size: 16px; padding: 0;">-</button>
-                            <input type="text" name="qty" value="${item.quantity}" class="input-qty text-center mx-2" style="width: 40px; height: 30px; border: 1px solid #ddd; border-radius: 5px;">
-                            <button class="qty-btn-plus btn btn-light change_qty_cart_item" data-cart_item_id="${item.id}" style="width: 30px; height: 30px; font-size: 16px; padding: 0;">+</button>
+            const productBlock = `
+            <div class="d-flex align-items-start mb-3">
+                <img src="${item.product_info.image_url}" alt="Product Image" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;">
+                <div class="ml-3">
+                    <h6 class="mb-1 font-weight-bold">${item.product_info.name}</h6>
+                    <small>Brand: ${item.product_info.brand_name}, ${variationInfo}</small>
+                    <div class="d-flex align-items-center mt-2">
+                        <span class="font-weight-bold text-dark mr-3">${item.product_info.product_price} Taka</span>
+                        <div class="quantity-control">
+                            <button class="btn btn-qty btn-decrease" type="button">−</button>
+                            <input type="text" class="qty-input" value="${item.quantity}" readonly>
+                            <button class="btn btn-qty btn-increase" type="button">+</button>
                         </div>
-                        <button class="btn btn-link text-danger p-0 remove-cart-item ms-2" data-cart_item_id="${item.id}" title="Remove">
-                            <i class="fa fa-trash text-danger" style="font-size: 15px;"></i>
-                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-            `;
-        });
+        `;
 
-        $('.cart_total_price').text(total.toFixed(2));
-        $('.shipping_charge_amount').text(total_shipping_charge.toFixed(2));
-        $('.coupon_discount').text(coupon_discount.toFixed(2));
-        $('.grand_total').text((total + total_shipping_charge - coupon_discount).toFixed(2));
+            container.insertAdjacentHTML('beforeend', productBlock);
+        });
     }
 
     function initEvents() {
@@ -56,16 +41,16 @@ const CartActiveItemList = (() => {
             const cartItemId = $(this).data('cart_item_id'); // FIXED here
             const $input = $(this).siblings('.input-qty');   // FIXED class name
             let currentQty = parseInt($input.val());
-        
+
             if ($(this).hasClass('qty-btn-minus')) {
                 currentQty = Math.max(1, currentQty - 1);
             } else {
                 currentQty += 1;
             }
-        
+
             CartManager.updateQuantity(cartItemId, currentQty);
         });
-        
+
         $(document).on('change', '.input-qty', function () {
             const cartItemId = $(this).siblings('.qty-btn-minus').data('cart_item_id'); // or find from parent
             let newQty = parseInt($(this).val());

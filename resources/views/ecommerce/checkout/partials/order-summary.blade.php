@@ -2,22 +2,7 @@
     <h5 class="mb-4 font-weight-bold">Your Order</h5>
 
     <!-- Product Block -->
-    <div class="d-flex align-items-start mb-3">
-        <img src="{{ asset('images/products/puma-shirt.png') }}" alt="Product Image" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;">
-        <div class="ml-3">
-            <h6 class="mb-1 font-weight-bold">Premium Puma Basic T-Shirt</h6>
-            <small>Brand: Puma, Size: XL, Color: Black</small>
-            <div class="d-flex align-items-center mt-2">
-                <span class="font-weight-bold text-dark mr-3">279 Taka</span>
-
-                <div class="quantity-control">
-                    <button class="btn btn-qty btn-decrease" type="button">−</button>
-                    <input type="text" class="qty-input" value="1" readonly>
-                    <button class="btn btn-qty btn-increase" type="button">+</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="productBlockList"></div>
 
     <!-- Payment Method -->
     <div class="mb-3">
