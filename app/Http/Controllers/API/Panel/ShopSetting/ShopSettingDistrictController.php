@@ -25,7 +25,6 @@ class ShopSettingDistrictController extends Controller
     public function select_district(Request $request): JsonResponse
     {
         try {
-            dd(District::get());
             // Get the lists
             $lists = District::getLists(District::query(), $request->all(), ShopSettingDistrictListResource::class);
 
@@ -43,6 +42,7 @@ class ShopSettingDistrictController extends Controller
      */
     public function lists(Request $request): bool|string
     {
+        dd(111);
         try {
             return $this->dataTable(District::query(), $request->all(), ShopSettingDistrictDatatableResource::class);
         } catch (Exception $ex) {
