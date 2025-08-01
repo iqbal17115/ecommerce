@@ -18,7 +18,7 @@
     <!-- Order Summary -->
     <div class="order-summary border-top pt-3">
         <div class="d-flex justify-content-between mb-2">
-            <span>Subtotal (1 Item)</span>
+            <span>Subtotal (<span class="total_item_count">0</span> Item)</span>
             <span class="cart_total_price">0</span>
         </div>
         <div class="d-flex justify-content-between mb-2">

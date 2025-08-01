@@ -40,6 +40,7 @@ const CartActiveItemList = (() => {
             $('.shipping_charge_amount').text(total_shipping_charge.toFixed(2));
             $('.coupon_discount').text(coupon_discount.toFixed(2));
             $('.grand_total_price').text((total + total_shipping_charge - coupon_discount).toFixed(2));
+            $('.total_item_count').text(data.length);
 
             container.insertAdjacentHTML('beforeend', productBlock);
         });
