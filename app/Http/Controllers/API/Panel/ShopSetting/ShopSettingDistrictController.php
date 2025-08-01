@@ -43,7 +43,7 @@ class ShopSettingDistrictController extends Controller
     public function lists(Request $request): bool|string
     {
         try {
-            return $this->dataTable(District::with('Division')->whereHas('Division'), $request->all(), ShopSettingDistrictDatatableResource::class);
+            return $this->dataTable(District::query(), $request->all(), ShopSettingDistrictDatatableResource::class);
         } catch (Exception $ex) {
             return Message::error($ex->getMessage());
         }
