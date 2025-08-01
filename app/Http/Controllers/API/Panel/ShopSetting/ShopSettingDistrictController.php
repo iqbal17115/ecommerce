@@ -42,8 +42,7 @@ class ShopSettingDistrictController extends Controller
      */
     public function lists(Request $request): bool|string
     {
-        return 'hi';
-            return $this->dataTable(District::query(), $request->all(), ShopSettingDistrictDatatableResource::class);
+        return $this->dataTable(District::query(), $request->all(), ShopSettingDistrictDatatableResource::class);
     }
 
     /**
@@ -122,7 +121,7 @@ class ShopSettingDistrictController extends Controller
         }
     }
 
-     /**
+    /**
      * Update District Location
      *
      * @param ShopSettingStatusUpdateRequest $shopSettingStatusUpdateRequest
