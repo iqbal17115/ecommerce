@@ -25,7 +25,7 @@
             <span>Shipping Fee</span>
             <span class="shipping_charge_amount"></span>
         </div>
-        <hr>
+        <hr class="my-2">
         <div class="d-flex justify-content-between font-weight-bold">
             <span>Total (VAT Inclusive if Applicable)</span>
             <span class="grand_total_price"></span>
@@ -33,7 +33,7 @@
     </div>
 
     <!-- Order Button -->
-    <div class="text-right mt-4">
+    <div class="text-right mt-2">
         <button type="button" class="btn btn-warning btn-block font-weight-bold" id="placeOrderBtn">Order Place</button>
     </div>
 </div>
