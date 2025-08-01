@@ -8,14 +8,14 @@
             <h6 class="mb-1 font-weight-bold">Premium Puma Basic T-Shirt</h6>
             <small>Brand: Puma, Size: XL, Color: Black</small>
             <div class="d-flex align-items-center mt-2">
-    <span class="font-weight-bold text-dark mr-3">279 Taka</span>
-    
-    <div class="quantity-control">
-        <button class="btn btn-qty btn-decrease" type="button">−</button>
-        <input type="text" class="qty-input" value="1" readonly>
-        <button class="btn btn-qty btn-increase" type="button">+</button>
-    </div>
-</div>
+                <span class="font-weight-bold text-dark mr-3">279 Taka</span>
+
+                <div class="quantity-control">
+                    <button class="btn btn-qty btn-decrease" type="button">−</button>
+                    <input type="text" class="qty-input" value="1" readonly>
+                    <button class="btn btn-qty btn-increase" type="button">+</button>
+                </div>
+            </div>
         </div>
     </div>
 
