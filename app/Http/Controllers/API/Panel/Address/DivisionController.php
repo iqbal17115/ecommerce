@@ -22,7 +22,7 @@ class DivisionController extends Controller
     public function lists(Request $request): JsonResponse|bool|string
     {
         try {
-            $list = Division::selectLists(Division::where('country_id', $request->country_id), $request->all(), DivisionListResource::class);
+            $list = Division::selectLists(Division::where('country_id', '9c617d63-544b-49f8-991f-63e9158b4b8d'), $request->all(), DivisionListResource::class);
 
             return Message::success(null, $list);
         } catch (Exception $ex) {
