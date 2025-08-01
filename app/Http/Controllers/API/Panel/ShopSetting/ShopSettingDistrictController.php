@@ -42,6 +42,7 @@ class ShopSettingDistrictController extends Controller
      */
     public function lists(Request $request): bool|string
     {
+        dd(111);
         try {
             return $this->dataTable(District::query(), $request->all(), ShopSettingDistrictDatatableResource::class);
         } catch (Exception $ex) {
