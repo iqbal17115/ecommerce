@@ -4,10 +4,14 @@ const CartActiveItemList = (() => {
         const container = document.getElementById('productBlockList');
         container.innerHTML = ''; // Clear previous content
 
+        let total = 0;
+        let total_shipping_charge = 0;
+        let coupon_discount = 0;
+
         data.forEach(item => {
-            // total += item.product_info.product_price * item.quantity;
-            // total_shipping_charge += parseFloat(item.shipping_charge);
-            // coupon_discount += item.coupon_discount;
+            total += item.product_info.product_price * item.quantity;
+            total_shipping_charge += parseFloat(item.shipping_charge);
+            coupon_discount += item.coupon_discount;
 
             let variationInfo = '';
             if (item.variations && item.variations.length > 0) {
@@ -31,6 +35,11 @@ const CartActiveItemList = (() => {
                 </div>
             </div>
         `;
+
+            $('.cart_total_price').text(total.toFixed(2));
+            $('.shipping_charge_amount').text(total_shipping_charge.toFixed(2));
+            $('.coupon_discount').text(coupon_discount.toFixed(2));
+            $('.grand_total_price').text((total + total_shipping_charge - coupon_discount).toFixed(2));
 
             container.insertAdjacentHTML('beforeend', productBlock);
         });

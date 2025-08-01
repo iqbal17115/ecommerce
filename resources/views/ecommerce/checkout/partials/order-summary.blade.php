@@ -19,16 +19,16 @@
     <div class="order-summary border-top pt-3">
         <div class="d-flex justify-content-between mb-2">
             <span>Subtotal (1 Item)</span>
-            <span>Taka 279</span>
+            <span class="cart_total_price">0</span>
         </div>
         <div class="d-flex justify-content-between mb-2">
             <span>Shipping Fee</span>
-            <span>Taka 100</span>
+            <span class="shipping_charge_amount"></span>
         </div>
         <hr>
         <div class="d-flex justify-content-between font-weight-bold">
             <span>Total (VAT Inclusive if Applicable)</span>
-            <span>Taka 379</span>
+            <span class="grand_total_price"></span>
         </div>
     </div>
 
