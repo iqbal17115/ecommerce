@@ -45,6 +45,7 @@ class ShopSettingDistrictController extends Controller
         try {
             return $this->dataTable(District::query(), $request->all(), ShopSettingDistrictDatatableResource::class);
         } catch (Exception $ex) {
+            dd($ex);
             return Message::error($ex->getMessage());
         }
     }
