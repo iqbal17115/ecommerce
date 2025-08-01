@@ -3,7 +3,7 @@ const CartActiveItemList = (() => {
     function render(data) {
         const container = document.getElementById('productBlockList');
         container.innerHTML = ''; // Clear previous content
-console.log(data);
+
         data.forEach(item => {
             // total += item.product_info.product_price * item.quantity;
             // total_shipping_charge += parseFloat(item.shipping_charge);
@@ -18,9 +18,9 @@ console.log(data);
             <div class="d-flex align-items-start mb-3">
                 <img src="${item.product_info.image_url}" alt="Product Image" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;">
                 <div class="ml-3">
-                    <h6 class="mb-1 font-weight-bold">${item.product_info.name}</h6>
+                    <h6 class="mb-0 font-weight-bold">${item.product_info.name}</h6>
                     <small>Brand: ${item.product_info.brand_name}, ${variationInfo}</small>
-                    <div class="d-flex align-items-center mt-2">
+                    <div class="d-flex align-items-center">
                         <span class="font-weight-bold text-dark mr-3">${item.product_info.product_price} Taka</span>
                         <div class="quantity-control">
                             <button class="btn btn-qty btn-decrease" type="button">−</button>
