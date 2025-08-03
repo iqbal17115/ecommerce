@@ -34,6 +34,6 @@
 
     <!-- Order Button -->
     <div class="text-right mt-2">
-        <button type="button" class="btn btn-warning btn-block font-weight-bold" id="placeOrderBtn">Order Place</button>
+        <button type="button" class="btn btn-warning btn-block font-weight-bold mb-sm-4 mb-md-0" id="placeOrderBtn">Order Place</button>
     </div>
 </div>
