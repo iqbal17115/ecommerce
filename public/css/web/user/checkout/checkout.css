@@ -37,6 +37,11 @@
     min-height: 100px;
 }
 
+/* Select Styling */
+.checkout-box select.form-control {
+    height: 40px !important;
+}
+
 /* Custom Quantity Control */
 .quantity-control {
     display: flex;

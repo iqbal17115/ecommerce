@@ -27,7 +27,7 @@ const CartActiveItemList = (() => {
                     <div class="d-flex align-items-center">
                         <span class="font-weight-bold text-dark mr-3">${item.product_info.product_price} Taka</span>
                         <div class="quantity-control">
-                            <button class="btn btn-qty btn-decrease qty-btn-plus" type="button" data-cart_item_id="${item.id}">−</button>
+                            <button class="btn btn-qty btn-decrease qty-btn-minus" type="button" data-cart_item_id="${item.id}">−</button>
                             <input type="text" class="qty-input input-qty" value="${item.quantity}" data-cart_item_id="${item.id}" readonly>
                             <button class="btn btn-qty btn-increase qty-btn-plus" type="button" data-cart_item_id="${item.id}">+</button>
                         </div>
