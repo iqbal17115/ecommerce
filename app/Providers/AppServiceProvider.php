@@ -31,19 +31,25 @@ class AppServiceProvider extends ServiceProvider
         //Categories
         View::composer('*', function ($view) {
             $cacheService = app(CacheService::class);
-            $parentCategories = Category::whereParentCategoryId(null)
+            $parentCategories = $cacheService->remember('parentCategories', function () {
+                return Category::whereParentCategoryId(null)
                     ->whereTopMenu(1)
                     ->orderBy('position', 'asc')
                     ->get();
+            }, 3600);
 
-            $sidebarMenuCategories = Category::whereSidebarMenu(1)
+            $sidebarMenuCategories = $cacheService->remember('sidebarMenuCategories', function () {
+                return Category::whereSidebarMenu(1)
                     ->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')
                     ->get();
+            }, 3600);
 
-            $headerMenuCategories = Category::whereHeaderMenu(1)
+            $headerMenuCategories = $cacheService->remember('headerMenuCategories', function () {
+                return Category::whereHeaderMenu(1)
                     ->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')
                     ->limit(6)
                     ->get();
+            }, 3600);
 
             $allActiveAdvertisements = $cacheService->remember('allActiveAdvertisements', function () {
                 return Advertisement::orderBy('position')
