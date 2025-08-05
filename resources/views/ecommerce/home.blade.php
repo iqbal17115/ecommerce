@@ -121,6 +121,7 @@
                                 }
                             }
                         }">
+                    @if(count($top_show_categories) > 0)
                     @foreach ($top_show_categories as $top_show_category)
                     <div class="product-category appear-animate" data-animation-name="fadeInUpShorter">
                         <a
@@ -140,6 +141,7 @@
                         </a>
                     </div>
                     @endforeach
+                    @endif
                 </div>
             </div>
             <!-- Start Top Feature -->
@@ -357,11 +359,11 @@
 
 @endsection
 @push('scripts')
-<script src="{{ asset('js/panel/users/common.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('js/panel/users/cart/cart_list.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/common.js') }}" defer></script>
+<script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}" defer></script>
+<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}" defer></script>
+<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}" defer></script>
+<script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
 <script>
     // Set the hasCartList variable
     window.hasCartList = false;
@@ -382,5 +384,5 @@
 
 
 @include('ecommerce.wishlist-js')
-<script src="{{ asset('js/panel/users/lazyload.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
 @endpush

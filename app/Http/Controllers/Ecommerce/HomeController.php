@@ -88,9 +88,39 @@ class HomeController extends Controller
         $sliders = $this->cacheService->remember('home_sliders', function () {
             return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
         }, 300); // cache 5 mins
+
+        $top_show_categories = $this->cacheService->remember('home_top_show_categories', function () {
+            return Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        }, 300); // 5 mins
+
         $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
-        $product_features = ProductFeature::getAllLists($this->homePageService->getProductFeatures(), [], HomePageProductFeatureResource::class);
-        $top_features = ProductFeature::with('TopFeatureSetting', 'TopFeatureSetting.FeatureSettingDetail', 'TopFeatureSetting.FeatureSettingDetail.Category', 'TopFeatureSetting.ProductFeature', 'TopFeatureSetting.ProductFeature.Advertisement', 'Product', 'Product.ProductMainImage', 'Product.ProductImage', 'Product.Category')->whereCardFeature(1)->whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
+        $product_features = $this->cacheService->remember('home_product_features', function () {
+            return ProductFeature::getAllLists(
+                $this->homePageService->getProductFeatures(),
+                [],
+                HomePageProductFeatureResource::class
+            );
+        }, 300);
+
+        $top_features = $this->cacheService->remember('home_top_features', function () {
+            return ProductFeature::with([
+                'TopFeatureSetting',
+                'TopFeatureSetting.FeatureSettingDetail',
+                'TopFeatureSetting.FeatureSettingDetail.Category',
+                'TopFeatureSetting.ProductFeature',
+                'TopFeatureSetting.ProductFeature.Advertisement',
+                'Product',
+                'Product.ProductMainImage',
+                'Product.ProductImage',
+                'Product.Category'
+            ])
+                ->whereCardFeature(1)
+                ->whereTopMenu(1)
+                ->whereIsActive(1)
+                ->orderByRaw('ISNULL(position), position ASC')
+                ->get();
+        }, 300);
+
         return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features', 'top_features', 'user_id']));
     }
 }
