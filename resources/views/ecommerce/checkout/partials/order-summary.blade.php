@@ -6,7 +6,7 @@
 
     <!-- Payment Method -->
     <div class="mb-3">
-        <h6 class="font-weight-bold">Select Payment Method</h6>
+        <!-- <h6 class="font-weight-bold">Select Payment Method</h6> -->
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_method" id="cod" value="cod" checked>
             <label class="form-check-label" for="cod">

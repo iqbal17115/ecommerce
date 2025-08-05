@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Helpers\Message;
+use App\Helpers\SessionHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Order\OrderPlaceRequest;
 use App\Http\Resources\User\Checkout\Cart\CartItemListResource;
@@ -25,7 +26,16 @@ class PlaceOrderController extends Controller
     public function placeOrder(OrderPlaceRequest $orderPlaceRequest): JsonResponse
     {
         try {
-            $cart = CartItem::getLists(CartItem::where('is_active', 1)->where("user_id", Auth::user()->id), $orderPlaceRequest->all(), CartItemListResource::class);
+            $userId = Auth::id();
+            $sessionId = SessionHelper::getSessionId();
+
+            $cart = CartItem::getLists(CartItem::where('is_active', 1)->where(function ($q) use ($userId, $sessionId) {
+                $q->where('session_id', $sessionId);
+
+                if ($userId) {
+                    $q->orWhere('user_id', $userId);
+                }
+            }), $orderPlaceRequest->all(), CartItemListResource::class);
 
             // Validate the request data and store the data
             $order = $this->orderService->store($orderPlaceRequest->validated(), $cart);

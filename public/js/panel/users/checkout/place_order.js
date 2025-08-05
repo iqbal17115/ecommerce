@@ -21,42 +21,55 @@ function submitOrder(formData, selectedId = "") {
     );
 }
 
-// document.getElementById('placeOrderBtn').addEventListener('click', function () {
-//     alert(111);
+// $(document).on('click', '#placeOrderBtn', function () {
 //     const form = document.getElementById('checkoutForm');
-//     const formData = new FormData(form);
+//     const orderData = new FormData(form);
 
 //     // Basic validation example
 //     const requiredFields = ['name', 'phone', 'district', 'thana', 'address'];
 //     for (let field of requiredFields) {
-//         if (!formData.get(field)) {
-//             alert(`Please fill the required field: ${field}`);
+//         if (!orderData.get(field)) {
+//             toastrErrorMessage(`Please fill the required field: ${field}`);
 //             return;
 //         }
 //     }
 
-//     // Here you would submit the form using AJAX or normal POST
-//     alert("Order placed! (This is a placeholder action)");
+//     const formData = {
+//         // address_id: $('#default_address').data('address_id') ?? null,
+//         // user_id: $("#temp_user_id").data('user_id') ?? null,
+//         // payment_method: $('input[name="radio"]:checked').val() ?? null,
+//     };
+
+//     submitOrder(formData, '');
 // });
 
 $(document).on('click', '#placeOrderBtn', function () {
     const form = document.getElementById('checkoutForm');
-    const orderData = new FormData(form);
+    const formData = {};
 
-    // Basic validation example
-    const requiredFields = ['name', 'phone', 'district', 'thana', 'address'];
+    // Collect required fields into formData object
+    const requiredFields = ['name', 'mobile', 'division', 'district', 'thana', 'address'];
     for (let field of requiredFields) {
-        if (!orderData.get(field)) {
+        const value = form.elements[field]?.value?.trim() || '';
+        if (!value) {
             toastrErrorMessage(`Please fill the required field: ${field}`);
             return;
         }
+        formData[field] = value;
     }
 
-    const formData = {
-        // address_id: $('#default_address').data('address_id') ?? null,
-        // user_id: $("#temp_user_id").data('user_id') ?? null,
-        // payment_method: $('input[name="radio"]:checked').val() ?? null,
-    };
+    // Get payment method
+    const paymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value;
+    if (!paymentMethod) {
+        toastrErrorMessage('Please select a payment method');
+        return;
+    }
+    formData['payment_method'] = paymentMethod;
+
+    // If you want to add other fields from the form that are not in requiredFields, do so here:
+    // for example:
+    // formData['email'] = form.elements['email']?.value || '';
 
     submitOrder(formData, '');
 });
+

@@ -6,8 +6,12 @@ use App\Enums\InvoiceNumberSettingEnum;
 use App\Enums\OrderStatusEnum;
 use App\Enums\PaymentStatusEnum;
 use App\Events\OrderPlaced;
+use App\Helpers\SessionHelper;
 use App\Helpers\Utils;
 use App\Models\Address\Address;
+use App\Models\Address\District;
+use App\Models\Address\Division;
+use App\Models\Address\Upazila;
 use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\Product\Product;
 use App\Models\Cart\CartItem;
@@ -22,6 +26,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\AssignOp\Div;
 
 class OrderService
 {
@@ -57,7 +62,7 @@ class OrderService
             $order->payment_method = $validatedData['payment_method'];
             $order->user_id = auth()->id();
             $order->order_date = now();
-            $order->estimate_delivery_date = now()->addDay(); 
+            $order->estimate_delivery_date = now()->addDay();
             $order->total_amount = $totalAmount;
             $order->other_amount = 0;
             $order->discount = $couponDiscount;
@@ -74,7 +79,7 @@ class OrderService
                 [
                     'order_id' => $order->id,
                     'status' => OrderStatusEnum::PENDING,
-                    'created_by' => Auth::user()->id
+                    'created_by' => Auth::user()->id ?? null
                 ],
             );
 
@@ -108,26 +113,32 @@ class OrderService
                 ],
             );
 
-            $address = UserAddress::find($validatedData['address_id']);
+            // $address = UserAddress::find($validatedData['address_id']);
 
             $orderAddress = new OrderAddress();
             $orderAddress->order_id = $order->id;
-            $orderAddress->name = $address->full_name;
-            $orderAddress->instruction = $address->instruction;
-            $orderAddress->mobile = $address->mobile;
-            $orderAddress->optional_mobile = $address->optional_mobile;
-            $orderAddress->street_address = $address->street_address;
-            $orderAddress->building_name = $address->building_name;
-            $orderAddress->nearest_landmark = $address->nearest_landmark;
-            $orderAddress->type = $address->type;
-            $orderAddress->country_name = $address?->country?->name;
-            $orderAddress->division_name = $address?->division?->name;
-            $orderAddress->district_name = $address?->district?->name;
-            $orderAddress->upazila_name = $address?->upazila?->name;
+            $orderAddress->name = $validatedData['name'];
+            $orderAddress->mobile = $validatedData['mobile'];
+            $orderAddress->country_name = $validatedData['country_name'] ?? '';
+            $orderAddress->division_name = Division::find($validatedData['division'])->name ?? '';
+            $orderAddress->district_name = District::find($validatedData['district'])->name ?? '';
+            $orderAddress->upazila_name = Upazila::find($validatedData['thana'])->name ?? '';
+            $orderAddress->instruction = $validatedData['address'] ?? '';
             $orderAddress->save();
 
+            // Delete CartItem records
+            $userId = Auth::id();
+            // Get the current session ID
+            $sessionId = SessionHelper::getSessionId();
+
             // Delete CartItem records for the current user
-            CartItem::where('user_id', auth()->id())->delete();
+            CartItem::where(function ($q) use ($userId, $sessionId) {
+                $q->where('session_id', $sessionId);
+
+                if ($userId) {
+                    $q->orWhere('user_id', $userId);
+                }
+            })->delete();
 
             // Remove the cart_info session
             session()->forget('cart_info');

@@ -24,8 +24,13 @@ class OrderPlaceRequest extends FormRequest
     public function rules()
     {
         return [
-            'address_id' => 'required',
-            'payment_method' => 'nullable',
+            'name'            => 'required|string|max:255',
+            'mobile'           => 'required|string',
+            'division'        => 'required|uuid',
+            'district'        => 'required|uuid',
+            'thana'           => 'required|uuid',
+            'address'         => 'required|string|max:500',
+            'payment_method'  => 'required|in:cod',
         ];
     }
 }
