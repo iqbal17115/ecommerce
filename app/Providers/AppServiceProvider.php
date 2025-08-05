@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         //Categories
         View::composer('*', function ($view) {
             $cacheService = app(CacheService::class);
+            dd($cacheService);
             $parentCategories = $cacheService->remember('parentCategories', function () {
                 return Category::whereParentCategoryId(null)
                     ->whereTopMenu(1)
