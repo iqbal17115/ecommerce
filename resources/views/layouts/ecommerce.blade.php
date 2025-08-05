@@ -63,9 +63,9 @@
 
 <body>
   <div id="loader-overlay">
-    <!-- <div id="loader">
+    <div id="loader">
       <img class="lazy-load" data-src="{{ asset('images/spinner.png') }}">
-    </div> -->
+    </div>
   </div>
   <!-- Scroll-top-end-->
   <div class="page-wrapper">
