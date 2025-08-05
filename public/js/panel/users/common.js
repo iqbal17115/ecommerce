@@ -25,7 +25,9 @@ $(document).ready(function () {
         getDetails(
             "/user-info",
             (data) => {
-                setUserData(data.results);
+                if (data.results != null) {
+                    setUserData(data.results);
+                }
             },
             (error) => {
 

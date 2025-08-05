@@ -26,7 +26,8 @@ class UserInfoController extends Controller
     public function userInfo(Request $request): JsonResponse
     {
         try {
-            $user = Auth::user() ?? collect();
+            $user = Auth::user();
+
             // Return success response with the address info
             return Message::success(null, $user ? UserInfoResource::make($user) : null);
         } catch (Exception $ex) {
@@ -45,32 +46,32 @@ class UserInfoController extends Controller
     {
 
         // try {
-             // Retrieve the image file from the request
-               // Retrieve the base64-encoded image from the request
-               $base64Image = $userProfilePhotoUpdateRequest->input('img_path');
+        // Retrieve the image file from the request
+        // Retrieve the base64-encoded image from the request
+        $base64Image = $userProfilePhotoUpdateRequest->input('img_path');
 
-               // Decode the base64 string to get the image data
-               $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64Image));
-   
-               // Process and upload the image
-               $targetWidth = 800;
-               $targetHeight = 600;
-   
-               $image = Image::make($imageData);
-               $image->resize($targetWidth, $targetHeight, function ($constraint) {
-                   $constraint->aspectRatio();
-               });
-   
-               $quality = 80;
-               $compressedPath = 'profile_photos/' . uniqid() . '.jpg';
-               Storage::disk('public')->put($compressedPath, $image->stream());
-   
-               $user->profile_photo_path = $compressedPath;
+        // Decode the base64 string to get the image data
+        $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64Image));
+
+        // Process and upload the image
+        $targetWidth = 800;
+        $targetHeight = 600;
+
+        $image = Image::make($imageData);
+        $image->resize($targetWidth, $targetHeight, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $quality = 80;
+        $compressedPath = 'profile_photos/' . uniqid() . '.jpg';
+        Storage::disk('public')->put($compressedPath, $image->stream());
+
+        $user->profile_photo_path = $compressedPath;
         $user->save();
 
 
-            //Success Response
-            return Message::success(__("messages.success_update"));
+        //Success Response
+        return Message::success(__("messages.success_update"));
         // } catch (Exception $e) {
         //     // Handle any exception that occurs during the process
         //     return Message::error($e->getMessage());
