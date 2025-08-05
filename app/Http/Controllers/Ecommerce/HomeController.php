@@ -102,6 +102,8 @@ class HomeController extends Controller
             );
         }, 300);
 
+        $product_features = $product_features->take(6);
+
         $top_features = $this->cacheService->remember('home_top_features', function () {
             return ProductFeature::with([
                 'TopFeatureSetting',
