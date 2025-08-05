@@ -11,7 +11,7 @@ class CacheService
      *
      * @var int
      */
-    protected int $ttl = 3600;
+    protected int $ttl;
 
     /**
      * Constructor to set default TTL
