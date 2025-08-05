@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         //Categories
         View::composer('*', function ($view) {
             $cacheService = app(CacheService::class);
-            dd($cacheService);
+            try {
             $parentCategories = $cacheService->remember('parentCategories', function () {
                 return Category::whereParentCategoryId(null)
                     ->whereTopMenu(1)
@@ -70,7 +70,11 @@ class AppServiceProvider extends ServiceProvider
             $currency = $cacheService->remember('currency', function () {
                 return Currency::whereIsDefault(1)->first();
             }, 3600);
-
+ } catch (\Exception $e) {
+        dd($e->getMessage());
+        // fallback data দিতে পারেন অথবা খালি কালেকশন দিয়ে দিন
+        $view->with('parentCategories', collect());
+    }
             $view->with(compact(
                 'parentCategories',
                 'sidebarMenuCategories',
