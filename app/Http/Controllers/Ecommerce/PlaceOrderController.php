@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Helpers\CartItemHelper;
 use App\Helpers\Message;
 use App\Helpers\SessionHelper;
 use App\Http\Controllers\Controller;
@@ -25,6 +26,12 @@ class PlaceOrderController extends Controller
      */
     public function placeOrder(OrderPlaceRequest $orderPlaceRequest): JsonResponse
     {
+        $cartItemCount = CartItemHelper::queryCartItemsByUserOrSession(1)->get()->count();
+
+        if ($cartItemCount < 1) {
+            return Message::error("Cart is empty");
+        }
+
         try {
             $userId = Auth::id();
             $sessionId = SessionHelper::getSessionId();
