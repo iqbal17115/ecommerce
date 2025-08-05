@@ -123,6 +123,6 @@ class HomeController extends Controller
                 ->get();
         }, 300);
 
-        return view('ecommerce.home', compact(['sliders', 'top_show_categories', 'product_features', 'top_features', 'user_id']));
+        return view('ecommerce.home.index', compact(['sliders', 'top_show_categories', 'product_features', 'top_features', 'user_id']));
     }
 }
