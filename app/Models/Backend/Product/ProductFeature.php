@@ -40,10 +40,4 @@ class ProductFeature extends Model
         // $today = now();
         return $this->hasMany(Product::class, 'product_feature_id');
     }
-
-    public function limitedProducts()
-    {
-        return $this->hasMany(Product::class, 'product_feature_id')
-            ->limit(6); // ✅ limit here
-    }
 }
