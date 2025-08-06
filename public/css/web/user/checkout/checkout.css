@@ -112,6 +112,30 @@
     border-radius: 8px;
 }
 
+/* Coupon Section */
+.apply-coupon .input-group {
+    max-width: 100%;
+}
+
+.apply-coupon input#coupon_code {
+    height: 44px;
+    border-radius: 6px 0 0 6px;
+    border-color: #ddd;
+}
+
+.apply-coupon button#applyCouponBtn {
+    height: 44px;
+    border-radius: 0 6px 6px 0;
+    border-color: #ddd;
+    background-color: #f4631b;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.apply-coupon button#applyCouponBtn:hover {
+    background-color: #e0550a;
+}
+
 /* Responsive */
 @media (max-width: 767.98px) {
     .checkout-box {

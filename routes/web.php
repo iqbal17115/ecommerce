@@ -67,6 +67,7 @@ use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDistrictController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingDivisionController;
 use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartController;
+use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
 use App\Http\Controllers\API\Panel\User\UserInfoController;
 use App\Http\Controllers\Backend\GiftCardController;
 use App\Http\Controllers\Backend\RewardPointRuleController;
@@ -723,5 +724,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::controller(UserRewardPointController::class)->group(function () {
         Route::get('user-reward-point', 'userRewardPoint')->name('user_reward_point');
         Route::get('user-reward-point-summary', 'summary')->name('user_reward_point_summary');
+    });
+
+    // Coupon Settings
+    Route::controller(ApplyCouponController::class)->group(function () {
+        Route::post('coupon-apply', 'apply')->name("coupon_apply");
     });
 });

@@ -32,6 +32,17 @@
         </div>
     </div>
 
+    <!-- Coupon Section -->
+    <div class="apply-coupon mt-3">
+        <div class="input-group">
+            <input type="text" class="form-control" id="coupon_code" placeholder="Enter coupon code">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="applyCouponBtn">Apply</button>
+            </div>
+        </div>
+        <small id="couponFeedback" class="form-text text-muted mt-1"></small>
+    </div>
+
     <!-- Order Button -->
     <div class="text-right mt-2">
         <button type="button" class="btn btn-warning btn-block font-weight-bold mb-sm-4 mb-md-0" id="placeOrderBtn">Order Place</button>

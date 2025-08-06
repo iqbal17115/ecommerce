@@ -12,7 +12,6 @@ use Illuminate\Http\JsonResponse;
 
 class ApplyCouponController extends Controller
 {
-    use BaseModel;
     protected $applyCouponProductService;
 
     public function __construct(ApplyCouponProductService $applyCouponProductService)
@@ -20,7 +19,7 @@ class ApplyCouponController extends Controller
         $this->applyCouponProductService = $applyCouponProductService;
     }
 
-      /**
+    /**
      * Apply coupon
      *
      * @param ApplyCouponRequest $applyCouponRequest

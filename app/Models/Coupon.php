@@ -12,6 +12,8 @@ class Coupon extends Model
 {
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
 
+    protected $table = 'coupons';
+    
     protected $fillable = [
         'code',
         'description',

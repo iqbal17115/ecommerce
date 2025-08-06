@@ -3,12 +3,15 @@
 namespace App\Services;
 
 use App\Enums\CouponScopeEnum;
+use App\Helpers\CartItemHelper;
+use App\Helpers\SessionHelper;
 use App\Models\Backend\Product\Product;
 use App\Models\Cart;
 use App\Models\Cart\CartItem;
 use App\Models\CartItemCoupon;
 use App\Models\Coupon;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ApplyCouponProductService
@@ -19,76 +22,73 @@ class ApplyCouponProductService
 
         try {
             $couponCode = $validatedData['coupon_code'];
-            $userId = $validatedData['user_id'];
+            $userId = Auth::id() ?? null;
 
-            // Retrieve the coupon from the database
-            $coupon = Coupon::where('code', $couponCode)->firstOrFail();
+            $coupon = Coupon::where('code', $couponCode)->first();
+            if (!$coupon) {
+                throw new \Exception('Coupon not found');
+            }
 
-            // Validate coupon
             if (!$coupon->is_active) {
-                DB::rollBack();
-                return 'Coupon is not active';
+                throw new \Exception('Coupon is not active');
             }
 
             $now = now();
             if ($now < $coupon->valid_from || $now > $coupon->valid_to) {
-                DB::rollBack();
-                return 'Coupon is not valid at this time';
+                throw new \Exception('Coupon is not valid at this time');
             }
 
-            if ($coupon->max_uses != null && $coupon->usage_limit_per_user < $coupon->usage_count) {
-                DB::rollBack();
-                return 'Coupon has reached the maximum usage limit';
+            if ($coupon->max_uses !== null && $coupon->usage_limit_per_user < $coupon->usage_count) {
+                throw new \Exception('Coupon has reached the maximum usage limit');
             }
 
-            $isApplied = false;
-            $cart = Cart::where('user_id', $userId)->where('is_active', true)->first();
+            $sessionId = SessionHelper::getSessionId();
+            $cart = Cart::where(function ($q) use ($userId, $sessionId) {
+                $q->where('session_id', $sessionId);
+                if ($userId) {
+                    $q->orWhere('user_id', $userId);
+                }
+            })->where('is_active', true)->first();
 
             if (!$cart) {
-                DB::rollBack();
-                return 'No active cart found for this user';
+                throw new \Exception('No active cart found for this user');
             }
 
-            $cartItems = CartItem::where('cart_id', $cart->id)->get();
-            $totalDiscountValue = 0; // To accumulate total discount value for the cart
+            $cartItems = CartItemHelper::queryCartItemsByUserOrSession(1)->get();
+            $totalDiscountValue = 0;
+            $isApplied = false;
 
-            // Loop through cart items and apply coupon if applicable
             foreach ($cartItems as $cartItem) {
-                $product = $cartItem->product;
-                $isProductEligible = $this->isProductEligibleForCoupon($coupon, $cartItem);
+                if ($this->isProductEligibleForCoupon($coupon, $cartItem)) {
+                    $discountValue = $this->calculateDiscount($coupon, $cartItem);
 
-                if ($isProductEligible) {
-                    $discountValue = $this->calculateDiscount($coupon, $cartItem); // Calculate for a single cart item
-                    // Add entry in CartItemCoupon
                     CartItemCoupon::create([
                         'coupon_id' => $coupon->id,
                         'cart_item_id' => $cartItem->id,
                         'value' => $discountValue,
                     ]);
 
-                    // Accumulate the discount value for the cart totals
                     $totalDiscountValue += $discountValue;
-
                     $isApplied = true;
                 }
             }
 
-            // Increment the usage count of the coupon
-            $coupon->increment('usage_count');
-
-            // Call applyCouponToCart to update the cart's total with the accumulated discount and associate coupon_id with the cart
-            if ($isApplied) {
-                $this->applyCouponToCart($cart, $coupon, $totalDiscountValue);
+            if (!$isApplied) {
+                throw new \Exception('Coupon not applicable to any products in your cart');
             }
+
+            $coupon->increment('usage_count');
+            $this->applyCouponToCart($cart, $coupon, $totalDiscountValue);
 
             DB::commit();
 
-            return $isApplied ? 'Coupon applied successfully' : 'Coupon not applicable to any products in your cart';
-        } catch (Exception $ex) {
+            return 'Coupon applied successfully';
+        } catch (\Exception $ex) {
             DB::rollBack();
-            throw $ex;
+            throw $ex; // important: rethrow
         }
     }
+
 
     /**
      * Apply the coupon to the entire cart.

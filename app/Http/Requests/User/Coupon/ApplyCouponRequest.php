@@ -24,7 +24,6 @@ class ApplyCouponRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
             'coupon_code' => 'required'
         ];
     }
