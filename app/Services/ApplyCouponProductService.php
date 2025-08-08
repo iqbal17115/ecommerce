@@ -77,6 +77,10 @@ class ApplyCouponProductService
                 throw new \Exception('Coupon not applicable to any products in your cart');
             }
 
+            if ($cart->coupon_discount > 0) {
+                throw new \Exception('Coupon already applied to the cart');
+            }
+
             $coupon->increment('usage_count');
             $this->applyCouponToCart($cart, $coupon, $totalDiscountValue);
 

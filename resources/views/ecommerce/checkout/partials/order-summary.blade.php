@@ -25,6 +25,10 @@
             <span>Shipping Fee</span>
             <span class="shipping_charge_amount"></span>
         </div>
+        <div class="d-flex justify-content-between mb-2 text-success">
+            <span>Coupon Discount</span>
+            <span class="coupon_discount">0</span>
+        </div>
         <hr class="my-2">
         <div class="d-flex justify-content-between font-weight-bold">
             <span>Total (VAT Inclusive if Applicable)</span>
