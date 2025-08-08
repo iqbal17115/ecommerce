@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\BaseModel;
 use Illuminate\Http\JsonResponse;
 use App\Models\Coupon;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CouponProductController extends Controller
@@ -25,8 +26,9 @@ class CouponProductController extends Controller
     /**
      * return View
      */
-    public function index(Coupon $coupon): View|JsonResponse
+    public function index(Request $request): View|JsonResponse
     {
+        $coupon = Coupon::find($request->id);
         return $this->generateView($this->viewPath, $coupon);
     }
 }

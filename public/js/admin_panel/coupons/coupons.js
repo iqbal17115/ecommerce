@@ -170,6 +170,6 @@ function linkableActions(id, text) {
     return `
        <a class="update_row btn btn-info text-light btn-sm" data-id="${id}" title="Update"><i class="mdi mdi-pencil font-size-16"></i></a>
        <a class="delete_row btn btn-danger text-light btn-sm" data-id="${id}" title="Delete"> <i class="mdi mdi-trash-can font-size-16"></i></a>
-       <a href="coupon-products/${id}/view" class="btn btn-warning text-light btn-sm" data-id="${id}" title="">Product</a>
+       <a href="coupon-product-view?id=${id}" class="btn btn-warning text-light btn-sm" data-id="${id}" title="">Product</a>
     `;
 }
