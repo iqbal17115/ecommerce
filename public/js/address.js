@@ -37,17 +37,20 @@
             }, addressSelect.handleError);
         },
 
-        loadDistricts: function (divisionId) {
+        loadDistricts: function (divisionId, callback) {
             getDetails(`/districts-select/lists?division_id=${divisionId}`, function (data) {
                 addressSelect.populateSelect('district', data.results, 'Select District');
+                if (typeof callback === 'function') callback();
             }, addressSelect.handleError);
         },
 
-        loadThanas: function (districtId) {
+        loadThanas: function (districtId, callback) {
             getDetails(`/areas-select/lists?district_id=${districtId}`, function (data) {
                 addressSelect.populateSelect('thana', data.results, 'Select Thana');
+                if (typeof callback === 'function') callback();
             }, addressSelect.handleError);
         },
+
 
         populateSelect: function (elementId, items, placeholder = 'Select') {
             const select = document.getElementById(elementId);

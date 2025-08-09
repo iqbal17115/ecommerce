@@ -39,6 +39,5 @@ class CartItemListResource extends JsonResource
         if (!$this->product) {
             return 0;
         }
-        return $shippingService->calculateShippingCharges($this->product, $this->quantity);
     }
 }

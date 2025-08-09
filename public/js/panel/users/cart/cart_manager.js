@@ -8,7 +8,7 @@ const CartManager = (() => {
         }
 
         getDetails('/cart/lists', (data) => {
-            cartData = data.results.data;
+            cartData = data.results.cart.data;
             renderAll();
         }, (error) => {
             console.error("Failed to load cart data:", error);
@@ -25,8 +25,9 @@ const CartManager = (() => {
         }
 
         if (window.hasCartActiveItemList && typeof CartActiveItemList !== 'undefined') {
-            getDetails('/checkout/cart/lists', (data) => {
-                cartData = data.results.data;
+            const upazilaId = $('#thana').val() || null; 
+            getDetails(`/checkout/cart/lists?upazila_id=${upazilaId}`, (data) => {
+                cartData = data.results;
                 CartActiveItemList.render(cartData);
             }, (error) => {
                 console.error("Failed to load cart data:", error);

@@ -23,8 +23,7 @@ class CartItemListResource extends JsonResource
         // Check if the cart info is already in the session
         $cartInfo = session($cacheKey);
 
-        $shippingService = new ShippingChargeService();
-        $shippingCharge = $shippingService->calculateShippingCharges($this->product, $this->quantity);
+        $shippingCharge = 0;
 
         $activeCurrency = Currency::where('is_active', 1)->first();
 

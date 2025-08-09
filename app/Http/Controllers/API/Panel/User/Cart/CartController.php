@@ -14,6 +14,7 @@ use App\Http\Resources\User\Cart\CartItemListResource;
 use App\Http\Resources\User\Checkout\Cart\CartItemListResource as CartCartItemListResource;
 use App\Models\Cart\CartItem;
 use App\Services\CartService;
+use App\Services\ShippingChargeService;
 use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\Request;
@@ -22,7 +23,6 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     use BaseModel;
-    protected $cartService;
 
     public function updateCartItemStatus(UpdateCartItemStatusRequest $updateCartItemStatusRequest, CartItem $cartItem)
     {
@@ -114,7 +114,24 @@ class CartController extends Controller
         $cart = $this->getLists($cartQuery, $request->all(), CartItemListResource::class);
 
         session(['cart_info' => $cart]);
-        return Message::success(null, $cart);
+        // Sample totals, you may calculate properly:
+        $totalOrderAmount = $cart->sum('subtotal'); // or however you calculate order amount
+        $totalQty = $cart->sum('quantity');
+        $upazilaId = $request->input('upazila_id');
+
+        $shippingChargeService = new ShippingChargeService();
+
+        $shippingCharge = $shippingChargeService->calculateCharge(
+            $upazilaId,
+            $totalOrderAmount,
+            $totalQty
+        );
+
+
+        return Message::success(null, [
+            'cart' => $cart,
+            'shipping_charge' => $shippingCharge,
+        ]);
     }
 
     public function updateCartItem(UpdateCartItemRequest $updateCartItemRequest, CartItem $cartItem)
@@ -161,6 +178,23 @@ class CartController extends Controller
 
         session(['cart_info' => $cart]);
 
-        return Message::success(null, $cart);
+        // Sample totals, you may calculate properly:
+        $totalOrderAmount = $cart->sum('subtotal'); // or however you calculate order amount
+        $totalQty = $cart->sum('quantity');
+        $upazilaId = $request->input('upazila_id');
+
+        $shippingChargeService = new ShippingChargeService();
+
+        $shippingCharge = $shippingChargeService->calculateCharge(
+            $upazilaId,
+            $totalOrderAmount,
+            $totalQty
+        );
+
+
+        return Message::success(null, [
+            'cart' => $cart,
+            'shipping_charge' => $shippingCharge,
+        ]);
     }
 }

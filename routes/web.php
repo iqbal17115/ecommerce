@@ -35,6 +35,7 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\RoleViewController;
 use App\Http\Controllers\Backend\Seo\SeoPageController;
 use App\Http\Controllers\Backend\Shipping\ShippingChargeController;
+use App\Http\Controllers\Backend\ShippingChargeController as BackendShippingChargeController;
 use App\Http\Controllers\Backend\Shipping\ShippingMethodController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\UserViewController;
@@ -73,9 +74,11 @@ use App\Http\Controllers\Backend\GiftCardController;
 use App\Http\Controllers\Backend\RewardPointRuleController;
 use App\Http\Controllers\Backend\View\GiftCardViewController;
 use App\Http\Controllers\Backend\View\RewardPointRuleViewController;
+use App\Http\Controllers\Backend\View\ShippingChargeViewController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
 use App\Http\Controllers\Ecommerce\UserRewardPointController;
+use App\Models\ShippingCharge;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -278,16 +281,6 @@ Route::group(['middleware' => 'web'], function () {
             Route::post('purchases', 'store')->name("purchases.store");
             Route::put('purchases/{purchase}', 'update')->name("purchases.update");
             Route::delete('purchases', 'destroy')->name("purchases.delete");
-        });
-
-        // Shipping
-        Route::controller(ShippingChargeController::class)->group(function () {
-            Route::get('/shipping-charge', 'index')->name('shipping_charge.index');
-            Route::get('/shipping-charge/create', 'create')->name('shipping_charge.create');
-            Route::post('/shipping-charge', 'store')->name('shipping_charge.store');
-            Route::get('/shipping-charge/{id}/edit', 'edit')->name('shipping_charge.edit');
-            Route::put('/shipping-charge/{id}', 'update')->name('shipping_charge.update');
-            Route::delete('/shipping-charge/{id}', 'destroy')->name('shipping_charge.destroy');
         });
 
         // Shipping Method
@@ -615,6 +608,13 @@ Route::group(['middleware' => 'web'], function () {
         );
         // End Currency
 
+        Route::prefix('shipping-charges')->group(function () {
+            Route::get('/', [BackendShippingChargeController::class, 'index'])->name('shipping-charges.index');
+            Route::get('/{id}', [BackendShippingChargeController::class, 'show'])->name('shipping-charges.show');
+            Route::post('/', [BackendShippingChargeController::class, 'store'])->name('shipping-charges.store');
+            Route::put('/{id}', [BackendShippingChargeController::class, 'update'])->name('shipping-charges.update');
+            Route::delete('/{id}', [BackendShippingChargeController::class, 'destroy'])->name('shipping-charges.destroy');
+        });
     });
 
     // Review
@@ -692,6 +692,11 @@ Route::group(['middleware' => 'web'], function () {
     // Reward Point
     Route::controller(RewardPointRuleViewController::class)->group(function () {
         Route::get('reward-point-rule-view', 'index')->name('reward_point_rules.view');
+    });
+
+    // Reward Point
+    Route::controller(ShippingChargeViewController::class)->group(function () {
+        Route::get('shipping-charge-view', 'index')->name('shipping_charges.view');
     });
 
     // Reward Point

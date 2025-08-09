@@ -12,6 +12,7 @@ class Cart extends Model
 {
     use HasFactory, BaseModel, DisplayNameTrait;
 
+    protected $table = 'carts';
     protected $fillable = [
         'user_id', 'session_id', 'coupon_id', 'coupon_discount', 'subtotal', 'total', 'is_active'
     ];

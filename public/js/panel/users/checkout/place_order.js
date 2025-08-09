@@ -21,27 +21,16 @@ function submitOrder(formData, selectedId = "") {
     );
 }
 
-// $(document).on('click', '#placeOrderBtn', function () {
-//     const form = document.getElementById('checkoutForm');
-//     const orderData = new FormData(form);
-
-//     // Basic validation example
-//     const requiredFields = ['name', 'phone', 'district', 'thana', 'address'];
-//     for (let field of requiredFields) {
-//         if (!orderData.get(field)) {
-//             toastrErrorMessage(`Please fill the required field: ${field}`);
-//             return;
-//         }
-//     }
-
-//     const formData = {
-//         // address_id: $('#default_address').data('address_id') ?? null,
-//         // user_id: $("#temp_user_id").data('user_id') ?? null,
-//         // payment_method: $('input[name="radio"]:checked').val() ?? null,
-//     };
-
-//     submitOrder(formData, '');
-// });
+$(document).on('click', '#thana', function () {
+    const upazilaId = $('#thana').val() || null;
+    getDetails(`/checkout/cart/lists?upazila_id=${upazilaId}`, (data) => {
+        cartData = data.results;
+          console.log(cartData);
+        CartActiveItemList.render(cartData);
+    }, (error) => {
+        console.error("Failed to load cart data:", error);
+    });
+});
 
 $(document).on('click', '#placeOrderBtn', function () {
     const form = document.getElementById('checkoutForm');
