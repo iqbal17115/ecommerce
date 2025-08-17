@@ -72,9 +72,16 @@ use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
 use App\Http\Controllers\API\Panel\User\UserInfoController;
 use App\Http\Controllers\Backend\GiftCardController;
 use App\Http\Controllers\Backend\RewardPointRuleController;
+use App\Http\Controllers\Backend\ShippingInsideOutsideController;
+use App\Http\Controllers\Backend\ShippingRateController;
+use App\Http\Controllers\Backend\ShippingZoneController;
+use App\Http\Controllers\Backend\ShippingZoneLocationController;
 use App\Http\Controllers\Backend\View\GiftCardViewController;
 use App\Http\Controllers\Backend\View\RewardPointRuleViewController;
 use App\Http\Controllers\Backend\View\ShippingChargeViewController;
+use App\Http\Controllers\Backend\View\ShippingRateViewController;
+use App\Http\Controllers\Backend\View\ShippingZoneLocationViewController;
+use App\Http\Controllers\Backend\View\ShippingZoneViewController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
 use App\Http\Controllers\Ecommerce\UserRewardPointController;
@@ -615,6 +622,36 @@ Route::group(['middleware' => 'web'], function () {
             Route::put('/{id}', [BackendShippingChargeController::class, 'update'])->name('shipping-charges.update');
             Route::delete('/{id}', [BackendShippingChargeController::class, 'destroy'])->name('shipping-charges.destroy');
         });
+
+        Route::prefix('admin')->group(function () {
+            Route::get('/shipping-zones', [ShippingZoneController::class, 'index']);
+            Route::get('/shipping-zones/select-lists', [ShippingZoneController::class, 'selectLists']);
+            Route::get('/shipping-zones/{id}', [ShippingZoneController::class, 'show']);
+            Route::post('/shipping-zones', [ShippingZoneController::class, 'store']);
+            Route::put('/shipping-zones/{id}', [ShippingZoneController::class, 'update']);
+            Route::put('/shipping-zone-status/{id}', [ShippingZoneController::class, 'updateStatus']);
+            Route::delete('/shipping-zones/{id}', [ShippingZoneController::class, 'destroy']);
+        });
+
+        Route::prefix('admin')->group(function () {
+            Route::get('/shipping-zone-locations', [ShippingZoneLocationController::class, 'index']);
+            Route::get('/shipping-zone-locations/create', [ShippingZoneLocationController::class, 'create']);
+            Route::post('/shipping-zone-locations/store', [ShippingZoneLocationController::class, 'store']);
+            Route::delete('/shipping-zone-locations/{id}', [ShippingZoneLocationController::class, 'destroy']);
+        });
+
+        Route::prefix('admin')->group(function () {
+            // shipping rates (non inside_outside)
+            Route::get('/shipping-rates', [ShippingRateController::class, 'index']);
+            Route::get('/shipping-rates/{id}', [ShippingRateController::class, 'show']);
+            Route::post('/shipping-rates', [ShippingRateController::class, 'store']);
+            Route::put('/shipping-rates/{id}', [ShippingRateController::class, 'update']);
+            Route::delete('/shipping-rates/{id}', [ShippingRateController::class, 'destroy']);
+
+            // inside/outside
+            Route::get('/shipping-inside-outside/{zoneId}', [ShippingInsideOutsideController::class, 'showByZone']);
+            Route::post('/shipping-inside-outside', [ShippingInsideOutsideController::class, 'storeOrUpdate']);
+        });
     });
 
     // Review
@@ -655,6 +692,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::controller(UpazilaController::class)->group(function () {
         Route::get('areas-select/lists', 'lists')->name('districts.lists');
+        Route::get('upazila-select/lists', 'shippingZoneWiseUpazilas')->name('upazilas.lists');
     });
 
     Route::controller(DistrictController::class)->group(function () {
@@ -694,10 +732,21 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('reward-point-rule-view', 'index')->name('reward_point_rules.view');
     });
 
-    // Reward Point
-    Route::controller(ShippingChargeViewController::class)->group(function () {
-        Route::get('shipping-charge-view', 'index')->name('shipping_charges.view');
+    // Shipping Zone View
+    Route::controller(ShippingZoneViewController::class)->group(function () {
+        Route::get('shipping-zones', 'index')->name('shipping_zones.view');
     });
+
+    // Shipping Zone Location View
+    Route::controller(ShippingZoneLocationViewController::class)->group(function () {
+        Route::get('shipping-zone-locations', 'index')->name('shipping_zone_locations.view');
+    });
+
+    // Shipping Rate View
+    Route::controller(ShippingRateViewController::class)->group(function () {
+        Route::get('shipping-rates', 'index')->name('shipping_rates.view');
+    });
+
 
     // Reward Point
     Route::controller(RewardPointRuleController::class)->group(function () {

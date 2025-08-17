@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Resources\AdminPanel\ShopSetting;
+namespace App\Http\Resources\AdminPanel\ShippingZone;
 
+use App\Helpers\TextFormatHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShopSettingUpazilaListResource extends JsonResource
+class ShippingZoneResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +17,9 @@ class ShopSettingUpazilaListResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'district_id' => $this->district_id,
             'name' => $this->name,
-            'status' => $this->status,
-            'is_selected' => $this->when(isset($this->is_selected), $this->is_selected, false),
+            'type' => TextFormatHelper::formatText($this->type),
+            'is_active' => $this->is_active,
         ];
     }
 }

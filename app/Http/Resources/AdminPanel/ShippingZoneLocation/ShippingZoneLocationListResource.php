@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\AdminPanel\ShopSetting;
+namespace App\Http\Resources\AdminPanel\ShippingZoneLocation;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShopSettingUpazilaListResource extends JsonResource
+class ShippingZoneLocationListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,10 @@ class ShopSettingUpazilaListResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'district_id' => $this->district_id,
-            'name' => $this->name,
-            'status' => $this->status,
-            'is_selected' => $this->when(isset($this->is_selected), $this->is_selected, false),
+            'shipping_zone_name' => $this->shippingZone?->name,
+            'division_name' => $this->division?->name,
+            'district_name' => $this->district?->name,
+            'upazila_name' => $this->upazila?->name,
         ];
     }
 }

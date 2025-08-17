@@ -85,16 +85,24 @@ return [
         'actions' => ['title' => 'Action', 'sorting' => false],
     ],
 
-    'shipping_charges' => [
+    'shipping_zones' => [
+        'name' => ['title' => 'Name', 'sorting' => true],
+        'type' => ['title' => 'Type', 'sorting' => true],
+        'is_active' => ['title' => 'Status', 'sorting' => true],
+        'actions' => ['title' => 'Action', 'sorting' => false],
+    ],
+
+    'shipping_zone_locations' => [
+        'shipping_zone_name' => ['title' => 'Shipping Zone', 'sorting' => true],
         'division_name' => ['title' => 'Division', 'sorting' => true],
         'district_name' => ['title' => 'District', 'sorting' => true],
         'upazila_name' => ['title' => 'Upazila', 'sorting' => true],
-        'min_qty' => ['title' => 'Min Qty', 'sorting' => true],
-        'max_qty' => ['title' => 'Max Qty', 'sorting' => true],
-        'min_order_amount' => ['title' => 'Min Amount', 'sorting' => true],
-        'max_order_amount' => ['title' => 'Max Amount', 'sorting' => true],
-        'charge_value' => ['title' => 'Charge Value', 'sorting' => true],
-        'status' => ['title' => 'Status', 'sorting' => true],
-        'actions' => ['title' => 'Action', 'sorting' => false],
+    ],
+
+    'shipping_rates' => [
+        'shipping_zone_name' => ['title' => 'Shipping Zone', 'sorting' => true],
+        'min_amount' => ['title' => 'Min Amount', 'sorting' => true],
+        'max_amount' => ['title' => 'Max Amount', 'sorting' => true],
+        'min_weight' => ['title' => 'Min Weight', 'sorting' => true],
     ],
 ];
