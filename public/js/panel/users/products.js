@@ -55,7 +55,7 @@ $(document).ready(function () {
         }
 
         products.forEach(product => {
-            const productUrl = `/product/${product.id}`; // Adjust based on your route
+            const productUrl = `/product-details/${product.name}`; // Adjust based on your route
 
             const html = `
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
