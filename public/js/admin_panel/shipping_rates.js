@@ -28,40 +28,19 @@ function loadShippingZones() {
 
 // DataTable loader
 function loadDataTable() {
-    // const url = selectedZoneId
-    //     ? (selectedZoneType === 'inside_outside'
-    //         ? `/admin/shipping-inside-outside?shipping_zone_id=${selectedZoneId}`
-    //         : `/admin/shipping-rates?shipping_zone_id=${selectedZoneId}`)
-    //     : `/admin/shipping-rates?shipping_zone_id=`;
-
-    // const columns = (selectedZoneType === 'inside_outside')
-    //     ? [
-    //         generateColumn('zone_name', null, 'zone_name'),
-    //         generateColumn('inside_rate', null, 'inside_rate'),
-    //         generateColumn('outside_rate', null, 'outside_rate'),
-    //         generateColumn('action', (data, type, row) => {
-    //             return `
-    //                 <a class="update_row btn btn-info text-light btn-sm" data-id="${row.id || ''}" title="Update">
-    //                     <i class="mdi mdi-pencil font-size-16"></i>
-    //                 </a>
-    //             `;
-    //         }, 'action'),
-    //     ]
-    //     : [
-    //         generateColumn('min_amount', null, 'min_amount'),
-    //         generateColumn('max_amount', null, 'max_amount'),
-    //         generateColumn('min_weight', null, 'min_weight'),
-    //         generateColumn('max_weight', null, 'max_weight'),
-    //         // generateColumn('rate', null, 'rate'),
-    //     ];
-
-    // initializeDataTable(url, columns);
-
-    // if (selectedZoneId && selectedZoneType !== 'inside_outside') {
-    //     $('#add_new').prop('disabled', false);
-    // } else {
-    //     $('#add_new').prop('disabled', true);
-    // }
+    initializeDataTable(
+        `/admin/shipping-rates`,
+        [
+            generateColumn('shipping_zone_name', null, 'Shipping Zone'),
+            generateColumn('min_amount', null, 'text-center'),
+            generateColumn('max_amount', null, 'text-center'),
+            generateColumn('min_weight', null, 'text-center'),
+            generateColumn('max_weight', null, 'text-center'),
+            generateColumn('min_qty', null, 'text-center'),
+            generateColumn('max_qty', null, 'text-center'),
+            generateColumn('rate', null, 'text-center'),
+        ]
+    );
 }
 
 function linkableActions(id) {
@@ -115,10 +94,10 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.add-new', function () {
-        if (!selectedZoneId) {
-            toastrErrorMessage("Please select a Shipping Zone first.");
-            return;
-        }
+        // if (!selectedZoneId) {
+        //     toastrErrorMessage("Please select a Shipping Zone first.");
+        //     return;
+        // }
         if (selectedZoneType === 'inside_outside') {
             toastrErrorMessage("This zone is Inside/Outside type. Use Edit instead.");
             return;
@@ -218,8 +197,14 @@ $(document).ready(function () {
             data: payload,
             success: function (res) {
                 toastrSuccessMessage(res.message || 'Saved');
-                modal.hide();
-                $('.dataTable').DataTable().ajax.reload(null, false);
+                // ✅ Close modal
+                $('#shippingRateModal').modal('hide');
+
+                // ✅ Form reset
+                $('#targeted_form')[0].reset();
+
+                // ✅ Reload DataTable
+                loadDataTable();
             },
             error: function (err) {
                 toastrErrorMessage(err.responseJSON?.message || 'Failed to save');

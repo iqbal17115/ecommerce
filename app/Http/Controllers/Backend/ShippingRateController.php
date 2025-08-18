@@ -6,24 +6,23 @@ use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\Shipping\ShippingRateStoreRequest;
 use App\Http\Requests\AdminPanel\Shipping\ShippingRateUpdateRequest;
+use App\Http\Requests\ListRequest;
 use App\Http\Resources\AdminPanel\Shipping\ShippingRateResource;
+use App\Models\ShippingRate;
 use App\Services\ShippingPricingService;
+use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
 class ShippingRateController extends Controller
 {
+    use BaseModel;
+
     public function __construct(private ShippingPricingService $service) {}
 
-    public function index(): JsonResponse
+    public function index(ListRequest $request)
     {
-        try {
-            $zoneId = request('shipping_zone_id');
-            $rates = $this->service->listRates($zoneId);
-            return Message::success(null, ShippingRateResource::collection($rates));
-        } catch (Exception $e) {
-            return Message::error($e->getMessage());
-        }
+        return $this->dataTable(ShippingRate::query(), $request->all(), ShippingRateResource::class);
     }
 
     public function show(string $id): JsonResponse

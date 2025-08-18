@@ -78,7 +78,6 @@
                                 <input type="number" step="0.01" min="0" class="form-control" id="max_weight" name="max_weight">
                             </div>
 
-                            <!-- If your migration includes qty: uncomment these
                             <div class="col-md-6">
                                 <label class="form-label">Min Qty</label>
                                 <input type="number" min="0" class="form-control" id="min_qty" name="min_qty">
@@ -87,7 +86,6 @@
                                 <label class="form-label">Max Qty</label>
                                 <input type="number" min="0" class="form-control" id="max_qty" name="max_qty">
                             </div>
-                            -->
 
                             <div class="col-12">
                                 <label class="form-label">Rate</label>

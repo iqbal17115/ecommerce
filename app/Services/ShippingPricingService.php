@@ -7,6 +7,7 @@ use App\Models\ShippingRate;
 use App\Models\ShippingInsideOutside;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
 use Exception;
 
 class ShippingPricingService
@@ -41,7 +42,7 @@ class ShippingPricingService
     {
         $this->ensureZoneType($data['shipping_zone_id'], ['location', 'mixed']); // inside_outside নয়
         return ShippingRate::create([
-            'id'               => (string) \Str::uuid(),
+            'id'               => (string) Str::uuid(),
             'shipping_zone_id' => $data['shipping_zone_id'],
             'min_weight'       => $data['min_weight'] ?? null,
             'max_weight'       => $data['max_weight'] ?? null,

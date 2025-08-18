@@ -104,5 +104,9 @@ return [
         'min_amount' => ['title' => 'Min Amount', 'sorting' => true],
         'max_amount' => ['title' => 'Max Amount', 'sorting' => true],
         'min_weight' => ['title' => 'Min Weight', 'sorting' => true],
+        'max_weight' => ['title' => 'Max Weight', 'sorting' => true],
+        'min_qty' => ['title' => 'Min Qty', 'sorting' => true],
+        'max_qty' => ['title' => 'Max Qty', 'sorting' => true],
+        'rate' => ['title' => 'Rate', 'sorting' => true],
     ],
 ];

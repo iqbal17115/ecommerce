@@ -15,8 +15,7 @@ class ShippingRateResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id'               => $this->id,
-            'shipping_zone_id' => $this->shipping_zone_id,
+            'shipping_zone_name' => $this->zone?->name,
             'min_weight'       => $this->min_weight,
             'max_weight'       => $this->max_weight,
             'min_amount'       => $this->min_amount,
@@ -24,7 +23,6 @@ class ShippingRateResource extends JsonResource
             'min_qty'          => $this->min_qty,
             'max_qty'          => $this->max_qty,
             'rate'             => $this->rate,
-            'is_active'        => (bool) $this->is_active
         ];
     }
 }
