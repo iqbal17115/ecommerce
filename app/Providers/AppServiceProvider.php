@@ -62,9 +62,7 @@ class AppServiceProvider extends ServiceProvider
                     ->toArray();
             }, 3600);
 
-            $company_info = $cacheService->remember('companyInfo', function () {
-                return CompanyInfo::first();
-            }, 3600);
+            $company_info = CompanyInfo::first();
 
             $currency = $cacheService->remember('currency', function () {
                 return Currency::whereIsDefault(1)->first();
