@@ -38,8 +38,11 @@ class ShippingRateController extends Controller
     public function store(ShippingRateStoreRequest $request): JsonResponse
     {
         try {
-            $rate = $this->service->createRate($request->validated());
-            return Message::success('Shipping rate created successfully.', new ShippingRateResource($rate));
+            $rates = $this->service->storeBulkRates(
+                $request->shipping_zone_id,
+                $request->validated()['rates']
+            );
+            return Message::success('Shipping rate created successfully.', ShippingRateResource::collection($rates));
         } catch (Exception $e) {
             return Message::error($e->getMessage());
         }
@@ -63,5 +66,14 @@ class ShippingRateController extends Controller
         } catch (Exception $e) {
             return Message::error($e->getMessage());
         }
+    }
+
+    public function byZone(string $zoneId)
+    {
+        $rates = ShippingRate::where('shipping_zone_id', $zoneId)->get();
+
+        return response()->json([
+            'results' => $rates
+        ]);
     }
 }

@@ -20,6 +20,8 @@ class ShippingRate extends Model
         'max_weight',
         'min_amount',
         'max_amount',
+        'min_qty',
+        'max_qty',
         'rate',
     ];
 

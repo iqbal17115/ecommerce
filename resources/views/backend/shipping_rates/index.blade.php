@@ -34,67 +34,20 @@
                 </div>
 
                 <div class="modal-body">
-                    <input type="hidden" id="row_id" name="id" />
-                    <input type="hidden" id="zone_id" name="shipping_zone_id" />
-                    <input type="hidden" id="zone_type" />
-
-                    <div class="col-md-4">
+                    <div class="col-md-12 mb-3">
                         <label for="shipping_zone_filter" class="form-label">Shipping Zone</label>
-                        <select id="shipping_zone_filter" class="form-select">
+                        <select id="shipping_zone_filter" name="shipping_zone_id" class="form-select">
                             <option value="">Select Zone</option>
                         </select>
                     </div>
 
-                    <!-- Inside/Outside variant -->
-                    <div id="insideOutsideFields" class="d-none">
-                        <div class="row">
-                        <div class="col-md-6">
-                            <label for="inside_rate" class="form-label">Inside Rate</label>
-                            <input type="number" step="0.01" min="0" class="form-control" id="inside_rate" name="inside_rate" placeholder="Enter inside rate">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="outside_rate" class="form-label">Outside Rate</label>
-                            <input type="number" step="0.01" min="0" class="form-control" id="outside_rate" name="outside_rate" placeholder="Enter outside rate">
-                        </div>
-                        </div>
+                    <div id="rate-container">
+                        <!-- Dynamic rows will be added here -->
                     </div>
-
-                    <!-- Tiered (shipping_rates) variant -->
-                    <div id="tierFields" class="d-none">
-                        <div class="row g-2">
-                            <div class="col-md-6">
-                                <label class="form-label">Min Amount</label>
-                                <input type="number" step="0.01" min="0" class="form-control" id="min_amount" name="min_amount" placeholder="Enter minimum amount">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Max Amount</label>
-                                <input type="number" step="0.01" min="0" class="form-control" id="max_amount" name="max_amount" placeholder="Enter maximum amount">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Min Weight</label>
-                                <input type="number" step="0.01" min="0" class="form-control" id="min_weight" name="min_weight" placeholder="Enter minimum weight">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Max Weight</label>
-                                <input type="number" step="0.01" min="0" class="form-control" id="max_weight" name="max_weight" placeholder="Enter maximum weight">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Min Qty</label>
-                                <input type="number" min="0" class="form-control" id="min_qty" name="min_qty" placeholder="Enter minimum quantity">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Max Qty</label>
-                                <input type="number" min="0" class="form-control" id="max_qty" name="max_qty" placeholder="Enter maximum quantity">
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label">Rate</label>
-                                <input type="number" step="0.01" min="0" class="form-control" id="rate" name="rate" placeholder="Enter rate">
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <button type="button" class="btn btn-sm btn-success mt-2" id="add-rate-row">
+                        <i class="fa fa-plus"></i> Add Rate
+                    </button>
 
                 </div>
 

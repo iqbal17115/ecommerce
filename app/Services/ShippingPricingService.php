@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ShippingPricingService
 {
@@ -38,22 +39,27 @@ class ShippingPricingService
             ->get();
     }
 
-    public function createRate(array $data): ShippingRate
+    public function storeBulkRates(string $zoneId, array $rates)
     {
-        $this->ensureZoneType($data['shipping_zone_id'], ['location', 'mixed']); // inside_outside নয়
-        return ShippingRate::create([
-            'id'               => (string) Str::uuid(),
-            'shipping_zone_id' => $data['shipping_zone_id'],
-            'min_weight'       => $data['min_weight'] ?? null,
-            'max_weight'       => $data['max_weight'] ?? null,
-            'min_amount'       => $data['min_amount'] ?? null,
-            'max_amount'       => $data['max_amount'] ?? null,
-            'min_qty'          => $data['min_qty'] ?? null,
-            'max_qty'          => $data['max_qty'] ?? null,
-            'rate'             => $data['rate'],
-            'is_active'        => $data['is_active'] ?? true,
-            'priority'         => $data['priority'] ?? 0,
-        ]);
+        return DB::transaction(function () use ($zoneId, $rates) {
+            ShippingRate::where('shipping_zone_id', $zoneId)->delete();
+
+            $inserted = [];
+            foreach ($rates as $rate) {
+                $inserted[] = ShippingRate::create([
+                    'shipping_zone_id' => $zoneId,
+                    'min_weight' => $rate['min_weight'] ?? null,
+                    'max_weight' => $rate['max_weight'] ?? null,
+                    'min_amount' => $rate['min_amount'] ?? null,
+                    'max_amount' => $rate['max_amount'] ?? null,
+                    'min_qty' => $rate['min_qty'] ?? null,
+                    'max_qty' => $rate['max_qty'] ?? null,
+                    'rate' => $rate['rate'],
+                    'is_active' => true,
+                ]);
+            }
+            return $inserted;
+        });
     }
 
     public function updateRate(string $id, array $data): ShippingRate

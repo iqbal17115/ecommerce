@@ -647,6 +647,7 @@ Route::group(['middleware' => 'web'], function () {
             Route::post('/shipping-rates', [ShippingRateController::class, 'store']);
             Route::put('/shipping-rates/{id}', [ShippingRateController::class, 'update']);
             Route::delete('/shipping-rates/{id}', [ShippingRateController::class, 'destroy']);
+            Route::get('/shipping-rates/by-zone/{zone}', [ShippingRateController::class, 'byZone']);
 
             // inside/outside
             Route::get('/shipping-inside-outside/{zoneId}', [ShippingInsideOutsideController::class, 'showByZone']);

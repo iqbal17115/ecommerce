@@ -1,16 +1,6 @@
 let selectedZoneId = "";
 let selectedZoneType = ""; // inside_outside | tiered
 
-// Helpers to toggle form variants
-function showInsideOutside() {
-    $('#insideOutsideFields').removeClass('d-none');
-    $('#tierFields').addClass('d-none');
-}
-function showTierFields() {
-    $('#tierFields').removeClass('d-none');
-    $('#insideOutsideFields').addClass('d-none');
-}
-
 // Load Shipping Zones into filter
 function loadShippingZones() {
     getDetails('/admin/shipping-zones/select-lists',
@@ -54,20 +44,187 @@ function linkableActions(id) {
     `;
 }
 
-function setTierForm(rate) {
-    $("#targeted_form #row_id").val(rate?.id || "");
-    $("#targeted_form #min_amount").val(rate?.min_amount ?? "");
-    $("#targeted_form #max_amount").val(rate?.max_amount ?? "");
-    $("#targeted_form #min_weight").val(rate?.min_weight ?? "");
-    $("#targeted_form #max_weight").val(rate?.max_weight ?? "");
-    $("#targeted_form #rate").val(rate?.rate ?? "");
+function getRateRow(data = {}) {
+    return `
+    <div class="rate-row card mb-3 p-3 shadow-sm">
+        <div class="row g-3 align-items-end">
+            
+            <input type="hidden" name="ids[]" value="${data.id || ''}">
+
+            <div class="col-md-2">
+                <label class="form-label small">Min Amount</label>
+                <input type="number" class="form-control" 
+                    name="min_amount[]" value="${data.min_amount || ''}">
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label small">Max Amount</label>
+                <input type="number" class="form-control" 
+                    name="max_amount[]" value="${data.max_amount || ''}">
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label small">Min Weight</label>
+                <input type="number" class="form-control" 
+                    name="min_weight[]" value="${data.min_weight || ''}">
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label small">Max Weight</label>
+                <input type="number" class="form-control" 
+                    name="max_weight[]" value="${data.max_weight || ''}">
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label small">Min Qty</label>
+                <input type="number" class="form-control" 
+                    name="min_qty[]" value="${data.min_qty || ''}" required>
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label small">Max Qty</label>
+                <input type="number" class="form-control" 
+                    name="max_qty[]" value="${data.max_qty || ''}" required>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label small">Rate</label>
+                <div class="input-group">
+                    <span class="input-group-text">৳</span>
+                    <input type="number" class="form-control" 
+                        name="rate[]" value="${data.rate || ''}" required>
+                </div>
+            </div>
+
+            <div class="col-md-2 d-flex">
+                <button type="button" class="btn btn-outline-danger ms-auto remove-rate-row" 
+                        data-bs-toggle="tooltip" title="Remove this rate">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>`;
 }
 
-function setInsideOutsideForm(row) {
-    $("#targeted_form #row_id").val(row?.id || "");
-    $("#targeted_form #inside_rate").val(row?.inside_rate ?? "");
-    $("#targeted_form #outside_rate").val(row?.outside_rate ?? "");
+function validateRates() {
+    let isValid = true;
+    let errorMessages = [];
+
+    const rows = $('#rate-container .rate-row');
+
+    // Loop through rows
+    rows.each(function (index) {
+        const row = $(this);
+
+        const minWeight = parseInt(row.find('input[name="min_weight[]"]').val()) || 0;
+        const maxWeight = row.find('input[name="max_weight[]"]').val();
+        const minQty = parseInt(row.find('input[name="min_qty[]"]').val()) || 0;
+        const maxQty = row.find('input[name="max_qty[]"]').val();
+        const minAmount = parseFloat(row.find('input[name="min_amount[]"]').val()) || 0;
+        const maxAmount = row.find('input[name="max_amount[]"]').val();
+        const rate = parseFloat(row.find('input[name="rate[]"]').val());
+
+        // Required Rate
+        if (isNaN(rate) || rate <= 0) {
+            isValid = false;
+            errorMessages.push(`Row ${index + 1}: Rate must be greater than 0`);
+        }
+
+        // Max >= Min (when max is given)
+        if (maxWeight && parseInt(maxWeight) < minWeight) {
+            isValid = false;
+            errorMessages.push(`Row ${index + 1}: Max Weight must be greater than or equal to Min Weight`);
+        }
+        if (maxQty && parseInt(maxQty) < minQty) {
+            isValid = false;
+            errorMessages.push(`Row ${index + 1}: Max Qty must be greater than or equal to Min Qty`);
+        }
+        if (maxAmount && parseFloat(maxAmount) < minAmount) {
+            isValid = false;
+            errorMessages.push(`Row ${index + 1}: Max Amount must be greater than or equal to Min Amount`);
+        }
+
+        // Check overlap with previous row
+        if (index > 0) {
+            const prevRow = $(rows[index - 1]);
+
+            const prevMaxWeight = prevRow.find('input[name="max_weight[]"]').val();
+            const prevMaxQty = prevRow.find('input[name="max_qty[]"]').val();
+            const prevMaxAmount = prevRow.find('input[name="max_amount[]"]').val();
+
+            // Weight continuity
+            if (prevMaxWeight) {
+                if (minWeight !== parseInt(prevMaxWeight) + 1) {
+                    isValid = false;
+                    errorMessages.push(`Row ${index + 1}: Min Weight should be ${parseInt(prevMaxWeight) + 1}`);
+                }
+            }
+
+            // Qty continuity
+            if (prevMaxQty) {
+                if (minQty !== parseInt(prevMaxQty) + 1) {
+                    isValid = false;
+                    errorMessages.push(`Row ${index + 1}: Min Qty should be ${parseInt(prevMaxQty) + 1}`);
+                }
+            }
+
+            // Amount continuity
+            if (prevMaxAmount) {
+                if (minAmount !== parseFloat(prevMaxAmount) + 1) {
+                    isValid = false;
+                    errorMessages.push(`Row ${index + 1}: Min Amount should be ${parseFloat(prevMaxAmount) + 1}`);
+                }
+            }
+        }
+    });
+
+    // Show errors
+    if (!isValid) {
+        toastr.error(errorMessages.join('<br>'));
+    }
+
+    return isValid;
 }
+
+// Add new row
+$(document).on('click', '#add-rate-row', function () {
+    $('#rate-container').append(getRateRow());
+});
+
+// Remove row
+$(document).on('click', '.remove-rate-row', function () {
+    $(this).closest('.rate-row').remove();
+});
+
+// যখন Shipping Zone select হবে
+$(document).on('change', '#shipping_zone_filter', function () {
+    selectedZoneId = $(this).val();
+    selectedZoneType = $(this).find(':selected').data('type'); // inside_outside | tiered
+
+    if (!selectedZoneId) {
+        $('#rate-container').html(getRateRow()); // default row
+        return;
+    }
+
+    // Load existing rates for this zone
+    getDetails(`/admin/shipping-rates/by-zone/${selectedZoneId}`,
+        (res) => {
+            let html = '';
+            if (res.results.length > 0) {
+                res.results.forEach(rate => {
+                    html += getRateRow(rate);
+                });
+            } else {
+                html = getRateRow(); // no data → default row
+            }
+            $('#rate-container').html(html);
+        },
+        (err) => {
+            toastrErrorMessage(err.responseJSON?.message || 'Failed to load rates');
+            $('#rate-container').html(getRateRow()); // fallback default row
+        }
+    );
+});
 
 $(document).ready(function () {
     const modal = new bootstrap.Modal(document.getElementById('shippingRateModal'));
@@ -77,173 +234,45 @@ $(document).ready(function () {
         loadShippingZones();
     });
 
-    $('#shipping_zone_filter').on('change', function () {
-        selectedZoneId = this.value;
-        selectedZoneType = $('option:selected', this).data('type') || '';
-
-        $('#zone_id').val(selectedZoneId);
-        $('#zone_type').val(selectedZoneType);
-
-        if (selectedZoneType == 'inside_outside') {
-            showInsideOutside();
-        } else {
-            showTierFields();
-        }
-
-        loadDataTable();
-    });
-
     $(document).on('click', '.add-new', function () {
-        // if (!selectedZoneId) {
-        //     toastrErrorMessage("Please select a Shipping Zone first.");
-        //     return;
-        // }
-        if (selectedZoneType === 'inside_outside') {
-            toastrErrorMessage("This zone is Inside/Outside type. Use Edit instead.");
-            return;
-        }
-
         $('#targeted_form')[0].reset();
-        $('#row_id').val('');
-        $('#zone_id').val(selectedZoneId);
-        showTierFields();
-        modal.show();
     });
 
-    $(document).on('click', '.update_row', function (e) {
+
+    // Save all rates
+    $('#targeted_form').submit(function (e) {
         e.preventDefault();
-        if (!selectedZoneId) {
-            toastrErrorMessage("Please select a Shipping Zone first.");
-            return;
-        }
-        const id = $(this).data('id');
-        if (selectedZoneType === 'inside_outside') {
-            getDetails(`/admin/shipping-inside-outside?shipping_zone_id=${selectedZoneId}`,
-                (res) => {
-                    const row = res?.results || res?.data || null;
-                    showInsideOutside();
-                    setInsideOutsideForm(row);
-                    $('#zone_id').val(selectedZoneId);
-                    modal.show();
-                },
-                (err) => toastrErrorMessage(err.responseJSON?.message || 'Failed to load details')
-            );
-        } else {
-            getDetails(`/admin/shipping-rates/${id}`,
-                (res) => {
-                    const rate = res?.results || res?.data || null;
-                    showTierFields();
-                    setTierForm(rate);
-                    $('#zone_id').val(selectedZoneId);
-                    modal.show();
-                },
-                (err) => toastrErrorMessage(err.responseJSON?.message || 'Failed to load details')
-            );
-        }
-    });
-
-    $(document).on('click', '.delete_row', function (e) {
-        e.preventDefault();
-        const id = $(this).data('id');
-        deleteAction(
-            `/admin/shipping-rates/${id}`,
-            (data) => {
-                toastrSuccessMessage(data.message || 'Deleted');
-                $('.dataTable').DataTable().ajax.reload(null, false);
-            },
-            (error) => toastrErrorMessage(error.responseJSON?.message || 'Delete failed')
-        );
-    });
-
-    $("#targeted_form").submit(function (event) {
-        event.preventDefault();
-
-        const zoneId = $('#zone_id').val();
-        const zoneType = $('#zone_type').val();
-        const id = $("#row_id").val().trim();
-
-        if (!zoneId) {
-            toastrErrorMessage("Please select a Shipping Zone first.");
-            return;
+        if (!validateRates()) {
+            return; // Stop submit if not valid
         }
 
-        let url = "";
-        let payload = {};
+        const shippingZoneId = $('#shipping_zone_filter').val();
+        let rates = [];
 
-        if (zoneType === 'inside_outside') {
-            url = id ? `/admin/shipping-inside-outside/${id}` : `/admin/shipping-inside-outside`;
-            payload = {
-                shipping_zone_id: zoneId,
-                inside_rate: $('#inside_rate').val(),
-                outside_rate: $('#outside_rate').val()
-            };
-        } else {
-            url = id ? `/admin/shipping-rates/${id}` : `/admin/shipping-rates`;
-            payload = {
-                shipping_zone_id: zoneId,
-                min_amount: $('#min_amount').val(),
-                max_amount: $('#max_amount').val(),
-                min_weight: $('#min_weight').val(),
-                max_weight: $('#max_weight').val(),
-                rate: $('#rate').val()
-            };
-        }
-
-        const method = id ? 'PUT' : 'POST';
-
-        $.ajax({
-            url: url,
-            type: method,
-            data: payload,
-            success: function (res) {
-                toastrSuccessMessage(res.message || 'Saved');
-                // ✅ Close modal
-                $('#shippingRateModal').modal('hide');
-
-                // ✅ Form reset
-                $('#targeted_form')[0].reset();
-
-                // ✅ Reload DataTable
-                loadDataTable();
-            },
-            error: function (err) {
-                toastrErrorMessage(err.responseJSON?.message || 'Failed to save');
-            }
+        // প্রতিটি rate-row collect করা হচ্ছে
+        $('#rate-container .rate-row').each(function () {
+            const row = $(this);
+            rates.push({
+                id: row.find('input[name="rate_id[]"]').val() || null,
+                min_amount: row.find('input[name="min_amount[]"]').val() || null,
+                max_amount: row.find('input[name="max_amount[]"]').val() || null,
+                min_weight: row.find('input[name="min_weight[]"]').val() || null,
+                max_weight: row.find('input[name="max_weight[]"]').val() || null,
+                min_qty: row.find('input[name="min_qty[]"]').val() || null,
+                max_qty: row.find('input[name="max_qty[]"]').val() || null,
+                rate: row.find('input[name="rate[]"]').val()
+            });
         });
-    });
 
-    // ✅ Shipping Zone Location batch add
-    $('#shipping_zone_location').submit(function (e) {
-        e.preventDefault();
-
-        const formData = $(this).serializeArray();
         const payload = {
-            shipping_zone_id: $('#shipping_zone').val(),
-            locations: []
+            shipping_zone_id: shippingZoneId,
+            rates: rates
         };
 
-        let location = {};
-        formData.forEach(item => {
-            if (item.name.includes('division')) location.division_id = item.value;
-            if (item.name.includes('district')) location.district_id = item.value;
-        });
-
-        location.upazila_ids = [];
-        $('.upazila-checkbox:checked').each(function () {
-            location.upazila_ids.push($(this).val());
-        });
-
-        payload.locations.push(location);
-
-        $.post('/admin/shipping-zone-locations/store', payload, function (res) {
-            toastr.success(res.message);
-            $('#shippingZoneLocation').modal('hide');
-            $('#shipping_zone_location')[0].reset();
-            $('#upazilaTable tbody').empty();
-            $('#district_id').val('').trigger('change');
-            $('#division_id').val('').trigger('change');
-        }).fail(function (err) {
-            toastr.error(err.responseJSON.message || 'Failed to save');
+        saveAction('store', '/admin/shipping-rates', payload, null, (res) => {
+            toastrSuccessMessage(res.message);
+            $('#shippingRateModal').modal('hide');
+            loadDataTable();
         });
     });
 });
