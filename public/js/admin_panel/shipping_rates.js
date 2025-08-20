@@ -242,9 +242,9 @@ $(document).ready(function () {
     // Save all rates
     $('#targeted_form').submit(function (e) {
         e.preventDefault();
-        if (!validateRates()) {
-            return; // Stop submit if not valid
-        }
+        // if (!validateRates()) {
+        //     return; // Stop submit if not valid
+        // }
 
         const shippingZoneId = $('#shipping_zone_filter').val();
         let rates = [];
