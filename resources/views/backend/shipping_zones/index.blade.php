@@ -67,7 +67,7 @@
     </div>
     @endsection
     @push('scripts')
-    <script src="{{ asset('js/admin_panel/shipping_zones.js') }}"></script>
+    <script src="{{ asset('js/admin_panel/shipping_zones.js') }}?v={{ time() }}"></script>
     <script>
         loadDataTable();
     </script>
