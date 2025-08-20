@@ -26,7 +26,7 @@ class ShippingZoneStoreRequest extends FormRequest
         $zoneId = $this->route('id') ?? null;
 
         return [
-            'name' => 'required|string|unique:shipping_zones,name,' . $zoneId,
+            'name' => 'required|string',
             'type' => 'required|in:inside_outside,location,mixed',
             'is_active' => 'nullable|boolean',
         ];

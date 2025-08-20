@@ -84,6 +84,7 @@ $('#shippingChargeZone').submit(function (e) {
         type: $('#zone_type').val(),
         is_active: $('#is_active').is(':checked') ? 1 : 0
     };
+    console.log(data);
     saveAction(id ? 'update' : 'store', '/admin/shipping-zones', data, id, (res) => {
         toastrSuccessMessage(res.message);
         $('#shippingChargeZone').modal('hide');
