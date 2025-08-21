@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Panel\User\Cart;
 
+use App\Helpers\CalculateShippingChargeHelper;
 use App\Helpers\Message;
 use App\Helpers\SessionHelper;
 use App\Http\Controllers\Controller;
@@ -13,6 +14,7 @@ use App\Http\Resources\User\Cart\CartItemDetailResource;
 use App\Http\Resources\User\Cart\CartItemListResource;
 use App\Http\Resources\User\Checkout\Cart\CartItemListResource as CartCartItemListResource;
 use App\Models\Cart\CartItem;
+use App\Models\ShippingZoneLocation;
 use App\Services\CartService;
 use App\Services\ShippingChargeService;
 use App\Traits\BaseModel;
@@ -164,7 +166,8 @@ class CartController extends Controller
             'productVariation.productVariationAttributes',
             'productVariation.productVariationAttributes.attributeValue',
             'product',
-            'product.Brand'
+            'product.Brand',
+            'product.ProductMoreDetail',
         )->where('is_active', 1)
             ->where(function ($q) use ($userId, $sessionId) {
                 $q->where('session_id', $sessionId);
@@ -178,19 +181,10 @@ class CartController extends Controller
 
         session(['cart_info' => $cart]);
 
-        // Sample totals, you may calculate properly:
-        $totalOrderAmount = $cart->sum('subtotal'); // or however you calculate order amount
-        $totalQty = $cart->sum('quantity');
         $upazilaId = $request->input('upazila_id');
 
-        $shippingChargeService = new ShippingChargeService();
-
-        $shippingCharge = $shippingChargeService->calculateCharge(
-            $upazilaId,
-            $totalOrderAmount,
-            $totalQty
-        );
-
+        $shippingZoneId = ShippingZoneLocation::where('upazila_id', $upazilaId)?->first()?->shipping_zone_id;
+        $shippingCharge = CalculateShippingChargeHelper::calculateShippingCharge($cartQuery->get(), $shippingZoneId);
 
         return Message::success(null, [
             'cart' => $cart,
