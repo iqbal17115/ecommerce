@@ -54,7 +54,17 @@ const CartActiveItemList = (() => {
 
             container.insertAdjacentHTML('beforeend', productBlock);
         });
-            $('.total_item_count').text(total_item_qty);
+
+        // Update total item count
+        // Update total item count
+        $('.total_item_count').text(total_item_qty);
+
+        // Change "Item" vs "Items"
+        if (total_item_qty === 1) {
+            $('.item_label').text('Item');
+        } else {
+            $('.item_label').text('Items');
+        }
     }
 
     function initEvents() {
