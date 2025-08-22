@@ -38,4 +38,14 @@ class CartItem extends Model
     {
         return $this->hasOne(CartItemCoupon::class);
     }
+
+    public function getUnitPrice()
+    {
+        return $this->product ? $this->product->calculateProductPrice() : 0;
+    }
+
+    public function getTotalPrice()
+    {
+        return $this->getUnitPrice() * $this->quantity;
+    }
 }

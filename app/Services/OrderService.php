@@ -6,6 +6,7 @@ use App\Enums\InvoiceNumberSettingEnum;
 use App\Enums\OrderStatusEnum;
 use App\Enums\PaymentStatusEnum;
 use App\Events\OrderPlaced;
+use App\Helpers\CalculateShippingChargeHelper;
 use App\Helpers\SessionHelper;
 use App\Helpers\Utils;
 use App\Models\Address\Address;
@@ -20,6 +21,7 @@ use App\Models\FrontEnd\OrderDetail;
 use App\Models\InvoiceNumberSetting;
 use App\Models\OrderAddress;
 use App\Models\OrderPayment;
+use App\Models\ShippingZoneLocation;
 use App\Models\User;
 use App\Models\UserAddress;
 use Exception;
@@ -46,7 +48,24 @@ class OrderService
             // Convert $allCartInfo to a collection
             $cartCollection = collect($allCartInfo);
 
-            $shippingChargeSum = collect($cartCollection['data'])->sum('shipping_charge') ?? 0;
+            $userId = Auth::id();
+            $sessionId = SessionHelper::getSessionId();
+
+            $cartQuery = CartItem::with(
+                'product',
+                'product.ProductMoreDetail',
+            )->where('is_active', 1)
+                ->where(function ($q) use ($userId, $sessionId) {
+                    $q->where('session_id', $sessionId);
+
+                    if ($userId) {
+                        $q->orWhere('user_id', $userId);
+                    }
+                });
+
+            $shippingZoneId = ShippingZoneLocation::where('division_id', $validatedData['division'])->where('district_id', $validatedData['district'])->where('upazila_id', $validatedData['thana'])->pluck('shipping_zone_id')?->first();
+
+            $shippingCharge = CalculateShippingChargeHelper::calculateShippingCharge($cartQuery->get(), $shippingZoneId);
             $couponDiscount = collect($cartCollection['data'])->sum('coupon_discount') ?? 0;
             $totalAmount = 0;
 
@@ -66,9 +85,9 @@ class OrderService
             $order->total_amount = $totalAmount;
             $order->other_amount = 0;
             $order->discount = $couponDiscount;
-            $order->shipping_charge = $shippingChargeSum;
+            $order->shipping_charge = $shippingCharge;
             $order->vat = 0;
-            $order->payable_amount = ($totalAmount + $shippingChargeSum - $couponDiscount);
+            $order->payable_amount = ($totalAmount + $shippingCharge - $couponDiscount);
             $order->note = 'Order';
             $order->status = OrderStatusEnum::PENDING;
             $order->is_active = 1;
@@ -104,7 +123,7 @@ class OrderService
                 [
                     'order_id' => $order->id,
                     'total_order_price' => $totalAmount,
-                    'total_shipping_charge_amount' => $shippingChargeSum,
+                    'total_shipping_charge_amount' => $shippingCharge,
                     'total_amount' => $order->payable_amount,
                     'amount_paid' => 0,
                     'due_amount' => $order->payable_amount,

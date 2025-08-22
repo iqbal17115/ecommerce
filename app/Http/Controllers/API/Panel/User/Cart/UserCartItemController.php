@@ -10,7 +10,6 @@ use App\Models\Cart\CartItem;
 use App\Services\UserCartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserCartItemController extends Controller
 {

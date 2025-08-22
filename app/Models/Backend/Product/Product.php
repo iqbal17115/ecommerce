@@ -257,4 +257,25 @@ class Product extends Model
             $query->whereIn('value', explode(",", $value));
         });
     }
+
+    public function calculateProductPrice()
+    {
+        if ($this->isOnSale()) {
+            return $this->sale_price;
+        }
+
+        return $this->your_price;
+    }
+
+    public function isOnSale()
+    {
+        $currentDate = now();
+
+        return ($this->sale_price &&
+            $this->sale_start_date &&
+            $this->sale_end_date &&
+            $this->sale_start_date <= $currentDate &&
+            $this->sale_end_date >= $currentDate
+        );
+    }
 }
