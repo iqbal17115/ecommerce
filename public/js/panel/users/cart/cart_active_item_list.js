@@ -7,10 +7,12 @@ const CartActiveItemList = (() => {
         let total = 0;
         let total_shipping_charge = data?.shipping_charge || 0;
         let coupon_discount = 0;
+        let total_item_qty = 0;
 
         data?.cart?.data?.forEach(item => {
             total += item.product_info.product_price * item.quantity;
             coupon_discount += item.coupon_discount;
+            total_item_qty += item.quantity;
 
             let variationInfo = '';
             if (item.variations && item.variations.length > 0) {
@@ -49,10 +51,10 @@ const CartActiveItemList = (() => {
             $('.shipping_charge_amount').text(total_shipping_charge);
             $('.coupon_discount').text(coupon_discount.toFixed(2));
             $('.grand_total_price').text((total + total_shipping_charge - coupon_discount).toFixed(2));
-            $('.total_item_count').text(data.length);
 
             container.insertAdjacentHTML('beforeend', productBlock);
         });
+            $('.total_item_count').text(total_item_qty);
     }
 
     function initEvents() {
