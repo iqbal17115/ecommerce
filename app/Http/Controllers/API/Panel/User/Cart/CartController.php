@@ -13,7 +13,9 @@ use App\Http\Requests\User\Cart\UpdateCartItemStatusRequest;
 use App\Http\Resources\User\Cart\CartItemDetailResource;
 use App\Http\Resources\User\Cart\CartItemListResource;
 use App\Http\Resources\User\Checkout\Cart\CartItemListResource as CartCartItemListResource;
+use App\Models\Address\Upazila;
 use App\Models\Cart\CartItem;
+use App\Models\ShippingZone;
 use App\Models\ShippingZoneLocation;
 use App\Services\CartService;
 use App\Services\ShippingChargeService;
@@ -181,9 +183,12 @@ class CartController extends Controller
 
         session(['cart_info' => $cart]);
 
+        $divisionId = $request->input('division_id');
+        $districtId = $request->input('district_id');
         $upazilaId = $request->input('upazila_id');
 
-        $shippingZoneId = ShippingZoneLocation::where('upazila_id', $upazilaId)?->first()?->shipping_zone_id;
+        $shippingZoneId = ShippingZoneLocation::where('division_id', $divisionId)->where('district_id', $districtId)->where('upazila_id', $upazilaId)->pluck('shipping_zone_id')?->first();
+
         $shippingCharge = CalculateShippingChargeHelper::calculateShippingCharge($cartQuery->get(), $shippingZoneId);
 
         return Message::success(null, [

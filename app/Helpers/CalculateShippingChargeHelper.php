@@ -22,8 +22,8 @@ class CalculateShippingChargeHelper
 
             // Calculate totals
             $totalQty += $item->quantity;
-            $totalAmount += $product->price * $item->quantity;
-            $totalWeight += $product->weight * $item->quantity;
+            $totalAmount += $product->sale_price * $item->quantity;
+            $totalWeight += $product?->ProductMoreDetail?->package_weight * $item->quantity;
         }
 
         // Find matching shipping rate

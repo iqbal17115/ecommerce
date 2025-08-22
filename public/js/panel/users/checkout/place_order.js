@@ -22,10 +22,12 @@ function submitOrder(formData, selectedId = "") {
 }
 
 $(document).on('click', '#thana', function () {
+    const divisionId = $('#division').val() || null;
+    const districtId = $('#district').val() || null;
     const upazilaId = $('#thana').val() || null;
-    getDetails(`/checkout/cart/lists?upazila_id=${upazilaId}`, (data) => {
+    getDetails(`/checkout/cart/lists?division_id=${divisionId}&district_id=${districtId}&upazila_id=${upazilaId}`, (data) => {
         cartData = data.results;
-          console.log(cartData);
+        console.log(cartData);
         CartActiveItemList.render(cartData);
     }, (error) => {
         console.error("Failed to load cart data:", error);
