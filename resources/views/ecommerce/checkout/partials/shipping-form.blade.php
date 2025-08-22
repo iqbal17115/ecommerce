@@ -1,6 +1,4 @@
 <div class="checkout-box shadow-sm p-4 rounded bg-white">
-    <h5 class="mb-2 font-weight-bold">Shipping Details</h5>
-    
     <form id="checkoutForm">
         <div class="form-group">
             <label for="name">Name / নাম <span class="text-danger">*</span></label>
