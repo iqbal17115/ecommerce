@@ -17,12 +17,22 @@ const CartActiveItemList = (() => {
                 variationInfo = item.variations.map(v => `${v.attribute_name}: ${v.attribute_value}`).join(', ');
             }
 
+            // build brand + variation line only if values exist
+            let extraInfo = '';
+            if (item.product_info.brand_name || variationInfo) {
+                let parts = [];
+                if (item.product_info.brand_name) parts.push(`Brand: ${item.product_info.brand_name}`);
+                if (variationInfo) parts.push(variationInfo);
+
+                extraInfo = `<small>${parts.join(', ')}</small>`;
+            }
+
             const productBlock = `
             <div class="d-flex align-items-start mb-3">
                 <img src="${item.product_info.image_url}" alt="Product Image" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;">
                 <div class="ml-3">
                     <h6 class="mb-0 font-weight-bold">${item.product_info.name}</h6>
-                    <small>Brand: ${item.product_info.brand_name}, ${variationInfo}</small>
+                    ${extraInfo}
                     <div class="d-flex align-items-center">
                         <span class="font-weight-bold text-dark mr-3">${item.product_info.product_price} Taka</span>
                         <div class="quantity-control">

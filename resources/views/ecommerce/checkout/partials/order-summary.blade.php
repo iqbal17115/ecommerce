@@ -1,6 +1,4 @@
 <div class="checkout-box shadow-sm p-4 rounded bg-white">
-    <h5 class="mb-4 font-weight-bold">Your Order</h5>
-
     <!-- Product Block -->
     <div id="productBlockList"></div>
 

@@ -20,7 +20,6 @@ class MyAccountTransactionController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        dd(11);
         $list = OrderPayment::getLists(OrderPayment::whereHas('order', function ($query) {
             $query->where('user_id', Auth::user()->id);
         }), $request->all(), MyTransactionListResource::class);
