@@ -12,7 +12,7 @@ const CartActiveItemList = (() => {
         data?.cart?.data?.forEach(item => {
             total += item.product_info.product_price * item.quantity;
             coupon_discount += item.coupon_discount;
-            total_item_qty += item.quantity;
+            total_item_qty += parseInt(item.quantity);
 
             let variationInfo = '';
             if (item.variations && item.variations.length > 0) {
