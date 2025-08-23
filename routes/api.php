@@ -120,6 +120,7 @@ Route::controller(ShopSettingUpazilaController::class)->group(function () {
     Route::get('upazilas/{upazila}', 'show')->name('upazilas.show');
     Route::post('upazilas', 'store')->name('upazilas.store');
     Route::put('upazilas/{upazila}', 'update')->name('upazilas.update');
+    Route::put('upazila-status/{upazila}', 'statusUpdate')->name('upazila_status.update');
     Route::delete('upazilas/{upazila}', 'destroy')->name('upazilas.delete');
     Route::get('upazilas/select-lists', 'select_upazila')->name('upazilas.select_lists');
 });

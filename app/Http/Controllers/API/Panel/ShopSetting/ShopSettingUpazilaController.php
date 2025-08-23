@@ -9,6 +9,7 @@ use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingUpazilaUpdateRequest;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingUpazilaDatatableResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingUpazilaListResource;
 use App\Http\Resources\AdminPanel\ShopSetting\ShopSettingUpazilaUpdateResource;
+use App\Http\Requests\AdminPanel\ShopSetting\ShopSettingStatusUpdateRequest;
 use App\Models\Address\District;
 use App\Models\Address\Upazila;
 use App\Traits\BaseModel;
@@ -115,6 +116,27 @@ class ShopSettingUpazilaController extends Controller
         try {
             // Update upazila
             $upazila->update($shopSettingUpazilaUpdateRequest->validated());
+
+            //Success Response
+            return Message::success(__("messages.success_update"));
+        } catch (Exception $e) {
+            // Handle any exception that occurs during the process
+            return Message::error($e->getMessage());
+        }
+    }
+
+    /**
+     * Update Upazila Location
+     *
+     * @param ShopSettingStatusUpdateRequest $shopSettingStatusUpdateRequest
+     * @param Upazila $upazila
+     * @return JsonResponse
+     */
+    public function statusUpdate(ShopSettingStatusUpdateRequest $shopSettingStatusUpdateRequest, Upazila $upazila): JsonResponse
+    {
+        try {
+            // Update upazila location
+            $upazila->update($shopSettingStatusUpdateRequest->validated());
 
             //Success Response
             return Message::success(__("messages.success_update"));
