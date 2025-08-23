@@ -36,10 +36,12 @@ class AllOrderController extends Controller
     use Barcode;
 
     private $advanceEditOrderService;
+    private $orderPaymentService;
 
-    public function __construct(AdvanceEditOrderService $advanceEditOrderService, private readonly OrderPaymentService $orderPaymentService)
+    public function __construct(AdvanceEditOrderService $advanceEditOrderService, OrderPaymentService $orderPaymentService)
     {
         $this->advanceEditOrderService = $advanceEditOrderService;
+        $this->orderPaymentService = $orderPaymentService;
     }
 
     public function createUpdateStatus(OrderStatusRequest $orderStatusRequest, Order $order)
