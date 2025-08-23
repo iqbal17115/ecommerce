@@ -17,8 +17,8 @@ class ShopSettingUpazilaUpdateResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'district_id' => $this->District->id,
-            'district_name' => $this->District->name,
+            'district_id' => $this?->District?->id,
+            'district_name' => $this?->District?->name,
             'status' => $this->status,
         ];
     }
