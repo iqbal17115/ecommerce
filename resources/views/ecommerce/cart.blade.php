@@ -40,7 +40,7 @@
                                 </td>
                             </tr>
 
-                            <tr class="shipping-total">
+                            <!-- <tr class="shipping-total">
                                 <td>
                                     Shipping Carge
                                 </td>
@@ -48,7 +48,7 @@
                                 <td class="shipping-col" style="text-align: right;">
                                     <span>{{ $currency?->icon }} <span class="shipping_charge_amount"></span></span>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <tr class="discount-total">
                                 <td>
                                     Discount

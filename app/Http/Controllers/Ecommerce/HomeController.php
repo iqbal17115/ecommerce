@@ -16,8 +16,15 @@ use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
-    public function __construct(private readonly HomePageService $homePageService, private readonly CacheService $cacheService) {}
+   private HomePageService $homePageService;
+    private CacheService $cacheService;
 
+    public function __construct(HomePageService $homePageService, CacheService $cacheService)
+    {
+        $this->homePageService = $homePageService;
+        $this->cacheService = $cacheService;
+    }
+    
     public function getMainContent()
     {
         $product_features = ProductFeature::whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
