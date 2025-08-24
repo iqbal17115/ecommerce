@@ -46,7 +46,6 @@ const CartActiveItemList = (() => {
                 </div>
             </div>
         `;
-            console.log('Product Block:', total_shipping_charge);
             $('.cart_total_price').text(total.toFixed(2));
             $('.shipping_charge_amount').text(total_shipping_charge);
             $('.coupon_discount').text(coupon_discount.toFixed(2));
