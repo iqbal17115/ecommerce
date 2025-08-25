@@ -27,6 +27,8 @@ class CapturePreviousUrl
             'shop*',       // avoid admin
             'user-info*',       // avoid admin
             'cart-drawer/*',       // avoid admin
+            'checkout/*',    // maybe avoid checkout too
+            'divisions-select/*',
         ];
 
         if (

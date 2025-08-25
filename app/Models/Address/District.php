@@ -27,8 +27,18 @@ class District extends Model
         'name'
     ];
 
+     protected array $filterable = [
+        'division_id'  => 'filterByDivision',
+    ];
+
+
     public function Division()
     {
         return $this->belongsTo(Division::class);
+    }
+
+    public function filterByDivision($query, $value)
+    {
+        return $query->where('division_id', $value);
     }
 }

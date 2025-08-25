@@ -187,25 +187,42 @@ function changeLocation(id, location) {
 }
 
 // Load the company data table
+// store the DataTable object returned by initializeDataTable
+let dataTableObj;
+
+// function to get current filters
+function getFilters() {
+    return {
+        division_id: $('#division_filter').val() || null
+    };
+}
+
+// load and initialize the DataTable
 function loadDataTable() {
-    initializeDataTable(
+    dataTableObj = initializeDataTable(
         `/api/shop-setting-districts/lists`,
         [
             generateColumn('name', null, 'name'),
             generateColumn('division_name', null, 'division_name'),
             generateColumn('country_name', null, 'country_name'),
-            generateColumn('location', (data, type, row) => {
-                return row.location == 'inside' ? 'Inside' : 'Outside';
-            }, 'location'),
+            generateColumn('location', (data, type, row) => row.location == 'inside' ? 'Inside' : 'Outside', 'location'),
             generateColumn('change_location', (data, type, row) => changeLocation(row.id, row.location), 'name'),
-            generateColumn('status', (data, type, row) => {
-                return row.status == 1 ? 'Active' : 'Inactive';
-            }, 'status'),
+            generateColumn('status', (data, type, row) => row.status == 1 ? 'Active' : 'Inactive', 'status'),
             generateColumn('change_status', (data, type, row) => changeStatus(row.id, row.status), 'name'),
             generateColumn('action', (data, type, row) => linkableActions(row.id), 'name'),
-        ]
+        ],
+        getFilters // pass filter function
     );
 }
+
+// when the page is ready
+$(document).ready(function () {
+    // reload table whenever division filter changes
+    $(document).on('change', '#division_filter', function () {
+        dataTableObj.reloadDataTable(); // ✅ reload table with updated filters
+    });
+});
+
 
 // Generates linkable text for a company with an ID and text
 function linkableActions(id, text) {
