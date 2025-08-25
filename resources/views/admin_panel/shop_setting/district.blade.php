@@ -76,6 +76,7 @@
 @push('scripts')
 <script src="{{ asset('js/admin_panel/shop_setting/district.js') }}?v={{ time() }}"></script>
 <script>
+    // Datatable
     loadDataTable();
 </script>
 @endpush
