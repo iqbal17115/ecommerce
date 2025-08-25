@@ -16,14 +16,19 @@ const CartActiveItemList = (() => {
 
             let variationInfo = '';
             if (item.variations && item.variations.length > 0) {
-                variationInfo = item.variations.map(v => `${v.attribute_name}: ${v.attribute_value}`).join(', ');
+                variationInfo = item.variations
+                    .filter(v => v.attribute_name && v.attribute_value) // ignore null/empty
+                    .map(v => `${v.attribute_name}: ${v.attribute_value}`)
+                    .join(', ');
             }
 
             // build brand + variation line only if values exist
             let extraInfo = '';
-            if (item.product_info.brand_name || variationInfo) {
+            if ((item.product_info.brand_name && item.product_info.brand_name !== 'null') || variationInfo) {
                 let parts = [];
-                if (item.product_info.brand_name) parts.push(`Brand: ${item.product_info.brand_name}`);
+                if (item.product_info.brand_name && item.product_info.brand_name !== 'null') {
+                    parts.push(`Brand: ${item.product_info.brand_name}`);
+                }
                 if (variationInfo) parts.push(variationInfo);
 
                 extraInfo = `<small>${parts.join(', ')}</small>`;
