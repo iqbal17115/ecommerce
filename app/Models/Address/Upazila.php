@@ -26,6 +26,15 @@ class Upazila extends Model
         'name'
     ];
 
+    protected array $filterable = [
+        'district_id'  => 'filterByDistrictId',
+    ];
+
+    public function filterByDistrictId($query, $district_id)
+    {
+        return $query->where('district_id', $district_id);
+    }
+    
     public function District()
     {
         return $this->belongsTo(District::class);
