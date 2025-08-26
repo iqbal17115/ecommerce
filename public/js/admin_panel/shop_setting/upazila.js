@@ -93,6 +93,12 @@ function submitUpazilaForm(formData, selectedId = "") {
     );
 }
 
+// function to get current filters
+function getFilters() {
+    return {
+        district_id: $('#district_filter').val() || null
+    };
+}
 
 // Load the company data table
 function loadDataTable() {
@@ -103,10 +109,12 @@ function loadDataTable() {
             generateColumn('district_name', null, 'district_name'),
             generateColumn('change_status', (data, type, row) => changeStatus(row.id, row.status), 'name'),
             generateColumn('action', (data, type, row) => linkableActions(row.id), 'name'),
-        ]
+        ],
+        getFilters // pass filter function
     );
 }
 
+<<<<<<< Updated upstream
 function changeStatus(id, location) {
     const locationButton = location == 1
         ? `
@@ -153,6 +161,16 @@ function submitChangeStatus(formData, selectedId = "") {
     });
 }
 
+=======
+// when the page is ready
+$(document).ready(function () {
+    // reload table whenever division filter changes
+    $(document).on('change', '#district_filter', function () {
+        dataTableObj.reloadDataTable(); // reload table with updated filters
+    });
+});
+
+>>>>>>> Stashed changes
 // Generates linkable text for a company with an ID and text
 function linkableActions(id, text) {
     return `
