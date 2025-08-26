@@ -100,9 +100,12 @@ function getFilters() {
     };
 }
 
+// store the DataTable object returned by initializeDataTable
+let dataTableObj;
+
 // Load the company data table
 function loadDataTable() {
-    initializeDataTable(
+    dataTableObj =initializeDataTable(
         `/api/shop-setting-upazilas/lists`,
         [
             generateColumn('name', null, 'name'),
@@ -114,7 +117,6 @@ function loadDataTable() {
     );
 }
 
-<<<<<<< Updated upstream
 function changeStatus(id, location) {
     const locationButton = location == 1
         ? `
@@ -161,7 +163,6 @@ function submitChangeStatus(formData, selectedId = "") {
     });
 }
 
-=======
 // when the page is ready
 $(document).ready(function () {
     // reload table whenever division filter changes
@@ -170,7 +171,6 @@ $(document).ready(function () {
     });
 });
 
->>>>>>> Stashed changes
 // Generates linkable text for a company with an ID and text
 function linkableActions(id, text) {
     return `
