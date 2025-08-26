@@ -78,7 +78,7 @@
 </div><!-- /.modal -->
 @endsection
 @push('scripts')
-<script src="{{ asset('js/admin_panel/shop_setting/upazila.js') }}"></script>
+<script src="{{ asset('js/admin_panel/shop_setting/upazila.js') }}?v={{ time() }}"></script>
 <script>
     loadDataTable();
 </script>
