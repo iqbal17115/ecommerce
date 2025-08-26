@@ -25,8 +25,11 @@ const CartManager = (() => {
         }
 
         if (window.hasCartActiveItemList && typeof CartActiveItemList !== 'undefined') {
-            const upazilaId = $('#thana').val() || null; 
-            getDetails(`/checkout/cart/lists?upazila_id=${upazilaId}`, (data) => {
+            const divisionId = $('#division').val() || null;
+            const districtId = $('#district').val() || null;
+            const upazilaId = $('#thana').val() || null;
+
+            getDetails(`/checkout/cart/lists?division_id=${divisionId}&district_id=${districtId}&upazila_id=${upazilaId}`, (data) => {
                 cartData = data.results;
                 CartActiveItemList.render(cartData);
             }, (error) => {
