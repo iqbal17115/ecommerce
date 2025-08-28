@@ -715,4 +715,20 @@
         }
     });
 </script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+dataLayer.push({
+    'event': 'view_item',
+    'ecommerce': {
+        'items': [{
+            'item_id': '{{ $product_detail->id }}',
+            'item_name': '{{ $product_detail->name }}',
+            'item_category': '{{ $product_detail->category->name ?? '' }}',
+            'price': '{{ $product_detail->price }}',
+        }]
+    }
+});
+</script>
+
 @endpush
