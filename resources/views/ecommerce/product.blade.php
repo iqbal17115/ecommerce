@@ -718,17 +718,19 @@
 
 <script>
 window.dataLayer = window.dataLayer || [];
+
+let productDetail = @json($product_detail);
+
 dataLayer.push({
     'event': 'view_item',
     'ecommerce': {
         'items': [{
-            'item_id': '{{ $product_detail->id }}',
-            'item_name': '{{ $product_detail->name }}',
-            'item_category': '{{ $product_detail->category->name ?? '' }}',
-            'price': '{{ $product_detail->price }}',
+            'item_id': productDetail.id,
+            'item_name': productDetail.name,
+            'item_category': productDetail.category?.name || '',
+            'price': productDetail.sale_price || 0,
         }]
     }
 });
 </script>
-
 @endpush
