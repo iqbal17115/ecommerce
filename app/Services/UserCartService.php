@@ -86,14 +86,20 @@ class UserCartService
     {
         if ($existingItem) {
             $existingItem->update(['is_active' => true]);
+
+            // Deactivate all other cart items
+            $this->deactivateOtherCartItems($cart->id, $existingItem, $userId, $sessionId);
         } else {
-            $this->createCartItem($cart->id, $userId, $sessionId, $productId, $variationId, $quantity, true);
+            $cartItem = $this->createCartItem($cart->id, $userId, $sessionId, $productId, $variationId, $quantity, true);
+
+            // Deactivate all other cart items
+            $this->deactivateOtherCartItems($cart->id, $cartItem, $userId, $sessionId);
         }
     }
 
-    protected function createCartItem($cartId, $userId, $sessionId, $productId, $variationId, $quantity, bool $isActive): void
+    protected function createCartItem($cartId, $userId, $sessionId, $productId, $variationId, $quantity, bool $isActive)
     {
-        CartItem::create([
+        return CartItem::create([
             'cart_id' => $cartId,
             'user_id' => $userId,
             'session_id' => $userId ? null : $sessionId,
@@ -130,5 +136,19 @@ class UserCartService
         if ($product->max_order_qty && $totalQty > $product->max_order_qty) {
             throw new Exception("Max order quantity: {$product->max_order_qty}");
         }
+    }
+
+    protected function deactivateOtherCartItems($cartId, $cartItem, $userId, $sessionId): void
+    {
+        $dd = CartItem::where('cart_id', $cartId)
+            ->where(function ($q) use ($userId, $sessionId) {
+                if ($userId) {
+                    $q->where('user_id', $userId);
+                } else {
+                    $q->where('session_id', $sessionId);
+                }
+            })
+            ->where('id', '!=', $cartItem->id)
+            ->update(['is_active' => false]);
     }
 }
