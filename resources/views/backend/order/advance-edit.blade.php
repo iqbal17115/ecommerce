@@ -877,7 +877,7 @@
 @endsection
 @push('script')
     <script src="{{ asset('backend_js/order_product/advance_edit.js') }}"></script>
-    <script src="{{ asset('js/courier.js') }}"></script>
+    <script src="{{ asset('js/courier.js') }}?v={{ time() }}"></script>
     <script>
         function removeBox(boxNumber) {
             $('#box_' + boxNumber).remove();
