@@ -314,40 +314,26 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-4">Shipping Panel</h5>
-                    <form>
+                    <form id="shippingForm">
+                        @csrf
+                        <input type="hidden" id="orderId" value="{{ $order->id }}">
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="courier">Courier:</label>
-                                <div class="input-group">
-                                    <select class="form-control" id="courier" name="courier">
-                                        <option value="pathao">Pathao</option>
-                                        <option value="dhl">DHL</option>
-                                        <!-- Add more options -->
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-outline-primary" id="openCourierModal">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                <select class="form-control" id="courier" name="courier">
+                                    <option value="steadfast">Steadfast</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="shippingMethod">Shipping Method:</label>
-                                <div class="input-group">
-                                    <select class="form-control" id="shippingMethod" name="shippingMethod">
-                                        <option value="standard">Standard Delivery</option>
-                                        <option value="express">Express Delivery</option>
-                                        <!-- Add more options -->
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-outline-primary"
-                                            id="openShippingMethodModal">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                <select class="form-control" id="shippingMethod" name="shippingMethod">
+                                    <option value="standard">Standard Delivery</option>
+                                    <option value="express">Express Delivery</option>
+                                </select>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="trackingId">Tracking ID:</label>
                             <input type="text" class="form-control" id="trackingId" name="trackingId">
@@ -356,6 +342,8 @@
                             <label for="dispatchDate">Dispatch Date:</label>
                             <input type="datetime-local" class="form-control" id="dispatchDate" name="dispatchDate">
                         </div>
+
+                        <button type="button" class="btn btn-success" id="sendToCourierBtn">Send to Courier</button>
                     </form>
                 </div>
 
@@ -889,6 +877,7 @@
 @endsection
 @push('script')
     <script src="{{ asset('backend_js/order_product/advance_edit.js') }}"></script>
+    <script src="{{ asset('js/courier.js') }}"></script>
     <script>
         function removeBox(boxNumber) {
             $('#box_' + boxNumber).remove();

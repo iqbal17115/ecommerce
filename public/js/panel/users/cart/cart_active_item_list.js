@@ -35,7 +35,7 @@ const CartActiveItemList = (() => {
             }
 
             const productBlock = `
-            <div class="d-flex align-items-start mb-3">
+            <div class="d-flex align-items-start mb-3  cart_list_${item.id}">
                 <img src="${item.product_info.image_url}" alt="Product Image" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;">
                 <div class="ml-3">
                     <h6 class="mb-0 font-weight-bold">${item.product_info.name}</h6>
@@ -47,6 +47,10 @@ const CartActiveItemList = (() => {
                             <input type="text" class="qty-input input-qty" value="${item.quantity}" data-cart_item_id="${item.id}" readonly>
                             <button class="btn btn-qty btn-increase qty-btn-plus" type="button" data-cart_item_id="${item.id}">+</button>
                         </div>
+                        <button class="btn btn-link text-danger p-0 remove-cart-item ms-auto" 
+                                data-cart_item_id="${item.id}" title="Remove">
+                            <i class="fa fa-trash text-danger" style="font-size: 15px;"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -117,6 +121,12 @@ const CartActiveItemList = (() => {
             }
         );
     });
+
+     $(document).on('click', '.remove-cart-item', function () {
+            const cartItemId = $(this).data('cart_item_id');
+
+            CartManager.removeItem(cartItemId);
+        });
 
     initEvents();
 

@@ -33,4 +33,10 @@ return [
     'gtm' => [
         'id' => env('GTM_ID', null),
     ],
+
+    'steadfast' => [
+    'url'        => env('STEADFAST_API_URL'),
+    'api_key'    => env('STEADFAST_API_KEY'),
+    'secret_key' => env('STEADFAST_SECRET_KEY'),
+],
 ];

@@ -1,3 +1,15 @@
+/**
+ * Validate phone number
+ * @param {string} phone
+ * @returns {boolean}
+ */
+function isValidPhone(phone) {
+    // Example: Bangladesh phone numbers
+    // Format: 01XXXXXXXXX (11 digits, starts with 01)
+    const phonePattern = /^(?:\+?88)?01[3-9]\d{8}$/;
+    return phonePattern.test(phone.trim());
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const qtyInput = document.querySelector('.quantity-control input');
     const btnIncrease = document.querySelector('.btn-increase');

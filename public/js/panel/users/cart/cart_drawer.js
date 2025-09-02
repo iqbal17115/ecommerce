@@ -87,6 +87,12 @@ const CartDrawer = (() => {
                         button.classList.remove("added-to-cart");
                     }
                 }
+
+                // Remove from DOM if container exists
+                const cartItemDiv = document.querySelector(`.cart_list_${cartItemId}`);
+                if (cartItemDiv) {
+                    cartItemDiv.remove();
+                }
             },
             (error) => {
                 toastrErrorMessage(error.responseJSON.message);
@@ -105,7 +111,7 @@ const CartDrawer = (() => {
 
     function handleQuantityChange(cartItemId, newQty) {
         if (newQty <= 0) return;
-    
+
         updateAction(
             `/cart-items/${cartItemId}`,
             { quantity: newQty },
@@ -126,7 +132,7 @@ const CartDrawer = (() => {
                 const cartItemId = e.target.dataset.id;
                 removeCartItem(cartItemId);
             }
-    
+
             // Quantity increase/decrease buttons
             if (e.target.classList.contains('qty-update-btn')) {
                 const cartItemId = e.target.dataset.id;
@@ -134,7 +140,7 @@ const CartDrawer = (() => {
                 handleQuantityChange(cartItemId, newQty);
             }
         });
-    
+
         // Manual input (blur event for direct changes)
         document.addEventListener('change', function (e) {
             if (e.target.classList.contains('manual-qty-input')) {

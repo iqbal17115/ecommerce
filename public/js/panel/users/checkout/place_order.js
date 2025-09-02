@@ -34,10 +34,32 @@ $(document).on('click', '#thana', function () {
     });
 });
 
+/**
+ * Validate Bangladeshi phone number
+ * @param {string} phone
+ * @returns {boolean}
+ */
+function isValidPhone(phone) {
+    const phonePattern = /^(?:\+?88)?01[3-9]\d{8}$/;
+    return phonePattern.test(phone.trim());
+}
+
 $(document).on('click', '#placeOrderBtn', function () {
     const form = document.getElementById('checkoutForm');
     const formData = {};
 
+    // 1️⃣ Validate phone first
+    const mobile = form.elements['mobile']?.value?.trim() || '';
+    if (!mobile) {
+        toastrErrorMessage('Please enter your phone number');
+        return;
+    }
+    if (!isValidPhone(mobile)) {
+        toastrErrorMessage('Please enter a valid Bangladeshi phone number (e.g., 017XXXXXXXX)');
+        return;
+    }
+    formData['mobile'] = mobile;
+    
     // Collect required fields into formData object
     const requiredFields = ['name', 'mobile', 'division', 'district', 'thana', 'address'];
     for (let field of requiredFields) {

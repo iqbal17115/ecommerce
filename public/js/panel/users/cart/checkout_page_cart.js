@@ -41,9 +41,7 @@ function showCartTableData(data) {
                             <input type="text" name="qty" value="${item.quantity}" class="input-qty text-center mx-2" style="width: 40px; height: 30px; border: 1px solid #ddd; border-radius: 5px;">
                             <button class="qty-btn-plus btn btn-light change_qty_cart_item" data-cart_item_id="${item.id}" style="width: 30px; height: 30px; font-size: 16px; padding: 0;">+</button>
                         </div>
-                        <button class="btn btn-link text-danger p-0 remove-cart-item ms-2" data-cart_item_id="${item.id}" title="Remove">
-                            <i class="fa fa-trash text-danger" style="font-size: 15px;"></i>
-                        </button>
+                        <button class="remove_from_cart btn btn-danger" data-cart_item_id="${item.id}">Remove</button>
                     </div>
                 </div>
             </div>
@@ -102,6 +100,7 @@ function updateCart(item) {
 $(document).ready(function () {
 
     function submitOrder(formData, selectedId = "") {
+
         saveAction(
             "store",
             "/order-place",

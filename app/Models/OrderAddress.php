@@ -29,5 +29,4 @@ class OrderAddress extends Model
         'district_name',
         'upazila_name'
     ];
-
 }

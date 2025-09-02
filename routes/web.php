@@ -85,6 +85,7 @@ use App\Http\Controllers\Backend\View\ShippingZoneViewController;
 use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
 use App\Http\Controllers\Ecommerce\UserRewardPointController;
+use App\Http\Controllers\Panel\CourierController;
 use App\Models\ShippingCharge;
 use Illuminate\Support\Facades\Route;
 
@@ -652,6 +653,10 @@ Route::group(['middleware' => 'web'], function () {
             // inside/outside
             Route::get('/shipping-inside-outside/{zoneId}', [ShippingInsideOutsideController::class, 'showByZone']);
             Route::post('/shipping-inside-outside', [ShippingInsideOutsideController::class, 'storeOrUpdate']);
+        });
+
+        Route::controller(CourierController::class)->group(function () {
+            Route::post('couriers/{order}/send', 'sendOrder')->name('couriers.sendOrder');
         });
     });
 
