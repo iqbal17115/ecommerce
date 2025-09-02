@@ -314,7 +314,7 @@ class AllOrderController extends Controller
 
     public function advanceEdit(Request $request)
     {
-        $order = Order::find($request->id);
+        $order = Order::with(['courierShipment'])->find($request->id);
         $lengthUnits = LengthUnitEnum::getOptions();
         $weightUnits = WeightUnitEnum::getWeightOptions();
         $cancel_reasons = ProductCancelReasonEnum::getCancelOptions();

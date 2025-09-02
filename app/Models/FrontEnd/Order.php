@@ -10,6 +10,7 @@ use App\Models\Backend\Inventory\SaleInvoice;
 use App\Models\Backend\Order\OrderTracking;
 use App\Models\Backend\OrderProduct\OrderNoteStatus;
 use App\Models\Backend\OrderProduct\OrderProductBox;
+use App\Models\CourierShipment;
 use App\Models\OrderAddress;
 use App\Models\OrderPayment;
 use App\Models\User;
@@ -24,7 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use HasFactory, SoftDeletes, BaseModel, DisplayNameTrait;
-    
+
     protected $dates = ['deleted_at'];
     protected $fillable = [
         'code',
@@ -87,7 +88,7 @@ class Order extends Model
     {
         return $this->hasOne(SaleInvoice::class);
     }
-    
+
     public function Contact()
     {
         return $this->belongsTo(Contact::class);
@@ -96,9 +97,14 @@ class Order extends Model
     {
         return $this->belongsTo(District::class);
     }
-    
+
     public function OrderDetail()
     {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    public function courierShipment()
+    {
+        return $this->hasOne(CourierShipment::class);
     }
 }

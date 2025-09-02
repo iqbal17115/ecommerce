@@ -17,16 +17,18 @@ document.addEventListener("DOMContentLoaded", function () {
             formData,
             orderId,
             (data) => {
-                alert("✅ Order sent to courier successfully!");
-                console.log("Response:", data);
+                if (data.success) {
+                    toastrSuccessMessage(data.message);
+                } else {
+                    toastrErrorMessage(data.message);
+                }
             },
             (error) => {
-                alert("❌ Failed to send order to courier!");
-                console.error("Error:", error);
+                toastrErrorMessage(error.responseJSON.message);
             }
         );
     });
-    document.getElementById("dispatchDate").addEventListener("change", function() {
-    console.log(this.value); // will show the new value
-});
+    document.getElementById("dispatchDate").addEventListener("change", function () {
+        console.log(this.value); // will show the new value
+    });
 });
