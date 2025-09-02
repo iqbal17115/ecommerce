@@ -41,12 +41,20 @@ class OrderCourierService
             return "{$productName} ({$variationAttributes}) x {$detail->quantity}";
         })->implode(' | ');
 
+        $recipientAddress = trim(
+            ($order?->orderAddress?->instruction ?? '') . ', ' .
+                ($order?->orderAddress?->upazila_name ?? '') . ', ' .
+                ($order?->orderAddress?->district_name ?? '') . ', ' .
+                ($order?->orderAddress?->division_name ?? ''),
+            ', '
+        );
+
         // Payload for courier API
         $payload = [
             "invoice"           => $order->code,
             "recipient_name"    => $order?->orderAddress?->name,
             "recipient_phone"   => $order?->orderAddress?->mobile,
-            "recipient_address" => $order?->orderAddress?->instruction,
+            "recipient_address" => $recipientAddress,
             "alternative_phone" => $order?->orderAddress?->optional_mobile,
             "item_description"  => $itemDescription,
             "cod_amount"        => $order->payable_amount,

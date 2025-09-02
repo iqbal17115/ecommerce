@@ -28,7 +28,13 @@ class CourierController extends Controller
         return response()->json([
             'success' => true,
             'message' => $result['message'] ?? 'Order sent successfully',
-            'data'    => $result['data'] ?? null,
+            'data'    => [
+                'courier_name'   => $order->courierShipment?->courier_name,
+                'shipping_method' => $order->shipping_method,
+                'tracking_code'  => $order->courierShipment?->tracking_code,
+                'dispatched_at'  => $order->courierShipment?->dispatched_at,
+                'estimate_date'  => $order->courierShipment?->dispatched_at, // or calculate if needed
+            ]
         ]);
     }
 }

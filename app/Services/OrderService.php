@@ -88,7 +88,7 @@ class OrderService
             $order->shipping_charge = $shippingCharge;
             $order->vat = 0;
             $order->payable_amount = ($totalAmount + $shippingCharge - $couponDiscount);
-            $order->note = 'Order';
+            $order->note = $validatedData['address'] ?? '';
             $order->status = OrderStatusEnum::PENDING;
             $order->is_active = 1;
             $order->save();

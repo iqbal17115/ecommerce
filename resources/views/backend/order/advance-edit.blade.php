@@ -321,13 +321,13 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="courier">Courier:</label>
-                                <select class="form-control" id="courier" name="courier">
+                                <select class="form-control" id="courier" name="courier" required>
                                     <option value="steadfast">Steadfast</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="shippingMethod">Shipping Method:</label>
-                                <select class="form-control" id="shippingMethod" name="shippingMethod">
+                                <select class="form-control" id="shippingMethod" name="shippingMethod" required>
                                     <option value="standard">Standard Delivery</option>
                                     <option value="express">Express Delivery</option>
                                 </select>
@@ -340,7 +340,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dispatchDate">Dispatch Date:</label>
-                            <input type="datetime-local" class="form-control" id="dispatchDate" name="dispatchDate">
+                            <input type="datetime-local" class="form-control" id="dispatchDate" name="dispatchDate" required>
                         </div>
 
                         <button type="button" class="btn btn-success" id="sendToCourierBtn">Send to Courier</button>
@@ -349,27 +349,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                     @if($shipment = $order->courierShipment)
-    <div class="row">
-        <div class="col-md-4">
-            <h5>Carrier & Delivery</h5>
-            <p>{{ ucfirst($shipment->courier_name) }}</p>
-            <p>{{ $order->shipping_method ?? '-' }}</p>
-        </div>
-        <div class="col-md-4">
-            <h5>Tracking ID</h5>
-            <p>{{ $shipment->tracking_code ?? '-' }}</p>
-            <p>{{ $shipment->dispatched_at }}</p>
-        </div>
-        <div class="col-md-4">
-            <h5>Estimate Delivery Date</h5>
-            <p>{{ $shipment->dispatched_at }}</p>
-        </div>
-    </div>
-@else
-    <p>No shipment information available.</p>
-@endif
-
+                        @include('backend.order.partials._shipment', ['order' => $order])
                     </div>
                 </div>
 
