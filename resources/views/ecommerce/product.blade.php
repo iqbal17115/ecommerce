@@ -717,20 +717,20 @@
 </script>
 
 <script>
-window.dataLayer = window.dataLayer || [];
+// window.dataLayer = window.dataLayer || [];
 
-let productDetail = @json($product_detail);
+// let productDetail = @json($product_detail);
 
-dataLayer.push({
-    'event': 'view_item',
-    'ecommerce': {
-        'items': [{
-            'item_id': productDetail.id,
-            'item_name': productDetail.name,
-            'item_category': productDetail.category?.name || '',
-            'price': productDetail.sale_price || 0,
-        }]
-    }
-});
+// dataLayer.push({
+//     'event': 'view_item',
+//     'ecommerce': {
+//         'items': [{
+//             'item_id': productDetail.id,
+//             'item_name': productDetail.name,
+//             'item_category': productDetail.category?.name || '',
+//             'price': productDetail.sale_price || 0,
+//         }]
+//     }
+// });
 </script>
 @endpush
