@@ -74,4 +74,28 @@ class CacheService
     {
         return Cache::forget($key);
     }
+
+/**
+     * Remember a value in cache with a key
+     */
+    public function rememberKey($key, callable $callback, $seconds = 3600)
+    {
+        if (Cache::has($key)) {
+            return Cache::get($key);
+        }
+
+        $value = $callback();
+        Cache::put($key, $value, $seconds);
+        return $value;
+    }
+
+    /**
+     * Forget multiple keys
+     */
+    public function forgetKeys(array $keys)
+    {
+        foreach ($keys as $key) {
+            Cache::forget($key);
+        }
+    }
 }

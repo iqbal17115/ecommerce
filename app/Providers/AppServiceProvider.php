@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Backend\Currency\Currency;
 use App\Models\Backend\Product\Category;
+use App\Models\Backend\Product\Product;
 use App\Models\Backend\WebSetting\Advertisement;
 use App\Models\Backend\WebSetting\CompanyInfo;
+use App\Observers\ProductObserver;
 use App\Services\CacheService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -28,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        //Products Observer
+        Product::observe(ProductObserver::class);
+
         //Categories
         View::composer('*', function ($view) {
             $cacheService = app(CacheService::class);
@@ -62,7 +68,9 @@ class AppServiceProvider extends ServiceProvider
                     ->toArray();
             }, 3600);
 
-            $company_info = CompanyInfo::first();
+            $company_info = $cacheService->remember('company_info', function () {
+                return CompanyInfo::first();
+            }, 3600);
 
             $currency = $cacheService->remember('currency', function () {
                 return Currency::whereIsDefault(1)->first();

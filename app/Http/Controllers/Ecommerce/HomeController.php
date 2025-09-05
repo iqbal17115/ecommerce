@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
-   private HomePageService $homePageService;
+    private HomePageService $homePageService;
     private CacheService $cacheService;
 
     public function __construct(HomePageService $homePageService, CacheService $cacheService)
@@ -24,7 +24,7 @@ class HomeController extends Controller
         $this->homePageService = $homePageService;
         $this->cacheService = $cacheService;
     }
-    
+
     public function getMainContent()
     {
         $product_features = ProductFeature::whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
@@ -89,19 +89,22 @@ class HomeController extends Controller
             return redirect()->route('home');
         }
     }
+
     public function index()
     {
         $user_id = auth()?->user()->id ?? null;
-        $sliders = $this->cacheService->remember('home_sliders', function () {
+
+        $sliders = $this->cacheService->rememberKey('home_sliders', function () {
             return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
-        }, 300); // cache 5 mins
+        }, 300);
 
-        $top_show_categories = $this->cacheService->remember('home_top_show_categories', function () {
-            return Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
-        }, 300); // 5 mins
+        $top_show_categories = $this->cacheService->rememberKey('home_top_show_categories', function () {
+            return Category::whereTopMenu(1)->whereIsActive(1)
+                ->orderByRaw('ISNULL(position), position ASC')
+                ->get();
+        }, 300);
 
-        $top_show_categories = Category::whereTopMenu(1)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC')->get();
-        $product_features = $this->cacheService->remember('home_product_features', function () {
+        $product_features = $this->cacheService->rememberKey('home_product_features', function () {
             return ProductFeature::getAllLists(
                 $this->homePageService->getProductFeatures(),
                 [],
@@ -109,14 +112,11 @@ class HomeController extends Controller
             );
         }, 300);
 
-        $top_features = $this->cacheService->remember('home_top_features', function () {
+        $top_features = $this->cacheService->rememberKey('home_top_features', function () {
             return ProductFeature::with([
                 'TopFeatureSetting',
-                'TopFeatureSetting.FeatureSettingDetail',
                 'TopFeatureSetting.FeatureSettingDetail.Category',
-                'TopFeatureSetting.ProductFeature',
                 'TopFeatureSetting.ProductFeature.Advertisement',
-                'Product',
                 'Product.ProductMainImage',
                 'Product.ProductImage',
                 'Product.Category'
@@ -128,6 +128,13 @@ class HomeController extends Controller
                 ->get();
         }, 300);
 
-        return view('ecommerce.home.index', compact(['sliders', 'top_show_categories', 'product_features', 'top_features', 'user_id']));
+
+        return view('ecommerce.home.index', compact([
+            'sliders',
+            'top_show_categories',
+            'product_features',
+            'top_features',
+            'user_id'
+        ]));
     }
 }
