@@ -185,7 +185,7 @@
                     <td>{{ $detail->product->name ?? 'N/A' }}</td>
                     <td>{{ number_format($detail->unit_price, 2) }}</td>
                     <td>{{ $detail->quantity }}</td>
-                    <td>{{ $detail->return_quantity }}</td>
+                    <td>{{ $detail->return_quantity ?? 0 }}</td>
                     <td>{{ number_format($detail->unit_price * $detail->quantity, 2) }}</td>
                 </tr>
                 @endforeach
