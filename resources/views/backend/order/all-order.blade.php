@@ -388,11 +388,11 @@
                             modal_content +=
                                 '<td><div><h5 class="text-truncate font-size-14" style="word-wrap: break-word;white-space: pre-line;">' +
                                 data['order_detail'][i]['product']['name'] +
-                                '</h5><p class="text-muted mb-0">$ ' + data['order_detail'][i][
+                                '</h5><p class="text-muted mb-0">' + data['order_detail'][i][
                                     'unit_price'
                                 ] + ' x ' + data['order_detail'][i]['quantity'] +
                                 '</p></div></td>';
-                            modal_content += '<td>$ ' + (data['order_detail'][i]['unit_price'] *
+                            modal_content += '<td>' + (data['order_detail'][i]['unit_price'] *
                                 data['order_detail'][i]['quantity']) + '</td>';
                             modal_content += '</tr>';
                             $('#order-product-id-' + data['order_detail'][i]['id']).attr("src",
@@ -403,17 +403,17 @@
                         modal_content += '<tr>';
                         modal_content +=
                             '<td colspan="2"><h6 class="m-0 text-right">Sub Total:</h6></td>';
-                        modal_content += '<td>$ 400</td>';
+                        modal_content += '<td>৳ '+ data['order']['total_amount'] +'</td>';
                         modal_content += '</tr>';
                         modal_content += '<tr>';
                         modal_content +=
                             '<td colspan="2"><h6 class="m-0 text-right">Shipping:</h6></td>';
-                        modal_content += '<td>Free</td>';
+                        modal_content += '<td>৳ '+data['order']['shipping_charge']+'</td>';
                         modal_content += '</tr>';
                         modal_content += '<tr>';
                         modal_content +=
                             '<td colspan="2"><h6 class="m-0 text-right">Total:</h6></td>';
-                        modal_content += '<td>$ 400</td>';
+                        modal_content += '<td>৳ '+data['order']['payable_amount']+'</td>';
                         modal_content += '</tr>';
                         modal_content += '</tbody>';
                         modal_content += '</table></div>';
