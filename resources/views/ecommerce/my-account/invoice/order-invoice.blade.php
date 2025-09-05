@@ -133,9 +133,9 @@
     <div class="invoice-container">
         <div class="invoice-header">
             <div>
-                <h4 style="color: #f4631b; margin: 0;">Aladdinne</h4>
-                <p style="margin: 5px 0; color: #6c757d;">123 Street, Dhaka, Bangladesh</p>
-                <p style="margin: 5px 0; color: #6c757d;">Email: info@aladdinne.com | Phone: +880123456789</p>
+                <h4 style="color: #f4631b; margin: 0;">{{ $company_info?->name}}</h4>
+                <p style="margin: 5px 0; color: #6c757d;">{{ $company_info?->address}}</p>
+                <p style="margin: 5px 0; color: #6c757d;">Email: {{ $company_info?->email}} | Phone: {{ $company_info?->phone}}</p>
             </div>
             <img src="{{ asset('logo.jpg') }}" alt="Company Logo" class="company-logo">
         </div>
@@ -152,7 +152,7 @@
         </div>
 
         <div class="address-section">
-            <p><strong>Shipping Address:</strong></p>
+            <p><strong>Shipping Details:</strong></p>
             <p><strong>Name:</strong> {{ $order->orderAddress->name ?? 'N/A' }},
                 <strong>Mobile:</strong> {{ $order->orderAddress->mobile ?? 'N/A' }}
             </p>
@@ -225,7 +225,7 @@
             </tbody>
         </table>
 
-        <p class="footer-text">If you have any questions, contact us at <a href="mailto:support@aladdinne.com">support@aladdinne.com</a></p>
+        <p class="footer-text">If you have any questions, contact us at <a href="mailto:{{ $company_info?->email}}">{{ $company_info?->email}}</a></p>
     </div>
 
     <script>
