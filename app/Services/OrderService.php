@@ -22,13 +22,10 @@ use App\Models\InvoiceNumberSetting;
 use App\Models\OrderAddress;
 use App\Models\OrderPayment;
 use App\Models\ShippingZoneLocation;
-use App\Models\User;
-use App\Models\UserAddress;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\AssignOp\Div;
 
 class OrderService
 {
@@ -63,7 +60,7 @@ class OrderService
                     }
                 });
 
-            $shippingZoneId = ShippingZoneLocation::where('division_id', $validatedData['division'])->where('district_id', $validatedData['district'])->where('upazila_id', $validatedData['thana'])->pluck('shipping_zone_id')?->first();
+            $shippingZoneId = ShippingZoneLocation::where('district_id', $validatedData['district'])->pluck('shipping_zone_id')?->first();
 
             $shippingCharge = CalculateShippingChargeHelper::calculateShippingCharge($cartQuery->get(), $shippingZoneId);
             $couponDiscount = collect($cartCollection['data'])->sum('coupon_discount') ?? 0;
@@ -139,9 +136,9 @@ class OrderService
             $orderAddress->name = $validatedData['name'];
             $orderAddress->mobile = $validatedData['mobile'];
             $orderAddress->country_name = $validatedData['country_name'] ?? '';
-            $orderAddress->division_name = Division::find($validatedData['division'])->name ?? '';
-            $orderAddress->district_name = District::find($validatedData['district'])->name ?? '';
-            $orderAddress->upazila_name = Upazila::find($validatedData['thana'])->name ?? '';
+            $orderAddress->division_name = Division::find($validatedData['division'])?->name ?? '';
+            $orderAddress->district_name = District::find($validatedData['district'])?->name ?? '';
+            $orderAddress->upazila_name = Upazila::find($validatedData['thana'])?->name ?? '';
             $orderAddress->instruction = $validatedData['address'] ?? '';
             $orderAddress->save();
 

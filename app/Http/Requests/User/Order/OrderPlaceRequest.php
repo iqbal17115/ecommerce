@@ -26,9 +26,9 @@ class OrderPlaceRequest extends FormRequest
         return [
             'name'            => 'required|string|max:255',
             'mobile'           => 'required|string',
-            'division'        => 'required|uuid',
+            // 'division'        => 'required|uuid',
             'district'        => 'required|uuid',
-            'thana'           => 'required|uuid',
+            // 'thana'           => 'required|uuid',
             'address'         => 'required|string|max:500',
             'payment_method'  => 'required|in:cod',
         ];
