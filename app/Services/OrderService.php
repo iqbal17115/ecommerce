@@ -138,7 +138,7 @@ class OrderService
             $orderAddress->country_name = $validatedData['country_name'] ?? '';
             $orderAddress->division_name = null;
             $orderAddress->district_name = District::find($validatedData['district'])?->name ?? '';
-            $orderAddress->upazila_name = null
+            $orderAddress->upazila_name = null;
             $orderAddress->instruction = $validatedData['address'] ?? '';
             $orderAddress->save();
 
