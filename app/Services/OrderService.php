@@ -136,9 +136,9 @@ class OrderService
             $orderAddress->name = $validatedData['name'];
             $orderAddress->mobile = $validatedData['mobile'];
             $orderAddress->country_name = $validatedData['country_name'] ?? '';
-            $orderAddress->division_name = Division::find($validatedData['division'])?->name ?? '';
+            $orderAddress->division_name = null;
             $orderAddress->district_name = District::find($validatedData['district'])?->name ?? '';
-            $orderAddress->upazila_name = Upazila::find($validatedData['thana'])?->name ?? '';
+            $orderAddress->upazila_name = null
             $orderAddress->instruction = $validatedData['address'] ?? '';
             $orderAddress->save();
 
