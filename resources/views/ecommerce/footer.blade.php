@@ -115,8 +115,8 @@
         </div>
 
         <div class="footer-right ml-auto mt-1 mt-sm-0">
-            <img @if($company_info && $company_info->footer_payment_image)
-            data-src="{{asset('storage/'.$company_info->footer_payment_image)}}" @endif  class="lazy-load" style="max-width: 1000px;" alt="payment">
+            <!-- <img @if($company_info && $company_info->footer_payment_image)
+            data-src="{{asset('storage/'.$company_info->footer_payment_image)}}" @endif  class="lazy-load" style="max-width: 1000px;" alt="payment"> -->
         </div>
     </div>
     @endif
