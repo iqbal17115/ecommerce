@@ -107,18 +107,17 @@
         </div>
     </div>
     @if($company_info && $company_info->is_footer_block3_active)
-    <div class="footer-bottom d-sm-flex align-items-center">
-        <div class="footer-left">
-            <span class="footer-copyright">© {{date("Y")}} @if($company_info && $company_info->name)
-                {{$company_info->name}} @endif | All Rights
-                Reserved.</span>
-        </div>
-
-        <div class="footer-right ml-auto mt-1 mt-sm-0">
-            <!-- <img @if($company_info && $company_info->footer_payment_image)
-            data-src="{{asset('storage/'.$company_info->footer_payment_image)}}" @endif  class="lazy-load" style="max-width: 1000px;" alt="payment"> -->
-        </div>
+    <div class="footer-bottom d-sm-flex align-items-center justify-content-center">
+    <div>
+        <span class="footer-copyright">
+            © {{ date("Y") }} 
+            @if($company_info && $company_info->name)
+                {{ $company_info->name }}
+            @endif 
+            | All Rights Reserved.
+        </span>
     </div>
+</div>
     @endif
 </footer>
 <!-- End .footer -->

@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PlaceOrderController extends Controller
 {
-    public function __construct(private readonly OrderService $orderService) {}
+    public $orderService;
+    
+    public function __construct(OrderService $orderService) {
+        $this->orderService = $orderService;
+    }
 
     /**
      * Store

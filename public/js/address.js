@@ -1,35 +1,36 @@
 (function () {
     const addressSelect = {
         init: function () {
-            this.bindEvents();
-            this.loadDivisions();
+            // this.bindEvents();
+            // this.loadDivisions();
+            this.loadDistricts();
         },
 
-        bindEvents: function () {
-            const divisionSelect = document.getElementById('division');
-            const districtSelect = document.getElementById('district');
+        // bindEvents: function () {
+        //     const divisionSelect = document.getElementById('division');
+        //     const districtSelect = document.getElementById('district');
 
-            if (divisionSelect) {
-                divisionSelect.addEventListener('change', function () {
-                    addressSelect.clearSelect('district');
-                    addressSelect.clearSelect('thana');
+        //     if (divisionSelect) {
+        //         divisionSelect.addEventListener('change', function () {
+        //             addressSelect.clearSelect('district');
+        //             addressSelect.clearSelect('thana');
 
-                    if (this.value) {
-                        addressSelect.loadDistricts(this.value);
-                    }
-                });
-            }
+        //             if (this.value) {
+        //                 addressSelect.loadDistricts(this.value);
+        //             }
+        //         });
+        //     }
 
-            if (districtSelect) {
-                districtSelect.addEventListener('change', function () {
-                    addressSelect.clearSelect('thana');
+        //     if (districtSelect) {
+        //         districtSelect.addEventListener('change', function () {
+        //             addressSelect.clearSelect('thana');
 
-                    if (this.value) {
-                        addressSelect.loadThanas(this.value);
-                    }
-                });
-            }
-        },
+        //             if (this.value) {
+        //                 addressSelect.loadThanas(this.value);
+        //             }
+        //         });
+        //     }
+        // },
 
         loadDivisions: function () {
             getDetails('/divisions-select/lists', function (data) {
@@ -37,8 +38,8 @@
             }, addressSelect.handleError);
         },
 
-        loadDistricts: function (divisionId, callback) {
-            getDetails(`/districts-select/lists?division_id=${divisionId}`, function (data) {
+        loadDistricts: function (divisionId = null, callback) {
+            getDetails(`/districts-select/lists`, function (data) {
                 addressSelect.populateSelect('district', data.results, 'Select District');
                 if (typeof callback === 'function') callback();
             }, addressSelect.handleError);

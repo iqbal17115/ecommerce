@@ -13,6 +13,7 @@ class UserCartService
 {
     public function addToCart(array $data): void
     {
+
         $userId = Auth::id();
         $sessionId = SessionHelper::getSessionId();
 

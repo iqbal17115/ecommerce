@@ -112,7 +112,6 @@ Route::controller(ProductController::class)->group(function () {
     Route::delete('delete-product-image/{productImage}', [ProductController::class, 'destroy'])->name('delete_product_image');
 });
 
-
 // Upazila
 Route::controller(ShopSettingUpazilaController::class)->group(function () {
     Route::get('shop-setting-upazilas/lists', 'lists')->name('shop_setting_upazilas.lists');
