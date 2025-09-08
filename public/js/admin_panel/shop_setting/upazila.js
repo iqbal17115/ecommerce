@@ -99,9 +99,12 @@ function getFilters() {
         district_id: $('#district_filter').val() || null
     };
 }
+<<<<<<< Updated upstream
 
 // store the DataTable object returned by initializeDataTable
 let dataTableObj;
+=======
+>>>>>>> Stashed changes
 
 // Load the company data table
 function loadDataTable() {
@@ -117,6 +120,7 @@ function loadDataTable() {
     );
 }
 
+<<<<<<< Updated upstream
 function changeStatus(id, location) {
     const locationButton = location == 1
         ? `
@@ -163,6 +167,8 @@ function submitChangeStatus(formData, selectedId = "") {
     });
 }
 
+=======
+>>>>>>> Stashed changes
 // when the page is ready
 $(document).ready(function () {
     // reload table whenever division filter changes
