@@ -26,13 +26,13 @@ class HomeCacheService
     {
         $this->cache->rememberKey('home_sliders', function () {
             return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
-        }, 300);
+        }, 3600);
 
         $this->cache->rememberKey('home_top_show_categories', function () {
             return Category::whereTopMenu(1)->whereIsActive(1)
                 ->orderByRaw('ISNULL(position), position ASC')
                 ->get();
-        }, 300);
+        }, 3600);
 
         $this->cache->rememberKey('home_product_features', function () {
             return ProductFeature::getAllLists(
@@ -40,7 +40,7 @@ class HomeCacheService
                 [],
                 HomePageProductFeatureResource::class
             );
-        }, 300);
+        }, 3600);
 
         $this->cache->rememberKey('home_top_features', function () {
             return ProductFeature::with([
@@ -56,6 +56,6 @@ class HomeCacheService
                 ->whereIsActive(1)
                 ->orderByRaw('ISNULL(position), position ASC')
                 ->get();
-        }, 300);
+        }, 3600);
     }
 }

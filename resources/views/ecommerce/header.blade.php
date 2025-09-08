@@ -40,14 +40,15 @@
 <header class="header">
     <div class="header-top" style="background-color: #f1f1f1; padding: 10px 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
         <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            @if($company_info && $company_info->free_shipping_text)
             <!-- Left Content: Free Shipping Text -->
             <div class="header-left d-flex align-items-center">
                 <i class="icon-shipping text-primary mr-2" style="font-size: 1.4rem;"></i>
                 <span class="text-dark" style="font-size: 1.1rem; font-weight: bold;">
-                    FREE Express Shipping On Orders 499+ TK
+                   {{ $company_info->free_shipping_text }}
                 </span>
             </div>
-    
+            @endif
             <!-- Right Content: Log In (Visible only on mobile devices) -->
             <div class="header-right d-flex align-items-center d-md-none">
                 @if (!Auth::user())

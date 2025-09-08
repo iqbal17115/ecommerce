@@ -431,6 +431,16 @@
                                                     </div>
                                                     <!-- End -->
 
+                                                     <div class="col-md-4 mt-md-3">
+                                                        <label class="col-form-label float-md-right"
+                                                            style="font-size: 14px;">Free Shipping{{ $company_info->free_shipping_text }}</label>
+                                                    </div>
+                                                    <div class="col-md-8 mt-md-3">
+                                                        <input type="text" name="free_shipping_text" id="free_shipping_text"
+                                                            @if($company_info) value="{{ $company_info->free_shipping_text }}" @endif
+                                                            class="form-control" placeholder="Free Shipping">
+                                                    </div>
+                                                    <!-- End -->
 
                                                     <div class="col-md-12 mt-md-3">
                                                         <button class="float-right btn btn-success btn-sm">Save</button>

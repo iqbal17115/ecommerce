@@ -51,6 +51,7 @@ class ProductDetailController extends Controller
         foreach ($attributeOptions as $attr => &$values) {
             $values = array_keys($values); // convert back to indexed array
         }
+        
         return view('ecommerce.product', compact('product_detail', 'user_id', 'variationMap', 'attributeOptions'));
     }
 }

@@ -4,22 +4,29 @@ namespace App\Http\Controllers\Backend\WebSetting;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\WebSetting\CompanyInfo;
+use App\Services\CacheService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CompanyInfoController extends Controller
 {
+    public  $cacheService;
+    public function __construct(CacheService $cacheService)
+    {
+        $this->cacheService = $cacheService;
+    }
 
-   // Title Save
-   public function Title(Request $request)
-   {
-       $company_info = CompanyInfo::firstOrNew();
-       $company_info->title = $request->title;
-       $company_info->save();
-       return response()->json([
-           'status' => 201
-       ]);
-   }
-   //End  Title Save
+    // Title Save
+    public function Title(Request $request)
+    {
+        $company_info = CompanyInfo::firstOrNew();
+        $company_info->title = $request->title;
+        $company_info->save();
+        return response()->json([
+            'status' => 201
+        ]);
+    }
+    //End  Title Save
 
 
     // Keyword Save
@@ -204,15 +211,27 @@ class CompanyInfoController extends Controller
         $company_info->address = $request->address;
         $company_info->google_map_location = $request->google_map_location;
         $company_info->web = $request->web;
+        $company_info->free_shipping_text = $request->free_shipping_text;
         $company_info->save();
+
+        $company_info = $this->cacheService->remember('company_info', function () {
+            return CompanyInfo::first();
+        }, 3600);
 
         return response()->json([
             'status' => 201
         ]);
     }
+
     public function index()
     {
-        $company_info = CompanyInfo::first();
+        // To forget the cache
+        Cache::forget('company_info');
+
+        $company_info = $this->cacheService->rememberKey('company_info', function () {
+            return CompanyInfo::first();
+        }, 3600);
+
         return view('backend.setting.company-info', compact('company_info'));
     }
 }
