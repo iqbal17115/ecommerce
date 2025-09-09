@@ -6,6 +6,7 @@ use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Panel\API\Address\District\DistrictListResource;
 use App\Models\Address\District;
+use App\Services\DistrictService;
 use App\Traits\BaseModel;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -13,6 +14,13 @@ use Illuminate\Http\Request;
 
 class DistrictController extends Controller
 {
+    protected DistrictService $districtService;
+
+    public function __construct(DistrictService $districtService)
+    {
+        $this->districtService = $districtService;
+    }
+
     /**
      * Division lists
      *
@@ -23,7 +31,9 @@ class DistrictController extends Controller
     {
         try {
             $request['limit'] = 300;
-            $list = District::selectLists(District::where('division_id', $request->division_id)->orderBy('name', 'asc'), $request->all(), DistrictListResource::class);
+
+
+            $list = District::selectLists($this->districtService->getDistricts($request->division_id ?? null), $request->all(), DistrictListResource::class);
 
             return Message::success(null, $list);
         } catch (Exception $ex) {

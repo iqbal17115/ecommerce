@@ -42,20 +42,20 @@ class AppServiceProvider extends ServiceProvider
                     ->whereTopMenu(1)
                     ->orderBy('position', 'asc')
                     ->get();
-            }, 3600);
+            }, 21600);
 
             $sidebarMenuCategories = $cacheService->remember('sidebarMenuCategories', function () {
                 return Category::whereSidebarMenu(1)
                     ->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')
                     ->get();
-            }, 3600);
+            }, 21600);
 
             $headerMenuCategories = $cacheService->remember('headerMenuCategories', function () {
                 return Category::whereHeaderMenu(1)
                     ->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')
                     ->limit(6)
                     ->get();
-            }, 3600);
+            }, 21600);
 
             $allActiveAdvertisements = $cacheService->remember('allActiveAdvertisements', function () {
                 return Advertisement::orderBy('position')
@@ -66,15 +66,15 @@ class AppServiceProvider extends ServiceProvider
                         return collect($ads)->keyBy('position');
                     })
                     ->toArray();
-            }, 3600);
+            }, 21600);
 
             $company_info = $cacheService->remember('company_info', function () {
                 return CompanyInfo::first();
-            }, 3600);
+            }, 21600);
 
             $currency = $cacheService->remember('currency', function () {
                 return Currency::whereIsDefault(1)->first();
-            }, 3600);
+            }, 21600);
 
             $view->with(compact(
                 'parentCategories',

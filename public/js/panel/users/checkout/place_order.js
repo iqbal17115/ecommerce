@@ -21,7 +21,7 @@ function submitOrder(formData, selectedId = "") {
     );
 }
 
-$(document).on('click', '#thana', function () {
+$(document).on('click', '#district', function () {
     const divisionId = $('#division').val() || null;
     const districtId = $('#district').val() || null;
     const upazilaId = $('#thana').val() || null;
@@ -61,7 +61,7 @@ $(document).on('click', '#placeOrderBtn', function () {
     formData['mobile'] = mobile;
     
     // Collect required fields into formData object
-    const requiredFields = ['name', 'mobile', 'division', 'district', 'thana', 'address'];
+    const requiredFields = ['name', 'mobile', 'district', 'address'];
     for (let field of requiredFields) {
         const value = form.elements[field]?.value?.trim() || '';
         if (!value) {

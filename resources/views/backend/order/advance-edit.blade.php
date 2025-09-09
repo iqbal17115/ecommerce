@@ -161,7 +161,7 @@
                                 
                                 <!-- Displaying District and Division -->
                                 <p class="mb-2" id="division_district_display">
-                                    {{ $order?->orderAddress?->upazila_name }}, {{ $order?->orderAddress?->district_name }}, {{ $order?->orderAddress?->division_name }}
+                                    {{ \App\Helpers\AddressHelper::getFullAddress($order) }}
                                 </p>
 
                                 <!-- Displaying User Information -->

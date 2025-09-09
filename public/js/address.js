@@ -2,33 +2,33 @@
     const addressSelect = {
         init: function () {
             this.bindEvents();
-            this.loadDivisions();
+            this.loadDistricts();
         },
 
         bindEvents: function () {
-            const divisionSelect = document.getElementById('division');
-            const districtSelect = document.getElementById('district');
+            // const divisionSelect = document.getElementById('division');
+            // const districtSelect = document.getElementById('district');
 
-            if (divisionSelect) {
-                divisionSelect.addEventListener('change', function () {
-                    addressSelect.clearSelect('district');
-                    addressSelect.clearSelect('thana');
+            // if (divisionSelect) {
+            //     divisionSelect.addEventListener('change', function () {
+            //         addressSelect.clearSelect('district');
+            //         addressSelect.clearSelect('thana');
 
-                    if (this.value) {
-                        addressSelect.loadDistricts(this.value);
-                    }
-                });
-            }
+            //         if (this.value) {
+            //             addressSelect.loadDistricts(this.value);
+            //         }
+            //     });
+            // }
 
-            if (districtSelect) {
-                districtSelect.addEventListener('change', function () {
-                    addressSelect.clearSelect('thana');
+            // if (districtSelect) {
+            //     districtSelect.addEventListener('change', function () {
+            //         addressSelect.clearSelect('thana');
 
-                    if (this.value) {
-                        addressSelect.loadThanas(this.value);
-                    }
-                });
-            }
+            //         if (this.value) {
+            //             addressSelect.loadThanas(this.value);
+            //         }
+            //     });
+            // }
         },
 
         loadDivisions: function () {

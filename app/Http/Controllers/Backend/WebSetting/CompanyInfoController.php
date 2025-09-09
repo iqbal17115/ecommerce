@@ -214,9 +214,12 @@ class CompanyInfoController extends Controller
         $company_info->free_shipping_text = $request->free_shipping_text;
         $company_info->save();
 
+        // To forget the cache
+        Cache::forget('company_info');
+        
         $company_info = $this->cacheService->remember('company_info', function () {
             return CompanyInfo::first();
-        }, 3600);
+        }, 21600);
 
         return response()->json([
             'status' => 201
@@ -230,7 +233,7 @@ class CompanyInfoController extends Controller
 
         $company_info = $this->cacheService->rememberKey('company_info', function () {
             return CompanyInfo::first();
-        }, 3600);
+        }, 21600);
 
         return view('backend.setting.company-info', compact('company_info'));
     }

@@ -185,7 +185,7 @@ class CartController extends Controller
         $districtId = $request->input('district_id');
         $upazilaId = $request->input('upazila_id');
 
-        $shippingZoneId = ShippingZoneLocation::where('division_id', $divisionId)->where('district_id', $districtId)->where('upazila_id', $upazilaId)->pluck('shipping_zone_id')?->first();
+        $shippingZoneId = ShippingZoneLocation::where('district_id', $districtId)->pluck('shipping_zone_id')?->first();
 
         $shippingCharge = CalculateShippingChargeHelper::calculateShippingCharge($cartQuery->get(), $shippingZoneId);
 

@@ -96,13 +96,13 @@ class HomeController extends Controller
 
         $sliders = $this->cacheService->rememberKey('home_sliders', function () {
             return HomeSliderResource::collection(Slider::whereIsActive(1)->get());
-        }, 300);
+        }, 21600);
 
         $top_show_categories = $this->cacheService->rememberKey('home_top_show_categories', function () {
             return Category::whereTopMenu(1)->whereIsActive(1)
                 ->orderByRaw('ISNULL(position), position ASC')
                 ->get();
-        }, 300);
+        }, 21600);
 
         $product_features = $this->cacheService->rememberKey('home_product_features', function () {
             return ProductFeature::getAllLists(
@@ -110,7 +110,7 @@ class HomeController extends Controller
                 [],
                 HomePageProductFeatureResource::class
             );
-        }, 300);
+        }, 21600);
 
         $top_features = $this->cacheService->rememberKey('home_top_features', function () {
             return ProductFeature::with([
@@ -126,7 +126,7 @@ class HomeController extends Controller
                 ->whereIsActive(1)
                 ->orderByRaw('ISNULL(position), position ASC')
                 ->get();
-        }, 300);
+        }, 21600);
 
 
         return view('ecommerce.home.index', compact([

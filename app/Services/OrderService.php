@@ -63,7 +63,7 @@ class OrderService
                     }
                 });
 
-            $shippingZoneId = ShippingZoneLocation::where('division_id', $validatedData['division'])->where('district_id', $validatedData['district'])->where('upazila_id', $validatedData['thana'])->pluck('shipping_zone_id')?->first();
+            $shippingZoneId = ShippingZoneLocation::where('district_id', $validatedData['district'])->pluck('shipping_zone_id')?->first();
 
             $shippingCharge = CalculateShippingChargeHelper::calculateShippingCharge($cartQuery->get(), $shippingZoneId);
             $couponDiscount = collect($cartCollection['data'])->sum('coupon_discount') ?? 0;
@@ -139,9 +139,9 @@ class OrderService
             $orderAddress->name = $validatedData['name'];
             $orderAddress->mobile = $validatedData['mobile'];
             $orderAddress->country_name = $validatedData['country_name'] ?? '';
-            $orderAddress->division_name = Division::find($validatedData['division'])->name ?? '';
+            $orderAddress->division_name = '';
             $orderAddress->district_name = District::find($validatedData['district'])->name ?? '';
-            $orderAddress->upazila_name = Upazila::find($validatedData['thana'])->name ?? '';
+            $orderAddress->upazila_name = '';
             $orderAddress->instruction = $validatedData['address'] ?? '';
             $orderAddress->save();
 
