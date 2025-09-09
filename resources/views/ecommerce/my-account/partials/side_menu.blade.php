@@ -11,11 +11,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link font-weight-bold text-danger" href="/customer-logout">
-               <i class="fas fa-sign-out-alt" style="visibility: hidden;"></i> Sign Out
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link font-weight-bold" href="#orders" data-toggle="tab">
                 <i class="fas fa-box-open" style="color: #f4631b;"></i> My Orders
             </a>
@@ -83,6 +78,11 @@
         <li class="nav-item">
             <a class="nav-link font-weight-bold" href="#switch-accounts" data-toggle="tab">
                 <i class="fa-solid fa-right-left" style="color: #f4631b;"></i> Switch Accounts
+            </a>
+        </li>
+         <li class="nav-item">
+            <a class="nav-link font-weight-bold text-danger" href="/customer-logout">
+               <i class="fas fa-sign-out-alt" style="visibility: hidden;"></i> Sign Out
             </a>
         </li>
         <br>
