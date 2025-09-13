@@ -153,26 +153,26 @@
                        <div class="col-md-5">
                      <h6 class="mb-3">Shipping To:</h6>
 
-<!-- Display Mode -->
-<div class="address d-flex align-items-center justify-content-between" id="address-view" style="border: 1px solid #e3e3e3; padding: 10px; border-radius: 5px;">
-    
-    <div>
-        <p class="mb-1" id="street_address_display">{{ $order?->orderAddress?->instruction }}</p>
-        <p class="mb-1" id="district_display">{{ \App\Helpers\AddressHelper::getFullAddress($order) }}</p>
-        <p class="mb-1 text-info" id="user_name_display">
-            {{ $order?->orderAddress?->name }}
-            @if($order?->orderAddress?->mobile), {{ $order?->orderAddress?->mobile }}@endif
-            @if($order?->orderAddress?->optional_mobile), {{ $order?->orderAddress?->optional_mobile }}@endif
-        </p>
-    </div>
+                        <!-- Display Mode -->
+                        <div class="address d-flex align-items-center justify-content-between" id="address-view" style="border: 1px solid #e3e3e3; padding: 10px; border-radius: 5px;">
+                            
+                            <div>
+                                <p class="mb-1" id="street_address_display">{{ $order?->orderAddress?->instruction }}</p>
+                                <p class="mb-1" id="district_display">{{ \App\Helpers\AddressHelper::getFullAddress($order) }}</p>
+                                <p class="mb-1 text-info" id="user_name_display">
+                                    {{ $order?->orderAddress?->name }}
+                                    @if($order?->orderAddress?->mobile), {{ $order?->orderAddress?->mobile }}@endif
+                                    @if($order?->orderAddress?->optional_mobile), {{ $order?->orderAddress?->optional_mobile }}@endif
+                                </p>
+                            </div>
 
-    <div>
-        <button type="button" class="btn btn-sm btn-primary" id="edit-address-btn">
-            <i class="fas fa-edit"></i> Edit
-        </button>
-    </div>
+                            <div>
+                                <button type="button" class="btn btn-sm btn-primary" id="edit-address-btn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                            </div>
 
-</div>
+                        </div>
 
 
                         <!-- Edit Mode -->
@@ -198,50 +198,46 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title mb-4">Order Details</h5>
-                    <!-- Assuming you have an array of products called 'products' -->
-                    @foreach ($order->OrderDetail as $orderDetail)
-                        <div class="row shadow-sm py-2">
-                            <div class="col-md-1">
-                                <img src="{{ asset('storage/product_photo/' . $orderDetail->Product?->ProductImage?->first()->image) }}"
-                                    style="width:70px; height: 70px;" class="img-responsive">
-                            </div>
-                            <div class="col-md-2">
-                                @php
-                                    $product_codes = [];
-                                @endphp
-                                @for ($i = 1; $i <= $orderDetail->quantity; $i++)
-                                    <p>{{ $order?->code }}-{{ $i }}</p>
-                                    @php
-                                        $product_codes[] = $order->code . $orderDetail->id . $i;
-                                    @endphp
-                                @endfor
-                            </div>
-                            <div class="col-md-5">
-                                <h6 class="mb-3">
-                                    {{ $orderDetail->Product->name }}
-                                    @if ($orderDetail?->productVariation?->productVariationAttributes)
-                                        @foreach ($orderDetail->productVariation->productVariationAttributes as $variantionAttribute)
-                                            <br> {{ $variantionAttribute?->attributeValue?->attribute->name }}: {{ $variantionAttribute?->attributeValue?->value }}
-                                        @endforeach
-                                    @endif
-                                </h6>
-                                <p class="mb-2">SKU: {{ $orderDetail->Product->seller_sku }}</p>
-                                <p class="mb-0">Price: (Inclusive Tax)</p>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="price-info">
-                                    <p class="mb-2">{{ $orderDetail->quantity * $orderDetail->unit_price }} Taka</p>
-                                    <p class="mb-0">Qty: {{ $orderDetail->quantity }}</p>
-                                    <p class="mb-0">Return Qty: {{ $orderDetail->return_quantity }}</p>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <a href="{{ route('generate.barcodes', ['product_codes' => $product_codes]) }}"
-                                    target="_blank" class="btn btn-outline-primary">Generate
-                                    Bar Code</a>
-                            </div>
-                        </div>
-                    @endforeach
+
+@foreach ($order->OrderDetail as $orderDetail)
+    <div class="row shadow-sm py-2 order-item-row" data-id="{{ $orderDetail->id }}">
+        <div class="col-md-1">
+            <img src="{{ asset('storage/product_photo/' . $orderDetail->Product?->ProductImage?->first()->image) }}"
+                style="width:70px; height: 70px;" class="img-responsive">
+        </div>
+
+        <div class="col-md-4">
+            <h6 class="mb-1">{{ $orderDetail->Product->name }}</h6>
+            @if ($orderDetail?->productVariation?->productVariationAttributes)
+                @foreach ($orderDetail->productVariation->productVariationAttributes as $variantionAttribute)
+                    <span class="text-muted">{{ $variantionAttribute?->attributeValue?->attribute->name }}: {{ $variantionAttribute?->attributeValue?->value }}</span><br>
+                @endforeach
+            @endif
+        </div>
+
+        <div class="col-md-2">
+            <input type="number" class="form-control qty-input" value="{{ $orderDetail->quantity }}" min="1">
+        </div>
+
+        <div class="col-md-2">
+            <input type="number" class="form-control price-input" value="{{ $orderDetail->unit_price }}" min="0" step="0.01">
+        </div>
+
+        <div class="col-md-2">
+            <p>Total: <span class="item-total">{{ $orderDetail->quantity * $orderDetail->unit_price }}</span> Taka</p>
+        </div>
+    </div>
+@endforeach
+
+<div class="mt-3">
+    <label>Shipping Charge</label>
+    <input type="number" class="form-control mb-2" id="shipping-charge-input" value="{{ $order->shipping_charge }}" step="0.01">
+</div>
+
+<div class="mt-2">
+    <button type="button" class="btn btn-success" id="save-order-details-btn">Save Changes</button>
+</div>
+
                 </div>
             </div>
 
@@ -493,18 +489,6 @@
                         </div>
                     </form>
                 </div>
-
-                {{-- Start shipping fee --}}
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div>
-                            <p class="text-dark h5">Total Shipping Charge: {{ $currency->icon }}
-                                {{ $order->shipping_charge }}</p>
-                        </div>
-                    </div>
-                </div>
-                {{-- End shipping fee --}}
-
             </div>
         </div>
         <div class="col-3">
@@ -877,6 +861,7 @@
     <script src="{{ asset('backend_js/order_product/advance_edit.js') }}"></script>
     <script src="{{ asset('js/courier.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/panel/address-edit.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/order-edit.js') }}?v={{ time() }}"></script>
     <script>
         function removeBox(boxNumber) {
             $('#box_' + boxNumber).remove();

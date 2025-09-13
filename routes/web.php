@@ -666,6 +666,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::prefix('orders')->group(function () {
             Route::put('edit-address/{order}', [OrderEditController::class, 'updateAddress'])->name('orders.edit.updateAddress');
+            Route::put('edit-items/{order}', [OrderEditController::class, 'updateItems'])->name('orders.edit.updateItems');
         });
     });
 

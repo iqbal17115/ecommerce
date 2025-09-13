@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Order;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderEdit\UpdateOrderAddressRequest;
+use App\Http\Requests\OrderEdit\UpdateOrderItemsRequest;
 use App\Http\Resources\OrderEdit\OrderAddressResource;
 use App\Models\FrontEnd\Order;
 use App\Services\OrderEditService;
@@ -34,5 +35,15 @@ class OrderEditController extends Controller
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function updateItems(UpdateOrderItemsRequest $request, Order $order)
+    {
+        $order = $this->orderEditService->updateOrderItems($order, $request->validated());
+
+        return response()->json([
+            'message' => 'Order updated successfully',
+            'order' => $order
+        ]);
     }
 }
