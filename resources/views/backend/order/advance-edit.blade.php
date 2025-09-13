@@ -150,32 +150,44 @@
                                 <p class="mb-2">{{ $company_info->address }}</p>
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            <h6 class="mb-3">Shipping To:</h6>
-                            <div class="address">
-                                <!-- Displaying Country Name -->
-                                <p class="mb-2" id="country_name_display">{{ $order?->orderAddress?->country_name }}</p>
+                       <div class="col-md-5">
+                     <h6 class="mb-3">Shipping To:</h6>
 
-                                 <!-- Displaying Street Address -->
-                                <p class="mb-2" id="street_address_display">{{ $order?->orderAddress?->instruction }}</p>
-                                
-                                <!-- Displaying District and Division -->
-                                <p class="mb-2" id="division_district_display">
-                                    {{ \App\Helpers\AddressHelper::getFullAddress($order) }}
-                                </p>
+<!-- Display Mode -->
+<div class="address d-flex align-items-center justify-content-between" id="address-view" style="border: 1px solid #e3e3e3; padding: 10px; border-radius: 5px;">
+    
+    <div>
+        <p class="mb-1" id="street_address_display">{{ $order?->orderAddress?->instruction }}</p>
+        <p class="mb-1" id="district_display">{{ \App\Helpers\AddressHelper::getFullAddress($order) }}</p>
+        <p class="mb-1 text-info" id="user_name_display">
+            {{ $order?->orderAddress?->name }}
+            @if($order?->orderAddress?->mobile), {{ $order?->orderAddress?->mobile }}@endif
+            @if($order?->orderAddress?->optional_mobile), {{ $order?->orderAddress?->optional_mobile }}@endif
+        </p>
+    </div>
 
-                                <!-- Displaying User Information -->
-                                <div class="user-info text-info">
-                                    <p class="mb-2" id="user_name_display">
-                                        {{ $order?->orderAddress?->name }}
-                                        @if($order?->orderAddress?->mobile), {{ $order?->orderAddress?->mobile }}@endif
-                                        @if($order?->orderAddress?->optional_mobile), {{ $order?->orderAddress?->optional_mobile }}@endif
-                                    </p>
-                                </div>
+    <div>
+        <button type="button" class="btn btn-sm btn-primary" id="edit-address-btn">
+            <i class="fas fa-edit"></i> Edit
+        </button>
+    </div>
 
-                            </div>
+</div>
 
-                        </div>                        
+
+                        <!-- Edit Mode -->
+                        <div class="address" id="address-edit" style="display:none;">
+                            <input type="text" id="street_address_input" class="form-control mb-2" value="{{ $order?->orderAddress?->instruction }}" placeholder="Street Address">
+                            <input type="text" id="district_input" class="form-control mb-2" value="{{ $order?->orderAddress?->district_name }}" placeholder="District">
+                            <input type="text" id="user_name_input" class="form-control mb-2" value="{{ $order?->orderAddress?->name }}" placeholder="Name">
+                            <input type="text" id="mobile_input" class="form-control mb-2" value="{{ $order?->orderAddress?->mobile }}" placeholder="Mobile">
+                            <input type="text" id="optional_mobile_input" class="form-control mb-2" value="{{ $order?->orderAddress?->optional_mobile }}" placeholder="Optional Mobile">
+
+                            <button type="button" class="btn btn-sm btn-success" id="save-address-btn">Save</button>
+                            <button type="button" class="btn btn-sm btn-secondary" id="cancel-address-btn">Cancel</button>
+                        </div>
+                    </div>
+                  
                         <div class="col-md-2 text-info" data-toggle="modal" data-target="#shippingModal" style="cursor: pointer;">
                             <i class="fas fa-plus-circle"></i> Shipping Address
                         </div>
@@ -864,6 +876,7 @@
 @push('script')
     <script src="{{ asset('backend_js/order_product/advance_edit.js') }}"></script>
     <script src="{{ asset('js/courier.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('js/panel/address-edit.js') }}?v={{ time() }}"></script>
     <script>
         function removeBox(boxNumber) {
             $('#box_' + boxNumber).remove();

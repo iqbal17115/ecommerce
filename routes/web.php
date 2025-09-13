@@ -71,6 +71,7 @@ use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartContro
 use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
 use App\Http\Controllers\API\Panel\User\UserInfoController;
 use App\Http\Controllers\Backend\GiftCardController;
+use App\Http\Controllers\Backend\Order\OrderEditController;
 use App\Http\Controllers\Backend\RewardPointRuleController;
 use App\Http\Controllers\Backend\ShippingInsideOutsideController;
 use App\Http\Controllers\Backend\ShippingRateController;
@@ -661,6 +662,10 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::controller(CourierController::class)->group(function () {
             Route::post('couriers/{order}/send', 'sendOrder')->name('couriers.sendOrder');
+        });
+
+        Route::prefix('orders')->group(function () {
+            Route::put('edit-address/{order}', [OrderEditController::class, 'updateAddress'])->name('orders.edit.updateAddress');
         });
     });
 
