@@ -31,6 +31,7 @@ class OrderEditService
         DB::transaction(function () use ($order, $data) {
             // Update shipping charge
             $order->shipping_charge = $data['shipping_charge'] ?? $order->shipping_charge;
+            $order->discount = $data['discount'] ?? $order->discount;
             $order->save();
 
             foreach ($data['items'] as $item) {

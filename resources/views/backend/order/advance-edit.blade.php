@@ -199,46 +199,72 @@
                 <div class="card-body">
                     <h5 class="card-title mb-4">Order Details</h5>
 
-@foreach ($order->OrderDetail as $orderDetail)
-    <div class="row shadow-sm py-2 order-item-row" data-id="{{ $orderDetail->id }}">
-        <div class="col-md-1">
-            <img src="{{ asset('storage/product_photo/' . $orderDetail->Product?->ProductImage?->first()->image) }}"
-                style="width:70px; height: 70px;" class="img-responsive">
-        </div>
+                    @foreach ($order->OrderDetail as $orderDetail)
+                        <div class="row shadow-sm py-2 order-item-row" data-id="{{ $orderDetail->id }}">
+                            <div class="col-md-1">
+                                <img src="{{ asset('storage/product_photo/' . $orderDetail->Product?->ProductImage?->first()->image) }}"
+                                    style="width:70px; height: 70px;" class="img-responsive">
+                            </div>
 
-        <div class="col-md-4">
-            <h6 class="mb-1">{{ $orderDetail->Product->name }}</h6>
-            @if ($orderDetail?->productVariation?->productVariationAttributes)
-                @foreach ($orderDetail->productVariation->productVariationAttributes as $variantionAttribute)
-                    <span class="text-muted">{{ $variantionAttribute?->attributeValue?->attribute->name }}: {{ $variantionAttribute?->attributeValue?->value }}</span><br>
-                @endforeach
-            @endif
-        </div>
+                            <div class="col-md-4">
+                                <h6 class="mb-1">{{ $orderDetail->Product->name }}</h6>
+                                @if ($orderDetail?->productVariation?->productVariationAttributes)
+                                    @foreach ($orderDetail->productVariation->productVariationAttributes as $variantionAttribute)
+                                        <span class="text-muted">
+                                            {{ $variantionAttribute?->attributeValue?->attribute->name }}: 
+                                            {{ $variantionAttribute?->attributeValue?->value }}
+                                        </span><br>
+                                    @endforeach
+                                @endif
+                            </div>
 
-        <div class="col-md-2">
-            <input type="number" class="form-control qty-input" value="{{ $orderDetail->quantity }}" min="1">
-        </div>
+                            <div class="col-md-2">
+                                <input type="number" class="form-control qty-input" 
+                                    value="{{ $orderDetail->quantity }}" min="1">
+                            </div>
 
-        <div class="col-md-2">
-            <input type="number" class="form-control price-input" value="{{ $orderDetail->unit_price }}" min="0" step="0.01">
-        </div>
+                            <div class="col-md-2">
+                                <input type="number" class="form-control price-input" 
+                                    value="{{ $orderDetail->unit_price }}" min="0" step="0.01">
+                            </div>
 
-        <div class="col-md-2">
-            <p>Total: <span class="item-total">{{ $orderDetail->quantity * $orderDetail->unit_price }}</span> Taka</p>
-        </div>
-    </div>
-@endforeach
+                            <div class="col-md-2">
+                                <p>Total: <span class="item-total">{{ $orderDetail->quantity * $orderDetail->unit_price }}</span> Taka</p>
+                            </div>
+                        </div>
+                    @endforeach
 
-<div class="mt-3">
-    <label>Shipping Charge</label>
-    <input type="number" class="form-control mb-2" id="shipping-charge-input" value="{{ $order->shipping_charge }}" step="0.01">
-</div>
+                    <div class="row">
+                        <!-- Shipping -->
+                        <div class="mt-3 col-md-3">
+                            <label>Shipping Charge</label>
+                            <input type="number" class="form-control mb-2 calc-input" id="shipping-charge-input"
+                                value="{{ $order->shipping_charge }}" step="0.01">
+                        </div>
 
-<div class="mt-2">
-    <button type="button" class="btn btn-success" id="save-order-details-btn">Save Changes</button>
-</div>
+                        <!-- Discount -->
+                        <div class="mt-3 col-md-3">
+                            <label>Discount</label>
+                            <input type="number" class="form-control mb-2 calc-input" id="discount-input"
+                                value="{{ $order->discount ?? 0 }}" step="0.01">
+                        </div>
 
+                        <!-- Totals -->
+                        <div class="mt-3 col-md-3">
+                            <label>Total Amount</label>
+                            <h6>Total Amount: <span id="total-amount">{{ $order->total_amount }}</span> Taka</h6>
+                        </div>
+                        <div class="mt-3 col-md-3">
+                            <label>Payable Amount</label>
+                            <h6>Payable Amount: <span id="payable-amount">{{ $order->payable_amount }}</span> Taka</h6>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-success" id="save-order-details-btn">Save Changes</button>
+                    </div>
                 </div>
+
             </div>
 
             <div class="card shadow">

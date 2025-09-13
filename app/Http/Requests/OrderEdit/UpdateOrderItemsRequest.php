@@ -29,6 +29,7 @@ class UpdateOrderItemsRequest extends FormRequest
             'items.*.quantity' => 'required|numeric|min:1',
             'items.*.unit_price' => 'required|numeric|min:0',
             'shipping_charge' => 'nullable|numeric|min:0',
+            'discount' => 'nullable|numeric|min:0',
         ];
     }
 }

@@ -1,9 +1,25 @@
-// Recalculate item total on input change
-$('.qty-input, .price-input').on('input', function() {
-    let row = $(this).closest('.order-item-row');
-    let qty = parseFloat(row.find('.qty-input').val()) || 0;
-    let price = parseFloat(row.find('.price-input').val()) || 0;
-    row.find('.item-total').text((qty * price));
+function recalcTotals() {
+    let total = 0;
+
+    $('.order-item-row').each(function () {
+        let qty = parseFloat($(this).find('.qty-input').val()) || 0;
+        let price = parseFloat($(this).find('.price-input').val()) || 0;
+        let rowTotal = qty * price;
+        total += rowTotal;
+        $(this).find('.item-total').text(rowTotal.toFixed(2));
+    });
+
+    let shipping = parseFloat($('#shipping-charge-input').val()) || 0;
+    let discount = parseFloat($('#discount-input').val()) || 0;
+    let payable = total + shipping - discount;
+
+    $('#total-amount').text(total.toFixed(2));
+    $('#payable-amount').text(payable.toFixed(2));
+}
+
+// Trigger recalculation on qty/price/shipping/discount change
+$(document).on('input', '.qty-input, .price-input, .calc-input', function () {
+    recalcTotals();
 });
 
 // Save order details
@@ -22,27 +38,26 @@ $('#save-order-details-btn').click(function () {
 
     let formData = {
         items: items,
-        shipping_charge: $('#shipping-charge-input').val()
+        shipping_charge: $('#shipping-charge-input').val(),
+        discount: $('#discount-input').val()
     };
 
     saveAction(
         "update",
-        `/orders/edit-items`, // Your route
+        `/orders/edit-items`,
         formData,
         orderId,
         function (response) {
             toastr.success(response.message);
-
-            // Optional: update totals in UI
-            $('.order-item-row').each(function (index) {
-                let row = $(this);
-                let qty = parseFloat(row.find('.qty-input').val());
-                let price = parseFloat(row.find('.price-input').val());
-                row.find('.item-total').text((qty * price));
-            });
+            recalcTotals();
         },
         function (error) {
             toastr.error(error.responseJSON?.message || 'Something went wrong');
         }
     );
+});
+
+// Initial load
+$(document).ready(function () {
+    recalcTotals();
 });
