@@ -38,13 +38,16 @@ class ProductDetailController extends Controller
             'ProductMainImage',
             'ProductImage',
             'Category',
-            'Brand'
+            'Brand',
+            'ProductDetail',
+            'reviews',
+            'rating'
         ])->whereName($name)
             ->when(!is_null($sellerSku), fn($q) => $q->where('seller_sku', $sellerSku))
             ->firstOrFail();
 
             $product_detail->Category->loadAllParents(); // 👈 load parents recursively
-            
+
         $variationMap = ProductVariationHelper::getProductVariationsGroupedByAttributes($product_detail->id);
 
         $attributeOptions = [];
