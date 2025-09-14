@@ -119,6 +119,12 @@
             CartManager.loadCartData();
         }
     });
+
+    window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+        'event': 'home_page_view'
+    });
+
 </script>
 
 
