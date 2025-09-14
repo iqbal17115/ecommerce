@@ -149,7 +149,7 @@
                     <div class="product-slider-container">
 
                         <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
-                            <!-- @foreach ($product_detail->ProductImage as $product_image)
+                            @foreach ($product_detail->ProductImage as $product_image)
                             <div class="product-item">
                                 <img class="product-single-image"
                                     src="{{ asset('storage/product_photo/' . $product_image->image) }}"
@@ -157,7 +157,7 @@
                                     width="468" height="468" />
                             </div>
                             @endforeach
-                            @foreach ($product_detail->productColors as $productColor)
+                            <!-- @foreach ($product_detail->productColors as $productColor)
                             @foreach ($productColor->media as $media)
                             <div class="product-item">
                                 <img class="product-single-image"
@@ -174,13 +174,13 @@
                     </div>
 
                     <div class="prod-thumbnail owl-dots">
-                        <!-- @foreach ($product_detail->ProductImage as $product_image)
+                        @foreach ($product_detail->ProductImage as $product_image)
                         <div class="owl-dot">
                             <img src="{{ asset('storage/product_photo/' . $product_image->image) }}" width="110"
                                 height="110" style="width: 110px; height: 110px;" alt="product-thumbnail" />
                         </div>
                         @endforeach
-                        @foreach ($product_detail->productColors as $productColor)
+                        <!-- @foreach ($product_detail->productColors as $productColor)
                         @foreach ($productColor->media as $media)
                         <div class="owl-dot">
                             <img src="{{ asset('storage/' . $media->file_path) }}" width="110" height="110"
