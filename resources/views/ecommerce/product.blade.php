@@ -149,7 +149,7 @@
                     <div class="product-slider-container">
 
                         <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
-                            @foreach ($product_detail->ProductImage as $product_image)
+                            <!-- @foreach ($product_detail->ProductImage as $product_image)
                             <div class="product-item">
                                 <img class="product-single-image"
                                     src="{{ asset('storage/product_photo/' . $product_image->image) }}"
@@ -165,7 +165,7 @@
                                     data-zoom-image="{{ asset('storage/' . $media->file_path) }}" />
                             </div>
                             @endforeach
-                            @endforeach
+                            @endforeach -->
                         </div>
                         <!-- End .product-single-carousel -->
                         <span class="prod-full-screen">
@@ -174,7 +174,7 @@
                     </div>
 
                     <div class="prod-thumbnail owl-dots">
-                        @foreach ($product_detail->ProductImage as $product_image)
+                        <!-- @foreach ($product_detail->ProductImage as $product_image)
                         <div class="owl-dot">
                             <img src="{{ asset('storage/product_photo/' . $product_image->image) }}" width="110"
                                 height="110" style="width: 110px; height: 110px;" alt="product-thumbnail" />
@@ -187,7 +187,7 @@
                                 style="width: 110px; height: 110px;" alt="product-thumbnail" />
                         </div>
                         @endforeach
-                        @endforeach
+                        @endforeach -->
                     </div>
                 </div>
                 <!-- End .product-single-gallery -->
