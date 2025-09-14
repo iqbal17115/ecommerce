@@ -43,6 +43,8 @@ class Category extends Model
             $parents[] = $category->Parent;
             $category = $category->Parent;
         }
+
+        // Reverse the array to have the top-level parent first
         return collect(array_reverse($parents));
     }
 }
