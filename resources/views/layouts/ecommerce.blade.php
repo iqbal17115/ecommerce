@@ -63,12 +63,12 @@
 
 <body>
       @include('layouts.partials.gtm-body')
-
+<!-- 
   <div id="loader-overlay">
     <div id="loader">
-      <!-- <img class="lazy-load" data-src="{{ asset('images/spinner.png') }}"> -->
+      <img class="lazy-load" data-src="{{ asset('images/spinner.png') }}">
     </div>
-  </div>
+  </div> -->
   <!-- Scroll-top-end-->
   <div class="page-wrapper">
     <!-- header-area -->
@@ -95,7 +95,7 @@
 
   @include('layouts.parts.js-links')
 
-  <script src="{{ asset('js/ajax_setup.js') }}"></script>
+  <!-- <script src="{{ asset('js/ajax_setup.js') }}"></script> -->
 
   @stack('scripts')
 </body>
