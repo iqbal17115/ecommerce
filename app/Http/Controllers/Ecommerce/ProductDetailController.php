@@ -41,7 +41,7 @@ class ProductDetailController extends Controller
             'Brand',
             'ProductDetail',
             'reviews',
-            'rating'
+            'reviewSum',
         ])->whereName($name)
             ->when(!is_null($sellerSku), fn($q) => $q->where('seller_sku', $sellerSku))
             ->firstOrFail();
