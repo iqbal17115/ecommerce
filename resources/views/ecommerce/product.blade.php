@@ -151,8 +151,8 @@
                         <div class="product-single-carousel owl-carousel owl-theme show-nav-hover">
                             @foreach ($product_detail->ProductImage as $product_image)
                             <div class="product-item">
-                                <img class="product-single-image"
-                                    src="{{ asset('storage/product_photo/' . $product_image->image) }}"
+                                <img class="product-single-image lazy-load"
+                                    data-src="{{ asset('storage/product_photo/' . $product_image->image) }}"
                                     data-zoom-image="{{ asset('storage/product_photo/' . $product_image->image) }}"
                                     width="468" height="468" />
                             </div>
@@ -176,7 +176,7 @@
                     <div class="prod-thumbnail owl-dots">
                         @foreach ($product_detail->ProductImage as $product_image)
                         <div class="owl-dot">
-                            <img src="{{ asset('storage/product_photo/' . $product_image->image) }}" width="110"
+                            <img class="lazy-load" data-src="{{ asset('storage/product_photo/' . $product_image->image) }}" width="110"
                                 height="110" style="width: 110px; height: 110px;" alt="product-thumbnail" />
                         </div>
                         @endforeach
@@ -265,8 +265,8 @@
                     {{-- end star Rating --}}
                     @if (isset($all_active_advertisements['Details']['2']['ads']))
                     <div class="" style="width: 600px;">
-                        <img src="{{ asset('storage/' . $all_active_advertisements['Details']['2']['ads']) }}"
-                            class="w-100 ml-sm-0 mb-2" style="height: 72px; width: 80%;" alt="Porto Logo">
+                        <img data-src="{{ asset('storage/' . $all_active_advertisements['Details']['2']['ads']) }}"
+                            class="w-100 ml-sm-0 mb-2 lazy-load" style="height: 72px; width: 80%;" alt="Porto Logo">
                     </div>
                     @else
                     <hr class="short-divider">
@@ -403,8 +403,8 @@
 
                         <!-- End .social-icons -->
                         @if (isset($all_active_advertisements['Details']['3']['ads']))
-                        <img src="{{ asset('storage/' . $all_active_advertisements['Details']['3']['ads']) }}"
-                            class="ml-md-5" style="height: 52px; width: 390px;">
+                        <img data-src="{{ asset('storage/' . $all_active_advertisements['Details']['3']['ads']) }}"
+                            class="ml-md-5 lazy-load" style="height: 52px; width: 390px;">
                         @endif
                     </div>
                     <!-- End .product single-share -->
@@ -529,9 +529,9 @@
                 @if ($product_category_product->id != $product_detail->id)
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
-                        <a
+                        <a class="lazy-load"
                             href="{{ route('products.details', ['name' => rawurlencode($product_category_product->name), 'seller_sku' => $product_category_product->seller_sku]) }}">
-                            <img @if ($product_category_product->ProductMainImage) src="{{ asset('storage/product_photo/' . $product_category_product->ProductMainImage->image) }}" @endif
+                            <img @if ($product_category_product->ProductMainImage) data-src="{{ asset('storage/product_photo/' . $product_category_product->ProductMainImage->image) }}" @endif
                             width="239" height="239" style="width: 239px; height: 239px;"
                             alt="product">
                         </a>
@@ -625,8 +625,8 @@
     @if (isset($all_active_advertisements['Details']['4']['ads']))
     <div>
         <center>
-            <img src="{{ asset('storage/' . $all_active_advertisements['Details']['4']['ads']) }}"
-                class="">
+            <img data-src="{{ asset('storage/' . $all_active_advertisements['Details']['4']['ads']) }}"
+                class="lazy-load">
         </center>
     </div>
     @endif
