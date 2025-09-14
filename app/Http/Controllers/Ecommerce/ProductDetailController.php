@@ -47,11 +47,11 @@ class ProductDetailController extends Controller
                 $attributeOptions[$attributeName][$value] = true; // use assoc to ensure uniqueness
             }
         }
-dd($attributeOptions);
+
         foreach ($attributeOptions as $attr => &$values) {
             $values = array_keys($values); // convert back to indexed array
         }
-        
+        dd($values);
         return view('ecommerce.product', compact('product_detail', 'user_id', 'variationMap', 'attributeOptions'));
     }
 }
