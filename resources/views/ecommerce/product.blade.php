@@ -125,15 +125,15 @@
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
         <div class="container">
             <ol class="breadcrumb">
-                <!-- @foreach ($product_detail?->category?->getParentsAttribute() as $parentCategory)
+                @foreach ($product_detail?->Category?->getParentsAttribute() as $parentCategory)
                 {{ $parentCategory->name }}
                 @if (!$loop->last)
                 &raquo;
                 @else
                 &raquo;
-                {{ $product_detail->category->name }}
+                {{ $product_detail->Category->name }}
                 @endif
-                @endforeach -->
+                @endforeach
                 </span></a>
                 </li>
             </ol>
