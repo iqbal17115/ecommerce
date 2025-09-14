@@ -125,15 +125,13 @@
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
         <div class="container">
             <ol class="breadcrumb">
-                @foreach ($product_detail?->Category?->getParentsAttribute() as $parentCategory)
-                {{ $parentCategory->name }}
-                @if (!$loop->last)
-                &raquo;
-                @else
-                &raquo;
-                {{ $product_detail->Category->name }}
-                @endif
-                @endforeach
+                @php
+                    $breadcrumbs = $product_detail?->Category?->getParentsAttribute()->pluck('name')->toArray() ?? [];
+                    $breadcrumbs[] = $product_detail?->Category?->name; // add current category
+                @endphp
+
+                {{ implode(' » ', $breadcrumbs) }}
+
                 </span></a>
                 </li>
             </ol>

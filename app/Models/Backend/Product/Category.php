@@ -16,12 +16,14 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
-    
-    public function SubCategory() {
+
+    public function SubCategory()
+    {
         return $this->hasMany(self::class, 'parent_category_id')->orderBy('position', 'ASC');
     }
-    public function Parent() {
-       return $this->belongsTo(self::class, 'parent_category_id')->orderBy('position', 'ASC');
+    public function Parent()
+    {
+        return $this->belongsTo(self::class, 'parent_category_id')->orderBy('position', 'ASC');
     }
 
     public function subcategories()
@@ -46,5 +48,15 @@ class Category extends Model
 
         // Reverse the array to have the top-level parent first
         return collect(array_reverse($parents));
+    }
+
+    public function loadAllParents($relation = 'Parent')
+    {
+        $category = $this;
+        while ($category && !$category->relationLoaded($relation)) {
+            $category->load($relation);
+            $category = $category->$relation;
+        }
+        return $this;
     }
 }
