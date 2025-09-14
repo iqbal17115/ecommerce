@@ -34,7 +34,9 @@ class ProductDetailController extends Controller
         $product_detail = Product::with([
             'productColors',
             'productVariations.productVariationAttributes.attributeValue.attribute',
-            'category',
+            'ProductMainImage',
+            'ProductImage',
+            'Category',
         ])->whereName($name)
             ->when(!is_null($sellerSku), fn($q) => $q->where('seller_sku', $sellerSku))
             ->firstOrFail();
