@@ -45,5 +45,10 @@
             CartManager.loadCartData();
         }
     });
+
+       window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+        'event': 'checkout_page_view'
+    });
 </script>
 @endpush

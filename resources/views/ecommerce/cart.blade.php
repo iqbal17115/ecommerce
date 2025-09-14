@@ -168,5 +168,10 @@
             observer.observe(image);
         }
     });
+
+       window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+        'event': 'cart_page_view'
+    });
 </script>
 @endpush
