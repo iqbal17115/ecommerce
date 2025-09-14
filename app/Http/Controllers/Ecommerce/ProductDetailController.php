@@ -37,7 +37,7 @@ class ProductDetailController extends Controller
         ])->whereName($name)
             ->when(!is_null($sellerSku), fn($q) => $q->where('seller_sku', $sellerSku))
             ->firstOrFail();
-dd($name, $sellerSku);
+
         $variationMap = ProductVariationHelper::getProductVariationsGroupedByAttributes($product_detail->id);
 
         $attributeOptions = [];
@@ -47,7 +47,7 @@ dd($name, $sellerSku);
                 $attributeOptions[$attributeName][$value] = true; // use assoc to ensure uniqueness
             }
         }
-
+dd($attributeOptions);
         foreach ($attributeOptions as $attr => &$values) {
             $values = array_keys($values); // convert back to indexed array
         }
