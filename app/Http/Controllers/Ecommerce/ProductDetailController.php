@@ -37,17 +37,22 @@ class ProductDetailController extends Controller
             'productVariations.productVariationAttributes.attributeValue.attribute',
             'ProductMainImage',
             'ProductImage',
-            'Category',
+            'Category' => function ($q) {
+                $q->with(['Product' => function ($q) {
+                    $q->with('ProductMainImage')
+                        ->withCount('reviews')              // preload review count
+                        ->withAvg('reviews', 'rating');    // preload review avg
+                }]);
+            },
             'Brand',
             'ProductDetail',
             'ProductDetail.Condition',
-            'reviews',
-            'reviewSum',
-        ])->whereName($name)
+        ])->withCount('reviews')              // review count for this product
+            ->withAvg('reviews', 'rating')
+            ->whereName($name)
             ->when(!is_null($sellerSku), fn($q) => $q->where('seller_sku', $sellerSku))
             ->firstOrFail();
 
-            $product_detail->Category->loadAllParents(); // 👈 load parents recursively
 
         $variationMap = ProductVariationHelper::getProductVariationsGroupedByAttributes($product_detail->id);
 

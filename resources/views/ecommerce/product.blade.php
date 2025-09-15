@@ -1,10 +1,10 @@
 @extends('layouts.ecommerce')
 @section('meta')
-    <meta property="og:title" content="{{ $product_detail->name }}">
-    <meta property="og:description" content="{{ Str::limit(strip_tags($product_detail->ProductDetail?->short_deacription), 150) }}">
-    <meta property="og:image" content="{{ asset('storage/product_photo/' . $product_detail?->ProductMainImage?->image) }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="product">
+<meta property="og:title" content="{{ $product_detail->name }}">
+<meta property="og:description" content="{{ Str::limit(strip_tags($product_detail->ProductDetail?->short_deacription), 150) }}">
+<meta property="og:image" content="{{ asset('storage/product_photo/' . $product_detail?->ProductMainImage?->image) }}">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:type" content="product">
 @endsection
 
 @section('content')
@@ -126,8 +126,8 @@
         <div class="container">
             <ol class="breadcrumb">
                 @php
-                    $breadcrumbs = $product_detail?->Category?->getParentsAttribute()->pluck('name')->toArray() ?? [];
-                    $breadcrumbs[] = $product_detail?->Category?->name; // add current category
+                $breadcrumbs = $product_detail?->Category?->getParentsAttribute()->pluck('name')->toArray() ?? [];
+                $breadcrumbs[] = $product_detail?->Category?->name; // add current category
                 @endphp
 
                 {{ implode(' » ', $breadcrumbs) }}
@@ -222,41 +222,27 @@
                     </div>
 
                     {{-- star Rating --}}
+                    @php
+                    $avgRating = round($product_detail->reviews_avg_rating);
+                    $totalReviews = $product_detail->reviews_count;
+                    @endphp
+
                     <span class="five-star-rating">
-                        @if ($product_detail->reviews()->avg('rating') >= 1)
-                        <i class="fas fa-star"></i>
-                        @else
-                        <i class="far fa-star"></i>
-                        @endif
-
-                        @if ($product_detail->reviews()->avg('rating') >= 2)
-                        <i class="fas fa-star"></i>
-                        @else
-                        <i class="far fa-star"></i>
-                        @endif
-
-                        @if ($product_detail->reviews()->avg('rating') >= 3)
-                        <i class="fas fa-star"></i>
-                        @else
-                        <i class="far fa-star"></i>
-                        @endif
-
-                        @if ($product_detail->reviews()->avg('rating') >= 4)
-                        <i class="fas fa-star"></i>
-                        @else
-                        <i class="far fa-star"></i>
-                        @endif
-
-                        @if ($product_detail->reviews()->avg('rating') >= 5)
-                        <i class="fas fa-star"></i>
-                        @else
-                        <i class="far fa-star"></i>
-                        @endif
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <=$avgRating)
+                            <i class="fas fa-star"></i>
+                            @else
+                            <i class="far fa-star"></i>
+                            @endif
+                            @endfor
                     </span>
+
+                    <span class="rating-number">({{ $totalReviews }} reviews)</span>
+
 
                     <span class="rating-number">-</span>
                     <span class="rating-number"
-                        style="font-size: 11px;">{{ $product_detail->reviews()->sum('rating') }} ratings |</span>
+                        style="font-size: 11px;">{{ $totalReviews }} ratings |</span>
                     <a class="write-review" id="write-a-review" role="button">
                         &nbsp; <span><i class="fas fa-pen"></i> Write a review</span>
                     </a>
@@ -525,6 +511,10 @@
                 @if ($product_detail && $product_detail->Category && $product_detail->Category->Product)
                 @foreach ($product_detail->Category->Product as $product_category_product)
                 @if ($product_category_product->id != $product_detail->id)
+                @php
+                    $avgRating = round($product_category_product->reviews_avg_rating);
+                    $totalReviews = $product_category_product->reviews_count;
+                @endphp
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
                         <a class="lazy-load"
@@ -549,40 +539,20 @@
                             <a
                                 href="{{ route('products.details', ['name' => $product_category_product->name, 'seller_sku' => $product_category_product->seller_sku]) }}">{{ $product_category_product->name }}</a>
                             {{-- rating add html code --}}
-                            <span class="five-star-rating">
-                                @if ($product_category_product->reviews()->avg('rating') >= 1)
+                           {{-- rating --}}
+                    <span class="five-star-rating">
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $avgRating)
                                 <i class="fas fa-star"></i>
-                                @else
+                            @else
                                 <i class="far fa-star"></i>
-                                @endif
+                            @endif
+                        @endfor
+                    </span>
 
-                                @if ($product_category_product->reviews()->avg('rating') >= 2)
-                                <i class="fas fa-star"></i>
-                                @else
-                                <i class="far fa-star"></i>
-                                @endif
-
-                                @if ($product_category_product->reviews()->avg('rating') >= 3)
-                                <i class="fas fa-star"></i>
-                                @else
-                                <i class="far fa-star"></i>
-                                @endif
-
-                                @if ($product_category_product->reviews()->avg('rating') >= 4)
-                                <i class="fas fa-star"></i>
-                                @else
-                                <i class="far fa-star"></i>
-                                @endif
-
-                                @if ($product_category_product->reviews()->avg('rating') >= 5)
-                                <i class="fas fa-star"></i>
-                                @else
-                                <i class="far fa-star"></i>
-                                @endif
-                            </span>
-                            <span class="rating-number">-</span>
-                            <span class="rating-number"
-                                style="font-size: 11px;">{{ $product_category_product->reviews()->sum('rating') }}</span>
+                    <span class="rating-number" style="font-size: 11px;">
+                        ({{ $totalReviews }} reviews)
+                    </span>
                         </h3>
                         <!-- End .product-container -->
                         <div class="price-box">
@@ -715,20 +685,20 @@
 </script>
 
 <script>
-window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
 
-let productDetail = @json($product_detail);
+    let productDetail = @json($product_detail);
 
-dataLayer.push({
-    'event': 'view_item',
-    'ecommerce': {
-        'items': [{
-            'item_id': productDetail.id,
-            'item_name': productDetail.name,
-            'item_category': productDetail.category?.name || '',
-            'price': productDetail.sale_price || 0,
-        }]
-    }
-});
+    dataLayer.push({
+        'event': 'view_item',
+        'ecommerce': {
+            'items': [{
+                'item_id': productDetail.id,
+                'item_name': productDetail.name,
+                'item_category': productDetail.category?.name || '',
+                'price': productDetail.sale_price || 0,
+            }]
+        }
+    });
 </script>
 @endpush
