@@ -299,7 +299,7 @@
                         </p>
                     </div>
                     {{-- Start Product Varations --}}
-                    @if(count($attributeOptions) > 0)
+                    <!-- @if(count($attributeOptions) > 0)
                     <div id="variation-selectors" class="variation-selector">
                         @foreach($attributeOptions as $attribute => $values)
                         <div class="attribute-group mb-2">
@@ -323,7 +323,7 @@
 
                         <input type="hidden" name="selected_variation_id" id="selected_variation_id" required>
                     </div>
-                    @endif
+                    @endif -->
                     {{-- End Product Varations --}}
                     <!-- End .product-desc -->
                     <div class="product-desc">
@@ -639,7 +639,7 @@
 @endsection
 @push('scripts')
 <script>
-    window.variationMap = @json($variationMap);
+    // window.variationMap = @json($variationMap);
 </script>
 
 <script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
