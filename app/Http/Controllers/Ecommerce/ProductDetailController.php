@@ -40,6 +40,7 @@ class ProductDetailController extends Controller
             'Category',
             'Brand',
             'ProductDetail',
+            'ProductDetail.Condition',
             'reviews',
             'reviewSum',
         ])->whereName($name)
@@ -48,20 +49,20 @@ class ProductDetailController extends Controller
 
             $product_detail->Category->loadAllParents(); // 👈 load parents recursively
 
-        // $variationMap = ProductVariationHelper::getProductVariationsGroupedByAttributes($product_detail->id);
+        $variationMap = ProductVariationHelper::getProductVariationsGroupedByAttributes($product_detail->id);
 
-        // $attributeOptions = [];
+        $attributeOptions = [];
 
-        // foreach ($variationMap as $variationId => $attributes) {
-        //     foreach ($attributes as $attributeName => $value) {
-        //         $attributeOptions[$attributeName][$value] = true; // use assoc to ensure uniqueness
-        //     }
-        // }
+        foreach ($variationMap as $variationId => $attributes) {
+            foreach ($attributes as $attributeName => $value) {
+                $attributeOptions[$attributeName][$value] = true; // use assoc to ensure uniqueness
+            }
+        }
 
-        // foreach ($attributeOptions as $attr => &$values) {
-        //     $values = array_keys($values); // convert back to indexed array
-        // }
+        foreach ($attributeOptions as $attr => &$values) {
+            $values = array_keys($values); // convert back to indexed array
+        }
 
-        return view('ecommerce.product', compact('product_detail', 'user_id'));
+        return view('ecommerce.product', compact('product_detail', 'user_id', 'variationMap', 'attributeOptions'));
     }
 }

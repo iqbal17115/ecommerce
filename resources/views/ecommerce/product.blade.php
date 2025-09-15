@@ -299,7 +299,31 @@
                         </p>
                     </div>
                     {{-- Start Product Varations --}}
-                    
+                    @if(count($attributeOptions) > 0)
+                    <div id="variation-selectors" class="variation-selector">
+                        @foreach($attributeOptions as $attribute => $values)
+                        <div class="attribute-group mb-2">
+                            <div class="attribute-label fw-semibold text-uppercase text-muted mb-1">{{ $attribute }}</div>
+                            <div class="btn-group-wrap" data-attribute="{{ $attribute }}">
+                                @foreach($values as $value)
+                                <button type="button"
+                                    class="btn variation-btn"
+                                    data-attribute="{{ $attribute }}"
+                                    data-value="{{ $value }}">
+                                    {{ $value }}
+                                </button>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endforeach
+
+                        <div class="mt-1">
+                            <button type="button" id="clear-variations" class="btn btn-sm btn-outline-secondary">Clear</button>
+                        </div>
+
+                        <input type="hidden" name="selected_variation_id" id="selected_variation_id" required>
+                    </div>
+                    @endif
                     {{-- End Product Varations --}}
                     <!-- End .product-desc -->
                     <div class="product-desc">
@@ -615,6 +639,7 @@
 @endsection
 @push('scripts')
 <script>
+    window.variationMap = @json($variationMap);
 </script>
 
 <script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}?v={{ time() }}"></script>
