@@ -153,7 +153,7 @@
                     @foreach ($headerMenuCategories as $headerMenuCategory)
                         <li>
                             <a class=""
-                                href="{{ route('catalog', ['id' => $headerMenuCategory->id]) }}">{{ $headerMenuCategory->name }}</a>
+                                href="{{ route('catalog.show', ['filters' => ['category_names' => $headerMenuCategory->name]]) }}">{{ $headerMenuCategory->name }}</a>
                         </li>
                     @endforeach
                     <li class="phone">

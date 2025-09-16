@@ -27,6 +27,7 @@ $(document).ready(function () {
 
         const url = `/products?${params.toString()}`;
         console.log(url);
+
         getDetails(
             url,
             (response) => {

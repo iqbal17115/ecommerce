@@ -129,7 +129,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/get_parent_category', [HomeController::class, 'getParentCategory'])->name('get_parent_category');
     Route::get('/catalog/{id}', [ShopController::class, 'shop'])->name('catalog');
     Route::get('product-search', [ShopController::class, 'searchProduct'])->name('product_search');
-    Route::get('/catalog/{categoryname?}', [ShopController::class, 'shop'])->name('catalog.show');
+    Route::get('/catalog/{name?}', [ShopController::class, 'shop'])->name('catalog.show');
     Route::get('/get-main-content', [HomeController::class, 'getMainContent'])->name('get-main-content');
     Route::get('/search/{q?}', [ShopController::class, 'shopSearch'])->name('search');
     Route::get('shop/products', [ShopController::class, 'list'])->name('products.show');

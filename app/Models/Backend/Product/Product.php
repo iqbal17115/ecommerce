@@ -69,7 +69,7 @@ class Product extends Model
         'type',
         'code',
         'brand.name',
-        'category.name',
+        'Category.name',
         'productFeature.name',
         'purchase_price',
         'your_price',
