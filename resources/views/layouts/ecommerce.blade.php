@@ -21,7 +21,7 @@
   @yield('meta')
 
   
-    <!-- @include('layouts.partials.gtm-head') -->
+    @include('layouts.partials.gtm-head')
   <!-- Favicon -->
   @if ($company_info && $company_info->icon)
   <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $company_info->icon) }}">
@@ -30,11 +30,11 @@
   <link rel="stylesheet" href="{{ asset('css/loader.css') }}">
   @stack('css')
 
-     {!! $company_info->header_code ?? '' !!}
+   {!! html_entity_decode($company_info->header_code ?? '') !!}
 </head>
 
 <body>
-      <!-- @include('layouts.partials.gtm-body') -->
+      @include('layouts.partials.gtm-body')
 <!-- 
   <div id="loader-overlay">
     <div id="loader">
@@ -70,7 +70,6 @@
   <!-- <script src="{{ asset('js/ajax_setup.js') }}"></script> -->
 
   @stack('scripts')
-
   {!! html_entity_decode($company_info->footer_code ?? '') !!}
 </body>
 
