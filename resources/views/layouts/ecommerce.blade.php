@@ -29,6 +29,9 @@
   @include('layouts.parts.css-links')
   <link rel="stylesheet" href="{{ asset('css/loader.css') }}">
   @stack('css')
+
+      {!! $companyInfo->header_code ?? '' !!}
+      22222222
 </head>
 
 <body>
@@ -68,6 +71,8 @@
   <!-- <script src="{{ asset('js/ajax_setup.js') }}"></script> -->
 
   @stack('scripts')
+
+  {!! $companyInfo->footer_code ?? '' !!}
 </body>
 
 </html>

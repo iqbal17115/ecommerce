@@ -212,6 +212,8 @@ class CompanyInfoController extends Controller
         $company_info->google_map_location = $request->google_map_location;
         $company_info->web = $request->web;
         $company_info->free_shipping_text = $request->free_shipping_text;
+        $company_info->header_code = $request->header_code;
+        $company_info->footer_code = $request->footer_code;
         $company_info->save();
 
         // To forget the cache

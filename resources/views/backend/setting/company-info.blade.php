@@ -442,6 +442,32 @@
                                                     </div>
                                                     <!-- End -->
 
+                                                    <div class="col-md-4 mt-md-3">
+                                                        <label class="col-form-label float-md-right"
+                                                            style="font-size: 14px;">Global Header Code</label>
+                                                    </div>
+                                                    <div class="col-md-8 mt-md-3">
+                                                        <textarea class="form-control" name="header_code" id="header_code" placeholder="Global Header Code">
+                                                        @if ($company_info && $company_info->header_code)
+                                                          {!! $company_info->header_code !!}
+                                                        @endif
+                                                    </textarea>
+                                                    </div>
+                                                    <!-- End -->
+
+                                                    <div class="col-md-4 mt-md-3">
+                                                        <label class="col-form-label float-md-right"
+                                                            style="font-size: 14px;">Global Footer Code</label>
+                                                    </div>
+                                                    <div class="col-md-8 mt-md-3">
+                                                        <textarea class="form-control" name="footer_code" id="footer_code" placeholder="Global Footer Code">
+                                                        @if ($company_info && $company_info->footer_code)
+                                                          {!! $company_info->footer_code !!}
+                                                        @endif
+                                                    </textarea>
+                                                    </div>
+                                                    <!-- End -->
+
                                                     <div class="col-md-12 mt-md-3">
                                                         <button class="float-right btn btn-success btn-sm">Save</button>
                                                     </div>
@@ -926,9 +952,13 @@
             height: 120
         });
 
+        $('#header_code').summernote({
+            height: 120
+        });
 
-
-
+        $('#footer_code').summernote({
+            height: 120
+        });
 
         // $('.file-upload').file_upload();
     </script>
