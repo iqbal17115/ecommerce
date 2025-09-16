@@ -131,7 +131,7 @@ class HomeController extends Controller
 
         return view('ecommerce.home.index', compact([
             'sliders',
-            'top_show_categories',
+            // 'top_show_categories',
             'product_features',
             'top_features',
             'user_id'

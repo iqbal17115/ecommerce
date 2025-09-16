@@ -77,7 +77,7 @@
             <!-- End .home-slider -->
 
             <div class="categories-section appear-animate" data-animation-name="fadeIn" data-animation-delay="100">
-                @include('ecommerce.home.partials.categories')
+
             </div>
             <!-- Start Top Feature -->
             @include('ecommerce.home.partials.top_features')

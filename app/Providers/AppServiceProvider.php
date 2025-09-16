@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
             }, 21600);
 
             $sidebarMenuCategories = $cacheService->remember('sidebarMenuCategories', function () {
-                return Category::whereSidebarMenu(1)
+                return Category::with(['SubCategory'])->whereSidebarMenu(1)
                     ->orderByRaw('ISNULL(sidebar_menu_position), sidebar_menu_position ASC')
                     ->get();
             }, 21600);
