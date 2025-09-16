@@ -952,14 +952,6 @@
             height: 120
         });
 
-        $('#header_code').summernote({
-            height: 120
-        });
-
-        $('#footer_code').summernote({
-            height: 120
-        });
-
         // $('.file-upload').file_upload();
     </script>
     @include('backend.setting.setting-js')
