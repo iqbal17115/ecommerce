@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="{{ asset('css/loader.css') }}">
   @stack('css')
 
-     {!! html_entity_decode($company_info->header_code ?? '') !!}
+     {!! $company_info->header_code ?? '' !!}
 </head>
 
 <body>
