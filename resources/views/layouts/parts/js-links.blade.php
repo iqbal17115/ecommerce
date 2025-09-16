@@ -20,14 +20,14 @@ WebFontConfig = {
 <script src="{{ URL::asset('aladdinne/') }}/assets/js/main.min.js"></script>
 <!-- Common JS File -->
 <script src="{{ URL::asset('aladdinne/') }}/assets/custom/js/common.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" defer></script>
 <script src="{{asset('js/panel/action.js')}}"></script>
 <script src="{{asset('js/panel/common.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $(".menu-toggle").click(function(e) {
