@@ -21,7 +21,7 @@
   @yield('meta')
 
   
-    @include('layouts.partials.gtm-head')
+    <!-- @include('layouts.partials.gtm-head') -->
   <!-- Favicon -->
   @if ($company_info && $company_info->icon)
   <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $company_info->icon) }}">
@@ -34,7 +34,7 @@
 </head>
 
 <body>
-      @include('layouts.partials.gtm-body')
+      <!-- @include('layouts.partials.gtm-body') -->
 <!-- 
   <div id="loader-overlay">
     <div id="loader">
