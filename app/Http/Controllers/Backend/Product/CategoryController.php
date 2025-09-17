@@ -6,11 +6,20 @@ use App\Models\Backend\Product\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Product\ProductFeature;
+use App\Services\CacheService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CategoryController extends Controller
 {
-    public function categoryHierarchy(Request $request) {
+    public  $cacheService;
+    public function __construct(CacheService $cacheService)
+    {
+        $this->cacheService = $cacheService;
+    }
+
+    public function categoryHierarchy(Request $request)
+    {
         $category = Category::with('Parent')->find($request->id);
         $child_categories = Category::whereParentCategoryId($request->id)->select('name')->get();
         return response()->json([
@@ -18,27 +27,31 @@ class CategoryController extends Controller
             'child_categories' => $child_categories
         ]);
     }
-    public function searchCategory(Request $request) {
-        $categories = Category::where('name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(10);
-        if($categories->count() >= 1) {
-        return view('backend.product.pagination-category', compact('categories'))->render();
-        }else {
+    public function searchCategory(Request $request)
+    {
+        $categories = Category::where('name', 'like', '%' . $request->search_string . '%')->orderBy('id', 'desc')->paginate(10);
+        if ($categories->count() >= 1) {
+            return view('backend.product.pagination-category', compact('categories'))->render();
+        } else {
             return response()->json([
                 'status' => 'nothing_found'
             ]);
         }
     }
-    public function pagination(Request $request) {
+    public function pagination(Request $request)
+    {
         $categories = Category::latest()->paginate(10);
         return view('backend.product.pagination-category', compact('categories'))->render();
     }
-    public function deleteCategory(Request $request) {
+    public function deleteCategory(Request $request)
+    {
         $category = Category::find($request->id)->delete();
         return response()->json([
             'status' => 'success'
         ]);
     }
-    public function addCategory(Request $request) {
+    public function addCategory(Request $request)
+    {
         $request->validate(
             [
                 'name' => 'required|max:50',
@@ -50,9 +63,9 @@ class CategoryController extends Controller
             ]
         );
         // dd($request->variation_type);
-        if($request->cu_id > 0) {
+        if ($request->cu_id > 0) {
             $category = Category::find($request->cu_id);
-        }else {
+        } else {
             $request->validate(
                 [
                     'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -96,13 +109,24 @@ class CategoryController extends Controller
         $category->is_active = $request->is_active;
         $category->save();
 
+        // To forget the cache
+        Cache::forget('headerMenuCategories');
+
+        $this->cacheService->remember('headerMenuCategories', function () {
+                return Category::whereHeaderMenu(1)
+                    ->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')
+                    ->limit(6)
+                    ->get();
+            }, 21600);
+
         return response()->json([
             'status' => 'success'
         ]);
     }
 
-    
-    public function index() {
+
+    public function index()
+    {
         $categories = Category::latest()->paginate(10);
         $parent_categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
         $product_features = ProductFeature::orderBy('id', 'DESC')->whereTopMenu(1)->whereIsActive(1)->get();
