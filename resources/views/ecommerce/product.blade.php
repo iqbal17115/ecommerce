@@ -620,7 +620,7 @@
 <script src="{{ asset('js/panel/users/share.js') }}?v={{ time() }}"></script>
 <script>
     // Set the hasCartList variable
-    window.hasCartList = true;
+    window.hasCartList = false;
     // Add an event listener to the DOMContentLoaded event
     document.addEventListener('DOMContentLoaded', function() {
         if (typeof CartManager !== 'undefined') {
@@ -633,6 +633,11 @@
         if (event.persisted) {
             CartManager.loadCartData();
         }
+    });
+
+    window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+        'event': 'home_page_view'
     });
 </script>
 
