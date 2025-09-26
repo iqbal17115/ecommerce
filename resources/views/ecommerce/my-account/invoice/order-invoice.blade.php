@@ -203,6 +203,10 @@
                     <td colspan="2" style="font-weight: bold;">{{ number_format($order->payable_amount, 2) }} ৳</td>
                 </tr>
                 <tr>
+                    <td colspan="3" style="text-align: right; font-weight: bold;">Paid:</td>
+                    <td colspan="2" style="font-weight: bold;">{{ number_format($order?->orderPayment?->orderPaymentDetails->sum('amount') ?? 0, 2) }} ৳</td>
+                </tr>
+                <tr>
                     @php 
                         $due_amount = $order->payable_amount - $order?->orderPayment?->orderPaymentDetails->sum('amount') ?? 0;
                     @endphp
