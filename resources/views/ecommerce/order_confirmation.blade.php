@@ -144,7 +144,8 @@
 </div>
 @endsection
 @push('scripts')
-<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}" defer></script>
+<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         CartDrawer.loadCartCount(); // ✅ Now it will work
