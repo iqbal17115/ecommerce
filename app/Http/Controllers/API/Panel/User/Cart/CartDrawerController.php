@@ -38,7 +38,16 @@ class CartDrawerController extends Controller
 
     public function count()
     {
-        $totalQty = CartItem::where('user_id', Auth::id())->sum('quantity');
+        $userId = Auth::id();
+        $sessionId = SessionHelper::getSessionId();
+
+        $totalQty = CartItem::where(function ($q) use ($userId, $sessionId) {
+            $q->where('session_id', $sessionId);
+
+            if ($userId) {
+                $q->orWhere('user_id', $userId);
+            }
+        })->sum('quantity');
 
         return Message::success(null, ['totalQty' => $totalQty]);
     }
