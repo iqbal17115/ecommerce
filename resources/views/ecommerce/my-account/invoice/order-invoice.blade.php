@@ -156,9 +156,8 @@
             <p><strong>Name:</strong> {{ $order->orderAddress->name ?? 'N/A' }},
                 <strong>Mobile:</strong> {{ $order->orderAddress->mobile ?? 'N/A' }}
             </p>
-            <p><strong>Street:</strong> {{ $order->orderAddress->street_address ?? 'N/A' }},
-                <strong>Building:</strong> {{ $order->orderAddress->building_name ?? 'N/A' }}
-            </p>
+            <p class="mb-1" id="street_address_display">{{ $order?->orderAddress?->instruction }}</p>
+            <p class="mb-1" id="district_display">{{ \App\Helpers\AddressHelper::getFullAddress($order) }}</p>
         </div>
 
         <!-- Added Estimated Delivery Date or Delivered Date Section -->
@@ -202,6 +201,13 @@
                 <tr>
                     <td colspan="3" style="text-align: right; font-weight: bold;">Payable:</td>
                     <td colspan="2" style="font-weight: bold;">{{ number_format($order->payable_amount, 2) }} ৳</td>
+                </tr>
+                <tr>
+                    @php 
+                        $due_amount = $order->payable_amount - $order?->orderPayment?->orderPaymentDetails->sum('amount') ?? 0;
+                    @endphp
+                    <td colspan="3" style="text-align: right; font-weight: bold;">Due:</td>
+                    <td colspan="2" style="font-weight: bold;">{{ number_format($due_amount, 2) }} ৳</td>
                 </tr>
             </tfoot>
         </table>
