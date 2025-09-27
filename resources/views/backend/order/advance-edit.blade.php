@@ -28,11 +28,6 @@
                         <li class="breadcrumb-item active">Confirm Order</li>
                     </ol>
                 </div>
-                @if($order?->courierShipment)
-<a href="{{ route('couriers.printInvoice', $order?->courierShipment?->consignment_id) }}" target="_blank" class="btn btn-outline-primary">
-    Print Invoice
-</a>
-@endif
             </div>
         </div>
     </div>
@@ -75,6 +70,11 @@
                                             class="btn btn-success btn-sm {{ $order->status == 'processing' ? 'disabled' : '' }}">Confirm
                                             Order</button>
                                     </form>
+                                     @if($order?->courierShipment)
+                    <a href="{{ route('couriers.printInvoice', $order?->courierShipment?->consignment_id) }}" target="_blank" class="btn btn-outline-primary">
+                        Courier Invoice
+                    </a>
+                @endif
                                     <button id="cancelOrderBtn"
                                         class="btn btn-danger waves-effect waves-light btn-sm {{ $order->status == 'cancelled' ? 'disabled' : '' }}"
                                         data-toggle="modal" data-target=".cancel-order">Cancel</button>
