@@ -28,6 +28,9 @@
                         <li class="breadcrumb-item active">Confirm Order</li>
                     </ol>
                 </div>
+<a href="{{ route('couriers.printInvoice', $order->courierShipment->consignment_id) }}" target="_blank" class="btn btn-outline-primary">
+    Print Invoice
+</a>
 
             </div>
         </div>

@@ -662,6 +662,7 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::controller(CourierController::class)->group(function () {
             Route::post('couriers/{order}/send', 'sendOrder')->name('couriers.sendOrder');
+            Route::get('couriers/{consignmentId}/print', 'printInvoice')->name('couriers.printInvoice');
         });
 
         Route::prefix('orders')->group(function () {
