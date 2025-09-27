@@ -191,15 +191,15 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" style="text-align: right;">Discount:</td>
-                    <td colspan="2">{{ number_format($order->discount, 2) }} ৳</td>
-                </tr>
-                <tr>
                     <td colspan="3" style="text-align: right;">Shipping Charge:</td>
                     <td colspan="2">{{ number_format($order->shipping_charge, 2) }} ৳</td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: right; font-weight: bold;">Payable:</td>
+                    <td colspan="3" style="text-align: right;">Discount:</td>
+                    <td colspan="2">{{ number_format($order->discount, 2) }} ৳</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: right; font-weight: bold;">Total:</td>
                     <td colspan="2" style="font-weight: bold;">{{ number_format($order->payable_amount, 2) }} ৳</td>
                 </tr>
                 <tr>
