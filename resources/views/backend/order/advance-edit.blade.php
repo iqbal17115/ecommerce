@@ -41,7 +41,14 @@
                     <div class="row">
                         <div class="col-md-5"><span>Order Id: {{ $order?->code }}</span> - <span>
                                 {{ $order ? date('M d, Y h:i A', strtotime($order->order_date)) : 'N/A' }} </span></div>
-                        <div class="col-md-7 text-right h6">
+                        <div class="col-md-2">
+                             @if($order?->courierShipment)
+                    <a href="{{ route('couriers.printInvoice', $order?->courierShipment?->consignment_id) }}" target="_blank" class="btn btn-outline-primary">
+                        Courier Invoice
+                    </a>
+                @endif
+                        </div>
+                                <div class="col-md-5 text-right h6">
                             <div class="row">
                                 <div class="col-md-7">
                                     <form id="cancelReasonForm" style="display: none;">
@@ -70,11 +77,7 @@
                                             class="btn btn-success btn-sm {{ $order->status == 'processing' ? 'disabled' : '' }}">Confirm
                                             Order</button>
                                     </form>
-                                     @if($order?->courierShipment)
-                    <a href="{{ route('couriers.printInvoice', $order?->courierShipment?->consignment_id) }}" target="_blank" class="btn btn-outline-primary">
-                        Courier Invoice
-                    </a>
-                @endif
+                        
                                     <button id="cancelOrderBtn"
                                         class="btn btn-danger waves-effect waves-light btn-sm {{ $order->status == 'cancelled' ? 'disabled' : '' }}"
                                         data-toggle="modal" data-target=".cancel-order">Cancel</button>
