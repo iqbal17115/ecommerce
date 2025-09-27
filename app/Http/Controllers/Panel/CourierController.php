@@ -41,30 +41,44 @@ class CourierController extends Controller
         ]);
     }
 
-    /**
-     * Print invoice/label for a consignment
-     */
     public function printInvoice($consignmentId)
-    {
-        try {
-            $response = Http::withHeaders([
-                'Api-Key'    => config('services.steadfast.api_key'),
-                'Secret-Key' => config('services.steadfast.secret_key'),
-            ])->get("https://portal.steadfast.com.bd/api/v1/print_label/{$consignmentId}");
-dd($response);
-            return response($response->body(), 200)
-        ->header('Content-Type', 'application/pdf');
+{
+    try {
+        $response = Http::withHeaders([
+            'Api-Key'    => config('services.steadfast.api_key'),
+            'Secret-Key' => config('services.steadfast.secret_key'),
+        ])->get("https://portal.steadfast.com.bd/api/v1/print_label/{$consignmentId}");
 
-        } catch (\Exception $ex) {
-            Log::error('Steadfast print error: ' . $ex->getMessage(), [
-                'consignment_id' => $consignmentId
+        // Check if API call was successful
+        if (! $response->successful()) {
+            Log::error('Steadfast print failed', [
+                'consignment_id' => $consignmentId,
+                'status' => $response->status(),
+                'body' => $response->body(),
             ]);
 
             return response()->json([
-                'status' => 500,
-                'message' => 'Error fetching invoice/label',
-                'error' => $ex->getMessage()
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+                'status' => $response->status(),
+                'message' => 'Failed to fetch invoice/label'
+            ], $response->status());
         }
+
+        // Return PDF inline
+        return response($response->body(), 200)
+            ->header('Content-Type', 'application/pdf')
+            ->header('Content-Disposition', 'inline; filename="invoice_'.$consignmentId.'.pdf"');
+
+    } catch (\Exception $ex) {
+        Log::error('Steadfast print error: ' . $ex->getMessage(), [
+            'consignment_id' => $consignmentId
+        ]);
+
+        return response()->json([
+            'status' => 500,
+            'message' => 'Error fetching invoice/label',
+            'error' => $ex->getMessage()
+        ], 500);
     }
+}
+
 }
