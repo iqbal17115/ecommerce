@@ -50,43 +50,10 @@ class CourierController extends Controller
             $response = Http::withHeaders([
                 'Api-Key'    => config('services.steadfast.api_key'),
                 'Secret-Key' => config('services.steadfast.secret_key'),
-            ])->get(config('services.steadfast.url') . "/print/{$consignmentId}");
-            
-            // Debug log
-            Log::info('Steadfast print response', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-            ]);
+            ])->get("https://portal.steadfast.com.bd/api/v1/print_label/{$consignmentId}");
 
-            if (! $response->successful()) {
-                return response()->json([
-                    'status' => $response->status(),
-                    'message' => 'Failed to fetch invoice/label',
-                    'body' => $response->body(),
-                ], $response->status());
-            }
-
-            // Assuming API returns PDF or file URL
-            $contentType = $response->header('Content-Type');
-
-            if ($contentType === 'application/pdf') {
-                // Return PDF file as download
-                return response($response->body(), 200)
-                    ->header('Content-Type', 'application/pdf')
-                    ->header('Content-Disposition', "inline; filename=consignment_{$consignmentId}.pdf");
-            }
-
-            // If API returns JSON with URL
-            $data = $response->json();
-            if (isset($data['label_url'])) {
-                return redirect($data['label_url']);
-            }
-
-            return response()->json([
-                'status' => 200,
-                'message' => 'Invoice fetched successfully',
-                'data' => $data,
-            ]);
+            return response($response->body(), 200)
+        ->header('Content-Type', 'application/pdf');
 
         } catch (\Exception $ex) {
             Log::error('Steadfast print error: ' . $ex->getMessage(), [
