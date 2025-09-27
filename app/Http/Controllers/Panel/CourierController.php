@@ -51,7 +51,7 @@ class CourierController extends Controller
                 'Api-Key'    => config('services.steadfast.api_key'),
                 'Secret-Key' => config('services.steadfast.secret_key'),
             ])->get("https://portal.steadfast.com.bd/api/v1/print_label/{$consignmentId}");
-
+dd($response);
             return response($response->body(), 200)
         ->header('Content-Type', 'application/pdf');
 
