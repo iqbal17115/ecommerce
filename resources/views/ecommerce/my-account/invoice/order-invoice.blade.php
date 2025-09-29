@@ -181,7 +181,17 @@
             <tbody>
                 @foreach($order->OrderDetail as $detail)
                 <tr>
-                    <td>{{ $detail->product->name ?? 'N/A' }}</td>
+                    <td>
+                        {{ $detail->product->name ?? 'N/A' }}
+                        @if ($detail?->productVariation?->productVariationAttributes)
+                            @foreach ($detail->productVariation->productVariationAttributes as $variantionAttribute)
+                                <span class="text-muted">
+                                    {{ $variantionAttribute?->attributeValue?->attribute->name }}: 
+                                    {{ $variantionAttribute?->attributeValue?->value }}
+                                </span><br>
+                            @endforeach
+                        @endif
+                    </td>
                     <td>{{ number_format($detail->unit_price, 2) }}</td>
                     <td>{{ $detail->quantity }}</td>
                     <td>{{ $detail->return_quantity ?? 0 }}</td>
