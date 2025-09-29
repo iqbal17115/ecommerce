@@ -98,7 +98,7 @@
 
 @endsection
 @push('scripts')
-<script src="{{ mix('js/home.bundle.js') }}" defer></script>
+<script src="{{ mix('js/home.bundle.js') }}"></script>
 
 <script>
     // Set the hasCartList variable
