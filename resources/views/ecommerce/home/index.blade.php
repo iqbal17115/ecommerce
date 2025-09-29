@@ -98,11 +98,8 @@
 
 @endsection
 @push('scripts')
-<script src="{{ asset('js/panel/users/common.js') }}" defer></script>
-<script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}" defer></script>
-<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}" defer></script>
-<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}" defer></script>
-<script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
+<script src="{{ mix('js/home.bundle.js') }}" defer></script>
+
 <script>
     // Set the hasCartList variable
     window.hasCartList = false;
