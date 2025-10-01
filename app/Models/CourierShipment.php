@@ -22,6 +22,11 @@ class CourierShipment extends Model
         'payload',
         'response',
         'dispatched_at',
+        'last_synced_at',
+        'delivered_at',
+        'is_final',
+        'attempts',
+        'status_reason'
     ];
 
     public function order()
