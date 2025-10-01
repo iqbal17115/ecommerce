@@ -22,7 +22,7 @@
     <div>
         <strong style="margin-right: 4px;">Last Synced:</strong>
         <span id="last-synced">
-            {{ $order->courierShipment?->last_synced_at?->format('d M Y, H:i') ?? 'N/A' }}
+            {{ $order->courierShipment?->last_synced_at ?? 'N/A' }}
         </span>
     </div>
 
