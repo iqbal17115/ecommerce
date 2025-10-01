@@ -8,7 +8,7 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_method" id="cod" value="cod" checked>
             <label class="form-check-label" for="cod">
-                &nbsp;Cash On Delivery
+                &nbsp;&nbsp;&nbsp;Cash On Delivery
             </label>
         </div>
     </div>
