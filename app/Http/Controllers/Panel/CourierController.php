@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\FrontEnd\Order;
+use App\Services\CourierFactory;
 use App\Services\OrderCourierService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -41,42 +42,44 @@ class CourierController extends Controller
         ]);
     }
 
-    public function printInvoice($consignmentId)
+    /**
+     * Check delivery status on-demand
+     */
+    public function checkStatus(Request $request, $orderId)
     {
-        try {
-            $response = Http::withHeaders([
-                'Api-Key'    => config('services.steadfast.api_key'),
-                'Secret-Key' => config('services.steadfast.secret_key'),
-            ])->get(config('services.steadfast.url') . '/print_label', [
-                'consignment_id' => $consignmentId
-            ]);
+        $order = Order::with('courierShipment')->findOrFail($orderId);
 
-            if (! $response->successful()) {
-                Log::error('Steadfast print failed', [
-                    'consignment_id' => $consignmentId,
-                    'status' => $response->status(),
-                    'body' => $response->body(),
-                ]);
-
-                return response()->json([
-                    'status' => $response->status(),
-                    'message' => 'Failed to fetch invoice/label'
-                ], $response->status());
-            }
-
-            return response($response->body(), 200)
-                ->header('Content-Type', 'application/pdf')
-                ->header('Content-Disposition', 'inline; filename="invoice_' . $consignmentId . '.pdf"');
-        } catch (\Exception $ex) {
-            Log::error('Steadfast print error: ' . $ex->getMessage(), [
-                'consignment_id' => $consignmentId
-            ]);
-
+        if (!$order->courierShipment) {
             return response()->json([
-                'status' => 500,
-                'message' => 'Error fetching invoice/label',
-                'error' => $ex->getMessage()
-            ], 500);
+                'success' => false,
+                'message' => 'No courier shipment found for this order.'
+            ], 404);
         }
+
+        $courier = CourierFactory::make($order->courierShipment->courier_name);
+
+        $result = $courier->checkStatus($order->courierShipment);
+dd($result);
+        if (!empty($result['error'])) {
+            return response()->json([
+                'success' => false,
+                'message' => $result['message'] ?? 'Failed to check status',
+                'data'    => $result['data'] ?? null,
+            ], 422);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated successfully',
+            'data'    => [
+                'status'        => $order->courierShipment->status,
+                'is_final'      => $order->courierShipment->is_final,
+                'delivered_at'  => $order->courierShipment->delivered_at,
+                'last_synced_at' => $order->courierShipment->last_synced_at,
+                'tracking_code' => $order->courierShipment->tracking_code,
+                'consignment_id' => $order->courierShipment->consignment_id,
+                'response'      => json_decode($order->courierShipment->response ?? '{}'),
+            ]
+        ]);
     }
 }

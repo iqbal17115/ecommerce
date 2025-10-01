@@ -86,4 +86,66 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("dispatchDate").addEventListener("change", function () {
         console.log(this.value);
     });
+
+  
 });
+  /**
+ * Update courier delivery status for a single order
+ * @param {number|string} orderId
+ */
+    function updateOrderStatus(orderId) {
+        const route = `/couriers/check-status/${orderId}`;
+        const targetSelector = `#order-status-${orderId}`;
+
+        getDetails(route, (data) => {
+            updateStatusElement(targetSelector, data.status);
+        }, (error) => {
+            console.error(`Failed to fetch status for order ${orderId}:`, error);
+            updateStatusElement(targetSelector, 'Error', 'badge-danger');
+        });
+    }
+
+    /**
+     * Update the status element text and optional badge class
+     * @param {string} selector - CSS selector of the element
+     * @param {string} status - Status text to display
+     * @param {string|null} forcedClass - Optional: force CSS class
+     */
+    function updateStatusElement(selector, status, forcedClass = null) {
+        const el = document.querySelector(selector);
+        if (!el) return;
+
+        el.textContent = status || 'Unknown';
+        const badgeClass = forcedClass || getStatusBadgeClass(status);
+        el.className = `badge ${badgeClass}`;
+    }
+
+    /**
+     * Map courier delivery status to CSS badge classes
+     * @param {string} status
+     * @returns {string} CSS class
+     */
+    function getStatusBadgeClass(status) {
+        switch (status) {
+            case 'delivered': return 'badge-success';
+            case 'partial_delivered': return 'badge-warning';
+            case 'in_review': return 'badge-info';
+            case 'cancelled': return 'badge-danger';
+            case 'hold': return 'badge-secondary';
+            case 'pending': return 'badge-secondary';
+            default: return 'badge-secondary';
+        }
+    }
+
+    /**
+     * Bulk update all orders currently in the table
+     * @param {Array} orderIds - Array of order IDs
+     */
+    function updateAllOrderStatuses(orderIds) {
+
+        updateOrderStatus(orderIds);
+    }
+
+   let orderIds = document.getElementById("orderId").value;
+
+    updateAllOrderStatuses(orderIds);
