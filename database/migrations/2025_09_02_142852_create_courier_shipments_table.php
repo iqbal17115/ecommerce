@@ -20,8 +20,8 @@ class CreateCourierShipmentsTable extends Migration
             $table->string('tracking_code')->nullable();
             $table->string('consignment_id')->nullable();
             $table->string('status')->default('pending');
-            $table->text('payload')->nullable();
-            $table->text('response')->nullable();
+            $table->longText('payload')->nullable();
+            $table->longText('response')->nullable();
             $table->timestamp('dispatched_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

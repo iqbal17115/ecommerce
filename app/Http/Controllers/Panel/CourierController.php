@@ -59,7 +59,7 @@ class CourierController extends Controller
         $courier = CourierFactory::make($order->courierShipment->courier_name);
 
         $result = $courier->checkStatus($order->courierShipment);
-dd($result);
+
         if (!empty($result['error'])) {
             return response()->json([
                 'success' => false,

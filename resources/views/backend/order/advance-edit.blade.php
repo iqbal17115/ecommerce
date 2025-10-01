@@ -391,6 +391,12 @@
                 </div>
 
                 <div class="card">
+                    <div class="card-body">
+                        @include('backend.order.partials._shipment_status', ['order' => $order])
+                    </div>
+                </div>
+                
+                <div class="card">
                     <form action="{{ route('order_package.submit', ['order' => $order->id]) }}" id="orderPackageSubmit">
                         @csrf
                         <div class="card-body">

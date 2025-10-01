@@ -21,6 +21,9 @@ class SteadfastCourier implements CourierInterface
 
     public function createOrder(array $orderData): array
     {
+        // Set endpoint
+        $this->baseUrl .= '/create_order';
+
         $response = Http::withHeaders([
             'Api-Key'    => $this->apiKey,
             'Secret-Key' => $this->secretKey,
