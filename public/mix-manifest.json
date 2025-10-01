@@ -1,7 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/home.bundle.js": "/js/home.bundle.js",
-    "/js/checkout.bundle.js": "/js/checkout.bundle.js",
-    "/js/cart.bundle.js": "/js/cart.bundle.js",
     "/css/app.css": "/css/app.css"
 }

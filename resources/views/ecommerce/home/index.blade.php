@@ -98,7 +98,12 @@
 
 @endsection
 @push('scripts')
-<script src="{{ mix('js/home.bundle.js') }}"></script>
+<script src="{{ asset('js/panel/users/common.js') }}" defer></script> 
+<script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}" defer></script> 
+<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}" defer></script> 
+<script src="{{ asset('js/panel/users/cart/cart_drawer.js') }}" defer></script> 
+<script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
+<script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
 
 <script>
     // Set the hasCartList variable
@@ -126,5 +131,4 @@
 
 
 @include('ecommerce.wishlist-js')
-<script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
 @endpush
