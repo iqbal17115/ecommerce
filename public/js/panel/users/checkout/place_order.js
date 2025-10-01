@@ -27,7 +27,6 @@ $(document).on('click', '#district', function () {
     const upazilaId = $('#thana').val() || null;
     getDetails(`/checkout/cart/lists?division_id=${divisionId}&district_id=${districtId}&upazila_id=${upazilaId}`, (data) => {
         cartData = data.results;
-        console.log(cartData);
         CartActiveItemList.render(cartData);
     }, (error) => {
         console.error("Failed to load cart data:", error);

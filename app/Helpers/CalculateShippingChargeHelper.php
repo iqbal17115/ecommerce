@@ -50,6 +50,6 @@ class CalculateShippingChargeHelper
             ->orderBy('rate')
             ->first();
 
-        return $rate ? (float)$rate->rate : 0;
+        return $rate ? round((float) $rate->rate, 2) : 0.00;
     }
 }
