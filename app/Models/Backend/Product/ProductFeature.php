@@ -43,7 +43,7 @@ class ProductFeature extends Model
 
     public function latestProducts()
     {
-        return $this->hasMany(Product::class)
+        return $this->hasMany(Product::class, 'product_feature_id')
             ->orderByDesc('created_at');
     }
 }
