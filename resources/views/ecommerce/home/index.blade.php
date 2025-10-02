@@ -98,34 +98,21 @@
 
 @endsection
 @push('scripts')
+<script src="{{ asset('js/panel/users/common.js') }}" defer></script> 
+<script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}" defer></script> 
+<script src="{{ asset('js/panel/users/cart/cart_manager.js') }}" defer></script> 
 <script>
 window.addEventListener('load', function () {
-    // list of scripts to load after full page render
-    const scripts = [
-        "{{ asset('js/panel/users/common.js') }}",
-        "{{ asset('js/panel/users/cart/add_to_cart.js') }}",
-        "{{ asset('js/panel/users/cart/cart_manager.js') }}",
-        "{{ asset('js/panel/users/cart/cart_drawer.js') }}",
-        "{{ asset('js/panel/users/cart/cart_list.js') }}"
-    ];
-
-    // load in order
-    (function loadSequentially(i) {
-        if (i >= scripts.length) {
-            // after all scripts, initialize cart if available
-            if (typeof CartManager !== 'undefined') {
-                CartManager.loadCartData();
-            }
-            return;
+    let script = document.createElement('script');
+    script.src = "{{ asset('js/panel/users/cart/cart_drawer.js') }}";
+    script.onload = function () {
+        if (typeof CartManager !== 'undefined') {
+            CartManager.loadCartData();
         }
-        let script = document.createElement('script');
-        script.src = scripts[i];
-        script.onload = () => loadSequentially(i + 1);
-        document.body.appendChild(script);
-    })(0);
+    };
+    document.body.appendChild(script);
 });
 </script>
-
 
 
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
