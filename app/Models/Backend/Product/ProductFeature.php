@@ -40,4 +40,10 @@ class ProductFeature extends Model
         // $today = now();
         return $this->hasMany(Product::class, 'product_feature_id');
     }
+
+    public function latestProducts()
+    {
+        return $this->hasMany(Product::class)
+            ->orderByDesc('created_at');
+    }
 }
