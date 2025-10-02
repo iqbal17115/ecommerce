@@ -38,12 +38,6 @@ class ProductFeature extends Model
     public function Product()
     {
         // $today = now();
-        return $this->hasMany(Product::class, 'product_feature_id')->limit(2);
-    }
-
-    public function latestProducts()
-    {
-        return $this->hasMany(Product::class, 'product_feature_id')
-            ->orderByDesc('created_at');
+        return $this->hasMany(Product::class, 'product_feature_id');
     }
 }
