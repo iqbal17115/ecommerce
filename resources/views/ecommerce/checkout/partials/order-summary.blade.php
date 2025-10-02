@@ -3,7 +3,7 @@
     <div id="productBlockList"></div>
 
     <!-- Payment Method -->
-    <div class="mb-3">
+    <div class="mb-1">
         <!-- <h6 class="font-weight-bold">Select Payment Method</h6> -->
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_method" id="cod" value="cod" checked>
@@ -11,6 +11,17 @@
                 &nbsp;&nbsp;&nbsp;Cash On Delivery
             </label>
         </div>
+    </div>
+
+    <!-- Coupon Section -->
+    <div class="apply-coupon">
+        <div class="input-group">
+            <input type="text" class="form-control" id="coupon_code" placeholder="Enter coupon code">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="applyCouponBtn">Apply</button>
+            </div>
+        </div>
+        <small id="couponFeedback" class="form-text text-muted mt-1"></small>
     </div>
 
     <!-- Order Summary -->
@@ -34,19 +45,10 @@
         </div>
     </div>
 
-    <!-- Coupon Section -->
-    <div class="apply-coupon mt-3">
-        <div class="input-group">
-            <input type="text" class="form-control" id="coupon_code" placeholder="Enter coupon code">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="applyCouponBtn">Apply</button>
-            </div>
-        </div>
-        <small id="couponFeedback" class="form-text text-muted mt-1"></small>
-    </div>
-
     <!-- Order Button -->
     <div class="text-right mt-2">
         <button type="button" class="btn btn-warning btn-block font-weight-bold mb-sm-4 mb-md-0" id="placeOrderBtn">Order Place</button>
     </div>
+    <br>
+    <br>
 </div>
