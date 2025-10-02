@@ -17,7 +17,7 @@ class HomePageProductFeatureResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'products' => ProductListResource::collection($this->latestProducts)->resolve(),
+            'products' => ProductListResource::collection($this->latestProducts),
         ];
     }
 }
