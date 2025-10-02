@@ -12,8 +12,7 @@ class HomePageService
             [
                 'Category',
                 'Product' => function ($query) {
-                    $query->whereIsActive(1)      // optional: only active products
-                        ->latest()              // order by created_at desc
+                    $query->latest()              // order by created_at desc
                         ->take(10);             // limit to 10 products
                 },
                 'Product.ProductMainImage',
