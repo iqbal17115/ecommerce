@@ -22,14 +22,20 @@ class CartDrawerController extends Controller
         $userId = Auth::id();
         $sessionId = SessionHelper::getSessionId();
 
-        $cartItemsQuery = CartItem::with('product', 'product.Brand')
+        $cartItemsQuery = CartItem::with([
+            'product' => function ($q) {
+                $q->with(['Brand', 'FirstProductImage']);
+            }
+        ])
             ->where(function ($q) use ($userId, $sessionId) {
                 $q->where('session_id', $sessionId);
 
                 if ($userId) {
                     $q->orWhere('user_id', $userId);
                 }
-            });
+            })
+            ->orderByDesc('created_at');
+
 
         $cart = CartItem::getAllLists($cartItemsQuery, $request->all(), CartDrawerCartResource::class);
 

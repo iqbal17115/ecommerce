@@ -140,6 +140,13 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function FirstProductImage()
+    {
+        return $this->hasOne(ProductImage::class)
+            ->orderBy('created_at', 'asc'); // or order by id if you prefer
+    }
+
     public function ProductCompliance()
     {
         return $this->hasOne(ProductCompliance::class);
@@ -158,7 +165,7 @@ class Product extends Model
     }
     public function Brand()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
     public function Category()
     {

@@ -19,7 +19,9 @@ class CartDrawerCartProductResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "image_url" => $this->getFirstProductImage() ? asset('storage/product_photo/' . $this->getFirstProductImage()) : '',
+            "image_url" =>  $this->FirstProductImage
+                ? asset('storage/product_photo/' . $this->FirstProductImage->image)
+                : '',
             "brand_name" => $this?->Brand?->name,
             "product_price" => (float)$productPrice,
         ];
