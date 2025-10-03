@@ -96,6 +96,11 @@
     text-align: center;
     margin-top: 15px;
 }
+
+/* .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    border-color: #3050ff;
+    background: transparent;
+} */
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
