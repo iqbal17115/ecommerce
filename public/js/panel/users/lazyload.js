@@ -23,5 +23,4 @@ function initLazyLoad() {
     }
 }
 
-// Automatically initialize after DOM is ready
 document.addEventListener("DOMContentLoaded", initLazyLoad);

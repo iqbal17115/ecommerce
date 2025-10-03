@@ -44,11 +44,15 @@
              <figure>
                  <a
                      href="{{ route('products.details', ['name' => rawurlencode($product['name']), 'seller_sku' => $product['seller_sku']]) }}">
-                     <img class="lazy-load"
-                         data-src="{{ $product['image_path'] }}"
-                         style="width: 239px; height: 239px; filter: brightness(0.9)
-                                contrast(1.2) saturate(1.1);"
-                         width="239" height="239" alt="product">
+                     <x-lazy-img 
+                        :src="$product['image_path']"
+                        :alt="$product['name']"
+                        width="239"
+                        height="239"
+                        class="rounded-md shadow-sm"
+                        style="filter: brightness(0.9) contrast(1.2) saturate(1.1);"
+                    />
+
                  </a>
                  <!-- Check if your_price is not null -->
                  @if ($product['is_on_sale'])
