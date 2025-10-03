@@ -2,6 +2,7 @@
     data-owl-options="{
 				'loop': true,
                 'autoplay':true,
+                 'dots': true,
                 'autoplayTimeout':5000
 			}">
     @foreach ($sliders as $slider)
