@@ -80,6 +80,27 @@
 .owl-dot.active span {
     background: #333 !important;
 }
+.owl-dots {
+    display: none !important;
+}
+.owl-dots {
+    display: block !important;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.owl-dot span {
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    background: #ccc;
+    display: inline-block;
+}
+
+.owl-dot.active span {
+    background: #333;
+}
 
 </style>
 <main class="main">
