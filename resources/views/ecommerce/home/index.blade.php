@@ -73,21 +73,23 @@
     width: 100% !important;
     position: relative !important;
     overflow: hidden !important;
+    background: #000 !important; /* optional: background fill behind image */
 }
 
-/* Images - always fill slider */
+/* Images - show full image always */
 .slider_image {
     width: 100% !important;
     height: 100% !important;
     display: block !important;
-    object-fit: cover !important;   /* fills full area */
+    object-fit: contain !important;   /* full image, no crop */
     object-position: center !important;
+    background-color: #000 !important; /* optional: fills gap nicely */
 }
 
 /* Mobile */
 @media (max-width: 767px) {
     .home-slide {
-        height: 250px !important; /* adjust for mobile */
+        height: 250px !important; /* adjust to your design */
     }
 }
 
