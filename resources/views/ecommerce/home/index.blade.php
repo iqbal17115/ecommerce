@@ -75,20 +75,19 @@
     overflow: hidden !important;
 }
 
-/* Images - show full image everywhere */
+/* Images - always fill slider */
 .slider_image {
     width: 100% !important;
     height: 100% !important;
     display: block !important;
-    object-fit: contain !important; /* full image visible */
+    object-fit: cover !important;   /* fills full area */
     object-position: center !important;
-    background-color: #000 !important; /* optional: adds black background for empty space */
 }
 
 /* Mobile */
 @media (max-width: 767px) {
     .home-slide {
-        height: 250px !important; /* adjust for your design */
+        height: 250px !important; /* adjust for mobile */
     }
 }
 
