@@ -108,7 +108,7 @@
 /* Desktop: full width, fixed height */
 @media (min-width: 992px) {
     .home-slide {
-        height: 100% !important;
+        height: 450px !important;
     }
     .slider_image {
         height: 100% !important;
@@ -116,6 +116,7 @@
         object-position: center !important;
     }
 }
+
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
