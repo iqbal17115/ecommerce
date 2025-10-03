@@ -111,7 +111,7 @@ class HomeController extends Controller
                 HomePageProductFeatureResource::class
             );
         }, 21600);
-
+dd($product_features);
         $top_features = $this->cacheService->rememberKey('home_top_features', function () {
             return ProductFeature::with([
                 'TopFeatureSetting',
