@@ -68,7 +68,19 @@
         border: 2px rgba(255, 255, 255, 0.7) dashed;
     }
 
-    /* two line name show css code */
+   .owl-dots {
+    text-align: center;
+    margin-top: 15px;
+}
+.owl-dot span {
+    background: #ccc !important;
+    width: 10px !important;
+    height: 10px !important;
+}
+.owl-dot.active span {
+    background: #333 !important;
+}
+
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
