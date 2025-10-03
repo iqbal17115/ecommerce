@@ -68,7 +68,7 @@
             border: 2px rgba(255, 255, 255, 0.7) dashed;
         }
 
-       /* Slider container */
+    /* Slider container */
 .slide-animate .home-slide {
     width: 100% !important;
     position: relative !important;
@@ -81,10 +81,10 @@
     display: block !important;
 }
 
-/* Mobile: full image, full height */
+/* Mobile: full viewport height */
 @media (max-width: 767px) {
     .home-slide {
-        height: 250px !important; /* minimum slider height */
+        height: 100vh !important; /* full viewport height */
     }
 
     .slider_image {
@@ -95,7 +95,7 @@
     }
 }
 
-/* Tablet */
+/* Tablet: medium height */
 @media (min-width: 768px) and (max-width: 991px) {
     .home-slide {
         height: 350px !important;
@@ -103,12 +103,12 @@
 
     .slider_image {
         height: 100% !important;
-        object-fit: cover !important;
+        object-fit: cover !important; /* crop slightly if needed */
         object-position: center !important;
     }
 }
 
-/* Desktop */
+/* Desktop: full width, fixed height */
 @media (min-width: 992px) {
     .home-slide {
         height: 450px !important;
@@ -116,10 +116,11 @@
 
     .slider_image {
         height: 100% !important;
-        object-fit: cover !important;
+        object-fit: cover !important; /* fills container */
         object-position: center !important;
     }
 }
+
     </style>
     <main class="main">
         <div class="bg-gray pb-5">
