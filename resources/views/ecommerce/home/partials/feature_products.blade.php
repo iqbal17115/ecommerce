@@ -49,11 +49,9 @@
                         :alt="$product['name']"
                         width="239"
                         height="239"
-                        class="rounded-md shadow-sm"
+                        class="rounded-md shadow-sm lazy-load"
                         style="filter: brightness(0.9) contrast(1.2) saturate(1.1);"
                     />
-
-
                  </a>
                  <!-- Check if your_price is not null -->
                  @if ($product['is_on_sale'])
