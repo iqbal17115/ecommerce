@@ -5,7 +5,7 @@
                 'autoplayTimeout':5000
 			}">
     @foreach ($sliders as $slider)
-    <div class="home-slide home-slide1 banner">
+    <div class="home-slide banner">
         <img class="slider_image slide-bg lazy-load" data-src="{{ asset('storage/' . $slider->image) }}"
             alt="slider image">
         <div
