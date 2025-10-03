@@ -98,10 +98,6 @@
     display: inline-block;
 }
 
-.owl-dot.active span {
-    background: #333;
-}
-
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
