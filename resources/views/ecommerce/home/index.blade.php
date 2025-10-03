@@ -68,7 +68,44 @@
         border: 2px rgba(255, 255, 255, 0.7) dashed;
     }
 
-    /* two line name show css code */
+    /* Slider container */
+.slide-animate .home-slide {
+    width: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Images - show full image everywhere */
+.slider_image {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: contain !important; /* full image visible */
+    object-position: center !important;
+    background-color: #000 !important; /* optional: adds black background for empty space */
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .home-slide {
+        height: 250px !important; /* adjust for your design */
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+    .home-slide {
+        height: 350px !important;
+    }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+    .home-slide {
+        height: 450px !important;
+    }
+}
+
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
