@@ -517,11 +517,17 @@
                 @endphp
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
-                        <a class="lazy-load"
+                        <a
                             href="{{ route('products.details', ['name' => rawurlencode($product_category_product->name), 'seller_sku' => $product_category_product->seller_sku]) }}">
-                            <img @if ($product_category_product->ProductMainImage) data-src="{{ asset('storage/product_photo/' . $product_category_product->ProductMainImage->image) }}" @endif
-                            width="239" height="239" style="width: 239px; height: 239px;"
-                            alt="product">
+                            <x-lazy-img
+    :src="asset('storage/product_photo/' . $product_category_product->ProductMainImage->image)"
+    :alt="$product_category_product->name ?? 'product'"
+    width="239"
+    height="239"
+    class="rounded-md shadow-sm"
+    style="filter: brightness(0.9) contrast(1.2) saturate(1.1);"
+/>
+
                         </a>
                         @if ($product_detail->stock_qty > 0)
                         <div class="btn-icon-group">
