@@ -68,7 +68,55 @@
         border: 2px rgba(255, 255, 255, 0.7) dashed;
     }
 
-    /* two line name show css code */
+    /* Slider container */
+.slide-animate .home-slide {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Images */
+.slider_image {
+    width: 100%;
+    display: block;
+}
+
+/* Mobile: show full image */
+@media (max-width: 767px) {
+    .home-slide {
+        height: auto; /* height adjusts automatically */
+    }
+    .slider_image {
+        height: auto;
+        object-fit: contain; /* show full image */
+        object-position: center;
+    }
+}
+
+/* Tablet: medium height */
+@media (min-width: 768px) and (max-width: 991px) {
+    .home-slide {
+        height: 300px;
+    }
+    .slider_image {
+        height: 100%;
+        object-fit: cover; /* crop slightly if needed */
+        object-position: center;
+    }
+}
+
+/* Desktop: full width, fixed height */
+@media (min-width: 992px) {
+    .home-slide {
+        height: 450px;
+    }
+    .slider_image {
+        height: 100%;
+        object-fit: cover; /* fills container */
+        object-position: center;
+    }
+}
+
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
