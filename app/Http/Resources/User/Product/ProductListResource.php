@@ -27,9 +27,7 @@ class ProductListResource extends JsonResource
             'offer_percentage' => $priceDetails['offer_percentage'],
             'currency' => $priceDetails['currency'],
             'rating' => $this->reviewSum->sum_rating ?? 0,
-            'image_path' => $this->FirstProductImage
-                ? asset('storage/product_photo/' . $this->FirstProductImage->image)
-                : '',
+            'image_path' => $this->getImagePath(),
             'has_variation' => count($this->productVariations) ? true : false
         ];
     }
