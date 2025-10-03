@@ -109,10 +109,9 @@
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
-        @include('ecommerce.home.partials.sliders')
-            <!-- End .home-slider -->
         <div class="container pb-2">
-            
+            @include('ecommerce.home.partials.sliders')
+            <!-- End .home-slider -->
 
             <div class="categories-section appear-animate" data-animation-name="fadeIn" data-animation-delay="100">
 
