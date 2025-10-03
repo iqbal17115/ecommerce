@@ -68,6 +68,29 @@
         border: 2px rgba(255, 255, 255, 0.7) dashed;
     }
 
+    .slider-image-header .owl-dots {
+    position: absolute;
+    bottom: 15px;     /* distance from bottom of slider */
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;      /* make sure dots appear above the image */
+}
+
+.slider-image-header .owl-dot span {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6); /* semi-transparent white */
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+.slider-image-header .owl-dot.active span {
+    background: #fff; /* solid white when active */
+}
+
 .owl-dots {
     display: block !important;
     text-align: center;
