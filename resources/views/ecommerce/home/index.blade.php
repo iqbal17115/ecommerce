@@ -116,7 +116,7 @@ window.addEventListener('load', function () {
 
 
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
-
+<script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
 
 <script>
     // Set the hasCartList variable
@@ -139,7 +139,7 @@ window.addEventListener('load', function () {
     });
 
 </script>
-<script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
+
 
 @include('ecommerce.wishlist-js')
 @endpush
