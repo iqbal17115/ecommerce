@@ -67,8 +67,27 @@
         -webkit-transform: scale(0.7);
         border: 2px rgba(255, 255, 255, 0.7) dashed;
     }
-
     /* two line name show css code */
+    /* Position dots below slider */
+.owl-dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.owl-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background: #ccc;
+    transition: background 0.3s ease;
+}
+
+.owl-dot.active {
+    background: #333; /* active dot color */
+}
+
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
