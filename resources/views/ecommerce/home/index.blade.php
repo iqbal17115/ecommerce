@@ -101,7 +101,7 @@
 <script src="{{ asset('js/panel/users/common.js') }}" defer></script> 
 <script src="{{ asset('js/panel/users/cart/add_to_cart.js') }}" defer></script> 
 <script src="{{ asset('js/panel/users/cart/cart_manager.js') }}" defer></script> 
-<!-- <script>
+<script>
 window.addEventListener('load', function () {
     let script = document.createElement('script');
     script.src = "{{ asset('js/panel/users/cart/cart_drawer.js') }}";
@@ -112,11 +112,11 @@ window.addEventListener('load', function () {
     };
     document.body.appendChild(script);
 });
-</script> -->
+</script>
 
 
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
-<script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
+
 
 <script>
     // Set the hasCartList variable
@@ -139,7 +139,7 @@ window.addEventListener('load', function () {
     });
 
 </script>
-
+<script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
 
 @include('ecommerce.wishlist-js')
 @endpush
