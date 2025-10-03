@@ -9,7 +9,7 @@
     <div class="home-slide home-slide1 banner">
         <img class="slider_image slide-bg lazy-load" 
              data-src="{{ asset('storage/' . $slider->image) }}" 
-             alt="slider image" style="min-height: 300px;">
+             alt="slider image">
         <div class="container d-flex align-items-sm-center justify-content-sm-between justify-content-center flex-column flex-sm-row">
             <div class="banner-content content-left text-sm-right mb-sm-0 mb-2"></div>
         </div>
