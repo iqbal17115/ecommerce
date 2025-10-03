@@ -103,20 +103,29 @@
 <script src="{{ asset('js/panel/users/cart/cart_manager.js') }}" defer></script> 
 <script>
 window.addEventListener('load', function () {
-    let script = document.createElement('script');
-    script.src = "{{ asset('js/panel/users/cart/cart_drawer.js') }}";
-    script.onload = function () {
-        if (typeof CartManager !== 'undefined') {
-            CartManager.loadCartData();
+    // scripts to load after page fully rendered
+    const scripts = [
+        "{{ asset('js/panel/users/cart/cart_drawer.js') }}",
+        "{{ asset('js/panel/users/lazyload.js') }}"
+    ];
+
+    (function loadSequentially(i) {
+        if (i >= scripts.length) {
+            // after all scripts, initialize cart if available
+            if (typeof CartManager !== 'undefined') {
+                CartManager.loadCartData();
+            }
+            return;
         }
-    };
-    document.body.appendChild(script);
+        let script = document.createElement('script');
+        script.src = scripts[i];
+        script.onload = () => loadSequentially(i + 1);
+        document.body.appendChild(script);
+    })(0);
 });
 </script>
 
-
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
-<script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
 
 <script>
     // Set the hasCartList variable
