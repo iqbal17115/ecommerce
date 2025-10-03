@@ -68,55 +68,7 @@
         border: 2px rgba(255, 255, 255, 0.7) dashed;
     }
 
-    /* Slider container */
-.slide-animate .home-slide {
-    width: 100% !important;
-    position: relative !important;
-    overflow: hidden !important;
-}
-
-/* Images */
-.slider_image {
-    width: 100% !important;
-    display: block !important;
-}
-
-/* Mobile: show full image */
-@media (max-width: 767px) {
-    .home-slide {
-        height: auto !important; /* height adjusts automatically */
-    }
-    .slider_image {
-        height: auto !important;
-        object-fit: contain !important; /* show full image */
-        object-position: center !important;
-    }
-}
-
-/* Tablet: medium height */
-@media (min-width: 768px) and (max-width: 991px) {
-    .home-slide {
-        height: 100% !important;
-    }
-    .slider_image {
-        height: 100% !important;
-        object-fit: cover !important; /* crop slightly if needed */
-        object-position: center !important;
-    }
-}
-
-/* Desktop: full width, fixed height */
-@media (min-width: 992px) {
-    .home-slide {
-        height: 100% !important;
-    }
-    .slider_image {
-        height: 100% !important;
-        object-fit: cover !important; /* fills container */
-        object-position: center !important;
-    }
-}
-
+    /* two line name show css code */
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
