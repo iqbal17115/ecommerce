@@ -89,7 +89,7 @@
 /* Mobile */
 @media (max-width: 767px) {
     .home-slide {
-        height: 250px !important; /* adjust to your design */
+        height: 100% !important; /* adjust to your design */
     }
 }
 
@@ -103,7 +103,7 @@
 /* Desktop */
 @media (min-width: 992px) {
     .home-slide {
-        height: 450px !important;
+        height: 100% !important;
     }
 }
 
