@@ -68,33 +68,7 @@
         border: 2px rgba(255, 255, 255, 0.7) dashed;
     }
 
-    .slider_image {
-    width: 100%;
-    display: block;
-}
-
-/* Mobile: show full image */
-@media (max-width: 767px) {
-    .slider_image {
-        height: auto;        /* let height adjust automatically */
-        object-fit: contain; /* show full image without cropping */
-    }
-}
-
-/* Desktop: fill container, crop if needed */
-@media (min-width: 768px) {
-    .home-slide {
-        height: 400px;       /* fixed height for desktop */
-        overflow: hidden;
-    }
-
-    .slider_image {
-        height: 100%;
-        object-fit: cover;   /* fill container */
-        object-position: center;
-    }
-}
-
+    /* two line name show css code */
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
