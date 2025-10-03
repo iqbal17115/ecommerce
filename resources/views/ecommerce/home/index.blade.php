@@ -96,7 +96,7 @@
 /* Tablet: medium height */
 @media (min-width: 768px) and (max-width: 991px) {
     .home-slide {
-        height: 300px !important;
+        height: 100% !important;
     }
     .slider_image {
         height: 100% !important;
@@ -108,7 +108,7 @@
 /* Desktop: full width, fixed height */
 @media (min-width: 992px) {
     .home-slide {
-        height: 450px !important;
+        height: 100% !important;
     }
     .slider_image {
         height: 100% !important;
@@ -116,7 +116,6 @@
         object-position: center !important;
     }
 }
-
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
