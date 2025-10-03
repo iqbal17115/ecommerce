@@ -97,10 +97,11 @@
     margin-top: 15px;
 }
 
-/* .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
-    border-color: #3050ff;
-    background: transparent;
-} */
+.owl-carousel .owl-dots .owl-dot span {
+    width: 11px !important;
+    height: 11px !important;
+    border-width: 3px !important;
+}
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
