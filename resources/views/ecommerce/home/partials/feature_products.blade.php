@@ -53,6 +53,7 @@
                         style="filter: brightness(0.9) contrast(1.2) saturate(1.1);"
                     />
 
+
                  </a>
                  <!-- Check if your_price is not null -->
                  @if ($product['is_on_sale'])
