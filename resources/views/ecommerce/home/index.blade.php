@@ -96,7 +96,7 @@
 /* Tablet */
 @media (min-width: 768px) and (max-width: 991px) {
     .home-slide {
-        height: 350px !important;
+        height: 100% !important;
     }
 }
 
