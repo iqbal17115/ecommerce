@@ -304,7 +304,7 @@
                         @endforeach
 
                         <div class="mt-1">
-                            <button type="button" id="clear-variations" class="btn btn-sm btn-outline-secondary">Clear</button>
+                            <button type="button" id="clear-variations" class="btn btn-sm btn-outline-secondary fs-1 fs-sm-2 fs-md-3 fs-lg-4 fs-xl-5">Clear</button>
                         </div>
 
                         <input type="hidden" name="selected_variation_id" id="selected_variation_id" required>
