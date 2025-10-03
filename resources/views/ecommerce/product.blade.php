@@ -520,13 +520,13 @@
                         <a
                             href="{{ route('products.details', ['name' => rawurlencode($product_category_product->name), 'seller_sku' => $product_category_product->seller_sku]) }}">
                             <x-lazy-img
-    :src="asset('storage/product_photo/' . $product_category_product->ProductMainImage->image)"
-    :alt="$product_category_product->name ?? 'product'"
-    width="239"
-    height="239"
-    class="rounded-md shadow-sm"
-    style="filter: brightness(0.9) contrast(1.2) saturate(1.1);"
-/>
+                                :src="asset('storage/product_photo/' . $product_category_product->ProductMainImage->image)"
+                                :alt="$product_category_product->name ?? 'product'"
+                                width="239"
+                                height="239"
+                                class="rounded-md shadow-sm"
+                                style="filter: brightness(0.9) contrast(1.2) saturate(1.1);"
+                            />
 
                         </a>
                         @if ($product_detail->stock_qty > 0)

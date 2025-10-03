@@ -68,7 +68,18 @@
         border: 2px rgba(255, 255, 255, 0.7) dashed;
     }
 
-    /* two line name show css code */
+    .home-slide .container {
+        display: flex;
+        flex-direction: column; /* stack content on mobile */
+        align-items: center;
+    }
+    @media (min-width: 768px) {
+        .home-slide .container {
+            flex-direction: row; /* side by side on larger screens */
+            justify-content: space-between;
+        }
+    }
+
 </style>
 <main class="main">
     <div class="bg-gray pb-5">
