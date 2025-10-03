@@ -15,14 +15,14 @@
 }
 
 .variation-selector .variation-btn.active {
-    background-color: #f4631b;
-    color: #fff;
-    border-color: #f4631b;
+    background-color: #f4631b !important;
+    color: #fff !important;
+    border-color: #f4631b !important;
 }
 
 .variation-selector .variation-btn:hover {
-    border-color: #f4631b;
-    color: #f4631b;
+    border-color: #f4631b !important;
+    color: #f4631b !important;
 }
 
 .variation-btn.disabled {
