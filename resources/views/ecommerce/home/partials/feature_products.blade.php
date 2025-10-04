@@ -44,7 +44,7 @@
              <figure>
                  <a
                      href="{{ route('products.details', ['name' => rawurlencode($product['name']), 'seller_sku' => $product['seller_sku']]) }}">
-                     <x-lazy-img 
+                      <x-lazy-img 
                         :src="$product['image_path']"
                         :alt="$product['name']"
                         width="239"

@@ -8,7 +8,7 @@
 ])
 
 <img 
-    class="{{ trim('lazy-load ' . ($class ?? '')) }}"
+    class="lazy-load {{ $class }}"
     data-src="{{ $src }}"
     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" 
     alt="{{ $alt }}"

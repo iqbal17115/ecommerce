@@ -137,7 +137,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('css/common.css') }}"> --}}
     <!-- Common JS -->
     <script src="{{ asset('js/common.js') }}"></script>
-
+<script src="{{ asset('js/cache-actions.js') }}"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({

@@ -87,6 +87,7 @@ use App\Http\Controllers\Ecommerce\PlaceOrderController;
 use App\Http\Controllers\Ecommerce\UserAddressController;
 use App\Http\Controllers\Ecommerce\UserRewardPointController;
 use App\Http\Controllers\Panel\CourierController;
+use App\Http\Controllers\SystemCacheController;
 use App\Models\ShippingCharge;
 use Illuminate\Support\Facades\Route;
 
@@ -800,5 +801,10 @@ Route::group(['middleware' => 'web'], function () {
     // Coupon Settings
     Route::controller(ApplyCouponController::class)->group(function () {
         Route::post('coupon-apply', 'apply')->name("coupon_apply");
+    });
+
+    // System Cache Controller
+    Route::controller(SystemCacheController::class)->group(function () {
+        Route::post('system-cache/clear', 'clear')->name('system-cache.clear');
     });
 });

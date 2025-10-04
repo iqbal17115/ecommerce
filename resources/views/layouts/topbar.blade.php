@@ -193,90 +193,10 @@
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item waves-effect" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                    <img class="" src="{{ URL::asset('assets/images/flags/us.jpg') }}" alt="Header Language"
-                        height="16">
+            <div class="d-none d-lg-flex justify-content-center my-3">
+                <button id="clear-cache-btn" class="btn btn-sm btn-danger">
+                    Clear Cache
                 </button>
-                <div class="dropdown-menu dropdown-menu-right">
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/spain.jpg') }}" alt="user-image" class="mr-1"
-                            height="12"> <span class="align-middle">Spanish</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/germany.jpg') }}" alt="user-image" class="mr-1"
-                            height="12"> <span class="align-middle">German</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/italy.jpg') }}" alt="user-image" class="mr-1"
-                            height="12"> <span class="align-middle">Italian</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('assets/images/flags/russia.jpg') }}" alt="user-image" class="mr-1"
-                            height="12"> <span class="align-middle">Russian</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="dropdown d-none d-lg-inline-block ml-1">
-                <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="bx bx-customize"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <div class="px-lg-2">
-                        <div class="row no-gutters">
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('assets/images/brands/github.png') }}" alt="Github">
-                                    <span>GitHub</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('assets/images/brands/bitbucket.png') }}" alt="bitbucket">
-                                    <span>Bitbucket</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('assets/images/brands/dribbble.png') }}" alt="dribbble">
-                                    <span>Dribbble</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="row no-gutters">
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('assets/images/brands/dropbox.png') }}" alt="dropbox">
-                                    <span>Dropbox</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('assets/images/brands/mail_chimp.png') }}" alt="mail_chimp">
-                                    <span>Mail Chimp</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('assets/images/brands/slack.png') }}" alt="slack">
-                                    <span>Slack</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="dropdown d-none d-lg-inline-block ml-1">
