@@ -7,7 +7,7 @@
 .variation-selector .variation-btn {
     border: 1px solid #dee2e6;
     padding: 0.4rem 1rem;
-    font-size: 0.875rem;
+    font-size: 1.5rem;
     background-color: #fff;
     color: #212529;
     transition: all 0.2s ease;
@@ -15,13 +15,13 @@
 }
 
 .variation-selector .variation-btn.active {
-    background-color: #0d6efd;
+    background-color: #f4631b;
     color: #fff;
-    border-color: #0d6efd;
+    border-color: #f4631b;
 }
 
 .variation-selector .variation-btn:hover {
-    border-color: #0d6efd;
+    border-color: #f4631b !important;
     color: #fff;
 }
 
