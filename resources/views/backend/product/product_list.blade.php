@@ -6,6 +6,10 @@
             <div class="row">
                 <div class="col-md-12 p-2 rounded" style="background-color: #e4ebea;">
                     <span class="h4">Product List</span>
+                    <button onclick="exportFacebookCatalog()" class="btn btn-primary">
+                        Export Facebook Catalog
+                    </button>
+
                     <a href="{{ route('product-product') }}"
                         class="btn btn-success text-light btn-sm py-2 float-right clean_form" style="width: 100px;"><i
                             class="fas fa-plus-circle"></i> New</a>
@@ -126,6 +130,7 @@
     @include('backend.product.modal.brand')
 @endsection
 @section('script')
+    <script src="{{ asset('js/panel/catalog.js') }}"></script>
     @include('backend.product.js.product_list-js')
     <script src="{{ asset('js/admin_panel/product/product_list.js') }}"></script>
 @endsection

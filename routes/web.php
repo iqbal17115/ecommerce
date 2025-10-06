@@ -70,6 +70,7 @@ use App\Http\Controllers\Web\Panel\ShopSetting\ShopSettingUpazilaController;
 use App\Http\Controllers\API\Panel\User\Cart\CartController as APIUserCartController;
 use App\Http\Controllers\API\Panel\User\Coupon\ApplyCouponController;
 use App\Http\Controllers\API\Panel\User\UserInfoController;
+use App\Http\Controllers\Backend\CatalogController;
 use App\Http\Controllers\Backend\GiftCardController;
 use App\Http\Controllers\Backend\Order\OrderEditController;
 use App\Http\Controllers\Backend\RewardPointRuleController;
@@ -669,6 +670,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::prefix('orders')->group(function () {
             Route::put('edit-address/{order}', [OrderEditController::class, 'updateAddress'])->name('orders.edit.updateAddress');
             Route::put('edit-items/{order}', [OrderEditController::class, 'updateItems'])->name('orders.edit.updateItems');
+        });
+
+        // Catalog
+        Route::controller(CatalogController::class)->group(function () {
+            Route::post('export/facebook-catalog', 'export')->name('facebook.catalog.export');
         });
     });
 
