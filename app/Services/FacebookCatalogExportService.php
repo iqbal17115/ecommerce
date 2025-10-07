@@ -43,35 +43,41 @@ class FacebookCatalogExportService
 
 
     protected function resolveField($product, $field)
-{
-    $parts = explode('.', $field);
-    $value = $product;
+    {
+        $parts = explode('.', $field);
+        $value = $product;
 
-    foreach ($parts as $part) {
-        if (is_null($value)) return '';
+        foreach ($parts as $part) {
+            if (is_null($value)) return '';
 
-        if ($part === '*') {
-            // Check if value is collection
-            if ($value instanceof \Illuminate\Support\Collection) {
-                return implode(',', $value->pluck('url')->toArray());
+            if ($part === '*') {
+                // If it's a collection, join urls
+                if ($value instanceof \Illuminate\Support\Collection) {
+                    return implode(',', $value->map(function ($img) {
+                        return asset('storage/product_photo/' . $img->image);
+                    })->toArray());
+                }
+                return '';
             }
-            return ''; // not a collection
+
+            $value = $value->{$part} ?? '';
         }
 
-        $value = $value->{$part} ?? '';
+        // handle image specially
+        if ($field === 'ProductMainImage.image') {
+            return $product->getImagePath(); // <-- use helper
+        }
+
+        // format price
+        if (str_contains($field, 'price') && $value) {
+            $value = $value . ' BDT';
+        }
+
+        // format availability
+        if ($field === 'is_active') {
+            $value = $value ? 'in stock' : 'out of stock';
+        }
+
+        return $value;
     }
-
-    // format price
-    if (str_contains($field, 'price') && $value) {
-        $value = $value . ' BDT';
-    }
-
-    // format availability
-    if ($field === 'is_active') {
-        $value = $value ? 'in stock' : 'out of stock';
-    }
-
-    return $value;
-}
-
 }
