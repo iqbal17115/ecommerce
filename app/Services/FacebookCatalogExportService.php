@@ -64,8 +64,16 @@ class FacebookCatalogExportService
         }
 
         // handle image specially
-        if ($field === 'ProductMainImage.image') {
-            return $product->getImagePath(); // <-- use helper
+        if ($field == 'images.0.url') {
+            return asset('storage/product_photo/' . $product->ProductMainImage?->image);
+        }
+
+        // handle product link specially
+        if ($field == 'product_link') {
+            return route('products.details', [
+                'name' => rawurlencode($product->name),
+                'seller_sku' => $product->seller_sku,
+            ]);
         }
 
         // format price

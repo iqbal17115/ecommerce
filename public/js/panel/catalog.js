@@ -7,7 +7,8 @@ function exportFacebookCatalog(successCallback, errorCallback) {
         "/export/facebook-catalog",             // route
         {},                                     // no formData
         "",                                     // no id
-        (data) => {                             // success
+        (data) => {              
+            console.log(data);               // success
             if (data.success && data.url) {
                 // Trigger download
                 let link = document.createElement('a');
