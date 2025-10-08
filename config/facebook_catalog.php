@@ -1,7 +1,7 @@
 <?php
 return [
     'columns' => [
-        'code' => 'code',
+        'id' => 'id',
         'title' => 'name',
         'description' => 'description',
         'availability' => 'is_active',
