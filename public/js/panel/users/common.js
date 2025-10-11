@@ -18,6 +18,9 @@ function setUserData(data) {
 `;
 
     $("#user_profile_info").html(profileContent);
+    
+    // Re-init lazy loading for newly added images
+    initLazyLoad();
 }
 
 $(document).ready(function () {
