@@ -23,19 +23,15 @@
                         <div class="side-bar">
                             <div class="user-info">
                                     <div class="avatar-upload">
-                                        <div class="avatar-edit">
-                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                            <label for="imageUpload"></label>
-                                        </div>
-                                        <div class="avatar-preview">
-                                            <div class="user_profile_img">
-                                            </div>
-                                        </div>
-                                    </div>
-                                {{-- <center>
-                                    <img class="img-profile img-circle img-responsive center-block"
-                                        style="border-radius: 50%;" id="user_profile_img">
-                                </center> --}}
+    <div class="avatar-preview">
+        <div class="user_profile_img" style="background-image: url('your-image.jpg');"></div>
+        <div class="avatar-edit">
+            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"></label>
+        </div>
+    </div>
+</div>
+
                                 <ul class="meta list list-unstyled">
                                     <li class="name">{{ $user->name }}
                                         {{-- <label class="label label-info">UX Designer</label> --}}

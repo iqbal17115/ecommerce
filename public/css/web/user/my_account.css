@@ -81,69 +81,97 @@
     background-color: #fff;
 }
 
-
 .avatar-upload {
     position: relative;
     max-width: 205px;
     margin: 50px auto;
 }
 
-.avatar-upload .avatar-edit {
-    position: absolute;
-    right: 12px;
-    z-index: 1;
-    top: 10px;
+/* Circular avatar container */
+.avatar-preview {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 6px solid #F8F8F8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-.avatar-upload .avatar-edit input {
+/* Background image */
+.avatar-preview .user_profile_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Edit icon container */
+.avatar-edit {
+    position: absolute;
+    bottom: 8px;  /* keep inside image */
+    right: 8px;
+    z-index: 10;
+}
+
+/* Hide default input */
+.avatar-edit input {
     display: none;
 }
 
-.avatar-upload .avatar-edit input+label {
-    display: inline-block;
-    width: 34px;
-    height: 34px;
-    margin-bottom: 0;
-    border-radius: 100%;
-    background: #FFFFFF;
-    border: 1px solid transparent;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+/* Label as icon button */
+.avatar-edit input + label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #555;
 }
 
-.avatar-upload .avatar-edit input+label:hover {
+.avatar-edit input + label:after {
+    content: "\f030"; /* camera icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.avatar-edit input + label:hover {
     background: #f1f1f1;
     border-color: #d6d6d6;
 }
 
-.avatar-upload .avatar-edit input+label:after {
-    content: "\f040";
-    color: #757575;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: auto;
-}
+/* ✅ Mobile responsive fix */
+@media (max-width: 576px) {
+    .avatar-preview {
+        width: 100px;
+        height: 100px;
+        border-width: 4px;
+    }
 
-.avatar-upload .avatar-preview {
-    width: 140px;
-    height: 140px;
-    position: relative;
-    border-radius: 100%;
-    border: 6px solid #F8F8F8;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-}
+    .avatar-edit {
+        bottom: 5px; /* tighter positioning */
+        right: 5px;
+    }
 
-.avatar-upload .avatar-preview>div {
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    .avatar-edit input + label {
+        width: 26px;
+        height: 26px;
+    }
+
+    .avatar-edit input + label:after {
+        font-size: 12px;
+    }
 }
 
 .form-control {
