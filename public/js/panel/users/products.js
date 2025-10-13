@@ -23,6 +23,9 @@ $(document).ready(function () {
     loadProducts(initialPage, initialFilters);
 
     function loadProducts(page = 1, filters = {}) {
+        // Always get current limit from dropdown
+        filters.limit = $('#data_limit').val();
+
         const params = new URLSearchParams({ ...filters, page });
 
         const url = `/products?${params.toString()}`;
@@ -113,4 +116,10 @@ $(document).ready(function () {
     }
 
     // Optional: handle filter/search etc.
+
+    // 🔹 Listen for change on data_limit dropdown
+    $('#data_limit').on('change', function() {
+        const filters = getQueryParams();
+        loadProducts(1, filters); // Reset to page 1 whenever limit changes
+    });
 });
