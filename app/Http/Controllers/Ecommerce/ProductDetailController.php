@@ -22,22 +22,10 @@ class ProductDetailController extends Controller
     {
         // Call the Service to get list data
         $lists = Product::getLists(Product::with([
-            'productColors',
-            'productColors.media',
             'productVariations',
-            'productVariations.productVariationAttributes.attributeValue.attribute',
             'ProductMainImage',
-            'ProductImage',
-            'Category' => function ($q) {
-                $q->with(['Product' => function ($q) {
-                    $q->with('ProductMainImage')
-                        ->withCount('reviews')              // preload review count
-                        ->withAvg('reviews', 'rating');    // preload review avg
-                }]);
-            },
             'Brand',
             'ProductDetail',
-            'ProductDetail.Condition',
         ])->withCount('reviews')             
             ->withAvg('reviews', 'rating')
         , $request->validated(), ProductListResource::class);
