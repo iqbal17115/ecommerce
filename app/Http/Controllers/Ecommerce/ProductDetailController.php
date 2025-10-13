@@ -21,7 +21,14 @@ class ProductDetailController extends Controller
     public function index(ProductListRequest $request): JsonResponse
     {
         // Call the Service to get list data
-        $lists = Product::getLists(Product::query(), $request->validated(), ProductListResource::class);
+        $lists = Product::getLists(Product::with([
+                'TopFeatureSetting',
+                'TopFeatureSetting.FeatureSettingDetail.Category',
+                'TopFeatureSetting.ProductFeature.Advertisement',
+                'Product.ProductMainImage',
+                'Product.ProductImage',
+                'Product.Category'
+            ]), $request->validated(), ProductListResource::class);
 
         // Return a success message with the data
         return Message::success(null, $lists);
