@@ -22,13 +22,25 @@ class ProductDetailController extends Controller
     {
         // Call the Service to get list data
         $lists = Product::getLists(Product::with([
-                'TopFeatureSetting',
-                'TopFeatureSetting.FeatureSettingDetail.Category',
-                'TopFeatureSetting.ProductFeature.Advertisement',
-                'Product.ProductMainImage',
-                'Product.ProductImage',
-                'Product.Category'
-            ]), $request->validated(), ProductListResource::class);
+            'productColors',
+            'productColors.media',
+            'productVariations',
+            'productVariations.productVariationAttributes.attributeValue.attribute',
+            'ProductMainImage',
+            'ProductImage',
+            'Category' => function ($q) {
+                $q->with(['Product' => function ($q) {
+                    $q->with('ProductMainImage')
+                        ->withCount('reviews')              // preload review count
+                        ->withAvg('reviews', 'rating');    // preload review avg
+                }]);
+            },
+            'Brand',
+            'ProductDetail',
+            'ProductDetail.Condition',
+        ])->withCount('reviews')             
+            ->withAvg('reviews', 'rating')
+        , $request->validated(), ProductListResource::class);
 
         // Return a success message with the data
         return Message::success(null, $lists);
@@ -44,13 +56,6 @@ class ProductDetailController extends Controller
             'productVariations.productVariationAttributes.attributeValue.attribute',
             'ProductMainImage',
             'ProductImage',
-            'Category' => function ($q) {
-                $q->with(['Product' => function ($q) {
-                    $q->with('ProductMainImage')
-                        ->withCount('reviews')              // preload review count
-                        ->withAvg('reviews', 'rating');    // preload review avg
-                }]);
-            },
             'Brand',
             'ProductDetail',
             'ProductDetail.Condition',
