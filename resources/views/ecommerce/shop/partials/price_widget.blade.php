@@ -5,35 +5,25 @@
     </h3>
 
     <div class="collapse show" id="widget-body-3">
-        <div class="widget-body pb-0">
-            <form id="productFilterByPrice" onsubmit="event.preventDefault(); sendPriceFilters();">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <input type="number" class="form-control form-control-sm rounded"
-                                id="min_price" name="min_price" placeholder="Min" min="0"
-                                style="-moz-appearance: textfield; height: 30px; font-size: 14px;"
-                                required>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <input type="number" class="form-control form-control-sm rounded"
-                                id="max_price" name="max_price" placeholder="Max" min="0"
-                                style="-moz-appearance: textfield; height: 30px; font-size: 14px;"
-                                required>
-                        </div>
-                    </div>
-                    <div class="col-md-4 align-items-end">
-                        <center>
-                            <button type="submit" class="btn btn-primary btn-sm"
-                                style="height: 30px; border-radius: 3px; background-color: #007bff; border-color: #007bff; color: #fff; padding: 0em 0em;">Filter</button>
-                        </center>
-                    </div>
+        <div class="widget-body">
+            <div class="price-filter text-center" 
+                style="padding:12px;border-radius:10px;background:#f9f9f9;border:1px solid #eee;">
+                
+                <div class="d-flex align-items-center justify-content-center mb-0">
+                    <input type="number" id="min_price" class="form-control form-control-sm w-50" placeholder="Min" min="0"
+                        style="border-radius:8px;font-size:14px;text-align:center;border:1px solid #ddd;">
+                    <span class="divider" 
+                        style="font-weight:500;color:#666;padding:0 6px;">-</span>
+                    <input type="number" id="max_price" class="form-control form-control-sm w-50" placeholder="Max" min="0"
+                        style="border-radius:8px;font-size:14px;text-align:center;border:1px solid #ddd;">
                 </div>
-            </form>
+
+                <button class="btn btn-sm w-100" id="apply_price_filter"
+                    style="border-radius:8px;margin-top:2px;font-size:14px;font-weight:500;
+                    background-color:#007bff;color:white;transition:all 0.2s ease-in-out;">
+                    <i class="fas fa-filter"></i> Apply
+                </button>
+            </div>
         </div>
-        <!-- End .widget-body -->
     </div>
-    <!-- End .collapse -->
 </div>

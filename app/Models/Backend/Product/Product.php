@@ -85,6 +85,8 @@ class Product extends Model
         'color_names' => 'filterByColorValues',
         'size_names' => 'filterBySizeValues',
         'feature_names' => 'filterByFeatureNames',
+        'min_price'     => 'filterByMinPrice',
+        'max_price'     => 'filterByMaxPrice',
     ];
 
     protected array $sortable = [
@@ -263,6 +265,42 @@ class Product extends Model
         return $query->whereHas('productVariations.productVariationAttributes.attributeValue', function ($query) use ($value) {
             $query->whereIn('value', explode(",", $value));
         });
+    }
+
+    public function filterByMinPrice($query, $value)
+    {
+        if (!empty($value)) {
+            $query->whereRaw(
+                'CASE 
+                WHEN sale_price IS NOT NULL 
+                     AND sale_start_date <= ? 
+                     AND sale_end_date >= ? 
+                THEN sale_price 
+                ELSE your_price 
+            END >= ?',
+                [now(), now(), $value]
+            );
+        }
+
+        return $query;
+    }
+
+    public function filterByMaxPrice($query, $value)
+    {
+        if (!empty($value)) {
+            $query->whereRaw(
+                'CASE 
+                WHEN sale_price IS NOT NULL 
+                     AND sale_start_date <= ? 
+                     AND sale_end_date >= ? 
+                THEN sale_price 
+                ELSE your_price 
+            END <= ?',
+                [now(), now(), $value]
+            );
+        }
+
+        return $query;
     }
 
     public function calculateProductPrice()
