@@ -90,9 +90,11 @@ $(document).ready(function () {
             return;
         }
 
+        let html = '';
+
         products.forEach(product => {
             const productUrl = `/product-details/${product.name}`;
-            const html = `
+            html += `
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
@@ -132,8 +134,12 @@ $(document).ready(function () {
                 </div>
             </div>`;
             container.append(html);
-            initLazyLoad();
+            // initLazyLoad();
         });
+
+        container.append(html);
+
+        initLazyLoad();
     }
 
     // 🔹 Apply price filter
