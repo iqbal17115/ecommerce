@@ -43,6 +43,7 @@
 
     @yield('individual__link')
     @yield('css')
+    @yield('styles')
 
     @include('layouts.head-scripts')
     @stack('links')
