@@ -1,0 +1,46 @@
+/* product-edit.css - custom tweaks to match screenshots */
+.card { border-radius: 12px; }
+.card-header { background: #fff; border-bottom: 1px solid #eef0f3; font-weight: 600; }
+.image-uploader { gap: 12px; }
+.img-thumb {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    margin-right: 8px;
+}
+.img-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-thumb .remove-img {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    border-radius: 50%;
+    padding: 0 6px;
+    line-height: 18px;
+}
+
+/* add placeholder card for upload */
+.img-upload-placeholder {
+    width: 96px;
+    height: 96px;
+    border: 1px dashed #d9e1ef;
+    display:flex; align-items:center; justify-content:center;
+    border-radius: 6px;
+}
+.uploader { display:block; width:100%; height:100%; cursor:pointer; text-align:center; }
+.uploader input { display:none; }
+.uploader .plus { font-size:28px; color:#9aa7b6; }
+
+/* variant cards */
+.variant-row { background: #fbfdff; border-radius: 8px; }
+.variant-row .form-control { min-height: 38px; }
+
+/* compact form spacing on right column */
+.col-md-4 .card { margin-bottom: 16px; }
+
+/* responsive tweaks */
+@media (max-width: 767px) {
+    .img-thumb, .img-upload-placeholder { width: 72px; height: 72px; }
+}

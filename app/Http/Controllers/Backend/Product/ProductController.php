@@ -314,34 +314,11 @@ class ProductController extends Controller
         $category = Category::find($id);
         return response()->json($category);
     }
+
     public function index(Request $request)
     {
-        $categories = Category::where('parent_category_id', '=', null)->orderBy('id', 'DESC')->get();
-        $brands = Brand::orderBy('id', 'DESC')->get();
-        $materials = Material::orderBy('id', 'DESC')->get();
-        $conditions = Condition::orderBy('id', 'DESC')->get();
-        $product_features = ProductFeature::orderBy('id', 'DESC')->whereIsActive(1)->get();
-        $productInfo = null;
-        $id = $request->id;
-
-        if ($id) {
-            $id = $id;
-            $productInfo = Product::with('productVariations', 'productVariations.product', 'productVariations.productVariationAttributes', 'productVariations.productVariationAttributes.attributeValue', 'productVariations.productVariationAttributes.attributeValue.attribute')->whereId($id)->first();
-        }
-
-        $unitConversionService = $this->unitConversionService;
-
-        $colors = AttributeValue::whereHas('attribute', function ($attribute) {
-            $attribute->where('name', 'Color');
-        })->orderBy('id', 'DESC')->get();
-
-        $sizes = AttributeValue::whereHas('attribute', function ($attribute) {
-            $attribute->where('name', 'Size');
-        })->orderBy('id', 'DESC')->get();
-
-        $product_statuses = ProductStatusEnums::getValues();
-
-        return view('backend.product.product', compact('colors', 'sizes', 'categories', 'brands', 'materials', 'conditions', 'productInfo', 'product_features', 'unitConversionService', 'product_statuses'));
+       
+        return view('backend.products.index');
     }
 
     public function saveProduct(ConfirmProductRequest $request)
