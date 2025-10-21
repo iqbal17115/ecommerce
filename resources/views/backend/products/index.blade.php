@@ -7,28 +7,29 @@
 @endsection
 
 @section('content')
-<div class="container py-4">
-        @csrf
-        @method(isset($product) ? 'PUT' : 'POST')
+<div class="add-product-container">
+        <h1>Add Product</h1>
+            {{-- HIDDEN FIELDS TO CARRY STEP 1 DATA TO STEP 2 AND FINAL SUBMISSION --}}
+            <input type="hidden" name="product_name" id="hiddenProductName">
+            <input type="hidden" name="category_id" id="hiddenCategoryId">
+            <input type="hidden" name="category_path" id="hiddenCategoryPath">
 
-        @include('backend.products.partials.header')
-
-        <div class="row mt-3">
-            <div class="col-md-8">
-                @include('backend.products.partials.basic-info')
-                @include('backend.products.partials.product-images')
-                @include('backend.products.partials.specs')
-                @include('backend.products.partials.description')
+            {{-- Basic Information and Category (Step 1) --}}
+            <div class="form-section basic-info-category-step">
+                @include('backend.products.partials.basic_info_category')
             </div>
 
-            <div class="col-md-4">
-                @include('backend.products.partials.price-variants')
-                @include('backend.products.partials.shipping-warranty')
+            {{-- Product Details, Price, Stock & Variants, Shipping (Step 2) --}}
+            <div class="form-section product-details-step" style="display: none;">
+                @include('backend.products.partials.product_details')
             </div>
-        </div>
 
-        @include('backend.products.partials.footer-actions')
-</div>
+            <div class="form-actions mt-4">
+                <button type="button" class="btn btn-secondary" id="cancelButton">Cancel</button>
+                <button type="button" class="btn btn-primary" id="nextStepButton">Next</button>
+                <button type="submit" class="btn btn-success" id="confirmButton" style="display: none;">Confirm</button>
+            </div>
+    </div>
 @endsection
 
 @section('script')
