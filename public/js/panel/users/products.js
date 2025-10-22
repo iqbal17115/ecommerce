@@ -82,19 +82,19 @@ $(document).ready(function () {
     }
 
     function renderProducts(products) {
-        const container = $('#product-container');
-        container.empty();
+    const container = $('#product-container');
+    container.empty();
 
-        if (!products.length) {
-            container.html('<p>No products found.</p>');
-            return;
-        }
+    if (!products.length) {
+        container.html('<p>No products found.</p>');
+        return;
+    }
 
-        let html = '';
+    let html = '';
 
-        products.forEach(product => {
-            const productUrl = `/product-details/${product.name}`;
-            html += `
+    products.forEach(product => {
+        const productUrl = `/product-details/${product.name}`;
+        html += `
             <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                 <div class="product-default inner-quickview inner-icon" style="overflow:hidden;">
                     <figure>
@@ -133,14 +133,11 @@ $(document).ready(function () {
                     ${product.stock_qty <= 0 ? `<a class="sold_out" style="color: #fff;">Sold out</a>` : ''}
                 </div>
             </div>`;
-            container.append(html);
-            // initLazyLoad();
-        });
+    });
 
-        container.append(html);
-
-        initLazyLoad();
-    }
+    container.append(html); // ✅ Append only once
+    initLazyLoad(); // ✅ Then initialize lazy load once
+}
 
     // 🔹 Apply price filter
     $('#apply_price_filter').on('click', function () {
