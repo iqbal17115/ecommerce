@@ -45,7 +45,7 @@ $(document).ready(function () {
         const currentFilters = {};
 
         // Limit
-        currentFilters.limit = $('#data_limit').val() || filters.limit || '';
+        const limit = $('#data_limit').val();
 
         // Price
         const minPrice = $('#min_price').val();
@@ -69,7 +69,7 @@ $(document).ready(function () {
         }
         if (search) params.append('search', search);
 
-        const url = `/products?${params.toString()}`;
+        const url = `/products?limit=${limit}&${params.toString()}`;
         console.log('Fetching:', url);
 
         getDetails(url, (response) => {
