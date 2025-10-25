@@ -33,5 +33,5 @@
 @endsection
 
 @section('script')
-   <script src="{{ asset('js/admin_panel/products/product-add.js') }}"></script>
+   <script src="{{ asset('js/admin_panel/products/product-add.js') }}?v={{ time() }}"></script>
 @endsection
