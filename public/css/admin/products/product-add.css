@@ -346,33 +346,193 @@ body {
 }
 
 
-/* --- Step 2 Variants & Shipping --- */
-.variant-table-responsive {
-    overflow-x: auto;
-}
-.variant-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+/* --- Variant 1 Input Row Styles --- */
+.variant-input-row {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #fff;
+    max-width: 400px; 
+    gap: 5px; 
 }
 
-.variant-table th, .variant-table td {
-    border: 1px solid #e9ecef;
-    padding: 8px;
-    text-align: left;
+.variant-input-row .variant-value-readonly {
+    flex-grow: 1;
+    border: none;
+    padding: 5px 8px;
+    height: 34px;
+    font-size: 13px;
+    background-color: #f8f9fa; 
+    cursor: default;
+    border-radius: 3px;
+    color: #495057;
+    font-weight: 500;
+}
+
+.variant-input-row .variant-value-select {
+    width: 150px; 
+    border: 1px solid #ced4da;
+    padding: 5px 8px;
+    height: 34px;
     font-size: 13px;
 }
 
-.variant-table th {
-    background-color: #f8f9fa;
+.variant-input-row .variant-value-select:focus {
+    box-shadow: none;
+}
+
+.variant-input-row .remove-variant-value,
+.variant-input-row .drag-handle {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.add-variant-value-btn {
+    font-size: 13px;
+}
+
+/* --- Variant 2 Pill List Spacing Fix --- */
+.variant-pills-list {
+    gap: 8px; 
+}
+
+/* --- Size Selection Modal Styles --- */
+#sizeSelectionModal .modal-dialog {
+    max-width: 800px; /* Wider modal */
+}
+
+#sizeSelectionModal .nav-pills .nav-link {
+    border-radius: 0;
+    color: #495057;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+#sizeSelectionModal .nav-pills .nav-link.active {
+    background-color: #e9ecef;
+    color: #007bff;
     font-weight: bold;
-    color: #555;
 }
 
-.variant-table td .form-control {
-    border: 1px solid #ddd;
-    padding: 6px;
+#sizeSelectionModal .size-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for sizes */
+    gap: 10px;
+}
+
+#sizeSelectionModal .size-option {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    background-color: #f8f9fa;
+    transition: all 0.2s;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden; /* For checkmark */
+}
+
+#sizeSelectionModal .size-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0; /* Hide default checkbox */
+}
+
+#sizeSelectionModal .size-option.selected {
+    border-color: #007bff;
+    background-color: #e0f2ff;
+    color: #007bff;
+    font-weight: bold;
+}
+
+#sizeSelectionModal .size-option.selected::after {
+    content: "\f00c"; /* FontAwesome check icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    color: #007bff;
+    font-size: 10px;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+#sizeSelectionModal .modal-footer {
+    border-top: 1px solid #e9ecef;
+    background-color: #fcfcfc;
+}
+
+#sizeSelectionModal .modal-selected-count {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* --- VARIANT 1 Input Row Styles (Updated for Image Matching) --- */
+.variant-pills-list-container {
+    max-width: 600px; 
+}
+.variant-input-row {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 10px;
+    background-color: #fff;
+    gap: 10px;
+    /* Default is the dashed border for the new/empty row */
+    border-style: dashed; 
+}
+.variant-input-row[data-is-fixed="true"] {
+    border-style: solid; /* Solid border for fixed/saved rows (Maroon, Black, etc.) */
+}
+
+.variant-input-row .variant-value-input {
+    flex-grow: 1;
+    border: none;
+    padding: 0;
+    height: auto;
+    font-size: 14px;
+    background-color: transparent;
+    pointer-events: none; /* Default read-only for fixed rows */
+}
+.variant-input-row[data-is-fixed="false"] .variant-value-input {
+    pointer-events: auto; /* Make the dynamic row editable */
+    cursor: text;
+    pointer-events: auto;
+}
+
+.variant-media-links {
     font-size: 13px;
+    white-space: nowrap;
+}
+
+.remove-variant-value,
+.drag-handle {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* --- VARIANT 2 Pill List Spacing Fix --- */
+.variant-pills-list {
+    gap: 8px; 
+}
+/* ... keep modal styles from previous response ... */
+
+/* --- New style for the dynamic select input --- */
+.variant-input-row[data-is-fixed="false"] .variant-value-select-dynamic {
+    border: none;
+    padding-left: 0;
+    font-size: 14px;
+    height: auto;
+    background-color: transparent;
+}
+/* Ensure the select placeholder looks like an input */
+.variant-input-row[data-is-fixed="false"] .variant-value-select-dynamic:focus {
+    box-shadow: none;
+    border-color: transparent;
 }
 
 /* Switch Toggle (for "Available") */

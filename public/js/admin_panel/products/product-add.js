@@ -197,4 +197,401 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('change', calculateFillRate); 
     });
 
+    // --- VARIANT MANAGEMENT LOGIC ---
+
+// --- DUMMY DATA ---
+const ALL_INT_SIZES = ["3XS", "XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL", "5XL", "XS/S", "S/M", "M/L", "L/XL", "W22 L30", "W23 L30", "W24 L30", "W25 L30", "W27 L30", "W35 L30", "W36 L30", "W37 L30", "W38 L30", "W39 L30", "W40 L30", "W41 L30", "W42 L30", "W43 L30", "W44 L30", "W22 L32", "W23 L32", "W24 L32", "W25 L32", "W27 L32", "W35 L32", "W37 L32", "W39 L32", "W41 L32", "W42 L32"];
+const ALL_COLOR_OPTIONS = ["Red", "Green", "Blue", "Yellow", "Maroon", "Black", "White", "Gray"];
+
+
+// --- Helper Functions ---
+
+function getVariantState() {
+    const variants = [];
+    document.querySelectorAll('.variant-block').forEach(block => {
+        const index = block.getAttribute('data-variant-index');
+        const nameInput = document.getElementById(`variant_name_${index}`);
+        const name = nameInput ? (nameInput.value || `Variant ${index}`) : `Variant ${index}`;
+        
+        const values = [];
+        
+        if (parseInt(index) === 1) {
+            // Variant 1: Get values from the data-value attribute set on fixed rows
+            block.querySelectorAll('.variant-pills-list-container .variant-input-row[data-is-fixed="true"]').forEach(row => {
+                const value = row.getAttribute('data-value');
+                if (value) values.push(value);
+            });
+        } else {
+            // Variant 2: Get values from the generated pills
+            block.querySelectorAll('.variant-pills-list .variant-pill').forEach(pill => {
+                values.push(pill.getAttribute('data-value'));
+            });
+        }
+
+        if (values.length > 0) {
+            variants.push({
+                index: parseInt(index),
+                name: name,
+                values: values,
+                isImageVariant: block.querySelector('.variant-image-checkbox')?.checked || false
+            });
+        }
+    });
+    return variants;
+}
+
+function generateCombinations(variants) {
+    if (variants.length === 0) return [];
+    
+    let combinations = variants[0].values.map(v => [v]);
+
+    for (let i = 1; i < variants.length; i++) {
+        const nextValues = variants[i].values;
+        const newCombinations = [];
+
+        combinations.forEach(currentCombo => {
+            nextValues.forEach(nextValue => {
+                newCombinations.push([...currentCombo, nextValue]);
+            });
+        });
+        combinations = newCombinations;
+    }
+    return combinations;
+}
+
+function renderVariantTable() {
+    const variants = getVariantState();
+    const combinations = generateCombinations(variants);
+    const tableHeader = document.getElementById('variantTableHeader');
+    const tableBody = document.getElementById('variantTableBody');
+    const tablePlaceholder = document.getElementById('tablePlaceholder');
+    const tableEl = document.querySelector('.variant-price-stock-table');
+
+    if (combinations.length === 0) {
+        tableHeader.innerHTML = '';
+        tableBody.innerHTML = '';
+        tablePlaceholder.style.display = 'block';
+        tableEl.style.display = 'none';
+        return;
+    }
+
+    tablePlaceholder.style.display = 'none';
+    tableEl.style.display = 'table';
+
+    tableHeader.innerHTML = '';
+    let headerHtml = '';
+    
+    variants.forEach(v => {
+        headerHtml += `<th>${v.name}</th>`;
+    });
+    
+    headerHtml += `
+        <th class="text-danger">* Price</th>
+        <th>Special Price</th>
+        <th class="text-danger">* Stock</th>
+        <th>Seller SKU</th>
+        <th>Free Items</th>
+        <th>Availability</th>
+    `;
+    tableHeader.innerHTML = headerHtml;
+
+    tableBody.innerHTML = '';
+    
+    const rowSpan = variants.length > 1 ? combinations.length / variants[0].values.length : 1;
+
+    let bodyHtml = '';
+    combinations.forEach((combo, index) => {
+        const uniqueKey = combo.map(v => v.replace(/\W/g, '')).join('_');
+        
+        bodyHtml += `<tr>`;
+
+        if (index % rowSpan === 0) {
+            bodyHtml += `<td ${rowSpan > 1 ? `rowspan="${rowSpan}"` : ''}>${combo[0]}</td>`;
+        }
+
+        combo.slice(1).forEach(value => {
+            bodyHtml += `<td>${value}</td>`;
+        });
+        
+        bodyHtml += `
+            <td><input type="number" name="price_${uniqueKey}" class="form-control form-control-sm" placeholder="Price"></td>
+            <td>
+                <input type="number" name="special_price_${uniqueKey}" class="form-control form-control-sm" placeholder="Special Price">
+            </td>
+            <td><input type="number" name="stock_${uniqueKey}" class="form-control form-control-sm" placeholder="Stock"></td>
+            <td><input type="text" name="sku_${uniqueKey}" class="form-control form-control-sm" placeholder="Seller SKU"></td>
+            <td><input type="text" name="free_items_${uniqueKey}" class="form-control form-control-sm" placeholder=""></td>
+            <td>
+                <label class="switch">
+                    <input type="checkbox" name="available_${uniqueKey}" checked>
+                    <span class="slider round"></span>
+                </label>
+            </td>
+        </tr>`;
+    });
+    
+    tableBody.innerHTML = bodyHtml;
+}
+
+
+// --- Variant 1 (Select-and-Add Logic) ---
+
+function getUsedVariant1Values() {
+    const usedValues = [];
+    document.querySelectorAll('#variantPills_1 .variant-input-row[data-is-fixed="true"]').forEach(row => {
+        usedValues.push(row.getAttribute('data-value').toLowerCase());
+    });
+    return usedValues;
+}
+
+function updateVariant1DynamicSelect(selectElement) {
+    const usedValues = getUsedVariant1Values();
+    const currentSelectedValue = selectElement.value;
+    
+    selectElement.innerHTML = ''; // Clear options
+
+    // Add placeholder
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Please type or select';
+    selectElement.appendChild(placeholder);
+
+    // Add available options
+    ALL_COLOR_OPTIONS.forEach(color => {
+        if (!usedValues.includes(color.toLowerCase())) {
+            const option = document.createElement('option');
+            option.value = color;
+            option.textContent = color;
+            selectElement.appendChild(option);
+        }
+    });
+
+    // Reset to placeholder
+    selectElement.value = '';
+}
+
+
+function createNewFixedRow(oldDynamicRow, value) {
+    // 1. Convert the existing dynamic row into a fixed row
+    oldDynamicRow.setAttribute('data-is-fixed', 'true');
+    oldDynamicRow.setAttribute('data-value', value);
+    oldDynamicRow.style.borderStyle = 'solid';
+
+    // Replace the select with an input that is set to read-only
+    oldDynamicRow.innerHTML = `
+        <input type="text" class="form-control variant-value-input" value="${value}" readonly style="pointer-events: none;">
+        <div class="ml-2 variant-media-links" style="visibility: visible;">
+            <a href="#">Upload</a> | <a href="#">Media Center</a>
+        </div>
+        <i class="fas fa-trash text-muted ml-3 remove-variant-value" style="cursor: pointer;"></i>
+        <i class="fas fa-bars text-muted ml-2 drag-handle" style="cursor: grab;"></i>
+    `;
+
+    // 2. Create the new dynamic SELECT row element
+    const newDynamicRow = document.createElement('div');
+    newDynamicRow.className = 'variant-input-row d-flex align-items-center mb-2';
+    newDynamicRow.setAttribute('data-is-fixed', 'false');
+
+    newDynamicRow.innerHTML = `
+        <select class="form-control variant-value-select-dynamic" style="max-width: 250px;"></select>
+        <div class="ml-2 variant-media-links" style="visibility: hidden;">
+            <a href="#">Upload</a> | <a href="#">Media Center</a>
+        </div>
+        <i class="fas fa-trash text-muted ml-3 remove-variant-value" style="cursor: pointer; display: none;"></i>
+        <i class="fas fa-bars text-muted ml-2 drag-handle" style="cursor: grab; display: none;"></i>
+    `;
+    
+    // 3. Append the new dynamic row
+    const container = document.getElementById('variantPills_1');
+    container.appendChild(newDynamicRow);
+    
+    // 4. Rebind listeners and update table
+    bindDynamicListeners(); 
+    renderVariantTable();
+    // Ensure the new select element is populated and focused
+    const newSelect = newDynamicRow.querySelector('.variant-value-select-dynamic');
+    updateVariant1DynamicSelect(newSelect);
+    newSelect.focus();
+}
+
+
+function handleVariant1SelectChange(selectElement) {
+    const value = selectElement.value.trim();
+    if (!value) return; 
+
+    // Find the row element this select belongs to
+    const currentDynamicRow = selectElement.closest('.variant-input-row[data-is-fixed="false"]');
+    if (currentDynamicRow) {
+        createNewFixedRow(currentDynamicRow, value);
+    }
+}
+
+function bindVariant1Listeners(row) {
+    
+    // Remove button listener (only for fixed rows)
+    const removeBtn = row.querySelector('.remove-variant-value');
+    if (removeBtn) {
+        removeBtn.onclick = function() {
+            this.closest('.variant-input-row').remove();
+            renderVariantTable();
+            // Update the last select dropdown to potentially re-add the deleted option
+            const lastSelect = document.querySelector('#variantPills_1 .variant-input-row[data-is-fixed="false"] .variant-value-select-dynamic');
+            if(lastSelect) updateVariant1DynamicSelect(lastSelect);
+        };
+    }
+    
+    // Bind change listener only to the dynamic select element
+    const select = row.querySelector('.variant-value-select-dynamic');
+    if (select && row.getAttribute('data-is-fixed') === 'false') {
+        // Unbind existing to prevent duplication
+        select.removeEventListener('change', handleVariant1SelectChange); 
+        // Bind new listener
+        select.addEventListener('change', function() {
+            handleVariant1SelectChange(this);
+        });
+    }
+}
+
+
+// --- Variant 2 (Modal Logic - No Changes) ---
+
+let currentSelectedModalSizes = [];
+
+function populateSizeModalGrid() {
+    const sizeGrid = document.querySelector('#v-pills-int .size-grid');
+    sizeGrid.innerHTML = ''; 
+
+    ALL_INT_SIZES.forEach(size => {
+        const isSelected = currentSelectedModalSizes.includes(size);
+        const sizeOptionDiv = document.createElement('div');
+        sizeOptionDiv.className = `size-option ${isSelected ? 'selected' : ''}`;
+        sizeOptionDiv.setAttribute('data-size', size);
+        sizeOptionDiv.innerHTML = `
+            <input type="checkbox" ${isSelected ? 'checked' : ''}>
+            ${size}
+        `;
+        sizeGrid.appendChild(sizeOptionDiv);
+
+        sizeOptionDiv.addEventListener('click', function() {
+            this.classList.toggle('selected');
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            updateSelectedSizeCount();
+        });
+    });
+}
+
+function updateSelectedSizeCount() {
+    const selectedCount = document.querySelectorAll('#v-pills-int .size-option.selected').length;
+    document.getElementById('selectedSizeCount').textContent = selectedCount;
+}
+
+function createVariantPill(value) {
+    const pill = document.createElement('div');
+    pill.className = 'variant-pill';
+    pill.setAttribute('data-value', value);
+    pill.innerHTML = `${value} <i class="fas fa-times remove-pill"></i>`;
+    return pill;
+}
+
+function addVariantPill(listElement, value) {
+    if (!value || value.trim() === '') return;
+    const cleanValue = value.trim();
+    if (listElement.querySelector(`.variant-pill[data-value="${cleanValue}"]`)) return;
+
+    listElement.appendChild(createVariantPill(cleanValue));
+    
+    bindDynamicListeners(); 
+}
+
+
+// Modal show event listener
+$('#sizeSelectionModal').on('show.bs.modal', function (e) {
+    currentSelectedModalSizes = [];
+    document.querySelectorAll('#variantPills_2 .variant-pill').forEach(pill => {
+        currentSelectedModalSizes.push(pill.getAttribute('data-value'));
+    });
+    populateSizeModalGrid();
+    updateSelectedSizeCount();
+});
+
+// Confirm button in modal
+document.getElementById('confirmSizeSelection').addEventListener('click', function() {
+    const variantPillsList = document.getElementById('variantPills_2');
+    variantPillsList.innerHTML = ''; 
+
+    document.querySelectorAll('#v-pills-int .size-option.selected').forEach(option => {
+        addVariantPill(variantPillsList, option.getAttribute('data-size'));
+    });
+    
+    renderVariantTable();
+    $('#sizeSelectionModal').modal('hide');
+});
+
+
+// --- Global Listener Binding ---
+
+function bindDynamicListeners() {
+    // 1. Pill Removal (for Variant 2)
+    document.querySelectorAll('#variantPills_2 .remove-pill').forEach(btn => {
+        btn.onclick = function() {
+            this.closest('.variant-pill').remove();
+            renderVariantTable();
+        };
+    });
+    
+    // 2. Variant 1 Row Listeners (rebinding every time a new row is added/converted)
+    document.querySelectorAll('#variantPills_1 .variant-input-row').forEach(bindVariant1Listeners);
+
+    // 3. Variant Name change listener
+    document.querySelectorAll('.variant-name-input').forEach(input => {
+        input.removeEventListener('input', renderVariantTable); 
+        input.addEventListener('input', renderVariantTable);
+    });
+}
+
+
+// Function to setup the variant block (Toggle & Name Change)
+function setupVariantBlock(block) {
+    const header = block.querySelector('.variant-header');
+    const content = block.querySelector('.variant-content');
+
+    // Toggle collapse listener
+    if(header) header.addEventListener('click', function() {
+        const isCollapsed = content.style.display === 'none';
+        content.style.display = isCollapsed ? 'block' : 'none';
+        header.querySelector('.variant-toggle-icon').classList.toggle('fa-chevron-up', isCollapsed);
+        header.querySelector('.variant-toggle-icon').classList.toggle('fa-chevron-down', !isCollapsed);
+    });
+}
+
+
+// --- INITIALIZATION ---
+document.querySelectorAll('.variant-block').forEach(setupVariantBlock);
+bindDynamicListeners(); 
+
+// Initial population of the first dynamic select
+const initialSelect = document.querySelector('#variantPills_1 .variant-value-select-dynamic');
+if (initialSelect) {
+    updateVariant1DynamicSelect(initialSelect);
+}
+
+renderVariantTable(); 
+
+
+// --- Bulk Apply Logic ---
+document.querySelector('.apply-to-all-btn').addEventListener('click', function() {
+    const price = document.querySelector('.bulk-input[data-field="price"]').value;
+    const specialPrice = document.querySelector('.bulk-input[data-field="special_price"]').value;
+    const stock = document.querySelector('.bulk-input[data-field="stock"]').value;
+    const sku = document.querySelector('.bulk-input[data-field="sku"]').value;
+    
+    if (price) { document.querySelectorAll('input[name^="price_"]').forEach(input => input.value = price); }
+    if (specialPrice) { document.querySelectorAll('input[name^="special_price_"]').forEach(input => input.value = specialPrice); }
+    if (stock) { document.querySelectorAll('input[name^="stock_"]').forEach(input => input.value = stock); }
+    if (sku) { document.querySelectorAll('input[name^="sku_"]').forEach(input => input.value = sku); }
+    
+    alert('Bulk fields applied to all visible rows!');
+});
+// --- End of Variant Management Logic ---
 });
