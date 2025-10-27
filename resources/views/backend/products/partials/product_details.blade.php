@@ -333,7 +333,7 @@
                     {{-- Package Weight --}}
                     <div class="col-md-6 form-group">
                         <label for="package_weight">* Package Weight</label>
-                        <small class="form-text text-primary mt-0"><a href="#">How to measure my package dimensions? View Example</a></small>
+                        <small class="form-text text-primary mt-0"><a href="#">How to measure my package weight? View Example</a></small>
 
                         <div class="input-group">
                             <input type="number" name="package_weight" id="package_weight" class="form-control" placeholder="0.001–300" min="0.001" max="300" step="0.001">
