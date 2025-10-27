@@ -2,7 +2,7 @@
 @section('title', 'Edit Product')
 
 @section('styles')
-<link href="{{ asset('css/admin/products/product-add.css') }}" rel="stylesheet">
+<link href="{{ asset('css/admin/products/product-add.css') }}?v={{ time() }}" rel="stylesheet">
 <!-- Bootstrap should already be loaded by your layout. -->
 @endsection
 
