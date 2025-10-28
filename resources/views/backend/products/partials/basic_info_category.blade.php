@@ -50,6 +50,12 @@
                 <input type="hidden" name="category_id" id="selectedCategoryId" value="">
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
 
     <div class="col-md-4"> {{-- Right panel --}}

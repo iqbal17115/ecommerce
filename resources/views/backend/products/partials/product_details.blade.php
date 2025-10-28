@@ -18,50 +18,42 @@
         {{-- LEFT COLUMN: All scrollable content --}}
         <div class="col-md-9 p-0 main-form-content">
 
-            {{-- START: Product Images section --}}
-            <div class="form-section">
-                <h2>Product Images</h2>
-                <p class="form-text text-muted mb-3">Upload main product image (200px * 200px) and gallery images.</p>
-                <div class="d-flex flex-column"> {{-- Adjusted to flex-column to manage internal vertical content --}}
-                    <div class="form-group">
-                        <label>Product Images</label>
-                        <div class="image-upload-area">
-                            <div class="upload-box main-image-box">
+            {{-- START: Product Images section (Updated for dynamic preview) --}}
+            <div class="form-section" data-step="2" id="productImagesSection">
+                <div class="form-group">
+                    <label>Product Images</label>
+                    {{-- Container for all image boxes (Main and Gallery) --}}
+                    <div class="image-upload-area" id="mainGalleryUploadArea">
+                        {{-- GALLERY IMAGE BOX 1 (Initial box, which will be the first gallery item) --}}
+                        <div class="upload-box-wrapper" data-type="gallery" data-index="1">
+                            <div class="upload-box gallery-image-box dashed-border">
                                 <i class="fas fa-plus"></i>
-                                <p>Upload main image</p>
-                                <input type="file" name="main_image" accept="image/*">
-                            </div>
-                            <div class="upload-box gallery-image-box">
-                                <i class="fas fa-plus"></i>
-                                <p>Upload gallery image</p>
-                                <input type="file" name="gallery_images[]" multiple accept="image/*">
-                            </div>
-                            {{-- Placeholder for additional gallery images --}}
-                            <div class="upload-box gallery-image-box">
-                                <i class="fas fa-plus"></i>
+                                <!-- <p>Upload gallery image</p> -->
+                                <input type="file" name="gallery_images[]" class="image-input" accept="image/*">
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group mt-4">
-                        <label>Buyer Promotion Image</label>
-                        <div class="image-upload-area small-upload-boxes">
-                            <div class="upload-box promo-image-box">
-                                <i class="fas fa-plus"></i>
-                                <input type="file" name="promo_image" accept="image/*">
-                            </div>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="form-group mt-4">
-                        <label>Product Video</label>
-                        <div class="d-flex align-items-center mb-2">
-                            <input type="radio" name="video_source" value="youtube" id="youtubeRadio" checked> <label for="youtubeRadio" class="ml-2 mr-3">Youtube Link</label>
-                            <input type="radio" name="video_source" value="media_center" id="mediaCenterRadio"> <label for="mediaCenterRadio" class="ml-2">Media Center</label>
+                <div class="form-group mt-4">
+                    <label>Buyer Promotion Image</label>
+                    <div class="image-upload-area small-upload-boxes">
+                        <div class="upload-box promo-image-box dashed-border">
+                            <i class="fas fa-plus"></i>
+                            <input type="file" name="promo_image" accept="image/*">
                         </div>
-                        <input type="text" name="video_link" class="form-control" placeholder="Enter Youtube URL">
-                        <small class="form-text text-muted">Note: Max video length 60 seconds. Max file size: 100MB</small>
                     </div>
+                </div>
+
+                <div class="form-group mt-4">
+                    <label>Product Video</label>
+                    <div class="d-flex align-items-center mb-2">
+                        <input type="radio" name="video_source" value="youtube" id="youtubeRadio" checked> <label for="youtubeRadio" class="ml-2 mr-3">Youtube Link</label>
+                        <input type="radio" name="video_source" value="media_center" id="mediaCenterRadio"> <label for="mediaCenterRadio" class="ml-2">Media Center</label>
+                    </div>
+                    <input type="text" name="video_link" class="form-control" placeholder="Enter Youtube URL">
+                    <small class="form-text text-muted">Note: Max video length 60 seconds. Max file size: 100MB</small>
                 </div>
             </div>
             {{-- END: Product Images section --}}
@@ -274,18 +266,48 @@
 
                 <hr class="mt-0 mb-4">
 
-                {{-- PRICE & STOCK MANAGEMENT CONTROLS --}}
-                <div class="variant-price-stock-header d-flex align-items-center mb-3">
-                    <h5 class="mb-0 mr-3"><i class="fas fa-dollar-sign text-success mr-2"></i> Price & Stock</h5>
-                    <select class="form-control form-control-sm w-auto mr-2" id="bulkSelectVariant" style="min-width: 150px;">
-                        <option value="">Select Variant</option>
-                        {{-- Options populated by JS --}}
-                    </select>
-                    <input type="text" class="form-control form-control-sm w-auto mr-2 bulk-input" data-field="price" placeholder="Price">
-                    <input type="text" class="form-control form-control-sm w-auto mr-2 bulk-input" data-field="special_price" placeholder="Special Price">
-                    <input type="text" class="form-control form-control-sm w-auto mr-2 bulk-input" data-field="stock" placeholder="Stock">
-                    <input type="text" class="form-control form-control-sm w-auto mr-2 bulk-input" data-field="sku" placeholder="Seller SKU">
-                    <button type="button" class="btn btn-sm btn-info apply-to-all-btn">Apply To All</button>
+                {{-- PRICE & STOCK MANAGEMENT CONTROLS (Updated to match Image 1 style) --}}
+                <div class="variant-price-stock-header">
+                    <h5 class="mb-3">
+                        <span class="text-danger">*</span> Price & Stock
+                    </h5>
+                    <div class="d-flex flex-wrap align-items-center mb-3 bulk-inputs-container">
+                        {{-- Select Variant --}}
+                        <div class="bulk-input-group">
+                            <select class="form-control form-control-sm" id="bulkSelectVariant">
+                                <option value="">Select Variant</option>
+                                {{-- Options populated by JS --}}
+                            </select>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+
+                        {{-- Price --}}
+                        <div class="bulk-input-group">
+                            <i class="fas fa-taka-sign input-icon">৳</i>
+                            <input type="text" class="form-control form-control-sm bulk-input" data-field="price" placeholder="Price">
+                        </div>
+
+                        {{-- Special Price --}}
+                        <div class="bulk-input-group">
+                            <i class="fas fa-taka-sign input-icon">৳</i>
+                            <input type="text" class="form-control form-control-sm bulk-input" data-field="special_price" placeholder="Special Price">
+                        </div>
+
+                        {{-- Stock --}}
+                        <div class="bulk-input-group">
+                            <i class="fas fa-boxes input-icon"></i> {{-- Changed icon for stock --}}
+                            <input type="text" class="form-control form-control-sm bulk-input" data-field="stock" placeholder="Stock">
+                        </div>
+
+                        {{-- Seller SKU --}}
+                        <div class="bulk-input-group">
+                            <i class="fas fa-barcode input-icon"></i> {{-- Changed icon for SKU --}}
+                            <input type="text" class="form-control form-control-sm bulk-input" data-field="sku" placeholder="Seller SKU" maxlength="200">
+                            <span class="sku-char-count"><span id="skuBulkCount">0</span>/200</span>
+                        </div>
+
+                        <button type="button" class="btn apply-to-all-btn btn-sm" style="background: #f4631b;">Apply To All</button>
+                    </div>
                 </div>
 
                 {{-- DYNAMIC VARIANT TABLE CONTAINER (Initially empty) --}}
@@ -301,16 +323,43 @@
             </div>
             {{-- END: Price, Stock & Variants Section --}}
 
-            {{-- START: Product Description Section --}}
+            {{-- START: Product Description Section (Updated for dual fields) --}}
             <div class="form-section">
-                <h2>Product Description</h2>
-                <div class="description-editor-wrapper">
-                    {{-- Placeholder for Rich Text Editor --}}
-                    <textarea name="description" class="form-control" rows="8"></textarea>
-                    <div class="description-footer d-flex justify-content-end align-items-center mt-2">
-                        <button type="button" class="btn btn-sm btn-info mr-2">Markdown Preview</button>
-                        <button type="button" class="btn btn-sm btn-light">HTML</button>
+                <div class="form-group mb-4">
+                    <label>Main Description</label>
+                    {{-- Mimicking a rich text editor toolbar --}}
+                    <div class="rich-text-toolbar d-flex justify-content-between align-items-center p-2 border-top border-left border-right rounded-top bg-light">
+                        <div class="toolbar-controls">
+                            <select class="form-control form-control-sm d-inline-block w-auto mr-1">
+                                <option>11</option>
+                                <option>12</option>
+                            </select>
+                            <button type="button" class="btn btn-sm btn-light border p-1"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1"><i class="fas fa-italic"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1"><i class="fas fa-underline"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1 ml-2"><i class="fas fa-list-ul"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1"><i class="fas fa-list-ol"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1 ml-2"><i class="fas fa-align-left"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1"><i class="fas fa-align-center"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1"><i class="fas fa-align-right"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1 ml-2"><i class="fas fa-link"></i></button>
+                            <button type="button" class="btn btn-sm btn-light border p-1"><i class="fas fa-image"></i></button>
+                        </div>
+                        <div class="toolbar-actions">
+                            <button type="button" class="btn btn-sm btn-light text-danger"><i class="fas fa-wrench mr-1"></i> Advanced Mode</button>
+                            <button type="button" class="btn btn-sm btn-light border ml-2">Preview</button>
+                        </div>
                     </div>
+                    <textarea name="description" class="form-control rounded-top-0 border-top-0" rows="10" placeholder="Please input"></textarea>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="highlights">* Highlights</label>
+                    {{-- Mimicking a highlights toolbar (just list icon for simplicity) --}}
+                    <div class="rich-text-toolbar d-flex p-2 border-top border-left border-right rounded-top bg-light" style="justify-content: flex-start;">
+                        <button type="button" class="btn btn-sm btn-light border p-1"><i class="fas fa-list-ul"></i></button>
+                    </div>
+                    <textarea name="highlights" id="highlights" class="form-control rounded-top-0 border-top-0" rows="5" placeholder="Please input"></textarea>
                 </div>
             </div>
             {{-- END: Product Description Section --}}

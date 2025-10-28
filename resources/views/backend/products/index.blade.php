@@ -23,12 +23,6 @@
             <div class="form-section product-details-step" style="display: none;">
                 @include('backend.products.partials.product_details')
             </div>
-
-            <div class="form-actions mt-4">
-                <button type="button" class="btn btn-secondary" id="cancelButton">Cancel</button>
-                <button type="button" class="btn btn-primary" id="nextStepButton">Next</button>
-                <button type="submit" class="btn btn-success" id="confirmButton" style="display: none;">Confirm</button>
-            </div>
     </div>
 @endsection
 

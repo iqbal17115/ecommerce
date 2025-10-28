@@ -39,7 +39,7 @@ body {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 1200px; 
+    /* max-width: 1200px;  */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -291,19 +291,24 @@ body {
 }
 
 
-/* --- Step 2 Image Upload Area --- */
+/* --- Product Images (Dynamic Update) --- */
+
 .image-upload-area {
     display: flex;
-    gap: 15px;
+    gap: 10px; /* Reduced gap to match the tight spacing in the image */
     flex-wrap: wrap;
     margin-top: 10px;
 }
 
+.upload-box-wrapper {
+    position: relative;
+}
+
 .upload-box {
-    border: 2px dashed #ced4da;
-    border-radius: 8px;
-    width: 120px; 
-    height: 120px; 
+    border: 1px solid #ced4da; /* Solid border for unselected */
+    border-radius: 4px;
+    width: 100px; /* Smaller size to match image */
+    height: 100px; /* Smaller size to match image */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -312,24 +317,36 @@ body {
     background-color: #f8f9fa;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.2s ease;
 }
 
-.upload-box:hover {
+.upload-box.dashed-border {
+    border: 2px dashed #ced4da;
+}
+
+.upload-box:hover.dashed-border {
     border-color: #007bff;
 }
 
 .upload-box i {
-    font-size: 24px;
+    font-size: 20px;
     color: #6c757d;
     margin-bottom: 5px;
 }
 
 .upload-box p {
-    font-size: 12px;
+    font-size: 10px;
     color: #6c757d;
     text-align: center;
     margin: 0;
+}
+
+.upload-box img.preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .upload-box input[type="file"] {
@@ -338,8 +355,42 @@ body {
     height: 100%;
     opacity: 0;
     cursor: pointer;
+    z-index: 2; /* Bring input on top of icons */
 }
 
+/* Icons for active (previewed) image */
+.upload-icons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    visibility: hidden; /* Initially hidden */
+    z-index: 3; 
+}
+
+.upload-box-wrapper:hover .upload-icons {
+    visibility: visible;
+}
+
+.upload-icons i {
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Hide initial content when image is selected */
+.upload-box.has-image i, 
+.upload-box.has-image p {
+    display: none;
+}
+
+/* Small upload boxes for promo image */
 .image-upload-area.small-upload-boxes .upload-box {
     width: 80px;
     height: 80px;
@@ -702,4 +753,151 @@ input:checked + .slider:before { transform: translateX(16px); }
 
 .package-dimensions-inputs .form-control:last-child {
     margin-right: 0 !important;
+}
+
+/* --- Product Description Section Styling --- */
+
+/* Style the toolbar buttons to look better */
+.rich-text-toolbar .btn-sm {
+    font-size: 12px;
+    padding: 0.25rem 0.5rem;
+    line-height: 1;
+}
+
+.rich-text-toolbar .form-control-sm {
+    height: 24px;
+    padding: 1px 6px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.form-section .rich-text-toolbar {
+    /* Ensures the toolbar matches the width of the textarea below */
+    width: 100%;
+    /* Override Bootstrap defaults for specific spacing/border */
+    padding: 6px 10px;
+}
+
+/* Ensure textarea below the toolbar has no top border and rounded bottom corners */
+.form-section .rich-text-toolbar + textarea.form-control {
+    border-top: 1px solid #ced4da !important; /* Re-add the line for separation, but keep the `border-top-0` class on the element */
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    /* Match the placeholder text color */
+    color: #6c757d; 
+}
+
+/* Ensure the textarea height fills the space */
+.form-section textarea.form-control {
+    resize: vertical;
+    min-height: 80px; 
+}
+
+/* Specific button styles for the Advanced Mode/Preview */
+.rich-text-toolbar .toolbar-actions .btn-light {
+    background-color: #f8f9fa !important;
+}
+
+/* --- Price & Stock Bulk Edit Styling (Matches Image 1) --- */
+
+.bulk-inputs-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    gap: 10px; /* Space between input groups */
+}
+
+.bulk-input-group {
+    position: relative;
+    flex-grow: 1; /* Allows groups to grow and take available space */
+    min-width: 120px; /* Minimum width for each input group */
+    max-width: 180px; /* Control max width for better alignment */
+    height: 38px; /* Standard height for form controls */
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    background-color: #fff; /* Ensure background is white */
+}
+
+.bulk-input-group:focus-within {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.bulk-input-group .input-icon {
+    position: absolute; /* Position icons inside the input group */
+    left: 10px;
+    color: #6c757d;
+    font-size: 14px;
+    pointer-events: none; /* Make icon unclickable */
+    z-index: 1; /* Above input but below text */
+}
+
+.bulk-input-group .form-control {
+    border: none; /* Remove individual input borders */
+    padding-left: 30px; /* Make space for the icon */
+    height: 100%; /* Fill the group height */
+    box-shadow: none; /* Remove focus shadow from individual input */
+    font-size: 14px;
+    background-color: transparent; /* Make input background transparent */
+}
+
+/* Specific styling for the Select Variant dropdown */
+.bulk-input-group #bulkSelectVariant {
+    padding-left: 10px; /* No icon for select variant, so normal padding */
+    -webkit-appearance: none; /* Remove default dropdown arrow */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: none; /* Ensure no background image for select */
+    cursor: pointer;
+    font-size: 14px;
+    height: 100%;
+    background-color: transparent;
+}
+
+.bulk-input-group .dropdown-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Seller SKU specific styling for character count */
+.bulk-input-group .sku-char-count {
+    position: absolute;
+    right: 8px;
+    color: #6c757d;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bulk-input-group input[data-field="sku"] {
+    padding-right: 55px; /* Adjust padding for SKU to prevent text overlapping count */
+}
+
+.apply-to-all-btn {
+    height: 38px; /* Match height of input groups */
+    padding: 0.375rem 1rem; /* Adjust padding */
+    font-size: 14px; /* Adjust font size */
+    background-color: #007bff; /* Primary button color */
+    border-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.apply-to-all-btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Adjust font size for the H5 heading */
+.variant-price-stock-header h5 {
+    font-size: 1rem; /* Adjust as needed */
+    margin-bottom: 0.75rem;
 }
