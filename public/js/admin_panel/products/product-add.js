@@ -17,20 +17,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const categorySearchInput = document.querySelector('.category-search-input-dropdown');
     const categoryItems = document.querySelectorAll('.category-list-dropdown .category-item');
     const recentlyUsedTags = document.querySelectorAll('.category-recently-used-tags .badge');
-
+// New variables for the Edit State in Step 2
+    const productSummaryDisplay = document.getElementById('productSummaryDisplay');
+    const editBasicInfoButton = document.getElementById('editBasicInfoButton');
+    const basicInfoEditSection = document.getElementById('basicInfoEditSection');
+    const saveBasicInfoButton = document.getElementById('saveBasicInfoButton');
+    const productNameInputStep2 = document.getElementById('product_name_step2');
+    const productNameCountStep2 = document.getElementById('productNameCountStep2');
+    const categoryDropdownWrapperStep2 = document.getElementById('categoryDropdownWrapperStep2');
     // --- New/Updated selectCategory function ---
     function selectCategory(categoryId, categoryPath) {
-        // 1. Update Category Display and Hidden Field
+        // ... (Category selection logic: updates selectedCategoryDisplay/selectedCategoryIdInput) ...
         selectedCategoryDisplay.textContent = categoryPath;
         selectedCategoryIdInput.value = categoryId;
-
-        // Assuming jQuery/Bootstrap is available to hide the dropdown
         if (typeof $ !== 'undefined') {
             $(categoryDropdownButton).dropdown('hide');
         }
-
-        // --- AUTOMATIC STEP TRANSITION LOGIC ---
-
+        // ... (End of selection logic) ...
+        
         const productName = productNameInput.value.trim();
 
         // Basic Validation Check
@@ -43,25 +47,19 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-
-        // 1. POPULATE HIDDEN FIELDS
+        // 1. POPULATE HIDDEN FIELDS (Crucial for final form submission)
         hiddenProductName.value = productName;
         hiddenCategoryId.value = categoryId;
         hiddenCategoryPath.value = categoryPath;
 
-        // 2. UPDATE SUMMARY DISPLAY (in Step 2)
-        const summaryProductName = document.getElementById('summaryProductName');
-        const summaryCategoryPath = document.getElementById('summaryCategoryPath');
-        const readOnlyProductName = document.getElementById('readOnlyProductName');
-        const readOnlyCategoryPath = document.getElementById('readOnlyCategoryPath');
+        // 2. TRANSFER DATA TO STEP 2 EDIT FIELDS
+        if (productNameInputStep2) productNameInputStep2.value = productName;
+        if (productNameCountStep2) productNameCountStep2.textContent = productName.length;
+        
+        // 3. Clone and Initialize Category Dropdown in Step 2
+        syncCategoryHtmlToStep2();
 
-        if (summaryProductName) summaryProductName.textContent = productName;
-        if (summaryCategoryPath) summaryCategoryPath.textContent = categoryPath;
-        if (readOnlyProductName) readOnlyProductName.textContent = productName;
-        if (readOnlyCategoryPath) readOnlyCategoryPath.textContent = categoryPath;
-
-
-        // 3. Transition to Step 2
+        // 4. Transition to Step 2
         const basicInfoCategorySection = document.querySelector('.basic-info-category-step');
         const productDetailsSection = document.querySelector('.product-details-step');
         const confirmButton = document.getElementById('confirmButton');
@@ -69,14 +67,231 @@ document.addEventListener('DOMContentLoaded', function () {
         if (basicInfoCategorySection && productDetailsSection) {
             basicInfoCategorySection.style.display = 'none';
             productDetailsSection.style.display = 'block';
-
-            // Show the Confirm button (if you still need a final submit button)
+            
             if (confirmButton) confirmButton.style.display = 'inline-block';
-
-            // 4. Calculate initial fill rate for Step 2
+            
             calculateFillRate();
         }
-        // --- END OF AUTOMATIC STEP TRANSITION LOGIC ---
+    }
+
+    // Function to clone and sync the complex category dropdown HTML
+    // --- Synchronization Functions ---
+
+    // Function to clone and sync the complex category dropdown HTML
+    function syncCategoryHtmlToStep2() {
+        if (!categoryDropdownWrapperStep2) return;
+
+        // Get the innerHTML of the Step 1 category wrapper
+        const originalCategoryWrapper = document.querySelector('.category-dropdown-wrapper');
+        
+        if (originalCategoryWrapper) {
+            // Clone the HTML and insert it into the Step 2 section
+            categoryDropdownWrapperStep2.innerHTML = originalCategoryWrapper.innerHTML;
+
+            // Update the display of the cloned dropdown to show the currently selected value
+            const clonedDisplay = categoryDropdownWrapperStep2.querySelector('#selectedCategoryDisplay');
+            const originalDisplay = document.getElementById('selectedCategoryDisplay');
+
+            if (clonedDisplay && originalDisplay) {
+                 clonedDisplay.textContent = originalDisplay.textContent;
+            }
+
+            // Set the hidden input value inside the cloned HTML (using the original name)
+            const clonedHiddenInput = categoryDropdownWrapperStep2.querySelector('#selectedCategoryId');
+            if (clonedHiddenInput) {
+                clonedHiddenInput.value = originalCategoryWrapper.querySelector('#selectedCategoryId').value;
+                
+                // IMPORTANT: Change the ID to prevent conflicts with the original field!
+                clonedHiddenInput.id = 'selectedCategoryIdStep2';
+                clonedHiddenInput.name = 'category_id'; // Ensure name is correct for submission
+            }
+
+            // Rebind all category related listeners to the new elements in Step 2
+            bindStep2CategoryListeners();
+        }
+    }
+
+    // Function to handle a selection inside the Step 2 dropdown
+    function selectCategoryInStep2(categoryId, categoryPath) {
+        const clonedDropdownButton = categoryDropdownWrapperStep2.querySelector('#categoryDropdownButton');
+        const clonedDisplay = categoryDropdownWrapperStep2.querySelector('#selectedCategoryDisplay');
+        const clonedHiddenInput = categoryDropdownWrapperStep2.querySelector('#selectedCategoryIdStep2');
+
+        // Update the visual display in Step 2
+        if (clonedDisplay) clonedDisplay.textContent = categoryPath;
+        if (clonedHiddenInput) clonedHiddenInput.value = categoryId;
+        
+        // Hide the dropdown
+        if (typeof $ !== 'undefined' && clonedDropdownButton) {
+            $(clonedDropdownButton).dropdown('hide');
+        }
+
+        // TWO-WAY BINDING: Sync this change back to the main hidden fields
+        hiddenCategoryId.value = categoryId;
+        hiddenCategoryPath.value = categoryPath;
+    }
+
+    // Function to bind category listeners in the Step 2 edit section
+    function bindStep2CategoryListeners() {
+        // Re-run the listeners on the Step 2 elements
+        const categoryItemsStep2 = categoryDropdownWrapperStep2.querySelectorAll('.category-list-dropdown .category-item');
+        const recentlyUsedTagsStep2 = categoryDropdownWrapperStep2.querySelectorAll('.category-recently-used-tags .badge');
+        const categorySearchInputStep2 = categoryDropdownWrapperStep2.querySelector('.category-search-input-dropdown');
+        
+        // --- Rebind Category Item Click ---
+        categoryItemsStep2.forEach(item => {
+            item.addEventListener('click', function (event) {
+                event.preventDefault();
+                selectCategoryInStep2(this.dataset.categoryId, this.dataset.categoryPath);
+                // Highlight active item if desired
+                categoryItemsStep2.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // --- Rebind Recently Used Click ---
+        recentlyUsedTagsStep2.forEach(tag => {
+            tag.addEventListener('click', function () {
+                selectCategoryInStep2(this.dataset.categoryId, this.textContent.trim());
+                recentlyUsedTagsStep2.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // --- Rebind Search Input (unchanged from previous logic) ---
+        if (categorySearchInputStep2) {
+            categorySearchInputStep2.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                categoryItemsStep2.forEach(item => {
+                    const categoryPath = item.dataset.categoryPath.toLowerCase();
+                    item.style.display = categoryPath.includes(searchTerm) ? 'block' : 'none';
+                });
+                recentlyUsedTagsStep2.forEach(tag => {
+                    const tagText = tag.textContent.toLowerCase();
+                    tag.style.display = tagText.includes(searchTerm) ? 'inline-flex' : 'none';
+                });
+            });
+        }
+    }
+    
+    // --- Final Data Binding Listeners (for the Product Name) ---
+
+    // 1. Character Count for Step 2 Name
+    if (productNameInputStep2 && productNameCountStep2) {
+        productNameInputStep2.addEventListener('input', function () {
+            productNameCountStep2.textContent = this.value.length;
+            // TWO-WAY BINDING: Sync this change back to the main hidden field
+            hiddenProductName.value = this.value; 
+        });
+    }
+
+    // Function to bind category listeners in the Step 2 edit section
+    function bindStep2CategoryListeners() {
+        // Re-run the listeners on the Step 2 elements
+        const categoryItemsStep2 = categoryDropdownWrapperStep2.querySelectorAll('.category-list-dropdown .category-item');
+        const recentlyUsedTagsStep2 = categoryDropdownWrapperStep2.querySelectorAll('.category-recently-used-tags .badge');
+        const categorySearchInputStep2 = categoryDropdownWrapperStep2.querySelector('.category-search-input-dropdown');
+        
+        // --- Rebind Category Item Click ---
+        categoryItemsStep2.forEach(item => {
+            item.addEventListener('click', function (event) {
+                event.preventDefault();
+                // When clicked in Step 2, update the original Step 1 display
+                selectCategoryInStep2(this.dataset.categoryId, this.dataset.categoryPath);
+                categoryItemsStep2.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // --- Rebind Recently Used Click ---
+        recentlyUsedTagsStep2.forEach(tag => {
+            tag.addEventListener('click', function () {
+                selectCategoryInStep2(this.dataset.categoryId, this.textContent.trim());
+                recentlyUsedTagsStep2.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // --- Rebind Search Input ---
+        if (categorySearchInputStep2) {
+            categorySearchInputStep2.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                categoryItemsStep2.forEach(item => {
+                    const categoryPath = item.dataset.categoryPath.toLowerCase();
+                    item.style.display = categoryPath.includes(searchTerm) ? 'block' : 'none';
+                });
+                recentlyUsedTagsStep2.forEach(tag => {
+                    const tagText = tag.textContent.toLowerCase();
+                    tag.style.display = tagText.includes(searchTerm) ? 'inline-flex' : 'none';
+                });
+            });
+        }
+    }
+    
+    // Custom select function for Step 2 that only updates the internal display
+    function selectCategoryInStep2(categoryId, categoryPath) {
+        const clonedDropdownButton = categoryDropdownWrapperStep2.querySelector('#categoryDropdownButton');
+        const clonedDisplay = categoryDropdownWrapperStep2.querySelector('#selectedCategoryDisplay');
+        const clonedHiddenInput = categoryDropdownWrapperStep2.querySelector('#selectedCategoryId');
+
+        if (clonedDisplay) clonedDisplay.textContent = categoryPath;
+        if (clonedHiddenInput) clonedHiddenInput.value = categoryId;
+        
+        if (typeof $ !== 'undefined' && clonedDropdownButton) {
+            $(clonedDropdownButton).dropdown('hide');
+        }
+    }
+
+    // --- Basic Info Toggling and Saving ---
+
+    // 1. Toggling the Edit Section
+    if (editBasicInfoButton) {
+        editBasicInfoButton.addEventListener('click', function() {
+            productSummaryDisplay.style.display = 'none';
+            basicInfoEditSection.style.display = 'block';
+            
+            // Sync current data to the editable fields on open
+            if(productNameInputStep2) productNameInputStep2.value = hiddenProductName.value;
+            if(productNameCountStep2) productNameCountStep2.textContent = hiddenProductName.value.length;
+            
+            // If the category dropdown wasn't synced before (shouldn't happen, but safety)
+            syncCategoryHtmlToStep2();
+        });
+    }
+    
+    // 2. Character Count for Step 2 Name
+    if (productNameInputStep2 && productNameCountStep2) {
+        productNameInputStep2.addEventListener('input', function () {
+            productNameCountStep2.textContent = this.value.length;
+        });
+    }
+
+    // 3. Saving the Changes
+    if (saveBasicInfoButton) {
+        saveBasicInfoButton.addEventListener('click', function() {
+            const newProductName = productNameInputStep2.value.trim();
+            const newCategoryId = categoryDropdownWrapperStep2.querySelector('#selectedCategoryId').value;
+            const newCategoryPath = categoryDropdownWrapperStep2.querySelector('#selectedCategoryDisplay').textContent;
+
+            // Simple validation
+            if (newProductName.length < 10 || !newCategoryId) {
+                alert('Please ensure the Product Name has at least 10 characters and a Category is selected.');
+                return;
+            }
+
+            // Sync the changes back to the main hidden fields (for form submission)
+            hiddenProductName.value = newProductName;
+            hiddenCategoryId.value = newCategoryId;
+            hiddenCategoryPath.value = newCategoryPath;
+            
+            // Update the read-only summary display
+            if (summaryProductName) summaryProductName.textContent = newProductName;
+            if (summaryCategoryPath) summaryCategoryPath.textContent = newCategoryPath;
+
+            // Hide the edit section and show the summary
+            basicInfoEditSection.style.display = 'none';
+            productSummaryDisplay.style.display = 'flex'; // Use flex to restore alignment
+        });
     }
 
     categoryItems.forEach(item => {

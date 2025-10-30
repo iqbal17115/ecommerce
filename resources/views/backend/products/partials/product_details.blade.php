@@ -1,16 +1,35 @@
 <div class="product-details-content">
 
-    {{-- Display Name and Category at the top --}}
-    <div class="product-header-summary mb-4 p-3 border rounded bg-light">
-        <div class="d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">
-                <i class="fas fa-box text-primary mr-2"></i> Product Name: <strong id="summaryProductName">N/A</strong>
-            </h5>
-            <small class="text-muted">
-                <i class="fas fa-tag text-secondary mr-1"></i> Category: <strong id="summaryCategoryPath">N/A</strong>
-            </small>
+    {{-- START: Basic Information & Category (Always Editable in Step 2) --}}
+    <div class="basic-info-editable-header mb-4 p-3 border rounded">
+        <div class="row">
+            {{-- 1. Editable Product Name --}}
+            <div class="col-md-6 form-group mb-0">
+                <label for="product_name_step2" class="mb-1 small text-muted">
+                    <i class="fas fa-box text-primary mr-2"></i> Product Name <span class="text-danger">*</span>
+                </label>
+                <div class="input-group input-group-sm">
+                    {{-- New ID, but will use the main 'product_name' name for submission --}}
+                    <input type="text" name="product_name" id="product_name_step2" class="form-control" maxlength="255" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text"><span id="productNameCountStep2">0</span>/255</span>
+                    </div>
+                </div>
+            </div>
+
+            {{-- 2. Editable Category Dropdown --}}
+            <div class="col-md-6 form-group mb-0">
+                <label for="category" class="mb-1 small text-muted">
+                    <i class="fas fa-tag text-secondary mr-1"></i> Category <span class="text-danger">*</span>
+                </label>
+                {{-- Placeholder where the full category dropdown will be cloned/synced --}}
+                <div id="categoryDropdownWrapperStep2">
+                    <p class="text-muted small mb-0">Loading category selection...</p>
+                </div>
+            </div>
         </div>
     </div>
+    {{-- END: Basic Information & Category (Always Editable in Step 2) --}}
 
     {{-- START: MAIN CONTENT WRAPPER FOR STICKY SIDEBAR --}}
     <div class="main-content-flex-wrapper d-flex">
