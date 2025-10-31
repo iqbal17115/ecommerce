@@ -29,14 +29,40 @@
 @section('script')
 <script src="{{ asset('js/admin_panel/products/product-add.js') }}?v={{ time() }}"></script>
 <script>
-    $('#description').summernote({
-        height: 120
-    });
-    $('#short_description').summernote({
-        height: 120
-    });
-    $('#highlights').summernote({
-        height: 120
+    // --- Summernote Initialization ---
+
+    $(document).ready(function() {
+        // Initialize Main Description
+        $('#description').summernote({
+            height: 120,
+            placeholder: 'Please input the full product description details...',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+
+        // Initialize Short Description
+        $('#short_description').summernote({
+            height: 120,
+            placeholder: 'Enter a concise summary or brief description...',
+            toolbar: [
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ul', 'ol']],
+            ]
+        });
+
+        // Initialize Highlights
+        $('#highlights').summernote({
+            height: 120,
+            placeholder: 'Enter key selling points or bulleted highlights...',
+            toolbar: [
+                ['para', ['ul']], // Only need bullet points for highlights
+            ]
+        });
     });
 </script>
 @endsection

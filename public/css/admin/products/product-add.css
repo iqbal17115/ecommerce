@@ -931,3 +931,18 @@ input:checked + .slider:before { transform: translateX(16px); }
 .main-form-content .form-section {
     padding: 0; /* Remove padding if the content itself is wrapped in .form-card */
 }
+
+/* --- Summernote Visual Fixes (Ensures Dark Text) --- */
+
+.note-editable {
+    color: #333 !important; 
+    background-color: #fff !important; 
+    font-size: 0.875rem; 
+    opacity: 1 !important;
+}
+
+.note-editable p {
+    color: #333 !important;
+    margin-bottom: 5px; 
+}
+/* ... other Summernote fixes ... */
