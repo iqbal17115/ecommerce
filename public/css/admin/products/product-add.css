@@ -35,11 +35,6 @@ body {
 }
 
 .add-product-container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* max-width: 1200px;  */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -900,4 +895,39 @@ input:checked + .slider:before { transform: translateX(16px); }
 .variant-price-stock-header h5 {
     font-size: 1rem; /* Adjust as needed */
     margin-bottom: 0.75rem;
+}
+
+/* --- New Card Styling for Form Sections --- */
+
+/* Style for the container around each included partial in Step 2 */
+.form-card {
+    background-color: #fff;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Light shadow for separation */
+    margin-bottom: 20px; /* Space between the cards */
+    padding: 20px;
+}
+
+/* Ensure headings inside the cards look good */
+.form-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+/* Make sure the editable header we previously created blends into the card style */
+.basic-info-editable-header {
+    background-color: #f8f9fa !important; /* Slightly distinct background */
+    border-radius: 8px !important;
+    padding: 15px !important;
+    border: 1px solid #dee2e6 !important;
+    margin-bottom: 20px; /* Space it from the first content card */
+}
+
+/* Specific styling to ensure main content sections don't inherit unnecessary padding */
+.main-form-content .form-section {
+    padding: 0; /* Remove padding if the content itself is wrapped in .form-card */
 }
