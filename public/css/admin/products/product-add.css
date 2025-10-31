@@ -1004,3 +1004,38 @@ input:checked + .slider:before { transform: translateX(16px); }
     opacity: 1 !important;
     margin-bottom: 5px; 
 }
+
+/* --- Custom Styling for Select Variant Dropdown --- */
+
+/* 1. Container setup to position the custom arrow */
+.bulk-input-group {
+    position: relative;
+    /* Ensure it has a fixed width or use flex/grid layout to control its size */
+    width: 150px; /* Adjust this width as needed for your layout */
+}
+
+/* 2. Style the actual <select> element */
+.bulk-input-group .form-control {
+    /* Hide the native browser arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* Ensure standard input styling: background, border, padding */
+    background-color: #fff;
+    padding-right: 25px; /* Make space for the custom icon */
+    height: 31px; /* Match the height of adjacent form-control-sm inputs */
+}
+
+/* 3. Style the custom dropdown arrow (the chevron icon) */
+.bulk-input-group .dropdown-arrow {
+    position: absolute;
+    top: 50%;
+    right: 8px; /* Position it on the right */
+    transform: translateY(-50%);
+    pointer-events: none; /* Allows clicks to pass through to the select element */
+    color: #6c757d; /* Muted color for the icon */
+    font-size: 0.75rem; /* Small icon size */
+    line-height: 1;
+    z-index: 2; /* Ensure it is above the select element */
+}

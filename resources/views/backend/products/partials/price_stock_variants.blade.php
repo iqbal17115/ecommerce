@@ -144,7 +144,7 @@
 
         <hr class="mt-0 mb-4">
 
-        {{-- PRICE & STOCK MANAGEMENT CONTROLS (Updated to match Image 1 style) --}}
+        {{-- PRICE & STOCK MANAGEMENT CONTROLS --}}
         <div class="variant-price-stock-header">
             <h5 class="mb-3">
                 <span class="text-danger">*</span> Price & Stock
@@ -154,7 +154,8 @@
                 <div class="bulk-input-group">
                     <select class="form-control form-control-sm" id="bulkSelectVariant">
                         <option value="">Select Variant</option>
-                        {{-- Options populated by JS --}}
+                        <option value="color">Color Family</option>
+                        <option value="size">Size</option>
                     </select>
                     <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </div>
@@ -162,28 +163,25 @@
                 {{-- Price --}}
                 <div class="bulk-input-group">
                     <i class="fas fa-taka-sign input-icon">৳</i>
-                    <input type="text" class="form-control form-control-sm bulk-input" data-field="price" placeholder="Price">
+                    <input type="number" class="form-control form-control-sm bulk-input" data-field="price" placeholder="Price">
                 </div>
 
                 {{-- Special Price --}}
                 <div class="bulk-input-group">
                     <i class="fas fa-taka-sign input-icon">৳</i>
-                    <input type="text" class="form-control form-control-sm bulk-input" data-field="special_price" placeholder="Special Price">
+                    <input type="number" class="form-control form-control-sm bulk-input" data-field="special_price" placeholder="Special Price">
                 </div>
 
                 {{-- Stock --}}
                 <div class="bulk-input-group">
-                    <i class="fas fa-boxes input-icon"></i> {{-- Changed icon for stock --}}
-                    <input type="text" class="form-control form-control-sm bulk-input" data-field="stock" placeholder="Stock">
+                    <i class="fas fa-boxes input-icon"></i>
+                    <input type="number" class="form-control form-control-sm bulk-input" data-field="stock" placeholder="Stock">
                 </div>
 
-                {{-- Seller SKU --}}
-                <div class="bulk-input-group">
-                    <i class="fas fa-barcode input-icon"></i> {{-- Changed icon for SKU --}}
-                    <input type="text" class="form-control form-control-sm bulk-input" data-field="sku" placeholder="Seller SKU" maxlength="200">
-                    <span class="sku-char-count"><span id="skuBulkCount">0</span>/200</span>
+                <div class="bulk-input-group" hide>
+                    <i class="fas fa-barcode input-icon"></i>
+                    <input type="text" class="form-control form-control-sm bulk-input" data-field="sku" placeholder="Base SKU">
                 </div>
-
                 <button type="button" class="btn apply-to-all-btn btn-sm" style="background: #f4631b;">Apply To All</button>
             </div>
         </div>

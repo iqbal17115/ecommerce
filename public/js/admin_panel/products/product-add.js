@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const categorySearchInput = document.querySelector('.category-search-input-dropdown');
     const categoryItems = document.querySelectorAll('.category-list-dropdown .category-item');
     const recentlyUsedTags = document.querySelectorAll('.category-recently-used-tags .badge');
-// New variables for the Edit State in Step 2
+    // New variables for the Edit State in Step 2
     const productSummaryDisplay = document.getElementById('productSummaryDisplay');
     const editBasicInfoButton = document.getElementById('editBasicInfoButton');
     const basicInfoEditSection = document.getElementById('basicInfoEditSection');
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $(categoryDropdownButton).dropdown('hide');
         }
         // ... (End of selection logic) ...
-        
+
         const productName = productNameInput.value.trim();
 
         // Basic Validation Check
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 2. TRANSFER DATA TO STEP 2 EDIT FIELDS
         if (productNameInputStep2) productNameInputStep2.value = productName;
         if (productNameCountStep2) productNameCountStep2.textContent = productName.length;
-        
+
         // 3. Clone and Initialize Category Dropdown in Step 2
         syncCategoryHtmlToStep2();
 
@@ -67,9 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (basicInfoCategorySection && productDetailsSection) {
             basicInfoCategorySection.style.display = 'none';
             productDetailsSection.style.display = 'block';
-            
+
             if (confirmButton) confirmButton.style.display = 'inline-block';
-            
+
             calculateFillRate();
         }
     }
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Get the innerHTML of the Step 1 category wrapper
         const originalCategoryWrapper = document.querySelector('.category-dropdown-wrapper');
-        
+
         if (originalCategoryWrapper) {
             // Clone the HTML and insert it into the Step 2 section
             categoryDropdownWrapperStep2.innerHTML = originalCategoryWrapper.innerHTML;
@@ -93,14 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const originalDisplay = document.getElementById('selectedCategoryDisplay');
 
             if (clonedDisplay && originalDisplay) {
-                 clonedDisplay.textContent = originalDisplay.textContent;
+                clonedDisplay.textContent = originalDisplay.textContent;
             }
 
             // Set the hidden input value inside the cloned HTML (using the original name)
             const clonedHiddenInput = categoryDropdownWrapperStep2.querySelector('#selectedCategoryId');
             if (clonedHiddenInput) {
                 clonedHiddenInput.value = originalCategoryWrapper.querySelector('#selectedCategoryId').value;
-                
+
                 // IMPORTANT: Change the ID to prevent conflicts with the original field!
                 clonedHiddenInput.id = 'selectedCategoryIdStep2';
                 clonedHiddenInput.name = 'category_id'; // Ensure name is correct for submission
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Update the visual display in Step 2
         if (clonedDisplay) clonedDisplay.textContent = categoryPath;
         if (clonedHiddenInput) clonedHiddenInput.value = categoryId;
-        
+
         // Hide the dropdown
         if (typeof $ !== 'undefined' && clonedDropdownButton) {
             $(clonedDropdownButton).dropdown('hide');
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const categoryItemsStep2 = categoryDropdownWrapperStep2.querySelectorAll('.category-list-dropdown .category-item');
         const recentlyUsedTagsStep2 = categoryDropdownWrapperStep2.querySelectorAll('.category-recently-used-tags .badge');
         const categorySearchInputStep2 = categoryDropdownWrapperStep2.querySelector('.category-search-input-dropdown');
-        
+
         // --- Rebind Category Item Click ---
         categoryItemsStep2.forEach(item => {
             item.addEventListener('click', function (event) {
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-    
+
     // --- Final Data Binding Listeners (for the Product Name) ---
 
     // 1. Character Count for Step 2 Name
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
         productNameInputStep2.addEventListener('input', function () {
             productNameCountStep2.textContent = this.value.length;
             // TWO-WAY BINDING: Sync this change back to the main hidden field
-            hiddenProductName.value = this.value; 
+            hiddenProductName.value = this.value;
         });
     }
 
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const categoryItemsStep2 = categoryDropdownWrapperStep2.querySelectorAll('.category-list-dropdown .category-item');
         const recentlyUsedTagsStep2 = categoryDropdownWrapperStep2.querySelectorAll('.category-recently-used-tags .badge');
         const categorySearchInputStep2 = categoryDropdownWrapperStep2.querySelector('.category-search-input-dropdown');
-        
+
         // --- Rebind Category Item Click ---
         categoryItemsStep2.forEach(item => {
             item.addEventListener('click', function (event) {
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-    
+
     // Custom select function for Step 2 that only updates the internal display
     function selectCategoryInStep2(categoryId, categoryPath) {
         const clonedDropdownButton = categoryDropdownWrapperStep2.querySelector('#categoryDropdownButton');
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (clonedDisplay) clonedDisplay.textContent = categoryPath;
         if (clonedHiddenInput) clonedHiddenInput.value = categoryId;
-        
+
         if (typeof $ !== 'undefined' && clonedDropdownButton) {
             $(clonedDropdownButton).dropdown('hide');
         }
@@ -246,19 +246,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 1. Toggling the Edit Section
     if (editBasicInfoButton) {
-        editBasicInfoButton.addEventListener('click', function() {
+        editBasicInfoButton.addEventListener('click', function () {
             productSummaryDisplay.style.display = 'none';
             basicInfoEditSection.style.display = 'block';
-            
+
             // Sync current data to the editable fields on open
-            if(productNameInputStep2) productNameInputStep2.value = hiddenProductName.value;
-            if(productNameCountStep2) productNameCountStep2.textContent = hiddenProductName.value.length;
-            
+            if (productNameInputStep2) productNameInputStep2.value = hiddenProductName.value;
+            if (productNameCountStep2) productNameCountStep2.textContent = hiddenProductName.value.length;
+
             // If the category dropdown wasn't synced before (shouldn't happen, but safety)
             syncCategoryHtmlToStep2();
         });
     }
-    
+
     // 2. Character Count for Step 2 Name
     if (productNameInputStep2 && productNameCountStep2) {
         productNameInputStep2.addEventListener('input', function () {
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 3. Saving the Changes
     if (saveBasicInfoButton) {
-        saveBasicInfoButton.addEventListener('click', function() {
+        saveBasicInfoButton.addEventListener('click', function () {
             const newProductName = productNameInputStep2.value.trim();
             const newCategoryId = categoryDropdownWrapperStep2.querySelector('#selectedCategoryId').value;
             const newCategoryPath = categoryDropdownWrapperStep2.querySelector('#selectedCategoryDisplay').textContent;
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
             hiddenProductName.value = newProductName;
             hiddenCategoryId.value = newCategoryId;
             hiddenCategoryPath.value = newCategoryPath;
-            
+
             // Update the read-only summary display
             if (summaryProductName) summaryProductName.textContent = newProductName;
             if (summaryCategoryPath) summaryCategoryPath.textContent = newCategoryPath;
@@ -545,6 +545,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tablePlaceholder.style.display = 'none';
         tableEl.style.display = 'table';
 
+        // 1. Build Table Header
         tableHeader.innerHTML = '';
         let headerHtml = '';
 
@@ -553,22 +554,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         headerHtml += `
-        <th class="text-danger">* Price</th>
-        <th>Special Price</th>
-        <th class="text-danger">* Stock</th>
-        <th>Seller SKU</th>
-        <th>Free Items</th>
-        <th>Availability</th>
-    `;
+    <th class="text-danger">* Price</th>
+    <th>Special Price</th>
+    <th class="text-danger">* Stock</th>
+    <th>Seller SKU</th>
+    <th>Free Items</th>
+    <th>Availability</th>
+`;
         tableHeader.innerHTML = headerHtml;
 
+        // 2. Build Table Body
         tableBody.innerHTML = '';
 
         const rowSpan = variants.length > 1 ? combinations.length / variants[0].values.length : 1;
 
+        // --- SKU BASE IDENTIFIER LOGIC ---
+        // Get a base identifier for the auto-generated SKU (e.g., first 4 letters of product name)
+        const productName = document.getElementById('product_name')?.value.trim().toUpperCase() || 'PROD';
+        const baseIdentifier = productName.substring(0, 4).replace(/\W/g, '');
+        // ---------------------------------
+
         let bodyHtml = '';
         combinations.forEach((combo, index) => {
+            // Create the unique key used for input names (e.g., Red_S)
             const uniqueKey = combo.map(v => v.replace(/\W/g, '')).join('_');
+
+            // --- NEW CODE: Auto-generate the unique SKU string ---
+            const defaultUniqueSku = `${baseIdentifier}-${uniqueKey.replace(/_/g, '-')}`.toUpperCase();
+            // -----------------------------------------------------
 
             bodyHtml += `<tr>`;
 
@@ -581,28 +594,28 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             bodyHtml += `
-            <td><input type="number" name="price_${uniqueKey}" class="form-control form-control-sm" placeholder="Price"></td>
-            <td>
-                <input type="number" name="special_price_${uniqueKey}" class="form-control form-control-sm" placeholder="Special Price">
-            </td>
-            <td><input type="number" name="stock_${uniqueKey}" class="form-control form-control-sm" placeholder="Stock"></td>
-            <td><input type="text" name="sku_${uniqueKey}" class="form-control form-control-sm" placeholder="Seller SKU"></td>
-            <td><input type="text" name="free_items_${uniqueKey}" class="form-control form-control-sm" placeholder=""></td>
-            <td>
-                <label class="switch">
-                    <input type="checkbox" name="available_${uniqueKey}" checked>
-                    <span class="slider round"></span>
-                </label>
-            </td>
-        </tr>`;
+        <td><input type="number" name="price_${uniqueKey}" class="form-control form-control-sm" placeholder="Price"></td>
+        <td>
+            <input type="number" name="special_price_${uniqueKey}" class="form-control form-control-sm" placeholder="Special Price">
+        </td>
+        <td><input type="number" name="stock_${uniqueKey}" class="form-control form-control-sm" placeholder="Stock"></td>
+        
+        <td><input type="text" name="sku_${uniqueKey}" class="form-control form-control-sm" placeholder="Seller SKU" value="${defaultUniqueSku}"></td>
+        
+        <td><input type="text" name="free_items_${uniqueKey}" class="form-control form-control-sm" placeholder=""></td>
+        <td>
+            <label class="switch">
+                <input type="checkbox" name="available_${uniqueKey}" checked>
+                <span class="slider round"></span>
+            </label>
+        </td>
+    </tr>`;
         });
 
         tableBody.innerHTML = bodyHtml;
     }
 
-
     // --- Variant 1 (Select-and-Add Logic) ---
-
     function getUsedVariant1Values() {
         const usedValues = [];
         document.querySelectorAll('#variantPills_1 .variant-input-row[data-is-fixed="true"]').forEach(row => {
@@ -845,20 +858,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
     renderVariantTable();
 
-
     // --- Bulk Apply Logic ---
     document.querySelector('.apply-to-all-btn').addEventListener('click', function () {
         const price = document.querySelector('.bulk-input[data-field="price"]').value;
         const specialPrice = document.querySelector('.bulk-input[data-field="special_price"]').value;
         const stock = document.querySelector('.bulk-input[data-field="stock"]').value;
-        const sku = document.querySelector('.bulk-input[data-field="sku"]').value;
+        const baseSku = document.querySelector('.bulk-input[data-field="sku"]').value.trim(); // Get the base SKU
 
+        // 1. Bulk apply Price, Special Price, and Stock (unchanged)
         if (price) { document.querySelectorAll('input[name^="price_"]').forEach(input => input.value = price); }
         if (specialPrice) { document.querySelectorAll('input[name^="special_price_"]').forEach(input => input.value = specialPrice); }
         if (stock) { document.querySelectorAll('input[name^="stock_"]').forEach(input => input.value = stock); }
-        if (sku) { document.querySelectorAll('input[name^="sku_"]').forEach(input => input.value = sku); }
 
-        alert('Bulk fields applied to all visible rows!');
+        // 2. Bulk apply and GENERATE UNIQUE SKU
+        if (baseSku) {
+            const variantRows = document.querySelectorAll('#variantTableBody tr');
+
+            variantRows.forEach((row, index) => {
+                // Determine the unique key for this row's input.
+                // Since your input names are structured as 'sku_<uniqueKey>', we must find the key.
+                // The easiest way is to target the specific SKU input in the row.
+                const skuInput = row.querySelector('input[name^="sku_"]');
+
+                if (skuInput) {
+                    // Extract the unique key from the input's 'name' attribute
+                    const fullInputName = skuInput.name; // e.g., 'sku_Red_S'
+                    const uniqueIdentifier = fullInputName.substring(4); // e.g., '_Red_S' (Keep the underscore if needed)
+
+                    // Generate the new unique SKU
+                    const newSku = `${baseSku}-${uniqueIdentifier.replace(/_/g, '-')}`;
+
+                    // Cleanup example: remove leading underscores if present, replace others with dashes
+                    // Alternatively, for a simple unique number suffix:
+                    // const newSku = `${baseSku}-${index + 1}`; 
+
+                    skuInput.value = newSku;
+                }
+            });
+        }
     });
     // --- End of Variant Management Logic ---
 
@@ -985,7 +1022,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const skuBulkCount = document.getElementById('skuBulkCount');
 
     if (skuBulkInput && skuBulkCount) {
-        skuBulkInput.addEventListener('input', function() {
+        skuBulkInput.addEventListener('input', function () {
             skuBulkCount.textContent = this.value.length;
         });
         // Set initial count if there's a default value
