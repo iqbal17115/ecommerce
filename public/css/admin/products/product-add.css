@@ -934,15 +934,73 @@ input:checked + .slider:before { transform: translateX(16px); }
 
 /* --- Summernote Visual Fixes (Ensures Dark Text) --- */
 
-.note-editable {
-    color: #333 !important; 
-    background-color: #fff !important; 
-    font-size: 0.875rem; 
+/* --- Summernote Toolbar Styling (Final Space & Highlight Fix) --- */
+
+/* 1. Target the overall toolbar container for soft background */
+.note-editor .note-toolbar {
+    background-color: #f7f7f7 !important; 
+    border-color: #e9e9e9 !important; 
+    padding: 3px 6px !important; /* REDUCED PADDING for the entire bar */
+}
+
+/* 2. Target the individual buttons (default state) - SPACE REDUCTION */
+.note-editor .btn.btn-sm, 
+.note-editor .note-btn {
+    /* Significantly reduce the padding inside the button */
+    padding: 2px 4px !important; 
+    /* Reduce margin between buttons if necessary, though padding should be enough */
+    margin: 0 1px !important; 
+    
+    color: #6c757d !important; 
+    background-color: transparent !important; 
+    border: 1px solid transparent !important; 
+    font-size: 0.8rem !important; /* Optional: Make the icon size slightly smaller */
+    border-radius: 4px !important; 
+}
+
+/* 3. Soften Hover and Focus States */
+.note-editor .btn.btn-sm:hover,
+.note-editor .note-btn:hover,
+.note-editor .note-btn:focus {
+    color: #333 !important;
+    background-color: #e9ecef !important; /* Soft light gray on hover */
+    border-color: #dee2e6 !important; 
+    box-shadow: none !important; 
+}
+
+/* 4. GUARANTEED FIX: Overriding the Active/Selected State (Less Highlighted) */
+/* Targets all combinations of active/selected buttons */
+.note-editor .note-btn.active, 
+.note-editor .note-btn:active, 
+.note-editor .note-btn.active:focus,
+.note-editor .note-btn:focus:active {
+    /* Use a completely neutral, muted color for the highlight */
+    background-color: #b0b0b0 !important; /* Muted gray background when active */
+    border-color: #b0b0b0 !important;
+    /* Use a darker icon color for contrast */
+    color: #333 !important;
+    box-shadow: none !important;
+}
+
+/* Ensure the icon element itself inside the active button uses the dark color */
+.note-editor .note-btn.active i,
+.note-editor .note-btn:active i {
+    color: #333 !important;
+}
+
+/* --- Final Fix: Overriding Muted Text Color in Summernote Content Area --- */
+
+/* Target the main editable div and force dark text color */
+.note-editable[contenteditable="true"] {
+    color: #333 !important;
     opacity: 1 !important;
 }
 
-.note-editable p {
+/* Target all paragraph and list elements directly inside the editor */
+.note-editable p,
+.note-editable li,
+.note-editable div {
     color: #333 !important;
+    opacity: 1 !important;
     margin-bottom: 5px; 
 }
-/* ... other Summernote fixes ... */
