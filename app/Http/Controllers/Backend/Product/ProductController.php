@@ -68,6 +68,7 @@ class ProductController extends Controller
             'category_id' => $product->category_id,
             'category_name' => $product->category->name,
             'brand_id' => $product->brand_id,
+            'brand_name' => $product->brand->name,
             'medias' => $product->media->map(function ($media) {
                 return [
                     'id' => $media->id,

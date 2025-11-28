@@ -92,7 +92,7 @@ class AdminProductService
         return Product::create([
             'name'               => $req['product_name'],
             'category_id'        => $req['category_id'],
-            'brand_id'           => $req['brand_id'] ?? "9a602108-1725-4ab5-93a5-89dc45ed2ff5",
+            'brand_id'           => $req['brand_id'],
             'description'        => $req['description'],
             'short_description'  => $req['short_description'],
             'highlights'         => $req['highlights'],

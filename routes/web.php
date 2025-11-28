@@ -441,6 +441,7 @@ Route::group(['middleware' => 'web'], function () {
             [],
             function () {
                 Route::get('product-brand', [BrandController::class, 'index'])->name('product-brand');
+                Route::get('brand-select-list', [BrandController::class, 'selectList'])->name('brand.select_list');
                 Route::post('add-brand', [BrandController::class, 'addBrand'])->name('add.brand');
                 Route::post('delete-brand', [BrandController::class, 'deleteBrand'])->name('delete.brand');
                 Route::get('pagination/brand-pagination-data', [BrandController::class, 'pagination']);

@@ -2,34 +2,42 @@
 
 namespace App\Http\Controllers\Backend\Product;
 
+use App\Helpers\Message;
 use App\Models\Backend\Product\Brand;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SelectListRequest;
+use App\Http\Resources\SelectListResource;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    public function searchBrand(Request $request) {
-        $brands = Brand::where('name', 'like', '%'.$request->search_string.'%')->orderBy('id', 'desc')->paginate(10);
-        if($brands->count() >= 1) {
-        return view('backend.product.pagination-brand', compact('brands'))->render();
-        }else {
+
+    public function searchBrand(Request $request)
+    {
+        $brands = Brand::where('name', 'like', '%' . $request->search_string . '%')->orderBy('id', 'desc')->paginate(10);
+        if ($brands->count() >= 1) {
+            return view('backend.product.pagination-brand', compact('brands'))->render();
+        } else {
             return response()->json([
                 'status' => 'nothing_found'
             ]);
         }
     }
-    public function pagination(Request $request) {
+    public function pagination(Request $request)
+    {
         $brands = Brand::latest()->paginate(10);
         return view('backend.product.pagination-brand', compact('brands'))->render();
     }
-    public function deleteBrand(Request $request) {
+    public function deleteBrand(Request $request)
+    {
         $brand = Brand::find($request->id)->delete();
         return response()->json([
             'status' => 'success'
         ]);
     }
-    public function addBrand(Request $request) {
+    public function addBrand(Request $request)
+    {
         $request->validate(
             [
                 'name' => 'required|max:20',
@@ -40,9 +48,9 @@ class BrandController extends Controller
                 'is_active' => 'Status is required',
             ]
         );
-        if($request->cu_id > 0) {
+        if ($request->cu_id > 0) {
             $brand = Brand::find($request->cu_id);
-        }else {
+        } else {
             $request->validate(
                 [
                     'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -73,8 +81,18 @@ class BrandController extends Controller
             'status' => 'success'
         ]);
     }
-    public function index() {
+    public function index()
+    {
         $brands = Brand::latest()->paginate(10);
         return view('backend.product.brand', compact('brands'));
+    }
+
+    public function selectList(SelectListRequest $selectListRequest)
+    {
+        // Get the lists
+        $lists = Brand::selectLists(Brand::query(), $selectListRequest->validated(), SelectListResource::class);
+
+        // Return success response with the lists
+        return Message::success(null, $lists);
     }
 }

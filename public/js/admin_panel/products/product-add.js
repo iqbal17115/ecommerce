@@ -1320,4 +1320,52 @@ $(document).ready(function () {
         galleryContainer.querySelectorAll('.upload-box-wrapper').forEach(setupImageUpload);
     }
     // End Upload Image
+
+
+    // Start Brand
+    // Utility to populate select options
+    function populateSelect(selectId, items, placeholder = 'Select') {
+        const select = document.getElementById(selectId);
+        select.innerHTML = `<option value="">${placeholder}</option>`; // Reset options
+
+        items.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.id;   // assuming your SelectListResource has 'id'
+            option.textContent = item.name; // assuming your SelectListResource has 'name'
+            select.appendChild(option);
+        });
+    }
+
+
+    const brandSelect = document.getElementById('brand_id');
+    let loaded = false; // prevent multiple AJAX calls
+    const selectedBrandId = window.PRODUCT_DATA?.brand_id ?? "";
+
+    brandSelect.addEventListener('click', function () {
+        if (loaded) return; // already loaded
+
+        getDetails('/brand-select-list', function (data) {
+            // Clear existing options
+            brandSelect.innerHTML = `<option value="">Select Brand</option>`;
+
+            // Populate options
+            data.results.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = item.name;
+
+                // Keep selected brand
+                if (item.id == selectedBrandId) {
+                    option.selected = true;
+                }
+
+                brandSelect.appendChild(option);
+            });
+
+            loaded = true; // mark as loaded
+        }, function (error) {
+            console.error('Error fetching brands:', error);
+        });
+    });
+    // End Brand
 });
