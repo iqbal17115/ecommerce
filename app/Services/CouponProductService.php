@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Enums\TransactionType;
-use App\Models\Backend\Product\Product;
 use App\Models\Coupon;
 use App\Models\JournalEntry;
 use App\Models\Transaction;

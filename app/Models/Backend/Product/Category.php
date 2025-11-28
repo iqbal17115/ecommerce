@@ -38,6 +38,16 @@ class Category extends Model
         return $this->subcategories()->with('allSubcategories');
     }
 
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_category_id');
+    }
+
+    public function childrenRecursive()
+    {
+        return $this->children()->with('childrenRecursive');
+    }
+
     public function getParentsAttribute()
     {
         $parents = [];

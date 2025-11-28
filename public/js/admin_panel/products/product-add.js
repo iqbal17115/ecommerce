@@ -1,3 +1,74 @@
+// --- PRODUCT IMAGES LOGIC ---
+// Define globally
+function setupImageUpload(wrapper) {
+    const input = wrapper.querySelector('.image-input');
+    const uploadBox = wrapper.querySelector('.upload-box');
+    const type = wrapper.dataset.type;
+    const index = parseInt(wrapper.dataset.index);
+
+    if (!input) return;
+
+    if (type === "gallery" && !input.name) input.name = "gallery_images[]";
+
+    input.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            uploadBox.innerHTML = `
+                <img src="${e.target.result}" class="preview-image" alt="Product Preview">
+                <div class="upload-icons">
+                    <i class="fas fa-trash-alt delete-image-icon"></i>
+                    <i class="fas fa-edit edit-image-icon"></i>
+                </div>
+            `;
+            uploadBox.classList.remove('dashed-border');
+            uploadBox.classList.add('has-image');
+
+            // delete handler
+            uploadBox.querySelector('.delete-image-icon').addEventListener('click', () => {
+                uploadBox.innerHTML = `<p class="text-muted">Upload Image</p>`;
+                uploadBox.classList.add('dashed-border');
+                uploadBox.classList.remove('has-image');
+                input.value = "";
+                if (type === "gallery" && index === getLastGalleryIndex()) {
+                    addNextGalleryUploadBox(index + 1);
+                }
+            });
+
+            wrapper.appendChild(input);
+
+            if (type === "gallery" && index === getLastGalleryIndex()) {
+                addNextGalleryUploadBox(index + 1);
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function addNextGalleryUploadBox(newIndex) {
+    const container = document.getElementById('mainGalleryUploadArea');
+    const newWrapper = document.createElement('div');
+    newWrapper.className = 'upload-box-wrapper';
+    newWrapper.dataset.type = 'gallery';
+    newWrapper.dataset.index = newIndex;
+
+    newWrapper.innerHTML = `
+        <div class="upload-box gallery-image-box dashed-border">
+            <i class="fas fa-plus"></i>
+            <input type="file" name="gallery_images[]" class="image-input" accept="image/*">
+        </div>
+    `;
+    container.appendChild(newWrapper);
+    setupImageUpload(newWrapper);
+}
+
+function getLastGalleryIndex() {
+    const galleryWrappers = document.querySelectorAll('#mainGalleryUploadArea .upload-box-wrapper[data-type="gallery"]');
+    return galleryWrappers.length > 0 ? parseInt(galleryWrappers[galleryWrappers.length - 1].dataset.index) : 0;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // --- STEP 1: Product Name Character Count ---
     const productNameInput = document.getElementById('product_name');
@@ -467,74 +538,97 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- VARIANT MANAGEMENT LOGIC ---
 
     // --- DUMMY DATA ---
-    const ALL_INT_SIZES = ["3XS", "XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL", "5XL", "XS/S", "S/M", "M/L", "L/XL", "W22 L30", "W23 L30", "W24 L30", "W25 L30", "W27 L30", "W35 L30", "W36 L30", "W37 L30", "W38 L30", "W39 L30", "W40 L30", "W41 L30", "W42 L30", "W43 L30", "W44 L30", "W22 L32", "W23 L32", "W24 L32", "W25 L32", "W27 L32", "W35 L32", "W37 L32", "W39 L32", "W41 L32", "W42 L32"];
-    const ALL_COLOR_OPTIONS = ["Red", "Green", "Blue", "Yellow", "Maroon", "Black", "White", "Gray"];
+    let ALL_INT_SIZES = [];
+    let ALL_COLOR_OPTIONS = [];
 
 
     // --- Helper Functions ---
 
+    // ----------------------------
+    // 1️⃣ Get current variants from DOM
+    // ----------------------------
     function getVariantState() {
         const variants = [];
+
         document.querySelectorAll('.variant-block').forEach(block => {
-            const index = block.getAttribute('data-variant-index');
+            const index = parseInt(block.getAttribute('data-variant-index'));
             const nameInput = document.getElementById(`variant_name_${index}`);
             const name = nameInput ? (nameInput.value || `Variant ${index}`) : `Variant ${index}`;
 
             const values = [];
 
-            if (parseInt(index) === 1) {
-                // Variant 1: Get values from the data-value attribute set on fixed rows
-                block.querySelectorAll('.variant-pills-list-container .variant-input-row[data-is-fixed="true"]').forEach(row => {
-                    const value = row.getAttribute('data-value');
-                    if (value) values.push(value);
-                });
-            } else {
-                // Variant 2: Get values from the generated pills
-                block.querySelectorAll('.variant-pills-list .variant-pill').forEach(pill => {
-                    values.push(pill.getAttribute('data-value'));
-                });
-            }
+            // fallback to hidden inputs
+            block.querySelectorAll(`input[name^="variant_values[${index}]"]`).forEach(input => {
+                if (input.value) values.push(input.value.trim());
+            });
+
+            // Variant 1 fixed rows
+            block.querySelectorAll('.variant-input-row[data-is-fixed="true"]').forEach(row => {
+                const val = row.getAttribute('data-value');
+                if (val) values.push(val.trim());
+            });
+
+            // Variant 2+ pills
+            block.querySelectorAll('.variant-pill').forEach(pill => {
+                const val = pill.getAttribute('data-value');
+                if (val) values.push(val.trim());
+            });
 
             if (values.length > 0) {
                 variants.push({
-                    index: parseInt(index),
-                    name: name,
-                    values: values,
+                    index,
+                    name,
+                    values,
                     isImageVariant: block.querySelector('.variant-image-checkbox')?.checked || false
                 });
             }
         });
+
         return variants;
     }
 
+    // ----------------------------
+    // 2️⃣ Generate all combinations
+    // ----------------------------
     function generateCombinations(variants) {
         if (variants.length === 0) return [];
 
-        let combinations = variants[0].values.map(v => [v]);
+        let combos = variants[0].values.map(v => [v]);
 
         for (let i = 1; i < variants.length; i++) {
             const nextValues = variants[i].values;
-            const newCombinations = [];
-
-            combinations.forEach(currentCombo => {
-                nextValues.forEach(nextValue => {
-                    newCombinations.push([...currentCombo, nextValue]);
+            const newCombos = [];
+            combos.forEach(c => {
+                nextValues.forEach(v => {
+                    newCombos.push([...c, v]);
                 });
             });
-            combinations = newCombinations;
+            combos = newCombos;
         }
-        return combinations;
+
+        return combos;
     }
 
+    // ----------------------------
+    // 3️⃣ Render table with proper saved data mapping
+    // ----------------------------
     function renderVariantTable() {
         const variants = getVariantState();
-        const combinations = generateCombinations(variants);
+        const combos = generateCombinations(variants);
+
         const tableHeader = document.getElementById('variantTableHeader');
         const tableBody = document.getElementById('variantTableBody');
         const tablePlaceholder = document.getElementById('tablePlaceholder');
         const tableEl = document.querySelector('.variant-price-stock-table');
 
-        if (combinations.length === 0) {
+        // Map saved backend data by **sorted option values** to match new combos
+        const savedData = {};
+        (window.EDIT_PRODUCT?.combinations || []).forEach(c => {
+            const sortedKey = c.option_values.map(v => v.trim().replace(/\W/g, '').toUpperCase()).join('_');
+            savedData[sortedKey] = c;
+        });
+
+        if (combos.length === 0) {
             tableHeader.innerHTML = '';
             tableBody.innerHTML = '';
             tablePlaceholder.style.display = 'block';
@@ -545,71 +639,56 @@ document.addEventListener('DOMContentLoaded', function () {
         tablePlaceholder.style.display = 'none';
         tableEl.style.display = 'table';
 
-        // 1. Build Table Header
-        tableHeader.innerHTML = '';
-        let headerHtml = '';
-
-        variants.forEach(v => {
-            headerHtml += `<th>${v.name}</th>`;
-        });
-
+        // Table header
+        let headerHtml = variants.map(v => `<th>${v.name}</th>`).join('');
         headerHtml += `
-    <th class="text-danger">* Price</th>
-    <th>Special Price</th>
-    <th class="text-danger">* Stock</th>
-    <th>Seller SKU</th>
-    <th>Free Items</th>
-    <th>Availability</th>
-`;
+        <th class="text-danger">* Price</th>
+        <th>Special Price</th>
+        <th class="text-danger">* Stock</th>
+        <th>Seller SKU</th>
+        <th>Free Items</th>
+        <th>Availability</th>`;
         tableHeader.innerHTML = headerHtml;
 
-        // 2. Build Table Body
-        tableBody.innerHTML = '';
-
-        const rowSpan = variants.length > 1 ? combinations.length / variants[0].values.length : 1;
-
-        // --- SKU BASE IDENTIFIER LOGIC ---
-        // Get a base identifier for the auto-generated SKU (e.g., first 4 letters of product name)
         const productName = document.getElementById('product_name')?.value.trim().toUpperCase() || 'PROD';
         const baseIdentifier = productName.substring(0, 4).replace(/\W/g, '');
-        // ---------------------------------
 
         let bodyHtml = '';
-        combinations.forEach((combo, index) => {
-            // Create the unique key used for input names (e.g., Red_S)
-            const uniqueKey = combo.map(v => v.replace(/\W/g, '')).join('_');
 
-            // --- NEW CODE: Auto-generate the unique SKU string ---
-            const defaultUniqueSku = `${baseIdentifier}-${uniqueKey.replace(/_/g, '-')}`.toUpperCase();
-            // -----------------------------------------------------
+        combos.forEach(values => {
+            // generate sorted key to match saved data
+            const key = values.map(v => v.trim().replace(/\W/g, '').toUpperCase()).join('_');
+
+            const saved = savedData[key] || {};
+
+            const fallbackSku = `${baseIdentifier}-${key.replace(/_/g, '-')}`;
 
             bodyHtml += `<tr>`;
 
-            if (index % rowSpan === 0) {
-                bodyHtml += `<td ${rowSpan > 1 ? `rowspan="${rowSpan}"` : ''}>${combo[0]}</td>`;
-            }
-
-            combo.slice(1).forEach(value => {
-                bodyHtml += `<td>${value}</td>`;
+            // option values
+            values.forEach(v => {
+                bodyHtml += `<td>${v}</td>`;
             });
 
             bodyHtml += `
-        <td><input type="number" name="price_${uniqueKey}" class="form-control form-control-sm" placeholder="Price"></td>
-        <td>
-            <input type="number" name="special_price_${uniqueKey}" class="form-control form-control-sm" placeholder="Special Price">
-        </td>
-        <td><input type="number" name="stock_${uniqueKey}" class="form-control form-control-sm" placeholder="Stock"></td>
-        
-        <td><input type="text" name="sku_${uniqueKey}" class="form-control form-control-sm" placeholder="Seller SKU" value="${defaultUniqueSku}"></td>
-        
-        <td><input type="text" name="free_items_${uniqueKey}" class="form-control form-control-sm" placeholder=""></td>
-        <td>
-            <label class="switch">
-                <input type="checkbox" name="available_${uniqueKey}" checked>
-                <span class="slider round"></span>
-            </label>
-        </td>
-    </tr>`;
+            <td><input type="number" name="combinations[${key}][price]" value="${saved.price ?? ''}" class="form-control form-control-sm" required></td>
+            <td><input type="number" name="combinations[${key}][special_price]" value="${saved.special_price ?? ''}" class="form-control form-control-sm"></td>
+            <td><input type="number" name="combinations[${key}][stock]" value="${saved.stock ?? ''}" class="form-control form-control-sm" required></td>
+            <td><input type="text" name="combinations[${key}][seller_sku]" value="${saved.seller_sku ?? fallbackSku}" class="form-control form-control-sm" required></td>
+            <td><input type="text" name="combinations[${key}][free_items]" value="${saved.free_items ?? ''}" class="form-control form-control-sm"></td>
+            <td>
+                <label class="switch">
+                    <input type="checkbox" name="combinations[${key}][available]" ${saved.available ? 'checked' : ''}>
+                    <span class="slider round"></span>
+                </label>
+            </td>`;
+
+            // hidden option values
+            values.forEach(v => {
+                bodyHtml += `<input type="hidden" name="combinations[${key}][option_values][]" value="${v}">`;
+            });
+
+            bodyHtml += `</tr>`;
         });
 
         tableBody.innerHTML = bodyHtml;
@@ -624,7 +703,37 @@ document.addEventListener('DOMContentLoaded', function () {
         return usedValues;
     }
 
+    /**
+ * Load all color options dynamically from backend
+ */
+    function loadColorOptions(callback) {
+        // Only load once
+        if (ALL_COLOR_OPTIONS.length > 0) {
+            if (callback && typeof callback === 'function') callback();
+            return;
+        }
+
+        getDetails('/attributes/color-values', function (response) {
+            if (response.success) {
+                ALL_COLOR_OPTIONS = response.data;
+                if (callback && typeof callback === 'function') callback();
+            } else {
+                console.error('Failed to load color values.');
+            }
+        }, function (error) {
+            console.error('Error fetching color values:', error);
+        });
+    }
+
+    /**
+     * Update color dropdown dynamically
+     */
     function updateVariant1DynamicSelect(selectElement) {
+        // Ensure color options are loaded before populating
+        if (ALL_COLOR_OPTIONS.length === 0) {
+            loadColorOptions(() => updateVariant1DynamicSelect(selectElement));
+            return;
+        }
         const usedValues = getUsedVariant1Values();
         const currentSelectedValue = selectElement.value;
 
@@ -740,7 +849,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function populateSizeModalGrid() {
         const sizeGrid = document.querySelector('#v-pills-int .size-grid');
         sizeGrid.innerHTML = '';
-
         ALL_INT_SIZES.forEach(size => {
             const isSelected = currentSelectedModalSizes.includes(size);
             const sizeOptionDiv = document.createElement('div');
@@ -786,13 +894,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Modal show event listener
+    // When modal is about to show
     $('#sizeSelectionModal').on('show.bs.modal', function (e) {
         currentSelectedModalSizes = [];
+
         document.querySelectorAll('#variantPills_2 .variant-pill').forEach(pill => {
             currentSelectedModalSizes.push(pill.getAttribute('data-value'));
         });
-        populateSizeModalGrid();
-        updateSelectedSizeCount();
+
+        if (ALL_INT_SIZES.length === 0) {
+            // Load size values via AJAX only once
+            getDetails('/attributes/size-values', function (response) {
+                if (response.success) {
+                    ALL_INT_SIZES = response.data;
+                    populateSizeModalGrid();
+                    updateSelectedSizeCount();
+                } else {
+                    console.error('Failed to load sizes');
+                }
+            }, function (error) {
+                console.error('Error fetching size values:', error);
+            });
+        } else {
+            populateSizeModalGrid();
+            updateSelectedSizeCount();
+        }
     });
 
     // Confirm button in modal
@@ -900,7 +1026,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- End of Variant Management Logic ---
 
     // --- PRODUCT IMAGES LOGIC ---
-
     function setupImageUpload(wrapper) {
         const input = wrapper.querySelector('.image-input');
         const uploadBox = wrapper.querySelector('.upload-box');
@@ -909,33 +1034,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!input) return;
 
+        // Always ensure input has name="gallery_images[]"
+        if (type === "gallery" && !input.name) {
+            input.name = "gallery_images[]";
+        }
+
         input.addEventListener('change', function (event) {
             const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    // 1. Display the preview image
-                    uploadBox.innerHTML = `
-                    <img src="${e.target.result}" class="preview-image" alt="Product Preview">
-                    <div class="upload-icons">
-                        <i class="fas fa-trash-alt delete-image-icon"></i>
-                        <i class="fas fa-edit edit-image-icon"></i>
-                    </div>
-                    ${input.outerHTML} 
-                `;
-                    uploadBox.classList.remove('dashed-border');
-                    uploadBox.classList.add('has-image');
+            if (!file) return;
 
-                    // Rebind the delete listener after innerHTML update
-                    uploadBox.querySelector('.delete-image-icon').addEventListener('click', handleDeleteImage);
+            const reader = new FileReader();
+            reader.onload = function (e) {
 
-                    // 2. Add the next gallery upload box if this one was just filled
-                    if (type === 'gallery' && index === getLastGalleryIndex()) {
+                // ⭐ DO NOT overwrite input
+                uploadBox.innerHTML = `
+                <img src="${e.target.result}" class="preview-image" alt="Product Preview">
+                <div class="upload-icons">
+                    <i class="fas fa-trash-alt delete-image-icon"></i>
+                    <i class="fas fa-edit edit-image-icon"></i>
+                </div>
+            `;
+
+                uploadBox.classList.remove('dashed-border');
+                uploadBox.classList.add('has-image');
+
+                // Rebind delete handler
+                uploadBox.querySelector('.delete-image-icon').addEventListener('click', () => {
+                    // Reset preview
+                    uploadBox.innerHTML = `<p class="text-muted">Upload Image</p>`;
+                    uploadBox.classList.add('dashed-border');
+                    uploadBox.classList.remove('has-image');
+
+                    // Clear file input
+                    input.value = "";
+
+                    // Maintain gallery rules
+                    if (type === "gallery" && index === getLastGalleryIndex()) {
                         addNextGalleryUploadBox(index + 1);
                     }
-                };
-                reader.readAsDataURL(file);
-            }
+                });
+
+                // ⭐ Append input back to wrapper (not inside uploadBox)
+                wrapper.appendChild(input);
+
+                // ⭐ Auto-add next gallery box
+                if (type === "gallery" && index === getLastGalleryIndex()) {
+                    addNextGalleryUploadBox(index + 1);
+                }
+            };
+
+            reader.readAsDataURL(file);
         });
     }
 
@@ -1003,7 +1151,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="upload-box gallery-image-box dashed-border">
             <i class="fas fa-plus"></i>
             ${placeholderText}
-            <input type="file" name="gallery_images[]" class="image-input" accept="image/*">
+            <input type="file" name="gallery_images[]" class="image-input" accept="image/*" style>
         </div>
     `;
 
@@ -1028,4 +1176,148 @@ document.addEventListener('DOMContentLoaded', function () {
         // Set initial count if there's a default value
         skuBulkCount.textContent = skuBulkInput.value.length;
     }
+
+    /**
+ * =========================================================================
+ * MOCK UTILITY FUNCTIONS (Needed for saveAction dependencies)
+ * NOTE: These assume you are using jQuery for AJAX.
+ * =========================================================================
+ */
+
+    /**
+     * Mock utility for making a simple GET or DELETE request.
+     */
+    function requestParamsUrl(route, method = "GET") {
+        return $.Deferred().resolve({ results: [], message: "Success (Mock)" }).promise();
+    }
+
+    /**
+     * Simple mock confirmation dialog (since alert()/confirm() are forbidden)
+     */
+    function confirmAction(title, text, callback) {
+        console.warn(`[MOCK CONFIRMATION] ${title}: ${text}`);
+        if (callback) {
+            // In a real app, this would show a modal. For the mock, we call the callback directly.
+            callback();
+        }
+    }
+
+    /**
+     * Delete Action
+     */
+    function deleteAction(route, successCallback, errorCallback, title = "Delete", text = "Are you sure you want to delete this record?") {
+        confirmAction(title, text, () => {
+            requestParamsUrl(route, "DELETE")
+                .done(function (data) {
+                    if (successCallback && typeof successCallback === 'function') {
+                        successCallback(data);
+                    }
+                })
+                .fail(function (error) {
+                    if (errorCallback && typeof errorCallback === 'function') {
+                        errorCallback(error);
+                    }
+                });
+        });
+    }
+});
+
+/**
+    * =========================================================================
+    * PRODUCT SUBMISSION LOGIC
+    * =========================================================================
+    */
+$(document).ready(function () {
+    // 1. Target the main form. You must ensure your entire wizard is wrapped in a form tag.
+    const $productForm = $('#productWizardForm');
+    const $submitButton = $('#finalSubmitButton'); // Assuming a button with this ID
+
+    // Helper function to clear previous validation errors
+    function clearFormErrors() {
+        $('.is-invalid').removeClass('is-invalid');
+        $('.invalid-feedback').remove();
+        $submitButton.prop('disabled', false).html('Save Product');
+    }
+
+    // Helper function to handle Laravel validation errors
+    function handleFormErrors(error) {
+        clearFormErrors();
+
+        const errors = error.responseJSON?.errors;
+    }
+
+    // --- Form Submission Listener ---
+    $productForm.on('submit', function (e) {
+        e.preventDefault();
+
+        // Disable button and show loading state
+        $submitButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm mr-2"></span> Saving...');
+
+        clearFormErrors();
+
+        const form = document.getElementById('productWizardForm');
+        const formData = new FormData(form);
+
+        const isEdit = form.getAttribute('method') === 'PUT' || form.querySelector('input[name="_method"]')?.value === 'PUT';
+
+        const route = isEdit
+            ? form.getAttribute('action')  // products/{id}
+            : form.getAttribute('action'); // products
+
+        saveAction(
+            'store', // action
+            route,   // route
+            formData, // formData
+            '',      // id (not needed for store)
+
+            // Success Callback
+            function (data) {
+                alert(data.message || 'Product created successfully!', 'success');
+                // Example: Redirect to the product listing page
+                // window.location.href = '/products';
+                $submitButton.html('Product Saved!');
+            },
+
+            // Error Callback
+            function (error) {
+                handleFormErrors(error);
+            }
+        );
+    });
+
+    // Start Upload Image
+    const galleryContainer = document.getElementById('mainGalleryUploadArea');
+    const editProduct = window.EDIT_PRODUCT || {};
+
+    // 1️⃣ Render existing media (if any)
+    if (editProduct.medias && editProduct.medias.length > 0) {
+        galleryContainer.innerHTML = ''; // clear placeholder
+
+        editProduct.medias.forEach((media, idx) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'upload-box-wrapper';
+            wrapper.dataset.type = 'gallery';
+            wrapper.dataset.index = idx + 1;
+
+            wrapper.innerHTML = `
+                <div class="upload-box gallery-image-box has-image">
+                    <img src="${media.url}" class="preview-image" alt="Product Image">
+                    <div class="upload-icons">
+                        <i class="fas fa-trash-alt delete-image-icon"></i>
+                    </div>
+                    <input type="file" name="gallery_images[]" class="image-input" accept="image/*" style="display:none">
+                </div>
+            `;
+            galleryContainer.appendChild(wrapper);
+
+            setupImageUpload(wrapper); // bind listeners for replace/delete
+        });
+
+        // Ensure an empty box at the end for adding new images
+        addNextGalleryUploadBox(editProduct.medias.length + 1);
+    } else {
+        // No existing images, just bind existing box
+        galleryContainer.querySelectorAll('.upload-box-wrapper').forEach(setupImageUpload);
+    }
+    // End Upload Image
 });

@@ -7,7 +7,6 @@ use App\Helpers\Message;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Review\StoreUserReviewRequest;
 use App\Http\Resources\User\Review\UserReviewListResource;
-use App\Models\Backend\Product\Product;
 use App\Models\FrontEnd\Review;
 use App\Services\ReviewService;
 use Illuminate\Http\Request;

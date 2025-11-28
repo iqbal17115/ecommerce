@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-use App\Models\Backend\Product\Product;
 use App\Services\CacheService;
 use App\Services\HomeCacheService;
 

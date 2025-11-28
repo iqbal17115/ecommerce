@@ -48,10 +48,10 @@
                            <span>Products</span>
                        </a>
                        <ul class="sub-menu" aria-expanded="false">
-                           <li><a href="{{ route('product-product') }}">Add Product</a></li>
+                           <li><a href="{{ route('products.create') }}">Add Product</a></li>
                            <li><a href="javascript:void(0);">Import Product</a></li>
                            <li><a href="javascript:void(0);" onclick="exportFacebookCatalog()">Export Product List</a></li>
-                           <li><a href="{{ route('product_list') }}">Manage Product</a></li>
+                           <li><a href="{{ route('product.index') }}">Manage Product</a></li>
                            <li><a href="{{ route('product-category') }}">Category</a></li>
                            <li><a href="{{ route('product-brand') }}">Brand</a></li>
                            <li><a href="{{ route('product-unit') }}">Unit</a></li>

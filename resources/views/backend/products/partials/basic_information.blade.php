@@ -1,5 +1,6 @@
 <div class="form-card">
     <h2>Basic Information</h2>
+
     {{-- START: Basic Information & Category (Always Editable in Step 2) --}}
     <div class="basic-info-editable-header mb-4 p-3 border rounded">
         <div class="row">
@@ -19,13 +20,9 @@
 
             {{-- 2. Editable Category Dropdown --}}
             <div class="col-md-6 form-group mb-0">
-                <label for="category" class="mb-1 small text-muted">
-                    <i class="fas fa-tag text-secondary mr-1"></i> Category <span class="text-danger">*</span>
-                </label>
-                {{-- Placeholder where the full category dropdown will be cloned/synced --}}
-                <div id="categoryDropdownWrapperStep2">
-                    <p class="text-muted small mb-0">Loading category selection...</p>
-                </div>
+                <label for="categoryDropdownStep2" class="mb-1 small text-muted">
+                    <i class="fas fa-tags text-primary mr-2"></i> Category <span class="text-danger">*</span>
+                <div id="categoryDropdownWrapperStep2"></div>
             </div>
         </div>
     </div>

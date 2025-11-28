@@ -2,7 +2,6 @@
 
 namespace App\Models\Cart;
 
-use App\Models\Backend\Product\Product;
 use App\Models\Cart;
 use App\Models\CartItemCoupon;
 use App\Models\ProductVariation;

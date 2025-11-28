@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Backend\Product\Product;
 use Illuminate\Support\Facades\Storage;
 
 class FacebookCatalogExportService

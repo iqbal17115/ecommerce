@@ -39,10 +39,6 @@
                         <div class="variant-input-row d-flex align-items-center mb-2" data-is-fixed="false">
                             <select class="form-control variant-value-select-dynamic" style="max-width: 250px;">
                                 <option value="">Please type or select</option>
-                                <option value="Red">Red</option>
-                                <option value="Green">Green</option>
-                                <option value="Blue">Blue</option>
-                                <option value="Yellow">Yellow</option>
                             </select>
                             <div class="ml-2 variant-media-links" style="visibility: hidden;">
                                 <a href="#">Upload</a> | <a href="#">Media Center</a>

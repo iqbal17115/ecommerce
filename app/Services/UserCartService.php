@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Helpers\SessionHelper;
-use App\Models\Backend\Product\Product;
 use App\Models\Cart;
 use App\Models\Cart\CartItem;
 use Exception;

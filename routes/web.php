@@ -458,6 +458,8 @@ Route::group(['middleware' => 'web'], function () {
                 Route::post('delete-attribute', [AttributeController::class, 'deleteAttribute'])->name('delete.attribute');
                 Route::get('pagination/attribute-pagination-data', [AttributeController::class, 'pagination']);
                 Route::get('search-attribute', [AttributeController::class, 'searchAttribute'])->name('search.attribute');
+                Route::get('/attributes/size-values', [AttributeController::class, 'getSizeValues'])->name('attributes.size-values');
+                Route::get('/attributes/color-values', [AttributeController::class, 'getColorValues'])->name('attributes.color-values');
             }
         );
         // Attribute
@@ -486,6 +488,8 @@ Route::group(['middleware' => 'web'], function () {
                 Route::get('pagination/category-pagination-data', [CategoryController::class, 'pagination']);
                 Route::get('category.hierarchy', [CategoryController::class, 'categoryHierarchy'])->name('category.hierarchy');
                 Route::get('category', [CategoryController::class, 'searchCategory'])->name('search.category');
+                Route::get('categories/tree', [CategoryController::class, 'getCategoryTree'])->name('categories.tree');
+                Route::get('categories', [CategoryController::class, 'getCategories'])->name('categories.list');
             }
         );
         // Unit Category
@@ -531,6 +535,14 @@ Route::group(['middleware' => 'web'], function () {
         );
         // End Product Feature
 
+        Route::controller(ProductController::class)->group(function () {
+            Route::get('product-list', 'index')->name('product.index');
+            Route::get('products-create', 'create')->name('products.create');
+            Route::post('products', 'store')->name('products.store');
+            Route::get('products-edit', 'edit')->name('products.edit');
+            Route::post('products-update/{product}', 'update')->name('products.update');
+        });
+
         // Start Product
         Route::group(
             [],
@@ -538,20 +550,9 @@ Route::group(['middleware' => 'web'], function () {
                 Route::get('product-product', [ProductController::class, 'index'])->name('product-product');
                 Route::get('get-category/{id}', [ProductController::class, 'getCategory'])->name('get-category');
                 Route::post('/generate-sku', [ProductController::class, 'generateSku'])->name('generate.sku');
-                Route::post('add-product_identity', [ProductController::class, 'addProductIdentity'])->name('add.product_identity');
-                Route::post('add-vital_info', [ProductController::class, 'addVitalInfo'])->name('add.vital_info');
-                Route::post('add-add_product_detail_info', [ProductController::class, 'addProductDetailInfo'])->name('add.add_product_detail_info');
-                Route::post('add-add_product_image_info', [ProductController::class, 'addProductImageInfo'])->name('add.add_product_image_info');
-                Route::post('add-add_product_description_info', [ProductController::class, 'addProductDescriptionInfo'])->name('add.add_product_description_info');
-                Route::post('add-add_product_keyword', [ProductController::class, 'addProductKeywordInfo'])->name('add.add_product_keyword');
-                Route::post('add-add_product_compliance', [ProductController::class, 'addProductComplianceInfo'])->name('add.add_product_compliance');
-                Route::post('add-add_product_more_detail', [ProductController::class, 'addProductMoreDetailInfo'])->name('add.add_product_more_detail');
-                Route::post('add-add_variant_variant', [ProductController::class, 'addProductVariantInfo'])->name('add.add_variant_variant');
-                Route::post('/product/save', [ProductController::class, 'saveProduct'])->name('product.save');
+                Route::post('/product/save', [ProductController::class, 'store'])->name('product.save');
 
                 // Product Variation
-                Route::post('products/variations', [ProductVariationController::class, 'storeVariations'])->name('products.store-variations');
-                Route::post('delete-product', [ProductController::class, 'deleteProduct'])->name('delete.product');
                 Route::post('product-stock-qty', [ProductController::class, 'updateStockQty'])->name('product_stock_qty.update');
                 Route::get('product_list', [ProductController::class, 'productList'])->name('product_list');
                 Route::get('pagination/product-pagination-data', [ProductController::class, 'pagination']);

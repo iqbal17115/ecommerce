@@ -2,7 +2,6 @@
 
 namespace App\Models\Frontend\Wishlist;
 
-use App\Models\Backend\Product\Product;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-6 form-group">
                 <label for="brand">* Brand</label>
-                <select name="brand" id="brand" class="form-control">
+                <select name="brand" id="brand_id" class="form-control">
                     <option value="">Select</option>
                     {{-- Options --}}
                 </select>
