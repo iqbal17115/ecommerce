@@ -6,7 +6,7 @@
                     <label for="product_name">Product Name <span class="text-danger">*</span></label>
                     <p class="form-text text-muted">Multiple language title will be shown when buyers change their APPs' default language setting. Setting it up can help improve product recall in Apps targeted at different languages.</p>
                     <div class="input-group">
-                        <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name', 'Ex. Nikon Coolpix A900 Digital Camera') }}" maxlength="255">
+                        <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" placeholder="Product Name" maxlength="255">
                         <div class="input-group-append">
                             <span class="input-group-text"><span id="productNameCount">0</span>/255</span>
                         </div>

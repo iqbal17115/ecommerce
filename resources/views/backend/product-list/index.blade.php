@@ -10,7 +10,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4 class="mb-0">Products</h4>
 
-        <a href="{{ route('products.store') }}" class="btn btn-primary">
+        <a href="{{ route('products.create') }}" class="btn btn-primary">
             + Add Product
         </a>
     </div>

@@ -3,7 +3,6 @@
 namespace App\Services\Admin;
 
 use App\Models\CombinationOptionPivot;
-use App\Models\Media;
 use App\Models\Product;
 use App\Models\ProductCombination;
 use App\Models\ProductSpec;
@@ -256,6 +255,23 @@ class AdminProductService
                 'path'       => $path,
                 'sort_order' => 1,
             ]);
+        }
+
+        // PROMO IMAGE
+        if (!empty($req['promo_image'])) {
+            $promo = $product->media()->where('type', 'promo')->first();
+
+            $path = $req['promo_image']->store('products/promo', 'public');
+
+            if ($promo) {
+                $promo->update(['path' => $path]);
+            } else {
+                $product->media()->create([
+                    'type'       => 'promo',
+                    'path'       => $path,
+                    'sort_order' => 1,
+                ]);
+            }
         }
 
         // GALLERY IMAGES

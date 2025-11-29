@@ -16,7 +16,7 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('(UUID())'));
-            $table->uuidMorphs('mediable'); // creates mediable_id (UUID) + mediable_type
+            $table->uuidMorphs('mediable');
             $table->enum('type', ['feature', 'gallery', 'promo', 'video', 'avatar', 'logo'])->default('gallery');
             $table->string('path', 255);
             $table->string('video_source')->nullable();

@@ -1272,10 +1272,12 @@ $(document).ready(function () {
 
             // Success Callback
             function (data) {
-                alert(data.message || 'Product created successfully!', 'success');
-                // Example: Redirect to the product listing page
-                // window.location.href = '/products';
-                $submitButton.html('Product Saved!');
+                toastrSuccessMessage(data.message || 'Product created successfully!');
+
+                // 1 sec delay before redirect
+                setTimeout(function () {
+                    window.location.href = routeIndex; // product.index route
+                }, 1000);
             },
 
             // Error Callback
@@ -1368,4 +1370,120 @@ $(document).ready(function () {
         });
     });
     // End Brand
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const EDIT = window.EDIT_PRODUCT ?? {};
+
+    // Helper to set preview inside a box without removing the input
+    function setPreview(boxSelector, imageUrl) {
+        const box = document.querySelector(boxSelector);
+        if (!box || !imageUrl) return;
+
+        box.classList.remove("dashed-border");
+
+        // Check if preview image already exists
+        let img = box.querySelector("img.preview-image");
+        if (img) {
+            img.src = imageUrl;
+        } else {
+            img = document.createElement("img");
+            img.src = imageUrl;
+            img.classList.add("preview-image");
+            box.appendChild(img);
+        }
+    }
+
+    // -------------------------------
+    // Preview on upload (promo)
+    // -------------------------------
+    document.querySelector('input[name="promo_image"]')?.addEventListener("change", function (e) {
+        let file = e.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = (ev) => setPreview(".promo-image-box", ev.target.result);
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // -------------------------------
+    // Preview on upload (promo)
+    // -------------------------------
+    document.querySelector('input[name="promo_image"]')?.addEventListener("change", function (e) {
+        let file = e.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = (ev) => setPreview(".promo-image-box", ev.target.result);
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // -------------------------------
+// Promo Image Load (edit mode)
+// -------------------------------
+if (EDIT.promo_image) {
+    const promoBox = document.querySelector(".promo-image-box");
+    promoBox.dataset.name = "promo_image";
+    setPreview(".promo-image-box", EDIT.promo_image);
+}
+
+    // -------------------------------
+    // Feature Image Load
+    // -------------------------------
+    if (EDIT.feature_image) {
+        const featureBox = document.querySelector(".feature-image-box");
+        featureBox.dataset.name = "feature_image";
+        setPreview(".feature-image-box", EDIT.feature_image);
+    }
+
+    // Preview on upload (feature)
+    document.querySelector("#feature_image")?.addEventListener("change", function (e) {
+        let file = e.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = (ev) => setPreview(".feature-image-box", ev.target.result);
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // -------------------------------
+    // Gallery Images Load
+    // -------------------------------
+    const galleryArea = document.getElementById("gallery_area");
+
+    if (EDIT.gallery && EDIT.gallery.length > 0) {
+        EDIT.gallery.forEach(img => {
+            const div = document.createElement("div");
+            div.classList.add("upload-box", "upload-box-wrapper");
+
+            div.innerHTML = `
+                <img src="${img.url}" class="preview-image">
+                <input type="hidden" name="existing_gallery_ids[]" value="${img.id}">
+            `;
+
+            galleryArea.prepend(div); // Insert before upload box
+        });
+    }
+
+    // Preview new uploaded gallery images
+    document.getElementById("gallery_input")?.addEventListener("change", function (e) {
+        let files = e.target.files;
+
+        [...files].forEach(file => {
+            let reader = new FileReader();
+            reader.onload = function (ev) {
+                const div = document.createElement("div");
+                div.classList.add("upload-box", "upload-box-wrapper");
+
+                div.innerHTML = `
+                    <img src="${ev.target.result}" class="preview-image">
+                `;
+
+                galleryArea.prepend(div);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
 });

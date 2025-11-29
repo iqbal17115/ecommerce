@@ -53,6 +53,7 @@ class ProductController extends Controller
                 'category',
                 'brand',
                 'media',
+                'gallery',
                 'productVariants',
                 'productVariants.variantOptions',
                 'productVariants.variantOptions.productVariant',
@@ -69,13 +70,16 @@ class ProductController extends Controller
             'category_name' => $product->category->name,
             'brand_id' => $product->brand_id,
             'brand_name' => $product->brand->name,
-            'medias' => $product->media->map(function ($media) {
+            'medias' => $product->gallery->map(function ($media) {
                 return [
                     'id' => $media->id,
                     'url' => Storage::url($media->path), // <- gives /storage/products/filename.png
                     'media_type' => $media->media_type,
                 ];
             }),
+            'promo_image' => $product->promoImage()
+                ? Storage::url($product->promoImage()->path)
+                : null,
             'description' => $product->description,
             'short_description' => $product->short_description,
             'highlights' => $product->highlights,

@@ -28,11 +28,14 @@
 @endsection
 
 @section('script')
+<script>
+    const routeIndex = "{{ route('product.index') }}";
+</script>
+
 <script src="{{ asset('js/admin_panel/products/product-add.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/admin_panel/products/product-edit.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/admin_panel/category_loader.js') }}?v={{ time() }}"></script>
 <script>
-    
     window.PRODUCT_DATA = @json($product);
     window.EDIT_PRODUCT = @json($editProduct ?? []);
 </script>

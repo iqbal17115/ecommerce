@@ -116,6 +116,10 @@ $(document).ready(function () {
         $("#selectedCategoryId").val(id);
         $("#selectedCategoryDisplay").text(name);
 
+        product_name = document.getElementById("product_name").value;
+
+        $("#product_name_step2").val(product_name);
+
         // Move to step 2
         $(".basic-info-category-step").hide();
         $(".product-details-step").show();

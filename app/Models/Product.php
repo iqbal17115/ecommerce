@@ -64,6 +64,11 @@ class Product extends Model
 
     public function gallery()
     {
-        return $this->media()->where('type', 'gallery')->orderBy('sort_order')->get();
+        return $this->morphMany(Media::class, 'mediable')->where('type', 'gallery')->orderBy('sort_order');
+    }
+
+    public function promoImage()
+    {
+        return $this->media()->where('type', 'promo')->first();
     }
 }
