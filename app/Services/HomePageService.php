@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Models\Backend\Product\ProductFeature;
+use App\Models\Product;
 
 class HomePageService
 {
-    public function getProductFeatures()
+    public function getProduct()
     {
-        return ProductFeature::with('Category', 'Product', 'Product.ProductMainImage', 'Product.productVariations', 'Product.reviewSum')->has('Product')->whereCardFeature(0)->whereTopMenu(0)->whereIsActive(1)->orderByRaw('ISNULL(position), position ASC');
+        return Product::with(['productCombinations', 'productCombinations.combinationOptionPivots', 'brand', 'category', 'media']);
     }
 }
