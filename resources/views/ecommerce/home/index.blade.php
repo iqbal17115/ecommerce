@@ -67,7 +67,7 @@
 
     <div class="bg-gray">
         <div class="container">
-            @include('ecommerce.home.partials.products', ['home_products' => $home_products])
+            @include('ecommerce.home.partials.products')
         </div>
     </div>
 </main>
@@ -94,6 +94,7 @@
     });
 </script>
 
+<script src="{{ asset('js/panel/users/home-products.js') }}"></script>
 
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
 <script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>

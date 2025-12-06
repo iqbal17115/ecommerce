@@ -24,6 +24,19 @@
                     <i class="fas fa-tags text-primary mr-2"></i> Category <span class="text-danger">*</span>
                 <div id="categoryDropdownWrapperStep2"></div>
             </div>
+            <div class="col-md-6 form-group mb-0">
+                <label for="categoryDropdownStep2" class="mb-1 small text-muted">
+                    Product Feature
+                </label>
+                <div>
+                    <select class="form-select" id="product_feature_id" name="product_feature_id">
+                        <option selected>Open this select menu</option>
+                        @foreach ($productFeatures as $productFeature)
+                            <option value="{{ $productFeature->id }}" @if(!empty($editProduct['product_feature_id']) && $productFeature->id == $editProduct['product_feature_id'])) selected @endif>{{ $productFeature->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
     {{-- END: Basic Information & Category (Always Editable in Step 2) --}}

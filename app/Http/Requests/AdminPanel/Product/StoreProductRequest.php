@@ -37,6 +37,7 @@ class StoreProductRequest extends FormRequest
             'short_description' => ['nullable', 'string', 'max:1000'],
             'highlights' => ['nullable', 'string'],
             'brand_id' => ['nullable', 'uuid', 'exists:brands,id'],
+            'product_feature_id' => ['nullable', 'uuid', 'exists:product_features,id'],
 
             // --- 2. Media ---
             // Gallery images validation (max 8 files)

@@ -7,6 +7,7 @@ use App\Models\Backend\Product\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPanel\Product\StoreProductRequest;
 use App\Http\Requests\AdminPanel\Product\UpdateProductRequest;
+use App\Models\Backend\Product\ProductFeature;
 use App\Models\Product;
 use App\Services\Admin\AdminProductService;
 use Illuminate\Http\Request;
@@ -41,8 +42,10 @@ class ProductController extends Controller
 
     public function create()
     {
+        $productFeatures = ProductFeature::whereIsActive(1)->orderBy('position', 'DESC')->get();
         return view('backend.products.index', [
-            'product' => null
+            'product' => null,
+            'productFeatures' => $productFeatures
         ]);
     }
 
@@ -69,6 +72,7 @@ class ProductController extends Controller
             'category_id' => $product->category_id,
             'category_name' => $product->category->name,
             'brand_id' => $product->brand_id,
+            'product_feature_id' => $product->product_feature_id,
             'brand_name' => $product->brand->name,
             'medias' => $product->gallery->map(function ($media) {
                 return [
@@ -115,7 +119,9 @@ class ProductController extends Controller
             })->toArray(),
         ];
 
-        return view('backend.products.index', compact('product', 'editProduct'));
+        $productFeatures = ProductFeature::whereIsActive(1)->orderBy('position', 'DESC')->get();
+
+        return view('backend.products.index', compact('product', 'editProduct', 'productFeatures'));
     }
 
     public function update(UpdateProductRequest $request, Product $product)

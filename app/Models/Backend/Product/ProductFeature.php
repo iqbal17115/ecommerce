@@ -5,6 +5,7 @@ namespace App\Models\Backend\Product;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\WebSetting\Advertisement;
 use App\Models\Backend\WebSetting\FeatureSetting;
+use App\Models\Product;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,17 @@ class ProductFeature extends Model
 {
     use HasFactory, BaseModel, DisplayNameTrait;
 
+    protected $table = 'product_features';
+
+    protected $fillable = [
+        'name',
+        'card_feature',
+        'feature_type',
+        'top_menu',
+        'position',
+        'is_active',
+        'product_feature_id'
+    ];
 
     public function TopFeatureSetting()
     {
@@ -35,9 +47,8 @@ class ProductFeature extends Model
         return $this->hasMany(Advertisement::class);
     }
 
-    public function Product()
+    public function products()
     {
-        // $today = now();
-        return $this->hasMany(Product::class, 'product_feature_id');
+        return $this->hasMany(Product::class);
     }
 }

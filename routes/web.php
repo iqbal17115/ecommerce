@@ -121,6 +121,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('lang/{lang}', [LanguageController::class, 'switchLang'])->name('lang.switch');
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/home-features', [HomeController::class, 'homeProducts']);
+    Route::get('/home-products/feature/{feature}', [HomeController::class, 'homeProductsByFeature']);
     Route::get('/home/categories', [HomeController::class, 'loadCategories'])->name('home.categories');
     Route::get('/home/top-features', [HomeController::class, 'loadTopFeatures'])->name('home.top_features');
     Route::get('/home/feature-products', [HomeController::class, 'loadFeatureProducts'])->name('home.feature_products');

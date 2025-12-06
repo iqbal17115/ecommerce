@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Helpers\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ListRequest;
 use App\Http\Resources\User\Home\HomeSliderResource;
 use App\Http\Resources\User\Home\ProductFeature\HomePageProductFeatureResource;
+use App\Http\Resources\User\HomePage\Product\ProductFeatureResource;
 use App\Http\Resources\User\HomePage\Product\ProductResource;
 use App\Models\Backend\Product\Category;
 use App\Models\Backend\Product\ProductFeature;
@@ -12,6 +15,7 @@ use App\Models\Backend\WebSetting\Slider;
 use App\Models\Product;
 use App\Services\CacheService;
 use App\Services\HomePageService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -92,6 +96,16 @@ class HomeController extends Controller
         }
     }
 
+    public function homeProducts(ListRequest $request): JsonResponse
+    {
+        $limit = $request->get('limit', 4); // features per page
+        $productLimit = $request->get('product_limit', 8);
+
+        $lists = ProductFeature::getLists(ProductFeature::whereHas('products'), $request->validated(), ProductFeatureResource::class);
+
+        return Message::success(null, $lists);
+    }
+
     public function index()
     {
         $user_id = auth()?->user()->id ?? null;
@@ -106,14 +120,6 @@ class HomeController extends Controller
                 ->get();
         }, 21600);
 
-        $home_products = $this->cacheService->rememberKey('home_products', function () {
-            return Product::getLists(
-                $this->homePageService->getProduct(),
-                [],
-                ProductResource::class
-            );
-        }, 21600);
-
         $top_features = $this->cacheService->rememberKey('home_top_features', function () {
             return Product::with([])
                 ->get();
@@ -122,7 +128,6 @@ class HomeController extends Controller
 
         return view('ecommerce.home.index', compact([
             'sliders',
-            'home_products',
             'top_features'
         ]));
     }

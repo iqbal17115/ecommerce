@@ -23,25 +23,14 @@ class ProductResource extends JsonResource
             'slug'     => $this->slug ?? null,
             'brand'    => $this->brand->name ?? null,
             'category' => $this->category->name ?? null,
-
-            // product image (main variant image if exists)
             'image' => $this->media?->first()
                 ? Storage::url($this->media->first()->path)
                 : asset('images/no-image.png'),
-
-            // price section just like Daraz
             'price'         => $defaultCombination->price ?? 0,
             'special_price' => $defaultCombination->special_price ?? null,
             'discount'      => $this->calculateDiscount($defaultCombination),
-
-            // ratings & sold count (if you store them)
             'rating' => (float) ($this->rating_avg ?? 0),
             'sold'   => (int) ($this->total_sold ?? 0),
-
-            // stock availability
-            // 'in_stock' => ($defaultCombination->stock > 0),
-
-            // product combinations (Daraz shows multiple options)
             'combinations' => $this->whenLoaded('productCombinations', function () {
                 return $this->productCombinations->map(function ($comb) {
                     return [
@@ -49,7 +38,6 @@ class ProductResource extends JsonResource
                         'price' => $comb->price,
                         'special_price' => $comb->special_price,
                         'stock' => $comb->stock,
-                        // 'options' => $comb->combinationOptionPivots()->pluck('option_value'),
                     ];
                 });
             }),
