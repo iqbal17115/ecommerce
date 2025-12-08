@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use App\Models\Backend\Currency\Currency;
 use App\Models\Backend\Product\Category;
-use App\Models\Backend\Product\Product;
 use App\Models\Backend\WebSetting\Advertisement;
 use App\Models\Backend\WebSetting\CompanyInfo;
+use App\Models\Product;
 use App\Observers\ProductObserver;
 use App\Services\CacheService;
 use Illuminate\Pagination\Paginator;
@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         //Products Observer
-        Product::observe(ProductObserver::class);
+        // Product::observe(ProductObserver::class);
 
         //Categories
         View::composer('*', function ($view) {

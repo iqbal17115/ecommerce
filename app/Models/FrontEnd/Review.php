@@ -2,7 +2,6 @@
 
 namespace App\Models\FrontEnd;
 
-use App\Models\Backend\Product\Product;
 use App\Models\User;
 use App\Traits\BaseModel;
 use App\Traits\DisplayNameTrait;

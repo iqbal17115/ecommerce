@@ -7,7 +7,6 @@ use App\Helpers\ProductVariationHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Product\ProductListRequest;
 use App\Http\Resources\User\Product\ProductListResource;
-use App\Models\Backend\Product\Product;
 use Illuminate\Http\JsonResponse;
 
 class ProductDetailController extends Controller

@@ -7,10 +7,14 @@
 
         <div class="row">
             <div class="col-md-6 form-group">
-                <label for="brand">* Brand</label>
-                <select name="brand" id="brand" class="form-control">
+                <label for="brand_id">* Brand</label>
+                <select name="brand_id" id="brand_id" class="form-control">
                     <option value="">Select</option>
-                    {{-- Options --}}
+                    @if(!empty($editProduct['brand_id']))
+                    <option value="{{ $editProduct['brand_id'] }}" selected>
+                        {{ $editProduct['brand_name'] }}
+                    </option>
+                    @endif
                 </select>
             </div>
             <div class="col-md-6 form-group">

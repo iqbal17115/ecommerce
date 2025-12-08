@@ -8,7 +8,6 @@ use App\Models\Address\District;
 use App\Models\Address\Division;
 use App\Models\Backend\ContactInfo\Contact;
 use App\Models\Backend\Order\OrderTracking;
-use App\Models\Backend\Product\Product;
 use Illuminate\Http\Request;
 use App\Models\Ecommerce\Setting\Union;
 use App\Models\Ecommerce\Setting\Upazila;

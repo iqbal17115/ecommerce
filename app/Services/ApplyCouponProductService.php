@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Enums\CouponScopeEnum;
 use App\Helpers\CartItemHelper;
 use App\Helpers\SessionHelper;
-use App\Models\Backend\Product\Product;
 use App\Models\Cart;
 use App\Models\Cart\CartItem;
 use App\Models\CartItemCoupon;

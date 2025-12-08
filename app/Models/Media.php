@@ -2,27 +2,30 @@
 
 namespace App\Models;
 
-use App\Traits\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Media extends Model
 {
-    use HasFactory, BaseModel;
+    use HasFactory;
 
-    protected $table = 'medias';
+    protected $table = 'media';
 
     protected $fillable = [
         'mediable_id',
         'mediable_type',
-        'file_path',
-        'mime_type',
         'type',
-        'file_size',
+        'path',
+        'video_source',
+        'meta',
+        'sort_order',
     ];
 
-    public function mediable(): MorphTo
+    protected $casts = [
+        'meta' => 'array',
+    ];
+
+    public function mediable()
     {
         return $this->morphTo();
     }

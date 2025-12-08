@@ -2,24 +2,30 @@
 
     {{-- START: MAIN CONTENT WRAPPER FOR STICKY SIDEBAR --}}
     <div class="main-content-flex-wrapper d-flex">
-
         {{-- LEFT COLUMN: All scrollable content --}}
         <div class="col-md-9 p-0 main-form-content">
-            <!-- Basic Information -->
-            @include('backend.products.partials.basic_information')
+            <form id="productWizardForm" method="POST" action="{{ isset($product) ? route('products.update', $product) : route('products.store') }}" enctype="multipart/form-data">
+                @csrf
 
-            <!-- Specification -->
-            @include('backend.products.partials.specification')
+                <!-- Basic Information -->
+                @include('backend.products.partials.basic_information')
 
-            <!-- Price, Stock & Variants -->
-            @include('backend.products.partials.price_stock_variants')
+                <!-- Specification -->
+                @include('backend.products.partials.specification')
 
-            <!-- Product Description -->
-            @include('backend.products.partials.description')
+                <!-- Price, Stock & Variants -->
+                @include('backend.products.partials.price_stock_variants')
 
-            <!-- Shipping & Warranty -->
-            @include('backend.products.partials.shipping_warranty')
+                <!-- Product Description -->
+                @include('backend.products.partials.description')
 
+                <!-- Shipping & Warranty -->
+                @include('backend.products.partials.shipping_warranty')
+
+                <button type="submit" class="btn btn-success btn-lg" id="finalSubmitButton">
+                    Save Product
+                </button>
+            </form>
         </div>
 
         <!-- Right Sidebar -->

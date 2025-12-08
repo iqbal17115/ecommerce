@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend\Product;
 
+use App\Helpers\Message;
 use App\Models\Backend\Product\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AdminPanel\AddProductCategory\AddProductCategoryResource;
 use App\Models\Backend\Product\ProductFeature;
 use App\Services\CacheService;
 use Illuminate\Http\Request;
@@ -113,17 +115,51 @@ class CategoryController extends Controller
         Cache::forget('headerMenuCategories');
 
         $this->cacheService->remember('headerMenuCategories', function () {
-                return Category::whereHeaderMenu(1)
-                    ->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')
-                    ->limit(6)
-                    ->get();
-            }, 21600);
+            return Category::whereHeaderMenu(1)
+                ->orderByRaw('ISNULL(header_menu_position), header_menu_position ASC')
+                ->limit(6)
+                ->get();
+        }, 21600);
 
         return response()->json([
             'status' => 'success'
         ]);
     }
 
+
+    /**
+     * Return all categories in a nested tree structure.
+     */
+    public function getCategoryTree()
+    {
+        $categories = Category::whereNull('parent_category_id')
+            ->with(['childrenRecursive'])
+            ->get();
+
+        return Message::success(null, AddProductCategoryResource::collection($categories));
+    }
+
+    public function getCategories(Request $request)
+    {
+        $parentId = $request->query('parent_id'); // optional
+
+        $categories = Category::when($parentId, function ($q, $parentId) {
+            $q->where('parent_category_id', $parentId);
+        }, function ($q) {
+            $q->whereNull('parent_category_id'); // top-level
+        })
+            ->select('id', 'name') // load only necessary fields
+            ->get();
+
+        // Optionally, mark if category has children (for frontend arrow)
+        $categories->each(function ($cat) {
+            $cat->has_children = Category::where('parent_category_id', $cat->id)->exists();
+        });
+
+        return response()->json([
+            'results' => $categories,
+        ]);
+    }
 
     public function index()
     {

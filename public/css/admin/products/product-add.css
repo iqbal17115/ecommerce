@@ -131,53 +131,6 @@ body {
     color: #dc3545 !important;
 }
 
-/* --- Category Dropdown Wrapper (Step 1) --- */
-.category-dropdown-wrapper .dropdown-toggle {
-    background-color: #fff;
-    color: #495057;
-    border: 1px solid #ced4da;
-    padding: 0.375rem 0.75rem; 
-    height: calc(2.25rem + 2px); 
-    line-height: 1.5; 
-}
-
-.category-dropdown-wrapper .dropdown-menu {
-    border-radius: 4px;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    padding: 0;
-    max-height: 350px; 
-    overflow-y: auto; 
-    border: 1px solid rgba(0,0,0,.15);
-}
-
-.category-recently-used-tags {
-    padding: 10px 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.category-recently-used-tags .badge {
-    background-color: #e2e6ea;
-    color: #495057;
-    padding: 6px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 12px;
-}
-
-.category-list-dropdown .dropdown-item {
-    font-size: 14px;
-    padding: 8px 15px;
-    white-space: normal;
-}
-
-.category-list-dropdown .dropdown-item:hover,
-.category-list-dropdown .dropdown-item.active {
-    background-color: #eaf1fa; 
-    color: #007bff;
-}
-
 /* Right Panel for Category Info (Step 1) */
 .right-panel {
     background-color: #fff;

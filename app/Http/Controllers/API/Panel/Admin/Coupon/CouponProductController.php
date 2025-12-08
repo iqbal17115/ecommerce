@@ -10,7 +10,6 @@ use App\Traits\BaseModel;
 use App\Http\Requests\AdminPanel\CouponProduct\CouponProductRequest;
 use App\Http\Resources\AdminPanel\Coupon\CouponDetailResource;
 use App\Http\Resources\AdminPanel\CouponProduct\CouponProductDatatableResource;
-use App\Models\Backend\Product\Product;
 use App\Models\Coupon;
 use App\Models\CouponProduct;
 use App\Services\CouponProductService;

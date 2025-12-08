@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Backend\Product\Product;
 use App\Models\Cart;
 use App\Models\Cart\CartItem;
 use App\Models\User;

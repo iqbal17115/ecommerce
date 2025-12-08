@@ -1,5 +1,6 @@
 <div class="form-card">
     <h2>Basic Information</h2>
+
     {{-- START: Basic Information & Category (Always Editable in Step 2) --}}
     <div class="basic-info-editable-header mb-4 p-3 border rounded">
         <div class="row">
@@ -19,12 +20,21 @@
 
             {{-- 2. Editable Category Dropdown --}}
             <div class="col-md-6 form-group mb-0">
-                <label for="category" class="mb-1 small text-muted">
-                    <i class="fas fa-tag text-secondary mr-1"></i> Category <span class="text-danger">*</span>
+                <label for="categoryDropdownStep2" class="mb-1 small text-muted">
+                    <i class="fas fa-tags text-primary mr-2"></i> Category <span class="text-danger">*</span>
+                <div id="categoryDropdownWrapperStep2"></div>
+            </div>
+            <div class="col-md-6 form-group mb-0">
+                <label for="categoryDropdownStep2" class="mb-1 small text-muted">
+                    Product Feature
                 </label>
-                {{-- Placeholder where the full category dropdown will be cloned/synced --}}
-                <div id="categoryDropdownWrapperStep2">
-                    <p class="text-muted small mb-0">Loading category selection...</p>
+                <div>
+                    <select class="form-select" id="product_feature_id" name="product_feature_id">
+                        <option selected>Open this select menu</option>
+                        @foreach ($productFeatures as $productFeature)
+                            <option value="{{ $productFeature->id }}" @if(!empty($editProduct['product_feature_id']) && $productFeature->id == $editProduct['product_feature_id'])) selected @endif>{{ $productFeature->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>

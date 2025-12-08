@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SelectListRequest;
 use App\Http\Requests\ShopPage\ShopPageRequest;
 use App\Models\Backend\Product\Category;
-use App\Models\Backend\Product\Product;
 use App\Http\Resources\User\Shop\ShopProductDetailResource;
 use App\Models\Backend\Product\Brand;
 use App\Models\AttributeValue;

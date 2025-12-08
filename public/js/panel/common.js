@@ -9,16 +9,21 @@ function enableSubmitButton() {
  * Form Request
  */
 function formRequest(url, method, data) {
+    const isFormData = data instanceof FormData;
+
     return $.ajax({
         url: url,
         type: method,
-        contentType: 'application/json',
-        data: JSON.stringify(data),
-        headers: {
+        data: data,
+        processData: !isFormData,               // ❌ false for FormData
+        contentType: isFormData ? false : 'application/json', // ❌ false for FormData
+        cache: false,
+        headers: isFormData ? {} : {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
 }
+
 
 /**
  * Request Params Url
@@ -57,14 +62,14 @@ function confirmAction(title, content, confirmCallback = {}, cancelCallback = {}
  * Toastr Success Message
  */
 function toastrSuccessMessage(message) {
-    toastr.success(message, {timeOut: 1000});
+    toastr.success(message, { timeOut: 1000 });
 }
 
 /**
  * Toastr Error Message
  */
 function toastrErrorMessage(message) {
-    toastr.error(message, {timeOut: 1000});
+    toastr.error(message, { timeOut: 1000 });
 }
 
 //Redirect Url
