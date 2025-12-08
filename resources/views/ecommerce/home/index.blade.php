@@ -94,7 +94,7 @@
     });
 </script>
 
-<script src="{{ asset('js/panel/users/home-products.js') }}"></script>
+<script src="{{ asset('js/panel/users/home-products.js') }}" defer></script>
 
 <script src="{{ asset('js/panel/users/cart/cart_list.js') }}" defer></script>
 <script src="{{ asset('js/panel/users/lazyload.js') }}" defer></script>
