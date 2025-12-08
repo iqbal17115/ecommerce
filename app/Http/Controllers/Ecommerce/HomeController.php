@@ -87,6 +87,7 @@ class HomeController extends Controller
         $sub_categories = Category::with('SubCategory')->whereParentCategoryId($request->id)->orderBy('position', 'ASC')->get();
         return response()->json(['sub_categories' => $sub_categories]);
     }
+
     public function adminDashboard()
     {
         if (Auth::check() && Auth::user()->roles->where('is_admin', 1)->isNotEmpty()) {
@@ -98,10 +99,7 @@ class HomeController extends Controller
 
     public function homeProducts(ListRequest $request): JsonResponse
     {
-        $limit = $request->get('limit', 4); // features per page
-        $productLimit = $request->get('product_limit', 8);
-
-        $lists = ProductFeature::getLists(ProductFeature::whereHas('products'), $request->validated(), ProductFeatureResource::class);
+        $lists = ProductFeature::getLists($this->homePageService->getProduct(), $request->validated(), ProductFeatureResource::class);
 
         return Message::success(null, $lists);
     }
