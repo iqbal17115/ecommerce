@@ -25,7 +25,7 @@ class ProductResource extends JsonResource
             'category' => $this->category->name ?? null,
             'image' => $this->media?->first()
                 ? Storage::url($this->media->first()->path)
-                : asset('/images/no-image.png'),
+                : asset('images/no-image.jpg'),
             'price'         => $defaultCombination->price ?? 0,
             'special_price' => $defaultCombination->special_price ?? null,
             'discount'      => $this->calculateDiscount($defaultCombination),
