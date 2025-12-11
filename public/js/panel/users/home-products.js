@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="col-6 col-sm-4 col-md-3 col-lg-2">
                 <div class="product-card shadow-sm bg-white rounded p-2 h-100">
                     <div class="product-img-wrapper position-relative">
-                        <img data-src="${p.image}" class="product-img img-fluid">
+                        <img data-src="${p.image}" class="product-img img-fluid lazy-load">
                     </div>
                     <div class="pt-2">
                         <div class="product-name text-truncate-2">${p.name}</div>
